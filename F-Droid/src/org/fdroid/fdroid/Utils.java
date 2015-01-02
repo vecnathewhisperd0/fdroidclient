@@ -316,6 +316,9 @@ public final class Utils {
                 StorageUtils.getCacheDirectory(context, true), "apks");
         if (!apkCacheDir.exists()) {
             apkCacheDir.mkdir();
+            // Change file system permissions to allow install apk on some devices.
+            apkCacheDir.setReadable(true,false);
+            apkCacheDir.setExecutable(true,false);
         }
         return apkCacheDir;
     }
