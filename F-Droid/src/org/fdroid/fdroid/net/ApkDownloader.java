@@ -142,20 +142,6 @@ public class ApkDownloader implements AsyncDownloadWrapper.Listener {
         return false;
     }
 
-    /**
-     * Change file system permissions to allow install apk on some devices.
-     */
-    private void changeFilePermission(){
-        if (localFile != null && localFile.exists()) {
-            if(!localFile.setReadable(true,false)){
-                 Log.d(TAG, "Cannot set readable to " + localFile);
-            }
-            if(!localFile.setExecutable(true,false)){
-                Log.d(TAG, "Cannot set executable to " + localFile);
-            }
-        }
-    }
-
     private void deleteLocalFile() {
         if (localFile != null && localFile.exists()) {
             localFile.delete();
