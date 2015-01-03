@@ -70,6 +70,7 @@ import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.data.ApkProvider;
 import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.data.AppProvider;
+import org.fdroid.fdroid.data.InstalledAppProvider;
 import org.fdroid.fdroid.data.Repo;
 import org.fdroid.fdroid.data.RepoProvider;
 import org.fdroid.fdroid.installer.Installer;
@@ -164,20 +165,39 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
 
         public ApkListAdapter(Context context, App app) {
             super(context, 0);
-            List<Apk> apks = ApkProvider.Helper.findByApp(context, app.id);
-            for (Apk apk : apks) {
+            final List<Apk> apks = ApkProvider.Helper.findByApp(context, app.id);
+            for (final Apk apk : apks) {
                 if (apk.compatible || Preferences.get().showIncompatibleVersions()) {
                     add(apk);
                 }
             }
+        }
 
+        private String getInstalledStatus(final Apk apk) {
+            // Definitely not installed.
+            if (apk.vercode != app.installedVersionCode) {
+                return getString(R.string.not_inst);
+            }
+            // Definitely installed this version.
+            if (mInstalledSigID != null && apk.sig != null
+                    && apk.sig.equals(mInstalledSigID)) {
+                return getString(R.string.inst);
+            }
+            // Installed the same version, but from someplace else.
+            final String installerPkgName = mPm.getInstallerPackageName(app.id);
+            if (installerPkgName != null && installerPkgName.length() > 0) {
+                final String installerLabel = InstalledAppProvider
+                    .getApplicationLabel(mctx, installerPkgName);
+                return getString(R.string.inst_known_source, installerLabel);
+            }
+            return getString(R.string.inst_unknown_source);
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
             java.text.DateFormat df = DateFormat.getDateFormat(mctx);
-            Apk apk = getItem(position);
+            final Apk apk = getItem(position);
             ViewHolder holder;
 
             if (convertView == null) {
@@ -202,13 +222,7 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
                     + " " + apk.version
                     + (apk.vercode == app.suggestedVercode ? "  ☆" : ""));
 
-            if (apk.vercode == app.installedVersionCode
-                    && mInstalledSigID != null && apk.sig != null
-                    && apk.sig.equals(mInstalledSigID)) {
-                holder.status.setText(getString(R.string.inst));
-            } else {
-                holder.status.setText(getString(R.string.not_inst));
-            }
+            holder.status.setText(getInstalledStatus(apk));
 
             if (apk.size > 0) {
                 holder.size.setText(Utils.getFriendlySize(apk.size));
@@ -1158,7 +1172,7 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
 
             Apk curApk = null;
             for (int i = 0; i < getApks().getCount(); i ++) {
-                Apk apk = getApks().getItem(i);
+                final Apk apk = getApks().getItem(i);
                 if (apk.vercode == getApp().suggestedVercode) {
                     curApk = apk;
                     break;
@@ -1178,7 +1192,7 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
                     Iterator<String> permissions = permsList.iterator();
                     StringBuilder sb = new StringBuilder();
                     while (permissions.hasNext()) {
-                        String permissionName = permissions.next();
+                        final String permissionName = permissions.next();
                         try {
                             Permission permission = new Permission(getActivity(), permissionName);
                             // TODO: Make this list RTL friendly
@@ -1205,7 +1219,7 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
             if (getApp().antiFeatures != null) {
                 StringBuilder sb = new StringBuilder();
                 for (String af : getApp().antiFeatures) {
-                    String afdesc = descAntiFeature(af);
+                    final String afdesc = descAntiFeature(af);
                     if (afdesc != null) {
                         sb.append("\t• ").append(afdesc).append("\n");
                     }
