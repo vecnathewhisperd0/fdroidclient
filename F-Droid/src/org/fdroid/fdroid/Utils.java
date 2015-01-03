@@ -23,6 +23,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
 import android.content.res.XmlResourceParser;
 import android.net.Uri;
+import android.os.Build;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextUtils;
@@ -316,9 +317,7 @@ public final class Utils {
                 StorageUtils.getCacheDirectory(context, true), "apks");
         if (!apkCacheDir.exists()) {
             apkCacheDir.mkdir();
-            // Change file system permissions to allow install apk on some devices.
-            apkCacheDir.setReadable(true,false);
-            apkCacheDir.setExecutable(true,false);
+            setFilePermission(apkCacheDir);
         }
         return apkCacheDir;
     }
@@ -362,6 +361,35 @@ public final class Utils {
                     + Log.getStackTraceString(e));
         }
         return ret;
+    }
+
+    // Change file system permissions to allow install apk on some devices.
+    public static boolean setFilePermission(File f) {
+        if (Build.VERSION.SDK_INT >= 9) {
+            return f.setReadable(true,false) && f.setExecutable(true,false);
+        } else {
+            int exitCode = -1;
+            try {
+              Process sh = Runtime.getRuntime().exec("sh");
+              OutputStream out = sh.getOutputStream();
+              String command = "/system/bin/chmod 755 \"" + f.getAbsolutePath() + "\"\nexit\n";
+              out.write(command.getBytes("ASCII"));
+
+              final char buf[] = new char[40];
+              InputStreamReader reader = new InputStreamReader(sh.getInputStream());
+              while (reader.read(buf) != -1)
+                  throw new IOException("stdout: " + new String(buf));
+              reader = new InputStreamReader(sh.getErrorStream());
+              while (reader.read(buf) != -1)
+                  throw new IOException("stderr: " + new String(buf));
+
+              exitCode = sh.waitFor();
+              return true;
+           } catch(Exception e) {
+             Log.e("FDroid","Unable to execute chmod.\n"+Log.getStackTraceString(e));
+             return false;
+           }
+        }
     }
 
     public static class CommaSeparatedList implements Iterable<String> {

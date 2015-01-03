@@ -25,6 +25,7 @@ import android.util.Log;
 
 import org.fdroid.fdroid.Hasher;
 import org.fdroid.fdroid.ProgressListener;
+import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.Apk;
 
 import java.io.File;
@@ -254,7 +255,7 @@ public class ApkDownloader implements AsyncDownloadWrapper.Listener {
         }
 
         Log.d("FDroid", "Download finished: " + localFile);
-        changeFilePermission();
+        Utils.setFilePermission(localFile);
         sendCompleteMessage();
     }
 
