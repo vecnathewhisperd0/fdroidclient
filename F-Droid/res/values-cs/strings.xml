@@ -19,8 +19,8 @@
   <string name="about_mail">Email:</string>
   <string name="about_version">Verze:</string>
   <string name="about_website">Webová stránka</string>
-  <string name="inst">Nainstalováno</string>
-  <string name="not_inst">Nenainstalováno</string>
+  <string name="inst">Je nainstalováno</string>
+  <string name="not_inst">Není nainstalováno</string>
   <string name="added_on">Přidáno %s</string>
   <string name="ok">OK</string>
   <string name="yes">Ano</string>
@@ -64,7 +64,7 @@
   <string name="menu_upgrade">Aktualizovat</string>
   <string name="menu_donate">Přispět</string>
   <string name="details_installed">Verze %s nainstalována</string>
-  <string name="details_notinstalled">Nenainstalováno</string>
+  <string name="details_notinstalled">Není nainstalováno</string>
   <string name="corrupt_download">Stažený soubor je poškozen</string>
   <string name="download_cancelled">Stažení zrušeno</string>
   <string name="antiadslist">Tato aplikace obsahuje reklamu</string>
