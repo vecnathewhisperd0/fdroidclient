@@ -26,6 +26,7 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.res.Configuration;
 import android.database.ContentObserver;
@@ -82,6 +83,15 @@ public class FDroid extends ActionBarActivity {
         createViews();
 
         getTabManager().createTabs();
+
+        // If the app is installed as system app enable system installer by default
+        if(Preferences.get().isFirstTime()) {
+            boolean isSystemApp = (getApplicationInfo().flags
+                    & (ApplicationInfo.FLAG_SYSTEM | ApplicationInfo.FLAG_UPDATED_SYSTEM_APP)) != 0;
+
+            Preferences.get().setSystemInstallerEnabled(isSystemApp);
+            Preferences.get().setFirstTime(false);
+        }
 
         // Start a search by just typing
         setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL);
