@@ -139,8 +139,13 @@ public class UpdateService extends IntentService implements ProgressListener {
             if (dialog == null) {
                 String title = context.getString(R.string.process_wait_title);
                 String message = lastShownMessage == null ? context.getString(R.string.process_update_msg) : lastShownMessage;
-                dialog = ProgressDialog.show(context, title, message, true, true);
-                dialog.setIcon(android.R.drawable.ic_dialog_info);
+                dialog = new ProgressDialog(context, R.style.AlertDialogDark);
+                dialog.setTitle(title);
+                dialog.setMessage(message);
+                dialog.setIndeterminate(true);
+                dialog.setCancelable(false);
+                //dialog = ProgressDialog.show(context, title, message, true, true);
+                //dialog.setIcon(android.R.drawable.ic_dialog_info);
                 dialog.setCanceledOnTouchOutside(false);
             }
         }

@@ -15,11 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Spinner;
-
+import android.widget.*;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.R;
@@ -124,7 +120,7 @@ public class AvailableAppsFragment extends AppListFragment implements
     @SuppressWarnings("deprecation")
     private void styleSpinner(Spinner spinner) {
 
-        Drawable menuButton = getResources().getDrawable(android.R.drawable.btn_dropdown);
+        Drawable menuButton = getResources().getDrawable(R.drawable.abc_spinner_textfield_background_material);
         if (FDroidApp.getCurTheme() == FDroidApp.Theme.dark) {
             menuButton.setAlpha(32); // make it darker via alpha
         }
@@ -135,18 +131,18 @@ public class AvailableAppsFragment extends AppListFragment implements
         }
     }
 
-    private Spinner setupCategorySpinner(Spinner spinner) {
+    private void setupCategorySpinner(LinearLayout view) {
 
-        categorySpinner = spinner;
+        categorySpinner = (Spinner) view.findViewById(R.id.categorySpinner);
         categorySpinner.setId(R.id.category_spinner);
 
         categories = AppProvider.Helper.categories(getActivity());
 
-        styleSpinner(categorySpinner);
+        //styleSpinner(categorySpinner);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
-            getActivity(), android.R.layout.simple_spinner_item, translateCategories(categories));
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            getActivity(), R.layout.spinner_item, translateCategories(categories));
+        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         categorySpinner.setAdapter(adapter);
 
         getActivity().getContentResolver().registerContentObserver(
@@ -164,16 +160,17 @@ public class AvailableAppsFragment extends AppListFragment implements
                 setCurrentCategory(null);
             }
         });
-        return categorySpinner;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.available_app_list, container, false);
+        LinearLayout view = (LinearLayout) inflater.inflate(R.layout.available_apps, container, false);
 
-        setupCategorySpinner((Spinner)view.findViewById(R.id.category_spinner));
+        setupCategorySpinner(view);
 
-        ((ListView)view.findViewById(android.R.id.list)).setOnItemClickListener(this);
+        ListView list = (ListView) view.findViewById(android.R.id.list);
+        list.setFastScrollEnabled(true);
+        list.setOnItemClickListener(this);
 
         // R.string.category_whatsnew is the default set in AppListManager
         DEFAULT_CATEGORY = getActivity().getString(R.string.category_whatsnew);

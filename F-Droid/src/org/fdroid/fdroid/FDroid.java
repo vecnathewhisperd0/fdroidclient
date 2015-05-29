@@ -19,7 +19,7 @@
 
 package org.fdroid.fdroid;
 
-import android.app.AlertDialog;
+import android.support.v7.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.SearchManager;
 import android.bluetooth.BluetoothAdapter;
@@ -281,7 +281,7 @@ public class FDroid extends AppCompatActivity {
                 view = li.inflate(R.layout.about, null);
             } else {
                 view = View.inflate(
-                        new ContextThemeWrapper(this, R.style.AboutDialogLight),
+                        new ContextThemeWrapper(this, R.style.DialogLight),
                         R.layout.about, null);
             }
 
@@ -301,7 +301,7 @@ public class FDroid extends AppCompatActivity {
             } else {
                 builder = new AlertDialog.Builder(
                         new ContextThemeWrapper(
-                                this, R.style.AboutDialogLight)
+                                this, R.style.DialogLight)
                         ).setView(view);
             }
             final AlertDialog alrt = builder.create();
@@ -386,7 +386,7 @@ public class FDroid extends AppCompatActivity {
         viewPager = (ViewPager)findViewById(R.id.main_pager);
         AppListFragmentPagerAdapter viewPagerAdapter = new AppListFragmentPagerAdapter(this);
         viewPager.setAdapter(viewPagerAdapter);
-        viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+        viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 getTabManager().selectTab(position);
