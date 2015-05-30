@@ -9,12 +9,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.NfcHelper;
 import org.fdroid.fdroid.Utils;
@@ -22,7 +21,7 @@ import org.fdroid.fdroid.data.Repo;
 import org.fdroid.fdroid.data.RepoProvider;
 import org.fdroid.fdroid.views.fragments.RepoDetailsFragment;
 
-public class RepoDetailsActivity extends ActionBarActivity {
+public class RepoDetailsActivity extends AppCompatActivity {
     private static final String TAG = "RepoDetailsActivity";
 
     private Repo repo;
