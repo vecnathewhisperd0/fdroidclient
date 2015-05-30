@@ -18,40 +18,22 @@
 
 package org.fdroid.fdroid;
 
-import android.app.AlarmManager;
-import android.app.IntentService;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.ProgressDialog;
-import android.content.ContentProviderOperation;
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.Intent;
-import android.content.OperationApplicationException;
-import android.content.SharedPreferences;
+import android.app.*;
+import android.content.*;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.RemoteException;
-import android.os.ResultReceiver;
-import android.os.SystemClock;
+import android.os.*;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import org.fdroid.fdroid.data.Apk;
-import org.fdroid.fdroid.data.ApkProvider;
-import org.fdroid.fdroid.data.App;
-import org.fdroid.fdroid.data.AppProvider;
-import org.fdroid.fdroid.data.Repo;
-import org.fdroid.fdroid.data.RepoProvider;
+import org.fdroid.fdroid.data.*;
 import org.fdroid.fdroid.net.Downloader;
 
 import java.util.ArrayList;
@@ -111,9 +93,10 @@ public class UpdateService extends IntentService implements ProgressListener {
     public static class UpdateReceiver extends ResultReceiver {
 
         private Context context;
-        private ProgressDialog dialog;
+        private AlertDialog dialog;
         private ProgressListener listener;
         private String lastShownMessage = null;
+        private TextView messageView;
 
         public UpdateReceiver(Handler handler) {
             super(handler);
@@ -139,14 +122,14 @@ public class UpdateService extends IntentService implements ProgressListener {
             if (dialog == null) {
                 String title = context.getString(R.string.process_wait_title);
                 String message = lastShownMessage == null ? context.getString(R.string.process_update_msg) : lastShownMessage;
-                dialog = new ProgressDialog(context, R.style.AlertDialogDark);
-                dialog.setTitle(title);
-                dialog.setMessage(message);
-                dialog.setIndeterminate(true);
-                dialog.setCancelable(false);
-                //dialog = ProgressDialog.show(context, title, message, true, true);
-                //dialog.setIcon(android.R.drawable.ic_dialog_info);
-                dialog.setCanceledOnTouchOutside(false);
+                dialog = new AlertDialog.Builder(context)
+                        .setCancelable(false)
+                        .setTitle(title)
+                        .create();
+                View dialogView = dialog.getLayoutInflater().inflate(R.layout.dialog_progress, null);
+                dialog.setView(dialogView);
+                messageView = (TextView) dialogView.findViewById(R.id.message);
+                messageView.setText(message);
             }
         }
 
@@ -155,6 +138,12 @@ public class UpdateService extends IntentService implements ProgressListener {
             ensureDialog();
             dialog.show();
             return this;
+        }
+
+        public void setMessage(String message){
+            if(dialog != null) {
+                messageView.setText(message);
+            }
         }
 
         public void hideDialog() {
@@ -200,7 +189,7 @@ public class UpdateService extends IntentService implements ProgressListener {
                 forwardEvent(EVENT_INFO);
                 if (dialog != null) {
                     lastShownMessage = message;
-                    dialog.setMessage(message);
+                    setMessage(message);
                 }
                 break;
             }
