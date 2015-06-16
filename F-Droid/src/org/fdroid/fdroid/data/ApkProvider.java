@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class ApkProvider extends FDroidProvider {
 
-    private static final String TAG = "fdroid.ApkProvider";
+    private static final String TAG = "ApkProvider";
 
     /**
      * SQLite has a maximum of 999 parameters in a query. Each apk we add
@@ -129,9 +129,9 @@ public class ApkProvider extends FDroidProvider {
                 List<Apk> apks1 = apks.subList(0, middle);
                 List<Apk> apks2 = apks.subList(middle, apks.size());
                 knownApks.addAll(knownApks(context, apks1, fields));
-                knownApks.addAll(knownApks(context,apks2, fields));
+                knownApks.addAll(knownApks(context, apks2, fields));
             } else {
-                knownApks.addAll(knownApksSafe(context,apks, fields));
+                knownApks.addAll(knownApksSafe(context, apks, fields));
             }
             return knownApks;
 
@@ -172,30 +172,30 @@ public class ApkProvider extends FDroidProvider {
 
     public interface DataColumns extends BaseColumns {
 
-        public static final String _COUNT_DISTINCT_ID = "countDistinct";
+        String _COUNT_DISTINCT_ID = "countDistinct";
 
-        public static final String APK_ID          = "id";
-        public static final String VERSION         = "version";
-        public static final String REPO_ID         = "repo";
-        public static final String HASH            = "hash";
-        public static final String VERSION_CODE    = "vercode";
-        public static final String NAME            = "apkName";
-        public static final String SIZE            = "size";
-        public static final String SIGNATURE       = "sig";
-        public static final String SOURCE_NAME     = "srcname";
-        public static final String MIN_SDK_VERSION = "minSdkVersion";
-        public static final String MAX_SDK_VERSION = "maxSdkVersion";
-        public static final String PERMISSIONS     = "permissions";
-        public static final String FEATURES        = "features";
-        public static final String NATIVE_CODE     = "nativecode";
-        public static final String HASH_TYPE       = "hashType";
-        public static final String ADDED_DATE      = "added";
-        public static final String IS_COMPATIBLE   = "compatible";
-        public static final String INCOMPATIBLE_REASONS = "incompatibleReasons";
-        public static final String REPO_VERSION    = "repoVersion";
-        public static final String REPO_ADDRESS    = "repoAddress";
+        String APK_ID          = "id";
+        String VERSION         = "version";
+        String REPO_ID         = "repo";
+        String HASH            = "hash";
+        String VERSION_CODE    = "vercode";
+        String NAME            = "apkName";
+        String SIZE            = "size";
+        String SIGNATURE       = "sig";
+        String SOURCE_NAME     = "srcname";
+        String MIN_SDK_VERSION = "minSdkVersion";
+        String MAX_SDK_VERSION = "maxSdkVersion";
+        String PERMISSIONS     = "permissions";
+        String FEATURES        = "features";
+        String NATIVE_CODE     = "nativecode";
+        String HASH_TYPE       = "hashType";
+        String ADDED_DATE      = "added";
+        String IS_COMPATIBLE   = "compatible";
+        String INCOMPATIBLE_REASONS = "incompatibleReasons";
+        String REPO_VERSION    = "repoVersion";
+        String REPO_ADDRESS    = "repoAddress";
 
-        public static final String[] ALL = {
+        String[] ALL = {
             _ID, APK_ID, VERSION, REPO_ID, HASH, VERSION_CODE, NAME, SIZE,
             SIGNATURE, SOURCE_NAME, MIN_SDK_VERSION, MAX_SDK_VERSION,
             PERMISSIONS, FEATURES, NATIVE_CODE, HASH_TYPE, ADDED_DATE,
@@ -215,7 +215,7 @@ public class ApkProvider extends FDroidProvider {
 
     private static final UriMatcher matcher = new UriMatcher(-1);
 
-    public static final Map<String,String> REPO_FIELDS = new HashMap<>();
+    public static final Map<String, String> REPO_FIELDS = new HashMap<>();
 
     static {
         REPO_FIELDS.put(DataColumns.REPO_VERSION, RepoProvider.DataColumns.VERSION);
@@ -424,7 +424,7 @@ public class ApkProvider extends FDroidProvider {
     }
 
     private static void removeRepoFields(ContentValues values) {
-        for (Map.Entry<String,String> repoField : REPO_FIELDS.entrySet()) {
+        for (Map.Entry<String, String> repoField : REPO_FIELDS.entrySet()) {
             final String field = repoField.getKey();
             if (values.containsKey(field)) {
                 Log.i(TAG, "Cannot insert/update '" + field + "' field " +

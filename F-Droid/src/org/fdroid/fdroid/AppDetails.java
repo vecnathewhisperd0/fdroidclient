@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2010-12  Ciaran Gultnieks, ciaran@ciarang.com
  * Copyright (C) 2013 Stefan Völkel, bd@bc-bd.org
+ * Copyright (C) 2015 Nico Alt, nicoalt@posteo.org
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,6 +24,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
+import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -33,6 +35,7 @@ import android.content.pm.Signature;
 import android.database.ContentObserver;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -41,20 +44,26 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
+import android.text.Layout;
+import android.text.Selection;
+import android.text.Spannable;
 import android.text.Spanned;
 import android.text.format.DateFormat;
 import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SubMenu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -84,10 +93,10 @@ import java.util.Iterator;
 import java.util.List;
 
 interface AppDetailsData {
-    public App getApp();
-    public AppDetails.ApkListAdapter getApks();
-    public Signature getInstalledSignature();
-    public String getInstalledSignatureId();
+    App getApp();
+    AppDetails.ApkListAdapter getApks();
+    Signature getInstalledSignature();
+    String getInstalledSignatureId();
 }
 
 /**
@@ -99,13 +108,13 @@ interface AppDetailsData {
  * activity communication possible.
  */
 interface AppInstallListener {
-    public void install(final Apk apk);
-    public void removeApk(String packageName);
+    void install(final Apk apk);
+    void removeApk(String packageName);
 }
 
 public class AppDetails extends ActionBarActivity implements ProgressListener, AppDetailsData, AppInstallListener {
 
-    private static final String TAG = "fdroid.AppDetails";
+    private static final String TAG = "AppDetails";
 
     public static final int REQUEST_ENABLE_BLUETOOTH = 2;
 
@@ -299,18 +308,9 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
     private static final int UNINSTALL          = Menu.FIRST + 1;
     private static final int IGNOREALL          = Menu.FIRST + 2;
     private static final int IGNORETHIS         = Menu.FIRST + 3;
-    private static final int WEBSITE            = Menu.FIRST + 4;
-    private static final int ISSUES             = Menu.FIRST + 5;
-    private static final int SOURCE             = Menu.FIRST + 6;
-    private static final int LAUNCH             = Menu.FIRST + 7;
-    private static final int SHARE              = Menu.FIRST + 8;
-    private static final int DONATE             = Menu.FIRST + 9;
-    private static final int BITCOIN            = Menu.FIRST + 10;
-    private static final int LITECOIN           = Menu.FIRST + 11;
-    private static final int DOGECOIN           = Menu.FIRST + 12;
-    private static final int FLATTR             = Menu.FIRST + 13;
-    private static final int DONATE_URL         = Menu.FIRST + 14;
-    private static final int SEND_VIA_BLUETOOTH = Menu.FIRST + 15;
+    private static final int LAUNCH             = Menu.FIRST + 4;
+    private static final int SHARE              = Menu.FIRST + 5;
+    private static final int SEND_VIA_BLUETOOTH = Menu.FIRST + 6;
 
     private App app;
     private PackageManager mPm;
@@ -605,9 +605,9 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
                 Hasher hash = new Hasher("MD5", mInstalledSignature.toCharsString().getBytes());
                 mInstalledSigID = hash.getHash();
             } catch (PackageManager.NameNotFoundException e) {
-                Log.d(TAG, "Failed to get installed signature");
+                Log.w(TAG, "Failed to get installed signature");
             } catch (NoSuchAlgorithmException e) {
-                Log.d(TAG, "Failed to calculate signature MD5 sum");
+                Log.w(TAG, "Failed to calculate signature MD5 sum");
                 mInstalledSignature = null;
             }
         }
@@ -625,48 +625,32 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-
         super.onPrepareOptionsMenu(menu);
         menu.clear();
         if (app == null)
             return true;
-        if (app.canAndWantToUpdate()) {
-            MenuItemCompat.setShowAsAction(menu.add(
-                        Menu.NONE, INSTALL, 0, R.string.menu_upgrade)
-                        .setIcon(R.drawable.ic_menu_refresh),
-                    MenuItemCompat.SHOW_AS_ACTION_ALWAYS |
-                    MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-        }
-
-        // Check count > 0 due to incompatible apps resulting in an empty list.
-        if (!app.isInstalled() && app.suggestedVercode > 0 &&
-                adapter.getCount() > 0) {
-            MenuItemCompat.setShowAsAction(menu.add(
-                        Menu.NONE, INSTALL, 1, R.string.menu_install)
-                        .setIcon(android.R.drawable.ic_menu_add),
-                    MenuItemCompat.SHOW_AS_ACTION_ALWAYS |
-                    MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-        } else if (app.isInstalled()) {
-            MenuItemCompat.setShowAsAction(menu.add(
-                        Menu.NONE, UNINSTALL, 1, R.string.menu_uninstall)
-                        .setIcon(android.R.drawable.ic_menu_delete),
-                    MenuItemCompat.SHOW_AS_ACTION_IF_ROOM |
-                    MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-
-            if (mPm.getLaunchIntentForPackage(app.id) != null) {
-                MenuItemCompat.setShowAsAction(menu.add(
-                            Menu.NONE, LAUNCH, 1, R.string.menu_launch)
-                            .setIcon(android.R.drawable.ic_media_play),
-                        MenuItemCompat.SHOW_AS_ACTION_ALWAYS |
-                        MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-            }
-        }
 
         MenuItemCompat.setShowAsAction(menu.add(
-                    Menu.NONE, SHARE, 1, R.string.menu_share)
-                    .setIcon(android.R.drawable.ic_menu_share),
+                        Menu.NONE, SHARE, 1, R.string.menu_share)
+                        .setIcon(android.R.drawable.ic_menu_share),
                 MenuItemCompat.SHOW_AS_ACTION_IF_ROOM |
-                MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
+                        MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
+
+        if (app.isInstalled()) {
+            MenuItemCompat.setShowAsAction(menu.add(
+                            Menu.NONE, UNINSTALL, 1, R.string.menu_uninstall)
+                            .setIcon(android.R.drawable.ic_menu_delete),
+                    MenuItemCompat.SHOW_AS_ACTION_IF_ROOM |
+                            MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
+        }
+
+        if (mPm.getLaunchIntentForPackage(app.id) != null && app.canAndWantToUpdate()) {
+            MenuItemCompat.setShowAsAction(menu.add(
+                            Menu.NONE, LAUNCH, 1, R.string.menu_launch)
+                            .setIcon(android.R.drawable.ic_media_play),
+                    MenuItemCompat.SHOW_AS_ACTION_ALWAYS |
+                            MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
+        }
 
         menu.add(Menu.NONE, IGNOREALL, 2, R.string.menu_ignore_all)
                     .setIcon(android.R.drawable.ic_menu_close_clear_cancel)
@@ -675,49 +659,21 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
 
         if (app.hasUpdates()) {
             menu.add(Menu.NONE, IGNORETHIS, 2, R.string.menu_ignore_this)
-                        .setIcon(android.R.drawable.ic_menu_close_clear_cancel)
-                        .setCheckable(true)
-                        .setChecked(app.ignoreThisUpdate >= app.suggestedVercode);
-        }
-        if (app.webURL.length() > 0) {
-            menu.add(Menu.NONE, WEBSITE, 3, R.string.menu_website).setIcon(
-                    android.R.drawable.ic_menu_view);
-        }
-        if (app.trackerURL.length() > 0) {
-            menu.add(Menu.NONE, ISSUES, 4, R.string.menu_issues).setIcon(
-                    android.R.drawable.ic_menu_view);
-        }
-        if (app.sourceURL.length() > 0) {
-            menu.add(Menu.NONE, SOURCE, 5, R.string.menu_source).setIcon(
-                    android.R.drawable.ic_menu_view);
+                    .setIcon(android.R.drawable.ic_menu_close_clear_cancel)
+                    .setCheckable(true)
+                    .setChecked(app.ignoreThisUpdate >= app.suggestedVercode);
         }
 
-        if (app.bitcoinAddr != null || app.litecoinAddr != null ||
-                app.dogecoinAddr != null ||
-                app.flattrID != null || app.donateURL != null) {
-            SubMenu donate = menu.addSubMenu(Menu.NONE, DONATE, 7,
-                    R.string.menu_donate).setIcon(
-                    android.R.drawable.ic_menu_send);
-            if (app.bitcoinAddr != null)
-                donate.add(Menu.NONE, BITCOIN, 8, R.string.menu_bitcoin);
-            if (app.litecoinAddr != null)
-                donate.add(Menu.NONE, LITECOIN, 8, R.string.menu_litecoin);
-            if (app.dogecoinAddr != null)
-                donate.add(Menu.NONE, DOGECOIN, 8, R.string.menu_dogecoin);
-            if (app.flattrID != null)
-                donate.add(Menu.NONE, FLATTR, 9, R.string.menu_flattr);
-            if (app.donateURL != null)
-                donate.add(Menu.NONE, DONATE_URL, 10, R.string.menu_website);
+        // Ignore on devices without Bluetooth
+        if (app.isInstalled() && fdroidApp.bluetoothAdapter != null) {
+            menu.add(Menu.NONE, SEND_VIA_BLUETOOTH, 3, R.string.send_via_bluetooth)
+                    .setIcon(android.R.drawable.stat_sys_data_bluetooth);
         }
-        if (app.isInstalled() && fdroidApp.bluetoothAdapter != null) { // ignore on devices without Bluetooth
-            menu.add(Menu.NONE, SEND_VIA_BLUETOOTH, 6, R.string.send_via_bluetooth);
-        }
-
         return true;
     }
 
 
-    public void tryOpenUri(String s) {
+    private void tryOpenUri(String s) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(s));
         if (intent.resolveActivity(getPackageManager()) == null) {
             Toast.makeText(this,
@@ -726,6 +682,62 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
             return;
         }
         startActivity(intent);
+    }
+
+    private static class SafeLinkMovementMethod extends LinkMovementMethod {
+
+        private static SafeLinkMovementMethod instance;
+
+        private final Context ctx;
+
+        private SafeLinkMovementMethod(Context ctx) {
+            this.ctx = ctx;
+        }
+
+        public static SafeLinkMovementMethod getInstance(Context ctx) {
+            if (instance == null) {
+                instance = new SafeLinkMovementMethod(ctx);
+            }
+            return instance;
+        }
+
+        private static CharSequence getLink(TextView widget, Spannable buffer,
+                MotionEvent event) {
+            int x = (int) event.getX();
+            int y = (int) event.getY();
+            x -= widget.getTotalPaddingLeft();
+            y -= widget.getTotalPaddingTop();
+            x += widget.getScrollX();
+            y += widget.getScrollY();
+
+            Layout layout = widget.getLayout();
+            final int line = layout.getLineForVertical(y);
+            final int off = layout.getOffsetForHorizontal(line, x);
+            final ClickableSpan[] links = buffer.getSpans(off, off, ClickableSpan.class);
+
+            if (links.length > 0) {
+                final ClickableSpan link = links[0];
+                final Spanned s = (Spanned) widget.getText();
+                return s.subSequence(s.getSpanStart(link), s.getSpanEnd(link));
+            }
+            return "null";
+        }
+
+        @Override
+        public boolean onTouchEvent(TextView widget, Spannable buffer,
+                MotionEvent event) {
+            try {
+                return super.onTouchEvent(widget, buffer, event);
+            } catch (ActivityNotFoundException ex) {
+                Selection.removeSelection(buffer);
+                final CharSequence link = getLink(widget, buffer, event);
+                Toast.makeText(ctx,
+                        ctx.getString(R.string.no_handler_app, link),
+                        Toast.LENGTH_LONG).show();
+                return true;
+            }
+        }
+
     }
 
     protected void navigateUp() {
@@ -772,38 +784,6 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
             else
                 app.ignoreThisUpdate = app.suggestedVercode;
             item.setChecked(app.ignoreThisUpdate > 0);
-            return true;
-
-        case WEBSITE:
-            tryOpenUri(app.webURL);
-            return true;
-
-        case ISSUES:
-            tryOpenUri(app.trackerURL);
-            return true;
-
-        case SOURCE:
-            tryOpenUri(app.sourceURL);
-            return true;
-
-        case BITCOIN:
-            tryOpenUri("bitcoin:" + app.bitcoinAddr);
-            return true;
-
-        case LITECOIN:
-            tryOpenUri("litecoin:" + app.litecoinAddr);
-            return true;
-
-        case DOGECOIN:
-            tryOpenUri("dogecoin:" + app.dogecoinAddr);
-            return true;
-
-        case FLATTR:
-            tryOpenUri("https://flattr.com/thing/" + app.flattrID);
-            return true;
-
-        case DONATE_URL:
-            tryOpenUri(app.donateURL);
             return true;
 
         case SEND_VIA_BLUETOOTH:
@@ -968,6 +948,9 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
         if (progressDialog == null) {
             final ProgressDialog pd = new ProgressDialog(this);
             pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            if (Build.VERSION.SDK_INT >= 11) {
+                pd.setProgressNumberFormat("%1d/%2d KiB");
+            }
             pd.setMessage(getString(R.string.download_server) + ":\n " + file);
             pd.setCancelable(true);
             pd.setCanceledOnTouchOutside(false);
@@ -1020,11 +1003,11 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
             ProgressDialog pd = getProgressDialog(downloadHandler.getRemoteAddress());
             if (total > 0) {
                 pd.setIndeterminate(false);
-                pd.setProgress(progress);
-                pd.setMax(total);
+                pd.setProgress(progress/1024);
+                pd.setMax(total/1024);
             } else {
                 pd.setIndeterminate(true);
-                pd.setProgress(progress);
+                pd.setProgress(progress/1024);
                 pd.setMax(0);
             }
             if (!pd.isShowing()) {
@@ -1105,6 +1088,13 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
 
         protected final Preferences prefs;
         private AppDetailsData data;
+        private static final int MAX_LINES = 5;
+        private static boolean view_all_description;
+        private static boolean view_all_information;
+        private static boolean view_all_permissions;
+        private static LinearLayout ll_view_more_description;
+        private static LinearLayout ll_view_more_information;
+        private static LinearLayout ll_view_more_permissions;
 
         public AppDetailsSummaryFragment() {
             prefs = Preferences.get();
@@ -1138,21 +1128,125 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
             updateViews(getView());
         }
 
-        private void setupView(View view) {
-
-            TextView description = (TextView) view.findViewById(R.id.description);
-            Spanned desc = Html.fromHtml(getApp().description, null, new Utils.HtmlTagHandler());
-            description.setMovementMethod(LinkMovementMethod.getInstance());
+        private void setupView(final View view) {
+            // Expandable description
+            final TextView description = (TextView) view.findViewById(R.id.description);
+            final Spanned desc = Html.fromHtml(getApp().description, null, new Utils.HtmlTagHandler());
+            description.setMovementMethod(SafeLinkMovementMethod.getInstance(getActivity()));
             description.setText(desc.subSequence(0, desc.length() - 2));
+            final ImageView view_more_description = (ImageView) view.findViewById(R.id.view_more_description);
+            description.post(new Runnable() {
+                @Override
+                public void run() {
+                    // If description has more than five lines
+                    if (description.getLineCount() > MAX_LINES) {
+                        description.setMaxLines(MAX_LINES);
+                        description.setOnClickListener(expander_description);
+                        view_all_description = true;
 
-            TextView appIdView = (TextView) view.findViewById(R.id.appid);
+                        ll_view_more_description = (LinearLayout) view.findViewById(R.id.ll_description);
+                        ll_view_more_description.setOnClickListener(expander_description);
+
+                        view_more_description.setImageResource(R.drawable.ic_expand_more_grey600);
+                        view_more_description.setOnClickListener(expander_description);
+                    }
+                    else {
+                        view_more_description.setVisibility(View.GONE);
+                    }
+                }
+            });
+
+            // App ID
+            final TextView appIdView = (TextView) view.findViewById(R.id.appid);
             if (prefs.expertMode())
                 appIdView.setText(getApp().id);
             else
                 appIdView.setVisibility(View.GONE);
 
-            TextView summaryView = (TextView) view.findViewById(R.id.summary);
+            // Expandable information
+            ll_view_more_information = (LinearLayout) view.findViewById(R.id.ll_information);
+            final TextView information = (TextView) view.findViewById(R.id.information);
+            final LinearLayout ll_view_more_information_content = (LinearLayout) view.findViewById(R.id.ll_information_content);
+            ll_view_more_information_content.setVisibility(View.GONE);
+            view_all_information = true;
+            information.setCompoundDrawablesWithIntrinsicBounds(null, null, getActivity().getResources().getDrawable(R.drawable.ic_expand_more_grey600), null);
+
+            ll_view_more_information.setOnClickListener(expander_information);
+            information.setOnClickListener(expander_information);
+
+            // Summary
+            final TextView summaryView = (TextView) view.findViewById(R.id.summary);
             summaryView.setText(getApp().summary);
+
+            // Website button
+            TextView tv = (TextView) view.findViewById(R.id.website);
+            if (getApp().webURL != null)
+                tv.setOnClickListener(mOnClickListener);
+            else
+                tv.setVisibility(View.GONE);
+
+            // Source button
+            tv = (TextView) view.findViewById(R.id.source);
+            if (getApp().sourceURL != null)
+                tv.setOnClickListener(mOnClickListener);
+            else
+                tv.setVisibility(View.GONE);
+
+            // Issues button
+            tv = (TextView) view.findViewById(R.id.issues);
+            if (getApp().trackerURL != null)
+                tv.setOnClickListener(mOnClickListener);
+            else
+                tv.setVisibility(View.GONE);
+
+            // Changelog button
+            tv = (TextView) view.findViewById(R.id.changelog);
+            if (getApp().changelogURL != null)
+                tv.setOnClickListener(mOnClickListener);
+            else
+                tv.setVisibility(View.GONE);
+
+            // Donate button
+            tv = (TextView) view.findViewById(R.id.donate);
+            if (getApp().donateURL != null)
+                tv.setOnClickListener(mOnClickListener);
+            else
+                tv.setVisibility(View.GONE);
+
+            // Bitcoin
+            tv = (TextView) view.findViewById(R.id.bitcoin);
+            if (getApp().bitcoinAddr != null)
+                tv.setOnClickListener(mOnClickListener);
+            else
+                tv.setVisibility(View.GONE);
+
+            // Litecoin
+            tv = (TextView) view.findViewById(R.id.litecoin);
+            if (getApp().litecoinAddr != null)
+                tv.setOnClickListener(mOnClickListener);
+            else
+                tv.setVisibility(View.GONE);
+
+            // Dogecoin
+            tv = (TextView) view.findViewById(R.id.dogecoin);
+            if (getApp().dogecoinAddr != null)
+                tv.setOnClickListener(mOnClickListener);
+            else
+                tv.setVisibility(View.GONE);
+
+            // Flattr
+            tv = (TextView) view.findViewById(R.id.flattr);
+            if (getApp().flattrID != null)
+                tv.setOnClickListener(mOnClickListener);
+            else
+                tv.setVisibility(View.GONE);
+
+            // Categories TextView
+            final TextView categories = (TextView) view.findViewById(R.id.categories);
+            if (prefs.expertMode() && getApp().categories != null)
+                categories.setText(getApp().categories.toString().replaceAll(",", ", "));
+            else
+                categories.setVisibility(View.GONE);
 
             Apk curApk = null;
             for (int i = 0; i < getApks().getCount(); i++) {
@@ -1163,51 +1257,33 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
                 }
             }
 
-            TextView permissionListView = (TextView) view.findViewById(R.id.permissions_list);
-            TextView permissionHeader = (TextView) view.findViewById(R.id.permissions);
-            boolean curApkCompatible = curApk != null && curApk.compatible;
-            if (prefs.showPermissions() && !getApks().isEmpty() &&
-                    (curApkCompatible || prefs.showIncompatibleVersions())) {
+            // Expandable permissions
+            ll_view_more_permissions = (LinearLayout) view.findViewById(R.id.ll_permissions);
+            final TextView permissionHeader = (TextView) view.findViewById(R.id.permissions);
+            final TextView permissionListView = (TextView) view.findViewById(R.id.permissions_list);
+            permissionListView.setVisibility(View.GONE);
+            view_all_permissions = true;
 
-                CommaSeparatedList permsList = getApks().getItem(0).permissions;
-                if (permsList == null) {
-                    permissionListView.setText(getString(R.string.no_permissions));
-                } else {
-                    Iterator<String> permissions = permsList.iterator();
-                    StringBuilder sb = new StringBuilder();
-                    while (permissions.hasNext()) {
-                        final String permissionName = permissions.next();
-                        try {
-                            Permission permission = new Permission(getActivity(), permissionName);
-                            // TODO: Make this list RTL friendly
-                            sb.append("\t• ").append(permission.getName()).append('\n');
-                        } catch (PackageManager.NameNotFoundException e) {
-                            if (permissionName.equals("ACCESS_SUPERUSER")) {
-                                // TODO: i18n this string, but surely it is already translated somewhere?
-                                sb.append("\t• Full permissions to all device features and storage\n");
-                            } else {
-                                Log.e(TAG, "Permission not yet available: " + permissionName);
-                            }
-                        }
-                    }
-                    if (sb.length() > 0) {
-                        sb.setLength(sb.length() - 1);
-                    }
-                    permissionListView.setText(sb.toString());
-                }
+            final boolean curApkCompatible = curApk != null && curApk.compatible;
+            if (!getApks().isEmpty() && (curApkCompatible || prefs.showIncompatibleVersions())) {
                 permissionHeader.setText(getString(R.string.permissions_for_long, getApks().getItem(0).version));
+                permissionHeader.setCompoundDrawablesWithIntrinsicBounds(null, null, getActivity().getResources().getDrawable(R.drawable.ic_expand_more_grey600), null);
+
+                ll_view_more_permissions.setOnClickListener(expander_permissions);
+                permissionHeader.setOnClickListener(expander_permissions);
             } else {
-                permissionListView.setVisibility(View.GONE);
                 permissionHeader.setVisibility(View.GONE);
+                permissionHeader.setCompoundDrawables(null, null, null, null);
             }
 
-            TextView antiFeaturesView = (TextView) view.findViewById(R.id.antifeatures);
+            // Anti features
+            final TextView antiFeaturesView = (TextView) view.findViewById(R.id.antifeatures);
             if (getApp().antiFeatures != null) {
                 StringBuilder sb = new StringBuilder();
                 for (final String af : getApp().antiFeatures) {
                     final String afdesc = descAntiFeature(af);
                     if (afdesc != null) {
-                        sb.append("\t• ").append(afdesc).append("\n");
+                        sb.append("\t• ").append(afdesc).append('\n');
                     }
                 }
                 if (sb.length() > 0) {
@@ -1222,6 +1298,117 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
 
             updateViews(view);
         }
+
+        private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
+            public void onClick(View v) {
+                switch(v.getId()) {
+                    case R.id.website:
+                        ((AppDetails) getActivity()).tryOpenUri(getApp().webURL);
+                        break;
+
+                    case R.id.source:
+                        ((AppDetails) getActivity()).tryOpenUri(getApp().sourceURL);
+                        break;
+
+                    case R.id.issues:
+                        ((AppDetails) getActivity()).tryOpenUri(getApp().trackerURL);
+                        break;
+
+                    case R.id.changelog:
+                        ((AppDetails) getActivity()).tryOpenUri(getApp().changelogURL);
+                        break;
+
+                    case R.id.donate:
+                        ((AppDetails) getActivity()).tryOpenUri(getApp().donateURL);
+                        break;
+
+                    case R.id.bitcoin:
+                        ((AppDetails) getActivity()).tryOpenUri("bitcoin:" + getApp().bitcoinAddr);
+                        break;
+
+                    case R.id.litecoin:
+                        ((AppDetails) getActivity()).tryOpenUri("litecoin:" + getApp().litecoinAddr);
+                        break;
+
+                    case R.id.dogecoin:
+                        ((AppDetails) getActivity()).tryOpenUri("dogecoin:" + getApp().dogecoinAddr);
+                        break;
+
+                    case R.id.flattr:
+                        ((AppDetails) getActivity()).tryOpenUri("https://flattr.com/thing/" + getApp().flattrID);
+                        break;
+                }
+            }
+        };
+
+        private final View.OnClickListener expander_description = new View.OnClickListener() {
+            public void onClick(View v) {
+                final TextView description = (TextView) ll_view_more_description.findViewById(R.id.description);
+                final ImageView view_more_permissions = (ImageView) ll_view_more_description.findViewById(R.id.view_more_description);
+                if (!view_all_description) {
+                    view_all_description = true;
+                    description.setMaxLines(MAX_LINES);
+                    view_more_permissions.setImageResource(R.drawable.ic_expand_more_grey600);
+                } else {
+                    view_all_description = false;
+                    description.setMaxLines(Integer.MAX_VALUE);
+                    view_more_permissions.setImageResource(R.drawable.ic_expand_less_grey600);
+                }
+            }
+        };
+
+        private final View.OnClickListener expander_information = new View.OnClickListener() {
+            public void onClick(View v) {
+                final TextView informationHeader = (TextView) ll_view_more_information.findViewById(R.id.information);
+                final LinearLayout information_content = (LinearLayout) ll_view_more_information.findViewById(R.id.ll_information_content);
+                if (!view_all_information) {
+                    view_all_information = true;
+                    information_content.setVisibility(View.GONE);
+                    informationHeader.setCompoundDrawablesWithIntrinsicBounds(null, null, getActivity().getResources().getDrawable(R.drawable.ic_expand_more_grey600), null);
+                } else {
+                    view_all_information = false;
+                    information_content.setVisibility(View.VISIBLE);
+                    informationHeader.setCompoundDrawablesWithIntrinsicBounds(null, null, getActivity().getResources().getDrawable(R.drawable.ic_expand_less_grey600), null);
+                }
+            }
+        };
+
+        private final View.OnClickListener expander_permissions = new View.OnClickListener() {
+            public void onClick(View v) {
+                final TextView permissionHeader = (TextView) ll_view_more_permissions.findViewById(R.id.permissions);
+                final TextView permissionListView = (TextView) ll_view_more_permissions.findViewById(R.id.permissions_list);
+                if (!view_all_permissions) {
+                    view_all_permissions = true;
+                    permissionListView.setVisibility(View.GONE);
+                    permissionHeader.setCompoundDrawablesWithIntrinsicBounds(null, null, getActivity().getResources().getDrawable(R.drawable.ic_expand_more_grey600), null);
+                } else {
+                    view_all_permissions = false;
+                    CommaSeparatedList permsList = getApks().getItem(0).permissions;
+                    if (permsList == null) {
+                        permissionListView.setText(getString(R.string.no_permissions));
+                    } else {
+                        Iterator<String> permissions = permsList.iterator();
+                        StringBuilder sb = new StringBuilder();
+                        while (permissions.hasNext()) {
+                            final String permissionName = permissions.next();
+                            try {
+                                final Permission permission = new Permission(getActivity(), permissionName);
+                                // TODO: Make this list RTL friendly
+                                sb.append("\t• ").append(permission.getName()).append('\n');
+                            } catch (PackageManager.NameNotFoundException e) {
+                                Log.e(TAG, "Permission not yet available: " + permissionName);
+                            }
+                        }
+                        if (sb.length() > 0) {
+                            sb.setLength(sb.length() - 1);
+                        }
+                        permissionListView.setText(sb.toString());
+                    }
+                    permissionListView.setVisibility(View.VISIBLE);
+                    permissionHeader.setCompoundDrawablesWithIntrinsicBounds(null, null, getActivity().getResources().getDrawable(R.drawable.ic_expand_less_grey600), null);
+                }
+            }
+        };
 
         private String descAntiFeature(String af) {
             switch (af) {
@@ -1262,11 +1449,11 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
     public static class AppDetailsHeaderFragment extends Fragment {
 
         private AppDetailsData data;
-        protected final Preferences prefs;
         protected final DisplayImageOptions displayImageOptions;
+        public static boolean installed = false;
+        public static boolean updateWanted = false;
 
         public AppDetailsHeaderFragment() {
-            prefs = Preferences.get();
             displayImageOptions = new DisplayImageOptions.Builder()
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
@@ -1298,18 +1485,12 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
 
             // Set the icon...
             ImageView iv = (ImageView) view.findViewById(R.id.icon);
-            ImageLoader.getInstance().displayImage(getApp().iconUrl, iv, displayImageOptions);
+            ImageLoader.getInstance().displayImage(getApp().iconUrlLarge, iv,
+                    displayImageOptions);
 
-            // Set the title and other header details...
+            // Set the title
             TextView tv = (TextView) view.findViewById(R.id.title);
             tv.setText(getApp().name);
-            tv = (TextView) view.findViewById(R.id.license);
-            tv.setText(getApp().license);
-
-            if (getApp().categories != null) {
-                tv = (TextView) view.findViewById(R.id.categories);
-                tv.setText(getApp().categories.toString().replaceAll(",", ", "));
-            }
 
             updateViews(view);
         }
@@ -1325,18 +1506,78 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
         }
 
         public void updateViews(View view) {
-
             TextView statusView = (TextView) view.findViewById(R.id.status);
-            if (getApp().isInstalled()) {
-                statusView.setText(getString(R.string.details_installed, getApp().installedVersionName));
-                NfcHelper.setAndroidBeam(getActivity(), getApp().id);
-            } else {
+            Button btMain = (Button) view.findViewById(R.id.btn_main);
+            btMain.setVisibility(View.VISIBLE);
+
+            /*
+            Check count > 0 due to incompatible apps resulting in an empty list.
+            If App isn't installed
+             */
+            if (!getApp().isInstalled() && getApp().suggestedVercode > 0 && ((AppDetails)getActivity()).adapter.getCount() > 0) {
+                installed = false;
                 statusView.setText(getString(R.string.details_notinstalled));
                 NfcHelper.disableAndroidBeam(getActivity());
+                // Set Install button and hide second button
+                btMain.setText(R.string.menu_install);
+                btMain.setOnClickListener(mOnClickListener);
+            }
+            // If App is installed
+            else if (getApp().isInstalled()) {
+                installed = true;
+                statusView.setText(getString(R.string.details_installed, getApp().installedVersionName));
+                NfcHelper.setAndroidBeam(getActivity(), getApp().id);
+                if (getApp().canAndWantToUpdate()) {
+                    updateWanted = true;
+                    btMain.setText(R.string.menu_upgrade);
+                }else {
+                    updateWanted = false;
+                    if (((AppDetails)getActivity()).mPm.getLaunchIntentForPackage(getApp().id) != null){
+                        btMain.setText(R.string.menu_launch);
+                    }
+                    else {
+                        btMain.setText(R.string.menu_uninstall);
+                    }
+                }
+                btMain.setOnClickListener(mOnClickListener);
+            }
+            TextView currentVersion = (TextView) view.findViewById(R.id.current_version);
+            if (!getApks().isEmpty()) {
+                currentVersion.setText(getApks().getItem(0).version);
+            }else {
+                currentVersion.setVisibility(View.GONE);
+                btMain.setVisibility(View.GONE);
             }
 
         }
 
+        private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
+            public void onClick(View v) {
+                if (updateWanted) {
+                    if (getApp().suggestedVercode > 0) {
+                        final Apk apkToInstall = ApkProvider.Helper.find(getActivity(), getApp().id, getApp().suggestedVercode);
+                        ((AppDetails)getActivity()).install(apkToInstall);
+                        return;
+                    }
+                }
+                // If installed
+                if (installed) {
+                    // If "launchable", launch
+                    if (((AppDetails)getActivity()).mPm.getLaunchIntentForPackage(getApp().id) != null) {
+                        ((AppDetails)getActivity()).launchApk(getApp().id);
+                    }
+                    else {
+                        ((AppDetails)getActivity()).removeApk(getApp().id);
+                    }
+                }
+
+                // If not installed, install
+                else if (getApp().suggestedVercode > 0) {
+                    final Apk apkToInstall = ApkProvider.Helper.find(getActivity(), getApp().id, getApp().suggestedVercode);
+                    ((AppDetails)getActivity()).install(apkToInstall);
+                }
+            }
+        };
     }
 
     public static class AppDetailsListFragment extends ListFragment {

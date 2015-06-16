@@ -33,7 +33,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.net.Uri;
-import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.Message;
@@ -42,7 +41,7 @@ import android.os.RemoteException;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
-import com.nostra13.universalimageloader.cache.disc.impl.LimitedAgeDiscCache;
+import com.nostra13.universalimageloader.cache.disc.impl.LimitedAgeDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -65,10 +64,10 @@ import java.util.Set;
 public class FDroidApp extends Application {
 
     // for the local repo on this device, all static since there is only one
-    public static int port = 8888;
-    public static String ipAddressString = null;
-    public static String ssid = "";
-    public static String bssid = "";
+    public static int port;
+    public static String ipAddressString;
+    public static String ssid;
+    public static String bssid;
     public static final Repo repo = new Repo();
     public static Set<String> selectedApps = null; // init in SelectLocalAppsFragment
 
@@ -77,8 +76,6 @@ public class FDroidApp extends Application {
     private static Messenger localRepoServiceMessenger = null;
     private static boolean localRepoServiceIsBound = false;
 
-    private static final String TAG = "fdroid.FDroidApp";
-
     BluetoothAdapter bluetoothAdapter = null;
 
     static {
@@ -86,7 +83,7 @@ public class FDroidApp extends Application {
         enableSpongyCastle();
     }
 
-    public static enum Theme {
+    public enum Theme {
         dark, light, lightWithDarkActionBar
     }
 
@@ -99,21 +96,24 @@ public class FDroidApp extends Application {
     }
 
     public void applyTheme(Activity activity) {
-        switch (curTheme) {
-        case dark:
-            activity.setTheme(R.style.AppThemeDark);
-            break;
-        case light:
-            activity.setTheme(R.style.AppThemeLight);
-            break;
-        case lightWithDarkActionBar:
-            activity.setTheme(R.style.AppThemeLightWithDarkActionBar);
-            break;
-        }
+            activity.setTheme(getCurThemeResId());
     }
 
     public static Theme getCurTheme() {
         return curTheme;
+    }
+
+    public static int getCurThemeResId() {
+        switch (curTheme) {
+            case dark:
+                return R.style.AppThemeDark;
+            case light:
+                return R.style.AppThemeLight;
+            case lightWithDarkActionBar:
+                return R.style.AppThemeLightWithDarkActionBar;
+            default:
+                return R.style.AppThemeDark;
+        }
     }
 
     public static void enableSpongyCastle() {
@@ -130,6 +130,13 @@ public class FDroidApp extends Application {
         if (Build.VERSION.SDK_INT == 21) {
             Security.removeProvider(spongyCastleProvider.getName());
         }
+    }
+
+    public static void initWifiSettings() {
+        port = 8888;
+        ipAddressString = null;
+        ssid = "";
+        bssid = "";
     }
 
     public static void updateLanguage(Context c) {
@@ -210,7 +217,7 @@ public class FDroidApp extends Application {
 
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext())
             .imageDownloader(new IconDownloader(getApplicationContext()))
-            .diskCache(new LimitedAgeDiscCache(
+            .diskCache(new LimitedAgeDiskCache(
                         new File(StorageUtils.getCacheDirectory(getApplicationContext(), true),
                             "icons"),
                         null,
@@ -231,11 +238,8 @@ public class FDroidApp extends Application {
         // TODO reintroduce PinningTrustManager and MemorizingTrustManager
 
         // initialized the local repo information
-        WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
-        int wifiState = wifiManager.getWifiState();
-        if (wifiState == WifiManager.WIFI_STATE_ENABLING
-                || wifiState == WifiManager.WIFI_STATE_ENABLED)
-            startService(new Intent(this, WifiStateChangeService.class));
+        FDroidApp.initWifiSettings();
+        startService(new Intent(this, WifiStateChangeService.class));
         // if the HTTPS pref changes, then update all affected things
         Preferences.get().registerLocalRepoHttpsListeners(new ChangeListener() {
             @Override
@@ -330,7 +334,10 @@ public class FDroidApp extends Application {
         app.stopService(new Intent(app, LocalRepoService.class));
     }
 
-    public static void restartLocalRepoService() {
+    /**
+     * Handles checking if the {@link LocalRepoService} is running, and only restarts it if it was running.
+     */
+    public static void restartLocalRepoServiceIfRunning() {
         if (localRepoServiceMessenger != null) {
             try {
                 Message msg = Message.obtain(null, LocalRepoService.RESTART, LocalRepoService.RESTART, 0);

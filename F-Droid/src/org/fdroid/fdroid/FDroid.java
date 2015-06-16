@@ -20,7 +20,6 @@
 package org.fdroid.fdroid;
 
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.NotificationManager;
 import android.app.SearchManager;
 import android.bluetooth.BluetoothAdapter;
@@ -35,6 +34,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -47,6 +47,8 @@ import android.widget.Toast;
 import org.fdroid.fdroid.compat.TabManager;
 import org.fdroid.fdroid.data.AppProvider;
 import org.fdroid.fdroid.data.NewRepoConfig;
+import org.fdroid.fdroid.installer.InstallIntoSystemDialogActivity;
+import org.fdroid.fdroid.installer.Installer;
 import org.fdroid.fdroid.views.AppListFragmentPagerAdapter;
 import org.fdroid.fdroid.views.ManageReposActivity;
 import org.fdroid.fdroid.views.swap.ConnectSwapActivity;
@@ -54,7 +56,7 @@ import org.fdroid.fdroid.views.swap.SwapActivity;
 
 public class FDroid extends ActionBarActivity {
 
-    private static final String TAG = "fdroid.FDroid";
+    private static final String TAG = "FDroid";
 
     public static final int REQUEST_MANAGEREPOS = 0;
     public static final int REQUEST_PREFS = 1;
@@ -101,6 +103,8 @@ public class FDroid extends ActionBarActivity {
 
         Uri uri = AppProvider.getContentUri();
         getContentResolver().registerContentObserver(uri, true, new AppObserver());
+
+        InstallIntoSystemDialogActivity.firstTime(this);
     }
 
     @Override
@@ -172,6 +176,16 @@ public class FDroid extends ActionBarActivity {
             query = data.getSchemeSpecificPart();
         }
 
+        if (!TextUtils.isEmpty(query)) {
+            // an old format for querying via packageName
+            if (query.startsWith("pname:"))
+                appId = query.split(":")[1];
+
+            // sometimes, search URLs include pub: or other things before the query string
+            if (query.contains(":"))
+                query = query.split(":")[1];
+        }
+
         Intent call = null;
         if (appId != null && appId.length() > 0) {
             Log.d(TAG, "FDroid launched via app link for '" + appId + "'");
@@ -193,7 +207,7 @@ public class FDroid extends ActionBarActivity {
         // Don't handle the intent after coming back to this view (e.g. after hitting the back button)
         // http://stackoverflow.com/a/14820849
         Intent intent = getIntent();
-        if (intent.hasExtra("handled")) {
+        if (!intent.hasExtra("handled")) {
             NewRepoConfig parser = new NewRepoConfig(this, intent);
             if (parser.isValidRepo()) {
                 intent.putExtra("handled", true);
@@ -286,16 +300,16 @@ public class FDroid extends ActionBarActivity {
             } catch (Exception ignored) {
             }
 
-            Builder p;
+            AlertDialog.Builder builder;
             if (Build.VERSION.SDK_INT >= 11) {
-                p = new AlertDialog.Builder(this).setView(view);
+                builder = new AlertDialog.Builder(this).setView(view);
             } else {
-                p = new AlertDialog.Builder(
+                builder = new AlertDialog.Builder(
                         new ContextThemeWrapper(
                                 this, R.style.AboutDialogLight)
                         ).setView(view);
             }
-            final AlertDialog alrt = p.create();
+            final AlertDialog alrt = builder.create();
             alrt.setIcon(R.drawable.ic_launcher);
             alrt.setTitle(getString(R.string.about_title));
             alrt.setButton(AlertDialog.BUTTON_NEUTRAL,

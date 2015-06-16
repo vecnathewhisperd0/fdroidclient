@@ -19,7 +19,7 @@ import java.net.URL;
 
 public abstract class Downloader {
 
-    private static final String TAG = "fdroid.Downloader";
+    private static final String TAG = "Downloader";
     private OutputStream outputStream;
 
     private ProgressListener progressListener = null;
@@ -173,12 +173,12 @@ public abstract class Downloader {
             int count = input.read(buffer);
             throwExceptionIfInterrupted();
 
-            bytesRead += count;
-            sendProgress(bytesRead, totalBytes);
             if (count == -1) {
                 Log.d(TAG, "Finished downloading from stream");
                 break;
             }
+            bytesRead += count;
+            sendProgress(bytesRead, totalBytes);
             outputStream.write(buffer, 0, count);
         }
         outputStream.flush();

@@ -53,7 +53,6 @@ import org.fdroid.fdroid.data.AppProvider;
 import org.fdroid.fdroid.data.Repo;
 import org.fdroid.fdroid.data.RepoProvider;
 import org.fdroid.fdroid.net.Downloader;
-import org.fdroid.fdroid.updater.RepoUpdater;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,7 +61,7 @@ import java.util.Map;
 
 public class UpdateService extends IntentService implements ProgressListener {
 
-    private static final String TAG = "fdroid.UpdateService";
+    private static final String TAG = "UpdateService";
 
     public static final String RESULT_MESSAGE     = "msg";
     public static final String RESULT_EVENT       = "event";
@@ -178,7 +177,7 @@ public class UpdateService extends IntentService implements ProgressListener {
                     msgB.append(error);
                 }
                 if (resultCode == STATUS_ERROR_LOCAL_SMALL) {
-                    msgB.append("\n").append(context.getString(R.string.all_other_repos_fine));
+                    msgB.append('\n').append(context.getString(R.string.all_other_repos_fine));
                 }
                 Toast.makeText(context, msgB.toString(), Toast.LENGTH_LONG).show();
                 finished = true;
@@ -376,7 +375,7 @@ public class UpdateService extends IntentService implements ProgressListener {
                 }
 
                 sendStatus(STATUS_INFO, getString(R.string.status_connecting_to_repo, repo.address));
-                RepoUpdater updater = RepoUpdater.createUpdaterFor(getBaseContext(), repo);
+                RepoUpdater updater = new RepoUpdater(getBaseContext(), repo);
                 updater.setProgressListener(this);
                 try {
                     updater.update();
@@ -480,9 +479,9 @@ public class UpdateService extends IntentService implements ProgressListener {
      * in order to see if, and why an apk is not compatible.
      */
     private static void calcApkCompatibilityFlags(Context context, List<Apk> apks) {
-        CompatibilityChecker checker = new CompatibilityChecker(context);
-        for (Apk apk : apks) {
-            List<String> reasons = checker.getIncompatibleReasons(apk);
+        final CompatibilityChecker checker = new CompatibilityChecker(context);
+        for (final Apk apk : apks) {
+            final List<String> reasons = checker.getIncompatibleReasons(apk);
             if (reasons.size() > 0) {
                 apk.compatible = false;
                 apk.incompatible_reasons = Utils.CommaSeparatedList.make(reasons);

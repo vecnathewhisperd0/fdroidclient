@@ -21,6 +21,7 @@ package org.fdroid.fdroid;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
+import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -65,7 +66,7 @@ import java.util.Locale;
 public final class Utils {
 
     @SuppressWarnings("UnusedDeclaration")
-    private static final String TAG = "fdroid.Utils";
+    private static final String TAG = "Utils";
 
     public static final int BUFFER_SIZE = 4096;
 
@@ -79,23 +80,33 @@ public final class Utils {
     private static final SimpleDateFormat LOG_DATE_FORMAT =
             new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
 
-    public static String getIconsDir(Context context) {
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        if (metrics.densityDpi >= 640) {
+    public static final String FALLBACK_ICONS_DIR = "/icons/";
+
+    /*
+     * @param dpiMultiplier Lets you grab icons for densities larger or
+     * smaller than that of your device by some fraction. Useful, for example,
+     * if you want to display a 48dp image at twice the size, 96dp, in which
+     * case you'd use a dpiMultiplier of 2.0 to get an image twice as big.
+     */
+    public static String getIconsDir(final Context context, final double dpiMultiplier) {
+        final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        final double dpi = metrics.densityDpi * dpiMultiplier;
+        if (dpi >= 640) {
             return "/icons-640/";
         }
-        if (metrics.densityDpi >= 480) {
+        if (dpi >= 480) {
             return "/icons-480/";
         }
-        if (metrics.densityDpi >= 320) {
+        if (dpi >= 320) {
             return "/icons-320/";
         }
-        if (metrics.densityDpi >= 240) {
+        if (dpi >= 240) {
             return "/icons-240/";
         }
-        if (metrics.densityDpi >= 160) {
+        if (dpi >= 160) {
             return "/icons-160/";
         }
+
         return "/icons-120/";
     }
 
@@ -218,8 +229,10 @@ public final class Utils {
         return androidVersionNames[sdkLevel];
     }
 
-    /* PackageManager doesn't give us minSdkVersion, so we have to parse it */
-    public static int getMinSdkVersion(Context context, String packageName) {
+    /* PackageManager doesn't give us the min and max sdk versions, so we have
+     * to parse it */
+    private static int getMinMaxSdkVersion(Context context, String packageName,
+            String attrName) {
         try {
             AssetManager am = context.createPackageContext(packageName, 0).getAssets();
             XmlResourceParser xml = am.openXmlResourceParser("AndroidManifest.xml");
@@ -227,7 +240,7 @@ public final class Utils {
             while (eventType != XmlPullParser.END_DOCUMENT) {
                 if (eventType == XmlPullParser.START_TAG && xml.getName().equals("uses-sdk")) {
                     for (int j = 0; j < xml.getAttributeCount(); j++) {
-                        if (xml.getAttributeName(j).equals("minSdkVersion")) {
+                        if (xml.getAttributeName(j).equals(attrName)) {
                             return Integer.parseInt(xml.getAttributeValue(j));
                         }
                     }
@@ -237,7 +250,15 @@ public final class Utils {
         } catch (PackageManager.NameNotFoundException | IOException | XmlPullParserException e) {
             e.printStackTrace();
         }
-        return 8; // some kind of hopeful default
+        return 0;
+    }
+
+    public static int getMinSdkVersion(Context context, String packageName) {
+        return getMinMaxSdkVersion(context, packageName, "minSdkVersion");
+    }
+
+    public static int getMaxSdkVersion(Context context, String packageName) {
+        return getMinMaxSdkVersion(context, packageName, "maxSdkVersion");
     }
 
     public static int countSubstringOccurrence(File file, String substring) throws IOException {
@@ -271,11 +292,11 @@ public final class Utils {
     }
 
     // return a fingerprint formatted for display
-    public static String formatFingerprint(String fingerprint) {
+    public static String formatFingerprint(Context context, String fingerprint) {
         if (TextUtils.isEmpty(fingerprint)
                 || fingerprint.length() != 64  // SHA-256 is 64 hex chars
                 || fingerprint.matches(".*[^0-9a-fA-F].*")) // its a hex string
-            return "BAD FINGERPRINT";
+            return context.getString(R.string.bad_fingerprint);
         String displayFP = fingerprint.substring(0, 2);
         for (int i = 2; i < fingerprint.length(); i = i + 2)
             displayFP += " " + fingerprint.substring(i, i + 2);
@@ -426,6 +447,19 @@ public final class Utils {
                     sb.append(',');
                 }
                 sb.append(list.get(i));
+            }
+            return new CommaSeparatedList(sb.toString());
+        }
+
+        public static CommaSeparatedList make(String[] list) {
+            if (list == null || list.length == 0)
+                return null;
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < list.length; i++) {
+                if (i > 0) {
+                    sb.append(',');
+                }
+                sb.append(list[i]);
             }
             return new CommaSeparatedList(sb.toString());
         }

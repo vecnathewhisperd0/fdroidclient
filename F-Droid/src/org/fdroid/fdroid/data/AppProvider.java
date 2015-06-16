@@ -21,7 +21,7 @@ import java.util.Set;
 
 public class AppProvider extends FDroidProvider {
 
-    private static final String TAG = "fdroid.AppProvider";
+    private static final String TAG = "AppProvider";
 
     public static final int MAX_APPS_TO_QUERY = 900;
 
@@ -91,8 +91,8 @@ public class AppProvider extends FDroidProvider {
             final ContentResolver resolver = context.getContentResolver();
             final Uri uri = getContentUri();
             final String[] projection = { DataColumns.CATEGORIES };
-            Cursor cursor = resolver.query(uri, projection, null, null, null);
-            Set<String> categorySet = new HashSet<>();
+            final Cursor cursor = resolver.query(uri, projection, null, null, null);
+            final Set<String> categorySet = new HashSet<>();
             if (cursor != null) {
                 if (cursor.getCount() > 0) {
                     cursor.moveToFirst();
@@ -108,7 +108,7 @@ public class AppProvider extends FDroidProvider {
                 }
                 cursor.close();
             }
-            List<String> categories = new ArrayList<>(categorySet);
+            final List<String> categories = new ArrayList<>(categorySet);
             Collections.sort(categories);
 
             // Populate the category list with the real categories, and the
@@ -154,53 +154,55 @@ public class AppProvider extends FDroidProvider {
 
     public interface DataColumns {
 
-        public static final String _ID = "rowid as _id"; // Required for CursorLoaders
-        public static final String _COUNT = "_count";
-        public static final String IS_COMPATIBLE = "compatible";
-        public static final String APP_ID = "id";
-        public static final String NAME = "name";
-        public static final String SUMMARY = "summary";
-        public static final String ICON = "icon";
-        public static final String DESCRIPTION = "description";
-        public static final String LICENSE = "license";
-        public static final String WEB_URL = "webURL";
-        public static final String TRACKER_URL = "trackerURL";
-        public static final String SOURCE_URL = "sourceURL";
-        public static final String DONATE_URL = "donateURL";
-        public static final String BITCOIN_ADDR = "bitcoinAddr";
-        public static final String LITECOIN_ADDR = "litecoinAddr";
-        public static final String DOGECOIN_ADDR = "dogecoinAddr";
-        public static final String FLATTR_ID = "flattrID";
-        public static final String SUGGESTED_VERSION_CODE = "suggestedVercode";
-        public static final String UPSTREAM_VERSION = "upstreamVersion";
-        public static final String UPSTREAM_VERSION_CODE = "upstreamVercode";
-        public static final String ADDED = "added";
-        public static final String LAST_UPDATED = "lastUpdated";
-        public static final String CATEGORIES = "categories";
-        public static final String ANTI_FEATURES = "antiFeatures";
-        public static final String REQUIREMENTS = "requirements";
-        public static final String IGNORE_ALLUPDATES = "ignoreAllUpdates";
-        public static final String IGNORE_THISUPDATE = "ignoreThisUpdate";
-        public static final String ICON_URL = "iconUrl";
+        String _ID = "rowid as _id"; // Required for CursorLoaders
+        String _COUNT = "_count";
+        String IS_COMPATIBLE = "compatible";
+        String APP_ID = "id";
+        String NAME = "name";
+        String SUMMARY = "summary";
+        String ICON = "icon";
+        String DESCRIPTION = "description";
+        String LICENSE = "license";
+        String WEB_URL = "webURL";
+        String TRACKER_URL = "trackerURL";
+        String SOURCE_URL = "sourceURL";
+        String CHANGELOG_URL = "changelogURL";
+        String DONATE_URL = "donateURL";
+        String BITCOIN_ADDR = "bitcoinAddr";
+        String LITECOIN_ADDR = "litecoinAddr";
+        String DOGECOIN_ADDR = "dogecoinAddr";
+        String FLATTR_ID = "flattrID";
+        String SUGGESTED_VERSION_CODE = "suggestedVercode";
+        String UPSTREAM_VERSION = "upstreamVersion";
+        String UPSTREAM_VERSION_CODE = "upstreamVercode";
+        String ADDED = "added";
+        String LAST_UPDATED = "lastUpdated";
+        String CATEGORIES = "categories";
+        String ANTI_FEATURES = "antiFeatures";
+        String REQUIREMENTS = "requirements";
+        String IGNORE_ALLUPDATES = "ignoreAllUpdates";
+        String IGNORE_THISUPDATE = "ignoreThisUpdate";
+        String ICON_URL = "iconUrl";
+        String ICON_URL_LARGE = "iconUrlLarge";
 
-        public interface SuggestedApk {
-            public static final String VERSION = "suggestedApkVersion";
+        interface SuggestedApk {
+            String VERSION = "suggestedApkVersion";
         }
 
-        public interface InstalledApp {
-            public static final String VERSION_CODE = "installedVersionCode";
-            public static final String VERSION_NAME = "installedVersionName";
+        interface InstalledApp {
+            String VERSION_CODE = "installedVersionCode";
+            String VERSION_NAME = "installedVersionName";
         }
 
-        public static final String[] ALL = {
+        String[] ALL = {
                 IS_COMPATIBLE, APP_ID, NAME, SUMMARY, ICON, DESCRIPTION,
-                LICENSE, WEB_URL, TRACKER_URL, SOURCE_URL, DONATE_URL,
+                LICENSE, WEB_URL, TRACKER_URL, SOURCE_URL, CHANGELOG_URL, DONATE_URL,
                 BITCOIN_ADDR, LITECOIN_ADDR, DOGECOIN_ADDR, FLATTR_ID,
                 UPSTREAM_VERSION, UPSTREAM_VERSION_CODE, ADDED, LAST_UPDATED,
                 CATEGORIES, ANTI_FEATURES, REQUIREMENTS, IGNORE_ALLUPDATES,
-                IGNORE_THISUPDATE, ICON_URL, SUGGESTED_VERSION_CODE,
-                SuggestedApk.VERSION, InstalledApp.VERSION_CODE,
-                InstalledApp.VERSION_NAME
+                IGNORE_THISUPDATE, ICON_URL, ICON_URL_LARGE,
+                SUGGESTED_VERSION_CODE, SuggestedApk.VERSION,
+                InstalledApp.VERSION_CODE, InstalledApp.VERSION_NAME
         };
     }
 
@@ -567,7 +569,7 @@ public class AppProvider extends FDroidProvider {
             } else {
                 selection.append("OR ");
             }
-            selection.append("(");
+            selection.append('(');
             boolean firstKeyword = true;
             for (final String keyword : keywords) {
                 if (firstKeyword) {
@@ -920,14 +922,21 @@ public class AppProvider extends FDroidProvider {
         write().execSQL(updateSql);
     }
 
-    private void updateIconUrls() {
-
-        Log.d(TAG, "Updating icon paths for apps belonging to repos with version >= " + Repo.VERSION_DENSITY_SPECIFIC_ICONS);
-        final String iconsDir = Utils.getIconsDir(getContext());
-        Log.d(TAG, "Using icon dir '"+iconsDir+"'");
+    /**
+     * Updates URLs to icons
+     */
+    public void updateIconUrls() {
+        final String iconsDir = Utils.getIconsDir(getContext(), 1.0);
+        final String iconsDirLarge = Utils.getIconsDir(getContext(), 1.5);
         String repoVersion = Integer.toString(Repo.VERSION_DENSITY_SPECIFIC_ICONS);
+        Log.d(TAG, "Updating icon paths for apps belonging to repos with version >= "
+                + repoVersion);
+        Log.d(TAG, "Using icons dir '" + iconsDir + "'");
+        Log.d(TAG, "Using large icons dir '" + iconsDirLarge + "'");
         String query = getIconUpdateQuery();
-        final String[] params = { repoVersion, iconsDir };
+        final String[] params = {
+            repoVersion, iconsDir, Utils.FALLBACK_ICONS_DIR,
+            repoVersion, iconsDirLarge, Utils.FALLBACK_ICONS_DIR };
         write().execSQL(query, params);
     }
 
@@ -942,39 +951,51 @@ public class AppProvider extends FDroidProvider {
         final String app = DBHelper.TABLE_APP;
         final String repo = DBHelper.TABLE_REPO;
 
+        final String iconUrlQuery =
+            " SELECT " +
+
+                // Concatenate (using the "||" operator) the address, the
+                // icons directory (bound to the ? as the second parameter
+                // when executing the query) and the icon path.
+                " ( " +
+                    repo + ".address " +
+                    " || " +
+
+                    // If the repo has the relevant version, then use a more
+                    // intelligent icons dir, otherwise revert to the default
+                    // one
+                    " CASE WHEN " + repo + ".version >= ? THEN ? ELSE ? END " +
+
+                    " || " +
+                    app + ".icon " +
+                ") " +
+            " FROM " +
+                apk +
+                " JOIN " + repo + " ON (" + repo + "._id = " + apk + ".repo) " +
+            " WHERE " +
+                app + ".id = " + apk + ".id AND " +
+                apk + ".vercode = ( " +
+
+                    // We only want the latest apk here. Ideally, we should
+                    // instead join onto apk.suggestedVercode, but as per
+                    // https://gitlab.com/fdroid/fdroidclient/issues/1 there
+                    // may be some situations where suggestedVercode isn't
+                    // set.
+                    // TODO: If we can guarantee that suggestedVercode is set,
+                    // then join onto that instead. This will save from doing
+                    // a futher sub query for each app.
+                    " SELECT MAX(inner_apk.vercode)  " +
+                    " FROM fdroid_apk as inner_apk " +
+                    " WHERE inner_apk.id = fdroid_apk.id ) " +
+                " AND fdroid_apk.repo = fdroid_repo._id ";
+
         return
-            " UPDATE " + app + " SET iconUrl = ( " +
-                " SELECT " +
-
-                    // Concatenate (using the "||" operator) the address, the icons directory (bound to the ? as the
-                    // second parameter when executing the query) and the icon path.
-                    " ( " +
-                        repo + ".address " +
-                        " || " +
-
-                        // If the repo has the relevant version, then use a more intelligent icons dir,
-                        // otherwise revert to '/icons/'
-                        " CASE WHEN " + repo + ".version >= ? THEN ? ELSE '/icons/' END " +
-
-                        " || " +
-                        app + ".icon " +
-                    ") " +
-                " FROM " +
-                    apk +
-                    " JOIN " + repo + " ON (" + repo + "._id = " + apk + ".repo) " +
-                " WHERE " +
-                    app + ".id = " + apk + ".id AND " +
-                    apk + ".vercode = ( " +
-
-                        // We only want the latest apk here. Ideally, we should instead join
-                        // onto apk.suggestedVercode, but as per https://gitlab.com/fdroid/fdroidclient/issues/1
-                        // there may be some situations where suggestedVercode isn't set.
-                        // TODO: If we can guarantee that suggestedVercode is set, then join onto that instead.
-                        // This will save from doing a futher sub query for each app.
-                        " SELECT MAX(inner_apk.vercode)  " +
-                        " FROM fdroid_apk as inner_apk " +
-                        " WHERE inner_apk.id = fdroid_apk.id ) " +
-                    " AND fdroid_apk.repo = fdroid_repo._id " +
+            " UPDATE " + app + " SET " +
+            " iconUrl = ( " +
+                iconUrlQuery +
+            " ), " +
+            " iconUrlLarge = ( " +
+                iconUrlQuery +
             " ) ";
     }
 

@@ -24,7 +24,6 @@ import android.os.Bundle;
 import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.data.Repo;
-import org.fdroid.fdroid.updater.RepoUpdater;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -97,7 +96,7 @@ public class RepoXMLHandler extends DefaultHandler {
 
         super.endElement(uri, localName, qName);
         final String curel = localName;
-        String str = curchars.toString().trim();
+        final String str = curchars.toString().trim();
 
         if (curel.equals("application") && curapp != null) {
             apps.add(curapp);
@@ -189,6 +188,9 @@ public class RepoXMLHandler extends DefaultHandler {
                 break;
             case "source":
                 curapp.sourceURL = str;
+                break;
+            case "changelog":
+                curapp.changelogURL = str;
                 break;
             case "donate":
                 curapp.donateURL = str;

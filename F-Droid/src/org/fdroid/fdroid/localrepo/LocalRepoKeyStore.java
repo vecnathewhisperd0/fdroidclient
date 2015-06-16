@@ -51,7 +51,7 @@ import kellinwood.security.zipsigner.ZipSigner;
 
 public class LocalRepoKeyStore {
 
-    private static final String TAG = "fdroid.LocalRepoKeyStore";
+    private static final String TAG = "LocalRepoKeyStore";
 
     public static final String INDEX_CERT_ALIAS = "fdroid";
     public static final String HTTP_CERT_ALIAS = "https";
@@ -272,8 +272,7 @@ public class LocalRepoKeyStore {
     private KeyPair generateRandomKeypair() throws NoSuchAlgorithmException {
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(DEFAULT_KEY_ALGO);
         keyPairGenerator.initialize(DEFAULT_KEY_BITS);
-        KeyPair keyPair = keyPairGenerator.generateKeyPair();
-        return keyPair;
+        return keyPairGenerator.generateKeyPair();
     }
 
     private Certificate generateSelfSignedCertChain(KeyPair kp, X500Name subject)

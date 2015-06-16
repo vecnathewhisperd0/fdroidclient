@@ -2,9 +2,7 @@ package org.fdroid.fdroid.data;
 
 import android.database.Cursor;
 
-abstract class ValueObject {
-
-    private static final String TAG = "fdroid.ValueObject";
+public class ValueObject {
 
     protected void checkCursorPosition(Cursor cursor) throws IllegalArgumentException {
         if (cursor.getPosition() == -1) {

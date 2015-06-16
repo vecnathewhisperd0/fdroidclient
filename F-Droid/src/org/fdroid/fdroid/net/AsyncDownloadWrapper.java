@@ -19,7 +19,7 @@ import java.io.IOException;
 @SuppressWarnings("serial")
 public class AsyncDownloadWrapper extends Handler {
 
-    private static final String TAG = "fdroid.AsyncDownloadWrapper";
+    private static final String TAG = "AsyncDownloadWrapper";
 
     private static final int MSG_PROGRESS           = 1;
     private static final int MSG_DOWNLOAD_COMPLETE  = 2;
@@ -105,11 +105,11 @@ public class AsyncDownloadWrapper extends Handler {
     }
 
     public interface Listener extends ProgressListener {
-        public void onReceiveTotalDownloadSize(int size);
-        public void onReceiveCacheTag(String cacheTag);
-        public void onErrorDownloading(String localisedExceptionDetails);
-        public void onDownloadComplete();
-        public void onDownloadCancelled();
+        void onReceiveTotalDownloadSize(int size);
+        void onReceiveCacheTag(String cacheTag);
+        void onErrorDownloading(String localisedExceptionDetails);
+        void onDownloadComplete();
+        void onDownloadCancelled();
     }
 
     private class DownloadThread extends Thread implements ProgressListener {

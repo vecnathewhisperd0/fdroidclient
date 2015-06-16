@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="org.fdroid.fdroid"
     android:installLocation="auto"
-    android:versionCode="880"
-    android:versionName="0.88"
+    android:versionCode="930"
+    android:versionName="0.93-test"
     >
 
     <uses-sdk
         tools:overrideLibrary="org.thoughtcrime.ssl.pinning"
-        android:minSdkVersion="7"
+        android:minSdkVersion="8"
         android:targetSdkVersion="21"
         />
 
@@ -45,7 +45,8 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
     <uses-permission android:name="android.permission.NFC" />
 
     <!-- These permissions are only granted when F-Droid is installed as a system-app! -->
@@ -53,9 +54,6 @@
         tools:ignore="ProtectedPermissions"/>
     <uses-permission android:name="android.permission.DELETE_PACKAGES"
         tools:ignore="ProtectedPermissions"/>
-
-    <!-- Indicate that F-Droid may request root access (introduced by Koush's Superuser app) -->
-    <uses-permission android:name="android.permission.ACCESS_SUPERUSER"/>
 
     <application
         android:name="FDroidApp"
@@ -209,6 +207,20 @@
                 <data android:path="/store/search" />
             </intent-filter>
 
+            <!-- Handle NFC tags detected from outside our application -->
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <!--
+                URIs that come in via NFC have scheme/host normalized to all lower case
+                https://developer.android.com/reference/android/nfc/NfcAdapter.html#ACTION_NDEF_DISCOVERED
+                -->
+                <data android:scheme="fdroidrepo" />
+                <data android:scheme="fdroidrepos" />
+            </intent-filter>
+
             <!-- Repo URLs -->
 
             <!--
@@ -273,8 +285,9 @@
                 the QR Code for sending the local repo to another device.
                 -->
                 <data android:path="/FDROID/REPO" />
-                <data android:path="/.*/FDROID/REPO" />
-                <data android:path="/.*/.*/FDROID/REPO" />
+                <data android:pathPattern="/.*/FDROID/REPO" />
+                <data android:pathPattern="/.*/.*/FDROID/REPO" />
+                <data android:pathPattern="/.*/.*/.*/FDROID/REPO" />
             </intent-filter>
 
             <meta-data
@@ -286,6 +299,16 @@
             android:theme="@style/SwapTheme.Wizard.ReceiveSwap"
             android:label=""
             android:noHistory="true"
+            android:parentActivityName=".FDroid"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".FDroid" />
+        </activity>
+        <activity
+            android:name=".installer.InstallConfirmActivity"
+            android:label="@string/menu_install"
             android:parentActivityName=".FDroid">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -299,19 +322,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".FDroid" />
-            <!-- Handle NFC tags detected from outside our application -->
-            <intent-filter>
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <!--
-                URIs that come in via NFC have scheme/host normalized to all lower case
-                https://developer.android.com/reference/android/nfc/NfcAdapter.html#ACTION_NDEF_DISCOVERED
-                -->
-                <data android:scheme="fdroidrepo" />
-                <data android:scheme="fdroidrepos" />
-            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -384,7 +394,9 @@
             android:label="@string/menu_swap"
             android:name=".views.swap.SwapActivity"
             android:parentActivityName=".FDroid"
-            android:theme="@style/SwapTheme.Wizard">
+            android:theme="@style/SwapTheme.Wizard"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".FDroid" />
@@ -393,11 +405,23 @@
             android:label="@string/swap"
             android:name=".views.swap.SwapAppListActivity"
             android:parentActivityName=".FDroid"
-            android:theme="@style/SwapTheme.AppList">
+            android:theme="@style/SwapTheme.AppList"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".FDroid" />
         </activity>
+        <!-- Note: Theme.NoDisplay, this activity shows dialogs only -->
+        <activity
+            android:name=".installer.InstallIntoSystemDialogActivity"
+            android:theme="@android:style/Theme.NoDisplay" />
+        <receiver
+            android:name=".installer.InstallIntoSystemBootReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
         <activity
             android:name=".SearchResults"
             android:label="@string/search_results"

@@ -56,7 +56,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarOutputStream;
 
 public class LocalRepoManager {
-    private static final String TAG = "fdroid.LocalRepoManager";
+    private static final String TAG = "LocalRepoManager";
 
     // For ref, official F-droid repo presently uses a maxage of 14 days
     private static final String DEFAULT_REPO_MAX_AGE_DAYS = "14";
@@ -435,6 +435,7 @@ public class LocalRepoManager {
             tag("sig", app.installedApk.sig.toLowerCase(Locale.US));
             tag("size", app.installedApk.installedFile.length());
             tag("sdkver", app.installedApk.minSdkVersion);
+            tag("maxsdkver", app.installedApk.maxSdkVersion);
             tag("added", app.installedApk.added);
             tagFeatures(app);
             tagPermissions(app);
@@ -449,7 +450,7 @@ public class LocalRepoManager {
 
                 for (String permission : app.installedApk.permissions) {
                     buff.append(permission.replace("android.permission.", ""));
-                    buff.append(",");
+                    buff.append(',');
                 }
                 String out = buff.toString();
                 if (!TextUtils.isEmpty(out))

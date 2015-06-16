@@ -69,7 +69,7 @@ public class RepoDetailsFragment extends Fragment {
     private static final int UPDATE = 1;
     private static final int ENABLE_NFC = 2;
 
-    private static final String TAG = "fdroid.RepoDetailsFragment";
+    private static final String TAG = "RepoDetailsFragment";
 
     private MenuItem enableNfc = null;
     private UpdateService.UpdateReceiver updateHandler = null;
@@ -366,7 +366,7 @@ public class RepoDetailsFragment extends Fragment {
         String repoFingerprint;
         int repoFingerprintColor;
 
-// TODO show the current state of the signature check, not just whether there is a key or not
+        // TODO show the current state of the signature check, not just whether there is a key or not
         if (TextUtils.isEmpty(repo.fingerprint) && TextUtils.isEmpty(repo.pubkey)) {
             repoFingerprint = getResources().getString(R.string.unsigned);
             repoFingerprintColor = getResources().getColor(R.color.unsigned);
@@ -374,7 +374,7 @@ public class RepoDetailsFragment extends Fragment {
             repoFingerprintDescView.setText(getResources().getString(R.string.unsigned_description));
         } else {
             // this is based on repo.fingerprint always existing, which it should
-            repoFingerprint = Utils.formatFingerprint(repo.fingerprint);
+            repoFingerprint = Utils.formatFingerprint(getActivity(), repo.fingerprint);
             repoFingerprintColor = getResources().getColor(R.color.signed);
             repoFingerprintDescView.setVisibility(View.GONE);
         }

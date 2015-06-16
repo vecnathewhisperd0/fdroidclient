@@ -23,7 +23,7 @@ import java.util.Random;
  */
 public class Preferences implements SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private static final String TAG = "fdroid.Preferences";
+    private static final String TAG = "Preferences";
 
     private final SharedPreferences preferences;
 
@@ -44,14 +44,13 @@ public class Preferences implements SharedPreferences.OnSharedPreferenceChangeLi
     public static final String PREF_ROOTED = "rooted";
     public static final String PREF_INCOMP_VER = "incompatibleVersions";
     public static final String PREF_THEME = "theme";
-    public static final String PREF_PERMISSIONS = "showPermissions";
     public static final String PREF_COMPACT_LAYOUT = "compactlayout";
     public static final String PREF_IGN_TOUCH = "ignoreTouchscreen";
     public static final String PREF_CACHE_APK = "cacheDownloaded";
     public static final String PREF_EXPERT = "expert";
     public static final String PREF_UPD_LAST = "lastUpdateCheck";
-    public static final String PREF_ROOT_INSTALLER = "rootInstaller";
     public static final String PREF_SYSTEM_INSTALLER = "systemInstaller";
+    public static final String PREF_UNINSTALL_SYSTEM_APP = "uninstallSystemApp";
     public static final String PREF_LOCAL_REPO_BONJOUR = "localRepoBonjour";
     public static final String PREF_LOCAL_REPO_NAME = "localRepoName";
     public static final String PREF_LOCAL_REPO_HTTPS = "localRepoHttps";
@@ -60,11 +59,12 @@ public class Preferences implements SharedPreferences.OnSharedPreferenceChangeLi
     public static final String PREF_PROXY_HOST = "proxyHost";
     public static final String PREF_PROXY_PORT = "proxyPort";
     public static final String PREF_SHOW_NFC_DURING_SWAP = "showNfcDuringSwap";
+    public static final String PREF_FIRST_TIME = "firstTime";
+    public static final String PREF_POST_SYSTEM_INSTALL = "postSystemInstall";
 
     private static final boolean DEFAULT_COMPACT_LAYOUT = false;
     private static final boolean DEFAULT_ROOTED = true;
     private static final int DEFAULT_UPD_HISTORY = 14;
-    private static final boolean DEFAULT_ROOT_INSTALLER = false;
     private static final boolean DEFAULT_SYSTEM_INSTALLER = false;
     private static final boolean DEFAULT_LOCAL_REPO_BONJOUR = true;
     private static final boolean DEFAULT_CACHE_APK = false;
@@ -77,11 +77,13 @@ public class Preferences implements SharedPreferences.OnSharedPreferenceChangeLi
     public static final String DEFAULT_PROXY_HOST = "127.0.0.1";
     public static final int DEFAULT_PROXY_PORT = 8118;
     public static final boolean DEFAULT_SHOW_NFC_DURING_SWAP = true;
+    private static final boolean DEFAULT_FIRST_TIME = true;
+    private static final boolean DEFAULT_POST_SYSTEM_INSTALL = false;
 
     private boolean compactLayout = DEFAULT_COMPACT_LAYOUT;
     private boolean filterAppsRequiringRoot = DEFAULT_ROOTED;
 
-    private final Map<String,Boolean> initialized = new HashMap<>();
+    private final Map<String, Boolean> initialized = new HashMap<>();
 
     private final List<ChangeListener> compactLayoutListeners = new ArrayList<>();
     private final List<ChangeListener> filterAppsRequiringRootListeners = new ArrayList<>();
@@ -102,12 +104,28 @@ public class Preferences implements SharedPreferences.OnSharedPreferenceChangeLi
         initialized.put(key, false);
     }
 
-    public boolean isRootInstallerEnabled() {
-        return preferences.getBoolean(PREF_ROOT_INSTALLER, DEFAULT_ROOT_INSTALLER);
-    }
-
     public boolean isSystemInstallerEnabled() {
         return preferences.getBoolean(PREF_SYSTEM_INSTALLER, DEFAULT_SYSTEM_INSTALLER);
+    }
+
+    public void setSystemInstallerEnabled(boolean enable) {
+        preferences.edit().putBoolean(PREF_SYSTEM_INSTALLER, enable).commit();
+    }
+
+    public boolean isFirstTime() {
+        return preferences.getBoolean(PREF_FIRST_TIME, DEFAULT_FIRST_TIME);
+    }
+
+    public void setFirstTime(boolean firstTime) {
+        preferences.edit().putBoolean(PREF_FIRST_TIME, firstTime).commit();
+    }
+
+    public boolean isPostSystemInstall() {
+        return preferences.getBoolean(PREF_POST_SYSTEM_INSTALL, DEFAULT_POST_SYSTEM_INSTALL);
+    }
+
+    public void setPostSystemInstall(boolean postInstall) {
+        preferences.edit().putBoolean(PREF_POST_SYSTEM_INSTALL, postInstall).commit();
     }
 
     public boolean isLocalRepoBonjourEnabled() {
@@ -120,10 +138,6 @@ public class Preferences implements SharedPreferences.OnSharedPreferenceChangeLi
 
     public boolean showIncompatibleVersions() {
         return preferences.getBoolean(PREF_INCOMP_VER, DEFAULT_INCOMP_VER);
-    }
-
-    public boolean showPermissions() {
-        return preferences.getBoolean(PREF_PERMISSIONS, DEFAULT_PERMISSIONS);
     }
 
     public boolean showNfcDuringSwap() {
@@ -160,7 +174,7 @@ public class Preferences implements SharedPreferences.OnSharedPreferenceChangeLi
     }
 
     public int getProxyPort() {
-        String port = preferences.getString(PREF_PROXY_PORT, String.valueOf(DEFAULT_PROXY_PORT));
+        final String port = preferences.getString(PREF_PROXY_PORT, String.valueOf(DEFAULT_PROXY_PORT));
         try {
             return Integer.parseInt(port);
         } catch (NumberFormatException e) {
@@ -194,7 +208,7 @@ public class Preferences implements SharedPreferences.OnSharedPreferenceChangeLi
      * Updated...
      */
     public Date calcMaxHistory() {
-        String daysString = preferences.getString(PREF_UPD_HISTORY, Integer.toString(DEFAULT_UPD_HISTORY));
+        final String daysString = preferences.getString(PREF_UPD_HISTORY, Integer.toString(DEFAULT_UPD_HISTORY));
         int maxHistoryDays;
         try {
             maxHistoryDays = Integer.parseInt(daysString);
@@ -230,7 +244,9 @@ public class Preferences implements SharedPreferences.OnSharedPreferenceChangeLi
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        Log.d(TAG, "Invalidating preference '" + key + "'.");
+        if (BuildConfig.DEBUG) {
+            Log.d(TAG, "Invalidating preference '" + key + "'.");
+        }
         uninitialize(key);
 
         switch (key) {
@@ -299,15 +315,15 @@ public class Preferences implements SharedPreferences.OnSharedPreferenceChangeLi
         localRepoHttpsListeners.remove(listener);
     }
 
-    public static interface ChangeListener {
-        public void onPreferenceChange();
+    public interface ChangeListener {
+        void onPreferenceChange();
     }
 
     private static Preferences instance;
 
     public static void setup(Context context) {
         if (instance != null) {
-            String error = "Attempted to reinitialize preferences after it " +
+            final String error = "Attempted to reinitialize preferences after it " +
                     "has already been initialized in FDroidApp";
             Log.e(TAG, error);
             throw new RuntimeException(error);
@@ -317,7 +333,7 @@ public class Preferences implements SharedPreferences.OnSharedPreferenceChangeLi
 
     public static Preferences get() {
         if (instance == null) {
-            String error = "Attempted to access preferences before it " +
+            final String error = "Attempted to access preferences before it " +
                     "has been initialized in FDroidApp";
             Log.e(TAG, error);
             throw new RuntimeException(error);

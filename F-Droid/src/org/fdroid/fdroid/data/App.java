@@ -8,7 +8,6 @@ import android.content.pm.FeatureInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -21,16 +20,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateEncodingException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class App extends ValueObject implements Comparable<App> {
 
-    private static final String TAG = "fdroid.App";
+    private static final String TAG = "App";
 
     // True if compatible with the device (i.e. if at least one apk is)
     public boolean compatible;
@@ -49,6 +45,8 @@ public class App extends ValueObject implements Comparable<App> {
     public String trackerURL;
 
     public String sourceURL;
+
+    public String changelogURL;
 
     public String donateURL;
 
@@ -93,7 +91,10 @@ public class App extends ValueObject implements Comparable<App> {
     // True if the current update for this app is to be ignored
     public int ignoreThisUpdate;
 
+    // To be displayed at 48dp (x1.0)
     public String iconUrl;
+    // To be displayed at 72dp (x1.5)
+    public String iconUrlLarge;
 
     public String installedVersionName;
 
@@ -106,9 +107,7 @@ public class App extends ValueObject implements Comparable<App> {
         return name.compareToIgnoreCase(app.name);
     }
 
-    public App() {
-
-    }
+    public App() { }
 
     public App(Cursor cursor) {
 
@@ -145,6 +144,9 @@ public class App extends ValueObject implements Comparable<App> {
                 break;
             case AppProvider.DataColumns.SOURCE_URL:
                 sourceURL = cursor.getString(i);
+                break;
+            case AppProvider.DataColumns.CHANGELOG_URL:
+                changelogURL = cursor.getString(i);
                 break;
             case AppProvider.DataColumns.DONATE_URL:
                 donateURL = cursor.getString(i);
@@ -197,6 +199,9 @@ public class App extends ValueObject implements Comparable<App> {
             case AppProvider.DataColumns.ICON_URL:
                 iconUrl = cursor.getString(i);
                 break;
+            case AppProvider.DataColumns.ICON_URL_LARGE:
+                iconUrlLarge = cursor.getString(i);
+                break;
             case AppProvider.DataColumns.InstalledApp.VERSION_CODE:
                 installedVersionCode = cursor.getInt(i);
                 break;
@@ -238,13 +243,8 @@ public class App extends ValueObject implements Comparable<App> {
         else
             this.summary = (String) appDescription.subSequence(0, 40);
         this.id = appInfo.packageName;
-        if (Build.VERSION.SDK_INT > 8) {
-            this.added = new Date(packageInfo.firstInstallTime);
-            this.lastUpdated = new Date(packageInfo.lastUpdateTime);
-        } else {
-            this.added = new Date(System.currentTimeMillis());
-            this.lastUpdated = this.added;
-        }
+        this.added = new Date(packageInfo.firstInstallTime);
+        this.lastUpdated = new Date(packageInfo.lastUpdateTime);
         this.description = "<p>";
         if (!TextUtils.isEmpty(appDescription))
             this.description += appDescription + "\n";
@@ -254,7 +254,7 @@ public class App extends ValueObject implements Comparable<App> {
 
         this.name = (String) appInfo.loadLabel(pm);
 
-        SanitizedFile apkFile = SanitizedFile.knownSanitized(appInfo.publicSourceDir);
+        final SanitizedFile apkFile = SanitizedFile.knownSanitized(appInfo.publicSourceDir);
         final Apk apk = new Apk();
         apk.version = packageInfo.versionName;
         apk.vercode = packageInfo.versionCode;
@@ -262,33 +262,25 @@ public class App extends ValueObject implements Comparable<App> {
         apk.hash = Utils.getBinaryHash(apkFile, apk.hashType);
         apk.added = this.added;
         apk.minSdkVersion = Utils.getMinSdkVersion(context, packageName);
+        apk.maxSdkVersion = Utils.getMaxSdkVersion(context, packageName);
         apk.id = this.id;
         apk.installedFile = apkFile;
-        if (packageInfo.requestedPermissions == null)
-            apk.permissions = null;
-        else
-            apk.permissions = Utils.CommaSeparatedList.make(
-                    Arrays.asList(packageInfo.requestedPermissions));
+        apk.permissions = Utils.CommaSeparatedList.make(packageInfo.requestedPermissions);
         apk.apkName = apk.id + "_" + apk.vercode + ".apk";
 
         final FeatureInfo[] features = packageInfo.reqFeatures;
-
         if (features != null && features.length > 0) {
-            List<String> featureNames = new ArrayList<>(features.length);
-
-            for (FeatureInfo feature : features) {
-                featureNames.add(feature.name);
+            final String[] featureNames = new String[features.length];
+            for (int i = 0; i < features.length; i++) {
+                featureNames[i] = features[i].name;
             }
-
             apk.features = Utils.CommaSeparatedList.make(featureNames);
         }
 
-        // Signature[] sigs = pkgInfo.signatures;
-
         byte[] rawCertBytes;
 
-        JarFile apkJar = new JarFile(apkFile);
-        JarEntry aSignedEntry = (JarEntry) apkJar.getEntry("AndroidManifest.xml");
+        final JarFile apkJar = new JarFile(apkFile);
+        final JarEntry aSignedEntry = (JarEntry) apkJar.getEntry("AndroidManifest.xml");
 
         if (aSignedEntry == null) {
             apkJar.close();
@@ -300,7 +292,7 @@ public class App extends ValueObject implements Comparable<App> {
         // details, check out https://gitlab.com/fdroid/fdroidclient/issues/111.
         try {
             FDroidApp.disableSpongyCastleOnLollipop();
-            InputStream tmpIn = apkJar.getInputStream(aSignedEntry);
+            final InputStream tmpIn = apkJar.getInputStream(aSignedEntry);
             byte[] buff = new byte[2048];
             while (tmpIn.read(buff, 0, buff.length) != -1) {
                 /*
@@ -316,7 +308,7 @@ public class App extends ValueObject implements Comparable<App> {
                 throw new CertificateEncodingException("No Certificates found!");
             }
 
-            Certificate signer = aSignedEntry.getCertificates()[0];
+            final Certificate signer = aSignedEntry.getCertificates()[0];
             rawCertBytes = signer.getEncoded();
         } finally {
             FDroidApp.enableSpongyCastleOnLollipop();
@@ -332,7 +324,7 @@ public class App extends ValueObject implements Comparable<App> {
          * if I'm right... If I'm not right, I really don't know! see lines
          * 67->75 in getsig.java bundled with Fdroidserver
          */
-        byte[] fdroidSig = new byte[rawCertBytes.length * 2];
+        final byte[] fdroidSig = new byte[rawCertBytes.length * 2];
         for (int j = 0; j < rawCertBytes.length; j++) {
             byte v = rawCertBytes[j];
             int d = (v >> 4) & 0xF;
@@ -356,26 +348,26 @@ public class App extends ValueObject implements Comparable<App> {
         if (TextUtils.isEmpty(this.installedApk.sig))
             return false;
 
-        File apkFile = this.installedApk.installedFile;
-        if (apkFile == null || !apkFile.canRead())
-            return false;
+        final File apkFile = this.installedApk.installedFile;
+        return !(apkFile == null || !apkFile.canRead());
 
-        return true;
     }
 
     public ContentValues toContentValues() {
 
-        ContentValues values = new ContentValues();
+        final ContentValues values = new ContentValues();
         values.put(AppProvider.DataColumns.APP_ID, id);
         values.put(AppProvider.DataColumns.NAME, name);
         values.put(AppProvider.DataColumns.SUMMARY, summary);
         values.put(AppProvider.DataColumns.ICON, icon);
         values.put(AppProvider.DataColumns.ICON_URL, iconUrl);
+        values.put(AppProvider.DataColumns.ICON_URL_LARGE, iconUrlLarge);
         values.put(AppProvider.DataColumns.DESCRIPTION, description);
         values.put(AppProvider.DataColumns.LICENSE, license);
         values.put(AppProvider.DataColumns.WEB_URL, webURL);
         values.put(AppProvider.DataColumns.TRACKER_URL, trackerURL);
         values.put(AppProvider.DataColumns.SOURCE_URL, sourceURL);
+        values.put(AppProvider.DataColumns.CHANGELOG_URL, changelogURL);
         values.put(AppProvider.DataColumns.DONATE_URL, donateURL);
         values.put(AppProvider.DataColumns.BITCOIN_ADDR, bitcoinAddr);
         values.put(AppProvider.DataColumns.LITECOIN_ADDR, litecoinAddr);
@@ -392,7 +384,6 @@ public class App extends ValueObject implements Comparable<App> {
         values.put(AppProvider.DataColumns.IS_COMPATIBLE, compatible ? 1 : 0);
         values.put(AppProvider.DataColumns.IGNORE_ALLUPDATES, ignoreAllUpdates ? 1 : 0);
         values.put(AppProvider.DataColumns.IGNORE_THISUPDATE, ignoreThisUpdate);
-        values.put(AppProvider.DataColumns.ICON_URL, iconUrl);
 
         return values;
     }

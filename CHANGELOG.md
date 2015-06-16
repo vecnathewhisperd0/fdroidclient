@@ -1,6 +1,59 @@
+### Upcoming release
+
+* Redesign the App Details view with larger icons, expandable description and
+  links with icons
+
+* Add ability to make F-Droid install itself as a privileged app on /system
+  via root, allowing the use of the system installer
+
+* Remove the root installer, since the system installer is safer, more stable
+  and now easy to set up with root privileges
+
+* Can now manually add swap repo via "Repositories" screen
+
+* Using NFC during swap now initiates a proper swap, rather than redirecting to
+  the "Repositories" screen
+
+### 0.92 (2015-06-08)
+
+* Make swap only in portrait mode to prevent crashes and issues where UI elements are obscured
+
+* Update Universal-Image-Loader to 1.9.4
+
+* Make Apk downloads progress be measured in kilobytes instead of bytes
+
+* Add missing Sardinian language to the preferences
+
+* Fix minimum SDK to be 8 (2.2) instead of 7 (2.1) since support for version 7
+  was dropped long ago
+
+### 0.91 (2015-05-18)
+
+* Don't request the "Write to external storage" permission on 4.4 and later
+  since it's not needed to use our own external app directory
+
+* Fix a crash occuring if the user triggered a repo update that got rid of
+  more than 450 apks at once
+
+* Properly cache apk files on the SD card if configured this way
+
+* Drop support for unsigned repos in favour of signed ones and TOFU support
+
+* Provide better feedback when adding repos with same name of existing repo
+
+* Add support for special Google Play search terms like "pub:" and "pname:"
+
+* Fix regression where adding repos via URLs would not actually add a new repo
+
+* Normalize and check URLs of repos being added
+
+* Don't crash if links on descriptions cannot be handled by any application
+
+* Support building as part of a ROM via an Android.mk using gradle
+
 ### 0.88 (2015-04-28)
 
-* Show list of apps to in the update notification (on devices with
+* Show list of apps in the update notification (on devices with
   Android 4.1 or higher)
 
 * User interface language can now be changed from inside the F-Droid
@@ -14,7 +67,7 @@
 * Fix regression where F-Droid web repo links would trigger an "Add new repo"
   action
 
-* Show a message to the user when there is no apps to display
+* Show a message to the user when there are no apps to display.
 
 * Swapping is now two way. Connecting to a swap on one device will
   initiate a swap on the other device.

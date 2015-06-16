@@ -30,7 +30,7 @@ import javax.net.ssl.SSLServerSocketFactory;
 import fi.iki.elonen.NanoHTTPD;
 
 public class LocalHTTPD extends NanoHTTPD {
-    private static final String TAG = "fdroid.LocalHTTPD";
+    private static final String TAG = "LocalHTTPD";
 
     private final Context context;
     private final File webRoot;
@@ -387,10 +387,10 @@ public class LocalHTTPD extends NanoHTTPD {
                     if (len < 1024) {
                         msg.append(len).append(" bytes");
                     } else if (len < 1024 * 1024) {
-                        msg.append(len / 1024).append(".").append(len % 1024 / 10 % 100)
+                        msg.append(len / 1024).append('.').append(len % 1024 / 10 % 100)
                                 .append(" KB");
                     } else {
-                        msg.append(len / (1024 * 1024)).append(".")
+                        msg.append(len / (1024 * 1024)).append('.')
                                 .append(len % (1024 * 1024) / 10 % 100).append(" MB");
                     }
                     msg.append(")</span></li>");
