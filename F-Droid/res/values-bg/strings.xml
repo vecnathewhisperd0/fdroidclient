@@ -1,152 +1,329 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="searchres_napps">Намерени са %1$d приложения съвпадащи с \'%2$s\':</string>
-  <string name="version">Версия</string>
-  <string name="edit">Редактиране</string>
-  <string name="delete">Изтриване</string>
-  <string name="enable_nfc_send">Активирай NFC изпращане…</string>
-  <string name="cache_downloaded">Кеширай свалените приложения</string>
-  <string name="cache_downloaded_on">Запазвай свалените .apk файлове на SD картата</string>
-  <string name="updates">Актуализации</string>
-  <string name="other">Други</string>
-  <string name="last_update_check">Последно сканиране на хранилищата: %s</string>
-  <string name="never">никога</string>
-  <string name="update_interval">Автоматичен интервал за обновяване</string>
-  <string name="automatic_scan_wifi">Само през WiFi</string>
-  <string name="notify_on">Известие при налична актуализация</string>
-  <string name="update_history">Актуализирай историята</string>
-  <string name="root_installer">Инсталиране през root</string>
-  <string name="local_repo_name">Име на локалното хранилище</string>
-  <string name="search_results">Резултати от търсенето</string>
-  <string name="app_details">Детайли за приложението</string>
-  <string name="no_such_app">Такова приложение не беше намерено</string>
-  <string name="about_title">За F-Droid</string>
-  <string name="about_desc">Първоначално базиран на Aptoide.
-Лицензиран под GNU GPLv3.</string>
-  <string name="about_site">Уебсайт:</string>
-  <string name="about_mail">Имейл:</string>
-  <string name="about_version">Версия:</string>
-  <string name="about_website">Уебсайт</string>
-  <string name="not_inst">Не е инсталирано</string>
-  <string name="ok">Добре</string>
-  <string name="yes">Да</string>
-  <string name="no">Не</string>
-  <string name="repo_add_add">Добави</string>
-  <string name="cancel">Отказ</string>
-  <string name="add_key">Добавете ключ</string>
-  <string name="repo_update_title">Актуализирай хранилищата</string>
-  <string name="tab_noninstalled">Налични</string>
-  <string name="one_update_available">1 налична актуализация.</string>
-  <string name="many_updates_available">%d налични актуализации.</string>
-  <string name="process_wait_title">Моля изчакай</string>
-  <string name="go_to_nfc_settings">Отиди в настройките на NFC…</string>
-  <string name="bluetooth_activity_not_found">Не е намерен Bluetooth метод за изпращане, изберете един!</string>
-  <string name="choose_bt_send">Изберете Bluetooth метод за изпращане</string>
-  <string name="send_via_bluetooth">Изпрати чрез Bluetooth</string>
-  <string name="repo_add_url">Адрес на хранилището</string>
-  <string name="repo_exists">Хранилището вече съществува!</string>
-  <string name="malformed_repo_uri">Игнориране на неправилен URI адрес на хранилище: %s</string>
-  <string name="menu_manage">Управление на хранилищата</string>
-  <string name="menu_send_apk_bt">Изпрати FDroid.apk чрез Bluetooth…</string>
-  <string name="menu_preferences">Предпочитания</string>
-  <string name="menu_about">Относно</string>
-  <string name="menu_search">Търсене</string>
-  <string name="menu_add_repo">Ново хранилище</string>
-  <string name="menu_rem_repo">Премахни хранилище</string>
-  <string name="menu_scan_repo">Намиране на локални хранилища</string>
-  <string name="menu_share">Сподели</string>
-  <string name="menu_install">Инсталирай</string>
-  <string name="menu_website">Уебсайт</string>
-  <string name="menu_issues">Проблеми</string>
-  <string name="menu_source">Изходен код</string>
-  <string name="corrupt_download">Сваленият файл е развален</string>
-  <string name="download_cancelled">Свалянето е отказано</string>
-  <string name="antitracklist">Приложението следи и докладва за местоположението ви</string>
-  <string name="display">Дисплей</string>
-  <string name="expert">Експерт</string>
-  <string name="search_hint">Търсене на приложения</string>
-  <string name="appcompatibility">Съвместимост на приложенията</string>
-  <string name="show_incompat_versions">Несъвместими версии</string>
-  <string name="show_incompat_versions_on">Показва и версиите, които са несъвместими с устройството.</string>
-  <string name="rooted">Root достъп</string>
-  <string name="ignoreTouch">Игнорирай сензорния екран</string>
-  <string name="category_all">Всички</string>
-  <string name="category_whatsnew">Какво ново</string>
-  <string name="local_repo">Локално хранилище</string>
-  <string name="local_repos_title">Локални FDroid хранилища</string>
-  <string name="local_repos_scanning">Откриване на локални FDroid хранилища…</string>
-  <string name="waiting_for_ipaddress">изчакване за IP адрес…</string>
-  <string name="updating">Обновяване…</string>
-  <string name="deleting_repo">Изтриване на хранилището…</string>
-  <string name="adding_apks_format">Добавяне на хранилището %s…</string>
-  <string name="no_applications_found">Не са открити приложения</string>
-  <string name="icon">икона</string>
-  <string name="fingerprint">Отпечатък:</string>
-  <string name="wifi_network">WiFi мрежа:</string>
-  <string name="sharing_uri">URL за споделяне:</string>
-  <string name="qr_code">QR код</string>
-  <string name="qr_content_description">QR код от URL на хранилище</string>
-  <string name="qr_wizard_wifi_network_instructions">Сканирайте QR кода, за се свържете към същата WiFi мрежа, в която е и устройството.</string>
-  <string name="send_fdroid_via_wifi">Изпрати FDroid чрез WiFi…</string>
-  <string name="proxy">Прокси</string>
-  <string name="proxy_port">Порт за проксито</string>
-  <string name="status_download">Сваляне
- %2$s / %3$s (%4$d%%) от
- %1$s</string>
-  <string name="status_connecting_to_repo">Свързване с
- %1$s</string>
-  <string name="status_inserting">Запазване на детайли за приложението (%1$d%%)</string>
-  <string name="global_error_updating_repos">Грешка при обновяването:</string>
-  <string name="permissions_for_long">Разрешения за версия %s</string>
-  <string name="compactlayout">Компактно оформление</string>
-  <string name="theme">Тема</string>
-  <string name="repo_url">URL</string>
-  <string name="repo_num_apps">Брой приложения</string>
-  <string name="repo_description">Описание</string>
-  <string name="repo_last_update">Последна актуализация</string>
-  <string name="repo_name">Име</string>
-  <string name="repo_not_yet_updated">Хранилището не е било използвано все още. За да разгледате приложенията, които предлага, трябва да го актуализирате.
+	<string name="searchres_napps">Намерени са %1$d приложения съвпадащи с \'%2$s\':</string>
+	<string name="searchres_oneapp">Намерено е едно приложение съвпадащо с \'%s\':</string>
+	<string name="searchres_noapps">Не са намерени приложения съвпадащи с \'%s\'</string>
+	<string name="SignatureMismatch">Новата версия е подписана с различен ключ. За да бъде инсталирана първо трябва да деинсталирате старата версия. (Забележка: деинсталирането ще доведе до изтриване на данни съхранявани от старата версия.)</string>
+	<string name="installIncompatible">Изглежда пакетът не е съвместим с вашето устройство. Да бъде направен опит за инсталиране въпреки това?</string>
+	<string name="installDowngrade">Опитвате се да инсталирате по-стара версия на приложението. Това действие може да предизвика нестабилност и дори загуба на данни. Наистина ли желаете да продължите?</string>
+	<string name="version">Версия</string>
+	<string name="edit">Редактиране</string>
+	<string name="delete">Изтриване</string>
+	<string name="enable_nfc_send">Активирай NFC изпращане…</string>
+	<string name="cache_downloaded">Кеширай приложения</string>
+	<string name="cache_downloaded_on">Записва свалените .apk файлове на SD картата.</string>
+	<string name="updates">Актуализации</string>
+	<string name="other">Други</string>
+	<string name="last_update_check">Последно сканиране: %s</string>
+	<string name="never">никога</string>
 
-Веднъж актуализирано, описанието и други детайли ще бъдат достъпни тук.</string>
-  <string name="repo_delete_details">Искате ли да изтриете \"{0}\"
-        хранилище, което има {1} приложения в себе си? Инсталираните приложения НЯМА
-        да бъдат премахнати, но няма да можете да ги актуализирате през F-Droid повече.</string>
-  <string name="repo_confirm_delete_title">Изтриване на хранилище?</string>
-  <string name="repo_confirm_delete_body">Изтриването на хранилище значи, че приложения от него няма да са налични от F-Droid.
+	<string name="update_interval">Интервал за автоматично актуализиране</string>
+	<string name="update_interval_zero">Без автоматично актуализиране на списъка с приложения</string>
+	<string name="automatic_scan_wifi">Само през WiFi</string>
+	<string name="automatic_scan_wifi_on">Актуализирането на списъка с приложения ще става само през WiFi.</string>
+	<string name="notify">Известяване</string>
+	<string name="notify_on">Известява за наличие на актуализация.</string>
+	<string name="update_history">История на актуализациите</string>
+	<string name="update_history_summ">Счита за нови или скорошни приложенията от преди (дни): %s</string>
+	<string name="root_installer">Инсталиране през root</string>
+	<string name="root_installer_on">Изисква Roоt достъп, за инсталиране, актуализиране и премахване на пакети.</string>
+	<string name="system_installer">Инсталиране чрез системни разрешения</string>
+	<string name="system_installer_on">Ползване на системни права за инсталиране, актуализиране и премахване на пакети.</string>
+	<string name="local_repo_bonjour">Обявяване на лок. хранилище</string>
+	<string name="local_repo_bonjour_on">Известяване за лок. хранилище чрез Bonjour (mDNS).</string>
+	<string name="local_repo_name">Име на локалното хранилище</string>
+	<string name="local_repo_name_summary">Обявява хранилището под името: %s.</string>
+	<string name="local_repo_https">Use Private Connection</string>
+	<string name="local_repo_https_on">Ползва криптирана HTTPS:// връзка за комуникацията с локалното хранилище.</string>
 
-Бележка: Всички
-        вече инсталирани приложения ще останат на устройството.</string>
-  <string name="repo_disabled_notification">\"%1$s\" е деактивирано.
+	<string name="search_results">Резултат от търсенето</string>
+	<string name="app_details">Детайли за приложението</string>
+	<string name="no_such_app">Не е намерено такова приложение</string>
 
-За да инсталирате приложения от него ще трябва да го активирате наново.</string>
-  <string name="up_to_maxsdk">до %s</string>
-  <string name="minsdk_up_to_maxsdk">%1$s до %2$s</string>
-  <string name="requires_features">Изисква: %1$s</string>
-  <string name="app_icon">Икона на приложението</string>
-  <string name="repo_icon">Икона на хранилището</string>
-  <string name="Children">Детски</string>
-  <string name="Games">Игри</string>
-  <string name="Internet">Интернет</string>
-  <string name="Mathematics">Математика</string>
-  <string name="Multimedia">Мултимедия</string>
-  <string name="Navigation">Навигиране</string>
-  <string name="News">Новини</string>
-  <string name="Office">Офис</string>
-  <string name="Phone_SMS">Телефон и SMS</string>
-  <string name="Reading">Четене</string>
-  <string name="Science_Education">Наука и образование</string>
-  <string name="Security">Сигурност</string>
-  <string name="System">Система</string>
-  <string name="Wallpaper">Тапет</string>
-  <string name="requesting_root_access_title">Root достъп</string>
-  <string name="requesting_root_access_body">Изискване на Root достъп…</string>
-  <string name="root_access_denied_title">Root достъпът е отказан</string>
-  <string name="update_all">Обнови всички</string>
-  <string name="installer_error_title">Грешка при (де)инсталирането</string>
-  <string name="installer_error_body">(Де)Инсталиранете се провали. Ако работиет с Root достъп, моля изключето го.</string>
-  <string name="system_permission_denied_body">Опцията е налична само когато F-Droid е инсталирано като системно приложение.</string>
-  <string name="swap_wifi_help">Научете повече относно Wifi</string>
-  <string name="swap_wifi_qr_not_working">Не работи</string>
-  <string name="open_qr_code_scanner">Отвори четец на QR кодове</string>
-  <string name="swap_welcome">Добре дошли в F-Droid!</string>
+	<string name="about_title">Относно F-Droid</string>
+	<string name="about_desc">Първоначално базиран на Aptoide.\nЛицензиран под
+		GNU GPLv3.</string>
+	<string name="about_site">Уебсайт: </string>
+	<string name="about_mail">Имейл: </string>
+	<string name="about_version">Версия: </string>
+	<string name="about_website">Уебсайт</string>
+
+		<string name="no_repo">Няма нито едно настроено хранилище!\n\nA
+		Хранилището е източник на приложения. За добавяне натиснете бутона
+		МЕНЮ и въведете URL адрес.\n\nАдресът изглежда трябва да
+		наподобява
+		: https://f-droid.org/repo</string>
+
+	<string name="inst">Инсталирана</string>
+	<string name="not_inst">Неинсталирана</string>
+	<string name="inst_known_source">Инсталирана (от %s)</string>
+	<string name="inst_unknown_source">Инсталирана (от неизвестен източник)</string>
+
+	<string name="added_on">Добавена на %s</string>
+
+	<string name="ok">Добре</string>
+
+	<string name="yes">Да</string>
+	<string name="no">Не</string>
+	<string name="repo_add_title">Add new repository</string>
+	<string name="repo_add_add">Добавяне</string>
+
+	<string name="cancel">Отказ</string>
+	<string name="enable">Enable</string>
+	<string name="add_key">Добавете ключ</string>
+	<string name="overwrite">Overwrite</string>
+	<string name="repo_delete_title">Choose repository to remove</string>
+
+	<string name="repo_update_title">Актуализиране на хранилищата</string>
+	<string name="tab_noninstalled">Налични</string>
+	<string name="tab_updates">Актуализации</string>
+	<string name="one_update_available">1 налична актуализация.</string>
+	<string name="many_updates_available">%d налични актуализации.</string>
+	<string name="fdroid_updates_available">F-Droid Updates Available</string>
+	<string name="update_notification_more">+%1$d more…</string>
+	<string name="process_wait_title">Моля изчакай</string>
+	<string name="process_update_msg">Актуализиране на списъка с приложения…</string>
+	<string name="download_server">Сваляне на приложение от</string>
+	<string name="nfc_is_not_enabled">NFC is not enabled!</string>
+	<string name="go_to_nfc_settings">Към настройките на NFC…</string>
+	<string name="bluetooth_activity_not_found">Не е намерен Bluetooth метод за изпращане, изберете един!</string>
+	<string name="choose_bt_send">Изберете Bluetooth метод за изпращане</string>
+	<string name="send_via_bluetooth">Изпрати чрез Bluetooth</string>
+
+	<string name="repo_add_url">Адрес на хранилището</string>
+	<string name="repo_add_fingerprint">Отпечатък (незадължително)</string>
+	<string name="repo_exists">Хранилището вече съществува!</string>
+	<string name="repo_exists_add_fingerprint">This repo is already setup, this will add new key information.</string>
+	<string name="repo_exists_enable">This repo is already setup, confirm that you want to re-enable it.</string>
+	<string name="repo_exists_and_enabled">The incoming repo is already setup and enabled!</string>
+	<string name="repo_delete_to_overwrite">You must first delete this repo before you can add one with a different key!</string>
+	<string name="malformed_repo_uri">Игнориране на неправилен URI адрес на хранилище: %s</string>
+
+	<string name="repo_alrt">Списъкът на хранилищата
+		е променен.\nЖелаете ли да
+		бъде актуализиран?</string>
+
+	<string name="menu_update_repo">Актуализиране на хранилищата</string>
+	<string name="menu_manage">Хранилищата</string>
+	<string name="menu_send_apk_bt">FDroid.apk чрез Bluetooth…</string>
+	<string name="menu_preferences">Предпочитания</string>
+	<string name="menu_about">Относно</string>
+	<string name="menu_search">Търсене</string>
+	<string name="menu_add_repo">Ново хранилище</string>
+	<string name="menu_rem_repo">Премахни хранилището</string>
+	<string name="menu_scan_repo">Намиране на локални хранилища</string>
+
+	<string name="menu_launch">Run</string>
+	<string name="menu_share">Сподели</string>
+	<string name="menu_install">Инсталирай</string>
+	<string name="menu_uninstall">Деинсталирай</string>
+	<string name="menu_ignore_all">Игнорирай всички актуализации<string>
+	<string name="menu_ignore_this">Игнорирай тази актуализация</string>
+	<string name="menu_website">Уебсайт</string>
+	<string name="menu_issues">Проблеми</string>
+	<string name="menu_source">Изходен код</string>
+	<string name="menu_upgrade">Upgrade</string>
+	<string name="menu_donate">Дарете</string>
+
+	<string name="details_installed">Инсталира на е версия %s</string>
+	<string name="details_notinstalled">Не е инсталирано</string>
+	<string name="corrupt_download">Сваленият файл е повреден</string>
+	<string name="download_cancelled">Свалянето е отказано</string>
+
+	<string name="antiadslist">Приложението съдържа реклами</string>
+	<string name="antitracklist">Приложението следи и докладва активността ви</string>
+	<string name="antinonfreeadlist">Приложението промотира не-безплатни добавки</string>
+	<string name="antinonfreenetlist">Приложението промотира не-безплатни услуги</string>
+	<string name="antinonfreedeplist">Приложението зависи от други не-безплатни приложения</string>
+	<string name="antiupstreamnonfreelist">Изходният код не е напълно безплатен</string>
+
+	<string name="display">Дисплей</string>
+
+	<string name="expert">Експерт</string>
+	<string name="expert_on">Показва допълнителна информация и активира допълнителни настройки.</string>
+
+	<string name="search_hint">Търсене на приложения</string>
+
+	<string name="appcompatibility">Съвместимост на приложенията</string>
+	<string name="show_incompat_versions">Несъвместими версии</string>
+	<string name="show_incompat_versions_on">Показва и версии, които са несъвместими с устройството.</string>
+	<string name="rooted">Root достъп</string>
+	<string name="rooted_on">Приложенията изискващи Root няма да бъдат изобразявани в сиво.</string>
+	<string name="ignoreTouch">Игнорирай сензорния екран</string>
+	<string name="ignoreTouch_on">Приложенията изискващи сензорен екран ще бъдат показвани винаги.</string>
+
+	<string name="category_all">Всички</string>
+	<string name="category_whatsnew">Какво ново</string>
+	<string name="category_recentlyupdated">Наскоро актуализирани</string>
+
+	<string name="local_repo">Локално хранилище</string>
+	<string name="local_repos_title">Локални хранилища на FDroid</string>
+	<string name="local_repos_scanning">Търсене…</string>
+	<string name="local_repo_running">F-Droid is ready to swap</string>
+	<string name="waiting_for_ipaddress">изчакване за IP адрес…</string>
+	<string name="setup_repo">Setup Local Repo</string>
+	<string name="touch_to_configure_local_repo">Touch to view details and allow others to swap your apps.</string>
+	<string name="touch_to_turn_on_local_repo">Touch to turn on your local repo.</string>
+	<string name="touch_to_turn_off_local_repo">Touch to turn off your local repo.</string>
+	<string name="updating">Обновяване&#8230;</string>
+	<string name="update_repo">Актуализиране на хранилището</string>
+	<string name="deleting_repo">Изтриване на хранилището&#8230;</string>
+	<string name="adding_apks_format">Добавяне на %s към хранилището&#8230;</string>
+	<string name="writing_index_jar">Writing signed index file (index.jar)&#8230;</string>
+	<string name="failed_to_create_index">Failed to create the repo index!</string>
+	<string name="linking_apks">Linking APKs into the repo&#8230;</string>
+	<string name="copying_icons">Copying app icons into the repo&#8230;</string>
+	<string name="updated_local_repo">Актуализирането на локалното хранилище приключи</string>
+	<string name="no_applications_found">Не са открити приложения</string>
+	<string name="icon">икона</string>
+	<string name="fingerprint">Отпечатък:</string>
+	<string name="wifi_network">WiFi мрежа:</string>
+	<string name="sharing_uri">URL за споделяне:</string>
+	<string name="enable_wifi">Enable WiFi</string>
+	<string name="enabling_wifi">Включване на WiFi&#8230;</string>
+	<string name="same_wifi_instructions">To connect to other people\'s devices, make sure both devices are on the same WiFi network.  Then either type the URL above into F-Droid, or scan this QR Code:</string>
+	<string name="qr_code">QR код</string>
+	<string name="next">Напред</string>
+	<string name="skip">Пропускане</string>
+	<string name="qr_content_description">QR код за URL на хранилище</string>
+	<string name="qr_wizard_wifi_network_instructions">Сканирайте QR кода, за се свържете към същата WiFi мрежа, в която е и устройството.</string>
+	<string name="qr_wizard_download_instructions">Scan this QR Code to connect to the website for getting started.</string>
+	<string name="send_fdroid_via_wifi">Изпрати FDroid чрез WiFi&#8230;</string>
+
+	<string name="proxy">Прокси</string>
+	<string name="enable_proxy_title">Включване на HTTP прокси</string>
+	<string name="enable_proxy_summary">Настройка на HTTP прокси за всички мрежови заявки.</string>
+	<string name="proxy_host">Хост на проксито</string>
+	<string name="proxy_host_summary">Въведете името на хоста за проксито (напр. 127.0.0.1).</string>
+	<string name="proxy_port">Порт за проксито</string>
+	<string name="proxy_port_summary">Въведете номер за порта на проксито (напр. 8118).</string>
+
+	<!--
+	status_download takes four parameters:
+			- Repository (url)
+			- Downloaded size (human readable)
+			- Total size (human readable)
+			- Percentage complete (int between 0-100)
+	-->
+	<string name="status_download">Сваляне\n%2$s / %3$s (%4$d%%) от\n%1$s</string>
+	<string name="status_processing_xml">Обработка на приложения\n%2$d от %3$d от\n%1$s</string>
+	<string name="status_connecting_to_repo">Свързване към\n%1$s</string>
+	<string name="status_checking_compatibility">Проверка за съвместимост с устройството…</string>
+				<string name="status_inserting">Запазване на детайли за приложенията (%1$d%%)</string>
+	<string name="repos_unchanged">В хранилищата няма актуализирани приложения</string>
+								<string name="all_other_repos_fine">All other repos didn\'t create errors.</string>
+								<string name="global_error_updating_repos">Грешка при актуализирането:</string>
+	<string name="no_permissions">No permissions are used.</string>
+	<string name="permissions_for_long">Разрешения за версия %s</string>
+	<string name="showPermissions">Показване на разрешенията</string>
+	<string name="showPermissions_on">Показва списък на разрешенията, които се изискват от отделните приложения.</string>
+	<string name="no_handler_app">Никое инсталирано приложение не може да изпълни %s</string>
+	<string name="compactlayout">Компактно оформление</string>
+	<string name="compactlayout_on">Показва по-малки икони.</string>
+				<string name="theme">Тема</string>
+				<string name="unsigned">Unsigned</string>
+				<string name="unverified">Unverified</string>
+				<string name="repo_url">URL</string>
+				<string name="repo_num_apps">Брой приложения</string>
+				<string name="repo_fingerprint">Отпечатък на ключа за подписване (SHA-256)</string>
+				<string name="repo_description">Описание</string>
+				<string name="repo_last_update">Последна актуализация</string>
+				<string name="repo_update">Update</string>
+				<string name="repo_name">Име</string>
+				<string name="unsigned_description">This means that the list of
+								applications could not be verified. You should be careful
+								with applications downloaded from unsigned indexes.</string>
+				<string name="repo_not_yet_updated">Хранилището не е било използвано все още.
+		За да разгледате приложенията, които предлага, трябва да бъде актуализирано.
+		\n\n
+		След това ще имате достъп до описанието и други детайли.
+				</string>
+				<string name="repo_delete_details">Желаете ли да изтриете хранилище
+		\"{0}\", което съдържа {1} приложения? Инсталираните приложения НЯМА
+		да бъдат изтрити, но ще загубите възможността за актуализиране
+		през F-Droid.
+				</string>
+				<string name="unknown">Unknown</string>
+				<string name="repo_confirm_delete_title">Изтриване на хранилището?</string>
+				<string name="repo_confirm_delete_body">Изтриването на хранилище значи, че
+		приложенията от него няма да са налични в F-Droid.\n\nБележка: Всички
+		вече инсталирани приложения ще останат на устройството.
+				</string>
+				<string name="repo_disabled_notification">"%1$s" е деактивирано.\n\n
+		За да можете отново да инсталирате приложения ще трябва да го активирате наново.
+				</string>
+				<string name="repo_added">Saved F-Droid repository %1$s</string>
+				<string name="repo_searching_address">Looking for F-Droid repository at\n%1$s</string>
+				<string name="minsdk_or_later">%s or later</string>
+				<string name="up_to_maxsdk">до %s</string>
+				<string name="minsdk_up_to_maxsdk">%1$s до %2$s</string>
+				<string name="not_on_same_wifi">Your device is not on the same WiFi as the local repo you just added! Try joining this network: %s</string>
+				<string name="requires_features">Изисква: %1$s</string>
+				<string name="pref_language">Език</string>
+				<string name="pref_language_default">Стандартния за устройството</string>
+
+				<string name="app_icon">Икона на приложението</string>
+				<string name="repo_icon">Икона на хранилището</string>
+
+				<string name="Children">Детски</string>
+				<string name="Development">Разработване</string>
+				<string name="Games">Игри</string>
+				<string name="Internet">Интернет</string>
+				<string name="Mathematics">Математика</string>
+				<string name="Multimedia">Мултимедия</string>
+				<string name="Navigation">Навигация</string>
+				<string name="News">Новини</string>
+				<string name="Office">Офис</string>
+				<string name="Phone_SMS">Телефон и SMS</string>
+				<string name="Reading">Четене</string>
+				<string name="Science_Education">Наука и образование</string>
+				<string name="Security">Сигурност</string>
+				<string name="System">Система</string>
+				<string name="Wallpaper">Тапет</string>
+
+					<string name="empty_installed_app_list">Няма инсталирани приложения.\n\nСъществуващите не са налични през F-Droid. Вероятна причина може да бъде неактуализирани хранилища или просто хранилищата не предлагат програмите, който ползвате.</string>
+				<string name="empty_swap_app_list">No apps available to swap.\n\nEither the device you are swapping with didn\'t offer any apps to swap, or an error occurred while communicating with it.</string>
+				<string name="empty_available_app_list"> В категорията няма приложения.\n\nИзберете друга категория или актуализирайте хранилищата за да получите последните промени в списъка с приложения..</string>
+				<string name="empty_can_update_app_list">Всички приложения са актуализирани до последните налични версии.\n\nПоздравления! Ползвате актуалните версии на приложенията (или хранилищата не са обновени).</string>
+
+				<string name="requesting_root_access_title">Root достъп</string>
+				<string name="requesting_root_access_body">Изисква Root достъп…</string>
+				<string name="root_access_denied_title">Root достъпът е отказан</string>
+				<string name="root_access_denied_body">Either your Android device is not rooted or you have denied root access for F-Droid.</string>
+				<string name="update_all">Актуализирай всички</string>
+				<string name="installer_error_title">Грешка при (де)инсталирането</string>
+				<string name="installer_error_body">(Де)Инсталирането се провали. Ако работите с Root достъп, моля изключете го.</string>
+				<string name="system_permission_denied_title">System permissions denied</string>
+				<string name="system_permission_denied_body">Опцията е налична само когато сте инсталирали F-Droid като системно приложение.</string>
+
+				<string name="app_description">F-Droid is an installable catalogue of FOSS (Free and Open Source Software) applications for the Android platform. The client makes it easy to browse, install, and keep track of updates on your device.</string>
+				<string name="swap_nfc_description">Ако приятелят ви има <b>F-Droid и е включил NFC</b> можете да докоснете телефоните си.</string>
+				<string name="swap_join_same_wifi">Свържете се към една и съща WiFi мрежа с приятеля си.</string>
+				<string name="swap_use_bluetooth">Use Bluetooth instead</string>
+				<string name="swap_wifi_help">Научете повече относно WiFi</string>
+				<string name="menu_swap">Размяна на приложения</string>
+				<string name="swap">РАЗМЯНА</string>
+				<string name="swap_repo_name">Размяна</string>
+				<string name="swap_success">Успешна размяна!</string>
+				<string name="swap_no_wifi_network">No network yet</string>
+				<string name="swap_view_available_networks">(Докоснете за преглед на наличните мрежи)</string>
+				<string name="swap_wifi_qr_not_working">Не работи</string>
+				<string name="open_qr_code_scanner">Отваряне на четец на QR кодове</string>
+				<string name="swap_welcome">Добре дошли в F-Droid!</string>
+				<string name="swap_confirm_connect">Do you want to get apps from %1$s now?</string>
+				<string name="swap_introduction">Вашето устройство се превръща в магазин за приложения!</string>
+				<string name="swap_start">НАЧАЛО НА РАЗМЯНА</string>
+				<string name="swap_reciprocate_failed">An error occurred while attempting to swap with another device. We will still try to get apps from them, but they may not be able to get apps from us.</string>
+				<string name="swap_tap_to_select_apps">Докоснете приложенията, които искате да размените.</string>
+				<string name="swap_dont_show_again">Не показвай повече това съобщение</string>
+				<string name="swap_tap_for_details_and_install">Tap an app for details and to install.</string>
+				<string name="swap_scan_or_type_url">Необходимо е един да сканира QR кода или да въведе URL адреса на другия разменящ в уеб браузър.</string>
+				<!-- WiFi AP status for Swap flow -->
+				<string name="wifi_ap_public">Public</string>
+				<string name="wifi_ap_private">Private</string>
+				<string name="wifi_ap_personal">Hotspot</string>
+				<string name="wifi_warning_public">May work</string>
+				<string name="wifi_warning_private">Promising</string>
+				<string name="wifi_warning_personal">Best bet</string>
+
 </resources>
