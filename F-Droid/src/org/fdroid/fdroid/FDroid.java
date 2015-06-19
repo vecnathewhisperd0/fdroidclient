@@ -19,7 +19,6 @@
 
 package org.fdroid.fdroid;
 
-import android.support.v7.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.SearchManager;
 import android.bluetooth.BluetoothAdapter;
@@ -33,17 +32,22 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.*;
+import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import org.fdroid.fdroid.compat.TabManager;
 import org.fdroid.fdroid.data.AppProvider;
 import org.fdroid.fdroid.data.NewRepoConfig;
 import org.fdroid.fdroid.installer.InstallIntoSystemDialogActivity;
-import org.fdroid.fdroid.installer.Installer;
 import org.fdroid.fdroid.views.AppListFragmentPagerAdapter;
 import org.fdroid.fdroid.views.ManageReposActivity;
 import org.fdroid.fdroid.views.swap.ConnectSwapActivity;

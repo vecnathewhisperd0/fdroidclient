@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import org.fdroid.fdroid.AppDetails;
@@ -19,7 +19,7 @@ import org.fdroid.fdroid.views.AppListAdapter;
 import org.fdroid.fdroid.views.AvailableAppListAdapter;
 import org.fdroid.fdroid.views.fragments.AppListFragment;
 
-public class SwapAppListActivity extends ActionBarActivity {
+public class SwapAppListActivity extends AppCompatActivity {
 
     private static final String TAG = "SwapAppListActivity";
 

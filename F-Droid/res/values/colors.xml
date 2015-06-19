@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="signed">#ffcccccc</color>
-    <color name="unsigned">#ffCC0000</color>
-    <color name="unverified">#ff999999</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="red">#FFFF0000</color>
+
+    <color name="primary">#2196F3</color>
+    <color name="primary_dark">#1976D2</color>
+    <color name="primary_light">#BBDEFB</color>
+    <color name="accent">#607D8B</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#B6B6B6</color>
 
     <color name="fdroid_blue">#FF6097C5</color>
     <color name="fdroid_blue_dark">#ff4b7195</color>
     <color name="fdroid_green">#FFAAD024</color>
 
+
+    <color name="signed">#ffcccccc</color>
+    <color name="unsigned">#ffCC0000</color>
+    <color name="unverified">#ff999999</color>
     <color name="swap_light_blue">#27aae1</color>
     <color name="swap_light_blue_pressed">#ff98cce1</color>
     <color name="swap_blue">#1c6bbc</color>

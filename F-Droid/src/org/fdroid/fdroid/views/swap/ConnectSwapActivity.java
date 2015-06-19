@@ -8,7 +8,7 @@ import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -33,7 +33,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConnectSwapActivity extends ActionBarActivity implements ProgressListener {
+public class ConnectSwapActivity extends AppCompatActivity implements ProgressListener {
     private static final String TAG = "ConnectSwapActivity";
 
     private static final String STATE_CONFIRM = "startSwap";

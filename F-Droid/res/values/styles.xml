@@ -2,23 +2,11 @@
 
     <style name="AppBaseThemeDark" parent="Theme.AppCompat">
         <!-- backward-compatibility theme options go here -->
-
-        <item name="colorPrimary">@color/fdroid_blue</item>
-        <item name="colorPrimaryDark">@color/fdroid_blue_dark</item>
-
     </style>
 
     <style name="AppBaseThemeLight" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- backward-compatibility theme options go here -->
-
-        <item name="colorPrimary">@color/fdroid_blue</item>
-        <item name="colorPrimaryDark">@color/fdroid_blue_dark</item>
-        <item name="android:textColor">#212121</item>
     </style>
-
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="red">#FFFF0000</color>
 
     <style name="DialogDark" parent="Theme.AppCompat.Dialog" />
     <style name="DialogLight" parent="Theme.AppCompat.Light.Dialog" />
@@ -32,10 +20,11 @@
     </style>
 
     <style name="AppThemeLight" parent="AppBaseThemeLight">
-        <item name="colorPrimary">@color/primary_light</item>
+        <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
     </style>
+
     <style name="SwapTheme.Wizard" parent="AppThemeDark">
         <item name="android:windowBackground">@drawable/swap_window_background</item>
         <item name="android:actionBarStyle">@style/Widget.AppCompat.ActionBar.Solid</item>

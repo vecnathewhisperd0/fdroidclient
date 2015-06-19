@@ -20,7 +20,11 @@
 package org.fdroid.fdroid.views;
 
 import android.app.AlertDialog;
-import android.content.*;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.net.Uri;
@@ -46,11 +50,23 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.*;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpHead;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.fdroid.fdroid.*;
+import org.fdroid.fdroid.FDroid;
+import org.fdroid.fdroid.FDroidApp;
+import org.fdroid.fdroid.Preferences;
+import org.fdroid.fdroid.ProgressListener;
+import org.fdroid.fdroid.R;
+import org.fdroid.fdroid.UpdateService;
 import org.fdroid.fdroid.compat.ClipboardCompat;
 import org.fdroid.fdroid.data.NewRepoConfig;
 import org.fdroid.fdroid.data.Repo;
@@ -60,7 +76,6 @@ import org.fdroid.fdroid.net.MDnsHelper.DiscoveredRepo;
 import org.fdroid.fdroid.net.MDnsHelper.RepoScanListAdapter;
 import org.fdroid.fdroid.views.fragments.RepoDetailsFragment;
 
-import javax.jmdns.ServiceInfo;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -68,6 +83,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Date;
 import java.util.Locale;
+
+import javax.jmdns.ServiceInfo;
 
 public class ManageReposActivity extends AppCompatActivity {
 
