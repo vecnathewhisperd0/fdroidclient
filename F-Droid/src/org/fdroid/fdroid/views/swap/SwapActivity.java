@@ -9,7 +9,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -24,7 +24,7 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class SwapActivity extends ActionBarActivity implements SwapProcessManager {
+public class SwapActivity extends AppCompatActivity implements SwapProcessManager {
 
     private static final String STATE_START_SWAP = "startSwap";
     private static final String STATE_SELECT_APPS = "selectApps";

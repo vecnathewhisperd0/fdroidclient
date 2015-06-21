@@ -42,7 +42,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.Layout;
 import android.text.Selection;
@@ -112,7 +112,7 @@ interface AppInstallListener {
     void removeApk(String packageName);
 }
 
-public class AppDetails extends ActionBarActivity implements ProgressListener, AppDetailsData, AppInstallListener {
+public class AppDetails extends AppCompatActivity implements ProgressListener, AppDetailsData, AppInstallListener {
 
     private static final String TAG = "AppDetails";
 
@@ -366,7 +366,7 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
         super.onCreate(savedInstanceState);
 
         // Must be called *after* super.onCreate(), as that is where the action bar
-        // compat implementation is assigned in the ActionBarActivity base class.
+        // compat implementation is assigned in the AppCompatActivity base class.
         supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
         if (getIntent().hasExtra(EXTRA_FROM)) {

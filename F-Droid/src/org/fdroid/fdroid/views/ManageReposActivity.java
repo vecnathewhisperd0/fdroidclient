@@ -41,7 +41,7 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.app.NavUtils;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -86,7 +86,7 @@ import java.util.Locale;
 
 import javax.jmdns.ServiceInfo;
 
-public class ManageReposActivity extends ActionBarActivity {
+public class ManageReposActivity extends AppCompatActivity {
 
     /**
      * If we have a new repo added, or the address of a repo has changed, then
