@@ -43,7 +43,7 @@ public class DownloaderFactory {
         return new HttpDownloader(context, url, destFile);
     }
 
-    private static boolean isOnionAddress(URL url) {
+    static boolean isOnionAddress(URL url) {
         return url.getHost().endsWith(".onion");
     }
 }
