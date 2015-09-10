@@ -108,7 +108,6 @@ public class AsyncDownloaderFromAndroid implements AsyncDownloader {
                 while (!isCancelled && isDownloading(context, uniqueDownloadId) >= 0) {
                     try { Thread.sleep(1000); } catch (Exception e) {}
                     sendProgress(getBytesRead(), getTotalBytes());
-                    Log.d("dm", "progress monitor");
                 }
             }
         };
