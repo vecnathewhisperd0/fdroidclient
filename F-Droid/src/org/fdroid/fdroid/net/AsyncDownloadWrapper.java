@@ -5,19 +5,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
-import org.fdroid.fdroid.ProgressListener;
-
 import java.io.IOException;
 
-/**
- * Given a {@link org.fdroid.fdroid.net.Downloader}, this wrapper will conduct the download operation on a
- * separate thread. All progress/status/error/etc events will be forwarded from that thread to the thread
- * that {@link AsyncDownloadWrapper#download()} was invoked on. If you want to respond with UI feedback
- * to these events, it is important that you execute the download method of this class from the UI thread.
- * That way, all forwarded events will be handled on that thread.
- */
-@SuppressWarnings("serial")
-public class AsyncDownloadWrapper extends Handler {
+class AsyncDownloadWrapper extends Handler implements AsyncDownloader {
 
     private static final String TAG = "AsyncDownloadWrapper";
 
@@ -27,8 +17,9 @@ public class AsyncDownloadWrapper extends Handler {
     private static final String MSG_DATA            = "data";
 
     private final Downloader downloader;
-    private final Listener listener;
     private DownloadThread downloadThread = null;
+
+    private final Listener listener;
 
     /**
      * Normally the listener would be provided using a setListener method.
@@ -39,7 +30,15 @@ public class AsyncDownloadWrapper extends Handler {
      */
     public AsyncDownloadWrapper(Downloader downloader, Listener listener) {
         this.downloader = downloader;
-        this.listener   = listener;
+        this.listener = listener;
+    }
+
+    public int getBytesRead() {
+        return downloader.getBytesRead();
+    }
+
+    public int getTotalBytes() {
+        return downloader.getTotalBytes();
     }
 
     public void download() {
@@ -55,35 +54,20 @@ public class AsyncDownloadWrapper extends Handler {
 
     /**
      * Receives "messages" from the download thread, and passes them onto the
-     * relevant {@link org.fdroid.fdroid.net.AsyncDownloadWrapper.Listener}
-     * @param message
+     * relevant {@link AsyncDownloader.Listener}
      */
     public void handleMessage(Message message) {
         switch (message.arg1) {
-        case MSG_DOWNLOAD_COMPLETE:
-            listener.onDownloadComplete();
-            break;
-        case MSG_DOWNLOAD_CANCELLED:
-            listener.onDownloadCancelled();
-            break;
-        case MSG_ERROR:
-            listener.onErrorDownloading(message.getData().getString(MSG_DATA));
-            break;
+            case MSG_DOWNLOAD_COMPLETE:
+                listener.onDownloadComplete();
+                break;
+            case MSG_DOWNLOAD_CANCELLED:
+                listener.onDownloadCancelled();
+                break;
+            case MSG_ERROR:
+                listener.onErrorDownloading(message.getData().getString(MSG_DATA));
+                break;
         }
-    }
-
-    public int getBytesRead() {
-        return downloader.getBytesRead();
-    }
-
-    public int getTotalBytes() {
-        return downloader.getTotalBytes();
-    }
-
-    public interface Listener extends ProgressListener {
-        void onErrorDownloading(String localisedExceptionDetails);
-        void onDownloadComplete();
-        void onDownloadCancelled();
     }
 
     private class DownloadThread extends Thread {

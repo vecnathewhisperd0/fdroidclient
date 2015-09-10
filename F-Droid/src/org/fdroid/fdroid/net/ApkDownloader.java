@@ -21,9 +21,10 @@
 package org.fdroid.fdroid.net;
 
 import android.content.Context;
-import android.os.Build;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import org.fdroid.fdroid.Hasher;
@@ -37,7 +38,6 @@ import org.fdroid.fdroid.data.SanitizedFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 
 /**
@@ -45,13 +45,17 @@ import java.security.NoSuchAlgorithmException;
  * If the file has previously been downloaded, it will make use of that
  * instead, without going to the network to download a new one.
  */
-public class ApkDownloader implements AsyncDownloadWrapper.Listener {
+public class ApkDownloader implements AsyncDownloader.Listener {
 
     private static final String TAG = "ApkDownloader";
 
     public static final String EVENT_APK_DOWNLOAD_COMPLETE = "apkDownloadComplete";
     public static final String EVENT_APK_DOWNLOAD_CANCELLED = "apkDownloadCancelled";
     public static final String EVENT_ERROR = "apkDownloadError";
+
+    public static final String ACTION_STATUS = "apkDownloadStatus";
+    public static final String EXTRA_TYPE = "apkDownloadStatusType";
+    public static final String EXTRA_URL = "apkDownloadUrl";
 
     public static final int ERROR_HASH_MISMATCH = 101;
     public static final int ERROR_DOWNLOAD_FAILED = 102;
@@ -72,7 +76,7 @@ public class ApkDownloader implements AsyncDownloadWrapper.Listener {
     @NonNull private final SanitizedFile potentiallyCachedFile;
 
     private ProgressListener listener;
-    private AsyncDownloadWrapper dlWrapper = null;
+    private AsyncDownloader dlWrapper = null;
     private boolean isComplete = false;
 
     private final long id = ++downloadIdCounter;
@@ -108,10 +112,6 @@ public class ApkDownloader implements AsyncDownloadWrapper.Listener {
      */
     public boolean isEventFromThis(Event event) {
         return event.getData().containsKey(EVENT_SOURCE_ID) && event.getData().getLong(EVENT_SOURCE_ID) == id;
-    }
-
-    public String getRemoteAddress() {
-         return repoAddress + "/" + curApk.apkName.replace(" ", "%20");
     }
 
     private Hasher createHasher(File apkFile) {
@@ -186,26 +186,16 @@ public class ApkDownloader implements AsyncDownloadWrapper.Listener {
         // Can we use the cached version?
         if (verifyOrDelete(potentiallyCachedFile)) {
             delete(localFile);
-            Utils.copy(potentiallyCachedFile, localFile);
+            Utils.copyQuietly(potentiallyCachedFile, localFile);
             prepareApkFileAndSendCompleteMessage();
             return false;
         }
 
-        String remoteAddress = getRemoteAddress();
+        String remoteAddress = Utils.getApkUrl(repoAddress, curApk);
         Utils.DebugLog(TAG, "Downloading apk from " + remoteAddress + " to " + localFile);
 
         try {
-            if (canUseDownloadManager(new URL(remoteAddress))) {
-                // If we can use Android's DownloadManager, let's use it, because
-                // of better OS integration, reliability, and async ability
-                dlWrapper = new AsyncDownloader(context, this,
-                        app.name + " " + curApk.version, curApk.id,
-                        remoteAddress, localFile);
-            } else {
-                Downloader downloader = DownloaderFactory.create(context, remoteAddress, localFile);
-                dlWrapper = new AsyncDownloadWrapper(downloader, this);
-            }
-
+            dlWrapper = DownloaderFactory.createAsync(context, remoteAddress, localFile, app.name + " " + curApk.version, curApk.id, this);
             dlWrapper.download();
             return true;
         } catch (IOException e) {
@@ -213,17 +203,6 @@ public class ApkDownloader implements AsyncDownloadWrapper.Listener {
         }
 
         return false;
-    }
-
-    /**
-     * Tests to see if we can use Android's DownloadManager to download the APK, instead of
-     * a downloader returned from DownloadFactory.
-     * @param url
-     * @return
-     */
-    private boolean canUseDownloadManager(URL url) {
-        return Build.VERSION.SDK_INT > Build.VERSION_CODES.FROYO
-                && !DownloaderFactory.isOnionAddress(url);
     }
 
     private void sendMessage(String type) {
@@ -236,6 +215,7 @@ public class ApkDownloader implements AsyncDownloadWrapper.Listener {
         sendProgressEvent(new Event(EVENT_ERROR, data));
     }
 
+    // TODO: Completely remove progress listener, only use broadcasts...
     private void sendProgressEvent(Event event) {
 
         event.getData().putLong(EVENT_SOURCE_ID, id);
@@ -243,6 +223,12 @@ public class ApkDownloader implements AsyncDownloadWrapper.Listener {
         if (listener != null) {
             listener.onProgress(event);
         }
+
+        Intent intent = new Intent(ACTION_STATUS);
+        intent.putExtras(event.getData());
+        intent.putExtra(EXTRA_TYPE, event.type);
+        intent.putExtra(EXTRA_URL, Utils.getApkUrl(repoAddress, curApk));
+        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
     }
 
     @Override
@@ -255,7 +241,7 @@ public class ApkDownloader implements AsyncDownloadWrapper.Listener {
     private void cacheIfRequired() {
         if (Preferences.get().shouldCacheApks()) {
             Utils.DebugLog(TAG, "Copying .apk file to cache at " + potentiallyCachedFile.getAbsolutePath());
-            Utils.copy(localFile, potentiallyCachedFile);
+            Utils.copyQuietly(localFile, potentiallyCachedFile);
         }
     }
 

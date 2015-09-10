@@ -3,6 +3,8 @@ package org.fdroid.fdroid.net;
 import android.content.Context;
 import android.util.Log;
 
+import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.Utils;
 
@@ -19,6 +21,8 @@ import java.net.URL;
 
 import javax.net.ssl.SSLHandshakeException;
 
+import info.guardianproject.netcipher.NetCipher;
+
 public class HttpDownloader extends Downloader {
     private static final String TAG = "HttpDownloader";
 
@@ -27,16 +31,35 @@ public class HttpDownloader extends Downloader {
 
     protected HttpURLConnection connection;
     private int statusCode = -1;
+    private boolean onlyStream = false;
 
     HttpDownloader(Context context, URL url, File destFile)
             throws FileNotFoundException, MalformedURLException {
         super(context, url, destFile);
     }
 
+    /**
+     * Calling this makes this downloader not download a file. Instead, it will
+     * only stream the file through the {@link HttpDownloader#getInputStream()}
+     * @return
+     */
+    public HttpDownloader streamDontDownload()
+    {
+        onlyStream = true;
+        return this;
+    }
+
+    /**
+     * Note: Doesn't follow redirects (as far as I'm aware).
+     * {@link BaseImageDownloader#getStreamFromNetwork(String, Object)} has an implementation worth
+     * checking out that follows redirects up to a certain point. I guess though the correct way
+     * is probably to check for a loop (keep a list of all URLs redirected to and if you hit the
+     * same one twice, bail with an exception).
+     * @throws IOException
+     */
     @Override
     public InputStream getInputStream() throws IOException {
         setupConnection();
-        // TODO check out BaseImageDownloader.getStreamFromNetwork() for optims
         return connection.getInputStream();
     }
 
@@ -68,10 +91,11 @@ public class HttpDownloader extends Downloader {
         if (prefs.isProxyEnabled()) {
             SocketAddress sa = new InetSocketAddress(prefs.getProxyHost(), prefs.getProxyPort());
             Proxy proxy = new Proxy(Proxy.Type.HTTP, sa);
-            connection = (HttpURLConnection) sourceUrl.openConnection(proxy);
+            NetCipher.setProxy(proxy);
         } else {
-            connection = (HttpURLConnection) sourceUrl.openConnection();
+            NetCipher.setProxy(null);
         }
+        connection = NetCipher.getHttpURLConnection(sourceUrl);
     }
 
     protected void doDownload() throws IOException, InterruptedException {
@@ -121,6 +145,10 @@ public class HttpDownloader extends Downloader {
     @Override
     public boolean hasChanged() {
         return this.statusCode != 304;
+    }
+
+    public int getStatusCode() {
+        return statusCode;
     }
 
 }

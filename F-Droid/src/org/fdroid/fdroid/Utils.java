@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.XmlResourceParser;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -31,9 +32,13 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 
 import org.fdroid.fdroid.compat.FileCompat;
+import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.data.Repo;
 import org.fdroid.fdroid.data.SanitizedFile;
 import org.xml.sax.XMLReader;
@@ -137,8 +142,8 @@ public final class Utils {
     /**
      * Attempt to symlink, but if that fails, it will make a copy of the file.
      */
-    public static boolean symlinkOrCopyFile(SanitizedFile inFile, SanitizedFile outFile) {
-        return FileCompat.symlink(inFile, outFile) || copy(inFile, outFile);
+    public static boolean symlinkOrCopyFileQuietly(SanitizedFile inFile, SanitizedFile outFile) {
+        return FileCompat.symlink(inFile, outFile) || copyQuietly(inFile, outFile);
     }
 
     /**
@@ -156,17 +161,20 @@ public final class Utils {
         }
     }
 
-    public static boolean copy(File inFile, File outFile) {
+    public static boolean copyQuietly(File inFile, File outFile) {
+        InputStream input = null;
+        OutputStream output = null;
         try {
-            InputStream input = new FileInputStream(inFile);
-            OutputStream output = new FileOutputStream(outFile);
+            input  = new FileInputStream(inFile);
+            output = new FileOutputStream(outFile);
             Utils.copy(input, output);
-            output.close();
-            input.close();
             return true;
         } catch (IOException e) {
             Log.e(TAG, "I/O error when copying a file", e);
             return false;
+        } finally {
+            closeQuietly(output);
+            closeQuietly(input);
         }
     }
 
@@ -403,6 +411,14 @@ public final class Utils {
         return new Locale(languageTag);
     }
 
+    public static String getApkUrl(Apk apk) {
+        return getApkUrl(apk.repoAddress, apk);
+    }
+
+    public static String getApkUrl(String repoAddress, Apk apk) {
+        return repoAddress + "/" + apk.apkName.replace(" ", "%20");
+    }
+
     public static class CommaSeparatedList implements Iterable<String> {
         private final String value;
 
@@ -470,6 +486,17 @@ public final class Utils {
             }
             return false;
         }
+    }
+
+    public static DisplayImageOptions.Builder getImageLoadingOptions() {
+        return new DisplayImageOptions.Builder()
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .imageScaleType(ImageScaleType.NONE)
+                .showImageOnLoading(R.drawable.ic_repo_app_default)
+                .showImageForEmptyUri(R.drawable.ic_repo_app_default)
+                .displayer(new FadeInBitmapDisplayer(200, true, true, false))
+                .bitmapConfig(Bitmap.Config.RGB_565);
     }
 
     // this is all new stuff being added

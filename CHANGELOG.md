@@ -1,3 +1,20 @@
+### 0.97 (2015-10-??)
+
+* Resumeable, simultaneous app downloads in the background using
+  Android's DownloadManager
+
+* Fix crash when trying to install incompatible apps with the privileged
+  installer
+
+* Add support for free Certificate Authorities: cert.startcom.org and
+  letsencrypt.org
+
+* Enable TLS v1.2 on all Android versions that support it
+
+* Add StrictMode to debug builds
+
+* Make the GitLab CI run the tests in an emulator as well as testing the build
+
 ### 0.96 (2015-09-03)
 
 * Move the repo index update to a notification

@@ -39,6 +39,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -55,6 +56,12 @@ import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarOutputStream;
 
+/**
+ * The {@link SwapService} deals with managing the entire workflow from selecting apps to
+ * swap, to invoking this class to prepare the webroot, to enabling various communication protocols.
+ * This class deals specifically with the webroot side of things, ensuring we have a valid index.jar
+ * and the relevant .apk and icon files available.
+ */
 public class LocalRepoManager {
     private static final String TAG = "LocalRepoManager";
 
@@ -133,7 +140,7 @@ public class LocalRepoManager {
             SanitizedFile apkFile = SanitizedFile.knownSanitized(appInfo.publicSourceDir);
             SanitizedFile fdroidApkLink = new SanitizedFile(webRoot, "fdroid.client.apk");
             attemptToDelete(fdroidApkLink);
-            if (Utils.symlinkOrCopyFile(apkFile, fdroidApkLink))
+            if (Utils.symlinkOrCopyFileQuietly(apkFile, fdroidApkLink))
                 fdroidClientURL = "/" + fdroidApkLink.getName();
         } catch (PackageManager.NameNotFoundException e) {
             Log.e(TAG, "Could not set up F-Droid apk in the webroot", e);
@@ -160,7 +167,11 @@ public class LocalRepoManager {
             out.close();
 
             for (final String file : WEB_ROOT_ASSET_FILES) {
-                Utils.copy(assetManager.open(file), new FileOutputStream(new File(webRoot, file)));
+                InputStream assetIn = assetManager.open(file);
+                OutputStream assetOut = new FileOutputStream(new File(webRoot, file));
+                Utils.copy(assetIn, assetOut);
+                assetIn.close();
+                assetOut.close();
             }
 
             // make symlinks/copies in each subdir of the repo to make sure that
@@ -209,7 +220,7 @@ public class LocalRepoManager {
     private void symlinkFileElsewhere(String fileName, String symlinkPrefix, File directory) {
         SanitizedFile index = new SanitizedFile(directory, fileName);
         attemptToDelete(index);
-        Utils.symlinkOrCopyFile(new SanitizedFile(new File(directory, symlinkPrefix), fileName), index);
+        Utils.symlinkOrCopyFileQuietly(new SanitizedFile(new File(directory, symlinkPrefix), fileName), index);
     }
 
     private void deleteContents(File path) {
@@ -238,7 +249,7 @@ public class LocalRepoManager {
 
             if (app.installedApk != null) {
                 SanitizedFile outFile = new SanitizedFile(repoDir, app.installedApk.apkName);
-                if (Utils.symlinkOrCopyFile(app.installedApk.installedFile, outFile))
+                if (Utils.symlinkOrCopyFileQuietly(app.installedApk.installedFile, outFile))
                     continue;
             }
             // if we got here, something went wrong
