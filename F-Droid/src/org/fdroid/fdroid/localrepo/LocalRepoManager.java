@@ -487,11 +487,8 @@ public class LocalRepoManager {
 
     public void writeIndexJar() throws IOException {
 
-        FileWriter writer;
-
         try {
-            writer = new FileWriter(xmlIndex);
-            new IndexXmlBuilder(context, apps).build(writer);
+            new IndexXmlBuilder(context, apps).build(xmlIndex);
         } catch (Exception e) {
             Log.e(TAG, "Could not write index jar", e);
             Toast.makeText(context, R.string.failed_to_create_index, Toast.LENGTH_LONG).show();
@@ -516,7 +513,6 @@ public class LocalRepoManager {
         bi.close();
         jo.close();
         bo.close();
-        writer.close();
 
         try {
             LocalRepoKeyStore.get(context).signZip(xmlIndexJarUnsigned, xmlIndexJar);
