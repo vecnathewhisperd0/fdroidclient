@@ -1,25 +1,33 @@
 package org.fdroid.fdroid.net;
 
+import android.annotation.TargetApi;
 import android.app.Service;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
+import android.text.TextUtils;
 import android.util.Log;
 
+import org.apache.commons.net.util.SubnetUtils;
 import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.localrepo.LocalRepoKeyStore;
 import org.fdroid.fdroid.localrepo.LocalRepoManager;
+import org.fdroid.fdroid.localrepo.SwapService;
 
 import java.net.Inet6Address;
 import java.net.InetAddress;
+import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.security.cert.Certificate;
@@ -37,6 +45,7 @@ public class WifiStateChangeService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.d(TAG, "WiFi change service started, clearing info about wifi state until we have figured it out again.");
         FDroidApp.initWifiSettings();
         NetworkInfo ni = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
         wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
@@ -44,7 +53,7 @@ public class WifiStateChangeService extends Service {
         if (ni == null || ni.isConnected()) {
             /* started on app start or from WifiStateChangeReceiver,
                NetworkInfo is only passed via WifiStateChangeReceiver */
-            Log.i(TAG, "ni == " + ni + "  wifiState == " + printWifiState(wifiState));
+            Utils.debugLog(TAG, "ni == " + ni + "  wifiState == " + printWifiState(wifiState));
             if (wifiState == WifiManager.WIFI_STATE_ENABLED
                     || wifiState == WifiManager.WIFI_STATE_DISABLING   // might be switching to hotspot
                     || wifiState == WifiManager.WIFI_STATE_DISABLED   // might be hotspot
@@ -65,6 +74,7 @@ public class WifiStateChangeService extends Service {
         @Override
         protected Void doInBackground(Void... params) {
             try {
+                Log.d(TAG, "Checking wifi state (in background thread).");
                 WifiInfo wifiInfo = null;
 
                 wifiState = wifiManager.getWifiState();
@@ -75,18 +85,24 @@ public class WifiStateChangeService extends Service {
                     if (wifiState == WifiManager.WIFI_STATE_ENABLED) {
                         wifiInfo = wifiManager.getConnectionInfo();
                         FDroidApp.ipAddressString = formatIpAddress(wifiInfo.getIpAddress());
+                        String netmask = formatIpAddress(wifiManager.getDhcpInfo().netmask);
+                        if (!TextUtils.isEmpty(FDroidApp.ipAddressString) && netmask != null)
+                            FDroidApp.subnetInfo = new SubnetUtils(FDroidApp.ipAddressString, netmask).getInfo();
                     } else if (wifiState == WifiManager.WIFI_STATE_DISABLED
                             || wifiState == WifiManager.WIFI_STATE_DISABLING) {
                         // try once to see if its a hotspot
-                        FDroidApp.ipAddressString = getIpAddressFromNetworkInterface();
+                        setIpInfoFromNetworkInterface();
                         if (FDroidApp.ipAddressString == null)
                             return null;
                     } else {  // a hotspot can be active during WIFI_STATE_UNKNOWN
-                        FDroidApp.ipAddressString = getIpAddressFromNetworkInterface();
+                        setIpInfoFromNetworkInterface();
                     }
-                    Thread.sleep(1000);
-                    if (BuildConfig.DEBUG) {
-                        Log.d(TAG, "waiting for an IP address...");
+
+                    if (FDroidApp.ipAddressString == null) {
+                        Thread.sleep(1000);
+                        if (BuildConfig.DEBUG) {
+                            Utils.debugLog(TAG, "waiting for an IP address...");
+                        }
                     }
                 }
                 if (isCancelled())  // can be canceled by a change via WifiStateChangeReceiver
@@ -94,6 +110,7 @@ public class WifiStateChangeService extends Service {
 
                 if (wifiInfo != null) {
                     String ssid = wifiInfo.getSSID();
+                    Log.d(TAG, "Have wifi info, connected to " + ssid);
                     if (ssid != null) {
                         FDroidApp.ssid = ssid.replaceAll("^\"(.*)\"$", "$1");
                     }
@@ -103,6 +120,7 @@ public class WifiStateChangeService extends Service {
                     }
                 }
 
+                // TODO: Can this be moved to the swap service instead?
                 String scheme;
                 if (Preferences.get().isLocalRepoHttpsEnabled())
                     scheme = "https";
@@ -137,11 +155,8 @@ public class WifiStateChangeService extends Service {
                 if (Preferences.get().isLocalRepoHttpsEnabled())
                     localRepoKeyStore.setupHTTPSCertificate();
 
-            } catch (LocalRepoKeyStore.InitException e) {
-                Log.e(TAG, "Unable to configure a fingerprint or HTTPS for the local repo: " + e.getMessage());
-                Log.e(TAG, Log.getStackTraceString(e));
-            } catch (InterruptedException e) {
-                Log.e(TAG, Log.getStackTraceString(e));
+            } catch (LocalRepoKeyStore.InitException | InterruptedException e) {
+                Log.e(TAG, "Unable to configure a fingerprint or HTTPS for the local repo", e);
             }
             return null;
         }
@@ -151,7 +166,19 @@ public class WifiStateChangeService extends Service {
             Intent intent = new Intent(BROADCAST);
             LocalBroadcastManager.getInstance(WifiStateChangeService.this).sendBroadcast(intent);
             WifiStateChangeService.this.stopSelf();
-            FDroidApp.restartLocalRepoServiceIfRunning();
+
+            Intent swapService = new Intent(WifiStateChangeService.this, SwapService.class);
+            getApplicationContext().bindService(swapService, new ServiceConnection() {
+                @Override
+                public void onServiceConnected(ComponentName name, IBinder service) {
+                    ((SwapService.Binder) service).getService().restartWifiIfEnabled();
+                    getApplicationContext().unbindService(this);
+                }
+
+                @Override
+                public void onServiceDisconnected(ComponentName name) {
+                }
+            }, BIND_AUTO_CREATE);
         }
     }
 
@@ -160,7 +187,8 @@ public class WifiStateChangeService extends Service {
         return null;
     }
 
-    public String getIpAddressFromNetworkInterface() {
+    @TargetApi(9)
+    public void setIpInfoFromNetworkInterface() {
         try {
             for (Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces(); networkInterfaces.hasMoreElements(); ) {
                 NetworkInterface netIf = networkInterfaces.nextElement();
@@ -169,18 +197,27 @@ public class WifiStateChangeService extends Service {
                     InetAddress inetAddress = inetAddresses.nextElement();
                     if (inetAddress.isLoopbackAddress() || inetAddress instanceof Inet6Address) {
                         continue;
-                    } else if (netIf.getDisplayName().contains("wlan0")
+                    }
+                    if (netIf.getDisplayName().contains("wlan0")
                             || netIf.getDisplayName().contains("eth0")
                             || netIf.getDisplayName().contains("ap0")) {
-                        return inetAddress.getHostAddress();
+                        FDroidApp.ipAddressString = inetAddress.getHostAddress();
+                        if (Build.VERSION.SDK_INT < 9)
+                            return;
+                        // the following methods were not added until android-9/Gingerbread
+                        for (InterfaceAddress address : netIf.getInterfaceAddresses()) {
+                            if (inetAddress.equals(address.getAddress()) && !TextUtils.isEmpty(FDroidApp.ipAddressString)) {
+                                String cidr = String.format("%s/%d", FDroidApp.ipAddressString, address.getNetworkPrefixLength());
+                                FDroidApp.subnetInfo = (new SubnetUtils(cidr)).getInfo();
+                                break;
+                            }
+                        }
                     }
                 }
             }
-        } catch (SocketException ex) {
-            ex.printStackTrace();
+        } catch (SocketException e) {
+            Log.e(TAG, "Could not get ip address", e);
         }
-
-        return null;
     }
 
     private String formatIpAddress(int ipAddress) {

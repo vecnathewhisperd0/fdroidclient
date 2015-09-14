@@ -9,6 +9,8 @@ import android.os.AsyncTask;
 import android.os.RemoteException;
 import android.util.Log;
 
+import org.fdroid.fdroid.Utils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -64,13 +66,13 @@ public class InstalledAppCacheUpdater {
         updateCache();
 
         long duration = System.currentTimeMillis() - startTime;
-        Log.d(TAG, "Took " + duration + "ms to compare the installed app cache with PackageManager.");
+        Utils.debugLog(TAG, "Took " + duration + "ms to compare the installed app cache with PackageManager.");
 
         return hasChanged();
     }
 
     protected void notifyProviders() {
-        Log.i(TAG, "Installed app cache has changed, notifying content providers (so they can update the relevant views).");
+        Utils.debugLog(TAG, "Installed app cache has changed, notifying content providers (so they can update the relevant views).");
         context.getContentResolver().notifyChange(AppProvider.getContentUri(), null);
         context.getContentResolver().notifyChange(ApkProvider.getContentUri(), null);
     }
@@ -96,7 +98,7 @@ public class InstalledAppCacheUpdater {
         if (ops.size() > 0) {
             try {
                 context.getContentResolver().applyBatch(InstalledAppProvider.getAuthority(), ops);
-                Log.d(TAG, "Finished executing " + ops.size() + " CRUD operations on installed app cache.");
+                Utils.debugLog(TAG, "Finished executing " + ops.size() + " CRUD operations on installed app cache.");
             } catch (RemoteException | OperationApplicationException e) {
                 Log.e(TAG, "Error updating installed app cache: " + e);
             }
@@ -126,7 +128,7 @@ public class InstalledAppCacheUpdater {
     private List<ContentProviderOperation> insertIntoCache(List<PackageInfo> appsToInsert) {
         List<ContentProviderOperation> ops = new ArrayList<>(appsToInsert.size());
         if (appsToInsert.size() > 0) {
-            Log.d(TAG, "Preparing to cache installed info for " + appsToInsert.size() + " new apps.");
+            Utils.debugLog(TAG, "Preparing to cache installed info for " + appsToInsert.size() + " new apps.");
             Uri uri = InstalledAppProvider.getContentUri();
             for (PackageInfo info : appsToInsert) {
                 ContentProviderOperation op = ContentProviderOperation.newInsert(uri)
@@ -145,7 +147,7 @@ public class InstalledAppCacheUpdater {
     private List<ContentProviderOperation> deleteFromCache(List<String> appIds) {
         List<ContentProviderOperation> ops = new ArrayList<>(appIds.size());
         if (appIds.size() > 0) {
-            Log.d(TAG, "Preparing to remove " + appIds.size() + " apps from the installed app cache.");
+            Utils.debugLog(TAG, "Preparing to remove " + appIds.size() + " apps from the installed app cache.");
             for (final String appId : appIds) {
                 Uri uri = InstalledAppProvider.getAppUri(appId);
                 ops.add(ContentProviderOperation.newDelete(uri).build());

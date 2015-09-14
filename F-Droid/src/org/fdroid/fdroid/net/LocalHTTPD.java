@@ -6,9 +6,10 @@ import android.net.Uri;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
-import org.fdroid.fdroid.FDroidApp;
+import org.fdroid.fdroid.BuildConfig;
+import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.localrepo.LocalRepoKeyStore;
-import org.fdroid.fdroid.views.swap.ConnectSwapActivity;
+import org.fdroid.fdroid.views.swap.SwapWorkflowActivity;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,11 +35,9 @@ public class LocalHTTPD extends NanoHTTPD {
 
     private final Context context;
     private final File webRoot;
-    private final boolean logRequests;
 
-    public LocalHTTPD(Context context, File webRoot, boolean useHttps) {
-        super(FDroidApp.ipAddressString, FDroidApp.port);
-        this.logRequests = false;
+    public LocalHTTPD(Context context, String hostname, int port, File webRoot, boolean useHttps) {
+        super(hostname, port);
         this.webRoot = webRoot;
         this.context = context.getApplicationContext();
         if (useHttps)
@@ -73,14 +72,15 @@ public class LocalHTTPD extends NanoHTTPD {
     }
 
     private void requestSwap(String repo) {
-        Log.d(TAG, "Received request to swap with " + repo);
-        Log.d(TAG, "Showing confirm screen to check whether that is okay with the user.");
+        Utils.debugLog(TAG, "Received request to swap with " + repo);
+        Utils.debugLog(TAG, "Showing confirm screen to check whether that is okay with the user.");
 
         Uri repoUri = Uri.parse(repo);
-        Intent intent = new Intent(context, ConnectSwapActivity.class);
+        Intent intent = new Intent(context, SwapWorkflowActivity.class);
         intent.setData(repoUri);
+        intent.putExtra(SwapWorkflowActivity.EXTRA_CONFIRM, true);
+        intent.putExtra(SwapWorkflowActivity.EXTRA_PREVENT_FURTHER_SWAP_REQUESTS, true);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.putExtra(ConnectSwapActivity.EXTRA_PREVENT_FURTHER_SWAP_REQUESTS, true);
         context.startActivity(intent);
     }
 
@@ -91,7 +91,7 @@ public class LocalHTTPD extends NanoHTTPD {
             try {
                 session.parseBody(new HashMap<String, String>());
             } catch (IOException e) {
-                Log.e(TAG, e.getMessage());
+                Log.e(TAG, "An error occured while parsing the POST body", e);
                 return new Response(Response.Status.INTERNAL_ERROR, MIME_PLAINTEXT, "Internal server error, check logcat on server for details.");
             } catch (ResponseException re) {
                 return new Response(re.getStatus(), MIME_PLAINTEXT, re.getMessage());
@@ -122,18 +122,18 @@ public class LocalHTTPD extends NanoHTTPD {
         Map<String, String> parms = session.getParms();
         String uri = session.getUri();
 
-        if (logRequests) {
-            Log.i(TAG, session.getMethod() + " '" + uri + "' ");
+        if (BuildConfig.DEBUG) {
+            Utils.debugLog(TAG, session.getMethod() + " '" + uri + "' ");
 
             Iterator<String> e = header.keySet().iterator();
             while (e.hasNext()) {
                 String value = e.next();
-                Log.i(TAG, "  HDR: '" + value + "' = '" + header.get(value) + "'");
+                Utils.debugLog(TAG, "  HDR: '" + value + "' = '" + header.get(value) + "'");
             }
             e = parms.keySet().iterator();
             while (e.hasNext()) {
                 String value = e.next();
-                Log.i(TAG, "  PRM: '" + value + "' = '" + parms.get(value) + "'");
+                Utils.debugLog(TAG, "  PRM: '" + value + "' = '" + parms.get(value) + "'");
             }
         }
 
@@ -153,8 +153,7 @@ public class LocalHTTPD extends NanoHTTPD {
                     localRepoKeyStore.getKeyManagers());
             makeSecure(factory);
         } catch (LocalRepoKeyStore.InitException | IOException e) {
-            Log.e(TAG, "Could not enable HTTPS: " + e.getMessage());
-            Log.e(TAG, Log.getStackTraceString(e));
+            Log.e(TAG, "Could not enable HTTPS", e);
         }
     }
 
@@ -276,9 +275,9 @@ public class LocalHTTPD extends NanoHTTPD {
                     res.addHeader("ETag", etag);
                 }
             } else {
-                if (etag.equals(header.get("if-none-match")))
+                if (etag.equals(header.get("if-none-match"))) {
                     res = createResponse(Response.Status.NOT_MODIFIED, mime, "");
-                else {
+                } else {
                     res = createResponse(Response.Status.OK, mime, new FileInputStream(file));
                     res.addHeader("Content-Length", "" + fileLen);
                     res.addHeader("ETag", etag);

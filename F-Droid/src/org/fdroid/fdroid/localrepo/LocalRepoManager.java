@@ -39,6 +39,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -55,6 +56,12 @@ import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarOutputStream;
 
+/**
+ * The {@link SwapService} deals with managing the entire workflow from selecting apps to
+ * swap, to invoking this class to prepare the webroot, to enabling various communication protocols.
+ * This class deals specifically with the webroot side of things, ensuring we have a valid index.jar
+ * and the relevant .apk and icon files available.
+ */
 public class LocalRepoManager {
     private static final String TAG = "LocalRepoManager";
 
@@ -133,10 +140,10 @@ public class LocalRepoManager {
             SanitizedFile apkFile = SanitizedFile.knownSanitized(appInfo.publicSourceDir);
             SanitizedFile fdroidApkLink = new SanitizedFile(webRoot, "fdroid.client.apk");
             attemptToDelete(fdroidApkLink);
-            if (Utils.symlinkOrCopyFile(apkFile, fdroidApkLink))
+            if (Utils.symlinkOrCopyFileQuietly(apkFile, fdroidApkLink))
                 fdroidClientURL = "/" + fdroidApkLink.getName();
         } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
+            Log.e(TAG, "Could not set up F-Droid apk in the webroot", e);
         }
         return fdroidClientURL;
     }
@@ -160,7 +167,11 @@ public class LocalRepoManager {
             out.close();
 
             for (final String file : WEB_ROOT_ASSET_FILES) {
-                Utils.copy(assetManager.open(file), new FileOutputStream(new File(webRoot, file)));
+                InputStream assetIn = assetManager.open(file);
+                OutputStream assetOut = new FileOutputStream(new File(webRoot, file));
+                Utils.copy(assetIn, assetOut);
+                assetIn.close();
+                assetOut.close();
             }
 
             // make symlinks/copies in each subdir of the repo to make sure that
@@ -176,8 +187,7 @@ public class LocalRepoManager {
             symlinkEntireWebRootElsewhere("../../", repoDirCaps);
 
         } catch (IOException e) {
-            Log.e(TAG, "Error writing local repo index: " + e.getMessage());
-            Log.e(TAG, Log.getStackTraceString(e));
+            Log.e(TAG, "Error writing local repo index", e);
         }
     }
 
@@ -210,7 +220,7 @@ public class LocalRepoManager {
     private void symlinkFileElsewhere(String fileName, String symlinkPrefix, File directory) {
         SanitizedFile index = new SanitizedFile(directory, fileName);
         attemptToDelete(index);
-        Utils.symlinkOrCopyFile(new SanitizedFile(new File(directory, symlinkPrefix), fileName), index);
+        Utils.symlinkOrCopyFileQuietly(new SanitizedFile(new File(directory, symlinkPrefix), fileName), index);
     }
 
     private void deleteContents(File path) {
@@ -239,7 +249,7 @@ public class LocalRepoManager {
 
             if (app.installedApk != null) {
                 SanitizedFile outFile = new SanitizedFile(repoDir, app.installedApk.apkName);
-                if (Utils.symlinkOrCopyFile(app.installedApk.installedFile, outFile))
+                if (Utils.symlinkOrCopyFileQuietly(app.installedApk.installedFile, outFile))
                     continue;
             }
             // if we got here, something went wrong
@@ -256,11 +266,10 @@ public class LocalRepoManager {
             PackageInfo packageInfo = pm.getPackageInfo(packageName, PackageManager.GET_META_DATA);
             app.icon = getIconFile(packageName, packageInfo.versionCode).getName();
         } catch (PackageManager.NameNotFoundException | CertificateEncodingException | IOException e) {
-            Log.e(TAG, "Error adding app to local repo: " + e.getMessage());
-            Log.e(TAG, Log.getStackTraceString(e));
+            Log.e(TAG, "Error adding app to local repo", e);
             return;
         }
-        Log.i(TAG, "apps.put: " + packageName);
+        Utils.debugLog(TAG, "apps.put: " + packageName);
         apps.put(packageName, app);
     }
 
@@ -276,7 +285,7 @@ public class LocalRepoManager {
                     appInfo = pm.getApplicationInfo(app.id, PackageManager.GET_META_DATA);
                     copyIconToRepo(appInfo.loadIcon(pm), app.id, app.installedApk.vercode);
                 } catch (PackageManager.NameNotFoundException e) {
-                    e.printStackTrace();
+                    Log.e(TAG, "Error getting app icon", e);
                 }
             }
         }
@@ -303,7 +312,7 @@ public class LocalRepoManager {
             bitmap.compress(CompressFormat.PNG, 100, out);
             out.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e(TAG, "Error copying icon to repo", e);
         }
     }
 
@@ -475,12 +484,17 @@ public class LocalRepoManager {
     }
 
     public void writeIndexJar() throws IOException {
+
+        FileWriter writer = null;
         try {
-            new IndexXmlBuilder(context, apps).build(new FileWriter(xmlIndex));
+            writer = new FileWriter(xmlIndex);
+            new IndexXmlBuilder(context, apps).build(writer);
         } catch (Exception e) {
-            Log.e(TAG, Log.getStackTraceString(e));
+            Log.e(TAG, "Could not write index jar", e);
             Toast.makeText(context, R.string.failed_to_create_index, Toast.LENGTH_LONG).show();
             return;
+        } finally {
+            Utils.closeQuietly(writer);
         }
 
         BufferedOutputStream bo = new BufferedOutputStream(new FileOutputStream(xmlIndexJarUnsigned));

@@ -1,44 +1,45 @@
 F-Droid Client
 ==============
 
-Client for [F-Droid](https://fdroid.org), the Free Software repository system
+[![build status](https://ci.gitlab.com/projects/6571/status.png?ref=master)](https://ci.gitlab.com/projects/6571?ref=master) [![Translation status](https://hosted.weblate.org/widgets/f-droid/-/svg-badge.svg)](https://hosted.weblate.org/engage/f-droid/)
+
+Client for [F-Droid](https://f-droid.org), the Free Software repository system
 for Android.
 
-Building from source with Gradle
---------------------------------
+Building with Gradle
+--------------------
 
-Once you have checked out the version you wish to build, install gradle on your system and run:
+The only required tools are the [Android SDK](https://developer.android.com/sdk/index.html)
+and Gradle.
 
-```
-git submodule update --init
-gradle build
-```
+You should use a relatively new version of Gradle, such as 2.4, or use the
+gradle wrapper.
+
+Once you have checked out the version you wish to build, run:
+
+	cd F-Droid
+	gradle assembleRelease
+
+The resulting apk will be in `build/outputs/apk/`.
 
 Android Studio
 --------------
 
 From Android Studio: File -> Import Project -> Select the cloned top folder
 
-Building from source with Ant
------------------------------
 
-The only required tools are the [Android SDK](http://developer.android.com/sdk/index.html) and Apache Ant.
+Building tips
+-------------
 
-Once you have checked out the version you wish to build, run:
-
-```
-git submodule update --init
-cd F-Droid
-./ant-prepare.sh # This runs 'android update' on the libs and the main project
-ant clean release
-```
+* Use `gradle --daemon` if you are going to build F-Droid multiple times.
+* If you get a message like `Could not find com.android.support:support-...`,
+  make sure that you have the latest Android support maven repository.
 
 Direct download
 ---------------
 
 You can [download the application](https://f-droid.org/FDroid.apk) directly
-from our site or [browse it in the
-repo](https://f-droid.org/app/org.fdroid.fdroid).
+from our site or [browse it in the repo](https://f-droid.org/app/org.fdroid.fdroid).
 
 
 Contributing
@@ -47,82 +48,72 @@ Contributing
 You are welcome to submit
 [Merge Requests](https://gitlab.com/fdroid/fdroidclient/merge_requests)
 via the Gitlab web interface. You can also follow our
-[Issue tracker](https://f-droid.org/repository/issues/) and our
-[Forums](https://f-droid.org/forums/).
+[Issue tracker](https://gitlab.com/fdroid/fdroidclient/issues) and our
+[Forums](https://f-droid.org/forums).
+
+Also see our [Contributing doc](CONTRIBUTING.md).
 
 
 Translating
 -----------
 
-The `res/values-*` dirs are kept up to date automatically via [MediaWiki's
-Translate Extension](http://www.mediawiki.org/wiki/Extension:Translate). See
-[our translation page](https://f-droid.org/wiki/page/Special:Translate) if you
-would like to contribute.
+The strings are translated using [Weblate](https://weblate.org/en/). Follow
+[these instructions](https://hosted.weblate.org/engage/f-droid/) if you would
+like to contribute.
 
 
 Running the test suite
 ----------------------
 
-FDroid client includes a embedded Android Test Project for running tests.  It
-is in the `test/` subfolder.  To run the tests from the command line, do:
+In order to run the F-Droid test suite, you will need to have either a real device
+connected via `adb`, or an emulator running. Then, execute the following from the
+command line:
 
-```
-git submodule update --init
-./ant-prepare.sh # This runs 'android update' on the libs and the main project
-ant clean emma debug install test
-```
+	gradle connectedCheck
 
-You can also run the tests in Eclipse. Here's how:
+This will build and install F-Droid and the test apk, then execute the entire
+test suite on the device or emulator.
 
-1. Choose *File* -> *Import* -> *Android* -> *Existing Android Code Into Workspace* for the `fdroidclient/` directory.
-2. Choose *File* -> *Import* -> *Android* -> *Existing Android Code Into Workspace* for the `fdroidclient/test/` directory
-3. If **fdroid-test** has errors, right-click on it, select *Properties*, the
-*Java Build Path*, then click on the *Projects* tab.
-4. Click on the *Add...* button and select `fdroidclient/`
-5. Right-click on the **fdroid-test** project, then *Run As...* -> *Android JUnit Test*
+See the [Android Gradle user guide](http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Testing)
+for more details, including how to use Android Studio to run tests (which
+provides more useful feedback than the command line).
 
 
-Troubleshooting
----------------
+Versioning
+----------
 
-When building F-Droid, the following error may occur:
+Each stable version follows the `X.Y` pattern. Hotfix releases - i.e. when a
+stable has an important bug that needs immediate fixing - will follow the
+`X.Y.Z` pattern.
 
-> Invalid file: extern/UniversalImageLoader/library/build.xml
+Before each stable release, a number of alpha releases will be released. They
+will follow the pattern `X.Y-alphaN`, where `N` is the current alpha number.
+These will usually include changes and new features that have not been tested
+enough for a stable release, so use at your own risk. Testers and reporters
+are very welcome.
 
-Check the output of the ./ant-prepare.sh command. This error is often
-accompanied by the following message:
+The version codes use a number of digits per each of these keys: `XYYZNN`.
+So for example, 1.3.1 would be `103150` and 0.95-alpha13 would be `95013`
+(leading zeros are omitted).
 
-> Error: The project either has no target set or the target is invalid.
-> Please provide a --target to the 'android update' command.
+Note that we use a trailing `50` for actual stable releases, so alphas are
+limited to `-alpha49`.
 
-The most likely cause of this is that your installed Android SDK is missing
-the target version specified by one of the dependencies. For example, at the
-time of writing this, UniversalImageLoader uses the "android-16" target API,
-however the default install of the Android SDK will usually only install the
-latest version ("android-20" as of writing). So you will have to install
-missings "android-xx" targets via the SDK manager. To get a list of already
-installed SDK targets, run:
+This is an example of a release process for **0.95**:
 
-```
-$ android list targets
-```
+* We are currently at stable **0.94**
+* **0.95-alpha1** is released
+* **0.95-alpha2** is released
+* **0.95-alpha3** is released
+* `stable-v0.95` is branched and frozen
+* **0.95** is released
+* A bug is reported on the stable release and fixed
+* **0.95.1** is released with only that fix
 
-To get a list of targets used by fdroidclient libs, run:
-
-```
-$ for i in $(grep "android.library.reference" project.properties | cut -f2 -d'='); do
-grep ^target $i/project.properties | cut -f2 -d'=';
-done | sort | uniq | paste -s -d',' -
-```
-to install missing or all needed targets, for example "android-16" and "android-7" run:
-
-```
-$ android update sdk -u -t "android-16,android-7"
-```
-
-NOTE: While it may be tempting to add "--target=android-19" to the
-ant-prepare.sh script, it is not the correct solution. Although it may work,
-it can cause strange bugs at runtime.
+As soon as a stable is tagged, master will move on to `-alpha0` on the next
+version. This is a temporary measure - until `-alpha1` is released - so that
+moving from stable to master doesn't require a downgrade. `-alpha0` versions
+will not be tagged nor released.
 
 
 License
@@ -138,4 +129,9 @@ Some icons are made by [Picol](http://www.flaticon.com/authors/picol),
 [Icomoon](http://www.flaticon.com/authors/icomoon) or
 [Dave Gandy](http://www.flaticon.com/authors/dave-gandy) from
 [Flaticon](http://www.flaticon.com) or by Google and are licensed by
-[Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/).
+[Creative Commons BY 3.0](https://creativecommons.org/licenses/by/3.0/).
+
+Other icons are from the
+[Material Design Icon set](https://github.com/google/material-design-icons)
+released under an
+[Attribution 4.0 International license](https://creativecommons.org/licenses/by/4.0/).

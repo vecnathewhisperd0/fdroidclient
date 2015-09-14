@@ -1,4 +1,62 @@
-### Upcoming release
+### 0.97 (2015-10-??)
+
+* Resumeable, simultaneous app downloads in the background using
+  Android's DownloadManager
+
+* Fix crash when trying to install incompatible apps with the privileged
+  installer
+
+* Add option to prompt for unstable updates globally
+
+* Add support for free Certificate Authorities: cert.startcom.org and
+  letsencrypt.org
+
+* Enable TLS v1.2 on all Android versions that support it
+
+* Add StrictMode to debug builds
+
+* Make the GitLab CI run the tests in an emulator as well as testing the build
+
+* Switched to Weblate for translations
+
+* Translation updates
+
+### 0.96 (2015-09-03)
+
+* Move the repo index update to a notification
+
+* Handle apk downloads without a dialog
+
+* Don't let users try to uninstall system apps that haven't been updated
+
+* Various bugfixes in the process that installs F-Droid as a privileged app
+
+* Fix privileged installer confirmation screen issues on Android 2.X/3.X/4.X
+
+* Disable HTTPS support in swap until it's stable
+
+* Fix a few crashes, including package receivers and NFC actions
+
+* Translation updates
+
+### 0.95.1 (2015-08-10)
+
+* Disable prompt to install F-Droid into system until it's more stable
+
+* Fix crash when updating from an older release if using the "Light with dark
+  ActionBar" theme
+
+* Re-add SuperUser third-party permission to the manifest since some systems
+  require it
+
+* Fix privileged installer confirmation screen crash on Android < 3.0
+
+### 0.95 (2015-08-04)
+
+* Start porting UI to Material Design, including a new launcher icon
+
+* Add support for app changelog links, which will appear for apps that have
+  them once the repositories have been updated again
 
 * Redesign the App Details view with larger icons, expandable description and
   links with icons
@@ -9,10 +67,15 @@
 * Remove the root installer, since the system installer is safer, more stable
   and now easy to set up with root privileges
 
+* Speed up and simplify repo update process by streaming the data out of the
+  jar file directly
+
 * Can now manually add swap repo via "Repositories" screen
 
 * Using NFC during swap now initiates a proper swap, rather than redirecting to
   the "Repositories" screen
+
+* Drop ant support to greatly simplify the build process and its maintenance
 
 ### 0.92 (2015-06-08)
 

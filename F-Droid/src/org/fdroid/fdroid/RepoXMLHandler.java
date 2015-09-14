@@ -19,7 +19,7 @@
 
 package org.fdroid.fdroid;
 
-import android.os.Bundle;
+import android.text.TextUtils;
 
 import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.data.App;
@@ -31,6 +31,9 @@ import org.xml.sax.helpers.DefaultHandler;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Parses the index.xml into Java data structures.
+ */
 public class RepoXMLHandler extends DefaultHandler {
 
     // The repo we're processing.
@@ -48,27 +51,18 @@ public class RepoXMLHandler extends DefaultHandler {
     private int version = -1;
     private int maxage = -1;
 
-    // After processing the XML, this will be null if the index specified a
-    // public key - otherwise a public key. This is used for TOFU where an
-    // index.xml is read on the first connection, and a signed index.jar is
-    // expected on all subsequent connections.
-    private String pubkey;
+    /** the X.509 signing certificate stored in the header of index.xml */
+    private String signingCertFromIndexXml;
 
     private String name;
     private String description;
     private String hashType;
 
-    private int progressCounter = 0;
-    private final ProgressListener progressListener;
-
-    private int totalAppCount;
-
-    public RepoXMLHandler(Repo repo, ProgressListener listener) {
+    public RepoXMLHandler(Repo repo) {
         this.repo = repo;
-        pubkey = null;
+        signingCertFromIndexXml = null;
         name = null;
         description = null;
-        progressListener = listener;
     }
 
     public List<App> getApps() { return apps; }
@@ -83,7 +77,7 @@ public class RepoXMLHandler extends DefaultHandler {
 
     public String getName() { return name; }
 
-    public String getPubKey() { return pubkey; }
+    public String getSigningCertFromIndexXml() { return signingCertFromIndexXml; }
 
     @Override
     public void characters(char[] ch, int start, int length) {
@@ -97,6 +91,7 @@ public class RepoXMLHandler extends DefaultHandler {
         super.endElement(uri, localName, qName);
         final String curel = localName;
         final String str = curchars.toString().trim();
+        final boolean empty = TextUtils.isEmpty(str);
 
         if (curel.equals("application") && curapp != null) {
             apps.add(curapp);
@@ -112,7 +107,7 @@ public class RepoXMLHandler extends DefaultHandler {
         } else if (curel.equals("package") && curapk != null && curapp != null) {
             apksList.add(curapk);
             curapk = null;
-        } else if (curapk != null) {
+        } else if (!empty && curapk != null) {
             switch (curel) {
             case "version":
                 curapk.version = str;
@@ -162,7 +157,7 @@ public class RepoXMLHandler extends DefaultHandler {
                 curapk.nativecode = Utils.CommaSeparatedList.make(str);
                 break;
             }
-        } else if (curapp != null) {
+        } else if (!empty && curapp != null) {
             switch (curel) {
             case "name":
                 curapp.name = str;
@@ -235,7 +230,7 @@ public class RepoXMLHandler extends DefaultHandler {
                 curapp.requirements = Utils.CommaSeparatedList.make(str);
                 break;
             }
-        } else if (curel.equals("description")) {
+        } else if (!empty && curel.equals("description")) {
             description = cleanWhiteSpace(str);
         }
     }
@@ -246,10 +241,7 @@ public class RepoXMLHandler extends DefaultHandler {
         super.startElement(uri, localName, qName, attributes);
 
         if (localName.equals("repo")) {
-            final String pk = attributes.getValue("", "pubkey");
-            if (pk != null)
-                pubkey = pk;
-
+            signingCertFromIndexXml = attributes.getValue("", "pubkey");
             maxage = Utils.parseInt(attributes.getValue("", "maxage"), -1);
             version = Utils.parseInt(attributes.getValue("", "version"), -1);
 
@@ -263,16 +255,6 @@ public class RepoXMLHandler extends DefaultHandler {
         } else if (localName.equals("application") && curapp == null) {
             curapp = new App();
             curapp.id = attributes.getValue("", "id");
-            /* show progress for the first 25, then start skipping every 25 */
-            if (totalAppCount < 25 || progressCounter % (totalAppCount / 25) == 0) {
-                Bundle data = new Bundle(1);
-                data.putString(RepoUpdater.PROGRESS_DATA_REPO_ADDRESS, repo.address);
-                progressListener.onProgress(
-                    new ProgressListener.Event(
-                        RepoUpdater.PROGRESS_TYPE_PROCESS_XML,
-                        progressCounter, totalAppCount, data));
-            }
-            progressCounter++;
         } else if (localName.equals("package") && curapp != null && curapk == null) {
             curapk = new Apk();
             curapk.id = curapp.id;
@@ -283,10 +265,6 @@ public class RepoXMLHandler extends DefaultHandler {
             hashType = attributes.getValue("", "type");
         }
         curchars.setLength(0);
-    }
-
-    public void setTotalAppCount(int totalAppCount) {
-        this.totalAppCount = totalAppCount;
     }
 
     private String cleanWhiteSpace(String str) {

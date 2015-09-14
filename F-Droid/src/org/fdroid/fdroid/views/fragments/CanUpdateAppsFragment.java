@@ -91,11 +91,6 @@ public class CanUpdateAppsFragment extends AppListFragment {
      * Copied from ListFragment and added Button on top of list. We do not use a
      * custom layout here, because this breaks the progress bar functionality of
      * ListFragment.
-     *
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -138,7 +133,7 @@ public class CanUpdateAppsFragment extends AppListFragment {
         mUpdateAllButton.setId(UPDATE_ALL_BUTTON_ID);
         mUpdateAllButton.setText(R.string.update_all);
         mUpdateAllButton.setCompoundDrawablesWithIntrinsicBounds(
-                getResources().getDrawable(R.drawable.ic_menu_refresh), null, null, null);
+                getResources().getDrawable(R.drawable.ic_refresh_white), null, null, null);
         mUpdateAllButton.setVisibility(View.GONE);
 
         linearLayout.addView(mUpdateAllButton, new FrameLayout.LayoutParams(

@@ -3,12 +3,19 @@ package org.fdroid.fdroid.net;
 import android.content.Context;
 import android.util.Log;
 
-import org.fdroid.fdroid.Preferences;
+import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 
+import org.fdroid.fdroid.FDroidApp;
+import org.fdroid.fdroid.Preferences;
+import org.fdroid.fdroid.Utils;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
@@ -18,6 +25,8 @@ import java.net.URL;
 
 import javax.net.ssl.SSLHandshakeException;
 
+import info.guardianproject.netcipher.NetCipher;
+
 public class HttpDownloader extends Downloader {
     private static final String TAG = "HttpDownloader";
 
@@ -25,30 +34,41 @@ public class HttpDownloader extends Downloader {
     protected static final String HEADER_FIELD_ETAG = "ETag";
 
     protected HttpURLConnection connection;
+    private InputStream stream;
     private int statusCode = -1;
+    private boolean onlyStream = false;
 
-    // The context is required for opening the file to write to.
-    HttpDownloader(String source, File destFile)
+    HttpDownloader(Context context, URL url, File destFile)
             throws FileNotFoundException, MalformedURLException {
-        super(destFile);
-        sourceUrl = new URL(source);
+        super(context, url, destFile);
     }
 
     /**
-     * Downloads to a temporary file, which *you must delete yourself when
-     * you are done*.
-     * @see org.fdroid.fdroid.net.Downloader#getFile()
+     * Calling this makes this downloader not download a file. Instead, it will
+     * only stream the file through the {@link HttpDownloader#getInputStream()}
      */
-    HttpDownloader(String source, Context ctx) throws IOException {
-        super(ctx);
-        sourceUrl = new URL(source);
+    public HttpDownloader streamDontDownload() {
+        onlyStream = true;
+        return this;
     }
 
-    @Override
+    /**
+     * Note: Doesn't follow redirects (as far as I'm aware).
+     * {@link BaseImageDownloader#getStreamFromNetwork(String, Object)} has an implementation worth
+     * checking out that follows redirects up to a certain point. I guess though the correct way
+     * is probably to check for a loop (keep a list of all URLs redirected to and if you hit the
+     * same one twice, bail with an exception).
+     * @throws IOException
+     */
+
     public InputStream getInputStream() throws IOException {
         setupConnection();
-        // TODO check out BaseImageDownloader.getStreamFromNetwork() for optims
-        return connection.getInputStream();
+        stream = new BufferedInputStream(connection.getInputStream());
+        return stream;
+    }
+
+    public BufferedReader getBufferedReader() throws IOException {
+        return new BufferedReader(new InputStreamReader(getInputStream()));
     }
 
     // Get a remote file. Returns the HTTP response code.
@@ -72,31 +92,39 @@ public class HttpDownloader extends Downloader {
         }
     }
 
+    boolean isSwapUrl() {
+        String host = sourceUrl.getHost();
+        return sourceUrl.getPort() > 1023 // only root can use <= 1023, so never a swap repo
+                && host.matches("[0-9.]+") // host must be an IP address
+                && FDroidApp.subnetInfo.isInRange(host); // on the same subnet as we are
+    }
+
     protected void setupConnection() throws IOException {
         if (connection != null)
             return;
         Preferences prefs = Preferences.get();
-        if (prefs.isProxyEnabled()) {
+        if (prefs.isProxyEnabled() && ! isSwapUrl()) {
             SocketAddress sa = new InetSocketAddress(prefs.getProxyHost(), prefs.getProxyPort());
             Proxy proxy = new Proxy(Proxy.Type.HTTP, sa);
-            connection = (HttpURLConnection) sourceUrl.openConnection(proxy);
+            NetCipher.setProxy(proxy);
         } else {
-            connection = (HttpURLConnection) sourceUrl.openConnection();
+            NetCipher.setProxy(null);
         }
+        connection = NetCipher.getHttpURLConnection(sourceUrl);
     }
 
     protected void doDownload() throws IOException, InterruptedException {
         if (wantToCheckCache()) {
             setupCacheCheck();
-            Log.i(TAG, "Checking cached status of " + sourceUrl);
+            Utils.debugLog(TAG, "Checking cached status of " + sourceUrl);
             statusCode = connection.getResponseCode();
         }
 
         if (isCached()) {
-            Log.i(TAG, sourceUrl + " is cached, so not downloading (HTTP " + statusCode + ")");
+            Utils.debugLog(TAG, sourceUrl + " is cached, so not downloading (HTTP " + statusCode + ")");
         } else {
-            Log.i(TAG, "Downloading from " + sourceUrl);
-            downloadFromStream();
+            Utils.debugLog(TAG, "Downloading from " + sourceUrl);
+            downloadFromStream(4096);
             updateCacheCheck();
         }
     }
@@ -134,4 +162,17 @@ public class HttpDownloader extends Downloader {
         return this.statusCode != 304;
     }
 
+    public int getStatusCode() {
+        return statusCode;
+    }
+
+    public void close() {
+        try {
+            if (stream != null)
+                stream.close();
+        }
+        catch (IOException e) {}
+
+        connection.disconnect();
+    }
 }

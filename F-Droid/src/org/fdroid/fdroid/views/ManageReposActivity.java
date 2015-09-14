@@ -19,7 +19,6 @@
 
 package org.fdroid.fdroid.views;
 
-import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -42,6 +41,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -50,7 +50,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -64,17 +63,13 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.fdroid.fdroid.FDroid;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Preferences;
-import org.fdroid.fdroid.ProgressListener;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.UpdateService;
+import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.compat.ClipboardCompat;
 import org.fdroid.fdroid.data.NewRepoConfig;
 import org.fdroid.fdroid.data.Repo;
 import org.fdroid.fdroid.data.RepoProvider;
-import org.fdroid.fdroid.net.MDnsHelper;
-import org.fdroid.fdroid.net.MDnsHelper.DiscoveredRepo;
-import org.fdroid.fdroid.net.MDnsHelper.RepoScanListAdapter;
-import org.fdroid.fdroid.views.fragments.RepoDetailsFragment;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -84,16 +79,7 @@ import java.net.URL;
 import java.util.Date;
 import java.util.Locale;
 
-import javax.jmdns.ServiceInfo;
-
 public class ManageReposActivity extends ActionBarActivity {
-
-    /**
-     * If we have a new repo added, or the address of a repo has changed, then
-     * we when we're finished, we'll set this boolean to true in the intent that
-     * we finish with, to signify that we want the main list of apps updated.
-     */
-    public static final String REQUEST_UPDATE = "update";
     private static final String TAG = "ManageReposActivity";
 
     private static final String DEFAULT_NEW_REPO_TEXT = "https://";
@@ -103,10 +89,6 @@ public class ManageReposActivity extends ActionBarActivity {
         EXISTS_DISABLED, EXISTS_ENABLED, EXISTS_UPGRADABLE_TO_SIGNED, INVALID_URL,
         IS_SWAP
     }
-
-    private UpdateService.UpdateReceiver updateHandler = null;
-
-    private static boolean changed = false;
 
     private RepoListFragment listFragment;
 
@@ -152,19 +134,9 @@ public class ManageReposActivity extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (updateHandler != null) {
-            updateHandler.showDialog(this);
-        }
+
         /* let's see if someone is trying to send us a new repo */
         addRepoFromIntent(getIntent());
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (updateHandler != null) {
-            updateHandler.hideDialog();
-        }
     }
 
     @Override
@@ -175,20 +147,8 @@ public class ManageReposActivity extends ActionBarActivity {
     @Override
     public void finish() {
         Intent ret = new Intent();
-        markChangedIfRequired(ret);
         setResult(RESULT_OK, ret);
         super.finish();
-    }
-
-    private boolean hasChanged() {
-        return changed;
-    }
-
-    private void markChangedIfRequired(Intent intent) {
-        if (hasChanged()) {
-            Log.i(TAG, "Repo details have changed, prompting for update.");
-            intent.putExtra(REQUEST_UPDATE, true);
-        }
     }
 
     @Override
@@ -202,7 +162,6 @@ public class ManageReposActivity extends ActionBarActivity {
         switch (item.getItemId()) {
         case android.R.id.home:
             Intent destIntent = new Intent(this, FDroid.class);
-            markChangedIfRequired(destIntent);
             setResult(RESULT_OK, destIntent);
             NavUtils.navigateUpTo(this, destIntent);
             return true;
@@ -210,82 +169,10 @@ public class ManageReposActivity extends ActionBarActivity {
             showAddRepo();
             return true;
         case R.id.action_update_repo:
-            updateRepos();
-            return true;
-        case R.id.action_find_local_repos:
-            scanForRepos();
+            UpdateService.updateNow(this);
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void updateRepos() {
-        updateHandler = UpdateService.updateNow(this).setListener(
-                new ProgressListener() {
-                    @Override
-                    public void onProgress(Event event) {
-                        switch (event.type) {
-                        case UpdateService.EVENT_COMPLETE_AND_SAME:
-                        case UpdateService.EVENT_COMPLETE_WITH_CHANGES:
-                            // No need to prompt to update any more, we just
-                            // did it!
-                            changed = false;
-                            break;
-                        case UpdateService.EVENT_FINISHED:
-                            updateHandler = null;
-                            break;
-                        }
-                    }
-                });
-    }
-
-    private void scanForRepos() {
-        final RepoScanListAdapter adapter = new RepoScanListAdapter(this);
-        final MDnsHelper mDnsHelper = new MDnsHelper(this, adapter);
-
-        final View view = getLayoutInflater().inflate(R.layout.repodiscoverylist, null);
-        final ListView repoScanList = (ListView) view.findViewById(R.id.reposcanlist);
-
-        final AlertDialog alrt = new AlertDialog.Builder(this).setView(view)
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mDnsHelper.stopDiscovery();
-                        dialog.dismiss();
-                    }
-                }).create();
-
-        alrt.setTitle(R.string.local_repos_title);
-        alrt.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                mDnsHelper.stopDiscovery();
-            }
-        });
-
-        repoScanList.setAdapter(adapter);
-        repoScanList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, final View view,
-                    int position, long id) {
-
-                final DiscoveredRepo discoveredService =
-                        (DiscoveredRepo) parent.getItemAtPosition(position);
-
-                final ServiceInfo serviceInfo = discoveredService.getServiceInfo();
-                String type = serviceInfo.getPropertyString("type");
-                String protocol = type.contains("fdroidrepos") ? "https:/" : "http:/";
-                String path = serviceInfo.getPropertyString("path");
-                if (TextUtils.isEmpty(path))
-                    path = "/fdroid/repo";
-                String serviceUrl = protocol + serviceInfo.getInetAddresses()[0]
-                        + ":" + serviceInfo.getPort() + path;
-                showAddRepo(serviceUrl, serviceInfo.getPropertyString("fingerprint"));
-            }
-        });
-
-        alrt.show();
-        mDnsHelper.discoverServices();
     }
 
     private void showAddRepo() {
@@ -348,9 +235,7 @@ public class ManageReposActivity extends ActionBarActivity {
             final EditText uriEditText = (EditText) view.findViewById(R.id.edit_uri);
             final EditText fingerprintEditText = (EditText) view.findViewById(R.id.edit_fingerprint);
 
-            addRepoDialog.setIcon(android.R.drawable.ic_menu_add);
-            addRepoDialog.setTitle(getString(R.string.repo_add_title));
-
+            addRepoDialog.setTitle(R.string.repo_add_title);
             addRepoDialog.setButton(DialogInterface.BUTTON_NEGATIVE,
                 getString(R.string.cancel),
                 new DialogInterface.OnClickListener() {
@@ -390,7 +275,6 @@ public class ManageReposActivity extends ActionBarActivity {
                     @Override
                     public void onClick(View v) {
 
-                        String fp = fingerprintEditText.getText().toString();
                         String url = uriEditText.getText().toString();
 
                         try {
@@ -400,13 +284,15 @@ public class ManageReposActivity extends ActionBarActivity {
                             return;
                         }
 
-                        switch(addRepoState) {
+                        String fp = fingerprintEditText.getText().toString();
+
+                        switch (addRepoState) {
                             case DOESNT_EXIST:
                                 prepareToCreateNewRepo(url, fp);
                                 break;
 
                             case IS_SWAP:
-                                Log.i(TAG, "Removing existing swap repo " + url + " before adding new repo.");
+                                Utils.debugLog(TAG, "Removing existing swap repo " + url + " before adding new repo.");
                                 Repo repo = RepoProvider.Helper.findByAddress(context, url);
                                 RepoProvider.Helper.remove(context, repo.getId());
                                 prepareToCreateNewRepo(url, fp);
@@ -476,7 +362,7 @@ public class ManageReposActivity extends ActionBarActivity {
                 // to the user until they try to save the repo.
             }
 
-            final Repo repo = uri.length() > 0 ? RepoProvider.Helper.findByAddress(context, uri) : null;
+            final Repo repo = !TextUtils.isEmpty(uri) ? RepoProvider.Helper.findByAddress(context, uri) : null;
 
             if (repo == null) {
                 repoDoesntExist();
@@ -577,7 +463,7 @@ public class ManageReposActivity extends ActionBarActivity {
                     final String[] pathsToCheck = {"", "fdroid/repo", "repo"};
                     for (final String path : pathsToCheck) {
 
-                        Log.d(TAG, "Checking for repo at " + originalAddress + " with suffix \"" + path + "\".");
+                        Utils.debugLog(TAG, "Checking for repo at " + originalAddress + " with suffix \"" + path + "\".");
                         Uri.Builder builder = Uri.parse(originalAddress).buildUpon().appendEncodedPath(path);
                         final String addressWithoutIndex = builder.build().toString();
                         publishProgress(addressWithoutIndex);
@@ -586,16 +472,16 @@ public class ManageReposActivity extends ActionBarActivity {
 
                         try {
                             if (checkForRepository(uri)) {
-                                Log.i(TAG, "Found F-Droid repo at " + addressWithoutIndex);
+                                Utils.debugLog(TAG, "Found F-Droid repo at " + addressWithoutIndex);
                                 return addressWithoutIndex;
                             }
                         } catch (IOException e) {
-                            Log.e(TAG, "Error while searching for repo at " + addressWithoutIndex + ": " + e.getMessage());
+                            Log.e(TAG, "Error while searching for repo at " + addressWithoutIndex, e);
                             return originalAddress;
                         }
 
                         if (isCancelled()) {
-                            Log.d(TAG, "Not checking any more repo addresses, because process was skipped.");
+                            Utils.debugLog(TAG, "Not checking any more repo addresses, because process was skipped.");
                             break;
                         }
                     }
@@ -624,7 +510,7 @@ public class ManageReposActivity extends ActionBarActivity {
             };
 
             Button skip = addRepoDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
-            skip.setText(getString(R.string.skip));
+            skip.setText(R.string.skip);
             skip.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -675,7 +561,7 @@ public class ManageReposActivity extends ActionBarActivity {
             }
             ContentValues values = new ContentValues(2);
             values.put(RepoProvider.DataColumns.ADDRESS, address);
-            if (fingerprint != null && fingerprint.length() > 0) {
+            if (!TextUtils.isEmpty(fingerprint)) {
                 values.put(RepoProvider.DataColumns.FINGERPRINT, fingerprint.toUpperCase(Locale.ENGLISH));
             }
             RepoProvider.Helper.insert(context, values);
@@ -689,14 +575,14 @@ public class ManageReposActivity extends ActionBarActivity {
         private void updateAndEnableExistingRepo(String url, String fingerprint) {
             if (fingerprint != null) {
                 fingerprint = fingerprint.trim();
-                if (fingerprint.length() == 0) {
+                if (TextUtils.isEmpty(fingerprint)) {
                     fingerprint = null;
                 } else {
                     fingerprint = fingerprint.toUpperCase(Locale.ENGLISH);
                 }
             }
 
-            Log.d(TAG, "Enabling existing repo: " + url);
+            Utils.debugLog(TAG, "Enabling existing repo: " + url);
             Repo repo = RepoProvider.Helper.findByAddress(context, url);
             ContentValues values = new ContentValues(2);
             values.put(RepoProvider.DataColumns.IN_USE, 1);
@@ -708,11 +594,11 @@ public class ManageReposActivity extends ActionBarActivity {
 
         /**
          * If started by an intent that expects a result (e.g. QR codes) then we
-         * will set a result and finish. Otherwise, we'll refresh the list of repos
+         * will set a result and finish. Otherwise, we'll updateViews the list of repos
          * to reflect the newly created repo.
          */
         private void finishedAddingRepo() {
-            changed = true;
+            UpdateService.updateNow(ManageReposActivity.this);
             if (addRepoDialog.isShowing()) {
                 addRepoDialog.dismiss();
             }
@@ -761,7 +647,7 @@ public class ManageReposActivity extends ActionBarActivity {
         @Override
         public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
             Uri uri = RepoProvider.allExceptSwapUri();
-            Log.i(TAG, "Creating repo loader '" + uri + "'.");
+            Utils.debugLog(TAG, "Creating repo loader '" + uri + "'.");
             final String[] projection = {
                     RepoProvider.DataColumns._ID,
                     RepoProvider.DataColumns.NAME,
@@ -785,7 +671,7 @@ public class ManageReposActivity extends ActionBarActivity {
         /**
          * NOTE: If somebody toggles a repo off then on again, it will have
          * removed all apps from the index when it was toggled off, so when it
-         * is toggled on again, then it will require a refresh. Previously, I
+         * is toggled on again, then it will require a updateViews. Previously, I
          * toyed with the idea of remembering whether they had toggled on or
          * off, and then only actually performing the function when the activity
          * stopped, but I think that will be problematic. What about when they
@@ -805,7 +691,7 @@ public class ManageReposActivity extends ActionBarActivity {
                 RepoProvider.Helper.update(getActivity(), repo, values);
 
                 if (isEnabled) {
-                    changed = true;
+                    UpdateService.updateNow(getActivity());
                 } else {
                     FDroidApp app = (FDroidApp) getActivity().getApplication();
                     RepoProvider.Helper.purgeApps(getActivity(), repo, app);
@@ -890,7 +776,7 @@ public class ManageReposActivity extends ActionBarActivity {
 
         public void editRepo(Repo repo) {
             Intent intent = new Intent(getActivity(), RepoDetailsActivity.class);
-            intent.putExtra(RepoDetailsFragment.ARG_REPO_ID, repo.getId());
+            intent.putExtra(RepoDetailsActivity.ARG_REPO_ID, repo.getId());
             startActivityForResult(intent, SHOW_REPO_DETAILS);
         }
 

@@ -19,7 +19,6 @@
 
 package org.fdroid.fdroid;
 
-import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.SearchManager;
 import android.bluetooth.BluetoothAdapter;
@@ -30,13 +29,11 @@ import android.content.pm.PackageInfo;
 import android.content.res.Configuration;
 import android.database.ContentObserver;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,18 +44,15 @@ import android.widget.Toast;
 import org.fdroid.fdroid.compat.TabManager;
 import org.fdroid.fdroid.data.AppProvider;
 import org.fdroid.fdroid.data.NewRepoConfig;
-import org.fdroid.fdroid.installer.InstallIntoSystemDialogActivity;
-import org.fdroid.fdroid.installer.Installer;
+import org.fdroid.fdroid.privileged.install.InstallPrivilegedDialogActivity;
 import org.fdroid.fdroid.views.AppListFragmentPagerAdapter;
 import org.fdroid.fdroid.views.ManageReposActivity;
-import org.fdroid.fdroid.views.swap.ConnectSwapActivity;
-import org.fdroid.fdroid.views.swap.SwapActivity;
+import org.fdroid.fdroid.views.swap.SwapWorkflowActivity;
 
 public class FDroid extends ActionBarActivity {
 
     private static final String TAG = "FDroid";
 
-    public static final int REQUEST_MANAGEREPOS = 0;
     public static final int REQUEST_PREFS = 1;
     public static final int REQUEST_ENABLE_BLUETOOTH = 2;
     public static final int REQUEST_SWAP = 3;
@@ -104,7 +98,11 @@ public class FDroid extends ActionBarActivity {
         Uri uri = AppProvider.getContentUri();
         getContentResolver().registerContentObserver(uri, true, new AppObserver());
 
-        InstallIntoSystemDialogActivity.firstTime(this);
+        InstallPrivilegedDialogActivity.firstTime(this);
+
+        if (UpdateService.isNetworkAvailableForUpdate(this)) {
+            UpdateService.updateNow(this);
+        }
     }
 
     @Override
@@ -187,12 +185,12 @@ public class FDroid extends ActionBarActivity {
         }
 
         Intent call = null;
-        if (appId != null && appId.length() > 0) {
-            Log.d(TAG, "FDroid launched via app link for '" + appId + "'");
+        if (!TextUtils.isEmpty(appId)) {
+            Utils.debugLog(TAG, "FDroid launched via app link for '" + appId + "'");
             call = new Intent(this, AppDetails.class);
             call.putExtra(AppDetails.EXTRA_APPID, appId);
-        } else if (query != null && query.length() > 0) {
-            Log.d(TAG, "FDroid launched via search link for '" + query + "'");
+        } else if (!TextUtils.isEmpty(query)) {
+            Utils.debugLog(TAG, "FDroid launched via search link for '" + query + "'");
             call = new Intent(this, SearchResults.class);
             call.setAction(Intent.ACTION_SEARCH);
             call.putExtra(SearchManager.QUERY, query);
@@ -212,7 +210,8 @@ public class FDroid extends ActionBarActivity {
             if (parser.isValidRepo()) {
                 intent.putExtra("handled", true);
                 if (parser.isFromSwap()) {
-                    Intent confirmIntent = new Intent(this, ConnectSwapActivity.class);
+                    Intent confirmIntent = new Intent(this, SwapWorkflowActivity.class);
+                    confirmIntent.putExtra(SwapWorkflowActivity.EXTRA_CONFIRM, true);
                     confirmIntent.setData(intent.getData());
                     startActivityForResult(confirmIntent, REQUEST_SWAP);
                 } else {
@@ -247,12 +246,11 @@ public class FDroid extends ActionBarActivity {
         switch (item.getItemId()) {
 
         case R.id.action_update_repo:
-            updateRepos();
+            UpdateService.updateNow(this);
             return true;
 
         case R.id.action_manage_repos:
-            Intent i = new Intent(this, ManageReposActivity.class);
-            startActivityForResult(i, REQUEST_MANAGEREPOS);
+            startActivity(new Intent(this, ManageReposActivity.class));
             return true;
 
         case R.id.action_settings:
@@ -261,7 +259,7 @@ public class FDroid extends ActionBarActivity {
             return true;
 
         case R.id.action_swap:
-            startActivity(new Intent(this, SwapActivity.class));
+            startActivity(new Intent(this, SwapWorkflowActivity.class));
             return true;
 
         case R.id.action_search:
@@ -280,53 +278,20 @@ public class FDroid extends ActionBarActivity {
             return true;
 
         case R.id.action_about:
-            View view;
-            if (Build.VERSION.SDK_INT >= 11) {
-                LayoutInflater li = LayoutInflater.from(this);
-                view = li.inflate(R.layout.about, null);
-            } else {
-                view = View.inflate(
-                        new ContextThemeWrapper(this, R.style.AboutDialogLight),
-                        R.layout.about, null);
-            }
+            View view = LayoutInflater.from(this).inflate(R.layout.about, null);
 
-            // Fill in the version...
-            try {
-                PackageInfo pi = getPackageManager()
-                        .getPackageInfo(getApplicationContext()
-                                .getPackageName(), 0);
-                ((TextView) view.findViewById(R.id.version))
-                        .setText(pi.versionName);
-            } catch (Exception ignored) {
+            String versionName = Utils.getVersionName(this);
+            if (versionName == null) {
+                versionName = getString(R.string.unknown);
             }
+            ((TextView) view.findViewById(R.id.version)).setText(versionName);
 
-            AlertDialog.Builder builder;
-            if (Build.VERSION.SDK_INT >= 11) {
-                builder = new AlertDialog.Builder(this).setView(view);
-            } else {
-                builder = new AlertDialog.Builder(
-                        new ContextThemeWrapper(
-                                this, R.style.AboutDialogLight)
-                        ).setView(view);
-            }
-            final AlertDialog alrt = builder.create();
-            alrt.setIcon(R.drawable.ic_launcher);
-            alrt.setTitle(getString(R.string.about_title));
-            alrt.setButton(AlertDialog.BUTTON_NEUTRAL,
-                    getString(R.string.about_website),
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog,
-                                int whichButton) {
-                            Uri uri = Uri.parse("https://f-droid.org");
-                            startActivity(new Intent(Intent.ACTION_VIEW, uri));
-                        }
-                    });
+            AlertDialog alrt = new AlertDialog.Builder(this).setView(view).create();
+            alrt.setTitle(R.string.about_title);
             alrt.setButton(AlertDialog.BUTTON_NEGATIVE, getString(R.string.ok),
                     new DialogInterface.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog,
-                                int whichButton) {
+                        public void onClick(DialogInterface dialog, int whichButton) {
                         }
                     });
             alrt.show();
@@ -339,32 +304,6 @@ public class FDroid extends ActionBarActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         switch (requestCode) {
-        case REQUEST_MANAGEREPOS:
-            if (data != null && data.hasExtra(ManageReposActivity.REQUEST_UPDATE)) {
-                AlertDialog.Builder ask_alrt = new AlertDialog.Builder(this);
-                ask_alrt.setTitle(getString(R.string.repo_update_title));
-                ask_alrt.setIcon(android.R.drawable.ic_menu_rotate);
-                ask_alrt.setMessage(getString(R.string.repo_alrt));
-                ask_alrt.setPositiveButton(getString(R.string.yes),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog,
-                                    int whichButton) {
-                                updateRepos();
-                            }
-                        });
-                ask_alrt.setNegativeButton(getString(R.string.no),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog,
-                                    int whichButton) {
-                                // do nothing
-                            }
-                        });
-                AlertDialog alert = ask_alrt.create();
-                alert.show();
-            }
-            break;
         case REQUEST_PREFS:
             // The automatic update settings may have changed, so reschedule (or
             // unschedule) the service accordingly. It's cheap, so no need to
@@ -397,13 +336,6 @@ public class FDroid extends ActionBarActivity {
                 getTabManager().selectTab(position);
             }
         });
-    }
-
-    // Force a repo update now. A progress dialog is shown and the UpdateService
-    // is told to do the update, which will result in the database changing. The
-    // UpdateReceiver class should get told when this is finished.
-    public void updateRepos() {
-        UpdateService.updateNow(this);
     }
 
     private TabManager getTabManager() {

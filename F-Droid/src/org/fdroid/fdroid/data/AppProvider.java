@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.util.Log;
 
@@ -98,8 +99,9 @@ public class AppProvider extends FDroidProvider {
                     cursor.moveToFirst();
                     while (!cursor.isAfterLast()) {
                         final String categoriesString = cursor.getString(0);
-                        if (categoriesString != null) {
-                            for (final String s : Utils.CommaSeparatedList.make(categoriesString)) {
+                        Utils.CommaSeparatedList categoriesList = Utils.CommaSeparatedList.make(categoriesString);
+                        if (categoriesList != null) {
+                            for (final String s : categoriesList) {
                                 categorySet.add(s);
                             }
                         }
@@ -152,6 +154,22 @@ public class AppProvider extends FDroidProvider {
 
     }
 
+    /**
+     * Class that only exists to call private methods in the {@link AppProvider} without having
+     * to go via a Context/ContentResolver. The reason is that if the {@link DBHelper} class
+     * was to try and use its getContext().getContentResolver() in order to access the app
+     * provider, then the AppProvider will end up creating a new instance of a writeable
+     * SQLiteDatabase. This causes problems because the {@link DBHelper} still has its reference
+     * open and locks certain tables.
+     */
+    static final class UpgradeHelper {
+
+        public static void updateIconUrls(Context context, SQLiteDatabase db) {
+            AppProvider.updateIconUrls(context, db);
+        }
+
+    }
+
     public interface DataColumns {
 
         String _ID = "rowid as _id"; // Required for CursorLoaders
@@ -195,7 +213,7 @@ public class AppProvider extends FDroidProvider {
         }
 
         String[] ALL = {
-                IS_COMPATIBLE, APP_ID, NAME, SUMMARY, ICON, DESCRIPTION,
+                _ID, IS_COMPATIBLE, APP_ID, NAME, SUMMARY, ICON, DESCRIPTION,
                 LICENSE, WEB_URL, TRACKER_URL, SOURCE_URL, CHANGELOG_URL, DONATE_URL,
                 BITCOIN_ADDR, LITECOIN_ADDR, DOGECOIN_ADDR, FLATTR_ID,
                 UPSTREAM_VERSION, UPSTREAM_VERSION_CODE, ADDED, LAST_UPDATED,
@@ -398,6 +416,7 @@ public class AppProvider extends FDroidProvider {
     private static final String PATH_INSTALLED = "installed";
     private static final String PATH_CAN_UPDATE = "canUpdate";
     private static final String PATH_SEARCH = "search";
+    private static final String PATH_SEARCH_REPO = "searchRepo";
     private static final String PATH_NO_APKS = "noApks";
     private static final String PATH_APPS = "apps";
     private static final String PATH_RECENTLY_UPDATED = "recentlyUpdated";
@@ -418,6 +437,7 @@ public class AppProvider extends FDroidProvider {
     private static final int IGNORED          = CATEGORY + 1;
     private static final int CALC_APP_DETAILS_FROM_INDEX = IGNORED + 1;
     private static final int REPO             = CALC_APP_DETAILS_FROM_INDEX + 1;
+    private static final int SEARCH_REPO      = REPO + 1;
 
     static {
         matcher.addURI(getAuthority(), null, CODE_LIST);
@@ -427,6 +447,7 @@ public class AppProvider extends FDroidProvider {
         matcher.addURI(getAuthority(), PATH_NEWLY_ADDED, NEWLY_ADDED);
         matcher.addURI(getAuthority(), PATH_CATEGORY + "/*", CATEGORY);
         matcher.addURI(getAuthority(), PATH_SEARCH + "/*", SEARCH);
+        matcher.addURI(getAuthority(), PATH_SEARCH_REPO + "/*/*", SEARCH_REPO);
         matcher.addURI(getAuthority(), PATH_REPO + "/#", REPO);
         matcher.addURI(getAuthority(), PATH_CAN_UPDATE, CAN_UPDATE);
         matcher.addURI(getAuthority(), PATH_INSTALLED, INSTALLED);
@@ -506,6 +527,14 @@ public class AppProvider extends FDroidProvider {
     public static Uri getSearchUri(String query) {
         return getContentUri().buildUpon()
             .appendPath(PATH_SEARCH)
+            .appendPath(query)
+            .build();
+    }
+
+    public static Uri getSearchUri(Repo repo, String query) {
+        return getContentUri().buildUpon()
+            .appendPath(PATH_SEARCH_REPO)
+            .appendPath(repo.id + "")
             .appendPath(query)
             .build();
     }
@@ -648,7 +677,6 @@ public class AppProvider extends FDroidProvider {
 
     @Override
     public Cursor query(Uri uri, String[] projection, String customSelection, String[] selectionArgs, String sortOrder) {
-        Query query = new Query();
         AppQuerySelection selection = new AppQuerySelection(customSelection, selectionArgs);
 
         // Queries which are for the main list of apps should not include swap apps.
@@ -680,6 +708,11 @@ public class AppProvider extends FDroidProvider {
         case SEARCH:
             selection = selection.add(querySearch(uri.getLastPathSegment()));
             includeSwap = false;
+            break;
+
+        case SEARCH_REPO:
+            selection = selection.add(querySearch(uri.getPathSegments().get(2)));
+            selection = selection.add(queryRepo(Long.parseLong(uri.getPathSegments().get(1))));
             break;
 
         case NO_APKS:
@@ -723,6 +756,8 @@ public class AppProvider extends FDroidProvider {
         if (AppProvider.DataColumns.NAME.equals(sortOrder)) {
             sortOrder = " lower( fdroid_app." + sortOrder + " ) ";
         }
+
+        Query query = new Query();
 
         query.addSelection(selection);
         query.addFields(projection); // TODO: Make the order of addFields/addSelection not dependent on each other...
@@ -790,7 +825,7 @@ public class AppProvider extends FDroidProvider {
         updateCompatibleFlags();
         updateSuggestedFromLatest();
         updateSuggestedFromUpstream();
-        updateIconUrls();
+        updateIconUrls(getContext(), write());
     }
 
     /**
@@ -828,11 +863,13 @@ public class AppProvider extends FDroidProvider {
      */
     private void updateSuggestedFromUpstream() {
 
-        Log.d(TAG, "Calculating suggested versions for all apps which specify an upstream version code.");
+        Utils.debugLog(TAG, "Calculating suggested versions for all apps which specify an upstream version code.");
 
         final String apk = DBHelper.TABLE_APK;
         final String app = DBHelper.TABLE_APP;
 
+        final boolean unstableUpdates = Preferences.get().getUnstableUpdates();
+        String restrictToStable = unstableUpdates ? "" : ( apk + ".vercode <= " + app + ".upstreamVercode AND " );
         String updateSql =
             "UPDATE " + app +
             " SET suggestedVercode = ( " +
@@ -840,7 +877,7 @@ public class AppProvider extends FDroidProvider {
                 " FROM " + apk +
                 " WHERE " +
                     app + ".id = " + apk + ".id AND " +
-                    apk + ".vercode <= " + app + ".upstreamVercode AND " +
+                    restrictToStable +
                     " ( " + app + ".compatible = 0 OR " + apk + ".compatible = 1 ) ) " +
             " WHERE upstreamVercode > 0 ";
 
@@ -860,7 +897,7 @@ public class AppProvider extends FDroidProvider {
      */
     private void updateCompatibleFlags() {
 
-        Log.d(TAG, "Calculating whether apps are compatible, based on whether any of their apks are compatible");
+        Utils.debugLog(TAG, "Calculating whether apps are compatible, based on whether any of their apks are compatible");
 
         final String apk = DBHelper.TABLE_APK;
         final String app = DBHelper.TABLE_APP;
@@ -904,7 +941,7 @@ public class AppProvider extends FDroidProvider {
      */
     private void updateSuggestedFromLatest() {
 
-        Log.d(TAG, "Calculating suggested versions for all apps which don't specify an upstream version code.");
+        Utils.debugLog(TAG, "Calculating suggested versions for all apps which don't specify an upstream version code.");
 
         final String apk = DBHelper.TABLE_APK;
         final String app = DBHelper.TABLE_APP;
@@ -923,21 +960,23 @@ public class AppProvider extends FDroidProvider {
     }
 
     /**
-     * Updates URLs to icons
+     * Made static so that the {@link org.fdroid.fdroid.data.AppProvider.UpgradeHelper} can access
+     * it without instantiating an {@link AppProvider}. This is also the reason it needs to accept
+     * the context and database as arguments.
      */
-    public void updateIconUrls() {
-        final String iconsDir = Utils.getIconsDir(getContext(), 1.0);
-        final String iconsDirLarge = Utils.getIconsDir(getContext(), 1.5);
+    private static void updateIconUrls(Context context, SQLiteDatabase db) {
+        final String iconsDir = Utils.getIconsDir(context, 1.0);
+        final String iconsDirLarge = Utils.getIconsDir(context, 1.5);
         String repoVersion = Integer.toString(Repo.VERSION_DENSITY_SPECIFIC_ICONS);
-        Log.d(TAG, "Updating icon paths for apps belonging to repos with version >= "
+        Utils.debugLog(TAG, "Updating icon paths for apps belonging to repos with version >= "
                 + repoVersion);
-        Log.d(TAG, "Using icons dir '" + iconsDir + "'");
-        Log.d(TAG, "Using large icons dir '" + iconsDirLarge + "'");
+        Utils.debugLog(TAG, "Using icons dir '" + iconsDir + "'");
+        Utils.debugLog(TAG, "Using large icons dir '" + iconsDirLarge + "'");
         String query = getIconUpdateQuery();
         final String[] params = {
             repoVersion, iconsDir, Utils.FALLBACK_ICONS_DIR,
             repoVersion, iconsDirLarge, Utils.FALLBACK_ICONS_DIR };
-        write().execSQL(query, params);
+        db.execSQL(query, params);
     }
 
     /**
@@ -945,7 +984,7 @@ public class AppProvider extends FDroidProvider {
      *  1) The repo version that introduced density specific icons
      *  2) The dir to density specific icons for the current device.
      */
-    private String getIconUpdateQuery() {
+    private static String getIconUpdateQuery() {
 
         final String apk = DBHelper.TABLE_APK;
         final String app = DBHelper.TABLE_APP;

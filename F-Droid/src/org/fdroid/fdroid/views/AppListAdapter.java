@@ -2,7 +2,6 @@ package org.fdroid.fdroid.views;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +12,10 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.R;
+import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.App;
 
 abstract public class AppListAdapter extends CursorAdapter {
@@ -50,15 +48,7 @@ abstract public class AppListAdapter extends CursorAdapter {
         mContext = context;
         mInflater = (LayoutInflater) mContext.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
-        displayImageOptions = new DisplayImageOptions.Builder()
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .imageScaleType(ImageScaleType.NONE)
-                .showImageOnLoading(R.drawable.ic_repo_app_default)
-                .showImageForEmptyUri(R.drawable.ic_repo_app_default)
-                .displayer(new FadeInBitmapDisplayer(200, true, true, false))
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .build();
+        displayImageOptions = Utils.getImageLoadingOptions().build();
 
     }
 
@@ -137,13 +127,12 @@ abstract public class AppListAdapter extends CursorAdapter {
         }
 
         final String installedVersionString = app.installedVersionName;
-        int installedVersionCode = app.installedVersionCode;
 
         if (app.canAndWantToUpdate() && showStatusUpdate()) {
             return installedVersionString + " → " + app.getSuggestedVersion();
         }
 
-        if (installedVersionCode > 0 && showStatusInstalled()) {
+        if (app.installedVersionCode > 0 && showStatusInstalled()) {
             return installedVersionString + " ✔";
         }
 

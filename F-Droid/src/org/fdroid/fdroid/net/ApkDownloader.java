@@ -21,8 +21,10 @@
 package org.fdroid.fdroid.net;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import org.fdroid.fdroid.Hasher;
@@ -31,6 +33,7 @@ import org.fdroid.fdroid.ProgressListener;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.compat.FileCompat;
 import org.fdroid.fdroid.data.Apk;
+import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.data.SanitizedFile;
 
 import java.io.File;
@@ -42,7 +45,7 @@ import java.security.NoSuchAlgorithmException;
  * If the file has previously been downloaded, it will make use of that
  * instead, without going to the network to download a new one.
  */
-public class ApkDownloader implements AsyncDownloadWrapper.Listener {
+public class ApkDownloader implements AsyncDownloader.Listener {
 
     private static final String TAG = "ApkDownloader";
 
@@ -50,9 +53,12 @@ public class ApkDownloader implements AsyncDownloadWrapper.Listener {
     public static final String EVENT_APK_DOWNLOAD_CANCELLED = "apkDownloadCancelled";
     public static final String EVENT_ERROR = "apkDownloadError";
 
+    public static final String ACTION_STATUS = "apkDownloadStatus";
+    public static final String EXTRA_TYPE = "apkDownloadStatusType";
+    public static final String EXTRA_URL = "apkDownloadUrl";
+
     public static final int ERROR_HASH_MISMATCH = 101;
     public static final int ERROR_DOWNLOAD_FAILED = 102;
-    public static final int ERROR_UNKNOWN = 103;
 
     private static final String EVENT_SOURCE_ID = "sourceId";
     private static long downloadIdCounter = 0;
@@ -62,15 +68,15 @@ public class ApkDownloader implements AsyncDownloadWrapper.Listener {
      */
     public static final String EVENT_DATA_ERROR_TYPE = "apkDownloadErrorType";
 
+    @NonNull private final App app;
     @NonNull private final Apk curApk;
+    @NonNull private final Context context;
     @NonNull private final String repoAddress;
     @NonNull private final SanitizedFile localFile;
     @NonNull private final SanitizedFile potentiallyCachedFile;
 
     private ProgressListener listener;
-    private AsyncDownloadWrapper dlWrapper = null;
-    private int progress  = 0;
-    private int totalSize = 0;
+    private AsyncDownloader dlWrapper = null;
     private boolean isComplete = false;
 
     private final long id = ++downloadIdCounter;
@@ -83,7 +89,9 @@ public class ApkDownloader implements AsyncDownloadWrapper.Listener {
         setProgressListener(null);
     }
 
-    public ApkDownloader(@NonNull final Context context, @NonNull final Apk apk, @NonNull final String repoAddress) {
+    public ApkDownloader(@NonNull final Context context, @NonNull final App app, @NonNull final Apk apk, @NonNull final String repoAddress) {
+        this.context = context;
+        this.app = app;
         curApk = apk;
         this.repoAddress = repoAddress;
         localFile = new SanitizedFile(Utils.getApkDownloadDir(context), apk.apkName);
@@ -104,10 +112,6 @@ public class ApkDownloader implements AsyncDownloadWrapper.Listener {
      */
     public boolean isEventFromThis(Event event) {
         return event.getData().containsKey(EVENT_SOURCE_ID) && event.getData().getLong(EVENT_SOURCE_ID) == id;
-    }
-
-    public String getRemoteAddress() {
-         return repoAddress + "/" + curApk.apkName.replace(" ", "%20");
     }
 
     private Hasher createHasher(File apkFile) {
@@ -138,10 +142,10 @@ public class ApkDownloader implements AsyncDownloadWrapper.Listener {
     private boolean verifyOrDelete(@NonNull final File apkFile) {
         if (apkFile.exists()) {
             if (hashMatches(apkFile)) {
-                Log.d(TAG, "Using cached apk at " + apkFile);
+                Utils.debugLog(TAG, "Using cached apk at " + apkFile);
                 return true;
             }
-            Log.d(TAG, "Not using cached apk at " + apkFile + "(hash doesn't match, will delete file)");
+            Utils.debugLog(TAG, "Not using cached apk at " + apkFile + "(hash doesn't match, will delete file)");
             delete(apkFile);
         }
         return false;
@@ -182,20 +186,18 @@ public class ApkDownloader implements AsyncDownloadWrapper.Listener {
         // Can we use the cached version?
         if (verifyOrDelete(potentiallyCachedFile)) {
             delete(localFile);
-            Utils.copy(potentiallyCachedFile, localFile);
+            Utils.copyQuietly(potentiallyCachedFile, localFile);
             prepareApkFileAndSendCompleteMessage();
             return false;
         }
 
-        String remoteAddress = getRemoteAddress();
-        Log.d(TAG, "Downloading apk from " + remoteAddress + " to " + localFile);
+        String remoteAddress = Utils.getApkUrl(repoAddress, curApk);
+        Utils.debugLog(TAG, "Downloading apk from " + remoteAddress + " to " + localFile);
 
         try {
-            Downloader downloader = DownloaderFactory.create(remoteAddress, localFile);
-            dlWrapper = new AsyncDownloadWrapper(downloader, this);
+            dlWrapper = DownloaderFactory.createAsync(context, remoteAddress, localFile, app.name + " " + curApk.version, curApk.id, this);
             dlWrapper.download();
             return true;
-
         } catch (IOException e) {
             onErrorDownloading(e.getLocalizedMessage());
         }
@@ -213,33 +215,20 @@ public class ApkDownloader implements AsyncDownloadWrapper.Listener {
         sendProgressEvent(new Event(EVENT_ERROR, data));
     }
 
+    // TODO: Completely remove progress listener, only use broadcasts...
     private void sendProgressEvent(Event event) {
-        switch (event.type) {
-        case Downloader.EVENT_PROGRESS:
-            // Keep a copy of these ourselves, so people can interrogate us for the
-            // info (in addition to receiving events with the info).
-            totalSize = event.total;
-            progress  = event.progress;
-            break;
-        }
 
         event.getData().putLong(EVENT_SOURCE_ID, id);
 
         if (listener != null) {
             listener.onProgress(event);
         }
-    }
 
-    @Override
-    public void onReceiveTotalDownloadSize(int size) {
-        // Do nothing...
-        // Rather, we will obtain the total download size from the progress events
-        // when they start coming through.
-    }
-
-    @Override
-    public void onReceiveCacheTag(String cacheTag) {
-        // Do nothing...
+        Intent intent = new Intent(ACTION_STATUS);
+        intent.putExtras(event.getData());
+        intent.putExtra(EXTRA_TYPE, event.type);
+        intent.putExtra(EXTRA_URL, Utils.getApkUrl(repoAddress, curApk));
+        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
     }
 
     @Override
@@ -251,8 +240,8 @@ public class ApkDownloader implements AsyncDownloadWrapper.Listener {
 
     private void cacheIfRequired() {
         if (Preferences.get().shouldCacheApks()) {
-            Log.i(TAG, "Copying .apk file to cache at " + potentiallyCachedFile.getAbsolutePath());
-            Utils.copy(localFile, potentiallyCachedFile);
+            Utils.debugLog(TAG, "Copying .apk file to cache at " + potentiallyCachedFile.getAbsolutePath());
+            Utils.copyQuietly(localFile, potentiallyCachedFile);
         }
     }
 
@@ -266,7 +255,7 @@ public class ApkDownloader implements AsyncDownloadWrapper.Listener {
 
         cacheIfRequired();
 
-        Log.d(TAG, "Download finished: " + localFile);
+        Utils.debugLog(TAG, "Download finished: " + localFile);
         prepareApkFileAndSendCompleteMessage();
     }
 
@@ -282,17 +271,19 @@ public class ApkDownloader implements AsyncDownloadWrapper.Listener {
 
     /**
      * Attempts to cancel the download (if in progress) and also removes the progress
-     * listener (to prevent
+     * listener
+     *
+     * @param userRequested - true if the user requested the cancel (via button click), otherwise false.
      */
-    public void cancel() {
+    public void cancel(boolean userRequested) {
         if (dlWrapper != null) {
-            dlWrapper.attemptCancel();
+            dlWrapper.attemptCancel(userRequested);
         }
     }
 
     public Apk getApk() { return curApk; }
 
-    public int getProgress() { return progress; }
+    public int getBytesRead() { return dlWrapper != null ? dlWrapper.getBytesRead() : 0; }
 
-    public int getTotalSize() { return totalSize; }
+    public int getTotalBytes() { return dlWrapper != null ? dlWrapper.getTotalBytes() : 0; }
 }

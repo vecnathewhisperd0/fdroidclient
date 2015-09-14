@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2010-12  Ciaran Gultnieks, ciaran@ciarang.com
+ * Copyright (C) 2013-15 Daniel Martí <mvdan@mvdan.cc>
  * Copyright (C) 2013 Stefan Völkel, bd@bc-bd.org
  * Copyright (C) 2015 Nico Alt, nicoalt@posteo.org
  *
@@ -21,33 +22,37 @@
 package org.fdroid.fdroid;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.content.ActivityNotFoundException;
+import android.content.BroadcastReceiver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.database.ContentObserver;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.NavUtils;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.text.Layout;
 import android.text.Selection;
 import android.text.Spannable;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
@@ -62,9 +67,11 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -85,10 +92,12 @@ import org.fdroid.fdroid.installer.Installer;
 import org.fdroid.fdroid.installer.Installer.AndroidNotCompatibleException;
 import org.fdroid.fdroid.installer.Installer.InstallerCallback;
 import org.fdroid.fdroid.net.ApkDownloader;
+import org.fdroid.fdroid.net.AsyncDownloaderFromAndroid;
 import org.fdroid.fdroid.net.Downloader;
 
 import java.io.File;
 import java.security.NoSuchAlgorithmException;
+import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.List;
 
@@ -112,7 +121,7 @@ interface AppInstallListener {
     void removeApk(String packageName);
 }
 
-public class AppDetails extends ActionBarActivity implements ProgressListener, AppDetailsData, AppInstallListener {
+public class AppDetails extends AppCompatActivity implements ProgressListener, AppDetailsData, AppInstallListener {
 
     private static final String TAG = "AppDetails";
 
@@ -123,7 +132,6 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
 
     private FDroidApp fdroidApp;
     private ApkListAdapter adapter;
-    private ProgressDialog progressDialog;
 
     private static class ViewHolder {
         TextView version;
@@ -190,12 +198,12 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
                 Log.w(TAG, "Application " + app.id + " is not installed anymore");
                 return getString(R.string.not_inst);
             }
-            if (installerPkgName != null && installerPkgName.length() > 0) {
-                final String installerLabel = InstalledAppProvider
-                    .getApplicationLabel(mctx, installerPkgName);
-                return getString(R.string.inst_known_source, installerLabel);
+            if (TextUtils.isEmpty(installerPkgName)) {
+                return getString(R.string.inst_unknown_source);
             }
-            return getString(R.string.inst_unknown_source);
+            final String installerLabel = InstalledAppProvider
+                .getApplicationLabel(mctx, installerPkgName);
+            return getString(R.string.inst_known_source, installerLabel);
         }
 
         @Override
@@ -315,6 +323,7 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
     private App app;
     private PackageManager mPm;
     private ApkDownloader downloadHandler;
+    private LocalBroadcastManager localBroadcastManager;
 
     private boolean startingIgnoreAll;
     private int startingIgnoreThis;
@@ -322,11 +331,14 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
     private final Context mctx = this;
     private Installer installer;
 
+
+    private AppDetailsHeaderFragment mHeaderFragment;
+
     /**
      * Stores relevant data that we want to keep track of when destroying the activity
      * with the expectation of it being recreated straight away (e.g. after an
      * orientation change). One of the major things is that we want the download thread
-     * to stay active, but for it not to trigger any UI stuff (e.g. progress dialogs)
+     * to stay active, but for it not to trigger any UI stuff (e.g. progress bar)
      * between the activity being destroyed and recreated.
      */
     private static class ConfigurationChangeHelper {
@@ -354,6 +366,7 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
             Log.e(TAG, "No application ID found in the intent!");
             return null;
         }
+
         return i.getStringExtra(EXTRA_APPID);
     }
 
@@ -380,10 +393,10 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
         // Get the preferences we're going to use in this Activity...
         ConfigurationChangeHelper previousData = (ConfigurationChangeHelper)getLastCustomNonConfigurationInstance();
         if (previousData != null) {
-            Log.d(TAG, "Recreating view after configuration change.");
+            Utils.debugLog(TAG, "Recreating view after configuration change.");
             downloadHandler = previousData.downloader;
             if (downloadHandler != null) {
-                Log.d(TAG, "Download was in progress before the configuration change, so we will start to listen to its events again.");
+                Utils.debugLog(TAG, "Download was in progress before the configuration change, so we will start to listen to its events again.");
             }
             app = previousData.app;
             setApp(app);
@@ -417,12 +430,18 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
             listFragment.removeSummaryHeader();
         }
 
-        // Spinner seems to default to visible on Android 4.0.3 and 4.0.4
-        // https://gitlab.com/fdroid/fdroidclient/issues/75
-        // Can't put this in onResume(), because that is called on return from asking
-        // the user permission to use su (in which case we still want to show the
-        // progress indicator after returning from that prompt).
-        setSupportProgressBarIndeterminateVisibility(false);
+        localBroadcastManager = LocalBroadcastManager.getInstance(this);
+
+        // Check if a download is running for this app
+        if (AsyncDownloaderFromAndroid.isDownloading(this, app.id) >= 0) {
+            // call install() to re-setup the listeners and downloaders
+            // the AsyncDownloader will not restart the download since the download is running,
+            // and thus the version we pass to install() is not important
+            refreshHeader();
+            refreshApkList();
+            final Apk apkToInstall = ApkProvider.Helper.find(this, app.id, app.suggestedVercode);
+            install(apkToInstall);
+        }
 
     }
 
@@ -442,38 +461,35 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        if (downloadHandler != null) {
-            if (downloadHandler.isComplete()) {
-                downloadCompleteInstallApk();
-            } else {
-                downloadHandler.setProgressListener(this);
-
-                // Show the progress dialog, if for no other reason than to prevent them attempting
-                // to download again (i.e. we force them to touch 'cancel' before they can access
-                // the rest of the activity).
-                Log.d(TAG, "Showing dialog to user after resuming app details view, because a download was previously in progress");
-                updateProgressDialog();
-            }
-        }
-    }
-
-    @Override
     protected void onResumeFragments() {
         super.onResumeFragments();
         refreshApkList();
         refreshHeader();
         supportInvalidateOptionsMenu();
+
+        if (downloadHandler != null) {
+            if (downloadHandler.isComplete()) {
+                downloadCompleteInstallApk();
+            } else {
+                localBroadcastManager.registerReceiver(downloaderProgressReceiver,
+                        new IntentFilter(Downloader.LOCAL_ACTION_PROGRESS));
+                downloadHandler.setProgressListener(this);
+
+                if (downloadHandler.getTotalBytes() == 0)
+                    mHeaderFragment.startProgress();
+                else
+                    mHeaderFragment.updateProgress(downloadHandler.getBytesRead(), downloadHandler.getTotalBytes());
+            }
+        }
     }
 
     /**
-     * Remove progress listener, suppress progress dialog, set downloadHandler to null.
+     * Remove progress listener, suppress progress bar, set downloadHandler to null.
      */
     private void cleanUpFinishedDownload() {
         if (downloadHandler != null) {
             downloadHandler.removeProgressListener();
-            removeProgressDialog();
+            mHeaderFragment.removeProgress();
             downloadHandler = null;
         }
     }
@@ -484,7 +500,7 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
      */
     private void downloadCompleteInstallApk() {
         if (downloadHandler != null) {
-            installApk(downloadHandler.localFile(), downloadHandler.getApk().id);
+            installApk(downloadHandler.localFile());
             cleanUpFinishedDownload();
         }
     }
@@ -499,16 +515,26 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
         super.onPause();
         if (app != null && (app.ignoreAllUpdates != startingIgnoreAll
                 || app.ignoreThisUpdate != startingIgnoreThis)) {
-            Log.d(TAG, "Updating 'ignore updates', as it has changed since we started the activity...");
+            Utils.debugLog(TAG, "Updating 'ignore updates', as it has changed since we started the activity...");
             setIgnoreUpdates(app.id, app.ignoreAllUpdates, app.ignoreThisUpdate);
         }
 
+        localBroadcastManager.unregisterReceiver(downloaderProgressReceiver);
         if (downloadHandler != null) {
             downloadHandler.removeProgressListener();
         }
 
-        removeProgressDialog();
+        mHeaderFragment.removeProgress();
     }
+
+    private final BroadcastReceiver downloaderProgressReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (mHeaderFragment != null)
+                mHeaderFragment.updateProgress(intent.getIntExtra(Downloader.EXTRA_BYTES_READ, -1),
+                    intent.getIntExtra(Downloader.EXTRA_TOTAL_BYTES, -1));
+        }
+    };
 
     private void onAppChanged() {
         if (!reset(app.id)) {
@@ -544,7 +570,7 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
     protected void onDestroy() {
         if (downloadHandler != null) {
             if (!inProcessOfChangingConfiguration) {
-                downloadHandler.cancel();
+                downloadHandler.cancel(false);
                 cleanUpFinishedDownload();
             }
         }
@@ -552,22 +578,15 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
         super.onDestroy();
     }
 
-    private void removeProgressDialog() {
-        if (progressDialog != null) {
-            progressDialog.dismiss();
-            progressDialog = null;
-        }
-    }
-
     // Reset the display and list contents. Used when entering the activity, and
     // also when something has been installed/uninstalled.
     // Return true if the app was found, false otherwise.
     private boolean reset(String appId) {
 
-        Log.d(TAG, "Getting application details for " + appId);
+        Utils.debugLog(TAG, "Getting application details for " + appId);
         App newApp = null;
 
-        if (appId != null && appId.length() > 0) {
+        if (!TextUtils.isEmpty(appId)) {
             newApp = AppProvider.Helper.findById(getContentResolver(), appId);
         }
 
@@ -583,7 +602,7 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
     private void setApp(App newApp) {
 
         if (newApp == null) {
-            Toast.makeText(this, getString(R.string.no_such_app), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.no_such_app, Toast.LENGTH_LONG).show();
             finish();
             return;
         }
@@ -618,9 +637,9 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
     }
 
     private void refreshHeader() {
-        AppDetailsHeaderFragment headerFragment = (AppDetailsHeaderFragment)
+        mHeaderFragment = (AppDetailsHeaderFragment)
                 getSupportFragmentManager().findFragmentById(R.id.header);
-        headerFragment.refresh();
+        mHeaderFragment.updateViews();
     }
 
     @Override
@@ -632,14 +651,14 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
 
         MenuItemCompat.setShowAsAction(menu.add(
                         Menu.NONE, SHARE, 1, R.string.menu_share)
-                        .setIcon(android.R.drawable.ic_menu_share),
+                        .setIcon(R.drawable.ic_share_white),
                 MenuItemCompat.SHOW_AS_ACTION_IF_ROOM |
                         MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
 
         if (app.isInstalled()) {
             MenuItemCompat.setShowAsAction(menu.add(
                             Menu.NONE, UNINSTALL, 1, R.string.menu_uninstall)
-                            .setIcon(android.R.drawable.ic_menu_delete),
+                            .setIcon(R.drawable.ic_delete_white),
                     MenuItemCompat.SHOW_AS_ACTION_IF_ROOM |
                             MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
         }
@@ -647,19 +666,19 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
         if (mPm.getLaunchIntentForPackage(app.id) != null && app.canAndWantToUpdate()) {
             MenuItemCompat.setShowAsAction(menu.add(
                             Menu.NONE, LAUNCH, 1, R.string.menu_launch)
-                            .setIcon(android.R.drawable.ic_media_play),
+                            .setIcon(R.drawable.ic_play_arrow_white),
                     MenuItemCompat.SHOW_AS_ACTION_ALWAYS |
                             MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
         }
 
         menu.add(Menu.NONE, IGNOREALL, 2, R.string.menu_ignore_all)
-                    .setIcon(android.R.drawable.ic_menu_close_clear_cancel)
+                    .setIcon(R.drawable.ic_do_not_disturb_white)
                     .setCheckable(true)
                     .setChecked(app.ignoreAllUpdates);
 
         if (app.hasUpdates()) {
             menu.add(Menu.NONE, IGNORETHIS, 2, R.string.menu_ignore_this)
-                    .setIcon(android.R.drawable.ic_menu_close_clear_cancel)
+                    .setIcon(R.drawable.ic_do_not_disturb_white)
                     .setCheckable(true)
                     .setChecked(app.ignoreThisUpdate >= app.suggestedVercode);
         }
@@ -667,7 +686,7 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
         // Ignore on devices without Bluetooth
         if (app.isInstalled() && fdroidApp.bluetoothAdapter != null) {
             menu.add(Menu.NONE, SEND_VIA_BLUETOOTH, 3, R.string.send_via_bluetooth)
-                    .setIcon(android.R.drawable.stat_sys_data_bluetooth);
+                    .setIcon(R.drawable.ic_bluetooth_white);
         }
         return true;
     }
@@ -724,8 +743,8 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
         }
 
         @Override
-        public boolean onTouchEvent(TextView widget, Spannable buffer,
-                MotionEvent event) {
+        public boolean onTouchEvent(@NonNull TextView widget, @NonNull Spannable buffer,
+                @NonNull MotionEvent event) {
             try {
                 return super.onTouchEvent(widget, buffer, event);
             } catch (ActivityNotFoundException ex) {
@@ -804,17 +823,17 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
     // Install the version of this app denoted by 'app.curApk'.
     @Override
     public void install(final Apk apk) {
-        final String[] projection = { RepoProvider.DataColumns.ADDRESS };
-        Repo repo = RepoProvider.Helper.findById(this, apk.repo, projection);
-        if (repo == null || repo.address == null) {
+        // Ignore call if another download is running.
+        if (downloadHandler != null && !downloadHandler.isComplete())
             return;
-        }
-        final String repoaddress = repo.address;
+
+        final String repoaddress = getRepoAddress(apk);
+        if (repoaddress == null) return;
 
         if (!apk.compatible) {
             AlertDialog.Builder ask_alrt = new AlertDialog.Builder(this);
-            ask_alrt.setMessage(getString(R.string.installIncompatible));
-            ask_alrt.setPositiveButton(getString(R.string.yes),
+            ask_alrt.setMessage(R.string.installIncompatible);
+            ask_alrt.setPositiveButton(R.string.yes,
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog,
@@ -822,7 +841,7 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
                             startDownload(apk, repoaddress);
                         }
                     });
-            ask_alrt.setNegativeButton(getString(R.string.no),
+            ask_alrt.setNegativeButton(R.string.no,
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog,
@@ -837,7 +856,7 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
                 && !apk.sig.equals(mInstalledSigID)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(R.string.SignatureMismatch).setPositiveButton(
-                    getString(R.string.ok),
+                    R.string.ok,
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
@@ -851,34 +870,40 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
         startDownload(apk, repoaddress);
     }
 
+    @Nullable
+    private String getRepoAddress(Apk apk) {
+        final String[] projection = { RepoProvider.DataColumns.ADDRESS };
+        Repo repo = RepoProvider.Helper.findById(this, apk.repo, projection);
+        if (repo == null || repo.address == null) {
+            return null;
+        }
+        return repo.address;
+    }
+
     private void startDownload(Apk apk, String repoAddress) {
-        downloadHandler = new ApkDownloader(getBaseContext(), apk, repoAddress);
+        downloadHandler = new ApkDownloader(getBaseContext(), app, apk, repoAddress);
+        localBroadcastManager.registerReceiver(downloaderProgressReceiver,
+                new IntentFilter(Downloader.LOCAL_ACTION_PROGRESS));
         downloadHandler.setProgressListener(this);
         if (downloadHandler.download()) {
-            updateProgressDialog();
+            mHeaderFragment.startProgress();
         }
     }
 
-    private void installApk(File file, String packageName) {
-        setSupportProgressBarIndeterminateVisibility(true);
-
+    private void installApk(File file) {
         try {
-            installer.installPackage(file);
+            installer.installPackage(file, app.id);
         } catch (AndroidNotCompatibleException e) {
             Log.e(TAG, "Android not compatible with this Installer!", e);
-            setSupportProgressBarIndeterminateVisibility(false);
         }
     }
 
     @Override
     public void removeApk(String packageName) {
-        setSupportProgressBarIndeterminateVisibility(true);
-
         try {
             installer.deletePackage(packageName);
         } catch (AndroidNotCompatibleException e) {
             Log.e(TAG, "Android not compatible with this Installer!", e);
-            setSupportProgressBarIndeterminateVisibility(false);
         }
     }
 
@@ -893,7 +918,6 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
                         PackageManagerCompat.setInstaller(mPm, app.id);
                     }
 
-                    setSupportProgressBarIndeterminateVisibility(false);
                     onAppChanged();
                 }
             });
@@ -902,30 +926,41 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
         @Override
         public void onError(int operation, final int errorCode) {
             if (errorCode == InstallerCallback.ERROR_CODE_CANCELED) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        setSupportProgressBarIndeterminateVisibility(false);
-                        onAppChanged();
-                    }
-                });
-            } else {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        setSupportProgressBarIndeterminateVisibility(false);
-                        onAppChanged();
-
-                        Log.e(TAG, "Installer aborted with errorCode: " + errorCode);
-
-                        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(AppDetails.this);
-                        alertBuilder.setTitle(R.string.installer_error_title);
-                        alertBuilder.setMessage(R.string.installer_error_title);
-                        alertBuilder.setNeutralButton(android.R.string.ok, null);
-                        alertBuilder.create().show();
-                    }
-                });
+                return;
             }
+            final int title, body;
+            if (operation == InstallerCallback.OPERATION_INSTALL) {
+                title = R.string.install_error_title;
+                switch (errorCode) {
+                case ERROR_CODE_CANNOT_PARSE:
+                    body = R.string.install_error_cannot_parse;
+                    break;
+                default: // ERROR_CODE_OTHER
+                    body = R.string.install_error_unknown;
+                    break;
+                }
+            } else { // InstallerCallback.OPERATION_DELETE
+                title = R.string.uninstall_error_title;
+                switch (errorCode) {
+                default: // ERROR_CODE_OTHER
+                    body = R.string.uninstall_error_unknown;
+                    break;
+                }
+            }
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    onAppChanged();
+
+                    Log.e(TAG, "Installer aborted with errorCode: " + errorCode);
+
+                    AlertDialog.Builder alertBuilder = new AlertDialog.Builder(AppDetails.this);
+                    alertBuilder.setTitle(title);
+                    alertBuilder.setMessage(body);
+                    alertBuilder.setNeutralButton(android.R.string.ok, null);
+                    alertBuilder.create().show();
+                }
+            });
         }
     };
 
@@ -944,79 +979,6 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
         startActivity(Intent.createChooser(shareIntent, getString(R.string.menu_share)));
     }
 
-    private ProgressDialog getProgressDialog(String file) {
-        if (progressDialog == null) {
-            final ProgressDialog pd = new ProgressDialog(this);
-            pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            if (Build.VERSION.SDK_INT >= 11) {
-                pd.setProgressNumberFormat("%1d/%2d KiB");
-            }
-            pd.setMessage(getString(R.string.download_server) + ":\n " + file);
-            pd.setCancelable(true);
-            pd.setCanceledOnTouchOutside(false);
-
-            // The indeterminate-ness will get overridden on the first progress event we receive.
-            pd.setIndeterminate(true);
-
-            pd.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                @Override
-                public void onCancel(DialogInterface dialog) {
-                    Log.d(TAG, "User clicked 'cancel' on download, attempting to interrupt download thread.");
-                    if (downloadHandler !=  null) {
-                        downloadHandler.cancel();
-                        cleanUpFinishedDownload();
-                    } else {
-                        Log.e(TAG, "Tried to cancel, but the downloadHandler doesn't exist.");
-                    }
-                    progressDialog = null;
-                    Toast.makeText(AppDetails.this, getString(R.string.download_cancelled), Toast.LENGTH_LONG).show();
-                }
-            });
-            pd.setButton(DialogInterface.BUTTON_NEUTRAL,
-                    getString(R.string.cancel),
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            pd.cancel();
-                        }
-                    }
-            );
-            progressDialog = pd;
-        }
-        return progressDialog;
-    }
-
-    /**
-     * Looks at the current <code>downloadHandler</code> and finds it's size and progress.
-     * This is in comparison to {@link org.fdroid.fdroid.AppDetails#updateProgressDialog(int, int)},
-     * which is used when you have the details from a freshly received
-     * {@link org.fdroid.fdroid.ProgressListener.Event}.
-     */
-    private void updateProgressDialog() {
-        if (downloadHandler != null) {
-            updateProgressDialog(downloadHandler.getProgress(), downloadHandler.getTotalSize());
-        }
-    }
-
-    private void updateProgressDialog(int progress, int total) {
-        if (downloadHandler != null) {
-            ProgressDialog pd = getProgressDialog(downloadHandler.getRemoteAddress());
-            if (total > 0) {
-                pd.setIndeterminate(false);
-                pd.setProgress(progress/1024);
-                pd.setMax(total/1024);
-            } else {
-                pd.setIndeterminate(true);
-                pd.setProgress(progress/1024);
-                pd.setMax(0);
-            }
-            if (!pd.isShowing()) {
-                Log.d(TAG, "Showing progress dialog for download.");
-                pd.show();
-            }
-        }
-    }
-
     @Override
     public void onProgress(Event event) {
         if (downloadHandler == null || !downloadHandler.isEventFromThis(event)) {
@@ -1027,23 +989,21 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
             // the download thread to make sure that we check for cancellations before
             // sending events, but it is not possible to be perfect, because the interruption
             // which triggers the download can happen after the check to see if
-            Log.d(TAG, "Discarding downloader event \"" + event.type + "\" as it is from an old (probably cancelled) downloader.");
+            Utils.debugLog(TAG, "Discarding downloader event \"" + event.type + "\" as it is from an old (probably cancelled) downloader.");
             return;
         }
 
         boolean finished = false;
         switch (event.type) {
-        case Downloader.EVENT_PROGRESS:
-            updateProgressDialog(event.progress, event.total);
-            break;
         case ApkDownloader.EVENT_ERROR:
-            final String text;
+            final int res;
             if (event.getData().getInt(ApkDownloader.EVENT_DATA_ERROR_TYPE) == ApkDownloader.ERROR_HASH_MISMATCH)
-                text = getString(R.string.corrupt_download);
+                res = R.string.corrupt_download;
             else
-                text = getString(R.string.details_notinstalled);
+                res = R.string.details_notinstalled;
             // this must be on the main UI thread
-            Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, res, Toast.LENGTH_LONG).show();
+            cleanUpFinishedDownload();
             finished = true;
             break;
         case ApkDownloader.EVENT_APK_DOWNLOAD_COMPLETE:
@@ -1053,7 +1013,8 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
         }
 
         if (finished) {
-            removeProgressDialog();
+            if (mHeaderFragment != null)
+                mHeaderFragment.removeProgress();
             downloadHandler = null;
         }
     }
@@ -1149,8 +1110,7 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
 
                         view_more_description.setImageResource(R.drawable.ic_expand_more_grey600);
                         view_more_description.setOnClickListener(expander_description);
-                    }
-                    else {
+                    } else {
                         view_more_description.setVisibility(View.GONE);
                     }
                 }
@@ -1180,63 +1140,63 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
 
             // Website button
             TextView tv = (TextView) view.findViewById(R.id.website);
-            if (getApp().webURL != null)
+            if (!TextUtils.isEmpty(getApp().webURL))
                 tv.setOnClickListener(mOnClickListener);
             else
                 tv.setVisibility(View.GONE);
 
             // Source button
             tv = (TextView) view.findViewById(R.id.source);
-            if (getApp().sourceURL != null)
+            if (!TextUtils.isEmpty(getApp().sourceURL))
                 tv.setOnClickListener(mOnClickListener);
             else
                 tv.setVisibility(View.GONE);
 
             // Issues button
             tv = (TextView) view.findViewById(R.id.issues);
-            if (getApp().trackerURL != null)
+            if (!TextUtils.isEmpty(getApp().trackerURL))
                 tv.setOnClickListener(mOnClickListener);
             else
                 tv.setVisibility(View.GONE);
 
             // Changelog button
             tv = (TextView) view.findViewById(R.id.changelog);
-            if (getApp().changelogURL != null)
+            if (!TextUtils.isEmpty(getApp().changelogURL))
                 tv.setOnClickListener(mOnClickListener);
             else
                 tv.setVisibility(View.GONE);
 
             // Donate button
             tv = (TextView) view.findViewById(R.id.donate);
-            if (getApp().donateURL != null)
+            if (!TextUtils.isEmpty(getApp().donateURL))
                 tv.setOnClickListener(mOnClickListener);
             else
                 tv.setVisibility(View.GONE);
 
             // Bitcoin
             tv = (TextView) view.findViewById(R.id.bitcoin);
-            if (getApp().bitcoinAddr != null)
+            if (!TextUtils.isEmpty(getApp().bitcoinAddr))
                 tv.setOnClickListener(mOnClickListener);
             else
                 tv.setVisibility(View.GONE);
 
             // Litecoin
             tv = (TextView) view.findViewById(R.id.litecoin);
-            if (getApp().litecoinAddr != null)
+            if (!TextUtils.isEmpty(getApp().litecoinAddr))
                 tv.setOnClickListener(mOnClickListener);
             else
                 tv.setVisibility(View.GONE);
 
             // Dogecoin
             tv = (TextView) view.findViewById(R.id.dogecoin);
-            if (getApp().dogecoinAddr != null)
+            if (!TextUtils.isEmpty(getApp().dogecoinAddr))
                 tv.setOnClickListener(mOnClickListener);
             else
                 tv.setVisibility(View.GONE);
 
             // Flattr
             tv = (TextView) view.findViewById(R.id.flattr);
-            if (getApp().flattrID != null)
+            if (!TextUtils.isEmpty(getApp().flattrID))
                 tv.setOnClickListener(mOnClickListener);
             else
                 tv.setVisibility(View.GONE);
@@ -1301,7 +1261,7 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
 
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             public void onClick(View v) {
-                switch(v.getId()) {
+                switch (v.getId()) {
                     case R.id.website:
                         ((AppDetails) getActivity()).tryOpenUri(getApp().webURL);
                         break;
@@ -1385,7 +1345,7 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
                     view_all_permissions = false;
                     CommaSeparatedList permsList = getApks().getItem(0).permissions;
                     if (permsList == null) {
-                        permissionListView.setText(getString(R.string.no_permissions));
+                        permissionListView.setText(R.string.no_permissions);
                     } else {
                         Iterator<String> permissions = permsList.iterator();
                         StringBuilder sb = new StringBuilder();
@@ -1446,9 +1406,14 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
         }
     }
 
-    public static class AppDetailsHeaderFragment extends Fragment {
+    public static class AppDetailsHeaderFragment extends Fragment implements View.OnClickListener {
 
         private AppDetailsData data;
+        private Button btMain;
+        private ProgressBar progressBar;
+        private TextView progressSize;
+        private TextView progressPercent;
+        private ImageButton cancelButton;
         protected final DisplayImageOptions displayImageOptions;
         public static boolean installed = false;
         public static boolean updateWanted = false;
@@ -1492,59 +1457,147 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
             TextView tv = (TextView) view.findViewById(R.id.title);
             tv.setText(getApp().name);
 
+            btMain   = (Button) view.findViewById(R.id.btn_main);
+            progressBar     = (ProgressBar) view.findViewById(R.id.progress_bar);
+            progressSize    = (TextView) view.findViewById(R.id.progress_size);
+            progressPercent = (TextView) view.findViewById(R.id.progress_percentage);
+            cancelButton    = (ImageButton) view.findViewById(R.id.cancel);
+            progressBar.setIndeterminate(false);
+            cancelButton.setOnClickListener(this);
+
             updateViews(view);
         }
 
         @Override
         public void onResume() {
             super.onResume();
-            refresh();
+            updateViews();
         }
 
-        public void refresh() {
+        /**
+         * Displays empty, indeterminate progress bar and related views.
+         */
+        public void startProgress() {
+            setProgressVisible(true);
+            progressBar.setIndeterminate(true);
+            progressSize.setText("");
+            progressPercent.setText("");
+            updateViews();
+        }
+
+        /**
+         * Updates progress bar and captions to new values (in bytes).
+         */
+        public void updateProgress(long progress, long total) {
+            // Avoid division by zero and other weird values
+            if (progress < 0 || total <= 0) {
+                return;
+            }
+            long percent = progress * 100 / total;
+            setProgressVisible(true);
+            progressBar.setIndeterminate(false);
+            progressBar.setProgress((int) percent);
+            progressBar.setMax(100);
+            progressSize.setText(readableFileSize(progress) + " / " + readableFileSize(total));
+            progressPercent.setText(Long.toString(percent) + " %");
+        }
+
+        /**
+         * Converts a number of bytes to a human readable file size (eg 3.5 GiB).
+         *
+         * Based on http://stackoverflow.com/a/5599842
+         */
+        public String readableFileSize(long bytes) {
+            final String[] units = getResources().getStringArray(R.array.file_size_units);
+            if (bytes <= 0) return "0 " + units[0];
+            int digitGroups = (int) (Math.log10(bytes) / Math.log10(1024));
+            return new DecimalFormat("#,##0.#")
+                    .format(bytes / Math.pow(1024, digitGroups)) + " " + units[digitGroups];
+        }
+
+        /**
+         * Shows or hides progress bar and related views.
+         */
+        private void setProgressVisible(boolean visible) {
+            int state = (visible) ? View.VISIBLE : View.GONE;
+            progressBar.setVisibility(state);
+            progressSize.setVisibility(state);
+            progressPercent.setVisibility(state);
+            cancelButton.setVisibility(state);
+        }
+
+        /**
+         * Removes progress bar and related views, invokes {@link #updateViews()}.
+         */
+        public void removeProgress() {
+            setProgressVisible(false);
+            updateViews();
+        }
+
+        /**
+         * Cancels download and hides progress bar.
+         */
+        @Override
+        public void onClick(View view) {
+            AppDetails activity = (AppDetails) getActivity();
+            if (activity == null || activity.downloadHandler == null)
+                return;
+
+            activity.downloadHandler.cancel(true);
+            activity.cleanUpFinishedDownload();
+            setProgressVisible(false);
+            updateViews();
+        }
+
+        public void updateViews() {
             updateViews(getView());
         }
 
         public void updateViews(View view) {
             TextView statusView = (TextView) view.findViewById(R.id.status);
-            Button btMain = (Button) view.findViewById(R.id.btn_main);
             btMain.setVisibility(View.VISIBLE);
 
-            /*
-            Check count > 0 due to incompatible apps resulting in an empty list.
-            If App isn't installed
-             */
-            if (!getApp().isInstalled() && getApp().suggestedVercode > 0 && ((AppDetails)getActivity()).adapter.getCount() > 0) {
+            AppDetails activity = (AppDetails) getActivity();
+            if (activity.downloadHandler != null) {
+                btMain.setText(R.string.downloading);
+                btMain.setEnabled(false);
+            // Check count > 0 due to incompatible apps resulting in an empty list.
+            // If App isn't installed
+            } else if (!getApp().isInstalled() && getApp().suggestedVercode > 0 &&
+                    ((AppDetails)getActivity()).adapter.getCount() > 0) {
                 installed = false;
-                statusView.setText(getString(R.string.details_notinstalled));
+                statusView.setText(R.string.details_notinstalled);
                 NfcHelper.disableAndroidBeam(getActivity());
                 // Set Install button and hide second button
                 btMain.setText(R.string.menu_install);
                 btMain.setOnClickListener(mOnClickListener);
-            }
+                btMain.setEnabled(true);
             // If App is installed
-            else if (getApp().isInstalled()) {
+            } else if (getApp().isInstalled()) {
                 installed = true;
                 statusView.setText(getString(R.string.details_installed, getApp().installedVersionName));
                 NfcHelper.setAndroidBeam(getActivity(), getApp().id);
                 if (getApp().canAndWantToUpdate()) {
                     updateWanted = true;
                     btMain.setText(R.string.menu_upgrade);
-                }else {
+                } else {
                     updateWanted = false;
                     if (((AppDetails)getActivity()).mPm.getLaunchIntentForPackage(getApp().id) != null){
                         btMain.setText(R.string.menu_launch);
-                    }
-                    else {
+                    } else {
                         btMain.setText(R.string.menu_uninstall);
+                        if (!getApp().uninstallable) {
+                            btMain.setVisibility(View.GONE);
+                        }
                     }
                 }
                 btMain.setOnClickListener(mOnClickListener);
+                btMain.setEnabled(true);
             }
             TextView currentVersion = (TextView) view.findViewById(R.id.current_version);
             if (!getApks().isEmpty()) {
                 currentVersion.setText(getApks().getItem(0).version);
-            }else {
+            } else {
                 currentVersion.setVisibility(View.GONE);
                 btMain.setVisibility(View.GONE);
             }
@@ -1565,14 +1618,13 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
                     // If "launchable", launch
                     if (((AppDetails)getActivity()).mPm.getLaunchIntentForPackage(getApp().id) != null) {
                         ((AppDetails)getActivity()).launchApk(getApp().id);
-                    }
-                    else {
+                    } else {
                         ((AppDetails)getActivity()).removeApk(getApp().id);
                     }
-                }
-
                 // If not installed, install
-                else if (getApp().suggestedVercode > 0) {
+                } else if (getApp().suggestedVercode > 0) {
+                    btMain.setEnabled(false);
+                    btMain.setText(R.string.system_install_installing);
                     final Apk apkToInstall = ApkProvider.Helper.find(getActivity(), getApp().id, getApp().suggestedVercode);
                     ((AppDetails)getActivity()).install(apkToInstall);
                 }
@@ -1617,7 +1669,7 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
             // the last opportunity to set the list adapter. As such, we use the headerView
             // as a mechanism to optionally allow adding a header in the future.
             if (headerView == null) {
-                headerView = new FrameLayout(getActivity().getApplicationContext());
+                headerView = new FrameLayout(getActivity());
                 headerView.setId(R.id.appDetailsSummaryHeader);
             } else {
                 Fragment summaryFragment = getChildFragmentManager().findFragmentByTag(SUMMARY_TAG);
@@ -1638,8 +1690,8 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
                 remove();
             } else if (getApp().installedVersionCode > apk.vercode) {
                 AlertDialog.Builder ask_alrt = new AlertDialog.Builder(getActivity());
-                ask_alrt.setMessage(getString(R.string.installDowngrade));
-                ask_alrt.setPositiveButton(getString(R.string.yes),
+                ask_alrt.setMessage(R.string.installDowngrade);
+                ask_alrt.setPositiveButton(R.string.yes,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog,
@@ -1647,7 +1699,7 @@ public class AppDetails extends ActionBarActivity implements ProgressListener, A
                                 install(apk);
                             }
                         });
-                ask_alrt.setNegativeButton(getString(R.string.no),
+                ask_alrt.setNegativeButton(R.string.no,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog,

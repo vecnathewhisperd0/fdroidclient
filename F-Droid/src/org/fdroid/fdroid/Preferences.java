@@ -47,11 +47,11 @@ public class Preferences implements SharedPreferences.OnSharedPreferenceChangeLi
     public static final String PREF_COMPACT_LAYOUT = "compactlayout";
     public static final String PREF_IGN_TOUCH = "ignoreTouchscreen";
     public static final String PREF_CACHE_APK = "cacheDownloaded";
+    public static final String PREF_UNSTABLE_UPDATES = "unstableUpdates";
     public static final String PREF_EXPERT = "expert";
     public static final String PREF_UPD_LAST = "lastUpdateCheck";
-    public static final String PREF_SYSTEM_INSTALLER = "systemInstaller";
-    public static final String PREF_UNINSTALL_SYSTEM_APP = "uninstallSystemApp";
-    public static final String PREF_LOCAL_REPO_BONJOUR = "localRepoBonjour";
+    public static final String PREF_PRIVILEGED_INSTALLER = "privilegedInstaller";
+    public static final String PREF_UNINSTALL_PRIVILEGED_APP = "uninstallPrivilegedApp";
     public static final String PREF_LOCAL_REPO_NAME = "localRepoName";
     public static final String PREF_LOCAL_REPO_HTTPS = "localRepoHttps";
     public static final String PREF_LANGUAGE = "language";
@@ -60,25 +60,25 @@ public class Preferences implements SharedPreferences.OnSharedPreferenceChangeLi
     public static final String PREF_PROXY_PORT = "proxyPort";
     public static final String PREF_SHOW_NFC_DURING_SWAP = "showNfcDuringSwap";
     public static final String PREF_FIRST_TIME = "firstTime";
-    public static final String PREF_POST_SYSTEM_INSTALL = "postSystemInstall";
+    public static final String PREF_POST_PRIVILEGED_INSTALL = "postPrivilegedInstall";
 
     private static final boolean DEFAULT_COMPACT_LAYOUT = false;
     private static final boolean DEFAULT_ROOTED = true;
     private static final int DEFAULT_UPD_HISTORY = 14;
-    private static final boolean DEFAULT_SYSTEM_INSTALLER = false;
+    private static final boolean DEFAULT_PRIVILEGED_INSTALLER = false;
     private static final boolean DEFAULT_LOCAL_REPO_BONJOUR = true;
     private static final boolean DEFAULT_CACHE_APK = false;
+    private static final boolean DEFAULT_UNSTABLE_UPDATES = false;
     private static final boolean DEFAULT_LOCAL_REPO_HTTPS = false;
     private static final boolean DEFAULT_INCOMP_VER = false;
     private static final boolean DEFAULT_EXPERT = false;
-    private static final boolean DEFAULT_PERMISSIONS = false;
     private static final boolean DEFAULT_ENABLE_PROXY = false;
     public static final String DEFAULT_THEME = "light";
     public static final String DEFAULT_PROXY_HOST = "127.0.0.1";
     public static final int DEFAULT_PROXY_PORT = 8118;
     public static final boolean DEFAULT_SHOW_NFC_DURING_SWAP = true;
     private static final boolean DEFAULT_FIRST_TIME = true;
-    private static final boolean DEFAULT_POST_SYSTEM_INSTALL = false;
+    private static final boolean DEFAULT_POST_PRIVILEGED_INSTALL = false;
 
     private boolean compactLayout = DEFAULT_COMPACT_LAYOUT;
     private boolean filterAppsRequiringRoot = DEFAULT_ROOTED;
@@ -88,9 +88,9 @@ public class Preferences implements SharedPreferences.OnSharedPreferenceChangeLi
     private final List<ChangeListener> compactLayoutListeners = new ArrayList<>();
     private final List<ChangeListener> filterAppsRequiringRootListeners = new ArrayList<>();
     private final List<ChangeListener> updateHistoryListeners = new ArrayList<>();
-    private final List<ChangeListener> localRepoBonjourListeners = new ArrayList<>();
     private final List<ChangeListener> localRepoNameListeners = new ArrayList<>();
     private final List<ChangeListener> localRepoHttpsListeners = new ArrayList<>();
+    private final List<ChangeListener> unstableUpdatesListeners = new ArrayList<>();
 
     private boolean isInitialized(String key) {
         return initialized.containsKey(key) && initialized.get(key);
@@ -104,12 +104,12 @@ public class Preferences implements SharedPreferences.OnSharedPreferenceChangeLi
         initialized.put(key, false);
     }
 
-    public boolean isSystemInstallerEnabled() {
-        return preferences.getBoolean(PREF_SYSTEM_INSTALLER, DEFAULT_SYSTEM_INSTALLER);
+    public boolean isPrivilegedInstallerEnabled() {
+        return preferences.getBoolean(PREF_PRIVILEGED_INSTALLER, DEFAULT_PRIVILEGED_INSTALLER);
     }
 
-    public void setSystemInstallerEnabled(boolean enable) {
-        preferences.edit().putBoolean(PREF_SYSTEM_INSTALLER, enable).commit();
+    public void setPrivilegedInstallerEnabled(boolean enable) {
+        preferences.edit().putBoolean(PREF_PRIVILEGED_INSTALLER, enable).commit();
     }
 
     public boolean isFirstTime() {
@@ -120,20 +120,20 @@ public class Preferences implements SharedPreferences.OnSharedPreferenceChangeLi
         preferences.edit().putBoolean(PREF_FIRST_TIME, firstTime).commit();
     }
 
-    public boolean isPostSystemInstall() {
-        return preferences.getBoolean(PREF_POST_SYSTEM_INSTALL, DEFAULT_POST_SYSTEM_INSTALL);
+    public boolean isPostPrivilegedInstall() {
+        return preferences.getBoolean(PREF_POST_PRIVILEGED_INSTALL, DEFAULT_POST_PRIVILEGED_INSTALL);
     }
 
-    public void setPostSystemInstall(boolean postInstall) {
-        preferences.edit().putBoolean(PREF_POST_SYSTEM_INSTALL, postInstall).commit();
-    }
-
-    public boolean isLocalRepoBonjourEnabled() {
-        return preferences.getBoolean(PREF_LOCAL_REPO_BONJOUR, DEFAULT_LOCAL_REPO_BONJOUR);
+    public void setPostPrivilegedInstall(boolean postInstall) {
+        preferences.edit().putBoolean(PREF_POST_PRIVILEGED_INSTALL, postInstall).commit();
     }
 
     public boolean shouldCacheApks() {
         return preferences.getBoolean(PREF_CACHE_APK, DEFAULT_CACHE_APK);
+    }
+
+    public boolean getUnstableUpdates() {
+        return preferences.getBoolean(PREF_UNSTABLE_UPDATES, DEFAULT_UNSTABLE_UPDATES);
     }
 
     public boolean showIncompatibleVersions() {
@@ -153,11 +153,11 @@ public class Preferences implements SharedPreferences.OnSharedPreferenceChangeLi
     }
 
     public boolean isLocalRepoHttpsEnabled() {
-        return preferences.getBoolean(PREF_LOCAL_REPO_HTTPS, DEFAULT_LOCAL_REPO_HTTPS);
+        return false; // disabled until it works well
     }
 
     private String getDefaultLocalRepoName() {
-        return (Build.BRAND + " " + Build.MODEL + String.valueOf(new Random().nextInt(9999)))
+        return (Build.BRAND + " " + Build.MODEL + new Random().nextInt(9999))
                 .replaceAll(" ", "-");
     }
 
@@ -242,11 +242,17 @@ public class Preferences implements SharedPreferences.OnSharedPreferenceChangeLi
         filterAppsRequiringRootListeners.remove(listener);
     }
 
+    public void registerUnstableUpdatesChangeListener(ChangeListener listener) {
+        unstableUpdatesListeners.add(listener);
+    }
+
+    public void unregisterUnstableUpdatesChangeListener(ChangeListener listener) {
+        unstableUpdatesListeners.remove(listener);
+    }
+
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (BuildConfig.DEBUG) {
-            Log.d(TAG, "Invalidating preference '" + key + "'.");
-        }
+        Utils.debugLog(TAG, "Invalidating preference '" + key + "'.");
         uninitialize(key);
 
         switch (key) {
@@ -265,11 +271,6 @@ public class Preferences implements SharedPreferences.OnSharedPreferenceChangeLi
                 listener.onPreferenceChange();
             }
             break;
-        case PREF_LOCAL_REPO_BONJOUR:
-            for (ChangeListener listener : localRepoBonjourListeners) {
-                listener.onPreferenceChange();
-            }
-            break;
         case PREF_LOCAL_REPO_NAME:
             for (ChangeListener listener : localRepoNameListeners) {
                 listener.onPreferenceChange();
@@ -277,6 +278,10 @@ public class Preferences implements SharedPreferences.OnSharedPreferenceChangeLi
             break;
         case PREF_LOCAL_REPO_HTTPS:
             for (ChangeListener listener : localRepoHttpsListeners) {
+                listener.onPreferenceChange();
+            }
+        case PREF_UNSTABLE_UPDATES:
+            for (ChangeListener listener : unstableUpdatesListeners) {
                 listener.onPreferenceChange();
             }
             break;
@@ -289,14 +294,6 @@ public class Preferences implements SharedPreferences.OnSharedPreferenceChangeLi
 
     public void unregisterUpdateHistoryListener(ChangeListener listener) {
         updateHistoryListeners.remove(listener);
-    }
-
-    public void registerLocalRepoBonjourListeners(ChangeListener listener) {
-        localRepoBonjourListeners.add(listener);
-    }
-
-    public void unregisterLocalRepoBonjourListeners(ChangeListener listener) {
-        localRepoBonjourListeners.remove(listener);
     }
 
     public void registerLocalRepoNameListeners(ChangeListener listener) {

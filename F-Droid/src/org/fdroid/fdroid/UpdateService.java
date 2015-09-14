@@ -22,11 +22,12 @@ import android.app.AlarmManager;
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.ContentProviderOperation;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.OperationApplicationException;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -34,14 +35,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
 import android.os.RemoteException;
-import android.os.ResultReceiver;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -63,30 +62,28 @@ public class UpdateService extends IntentService implements ProgressListener {
 
     private static final String TAG = "UpdateService";
 
-    public static final String RESULT_MESSAGE     = "msg";
-    public static final String RESULT_EVENT       = "event";
-    public static final String RESULT_REPO_ERRORS = "repoErrors";
+    public static final String LOCAL_ACTION_STATUS = "status";
+
+    public static final String EXTRA_MESSAGE = "msg";
+    public static final String EXTRA_REPO_ERRORS = "repoErrors";
+    public static final String EXTRA_STATUS_CODE = "status";
+    public static final String EXTRA_ADDRESS = "address";
+    public static final String EXTRA_MANUAL_UPDATE = "manualUpdate";
 
     public static final int STATUS_COMPLETE_WITH_CHANGES = 0;
-    public static final int STATUS_COMPLETE_AND_SAME     = 1;
-    public static final int STATUS_ERROR_GLOBAL          = 2;
-    public static final int STATUS_ERROR_LOCAL           = 3;
-    public static final int STATUS_ERROR_LOCAL_SMALL     = 4;
-    public static final int STATUS_INFO                  = 5;
+    public static final int STATUS_COMPLETE_AND_SAME = 1;
+    public static final int STATUS_ERROR_GLOBAL = 2;
+    public static final int STATUS_ERROR_LOCAL = 3;
+    public static final int STATUS_ERROR_LOCAL_SMALL = 4;
+    public static final int STATUS_INFO = 5;
 
-    // I don't like that I've had to dupliacte the statuses above with strings here, however
-    // one method of communication/notification is using ResultReceiver (int status codes)
-    // while the other uses progress events (string event types).
-    public static final String EVENT_COMPLETE_WITH_CHANGES = "repoUpdateComplete (changed)";
-    public static final String EVENT_COMPLETE_AND_SAME     = "repoUpdateComplete (not changed)";
-    public static final String EVENT_FINISHED              = "repoUpdateFinished";
-    public static final String EVENT_ERROR                 = "repoUpdateError";
-    public static final String EVENT_INFO                  = "repoUpdateInfo";
+    private LocalBroadcastManager localBroadcastManager;
 
-    public static final String EXTRA_RECEIVER = "receiver";
-    public static final String EXTRA_ADDRESS = "address";
+    private static final int NOTIFY_ID_UPDATING = 0;
+    private static final int NOTIFY_ID_UPDATES_AVAILABLE = 1;
 
-    private ResultReceiver receiver = null;
+    private NotificationManager notificationManager;
+    private NotificationCompat.Builder notificationBuilder;
 
     public UpdateService() {
         super("UpdateService");
@@ -106,130 +103,17 @@ public class UpdateService extends IntentService implements ProgressListener {
         AppProvider.DataColumns.IGNORE_THISUPDATE
     };
 
-    // For receiving results from the UpdateService when we've told it to
-    // update in response to a user request.
-    public static class UpdateReceiver extends ResultReceiver {
-
-        private Context context;
-        private ProgressDialog dialog;
-        private ProgressListener listener;
-        private String lastShownMessage = null;
-
-        public UpdateReceiver(Handler handler) {
-            super(handler);
-        }
-
-        public UpdateReceiver setDialog(ProgressDialog dialog) {
-            this.dialog = dialog;
-            return this;
-        }
-
-        public UpdateReceiver setListener(ProgressListener listener) {
-            this.listener = listener;
-            return this;
-        }
-
-        private void forwardEvent(String type) {
-            if (listener != null) {
-                listener.onProgress(new Event(type));
-            }
-        }
-
-        private void ensureDialog() {
-            if (dialog == null) {
-                String title = context.getString(R.string.process_wait_title);
-                String message = lastShownMessage == null ? context.getString(R.string.process_update_msg) : lastShownMessage;
-                dialog = ProgressDialog.show(context, title, message, true, true);
-                dialog.setIcon(android.R.drawable.ic_dialog_info);
-                dialog.setCanceledOnTouchOutside(false);
-            }
-        }
-
-        public UpdateReceiver showDialog(Context context) {
-            this.context = context;
-            ensureDialog();
-            dialog.show();
-            return this;
-        }
-
-        public void hideDialog() {
-            dialog.hide();
-            dialog.dismiss();
-            dialog = null;
-        }
-
-        @Override
-        protected void onReceiveResult(int resultCode, Bundle resultData) {
-            final String message = resultData.getString(RESULT_MESSAGE);
-            boolean finished = false;
-            switch (resultCode) {
-            case STATUS_ERROR_GLOBAL:
-                forwardEvent(EVENT_ERROR);
-                Toast.makeText(context, context.getString(R.string.global_error_updating_repos) + " " + message, Toast.LENGTH_LONG).show();
-                finished = true;
-                break;
-            case STATUS_ERROR_LOCAL:
-            case STATUS_ERROR_LOCAL_SMALL:
-                StringBuilder msgB = new StringBuilder();
-                List<CharSequence> repoErrors = resultData.getCharSequenceArrayList(RESULT_REPO_ERRORS);
-                for (CharSequence error : repoErrors) {
-                    if (msgB.length() > 0) msgB.append('\n');
-                    msgB.append(error);
-                }
-                if (resultCode == STATUS_ERROR_LOCAL_SMALL) {
-                    msgB.append('\n').append(context.getString(R.string.all_other_repos_fine));
-                }
-                Toast.makeText(context, msgB.toString(), Toast.LENGTH_LONG).show();
-                finished = true;
-                break;
-            case STATUS_COMPLETE_WITH_CHANGES:
-                forwardEvent(EVENT_COMPLETE_WITH_CHANGES);
-                finished = true;
-                break;
-            case STATUS_COMPLETE_AND_SAME:
-                forwardEvent(EVENT_COMPLETE_AND_SAME);
-                Toast.makeText(context, context.getString(R.string.repos_unchanged), Toast.LENGTH_LONG).show();
-                finished = true;
-                break;
-            case STATUS_INFO:
-                forwardEvent(EVENT_INFO);
-                if (dialog != null) {
-                    lastShownMessage = message;
-                    dialog.setMessage(message);
-                }
-                break;
-            }
-
-            if (finished) {
-                forwardEvent(EVENT_FINISHED);
-                if (dialog != null && dialog.isShowing()) {
-                    try {
-                        dialog.dismiss();
-                    } catch (IllegalArgumentException e) {
-                        // sometimes dialog.isShowing() doesn't work :(
-                        // https://stackoverflow.com/questions/19538282/view-not-attached-to-window-manager-dialog-dismiss
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
+    public static void updateNow(Context context) {
+        updateRepoNow(null, context);
     }
 
-    public static UpdateReceiver updateNow(Context context) {
-        return updateRepoNow(null, context);
-    }
-
-    public static UpdateReceiver updateRepoNow(String address, Context context) {
+    public static void updateRepoNow(String address, Context context) {
         Intent intent = new Intent(context, UpdateService.class);
-        UpdateReceiver receiver = new UpdateReceiver(new Handler());
-        receiver.showDialog(context);
-        intent.putExtra(EXTRA_RECEIVER, receiver);
+        intent.putExtra(EXTRA_MANUAL_UPDATE, true);
         if (!TextUtils.isEmpty(address)) {
             intent.putExtra(EXTRA_ADDRESS, address);
         }
         context.startService(intent);
-
-        return receiver;
     }
 
     // Schedule (or cancel schedule for) this service, according to the
@@ -252,11 +136,46 @@ public class UpdateService extends IntentService implements ProgressListener {
             alarm.setInexactRepeating(AlarmManager.ELAPSED_REALTIME,
                     SystemClock.elapsedRealtime() + 5000,
                     AlarmManager.INTERVAL_HOUR, pending);
-            Log.d(TAG, "Update scheduler alarm set");
+            Utils.debugLog(TAG, "Update scheduler alarm set");
         } else {
-            Log.d(TAG, "Update scheduler alarm not set");
+            Utils.debugLog(TAG, "Update scheduler alarm not set");
         }
 
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        localBroadcastManager = LocalBroadcastManager.getInstance(this);
+        localBroadcastManager.registerReceiver(downloadProgressReceiver,
+                new IntentFilter(Downloader.LOCAL_ACTION_PROGRESS));
+        localBroadcastManager.registerReceiver(updateStatusReceiver,
+                new IntentFilter(LOCAL_ACTION_STATUS));
+
+        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        notificationBuilder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.drawable.ic_refresh_white)
+                .setOngoing(true)
+                .setCategory(NotificationCompat.CATEGORY_SERVICE)
+                .setContentTitle(getString(R.string.update_notification_title));
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+            Intent intent = new Intent(this, FDroid.class);
+            // TODO: Is this the correct FLAG?
+            notificationBuilder.setContentIntent(PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT));
+        }
+
+        notificationManager.notify(NOTIFY_ID_UPDATING, notificationBuilder.build());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        notificationManager.cancel(NOTIFY_ID_UPDATING);
+        localBroadcastManager.unregisterReceiver(downloadProgressReceiver);
+        localBroadcastManager.unregisterReceiver(updateStatusReceiver);
     }
 
     protected void sendStatus(int statusCode) {
@@ -264,30 +183,102 @@ public class UpdateService extends IntentService implements ProgressListener {
     }
 
     protected void sendStatus(int statusCode, String message) {
-        if (receiver != null) {
-            Bundle resultData = new Bundle();
-            if (message != null && message.length() > 0)
-                resultData.putString(RESULT_MESSAGE, message);
-            receiver.send(statusCode, resultData);
-        }
+        Intent intent = new Intent(LOCAL_ACTION_STATUS);
+        intent.putExtra(EXTRA_STATUS_CODE, statusCode);
+        if (!TextUtils.isEmpty(message))
+            intent.putExtra(EXTRA_MESSAGE, message);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
     protected void sendRepoErrorStatus(int statusCode, ArrayList<CharSequence> repoErrors) {
-        if (receiver != null) {
-            Bundle resultData = new Bundle();
-            resultData.putCharSequenceArrayList(RESULT_REPO_ERRORS, repoErrors);
-            receiver.send(statusCode, resultData);
-        }
+        Intent intent = new Intent(LOCAL_ACTION_STATUS);
+        intent.putExtra(EXTRA_STATUS_CODE, statusCode);
+        intent.putExtra(EXTRA_REPO_ERRORS, repoErrors.toArray(new CharSequence[repoErrors.size()]));
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
-    /**
-     * We might be doing a scheduled run, or we might have been launched by the
-     * app in response to a user's request. If we have a receiver, it's the
-     * latter...
-     */
-    private boolean isScheduledRun() {
-        return receiver == null;
-    }
+    private final BroadcastReceiver downloadProgressReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (TextUtils.isEmpty(action))
+                return;
+
+            if (!action.equals(Downloader.LOCAL_ACTION_PROGRESS))
+                return;
+
+            String repoAddress = intent.getStringExtra(Downloader.EXTRA_ADDRESS);
+            int downloadedSize = intent.getIntExtra(Downloader.EXTRA_BYTES_READ, -1);
+            int totalSize = intent.getIntExtra(Downloader.EXTRA_TOTAL_BYTES, -1);
+            int percent = (int) ((double) downloadedSize / totalSize * 100);
+            sendStatus(STATUS_INFO,
+                    getString(R.string.status_download, repoAddress,
+                            Utils.getFriendlySize(downloadedSize),
+                            Utils.getFriendlySize(totalSize), percent));
+        }
+    };
+
+        // For receiving results from the UpdateService when we've told it to
+    // update in response to a user request.
+    private final BroadcastReceiver updateStatusReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (TextUtils.isEmpty(action))
+                return;
+
+            if (!action.equals(LOCAL_ACTION_STATUS))
+                return;
+
+            final String message = intent.getStringExtra(EXTRA_MESSAGE);
+            int resultCode = intent.getIntExtra(EXTRA_STATUS_CODE, -1);
+
+            String text;
+            switch (resultCode) {
+                case STATUS_INFO:
+                    notificationBuilder.setContentText(message)
+                            .setProgress(0, 0, true)
+                            .setCategory(NotificationCompat.CATEGORY_SERVICE);
+                    notificationManager.notify(NOTIFY_ID_UPDATING, notificationBuilder.build());
+                    break;
+                case STATUS_ERROR_GLOBAL:
+                    text = context.getString(R.string.global_error_updating_repos, message);
+                    notificationBuilder.setContentText(text)
+                            .setCategory(NotificationCompat.CATEGORY_ERROR)
+                            .setSmallIcon(android.R.drawable.ic_dialog_alert);
+                    notificationManager.notify(NOTIFY_ID_UPDATING, notificationBuilder.build());
+                    Toast.makeText(context, text, Toast.LENGTH_LONG).show();
+                    break;
+                case STATUS_ERROR_LOCAL:
+                case STATUS_ERROR_LOCAL_SMALL:
+                    StringBuilder msgBuilder = new StringBuilder();
+                    CharSequence[] repoErrors = intent.getCharSequenceArrayExtra(EXTRA_REPO_ERRORS);
+                    for (CharSequence error : repoErrors) {
+                        if (msgBuilder.length() > 0) msgBuilder.append('\n');
+                        msgBuilder.append(error);
+                    }
+                    if (resultCode == STATUS_ERROR_LOCAL_SMALL) {
+                        msgBuilder.append('\n').append(context.getString(R.string.all_other_repos_fine));
+                    }
+                    text = msgBuilder.toString();
+                    notificationBuilder.setContentText(text)
+                            .setCategory(NotificationCompat.CATEGORY_ERROR)
+                            .setSmallIcon(android.R.drawable.ic_dialog_info);
+                    notificationManager.notify(NOTIFY_ID_UPDATING, notificationBuilder.build());
+                    Toast.makeText(context, text, Toast.LENGTH_LONG).show();
+                    break;
+                case STATUS_COMPLETE_WITH_CHANGES:
+                    break;
+                case STATUS_COMPLETE_AND_SAME:
+                    text = context.getString(R.string.repos_unchanged);
+                    notificationBuilder.setContentText(text)
+                            .setCategory(NotificationCompat.CATEGORY_SERVICE);
+                    notificationManager.notify(NOTIFY_ID_UPDATING, notificationBuilder.build());
+                    break;
+            }
+        }
+    };
 
     /**
      * Check whether it is time to run the scheduled update.
@@ -300,50 +291,59 @@ public class UpdateService extends IntentService implements ProgressListener {
      */
     private boolean verifyIsTimeForScheduledRun() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        long lastUpdate = prefs.getLong(Preferences.PREF_UPD_LAST, 0);
         String sint = prefs.getString(Preferences.PREF_UPD_INTERVAL, "0");
         int interval = Integer.parseInt(sint);
         if (interval == 0) {
-            Log.d(TAG, "Skipping update - disabled");
+            Log.i(TAG, "Skipping update - disabled");
             return false;
         }
+        long lastUpdate = prefs.getLong(Preferences.PREF_UPD_LAST, 0);
         long elapsed = System.currentTimeMillis() - lastUpdate;
         if (elapsed < interval * 60 * 60 * 1000) {
-            Log.d(TAG, "Skipping update - done " + elapsed
+            Log.i(TAG, "Skipping update - done " + elapsed
                     + "ms ago, interval is " + interval + " hours");
             return false;
         }
 
-        // If we are to update the repos only on wifi, make sure that
-        // connection is active
-        if (prefs.getBoolean(Preferences.PREF_UPD_WIFI_ONLY, false)) {
-            ConnectivityManager conMan = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo.State wifi = conMan.getNetworkInfo(1).getState();
-            if (wifi != NetworkInfo.State.CONNECTED &&
-                    wifi !=  NetworkInfo.State.CONNECTING) {
-                Log.d(TAG, "Skipping update - wifi not available");
-                return false;
-            }
+        return isNetworkAvailableForUpdate(this);
+    }
+
+    /**
+     * If we are to update the repos only on wifi, make sure that connection is active
+     */
+    public static boolean isNetworkAvailableForUpdate(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        // this could be cellular or wifi
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if (activeNetwork == null)
+            return false;
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        if (activeNetwork.getType() != ConnectivityManager.TYPE_WIFI
+                && prefs.getBoolean(Preferences.PREF_UPD_WIFI_ONLY, false)) {
+            Log.i(TAG, "Skipping update - wifi not available");
+            return false;
+        } else {
+            return activeNetwork.isConnectedOrConnecting();
         }
-        return true;
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
 
-        receiver = intent.getParcelableExtra(EXTRA_RECEIVER);
         String address = intent.getStringExtra(EXTRA_ADDRESS);
+        boolean manualUpdate = intent.getBooleanExtra(EXTRA_MANUAL_UPDATE, false);
 
-        long startTime = System.currentTimeMillis();
         try {
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-
             // See if it's time to actually do anything yet...
-            if (!isScheduledRun()) {
-                Log.d(TAG, "Unscheduled (manually requested) update");
+            if (manualUpdate) {
+                Utils.debugLog(TAG, "Unscheduled (manually requested) update");
             } else if (!verifyIsTimeForScheduledRun()) {
                 return;
             }
+
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
             // Grab some preliminary information, then we can release the
             // database while we do all the downloading, etc...
@@ -393,13 +393,12 @@ public class UpdateService extends IntentService implements ProgressListener {
                 } catch (RepoUpdater.UpdateException e) {
                     errorRepos.add(repo.address);
                     repoErrors.add(e.getMessage());
-                    Log.e(TAG, "Error updating repository " + repo.address + ": " + e.getMessage());
-                    Log.e(TAG, Log.getStackTraceString(e));
+                    Log.e(TAG, "Error updating repository " + repo.address, e);
                 }
             }
 
             if (!changes) {
-                Log.d(TAG, "Not checking app details or compatibility, because all repos were up to date.");
+                Utils.debugLog(TAG, "Not checking app details or compatibility, because all repos were up to date.");
             } else {
                 sendStatus(STATUS_INFO, getString(R.string.status_checking_compatibility));
 
@@ -455,15 +454,8 @@ public class UpdateService extends IntentService implements ProgressListener {
                 }
             }
         } catch (Exception e) {
-            Log.e(TAG,
-                    "Exception during update processing:\n"
-                            + Log.getStackTraceString(e));
+            Log.e(TAG, "Exception during update processing", e);
             sendStatus(STATUS_ERROR_GLOBAL, e.getMessage());
-        } finally {
-            Log.d(TAG, "Update took "
-                    + ((System.currentTimeMillis() - startTime) / 1000)
-                    + " seconds.");
-            receiver = null;
         }
     }
 
@@ -513,9 +505,9 @@ public class UpdateService extends IntentService implements ProgressListener {
         return stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
-    private NotificationCompat.Style createNotificationBigStyle(Cursor hasUpdates) {
+    private static final int MAX_UPDATES_TO_SHOW = 5;
 
-        final int MAX_UPDATES_TO_SHOW = 5;
+    private NotificationCompat.Style createNotificationBigStyle(Cursor hasUpdates) {
 
         final String contentText = hasUpdates.getCount() > 1
                 ? getString(R.string.many_updates_available, hasUpdates.getCount())
@@ -539,7 +531,7 @@ public class UpdateService extends IntentService implements ProgressListener {
     }
 
     private void showAppUpdatesNotification(Cursor hasUpdates) {
-        Log.d(TAG, "Notifying " + hasUpdates.getCount() + " updates.");
+        Utils.debugLog(TAG, "Notifying " + hasUpdates.getCount() + " updates.");
 
         final int icon = Build.VERSION.SDK_INT >= 11 ? R.drawable.ic_stat_notify_updates : R.drawable.ic_launcher;
 
@@ -556,13 +548,12 @@ public class UpdateService extends IntentService implements ProgressListener {
                         .setContentText(contentText)
                         .setStyle(createNotificationBigStyle(hasUpdates));
 
-        NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        nm.notify(1, builder.build());
+        notificationManager.notify(NOTIFY_ID_UPDATES_AVAILABLE, builder.build());
     }
 
     private List<String> getKnownAppIds(List<App> apps) {
         List<String> knownAppIds = new ArrayList<>();
-        if (apps.size() == 0) {
+        if (apps.isEmpty()) {
             return knownAppIds;
         }
         if (apps.size() > AppProvider.MAX_APPS_TO_QUERY) {
@@ -616,11 +607,11 @@ public class UpdateService extends IntentService implements ProgressListener {
             }
         }
 
-        Log.d(TAG, "Updating/inserting " + operations.size() + " apps.");
+        Utils.debugLog(TAG, "Updating/inserting " + operations.size() + " apps.");
         try {
             executeBatchWithStatus(AppProvider.getAuthority(), operations, currentCount, totalUpdateCount);
         } catch (RemoteException | OperationApplicationException e) {
-            Log.e(TAG, e.getMessage());
+            Log.e(TAG, "Could not update or insert apps", e);
         }
     }
 
@@ -675,11 +666,11 @@ public class UpdateService extends IntentService implements ProgressListener {
             }
         }
 
-        Log.d(TAG, "Updating/inserting " + operations.size() + " apks.");
+        Utils.debugLog(TAG, "Updating/inserting " + operations.size() + " apks.");
         try {
             executeBatchWithStatus(ApkProvider.getAuthority(), operations, currentCount, totalApksAppsCount);
         } catch (RemoteException | OperationApplicationException e) {
-            Log.e(TAG, e.getMessage());
+            Log.e(TAG, "Could not update/insert apps", e);
         }
     }
 
@@ -739,7 +730,7 @@ public class UpdateService extends IntentService implements ProgressListener {
         }
 
         long duration = System.currentTimeMillis() - startTime;
-        Log.d(TAG, "Found " + toRemove.size() + " apks no longer in the updated repos (took " + duration + "ms)");
+        Utils.debugLog(TAG, "Found " + toRemove.size() + " apks no longer in the updated repos (took " + duration + "ms)");
 
         if (toRemove.size() > 0) {
             ApkProvider.Helper.deleteApks(this, toRemove);
@@ -759,15 +750,14 @@ public class UpdateService extends IntentService implements ProgressListener {
         for (final Repo repo : repos) {
             Uri uri = ApkProvider.getRepoUri(repo.getId());
             int numDeleted = getContentResolver().delete(uri, null, null);
-            Log.d(TAG, "Removing " + numDeleted + " apks from repo " + repo.address);
+            Utils.debugLog(TAG, "Removing " + numDeleted + " apks from repo " + repo.address);
         }
     }
 
     private void removeAppsWithoutApks() {
         int numDeleted = getContentResolver().delete(AppProvider.getNoApksUri(), null, null);
-        Log.d(TAG, "Removing " + numDeleted + " apks that don't have any apks");
+        Utils.debugLog(TAG, "Removing " + numDeleted + " apks that don't have any apks");
     }
-
 
     /**
      * Received progress event from the RepoXMLHandler. It could be progress
@@ -779,16 +769,13 @@ public class UpdateService extends IntentService implements ProgressListener {
         // TODO: Switch to passing through Bundles of data with the event, rather than a repo address. They are
         // now much more general purpose then just repo downloading.
         String repoAddress = event.getData().getString(RepoUpdater.PROGRESS_DATA_REPO_ADDRESS);
+        String downloadedSize = Utils.getFriendlySize(event.progress);
+        String totalSize = Utils.getFriendlySize(event.total);
+        int percent = (int) ((double) event.progress / event.total * 100);
         switch (event.type) {
-        case Downloader.EVENT_PROGRESS:
-            String downloadedSize = Utils.getFriendlySize(event.progress);
-            String totalSize      = Utils.getFriendlySize(event.total);
-            int percent           = (int)((double)event.progress/event.total * 100);
-            message = getString(R.string.status_download, repoAddress, downloadedSize, totalSize, percent);
-            break;
-        case RepoUpdater.PROGRESS_TYPE_PROCESS_XML:
-            message = getString(R.string.status_processing_xml, repoAddress, event.progress, event.total);
-            break;
+            case RepoUpdater.PROGRESS_TYPE_PROCESS_XML:
+                message = getString(R.string.status_processing_xml_percent, repoAddress, downloadedSize, totalSize, percent);
+                break;
         }
         sendStatus(STATUS_INFO, message);
     }

@@ -21,8 +21,8 @@ package org.fdroid.fdroid;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
-import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -32,9 +32,13 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 
 import org.fdroid.fdroid.compat.FileCompat;
+import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.data.Repo;
 import org.fdroid.fdroid.data.SanitizedFile;
 import org.xml.sax.XMLReader;
@@ -46,7 +50,6 @@ import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -76,9 +79,6 @@ public final class Utils {
 
     private static final String[] FRIENDLY_SIZE_FORMAT = {
             "%.0f B", "%.0f KiB", "%.1f MiB", "%.2f GiB" };
-
-    private static final SimpleDateFormat LOG_DATE_FORMAT =
-            new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
 
     public static final String FALLBACK_ICONS_DIR = "/icons/";
 
@@ -139,8 +139,8 @@ public final class Utils {
     /**
      * Attempt to symlink, but if that fails, it will make a copy of the file.
      */
-    public static boolean symlinkOrCopyFile(SanitizedFile inFile, SanitizedFile outFile) {
-        return FileCompat.symlink(inFile, outFile) || copy(inFile, outFile);
+    public static boolean symlinkOrCopyFileQuietly(SanitizedFile inFile, SanitizedFile outFile) {
+        return FileCompat.symlink(inFile, outFile) || copyQuietly(inFile, outFile);
     }
 
     /**
@@ -158,17 +158,20 @@ public final class Utils {
         }
     }
 
-    public static boolean copy(File inFile, File outFile) {
+    public static boolean copyQuietly(File inFile, File outFile) {
+        InputStream input = null;
+        OutputStream output = null;
         try {
-            InputStream input = new FileInputStream(inFile);
-            OutputStream output = new FileOutputStream(outFile);
+            input  = new FileInputStream(inFile);
+            output = new FileOutputStream(outFile);
             Utils.copy(input, output);
-            output.close();
-            input.close();
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(TAG, "I/O error when copying a file", e);
             return false;
+        } finally {
+            closeQuietly(output);
+            closeQuietly(input);
         }
     }
 
@@ -216,7 +219,8 @@ public final class Utils {
         "4.4",   // 19
         "4.4W",  // 20
         "5.0",   // 21
-        "5.1"    // 22
+        "5.1",   // 22
+        "6.0"    // 23
     };
 
     public static String getAndroidVersionName(int sdkLevel) {
@@ -248,7 +252,7 @@ public final class Utils {
                 eventType = xml.nextToken();
             }
         } catch (PackageManager.NameNotFoundException | IOException | XmlPullParserException e) {
-            e.printStackTrace();
+            Log.e(TAG, "Could not get min/max sdk version", e);
         }
         return 0;
     }
@@ -259,36 +263,6 @@ public final class Utils {
 
     public static int getMaxSdkVersion(Context context, String packageName) {
         return getMinMaxSdkVersion(context, packageName, "maxSdkVersion");
-    }
-
-    public static int countSubstringOccurrence(File file, String substring) throws IOException {
-        int count = 0;
-        FileReader input = null;
-        try {
-            int currentSubstringIndex = 0;
-            char[] buffer = new char[4096];
-
-            input = new FileReader(file);
-            int numRead = input.read(buffer);
-            while(numRead != -1) {
-
-                for (char c : buffer) {
-                    if (c == substring.charAt(currentSubstringIndex)) {
-                        currentSubstringIndex++;
-                        if (currentSubstringIndex == substring.length()) {
-                            count++;
-                            currentSubstringIndex = 0;
-                        }
-                    } else {
-                        currentSubstringIndex = 0;
-                    }
-                }
-                numRead = input.read(buffer);
-            }
-        } finally {
-            closeQuietly(input);
-        }
-        return count;
     }
 
     // return a fingerprint formatted for display
@@ -370,6 +344,8 @@ public final class Utils {
     }
 
     public static String calcFingerprint(Certificate cert) {
+        if (cert == null)
+            return null;
         try {
             return calcFingerprint(cert.getEncoded());
         } catch (CertificateEncodingException e) {
@@ -378,11 +354,13 @@ public final class Utils {
     }
 
     public static String calcFingerprint(byte[] key) {
-        String ret = null;
+        if (key == null)
+            return null;
         if (key.length < 256) {
             Log.e(TAG, "key was shorter than 256 bytes (" + key.length + "), cannot be valid!");
             return null;
         }
+        String ret = null;
         try {
             // keytool -list -v gives you the SHA-256 fingerprint
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -395,8 +373,7 @@ public final class Utils {
             ret = formatter.toString();
             formatter.close();
         } catch (Exception e) {
-            Log.w(TAG, "Unable to get certificate fingerprint.\n"
-                    + Log.getStackTraceString(e));
+            Log.w(TAG, "Unable to get certificate fingerprint", e);
         }
         return ret;
     }
@@ -431,6 +408,14 @@ public final class Utils {
         return new Locale(languageTag);
     }
 
+    public static String getApkUrl(Apk apk) {
+        return getApkUrl(apk.repoAddress, apk);
+    }
+
+    public static String getApkUrl(String repoAddress, Apk apk) {
+        return repoAddress + "/" + apk.apkName.replace(" ", "%20");
+    }
+
     public static class CommaSeparatedList implements Iterable<String> {
         private final String value;
 
@@ -439,7 +424,7 @@ public final class Utils {
         }
 
         public static CommaSeparatedList make(List<String> list) {
-            if (list == null || list.size() == 0)
+            if (list == null || list.isEmpty())
                 return null;
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < list.size(); i++) {
@@ -464,8 +449,9 @@ public final class Utils {
             return new CommaSeparatedList(sb.toString());
         }
 
-        public static CommaSeparatedList make(String list) {
-            if (list == null || list.length() == 0)
+        @Nullable
+        public static CommaSeparatedList make(@Nullable String list) {
+            if (TextUtils.isEmpty(list))
                 return null;
             return new CommaSeparatedList(list);
         }
@@ -499,6 +485,17 @@ public final class Utils {
         }
     }
 
+    public static DisplayImageOptions.Builder getImageLoadingOptions() {
+        return new DisplayImageOptions.Builder()
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .imageScaleType(ImageScaleType.NONE)
+                .showImageOnLoading(R.drawable.ic_repo_app_default)
+                .showImageForEmptyUri(R.drawable.ic_repo_app_default)
+                .displayer(new FadeInBitmapDisplayer(200, true, true, false))
+                .bitmapConfig(Bitmap.Config.RGB_565);
+    }
+
     // this is all new stuff being added
     public static String hashBytes(byte[] input, String algo) {
         try {
@@ -530,7 +527,7 @@ public final class Utils {
             return toHexString(mdbytes);
         } catch (IOException e) {
             Log.e(TAG, "Error reading \"" + apk.getAbsolutePath()
-                    + "\" to compute " + algo + " hash.");
+                    + "\" to compute " + algo + " hash.", e);
             return null;
         } catch (NoSuchAlgorithmException e) {
             Log.e(TAG, "Device does not support " + algo + " MessageDisgest algorithm");
@@ -584,13 +581,6 @@ public final class Utils {
         return DATE_FORMAT.format(date);
     }
 
-    public static String formatLogDate(Date date) {
-        if (date == null) {
-            return "(unknown)";
-        }
-        return LOG_DATE_FORMAT.format(date);
-    }
-
     // Need this to add the unimplemented support for ordered and unordered
     // lists to Html.fromHtml().
     public static class HtmlTagHandler implements Html.TagHandler {
@@ -629,7 +619,7 @@ public final class Utils {
     }
 
     /**
-     * Remove all files from the {@parm directory} either beginning with {@param startsWith}
+     * Remove all files from the {@param directory} either beginning with {@param startsWith}
      * or ending with {@param endsWith}. Note that if the SD card is not ready, then the
      * cache directory will probably not be available. In this situation no files will be
      * deleted (and thus they may still exist after the SD card becomes available).
@@ -646,21 +636,45 @@ public final class Utils {
         }
 
         if (startsWith != null) {
-            Log.i(TAG, "Cleaning up files in " + directory + " that start with \"" + startsWith + "\"");
+            debugLog(TAG, "Cleaning up files in " + directory + " that start with \"" + startsWith + "\"");
         }
 
         if (endsWith != null) {
-            Log.i(TAG, "Cleaning up files in " + directory + " that end with \"" + endsWith + "\"");
+            debugLog(TAG, "Cleaning up files in " + directory + " that end with \"" + endsWith + "\"");
         }
 
         for (File f : files) {
             if ((startsWith != null && f.getName().startsWith(startsWith))
                 || (endsWith != null && f.getName().endsWith(endsWith))) {
                 if (!f.delete()) {
-                    Log.i(TAG, "Couldn't delete cache file " + f);
+                    Log.w(TAG, "Couldn't delete cache file " + f);
                 }
             }
         }
+    }
+
+    public static void debugLog(String tag, String msg) {
+        if (BuildConfig.DEBUG) {
+            Log.d(tag, msg);
+        }
+    }
+
+    public static void debugLog(String tag, String msg, Throwable tr) {
+        if (BuildConfig.DEBUG) {
+            Log.d(tag, msg, tr);
+        }
+    }
+
+    // Try to get the version name of the client. Return null on failure.
+    public static String getVersionName(Context context) {
+        String versionName = null;
+        try {
+            versionName = context.getPackageManager()
+                .getPackageInfo(context.getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Could not get client version name", e);
+        }
+        return versionName;
     }
 
 }

@@ -4,11 +4,13 @@ import android.content.Context;
 import android.util.Log;
 
 import org.fdroid.fdroid.FDroidApp;
+import org.fdroid.fdroid.Utils;
 import org.spongycastle.asn1.ASN1Sequence;
 import org.spongycastle.asn1.x500.X500Name;
 import org.spongycastle.asn1.x509.GeneralName;
 import org.spongycastle.asn1.x509.GeneralNames;
 import org.spongycastle.asn1.x509.SubjectPublicKeyInfo;
+import org.spongycastle.asn1.x509.Time;
 import org.spongycastle.asn1.x509.X509Extension;
 import org.spongycastle.cert.X509CertificateHolder;
 import org.spongycastle.cert.X509v3CertificateBuilder;
@@ -21,6 +23,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.net.Socket;
 import java.security.GeneralSecurityException;
@@ -40,6 +43,8 @@ import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
@@ -84,16 +89,18 @@ public class LocalRepoKeyStore {
         try {
             File appKeyStoreDir = context.getDir("keystore", Context.MODE_PRIVATE);
 
-            Log.d(TAG, "Generating LocalRepoKeyStore instance: " + appKeyStoreDir.getAbsolutePath());
+            Utils.debugLog(TAG, "Generating LocalRepoKeyStore instance: " + appKeyStoreDir.getAbsolutePath());
             this.keyStoreFile = new File(appKeyStoreDir, "kerplapp.bks");
 
-            Log.d(TAG, "Using default KeyStore type: " + KeyStore.getDefaultType());
+            Utils.debugLog(TAG, "Using default KeyStore type: " + KeyStore.getDefaultType());
             this.keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
 
             if (keyStoreFile.exists()) {
+                InputStream in = null;
                 try {
-                    Log.d(TAG, "Keystore already exists, loading...");
-                    keyStore.load(new FileInputStream(keyStoreFile), "".toCharArray());
+                    Utils.debugLog(TAG, "Keystore already exists, loading...");
+                    in = new FileInputStream(keyStoreFile);
+                    keyStore.load(in, "".toCharArray());
                 } catch (IOException e) {
                     Log.e(TAG, "Error while loading existing keystore. Will delete and create a new one.");
 
@@ -102,6 +109,8 @@ public class LocalRepoKeyStore {
                     // that you have swapped apps with in the past, then you would really want the
                     // signature to be the same as last time.
                     throw new InitException("Could not initialize local repo keystore: " + e);
+                } finally {
+                    Utils.closeQuietly(in);
                 }
             }
 
@@ -109,7 +118,7 @@ public class LocalRepoKeyStore {
                 // If there isn't a persisted BKS keystore on disk we need to
                 // create a new empty keystore
                 // Init a new keystore with a blank passphrase
-                Log.d(TAG, "Keystore doesn't exist, creating...");
+                Utils.debugLog(TAG, "Keystore doesn't exist, creating...");
                 keyStore.load(null, "".toCharArray());
             }
 
@@ -155,8 +164,11 @@ public class LocalRepoKeyStore {
                     wrappedKeyManager
             };
         } catch (UnrecoverableKeyException | KeyStoreException | NoSuchAlgorithmException | CertificateException | OperatorCreationException | IOException e) {
-            Log.e(TAG, "Error loading keystore: " + e.getMessage());
-            Log.e(TAG, Log.getStackTraceString(e));
+            Log.e(TAG, "Error loading keystore", e);
+        // TODO: Remove once we have a proper fix for #334
+        } catch (IllegalArgumentException e) {
+            Log.e(TAG, "Error loading keystore", e);
+            Log.e(TAG, "See https://gitlab.com/fdroid/fdroidclient/issues/334");
         }
     }
 
@@ -177,8 +189,7 @@ public class LocalRepoKeyStore {
                     FDroidApp.ipAddressString);
             addToStore(HTTP_CERT_ALIAS, kerplappKeypair, indexCert);
         } catch (Exception e) {
-            Log.e(TAG, "Failed to setup HTTPS certificate: " + e);
-            Log.e(TAG, Log.getStackTraceString(e));
+            Log.e(TAG, "Failed to setup HTTPS certificate", e);
         }
     }
 
@@ -207,8 +218,7 @@ public class LocalRepoKeyStore {
             zipSigner.signZip(input.getAbsolutePath(), output.getAbsolutePath());
 
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | GeneralSecurityException | IOException e) {
-            Log.e(TAG, "Unable to sign local repo index: " + e);
-            Log.e(TAG, Log.getStackTraceString(e));
+            Log.e(TAG, "Unable to sign local repo index", e);
         }
     }
 
@@ -237,8 +247,7 @@ public class LocalRepoKeyStore {
             if (key instanceof PrivateKey)
                 return keyStore.getCertificate(INDEX_CERT_ALIAS);
         } catch (GeneralSecurityException e) {
-            Log.e(TAG, "Unable to get certificate for local repo: " + e);
-            Log.e(TAG, Log.getStackTraceString(e));
+            Log.e(TAG, "Unable to get certificate for local repo", e);
         }
         return null;
     }
@@ -290,17 +299,22 @@ public class LocalRepoKeyStore {
         SubjectPublicKeyInfo subPubKeyInfo = new SubjectPublicKeyInfo(
                 ASN1Sequence.getInstance(pubKey.getEncoded()));
 
-        Date startDate = new Date(); // now
+        Date now = new Date(); // now
 
-        Calendar c = Calendar.getInstance();
-        c.setTime(startDate);
+        /* force it to use a English/Gregorian dates for the cert, hardly anyone
+           ever looks at the cert metadata anyway, and its very likely that they
+           understand English/Gregorian dates */
+        Calendar c = new GregorianCalendar(Locale.ENGLISH);
+        c.setTime(now);
         c.add(Calendar.YEAR, 1);
-        Date endDate = c.getTime();
+        Time startTime = new Time(now, Locale.ENGLISH);
+        Time endTime = new Time(c.getTime(), Locale.ENGLISH);
 
         X509v3CertificateBuilder v3CertGen = new X509v3CertificateBuilder(
                 subject,
                 BigInteger.valueOf(rand.nextLong()),
-                startDate, endDate,
+                startTime,
+                endTime,
                 subject,
                 subPubKeyInfo);
 

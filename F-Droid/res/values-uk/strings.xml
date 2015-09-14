@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="searchres_napps">Знайдено %1$d програм за запитом «%2$s»:</string>
   <string name="searchres_oneapp">Знайдено програму за запитом «%s»:</string>
@@ -8,13 +8,12 @@
   <string name="cache_downloaded">Зберігати звантажене</string>
   <string name="updates">Оновлення</string>
   <string name="last_update_check">Синхронізовано: %s</string>
-  <string name="never">ніколи</string>
+  <string name="never">Ніколи</string>
   <string name="notify">Сповіщення</string>
   <string name="about_title">Про F-Droid</string>
   <string name="about_site">Сайт:</string>
   <string name="about_mail">Пошта:</string>
   <string name="about_version">Версія:</string>
-  <string name="about_website">Сайт</string>
   <string name="inst">Встановлено</string>
   <string name="not_inst">Не встановлено</string>
   <string name="ok">Гаразд</string>
@@ -23,23 +22,15 @@
   <string name="repo_add_title">Новий репозиторій</string>
   <string name="repo_add_add">Додати</string>
   <string name="cancel">Назад</string>
-  <string name="repo_delete_title">Видалити репозиторій</string>
-  <string name="repo_update_title">Оновити репозиторії?</string>
   <string name="tab_noninstalled">Наявне</string>
   <string name="tab_updates">Оновлення</string>
-  <string name="process_wait_title">Зачекайте</string>
-  <string name="process_update_msg">Оновлюю список програм…</string>
-  <string name="download_server">Звантажую програму</string>
   <string name="repo_add_url">Адреса репозиторію</string>
-  <string name="repo_alrt">Список репозиторіїв змінено.
-Оновити їх?</string>
   <string name="menu_update_repo">Оновити</string>
   <string name="menu_manage">Репозиторії</string>
   <string name="menu_preferences">Параметри</string>
   <string name="menu_about">Про F-Droid</string>
   <string name="menu_search">Пошук</string>
   <string name="menu_add_repo">Додати</string>
-  <string name="menu_rem_repo">Видалити</string>
   <string name="menu_launch">Запуск</string>
   <string name="menu_install">Встановити</string>
   <string name="menu_uninstall">Стерти</string>
@@ -50,7 +41,6 @@
   <string name="details_installed">Встановлена версія %s</string>
   <string name="details_notinstalled">Не встановлено</string>
   <string name="corrupt_download">Отриманий файл пошкоджений</string>
-  <string name="download_cancelled">Звантаження скасовано</string>
   <string name="expert">Експерт</string>
   <string name="search_hint">Пошук програм</string>
   <string name="appcompatibility">Сумісність</string>
@@ -59,4 +49,22 @@
   <string name="category_all">Всі програми</string>
   <string name="category_whatsnew">Недавні додання</string>
   <string name="category_recentlyupdated">Недавні оновлення</string>
-</resources>
+<string name="app_name">F-Droid</string>
+
+	<string name="installIncompatible">Схоже, ця програма не сумісна з вашим пристроєм. Спробувати встановити її все одно?</string>
+	<string name="installDowngrade">Ви збираєтесь встановити більш стару версію програми. Це можете призвести до некоректної робити і навіть втрати ваших даних. Встановити більш стару версію?</string>
+	<string name="delete">Видалити</string>
+	<string name="cache_downloaded_on">Зберігати завантажені пакети у пам\'яті пристрою</string>
+	<string name="other">Інше</string>
+	<string name="update_interval">Інтервал автооновлення</string>
+	<string name="update_interval_zero">Не оновлювати список програм автоматично</string>
+	<string name="automatic_scan_wifi">Тільки через Wi-Fi</string>
+	<string name="automatic_scan_wifi_on">Автоматично оновлювати списки програм тільки через Wi-Fi</string>
+	<string name="notify_on">Показувати сповіщення коли є доступні оновлення</string>
+	<string name="update_history">Історія оновлень</string>
+	<string name="update_history_summ">Скільки днів вважати програму новою чи нещодавньою: %s</string>
+	<string name="system_installer">Активувати привілеї F-Droid</string>
+	<string name="system_installer_on">Використовувати привілейовані права для встановлення, оновлення та видалення пакетів</string>
+	<string name="uninstall_system">Видалити привілеї F-Droid</string>
+	<string name="uninstall_system_summary">Видаляє додаткову програму привілейованого F-Droid</string>
+	</resources>

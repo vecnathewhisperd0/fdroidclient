@@ -1,11 +1,9 @@
 package org.fdroid.fdroid.net;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.util.Log;
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 
-import org.fdroid.fdroid.ProgressListener;
 import org.fdroid.fdroid.Utils;
 
 import java.io.File;
@@ -20,49 +18,32 @@ import java.net.URL;
 public abstract class Downloader {
 
     private static final String TAG = "Downloader";
-    private OutputStream outputStream;
 
-    private ProgressListener progressListener = null;
-    private Bundle eventData = null;
+    public static final String LOCAL_ACTION_PROGRESS = "Downloader.PROGRESS";
+
+    public static final String EXTRA_ADDRESS = "extraAddress";
+    public static final String EXTRA_BYTES_READ = "extraBytesRead";
+    public static final String EXTRA_TOTAL_BYTES = "extraTotalBytes";
+
+    private final OutputStream outputStream;
+
+    private final LocalBroadcastManager localBroadcastManager;
     private final File outputFile;
 
-    protected URL sourceUrl;
+    protected final URL sourceUrl;
     protected String cacheTag = null;
-
-    public static final String EVENT_PROGRESS = "downloadProgress";
+    protected int bytesRead = 0;
+    protected int totalBytes = 0;
 
     public abstract InputStream getInputStream() throws IOException;
+    public abstract void close();
 
-    // The context is required for opening the file to write to.
-    Downloader(String destFile, @NonNull Context ctx)
+    Downloader(Context context, URL url, File destFile)
             throws FileNotFoundException, MalformedURLException {
-        this(new File(ctx.getFilesDir() + File.separator + destFile));
-    }
-
-    // The context is required for opening the file to write to.
-    Downloader(@NonNull Context ctx) throws IOException {
-        this(File.createTempFile("dl-", "", ctx.getCacheDir()));
-    }
-
-    Downloader(File destFile)
-            throws FileNotFoundException, MalformedURLException {
+        this.sourceUrl = url;
         outputFile = destFile;
         outputStream = new FileOutputStream(outputFile);
-    }
-
-    Downloader(OutputStream output)
-            throws MalformedURLException {
-        outputStream = output;
-        outputFile   = null;
-    }
-
-    public void setProgressListener(ProgressListener listener) {
-        setProgressListener(listener, null);
-    }
-
-    public void setProgressListener(ProgressListener listener, Bundle eventData) {
-        this.progressListener = listener;
-        this.eventData = eventData;
+        localBroadcastManager = LocalBroadcastManager.getInstance(context);
     }
 
     /**
@@ -117,8 +98,8 @@ public abstract class Downloader {
 
     public abstract boolean isCached();
 
-    protected void downloadFromStream() throws IOException, InterruptedException {
-        Log.d(TAG, "Downloading from stream");
+    protected void downloadFromStream(int bufferSize) throws IOException, InterruptedException {
+        Utils.debugLog(TAG, "Downloading from stream");
         InputStream input = null;
         try {
             input = getInputStream();
@@ -127,7 +108,7 @@ public abstract class Downloader {
             // we were interrupted before proceeding to the download.
             throwExceptionIfInterrupted();
 
-            copyInputToOutputStream(getInputStream());
+            copyInputToOutputStream(input, bufferSize);
         } finally {
             Utils.closeQuietly(outputStream);
             Utils.closeQuietly(input);
@@ -152,46 +133,68 @@ public abstract class Downloader {
      */
     private void throwExceptionIfInterrupted() throws InterruptedException {
         if (Thread.interrupted()) {
-            Log.d(TAG, "Received interrupt, cancelling download");
+            Utils.debugLog(TAG, "Received interrupt, cancelling download");
             throw new InterruptedException();
         }
     }
 
-    protected void copyInputToOutputStream(InputStream input) throws IOException, InterruptedException {
+    /**
+     * This copies the downloaded data from the InputStream to the OutputStream,
+     * keeping track of the number of bytes that have flowed through for the
+     * progress counter.
+     */
+    protected void copyInputToOutputStream(InputStream input, int bufferSize) throws IOException, InterruptedException {
 
-        byte[] buffer = new byte[Utils.BUFFER_SIZE];
         int bytesRead = 0;
-        int totalBytes = totalDownloadSize();
+        this.totalBytes = totalDownloadSize();
+        byte[] buffer = new byte[bufferSize];
 
         // Getting the total download size could potentially take time, depending on how
         // it is implemented, so we may as well check this before we proceed.
         throwExceptionIfInterrupted();
 
         sendProgress(bytesRead, totalBytes);
-        while (true) {
+        while (bytesRead < totalBytes) {
 
-            int count = input.read(buffer);
+            int count;
+            if (input.available()>0) {
+
+                int readLength = Math.min(input.available(), buffer.length);
+                count = input.read(buffer, 0, readLength);
+            } else {
+                count = input.read(buffer);
+            }
+
             throwExceptionIfInterrupted();
 
             if (count == -1) {
-                Log.d(TAG, "Finished downloading from stream");
+                Utils.debugLog(TAG, "Finished downloading from stream");
                 break;
             }
+
             bytesRead += count;
             sendProgress(bytesRead, totalBytes);
             outputStream.write(buffer, 0, count);
+
         }
         outputStream.flush();
+        outputStream.close();
     }
 
     protected void sendProgress(int bytesRead, int totalBytes) {
-        sendProgress(new ProgressListener.Event(EVENT_PROGRESS, bytesRead, totalBytes, eventData));
+        this.bytesRead = bytesRead;
+        Intent intent = new Intent(LOCAL_ACTION_PROGRESS);
+        intent.putExtra(EXTRA_ADDRESS, sourceUrl.toString());
+        intent.putExtra(EXTRA_BYTES_READ, bytesRead);
+        intent.putExtra(EXTRA_TOTAL_BYTES, totalBytes);
+        localBroadcastManager.sendBroadcast(intent);
     }
 
-    protected void sendProgress(ProgressListener.Event event) {
-        if (progressListener != null) {
-            progressListener.onProgress(event);
-        }
+    public int getBytesRead() {
+        return bytesRead;
     }
 
+    public int getTotalBytes() {
+        return totalBytes;
+    }
 }

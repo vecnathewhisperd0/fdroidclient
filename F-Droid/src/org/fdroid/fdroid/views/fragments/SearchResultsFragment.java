@@ -9,7 +9,7 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import org.fdroid.fdroid.AppDetails;
 import org.fdroid.fdroid.R;
+import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.data.AppProvider;
 import org.fdroid.fdroid.views.AppListAdapter;
@@ -87,7 +88,7 @@ public class SearchResultsFragment extends ListFragment implements LoaderManager
         if (query != null)
             query = query.trim();
 
-        if (query == null || query.length() == 0)
+        if (TextUtils.isEmpty(query))
             getActivity().finish();
 
         TextView tv = (TextView) view.findViewById(R.id.description);
@@ -101,7 +102,7 @@ public class SearchResultsFragment extends ListFragment implements LoaderManager
             headerText = getString(R.string.searchres_napps, count, query);
         }
         tv.setText(headerText);
-        Log.d(TAG, "Search for '" + query + "' returned " + count + " results");
+        Utils.debugLog(TAG, "Search for '" + query + "' returned " + count + " results");
     }
 
     @Override

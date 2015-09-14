@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="org.fdroid.fdroid"
     android:installLocation="auto"
-    android:versionCode="930"
-    android:versionName="0.93-test"
+    android:versionCode="97002"
+    android:versionName="0.97-alpha2"
     >
 
     <uses-sdk
         tools:overrideLibrary="org.thoughtcrime.ssl.pinning"
         android:minSdkVersion="8"
-        android:targetSdkVersion="21"
+        android:targetSdkVersion="22"
         />
 
     <supports-screens
@@ -42,18 +42,21 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
     <uses-permission android:name="android.permission.NFC" />
 
-    <!-- These permissions are only granted when F-Droid is installed as a system-app! -->
-    <uses-permission android:name="android.permission.INSTALL_PACKAGES"
-        tools:ignore="ProtectedPermissions"/>
-    <uses-permission android:name="android.permission.DELETE_PACKAGES"
-        tools:ignore="ProtectedPermissions"/>
+    <uses-permission android:name="org.fdroid.fdroid.privileged.USE_SERVICE" />
+
+    <!-- Indicate that F-Droid may request root access (introduced by Koush's Superuser app)
+         This permission is deprecated, but necessary for some old superuser
+         apps to actually grant superuser access to F-Droid. -->
+    <uses-permission android:name="android.permission.ACCESS_SUPERUSER"/>
 
     <application
         android:name="FDroidApp"
@@ -61,7 +64,7 @@
         android:label="@string/app_name"
         android:description="@string/app_description"
         android:allowBackup="true"
-        android:theme="@style/AppThemeDark"
+        android:theme="@style/AppThemeLight"
         android:supportsRtl="true"
         >
 
@@ -295,19 +298,7 @@
                 android:value=".SearchResults" />
         </activity>
         <activity
-            android:name=".views.swap.ConnectSwapActivity"
-            android:theme="@style/SwapTheme.Wizard.ReceiveSwap"
-            android:label=""
-            android:noHistory="true"
-            android:parentActivityName=".FDroid"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".FDroid" />
-        </activity>
-        <activity
-            android:name=".installer.InstallConfirmActivity"
+            android:name=".privileged.views.InstallConfirmActivity"
             android:label="@string/menu_install"
             android:parentActivityName=".FDroid">
             <meta-data
@@ -375,14 +366,6 @@
 
         </activity>
         <activity
-            android:name=".views.swap.SwapAppListActivity$SwapAppDetails"
-            android:label="@string/app_details"
-            android:parentActivityName=".views.swap.SwapAppListActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".views.swap.SwapAppListActivity" />
-        </activity>
-        <activity
             android:label="@string/menu_preferences"
             android:name=".PreferencesActivity"
             android:parentActivityName=".FDroid" >
@@ -392,7 +375,7 @@
         </activity>
         <activity
             android:label="@string/menu_swap"
-            android:name=".views.swap.SwapActivity"
+            android:name=".views.swap.SwapWorkflowActivity"
             android:parentActivityName=".FDroid"
             android:theme="@style/SwapTheme.Wizard"
             android:screenOrientation="portrait"
@@ -401,23 +384,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".FDroid" />
         </activity>
-        <activity
-            android:label="@string/swap"
-            android:name=".views.swap.SwapAppListActivity"
-            android:parentActivityName=".FDroid"
-            android:theme="@style/SwapTheme.AppList"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".FDroid" />
-        </activity>
         <!-- Note: Theme.NoDisplay, this activity shows dialogs only -->
         <activity
-            android:name=".installer.InstallIntoSystemDialogActivity"
+            android:name=".privileged.install.InstallPrivilegedDialogActivity"
             android:theme="@android:style/Theme.NoDisplay" />
         <receiver
-            android:name=".installer.InstallIntoSystemBootReceiver" >
+            android:name=".privileged.install.InstallPrivilegedBootReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -474,10 +446,18 @@
                 <action android:name="android.net.wifi.STATE_CHANGE" />
             </intent-filter>
         </receiver>
+        <receiver android:name=".receiver.DownloadManagerReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED" />
+            </intent-filter>
+        </receiver>
 
         <service android:name=".UpdateService" />
         <service android:name=".net.WifiStateChangeService" />
-        <service android:name=".localrepo.LocalRepoService" />
+        <service android:name=".localrepo.SwapService" />
     </application>
 
 </manifest>

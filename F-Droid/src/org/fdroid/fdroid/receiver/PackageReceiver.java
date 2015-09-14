@@ -23,8 +23,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
-import android.util.Log;
 
+import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.ApkProvider;
 import org.fdroid.fdroid.data.AppProvider;
 
@@ -46,7 +46,7 @@ abstract class PackageReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d(TAG, "PackageReceiver received [action = '" + intent.getAction() + "', data = '" + intent.getData() + "']");
+        Utils.debugLog(TAG, "PackageReceiver received [action = '" + intent.getAction() + "', data = '" + intent.getData() + "']");
         if (toDiscard(intent)) {
             return;
         }

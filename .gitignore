@@ -46,5 +46,5 @@ out
 extern/*/libs/
 extern/*/*/libs/
 
-# We don't use proguard anywhere
-proguard-project.txt
+# Tests
+junit-report.xml
