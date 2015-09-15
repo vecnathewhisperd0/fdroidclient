@@ -70,18 +70,24 @@ public class AsyncDownloaderFromAndroid implements AsyncDownloader {
 
         // Check if the download is complete
         if ((downloadManagerId = isDownloadComplete(context, uniqueDownloadId)) > 0) {
-            // clear the notification
+            int status = validDownload(context, downloadManagerId);
+            // clear the download
             dm.remove(downloadManagerId);
 
-            try {
-                // write the downloaded file to the expected location
-                ParcelFileDescriptor fd = dm.openDownloadedFile(downloadManagerId);
-                copyFile(fd.getFileDescriptor(), localFile);
-                listener.onDownloadComplete();
-            } catch (IOException e) {
-                listener.onErrorDownloading(e.getLocalizedMessage());
+            if (status != 0) {
+                // some error occurred during download
+                downloadManagerId = -1;
+            } else {
+                try {
+                    // write the downloaded file to the expected location
+                    ParcelFileDescriptor fd = dm.openDownloadedFile(downloadManagerId);
+                    copyFile(fd.getFileDescriptor(), localFile);
+                    listener.onDownloadComplete();
+                } catch (IOException e) {
+                    listener.onErrorDownloading(e.getLocalizedMessage());
+                }
+                return;
             }
-            return;
         }
 
         // Check if the download is still in progress
@@ -311,6 +317,31 @@ public class AsyncDownloaderFromAndroid implements AsyncDownloader {
         }
 
         return -1;
+    }
+
+
+    /**
+     * Check if download was valid, see issue
+     * http://code.google.com/p/android/issues/detail?id=18462
+     * From http://stackoverflow.com/questions/8937817/downloadmanager-action-download-complete-broadcast-receiver-receiving-same-downl
+     * @return 0 if successful, -1 if download doesn't exist, else the DownloadManager.ERROR_... code
+     */
+    public static int validDownload(Context context, long downloadId) {
+        //Verify if download is a success
+        DownloadManager dm = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+        Cursor c= dm.query(new DownloadManager.Query().setFilterById(downloadId));
+
+        if(c.moveToFirst()){
+            int status = c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
+
+            if(status == DownloadManager.STATUS_SUCCESSFUL){
+                return 0; //Download is valid, celebrate
+            }else{
+                return c.getInt(c.getColumnIndex(DownloadManager.COLUMN_REASON));
+            }
+        }
+
+        return -1; // download doesn't exist
     }
 
     /**
