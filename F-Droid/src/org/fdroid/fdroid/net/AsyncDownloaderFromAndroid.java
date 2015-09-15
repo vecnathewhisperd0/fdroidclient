@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.ParcelFileDescriptor;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.Utils;
@@ -69,28 +70,33 @@ public class AsyncDownloaderFromAndroid implements AsyncDownloader {
     public void download() {
         isCancelled = false;
 
-        // Check if the download is complete
-        if ((downloadManagerId = isDownloadComplete(context, uniqueDownloadId)) > 0) {
+        // check if download failed
+        if (downloadManagerId >= 0) {
             int status = validDownload(context, downloadManagerId);
-            // clear the download
-            dm.remove(downloadManagerId);
-
-            if (status != 0) {
-                // some error occurred during download
-                downloadManagerId = -1;
-                listener.onErrorDownloading(context.getString(R.string.corrupt_download));
-                return;
-            } else {
-                try {
-                    // write the downloaded file to the expected location
-                    ParcelFileDescriptor fd = dm.openDownloadedFile(downloadManagerId);
-                    copyFile(fd.getFileDescriptor(), localFile);
-                    listener.onDownloadComplete();
-                } catch (IOException e) {
-                    listener.onErrorDownloading(e.getLocalizedMessage());
+            if (status > 0) {
+                // error downloading
+                dm.remove(downloadManagerId);
+                if (listener != null) {
+                    listener.onErrorDownloading(context.getString(R.string.corrupt_download));
                 }
                 return;
             }
+        }
+
+        // Check if the download is complete
+        if ((downloadManagerId = isDownloadComplete(context, uniqueDownloadId)) > 0) {
+            // clear the download
+            dm.remove(downloadManagerId);
+
+            try {
+                // write the downloaded file to the expected location
+                ParcelFileDescriptor fd = dm.openDownloadedFile(downloadManagerId);
+                copyFile(fd.getFileDescriptor(), localFile);
+                listener.onDownloadComplete();
+            } catch (IOException e) {
+                listener.onErrorDownloading(e.getLocalizedMessage());
+            }
+            return;
         }
 
         // Check if the download is still in progress
@@ -332,16 +338,20 @@ public class AsyncDownloaderFromAndroid implements AsyncDownloader {
     public static int validDownload(Context context, long downloadId) {
         //Verify if download is a success
         DownloadManager dm = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
-        Cursor c= dm.query(new DownloadManager.Query().setFilterById(downloadId));
+        Cursor c = dm.query(new DownloadManager.Query().setFilterById(downloadId));
 
-        if(c.moveToFirst()){
-            int status = c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
+        try {
+            if (c.moveToFirst()) {
+                int status = c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
 
-            if(status == DownloadManager.STATUS_SUCCESSFUL){
-                return 0; //Download is valid, celebrate
-            }else{
-                return c.getInt(c.getColumnIndex(DownloadManager.COLUMN_REASON));
+                if (status == DownloadManager.STATUS_SUCCESSFUL) {
+                    return 0; //Download is valid, celebrate
+                } else {
+                    return c.getInt(c.getColumnIndex(DownloadManager.COLUMN_REASON));
+                }
             }
+        } finally {
+            c.close();
         }
 
         return -1; // download doesn't exist
@@ -353,9 +363,11 @@ public class AsyncDownloaderFromAndroid implements AsyncDownloader {
     final BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Log.d("dm", "in downloader got intent " + intent.getAction());
             if (DownloadManager.ACTION_DOWNLOAD_COMPLETE.equals(intent.getAction())) {
                 long dId = getDownloadId(intent);
                 String downloadId = getDownloadId(context, dId);
+
                 if (listener != null && dId == AsyncDownloaderFromAndroid.this.downloadManagerId && downloadId != null) {
                     // our current download has just completed, so let's throw up install dialog
                     // immediately
