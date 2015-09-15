@@ -269,7 +269,7 @@ public class LocalRepoManager {
             Log.e(TAG, "Error adding app to local repo", e);
             return;
         }
-        Utils.DebugLog(TAG, "apps.put: " + packageName);
+        Utils.debugLog(TAG, "apps.put: " + packageName);
         apps.put(packageName, app);
     }
 
@@ -484,12 +484,17 @@ public class LocalRepoManager {
     }
 
     public void writeIndexJar() throws IOException {
+
+        FileWriter writer = null;
         try {
-            new IndexXmlBuilder(context, apps).build(new FileWriter(xmlIndex));
+            writer = new FileWriter(xmlIndex);
+            new IndexXmlBuilder(context, apps).build(writer);
         } catch (Exception e) {
             Log.e(TAG, "Could not write index jar", e);
             Toast.makeText(context, R.string.failed_to_create_index, Toast.LENGTH_LONG).show();
             return;
+        } finally {
+            Utils.closeQuietly(writer);
         }
 
         BufferedOutputStream bo = new BufferedOutputStream(new FileOutputStream(xmlIndexJarUnsigned));

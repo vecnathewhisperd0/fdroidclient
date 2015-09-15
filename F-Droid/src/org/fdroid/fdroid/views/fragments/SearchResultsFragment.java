@@ -10,7 +10,6 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,7 +102,7 @@ public class SearchResultsFragment extends ListFragment implements LoaderManager
             headerText = getString(R.string.searchres_napps, count, query);
         }
         tv.setText(headerText);
-        Utils.DebugLog(TAG, "Search for '" + query + "' returned " + count + " results");
+        Utils.debugLog(TAG, "Search for '" + query + "' returned " + count + " results");
     }
 
     @Override

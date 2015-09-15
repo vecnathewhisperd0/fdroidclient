@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<string name="app_name">F-Droid</string>
+    <string name="site_link">https://f-droid.org</string>
+    <string name="source_link">https://gitlab.com/fdroid/fdroidclient</string>
+    <string name="team_email">team@f-droid.org</string>
 
-	<string name="about_sitec">https://f-droid.org</string>
-	<string name="about_mailc">team@f-droid.org</string>
+    <string name="menu_bitcoin">Bitcoin</string>
+    <string name="menu_litecoin">Litecoin</string>
+    <string name="menu_dogecoin">Dogecoin</string>
+    <string name="menu_flattr">Flattr</string>
 
-	<string name="menu_bitcoin">Bitcoin</string>
-	<string name="menu_litecoin">Litecoin</string>
-	<string name="menu_dogecoin">Dogecoin</string>
-	<string name="menu_flattr">Flattr</string>
+    <string name="https">https://</string>
 
-	<string name="https">https://</string>
+    <string-array name="updateIntervalValues">
+        <item>0</item>
+        <item>1</item>
+        <item>4</item>
+        <item>12</item>
+        <item>24</item>
+        <item>168</item>
+        <item>336</item>
+    </string-array>
 
-	<string-array name="updateIntervalValues">
-		<item>0</item>
-		<item>1</item>
-		<item>4</item>
-		<item>12</item>
-		<item>24</item>
-		<item>168</item>
-		<item>336</item>
-	</string-array>
-
-	<string-array name="themeValues">
-		<item>dark</item>
-		<item>light</item>
-	</string-array>
+    <string-array name="themeValues">
+        <item>light</item>
+        <item>dark</item>
+    </string-array>
 
     <string-array name="languageValues">
         <item></item>
@@ -37,7 +36,6 @@
         <item>cs</item>
         <item>de</item>
         <item>el</item>
-        <item>en-rUS</item>
         <item>eo</item>
         <item>es</item>
         <item>eu</item>
@@ -68,9 +66,16 @@
         <item>ug</item>
         <item>uk</item>
         <item>vi</item>
-        <item>zh</item>
         <item>zh-rCN</item>
         <item>zh-rHK</item>
+    </string-array>
+
+    <string-array name="file_size_units">
+        <item>B</item>
+        <item>KiB</item>
+        <item>MiB</item>
+        <item>GiB</item>
+        <item>TiB</item>
     </string-array>
 
 </resources>

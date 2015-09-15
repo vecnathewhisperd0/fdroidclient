@@ -5,7 +5,6 @@ import android.os.Build;
 import android.system.ErrnoException;
 import android.util.Log;
 
-import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.SanitizedFile;
 
@@ -59,7 +58,7 @@ public class FileCompat extends Compatibility {
             dest.getAbsolutePath()
         };
         try {
-            Utils.DebugLog(TAG, "Executing command: " + commands[0] + " " + commands[1] + " " + commands[2]);
+            Utils.debugLog(TAG, "Executing command: " + commands[0] + " " + commands[1] + " " + commands[2]);
             Process proc = Runtime.getRuntime().exec(commands);
             Utils.consumeStream(proc.getInputStream());
             Utils.consumeStream(proc.getErrorStream());
@@ -107,7 +106,7 @@ public class FileCompat extends Compatibility {
         };
 
         try {
-            Utils.DebugLog(TAG, "Executing following command: " + args[0] + " " + args[1] + " " + args[2]);
+            Utils.debugLog(TAG, "Executing following command: " + args[0] + " " + args[1] + " " + args[2]);
             Process proc = Runtime.getRuntime().exec(args);
             Utils.consumeStream(proc.getInputStream());
             Utils.consumeStream(proc.getErrorStream());

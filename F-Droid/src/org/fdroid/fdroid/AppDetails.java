@@ -183,12 +183,12 @@ public class AppDetails extends AppCompatActivity implements ProgressListener, A
         private String getInstalledStatus(final Apk apk) {
             // Definitely not installed.
             if (apk.vercode != app.installedVersionCode) {
-                return getString(R.string.not_inst);
+                return getString(R.string.app_not_installed);
             }
             // Definitely installed this version.
             if (mInstalledSigID != null && apk.sig != null
                     && apk.sig.equals(mInstalledSigID)) {
-                return getString(R.string.inst);
+                return getString(R.string.app_installed);
             }
             // Installed the same version, but from someplace else.
             final String installerPkgName;
@@ -196,14 +196,14 @@ public class AppDetails extends AppCompatActivity implements ProgressListener, A
                 installerPkgName = mPm.getInstallerPackageName(app.id);
             } catch (IllegalArgumentException e) {
                 Log.w(TAG, "Application " + app.id + " is not installed anymore");
-                return getString(R.string.not_inst);
+                return getString(R.string.app_not_installed);
             }
             if (TextUtils.isEmpty(installerPkgName)) {
-                return getString(R.string.inst_unknown_source);
+                return getString(R.string.app_inst_unknown_source);
             }
             final String installerLabel = InstalledAppProvider
                 .getApplicationLabel(mctx, installerPkgName);
-            return getString(R.string.inst_known_source, installerLabel);
+            return getString(R.string.app_inst_known_source, installerLabel);
         }
 
         @Override
@@ -393,10 +393,10 @@ public class AppDetails extends AppCompatActivity implements ProgressListener, A
         // Get the preferences we're going to use in this Activity...
         ConfigurationChangeHelper previousData = (ConfigurationChangeHelper)getLastCustomNonConfigurationInstance();
         if (previousData != null) {
-            Utils.DebugLog(TAG, "Recreating view after configuration change.");
+            Utils.debugLog(TAG, "Recreating view after configuration change.");
             downloadHandler = previousData.downloader;
             if (downloadHandler != null) {
-                Utils.DebugLog(TAG, "Download was in progress before the configuration change, so we will start to listen to its events again.");
+                Utils.debugLog(TAG, "Download was in progress before the configuration change, so we will start to listen to its events again.");
             }
             app = previousData.app;
             setApp(app);
@@ -515,7 +515,7 @@ public class AppDetails extends AppCompatActivity implements ProgressListener, A
         super.onPause();
         if (app != null && (app.ignoreAllUpdates != startingIgnoreAll
                 || app.ignoreThisUpdate != startingIgnoreThis)) {
-            Utils.DebugLog(TAG, "Updating 'ignore updates', as it has changed since we started the activity...");
+            Utils.debugLog(TAG, "Updating 'ignore updates', as it has changed since we started the activity...");
             setIgnoreUpdates(app.id, app.ignoreAllUpdates, app.ignoreThisUpdate);
         }
 
@@ -583,7 +583,7 @@ public class AppDetails extends AppCompatActivity implements ProgressListener, A
     // Return true if the app was found, false otherwise.
     private boolean reset(String appId) {
 
-        Utils.DebugLog(TAG, "Getting application details for " + appId);
+        Utils.debugLog(TAG, "Getting application details for " + appId);
         App newApp = null;
 
         if (!TextUtils.isEmpty(appId)) {
@@ -943,7 +943,7 @@ public class AppDetails extends AppCompatActivity implements ProgressListener, A
                 title = R.string.uninstall_error_title;
                 switch (errorCode) {
                 default: // ERROR_CODE_OTHER
-                    body = R.string.install_error_unknown;
+                    body = R.string.uninstall_error_unknown;
                     break;
                 }
             }
@@ -989,7 +989,7 @@ public class AppDetails extends AppCompatActivity implements ProgressListener, A
             // the download thread to make sure that we check for cancellations before
             // sending events, but it is not possible to be perfect, because the interruption
             // which triggers the download can happen after the check to see if
-            Utils.DebugLog(TAG, "Discarding downloader event \"" + event.type + "\" as it is from an old (probably cancelled) downloader.");
+            Utils.debugLog(TAG, "Discarding downloader event \"" + event.type + "\" as it is from an old (probably cancelled) downloader.");
             return;
         }
 
@@ -1489,6 +1489,10 @@ public class AppDetails extends AppCompatActivity implements ProgressListener, A
          * Updates progress bar and captions to new values (in bytes).
          */
         public void updateProgress(long progress, long total) {
+            // Avoid division by zero and other weird values
+            if (progress < 0 || total <= 0) {
+                return;
+            }
             long percent = progress * 100 / total;
             setProgressVisible(true);
             progressBar.setIndeterminate(false);

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+	<string name="app_name">F-Droid</string>
+
 	<string name="searchres_napps">Found %1$d applications matching \'%2$s\':</string>
 	<string name="searchres_oneapp">Found one application matching \'%s\':</string>
 	<string name="searchres_noapps">No applications were found matching \'%s\'</string>
@@ -7,22 +10,23 @@
 	<string name="installIncompatible">It seems like this package is not compatible with your device. Do you want to try and install it anyway?</string>
 	<string name="installDowngrade">You are trying to downgrade this application. Doing so might get it to malfunction and even lose your data. Do you want to try and downgrade it anyway?</string>
 	<string name="version">Version</string>
-	<string name="edit">Edit</string>
 	<string name="delete">Delete</string>
 	<string name="enable_nfc_send">Enable NFC Send…</string>
-	<string name="cache_downloaded">App cache</string>
-	<string name="cache_downloaded_on">Keep downloaded .apk files on device</string>
+	<string name="cache_downloaded">Cache packages</string>
+	<string name="cache_downloaded_on">Keep downloaded package files on device</string>
 	<string name="updates">Updates</string>
+	<string name="unstable_updates">Unstable updates</string>
+	<string name="unstable_updates_summary">Suggest updates to unstable versions</string>
 	<string name="other">Other</string>
 	<string name="last_update_check">Last repo scan: %s</string>
-	<string name="never">never</string>
+	<string name="never">Never</string>
 
 	<string name="update_interval">Automatic update interval</string>
 	<string name="update_interval_zero">No automatic app list updates</string>
-	<string name="automatic_scan_wifi">Only on wifi</string>
-	<string name="automatic_scan_wifi_on">Update app lists automatically only on wifi</string>
-	<string name="notify">Notify</string>
-	<string name="notify_on">Notify when updates are available</string>
+	<string name="automatic_scan_wifi">Only on Wi-Fi</string>
+	<string name="automatic_scan_wifi_on">Update app lists automatically only on Wi-Fi</string>
+	<string name="notify">Update notifications</string>
+	<string name="notify_on">Show a notification when updates are available</string>
 	<string name="update_history">Update history</string>
 	<string name="update_history_summ">Days to consider apps new or recent: %s</string>
 	<string name="system_installer">Enable privileged F-Droid</string>
@@ -36,27 +40,21 @@
 
 	<string name="search_results">Search Results</string>
 	<string name="app_details">App Details</string>
-	<string name="no_such_app">No such app found</string>
+	<string name="no_such_app">No such app found.</string>
 
 	<string name="about_title">About F-Droid</string>
+	<string name="about_version">Version:</string>
+	<string name="about_site">Website:</string>
+	<string name="about_source">Source:</string>
+	<string name="about_mail">E-Mail:</string>
 	<string name="about_desc">Originally based on Aptoide.\nReleased under the
 		GNU GPLv3 license.</string>
-	<string name="about_site">Website: </string>
-	<string name="about_mail">Email: </string>
-	<string name="about_version">Version: </string>
-	<string name="about_website">Website</string>
 
-	<string name="no_repo">You don\'t have any repositories configured!\n\nA
-		repository is a source of applications. To add one, press the MENU
-		button now and enter the URL.\n\nA repository address looks something
-		like
-		this: https://f-droid.org/repo</string>
-
-	<string name="incompatible">Incompatible</string>
-	<string name="inst">Installed</string>
-	<string name="not_inst">Not Installed</string>
-	<string name="inst_known_source">Installed (from %s)</string>
-	<string name="inst_unknown_source">Installed (from unknown source)</string>
+	<string name="app_incompatible">Incompatible</string>
+	<string name="app_installed">Installed</string>
+	<string name="app_not_installed">Not Installed</string>
+	<string name="app_inst_known_source">Installed (from %s)</string>
+	<string name="app_inst_unknown_source">Installed (from unknown source)</string>
 
 	<string name="added_on">Added on %s</string>
 
@@ -75,45 +73,34 @@
 	<string name="add_key">Add Key</string>
 	<string name="overwrite">Overwrite</string>
 
-	<string name="repo_update_title">Update repositories</string>
-	<string name="tab_noninstalled">Available</string>
+	<string name="tab_available_apps">Available</string>
+	<string name="tab_installed_apps">Installed</string>
 	<string name="tab_updates">Updates</string>
 	<string name="one_update_available">1 update is available.</string>
 	<string name="many_updates_available">%d updates are available.</string>
 	<string name="fdroid_updates_available">F-Droid Updates Available</string>
 	<string name="update_notification_more">+%1$d more…</string>
-	<string name="process_wait_title">Please Wait</string>
-	<string name="process_update_msg">Updating application list…</string>
-	<string name="download_server">Getting application from</string>
-	<string name="nfc_is_not_enabled">NFC is not enabled!</string>
-	<string name="go_to_nfc_settings">Go to NFC Settings…</string>
 	<string name="bluetooth_activity_not_found">No Bluetooth send method found, choose one!</string>
 	<string name="choose_bt_send">Choose Bluetooth send method</string>
 	<string name="send_via_bluetooth">Send via Bluetooth</string>
 
 	<string name="repo_add_url">Repository address</string>
 	<string name="repo_add_fingerprint">Fingerprint (optional)</string>
-	<string name="repo_exists">This repo already exists</string>
 	<string name="repo_exists_add_fingerprint">This repo is already setup, this will add new key information.</string>
 	<string name="repo_exists_enable">This repo is already setup, confirm that you want to re-enable it.</string>
 	<string name="repo_exists_and_enabled">The incoming repo is already setup and enabled.</string>
 	<string name="repo_delete_to_overwrite">You must first delete this repo before you can add one with a different key.</string>
-	<string name="bad_fingerprint">BAD FINGERPRINT</string>
+	<string name="bad_fingerprint">Bad fingerprint</string>
 	<string name="invalid_url">This is not a valid URL.</string>
 	<string name="malformed_repo_uri">Ignoring malformed repo URI: %s</string>
 
-	<string name="repo_alrt">The list of used repositories has
-		changed.\nDo you
-		want to update them?</string>
-
 	<string name="menu_update_repo">Update Repos</string>
 	<string name="menu_manage">Repositories</string>
-	<string name="menu_send_apk_bt">Bluetooth FDroid.apk…</string>
+	<string name="menu_send_apk_bt">Share F-Droid by Bluetooth</string>
 	<string name="menu_preferences">Preferences</string>
 	<string name="menu_about">About</string>
 	<string name="menu_search">Search</string>
 	<string name="menu_add_repo">New Repository</string>
-	<string name="menu_rem_repo">Remove Repository</string>
 
 	<string name="menu_launch">Run</string>
 	<string name="menu_share">Share</string>
@@ -130,8 +117,7 @@
 
 	<string name="details_installed">Version %s installed</string>
 	<string name="details_notinstalled">Not installed</string>
-	<string name="corrupt_download">Downloaded file is corrupt</string>
-	<string name="download_cancelled">Download cancelled</string>
+	<string name="corrupt_download">Downloaded file is corrupt.</string>
 
 	<string name="antiadslist">This app contains advertising</string>
 	<string name="antitracklist">This app tracks and reports your activity</string>
@@ -142,7 +128,7 @@
 
 	<string name="display">Display</string>
 
-	<string name="expert">Expert</string>
+	<string name="expert">Expert mode</string>
 	<string name="expert_on">Show extra info and enable extra settings</string>
 
 	<string name="search_hint">Search applications</string>
@@ -150,45 +136,23 @@
 	<string name="appcompatibility">Application compatibility</string>
 	<string name="show_incompat_versions">Incompatible versions</string>
 	<string name="show_incompat_versions_on">Show app versions incompatible with the device</string>
-	<string name="rooted">Root</string>
+	<string name="rooted">Ignore root</string>
 	<string name="rooted_on">Do not grey out apps requiring root privileges</string>
-	<string name="ignoreTouch">Ignore Touchscreen</string>
+	<string name="ignoreTouch">Ignore touchscreen</string>
 	<string name="ignoreTouch_on">Always include apps that require touchscreen</string>
-
-	<string name="category_all">All</string>
-	<string name="category_whatsnew">What\'s New</string>
-	<string name="category_recentlyupdated">Recently Updated</string>
 
 	<string name="local_repo">Local Repo</string>
 	<string name="local_repo_running">F-Droid is ready to swap</string>
-	<string name="waiting_for_ipaddress">waiting for IP address…</string>
-	<string name="setup_repo">Setup Local Repo</string>
 	<string name="touch_to_configure_local_repo">Touch to view details and allow others to swap your apps.</string>
-	<string name="touch_to_turn_on_local_repo">Touch to turn on your local repo.</string>
-	<string name="touch_to_turn_off_local_repo">Touch to turn off your local repo.</string>
-	<string name="updating">Updating…</string>
-	<string name="update_repo">Update Repo</string>
 	<string name="deleting_repo">Deleting current repo…</string>
 	<string name="adding_apks_format">Adding %s to repo…</string>
 	<string name="writing_index_jar">Writing signed index file (index.jar)…</string>
 	<string name="failed_to_create_index">Failed to create the repo index!</string>
 	<string name="linking_apks">Linking APKs into the repo…</string>
 	<string name="copying_icons">Copying app icons into the repo…</string>
-	<string name="no_applications_found">No applications found</string>
-	<string name="icon">icon</string>
-	<string name="fingerprint">Fingerprint:</string>
-	<string name="wifi_network">WiFi Network:</string>
-	<string name="sharing_uri">Sharing URL:</string>
-	<string name="enable_wifi">Enable WiFi</string>
-	<string name="enabling_wifi">Enabling WiFi…</string>
-	<string name="same_wifi_instructions">To connect to other people\'s devices, make sure both devices are on the same WiFi network. Then either type the URL above into F-Droid, or scan this QR Code:</string>
-	<string name="qr_code">QR Code</string>
+	<string name="icon">Icon</string>
 	<string name="next">Next</string>
 	<string name="skip">Skip</string>
-	<string name="qr_content_description">QR Code of repo URL</string>
-	<string name="qr_wizard_wifi_network_instructions">Scan this QR Code to connect to the same WiFi network as this device.</string>
-	<string name="qr_wizard_download_instructions">Scan this QR Code to connect to the website for getting started.</string>
-	<string name="send_fdroid_via_wifi">Send F-Droid via WiFi…</string>
 
 	<string name="proxy">Proxy</string>
 	<string name="enable_proxy_title">Enable HTTP Proxy</string>
@@ -213,16 +177,15 @@
     <string name="status_inserting">Saving application details (%1$d%%)</string>
 	<string name="repos_unchanged">All repositories are up to date</string>
         <string name="all_other_repos_fine">All other repos didn\'t create errors.</string>
-        <string name="global_error_updating_repos">Error during update:</string>
+        <string name="global_error_updating_repos">Error during update: %s</string>
 	<string name="no_permissions">No permissions are used.</string>
 	<string name="permissions_for_long">Permissions for version %s</string>
-	<string name="no_handler_app">You don\'t have any available app that can handle %s</string>
+	<string name="no_handler_app">You don\'t have any available app that can handle %s.</string>
 	<string name="compactlayout">Compact Layout</string>
 	<string name="compactlayout_on">Show icons at a smaller size</string>
     <string name="theme">Theme</string>
     <string name="unsigned">Unsigned</string>
     <string name="unverified">Unverified</string>
-    <string name="repo_url">URL</string>
     <string name="repo_num_apps">Number of apps</string>
     <string name="repo_fingerprint">Fingerprint of Repo Signing Key (SHA-256)</string>
     <string name="repo_description">Description</string>
@@ -235,55 +198,51 @@
     <string name="repo_not_yet_updated">This repository has not been used yet.
         In order to view the apps it provides, you will need to update
         it.\n\nOnce updated, the description and other details will
-        become available here.
-    </string>
-    <string name="repo_delete_details">Do you want to delete the \"{0}\"
-        repository, which has {1} apps in it? Any installed apps will NOT be
-        removed, but you will not be able to update them through F-Droid any
-        more.
-    </string>
+        become available here.</string>
     <string name="unknown">Unknown</string>
     <string name="repo_confirm_delete_title">Delete Repository?</string>
     <string name="repo_confirm_delete_body">Deleting a repository means
         apps from it will no longer be available from F-Droid.\n\nNote: All
-        previously installed apps will remain on your device.
-    </string>
+        previously installed apps will remain on your device.</string>
     <string name="repo_disabled_notification">Disabled "%1$s".\n\nYou will
-        need to re-enable this repository to install apps from it.
-    </string>
-    <string name="repo_added">Saved F-Droid repository %1$s</string>
+        need to re-enable this repository to install apps from it.</string>
+    <string name="repo_added">Saved F-Droid repository %1$s.</string>
     <string name="repo_searching_address">Looking for F-Droid repository at\n%1$s</string>
     <string name="minsdk_or_later">%s or later</string>
-    <string name="up_to_maxsdk">up to %s</string>
+    <string name="up_to_maxsdk">Up to %s</string>
     <string name="minsdk_up_to_maxsdk">%1$s up to %2$s</string>
-    <string name="not_on_same_wifi">Your device is not on the same WiFi as the local repo you just added! Try joining this network: %s</string>
+    <string name="not_on_same_wifi">Your device is not on the same Wi-Fi as the local repo you just added! Try joining this network: %s</string>
     <string name="requires_features">Requires: %1$s</string>
     <string name="pref_language">Language</string>
     <string name="pref_language_default">System Default</string>
 
     <string name="app_icon">App icon</string>
     <string name="repo_icon">Repo icon</string>
-    <string name="wifi">WiFi</string>
+    <string name="wifi">Wi-Fi</string>
     <string name="wifi_ap">Hotspot</string>
 
-    <string name="Children">Children</string>
+    <string name="category_all">All</string>
+    <string name="category_whatsnew">What\'s New</string>
+    <string name="category_recentlyupdated">Recently Updated</string>
+    <string name="Connectivity">Connectivity</string>
     <string name="Development">Development</string>
     <string name="Games">Games</string>
+    <string name="Graphics">Graphics</string>
     <string name="Internet">Internet</string>
-    <string name="Mathematics">Mathematics</string>
+    <string name="Money">Money</string>
     <string name="Multimedia">Multimedia</string>
     <string name="Navigation">Navigation</string>
-    <string name="News">News</string>
-    <string name="Office">Office</string>
     <string name="Phone_SMS">Phone &amp; SMS</string>
     <string name="Reading">Reading</string>
     <string name="Science_Education">Science &amp; Education</string>
     <string name="Security">Security</string>
+    <string name="Sports_Health">Sports &amp; Health</string>
     <string name="System">System</string>
-    <string name="Wallpaper">Wallpaper</string>
+    <string name="Theming">Theming</string>
+    <string name="Time">Time</string>
+    <string name="Writing">Writing</string>
 
     <string name="empty_installed_app_list">No apps installed.\n\nThere are apps on your device, but they are not available from F-Droid. This could be because you need to update your repositories, or the repositories genuinely don\'t have your apps available.</string>
-    <string name="empty_swap_app_list">No apps available to swap.\n\nEither the device you are swapping with didn\'t offer any apps to swap, or an error occurred while communicating with it.</string>
     <string name="empty_available_app_list">No apps in this category.\n\nTry selecting a different category or updating your repositories to get a fresh list of apps.</string>
     <string name="empty_can_update_app_list">All apps up to date.\n\nCongratulations! All of your apps are up to date (or your repositories are out of date).</string>
 
@@ -306,10 +265,10 @@
     <string name="system_install_post_fail">Installation of privileged F-Droid failed</string>
     <string name="system_install_post_success_message">Privileged F-Droid has been successfully installed. This allows F-Droid to install, upgrade and uninstall apps on its own.</string>
     <string name="system_install_post_fail_message">The installation of privileged F-Droid has failed. The installation method is not supported by all Android distributions, please consult the F-Droid bug tracker for more information.</string>
-    <string name="system_install_installing">installing…</string>
-    <string name="system_install_uninstalling">uninstalling…</string>
+    <string name="system_install_installing">Installing…</string>
+    <string name="system_install_uninstalling">Uninstalling…</string>
     <string name="system_install_question">Do you want to install privileged F-Droid?\nThis takes up to 10 seconds.</string>
-    <string name="system_install_question_lollipop">Do you want to install privileged F-Droid?\nThis takes up to 10 seconds and the device will be &lt;b>rebooted&lt;/b> afterwards.</string>
+    <string name="system_install_question_lollipop">Do you want to install privileged F-Droid?\nThis takes up to 10 seconds and the device will be rebooted afterwards.</string>
     <string name="system_install_first_time_message">Looks like you have root access on your device. You can now install privileged F-Droid, tightly coupled with the Android operating system. This allows F-Droid to install, upgrade and uninstall apps on its own.</string>
     <string name="system_uninstall">Do you want to uninstall privileged F-Droid?</string>
     <string name="system_uninstall_message">This will uninstall privileged F-Droid.</string>
@@ -318,23 +277,19 @@
     <string name="app_description">F-Droid is an installable catalogue of FOSS (Free and Open Source Software) applications for the Android platform. The client makes it easy to browse, install, and keep track of updates on your device.</string>
     <string name="swap_nfc_title">Touch to swap</string>
     <string name="swap_nfc_description">If your friend has F-Droid and NFC turned on touch your phones together.</string>
-    <string name="swap_join_same_wifi">Join the same WiFi as your friend</string>
-    <string name="swap_join_same_wifi_desc">To swap using WiFi, ensure you are on the same network. If you don\'t have access to the same network, one of you can create a WiFi Hotspot.</string>
+    <string name="swap_join_same_wifi">Join the same Wi-Fi as your friend</string>
+    <string name="swap_join_same_wifi_desc">To swap using Wi-Fi, ensure you are on the same network. If you don\'t have access to the same network, one of you can create a Wi-Fi Hotspot.</string>
     <string name="swap_join_this_hotspot">Help your friend join your hotspot</string>
-    <string name="swap_use_bluetooth">Use Bluetooth instead</string>
-    <string name="swap_wifi_help">Learn more about Wifi</string>
     <string name="menu_swap">Swap apps</string>
     <string name="swap">Swap apps</string>
     <string name="swap_success">Swap success!</string>
     <string name="swap_no_wifi_network">No network yet</string>
     <string name="swap_active_hotspot">%1$s (your hotspot)</string>
     <string name="swap_view_available_networks">Tap to open available networks</string>
-    <string name="swap_switch_to_wifi">Tap to switch to a WiFi network</string>
-    <string name="swap_wifi_qr_not_working">It\'s not working</string>
+    <string name="swap_switch_to_wifi">Tap to switch to a Wi-Fi network</string>
     <string name="open_qr_code_scanner">Open QR Scanner</string>
     <string name="swap_welcome">Welcome to F-Droid!</string>
     <string name="swap_confirm_connect">Do you want to get apps from %1$s now?</string>
-    <string name="swap_reciprocate_failed">An error occurred while attempting to swap with another device. We will still try to get apps from them, but they may not be able to get apps from us.</string>
     <string name="swap_tap_to_select_apps">Tap to select the apps you want to swap.</string>
     <string name="swap_dont_show_again">Don\'t show this again</string>
     <string name="swap_scan_or_type_url">One person needs to scan the code, or type the URL of the other in a browser.</string>
@@ -347,13 +302,12 @@
     <string name="swap_visible_bluetooth">Visible via Bluetooth</string>
     <string name="swap_setting_up_bluetooth">Setting up Bluetooth…</string>
     <string name="swap_not_visible_bluetooth">Not visible via Bluetooth</string>
-    <string name="swap_visible_wifi">Visible via WiFi</string>
-    <string name="swap_setting_up_wifi">Setting up WiFi…</string>
-    <string name="swap_not_visible_wifi">Not visible via WiFi</string>
+    <string name="swap_visible_wifi">Visible via Wi-Fi</string>
+    <string name="swap_setting_up_wifi">Setting up Wi-Fi…</string>
+    <string name="swap_not_visible_wifi">Not visible via Wi-Fi</string>
     <string name="swap_wifi_device_name">Device Name</string>
     <string name="swap_cant_find_peers">Can\'t find who you\'re looking for?</string>
-    <string name="swap_send_fdroid">SEND F-DROID</string>
-    <string name="swap_scan_qr_code">SCAN QR CODE</string>
+    <string name="swap_send_fdroid">Send F-Droid</string>
     <string name="swap_no_peers_nearby">Could not find people nearby to swap with.</string>
     <string name="swap_connecting">Connecting</string>
     <string name="swap_confirm">Confirm swap</string>
@@ -361,7 +315,7 @@
     <string name="bluetooth_unavailable">Bluetooth unavailable</string>
     <string name="swap_cant_send_no_bluetooth">Cannot send F-Droid, because Bluetooth is unavailable on this device.</string>
     <string name="loading">Loading…</string>
-    <string name="swap_attempt_install">TRY TO INSTALL</string>
+    <string name="swap_attempt_install">Try to install</string>
     <string name="swap_connection_misc_error">An error occurred while connecting to device, we can\'t seem to swap with it :(</string>
     <string name="swap_not_enabled">Swapping not enabled</string>
     <string name="swap_not_enabled_description">Before swapping, your device must be made visible.</string>
@@ -386,20 +340,23 @@
     <string name="allPerms">All</string>
     <string name="privacyPerms">Privacy</string>
     <string name="devicePerms">Device Access</string>
-    <string name="perm_costs_money">this may cost you money</string>
+    <string name="perm_costs_money">This may cost you money</string>
     <string name="uninstall_update_confirm">Do you want to replace this app with the factory version?</string>
     <string name="uninstall_confirm">Do you want to uninstall this app?</string>
-	<string name="tap_to_install">Download completed, tap to install</string>
+    <string name="tap_to_install">Download completed, tap to install</string>
 
-    <string name="perms_new_perm_prefix">NEW: </string>
+    <string name="perms_new_perm_prefix">New: </string>
     <string name="perms_description_app">Provided by %1$s.</string>
     <string name="downloading">Downloading…</string>
 
-	<string-array name="file_size_units">
-        <item>B</item>
-        <item>KiB</item>
-        <item>MiB</item>
-        <item>GiB</item>
-        <item>TiB</item>
-    </string-array>
+    <string name="interval_never">Never</string>
+    <string name="interval_1h">Hourly</string>
+    <string name="interval_4h">Every 4 hours</string>
+    <string name="interval_12h">Every 12 hours</string>
+    <string name="interval_1d">Daily</string>
+    <string name="interval_1w">Weekly</string>
+    <string name="interval_2w">Every 2 weeks</string>
+
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
 </resources>

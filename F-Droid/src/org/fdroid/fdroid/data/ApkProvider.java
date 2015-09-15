@@ -9,12 +9,12 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 import android.util.Log;
 
+import org.fdroid.fdroid.Utils;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.fdroid.fdroid.Utils;
 
 public class ApkProvider extends FDroidProvider {
 
@@ -121,7 +121,7 @@ public class ApkProvider extends FDroidProvider {
          * one of the apks in the "apks" argument.
          */
         public static List<Apk> knownApks(Context context, List<Apk> apks, String[] fields) {
-            if (apks.size() == 0) {
+            if (apks.isEmpty()) {
                 return new ArrayList<>();
             }
 
@@ -362,13 +362,13 @@ public class ApkProvider extends FDroidProvider {
 
     private QuerySelection queryApks(String apkKeys) {
         final String[] apkDetails = apkKeys.split(",");
-        final String[] args = new String[apkDetails.length * 2];
-        StringBuilder sb = new StringBuilder();
         if (apkDetails.length > MAX_APKS_TO_QUERY) {
             throw new IllegalArgumentException(
                 "Cannot query more than " + MAX_APKS_TO_QUERY + ". " +
                 "You tried to query " + apkDetails.length);
         }
+        final String[] args = new String[apkDetails.length * 2];
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < apkDetails.length; i++) {
             String[] parts = apkDetails[i].split(":");
             String id = parts[0];
@@ -429,7 +429,7 @@ public class ApkProvider extends FDroidProvider {
         for (Map.Entry<String, String> repoField : REPO_FIELDS.entrySet()) {
             final String field = repoField.getKey();
             if (values.containsKey(field)) {
-                Utils.DebugLog(TAG, "Cannot insert/update '" + field + "' field " +
+                Utils.debugLog(TAG, "Cannot insert/update '" + field + "' field " +
                         "on apk table, as it belongs to the repo table. " +
                         "This field will be ignored.");
                 values.remove(field);

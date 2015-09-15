@@ -10,6 +10,7 @@ import android.util.Log;
 
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Preferences;
+import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.localrepo.SwapService;
 import org.fdroid.fdroid.net.LocalHTTPD;
 import org.fdroid.fdroid.net.WifiStateChangeService;
@@ -42,7 +43,7 @@ public class WifiSwap extends SwapType {
     @Override
     public void start() {
 
-        Log.d(TAG, "Preparing swap webserver.");
+        Utils.debugLog(TAG, "Preparing swap webserver.");
         sendBroadcast(SwapService.EXTRA_STARTING);
 
         Runnable webServer = new Runnable() {
@@ -67,10 +68,10 @@ public class WifiSwap extends SwapType {
                     }
                 };
                 try {
-                    Log.d(TAG, "Starting swap webserver...");
+                    Utils.debugLog(TAG, "Starting swap webserver...");
                     localHttpd.start();
                     setConnected(true);
-                    Log.d(TAG, "Swap webserver started.");
+                    Utils.debugLog(TAG, "Swap webserver started.");
                 } catch (BindException e) {
                     int prev = FDroidApp.port;
                     FDroidApp.port = FDroidApp.port + new Random().nextInt(1111);
@@ -79,8 +80,7 @@ public class WifiSwap extends SwapType {
                     context.startService(new Intent(context, WifiStateChangeService.class));
                 } catch (IOException e) {
                     setConnected(false);
-                    Log.e(TAG, "Could not start local repo HTTP server: " + e);
-                    Log.e(TAG, Log.getStackTraceString(e));
+                    Log.e(TAG, "Could not start local repo HTTP server", e);
                 }
                 Looper.loop(); // start the message receiving loop
             }
@@ -94,7 +94,7 @@ public class WifiSwap extends SwapType {
         if (webServerThreadHandler == null) {
             Log.i(TAG, "null handler in stopWebServer");
         } else {
-            Log.d(TAG, "Sending message to swap webserver to stop it.");
+            Utils.debugLog(TAG, "Sending message to swap webserver to stop it.");
             Message msg = webServerThreadHandler.obtainMessage();
             msg.obj = webServerThreadHandler.getLooper().getThread().getName() + " says stop";
             webServerThreadHandler.sendMessage(msg);

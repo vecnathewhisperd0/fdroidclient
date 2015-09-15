@@ -7,7 +7,6 @@ import android.util.Log;
 import android.webkit.MimeTypeMap;
 
 import org.fdroid.fdroid.BuildConfig;
-import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.localrepo.LocalRepoKeyStore;
 import org.fdroid.fdroid.views.swap.SwapWorkflowActivity;
@@ -73,8 +72,8 @@ public class LocalHTTPD extends NanoHTTPD {
     }
 
     private void requestSwap(String repo) {
-        Utils.DebugLog(TAG, "Received request to swap with " + repo);
-        Utils.DebugLog(TAG, "Showing confirm screen to check whether that is okay with the user.");
+        Utils.debugLog(TAG, "Received request to swap with " + repo);
+        Utils.debugLog(TAG, "Showing confirm screen to check whether that is okay with the user.");
 
         Uri repoUri = Uri.parse(repo);
         Intent intent = new Intent(context, SwapWorkflowActivity.class);
@@ -124,17 +123,17 @@ public class LocalHTTPD extends NanoHTTPD {
         String uri = session.getUri();
 
         if (BuildConfig.DEBUG) {
-            Utils.DebugLog(TAG, session.getMethod() + " '" + uri + "' ");
+            Utils.debugLog(TAG, session.getMethod() + " '" + uri + "' ");
 
             Iterator<String> e = header.keySet().iterator();
             while (e.hasNext()) {
                 String value = e.next();
-                Utils.DebugLog(TAG, "  HDR: '" + value + "' = '" + header.get(value) + "'");
+                Utils.debugLog(TAG, "  HDR: '" + value + "' = '" + header.get(value) + "'");
             }
             e = parms.keySet().iterator();
             while (e.hasNext()) {
                 String value = e.next();
-                Utils.DebugLog(TAG, "  PRM: '" + value + "' = '" + parms.get(value) + "'");
+                Utils.debugLog(TAG, "  PRM: '" + value + "' = '" + parms.get(value) + "'");
             }
         }
 
@@ -276,9 +275,9 @@ public class LocalHTTPD extends NanoHTTPD {
                     res.addHeader("ETag", etag);
                 }
             } else {
-                if (etag.equals(header.get("if-none-match")))
+                if (etag.equals(header.get("if-none-match"))) {
                     res = createResponse(Response.Status.NOT_MODIFIED, mime, "");
-                else {
+                } else {
                     res = createResponse(Response.Status.OK, mime, new FileInputStream(file));
                     res.addHeader("Content-Length", "" + fileLen);
                     res.addHeader("ETag", etag);

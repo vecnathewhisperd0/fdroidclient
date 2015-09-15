@@ -1,7 +1,7 @@
 F-Droid Client
 ==============
 
-[![build status](https://ci.gitlab.com/projects/6571/status.png?ref=master)](https://ci.gitlab.com/projects/6571?ref=master)
+[![build status](https://ci.gitlab.com/projects/6571/status.png?ref=master)](https://ci.gitlab.com/projects/6571?ref=master) [![Translation status](https://hosted.weblate.org/widgets/f-droid/-/svg-badge.svg)](https://hosted.weblate.org/engage/f-droid/)
 
 Client for [F-Droid](https://f-droid.org), the Free Software repository system
 for Android.
@@ -57,10 +57,14 @@ Also see our [Contributing doc](CONTRIBUTING.md).
 Translating
 -----------
 
-The `res/values-*` dirs are kept up to date automatically via [MediaWiki's
-Translate Extension](https://www.mediawiki.org/wiki/Extension:Translate). See
-[our translation page](https://f-droid.org/wiki/page/Special:Translate) if you
-would like to contribute.
+The strings are translated using [Weblate](https://weblate.org/en/). Follow
+[these instructions](https://hosted.weblate.org/engage/f-droid/) if you would
+like to contribute.
+
+Please *do not* send merge requests or patches modifying the translations. Use
+Weblate instead - it applies a series of fixes and suggestions, plus it keeps
+track of modifications and fuzzy translations. Applying translations manually
+skips all of the fixes and checks, and overrides the fuzzy state of strings.
 
 
 Running the test suite
@@ -74,6 +78,10 @@ command line:
 
 This will build and install F-Droid and the test apk, then execute the entire
 test suite on the device or emulator.
+
+Note that the CI already runs the tests on an emulator, so you don't
+necessarily have to do this yourself if you open a merge request as the tests
+will get run.
 
 See the [Android Gradle user guide](http://tools.android.com/tech-docs/new-build-system/user-guide#TOC-Testing)
 for more details, including how to use Android Studio to run tests (which

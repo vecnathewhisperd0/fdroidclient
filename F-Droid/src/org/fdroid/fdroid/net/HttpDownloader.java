@@ -5,13 +5,17 @@ import android.util.Log;
 
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 
+import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.Utils;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
@@ -30,6 +34,7 @@ public class HttpDownloader extends Downloader {
     protected static final String HEADER_FIELD_ETAG = "ETag";
 
     protected HttpURLConnection connection;
+    private InputStream stream;
     private int statusCode = -1;
     private boolean onlyStream = false;
 
@@ -41,10 +46,8 @@ public class HttpDownloader extends Downloader {
     /**
      * Calling this makes this downloader not download a file. Instead, it will
      * only stream the file through the {@link HttpDownloader#getInputStream()}
-     * @return
      */
-    public HttpDownloader streamDontDownload()
-    {
+    public HttpDownloader streamDontDownload() {
         onlyStream = true;
         return this;
     }
@@ -57,10 +60,15 @@ public class HttpDownloader extends Downloader {
      * same one twice, bail with an exception).
      * @throws IOException
      */
-    @Override
+
     public InputStream getInputStream() throws IOException {
         setupConnection();
-        return connection.getInputStream();
+        stream = new BufferedInputStream(connection.getInputStream());
+        return stream;
+    }
+
+    public BufferedReader getBufferedReader() throws IOException {
+        return new BufferedReader(new InputStreamReader(getInputStream()));
     }
 
     // Get a remote file. Returns the HTTP response code.
@@ -84,11 +92,18 @@ public class HttpDownloader extends Downloader {
         }
     }
 
+    boolean isSwapUrl() {
+        String host = sourceUrl.getHost();
+        return sourceUrl.getPort() > 1023 // only root can use <= 1023, so never a swap repo
+                && host.matches("[0-9.]+") // host must be an IP address
+                && FDroidApp.subnetInfo.isInRange(host); // on the same subnet as we are
+    }
+
     protected void setupConnection() throws IOException {
         if (connection != null)
             return;
         Preferences prefs = Preferences.get();
-        if (prefs.isProxyEnabled()) {
+        if (prefs.isProxyEnabled() && ! isSwapUrl()) {
             SocketAddress sa = new InetSocketAddress(prefs.getProxyHost(), prefs.getProxyPort());
             Proxy proxy = new Proxy(Proxy.Type.HTTP, sa);
             NetCipher.setProxy(proxy);
@@ -101,15 +116,15 @@ public class HttpDownloader extends Downloader {
     protected void doDownload() throws IOException, InterruptedException {
         if (wantToCheckCache()) {
             setupCacheCheck();
-            Utils.DebugLog(TAG, "Checking cached status of " + sourceUrl);
+            Utils.debugLog(TAG, "Checking cached status of " + sourceUrl);
             statusCode = connection.getResponseCode();
         }
 
         if (isCached()) {
-            Utils.DebugLog(TAG, sourceUrl + " is cached, so not downloading (HTTP " + statusCode + ")");
+            Utils.debugLog(TAG, sourceUrl + " is cached, so not downloading (HTTP " + statusCode + ")");
         } else {
-            Utils.DebugLog(TAG, "Downloading from " + sourceUrl);
-            downloadFromStream();
+            Utils.debugLog(TAG, "Downloading from " + sourceUrl);
+            downloadFromStream(4096);
             updateCacheCheck();
         }
     }
@@ -151,4 +166,13 @@ public class HttpDownloader extends Downloader {
         return statusCode;
     }
 
+    public void close() {
+        try {
+            if (stream != null)
+                stream.close();
+        }
+        catch (IOException e) {}
+
+        connection.disconnect();
+    }
 }

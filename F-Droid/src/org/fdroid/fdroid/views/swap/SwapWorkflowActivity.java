@@ -1,8 +1,8 @@
 package org.fdroid.fdroid.views.swap;
 
 import android.app.Activity;
-import android.content.ComponentName;
 import android.bluetooth.BluetoothAdapter;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -44,6 +44,7 @@ import org.fdroid.fdroid.data.NewRepoConfig;
 import org.fdroid.fdroid.installer.Installer;
 import org.fdroid.fdroid.localrepo.LocalRepoManager;
 import org.fdroid.fdroid.localrepo.SwapService;
+import org.fdroid.fdroid.localrepo.peers.BluetoothFinder;
 import org.fdroid.fdroid.localrepo.peers.Peer;
 import org.fdroid.fdroid.net.ApkDownloader;
 
@@ -625,7 +626,7 @@ public class SwapWorkflowActivity extends AppCompatActivity {
 
             Log.d(TAG, "Not currently in discoverable mode, so prompting user to enable.");
             Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-            intent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300); // TODO: What about when this expires? What if user manually disables discovery?
+            intent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, BluetoothFinder.DISCOVERABLE_TIMEOUT); // 3600 is new maximum! TODO: What about when this expires? What if user manually disables discovery?
             startActivityForResult(intent, REQUEST_BLUETOOTH_DISCOVERABLE);
         }
 
@@ -714,7 +715,7 @@ public class SwapWorkflowActivity extends AppCompatActivity {
                 broadcast(TYPE_COMPLETE);
             } catch (Exception e) {
                 broadcast(TYPE_ERROR);
-                e.printStackTrace();
+                Log.e(TAG, "", e);
             }
             return null;
         }
@@ -750,7 +751,7 @@ public class SwapWorkflowActivity extends AppCompatActivity {
                     String bluetooth = service.getBluetoothSwap().isConnected() ? "Y" : " N";
                     String wifi = service.getWifiSwap().isConnected() ? "Y" : " N";
                     String mdns = service.getWifiSwap().getBonjour().isConnected() ? "Y" : " N";
-                     message += "Swap { BT: " + bluetooth + ", WiFi: " + wifi + ", mDNS: " + mdns + "}, ";
+                    message += "Swap { BT: " + bluetooth + ", WiFi: " + wifi + ", mDNS: " + mdns + "}, ";
                 }
 
                 {

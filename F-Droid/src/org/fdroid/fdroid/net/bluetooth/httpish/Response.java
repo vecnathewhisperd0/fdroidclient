@@ -1,6 +1,7 @@
 package org.fdroid.fdroid.net.bluetooth.httpish;
 
 import android.util.Log;
+
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.net.bluetooth.BluetoothConnection;
 import org.fdroid.fdroid.net.bluetooth.FileDetails;
@@ -50,7 +51,7 @@ public class Response {
         } catch (UnsupportedEncodingException e) {
             // Not quite sure what to do in the case of a phone not supporting UTF-8, so lets
             // throw a runtime exception and hope that we get good bug reports if this ever happens.
-            Log.e(TAG, "Device does not support UTF-8: " + e.getMessage());
+            Log.e(TAG, "Device does not support UTF-8", e);
             throw new IllegalStateException("Device does not support UTF-8.", e);
         }
     }
@@ -62,8 +63,7 @@ public class Response {
         this.contentStream = contentStream;
     }
 
-    public void addHeader (String key, String value)
-    {
+    public void addHeader (String key, String value) {
         headers.put(key, value);
     }
 
@@ -132,7 +132,7 @@ public class Response {
 
     public String readContents() throws IOException {
         int size = getFileSize();
-        if (contentStream == null || getFileSize() <= 0) {
+        if (contentStream == null || size <= 0) {
             return null;
         }
 
@@ -184,7 +184,7 @@ public class Response {
             }
 
             if (etag != null) {
-                headers.put( "ETag", etag);
+                headers.put("ETag", etag);
             }
 
             return new Response(statusCode, headers, contentStream);

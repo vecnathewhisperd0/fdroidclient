@@ -2,7 +2,6 @@
 <resources>
   <string name="installIncompatible">به‌نظر می‌رسد این بسته با دستگاه شما هماهنگ نیست. آیا می‌خواهید آن را به هر قیمتی آزمایش و نصب کنید؟</string>
   <string name="installDowngrade">شما در حال قدیمی‌کردن و کاهش درجهٔ این برنامه هستید. انجام چنین کاری ممکن منجر به خرابی یا از دست رفتن داده‌های شما شود. آیا می‌خواهید سعی کنید این برنامه را به هر قیمتی قدیمی کنید؟</string>
-  <string name="edit">ویرایش</string>
   <string name="delete">حذف</string>
   <string name="cache_downloaded">میانگیری برنامه‌های دریافت‌شده</string>
   <string name="cache_downloaded_on">نگه‌داشتن پرونده‌های ای‌پی‌کی بر روی کارت اس‌دی</string>
@@ -20,14 +19,8 @@
   <string name="no_such_app">چنین برنامه‌ای یافت نشد</string>
   <string name="about_title">دربارهٔ F-Droid</string>
   <string name="about_mail">رایانامه:</string>
-  <string name="about_website">وب‌گاه</string>
-  <string name="no_repo">شما هیچ مخزنی را تنظیم نکرده‌اید!
-
-یک مخزن منبعی از برنامه‌ها است. برای اضافه‌کردن یکی. دکمهٔ منو را بزنید و نشانی اینترنتی وارد کنید.
-
-نشانی یک مخزن چیزی است شبیه این: https://f-droid.org/repo</string>
-  <string name="inst">نصب‌شده</string>
-  <string name="not_inst">نصب‌نشده</string>
+  <string name="app_installed">نصب‌شده</string>
+  <string name="app_not_installed">نصب‌نشده</string>
   <string name="added_on">به %s افزوده شد</string>
   <string name="ok">باشد</string>
   <string name="yes">بله</string>
@@ -38,25 +31,16 @@
   <string name="enable">توانا ساختن</string>
   <string name="add_key">فزودن کلید</string>
   <string name="overwrite">بازنویسی</string>
-  <string name="repo_update_title">به‌روزرسانی مخازن</string>
   <string name="tab_updates">به‌روزرسانی‌ها</string>
   <string name="fdroid_updates_available">به‌روزرسانی‌های F-Droid موجود هستند</string>
-  <string name="process_update_msg">به‌روزرسانی فهرست برنامه‌ها…</string>
-  <string name="download_server">گرفتن برنامه از</string>
-  <string name="nfc_is_not_enabled">اِن‌اِف‌سی فعال نیست!</string>
-  <string name="go_to_nfc_settings">برو به ساماندهی اِن‌اِف‌سی</string>
   <string name="bluetooth_activity_not_found">روش فرستادن دندان‌آبی پیدا نشد، یکی را برگزینید!</string>
   <string name="choose_bt_send">گزینش روش فرستادن دندان‌آبی</string>
   <string name="repo_add_url">نشانی مخزن</string>
   <string name="repo_add_fingerprint">انگشت‌نگاری (دلبخواهی)</string>
-  <string name="repo_exists">این مخزن هم‌اکنون وجود ندارد!</string>
-  <string name="repo_alrt">فهرست مخزن‌ها تغییر یافته‌است.
-آیا می‌خواهید به‌روزرسانی‌شان کنید؟</string>
   <string name="menu_update_repo">به‌روزرسانی مخزن‌ها</string>
   <string name="menu_manage">مدیریت مخزن‌ها</string>
   <string name="menu_about">درباره</string>
   <string name="menu_search">جستجو</string>
-  <string name="menu_rem_repo">حذف مخزن</string>
   <string name="menu_share">به اشتراک‌گذاری</string>
   <string name="menu_install">نصب</string>
   <string name="menu_uninstall">حذف نصب</string>
@@ -65,7 +49,6 @@
   <string name="menu_donate">کمک مالی</string>
   <string name="details_notinstalled">نصب‌نشده</string>
   <string name="corrupt_download">پروندهٔ دریافتی خراب است</string>
-  <string name="download_cancelled">دریافت فسخ شد</string>
   <string name="antiadslist">این برنامه دارای تبلیغات است</string>
   <string name="antitracklist">این برنامه فعالیت‌های شما را ردیابی و گزارش می‌کند</string>
   <string name="antinonfreeadlist">این برنامه افزونه‌های غیر آزاد را تبلیغ می‌کند</string>
@@ -90,7 +73,6 @@
   <string name="compactlayout_on">نمایش شکلک‌ها در اندازه کوچکتر</string>
   <string name="theme">پوسته</string>
   <string name="unsigned">بدون امضا</string>
-  <string name="repo_url">URL</string>
   <string name="repo_description">توضیحات</string>
   <string name="repo_last_update">واپسین بروزرسانی</string>
   <string name="repo_update">بروزرسانی‌ها</string>

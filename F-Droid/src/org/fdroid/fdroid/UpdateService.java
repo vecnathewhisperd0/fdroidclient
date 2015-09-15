@@ -136,9 +136,9 @@ public class UpdateService extends IntentService implements ProgressListener {
             alarm.setInexactRepeating(AlarmManager.ELAPSED_REALTIME,
                     SystemClock.elapsedRealtime() + 5000,
                     AlarmManager.INTERVAL_HOUR, pending);
-            Utils.DebugLog(TAG, "Update scheduler alarm set");
+            Utils.debugLog(TAG, "Update scheduler alarm set");
         } else {
-            Utils.DebugLog(TAG, "Update scheduler alarm not set");
+            Utils.debugLog(TAG, "Update scheduler alarm not set");
         }
 
     }
@@ -243,7 +243,7 @@ public class UpdateService extends IntentService implements ProgressListener {
                     notificationManager.notify(NOTIFY_ID_UPDATING, notificationBuilder.build());
                     break;
                 case STATUS_ERROR_GLOBAL:
-                    text = context.getString(R.string.global_error_updating_repos) + " " + message;
+                    text = context.getString(R.string.global_error_updating_repos, message);
                     notificationBuilder.setContentText(text)
                             .setCategory(NotificationCompat.CATEGORY_ERROR)
                             .setSmallIcon(android.R.drawable.ic_dialog_alert);
@@ -291,13 +291,13 @@ public class UpdateService extends IntentService implements ProgressListener {
      */
     private boolean verifyIsTimeForScheduledRun() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        long lastUpdate = prefs.getLong(Preferences.PREF_UPD_LAST, 0);
         String sint = prefs.getString(Preferences.PREF_UPD_INTERVAL, "0");
         int interval = Integer.parseInt(sint);
         if (interval == 0) {
             Log.i(TAG, "Skipping update - disabled");
             return false;
         }
+        long lastUpdate = prefs.getLong(Preferences.PREF_UPD_LAST, 0);
         long elapsed = System.currentTimeMillis() - lastUpdate;
         if (elapsed < interval * 60 * 60 * 1000) {
             Log.i(TAG, "Skipping update - done " + elapsed
@@ -312,7 +312,6 @@ public class UpdateService extends IntentService implements ProgressListener {
      * If we are to update the repos only on wifi, make sure that connection is active
      */
     public static boolean isNetworkAvailableForUpdate(Context context) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         // this could be cellular or wifi
@@ -320,6 +319,7 @@ public class UpdateService extends IntentService implements ProgressListener {
         if (activeNetwork == null)
             return false;
 
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         if (activeNetwork.getType() != ConnectivityManager.TYPE_WIFI
                 && prefs.getBoolean(Preferences.PREF_UPD_WIFI_ONLY, false)) {
             Log.i(TAG, "Skipping update - wifi not available");
@@ -336,14 +336,14 @@ public class UpdateService extends IntentService implements ProgressListener {
         boolean manualUpdate = intent.getBooleanExtra(EXTRA_MANUAL_UPDATE, false);
 
         try {
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-
             // See if it's time to actually do anything yet...
             if (manualUpdate) {
-                Utils.DebugLog(TAG, "Unscheduled (manually requested) update");
+                Utils.debugLog(TAG, "Unscheduled (manually requested) update");
             } else if (!verifyIsTimeForScheduledRun()) {
                 return;
             }
+
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 
             // Grab some preliminary information, then we can release the
             // database while we do all the downloading, etc...
@@ -398,7 +398,7 @@ public class UpdateService extends IntentService implements ProgressListener {
             }
 
             if (!changes) {
-                Utils.DebugLog(TAG, "Not checking app details or compatibility, because all repos were up to date.");
+                Utils.debugLog(TAG, "Not checking app details or compatibility, because all repos were up to date.");
             } else {
                 sendStatus(STATUS_INFO, getString(R.string.status_checking_compatibility));
 
@@ -505,9 +505,9 @@ public class UpdateService extends IntentService implements ProgressListener {
         return stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
-    private NotificationCompat.Style createNotificationBigStyle(Cursor hasUpdates) {
+    private static final int MAX_UPDATES_TO_SHOW = 5;
 
-        final int MAX_UPDATES_TO_SHOW = 5;
+    private NotificationCompat.Style createNotificationBigStyle(Cursor hasUpdates) {
 
         final String contentText = hasUpdates.getCount() > 1
                 ? getString(R.string.many_updates_available, hasUpdates.getCount())
@@ -531,7 +531,7 @@ public class UpdateService extends IntentService implements ProgressListener {
     }
 
     private void showAppUpdatesNotification(Cursor hasUpdates) {
-        Utils.DebugLog(TAG, "Notifying " + hasUpdates.getCount() + " updates.");
+        Utils.debugLog(TAG, "Notifying " + hasUpdates.getCount() + " updates.");
 
         final int icon = Build.VERSION.SDK_INT >= 11 ? R.drawable.ic_stat_notify_updates : R.drawable.ic_launcher;
 
@@ -553,7 +553,7 @@ public class UpdateService extends IntentService implements ProgressListener {
 
     private List<String> getKnownAppIds(List<App> apps) {
         List<String> knownAppIds = new ArrayList<>();
-        if (apps.size() == 0) {
+        if (apps.isEmpty()) {
             return knownAppIds;
         }
         if (apps.size() > AppProvider.MAX_APPS_TO_QUERY) {
@@ -607,7 +607,7 @@ public class UpdateService extends IntentService implements ProgressListener {
             }
         }
 
-        Utils.DebugLog(TAG, "Updating/inserting " + operations.size() + " apps.");
+        Utils.debugLog(TAG, "Updating/inserting " + operations.size() + " apps.");
         try {
             executeBatchWithStatus(AppProvider.getAuthority(), operations, currentCount, totalUpdateCount);
         } catch (RemoteException | OperationApplicationException e) {
@@ -666,7 +666,7 @@ public class UpdateService extends IntentService implements ProgressListener {
             }
         }
 
-        Utils.DebugLog(TAG, "Updating/inserting " + operations.size() + " apks.");
+        Utils.debugLog(TAG, "Updating/inserting " + operations.size() + " apks.");
         try {
             executeBatchWithStatus(ApkProvider.getAuthority(), operations, currentCount, totalApksAppsCount);
         } catch (RemoteException | OperationApplicationException e) {
@@ -730,7 +730,7 @@ public class UpdateService extends IntentService implements ProgressListener {
         }
 
         long duration = System.currentTimeMillis() - startTime;
-        Utils.DebugLog(TAG, "Found " + toRemove.size() + " apks no longer in the updated repos (took " + duration + "ms)");
+        Utils.debugLog(TAG, "Found " + toRemove.size() + " apks no longer in the updated repos (took " + duration + "ms)");
 
         if (toRemove.size() > 0) {
             ApkProvider.Helper.deleteApks(this, toRemove);
@@ -750,13 +750,13 @@ public class UpdateService extends IntentService implements ProgressListener {
         for (final Repo repo : repos) {
             Uri uri = ApkProvider.getRepoUri(repo.getId());
             int numDeleted = getContentResolver().delete(uri, null, null);
-            Utils.DebugLog(TAG, "Removing " + numDeleted + " apks from repo " + repo.address);
+            Utils.debugLog(TAG, "Removing " + numDeleted + " apks from repo " + repo.address);
         }
     }
 
     private void removeAppsWithoutApks() {
         int numDeleted = getContentResolver().delete(AppProvider.getNoApksUri(), null, null);
-        Utils.DebugLog(TAG, "Removing " + numDeleted + " apks that don't have any apks");
+        Utils.debugLog(TAG, "Removing " + numDeleted + " apks that don't have any apks");
     }
 
     /**

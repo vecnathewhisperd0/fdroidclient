@@ -9,10 +9,7 @@ import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.FDroidApp;
 
 import java.io.IOException;
-import java.net.Inet4Address;
 import java.net.InetAddress;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceEvent;
@@ -61,7 +58,7 @@ public class BonjourFinder extends PeerFinder<BonjourPeer> implements ServiceLis
                     Log.d(TAG, "Searching for Bonjour (mDNS) clients...");
                     jmdns = JmDNS.create(InetAddress.getByName(FDroidApp.ipAddressString));
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Log.e(TAG, "", e);
                 }
                 return null;
             }

@@ -80,9 +80,6 @@ public final class Utils {
     private static final String[] FRIENDLY_SIZE_FORMAT = {
             "%.0f B", "%.0f KiB", "%.1f MiB", "%.2f GiB" };
 
-    private static final SimpleDateFormat LOG_DATE_FORMAT =
-            new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
-
     public static final String FALLBACK_ICONS_DIR = "/icons/";
 
     /*
@@ -359,11 +356,11 @@ public final class Utils {
     public static String calcFingerprint(byte[] key) {
         if (key == null)
             return null;
-        String ret = null;
         if (key.length < 256) {
             Log.e(TAG, "key was shorter than 256 bytes (" + key.length + "), cannot be valid!");
             return null;
         }
+        String ret = null;
         try {
             // keytool -list -v gives you the SHA-256 fingerprint
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -427,7 +424,7 @@ public final class Utils {
         }
 
         public static CommaSeparatedList make(List<String> list) {
-            if (list == null || list.size() == 0)
+            if (list == null || list.isEmpty())
                 return null;
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < list.size(); i++) {
@@ -530,7 +527,7 @@ public final class Utils {
             return toHexString(mdbytes);
         } catch (IOException e) {
             Log.e(TAG, "Error reading \"" + apk.getAbsolutePath()
-                    + "\" to compute " + algo + " hash.");
+                    + "\" to compute " + algo + " hash.", e);
             return null;
         } catch (NoSuchAlgorithmException e) {
             Log.e(TAG, "Device does not support " + algo + " MessageDisgest algorithm");
@@ -584,13 +581,6 @@ public final class Utils {
         return DATE_FORMAT.format(date);
     }
 
-    public static String formatLogDate(Date date) {
-        if (date == null) {
-            return "(unknown)";
-        }
-        return LOG_DATE_FORMAT.format(date);
-    }
-
     // Need this to add the unimplemented support for ordered and unordered
     // lists to Html.fromHtml().
     public static class HtmlTagHandler implements Html.TagHandler {
@@ -629,7 +619,7 @@ public final class Utils {
     }
 
     /**
-     * Remove all files from the {@parm directory} either beginning with {@param startsWith}
+     * Remove all files from the {@param directory} either beginning with {@param startsWith}
      * or ending with {@param endsWith}. Note that if the SD card is not ready, then the
      * cache directory will probably not be available. In this situation no files will be
      * deleted (and thus they may still exist after the SD card becomes available).
@@ -646,11 +636,11 @@ public final class Utils {
         }
 
         if (startsWith != null) {
-            DebugLog(TAG, "Cleaning up files in " + directory + " that start with \"" + startsWith + "\"");
+            debugLog(TAG, "Cleaning up files in " + directory + " that start with \"" + startsWith + "\"");
         }
 
         if (endsWith != null) {
-            DebugLog(TAG, "Cleaning up files in " + directory + " that end with \"" + endsWith + "\"");
+            debugLog(TAG, "Cleaning up files in " + directory + " that end with \"" + endsWith + "\"");
         }
 
         for (File f : files) {
@@ -663,16 +653,28 @@ public final class Utils {
         }
     }
 
-    public static void DebugLog(String tag, String msg) {
+    public static void debugLog(String tag, String msg) {
         if (BuildConfig.DEBUG) {
             Log.d(tag, msg);
         }
     }
 
-    public static void DebugLog(String tag, String msg, Throwable tr) {
+    public static void debugLog(String tag, String msg, Throwable tr) {
         if (BuildConfig.DEBUG) {
             Log.d(tag, msg, tr);
         }
+    }
+
+    // Try to get the version name of the client. Return null on failure.
+    public static String getVersionName(Context context) {
+        String versionName = null;
+        try {
+            versionName = context.getPackageManager()
+                .getPackageInfo(context.getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Could not get client version name", e);
+        }
+        return versionName;
     }
 
 }

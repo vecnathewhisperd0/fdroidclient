@@ -7,7 +7,6 @@
   <string name="installIncompatible">Φαίνεται ότι αυτό το πακέτο δεν είναι συμβατό με τη συσκευή σας. Θα θέλατε να δοκιμάσετε να το εγκαταστήσετε ούτως ή άλλως;</string>
   <string name="installDowngrade">Προσπαθείτε να υποβαθμίσετε αυτήν την εφαρμογή. Αν το κάνετε αυτό, μπορεί να προκληθούν προβλήματα στην εφαρμογή ή ακόμα και να χάσετε τα δεδομένα σας. Θέλετε να δοκιμάσετε να την υποβαθμίσετε ούτως ή άλλως;</string>
   <string name="version">Έκδοση</string>
-  <string name="edit">Επεξεργασία</string>
   <string name="delete">Διαγραφή</string>
   <string name="enable_nfc_send">Ενεργοποίηση Αποστολής NFC…</string>
   <string name="cache_downloaded">Αποθήκευση ληφθέντων εφαρμογών στην προσωρινή μνήμη</string>
@@ -33,14 +32,8 @@
   <string name="about_site">Ιστοσελίδα:</string>
   <string name="about_mail">Ηλ. ταχυδρομείο:</string>
   <string name="about_version">Έκδοση:</string>
-  <string name="about_website">Ιστοσελίδα</string>
-  <string name="no_repo">Δεν έχει ρυθμιστεί κανένα αποθετήριο!
-
-Ένα αποθετήριο είναι μια πηγή εφαρμογών. Για να προσθέσετε κάποιο, πιέστε το πλήκτρο ΜΕΝΟΥ και εισάγετε το URL.
-
-Μια διεύθυνση αποθετηρίου μοιάζει κάπως έτσι: https://f-droid.org/repo</string>
-  <string name="inst">Εγκατεστημένο</string>
-  <string name="not_inst">Δεν είναι εγκατεστημένο</string>
+  <string name="app_installed">Εγκατεστημένο</string>
+  <string name="app_not_installed">Δεν είναι εγκατεστημένο</string>
   <string name="added_on">Προστέθηκε στις %s</string>
   <string name="ok">Εντάξει</string>
   <string name="yes">Ναι</string>
@@ -51,29 +44,20 @@
   <string name="enable">Ενεργοποίηση</string>
   <string name="add_key">Προσθήκη κλειδιού</string>
   <string name="overwrite">Αντικατάσταση</string>
-  <string name="repo_update_title">Ενημέρωση αποθετηρίων</string>
-  <string name="tab_noninstalled">Διαθέσιμα</string>
+  <string name="tab_available_apps">Διαθέσιμα</string>
   <string name="tab_updates">Ενημερώσεις</string>
   <string name="one_update_available">1 διαθέσιμη ενημερώση.</string>
   <string name="many_updates_available">%d διαθέσιμες ενημερώσεις.</string>
   <string name="fdroid_updates_available">Υπάρχουν ενημερώσεις του F-Droid</string>
-  <string name="process_wait_title">Παρακαλώ περιμένετε</string>
-  <string name="process_update_msg">Ενημέρωση λίστας εφαρμογών…</string>
-  <string name="download_server">Λήψη εφαρμογών από</string>
-  <string name="nfc_is_not_enabled">NFC δεν είναι ενεργοποιημένο!</string>
-  <string name="go_to_nfc_settings">Μετάβαση στις ρυθμίσεις NFC…</string>
   <string name="bluetooth_activity_not_found">Καμία μέθοδος αποστολής με Bluetooth δεν βρέθηκε, επιλέξετε μία!</string>
   <string name="choose_bt_send">Επιλέξτε τη μέθοδο αποστολής με Bluetooth</string>
   <string name="repo_add_url">Διεύθυνση αποθετηρίου</string>
   <string name="repo_add_fingerprint">Δακτυλικό αποτύπωμα (προαιρετικό)</string>
-  <string name="repo_exists">Αυτό το αποθετήριο υπάρχει ήδη!</string>
   <string name="repo_exists_add_fingerprint">Αυτό το αποθετήριο υπάρχει ήδη, αυτό θα προσθέσει νέο κλειδί.</string>
   <string name="repo_exists_enable">Αυτό το αποθετήριο υπάρχει ήδη, επιβεβαιώστε ότι θέλετε να το ενεργοποιήσετε ξανά.</string>
   <string name="repo_exists_and_enabled">Το εισερχόμενο αποθετήριο υπάρχει ήδη και είναι ενεργοποιημένο!</string>
   <string name="repo_delete_to_overwrite">Πρέπει πρώτα να διαγράψετε αυτό το αποθετήριο για να μπορέσετε να προσθέσετε ένα με διαφορετικό κλειδί!</string>
   <string name="malformed_repo_uri">Παράβλεψη αποθετηρίου με λανθασμένη διεύθυνση: %s</string>
-  <string name="repo_alrt">Η λίστα με τα χρησιμοποιούμενα αποθετήρια έχει αλλάξει. 
-Θέλετε να ενημερωθούν;</string>
   <string name="menu_update_repo">Ενημέρωση αποθετηρίων</string>
   <string name="menu_manage">Διαχείριση Αποθετηρίων</string>
   <string name="menu_send_apk_bt">Αποστολή του FDroid.apk με Bluetooth</string>
@@ -81,7 +65,6 @@
   <string name="menu_about">Σχετικά</string>
   <string name="menu_search">Αναζήτηση</string>
   <string name="menu_add_repo">Νέο Αποθετήριο</string>
-  <string name="menu_rem_repo">Αφαίρεση Αποθετηρίου</string>
   <string name="menu_launch">Εκτέλεση</string>
   <string name="menu_share">Διαμοιρασμός</string>
   <string name="menu_install">Εγκατάσταση</string>
@@ -96,7 +79,6 @@
   <string name="details_installed">Εγκατεστημένη Έκδοση: %s</string>
   <string name="details_notinstalled">Δεν είναι εγκατεστημένο</string>
   <string name="corrupt_download">Το αρχείο που λήφθηκε είναι κατεστραμμένο</string>
-  <string name="download_cancelled">Ακύρωθηκε η λήψη</string>
   <string name="antiadslist">Αυτή η εφαρμογή περιέχει διαφημίσεις</string>
   <string name="antitracklist">Αυτή η εφαρμογή παρακολουθεί και αναφέρει την δραστηριότητα σας</string>
   <string name="antinonfreeadlist">Αυτή η εφαρμογή προωθεί μη-ελεύθερα πρόσθετα</string>
@@ -131,7 +113,6 @@
   <string name="compactlayout_on">Εμφάνιση εικονιδίων σε μικρότερο μέγεθος</string>
   <string name="theme">Θέμα</string>
   <string name="unsigned">Μη υπογεγραμμένη</string>
-  <string name="repo_url">Διεύθυνση URL</string>
   <string name="repo_num_apps">Αριθμός των εφαρμογών</string>
   <string name="repo_fingerprint">Υπογεγραμμένο κλειδί αποθετηρίου (SHA-256)</string>
   <string name="repo_description">Περιγραφή</string>

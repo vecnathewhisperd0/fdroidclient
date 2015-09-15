@@ -2,6 +2,7 @@ package org.fdroid.fdroid.net;
 
 import android.content.Context;
 import android.util.Log;
+
 import org.apache.commons.io.input.BoundedInputStream;
 import org.fdroid.fdroid.net.bluetooth.BluetoothClient;
 import org.fdroid.fdroid.net.bluetooth.BluetoothConnection;
@@ -30,8 +31,10 @@ public class BluetoothDownloader extends Downloader {
 
     @Override
     public InputStream getInputStream() throws IOException {
-        Response response = Request.createGET(sourcePath, connection).send();
+        Request request = Request.createGET(sourcePath, connection);
+        Response response = request.send();
         fileDetails = response.toFileDetails();
+
 
         // TODO: Manage the dependency which includes this class better?
         // Right now, I only needed the one class from apache commons.
@@ -43,6 +46,7 @@ public class BluetoothDownloader extends Downloader {
         // to us).
         BoundedInputStream stream = new BoundedInputStream(response.toContentStream(), fileDetails.getFileSize());
         stream.setPropagateClose(false);
+
         return stream;
     }
 
@@ -58,7 +62,7 @@ public class BluetoothDownloader extends Downloader {
             try {
                 fileDetails = Request.createHEAD(sourceUrl.getPath(), connection).send().toFileDetails();
             } catch (IOException e) {
-                Log.e(TAG, "Error getting file details from Bluetooth \"server\": " + e.getMessage());
+                Log.e(TAG, "Error getting file details from Bluetooth \"server\"", e);
             }
         }
         return fileDetails;
@@ -76,7 +80,8 @@ public class BluetoothDownloader extends Downloader {
 
     @Override
     public void download() throws IOException, InterruptedException {
-        downloadFromStream();
+        downloadFromStream(1024);
+        connection.closeQuietly();
     }
 
     @Override
@@ -87,6 +92,12 @@ public class BluetoothDownloader extends Downloader {
             details.getCacheTag() != null &&
             details.getCacheTag().equals(getCacheTag())
         );
+    }
+
+    @Override
+    public void close() {
+        if (connection != null)
+            connection.closeQuietly();
     }
 
 }

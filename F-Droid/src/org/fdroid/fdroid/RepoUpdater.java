@@ -72,11 +72,9 @@ public class RepoUpdater {
 
     private URL getIndexAddress() throws MalformedURLException {
         String urlString = repo.address + "/index.jar";
-        try {
-            String versionName = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
+        String versionName = Utils.getVersionName(context);
+        if (versionName != null) {
             urlString += "?client_version=" + versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.e(TAG, "Could not get client version name", e);
         }
         return new URL(urlString);
     }
@@ -92,13 +90,15 @@ public class RepoUpdater {
             if (downloader.isCached()) {
                 // The index is unchanged since we last read it. We just mark
                 // everything that came from this repo as being updated.
-                Utils.DebugLog(TAG, "Repo index for " + getIndexAddress() + " is up to date (by etag)");
+                Utils.debugLog(TAG, "Repo index for " + getIndexAddress() + " is up to date (by etag)");
             }
 
         } catch (IOException e) {
             if (downloader != null && downloader.getFile() != null) {
                 downloader.getFile().delete();
+                downloader.close();
             }
+
             throw new UpdateException(repo, "Error getting index file from " + repo.address, e);
         }
         return downloader;
@@ -121,6 +121,8 @@ public class RepoUpdater {
             // successful download, then we will have a file ready to use:
             processDownloadedFile(downloader.getFile(), downloader.getCacheTag());
         }
+
+        downloader.close();
     }
 
     protected void processDownloadedFile(File downloadedFile, String cacheTag) throws UpdateException {
@@ -190,13 +192,13 @@ public class RepoUpdater {
         }
 
         if (handler.getVersion() != -1 && handler.getVersion() != repo.version) {
-            Utils.DebugLog(TAG, "Repo specified a new version: from "
+            Utils.debugLog(TAG, "Repo specified a new version: from "
                     + repo.version + " to " + handler.getVersion());
             values.put(RepoProvider.DataColumns.VERSION, handler.getVersion());
         }
 
         if (handler.getMaxAge() != -1 && handler.getMaxAge() != repo.maxage) {
-            Utils.DebugLog(TAG, "Repo specified a new maximum age - updated");
+            Utils.debugLog(TAG, "Repo specified a new maximum age - updated");
             values.put(RepoProvider.DataColumns.MAX_AGE, handler.getMaxAge());
         }
 
@@ -278,7 +280,7 @@ public class RepoUpdater {
          * actually in the index.jar itself.  If no fingerprint, just store the
          * signing certificate */
         boolean trustNewSigningCertificate = false;
-        if (repo.fingerprint == null) {
+        if (TextUtils.isEmpty(repo.fingerprint)) {
             // no info to check things are valid, so just Trust On First Use
             trustNewSigningCertificate = true;
         } else {
@@ -293,7 +295,7 @@ public class RepoUpdater {
         }
 
         if (trustNewSigningCertificate) {
-            Utils.DebugLog(TAG, "Saving new signing certificate in the database for " + repo.address);
+            Utils.debugLog(TAG, "Saving new signing certificate in the database for " + repo.address);
             ContentValues values = new ContentValues(2);
             values.put(RepoProvider.DataColumns.LAST_UPDATED, Utils.formatDate(new Date(), ""));
             values.put(RepoProvider.DataColumns.PUBLIC_KEY, Hasher.hex(rawCertFromJar));

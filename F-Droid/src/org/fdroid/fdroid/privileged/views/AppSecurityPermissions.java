@@ -436,8 +436,6 @@ public class AppSecurityPermissions {
         final boolean isDangerous = (base == PermissionInfo.PROTECTION_DANGEROUS);
         final boolean isRequired =
                 ((newReqFlags&PackageInfo.REQUESTED_PERMISSION_REQUIRED) != 0);
-        final boolean isDevelopment =
-                ((pInfo.protectionLevel&PermissionInfo.PROTECTION_FLAG_DEVELOPMENT) != 0);
         final boolean wasGranted =
                 ((existingReqFlags&PackageInfo.REQUESTED_PERMISSION_GRANTED) != 0);
         final boolean isGranted =
@@ -450,13 +448,13 @@ public class AppSecurityPermissions {
             return true;
         }
 
+        final boolean isDevelopment =
+                ((pInfo.protectionLevel&PermissionInfo.PROTECTION_FLAG_DEVELOPMENT) != 0);
+
         // Development permissions are only shown to the user if they are already
         // granted to the app -- if we are installing an app and they are not
         // already granted, they will not be granted as part of the install.
-        if (isDevelopment && wasGranted) {
-            return true;
-        }
-        return false;
+        return isDevelopment && wasGranted;
     }
 
     private static class PermissionGroupInfoComparator implements Comparator<MyPermissionGroupInfo> {

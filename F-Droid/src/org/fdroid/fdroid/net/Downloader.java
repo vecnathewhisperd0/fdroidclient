@@ -3,7 +3,6 @@ package org.fdroid.fdroid.net;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 
 import org.fdroid.fdroid.Utils;
 
@@ -37,6 +36,7 @@ public abstract class Downloader {
     protected int totalBytes = 0;
 
     public abstract InputStream getInputStream() throws IOException;
+    public abstract void close();
 
     Downloader(Context context, URL url, File destFile)
             throws FileNotFoundException, MalformedURLException {
@@ -98,8 +98,8 @@ public abstract class Downloader {
 
     public abstract boolean isCached();
 
-    protected void downloadFromStream() throws IOException, InterruptedException {
-        Utils.DebugLog(TAG, "Downloading from stream");
+    protected void downloadFromStream(int bufferSize) throws IOException, InterruptedException {
+        Utils.debugLog(TAG, "Downloading from stream");
         InputStream input = null;
         try {
             input = getInputStream();
@@ -108,7 +108,7 @@ public abstract class Downloader {
             // we were interrupted before proceeding to the download.
             throwExceptionIfInterrupted();
 
-            copyInputToOutputStream(input);
+            copyInputToOutputStream(input, bufferSize);
         } finally {
             Utils.closeQuietly(outputStream);
             Utils.closeQuietly(input);
@@ -133,7 +133,7 @@ public abstract class Downloader {
      */
     private void throwExceptionIfInterrupted() throws InterruptedException {
         if (Thread.interrupted()) {
-            Utils.DebugLog(TAG, "Received interrupt, cancelling download");
+            Utils.debugLog(TAG, "Received interrupt, cancelling download");
             throw new InterruptedException();
         }
     }
@@ -143,32 +143,42 @@ public abstract class Downloader {
      * keeping track of the number of bytes that have flowed through for the
      * progress counter.
      */
-    protected void copyInputToOutputStream(InputStream input) throws IOException, InterruptedException {
+    protected void copyInputToOutputStream(InputStream input, int bufferSize) throws IOException, InterruptedException {
 
-        byte[] buffer = new byte[Utils.BUFFER_SIZE];
         int bytesRead = 0;
         this.totalBytes = totalDownloadSize();
+        byte[] buffer = new byte[bufferSize];
 
         // Getting the total download size could potentially take time, depending on how
         // it is implemented, so we may as well check this before we proceed.
         throwExceptionIfInterrupted();
 
         sendProgress(bytesRead, totalBytes);
-        while (true) {
+        while (bytesRead < totalBytes) {
 
-            int count = input.read(buffer);
+            int count;
+            if (input.available()>0) {
+
+                int readLength = Math.min(input.available(), buffer.length);
+                count = input.read(buffer, 0, readLength);
+            } else {
+                count = input.read(buffer);
+            }
+
             throwExceptionIfInterrupted();
 
             if (count == -1) {
-                Utils.DebugLog(TAG, "Finished downloading from stream");
+                Utils.debugLog(TAG, "Finished downloading from stream");
                 break;
             }
 
             bytesRead += count;
             sendProgress(bytesRead, totalBytes);
             outputStream.write(buffer, 0, count);
+
         }
         outputStream.flush();
+        outputStream.close();
     }
 
     protected void sendProgress(int bytesRead, int totalBytes) {

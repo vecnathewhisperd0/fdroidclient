@@ -184,7 +184,7 @@ public class PrivilegedInstaller extends Installer {
                     public void handleResult(String packageName, int returnCode) throws RemoteException {
                         // TODO: propagate other return codes?
                         if (returnCode == INSTALL_SUCCEEDED) {
-                            Utils.DebugLog(TAG, "Install succeeded");
+                            Utils.debugLog(TAG, "Install succeeded");
                             mCallback.onSuccess(InstallerCallback.OPERATION_INSTALL);
                         } else {
                             Log.e(TAG, "Install failed with returnCode " + returnCode);
@@ -289,7 +289,7 @@ public class PrivilegedInstaller extends Installer {
                     public void handleResult(String packageName, int returnCode) throws RemoteException {
                         // TODO: propagate other return codes?
                         if (returnCode == DELETE_SUCCEEDED) {
-                            Utils.DebugLog(TAG, "Delete succeeded");
+                            Utils.debugLog(TAG, "Delete succeeded");
 
                             mCallback.onSuccess(InstallerCallback.OPERATION_DELETE);
                         } else {
@@ -352,7 +352,7 @@ public class PrivilegedInstaller extends Installer {
         return false;
     }
 
-    public final int INSTALL_REPLACE_EXISTING = 2;
+    public static final int INSTALL_REPLACE_EXISTING = 2;
 
     /**
      * Following return codes are copied from Android 5.1 source code

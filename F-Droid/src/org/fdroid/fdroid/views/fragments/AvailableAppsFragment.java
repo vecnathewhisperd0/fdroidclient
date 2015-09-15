@@ -11,7 +11,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -157,7 +156,6 @@ public class AvailableAppsFragment extends AppListFragment implements
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 getListView().setSelection(0);
-                Utils.DebugLog(TAG, "Selected category: " + categories.get(pos));
                 setCurrentCategory(categories.get(pos));
             }
             @Override
@@ -195,7 +193,7 @@ public class AvailableAppsFragment extends AppListFragment implements
 
     private void setCurrentCategory(String category) {
         currentCategory = category;
-        Utils.DebugLog(TAG, "Category '" + currentCategory + "' selected.");
+        Utils.debugLog(TAG, "Category '" + currentCategory + "' selected.");
         getLoaderManager().restartLoader(0, null, AvailableAppsFragment.this);
     }
 

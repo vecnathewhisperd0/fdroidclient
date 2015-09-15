@@ -2,7 +2,6 @@ package org.fdroid.fdroid.views;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +12,6 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.R;
@@ -130,13 +127,12 @@ abstract public class AppListAdapter extends CursorAdapter {
         }
 
         final String installedVersionString = app.installedVersionName;
-        int installedVersionCode = app.installedVersionCode;
 
         if (app.canAndWantToUpdate() && showStatusUpdate()) {
             return installedVersionString + " → " + app.getSuggestedVersion();
         }
 
-        if (installedVersionCode > 0 && showStatusInstalled()) {
+        if (app.installedVersionCode > 0 && showStatusInstalled()) {
             return installedVersionString + " ✔";
         }
 

@@ -677,7 +677,6 @@ public class AppProvider extends FDroidProvider {
 
     @Override
     public Cursor query(Uri uri, String[] projection, String customSelection, String[] selectionArgs, String sortOrder) {
-        Query query = new Query();
         AppQuerySelection selection = new AppQuerySelection(customSelection, selectionArgs);
 
         // Queries which are for the main list of apps should not include swap apps.
@@ -757,6 +756,8 @@ public class AppProvider extends FDroidProvider {
         if (AppProvider.DataColumns.NAME.equals(sortOrder)) {
             sortOrder = " lower( fdroid_app." + sortOrder + " ) ";
         }
+
+        Query query = new Query();
 
         query.addSelection(selection);
         query.addFields(projection); // TODO: Make the order of addFields/addSelection not dependent on each other...
@@ -862,11 +863,13 @@ public class AppProvider extends FDroidProvider {
      */
     private void updateSuggestedFromUpstream() {
 
-        Utils.DebugLog(TAG, "Calculating suggested versions for all apps which specify an upstream version code.");
+        Utils.debugLog(TAG, "Calculating suggested versions for all apps which specify an upstream version code.");
 
         final String apk = DBHelper.TABLE_APK;
         final String app = DBHelper.TABLE_APP;
 
+        final boolean unstableUpdates = Preferences.get().getUnstableUpdates();
+        String restrictToStable = unstableUpdates ? "" : ( apk + ".vercode <= " + app + ".upstreamVercode AND " );
         String updateSql =
             "UPDATE " + app +
             " SET suggestedVercode = ( " +
@@ -874,7 +877,7 @@ public class AppProvider extends FDroidProvider {
                 " FROM " + apk +
                 " WHERE " +
                     app + ".id = " + apk + ".id AND " +
-                    apk + ".vercode <= " + app + ".upstreamVercode AND " +
+                    restrictToStable +
                     " ( " + app + ".compatible = 0 OR " + apk + ".compatible = 1 ) ) " +
             " WHERE upstreamVercode > 0 ";
 
@@ -894,7 +897,7 @@ public class AppProvider extends FDroidProvider {
      */
     private void updateCompatibleFlags() {
 
-        Utils.DebugLog(TAG, "Calculating whether apps are compatible, based on whether any of their apks are compatible");
+        Utils.debugLog(TAG, "Calculating whether apps are compatible, based on whether any of their apks are compatible");
 
         final String apk = DBHelper.TABLE_APK;
         final String app = DBHelper.TABLE_APP;
@@ -938,7 +941,7 @@ public class AppProvider extends FDroidProvider {
      */
     private void updateSuggestedFromLatest() {
 
-        Utils.DebugLog(TAG, "Calculating suggested versions for all apps which don't specify an upstream version code.");
+        Utils.debugLog(TAG, "Calculating suggested versions for all apps which don't specify an upstream version code.");
 
         final String apk = DBHelper.TABLE_APK;
         final String app = DBHelper.TABLE_APP;
@@ -965,10 +968,10 @@ public class AppProvider extends FDroidProvider {
         final String iconsDir = Utils.getIconsDir(context, 1.0);
         final String iconsDirLarge = Utils.getIconsDir(context, 1.5);
         String repoVersion = Integer.toString(Repo.VERSION_DENSITY_SPECIFIC_ICONS);
-        Utils.DebugLog(TAG, "Updating icon paths for apps belonging to repos with version >= "
+        Utils.debugLog(TAG, "Updating icon paths for apps belonging to repos with version >= "
                 + repoVersion);
-        Utils.DebugLog(TAG, "Using icons dir '" + iconsDir + "'");
-        Utils.DebugLog(TAG, "Using large icons dir '" + iconsDirLarge + "'");
+        Utils.debugLog(TAG, "Using icons dir '" + iconsDir + "'");
+        Utils.debugLog(TAG, "Using large icons dir '" + iconsDirLarge + "'");
         String query = getIconUpdateQuery();
         final String[] params = {
             repoVersion, iconsDir, Utils.FALLBACK_ICONS_DIR,

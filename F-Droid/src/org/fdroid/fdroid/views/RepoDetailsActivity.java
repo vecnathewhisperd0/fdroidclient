@@ -18,7 +18,6 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -121,7 +120,7 @@ public class RepoDetailsActivity extends ActionBarActivity {
         Uri uri = Uri.parse(repo.address);
         uri = uri.buildUpon().appendQueryParameter("fingerprint", repo.fingerprint).build();
         String qrUriString = uri.toString().toUpperCase(Locale.ENGLISH);
-        new QrGenAsyncTask(this, R.id.qr_code).execute(uri.toString());
+        new QrGenAsyncTask(this, R.id.qr_code).execute(qrUriString);
     }
 
     @TargetApi(14)
@@ -172,7 +171,7 @@ public class RepoDetailsActivity extends ActionBarActivity {
                     i.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
             NdefMessage msg = (NdefMessage) rawMsgs[0];
             String url = new String(msg.getRecords()[0].getPayload());
-            Utils.DebugLog(TAG, "Got this URL: " + url);
+            Utils.debugLog(TAG, "Got this URL: " + url);
             Toast.makeText(this, "Got this URL: " + url, Toast.LENGTH_LONG).show();
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             intent.setClass(this, ManageReposActivity.class);
