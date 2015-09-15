@@ -13,6 +13,7 @@ import android.os.ParcelFileDescriptor;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 
+import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.Utils;
 
 import java.io.File;
@@ -77,6 +78,8 @@ public class AsyncDownloaderFromAndroid implements AsyncDownloader {
             if (status != 0) {
                 // some error occurred during download
                 downloadManagerId = -1;
+                listener.onErrorDownloading(context.getString(R.string.corrupt_download));
+                return;
             } else {
                 try {
                     // write the downloaded file to the expected location
