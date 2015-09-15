@@ -41,7 +41,7 @@ public class DownloadManagerReceiver extends BroadcastReceiver {
                 showNotification(context, appId, intent, downloadId, R.string.tap_to_install);
             } else {
                 // download failed!
-                showNotification(context, appId, intent, downloadId, R.string.corrupt_download);
+                showNotification(context, appId, intent, downloadId, R.string.download_error);
 
                 // clear the download to allow user to download again
                 DownloadManager dm = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);

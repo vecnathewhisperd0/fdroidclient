@@ -77,7 +77,7 @@ public class AsyncDownloaderFromAndroid implements AsyncDownloader {
                 // error downloading
                 dm.remove(downloadManagerId);
                 if (listener != null) {
-                    listener.onErrorDownloading(context.getString(R.string.corrupt_download));
+                    listener.onErrorDownloading(context.getString(R.string.download_error));
                 }
                 return;
             }
