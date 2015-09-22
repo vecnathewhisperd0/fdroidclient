@@ -1,3 +1,6 @@
+image: debian:testing
+services:
+
 before_script:
   - apt-get -q update -y
   - echo " == Installing packages required by this CI script"
