@@ -1056,10 +1056,7 @@ public class AppDetails extends AppCompatActivity implements ProgressListener, A
         private AppDetailsData data;
         private static final int MAX_LINES = 5;
         private static boolean view_all_description;
-        private static boolean view_all_information;
-        private static boolean view_all_permissions;
         private static LinearLayout ll_view_more_description;
-        private static LinearLayout ll_view_more_information;
         private static LinearLayout ll_view_more_permissions;
 
         public AppDetailsSummaryFragment() {
@@ -1129,6 +1126,7 @@ public class AppDetails extends AppCompatActivity implements ProgressListener, A
                     // If description has more than five lines
                     if (description.getLineCount() > MAX_LINES) {
                         description.setMaxLines(MAX_LINES);
+                        description.setEllipsize(TextUtils.TruncateAt.MARQUEE);
                         description.setOnClickListener(expander_description);
                         view_all_description = true;
 
@@ -1150,72 +1148,61 @@ public class AppDetails extends AppCompatActivity implements ProgressListener, A
             else
                 appIdView.setVisibility(View.GONE);
 
-            // Expandable information
-            ll_view_more_information = (LinearLayout) view.findViewById(R.id.ll_information);
-            final TextView information = (TextView) view.findViewById(R.id.information);
-            final LinearLayout ll_view_more_information_content = (LinearLayout) view.findViewById(R.id.ll_information_content);
-            ll_view_more_information_content.setVisibility(View.GONE);
-            view_all_information = true;
-            information.setCompoundDrawablesWithIntrinsicBounds(null, null, getActivity().getResources().getDrawable(R.drawable.ic_expand_more_grey600), null);
-
-            ll_view_more_information.setOnClickListener(expander_information);
-            information.setOnClickListener(expander_information);
-
             // Summary
             final TextView summaryView = (TextView) view.findViewById(R.id.summary);
             summaryView.setText(getApp().summary);
 
             // Website button
-            TextView tv = (TextView) view.findViewById(R.id.website);
+            View tv = view.findViewById(R.id.website);
             if (!TextUtils.isEmpty(getApp().webURL))
                 tv.setOnClickListener(mOnClickListener);
             else
                 tv.setVisibility(View.GONE);
 
             // Source button
-            tv = (TextView) view.findViewById(R.id.source);
+            tv = view.findViewById(R.id.source);
             if (!TextUtils.isEmpty(getApp().sourceURL))
                 tv.setOnClickListener(mOnClickListener);
             else
                 tv.setVisibility(View.GONE);
 
             // Issues button
-            tv = (TextView) view.findViewById(R.id.issues);
+            tv = view.findViewById(R.id.issues);
             if (!TextUtils.isEmpty(getApp().trackerURL))
                 tv.setOnClickListener(mOnClickListener);
             else
                 tv.setVisibility(View.GONE);
 
             // Changelog button
-            tv = (TextView) view.findViewById(R.id.changelog);
+            tv = view.findViewById(R.id.changelog);
             if (!TextUtils.isEmpty(getApp().changelogURL))
                 tv.setOnClickListener(mOnClickListener);
             else
                 tv.setVisibility(View.GONE);
 
             // Donate button
-            tv = (TextView) view.findViewById(R.id.donate);
+            tv = view.findViewById(R.id.donate);
             if (!TextUtils.isEmpty(getApp().donateURL))
                 tv.setOnClickListener(mOnClickListener);
             else
                 tv.setVisibility(View.GONE);
 
             // Bitcoin
-            tv = (TextView) view.findViewById(R.id.bitcoin);
+            tv = view.findViewById(R.id.bitcoin);
             if (!TextUtils.isEmpty(getApp().bitcoinAddr))
                 tv.setOnClickListener(mOnClickListener);
             else
                 tv.setVisibility(View.GONE);
 
             // Litecoin
-            tv = (TextView) view.findViewById(R.id.litecoin);
+            tv = view.findViewById(R.id.litecoin);
             if (!TextUtils.isEmpty(getApp().litecoinAddr))
                 tv.setOnClickListener(mOnClickListener);
             else
                 tv.setVisibility(View.GONE);
 
             // Flattr
-            tv = (TextView) view.findViewById(R.id.flattr);
+            tv = view.findViewById(R.id.flattr);
             if (!TextUtils.isEmpty(getApp().flattrID))
                 tv.setOnClickListener(mOnClickListener);
             else
@@ -1242,18 +1229,13 @@ public class AppDetails extends AppCompatActivity implements ProgressListener, A
             final TextView permissionHeader = (TextView) view.findViewById(R.id.permissions);
             final TextView permissionListView = (TextView) view.findViewById(R.id.permissions_list);
             permissionListView.setVisibility(View.GONE);
-            view_all_permissions = true;
 
             final boolean curApkCompatible = curApk != null && curApk.compatible;
             if (!getApks().isEmpty() && (curApkCompatible || prefs.showIncompatibleVersions())) {
-                permissionHeader.setText(getString(R.string.permissions_for_long, getApks().getItem(0).version));
-                permissionHeader.setCompoundDrawablesWithIntrinsicBounds(null, null, getActivity().getResources().getDrawable(R.drawable.ic_expand_more_grey600), null);
+                showPermissionInfo();
 
-                ll_view_more_permissions.setOnClickListener(expander_permissions);
-                permissionHeader.setOnClickListener(expander_permissions);
             } else {
                 permissionHeader.setVisibility(View.GONE);
-                permissionHeader.setCompoundDrawables(null, null, null, null);
             }
 
             // Anti features
@@ -1320,65 +1302,45 @@ public class AppDetails extends AppCompatActivity implements ProgressListener, A
                 final ImageView view_more_permissions = (ImageView) ll_view_more_description.findViewById(R.id.view_more_description);
                 if (view_all_description) {
                     description.setMaxLines(Integer.MAX_VALUE);
+
                     view_more_permissions.setImageResource(R.drawable.ic_expand_less_grey600);
                 } else {
                     description.setMaxLines(MAX_LINES);
+                    description.setEllipsize(TextUtils.TruncateAt.MARQUEE);
                     view_more_permissions.setImageResource(R.drawable.ic_expand_more_grey600);
                 }
                 view_all_description ^= true;
             }
         };
 
-        private final View.OnClickListener expander_information = new View.OnClickListener() {
-            public void onClick(View v) {
-                final TextView informationHeader = (TextView) ll_view_more_information.findViewById(R.id.information);
-                final LinearLayout information_content = (LinearLayout) ll_view_more_information.findViewById(R.id.ll_information_content);
-                if (!view_all_information) {
-                    information_content.setVisibility(View.GONE);
-                    informationHeader.setCompoundDrawablesWithIntrinsicBounds(null, null, getActivity().getResources().getDrawable(R.drawable.ic_expand_more_grey600), null);
-                } else {
-                    information_content.setVisibility(View.VISIBLE);
-                    informationHeader.setCompoundDrawablesWithIntrinsicBounds(null, null, getActivity().getResources().getDrawable(R.drawable.ic_expand_less_grey600), null);
-                }
-                view_all_information ^= true;
-            }
-        };
+        private void showPermissionInfo() {
+            final TextView permissionListView = (TextView) ll_view_more_permissions.findViewById(R.id.permissions_list);
 
-        private final View.OnClickListener expander_permissions = new View.OnClickListener() {
-            public void onClick(View v) {
-                final TextView permissionHeader = (TextView) ll_view_more_permissions.findViewById(R.id.permissions);
-                final TextView permissionListView = (TextView) ll_view_more_permissions.findViewById(R.id.permissions_list);
-                if (!view_all_permissions) {
-                    permissionListView.setVisibility(View.GONE);
-                    permissionHeader.setCompoundDrawablesWithIntrinsicBounds(null, null, getActivity().getResources().getDrawable(R.drawable.ic_expand_more_grey600), null);
-                } else {
-                    CommaSeparatedList permsList = getApks().getItem(0).permissions;
-                    if (permsList == null) {
-                        permissionListView.setText(R.string.no_permissions);
-                    } else {
-                        Iterator<String> permissions = permsList.iterator();
-                        StringBuilder sb = new StringBuilder();
-                        while (permissions.hasNext()) {
-                            final String permissionName = permissions.next();
-                            try {
-                                final Permission permission = new Permission(getActivity(), permissionName);
-                                // TODO: Make this list RTL friendly
-                                sb.append("\t• ").append(permission.getName()).append('\n');
-                            } catch (PackageManager.NameNotFoundException e) {
-                                Log.e(TAG, "Permission not yet available: " + permissionName);
-                            }
-                        }
-                        if (sb.length() > 0) {
-                            sb.setLength(sb.length() - 1);
-                        }
-                        permissionListView.setText(sb.toString());
+            CommaSeparatedList permsList = getApks().getItem(0).permissions;
+            if (permsList == null) {
+                permissionListView.setText(R.string.no_permissions);
+            } else {
+                Iterator<String> permissions = permsList.iterator();
+                StringBuilder sb = new StringBuilder();
+                while (permissions.hasNext()) {
+                    final String permissionName = permissions.next();
+                    try {
+                        final Permission permission = new Permission(getActivity(), permissionName);
+                        // TODO: Make this list RTL friendly
+                        sb.append("\t• ").append(permission.getName()).append('\n');
+                    } catch (PackageManager.NameNotFoundException e) {
+                        Log.e(TAG, "Permission not yet available: " + permissionName);
                     }
-                    permissionListView.setVisibility(View.VISIBLE);
-                    permissionHeader.setCompoundDrawablesWithIntrinsicBounds(null, null, getActivity().getResources().getDrawable(R.drawable.ic_expand_less_grey600), null);
                 }
-                view_all_permissions ^= true;
+                if (sb.length() > 0) {
+                    sb.setLength(sb.length() - 1);
+                    permissionListView.setText(sb.toString());
+                } else {
+                    permissionListView.setText(R.string.no_permissions);
+                }
             }
-        };
+            permissionListView.setVisibility(View.VISIBLE);
+        }
 
         private String descAntiFeature(String af) {
             switch (af) {

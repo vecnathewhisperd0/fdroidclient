@@ -189,6 +189,7 @@
         <string name="global_error_updating_repos">Error during update: %s</string>
 	<string name="no_permissions">No permissions are used.</string>
 	<string name="permissions_for_long">Permissions for version %s</string>
+    <string name="permissions">Permissions</string>
 	<string name="no_handler_app">You don\'t have any available app that can handle %s.</string>
 	<string name="compactlayout">Compact Layout</string>
 	<string name="compactlayout_on">Show icons at a smaller size</string>

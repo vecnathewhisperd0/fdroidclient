@@ -5,4 +5,8 @@
         <item name="android:lineSpacingMultiplier">1.25</item>
     </style>
 
+    <style name="AppDetailsSubheaderText" parent="AppDetailsSubheaderTextBase">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
 </resources>
