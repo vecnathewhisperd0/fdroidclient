@@ -62,11 +62,11 @@ public class DownloadManagerReceiver extends BroadcastReceiver {
         Intent appDetails = new Intent(context, AppDetails.class);
         appDetails.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         appDetails.setAction(intent.getAction());
-        appDetails.putExtras(intent.getExtras());
+        appDetails.putExtra(DownloadManager.EXTRA_DOWNLOAD_ID, downloadId);
         appDetails.putExtra(AppDetails.EXTRA_APPID, appId);
 
         PendingIntent pi = PendingIntent.getActivity(
-                context, 1, appDetails, PendingIntent.FLAG_ONE_SHOT);
+                context, (int) downloadId, appDetails, PendingIntent.FLAG_ONE_SHOT);
 
         // launch LocalRepoActivity if the user selects this notification
         String downloadTitle = AsyncDownloaderFromAndroid.getDownloadTitle(context, downloadId);
