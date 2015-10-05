@@ -65,10 +65,11 @@ public class DownloadManagerReceiver extends BroadcastReceiver {
         appDetails.putExtra(DownloadManager.EXTRA_DOWNLOAD_ID, downloadId);
         appDetails.putExtra(AppDetails.EXTRA_APPID, appId);
 
+        // set separate pending intents per download id
         PendingIntent pi = PendingIntent.getActivity(
                 context, (int) downloadId, appDetails, PendingIntent.FLAG_ONE_SHOT);
 
-        // launch LocalRepoActivity if the user selects this notification
+        // build & show notification
         String downloadTitle = AsyncDownloaderFromAndroid.getDownloadTitle(context, downloadId);
         Notification notif = new NotificationCompat.Builder(context)
                 .setContentTitle(downloadTitle)
