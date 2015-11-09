@@ -6,8 +6,6 @@ import android.text.TextUtils;
 
 import org.fdroid.fdroid.Utils;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Date;
 
 public class Repo extends ValueObject {
@@ -114,21 +112,6 @@ public class Repo extends ValueObject {
 
     public boolean hasBeenUpdated() {
         return this.lastetag != null;
-    }
-    /**
-     * If we haven't run an update for this repo yet, then the name
-     * will be unknown, in which case we will just take a guess at an
-     * appropriate name based on the url (e.g. "f-droid.org/archive")
-     */
-    public static String addressToName(String address) {
-        String tempName;
-        try {
-            URL url = new URL(address);
-            tempName = url.getHost() + url.getPath();
-        } catch (MalformedURLException e) {
-            tempName = address;
-        }
-        return tempName;
     }
 
     private static int toInt(Integer value) {
