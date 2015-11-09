@@ -22,6 +22,12 @@
         android:title="@string/menu_manage"
         app:showAsAction="ifRoom"/>
     <item
+        android:id="@+id/action_manage_external_searches"
+        android:icon="@drawable/ic_toc_white"
+        android:title="@string/menu_manage_external_searches"
+        app:showAsAction="ifRoom"/>
+
+    <item
         android:id="@+id/action_bluetooth_apk"
         android:icon="@drawable/ic_bluetooth_white"
         android:title="@string/menu_send_apk_bt"

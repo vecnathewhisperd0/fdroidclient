@@ -117,6 +117,35 @@
     <string name="menu_litecoin">Litecoin</string>
     <string name="menu_flattr">Flattr</string>
 
+    <string name="menu_search_external">Search on external Site</string>
+    <string name="menu_manage_external_searches">Manage external Search Sites</string>
+    <string name="menu_add_external_search">Add external Search Site</string>
+
+    <string name="external_search_message_address_info">Enter an address of a search site.\n
+        All occurrences of the pattern \'$s\' will be replaced with the search query.</string>
+    <string name="external_search_message_address_not_parsable">
+        The address you have entered is not parsable.</string>
+    <string name="external_search_message_address_not_absolute">
+        Please enter an absolute address.</string>
+    <string name="external_search_message_address_pattern_missing">
+        The address you have entered does not contain the pattern \'$s\'.</string>
+
+    <string name="search_tab_external_search">Search (external)</string>
+    <string name="search_tab_search_results">Results</string>
+
+    <string name="external_search_add_title">Add external Search Site</string>
+    <string name="external_search_add_add">Add Site</string>
+    <string name="external_search_add_address">Address</string>
+    <string name="external_search_add_name">Name</string>
+    <string name="external_search_add_description">Description (optional)</string>
+    <string name="external_search_added">Saved search site \'%1$s\'.</string>
+
+    <string name="external_search_manage_delete">Delete</string>
+    <string name="external_search_manage_edit">Edit</string>
+    <string name="external_search_deleted">Deleted search site \'%1$s\'.</string>
+    <string name="external_search_delete_confirm_title">Delete External Search Site?</string>
+    <string name="external_search_delete_confirm_message">This step can not be undone.
+        \nYour are about to delete the search site:\n\n%1$s\n</string>
 
     <string name="details_installed">Version %s installed</string>
     <string name="details_notinstalled">Not installed</string>
