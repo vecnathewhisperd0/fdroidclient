@@ -4,6 +4,7 @@ import android.content.res.Configuration;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Spinner;
@@ -21,18 +22,28 @@ public class TabManager {
     public static final int INDEX_COUNT      = 3;
 
     private final ViewPager pager;
-    private final FDroid parent;
+    private final ActionBarActivity parent;
     private final ActionBar actionBar;
-    private Spinner actionBarSpinner;
+    private Spinner actionBarSpinner = null;
+
+    private TabSelectionListener tabSelectionListener = null;
+    private int contentViewID; //TODO required? or part of android?!
 
     // Used to make sure we only search for the action bar spinner once
     // in each orientation.
     private boolean dirtyConfig = true;
 
-    public TabManager(FDroid parent, ViewPager pager) {
+    public TabManager(ActionBarActivity parent, int contentViewID, ViewPager pager) {
         actionBar = parent.getSupportActionBar();
+        this.contentViewID = contentViewID;
         this.parent = parent;
         this.pager = pager;
+    }
+
+    public TabManager(ActionBarActivity parent, int contentViewID,
+                      ViewPager pager, TabSelectionListener tabSelectionListener) {
+        this(parent, contentViewID, pager);
+        this.setTabSelectionListener(tabSelectionListener);
     }
 
     protected CharSequence getLabel(int index) {
@@ -40,35 +51,23 @@ public class TabManager {
     }
 
     public void removeNotification(int id) {
-        parent.removeNotification(id);
+        //TODO parent.removeNotification(id);
     }
 
-    public void createTabs() {
+    public void createTabs(ActionBar.TabListener tabListener) {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         for (int i = 0; i < pager.getAdapter().getCount(); i++) {
             CharSequence label = pager.getAdapter().getPageTitle(i);
             actionBar.addTab(
                 actionBar.newTab()
                     .setText(label)
-                    .setTabListener(new ActionBar.TabListener() {
-                        @Override
-                        public void onTabSelected(ActionBar.Tab tab,
-                                                  FragmentTransaction ft) {
-                            int pos = tab.getPosition();
-                            pager.setCurrentItem(pos);
-                            if (pos == INDEX_CAN_UPDATE)
-                                removeNotification(1);
-                        }
-
-                        @Override
-                        public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-                        }
-
-                        @Override
-                        public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-                        }
-                    }));
+                    .setTabListener(tabListener)
+            );
         }
+    }
+
+    public void setTabSelectionListener(TabSelectionListener tabSelectionListener) {
+        this.tabSelectionListener = tabSelectionListener;
     }
 
     public void selectTab(int index) {
@@ -77,8 +76,9 @@ public class TabManager {
         if (actionBarSpinner != null) {
             actionBarSpinner.setSelection(index);
         }
-        if (index == INDEX_CAN_UPDATE)
-            removeNotification(1);
+        if (tabSelectionListener != null) {
+            tabSelectionListener.onSelect(index);
+        }
     }
 
     public void refreshTabLabel(int index) {
@@ -120,6 +120,7 @@ public class TabManager {
      * then we will need to update the findListNavigationSpinner() method.
      */
     private Spinner findActionBarSpinner() {
+      //TODO  View rootView = parent.findViewById(this.contentViewID).getRootView();
         View rootView = parent.findViewById(android.R.id.content).getRootView();
         List<Spinner> spinners = traverseViewChildren((ViewGroup) rootView);
         return findListNavigationSpinner(spinners);
@@ -147,5 +148,9 @@ public class TabManager {
             }
         }
         return spinners;
+    }
+
+    public interface TabSelectionListener {
+        void onSelect(int i);
     }
 }

@@ -29,6 +29,7 @@ import android.content.res.Configuration;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
@@ -47,6 +48,7 @@ import org.fdroid.fdroid.privileged.install.InstallExtensionDialogActivity;
 import org.fdroid.fdroid.views.AppListFragmentPagerAdapter;
 import org.fdroid.fdroid.views.ManageReposActivity;
 import org.fdroid.fdroid.views.swap.SwapWorkflowActivity;
+import android.support.v7.app.ActionBar;
 
 public class FDroid extends ActionBarActivity {
 
@@ -76,7 +78,32 @@ public class FDroid extends ActionBarActivity {
         setContentView(R.layout.fdroid);
         createViews();
 
-        getTabManager().createTabs();
+        getTabManager().createTabs(new ActionBar.TabListener() {
+            @Override
+            public void onTabSelected(ActionBar.Tab tab,
+                                      FragmentTransaction ft) {
+                int pos = tab.getPosition();
+                viewPager.setCurrentItem(pos);
+                if (pos == TabManager.INDEX_CAN_UPDATE)
+                    removeNotification(1);
+            }
+
+            @Override
+            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+            }
+
+            @Override
+            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+            }
+        });
+
+        tabManager.setTabSelectionListener(new TabManager.TabSelectionListener() {
+            @Override
+            public void onSelect(int i) {
+                if (i == TabManager.INDEX_CAN_UPDATE)
+                    removeNotification(1);
+            }
+        });
 
         // Start a search by just typing
         setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL);
@@ -342,7 +369,7 @@ public class FDroid extends ActionBarActivity {
 
     private TabManager getTabManager() {
         if (tabManager == null) {
-            tabManager = new TabManager(this, viewPager);
+            tabManager = new TabManager(this, android.R.id.content, viewPager);
         }
         return tabManager;
     }
