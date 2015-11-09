@@ -22,18 +22,30 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 
+import org.fdroid.fdroid.compat.TabManager;
+import org.fdroid.fdroid.views.SearchListFragmentPagerAdapter;
 import org.fdroid.fdroid.views.fragments.SearchResultsFragment;
 
 public class SearchResults extends ActionBarActivity {
 
     private static final int SEARCH = Menu.FIRST;
+
+    public static final int INDEX_SEARCH_RESULTS = 0;
+    public static final int INDEX_EXTERNAL_SEARCH = 1;
+    public static final int INDEX_COUNT = 2;
+
+    private TabManager tabManager = null;
+    private ViewPager viewPager = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,6 +56,30 @@ public class SearchResults extends ActionBarActivity {
         // Start a search by just typing
         setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL);
 
+        //NEW
+        setContentView(R.layout.tabbed_search);
+        createViews();
+
+        getTabManager().createTabs(new ActionBar.TabListener() {
+            @Override
+            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+                int pos = tab.getPosition();
+                viewPager.setCurrentItem(pos);
+            }
+
+            @Override
+            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+            }
+
+            @Override
+            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+            }
+        });
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        /*
         FragmentManager fm = getSupportFragmentManager();
         if (fm.findFragmentById(android.R.id.content) == null) {
 
@@ -64,7 +100,27 @@ public class SearchResults extends ActionBarActivity {
         // see: http://blog.perpetumdesign.com/2011/08/strange-case-of-dr-action-and-mr-bar.html
         // for reason why.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+*/
+    }
 
+    private void createViews() {
+        viewPager = (ViewPager)findViewById(R.id.search_pager);
+        SearchListFragmentPagerAdapter searchPagerAdapter = new SearchListFragmentPagerAdapter(this);
+        viewPager.setAdapter(searchPagerAdapter);
+
+        viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                getTabManager().selectTab(position);
+            }
+        });
+    }
+
+    public TabManager getTabManager() {
+        if (tabManager == null) {
+            tabManager = new TabManager(this, android.R.id.content, viewPager);
+        }
+        return tabManager;
     }
 
     @Override
@@ -75,6 +131,7 @@ public class SearchResults extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.swap_search, menu);
         super.onCreateOptionsMenu(menu);
         MenuItem search = menu.add(Menu.NONE, SEARCH, 1, R.string.menu_search).setIcon(
                 android.R.drawable.ic_menu_search);
