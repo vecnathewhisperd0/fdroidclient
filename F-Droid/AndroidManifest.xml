@@ -79,6 +79,11 @@
             android:exported="false"/>
 
         <provider
+            android:authorities="org.fdroid.fdroid.data.ExternalSearchProvider"
+            android:name="org.fdroid.fdroid.data.ExternalSearchProvider"
+            android:exported="false"/>
+
+        <provider
             android:authorities="org.fdroid.fdroid.data.ApkProvider"
             android:name="org.fdroid.fdroid.data.ApkProvider"
             android:exported="false"/>
