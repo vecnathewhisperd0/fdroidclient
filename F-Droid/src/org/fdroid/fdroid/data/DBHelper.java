@@ -21,10 +21,17 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public static final String TABLE_REPO = "fdroid_repo";
 
+    public static final String TABLE_EXT_SEARCH = "fdroid_external_search";
+
     // The TABLE_APK table stores details of all the application versions we
     // know about. Each relates directly back to an entry in TABLE_APP.
     // This information is retrieved from the repositories.
     public static final String TABLE_APK = "fdroid_apk";
+
+    private static final String CREATE_TABLE_EXT_SEARCH = "create table "
+            + TABLE_EXT_SEARCH + " (_id integer primary key, "
+            + "address text not null, "
+            + "name text, description text);";
 
     private static final String CREATE_TABLE_REPO = "create table "
             + TABLE_REPO + " (_id integer primary key, "
@@ -102,7 +109,7 @@ public class DBHelper extends SQLiteOpenHelper {
             + " );";
     private static final String DROP_TABLE_INSTALLED_APP = "DROP TABLE " + TABLE_INSTALLED_APP + ";";
 
-    private static final int DB_VERSION = 51;
+    private static final int DB_VERSION = 52;
 
     private final Context context;
 
@@ -196,36 +203,36 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_REPO);
 
         insertRepo(
-            db,
-            context.getString(R.string.fdroid_repo_name),
-            context.getString(R.string.fdroid_repo_address),
-            context.getString(R.string.fdroid_repo_description),
-            context.getString(R.string.fdroid_repo_pubkey),
-            context.getResources().getInteger(R.integer.fdroid_repo_version),
-            context.getResources().getInteger(R.integer.fdroid_repo_inuse),
-            context.getResources().getInteger(R.integer.fdroid_repo_priority)
+                db,
+                context.getString(R.string.fdroid_repo_name),
+                context.getString(R.string.fdroid_repo_address),
+                context.getString(R.string.fdroid_repo_description),
+                context.getString(R.string.fdroid_repo_pubkey),
+                context.getResources().getInteger(R.integer.fdroid_repo_version),
+                context.getResources().getInteger(R.integer.fdroid_repo_inuse),
+                context.getResources().getInteger(R.integer.fdroid_repo_priority)
         );
 
         insertRepo(
-            db,
-            context.getString(R.string.fdroid_archive_name),
-            context.getString(R.string.fdroid_archive_address),
-            context.getString(R.string.fdroid_archive_description),
-            context.getString(R.string.fdroid_archive_pubkey),
-            context.getResources().getInteger(R.integer.fdroid_archive_version),
-            context.getResources().getInteger(R.integer.fdroid_archive_inuse),
-            context.getResources().getInteger(R.integer.fdroid_archive_priority)
+                db,
+                context.getString(R.string.fdroid_archive_name),
+                context.getString(R.string.fdroid_archive_address),
+                context.getString(R.string.fdroid_archive_description),
+                context.getString(R.string.fdroid_archive_pubkey),
+                context.getResources().getInteger(R.integer.fdroid_archive_version),
+                context.getResources().getInteger(R.integer.fdroid_archive_inuse),
+                context.getResources().getInteger(R.integer.fdroid_archive_priority)
         );
 
         insertRepo(
-            db,
-            context.getString(R.string.guardianproject_repo_name),
-            context.getString(R.string.guardianproject_repo_address),
-            context.getString(R.string.guardianproject_repo_description),
-            context.getString(R.string.guardianproject_repo_pubkey),
-            context.getResources().getInteger(R.integer.guardianproject_repo_version),
-            context.getResources().getInteger(R.integer.guardianproject_repo_inuse),
-            context.getResources().getInteger(R.integer.guardianproject_repo_priority)
+                db,
+                context.getString(R.string.guardianproject_repo_name),
+                context.getString(R.string.guardianproject_repo_address),
+                context.getString(R.string.guardianproject_repo_description),
+                context.getString(R.string.guardianproject_repo_pubkey),
+                context.getResources().getInteger(R.integer.guardianproject_repo_version),
+                context.getResources().getInteger(R.integer.guardianproject_repo_inuse),
+                context.getResources().getInteger(R.integer.guardianproject_repo_priority)
         );
 
         insertRepo(
@@ -238,6 +245,48 @@ public class DBHelper extends SQLiteOpenHelper {
             context.getResources().getInteger(R.integer.guardianproject_archive_inuse),
             context.getResources().getInteger(R.integer.guardianproject_archive_priority)
         );
+
+        db.execSQL(CREATE_TABLE_EXT_SEARCH);
+
+        insertExternalSearch(
+                db,
+                "https://www.google.com/search?q=$s",
+                "Google",
+                "Search APP with Google."
+        );
+
+        insertExternalSearch(
+                db,
+                "https://duckduckgo.com/?q=$s",
+                "DuckDuckGo",
+                "Search APP using DuckDuckGo."
+        );
+
+        insertExternalSearch(
+                db,
+                "https://play.google.com/store/search?q=$s",
+                "Google Play",
+                "Search APP using the Google Play store."
+        );
+
+        insertExternalSearch(
+                db,
+                "http://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dmobile-apps&field-keywords=$s",
+                "Amazon App Store",
+                "Search APP in the Amazon App Store."
+        );
+    }
+
+    private void insertExternalSearch(
+            SQLiteDatabase db, String address, String name, String description) {
+        ContentValues values = new ContentValues();
+
+        values.put(ExternalSearchProvider.DataColumns.ADDRESS, address);
+        values.put(ExternalSearchProvider.DataColumns.NAME, name);
+        values.put(ExternalSearchProvider.DataColumns.DESCRIPTION, description);
+
+        Utils.debugLog(TAG, "Adding search: " + name);
+        db.insert(TABLE_EXT_SEARCH, null, values);
     }
 
     private void insertRepo(
@@ -266,6 +315,7 @@ public class DBHelper extends SQLiteOpenHelper {
         Utils.debugLog(TAG, "Upgrading database from v" + oldVersion + " v" + newVersion);
 
         migrateRepoTable(db, oldVersion);
+        migrateExternalSearchTable(db, oldVersion);
 
         // The other tables are transient and can just be reset. Do this after
         // the repo table changes though, because it also clears the lastetag
@@ -285,6 +335,39 @@ public class DBHelper extends SQLiteOpenHelper {
         addIconUrlLargeToApp(db, oldVersion);
         updateIconUrlLarge(db, oldVersion);
         recreateInstalledCache(db, oldVersion);
+    }
+
+    private void migrateExternalSearchTable(SQLiteDatabase db, int oldVersion) {
+        if (oldVersion < 52) { // External search was introduced with version 52.
+            db.execSQL(CREATE_TABLE_EXT_SEARCH);
+        } else {
+            List<ExternalSearch> oldsearches = new ArrayList<>();
+            Cursor cursor = db.query(TABLE_EXT_SEARCH,
+                    new String[] {"address", "name", "description"},
+                    null, null, null, null, null);
+            if (cursor != null) {
+                if (cursor.getCount() > 0) {
+                    cursor.moveToFirst();
+                    while (!cursor.isAfterLast()) {
+                        ExternalSearch extsearch = new ExternalSearch();
+                        extsearch.address       = cursor.getString(0);
+                        extsearch.name          = cursor.getString(1);
+                        extsearch.description   = cursor.getString(2);
+                    }
+                }
+                cursor.close();
+            }
+
+            db.execSQL("drop table " + TABLE_EXT_SEARCH);
+            db.execSQL(CREATE_TABLE_EXT_SEARCH);
+            for (final ExternalSearch extsearch : oldsearches) {
+                ContentValues values = new ContentValues();
+                values.put("address", extsearch.address);
+                values.put("name", extsearch.name);
+                values.put("description", extsearch.description);
+                db.insert(TABLE_EXT_SEARCH, null, values);
+            }
+        }
     }
 
     /**
