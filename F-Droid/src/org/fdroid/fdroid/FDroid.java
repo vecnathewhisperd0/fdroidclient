@@ -46,6 +46,7 @@ import org.fdroid.fdroid.data.AppProvider;
 import org.fdroid.fdroid.data.NewRepoConfig;
 import org.fdroid.fdroid.privileged.install.InstallExtensionDialogActivity;
 import org.fdroid.fdroid.views.AppListFragmentPagerAdapter;
+import org.fdroid.fdroid.views.ManageExternalSearchesActivity;
 import org.fdroid.fdroid.views.ManageReposActivity;
 import org.fdroid.fdroid.views.swap.SwapWorkflowActivity;
 import android.support.v7.app.ActionBar;
@@ -280,6 +281,10 @@ public class FDroid extends ActionBarActivity {
 
             case R.id.action_manage_repos:
                 startActivity(new Intent(this, ManageReposActivity.class));
+                return true;
+
+            case R.id.action_manage_external_searches:
+                startActivity(new Intent(this, ManageExternalSearchesActivity.class));
                 return true;
 
             case R.id.action_settings:
