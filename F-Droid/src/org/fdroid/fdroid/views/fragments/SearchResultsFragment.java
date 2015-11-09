@@ -32,18 +32,6 @@ public class SearchResultsFragment extends ListFragment implements LoaderManager
 
     private AppListAdapter adapter;
 
-    protected String getQuery() {
-        Intent intent = getActivity().getIntent();
-        String query = null;
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            query = intent.getStringExtra(SearchManager.QUERY);
-        }
-        if (query == null) {
-            return "";
-        }
-        return query;
-    }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -66,7 +54,7 @@ public class SearchResultsFragment extends ListFragment implements LoaderManager
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        Uri uri = AppProvider.getSearchUri(getQuery());
+        Uri uri = AppProvider.getSearchUri(Utils.getSearchQuery(getActivity().getIntent()));
         return new CursorLoader(
             getActivity(),
             uri,
@@ -83,7 +71,7 @@ public class SearchResultsFragment extends ListFragment implements LoaderManager
 
     private void updateSummary(View view) {
 
-        String query = getQuery();
+        String query = Utils.getSearchQuery(getActivity().getIntent());
 
         if (query != null)
             query = query.trim();

@@ -124,7 +124,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         String address = cursor.getString(0);
                         long id = cursor.getInt(1);
                         ContentValues values = new ContentValues(1);
-                        String name = Repo.addressToName(address);
+                        String name = Utils.addressToName(address, true);
                         values.put("name", name);
                         final String[] args = {Long.toString(id)};
                         Utils.debugLog(TAG, "Setting repo name to '" + name + "' for repo " + address);

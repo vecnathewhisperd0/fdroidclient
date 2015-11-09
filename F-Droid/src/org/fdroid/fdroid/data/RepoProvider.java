@@ -116,7 +116,7 @@ public class RepoProvider extends FDroidProvider {
             // name, but the best we can do is guess right now.
             if (values.containsKey(DataColumns.ADDRESS) &&
                     !values.containsKey(DataColumns.NAME)) {
-                String name = Repo.addressToName(values.getAsString(DataColumns.ADDRESS));
+                String name = Utils.addressToName(values.getAsString(DataColumns.ADDRESS), true);
                 values.put(DataColumns.NAME, name);
             }
 
@@ -337,7 +337,7 @@ public class RepoProvider extends FDroidProvider {
 
         if (!values.containsKey(DataColumns.NAME)) {
             final String address = values.getAsString(DataColumns.ADDRESS);
-            values.put(DataColumns.NAME, Repo.addressToName(address));
+            values.put(DataColumns.NAME, Utils.addressToName(address, true));
         }
 
         long id = write().insertOrThrow(getTableName(), null, values);

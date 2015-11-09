@@ -18,7 +18,9 @@
 
 package org.fdroid.fdroid;
 
+import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.XmlResourceParser;
@@ -54,6 +56,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.math.BigInteger;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.Certificate;
@@ -140,6 +144,17 @@ public final class Utils {
             output.write(buffer, 0, count);
         }
         output.flush();
+    }
+
+    public static String getSearchQuery(Intent intent) {
+        String query = null;
+        if (intent != null && Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            query = intent.getStringExtra(SearchManager.QUERY);
+        }
+        if (query == null) {
+            return "";
+        }
+        return query;
     }
 
     /**
@@ -420,6 +435,22 @@ public final class Utils {
 
     public static String getApkUrl(String repoAddress, Apk apk) {
         return repoAddress + "/" + apk.apkName.replace(" ", "%20");
+    }
+
+    /**
+     * If we haven't run an update for this repo yet, then the name
+     * will be unknown, in which case we will just take a guess at an
+     * appropriate name based on the url (e.g. "f-droid.org/archive")
+     */
+    public static String addressToName(String address, boolean addPath) {
+        String tempName;
+        try {
+            URL url = new URL(address);
+            tempName = url.getHost() + ((addPath) ? url.getPath() : "");
+        } catch (MalformedURLException e) {
+            tempName = address;
+        }
+        return tempName;
     }
 
     public static final class CommaSeparatedList implements Iterable<String> {
