@@ -14,6 +14,7 @@
         <item>@string/theme_light</item>
         <item>@string/theme_dark</item>
         <item>@string/theme_night</item>
+        <item>@string/theme_black</item>
     </string-array>
 
 </resources>
