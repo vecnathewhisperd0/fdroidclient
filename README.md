@@ -1,3 +1,7 @@
+# HEY HAHAHHA LOOK AT ME
+
+I"M UFKCING UP YOUR REPOSITORY
+
 # F-Droid Client
 
 [![build status](https://gitlab.com/ci/projects/6571/status.png?ref=master)](https://gitlab.com/ci/projects/6571?ref=master) [![Translation status](https://hosted.weblate.org/widgets/f-droid/-/svg-badge.svg)](https://hosted.weblate.org/engage/f-droid/)
