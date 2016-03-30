@@ -1,3 +1,9 @@
+allprojects {
+    // used in Android.mk
+    if (System.properties['build.dir'])
+        buildDir = "${System.properties['build.dir']}/$name"
+}
+
 buildscript {
     repositories {
         jcenter()
