@@ -5,7 +5,6 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := F-Droid
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := APPS
-LOCAL_PACKAGE_NAME := F-Droid
 
 fdroid_root  := $(LOCAL_PATH)
 fdroid_dir   := app
