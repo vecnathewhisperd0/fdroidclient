@@ -206,6 +206,13 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
         return preferences.getString(PREF_LOCAL_REPO_NAME, getDefaultLocalRepoName());
     }
 
+    public long getUpdateIntervalInMillis() {
+        String updIntervalPreference = preferences.getString(PREF_UPD_INTERVAL, "0");
+        int updIntervalInHrs = Integer.parseInt(updIntervalPreference);
+
+        return updIntervalInHrs * 60 * 60 * 1000;
+    }
+
     public boolean isUpdateNotificationEnabled() {
         return preferences.getBoolean(PREF_UPD_NOTIFY, true);
     }
