@@ -107,22 +107,19 @@ public class UpdateService extends IntentService {
      * is changed, or c) on startup, in case we get upgraded.
      */
     public static void schedule(Context ctx) {
-
-        SharedPreferences prefs = PreferenceManager
-                .getDefaultSharedPreferences(ctx);
-        String sint = prefs.getString(Preferences.PREF_UPD_INTERVAL, "0");
-        int interval = Integer.parseInt(sint);
-
+        long updateInterval = Preferences.get().getUpdIntervalInMillis();
         Intent intent = new Intent(ctx, UpdateService.class);
         PendingIntent pending = PendingIntent.getService(ctx, 0, intent, 0);
 
         AlarmManager alarm = (AlarmManager) ctx
                 .getSystemService(Context.ALARM_SERVICE);
         alarm.cancel(pending);
-        if (interval > 0) {
+
+        if (updateInterval > 0) {
             alarm.setInexactRepeating(AlarmManager.ELAPSED_REALTIME,
                     SystemClock.elapsedRealtime() + 5000,
-                    AlarmManager.INTERVAL_HOUR, pending);
+                    updateInterval,
+                    pending);
             Utils.debugLog(TAG, "Update scheduler alarm set");
         } else {
             Utils.debugLog(TAG, "Update scheduler alarm not set");
