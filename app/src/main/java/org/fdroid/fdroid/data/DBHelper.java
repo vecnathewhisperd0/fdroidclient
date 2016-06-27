@@ -53,6 +53,10 @@ class DBHelper extends SQLiteOpenHelper {
             + "minSdkVersion integer, "
             + "targetSdkVersion integer, "
             + "maxSdkVersion integer, "
+            + "obbMainFile string, "
+            + "obbMainFileSha256 string, "
+            + "obbPatchFile string, "
+            + "obbPatchFileSha256 string, "
             + "permissions string, "
             + "features string, "
             + "nativecode string, "
@@ -111,7 +115,7 @@ class DBHelper extends SQLiteOpenHelper {
             + " );";
     private static final String DROP_TABLE_INSTALLED_APP = "DROP TABLE " + TABLE_INSTALLED_APP + ";";
 
-    private static final int DB_VERSION = 58;
+    private static final int DB_VERSION = 59;
 
     private final Context context;
 
@@ -301,6 +305,7 @@ class DBHelper extends SQLiteOpenHelper {
         requireTimestampInRepos(db, oldVersion);
         addTargetSdkVersionToApk(db, oldVersion);
         recreateInstalledAppTable(db, oldVersion);
+        addObbFiles(db, oldVersion);
     }
 
     /**
@@ -582,6 +587,23 @@ class DBHelper extends SQLiteOpenHelper {
                 + " columns to " + TABLE_APK);
         db.execSQL("alter table " + TABLE_APK + " add column "
                 + ApkProvider.DataColumns.TARGET_SDK_VERSION + " integer");
+    }
+
+    private void addObbFiles(SQLiteDatabase db, int oldVersion) {
+        if (oldVersion >= 59) {
+            return;
+        }
+        Utils.debugLog(TAG, "Adding " + ApkProvider.DataColumns.OBB_MAIN_FILE
+                + ", " + ApkProvider.DataColumns.OBB_PATCH_FILE
+                + ", and hash columns to " + TABLE_APK);
+        db.execSQL("alter table " + TABLE_APK + " add column "
+                + ApkProvider.DataColumns.OBB_MAIN_FILE + " string");
+        db.execSQL("alter table " + TABLE_APK + " add column "
+                + ApkProvider.DataColumns.OBB_MAIN_FILE_SHA256 + " string");
+        db.execSQL("alter table " + TABLE_APK + " add column "
+                + ApkProvider.DataColumns.OBB_PATCH_FILE + " string");
+        db.execSQL("alter table " + TABLE_APK + " add column "
+                + ApkProvider.DataColumns.OBB_PATCH_FILE_SHA256 + " string");
     }
 
     private static boolean columnExists(SQLiteDatabase db,

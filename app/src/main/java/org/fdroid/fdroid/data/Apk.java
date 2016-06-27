@@ -28,6 +28,10 @@ public class Apk extends ValueObject implements Comparable<Apk> {
     public int minSdkVersion = SDK_VERSION_MIN_VALUE; // 0 if unknown
     public int targetSdkVersion = SDK_VERSION_MIN_VALUE; // 0 if unknown
     public int maxSdkVersion = SDK_VERSION_MAX_VALUE; // "infinity" if not set
+    public String obbMainFile;
+    public String obbMainFileSha256;
+    public String obbPatchFile;
+    public String obbPatchFileSha256;
     public Date added;
     public String[] permissions; // null if empty or
     // unknown
@@ -100,6 +104,18 @@ public class Apk extends ValueObject implements Comparable<Apk> {
                 case ApkProvider.DataColumns.MAX_SDK_VERSION:
                     maxSdkVersion = cursor.getInt(i);
                     break;
+                case ApkProvider.DataColumns.OBB_MAIN_FILE:
+                    obbMainFile = cursor.getString(i);
+                    break;
+                case ApkProvider.DataColumns.OBB_MAIN_FILE_SHA256:
+                    obbMainFileSha256 = cursor.getString(i);
+                    break;
+                case ApkProvider.DataColumns.OBB_PATCH_FILE:
+                    obbPatchFile = cursor.getString(i);
+                    break;
+                case ApkProvider.DataColumns.OBB_PATCH_FILE_SHA256:
+                    obbPatchFileSha256 = cursor.getString(i);
+                    break;
                 case ApkProvider.DataColumns.NAME:
                     apkName = cursor.getString(i);
                     break;
@@ -140,11 +156,71 @@ public class Apk extends ValueObject implements Comparable<Apk> {
         }
     }
 
-    public String getUrl() {
+    private void checkRepoAddress() {
         if (repoAddress == null || apkName == null) {
             throw new IllegalStateException("Apk needs to have both ApkProvider.DataColumns.REPO_ADDRESS and ApkProvider.DataColumns.NAME set in order to calculate URL.");
         }
+    }
+
+    public String getUrl() {
+        checkRepoAddress();
         return repoAddress + "/" + apkName.replace(" ", "%20");
+    }
+
+    /**
+     * Get the URL to download the <i>main</i> expansion file, the primary
+     * expansion file for additional resources required by your application.
+     * The filename will always have the format:
+     * "main.<i>versionCode</i>.<i>packageName</i>.obb"
+     *
+     * @return a URL to download the OBB file that matches this APK
+     * @see #getPatchObbUrl()
+     * @see <a href="https://developer.android.com/google/play/expansion-files.html">APK Expansion Files</a>
+     */
+    public String getMainObbUrl() {
+        if (obbMainFile == null) {
+            return null;
+        }
+        checkRepoAddress();
+        return repoAddress + "/" + obbMainFile;
+    }
+
+    /**
+     * Get the URL to download the optional <i>patch</i> expansion file, which
+     * is intended for small updates to the <i>main</i> expansion file.
+     * The filename will always have the format:
+     * "patch.<i>versionCode</i>.<i>packageName</i>.obb"
+     *
+     * @return a URL to download the OBB file that matches this APK
+     * @see #getMainObbUrl()
+     * @see <a href="https://developer.android.com/google/play/expansion-files.html">APK Expansion Files</a>
+     */
+    public String getPatchObbUrl() {
+        if (obbPatchFile == null) {
+            return null;
+        }
+        checkRepoAddress();
+        return repoAddress + "/" + obbPatchFile;
+    }
+
+    /**
+     * Get the local path to the "main" OBB file.
+     */
+    public String getMainObbPath() {
+        if (obbMainFile == null) {
+            return null;
+        }
+        return App.getObbDir(packageName) + "/" + obbMainFile;
+    }
+
+    /**
+     * Get the local path to the "patch" OBB file.
+     */
+    public String getPatchObbPath() {
+        if (obbPatchFile == null) {
+            return null;
+        }
+        return App.getObbDir(packageName) + "/" + obbPatchFile;
     }
 
     public ArrayList<String> getFullPermissionList() {
@@ -174,7 +250,8 @@ public class Apk extends ValueObject implements Comparable<Apk> {
      * FDroid just includes the constant name in the apk list, so we prefix it
      * with "android.permission."
      *
-     * see https://gitlab.com/fdroid/fdroidserver/blob/master/fdroidserver/update.py#L535#
+     * @see <a href="https://gitlab.com/fdroid/fdroidserver/blob/1afa8cfc/update.py#L91">
+     *     More info into index - size, permissions, features, sdk version</a>
      */
     public static String fdroidToAndroidPermission(String permission) {
         if (!permission.contains(".")) {
@@ -204,6 +281,10 @@ public class Apk extends ValueObject implements Comparable<Apk> {
         values.put(ApkProvider.DataColumns.MIN_SDK_VERSION, minSdkVersion);
         values.put(ApkProvider.DataColumns.TARGET_SDK_VERSION, targetSdkVersion);
         values.put(ApkProvider.DataColumns.MAX_SDK_VERSION, maxSdkVersion);
+        values.put(ApkProvider.DataColumns.OBB_MAIN_FILE, obbMainFile);
+        values.put(ApkProvider.DataColumns.OBB_MAIN_FILE_SHA256, obbMainFile);
+        values.put(ApkProvider.DataColumns.OBB_PATCH_FILE, obbPatchFileSha256);
+        values.put(ApkProvider.DataColumns.OBB_PATCH_FILE_SHA256, obbPatchFileSha256);
         values.put(ApkProvider.DataColumns.ADDED_DATE, Utils.formatDate(added, ""));
         values.put(ApkProvider.DataColumns.PERMISSIONS, Utils.serializeCommaSeparatedString(permissions));
         values.put(ApkProvider.DataColumns.FEATURES, Utils.serializeCommaSeparatedString(features));
