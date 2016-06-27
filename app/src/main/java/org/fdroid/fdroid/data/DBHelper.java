@@ -111,7 +111,7 @@ class DBHelper extends SQLiteOpenHelper {
             + " );";
     private static final String DROP_TABLE_INSTALLED_APP = "DROP TABLE " + TABLE_INSTALLED_APP + ";";
 
-    private static final int DB_VERSION = 57;
+    private static final int DB_VERSION = 58;
 
     private final Context context;
 
@@ -299,8 +299,8 @@ class DBHelper extends SQLiteOpenHelper {
         addAuthorToApp(db, oldVersion);
         useMaxValueInMaxSdkVersion(db, oldVersion);
         requireTimestampInRepos(db, oldVersion);
-        recreateInstalledAppTable(db, oldVersion);
         addTargetSdkVersionToApk(db, oldVersion);
+        recreateInstalledAppTable(db, oldVersion);
     }
 
     /**
@@ -566,7 +566,7 @@ class DBHelper extends SQLiteOpenHelper {
      * table for the first time.
      */
     private void recreateInstalledAppTable(SQLiteDatabase db, int oldVersion) {
-        if (oldVersion >= 56) {
+        if (oldVersion >= 58) {
             return;
         }
         Utils.debugLog(TAG, "(re)creating 'installed app' database table.");

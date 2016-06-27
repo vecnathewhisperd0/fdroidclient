@@ -385,7 +385,7 @@ public final class Utils {
             }
 
             byte[] mdbytes = md.digest();
-            return toHexString(mdbytes);
+            return toHexString(mdbytes).toLowerCase(Locale.ENGLISH);
         } catch (IOException e) {
             Log.e(TAG, "Error reading \"" + apk.getAbsolutePath()
                     + "\" to compute " + algo + " hash.", e);
