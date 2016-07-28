@@ -6,8 +6,6 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import org.fdroid.fdroid.compat.PreferencesCompat;
-
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.SocketAddress;
@@ -40,8 +38,9 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
         preferences = PreferenceManager.getDefaultSharedPreferences(context);
         preferences.registerOnSharedPreferenceChangeListener(this);
         if (preferences.getString(PREF_LOCAL_REPO_NAME, null) == null) {
-            PreferencesCompat.apply(preferences.edit()
-                    .putString(PREF_LOCAL_REPO_NAME, getDefaultLocalRepoName()));
+            preferences.edit()
+                .putString(PREF_LOCAL_REPO_NAME, getDefaultLocalRepoName())
+                .apply();
         }
     }
 
@@ -68,7 +67,6 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
     public static final String PREF_PROXY_HOST = "proxyHost";
     public static final String PREF_PROXY_PORT = "proxyPort";
     public static final String PREF_SHOW_NFC_DURING_SWAP = "showNfcDuringSwap";
-    public static final String PREF_FIRST_TIME = "firstTime";
     public static final String PREF_POST_PRIVILEGED_INSTALL = "postPrivilegedInstall";
 
     private static final boolean DEFAULT_ROOTED = true;
@@ -87,7 +85,6 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
     public static final String DEFAULT_PROXY_HOST = "127.0.0.1";
     public static final int DEFAULT_PROXY_PORT = 8118;
     private static final boolean DEFAULT_SHOW_NFC_DURING_SWAP = true;
-    private static final boolean DEFAULT_FIRST_TIME = true;
     private static final boolean DEFAULT_POST_PRIVILEGED_INSTALL = false;
 
     public enum Theme {
@@ -128,15 +125,7 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
     }
 
     public void setPrivilegedInstallerEnabled(boolean enable) {
-        PreferencesCompat.apply(preferences.edit().putBoolean(PREF_PRIVILEGED_INSTALLER, enable));
-    }
-
-    public boolean isFirstTime() {
-        return preferences.getBoolean(PREF_FIRST_TIME, DEFAULT_FIRST_TIME);
-    }
-
-    public void setFirstTime(boolean firstTime) {
-        PreferencesCompat.apply(preferences.edit().putBoolean(PREF_FIRST_TIME, firstTime));
+        preferences.edit().putBoolean(PREF_PRIVILEGED_INSTALLER, enable).apply();
     }
 
     public boolean isPostPrivilegedInstall() {
@@ -144,7 +133,7 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
     }
 
     public void setPostPrivilegedInstall(boolean postInstall) {
-        PreferencesCompat.apply(preferences.edit().putBoolean(PREF_POST_PRIVILEGED_INSTALL, postInstall));
+        preferences.edit().putBoolean(PREF_POST_PRIVILEGED_INSTALL, postInstall).apply();
     }
 
     /**
@@ -165,7 +154,7 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
             SharedPreferences.Editor editor = preferences.edit();
             editor.remove(PREF_CACHE_APK);
             editor.putString(PREF_KEEP_CACHE_TIME, value);
-            PreferencesCompat.apply(editor);
+            editor.apply();
         }
 
         try {
@@ -188,7 +177,7 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
     }
 
     public void setShowNfcDuringSwap(boolean show) {
-        PreferencesCompat.apply(preferences.edit().putBoolean(PREF_SHOW_NFC_DURING_SWAP, show));
+        preferences.edit().putBoolean(PREF_SHOW_NFC_DURING_SWAP, show).apply();
     }
 
     public boolean expertMode() {
@@ -234,7 +223,7 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
         return preferences.getBoolean(PREF_USE_TOR, false);
     }
 
-    public boolean isProxyEnabled() {
+    private boolean isProxyEnabled() {
         return preferences.getBoolean(PREF_ENABLE_PROXY, DEFAULT_ENABLE_PROXY);
     }
 
@@ -378,6 +367,17 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
     }
 
     private static Preferences instance;
+
+    /**
+     * Should only be used for unit testing, whereby separate tests are required to invoke `setup()`.
+     * The reason we don't instead ask for the singleton to be lazily loaded in the {@link Preferences#get()}
+     * method is because that would require each call to that method to require a {@link Context}.
+     * While it is likely that most places asking for preferences have access to a {@link Context},
+     * it is a minor convenience to be able to ask for preferences without.
+     */
+    public static void clearSingletonForTesting() {
+        instance = null;
+    }
 
     /**
      * Needs to be setup before anything else tries to access it.
