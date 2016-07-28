@@ -80,6 +80,13 @@
         <CheckBoxPreference android:title="@string/expert"
             android:defaultValue="false"
             android:key="expert" />
+         <CheckBoxPreference
+            android:defaultValue="true"
+            android:dependency="expert"
+            android:key="install_mgr_srv"
+            android:summaryOff="stop Install Manager Service after successful download of Application"
+            android:summaryOn="keep Install Manager Service always running"
+            android:title="Install Manager Service behaviour"/>
         <CheckBoxPreference
             android:key="unstableUpdates"
             android:title="@string/unstable_updates"
