@@ -26,6 +26,7 @@ before_script:
 test:
   script:
     - echo " == Running build"
+    -Test
     - gradle build
     - echo " == Running checkstyle"
     - gradle checkstyle
