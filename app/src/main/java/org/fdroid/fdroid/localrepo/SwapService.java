@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.localrepo;
+package org.belos.belmarket.localrepo;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -26,22 +26,22 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.message.BasicNameValuePair;
-import org.fdroid.fdroid.FDroidApp;
-import org.fdroid.fdroid.Preferences;
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.UpdateService;
-import org.fdroid.fdroid.Utils;
-import org.fdroid.fdroid.data.App;
-import org.fdroid.fdroid.data.Repo;
-import org.fdroid.fdroid.data.RepoProvider;
-import org.fdroid.fdroid.data.Schema;
-import org.fdroid.fdroid.localrepo.peers.Peer;
-import org.fdroid.fdroid.localrepo.peers.PeerFinder;
-import org.fdroid.fdroid.localrepo.type.BluetoothSwap;
-import org.fdroid.fdroid.localrepo.type.SwapType;
-import org.fdroid.fdroid.localrepo.type.WifiSwap;
-import org.fdroid.fdroid.net.WifiStateChangeService;
-import org.fdroid.fdroid.views.swap.SwapWorkflowActivity;
+import org.belos.belmarket.FDroidApp;
+import org.belos.belmarket.Preferences;
+import org.belos.belmarket.R;
+import org.belos.belmarket.UpdateService;
+import org.belos.belmarket.Utils;
+import org.belos.belmarket.data.App;
+import org.belos.belmarket.data.Repo;
+import org.belos.belmarket.data.RepoProvider;
+import org.belos.belmarket.data.Schema;
+import org.belos.belmarket.localrepo.peers.Peer;
+import org.belos.belmarket.localrepo.peers.PeerFinder;
+import org.belos.belmarket.localrepo.type.BluetoothSwap;
+import org.belos.belmarket.localrepo.type.SwapType;
+import org.belos.belmarket.localrepo.type.WifiSwap;
+import org.belos.belmarket.net.WifiStateChangeService;
+import org.belos.belmarket.views.swap.SwapWorkflowActivity;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -449,16 +449,16 @@ public class SwapService extends Service {
         return wifiSwap.isConnected() && wifiSwap.getBonjour().isConnected();
     }
 
-    public static final String ACTION_PEER_FOUND = "org.fdroid.fdroid.SwapManager.ACTION_PEER_FOUND";
+    public static final String ACTION_PEER_FOUND = "org.belos.belmarket.SwapManager.ACTION_PEER_FOUND";
     public static final String EXTRA_PEER = "EXTRA_PEER";
 
     // ===============================================================
     //        Old SwapService stuff being merged into that.
     // ===============================================================
 
-    public static final String BONJOUR_STATE_CHANGE = "org.fdroid.fdroid.BONJOUR_STATE_CHANGE";
-    public static final String BLUETOOTH_STATE_CHANGE = "org.fdroid.fdroid.BLUETOOTH_STATE_CHANGE";
-    public static final String WIFI_STATE_CHANGE = "org.fdroid.fdroid.WIFI_STATE_CHANGE";
+    public static final String BONJOUR_STATE_CHANGE = "org.belos.belmarket.BONJOUR_STATE_CHANGE";
+    public static final String BLUETOOTH_STATE_CHANGE = "org.belos.belmarket.BLUETOOTH_STATE_CHANGE";
+    public static final String WIFI_STATE_CHANGE = "org.belos.belmarket.WIFI_STATE_CHANGE";
     public static final String EXTRA_STARTING = "STARTING";
     public static final String EXTRA_STARTED = "STARTED";
     public static final String EXTRA_STOPPING = "STOPPING";

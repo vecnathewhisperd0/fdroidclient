@@ -17,7 +17,7 @@
  * MA 02110-1301, USA.
  */
 
-package org.fdroid.fdroid.installer;
+package org.belos.belmarket.installer;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -27,8 +27,8 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 
-import org.fdroid.fdroid.Utils;
-import org.fdroid.fdroid.data.Apk;
+import org.belos.belmarket.Utils;
+import org.belos.belmarket.data.Apk;
 
 import java.util.Arrays;
 import java.util.HashSet;

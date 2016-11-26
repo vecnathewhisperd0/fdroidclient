@@ -1,13 +1,13 @@
-package org.fdroid.fdroid.localrepo.type;
+package org.belos.belmarket.localrepo.type;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import org.fdroid.fdroid.FDroidApp;
-import org.fdroid.fdroid.Preferences;
-import org.fdroid.fdroid.Utils;
-import org.fdroid.fdroid.localrepo.SwapService;
+import org.belos.belmarket.FDroidApp;
+import org.belos.belmarket.Preferences;
+import org.belos.belmarket.Utils;
+import org.belos.belmarket.localrepo.SwapService;
 
 import java.io.IOException;
 import java.net.InetAddress;

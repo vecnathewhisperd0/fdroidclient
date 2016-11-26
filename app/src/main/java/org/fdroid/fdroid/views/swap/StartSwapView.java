@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.views.swap;
+package org.belos.belmarket.views.swap;
 
 import android.annotation.TargetApi;
 import android.bluetooth.BluetoothAdapter;
@@ -28,12 +28,12 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.fdroid.fdroid.FDroidApp;
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.Utils;
-import org.fdroid.fdroid.localrepo.SwapService;
-import org.fdroid.fdroid.localrepo.peers.Peer;
-import org.fdroid.fdroid.net.WifiStateChangeService;
+import org.belos.belmarket.FDroidApp;
+import org.belos.belmarket.R;
+import org.belos.belmarket.Utils;
+import org.belos.belmarket.localrepo.SwapService;
+import org.belos.belmarket.localrepo.peers.Peer;
+import org.belos.belmarket.net.WifiStateChangeService;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.data;
+package org.belos.belmarket.data;
 
 import android.app.Application;
 import android.content.ContentValues;
@@ -7,9 +7,9 @@ import android.content.ContextWrapper;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import org.fdroid.fdroid.BuildConfig;
-import org.fdroid.fdroid.TestUtils;
-import org.fdroid.fdroid.Utils;
+import org.belos.belmarket.BuildConfig;
+import org.belos.belmarket.TestUtils;
+import org.belos.belmarket.Utils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

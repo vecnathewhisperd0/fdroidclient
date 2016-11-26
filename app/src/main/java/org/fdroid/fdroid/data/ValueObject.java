@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.data;
+package org.belos.belmarket.data;
 
 import android.database.Cursor;
 

@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.localrepo;
+package org.belos.belmarket.localrepo;
 
 import android.app.IntentService;
 import android.content.Context;
@@ -7,9 +7,9 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 
 import org.apache.commons.io.FileUtils;
-import org.fdroid.fdroid.FDroidApp;
-import org.fdroid.fdroid.Utils;
-import org.fdroid.fdroid.data.App;
+import org.belos.belmarket.FDroidApp;
+import org.belos.belmarket.Utils;
+import org.belos.belmarket.data.App;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,14 +20,14 @@ import java.security.cert.CertificateEncodingException;
  * which are available for swapping.  It does not cache system apps, since those are
  * rarely swapped.  This is meant to start running when {@link SwapService} starts.
  * <p>
- * This could probably be replaced by {@link org.fdroid.fdroid.data.InstalledAppProvider}
+ * This could probably be replaced by {@link org.belos.belmarket.data.InstalledAppProvider}
  * if that contained all of the info to generate complete {@link App} and
- * {@link org.fdroid.fdroid.data.Apk} instances.
+ * {@link org.belos.belmarket.data.Apk} instances.
  */
 public class CacheSwapAppsService extends IntentService {
     private static final String TAG = "CacheSwapAppsService";
 
-    private static final String ACTION_PARSE_APP = "org.fdroid.fdroid.localrepo.action.PARSE_APP";
+    private static final String ACTION_PARSE_APP = "org.belos.belmarket.localrepo.action.PARSE_APP";
 
     public CacheSwapAppsService() {
         super("CacheSwapAppsService");

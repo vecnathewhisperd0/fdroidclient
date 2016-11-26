@@ -17,7 +17,7 @@
  * MA 02110-1301, USA.
  */
 
-package org.fdroid.fdroid.privileged;
+package org.belos.belmarket.privileged;
 
 interface IPrivilegedCallback {
 

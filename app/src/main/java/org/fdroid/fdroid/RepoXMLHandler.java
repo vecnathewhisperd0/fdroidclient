@@ -17,17 +17,17 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-package org.fdroid.fdroid;
+package org.belos.belmarket;
 
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import org.fdroid.fdroid.data.Apk;
-import org.fdroid.fdroid.data.App;
-import org.fdroid.fdroid.data.Repo;
-import org.fdroid.fdroid.data.RepoPushRequest;
-import org.fdroid.fdroid.data.Schema.ApkTable;
+import org.belos.belmarket.data.Apk;
+import org.belos.belmarket.data.App;
+import org.belos.belmarket.data.Repo;
+import org.belos.belmarket.data.RepoPushRequest;
+import org.belos.belmarket.data.Schema.ApkTable;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;

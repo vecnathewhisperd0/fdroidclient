@@ -21,14 +21,14 @@
  * MA 02110-1301, USA.
  */
 
-package org.fdroid.fdroid.data;
+package org.belos.belmarket.data;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.text.TextUtils;
 
-import org.fdroid.fdroid.Utils;
-import org.fdroid.fdroid.data.Schema.RepoTable.Cols;
+import org.belos.belmarket.Utils;
+import org.belos.belmarket.data.Schema.RepoTable.Cols;
 
 import java.net.MalformedURLException;
 import java.net.URL;

@@ -18,7 +18,7 @@
  * 02110-1301, USA.
  */
 
-package org.fdroid.fdroid;
+package org.belos.belmarket;
 
 import java.io.BufferedInputStream;
 import java.io.File;

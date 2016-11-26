@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.data;
+package org.belos.belmarket.data;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -8,7 +8,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
-import org.fdroid.fdroid.Utils;
+import org.belos.belmarket.Utils;
 
 /**
  * Replies with the public download URL for the OBB that belongs to the
@@ -21,10 +21,10 @@ import org.fdroid.fdroid.Utils;
 public class ObbUrlActivity extends Activity {
     public static final String TAG = "ObbUrlActivity";
 
-    public static final String ACTION_GET_OBB_MAIN_URL = "org.fdroid.fdroid.action.GET_OBB_MAIN_URL";
-    public static final String ACTION_GET_OBB_PATCH_URL = "org.fdroid.fdroid.action.GET_OBB_PATCH_URL";
+    public static final String ACTION_GET_OBB_MAIN_URL = "org.belos.belmarket.action.GET_OBB_MAIN_URL";
+    public static final String ACTION_GET_OBB_PATCH_URL = "org.belos.belmarket.action.GET_OBB_PATCH_URL";
 
-    public static final String EXTRA_SHA256 = "org.fdroid.fdroid.extra.SHA256";
+    public static final String EXTRA_SHA256 = "org.belos.belmarket.extra.SHA256";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

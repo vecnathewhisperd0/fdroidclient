@@ -15,7 +15,7 @@
 ** limitations under the License.
 */
 
-package org.fdroid.fdroid.privileged.views;
+package org.belos.belmarket.privileged.views;
 
 import android.app.Activity;
 import android.content.Context;

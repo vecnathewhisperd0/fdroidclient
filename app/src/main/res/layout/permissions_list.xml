@@ -16,7 +16,7 @@
 <!--
 This is the structure for the list of all permissions.
 -->
-<org.fdroid.fdroid.privileged.views.CaffeinatedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<org.belos.belmarket.privileged.views.CaffeinatedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollview"
     android:layout_width="wrap_content"
@@ -31,4 +31,4 @@ This is the structure for the list of all permissions.
         android:paddingEnd="4dp"
         android:paddingRight="4dp"
         tools:ignore="RtlSymmetry" />
-</org.fdroid.fdroid.privileged.views.CaffeinatedScrollView>
+</org.belos.belmarket.privileged.views.CaffeinatedScrollView>

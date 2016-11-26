@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.data;
+package org.belos.belmarket.data;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -8,10 +8,10 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.data.Schema.CatJoinTable;
-import org.fdroid.fdroid.data.Schema.CategoryTable;
-import org.fdroid.fdroid.data.Schema.CategoryTable.Cols;
+import org.belos.belmarket.R;
+import org.belos.belmarket.data.Schema.CatJoinTable;
+import org.belos.belmarket.data.Schema.CategoryTable;
+import org.belos.belmarket.data.Schema.CategoryTable.Cols;
 
 import java.util.ArrayList;
 import java.util.Collections;

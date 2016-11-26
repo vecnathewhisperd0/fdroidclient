@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  */
 
-package org.fdroid.fdroid.installer;
+package org.belos.belmarket.installer;
 
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
-import org.fdroid.fdroid.BuildConfig;
-import org.fdroid.fdroid.data.Apk;
-import org.fdroid.fdroid.privileged.install.InstallExtensionDialogActivity;
+import org.belos.belmarket.BuildConfig;
+import org.belos.belmarket.data.Apk;
+import org.belos.belmarket.privileged.install.InstallExtensionDialogActivity;
 
 import java.io.File;
 

@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-package org.fdroid.fdroid;
+package org.belos.belmarket;
 
 import android.app.AlarmManager;
 import android.app.IntentService;
@@ -43,14 +43,14 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import org.fdroid.fdroid.data.Apk;
-import org.fdroid.fdroid.data.ApkProvider;
-import org.fdroid.fdroid.data.App;
-import org.fdroid.fdroid.data.AppProvider;
-import org.fdroid.fdroid.data.Repo;
-import org.fdroid.fdroid.data.RepoProvider;
-import org.fdroid.fdroid.data.Schema;
-import org.fdroid.fdroid.installer.InstallManagerService;
+import org.belos.belmarket.data.Apk;
+import org.belos.belmarket.data.ApkProvider;
+import org.belos.belmarket.data.App;
+import org.belos.belmarket.data.AppProvider;
+import org.belos.belmarket.data.Repo;
+import org.belos.belmarket.data.RepoProvider;
+import org.belos.belmarket.data.Schema;
+import org.belos.belmarket.installer.InstallManagerService;
 
 import java.net.URL;
 import java.util.ArrayList;

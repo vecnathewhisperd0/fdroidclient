@@ -15,7 +15,7 @@
 ** limitations under the License.
 */
 
-package org.fdroid.fdroid.privileged.views;
+package org.belos.belmarket.privileged.views;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -42,7 +42,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.fdroid.fdroid.R;
+import org.belos.belmarket.R;
 
 import java.text.Collator;
 import java.util.ArrayList;

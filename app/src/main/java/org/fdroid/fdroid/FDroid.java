@@ -17,7 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-package org.fdroid.fdroid;
+package org.belos.belmarket;
 
 import android.app.NotificationManager;
 import android.app.SearchManager;
@@ -44,13 +44,13 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.fdroid.fdroid.compat.TabManager;
-import org.fdroid.fdroid.compat.UriCompat;
-import org.fdroid.fdroid.data.AppProvider;
-import org.fdroid.fdroid.data.NewRepoConfig;
-import org.fdroid.fdroid.views.AppListFragmentPagerAdapter;
-import org.fdroid.fdroid.views.ManageReposActivity;
-import org.fdroid.fdroid.views.swap.SwapWorkflowActivity;
+import org.belos.belmarket.compat.TabManager;
+import org.belos.belmarket.compat.UriCompat;
+import org.belos.belmarket.data.AppProvider;
+import org.belos.belmarket.data.NewRepoConfig;
+import org.belos.belmarket.views.AppListFragmentPagerAdapter;
+import org.belos.belmarket.views.ManageReposActivity;
+import org.belos.belmarket.views.swap.SwapWorkflowActivity;
 
 public class FDroid extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
@@ -62,7 +62,7 @@ public class FDroid extends AppCompatActivity implements SearchView.OnQueryTextL
 
     public static final String EXTRA_TAB_UPDATE = "extraTab";
 
-    private static final String ACTION_ADD_REPO = "org.fdroid.fdroid.FDroid.ACTION_ADD_REPO";
+    private static final String ACTION_ADD_REPO = "org.belos.belmarket.FDroid.ACTION_ADD_REPO";
 
     private static final String ADD_REPO_INTENT_HANDLED = "addRepoIntentHandled";
 
@@ -382,7 +382,7 @@ public class FDroid extends AppCompatActivity implements SearchView.OnQueryTextL
                 }
                 break;
             case REQUEST_ENABLE_BLUETOOTH:
-                fdroidApp.sendViaBluetooth(this, resultCode, "org.fdroid.fdroid");
+                fdroidApp.sendViaBluetooth(this, resultCode, "org.belos.belmarket");
                 break;
         }
     }

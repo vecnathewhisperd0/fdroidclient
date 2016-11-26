@@ -1,21 +1,21 @@
 
-package org.fdroid.fdroid.updater;
+package org.belos.belmarket.updater;
 
 import android.content.ContentValues;
 import android.support.annotation.StringDef;
 import android.util.Log;
 
-import org.fdroid.fdroid.BuildConfig;
-import org.fdroid.fdroid.RepoUpdater;
-import org.fdroid.fdroid.data.Apk;
-import org.fdroid.fdroid.data.ApkProvider;
-import org.fdroid.fdroid.data.App;
-import org.fdroid.fdroid.data.AppProvider;
-import org.fdroid.fdroid.data.Repo;
-import org.fdroid.fdroid.data.RepoProvider;
-import org.fdroid.fdroid.data.Schema;
-import org.fdroid.fdroid.data.Schema.AppMetadataTable;
-import org.fdroid.fdroid.data.Schema.RepoTable.Cols;
+import org.belos.belmarket.BuildConfig;
+import org.belos.belmarket.RepoUpdater;
+import org.belos.belmarket.data.Apk;
+import org.belos.belmarket.data.ApkProvider;
+import org.belos.belmarket.data.App;
+import org.belos.belmarket.data.AppProvider;
+import org.belos.belmarket.data.Repo;
+import org.belos.belmarket.data.RepoProvider;
+import org.belos.belmarket.data.Schema;
+import org.belos.belmarket.data.Schema.AppMetadataTable;
+import org.belos.belmarket.data.Schema.RepoTable.Cols;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricGradleTestRunner;

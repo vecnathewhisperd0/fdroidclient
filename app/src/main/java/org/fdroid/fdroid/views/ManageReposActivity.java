@@ -17,7 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-package org.fdroid.fdroid.views;
+package org.belos.belmarket.views;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -54,17 +54,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.fdroid.fdroid.FDroid;
-import org.fdroid.fdroid.FDroidApp;
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.UpdateService;
-import org.fdroid.fdroid.Utils;
-import org.fdroid.fdroid.compat.ClipboardCompat;
-import org.fdroid.fdroid.compat.CursorAdapterCompat;
-import org.fdroid.fdroid.data.NewRepoConfig;
-import org.fdroid.fdroid.data.Repo;
-import org.fdroid.fdroid.data.RepoProvider;
-import org.fdroid.fdroid.data.Schema.RepoTable;
+import org.belos.belmarket.FDroid;
+import org.belos.belmarket.FDroidApp;
+import org.belos.belmarket.R;
+import org.belos.belmarket.UpdateService;
+import org.belos.belmarket.Utils;
+import org.belos.belmarket.compat.ClipboardCompat;
+import org.belos.belmarket.compat.CursorAdapterCompat;
+import org.belos.belmarket.data.NewRepoConfig;
+import org.belos.belmarket.data.Repo;
+import org.belos.belmarket.data.RepoProvider;
+import org.belos.belmarket.data.Schema.RepoTable;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

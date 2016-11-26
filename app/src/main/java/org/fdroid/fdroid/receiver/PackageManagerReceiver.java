@@ -1,16 +1,16 @@
-package org.fdroid.fdroid.receiver;
+package org.belos.belmarket.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import org.fdroid.fdroid.Utils;
-import org.fdroid.fdroid.data.InstalledAppProviderService;
+import org.belos.belmarket.Utils;
+import org.belos.belmarket.data.InstalledAppProviderService;
 
 /**
  * Receive {@link Intent#ACTION_PACKAGE_ADDED} and {@link Intent#ACTION_PACKAGE_REMOVED}
  * events from {@link android.content.pm.PackageManager} to keep
- * {@link org.fdroid.fdroid.data.InstalledAppProvider} updated. This ignores
+ * {@link org.belos.belmarket.data.InstalledAppProvider} updated. This ignores
  * {@link Intent#EXTRA_REPLACING} and instead handles updates by just deleting then
  * inserting the app being updated in direct response to the {@code Intent}s from
  * the system.  This is also necessary because there are no other checks to prevent

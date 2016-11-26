@@ -1,8 +1,8 @@
-package org.fdroid.fdroid.data;
+package org.belos.belmarket.data;
 
 import android.content.ContextWrapper;
 
-import org.fdroid.fdroid.TestUtils;
+import org.belos.belmarket.TestUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.robolectric.RuntimeEnvironment;

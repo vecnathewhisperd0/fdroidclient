@@ -1,4 +1,4 @@
-package org.fdroid.fdroid;
+package org.belos.belmarket;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,13 +7,13 @@ import android.net.Uri;
 
 import junit.framework.AssertionFailedError;
 
-import org.fdroid.fdroid.data.ApkProvider;
-import org.fdroid.fdroid.data.App;
-import org.fdroid.fdroid.data.AppProvider;
-import org.fdroid.fdroid.data.InstalledAppProvider;
-import org.fdroid.fdroid.data.Schema.ApkTable;
-import org.fdroid.fdroid.data.Schema.AppMetadataTable;
-import org.fdroid.fdroid.data.Schema.InstalledAppTable;
+import org.belos.belmarket.data.ApkProvider;
+import org.belos.belmarket.data.App;
+import org.belos.belmarket.data.AppProvider;
+import org.belos.belmarket.data.InstalledAppProvider;
+import org.belos.belmarket.data.Schema.ApkTable;
+import org.belos.belmarket.data.Schema.AppMetadataTable;
+import org.belos.belmarket.data.Schema.InstalledAppTable;
 import org.robolectric.shadows.ShadowContentResolver;
 
 import java.util.ArrayList;

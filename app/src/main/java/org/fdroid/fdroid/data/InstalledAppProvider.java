@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.data;
+package org.belos.belmarket.data;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,10 +12,10 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.Utils;
-import org.fdroid.fdroid.data.Schema.InstalledAppTable;
-import org.fdroid.fdroid.data.Schema.InstalledAppTable.Cols;
+import org.belos.belmarket.R;
+import org.belos.belmarket.Utils;
+import org.belos.belmarket.data.Schema.InstalledAppTable;
+import org.belos.belmarket.data.Schema.InstalledAppTable.Cols;
 
 import java.util.HashMap;
 import java.util.Map;

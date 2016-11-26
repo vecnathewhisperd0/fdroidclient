@@ -17,13 +17,13 @@
  * MA 02110-1301, USA.
  */
 
-package org.fdroid.fdroid.privileged.install;
+package org.belos.belmarket.privileged.install;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import org.fdroid.fdroid.Preferences;
+import org.belos.belmarket.Preferences;
 
 public class InstallExtensionBootReceiver extends BroadcastReceiver {
 

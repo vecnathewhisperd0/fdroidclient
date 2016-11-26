@@ -1,11 +1,11 @@
-package org.fdroid.fdroid.net;
+package org.belos.belmarket.net;
 
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 
 import org.apache.commons.io.FileUtils;
-import org.fdroid.fdroid.BuildConfig;
-import org.fdroid.fdroid.FDroidApp;
-import org.fdroid.fdroid.Utils;
+import org.belos.belmarket.BuildConfig;
+import org.belos.belmarket.FDroidApp;
+import org.belos.belmarket.Utils;
 import org.spongycastle.util.encoders.Base64;
 
 import java.io.BufferedInputStream;

@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.net.bluetooth;
+package org.belos.belmarket.net.bluetooth;
 
 import java.util.UUID;
 
@@ -8,7 +8,7 @@ import java.util.UUID;
 class BluetoothConstants {
 
     public static UUID fdroidUuid() {
-        // TODO: Generate a UUID deterministically from, e.g. "org.fdroid.fdroid.net.Bluetooth";
+        // TODO: Generate a UUID deterministically from, e.g. "org.belos.belmarket.net.Bluetooth";
         // This can be an offline process, as long as it can be reproduced by other people who
         // want to do so.
         // This UUID is just from mashing random hex characters on the keyboard.

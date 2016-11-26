@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.fdroid.fdroid"
+    package="org.belos.belmarket"
     android:installLocation="auto">
 
     <uses-sdk
@@ -46,7 +46,7 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.NFC" />
 
-    <uses-permission android:name="org.fdroid.fdroid.privileged.USE_SERVICE" />
+    <uses-permission android:name="org.belos.belmarket.privileged.USE_SERVICE" />
 
     <!-- Indicate that F-Droid may request root access (introduced by Koush's Superuser app)
          This permission is deprecated, but necessary for some old superuser
@@ -65,53 +65,53 @@
         >
 
         <provider
-            android:authorities="org.fdroid.fdroid.data.AppProvider"
-            android:name="org.fdroid.fdroid.data.AppProvider"
+            android:authorities="org.belos.belmarket.data.AppProvider"
+            android:name="org.belos.belmarket.data.AppProvider"
             android:exported="false"/>
 
         <provider
-            android:authorities="org.fdroid.fdroid.data.RepoProvider"
-            android:name="org.fdroid.fdroid.data.RepoProvider"
+            android:authorities="org.belos.belmarket.data.RepoProvider"
+            android:name="org.belos.belmarket.data.RepoProvider"
             android:exported="false"/>
 
         <provider
-            android:authorities="org.fdroid.fdroid.data.ApkProvider"
-            android:name="org.fdroid.fdroid.data.ApkProvider"
+            android:authorities="org.belos.belmarket.data.ApkProvider"
+            android:name="org.belos.belmarket.data.ApkProvider"
             android:exported="false"/>
 
         <provider
-            android:authorities="org.fdroid.fdroid.data.TempApkProvider"
-            android:name="org.fdroid.fdroid.data.TempApkProvider"
+            android:authorities="org.belos.belmarket.data.TempApkProvider"
+            android:name="org.belos.belmarket.data.TempApkProvider"
             android:exported="false"/>
 
         <provider
-            android:authorities="org.fdroid.fdroid.data.TempAppProvider"
-            android:name="org.fdroid.fdroid.data.TempAppProvider"
+            android:authorities="org.belos.belmarket.data.TempAppProvider"
+            android:name="org.belos.belmarket.data.TempAppProvider"
             android:exported="false"/>
 
         <provider
-            android:authorities="org.fdroid.fdroid.data.InstalledAppProvider"
-            android:name="org.fdroid.fdroid.data.InstalledAppProvider"
+            android:authorities="org.belos.belmarket.data.InstalledAppProvider"
+            android:name="org.belos.belmarket.data.InstalledAppProvider"
             android:exported="false"/>
 
         <provider
-            android:authorities="org.fdroid.fdroid.data.AppPrefsProvider"
-            android:name="org.fdroid.fdroid.data.AppPrefsProvider"
+            android:authorities="org.belos.belmarket.data.AppPrefsProvider"
+            android:name="org.belos.belmarket.data.AppPrefsProvider"
             android:exported="false"/>
 
         <provider
-            android:authorities="org.fdroid.fdroid.data.PackageProvider"
-            android:name="org.fdroid.fdroid.data.PackageProvider"
+            android:authorities="org.belos.belmarket.data.PackageProvider"
+            android:name="org.belos.belmarket.data.PackageProvider"
             android:exported="false"/>
 
         <provider
-            android:authorities="org.fdroid.fdroid.data.CategoryProvider"
-            android:name="org.fdroid.fdroid.data.CategoryProvider"
+            android:authorities="org.belos.belmarket.data.CategoryProvider"
+            android:name="org.belos.belmarket.data.CategoryProvider"
             android:exported="false"/>
 
         <provider
-            android:name="org.fdroid.fdroid.installer.ApkFileProvider"
-            android:authorities="org.fdroid.fdroid.installer.ApkFileProvider"
+            android:name="org.belos.belmarket.installer.ApkFileProvider"
+            android:authorities="org.belos.belmarket.installer.ApkFileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -120,7 +120,7 @@
         </provider>
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="org.fdroid.fdroid.installer"
+            android:authorities="org.belos.belmarket.installer"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -375,7 +375,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
 
-                <data android:mimeType="application/vnd.org.fdroid.fdroid.repo" />
+                <data android:mimeType="application/vnd.org.belos.belmarket.repo" />
             </intent-filter>
         </activity>
         <activity

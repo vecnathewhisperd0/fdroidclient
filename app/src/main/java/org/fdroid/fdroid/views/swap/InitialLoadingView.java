@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.views.swap;
+package org.belos.belmarket.views.swap;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -9,8 +9,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.RelativeLayout;
 
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.localrepo.SwapService;
+import org.belos.belmarket.R;
+import org.belos.belmarket.localrepo.SwapService;
 
 public class InitialLoadingView extends RelativeLayout implements SwapWorkflowActivity.InnerView {
 

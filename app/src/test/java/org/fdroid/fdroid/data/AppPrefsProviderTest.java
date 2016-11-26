@@ -1,9 +1,9 @@
-package org.fdroid.fdroid.data;
+package org.belos.belmarket.data;
 
 import android.app.Application;
 
-import org.fdroid.fdroid.Assert;
-import org.fdroid.fdroid.BuildConfig;
+import org.belos.belmarket.Assert;
+import org.belos.belmarket.BuildConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

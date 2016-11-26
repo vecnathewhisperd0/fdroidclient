@@ -17,7 +17,7 @@
  * MA 02110-1301, USA.
  */
 
-package org.fdroid.fdroid.privileged.install;
+package org.belos.belmarket.privileged.install;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -32,10 +32,10 @@ import android.text.Html;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
 
-import org.fdroid.fdroid.FDroid;
-import org.fdroid.fdroid.FDroidApp;
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.installer.PrivilegedInstaller;
+import org.belos.belmarket.FDroid;
+import org.belos.belmarket.FDroidApp;
+import org.belos.belmarket.R;
+import org.belos.belmarket.installer.PrivilegedInstaller;
 
 import java.io.File;
 

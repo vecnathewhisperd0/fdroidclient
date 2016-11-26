@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.data;
+package org.belos.belmarket.data;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -9,17 +9,17 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
-import org.fdroid.fdroid.Preferences;
-import org.fdroid.fdroid.Utils;
-import org.fdroid.fdroid.data.Schema.ApkTable;
-import org.fdroid.fdroid.data.Schema.AppPrefsTable;
-import org.fdroid.fdroid.data.Schema.AppMetadataTable;
-import org.fdroid.fdroid.data.Schema.AppMetadataTable.Cols;
-import org.fdroid.fdroid.data.Schema.CatJoinTable;
-import org.fdroid.fdroid.data.Schema.CategoryTable;
-import org.fdroid.fdroid.data.Schema.InstalledAppTable;
-import org.fdroid.fdroid.data.Schema.PackageTable;
-import org.fdroid.fdroid.data.Schema.RepoTable;
+import org.belos.belmarket.Preferences;
+import org.belos.belmarket.Utils;
+import org.belos.belmarket.data.Schema.ApkTable;
+import org.belos.belmarket.data.Schema.AppPrefsTable;
+import org.belos.belmarket.data.Schema.AppMetadataTable;
+import org.belos.belmarket.data.Schema.AppMetadataTable.Cols;
+import org.belos.belmarket.data.Schema.CatJoinTable;
+import org.belos.belmarket.data.Schema.CategoryTable;
+import org.belos.belmarket.data.Schema.InstalledAppTable;
+import org.belos.belmarket.data.Schema.PackageTable;
+import org.belos.belmarket.data.Schema.RepoTable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Each app has a bunch of metadata that it associates with a package name (such as org.fdroid.fdroid).
+ * Each app has a bunch of metadata that it associates with a package name (such as org.belos.belmarket).
  * Multiple repositories can host the same package, and provide different metadata for that app.
  *
  * As such, it is usually the case that you are interested in an {@link App} which has its metadata
@@ -142,12 +142,12 @@ public class AppProvider extends FDroidProvider {
     /**
      * A QuerySelection which is aware of the option/need to join onto the
      * installed apps table. Not that the base classes
-     * {@link org.fdroid.fdroid.data.QuerySelection#add(QuerySelection)} and
-     * {@link org.fdroid.fdroid.data.QuerySelection#add(String, String[])} methods
-     * will only return the base class {@link org.fdroid.fdroid.data.QuerySelection}
+     * {@link org.belos.belmarket.data.QuerySelection#add(QuerySelection)} and
+     * {@link org.belos.belmarket.data.QuerySelection#add(String, String[])} methods
+     * will only return the base class {@link org.belos.belmarket.data.QuerySelection}
      * which is not aware of the installed app table.
      * However, the
-     * {@link org.fdroid.fdroid.data.AppProvider.AppQuerySelection#add(org.fdroid.fdroid.data.AppProvider.AppQuerySelection)}
+     * {@link org.belos.belmarket.data.AppProvider.AppQuerySelection#add(org.belos.belmarket.data.AppProvider.AppQuerySelection)}
      * method from this class will return an instance of this class, that is aware of
      * the install apps table.
      */

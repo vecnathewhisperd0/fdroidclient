@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.views.swap;
+package org.belos.belmarket.views.swap;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -33,10 +33,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.data.InstalledAppProvider;
-import org.fdroid.fdroid.data.Schema.InstalledAppTable;
-import org.fdroid.fdroid.localrepo.SwapService;
+import org.belos.belmarket.R;
+import org.belos.belmarket.data.InstalledAppProvider;
+import org.belos.belmarket.data.Schema.InstalledAppTable;
+import org.belos.belmarket.localrepo.SwapService;
 
 public class SelectAppsView extends ListView implements
         SwapWorkflowActivity.InnerView,

@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.localrepo.peers;
+package org.belos.belmarket.localrepo.peers;
 
 import android.content.Context;
 

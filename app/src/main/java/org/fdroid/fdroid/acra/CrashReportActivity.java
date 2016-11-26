@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.acra;
+package org.belos.belmarket.acra;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.widget.EditText;
 
 import org.acra.dialog.BaseCrashReportDialog;
-import org.fdroid.fdroid.R;
+import org.belos.belmarket.R;
 
 public class CrashReportActivity extends BaseCrashReportDialog
         implements DialogInterface.OnDismissListener, DialogInterface.OnClickListener {

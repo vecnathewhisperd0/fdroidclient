@@ -16,14 +16,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-package org.fdroid.fdroid.receiver;
+package org.belos.belmarket.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import org.fdroid.fdroid.UpdateService;
-import org.fdroid.fdroid.Utils;
+import org.belos.belmarket.UpdateService;
+import org.belos.belmarket.Utils;
 
 public class StartupReceiver extends BroadcastReceiver {
     private static final String TAG = "StartupReceiver";

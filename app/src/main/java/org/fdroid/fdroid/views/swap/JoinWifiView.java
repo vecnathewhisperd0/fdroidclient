@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.views.swap;
+package org.belos.belmarket.views.swap;
 
 import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
@@ -20,10 +20,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.fdroid.fdroid.FDroidApp;
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.localrepo.SwapService;
-import org.fdroid.fdroid.net.WifiStateChangeService;
+import org.belos.belmarket.FDroidApp;
+import org.belos.belmarket.R;
+import org.belos.belmarket.localrepo.SwapService;
+import org.belos.belmarket.net.WifiStateChangeService;
 
 public class JoinWifiView extends RelativeLayout implements SwapWorkflowActivity.InnerView {
 

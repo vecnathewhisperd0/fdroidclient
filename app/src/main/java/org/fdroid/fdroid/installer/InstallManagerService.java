@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.installer;
+package org.belos.belmarket.installer;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -20,17 +20,17 @@ import android.text.TextUtils;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
-import org.fdroid.fdroid.AppDetails;
-import org.fdroid.fdroid.Hasher;
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.Utils;
-import org.fdroid.fdroid.compat.PackageManagerCompat;
-import org.fdroid.fdroid.data.Apk;
-import org.fdroid.fdroid.data.App;
-import org.fdroid.fdroid.data.AppProvider;
-import org.fdroid.fdroid.data.Schema;
-import org.fdroid.fdroid.net.Downloader;
-import org.fdroid.fdroid.net.DownloaderService;
+import org.belos.belmarket.AppDetails;
+import org.belos.belmarket.Hasher;
+import org.belos.belmarket.R;
+import org.belos.belmarket.Utils;
+import org.belos.belmarket.compat.PackageManagerCompat;
+import org.belos.belmarket.data.Apk;
+import org.belos.belmarket.data.App;
+import org.belos.belmarket.data.AppProvider;
+import org.belos.belmarket.data.Schema;
+import org.belos.belmarket.net.Downloader;
+import org.belos.belmarket.net.DownloaderService;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -77,11 +77,11 @@ import java.util.Set;
 public class InstallManagerService extends Service {
     private static final String TAG = "InstallManagerService";
 
-    private static final String ACTION_INSTALL = "org.fdroid.fdroid.installer.action.INSTALL";
-    private static final String ACTION_CANCEL = "org.fdroid.fdroid.installer.action.CANCEL";
+    private static final String ACTION_INSTALL = "org.belos.belmarket.installer.action.INSTALL";
+    private static final String ACTION_CANCEL = "org.belos.belmarket.installer.action.CANCEL";
 
-    private static final String EXTRA_APP = "org.fdroid.fdroid.installer.extra.APP";
-    private static final String EXTRA_APK = "org.fdroid.fdroid.installer.extra.APK";
+    private static final String EXTRA_APP = "org.belos.belmarket.installer.extra.APP";
+    private static final String EXTRA_APK = "org.belos.belmarket.installer.extra.APK";
 
     /**
      * The collection of {@link Apk}s that are actively going through this whole process,

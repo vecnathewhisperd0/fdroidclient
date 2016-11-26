@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-package org.fdroid.fdroid;
+package org.belos.belmarket;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -37,9 +37,9 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 
-import org.fdroid.fdroid.compat.FileCompat;
-import org.fdroid.fdroid.data.Repo;
-import org.fdroid.fdroid.data.SanitizedFile;
+import org.belos.belmarket.compat.FileCompat;
+import org.belos.belmarket.data.Repo;
+import org.belos.belmarket.data.SanitizedFile;
 import org.xml.sax.XMLReader;
 
 import java.io.BufferedInputStream;

@@ -1,10 +1,10 @@
-package org.fdroid.fdroid.localrepo.peers;
+package org.belos.belmarket.localrepo.peers;
 
 import android.net.Uri;
 import android.os.Parcel;
 
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.data.NewRepoConfig;
+import org.belos.belmarket.R;
+import org.belos.belmarket.data.NewRepoConfig;
 
 public class WifiPeer implements Peer {
 

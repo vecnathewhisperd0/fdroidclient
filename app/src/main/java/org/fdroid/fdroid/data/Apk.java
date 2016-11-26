@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.data;
+package org.belos.belmarket.data;
 
 import android.annotation.TargetApi;
 import android.content.ContentValues;
@@ -8,9 +8,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
-import org.fdroid.fdroid.RepoXMLHandler;
-import org.fdroid.fdroid.Utils;
-import org.fdroid.fdroid.data.Schema.ApkTable.Cols;
+import org.belos.belmarket.RepoXMLHandler;
+import org.belos.belmarket.Utils;
+import org.belos.belmarket.data.Schema.ApkTable.Cols;
 
 import java.io.File;
 import java.util.Date;

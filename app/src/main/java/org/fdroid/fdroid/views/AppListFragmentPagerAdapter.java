@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.views;
+package org.belos.belmarket.views;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -6,14 +6,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
-import org.fdroid.fdroid.FDroid;
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.compat.TabManager;
-import org.fdroid.fdroid.data.AppProvider;
-import org.fdroid.fdroid.views.fragments.AppListFragment;
-import org.fdroid.fdroid.views.fragments.AvailableAppsFragment;
-import org.fdroid.fdroid.views.fragments.CanUpdateAppsFragment;
-import org.fdroid.fdroid.views.fragments.InstalledAppsFragment;
+import org.belos.belmarket.FDroid;
+import org.belos.belmarket.R;
+import org.belos.belmarket.compat.TabManager;
+import org.belos.belmarket.data.AppProvider;
+import org.belos.belmarket.views.fragments.AppListFragment;
+import org.belos.belmarket.views.fragments.AvailableAppsFragment;
+import org.belos.belmarket.views.fragments.CanUpdateAppsFragment;
+import org.belos.belmarket.views.fragments.InstalledAppsFragment;
 
 /**
  * Used by the FDroid activity in conjunction with its ViewPager to support

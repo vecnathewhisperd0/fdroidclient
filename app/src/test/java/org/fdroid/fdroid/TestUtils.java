@@ -1,4 +1,4 @@
-package org.fdroid.fdroid;
+package org.belos.belmarket;
 
 import android.content.ContentResolver;
 import android.content.ContextWrapper;

@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.views.swap;
+package org.belos.belmarket.views.swap;
 
 import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
@@ -22,13 +22,13 @@ import android.widget.TextView;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
-import org.fdroid.fdroid.FDroidApp;
-import org.fdroid.fdroid.Preferences;
-import org.fdroid.fdroid.QrGenAsyncTask;
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.Utils;
-import org.fdroid.fdroid.localrepo.SwapService;
-import org.fdroid.fdroid.net.WifiStateChangeService;
+import org.belos.belmarket.FDroidApp;
+import org.belos.belmarket.Preferences;
+import org.belos.belmarket.QrGenAsyncTask;
+import org.belos.belmarket.R;
+import org.belos.belmarket.Utils;
+import org.belos.belmarket.localrepo.SwapService;
+import org.belos.belmarket.net.WifiStateChangeService;
 
 import java.net.URI;
 import java.util.List;

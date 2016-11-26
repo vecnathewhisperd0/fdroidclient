@@ -1,10 +1,10 @@
-package org.fdroid.fdroid.net.bluetooth;
+package org.belos.belmarket.net.bluetooth;
 
 import android.annotation.TargetApi;
 import android.bluetooth.BluetoothSocket;
 import android.os.Build;
 
-import org.fdroid.fdroid.Utils;
+import org.belos.belmarket.Utils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;

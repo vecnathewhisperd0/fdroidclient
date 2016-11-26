@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.compat;
+package org.belos.belmarket.compat;
 
 import android.app.Instrumentation;
 import android.content.Context;
@@ -7,8 +7,8 @@ import android.os.Environment;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
-import org.fdroid.fdroid.AssetUtils;
-import org.fdroid.fdroid.data.SanitizedFile;
+import org.belos.belmarket.AssetUtils;
+import org.belos.belmarket.data.SanitizedFile;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

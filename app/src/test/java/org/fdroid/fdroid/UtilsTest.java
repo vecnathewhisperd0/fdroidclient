@@ -1,5 +1,5 @@
 
-package org.fdroid.fdroid;
+package org.belos.belmarket;
 
 import android.content.Context;
 

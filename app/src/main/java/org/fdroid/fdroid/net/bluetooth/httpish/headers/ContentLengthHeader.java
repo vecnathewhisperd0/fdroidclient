@@ -1,6 +1,6 @@
-package org.fdroid.fdroid.net.bluetooth.httpish.headers;
+package org.belos.belmarket.net.bluetooth.httpish.headers;
 
-import org.fdroid.fdroid.net.bluetooth.FileDetails;
+import org.belos.belmarket.net.bluetooth.FileDetails;
 
 public class ContentLengthHeader extends Header {
 

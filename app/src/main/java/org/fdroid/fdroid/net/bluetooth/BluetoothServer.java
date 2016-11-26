@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.net.bluetooth;
+package org.belos.belmarket.net.bluetooth;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothServerSocket;
@@ -6,10 +6,10 @@ import android.bluetooth.BluetoothSocket;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
-import org.fdroid.fdroid.Utils;
-import org.fdroid.fdroid.localrepo.type.BluetoothSwap;
-import org.fdroid.fdroid.net.bluetooth.httpish.Request;
-import org.fdroid.fdroid.net.bluetooth.httpish.Response;
+import org.belos.belmarket.Utils;
+import org.belos.belmarket.localrepo.type.BluetoothSwap;
+import org.belos.belmarket.net.bluetooth.httpish.Request;
+import org.belos.belmarket.net.bluetooth.httpish.Response;
 
 import java.io.File;
 import java.io.FileInputStream;

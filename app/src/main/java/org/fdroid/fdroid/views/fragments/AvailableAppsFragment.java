@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.views.fragments;
+package org.belos.belmarket.views.fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,15 +20,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import org.fdroid.fdroid.Preferences;
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.Utils;
-import org.fdroid.fdroid.compat.ArrayAdapterCompat;
-import org.fdroid.fdroid.compat.CursorAdapterCompat;
-import org.fdroid.fdroid.data.AppProvider;
-import org.fdroid.fdroid.data.CategoryProvider;
-import org.fdroid.fdroid.views.AppListAdapter;
-import org.fdroid.fdroid.views.AvailableAppListAdapter;
+import org.belos.belmarket.Preferences;
+import org.belos.belmarket.R;
+import org.belos.belmarket.Utils;
+import org.belos.belmarket.compat.ArrayAdapterCompat;
+import org.belos.belmarket.compat.CursorAdapterCompat;
+import org.belos.belmarket.data.AppProvider;
+import org.belos.belmarket.data.CategoryProvider;
+import org.belos.belmarket.views.AppListAdapter;
+import org.belos.belmarket.views.AvailableAppListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

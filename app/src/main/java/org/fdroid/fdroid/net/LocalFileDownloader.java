@@ -1,6 +1,6 @@
-package org.fdroid.fdroid.net;
+package org.belos.belmarket.net;
 
-import org.fdroid.fdroid.Utils;
+import org.belos.belmarket.Utils;
 
 import java.io.File;
 import java.io.FileInputStream;

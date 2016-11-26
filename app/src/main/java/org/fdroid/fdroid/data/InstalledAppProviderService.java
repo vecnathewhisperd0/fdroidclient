@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.data;
+package org.belos.belmarket.data;
 
 import android.app.IntentService;
 import android.content.ContentValues;
@@ -12,9 +12,9 @@ import android.os.Process;
 import android.support.annotation.Nullable;
 
 import org.acra.ACRA;
-import org.fdroid.fdroid.Hasher;
-import org.fdroid.fdroid.Utils;
-import org.fdroid.fdroid.data.Schema.InstalledAppTable;
+import org.belos.belmarket.Hasher;
+import org.belos.belmarket.Utils;
+import org.belos.belmarket.data.Schema.InstalledAppTable;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -43,10 +43,10 @@ import rx.subjects.PublishSubject;
 public class InstalledAppProviderService extends IntentService {
     private static final String TAG = "InstalledAppProviderSer";
 
-    private static final String ACTION_INSERT = "org.fdroid.fdroid.data.action.INSERT";
-    private static final String ACTION_DELETE = "org.fdroid.fdroid.data.action.DELETE";
+    private static final String ACTION_INSERT = "org.belos.belmarket.data.action.INSERT";
+    private static final String ACTION_DELETE = "org.belos.belmarket.data.action.DELETE";
 
-    private static final String EXTRA_PACKAGE_INFO = "org.fdroid.fdroid.data.extra.PACKAGE_INFO";
+    private static final String EXTRA_PACKAGE_INFO = "org.belos.belmarket.data.extra.PACKAGE_INFO";
 
     /**
      * This is for notifing the users of this {@link android.content.ContentProvider}

@@ -1,4 +1,4 @@
-package org.fdroid.fdroid;
+package org.belos.belmarket;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -9,8 +9,8 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
-import org.fdroid.fdroid.compat.SupportedArchitectures;
-import org.fdroid.fdroid.data.Apk;
+import org.belos.belmarket.compat.SupportedArchitectures;
+import org.belos.belmarket.data.Apk;
 
 import java.util.ArrayList;
 import java.util.Collections;

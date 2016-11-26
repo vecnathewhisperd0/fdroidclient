@@ -16,9 +16,9 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-package org.fdroid.fdroid;
+package org.belos.belmarket;
 
-import org.fdroid.fdroid.data.App;
+import org.belos.belmarket.data.App;
 
 public class AppFilter {
 

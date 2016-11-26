@@ -20,7 +20,7 @@
  * MA 02110-1301, USA.
  */
 
-package org.fdroid.fdroid;
+package org.belos.belmarket;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -32,19 +32,19 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 
-import org.fdroid.fdroid.data.Apk;
-import org.fdroid.fdroid.data.ApkProvider;
-import org.fdroid.fdroid.data.App;
-import org.fdroid.fdroid.data.AppProvider;
-import org.fdroid.fdroid.data.Repo;
-import org.fdroid.fdroid.data.RepoPersister;
-import org.fdroid.fdroid.data.RepoProvider;
-import org.fdroid.fdroid.data.RepoPushRequest;
-import org.fdroid.fdroid.data.Schema.RepoTable;
-import org.fdroid.fdroid.installer.InstallManagerService;
-import org.fdroid.fdroid.installer.InstallerService;
-import org.fdroid.fdroid.net.Downloader;
-import org.fdroid.fdroid.net.DownloaderFactory;
+import org.belos.belmarket.data.Apk;
+import org.belos.belmarket.data.ApkProvider;
+import org.belos.belmarket.data.App;
+import org.belos.belmarket.data.AppProvider;
+import org.belos.belmarket.data.Repo;
+import org.belos.belmarket.data.RepoPersister;
+import org.belos.belmarket.data.RepoProvider;
+import org.belos.belmarket.data.RepoPushRequest;
+import org.belos.belmarket.data.Schema.RepoTable;
+import org.belos.belmarket.installer.InstallManagerService;
+import org.belos.belmarket.installer.InstallerService;
+import org.belos.belmarket.net.Downloader;
+import org.belos.belmarket.net.DownloaderFactory;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;

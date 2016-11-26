@@ -17,7 +17,7 @@
  * MA 02110-1301, USA.
  */
 
-package org.fdroid.fdroid.installer;
+package org.belos.belmarket.installer;
 
 import android.app.IntentService;
 import android.content.BroadcastReceiver;
@@ -29,8 +29,8 @@ import android.os.Process;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 
-import org.fdroid.fdroid.Utils;
-import org.fdroid.fdroid.data.Apk;
+import org.belos.belmarket.Utils;
+import org.belos.belmarket.data.Apk;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -47,7 +47,7 @@ import java.util.List;
 public class InstallHistoryService extends IntentService {
     public static final String TAG = "InstallHistoryService";
 
-    public static final Uri LOG_URI = Uri.parse("content://org.fdroid.fdroid.installer/install_history/all");
+    public static final Uri LOG_URI = Uri.parse("content://org.belos.belmarket.installer/install_history/all");
 
     private static BroadcastReceiver broadcastReceiver;
 

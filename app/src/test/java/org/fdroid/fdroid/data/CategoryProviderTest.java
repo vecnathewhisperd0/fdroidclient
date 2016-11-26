@@ -1,14 +1,14 @@
-package org.fdroid.fdroid.data;
+package org.belos.belmarket.data;
 
 import android.app.Application;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 
-import org.fdroid.fdroid.BuildConfig;
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.data.Schema.AppMetadataTable.Cols;
-import org.fdroid.fdroid.mock.MockRepo;
+import org.belos.belmarket.BuildConfig;
+import org.belos.belmarket.R;
+import org.belos.belmarket.data.Schema.AppMetadataTable.Cols;
+import org.belos.belmarket.mock.MockRepo;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +18,7 @@ import org.robolectric.shadows.ShadowContentResolver;
 
 import java.util.List;
 
-import static org.fdroid.fdroid.Assert.assertContainsOnly;
+import static org.belos.belmarket.Assert.assertContainsOnly;
 import static org.junit.Assert.assertEquals;
 
 // TODO: Use sdk=24 when Robolectric supports this

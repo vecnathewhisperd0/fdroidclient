@@ -1,7 +1,7 @@
-package org.fdroid.fdroid.mock;
+package org.belos.belmarket.mock;
 
-import org.fdroid.fdroid.data.Apk;
-import org.fdroid.fdroid.data.App;
+import org.belos.belmarket.data.Apk;
+import org.belos.belmarket.data.App;
 
 public class MockApk extends Apk {
 

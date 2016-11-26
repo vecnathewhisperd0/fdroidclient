@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.compat;
+package org.belos.belmarket.compat;
 
 import android.net.Uri;
 import android.os.Build;

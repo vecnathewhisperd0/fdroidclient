@@ -1,12 +1,12 @@
-package org.fdroid.fdroid.net;
+package org.belos.belmarket.net;
 
 import android.content.Context;
 import android.net.Uri;
 import android.support.v4.content.LocalBroadcastManager;
 
-import org.fdroid.fdroid.data.Repo;
-import org.fdroid.fdroid.data.RepoProvider;
-import org.fdroid.fdroid.data.Schema;
+import org.belos.belmarket.data.Repo;
+import org.belos.belmarket.data.RepoProvider;
+import org.belos.belmarket.data.Schema;
 
 import java.io.File;
 import java.io.IOException;

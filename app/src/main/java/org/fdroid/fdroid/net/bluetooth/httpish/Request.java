@@ -1,7 +1,7 @@
-package org.fdroid.fdroid.net.bluetooth.httpish;
+package org.belos.belmarket.net.bluetooth.httpish;
 
-import org.fdroid.fdroid.Utils;
-import org.fdroid.fdroid.net.bluetooth.BluetoothConnection;
+import org.belos.belmarket.Utils;
+import org.belos.belmarket.net.bluetooth.BluetoothConnection;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

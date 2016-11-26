@@ -1,9 +1,9 @@
 
-package org.fdroid.fdroid.updater;
+package org.belos.belmarket.updater;
 
-import org.fdroid.fdroid.BuildConfig;
-import org.fdroid.fdroid.RepoUpdater;
-import org.fdroid.fdroid.Utils;
+import org.belos.belmarket.BuildConfig;
+import org.belos.belmarket.RepoUpdater;
+import org.belos.belmarket.Utils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricGradleTestRunner;

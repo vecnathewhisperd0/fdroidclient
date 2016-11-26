@@ -19,7 +19,7 @@
  * MA 02110-1301, USA.
  */
 
-package org.fdroid.fdroid.installer;
+package org.belos.belmarket.installer;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -31,11 +31,11 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 
-import org.fdroid.fdroid.Preferences;
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.data.Apk;
-import org.fdroid.fdroid.privileged.IPrivilegedCallback;
-import org.fdroid.fdroid.privileged.IPrivilegedService;
+import org.belos.belmarket.Preferences;
+import org.belos.belmarket.R;
+import org.belos.belmarket.data.Apk;
+import org.belos.belmarket.privileged.IPrivilegedCallback;
+import org.belos.belmarket.privileged.IPrivilegedService;
 
 import java.util.HashMap;
 
@@ -66,8 +66,8 @@ public class PrivilegedInstaller extends Installer {
 
     private static final String TAG = "PrivilegedInstaller";
 
-    private static final String PRIVILEGED_EXTENSION_SERVICE_INTENT = "org.fdroid.fdroid.privileged.IPrivilegedService";
-    public static final String PRIVILEGED_EXTENSION_PACKAGE_NAME = "org.fdroid.fdroid.privileged";
+    private static final String PRIVILEGED_EXTENSION_SERVICE_INTENT = "org.belos.belmarket.privileged.IPrivilegedService";
+    public static final String PRIVILEGED_EXTENSION_PACKAGE_NAME = "org.belos.belmarket.privileged";
 
     public static final int IS_EXTENSION_INSTALLED_NO = 0;
     public static final int IS_EXTENSION_INSTALLED_YES = 1;

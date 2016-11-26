@@ -1,13 +1,13 @@
-package org.fdroid.fdroid.compat;
+package org.belos.belmarket.compat;
 
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.system.ErrnoException;
 import android.util.Log;
 
-import org.fdroid.fdroid.FDroidApp;
-import org.fdroid.fdroid.Utils;
-import org.fdroid.fdroid.data.SanitizedFile;
+import org.belos.belmarket.FDroidApp;
+import org.belos.belmarket.Utils;
+import org.belos.belmarket.data.SanitizedFile;
 
 import java.io.IOException;
 import java.lang.reflect.Method;

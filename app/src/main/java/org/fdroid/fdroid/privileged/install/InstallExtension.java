@@ -17,15 +17,15 @@
  * MA 02110-1301, USA.
  */
 
-package org.fdroid.fdroid.privileged.install;
+package org.belos.belmarket.privileged.install;
 
 import android.content.Context;
 import android.os.Build;
 
-import org.fdroid.fdroid.FDroidApp;
-import org.fdroid.fdroid.Preferences;
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.installer.PrivilegedInstaller;
+import org.belos.belmarket.FDroidApp;
+import org.belos.belmarket.Preferences;
+import org.belos.belmarket.R;
+import org.belos.belmarket.installer.PrivilegedInstaller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,7 +106,7 @@ abstract class InstallExtension {
 
     List<String> getPostInstallCommands() {
         final List<String> commands = new ArrayList<>(1);
-        commands.add("am start -n org.fdroid.fdroid/.privileged.install.InstallExtensionDialogActivity --ez "
+        commands.add("am start -n org.belos.belmarket/.privileged.install.InstallExtensionDialogActivity --ez "
                 + InstallExtensionDialogActivity.ACTION_POST_INSTALL + " true");
         return commands;
     }

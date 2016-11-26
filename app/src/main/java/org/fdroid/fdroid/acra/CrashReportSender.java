@@ -1,5 +1,5 @@
 
-package org.fdroid.fdroid.acra;
+package org.belos.belmarket.acra;
 
 import android.content.Context;
 import android.content.Intent;

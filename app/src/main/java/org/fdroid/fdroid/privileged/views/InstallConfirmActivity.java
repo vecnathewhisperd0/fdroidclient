@@ -16,7 +16,7 @@
 ** limitations under the License.
 */
 
-package org.fdroid.fdroid.privileged.views;
+package org.belos.belmarket.privileged.views;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -41,13 +41,13 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
-import org.fdroid.fdroid.FDroidApp;
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.data.Apk;
-import org.fdroid.fdroid.data.ApkProvider;
-import org.fdroid.fdroid.data.App;
-import org.fdroid.fdroid.data.AppProvider;
-import org.fdroid.fdroid.data.Schema;
+import org.belos.belmarket.FDroidApp;
+import org.belos.belmarket.R;
+import org.belos.belmarket.data.Apk;
+import org.belos.belmarket.data.ApkProvider;
+import org.belos.belmarket.data.App;
+import org.belos.belmarket.data.AppProvider;
+import org.belos.belmarket.data.Schema;
 
 /**
  * NOTES:

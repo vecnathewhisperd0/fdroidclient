@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.net;
+package org.belos.belmarket.net;
 
 import android.content.Context;
 

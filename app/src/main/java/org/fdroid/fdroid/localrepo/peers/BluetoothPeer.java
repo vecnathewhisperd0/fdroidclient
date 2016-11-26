@@ -1,10 +1,10 @@
-package org.fdroid.fdroid.localrepo.peers;
+package org.belos.belmarket.localrepo.peers;
 
 import android.bluetooth.BluetoothDevice;
 import android.os.Parcel;
 
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.localrepo.type.BluetoothSwap;
+import org.belos.belmarket.R;
+import org.belos.belmarket.localrepo.type.BluetoothSwap;
 
 public class BluetoothPeer implements Peer {
 

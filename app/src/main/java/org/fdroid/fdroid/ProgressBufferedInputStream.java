@@ -1,4 +1,4 @@
-package org.fdroid.fdroid;
+package org.belos.belmarket;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.data;
+package org.belos.belmarket.data;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -11,12 +11,12 @@ import android.text.TextUtils;
 
 import java.util.List;
 
-import org.fdroid.fdroid.Utils;
-import org.fdroid.fdroid.data.Schema.ApkTable;
-import org.fdroid.fdroid.data.Schema.AppMetadataTable;
-import org.fdroid.fdroid.data.Schema.AppMetadataTable.Cols;
-import org.fdroid.fdroid.data.Schema.CatJoinTable;
-import org.fdroid.fdroid.data.Schema.PackageTable;
+import org.belos.belmarket.Utils;
+import org.belos.belmarket.data.Schema.ApkTable;
+import org.belos.belmarket.data.Schema.AppMetadataTable;
+import org.belos.belmarket.data.Schema.AppMetadataTable.Cols;
+import org.belos.belmarket.data.Schema.CatJoinTable;
+import org.belos.belmarket.data.Schema.PackageTable;
 
 /**
  * This class does all of its operations in a temporary sqlite table.

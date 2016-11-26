@@ -17,7 +17,7 @@
  * MA 02110-1301, USA.
  */
 
-package org.fdroid.fdroid.privileged.views;
+package org.belos.belmarket.privileged.views;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -30,10 +30,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.view.ContextThemeWrapper;
 
-import org.fdroid.fdroid.FDroidApp;
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.data.Apk;
-import org.fdroid.fdroid.installer.Installer;
+import org.belos.belmarket.FDroidApp;
+import org.belos.belmarket.R;
+import org.belos.belmarket.data.Apk;
+import org.belos.belmarket.installer.Installer;
 
 /**
  * This class provides the confirmation prompt for when the user chooses to

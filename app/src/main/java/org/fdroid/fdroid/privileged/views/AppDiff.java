@@ -16,13 +16,13 @@
 ** limitations under the License.
 */
 
-package org.fdroid.fdroid.privileged.views;
+package org.belos.belmarket.privileged.views;
 
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
-import org.fdroid.fdroid.data.Apk;
+import org.belos.belmarket.data.Apk;
 
 public class AppDiff {
 

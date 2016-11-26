@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.compat;
+package org.belos.belmarket.compat;
 
 /*
  * This software is provided 'as-is', without any express or implied

@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.net;
+package org.belos.belmarket.net;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,10 +6,10 @@ import android.net.Uri;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
-import org.fdroid.fdroid.BuildConfig;
-import org.fdroid.fdroid.Utils;
-import org.fdroid.fdroid.localrepo.LocalRepoKeyStore;
-import org.fdroid.fdroid.views.swap.SwapWorkflowActivity;
+import org.belos.belmarket.BuildConfig;
+import org.belos.belmarket.Utils;
+import org.belos.belmarket.localrepo.LocalRepoKeyStore;
+import org.belos.belmarket.views.swap.SwapWorkflowActivity;
 
 import java.io.File;
 import java.io.FileInputStream;

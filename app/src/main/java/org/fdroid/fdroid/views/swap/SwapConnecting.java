@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.views.swap;
+package org.belos.belmarket.views.swap;
 
 import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
@@ -16,9 +16,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.UpdateService;
-import org.fdroid.fdroid.localrepo.SwapService;
+import org.belos.belmarket.R;
+import org.belos.belmarket.UpdateService;
+import org.belos.belmarket.localrepo.SwapService;
 
 // TODO: Use this for the "Preparing local repo" dialog also.
 public class SwapConnecting extends LinearLayout implements SwapWorkflowActivity.InnerView {

@@ -1,4 +1,4 @@
-package org.fdroid.fdroid.views.fragments;
+package org.belos.belmarket.views.fragments;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,14 +19,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
-import org.fdroid.fdroid.AppDetails;
-import org.fdroid.fdroid.Preferences;
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.UpdateService;
-import org.fdroid.fdroid.Utils;
-import org.fdroid.fdroid.data.App;
-import org.fdroid.fdroid.data.Schema.AppMetadataTable;
-import org.fdroid.fdroid.views.AppListAdapter;
+import org.belos.belmarket.AppDetails;
+import org.belos.belmarket.Preferences;
+import org.belos.belmarket.R;
+import org.belos.belmarket.UpdateService;
+import org.belos.belmarket.Utils;
+import org.belos.belmarket.data.App;
+import org.belos.belmarket.data.Schema.AppMetadataTable;
+import org.belos.belmarket.views.AppListAdapter;
 
 public abstract class AppListFragment extends ListFragment implements
         AdapterView.OnItemClickListener,

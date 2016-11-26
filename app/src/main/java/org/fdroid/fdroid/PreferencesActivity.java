@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-package org.fdroid.fdroid;
+package org.belos.belmarket;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -26,7 +26,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 
-import org.fdroid.fdroid.views.fragments.PreferencesFragment;
+import org.belos.belmarket.views.fragments.PreferencesFragment;
 
 public class PreferencesActivity extends ActionBarActivity {
 
