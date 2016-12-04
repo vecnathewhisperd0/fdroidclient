@@ -5,8 +5,8 @@
     <color name="unverified">#ff999999</color>
     <color name="red">#ffdd2c00</color>
 
-    <color name="fdroid_blue">#ff1976d2</color>
-    <color name="fdroid_blue_dark">#ff0d47a1</color>
+    <color name="fdroid_blue">#dd2c00</color>
+    <color name="fdroid_blue_dark">#9e1010</color>
     <color name="fdroid_blue_darkest">#ff042570</color>
     <color name="fdroid_green">#ff8ab000</color>
     <color name="fdroid_night">#ff222222</color>
