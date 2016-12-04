@@ -21,6 +21,7 @@ test:
           done;
           exit 1;
       }
+  allow_failure: true
 
 connected10:
   variables:
