@@ -43,3 +43,6 @@ extern/*/*/libs/
 
 # Tests
 junit-report.xml
+
+#local configuration
+local.properties
