@@ -362,4 +362,5 @@ Uwaga: Wszystkie poprzednio zainstalowane aplikacje zostaną na urządzeniu.</st
     <string name="app_details_donate_prompt_unknown_author">Sponsoruj kawę dla programistów %1$s!</string>
     <string name="app_details_donate_prompt">%1$s został stworzony przez %2$s. Sponsoruj im kawę!</string>
 
+    <string name="repositories_summary">Dodaj dodatkowe źródła i aplikacje</string>
     </resources>
