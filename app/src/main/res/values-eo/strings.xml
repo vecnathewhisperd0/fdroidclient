@@ -370,4 +370,7 @@ Provu elekti alian kategorion aŭ ĝisdatigi viajn deponejojn por atingi freŝan
     <string name="keep_install_history_summary">Memoras historion de instaladoj kaj malinstaladoj en F-Droid</string>
     <string name="warning_no_internet">Ne povas ĝisdatigi, ĉu vi estas konektita kun la Interreto?</string>
     <string name="versions">Versioj</string>
+    <string name="app_details_donate_prompt_unknown_author">Monhelpu programistojn de %1$s por kafo!</string>
+    <string name="app_details_donate_prompt">%1$s estas programita de %2$s. Monhelpu ilin por kafo!</string>
+
     </resources>
