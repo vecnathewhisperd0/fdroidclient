@@ -378,6 +378,6 @@ in de toekomst te helpen voorkomen?</string>
     <string name="warning_no_internet">Kan niet updaten, ben je verbonden met het internet?</string>
     <string name="versions">Versies</string>
     <string name="app_details_donate_prompt_unknown_author">Doneer aan de ontwikkelaars van %1$s!</string>
-    <string name="app_details_donate_prompt">%1$s is gemaakt door %2$s. Geef ze een donatie!</string>
+    <string name="app_details_donate_prompt">%1$s is gemaakt door %2$s. Doneer!</string>
 
     </resources>
