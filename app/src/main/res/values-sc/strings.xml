@@ -376,4 +376,7 @@ Depes
     <string name="keep_install_history_summary">Sarba unu regitru de sas installatziones e de sas disinstallatziones in F-Droid</string>
     <string name="warning_no_internet">Impossìbile agiornare, ses connessu a ìnternet?</string>
     <string name="versions">Versiones</string>
+    <string name="app_details_donate_prompt_unknown_author">Cùmbida unu cafè a sos isvilupadores de %1$s!</string>
+    <string name="app_details_donate_prompt">%1$s est creadu dae %2$s. Cumbida·li unu cafè!</string>
+
     </resources>
