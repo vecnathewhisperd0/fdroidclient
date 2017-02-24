@@ -375,4 +375,7 @@
     <string name="keep_install_history_summary">Чувај запис свих уградњи и уклањања унутар Ф-дроида</string>
     <string name="versions">Издања</string>
     <string name="warning_no_internet">Не могу да освежим, да ли сте повезани на интернет?</string>
+    <string name="app_details_donate_prompt_unknown_author">Почастите програмере %1$ кафом!</string>
+    <string name="app_details_donate_prompt">%1$s су направили %2$s. Почастите их кафом!</string>
+
     </resources>
