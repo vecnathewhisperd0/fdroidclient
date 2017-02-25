@@ -376,4 +376,7 @@ F-Droid 並無您裝置上可用的應用程式。這可能是因為您需要更
     <string name="hide_anti_feature_apps_on">以灰色顯示需要 anti-features 的應用程式</string>
     <string name="warning_no_internet">無法更新，您是否已連接到網路？</string>
     <string name="versions">版本</string>
+    <string name="app_details_donate_prompt_unknown_author">購買%1$s開發者的咖啡！</string>
+    <string name="app_details_donate_prompt">%1$s由%2$s建立。買他們的咖啡！</string>
+
     </resources>
