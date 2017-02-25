@@ -340,4 +340,32 @@ pentru a putea ajuta la rezolvarea acestei probleme?</string>
     <string name="keep_install_history">Pastreaza istoricul instalarilor</string>
     <string name="keep_install_history_summary">Toate instalarile si dezinstalarile se noteaza intr-un jurnal in F-Droid</string>
     <string name="system_installer_on">Folositi F-Droid Extension pentru a instala, actualiza si a înlătura pachete</string>
+    <string name="empty_can_update_app_list">Toate aplicatiile sunt la zi.
+
+Felicitari! Toate aplicatiile tale sunt la zi (sau depozitele sunt prea vechi).</string>
+    <string name="empty_available_app_list">Nici o aplicatie in aceasta categorie.
+
+Incercati sa selectati o categorie diferita sau sa actualizati depozitele.</string>
+    <string name="empty_installed_app_list">Nici o aplicatie instalata.
+
+Exista aplicatii pe acest dispozitiv, dar nu sunt disponibile din F-Droid. Asta din cauza ca trebuie sa actualizati depozitele sau poate depozitele chiar nu contin aplicatiile dumneavoastra.</string>
+    <string name="repo_disabled_notification">%1$s dezactivat.
+
+Va trebui
+ sa reactivati acest depozit pentru a putea instala aplicatii din el.</string>
+    <string name="repo_confirm_delete_body">Stergerea unui depozit presupune
+ ca aplicatiile din el sa nu mai fi disponibile din F-Droid.
+
+Nota: Toate
+ aplicatiile instalate anterior vor ramane pe dispozitivul dumneavoastra.</string>
+    <string name="repo_not_yet_updated">Acest depozit nu a fost folosit inca.
+ Trebuie sa il activati pentru a putea vedea ce aplicatii are disponibile.</string>
+    <string name="unsigned_description">Asta inseamna ca lista
+ de aplicatii nu a putut fi verificata. Ar trebui sa fiti atenti
+ cu aplicatiile descarcate din indexuri nesemnate.</string>
+    <string name="warning_no_internet">Nu se poate face actualizarea, exista conexiune la internet?</string>
+    <string name="versions">Versiuni</string>
+    <string name="app_details_donate_prompt">%1$s creat de %2$s. Cumpara-le o cafea!</string>
+
+    <string name="app_details_donate_prompt_unknown_author">Cumpara dezvoltatorului %1$s o cafea!</string>
     </resources>
