@@ -368,4 +368,7 @@
     <string name="keep_install_history_summary">F-Droid内ですべてのｲﾝｽﾄｰﾙとｱﾝｲﾝｽﾄｰﾙのﾛｸﾞを保存します</string>
     <string name="warning_no_internet">更新できません。ｲﾝﾀｰﾈｯﾄに接続していますか?</string>
     <string name="versions">ﾊﾞｰｼﾞｮﾝ</string>
+    <string name="app_details_donate_prompt_unknown_author">開発者の %1$s のコーヒーを購入します!</string>
+    <string name="app_details_donate_prompt">%1$s は %2$s によって作成されました。彼らにコーヒーを購入します!</string>
+
     </resources>
