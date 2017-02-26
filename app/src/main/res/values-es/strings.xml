@@ -378,4 +378,5 @@ detalles para ayudarnos a arreglar el problema?</string>
     <string name="app_details_donate_prompt_unknown_author">¡Invite a los desarrolladores de %1$ a un café!</string>
     <string name="app_details_donate_prompt">%2$ han creado %1$. ¡Invítelos a un café!</string>
 
+    <string name="repositories_summary">Añadir orígenes adiccionales de aplicaciones</string>
     </resources>
