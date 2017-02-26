@@ -375,4 +375,7 @@ detalles para ayudarnos a arreglar el problema?</string>
     <string name="keep_install_history_summary">Guardar un registro de todas las instalaciones y desinstalaciones en F-Droid</string>
     <string name="warning_no_internet">No se puede actualizar, ¿estás conectado a internet?</string>
     <string name="versions">Versiones</string>
+    <string name="app_details_donate_prompt_unknown_author">¡Invite a los desarrolladores de %1$ a un café!</string>
+    <string name="app_details_donate_prompt">%2$ han creado %1$. ¡Invítelos a un café!</string>
+
     </resources>
