@@ -375,4 +375,7 @@ per tal d\'ajudar a resoldre la incidència?</string>
     <string name="update_auto_install_summary">Descarregueu i instal·leu les actualitzacions de les apps en segon pla</string>
     <string name="versions">Versions</string>
     <string name="warning_no_internet">No es pot actualitzar: esteu connectat a internet?</string>
+    <string name="app_details_donate_prompt_unknown_author">Convideu els desenvolupadors de %1$ a un cafè!</string>
+    <string name="app_details_donate_prompt">%2$ ha creat %1$. Convideu-los a un cafè!</string>
+
     </resources>
