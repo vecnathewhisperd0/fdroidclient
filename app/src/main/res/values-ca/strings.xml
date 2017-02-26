@@ -378,4 +378,5 @@ per tal d\'ajudar a resoldre la incidència?</string>
     <string name="app_details_donate_prompt_unknown_author">Convideu els desenvolupadors de %1$ a un cafè!</string>
     <string name="app_details_donate_prompt">%2$ ha creat %1$. Convideu-los a un cafè!</string>
 
+    <string name="repositories_summary">Afegiu orígens d\'aplicacions addicionals</string>
     </resources>
