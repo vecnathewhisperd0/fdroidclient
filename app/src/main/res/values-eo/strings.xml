@@ -373,4 +373,5 @@ Provu elekti alian kategorion aŭ ĝisdatigi viajn deponejojn por atingi freŝan
     <string name="app_details_donate_prompt_unknown_author">Monhelpu programistojn de %1$s por kafo!</string>
     <string name="app_details_donate_prompt">%1$s estas programita de %2$s. Monhelpu ilin por kafo!</string>
 
+    <string name="repositories_summary">Aldonas pliajn fontojn de aplikaĵoj</string>
     </resources>
