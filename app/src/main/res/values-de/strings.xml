@@ -370,6 +370,6 @@ Bitte eine andere Kategorie wählen oder die Paketquellen aktualisieren.</string
     <string name="warning_no_internet">Aktualisierung kann nicht durchgeführt werden! Besteht eine Internetverbindung?</string>
     <string name="versions">Versionen</string>
     <string name="app_details_donate_prompt_unknown_author">Den Entwicklern von %1$s einen Kaffee kaufen!</string>
-    <string name="app_details_donate_prompt">%1$s wurde von %2$s erstellt. Denen einen Kaffee kaufen!</string>
+    <string name="app_details_donate_prompt">%1$s wurde von %2$s erstellt. Spendieren Sie ihnen einen Kaffee!</string>
 
     </resources>
