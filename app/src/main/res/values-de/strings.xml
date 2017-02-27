@@ -372,4 +372,5 @@ Bitte eine andere Kategorie wählen oder die Paketquellen aktualisieren.</string
     <string name="app_details_donate_prompt_unknown_author">Den Entwicklern von %1$s einen Kaffee kaufen!</string>
     <string name="app_details_donate_prompt">%1$s wurde von %2$s erstellt. Spendieren Sie ihnen einen Kaffee!</string>
 
+    <string name="repositories_summary">Zusätzliche Paketquellen hinzufügen</string>
     </resources>
