@@ -306,7 +306,7 @@ Provu elekti alian kategorion aŭ ĝisdatigi viajn deponejojn por atingi freŝan
     <string name="install_confirm_update_system">Ĉu vi volas instali ĝisdatigon al ĉi tiu integrigita aplikaĵo? Viaj nunaj datumoj ne foriĝos. La ĝisdatiga aplikaĵo povos aliri:</string>
     <string name="install_confirm_update_no_perms">Ĉu vi volas instali ĝisdatigon al ĉi tiu estanta aplikaĵo? Viaj nunaj datumoj ne foriĝos. Ĝi ne bezonas iun ajn specialan aliron.</string>
     <string name="install_confirm_update_system_no_perms">Ĉu vi volas instali ĝisdatigon al ĉi tiu integrigita aplikaĵo? Viaj nunaj datumoj ne foriĝos. Ĝi ne bezonas iun ajn specialan aliron.</string>
-    <string name="newPerms">Novaj</string>
+    <string name="newPerms">Nova(j)</string>
     <string name="allPerms">Ĉiuj</string>
     <string name="perm_costs_money">Ĉi tio povas elspezi vian monon</string>
     <string name="uninstall_update_confirm">Ĉu vi volas anstataŭigi ĉi tiun aplikaĵon per la antaŭinstalita versio?</string>
@@ -314,7 +314,7 @@ Provu elekti alian kategorion aŭ ĝisdatigi viajn deponejojn por atingi freŝan
     <string name="tap_to_install">Elŝuto finis, tuŝu por instali</string>
     <string name="download_error">Elŝuto malsukcesis</string>
 
-    <string name="perms_new_perm_prefix">"Novaj: "</string>
+    <string name="perms_new_perm_prefix">"Nova: "</string>
     <string name="downloading">Elŝutado…</string>
 
     <string name="perms_description_app">Liverita per %1$s.</string>
