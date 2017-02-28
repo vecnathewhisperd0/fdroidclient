@@ -371,5 +371,5 @@
     <string name="app_details_donate_prompt_unknown_author">開発者の %1$s のコーヒーを購入します!</string>
     <string name="app_details_donate_prompt">%1$s は %2$s によって作成されました。彼らにコーヒーを購入します!</string>
 
-    <string name="repositories_summary">アプリケーションの追加のソースを追加します</string>
+    <string name="repositories_summary">ｱﾌﾟﾘｹｰｼｮﾝの追加のｿｰｽを追加します</string>
     </resources>
