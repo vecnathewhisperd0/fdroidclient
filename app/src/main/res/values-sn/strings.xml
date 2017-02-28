@@ -396,4 +396,8 @@ yamanikidza Application kuti imire. Unoda kunyora tsamba mbozha
 ine zvizerekuti ubatsire kugadzira dambudziko iri here?</string>
     <string name="crash_dialog_comment_prompt">Unokwanisa kuwedzera mashoko mamwe ne mawonero ako panapa:</string>
 <string name="versions">Mavhezheni</string>
+    <string name="app_details_donate_prompt_unknown_author">Tengera vauumbi ve %1$s coffee!</string>
+    <string name="app_details_donate_prompt">%1$s inosikwa na %2$s. Vatengereyi coffee!</string>
+
+    <string name="repositories_summary">Wedzera dzimwe nyuko dze maapplication</string>
     </resources>
