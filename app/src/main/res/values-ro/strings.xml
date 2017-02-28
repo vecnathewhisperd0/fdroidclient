@@ -368,4 +368,5 @@ Nota: Toate
     <string name="app_details_donate_prompt">%1$s creat de %2$s. Cumpara-le o cafea!</string>
 
     <string name="app_details_donate_prompt_unknown_author">Cumpara dezvoltatorului %1$s o cafea!</string>
+    <string name="repositories_summary">Adaugă surse adiționale de aplicații</string>
     </resources>
