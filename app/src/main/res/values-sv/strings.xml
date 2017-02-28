@@ -375,4 +375,8 @@ e-post för att hjälpa till att åtgärda problemet?</string>
     <string name="hide_anti_feature_apps_on">Gråa ut appar som kräver anti-funktioner</string>
     <string name="warning_no_internet">Det går inte att uppdatera, är du ansluten till Internet?</string>
     <string name="versions">Versioner</string>
+    <string name="app_details_donate_prompt_unknown_author">Köp utvecklarna av %1$s en kopp kaffe!</string>
+    <string name="app_details_donate_prompt">%1$s är skapad av %2$s. Köp dem en kaffe!</string>
+
+    <string name="repositories_summary">Lägg till ytterligare källor till applikationer</string>
     </resources>
