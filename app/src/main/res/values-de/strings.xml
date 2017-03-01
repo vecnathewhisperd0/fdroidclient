@@ -373,4 +373,27 @@ Bitte eine andere Kategorie wählen oder die Paketquellen aktualisieren.</string
     <string name="app_details_donate_prompt">%1$s wurde von %2$s erstellt. Spendieren Sie ihnen einen Kaffee!</string>
 
     <string name="repositories_summary">Zusätzliche Paketquellen hinzufügen</string>
-    </resources>
+    <string name="notification_title_single_update_available">Aktualisierung verfügbar</string>
+    <string name="notification_title_single_ready_to_install">Bereit zum Installieren</string>
+    <string name="notification_title_single_ready_to_install_update">Aktualisierung bereit zum Installieren</string>
+    <string name="notification_title_single_install_error">Installation fehlgeschlagen</string>
+    <string name="notification_content_single_downloading">»%1$s« wird heruntergeladen …</string>
+    <string name="notification_content_single_downloading_update">Aktualisierung für »%1$s« wird heruntergeladen …</string>
+    <string name="notification_content_single_installing">»%1$s« wird installiert …</string>
+    <string name="notification_content_single_installed">Erfolgreich installiert</string>
+    <string name="notification_content_single_install_error">Installation fehlgeschlagen</string>
+    <string name="notification_summary_updates">%1$d Aktualisierungen</string>
+    <string name="notification_summary_installed">%1$d Apps installiert</string>
+    <string name="notification_title_summary_update_available">Aktualisierung verfügbar</string>
+    <string name="notification_title_summary_downloading">wird heruntergeladen …</string>
+    <string name="notification_title_summary_downloading_update">Aktualisierung wird heruntergeladen …</string>
+    <string name="notification_title_summary_ready_to_install">Bereit zum Installieren</string>
+    <string name="notification_title_summary_ready_to_install_update">Aktualisierung bereit zum Installieren</string>
+    <string name="notification_title_summary_installing">Installation läuft</string>
+    <string name="notification_title_summary_installed">Erfolgreich installiert</string>
+    <string name="notification_title_summary_install_error">Installation fehlgeschlagen</string>
+    <string name="notification_action_update">Aktualisieren</string>
+    <string name="notification_action_cancel">Abbrechen</string>
+    <string name="notification_action_install">Installieren</string>
+
+</resources>
