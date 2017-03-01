@@ -363,4 +363,27 @@ Uwaga: Wszystkie poprzednio zainstalowane aplikacje zostaną na urządzeniu.</st
     <string name="app_details_donate_prompt">%1$s został stworzony przez %2$s. Sponsoruj im kawę!</string>
 
     <string name="repositories_summary">Dodaje dodatkowe źródła aplikacji</string>
-    </resources>
+    <string name="notification_title_single_update_available">Dostępna aktualizacja</string>
+    <string name="notification_title_single_ready_to_install">Gotowa do instalacji</string>
+    <string name="notification_title_single_ready_to_install_update">Aktualizacja gotowa do instalacji</string>
+    <string name="notification_title_single_install_error">Instalacja nie powiodła się</string>
+    <string name="notification_content_single_downloading">Pobieranie \"%1$s\"…</string>
+    <string name="notification_content_single_downloading_update">Pobieranie aktualizacji dla \"%1$s\"…</string>
+    <string name="notification_content_single_installing">Instalowanie \"%1$s\"…</string>
+    <string name="notification_content_single_installed">Instalacja powiodła się</string>
+    <string name="notification_content_single_install_error">Instalacja zakończona niepowodzeniem</string>
+    <string name="notification_summary_updates">%1$d aktualizacji</string>
+    <string name="notification_summary_installed">%1$d aplikacji zainstalowano</string>
+    <string name="notification_title_summary_update_available">Dostępna aktualizacja</string>
+    <string name="notification_title_summary_downloading">Pobieranie…</string>
+    <string name="notification_title_summary_downloading_update">Pobieranie aktualizacji…</string>
+    <string name="notification_title_summary_ready_to_install">Gotowa do instalacji</string>
+    <string name="notification_title_summary_ready_to_install_update">Aktualizacja gotowa do instalacji</string>
+    <string name="notification_title_summary_installing">Instalowanie</string>
+    <string name="notification_title_summary_installed">Instalacja powiodła się</string>
+    <string name="notification_title_summary_install_error">Instalacja zakończona niepowodzeniem</string>
+    <string name="notification_action_update">Aktualizuj</string>
+    <string name="notification_action_cancel">Anuluj</string>
+    <string name="notification_action_install">Zainstaluj</string>
+
+</resources>
