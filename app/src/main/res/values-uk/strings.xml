@@ -387,4 +387,28 @@
     <string name="hide_anti_feature_apps">Позначати додатки з не бажаним функціоналом</string>
     <string name="hide_anti_feature_apps_on">Позначати сірим додатки, які потребують не бажаний функціонал</string>
     <string name="warning_no_internet">Не можливо оновитися, чи підключено пристрій до інтернету?</string>
-    </resources>
+    <string name="repositories_summary">Додати додаткові джерела для додатку</string>
+    <string name="notification_title_single_update_available">Доступне оновлення</string>
+    <string name="notification_title_single_ready_to_install">Готове до встановлення</string>
+    <string name="notification_title_single_ready_to_install_update">Оновлення готове до встановлення</string>
+    <string name="notification_title_single_install_error">Помилка встановлення</string>
+    <string name="notification_content_single_downloading">Завантаження \"%1$s\"…</string>
+    <string name="notification_content_single_downloading_update">Завантаження оновлення для \"%1$s\"…</string>
+    <string name="notification_content_single_installing">Встановлення \"%1$s\"…</string>
+    <string name="notification_content_single_installed">Встановлено</string>
+    <string name="notification_content_single_install_error">Помилка встановлення</string>
+    <string name="notification_summary_updates">Оновлень: %1$d</string>
+    <string name="notification_summary_installed">Додатків встановлено: %1$d</string>
+    <string name="notification_title_summary_update_available">Доступне оновлення</string>
+    <string name="notification_title_summary_downloading">Завантаження…</string>
+    <string name="notification_title_summary_downloading_update">Завантаження оновлення…</string>
+    <string name="notification_title_summary_ready_to_install">Готове до встановлення</string>
+    <string name="notification_title_summary_ready_to_install_update">Оновлення готове до встановлення</string>
+    <string name="notification_title_summary_installing">Встановлення</string>
+    <string name="notification_title_summary_installed">Встановлено</string>
+    <string name="notification_title_summary_install_error">Помилка встановлення</string>
+    <string name="notification_action_update">Оновити</string>
+    <string name="notification_action_cancel">Скасувати</string>
+    <string name="notification_action_install">Встановити</string>
+
+</resources>
