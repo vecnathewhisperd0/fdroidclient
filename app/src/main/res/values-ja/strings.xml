@@ -372,4 +372,27 @@
     <string name="app_details_donate_prompt">%1$s は %2$s によって作成されました。彼らにコーヒーを購入します!</string>
 
     <string name="repositories_summary">ｱﾌﾟﾘｹｰｼｮﾝの追加のｿｰｽを追加します</string>
-    </resources>
+    <string name="notification_title_single_update_available">更新が利用可能です</string>
+    <string name="notification_title_single_ready_to_install">ｲﾝｽﾄｰﾙの準備完了</string>
+    <string name="notification_title_single_ready_to_install_update">更新をｲﾝｽﾄｰﾙする準備完了</string>
+    <string name="notification_title_single_install_error">ｲﾝｽﾄｰﾙに失敗しました</string>
+    <string name="notification_content_single_downloading">\"%1$s\" をﾀﾞｳﾝﾛｰﾄﾞ中…</string>
+    <string name="notification_content_single_downloading_update">\"%1$s\" の更新をﾀﾞｳﾝﾛｰﾄﾞ中…</string>
+    <string name="notification_content_single_installing">\"%1$s\" をｲﾝｽﾄｰﾙ中…</string>
+    <string name="notification_content_single_installed">正常にｲﾝｽﾄｰﾙしました</string>
+    <string name="notification_content_single_install_error">ｲﾝｽﾄｰﾙに失敗しました</string>
+    <string name="notification_summary_updates">%1$d 更新</string>
+    <string name="notification_title_summary_update_available">更新が利用可能です</string>
+    <string name="notification_title_summary_downloading_update">更新をﾀﾞｳﾝﾛｰﾄﾞしています…</string>
+    <string name="notification_title_summary_ready_to_install_update">更新をｲﾝｽﾄｰﾙする準備ができました</string>
+    <string name="notification_action_update">更新</string>
+    <string name="notification_summary_installed">%1$d ｱﾌﾟﾘをｲﾝｽﾄｰﾙしました</string>
+    <string name="notification_title_summary_downloading">ﾀﾞｳﾝﾛｰﾄﾞ中…</string>
+    <string name="notification_title_summary_ready_to_install">ｲﾝｽﾄｰﾙの準備完了</string>
+    <string name="notification_title_summary_installing">ｲﾝｽﾄｰﾙ中</string>
+    <string name="notification_title_summary_installed">正常にｲﾝｽﾄｰﾙしました</string>
+    <string name="notification_title_summary_install_error">ｲﾝｽﾄｰﾙに失敗しました</string>
+    <string name="notification_action_cancel">ｷｬﾝｾﾙ</string>
+    <string name="notification_action_install">ｲﾝｽﾄｰﾙ</string>
+
+</resources>
