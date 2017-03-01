@@ -379,4 +379,28 @@ com os detalhes para ajudar a corrigir o problema?</string>
     <string name="app_details_donate_prompt_unknown_author">Compre %1$s de um café para os desenvolvedores!</string>
     <string name="app_details_donate_prompt">%1$s é criado por %2$s. Compre um café para eles!</string>
 
-    </resources>
+    <string name="repositories_summary">Acrescentar fontes adicionais de aplicativos</string>
+    <string name="notification_title_single_update_available">Atualização disponível</string>
+    <string name="notification_title_single_ready_to_install">Pronto para instalar</string>
+    <string name="notification_title_single_ready_to_install_update">Atualização pronta para instalar</string>
+    <string name="notification_title_single_install_error">Falha na instalação</string>
+    <string name="notification_content_single_downloading">Baixando \"%1$s\"…</string>
+    <string name="notification_content_single_downloading_update">Baixando atualização para \"%1$s\"…</string>
+    <string name="notification_content_single_installing">Instalando \"%1$s\"…</string>
+    <string name="notification_content_single_installed">Instalado com sucesso</string>
+    <string name="notification_content_single_install_error">Falha na instalação</string>
+    <string name="notification_summary_updates">%1$d Atualizações</string>
+    <string name="notification_summary_installed">%1$d Aplicativos instalados</string>
+    <string name="notification_title_summary_update_available">Atualização disponível</string>
+    <string name="notification_title_summary_downloading">Baixando…</string>
+    <string name="notification_title_summary_downloading_update">Baixando atualização…</string>
+    <string name="notification_title_summary_ready_to_install">Pronto para instalar</string>
+    <string name="notification_title_summary_ready_to_install_update">Atualização pronta para instalar</string>
+    <string name="notification_title_summary_installing">Instalando</string>
+    <string name="notification_title_summary_installed">Instalado com sucesso</string>
+    <string name="notification_title_summary_install_error">Falha na instalação</string>
+    <string name="notification_action_update">Atualizar</string>
+    <string name="notification_action_cancel">Cancelar</string>
+    <string name="notification_action_install">Instalar</string>
+
+</resources>
