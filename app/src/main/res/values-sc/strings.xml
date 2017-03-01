@@ -380,4 +380,27 @@ Depes
     <string name="app_details_donate_prompt">%1$s est istadu creadu dae %2$s. Cumbida·li unu cafè!</string>
 
     <string name="repositories_summary">Annanghe mitzas additzionales de aplicatziones</string>
-    </resources>
+    <string name="notification_title_single_update_available">Agiornamentu disponìbile</string>
+    <string name="notification_title_single_ready_to_install">Prontu pro s\'installatzione</string>
+    <string name="notification_title_single_ready_to_install_update">Agiornamentu prontu pro s\'installatzione</string>
+    <string name="notification_title_single_install_error">Installatzione faddida</string>
+    <string name="notification_content_single_downloading">Iscarrighende \"%1$s\"…</string>
+    <string name="notification_content_single_downloading_update">Iscarrighende s\'agiornamentu pro \"%1$s\"…</string>
+    <string name="notification_content_single_installing">Installende \"%1$s\"…</string>
+    <string name="notification_content_single_installed">Installatzione resissida</string>
+    <string name="notification_content_single_install_error">Installatzione faddida</string>
+    <string name="notification_summary_updates">%1$d agiornamentos</string>
+    <string name="notification_summary_installed">%1$d aplicatziones installadas</string>
+    <string name="notification_title_summary_update_available">Agiornamentu disponìbile</string>
+    <string name="notification_title_summary_downloading">Iscarrighende…</string>
+    <string name="notification_title_summary_downloading_update">Iscarrighende s\'agiornamentu…</string>
+    <string name="notification_title_summary_ready_to_install">Prontu pro s\'installatzione</string>
+    <string name="notification_title_summary_ready_to_install_update">Agiornamentu prontu pro s\'installatzione</string>
+    <string name="notification_title_summary_installing">Installende</string>
+    <string name="notification_title_summary_installed">Installatzione resissida</string>
+    <string name="notification_title_summary_install_error">Installatzione faddida</string>
+    <string name="notification_action_update">Agiornamentu</string>
+    <string name="notification_action_cancel">Annudda</string>
+    <string name="notification_action_install">Installa</string>
+
+</resources>
