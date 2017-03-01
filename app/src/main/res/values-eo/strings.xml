@@ -374,4 +374,27 @@ Provu elekti alian kategorion aŭ ĝisdatigi viajn deponejojn por atingi freŝan
     <string name="app_details_donate_prompt">%1$s estas programita de %2$s. Monhelpu ilin por kafo!</string>
 
     <string name="repositories_summary">Aldonas pliajn fontojn de aplikaĵoj</string>
-    </resources>
+    <string name="notification_title_single_update_available">Ĝisdatigo disponebla</string>
+    <string name="notification_title_single_ready_to_install">Instalpreta</string>
+    <string name="notification_title_single_ready_to_install_update">Ĝisdatigo preta por instali</string>
+    <string name="notification_title_single_install_error">Instalado fiaskis</string>
+    <string name="notification_content_single_downloading">Elŝutado de \"%1$s\"…</string>
+    <string name="notification_content_single_downloading_update">Elŝutado de ĝisdatigo por \"%1$s\"…</string>
+    <string name="notification_content_single_installing">Instalado de \"%1$s\"…</string>
+    <string name="notification_content_single_installed">Instalado sukcesis</string>
+    <string name="notification_content_single_install_error">Instalado fiaskis</string>
+    <string name="notification_summary_updates">%1$d ĝisdatigoj</string>
+    <string name="notification_summary_installed">Instalis %1$d aplikaĵojn</string>
+    <string name="notification_title_summary_update_available">Disponebla ĝisdatigo</string>
+    <string name="notification_title_summary_downloading">Elŝutado…</string>
+    <string name="notification_title_summary_downloading_update">Elŝutado de ĝisdatigo…</string>
+    <string name="notification_title_summary_ready_to_install">Instalpreta</string>
+    <string name="notification_title_summary_ready_to_install_update">Ĝisdatigo preta por instali</string>
+    <string name="notification_title_summary_installing">Instalado</string>
+    <string name="notification_title_summary_installed">Instalado sukcesis</string>
+    <string name="notification_title_summary_install_error">Instalado fiaskis</string>
+    <string name="notification_action_update">Ĝisdatigi</string>
+    <string name="notification_action_cancel">Nuligi</string>
+    <string name="notification_action_install">Instali</string>
+
+</resources>
