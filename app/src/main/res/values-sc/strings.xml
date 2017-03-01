@@ -400,7 +400,7 @@ Depes
     <string name="notification_title_summary_installed">Installatzione resissida</string>
     <string name="notification_title_summary_install_error">Installatzione faddida</string>
     <string name="notification_action_update">Agiornamentu</string>
-    <string name="notification_action_cancel">Annudda</string>
+    <string name="notification_action_cancel">Lassa</string>
     <string name="notification_action_install">Installa</string>
 
 </resources>
