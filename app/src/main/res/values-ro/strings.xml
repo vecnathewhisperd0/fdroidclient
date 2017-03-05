@@ -369,4 +369,27 @@ Nota: Toate
 
     <string name="app_details_donate_prompt_unknown_author">Cumpara dezvoltatorului %1$s o cafea!</string>
     <string name="repositories_summary">Adaugă surse adiționale de aplicații</string>
-    </resources>
+    <string name="notification_title_single_update_available">Actualizare disponibila</string>
+    <string name="notification_title_single_ready_to_install">Pregatit de instalare</string>
+    <string name="notification_title_single_ready_to_install_update">Actualizare pregătită de instalare</string>
+    <string name="notification_title_single_install_error">Instalarea a eșuat</string>
+    <string name="notification_content_single_downloading">Descărcare \"%1$s\"…</string>
+    <string name="notification_content_single_downloading_update">Descărcare actualizare pentru \"%1$s\"…</string>
+    <string name="notification_content_single_installing">Instalare \"%1$s\"…</string>
+    <string name="notification_content_single_installed">Instalare reușită</string>
+    <string name="notification_content_single_install_error">Instalarea a eșuat</string>
+    <string name="notification_summary_updates">%1$d actualizări</string>
+    <string name="notification_summary_installed">%1$d aplicații instalate</string>
+    <string name="notification_title_summary_update_available">Actualizare disponibila</string>
+    <string name="notification_title_summary_downloading">Descărcare…</string>
+    <string name="notification_title_summary_downloading_update">Descărcare actualizare…</string>
+    <string name="notification_title_summary_ready_to_install">Pregătit de instalare</string>
+    <string name="notification_title_summary_ready_to_install_update">Actualizare pregătita de instalare</string>
+    <string name="notification_title_summary_installing">Se instalează</string>
+    <string name="notification_title_summary_installed">Instalare reușită</string>
+    <string name="notification_title_summary_install_error">Instalarea a eșuat</string>
+    <string name="notification_action_update">Actualizare</string>
+    <string name="notification_action_cancel">Anulează</string>
+    <string name="notification_action_install">Instalare</string>
+
+</resources>
