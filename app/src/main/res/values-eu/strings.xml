@@ -384,4 +384,31 @@ konpontzen laguntzeko?</string>
     <string name="keep_install_history_summary">Gorde instalazio eta desinstalazioen egunkari bat F-Droiden</string>
     <string name="warning_no_internet">Ezin da eguneratu, Internetera konektatuta zaude?</string>
     <string name="versions">Bertsioak</string>
-    </resources>
+    <string name="app_details_donate_prompt_unknown_author">"Gonbidatu %1$s  garatzaileak kafe batetara!"</string>
+    <string name="app_details_donate_prompt">%1$s %2$s(e)k sortu du. Gonbidatu kafe batetara!</string>
+
+    <string name="repositories_summary">Gehitu aplikazioen iturri gehigarriak</string>
+    <string name="notification_title_single_update_available">Eguneraketa eskuragarri</string>
+    <string name="notification_title_single_ready_to_install">Instalatzeko prest</string>
+    <string name="notification_title_single_ready_to_install_update">Eguneraketa instalatzeko prest</string>
+    <string name="notification_title_single_install_error">Instalazioak huts egin du</string>
+    <string name="notification_content_single_downloading">\"%1$s\" deskargatzen…</string>
+    <string name="notification_content_single_downloading_update">\"%1$s\" eguneraketa deskargatzen…</string>
+    <string name="notification_content_single_installing">\"%1$s\" instalatzen…</string>
+    <string name="notification_content_single_installed">Ongi instalatu da</string>
+    <string name="notification_content_single_install_error">Instalazioak huts egin du</string>
+    <string name="notification_summary_updates">%1$d eguneraketa</string>
+    <string name="notification_summary_installed">%1$d Aplikazio instalatuta</string>
+    <string name="notification_title_summary_update_available">Eguneraketa eskuragarri</string>
+    <string name="notification_title_summary_downloading">Deskargatzen…</string>
+    <string name="notification_title_summary_downloading_update">Eguneraketa deskargatzen…</string>
+    <string name="notification_title_summary_ready_to_install">Instalatzeko prest</string>
+    <string name="notification_title_summary_ready_to_install_update">Eguneraketa instalatzeko prest</string>
+    <string name="notification_title_summary_installing">Instalatzen</string>
+    <string name="notification_title_summary_installed">Ongi instalatu da</string>
+    <string name="notification_title_summary_install_error">Instalazioak huts egin du</string>
+    <string name="notification_action_update">Eguneratu</string>
+    <string name="notification_action_cancel">Utzi</string>
+    <string name="notification_action_install">Instalatu</string>
+
+</resources>
