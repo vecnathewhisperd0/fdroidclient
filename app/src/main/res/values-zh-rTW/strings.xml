@@ -379,4 +379,28 @@ F-Droid 並無您裝置上可用的應用程式。這可能是因為您需要更
     <string name="app_details_donate_prompt_unknown_author">購買%1$s開發者的咖啡！</string>
     <string name="app_details_donate_prompt">%1$s由%2$s建立。買他們的咖啡！</string>
 
-    </resources>
+    <string name="repositories_summary">增加另外的應用程式來源</string>
+    <string name="notification_title_single_update_available">可用的更新</string>
+    <string name="notification_title_single_ready_to_install">準備安裝</string>
+    <string name="notification_title_single_ready_to_install_update">更新就緒準備安裝</string>
+    <string name="notification_title_single_install_error">安裝失敗</string>
+    <string name="notification_content_single_downloading">正在下載 \"%1$s\"…</string>
+    <string name="notification_content_single_downloading_update">\"%1$s\" 正在下載更新…</string>
+    <string name="notification_content_single_installing">正在安裝 \"%1$s\"…</string>
+    <string name="notification_content_single_installed">安裝成功</string>
+    <string name="notification_content_single_install_error">安裝失敗</string>
+    <string name="notification_summary_updates">%1$d 更新</string>
+    <string name="notification_summary_installed">%1$d 應用程式已安裝</string>
+    <string name="notification_title_summary_update_available">可用的更新</string>
+    <string name="notification_title_summary_downloading">正在下載…</string>
+    <string name="notification_title_summary_downloading_update">正在下載更新…</string>
+    <string name="notification_title_summary_ready_to_install">準備安裝</string>
+    <string name="notification_title_summary_ready_to_install_update">更新就緒準備安裝</string>
+    <string name="notification_title_summary_installing">正在安裝</string>
+    <string name="notification_title_summary_installed">安裝成功</string>
+    <string name="notification_title_summary_install_error">安裝失敗</string>
+    <string name="notification_action_update">更新</string>
+    <string name="notification_action_cancel">取消</string>
+    <string name="notification_action_install">安裝</string>
+
+</resources>
