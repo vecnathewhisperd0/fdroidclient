@@ -378,4 +378,51 @@
     <string name="app_details_donate_prompt_unknown_author">Почастите програмере %1$ кафом!</string>
     <string name="app_details_donate_prompt">%1$s су направили %2$s. Почастите их кафом!</string>
 
+    <string name="app_version_x_available">Издање %1$s је доступно</string>
+    <string name="app_version_x_installed">Издање %1$s</string>
+
+    <string name="my_apps_btn_update_all">Надогради све</string>
+    <plurals name="my_apps_header_number_of_updateable">
+	<item quantity="one">%1$d надоградња</item>
+	<item quantity="other">%1$d надоградње</item>
+</plurals>
+
+    <string name="clear_search">Очисти претрагу</string>
+
+    <string name="repositories_summary">Додај додатне изворе апликација</string>
+    <string name="main_menu__latest_apps">Најновије</string>
+    <string name="main_menu__categories">Категорије</string>
+    <string name="main_menu__my_apps">Моје апликације</string>
+
+
+    <string name="notification_title_single_update_available">Доступна надоградња</string>
+    <string name="notification_title_single_ready_to_install">Спреман за уградњу</string>
+    <string name="notification_title_single_ready_to_install_update">Надоградња спремна</string>
+    <string name="notification_title_single_install_error">Уградња није успела</string>
+    <string name="notification_content_single_downloading">Преузимам „%1$s“…</string>
+    <string name="notification_content_single_downloading_update">Преузимам надоградњу за „%1$s“…</string>
+    <string name="notification_content_single_installing">Уграђујем „%1$s“…</string>
+    <string name="notification_content_single_installed">Успешно уграђено</string>
+    <string name="notification_content_single_install_error">Уградња није успела</string>
+    <string name="notification_summary_updates">%1$d надоградњи</string>
+    <string name="notification_summary_installed">%1$d уграђених апликација</string>
+    <string name="notification_title_summary_update_available">Надоградња доступна</string>
+    <string name="notification_title_summary_downloading">Преузимам…</string>
+    <string name="notification_title_summary_downloading_update">Преузимам надоградњу…</string>
+    <string name="notification_title_summary_ready_to_install">Спреман за уградњу</string>
+    <string name="notification_title_summary_installing">Уграђујем</string>
+    <string name="notification_title_summary_installed">Успешно уграђено</string>
+    <string name="notification_title_summary_install_error">Уградња није успела</string>
+    <string name="notification_action_update">Надогради</string>
+    <string name="notification_action_cancel">Одустани</string>
+    <string name="notification_action_install">Угради</string>
+
+    <string name="category">Категорија</string>
+<string name="main_menu__swap_nearby">Оближње</string>
+    <plurals name="button_view_all_apps_in_category">
+	<item quantity="one">" Прикажи %d "</item>
+	<item quantity="other">" Прикажи све %d "</item>
+</plurals>
+
+    <string name="notification_title_summary_ready_to_install_update">Надоградња спремна</string>
     </resources>
