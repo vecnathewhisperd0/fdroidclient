@@ -403,4 +403,27 @@ Depes
     <string name="notification_action_cancel">Lassa</string>
     <string name="notification_action_install">Installa</string>
 
-</resources>
+<string name="app_version_x_available">Sa versione %1$s est disponìbile</string>
+    <string name="app_version_x_installed">Versione %1$s</string>
+
+    <string name="my_apps_btn_update_all">Agiorna totu</string>
+    <plurals name="my_apps_header_number_of_updateable">
+	<item quantity="one">%1$d Agiornamentu</item>
+	<item quantity="other">%1$d Agiornamentos</item>
+</plurals>
+
+    <string name="main_menu__latest_apps">Ùrtimas</string>
+    <string name="main_menu__categories">Categorias</string>
+    <string name="main_menu__swap_nearby">A curtzu</string>
+    <string name="main_menu__my_apps">Aplicatziones meas</string>
+
+
+    <plurals name="button_view_all_apps_in_category">
+	<item quantity="one">" Fintzas si in custu casu sunt sa matessi cosa, sos documentos de Android narant chi est mègius dislindare a su mancu \"unu\" e \"àteros\": https://developer.android.com/guide/topics/resources/string-resource.html#Plurals "</item>
+	<item quantity="other">" Càstia totu %d "</item>
+</plurals>
+
+    <string name="category">Categoria</string>
+<string name="clear_search">Inneta sa chirca</string>
+
+    </resources>
