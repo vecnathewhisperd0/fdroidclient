@@ -4,9 +4,9 @@
   <string name="delete">Forigi</string>
   <string name="updates">Ĝisdatigoj</string>
   <string name="other">Aliaj</string>
-  <string name="automatic_scan_wifi">Nur per sendrata reto</string>
+  <string name="automatic_scan_wifi">Nur per vifio</string>
   <string name="notify">Sciigoj pri ĝisdatigoj</string>
-  <string name="notify_on">Sciigas kiam ĝisdatigoj estas disponeblaj</string>
+  <string name="notify_on">Sciigi kiam ĝisdatigoj estas disponeblaj</string>
   <string name="update_history">Ĝisdatiga historio</string>
   <string name="app_details">Aplikaĵaj detaloj</string>
   <string name="no_such_app">Neniu aplikaĵo trovita.</string>
@@ -138,7 +138,7 @@
     <string name="about_source">Fontkodo</string>
     <string name="about_license">Permesilo</string>
 
-    <string name="app_incompatible">Malkongrua</string>
+    <string name="app_incompatible">Nekongrua</string>
     <string name="links">Ligiloj</string>
     <string name="more">Pli</string>
     <string name="less">Malpli</string>
@@ -152,7 +152,7 @@
     <string name="notification_summary_more">ankoraŭ +%1$d…</string>
     <string name="bluetooth_activity_not_found">Neniu Bludenta metodo de sendo trovita, elektu iun!</string>
     <string name="choose_bt_send">Elektu Bludentan metodon de sendo</string>
-    <string name="repo_add_fingerprint">Fingrospuro (malnepra)</string>
+    <string name="repo_add_fingerprint">Fingrospuro (nedeviga)</string>
     <string name="repo_exists_add_fingerprint">Ĉi tiu deponejo estas jam instalita, tio aldonos novan informon pri ŝlosilo.</string>
     <string name="repo_exists_enable">Ĉi tiu deponejo estas jam instalita, konfirmu ke vi volas reaktivigi ĝin.</string>
     <string name="repo_exists_and_enabled">La deponejo estas jam instalita kaj aktiva.</string>
@@ -190,12 +190,12 @@
     <string name="status_download_unknown_size">Elŝutado
 %2$s el
 %1$s</string>
-    <string name="update_notification_title">Elŝutado de deponejoj</string>
+    <string name="update_notification_title">Ĝisdatigado de deponejoj</string>
     <string name="status_processing_xml_percent">Prilaborado de %2$s / %3$s (%4$d%%) el %1$s</string>
     <string name="status_connecting_to_repo">Konektado al
 %1$s</string>
     <string name="status_inserting_apps">Konservado de aplikaĵaj detaloj</string>
-    <string name="repos_unchanged">Ĉiuj deponejoj estas ĝisdataj</string>
+    <string name="repos_unchanged">Ĉiuj deponejoj estas ĝisdatigitaj</string>
         <string name="all_other_repos_fine">En ĉiuj aliaj deponejoj ne okazis erarojn.</string>
         <string name="global_error_updating_repos">Eraro dum ĝisdatigado: %s</string>
     <string name="permissions">Permesoj</string>
@@ -213,11 +213,11 @@ Rigardu: ĉiuj antaŭe konservitaj aplikaĵoj restos en via aparato.</string>
     <string name="repo_disabled_notification">%1$s malaktiva.
 
 Vi devos reaktivigi ĉi tiun deponejon por instali aplikaĵojn el ĝi.</string>
-    <string name="not_on_same_wifi">Via aparato ne estas en la sama sendrata reto, kie loka deponejo vi jam aldonis! Provu kuniĝi la reton: %s</string>
+    <string name="not_on_same_wifi">Via aparato ne estas en la sama vifi-reto kiel loka deponejo, kiun vi ĵus aldonis! Provu konekti al ĉi tiu reto: %s</string>
     <string name="pref_language">Lingvo</string>
     <string name="pref_language_default">Sistema apriora</string>
 
-    <string name="wifi">Sendrata reto</string>
+    <string name="wifi">Vifio</string>
     <string name="wifi_ap">Retkaptejo</string>
 
     <string name="category_Connectivity">Konekteco</string>
@@ -242,8 +242,8 @@ Provu elekti alian kategorion aŭ ĝisdatigi viajn deponejojn por atingi freŝan
     <string name="requesting_root_access_body">Petado pri ĉefuzanta aliro…</string>
     <string name="root_access_denied_title">Ĉefuzanta aliro malpermesita</string>
     <string name="root_access_denied_body">Aŭ via Androida aparato ne havas ĉefuzantan aliron, aŭ vi malpermesis ĉefuzantan aliron al F-Droid.</string>
-    <string name="install_error_unknown">Malsukcesis instali pro nekonata eraro</string>
-    <string name="uninstall_error_unknown">Malsukcesis malinstali pro nekonata eraro</string>
+    <string name="install_error_unknown">Instalo malsukcesis pro nekonata eraro</string>
+    <string name="uninstall_error_unknown">Malinstalo malsukcesis pro nekonata eraro</string>
     <string name="system_install_denied_title">Privilegia F-Droid-aldonaĵo ne disponebla</string>
     <string name="system_install_denied_body">Ĉi tiu agordo estas nur disponebla kiam privilegia F-Droid-aldonaĵo estas instalita.</string>
     <string name="system_install_denied_signature">La subskribo de aldonaĵo estas erara! Bonvolu krei erar-raporton!</string>
@@ -258,36 +258,36 @@ Provu elekti alian kategorion aŭ ĝisdatigi viajn deponejojn por atingi freŝan
     <string name="system_install_installing_rebooting">Instalado kaj restartado…</string>
     <string name="system_install_uninstalling">Malinstalado…</string>
     <string name="system_install_question">Ĉu vi volas instali privilegian F-Droid-aldonaĵon?</string>
-    <string name="system_install_warning">Ĉi tio daŭros maksimume 10 sekundojn.</string>
-    <string name="system_install_warning_lollipop">Ĉi tio daŭros maksimume 10 sekundojn kaj la aparato <b>restartos</b> poste.</string>
+    <string name="system_install_warning">Ĉi tio daŭros ĝis 10 sekundoj.</string>
+    <string name="system_install_warning_lollipop">Ĉi tio daŭros ĝis 10 sekundoj kaj la aparato estos poste <b>restartita</b>.</string>
     <string name="system_uninstall">Ĉu vi certe volas malinstali privilegian F-Droid-aldonaĵon?</string>
     <string name="system_uninstall_button">Malinstali</string>
 
     <string name="swap_nfc_title">Tuŝu por interŝanĝi</string>
     <string name="swap_nfc_description">Se via kolego havas F-Droid kaj ŝaltitan NFC-on por tuŝi viajn aparatojn kune.</string>
-    <string name="swap_join_same_wifi">Konektu la saman sendatan reton kiel via kolego</string>
-    <string name="swap_join_same_wifi_desc">Por interŝanĝi per sendrata reto, certigu ke vi estas en la sama reto. Se vi ne havas aliron al la sama reto, unu de vi povas krei vifian retkaptejon.</string>
+    <string name="swap_join_same_wifi">Konektu al la sama vifio kiel via amiko</string>
+    <string name="swap_join_same_wifi_desc">Por interŝanĝi per vifio, certigu ke vi estas en la sama reto. Se vi ne havas aliron al la sama reto, unu de vi povas krei vifian retkaptejon.</string>
     <string name="swap_join_this_hotspot">Helpi al via kolego aligi vian retkaptejon</string>
     <string name="swap">Interŝanĝi aplikaĵojn</string>
     <string name="swap_success">Interŝanĝo sukcesis!</string>
     <string name="swap_active_hotspot">%1$s (via retkaptejo)</string>
-    <string name="swap_switch_to_wifi">Tuŝu por ŝanĝi al sendrata reto</string>
+    <string name="swap_switch_to_wifi">Tuŝu por ŝanĝi al vifio</string>
     <string name="swap_confirm_connect">Ĉu vi volas elŝuti aplikaĵojn de %1$s nun?</string>
     <string name="swap_dont_show_again">Ne montri ĉi tion denove</string>
     <string name="swap_scan_or_type_url">Iu ajn devas skani kodon, aŭ entajpi URL-on de aliulo en la foliumilo.</string>
     <string name="swap_choose_apps">Elekti aplikaĵojn</string>
-    <string name="swap_scan_qr">Skani QR-kodon</string>
+    <string name="swap_scan_qr">Skanu QR-kodon</string>
     <string name="swap_people_nearby">Homoj proksime</string>
     <string name="swap_scanning_for_peers">Serĉado de proksimuloj…</string>
     <string name="swap_nearby">Proksima Interŝanĝo</string>
     <string name="swap_intro">Konekti kaj interŝanĝi aplikaĵojn kun proksimaj homoj.</string>
-    <string name="swap_visible_bluetooth">Videbla tra Bludento</string>
+    <string name="swap_visible_bluetooth">Videbla per Bludento</string>
     <string name="swap_setting_up_bluetooth">Agordado de Bludento…</string>
-    <string name="swap_not_visible_bluetooth">Nevidebla tra Bludento</string>
-    <string name="swap_visible_wifi">Videbla tra sendrata reto</string>
-    <string name="swap_setting_up_wifi">Agordado de sendrata reto…</string>
-    <string name="swap_not_visible_wifi">Nevidebla tra sendrata reto</string>
-    <string name="swap_wifi_device_name">Aparata nomo</string>
+    <string name="swap_not_visible_bluetooth">Nevidebla per Bludento</string>
+    <string name="swap_visible_wifi">Videbla per vifio</string>
+    <string name="swap_setting_up_wifi">Agordado de vifio…</string>
+    <string name="swap_not_visible_wifi">Nevidebla per vifio</string>
+    <string name="swap_wifi_device_name">Nomo de aparato</string>
     <string name="swap_cant_find_peers">Ĉu vi ne povas trovi kiun, tiun vi serĉas?</string>
     <string name="swap_send_fdroid">Sendi F-Droid</string>
     <string name="swap_no_peers_nearby">Ne povas trovi homojn proksime por interŝanĝi.</string>
@@ -307,7 +307,7 @@ Provu elekti alian kategorion aŭ ĝisdatigi viajn deponejojn por atingi freŝan
     <string name="install_confirm_update_no_perms">Ĉu vi volas instali ĝisdatigon al ĉi tiu estanta aplikaĵo? Viaj nunaj datumoj ne foriĝos. Ĝi ne bezonas iun ajn specialan aliron.</string>
     <string name="install_confirm_update_system_no_perms">Ĉu vi volas instali ĝisdatigon al ĉi tiu integrigita aplikaĵo? Viaj nunaj datumoj ne foriĝos. Ĝi ne bezonas iun ajn specialan aliron.</string>
     <string name="newPerms">Nova(j)</string>
-    <string name="allPerms">Ĉiuj</string>
+    <string name="allPerms">Ĉio</string>
     <string name="perm_costs_money">Ĉi tio povas elspezi vian monon</string>
     <string name="uninstall_update_confirm">Ĉu vi volas anstataŭigi ĉi tiun aplikaĵon per la antaŭinstalita versio?</string>
     <string name="uninstall_confirm">Ĉu vi volas malinstali ĉi tiun aplikaĵon?</string>
@@ -335,7 +335,7 @@ Provu elekti alian kategorion aŭ ĝisdatigi viajn deponejojn por atingi freŝan
     <string name="crash_dialog_comment_prompt">Vi povas aldoni ekstrajn informojn kaj komentojn ĉi tien:</string>
 <string name="useTor">Uzi Tor</string>
     <string name="useTorSummary">Devigas elŝuti per Tor-reto por plibonigi privatecon</string>
-    <string name="swap_stopping_wifi">Ĉesado de sendrata reto…</string>
+    <string name="swap_stopping_wifi">Ĉesado de vifio…</string>
     <string name="repo_provider">Deponejo: %s</string>
 
     <string name="update_auto_download">Aŭtomate elŝuti ĝisdatigojn</string>
