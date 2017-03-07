@@ -324,4 +324,123 @@ Baie geluk! Al jou toepassings is op datum (of jou argiewe is verouderd).</strin
     <string name="swap_send_fdroid">F-Droid stuur</string>
     <string name="swap_no_peers_nearby">Kan mense naby kry om mee te ruil nie.</string>
     <string name="swap_connecting">Verbind tans</string>
-    </resources>
+    <string name="app_version_x_available">Weergawe %1$s beskikbaar</string>
+    <string name="app_version_x_installed">Weergawe %1$s</string>
+
+    <string name="my_apps_btn_update_all">Opdateer alles</string>
+    <plurals name="my_apps_header_number_of_updateable">
+	<item quantity="one">%1$d opdateering</item>
+	<item quantity="other">%1$ d bywerking</item>
+</plurals>
+
+    <string name="clear_search">Duidelike soektog</string>
+
+    <string name="main_menu__latest_apps">Nuutste</string>
+    <string name="main_menu__categories">Kategorieë</string>
+    <string name="main_menu__swap_nearby">Naby</string>
+    <string name="main_menu__my_apps">My programme</string>
+
+
+    <string name="status_download_unknown_size">Aflaai van 
+%2$s vanaf 
+%1$s</string>
+    <plurals name="button_view_all_apps_in_category">
+	<item quantity="one">" Selfs al is hierdie dieselfde as mekaar, stel Android  dokumentasie voor dat daar altyd  ten minste een of die ander gespesifiseer word. Sien: https://developer.android.com/guide/topics/resources/string-resource.html#Plurals "</item>
+	<item quantity="other">" Selfs al is dit dieselfde as mekaar, raai Android dokumente altyd spesifiseer ten minste een en ander: https://developer.android.com/guide/topics/resources/string-resource.html#Plurals "</item>
+</plurals>
+
+    <string name="swap_scan_or_type_url">Een persoon het nodig om die kode te skandeer of tik die URL van die ander in \'n web browser.</string>
+    <string name="swap_intro">Verbind en deel programme met mense naby jou.</string>
+    <string name="swap_confirm">Bevestig uitruil</string>
+    <string name="swap_qr_isnt_for_swap">Die QR kode jy geskandeer het lyk nie soos \'n uitruil kode nie.</string>
+    <string name="bluetooth_unavailable">Bluetooth nie beskikbaar nie</string>
+    <string name="swap_cant_send_no_bluetooth">"Kan nie  F-Droid stuur nie, omdat Bluetooth is nie beskikbaar is op hierdie toestel nie."</string>
+    <string name="loading">Laai tans…</string>
+    <string name="swap_connection_misc_error">\'n Fout het plaasgevind tydens koppeling met die toestel, dit lyk nie asof ons kan uitruil nie.</string>
+    <string name="swap_not_enabled">Uitruil nie geaktiveer nie</string>
+    <string name="swap_not_enabled_description">Voor uitruil, moet jou toestel sigbaar gemaak word.</string>
+
+    <string name="tap_to_install_format">Tik om %s te installeer</string>
+    <string name="tap_to_update_format">Tik om %s op te dateer</string>
+    <string name="install_confirm">benodig toegang tot</string>
+    <string name="install_confirm_update">Wil jy \'n opdatering installeer 
+vir hierdie bestaande program? Jou bestaande data sal nie verloor word nie. 
+Die opgadateerde progam sal toegang te kry tot:</string>
+    <string name="install_confirm_update_no_perms">Wil jy \'n opdatering installeer 
+vir hierdie bestaande program? Jou bestaande data sal nie verloor word nie. 
+Die opgadateerde progam benodig geen addisionele toegang nie.</string>
+    <string name="install_confirm_update_system_no_perms">Wil jy \'n opdatering installeer 
+vir hierdie ingeboude program? Jou bestaande data sal nie verloor word nie. 
+Die opgadateerde progam benodig geen addisionele toegang nie.</string>
+    <string name="newPerms">Nuwe</string>
+    <string name="allPerms">Alle</string>
+    <string name="perm_costs_money">Dit kan jy dalk geld kos</string>
+    <string name="uninstall_update_confirm">Wil jy hierdie program met die fabriek weergawe vervang?</string>
+    <string name="uninstall_confirm">Wil jy hierdie program deïnstalleer?</string>
+    <string name="tap_to_install">Aflaai voltooi, tik om te installeer</string>
+    <string name="download_error">Aflaai onsuksesvol</string>
+    <string name="download_pending">Wag om aflaai te begin …</string>
+    <string name="install_error_notify_title">Fout tydens installeering van %s</string>
+    <string name="uninstall_error_notify_title">Fout tydens deïnstalleer van %s</string>
+
+
+    <string name="perms_new_perm_prefix">"Nuwe: "</string>
+    <string name="perms_description_app">Verskaf deur %1$s.</string>
+    <string name="downloading">Laai tans af…</string>
+    <string name="downloading_apk">Aflaai van %1$s</string>
+    <string name="installing">Installeer tans…</string>
+    <string name="uninstalling">Deïnstalleer…</string>
+
+    <string name="interval_never">Nooit</string>
+    <string name="interval_1h">Uurliks</string>
+    <string name="interval_4h">Elke 4 uur</string>
+    <string name="interval_12h">Elke 12 uur</string>
+    <string name="interval_1d">Daagliks</string>
+    <string name="interval_1w">Weekliks</string>
+    <string name="interval_2w">Elke 2 weke</string>
+
+    <string name="keep_hour">1 uur</string>
+    <string name="keep_day">1 dag</string>
+    <string name="keep_week">1 week</string>
+    <string name="keep_month">1 maand</string>
+    <string name="keep_year">1 jaar</string>
+    <string name="keep_forever">Vir ewig</string>
+
+    <string name="theme_light">Lig</string>
+    <string name="theme_dark">Donker</string>
+    <string name="theme_night">Nag</string>
+
+    <string name="crash_dialog_title">F-Droid het ineengestort</string>
+    <string name="crash_dialog_text">\'N Onverwagse fout het voorgekom wat die program laat stop het. 
+Wil jy \'n e-pos met die besonderhede stuur om die probleem te help oplos?</string>
+    <string name="crash_dialog_comment_prompt">Jy kan ekstra inligting en kommentaar hier laat:</string>
+
+    <string name="notification_summary_more">+%1$d meer…</string>
+    <string name="notification_title_single_update_available">Opdateering beskikbaar</string>
+    <string name="install_confirm_update_system">Wil jy \'n opdatering installeer 
+vir hierdie ingeboude program? Jou bestaande data sal nie verloor word nie. 
+Die opgadateerde progam sal toegang te kry tot:</string>
+    <string name="notification_title_single_ready_to_install">Gereed om te installeer</string>
+    <string name="notification_title_single_ready_to_install_update">Opdateering gereed vir installasie</string>
+    <string name="notification_title_single_install_error">Installering het misluk</string>
+    <string name="notification_content_single_downloading">Aflaai \"%1$s\"…</string>
+    <string name="notification_content_single_downloading_update">Aflaai opdatering vir \"%1$s\"…</string>
+    <string name="notification_content_single_installing">Installeer tans \"%1$s\"…</string>
+    <string name="notification_content_single_installed">Suksesvol geïnstalleer</string>
+    <string name="notification_content_single_install_error">Installering het misluk</string>
+    <string name="notification_summary_updates">%1$d Opdaterings</string>
+    <string name="notification_summary_installed">%1$d programme geïnstalleer</string>
+    <string name="notification_title_summary_update_available">Opdateering beskikbaar</string>
+    <string name="notification_title_summary_downloading">Laai tans af…</string>
+    <string name="notification_title_summary_downloading_update">Besig met aflaai van opdateering …</string>
+    <string name="notification_title_summary_ready_to_install">Gereed om te installeer</string>
+    <string name="notification_title_summary_ready_to_install_update">Opdateering gereed vir installasie</string>
+    <string name="notification_title_summary_installing">Installering van</string>
+    <string name="notification_title_summary_installed">Suksesvol geïnstalleer</string>
+    <string name="notification_title_summary_install_error">Installering het misluk</string>
+    <string name="notification_action_update">Opdateering</string>
+    <string name="notification_action_cancel">Kanselleer</string>
+    <string name="notification_action_install">Installeer</string>
+
+    <string name="category">Kategorie</string>
+</resources>
