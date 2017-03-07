@@ -386,4 +386,31 @@ Uwaga: Wszystkie poprzednio zainstalowane aplikacje zostaną na urządzeniu.</st
     <string name="notification_action_cancel">Anuluj</string>
     <string name="notification_action_install">Zainstaluj</string>
 
+<string name="app_version_x_available">Wersja %1$s dostępna</string>
+    <string name="app_version_x_installed">Wersja %1$s</string>
+
+    <string name="my_apps_btn_update_all">Aktualizuj wszystko</string>
+    <plurals name="my_apps_header_number_of_updateable">
+	<item quantity="one">%1$d aktualizacja</item>
+	<item quantity="few">%1$d aktualizacje</item>
+	<item quantity="many">%1$d aktualizacji</item>
+	<item quantity="other"/>
+</plurals>
+
+    <string name="clear_search">Wyczyść wyszukiwanie</string>
+
+    <string name="main_menu__latest_apps">Najnowsze</string>
+    <string name="main_menu__categories">Kategorie</string>
+    <string name="main_menu__swap_nearby">Blisko</string>
+    <string name="main_menu__my_apps">Moje aplikacje</string>
+
+
+    <plurals name="button_view_all_apps_in_category">
+	<item quantity="one">" Zobacz %d aplikację "</item>
+	<item quantity="few">" Zobacz wszystkie %d aplikacje "</item>
+	<item quantity="many">" Zobacz wszystkich %d aplikacji "</item>
+	<item quantity="other"/>
+</plurals>
+
+    <string name="category">Kategoria</string>
 </resources>
