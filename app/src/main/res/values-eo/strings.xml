@@ -397,4 +397,27 @@ Provu elekti alian kategorion aŭ ĝisdatigi viajn deponejojn por atingi freŝan
     <string name="notification_action_cancel">Nuligi</string>
     <string name="notification_action_install">Instali</string>
 
+<string name="app_version_x_available">Versio %1$s disponebla</string>
+    <string name="app_version_x_installed">Versio %1$s</string>
+
+    <string name="my_apps_btn_update_all">Ĝisdatigi ĉiujn</string>
+    <plurals name="my_apps_header_number_of_updateable">
+	<item quantity="one">%1$d ĝisdatigo</item>
+	<item quantity="other">%1$d ĝisdatigoj</item>
+</plurals>
+
+    <string name="clear_search">Forviŝi serĉon</string>
+
+    <string name="main_menu__latest_apps">Novaj</string>
+    <string name="main_menu__categories">Kategorioj</string>
+    <string name="main_menu__swap_nearby">Proksime</string>
+    <string name="main_menu__my_apps">Miaj aplikaĵoj</string>
+
+
+    <plurals name="button_view_all_apps_in_category">
+	<item quantity="one">" Montri aplikaĵon "</item>
+	<item quantity="other">" Montri ĉiujn %d "</item>
+</plurals>
+
+    <string name="category">Kategorion</string>
 </resources>
