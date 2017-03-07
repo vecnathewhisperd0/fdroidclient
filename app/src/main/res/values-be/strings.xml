@@ -424,4 +424,29 @@
     <string name="notification_action_cancel">Скасаваць</string>
     <string name="notification_action_install">Усталяваць</string>
 
+<string name="app_version_x_available">Версія %1$s даступна</string>
+    <string name="app_version_x_installed">Версія %1$s</string>
+
+    <string name="my_apps_btn_update_all">Абнавіць усе</string>
+    <plurals name="my_apps_header_number_of_updateable">
+	<item quantity="one">%1$d абнаўленне</item>
+	<item quantity="other">%1$d абнаўленні</item>
+</plurals>
+
+    <string name="clear_search">Ачысціць пошук</string>
+
+    <string name="main_menu__latest_apps">Апошнія</string>
+    <string name="main_menu__categories">Катэгорыі</string>
+    <string name="main_menu__swap_nearby">Блізка</string>
+    <string name="main_menu__my_apps">Мае праграмы</string>
+
+
+    <plurals name="button_view_all_apps_in_category">
+	<item quantity="one">" Убачыць %d праграму "</item>
+	<item quantity="few">" Убачыць усе %d "</item>
+	<item quantity="many">" Убачыць усе %d "</item>
+	<item quantity="other"/>
+</plurals>
+
+    <string name="category">Катэгорыя</string>
 </resources>
