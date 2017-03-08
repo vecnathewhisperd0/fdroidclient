@@ -439,4 +439,5 @@ hilang. Aplikasi yang diperbarui akan mendapatkan akses ke:</string>
 </plurals>
 
     <string name="category">Kategori</string>
-</resources>
+<string name="main_menu__swap_nearby">Dekat</string>
+    </resources>
