@@ -417,4 +417,26 @@ hilang. Aplikasi yang diperbarui akan mendapatkan akses ke:</string>
     <string name="notification_action_install">Pasang</string>
 
 <string name="app_details_donate_prompt_unknown_author">Belikan pengembang %1$s kopi!</string>
-    </resources>
+    <string name="app_version_x_available">Versi %1$s tersedia</string>
+    <string name="app_version_x_installed">Versi %1$s</string>
+
+    <string name="my_apps_btn_update_all">Perbarui semua</string>
+    <plurals name="my_apps_header_number_of_updateable">
+	<item quantity="one">%1$d Pembaruan</item>
+	<item quantity="other"/>
+</plurals>
+
+    <string name="clear_search">Kosongkan pencarian</string>
+
+    <string name="main_menu__latest_apps">Terbaru</string>
+    <string name="main_menu__categories">Kategori</string>
+    <string name="main_menu__my_apps">Apl Saya</string>
+
+
+    <plurals name="button_view_all_apps_in_category">
+	<item quantity="one">" Tampilkan semua %d "</item>
+	<item quantity="other"/>
+</plurals>
+
+    <string name="category">Kategori</string>
+</resources>
