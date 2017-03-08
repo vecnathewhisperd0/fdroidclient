@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="app_name">F-Droid</string>
 
-    <string name="SignatureMismatch">Die nuwe weergawe is geteken met \'n ander sleutel as die vorige een. Om die nuwe weergawe te instaleer moet die vorige een eers verwyder word. Doen dit asseblief en probeer weer. (Neem egter kennis dat verwydering alle interne data wat deur die program gestoor is sal uitvee)</string>
-    <string name="installIncompatible">Dit blyk dat die pakket nie aanpasbaar is met you toestel nie. Wil jy in elk geval probeer?</string>
+    <string name="SignatureMismatch">Die nuwe weergawe is geteken met \'n ander sleutel as die vorige een. Om die nuwe weergawe te installeer moet die vorige een eers verwyder word. Doen dit asseblief en probeer weer. (Neem egter kennis dat deinstallasie alle interne data wat deur die program gestoor is sal verloor)</string>
+    <string name="installIncompatible">Dit blyk dat hierdie prorgam nie aanpasbaar is met you toestel nie. Wil jy in elk geval probeer?</string>
     <string name="installDowngrade">Jy probeer die program afgradeer. Dit mag veroorsaak dat die program nie meer werk nie of selfs data verlies tot gevolg hê. Wil jy in elk geval probeer afgradeer?</string>
     <string name="version">Weergawe</string>
     <string name="by_author">deur</string>
@@ -22,8 +22,8 @@
     <string name="update_auto_download_summary">Opdateer in die agtergrond</string>
     <string name="update_auto_install">Installeer opdaterings automaties</string>
     <string name="update_auto_install_summary">Laai en installeer opdaterings in die agtergrond</string>
-    <string name="notify">Opdateering kennisgewings</string>
-    <string name="notify_on">Versoon \'n kennisgewing wanneer opdateerings beskikbaar is</string>
+    <string name="notify">Opdaterings kennisgewings</string>
+    <string name="notify_on">Wys \'n kennisgewing wanneer opdaterings beskikbaar is</string>
     <string name="update_history">Dateer geskiedenis op</string>
     <string name="update_history_summ">Hoeveelheid dae wat programme as nuut of onlangs geag word: %s</string>
     <string name="system_installer">Bevoorregte uitbreiding</string>
@@ -43,23 +43,23 @@
     <string name="app_details">Program details</string>
     <string name="no_such_app">Daar bestaan nie so program nie.</string>
 
-    <string name="app_details_donate_prompt_unknown_author">Koop vir die ontwikkelaars \'n koppie koffie ter waarde van %1$s!</string>
-    <string name="app_details_donate_prompt">%1$s is gemaak deur %2$s. Koop vir hulle \'n koffie!</string>
+    <string name="app_details_donate_prompt_unknown_author">Koop vir die ontwikkelaars van %1$s \'n koppie koffie!</string>
+    <string name="app_details_donate_prompt">%1$s is geskep deur %2$s. Koop vir hulle \'n koffie!</string>
 
     <string name="about_title">Ietsie oor F-Droid</string>
     <string name="about_version">Weergawe</string>
     <string name="about_site">Webwerf</string>
     <string name="about_source">Bronkode</string>
-    <string name="about_mail">Epos</string>
+    <string name="about_mail">E-pos</string>
     <string name="about_license">Lisensie</string>
 
     <string name="app_incompatible">Onaanpasbaar</string>
     <string name="app_installed">Geinstalleer</string>
-    <string name="app_not_installed">Nie geinstalleer</string>
-    <string name="app_inst_known_source">Geinstalleer (van %s)</string>
+    <string name="app_not_installed">Nie geïnstalleer nie</string>
+    <string name="app_inst_known_source">Geinstalleer (vanaf %s)</string>
     <string name="app_inst_unknown_source">Geinstalleer (van onbekende bron)</string>
 
-    <string name="added_on">Bygevoeg op %s</string>
+    <string name="added_on">Toegevoeg op %s</string>
 
     <string name="ok">OK</string>
 
@@ -80,7 +80,7 @@
     <string name="tab_updates">Opdaterings</string>
     <string name="tab_installed_apps_count">Geinstalleer (%d)</string>
     <string name="tab_updates_count">Opdaterings (%d)</string>
-    <string name="fdroid_updates_available">F-Droid opdatering beskikbaar</string>
+    <string name="fdroid_updates_available">F-Droid opdaterings beskikbaar</string>
     <string name="bluetooth_activity_not_found">Geen Bluetooth stuur metode gevind, kies een!</string>
     <string name="choose_bt_send">Kies Bluetooth stuur metode</string>
     <string name="send_via_bluetooth">Stuur via Bluetooth</string>
@@ -91,30 +91,30 @@
     <string name="add_key">Nuwe sleutel</string>
     <string name="repo_add_url">Argief adres</string>
     <string name="repo_exists_add_fingerprint">Hierdie argief is reeds opgestel, die aksie sal nuwe sleutel inligting laai.</string>
-    <string name="repo_exists_enable">Hierdie argief is reeds opgestel, bevestig jy wil dit weer wil aktiveer.</string>
+    <string name="repo_exists_enable">Hierdie argief is reeds opgestel, bevestig jy wil dit weer wil her-aktiveer.</string>
     <string name="repo_exists_and_enabled">Die inkomende argief is reeds opgestel en geaktiveer.</string>
-    <string name="bad_fingerprint">Slegte vingerafdruk</string>
+    <string name="bad_fingerprint">Onaanvaarbare vingerafdruk</string>
     <string name="invalid_url">Dit is nie \'n geldige URL nie.</string>
     <string name="malformed_repo_uri">Ek ignoreer die misvormde argief URI: %s</string>
     <string name="repo_provider">Argief: %s</string>
 
     <string name="menu_update_repo">Opdateer argiewe</string>
     <string name="menu_manage">Argiewe</string>
-    <string name="repositories_summary">Laai addisionele bronne van die programme</string>
-    <string name="menu_send_apk_bt">Deel F-Droid mbv Bluetooth</string>
+    <string name="repositories_summary">Laai addisionele program bronne</string>
+    <string name="menu_send_apk_bt">Deel F-Droid via Bluetooth</string>
     <string name="menu_settings">Instellings</string>
     <string name="menu_about">Iesie oor</string>
     <string name="menu_search">Soek</string>
     <string name="menu_add_repo">Nuwe argief</string>
 
     <string name="menu_launch">Begin</string>
-    <string name="menu_share">Deel</string>
+    <string name="menu_share">Uitruil</string>
     <string name="menu_install">Installeer</string>
-    <string name="menu_uninstall">Verwyder</string>
+    <string name="menu_uninstall">Deïnstalleer</string>
     <string name="menu_ignore_all">Ignoreer alle opdaterings</string>
     <string name="menu_ignore_this">Ignoreer hierdie opdatering</string>
     <string name="menu_website">Webwerf</string>
-    <string name="menu_email">Epos auteur</string>
+    <string name="menu_email">E-pos skrywer</string>
     <string name="menu_issues">Probleme</string>
     <string name="menu_changelog">Veranderingslys</string>
     <string name="menu_source">Bronkode</string>
@@ -129,14 +129,14 @@
     <string name="details_notinstalled">Nie geïnstalleer nie</string>
 
     <string name="antiadslist">Hierdie program bevat advertensies</string>
-    <string name="antitracklist">Hierdie program speur op en rapporteer jou aktiwiteite</string>
+    <string name="antitracklist">Hierdie program speur op, en rapporteer jou aktiwiteite</string>
     <string name="antinonfreeadlist">Hierdie program bevorder nie-vrye toevoegsels</string>
     <string name="antinonfreenetlist">Hierdie program bevorder nie-vrye netwerk dienste</string>
     <string name="antinonfreedeplist">Hierdie program is afhanklik van ander nie-vrye programme</string>
     <string name="antiupstreamnonfreelist">Die stroomop bronkode is nie heeltemal vry nie</string>
     <string name="antinonfreeassetslist">Hierdie program bevat nie-vrye bates</string>
 
-    <string name="display">Vertoon</string>
+    <string name="display">Wys</string>
 
     <string name="expert">Expertmodus</string>
     <string name="expert_on">Wys addisionele inligting en aktiveer addisionele instellings</string>
@@ -204,7 +204,7 @@ Jy moet dit aktiveer om die progamme wat dit bied te sien.</string>
 
 Let wel: Alle voorheen geïnstalleerde programme sal op jou toestel bly.</string>
     <string name="cache_downloaded">Behou gekaste programme</string>
-    <string name="uninstall_system_summary">Wys detail besonderhede skerm van voorreg uitvoering vir opdatering of verdyder</string>
+    <string name="uninstall_system_summary">Wys die bevoorregte uitbreiding detail besonderhede skerm vir opdatering of verdydering</string>
     <string name="hide_anti_feature_apps">Grys anti-funksie programme uit</string>
     <string name="hide_anti_feature_apps_on">Grys programme wat anti-funksies benodig uit</string>
     <string name="touch_to_configure_local_repo">Tas om details te wys en laat ander toe om jou programme te deel.</string>
@@ -265,7 +265,7 @@ Probeer \'n ander kategorie te kies of om jou argiewe  op te dateer om sodoende 
 Baie geluk! Al jou toepassings is op datum (of jou argiewe is verouderd).</string>
     <string name="empty_search_installed_app_list">Geen ooreenstemende geïnstalleerde programme.</string>
     <string name="empty_search_available_app_list">Geen ooreenstemende programme beskikbaar.</string>
-    <string name="empty_search_can_update_app_list">Geen ooreenstemende programme vir opdateering.</string>
+    <string name="empty_search_can_update_app_list">Geen ooreenstemende programme vir opdatering.</string>
 
     <string name="requesting_root_access_body">Versoek root toegang…</string>
     <string name="root_access_denied_title">Root toegang geweier</string>
@@ -329,7 +329,7 @@ Baie geluk! Al jou toepassings is op datum (of jou argiewe is verouderd).</strin
 
     <string name="my_apps_btn_update_all">Opdateer alles</string>
     <plurals name="my_apps_header_number_of_updateable">
-	<item quantity="one">%1$d opdateering</item>
+	<item quantity="one">%1$d Opdaterings</item>
 	<item quantity="other">%1$ d bywerking</item>
 </plurals>
 
@@ -416,12 +416,12 @@ Wil jy \'n e-pos met die besonderhede stuur om die probleem te help oplos?</stri
     <string name="crash_dialog_comment_prompt">Jy kan ekstra inligting en kommentaar hier laat:</string>
 
     <string name="notification_summary_more">+%1$d meer…</string>
-    <string name="notification_title_single_update_available">Opdateering beskikbaar</string>
+    <string name="notification_title_single_update_available">Opdatering beskikbaar</string>
     <string name="install_confirm_update_system">Wil jy \'n opdatering installeer 
 vir hierdie ingeboude program? Jou bestaande data sal nie verloor word nie. 
 Die opgadateerde progam sal toegang te kry tot:</string>
     <string name="notification_title_single_ready_to_install">Gereed om te installeer</string>
-    <string name="notification_title_single_ready_to_install_update">Opdateering gereed vir installasie</string>
+    <string name="notification_title_single_ready_to_install_update">Opdatering gereed vir installasie</string>
     <string name="notification_title_single_install_error">Installering het misluk</string>
     <string name="notification_content_single_downloading">Aflaai \"%1$s\"…</string>
     <string name="notification_content_single_downloading_update">Aflaai opdatering vir \"%1$s\"…</string>
@@ -430,15 +430,15 @@ Die opgadateerde progam sal toegang te kry tot:</string>
     <string name="notification_content_single_install_error">Installering het misluk</string>
     <string name="notification_summary_updates">%1$d Opdaterings</string>
     <string name="notification_summary_installed">%1$d programme geïnstalleer</string>
-    <string name="notification_title_summary_update_available">Opdateering beskikbaar</string>
+    <string name="notification_title_summary_update_available">Opdatering beskikbaar</string>
     <string name="notification_title_summary_downloading">Laai tans af…</string>
-    <string name="notification_title_summary_downloading_update">Besig met aflaai van opdateering …</string>
+    <string name="notification_title_summary_downloading_update">Besig met aflaai van opdatering …</string>
     <string name="notification_title_summary_ready_to_install">Gereed om te installeer</string>
-    <string name="notification_title_summary_ready_to_install_update">Opdateering gereed vir installasie</string>
+    <string name="notification_title_summary_ready_to_install_update">Opdatering gereed vir installasie</string>
     <string name="notification_title_summary_installing">Installering van</string>
     <string name="notification_title_summary_installed">Suksesvol geïnstalleer</string>
     <string name="notification_title_summary_install_error">Installering het misluk</string>
-    <string name="notification_action_update">Opdateering</string>
+    <string name="notification_action_update">Opdatering</string>
     <string name="notification_action_cancel">Kanselleer</string>
     <string name="notification_action_install">Installeer</string>
 
