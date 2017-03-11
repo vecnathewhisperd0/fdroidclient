@@ -379,4 +379,51 @@ detalles para ayudarnos a arreglar el problema?</string>
     <string name="app_details_donate_prompt">%2$ han creado %1$. ¡Invítelos a un café!</string>
 
     <string name="repositories_summary">Añadir orígenes adiccionales de aplicaciones</string>
-    </resources>
+    <string name="app_version_x_available">Versión %1$s disponible</string>
+    <string name="app_version_x_installed">Versión %1$s</string>
+
+    <string name="my_apps_btn_update_all">Actualizar todo</string>
+    <plurals name="my_apps_header_number_of_updateable">
+	<item quantity="one">%1$d actualización</item>
+	<item quantity="other">%1$d actualizaciones</item>
+</plurals>
+
+    <string name="clear_search">Limpiar la búsqueda</string>
+
+    <string name="main_menu__latest_apps">Último</string>
+    <string name="main_menu__categories">Categorías</string>
+    <string name="main_menu__swap_nearby">Alrededor</string>
+    <string name="main_menu__my_apps">Mis apps</string>
+
+
+    <plurals name="button_view_all_apps_in_category">
+	<item quantity="one">" Aunque son lo mismo, la documentación de Android recomienda detallar siempre uno y otro:
+https://developer.android.com/guide/topics/resources/string-resource.html#Plurals "</item>
+	<item quantity="other">" Ver todo %d "</item>
+</plurals>
+
+    <string name="notification_title_single_update_available">Actualización disponible</string>
+    <string name="notification_title_single_ready_to_install">Listo para instalar</string>
+    <string name="notification_title_single_ready_to_install_update">Actualización lista para instalar</string>
+    <string name="notification_title_single_install_error">Instalación fallida</string>
+    <string name="notification_content_single_downloading">Descargando \"%1$s\"…</string>
+    <string name="notification_content_single_downloading_update">Descargando la actualización de \"%1$s\"…</string>
+    <string name="notification_content_single_installing">Instalando \"%1$s\"…</string>
+    <string name="notification_content_single_installed">Instalación correcta</string>
+    <string name="notification_content_single_install_error">Instalación fallida</string>
+    <string name="notification_summary_updates">%1$d actualizaciones</string>
+    <string name="notification_summary_installed">%1$d apps instaladas</string>
+    <string name="notification_title_summary_update_available">Actualización disponible</string>
+    <string name="notification_title_summary_downloading">Descargando…</string>
+    <string name="notification_title_summary_downloading_update">Descargando actualización…</string>
+    <string name="notification_title_summary_ready_to_install">Listo para instalar</string>
+    <string name="notification_title_summary_ready_to_install_update">Actualización lista para instalar</string>
+    <string name="notification_title_summary_installing">Instalando</string>
+    <string name="notification_title_summary_installed">Instalación correcta</string>
+    <string name="notification_title_summary_install_error">Instalación fallida</string>
+    <string name="notification_action_update">Actualizar</string>
+    <string name="notification_action_cancel">Cancelar</string>
+    <string name="notification_action_install">Instalar</string>
+
+    <string name="category">Categoría</string>
+</resources>
