@@ -69,7 +69,7 @@
   <string name="menu_website">Pàgina web</string>
   <string name="menu_issues">Problemes</string>
   <string name="menu_source">Codi font</string>
-  <string name="menu_upgrade">Actualitza</string>
+  <string name="menu_upgrade">Actualitzeu</string>
   <string name="menu_donate">Feu una donació</string>
   <string name="details_installed">Versió instal·lada %s</string>
   <string name="details_notinstalled">No està instal·lat</string>
@@ -379,4 +379,51 @@ per tal d\'ajudar a resoldre la incidència?</string>
     <string name="app_details_donate_prompt">%2$ ha creat %1$. Convideu-los a un cafè!</string>
 
     <string name="repositories_summary">Afegiu orígens d\'aplicacions addicionals</string>
-    </resources>
+    <string name="app_version_x_available">Versió %1$s disponible</string>
+    <string name="app_version_x_installed">Versió %1$s</string>
+
+    <string name="my_apps_btn_update_all">Actualitzeu-ho tot</string>
+    <plurals name="my_apps_header_number_of_updateable">
+	<item quantity="one">%1$d actualització</item>
+	<item quantity="other">"%1$d  actualitzacions"</item>
+</plurals>
+
+    <string name="clear_search">Netegeu la cerca</string>
+
+    <string name="main_menu__latest_apps">Últim</string>
+    <string name="main_menu__categories">Categories</string>
+    <string name="main_menu__swap_nearby">Al voltant</string>
+    <string name="main_menu__my_apps">Les meves apps</string>
+
+
+    <plurals name="button_view_all_apps_in_category">
+	<item quantity="one">" Malgrat que són iguals, la documentació d\'Android recomana especificar sempre l\'una i l\'altre:
+https://developer.android.com/guide/topics/resources/string-resource.html#Plurals "</item>
+	<item quantity="other">" Veure-ho tot "</item>
+</plurals>
+
+    <string name="notification_title_single_update_available">Actualització disponible</string>
+    <string name="notification_title_single_ready_to_install">Llest per a instal·lar</string>
+    <string name="notification_title_single_ready_to_install_update">Actualització llesta per a ser instal·lada</string>
+    <string name="notification_title_single_install_error">Instal·lació fallida</string>
+    <string name="notification_content_single_downloading">Descarregant \"%1$s\"…</string>
+    <string name="notification_content_single_downloading_update">Descarregant una actualització de \"%1$s\"…</string>
+    <string name="notification_content_single_installing">Instal·lant \"%1$s\"…</string>
+    <string name="notification_content_single_installed">Instal·lació correcta</string>
+    <string name="notification_content_single_install_error">Instal·lació fallida</string>
+    <string name="notification_summary_updates">%1$d actualitzacions</string>
+    <string name="notification_summary_installed">%1$d Apps instal·lades</string>
+    <string name="notification_title_summary_update_available">Actualització disponible</string>
+    <string name="notification_title_summary_downloading">Descarregant…</string>
+    <string name="notification_title_summary_downloading_update">Descarregant una actualització…</string>
+    <string name="notification_title_summary_ready_to_install">Llest per instal·lar</string>
+    <string name="notification_title_summary_ready_to_install_update">Actualització llesta per a ser instal·lada</string>
+    <string name="notification_title_summary_installing">Instal·lant</string>
+    <string name="notification_title_summary_installed">Instal·lació correcta</string>
+    <string name="notification_title_summary_install_error">Instal·lació fallida</string>
+    <string name="notification_action_update">Actualitzeu</string>
+    <string name="notification_action_cancel">Cancel·leu</string>
+    <string name="notification_action_install">Instal·leu</string>
+
+    <string name="category">Categoria</string>
+</resources>
