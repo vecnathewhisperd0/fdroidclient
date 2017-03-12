@@ -427,4 +427,5 @@ non saranno rimossi. Non richiede alcun permesso speciale.</string>
     <string name="notification_action_install">Installa</string>
 
     <string name="category">Categoria</string>
-</resources>
+<string name="main_menu__swap_nearby">Nelle vicinanze</string>
+    </resources>
