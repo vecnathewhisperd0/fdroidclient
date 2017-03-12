@@ -377,4 +377,25 @@ için ayrıntıları e-posta ile göndermek ister misiniz?</string>
     <string name="versions">Sürümler</string>
     <string name="hide_anti_feature_apps">"Anti-işlev içeren  uygulamaları gri göster"</string>
     <string name="hide_anti_feature_apps_on">Anti-işlev gerektiren uygulamaları gri göster</string>
+    <string name="app_details_donate_prompt_unknown_author">%1$s geliştiricilerine bir kahve satın al!</string>
+    <string name="app_details_donate_prompt">%1$s %2$s tarafından oluşturuldu. Onlara bir kahve satın al!</string>
+
+    <string name="app_version_x_available">%1$s sürümü mevcut</string>
+    <string name="app_version_x_installed">Sürüm %1$s</string>
+
+    <string name="my_apps_btn_update_all">Tümünü güncelle</string>
+    <plurals name="my_apps_header_number_of_updateable">
+	<item quantity="one">%1$d Güncelleme</item>
+	<item quantity="other">%1$d Güncelleme</item>
+</plurals>
+
+    <string name="clear_search">Aramayı temizle</string>
+
+    <string name="repositories_summary">Uygulamaların ek kaynaklarını ekle</string>
+    <string name="main_menu__latest_apps">Son</string>
+    <string name="main_menu__categories">Kategoriler</string>
+    <string name="main_menu__swap_nearby">Yakınlardaki</string>
+    <string name="main_menu__my_apps">Uygulamalarım</string>
+
+
     </resources>
