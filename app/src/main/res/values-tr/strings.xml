@@ -111,8 +111,8 @@
   <string name="enable_proxy_summary">HTTP Vekilini tüm ağ istekleri için yapılandır</string>
   <string name="proxy_host">Vekil Sunucu</string>
   <string name="proxy_host_summary">Vekil sunucu adresini yapılandır (örn. 127.0.0.1)</string>
-  <string name="proxy_port">Vekil Girişi</string>
-  <string name="proxy_port_summary">Vekil giriş numarasını yapılandır (örn. 8118)</string>
+  <string name="proxy_port">Vekil Bağlantı Noktası</string>
+  <string name="proxy_port_summary">Vekil bağlantı noktası numarasını yapılandır (örn. 8118)</string>
   <string name="status_download">İndiriliyor
 %1$s konumundan
 %2$s / %3$s (%%%4$d)</string>
@@ -403,7 +403,7 @@ Hiçbir özel erişim gerektirmez.</string>
     <string name="repositories_summary">Ek uygulama kaynakları ekle</string>
     <string name="main_menu__latest_apps">En Son</string>
     <string name="main_menu__categories">Kategoriler</string>
-    <string name="main_menu__swap_nearby">Yakınlardaki</string>
+    <string name="main_menu__swap_nearby">Yakındaki</string>
     <string name="main_menu__my_apps">Uygulamalarım</string>
 
 
@@ -419,7 +419,7 @@ Hiçbir özel erişim gerektirmez.</string>
     <string name="notification_summary_updates">%1$d Güncelleme</string>
     <string name="notification_summary_installed">%1$d Uygulama Yüklendi</string>
     <string name="notification_title_summary_update_available">Güncelleme mevcut</string>
-    <string name="notification_title_summary_downloading">İndiriliyor...</string>
+    <string name="notification_title_summary_downloading">İndiriliyor…</string>
     <string name="notification_title_summary_downloading_update">Güncelleme indiriliyor…</string>
     <string name="notification_title_summary_ready_to_install">Yüklenmeye hazır</string>
     <string name="notification_title_summary_ready_to_install_update">Güncelleme yüklenmeye hazır</string>
@@ -431,4 +431,9 @@ Hiçbir özel erişim gerektirmez.</string>
     <string name="notification_action_install">Yükle</string>
 
     <string name="category">Kategori</string>
-</resources>
+<plurals name="button_view_all_apps_in_category">
+	<item quantity="one">" Tüm %d taneyi göster "</item>
+	<item quantity="other">" Tüm %d taneyi göster "</item>
+</plurals>
+
+    </resources>
