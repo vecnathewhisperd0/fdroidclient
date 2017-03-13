@@ -417,5 +417,5 @@ Hiçbir özel erişim gerektirmez.</string>
     <string name="notification_content_single_installed">Başarıyla yüklendi</string>
     <string name="notification_content_single_install_error">Yükleme Başarısız</string>
     <string name="notification_summary_updates">%1$d Güncelleme</string>
-    <string name="notification_summary_installed">%1$d App Yüklendi</string>
+    <string name="notification_summary_installed">%1$d Uygulama Yüklendi</string>
     </resources>
