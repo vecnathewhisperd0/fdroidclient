@@ -407,4 +407,15 @@ Hiçbir özel erişim gerektirmez.</string>
     <string name="main_menu__my_apps">Uygulamalarım</string>
 
 
+    <string name="notification_title_single_update_available">Güncelleme Mevcut</string>
+    <string name="notification_title_single_ready_to_install">Yüklenmeye hazır</string>
+    <string name="notification_title_single_ready_to_install_update">Güncelleme yüklenmeye hazır</string>
+    <string name="notification_title_single_install_error">Yükleme Başarısız</string>
+    <string name="notification_content_single_downloading">\"%1$s\" indiriliyor…</string>
+    <string name="notification_content_single_downloading_update">\"%1$s\" için güncelleme indiriliyor…</string>
+    <string name="notification_content_single_installing">\"%1$s\" yükleniyor…</string>
+    <string name="notification_content_single_installed">Başarıyla yüklendi</string>
+    <string name="notification_content_single_install_error">Yükleme Başarısız</string>
+    <string name="notification_summary_updates">%1$d Güncelleme</string>
+    <string name="notification_summary_installed">%1$d App Yüklendi</string>
     </resources>
