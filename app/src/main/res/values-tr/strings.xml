@@ -418,4 +418,17 @@ Hiçbir özel erişim gerektirmez.</string>
     <string name="notification_content_single_install_error">Yükleme Başarısız</string>
     <string name="notification_summary_updates">%1$d Güncelleme</string>
     <string name="notification_summary_installed">%1$d Uygulama Yüklendi</string>
-    </resources>
+    <string name="notification_title_summary_update_available">Güncelleme mevcut</string>
+    <string name="notification_title_summary_downloading">İndiriliyor...</string>
+    <string name="notification_title_summary_downloading_update">Güncelleme indiriliyor…</string>
+    <string name="notification_title_summary_ready_to_install">Yüklenmeye hazır</string>
+    <string name="notification_title_summary_ready_to_install_update">Güncelleme yüklenmeye hazır</string>
+    <string name="notification_title_summary_installing">Yükleniyor</string>
+    <string name="notification_title_summary_installed">Başarıyla yüklendi</string>
+    <string name="notification_title_summary_install_error">Yükleme Başarısız</string>
+    <string name="notification_action_update">Güncelle</string>
+    <string name="notification_action_cancel">İptal</string>
+    <string name="notification_action_install">Yükle</string>
+
+    <string name="category">Kategori</string>
+</resources>
