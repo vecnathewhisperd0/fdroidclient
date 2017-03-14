@@ -420,4 +420,21 @@ Provu elekti alian kategorion aŭ ĝisdatigi viajn deponejojn por atingi freŝan
 </plurals>
 
     <string name="category">Kategorion</string>
+<string name="app_recommended_version_installed">Versio %1$s (konsilinda)</string>
+    <string name="app__newly_added">Novaj</string>
+
+    <string name="installed_apps__activity_title">Instalitaj aplikaĵoj</string>
+    <string name="installed_app__updates_ignored">Ignorataj ĝisdatigoj</string>
+    <string name="installed_app__updates_ignored_for_suggested_version">Ignorataj ĝisdatigoj por versio %1$s</string>
+
+    <string name="preference_category__my_apps">Miaj aplikaĵoj</string>
+    <string name="preference_manage_installed_apps">Administri instalitajn aplikaĵojn</string>
+
+
+    <string name="tts_category_name">Kategorio %1$s</string>
+
+    <plurals name="tts_view_all_in_category">
+	<item quantity="one">Montri la ununuran aplikaĵon en la kategorio %2$s</item>
+	<item quantity="other">Montri ĉiujn %1$s aplikaĵojn en la kategorio %2$s</item>
+</plurals>
 </resources>
