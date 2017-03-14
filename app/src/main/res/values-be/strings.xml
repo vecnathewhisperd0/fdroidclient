@@ -430,7 +430,9 @@
     <string name="my_apps_btn_update_all">Абнавіць усе</string>
     <plurals name="my_apps_header_number_of_updateable">
 	<item quantity="one">%1$d абнаўленне</item>
-	<item quantity="other">%1$d абнаўленні</item>
+	<item quantity="few">%1$d абнаўленні</item>
+	<item quantity="many">%1$d абнаўленняў</item>
+	<item quantity="other"/>
 </plurals>
 
     <string name="clear_search">Ачысціць пошук</string>
@@ -449,4 +451,21 @@
 </plurals>
 
     <string name="category">Катэгорыя</string>
+<string name="app_recommended_version_installed">Версія %1$s (рэкамендуецца)</string>
+    <string name="app__newly_added">Новая</string>
+
+    <string name="installed_apps__activity_title">Усталяваныя праграмы</string>
+    <string name="installed_app__updates_ignored">Абнаўленні ігнаруюцца</string>
+    <string name="installed_app__updates_ignored_for_suggested_version">Абнаўленні ігнаруюцца для версіі %1$s</string>
+
+    <string name="preference_category__my_apps">Мае праграмы</string>
+    <string name="preference_manage_installed_apps">Кіраваць усталяванымі праграмамі</string>
+
+
+    <string name="tts_category_name">Катэгорыя %1$s</string>
+
+    <plurals name="tts_view_all_in_category">
+	<item quantity="one">Паказаць адну праграму ў катэгорыі %2$s</item>
+	<item quantity="other">Паказаць %1$s праграмы ў катэгорыі %2$s</item>
+</plurals>
 </resources>
