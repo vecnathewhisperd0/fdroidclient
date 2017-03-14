@@ -426,4 +426,21 @@ F-Droid 並無您裝置上可用的應用程式。這可能是因為您需要更
 </plurals>
 
     <string name="category">類別</string>
+<string name="app_recommended_version_installed">版本 %1$s （推薦）</string>
+    <string name="app__newly_added">新的</string>
+
+    <string name="installed_apps__activity_title">已安裝的應用程式</string>
+    <string name="installed_app__updates_ignored">忽略更新</string>
+    <string name="installed_app__updates_ignored_for_suggested_version">忽略 %1$s 版本更新</string>
+
+    <string name="preference_category__my_apps">我的應用程式</string>
+    <string name="preference_manage_installed_apps">管理已安裝的應用程式</string>
+
+
+    <string name="tts_category_name">類別 %1$s</string>
+
+    <plurals name="tts_view_all_in_category">
+	<item quantity="one">從 %2$s 類別中查看所有 %1$d 的應用程式</item>
+	<item quantity="other"></item>
+</plurals>
 </resources>
