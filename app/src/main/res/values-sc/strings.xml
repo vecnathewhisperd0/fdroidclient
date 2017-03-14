@@ -426,4 +426,21 @@ Depes
     <string name="category">Categoria</string>
 <string name="clear_search">Inneta sa chirca</string>
 
-    </resources>
+    <string name="app_recommended_version_installed">Versione %1$s (Racumandada)</string>
+    <string name="app__newly_added">Noa</string>
+
+    <string name="installed_apps__activity_title">Aplicatziones installadas</string>
+    <string name="installed_app__updates_ignored">Agiornamentos ignorados</string>
+    <string name="installed_app__updates_ignored_for_suggested_version">Agiornamentos ignorados pro sa versione %1$s</string>
+
+    <string name="preference_category__my_apps">Aplicatziones meas</string>
+    <string name="preference_manage_installed_apps">Manìgia sas aplicatziones installadas</string>
+
+
+    <string name="tts_category_name">Categoria %1$s</string>
+
+    <plurals name="tts_view_all_in_category">
+	<item quantity="one">Ammustra s\'aplicatzione in sa categoria %2$s</item>
+	<item quantity="other">Ammustra totu sas aplicatziones in sa categoria %2$s</item>
+</plurals>
+</resources>
