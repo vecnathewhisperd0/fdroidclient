@@ -415,7 +415,24 @@
 
     <plurals name="button_view_all_apps_in_category">
 	<item quantity="one">" %d すべて表示 "</item>
-	<item quantity="other"></item>
+	<item quantity="other"/>
 </plurals>
 
-    </resources>
+    <string name="app_recommended_version_installed">ﾊﾞｰｼﾞｮﾝ %1$s (推奨)</string>
+    <string name="app__newly_added">新規</string>
+
+    <string name="installed_apps__activity_title">ｲﾝｽﾄｰﾙ済ｱﾌﾟﾘ</string>
+    <string name="installed_app__updates_ignored">ｱｯﾌﾟﾃﾞｰﾄを無視</string>
+    <string name="installed_app__updates_ignored_for_suggested_version">ﾊﾞｰｼﾞｮﾝ %1$s の更新を無視しました</string>
+
+    <string name="preference_category__my_apps">ﾏｲ ｱﾌﾟﾘ</string>
+    <string name="preference_manage_installed_apps">ｲﾝｽﾄｰﾙ済ｱﾌﾟﾘを管理</string>
+
+
+    <string name="tts_category_name">ｶﾃｺﾞﾘ %1$s</string>
+
+    <plurals name="tts_view_all_in_category">
+	<item quantity="one">%2$s ｶﾃｺﾞﾘのｱﾌﾟﾘを1つ表示</item>
+	<item quantity="other"></item>
+</plurals>
+</resources>
