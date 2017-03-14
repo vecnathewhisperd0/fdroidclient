@@ -414,4 +414,15 @@ Bitte eine andere Kategorie wählen oder die Paketquellen aktualisieren.</string
 
     <string name="main_menu__swap_nearby">In der Nähe</string>
     <string name="category">Kategorie</string>
-</resources>
+<string name="app_recommended_version_installed">Version %1$s (Empfohlen)</string>
+    <string name="app__newly_added">Neu</string>
+
+    <string name="installed_apps__activity_title">Installierte Anwendungen</string>
+    <string name="installed_app__updates_ignored">Ignorierte Aktualisierungen</string>
+    <string name="installed_app__updates_ignored_for_suggested_version">Für Version %1$s ignorierte Aktualisierungen</string>
+
+    <string name="preference_category__my_apps">Meine Anwendungen</string>
+    <string name="preference_manage_installed_apps">Installierte Anwendungen verwalten</string>
+
+
+    </resources>
