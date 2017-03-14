@@ -436,4 +436,21 @@ Hiçbir özel erişim gerektirmez.</string>
 	<item quantity="other">" Tüm %d taneyi göster "</item>
 </plurals>
 
-    </resources>
+    <string name="app_recommended_version_installed">Sürüm %1$s (Tavsiye edilen)</string>
+    <string name="app__newly_added">Yeni</string>
+
+    <string name="installed_apps__activity_title">Yüklü Uygulamalar</string>
+    <string name="installed_app__updates_ignored">Yok sayılan güncellemeler</string>
+    <string name="installed_app__updates_ignored_for_suggested_version">Sürüm %1$s için yok sayılan güncellemeler</string>
+
+    <string name="preference_category__my_apps">Uygulamalarım</string>
+    <string name="preference_manage_installed_apps">Yüklü Uygulamaları Yönet</string>
+
+
+    <string name="tts_category_name">Kategori %1$s</string>
+
+    <plurals name="tts_view_all_in_category">
+	<item quantity="one">%2$s kategorisindeki tek uygulamayı göster</item>
+	<item quantity="other">%2$s kategorisindeki %1$d uygulamayı göster</item>
+</plurals>
+</resources>
