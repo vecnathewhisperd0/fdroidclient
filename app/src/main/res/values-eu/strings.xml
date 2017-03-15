@@ -429,4 +429,21 @@ konpontzen laguntzeko?</string>
 
 
     <string name="category">Kategoria</string>
+<string name="app_recommended_version_installed">%1$s bertsioa (Aholkatutakoa)</string>
+    <string name="app__newly_added">Berria</string>
+
+    <string name="installed_apps__activity_title">Instalatutako aplikazioak</string>
+    <string name="installed_app__updates_ignored">Eguneraketak ezikusita</string>
+    <string name="installed_app__updates_ignored_for_suggested_version">"Eguneraketak ezikusita  %1$s bertsioarentzat"</string>
+
+    <string name="preference_category__my_apps">Nire aplikazioak</string>
+    <string name="preference_manage_installed_apps">Kudeatu instalatutako aplikazioak</string>
+
+
+    <string name="tts_category_name">%1$s kategoria</string>
+
+    <plurals name="tts_view_all_in_category">
+	<item quantity="one">Ikusi %2$s kategoriako aplikazio bakarra</item>
+	<item quantity="other">Ikusi %2$s kategoriako %1$d aplikazioak</item>
+</plurals>
 </resources>
