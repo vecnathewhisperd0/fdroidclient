@@ -9,7 +9,6 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 
-import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.net.ConnectivityMonitorService;
 
@@ -67,7 +66,8 @@ public class BannerNoInternet extends android.support.v7.widget.AppCompatTextVie
     }
 
     private void updateNetworkState() {
-        if (FDroidApp.networkState == ConnectivityMonitorService.FLAG_NET_UNAVAILABLE) {
+        int state = ConnectivityMonitorService.getNetworkState(getContext());
+        if (state == ConnectivityMonitorService.FLAG_NET_UNAVAILABLE) {
             setVisibility(View.VISIBLE);
         } else {
             setVisibility(View.GONE);
