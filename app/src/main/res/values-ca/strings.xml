@@ -426,4 +426,21 @@ https://developer.android.com/guide/topics/resources/string-resource.html#Plural
     <string name="notification_action_install">Instal·leu</string>
 
     <string name="category">Categoria</string>
+<string name="app_recommended_version_installed">Versió %1$s (Recomanada)</string>
+    <string name="app__newly_added">Nou</string>
+
+    <string name="installed_apps__activity_title">Apps instal·lades</string>
+    <string name="installed_app__updates_ignored">Ignoreu les actualitzacions</string>
+    <string name="installed_app__updates_ignored_for_suggested_version">Les actualitzacions s\'han ignorat per la versió %1$s</string>
+
+    <string name="preference_category__my_apps">Les meves apps</string>
+    <string name="preference_manage_installed_apps">Administreu les «apps» instal·lades</string>
+
+
+    <string name="tts_category_name">Categoria %1$s</string>
+
+    <plurals name="tts_view_all_in_category">
+	<item quantity="one">Mostreu l\'única «app» de la categoria %2$s</item>
+	<item quantity="other">Mostreu totes les «apps» de la categoria %2$s</item>
+</plurals>
 </resources>
