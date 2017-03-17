@@ -425,4 +425,10 @@ Bitte eine andere Kategorie wählen oder die Paketquellen aktualisieren.</string
     <string name="preference_manage_installed_apps">Installierte Anwendungen verwalten</string>
 
 
-    </resources>
+    <string name="tts_category_name">Kategorie %1$s</string>
+
+    <plurals name="tts_view_all_in_category">
+	<item quantity="one">Die einzige Anwendung in der %2$s Kategorie ansehen</item>
+	<item quantity="other">Alle %1$s Anwendungen aus der %2$s Kategorie ansehen</item>
+</plurals>
+</resources>
