@@ -393,4 +393,11 @@ Nota: Toate
     <string name="notification_action_install">Instalare</string>
 
 <string name="category">Categorie</string>
+<string name="tts_category_name">Categorie %1$s</string>
+
+    <plurals name="tts_view_all_in_category">
+	<item quantity="one">Vezi singura aplicație din categoria %2$s</item>
+	<item quantity="few">Vezi toate aplicațiile din categoria %2$s</item>
+	<item quantity="other">Vezi toate aplicațiile din categoria %2$s</item>
+</plurals>
 </resources>
