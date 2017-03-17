@@ -411,4 +411,35 @@
     <string name="notification_action_cancel">Скасувати</string>
     <string name="notification_action_install">Встановити</string>
 
-</resources>
+<string name="app_details_donate_prompt">%1$s результат роботи %2$s. Пригости його кавою!</string>
+
+    <string name="app_version_x_available">Доступна версія %1$s</string>
+    <string name="app_version_x_installed">Версія %1$s</string>
+    <string name="app_recommended_version_installed">Версія %1$s (Рекомендовано)</string>
+    <string name="app__newly_added">Нова</string>
+
+    <string name="installed_apps__activity_title">Встановлені додатки</string>
+    <string name="installed_app__updates_ignored">Оновлення проігноровані</string>
+    <string name="installed_app__updates_ignored_for_suggested_version">Ігнорувати оновлення для версії %1$s</string>
+
+    <string name="my_apps_btn_update_all">Оновити все</string>
+    <plurals name="my_apps_header_number_of_updateable">
+	<item quantity="one">%1$d оновлення</item>
+	<item quantity="few">%1$d оновлення</item>
+	<item quantity="many">%1$d оновлень</item>
+	<item quantity="other"></item>
+</plurals>
+
+    <string name="clear_search">Очистити пошук</string>
+
+    <string name="main_menu__latest_apps">Останні</string>
+    <string name="main_menu__categories">Категорії</string>
+    <string name="main_menu__swap_nearby">Сусідні</string>
+
+    <string name="preference_category__my_apps">Мої додатки</string>
+    <string name="preference_manage_installed_apps">Керування встановленими додатками</string>
+
+
+    <string name="tts_category_name">Категорія %1$s</string>
+
+    </resources>
