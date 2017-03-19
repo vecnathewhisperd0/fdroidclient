@@ -426,4 +426,10 @@ Budete chtít odeslat detaily emailem a tím pomoci s napravením chyby?</string
 
     <string name="main_menu__swap_nearby">Poblíž</string>
 
+    <string name="preference_category__my_apps">Moje aplikace</string>
+    <string name="preference_manage_installed_apps">Spravovat nainstalované aplikace</string>
+
+
+    <string name="tts_category_name">Kategorie %1$s</string>
+
     </resources>
