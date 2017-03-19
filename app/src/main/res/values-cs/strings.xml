@@ -424,4 +424,6 @@ Budete chtít odeslat detaily emailem a tím pomoci s napravením chyby?</string
     <string name="installed_app__updates_ignored">Ignorované aktualizace</string>
     <string name="installed_app__updates_ignored_for_suggested_version">Ignorované aktualizace pro verzi %1$s</string>
 
+    <string name="main_menu__swap_nearby">Poblíž</string>
+
     </resources>
