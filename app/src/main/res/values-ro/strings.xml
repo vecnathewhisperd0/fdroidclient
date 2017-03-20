@@ -397,7 +397,7 @@ Nota: Toate
 
     <plurals name="tts_view_all_in_category">
 	<item quantity="one">Vezi singura aplicație din categoria %2$s</item>
-	<item quantity="few">Vezi toate aplicațiile din categoria %2$s</item>
-	<item quantity="other">Vezi toate aplicațiile din categoria %2$s</item>
+	<item quantity="few">Vezi toate cele %1$d aplicații din categoria %2$s</item>
+	<item quantity="other">Vezi toate cele %1$d de aplicații din categoria %2$s</item>
 </plurals>
 </resources>
