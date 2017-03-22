@@ -430,6 +430,31 @@ Uwaga: Wszystkie poprzednio zainstalowane aplikacje zostaną na urządzeniu.</st
 	<item quantity="one">Pokaż pojedynczą aplikację w kategorii %2$s</item>
 	<item quantity="few">Pokaż wszystkie %1$s aplikacje w kategorii %2$s</item>
 	<item quantity="many">Pokaż wszystkie %1$s aplikacji w kategorii %2$s</item>
+	<item quantity="other"/>
+</plurals>
+<string name="app__install_downloaded_update">Aktualizuj</string>
+
+    <string name="app_list__name__downloaded_and_ready_to_update">Aktualizuj %1$s</string>
+    <string name="app_list__name__downloaded_and_ready_to_install">Instaluj %1$s</string>
+    <string name="app_list__name__downloading_in_progress">Pobieranie %1$s</string>
+    <plurals name="app_list__age__released_x_days_ago">
+	<item quantity="one">Wydano %1$d dzień temu</item>
+	<item quantity="few">Wydano %1$d dni temu</item>
+	<item quantity="many">Wydano %1$d dni temu</item>
+	<item quantity="other"/>
+</plurals>
+
+    <string name="updates__tts__download_app">Pobierz</string>
+    <string name="updates__tts__download_updates_for_all_apps">Pobierz wszystkie aktualizacje</string>
+
+    <string name="updates__hide_updateable_apps">Ukryj aplikacje</string>
+    <string name="updates__show_updateable_apps">Pokaż aplikacje</string>
+
+    <plurals name="updates__download_updates_for_apps">
+	<item quantity="one">Pobierz aktualizację dla %1$d aplikacji.</item>
+	<item quantity="few">Pobierz aktualizacje dla %1$d aplikacji.</item>
+	<item quantity="many">Pobierz aktualizacje dla %1$d aplikacji.</item>
 	<item quantity="other"></item>
 </plurals>
-</resources>
+
+    </resources>
