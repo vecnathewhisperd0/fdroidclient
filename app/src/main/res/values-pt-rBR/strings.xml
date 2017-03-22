@@ -427,4 +427,40 @@ pelo menos um e outro: https://developer.android.com/guide/topics/resources/stri
 </plurals>
 
     <string name="category">Categoria</string>
+<string name="app_recommended_version_installed">Versão %1$s (Recomendada)</string>
+    <string name="app__newly_added">Novo</string>
+    <string name="app__install_downloaded_update">Atualizar</string>
+
+    <string name="app_list__name__downloaded_and_ready_to_update">Atualizar %1$s</string>
+    <string name="app_list__name__downloaded_and_ready_to_install">Instalar %1$s</string>
+    <string name="app_list__name__downloading_in_progress">Baixando %1$s</string>
+    <plurals name="app_list__age__released_x_days_ago">
+	<item quantity="one">Lançado %1$d dias atrás</item>
+	<item quantity="other">Lançados %1$d dias atrás</item>
+</plurals>
+
+    <string name="installed_apps__activity_title">Aplicativos instalados</string>
+    <string name="installed_app__updates_ignored">Atualizações ignoradas</string>
+    <string name="installed_app__updates_ignored_for_suggested_version">Atualizações ignoradas para a versão %1$s</string>
+    <string name="updates__tts__download_app">Download</string>
+    <string name="updates__tts__download_updates_for_all_apps">Baixar todas as atualizações</string>
+
+    <string name="updates__hide_updateable_apps">Esconder aplicativos</string>
+    <string name="updates__show_updateable_apps">Mostrar aplicativos</string>
+
+    <plurals name="updates__download_updates_for_apps">
+	<item quantity="one">Baixar atualização para %1$d aplicativo.</item>
+	<item quantity="other">Baixar atualização para %1$d aplicativos.</item>
+</plurals>
+
+    <string name="preference_category__my_apps">Meus aplicativos</string>
+    <string name="preference_manage_installed_apps">Gerenciar aplicativos instalados</string>
+
+
+    <string name="tts_category_name">Categoria %1$s</string>
+
+    <plurals name="tts_view_all_in_category">
+	<item quantity="one">Ver o único aplicativo na categoria %2$s</item>
+	<item quantity="other">Ver todos os %1$d aplicativos da categoria %2$s</item>
+</plurals>
 </resources>
