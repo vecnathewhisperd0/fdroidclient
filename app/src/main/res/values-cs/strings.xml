@@ -432,4 +432,19 @@ Budete chtít odeslat detaily emailem a tím pomoci s napravením chyby?</string
 
     <string name="tts_category_name">Kategorie %1$s</string>
 
+    <string name="app__install_downloaded_update">Aktualizovat</string>
+
+    <string name="app_list__name__downloaded_and_ready_to_update">Aktualizovat %1$s</string>
+    <string name="app_list__name__downloaded_and_ready_to_install">Instalovat %1$s</string>
+    <string name="app_list__name__downloading_in_progress">Stahování %1$s</string>
+    <plurals name="app_list__age__released_x_days_ago">
+	<item quantity="one">Vydáno před %1$d dnem</item>
+	<item quantity="few">Vydáno před %1$d dny</item>
+	<item quantity="many">‚Vydáno před %1$d dny</item>
+	<item quantity="other"/>
+</plurals>
+
+    <string name="updates__tts__download_app">Stáhnout</string>
+    <string name="updates__tts__download_updates_for_all_apps">Stáhnout všechny aktualizace</string>
+
     </resources>
