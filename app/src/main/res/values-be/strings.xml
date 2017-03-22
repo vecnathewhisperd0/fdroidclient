@@ -466,6 +466,29 @@
 
     <plurals name="tts_view_all_in_category">
 	<item quantity="one">Паказаць адну праграму ў катэгорыі %2$s</item>
-	<item quantity="other">Паказаць %1$s праграмы ў катэгорыі %2$s</item>
+	<item quantity="few">Паказаць %1$s праграмы ў катэгорыі %2$s</item>
+	<item quantity="many">Паказаць %1$s праграм ў катэгорыі %2$s</item>
+	<item quantity="other"/>
 </plurals>
-</resources>
+<string name="app__install_downloaded_update">Абнавіць</string>
+
+    <string name="app_list__name__downloaded_and_ready_to_update">Абнавіць %1$s</string>
+    <string name="app_list__name__downloaded_and_ready_to_install">Усталяваць %1$s</string>
+    <string name="app_list__name__downloading_in_progress">Спампоўка %1$s</string>
+    <plurals name="app_list__age__released_x_days_ago">
+	<item quantity="one">Выпушчана %1$d дзень таму</item>
+	<item quantity="other">Выпушчана %1$d дня таму</item>
+</plurals>
+
+    <string name="updates__tts__download_app">Спампаваць</string>
+    <string name="updates__tts__download_updates_for_all_apps">Спампаваць усе абнаўленні</string>
+
+    <string name="updates__hide_updateable_apps">Схаваць праграмы</string>
+    <string name="updates__show_updateable_apps">Паказаць праграмы</string>
+
+    <plurals name="updates__download_updates_for_apps">
+	<item quantity="one">Спампаваць абнаўленне для %1$d праграмы.</item>
+	<item quantity="other">Спампаваць абнаўленні для %1$d праграм.</item>
+</plurals>
+
+    </resources>
