@@ -455,8 +455,8 @@ Hiçbir özel erişim gerektirmez.</string>
 </plurals>
 <string name="app__install_downloaded_update">Güncelle</string>
 
-    <string name="app_list__name__downloaded_and_ready_to_update">%1$s güncelle</string>
-    <string name="app_list__name__downloaded_and_ready_to_install">%1$s yükle</string>
+    <string name="app_list__name__downloaded_and_ready_to_update">%1$s uygulamasını güncelle</string>
+    <string name="app_list__name__downloaded_and_ready_to_install">%1$s uygulamasını yükle</string>
     <string name="app_list__name__downloading_in_progress">%1$s indiriliyor</string>
     <plurals name="app_list__age__released_x_days_ago">
 	<item quantity="one">%1$d gün önce yayımlandı</item>
