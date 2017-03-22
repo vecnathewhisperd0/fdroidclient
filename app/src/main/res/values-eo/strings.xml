@@ -437,4 +437,25 @@ Provu elekti alian kategorion aŭ ĝisdatigi viajn deponejojn por atingi freŝan
 	<item quantity="one">Montri la ununuran aplikaĵon en la kategorio %2$s</item>
 	<item quantity="other">Montri ĉiujn %1$s aplikaĵojn en la kategorio %2$s</item>
 </plurals>
-</resources>
+<string name="app__install_downloaded_update">Ĝisdatigi</string>
+
+    <string name="app_list__name__downloaded_and_ready_to_update">Ĝisdatigi %1$s</string>
+    <string name="app_list__name__downloaded_and_ready_to_install">Instali %1$s</string>
+    <string name="app_list__name__downloading_in_progress">Elŝutado de %1$s</string>
+    <plurals name="app_list__age__released_x_days_ago">
+	<item quantity="one">Eldonita antaŭ %1$d tago</item>
+	<item quantity="other">Eldonita antaŭ %1$d tagoj</item>
+</plurals>
+
+    <string name="updates__tts__download_app">Elŝuti</string>
+    <string name="updates__tts__download_updates_for_all_apps">Elŝuti ĉiujn ĝisdatigojn</string>
+
+    <string name="updates__hide_updateable_apps">Kaŝi aplikaĵojn</string>
+    <string name="updates__show_updateable_apps">Montri aplikaĵojn</string>
+
+    <plurals name="updates__download_updates_for_apps">
+	<item quantity="one">Elŝuti ĝisdatigon por %1$d aplikaĵo.</item>
+	<item quantity="other">Elŝuti ĝisdatigojn por %1$d aplikaĵoj.</item>
+</plurals>
+
+    </resources>
