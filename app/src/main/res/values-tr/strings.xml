@@ -453,4 +453,25 @@ Hiçbir özel erişim gerektirmez.</string>
 	<item quantity="one">%2$s kategorisindeki tek uygulamayı göster</item>
 	<item quantity="other">%2$s kategorisindeki %1$d uygulamayı göster</item>
 </plurals>
-</resources>
+<string name="app__install_downloaded_update">Güncelle</string>
+
+    <string name="app_list__name__downloaded_and_ready_to_update">%1$s güncelle</string>
+    <string name="app_list__name__downloaded_and_ready_to_install">%1$s yükle</string>
+    <string name="app_list__name__downloading_in_progress">%1$s indiriliyor</string>
+    <plurals name="app_list__age__released_x_days_ago">
+	<item quantity="one">%1$d gün önce yayımlandı</item>
+	<item quantity="other">%1$d gün önce yayımlandı</item>
+</plurals>
+
+    <string name="updates__tts__download_app">İndir</string>
+    <string name="updates__tts__download_updates_for_all_apps">Tüm güncellemeleri indir</string>
+
+    <string name="updates__hide_updateable_apps">Uygulamaları gizle</string>
+    <string name="updates__show_updateable_apps">Uygulamaları göster</string>
+
+    <plurals name="updates__download_updates_for_apps">
+	<item quantity="one">%1$d uygulama için güncellemeyi indir.</item>
+	<item quantity="other">%1$d uygulama için güncellemeleri indir.</item>
+</plurals>
+
+    </resources>
