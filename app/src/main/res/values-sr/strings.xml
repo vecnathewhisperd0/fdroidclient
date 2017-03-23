@@ -440,4 +440,40 @@
 
     <string name="tts_category_name">Категорија %1$s</string>
 
-    </resources>
+    <string name="app__install_downloaded_update">Надогради</string>
+
+    <string name="app_list__name__downloaded_and_ready_to_update">Надогради %1$s</string>
+    <string name="app_list__name__downloaded_and_ready_to_install">Угради %1$s</string>
+    <string name="app_list__name__downloading_in_progress">Преузимам %1$s</string>
+    <plurals name="app_list__age__released_x_days_ago">
+	<item quantity="one">Издато пре %1$d дан</item>
+	<item quantity="few">Издато пре %1$d дана</item>
+	<item quantity="other">Издато пре %1$d дана</item>
+</plurals>
+
+    <string name="updates__tts__download_app">Преузми</string>
+    <string name="updates__tts__download_updates_for_all_apps">Преузми све надоградње</string>
+
+    <string name="updates__hide_updateable_apps">Сакриј апликације</string>
+    <string name="updates__show_updateable_apps">Прикажи апликације</string>
+
+    <plurals name="updates__download_updates_for_apps">
+	<item quantity="one">Преузми надоградњу за %1$d апликацију.</item>
+	<item quantity="other">Преузми надоградње за %1$d апликације.</item>
+</plurals>
+
+    <string name="details_new_in_version">Ново у издању %s</string>
+
+    <string name="antifeatureswarning">Ова апликација поседује функционалности које вам се можда неће свидети.</string>
+    <string name="antifeatures">Анти-могућности</string>
+    <plurals name="tts_view_all_in_category">
+	<item quantity="one">Прикажи једну апликацију у категорији %2$s</item>
+	<item quantity="other">Прикажи све %1$d апликације у категорији %2$s</item>
+</plurals>
+
+    <plurals name="details_last_update_days">
+	<item quantity="one">Ажурирано данас</item>
+	<item quantity="few">Ажурирано пре %1$s дана</item>
+	<item quantity="other">Ажурирано пре %1$s дана</item>
+</plurals>
+</resources>
