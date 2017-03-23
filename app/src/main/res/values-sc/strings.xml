@@ -443,4 +443,33 @@ Depes
 	<item quantity="one">Ammustra s\'aplicatzione in sa categoria %2$s</item>
 	<item quantity="other">Ammustra totu sas aplicatziones in sa categoria %2$s</item>
 </plurals>
+<string name="app__install_downloaded_update">Agiorna</string>
+
+    <string name="app_list__name__downloaded_and_ready_to_update">Agiorna %1$s</string>
+    <string name="app_list__name__downloaded_and_ready_to_install">Installa %1$s</string>
+    <string name="app_list__name__downloading_in_progress">Installende %1$s</string>
+    <plurals name="app_list__age__released_x_days_ago">
+	<item quantity="one">Carrigada %1$d die faghet</item>
+	<item quantity="other">Carrigada %1$d dies faghet</item>
+</plurals>
+
+    <string name="updates__tts__download_app">Iscàrriga</string>
+    <string name="updates__tts__download_updates_for_all_apps">Iscàrriga totu sos agiornamentos</string>
+
+    <string name="updates__hide_updateable_apps">Istichi sas aplicatziones</string>
+    <string name="updates__show_updateable_apps">Ammustra sas aplicatziones</string>
+
+    <plurals name="updates__download_updates_for_apps">
+	<item quantity="one">Iscàrriga s\'agiornamentu pro %1$d aplicatzione.</item>
+	<item quantity="other">Iscàrriga sos agiornamentos pro %1$d aplicatziones.</item>
+</plurals>
+
+    <string name="details_new_in_version">Nou in sa versione %s</string>
+
+    <string name="antifeatureswarning">Custa aplicatzione tenet funtzionalidades chi ti diant pòdere non agradare.</string>
+    <string name="antifeatures">Anti-funtzionalidades</string>
+    <plurals name="details_last_update_days">
+	<item quantity="one">Agiornadu oe</item>
+	<item quantity="other">Agiornadu %1$s dies faghet</item>
+</plurals>
 </resources>
