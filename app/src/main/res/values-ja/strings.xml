@@ -455,4 +455,12 @@
 	<item quantity="other">%1$d ｱﾌﾟﾘの更新をﾀﾞｳﾝﾛｰﾄﾞします。</item>
 </plurals>
 
-    </resources>
+    <string name="details_new_in_version">ﾊﾞｰｼﾞｮﾝ %s の新機能</string>
+
+    <string name="antifeatureswarning">このｱﾌﾟﾘの機能は好きではないかもしれません。</string>
+    <string name="antifeatures">対策機能</string>
+    <plurals name="details_last_update_days">
+	<item quantity="one">今日更新</item>
+	<item quantity="other"></item>
+</plurals>
+</resources>
