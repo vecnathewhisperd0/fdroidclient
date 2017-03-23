@@ -458,4 +458,12 @@ Provu elekti alian kategorion aŭ ĝisdatigi viajn deponejojn por atingi freŝan
 	<item quantity="other">Elŝuti ĝisdatigojn por %1$d aplikaĵoj.</item>
 </plurals>
 
-    </resources>
+    <string name="details_new_in_version">Nova en versio %s</string>
+
+    <string name="antifeatureswarning">Ĉi tiu aplikaĵo enhavas eblojn, kiujn vi povas ne ŝati.</string>
+    <string name="antifeatures">Fiebloj</string>
+    <plurals name="details_last_update_days">
+	<item quantity="one">Ĝisdatigita hodiaŭ</item>
+	<item quantity="other">Ĝisdatigita antaŭ %1$s tagoj</item>
+</plurals>
+</resources>
