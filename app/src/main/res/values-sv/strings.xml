@@ -439,4 +439,33 @@ e-post för att hjälpa till att åtgärda problemet?</string>
 	<item quantity="one">Visa enda appen %1$d kategorin</item>
 	<item quantity="other">Visa alla %1$d appar från %2$s kategorin</item>
 </plurals>
+<string name="app__install_downloaded_update">Uppdatera</string>
+
+    <string name="app_list__name__downloaded_and_ready_to_update">Uppdatera %1$s</string>
+    <string name="app_list__name__downloaded_and_ready_to_install">Installera %1$s</string>
+    <string name="app_list__name__downloading_in_progress">Hämtar %1$s</string>
+    <plurals name="app_list__age__released_x_days_ago">
+	<item quantity="one">Utgiven för %1$d dag sedan</item>
+	<item quantity="other">Utgiven för %1$d dagar sedan</item>
+</plurals>
+
+    <string name="updates__tts__download_app">Hämta</string>
+    <string name="updates__tts__download_updates_for_all_apps">Hämta alla uppdateringar</string>
+
+    <string name="updates__hide_updateable_apps">Göm appar</string>
+    <string name="updates__show_updateable_apps">Visa appar</string>
+
+    <plurals name="updates__download_updates_for_apps">
+	<item quantity="one">Hämta uppdatering för %1$d app.</item>
+	<item quantity="other">Hämta uppdatering för %1$d appar.</item>
+</plurals>
+
+    <string name="details_new_in_version">Nytt i version %s</string>
+
+    <string name="antifeatureswarning">Denna app har funktioner som du kanske inte gillar.</string>
+    <string name="antifeatures">Anti-funktioner</string>
+    <plurals name="details_last_update_days">
+	<item quantity="one">Uppdaterad %1$s dag sedan</item>
+	<item quantity="other">Uppdaterad %1$s dagar sedan</item>
+</plurals>
 </resources>
