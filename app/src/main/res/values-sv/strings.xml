@@ -97,7 +97,7 @@
   <string name="category_Recently_Updated">Nyss uppdaterade</string>
   <string name="local_repo">Lokalt filförråd</string>
   <string name="local_repo_running">F-Droid är redo att utbyta</string>
-  <string name="touch_to_configure_local_repo">Rör för att se detaljer och tillåta andra att byta ut appar med dig.</string>
+  <string name="touch_to_configure_local_repo">Tryck för att se detaljer och tillåta andra att utbyta appar med dig.</string>
   <string name="deleting_repo">Tar bort aktuellt förråd…</string>
   <string name="adding_apks_format">Lägger till %s till förråd…</string>
   <string name="writing_index_jar">Skriver signerad indexfil (index.jar)…</string>
@@ -278,7 +278,7 @@ Du kommer
     <string name="swap_scan_qr">Skanna QR kod</string>
     <string name="swap_people_nearby">Folk i närheten</string>
     <string name="swap_scanning_for_peers">Söker efter folk i närheten…</string>
-    <string name="swap_intro">Anslut och byt ut appar med personer nära dig.</string>
+    <string name="swap_intro">Anslut och utbyt appar med personer nära dig.</string>
     <string name="swap_visible_bluetooth">Synlig via Bluetooth</string>
     <string name="swap_setting_up_bluetooth">Ställer in Bluetooth…</string>
     <string name="swap_not_visible_bluetooth">Inte synlig via Bluetooth</string>
@@ -316,7 +316,7 @@ Den kräver inte någon särskild tillgång.</string>
     <string name="newPerms">Ny</string>
     <string name="allPerms">Alla</string>
     <string name="perm_costs_money">Detta kan kosta pengar</string>
-    <string name="uninstall_update_confirm">Vill du byta ut den här appen med fabriksversionen?</string>
+    <string name="uninstall_update_confirm">Vill du utbyta den här appen med fabriksversionen?</string>
     <string name="uninstall_confirm">Vill du avinstallera den här appen?</string>
     <string name="tap_to_install">Hämtning klar, tryck för att installera</string>
     <string name="download_error">Hämtning misslyckades</string>
