@@ -474,4 +474,12 @@ Hiçbir özel erişim gerektirmez.</string>
 	<item quantity="other">%1$d uygulama için güncellemeleri indir.</item>
 </plurals>
 
-    </resources>
+    <string name="details_new_in_version">%s sürümünde yeni</string>
+
+    <string name="antifeatureswarning">Bu uygulama sevmeyebileceğiniz özellikler içerir.</string>
+    <string name="antifeatures">Ters-özellikler</string>
+    <plurals name="details_last_update_days">
+	<item quantity="one">%1$s gün önce güncellendi</item>
+	<item quantity="other">%1$s gün önce güncellendi</item>
+</plurals>
+</resources>
