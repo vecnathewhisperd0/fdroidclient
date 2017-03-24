@@ -477,7 +477,9 @@
     <string name="app_list__name__downloading_in_progress">Спампоўка %1$s</string>
     <plurals name="app_list__age__released_x_days_ago">
 	<item quantity="one">Выпушчана %1$d дзень таму</item>
-	<item quantity="other">Выпушчана %1$d дня таму</item>
+	<item quantity="few">Выпушчана %1$d дня таму</item>
+	<item quantity="many">Выпушчана %1$d дзён таму</item>
+	<item quantity="other"/>
 </plurals>
 
     <string name="updates__tts__download_app">Спампаваць</string>
@@ -488,7 +490,17 @@
 
     <plurals name="updates__download_updates_for_apps">
 	<item quantity="one">Спампаваць абнаўленне для %1$d праграмы.</item>
-	<item quantity="other">Спампаваць абнаўленні для %1$d праграм.</item>
+	<item quantity="few">Спампаваць абнаўленні для %1$d праграм.</item>
+	<item quantity="many">Спампаваць абнаўленні для %1$d праграм.</item>
+	<item quantity="other"/>
 </plurals>
 
+    <string name="details_new_in_version">Навае ў версіі %s</string>
+
+    <string name="antifeatures">Непажаданыя функцыі</string>
+    <plurals name="details_last_update_days">
+	<item quantity="one">Абноўлена сёння</item>
+	<item quantity="other">Абноўлена %1$s дня таму</item>
+</plurals>
+<string name="antifeatureswarning">Гэтая праграма мае функцыі, што могуць вам не спадабацца.</string>
     </resources>
