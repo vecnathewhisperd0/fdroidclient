@@ -482,4 +482,12 @@ hilang. Aplikasi yang diperbarui akan mendapatkan akses ke:</string>
 <string name="preference_category__my_apps">Apl Saya</string>
     <string name="app__install_downloaded_update">Perbarui</string>
 
-    </resources>
+    <string name="details_new_in_version">Apa yang baru dalam versi %s</string>
+
+    <string name="antifeatureswarning">Apl ini memiliki fitur yang Anda mungkin tidak suka.</string>
+    <string name="antifeatures">Anti-fitur</string>
+    <plurals name="details_last_update_days">
+	<item quantity="one">Diperbarui %1$s hari yang lalu</item>
+	<item quantity="other"></item>
+</plurals>
+</resources>
