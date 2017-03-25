@@ -446,4 +446,38 @@ konpontzen laguntzeko?</string>
 	<item quantity="one">Ikusi %2$s kategoriako aplikazio bakarra</item>
 	<item quantity="other">Ikusi %2$s kategoriako %1$d aplikazioak</item>
 </plurals>
+<string name="app__install_downloaded_update">Eguneratu</string>
+
+    <string name="app_list__name__downloaded_and_ready_to_update">Eguneratu %1$s</string>
+    <string name="app_list__name__downloaded_and_ready_to_install">Instalatu %1$s</string>
+    <string name="app_list__name__downloading_in_progress">%1$s deskargatzen</string>
+    <plurals name="app_list__age__released_x_days_ago">
+	<item quantity="one">Orain dela egun %1$d kaleratua</item>
+	<item quantity="other">Orain dela %1$d egun kaleratua</item>
+</plurals>
+
+    <string name="updates__tts__download_app">Deskargatu</string>
+    <string name="updates__tts__download_updates_for_all_apps">Deskargatu eguneraketa guztiak</string>
+
+    <string name="updates__hide_updateable_apps">Ezkutatu aplikazioak</string>
+    <string name="updates__show_updateable_apps">Erakutsi aplikazioak</string>
+
+    <plurals name="updates__download_updates_for_apps">
+	<item quantity="one">Deskargatu eguneraketa %1$d.</item>
+	<item quantity="other">Deskargatu %1$d eguneraketa.</item>
+</plurals>
+
+    <string name="details_new_in_version">%s bertsioan berria</string>
+
+    <string name="antifeatureswarning">Aplikazio honek gustuko izan ez ditzakezun ezaugarriak ditu.</string>
+    <string name="antifeatures">Anti-ezaugarriak</string>
+    <plurals name="button_view_all_apps_in_category">
+	<item quantity="one">" Bi hauek berdina badira ere, Androiden dokumentazioak gutxienez bata zein bestea zehaztea aholkatzen du: https://developer.android.com/guide/topics/resources/string-resource.html#Plurals "</item>
+	<item quantity="other">" Ikusi guztiak %d "</item>
+</plurals>
+
+    <plurals name="details_last_update_days">
+	<item quantity="one">Gaur eguneratua</item>
+	<item quantity="other">Orain dela %1$s egun eguneratua</item>
+</plurals>
 </resources>
