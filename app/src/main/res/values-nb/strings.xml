@@ -429,4 +429,38 @@ i en e-post for å fikse problemet?</string>
 	<item quantity="one">Vis det ene programmet i kategorien %1$s</item>
 	<item quantity="other">Vis alle programmer i kategorien %2$s</item>
 </plurals>
+<string name="app__install_downloaded_update">Oppdater</string>
+
+    <string name="app_list__name__downloaded_and_ready_to_update">Oppdater %1$s</string>
+    <string name="app_list__name__downloaded_and_ready_to_install">Installer %1$s</string>
+    <string name="app_list__name__downloading_in_progress">Henter %1$s</string>
+    <plurals name="app_list__age__released_x_days_ago">
+	<item quantity="one">Utgitt i går</item>
+	<item quantity="other">Utgitt for %1$d dager siden</item>
+</plurals>
+
+    <string name="updates__tts__download_app">Last ned</string>
+    <string name="updates__tts__download_updates_for_all_apps">Last ned alle oppdateringer</string>
+
+    <string name="updates__hide_updateable_apps">Skjul programmer</string>
+    <string name="updates__show_updateable_apps">Vis programmer</string>
+
+    <plurals name="updates__download_updates_for_apps">
+	<item quantity="one">Hent oppdatering for %1$d program.</item>
+	<item quantity="other">Hent oppdateringer for %1$d programmer.</item>
+</plurals>
+
+    <string name="details_new_in_version">Nytt i versjon %s</string>
+
+    <string name="antifeatureswarning">Dette programmet har funksjoner du kanskje ikke liker.</string>
+    <string name="antifeatures">Anti-funksjoner</string>
+    <plurals name="button_view_all_apps_in_category">
+	<item quantity="one">" Vis alle %d "</item>
+	<item quantity="other">" Vis alle %d "</item>
+</plurals>
+
+    <plurals name="details_last_update_days">
+	<item quantity="one">Oppdatert i dag</item>
+	<item quantity="other">Oppdatert for %1$s dager siden</item>
+</plurals>
 </resources>
