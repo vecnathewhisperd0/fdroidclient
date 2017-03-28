@@ -431,4 +431,38 @@ Bitte eine andere Kategorie wählen oder die Paketquellen aktualisieren.</string
 	<item quantity="one">Die einzige Anwendung in der %2$s Kategorie ansehen</item>
 	<item quantity="other">Alle %1$s Anwendungen aus der %2$s Kategorie ansehen</item>
 </plurals>
-</resources>
+<string name="app__install_downloaded_update">Aktualisieren</string>
+
+    <string name="app_list__name__downloaded_and_ready_to_update">%1$s aktualisieren</string>
+    <string name="app_list__name__downloaded_and_ready_to_install">%1$s installieren</string>
+    <string name="app_list__name__downloading_in_progress">%1$s wird heruntergeladen</string>
+    <plurals name="app_list__age__released_x_days_ago">
+	<item quantity="one">Vor %1$d Tag veröffentlicht</item>
+	<item quantity="other">Vor %1$d Tagen veröffentlicht</item>
+</plurals>
+
+    <string name="updates__tts__download_app">Herunterladen</string>
+    <string name="updates__tts__download_updates_for_all_apps">Alle Aktualisierungen herunterladen</string>
+
+    <string name="updates__hide_updateable_apps">Anwendungen ausblenden</string>
+    <string name="updates__show_updateable_apps">Anwendungen anzeigen</string>
+
+    <plurals name="updates__download_updates_for_apps">
+	<item quantity="one">Aktualisierung für %1$d Anwendung herunterladen.</item>
+	<item quantity="other">Aktualisierungen für %1$d Anwendungen herunterladen.</item>
+</plurals>
+
+    <string name="details_new_in_version">Neu in Version %s</string>
+
+    <string name="antifeatureswarning">Diese Anwendung hat Merkmale, die Ihnen nicht gefallen könnten.</string>
+    <string name="antifeatures">Unfreie Merkmale</string>
+    <plurals name="details_last_update_days">
+	<item quantity="one">Heute aktualisiert</item>
+	<item quantity="other">Vor %1$d Tagen aktualisiert</item>
+</plurals>
+<plurals name="button_view_all_apps_in_category">
+	<item quantity="one"></item>
+	<item quantity="other">" Alle %d ansehen "</item>
+</plurals>
+
+    </resources>
