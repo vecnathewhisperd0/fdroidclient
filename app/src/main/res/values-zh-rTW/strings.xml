@@ -441,6 +441,35 @@ F-Droid 並無您裝置上可用的應用程式。這可能是因為您需要更
 
     <plurals name="tts_view_all_in_category">
 	<item quantity="one">從 %2$s 類別中查看所有 %1$d 的應用程式</item>
-	<item quantity="other"></item>
+	<item quantity="other"/>
 </plurals>
-</resources>
+<string name="app__install_downloaded_update">更新</string>
+
+    <string name="app_list__name__downloaded_and_ready_to_update">更新 %1$s</string>
+    <string name="app_list__name__downloaded_and_ready_to_install">安裝 %1$s</string>
+    <string name="app_list__name__downloading_in_progress">正在下載 %1$s</string>
+    <plurals name="app_list__age__released_x_days_ago">
+	<item quantity="one">%1$d 天前已釋出</item>
+	<item quantity="other"/>
+</plurals>
+
+    <string name="updates__tts__download_updates_for_all_apps">下載所有的更新</string>
+
+    <string name="updates__hide_updateable_apps">隱藏應用程式</string>
+    <string name="updates__show_updateable_apps">顯示應用程式</string>
+
+    <plurals name="updates__download_updates_for_apps">
+	<item quantity="one">為 %1$d 應用程式下載更新。</item>
+	<item quantity="other"/>
+</plurals>
+
+    <string name="details_new_in_version">新的版本在 %s</string>
+
+    <string name="antifeatureswarning">此應用程式可能有您不喜歡的功能。</string>
+    <plurals name="details_last_update_days">
+	<item quantity="one">%1$s 天前已更新</item>
+	<item quantity="other"/>
+</plurals>
+<string name="updates__tts__download_app">下載</string>
+    <string name="antifeatures">Anti-features</string>
+    </resources>
