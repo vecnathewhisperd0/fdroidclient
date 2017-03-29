@@ -206,7 +206,7 @@ F-Droid deposu aranıyor</string>
     <string name="bad_fingerprint">Yanlış parmak izi</string>
     <string name="invalid_url">Bu geçerli bir URL değildir.</string>
     <string name="menu_settings">Ayarlar</string>
-    <string name="menu_changelog">Değişiklik kütüğü</string>
+    <string name="menu_changelog">Değişiklikler</string>
     <string name="menu_bitcoin">Bitcoin</string>
     <string name="menu_litecoin">Litecoin</string>
     <string name="menu_flattr">Flattr</string>
