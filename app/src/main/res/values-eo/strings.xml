@@ -57,15 +57,15 @@
   <string name="antiupstreamnonfreelist">La fontkodo ne estas tute libera</string>
   <string name="display">Aspekto</string>
   <string name="expert">Altnivelo</string>
-  <string name="expert_on">Montras aldonajn informojn kaj ŝaltas aldonajn agordojn</string>
+  <string name="expert_on">Montri aldonajn informojn kaj aktivigi aldonajn agordojn</string>
   <string name="search_hint">Serĉi aplikaĵojn</string>
   <string name="appcompatibility">Aplikaĵa kongrueco</string>
-  <string name="show_incompat_versions">Malkongruaj versioj</string>
-  <string name="show_incompat_versions_on">Montras aplikaĵ-versiojn malkongruajn por la aparato</string>
+  <string name="show_incompat_versions">Nekongruaj versioj</string>
+  <string name="show_incompat_versions_on">Montri aplikaĵ-versiojn nekongruajn kun la aparato</string>
   <string name="rooted">Ĉefuzanto</string>
-  <string name="rooted_on">Ne grizigas aplikaĵojn, kiuj postulas ĉefuzantajn privilegiojn</string>
+  <string name="rooted_on">Ne grizigi aplikaĵojn, kiuj postulas ĉefuzantajn privilegiojn</string>
   <string name="ignoreTouch">Ignori tuŝekranon</string>
-  <string name="ignoreTouch_on">Ĉiam inkluzivas aplikaĵojn, kiuj postulas tuŝekranon</string>
+  <string name="ignoreTouch_on">Ĉiam inkluzivi aplikaĵojn, kiuj postulas tuŝekranon</string>
   <string name="category_All">Ĉiuj</string>
   <string name="category_Whats_New">Novaj</string>
   <string name="category_Recently_Updated">Ĵus ĝisdatigitaj</string>
@@ -86,7 +86,7 @@
   <string name="unknown">Nekonata</string>
   <string name="repo_confirm_delete_title">Ĉu forigi la deponejon?</string>
   <string name="repo_added">Konservis la F-Droidan deponejon %1$s.</string>
-  <string name="repo_searching_address">Serĉado de F-Droida deponejo je %1$s</string>
+  <string name="repo_searching_address">Serĉado de F-Droida deponejo ĉe %1$s</string>
   <string name="minsdk_or_later">%s aŭ posta</string>
   <string name="up_to_maxsdk">Ĝis %s</string>
   <string name="minsdk_up_to_maxsdk">De %1$s ĝis %2$s</string>
@@ -116,18 +116,18 @@
     <string name="by_author">de</string>
     <string name="enable_nfc_send">Aktivigi sendadon tra NFC…</string>
     <string name="cache_downloaded">Kaŝmemorigi apk-dosierojn</string>
-    <string name="unstable_updates_summary">Proponas ĝisdatigojn al nestabilaj versioj</string>
-    <string name="update_interval_zero">Neniam aŭtomate ĝisdatigas listojn de aplikaĵoj</string>
-    <string name="automatic_scan_wifi_on">Ĝisdatigas listojn aŭtomate nur per netarifaj retoj kiel vifio</string>
-    <string name="update_history_summ">Traktas aplikaĵojn kiel novajn aŭ ĵus-ĝisdatigajn por: %s tagoj</string>
+    <string name="unstable_updates_summary">Proponi ĝisdatigojn al nestabilaj versioj</string>
+    <string name="update_interval_zero">Neniam aŭtomate ĝisdatigi listojn de aplikaĵoj</string>
+    <string name="automatic_scan_wifi_on">Ĝisdatigi listojn aŭtomate nur per netarifaj retoj kiel vifio</string>
+    <string name="update_history_summ">Trakti aplikaĵojn kiel novajn aŭ ĵus-ĝisdatigajn por: %s tagoj</string>
     <string name="system_installer">Privilegia aldonaĵo</string>
-    <string name="system_installer_on">Uzas privilegian F-Droid-aldonaĵon por instali, ĝisdatigi, kaj forigi pakaĵojn</string>
+    <string name="system_installer_on">Uzi privilegian F-Droid-aldonaĵon por instali, ĝisdatigi kaj forigi pakaĵojn</string>
     <string name="uninstall_system">Ĝisdatigi/malinstali privilegian aldonaĵon</string>
-    <string name="uninstall_system_summary">Malfermas detalan ekranon de Privilegia Aldonaĵo por ĝisdatigi/malinstali ĝin</string>
+    <string name="uninstall_system_summary">Malfermi detalan ekranon de Privilegia Aldonaĵo por ĝisdatigi/malinstali ĝin</string>
     <string name="local_repo_name">Nomo de loka deponejo</string>
     <string name="local_repo_name_summary">La anoncata nomo de via loka deponejo: %s</string>
     <string name="local_repo_https">Uzi privatan konekton</string>
-    <string name="local_repo_https_on">Uzas ĉifritan HTTPS-konekton por loka deponejo</string>
+    <string name="local_repo_https_on">Uzi ĉifritan HTTPS-konekton por loka deponejo</string>
 
     <string name="login_title">Aŭtentokontrolo nepra</string>
     <string name="login_name">Uzantnomo</string>
@@ -152,7 +152,7 @@
     <string name="notification_summary_more">ankoraŭ +%1$d…</string>
     <string name="bluetooth_activity_not_found">Neniu Bludenta metodo de sendo trovita, elektu iun!</string>
     <string name="choose_bt_send">Elektu Bludentan metodon de sendo</string>
-    <string name="repo_add_fingerprint">Fingrospuro (nedeviga)</string>
+    <string name="repo_add_fingerprint">Fingrospuro (malnepra)</string>
     <string name="repo_exists_add_fingerprint">Ĉi tiu deponejo estas jam instalita, tio aldonos novan informon pri ŝlosilo.</string>
     <string name="repo_exists_enable">Ĉi tiu deponejo estas jam instalita, konfirmu ke vi volas reaktivigi ĝin.</string>
     <string name="repo_exists_and_enabled">La deponejo estas jam instalita kaj aktiva.</string>
@@ -177,11 +177,11 @@
     <string name="writing_index_jar">Konservado de subskribita indeksa dosiero (index.jar)…</string>
     <string name="proxy">Prokurilo</string>
     <string name="enable_proxy_title">Aktivigi HTTP prokurilon</string>
-    <string name="enable_proxy_summary">Uzas HTTP prokurilon por ĉiuj retkonektoj</string>
+    <string name="enable_proxy_summary">Uzi HTTP prokurilon por ĉiuj retkonektoj</string>
     <string name="proxy_host">Prokurila adreso</string>
     <string name="proxy_port">Prokurila pordo</string>
-    <string name="proxy_host_summary">Agordu adreson de via prokurilo (ekz. 127.0.0.1)</string>
-    <string name="proxy_port_summary">Agordu pordan numeron de via prokurilo (ekz. 8118)</string>
+    <string name="proxy_host_summary">Agordi adreson de via prokurilo (ekz. 127.0.0.1)</string>
+    <string name="proxy_port_summary">Agordi pordan numeron de via prokurilo (ekz. 8118)</string>
 
     <string name="status_download">Elŝutado
 %2$s / %3$s (%4$d%%) el
@@ -199,23 +199,23 @@
         <string name="all_other_repos_fine">En ĉiuj aliaj deponejoj ne okazis erarojn.</string>
         <string name="global_error_updating_repos">Eraro dum ĝisdatigado: %s</string>
     <string name="permissions">Permesoj</string>
-    <string name="no_handler_app">Vi ne havas iun ajn disponeblan aplikaĵon kiu povas trakti %s.</string>
+    <string name="no_handler_app">Vi ne havas iun ajn disponeblan aplikaĵon, kiu povas trakti %s.</string>
     <string name="unsigned">Nesubskribita</string>
     <string name="unverified">Neverigita</string>
     <string name="repo_details">Deponejo</string>
     <string name="repo_url">Adreso</string>
     <string name="repo_fingerprint">Fingrospuro de subskrib-ŝlosilo (SHA-256)</string>
-    <string name="unsigned_description">Tio ĉi signifas ke la listo de aplikaĵoj ne povas esti verigita. Vi povas esti singarda kun aplikaĵoj elŝutitaj de nesubskribitaj indeksoj.</string>
-    <string name="repo_not_yet_updated">La deponejo ne estas jam uzita. Vi devas aktivigi ĝin por vidi la aplikaĵojn kiujn ĝi liveras.</string>
-    <string name="repo_confirm_delete_body">Forigado de deponejo kaŭzos ke aplikaĵojn ĝi liveras ne plu estos disponeblaj en F-Droid.
+    <string name="unsigned_description">Tio ĉi signifas, ke la listo de aplikaĵoj ne povas esti verigita. Vi devas esti singarda kun aplikaĵoj elŝutitaj de nesubskribitaj indeksoj.</string>
+    <string name="repo_not_yet_updated">La deponejo ne estas jam uzita. Vi devas aktivigi ĝin por vidi la aplikaĵojn, kiujn ĝi liveras.</string>
+    <string name="repo_confirm_delete_body">Forigado de deponejo kaŭzos, ke aplikaĵojn ĝi liveras ne plu estos disponeblaj en F-Droid.
 
 Rigardu: ĉiuj antaŭe konservitaj aplikaĵoj restos en via aparato.</string>
     <string name="repo_disabled_notification">%1$s malaktiva.
 
 Vi devos reaktivigi ĉi tiun deponejon por instali aplikaĵojn el ĝi.</string>
-    <string name="not_on_same_wifi">Via aparato ne estas en la sama vifi-reto kiel loka deponejo, kiun vi ĵus aldonis! Provu konekti al ĉi tiu reto: %s</string>
+    <string name="not_on_same_wifi">Via aparato ne estas en la sama vifi-reto kiel la loka deponejo, kiun vi ĵus aldonis! Provu konekti al ĉi tiu reto: %s</string>
     <string name="pref_language">Lingvo</string>
-    <string name="pref_language_default">Sistema apriora</string>
+    <string name="pref_language_default">Sistema implicita</string>
 
     <string name="wifi">Vifio</string>
     <string name="wifi_ap">Retkaptejo</string>
@@ -230,7 +230,7 @@ Vi devos reaktivigi ĉi tiun deponejon por instali aplikaĵojn el ĝi.</string>
 
     <string name="empty_installed_app_list">Neniu aplikaĵo instalita.
 
-En via aparato estas aplikaĵoj, tamen ili ne estas disponeblaj el F-Droid. Eble vi povos ĝisdatigi viajn deponejojn, aŭ la deponejoj vere ne enhavas viajn aplikaĵojn.</string>
+En via aparato estas aplikaĵoj, tamen ili ne estas disponeblaj el F-Droid. Eble vi devas ĝisdatigi viajn deponejojn, aŭ la deponejoj vere ne enhavas viajn aplikaĵojn.</string>
     <string name="empty_available_app_list">Nenia aplikaĵo en ĉi tiu kategorio.
 
 Provu elekti alian kategorion aŭ ĝisdatigi viajn deponejojn por atingi freŝan liston de aplikaĵojn.</string>
@@ -249,11 +249,11 @@ Provu elekti alian kategorion aŭ ĝisdatigi viajn deponejojn por atingi freŝan
     <string name="system_install_denied_signature">La subskribo de aldonaĵo estas erara! Bonvolu krei erar-raporton!</string>
     <string name="system_install_button_install">Instali</string>
     <string name="system_install_button_open">Malfermi aldonaĵon</string>
-    <string name="system_install_denied_permissions">La aldonaĵo ne aliris ĉefuzantan permeson! Bonvolu krei erar-raporton!</string>
+    <string name="system_install_denied_permissions">La privilegia aldonaĵo ne akiris ĉefuzantan permeson! Bonvolu krei erar-raporton!</string>
     <string name="system_install_post_success">Sukcese instalis privilegian F-Droid-aldonaĵon</string>
     <string name="system_install_post_fail">Instalado de privilegia F-Droid-aldonaĵo malsukcesis</string>
-    <string name="system_install_post_success_message">Privilegia F-Droid-aldonaĵo estas instalita senerare. Ĉi tio ebligos al F-Droid instali, ĝisdatigi, kaj malinstali aplikaĵojn per si mem.</string>
-    <string name="system_install_post_fail_message">La instalado de Privilegia F-Droid-aldonaĵo malsukcesis. La instala metodo ne estas subtenata de ĉiuj Androidaj distribuaĵoj, bonvolu konsiliĝi en la F-Droida erar-spuradilo por pli da informojn.</string>
+    <string name="system_install_post_success_message">Privilegia F-Droid-aldonaĵo estas instalita senerare. Ĉi tio ebligos al F-Droid instali, ĝisdatigi kaj malinstali aplikaĵojn per si mem.</string>
+    <string name="system_install_post_fail_message">La instalado de Privilegia F-Droid-aldonaĵo malsukcesis. La instala metodo ne estas subtenata de ĉiuj Androidaj distribuaĵoj, bonvolu konsiliĝi en la F-Droida erar-spurilo por pli da informoj.</string>
     <string name="system_install_installing">Instalado…</string>
     <string name="system_install_installing_rebooting">Instalado kaj restartado…</string>
     <string name="system_install_uninstalling">Malinstalado…</string>
@@ -279,7 +279,7 @@ Provu elekti alian kategorion aŭ ĝisdatigi viajn deponejojn por atingi freŝan
     <string name="swap_scan_qr">Skanu QR-kodon</string>
     <string name="swap_people_nearby">Homoj proksime</string>
     <string name="swap_scanning_for_peers">Serĉado de proksimuloj…</string>
-    <string name="swap_nearby">Proksima Interŝanĝo</string>
+    <string name="swap_nearby">Proksima interŝanĝo</string>
     <string name="swap_intro">Konekti kaj interŝanĝi aplikaĵojn kun proksimaj homoj.</string>
     <string name="swap_visible_bluetooth">Videbla per Bludento</string>
     <string name="swap_setting_up_bluetooth">Agordado de Bludento…</string>
@@ -334,12 +334,12 @@ Provu elekti alian kategorion aŭ ĝisdatigi viajn deponejojn por atingi freŝan
     <string name="crash_dialog_text">Senatenda eraro okazis kaj devigis al aplikaĵo halti. Ĉu vi volas retmesaĝi detalojn por helpi ripari la eraron?</string>
     <string name="crash_dialog_comment_prompt">Vi povas aldoni ekstrajn informojn kaj komentojn ĉi tien:</string>
 <string name="useTor">Uzi Tor</string>
-    <string name="useTorSummary">Devigas elŝuti per Tor-reto por plibonigi privatecon</string>
+    <string name="useTorSummary">Devigi elŝuti per Tor-reto por plibonigi privatecon</string>
     <string name="swap_stopping_wifi">Ĉesado de vifio…</string>
     <string name="repo_provider">Deponejo: %s</string>
 
     <string name="update_auto_download">Aŭtomate elŝuti ĝisdatigojn</string>
-    <string name="update_auto_download_summary">Elŝutas dosierojn de ĝisdatigoj fone</string>
+    <string name="update_auto_download_summary">Elŝuti dosierojn de ĝisdatigoj fone kaj vi ricevos sciigon por ilin instali</string>
     <string name="tap_to_install_format">Tuŝu por instali %s</string>
     <string name="tap_to_update_format">Tuŝu por ĝisdatigi %s</string>
     <string name="download_pending">Atendado je instalado…</string>
@@ -362,18 +362,18 @@ Provu elekti alian kategorion aŭ ĝisdatigi viajn deponejojn por atingi freŝan
     <string name="installing">Instalado…</string>
     <string name="uninstalling">Malinstalado…</string>
 
-    <string name="hide_anti_feature_apps">Grizigi aplikaĵojn kun fi-ebloj</string>
-    <string name="hide_anti_feature_apps_on">Grizigas aplikaĵojn kun nedeziratajn eblojn (ekz. spurado)</string>
+    <string name="hide_anti_feature_apps">Grizigi aplikaĵojn kun fiebloj</string>
+    <string name="hide_anti_feature_apps_on">Grizigi aplikaĵojn kun nedeziratajn eblojn (ekz. spurado)</string>
     <string name="update_auto_install">Aŭtomate instali ĝisdatigojn</string>
-    <string name="update_auto_install_summary">Elŝutas kaj instalas ĝisdatigojn de aplikaĵoj fone</string>
+    <string name="update_auto_install_summary">Elŝuti kaj instali ĝisdatigojn de aplikaĵoj fone</string>
     <string name="keep_install_history">Konservi historion de instaladoj</string>
-    <string name="keep_install_history_summary">Memoras historion de instaladoj kaj malinstaladoj en F-Droid</string>
+    <string name="keep_install_history_summary">Memori historion de instaladoj kaj malinstaladoj en F-Droid</string>
     <string name="warning_no_internet">Ne povas ĝisdatigi, ĉu vi estas konektita kun la Interreto?</string>
     <string name="versions">Versioj</string>
     <string name="app_details_donate_prompt_unknown_author">Monhelpu programistojn de %1$s por kafo!</string>
     <string name="app_details_donate_prompt">%1$s estas programita de %2$s. Monhelpu ilin por kafo!</string>
 
-    <string name="repositories_summary">Aldonas pliajn fontojn de aplikaĵoj</string>
+    <string name="repositories_summary">Aldoni pliajn fontojn de aplikaĵoj</string>
     <string name="notification_title_single_update_available">Ĝisdatigo disponebla</string>
     <string name="notification_title_single_ready_to_install">Instalpreta</string>
     <string name="notification_title_single_ready_to_install_update">Ĝisdatigo preta por instali</string>
@@ -460,10 +460,15 @@ Provu elekti alian kategorion aŭ ĝisdatigi viajn deponejojn por atingi freŝan
 
     <string name="details_new_in_version">Nova en versio %s</string>
 
-    <string name="antifeatureswarning">Ĉi tiu aplikaĵo enhavas eblojn, kiujn vi povas ne ŝati.</string>
+    <string name="antifeatureswarning">Ĉi tiu aplikaĵo enhavas eblojn, kiujn vi eble ne ŝatas.</string>
     <string name="antifeatures">Fiebloj</string>
     <plurals name="details_last_update_days">
 	<item quantity="one">Ĝisdatigita hodiaŭ</item>
 	<item quantity="other">Ĝisdatigita antaŭ %1$s tagoj</item>
 </plurals>
-</resources>
+<string name="app_list__name__successfully_installed">%1$s instalita sukcese</string>
+    <string name="nearby_splash__download_apps_from_people_nearby">Seninterrete? Elŝutu aplikaĵojn el proksimaj uloj!</string>
+    <string name="nearby_splash__find_people_button">Trovi proksimajn ulojn</string>
+    <string name="nearby_splash__both_parties_need_fdroid">Ambaŭ flankoj bezonas %1$s por uzi proksiman interŝanĝon.</string>
+
+    </resources>
