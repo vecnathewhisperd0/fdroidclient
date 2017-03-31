@@ -345,7 +345,7 @@ Depes
     <string name="repo_provider">Depòsitu: %s</string>
 
     <string name="update_auto_download">Iscàrriga automaticamente sos agiornamentos</string>
-    <string name="update_auto_download_summary">Sos agiornamentos benint iscarrigados automaticamente e tue as a tènnere una notìfica pro los installare</string>
+    <string name="update_auto_download_summary">Sos agiornamentos ant a èssere iscarrigados automaticamente e tue as a retzire una notìfica pro los installare</string>
     <string name="tap_to_install_format">Incarca pro installare %s</string>
     <string name="tap_to_update_format">Incarca pro agiornare %s</string>
     <string name="download_pending">Isetende pro incumintzare s\'iscarrigamentu…</string>
