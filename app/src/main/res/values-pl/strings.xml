@@ -328,7 +328,7 @@ Uwaga: Wszystkie poprzednio zainstalowane aplikacje zostaną na urządzeniu.</st
     <string name="repo_provider">Repozytorium: %s</string>
 
     <string name="update_auto_download">Pobierz aktualizacje automatycznie</string>
-    <string name="update_auto_download_summary">Automatycznie pobiera pliki aktualizacji w tle</string>
+    <string name="update_auto_download_summary">Automatycznie pobiera pliki aktualizacji w tle i zostaniesz powiadomiony, aby je zainstalować</string>
     <string name="tap_to_install_format">Dotknij aby zainstalować %s</string>
     <string name="tap_to_update_format">Dotknij aby uaktualnić %s</string>
     <string name="download_pending">Oczekiwanie na pobieranie…</string>
@@ -465,6 +465,11 @@ Uwaga: Wszystkie poprzednio zainstalowane aplikacje zostaną na urządzeniu.</st
 	<item quantity="one">Uaktualniono dzisiaj</item>
 	<item quantity="few">Uaktualniono %1$s dni temu</item>
 	<item quantity="many">Uaktualniono %1$s dni temu</item>
-	<item quantity="other"></item>
+	<item quantity="other"/>
 </plurals>
-</resources>
+<string name="app_list__name__successfully_installed">%1$s pomyślnie zainstalowano</string>
+    <string name="nearby_splash__download_apps_from_people_nearby">Brak internetu? Pobierz aplikacje od ludzi w pobliżu!</string>
+    <string name="nearby_splash__find_people_button">Znajdź ludzi w pobliżu</string>
+    <string name="nearby_splash__both_parties_need_fdroid">Obydwie strony potrzebują %1$s, aby użyć pobliskiej wymiany.</string>
+
+    </resources>
