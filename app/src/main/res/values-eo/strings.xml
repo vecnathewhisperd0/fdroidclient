@@ -205,7 +205,7 @@
     <string name="repo_details">Deponejo</string>
     <string name="repo_url">Adreso</string>
     <string name="repo_fingerprint">Fingrospuro de subskrib-ŝlosilo (SHA-256)</string>
-    <string name="unsigned_description">Tio ĉi signifas, ke la listo de aplikaĵoj ne povas esti verigita. Vi devas esti singarda kun aplikaĵoj elŝutitaj de nesubskribitaj indeksoj.</string>
+    <string name="unsigned_description">Tio ĉi signifas, ke la listo de aplikaĵoj ne povas esti verigita. Vi devas esti singarda kun aplikaĵoj elŝutitaj el nesubskribitaj indeksoj.</string>
     <string name="repo_not_yet_updated">La deponejo ne estas jam uzita. Vi devas aktivigi ĝin por vidi la aplikaĵojn, kiujn ĝi liveras.</string>
     <string name="repo_confirm_delete_body">Forigado de deponejo kaŭzos, ke aplikaĵojn ĝi liveras ne plu estos disponeblaj en F-Droid.
 
@@ -264,17 +264,17 @@ Provu elekti alian kategorion aŭ ĝisdatigi viajn deponejojn por atingi freŝan
     <string name="system_uninstall_button">Malinstali</string>
 
     <string name="swap_nfc_title">Tuŝu por interŝanĝi</string>
-    <string name="swap_nfc_description">Se via kolego havas F-Droid kaj ŝaltitan NFC-on por tuŝi viajn aparatojn kune.</string>
+    <string name="swap_nfc_description">Se via amiko havas F-Droid kaj aktivigan NFC, vi povas tuŝi viajn aparatojn kune.</string>
     <string name="swap_join_same_wifi">Konektu al la sama vifio kiel via amiko</string>
-    <string name="swap_join_same_wifi_desc">Por interŝanĝi per vifio, certigu ke vi estas en la sama reto. Se vi ne havas aliron al la sama reto, unu de vi povas krei vifian retkaptejon.</string>
-    <string name="swap_join_this_hotspot">Helpi al via kolego aligi vian retkaptejon</string>
+    <string name="swap_join_same_wifi_desc">Por interŝanĝi per vifio, certigu ke vi estas en la sama reto. Se vi ne havas aliron al la sama reto, unu el vi povas krei vifian retkaptejon.</string>
+    <string name="swap_join_this_hotspot">Helpu al via amiko aligi vian retkaptejon</string>
     <string name="swap">Interŝanĝi aplikaĵojn</string>
     <string name="swap_success">Interŝanĝo sukcesis!</string>
     <string name="swap_active_hotspot">%1$s (via retkaptejo)</string>
     <string name="swap_switch_to_wifi">Tuŝu por ŝanĝi al vifio</string>
-    <string name="swap_confirm_connect">Ĉu vi volas elŝuti aplikaĵojn de %1$s nun?</string>
+    <string name="swap_confirm_connect">Ĉu vi volas elŝuti aplikaĵojn el %1$s nun?</string>
     <string name="swap_dont_show_again">Ne montri ĉi tion denove</string>
-    <string name="swap_scan_or_type_url">Iu ajn devas skani kodon, aŭ entajpi URL-on de aliulo en la foliumilo.</string>
+    <string name="swap_scan_or_type_url">Iu ajn devas skani kodon, aŭ entajpi URL-n de aliulo en la foliumilo.</string>
     <string name="swap_choose_apps">Elekti aplikaĵojn</string>
     <string name="swap_scan_qr">Skanu QR-kodon</string>
     <string name="swap_people_nearby">Homoj proksime</string>
@@ -295,23 +295,23 @@ Provu elekti alian kategorion aŭ ĝisdatigi viajn deponejojn por atingi freŝan
     <string name="swap_confirm">Konfirmi interŝanĝon</string>
     <string name="swap_qr_isnt_for_swap">La skanita QR-kodo ne estas interŝanĝa kodo.</string>
     <string name="bluetooth_unavailable">Bludento ne disponebla</string>
-    <string name="swap_cant_send_no_bluetooth">Ne povas sendi F-Droid-on, ĉar Bludento ne estas disponebla en via aparato.</string>
+    <string name="swap_cant_send_no_bluetooth">Ne povas sendi F-Droid, ĉar Bludento ne estas disponebla en via aparato.</string>
     <string name="loading">Prilaborado…</string>
     <string name="swap_connection_misc_error">Eraro okazis dum konektado al aparato, verŝajne ne povas interŝanĝi kun ĝi.</string>
     <string name="swap_not_enabled">Interŝanĝo malaktiva</string>
     <string name="swap_not_enabled_description">Antaŭ interŝanĝo via aparato devas esti videbla.</string>
 
-    <string name="install_confirm">postulas aliron al</string>
-    <string name="install_confirm_update">Ĉu vi volas instali ĝisdatigon al ĉi tiu aplikaĵo? Viaj nunaj datumoj ne foriĝos. La ĝisdatiga aplikaĵo povos aliri:</string>
-    <string name="install_confirm_update_system">Ĉu vi volas instali ĝisdatigon al ĉi tiu integrigita aplikaĵo? Viaj nunaj datumoj ne foriĝos. La ĝisdatiga aplikaĵo povos aliri:</string>
-    <string name="install_confirm_update_no_perms">Ĉu vi volas instali ĝisdatigon al ĉi tiu estanta aplikaĵo? Viaj nunaj datumoj ne foriĝos. Ĝi ne bezonas iun ajn specialan aliron.</string>
-    <string name="install_confirm_update_system_no_perms">Ĉu vi volas instali ĝisdatigon al ĉi tiu integrigita aplikaĵo? Viaj nunaj datumoj ne foriĝos. Ĝi ne bezonas iun ajn specialan aliron.</string>
+    <string name="install_confirm">postulas permeson al</string>
+    <string name="install_confirm_update">Ĉu vi volas instali ĝisdatigon al ĉi tiu aplikaĵo? Viaj nunaj datumoj ne foriĝos. La ĝisdatiga aplikaĵo povos aliri al:</string>
+    <string name="install_confirm_update_system">Ĉu vi volas instali ĝisdatigon al ĉi tiu integrigita aplikaĵo? Viaj nunaj datumoj ne foriĝos. La ĝisdatiga aplikaĵo povos aliri al:</string>
+    <string name="install_confirm_update_no_perms">Ĉu vi volas instali ĝisdatigon al ĉi tiu estanta aplikaĵo? Viaj nunaj datumoj ne foriĝos. Ĝi ne postulas iun ajn specialan permeson.</string>
+    <string name="install_confirm_update_system_no_perms">Ĉu vi volas instali ĝisdatigon al ĉi tiu integrigita aplikaĵo? Viaj nunaj datumoj ne foriĝos. Ĝi ne bezonas iun ajn specialan permeson.</string>
     <string name="newPerms">Nova(j)</string>
     <string name="allPerms">Ĉio</string>
     <string name="perm_costs_money">Ĉi tio povas elspezi vian monon</string>
     <string name="uninstall_update_confirm">Ĉu vi volas anstataŭigi ĉi tiun aplikaĵon per la antaŭinstalita versio?</string>
     <string name="uninstall_confirm">Ĉu vi volas malinstali ĉi tiun aplikaĵon?</string>
-    <string name="tap_to_install">Elŝuto finis, tuŝu por instali</string>
+    <string name="tap_to_install">Elŝuto finiĝis, tuŝu por instali</string>
     <string name="download_error">Elŝuto malsukcesis</string>
 
     <string name="perms_new_perm_prefix">"Nova: "</string>
@@ -331,7 +331,7 @@ Provu elekti alian kategorion aŭ ĝisdatigi viajn deponejojn por atingi freŝan
     <string name="theme_night">Nokta</string>
 
     <string name="crash_dialog_title">F-Droid kolapsis</string>
-    <string name="crash_dialog_text">Senatenda eraro okazis kaj devigis al aplikaĵo halti. Ĉu vi volas retmesaĝi detalojn por helpi ripari la eraron?</string>
+    <string name="crash_dialog_text">Senatenda eraro okazis kaj devigis aplikaĵon halti. Ĉu vi volas retmesaĝi detalojn por helpi ripari la eraron?</string>
     <string name="crash_dialog_comment_prompt">Vi povas aldoni ekstrajn informojn kaj komentojn ĉi tien:</string>
 <string name="useTor">Uzi Tor</string>
     <string name="useTorSummary">Devigi elŝuti per Tor-reto por plibonigi privatecon</string>
