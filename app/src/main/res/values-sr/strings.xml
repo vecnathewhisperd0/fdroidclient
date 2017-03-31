@@ -459,7 +459,8 @@
 
     <plurals name="updates__download_updates_for_apps">
 	<item quantity="one">Преузми надоградњу за %1$d апликацију.</item>
-	<item quantity="other">Преузми надоградње за %1$d апликације.</item>
+	<item quantity="few">Преузми надоградње за %1$d апликације.</item>
+	<item quantity="other">Преузми надоградње за %1$d апликација.</item>
 </plurals>
 
     <string name="details_new_in_version">Ново у издању %s</string>
@@ -468,7 +469,8 @@
     <string name="antifeatures">Анти-могућности</string>
     <plurals name="tts_view_all_in_category">
 	<item quantity="one">Прикажи једну апликацију у категорији %2$s</item>
-	<item quantity="other">Прикажи све %1$d апликације у категорији %2$s</item>
+	<item quantity="few">Прикажи све %1$d апликације у категорији %2$s</item>
+	<item quantity="other">Прикажи свих %1$d апликација у категорији %2$s</item>
 </plurals>
 
     <plurals name="details_last_update_days">
