@@ -345,7 +345,7 @@ Depes
     <string name="repo_provider">Depòsitu: %s</string>
 
     <string name="update_auto_download">Iscàrriga automaticamente sos agiornamentos</string>
-    <string name="update_auto_download_summary">Iscàrriga sos agiornamentos in segundu pianu</string>
+    <string name="update_auto_download_summary">Sos agiornamentos benint iscarrigados automaticamente e tue as a tènnere una notìfica pro los installare</string>
     <string name="tap_to_install_format">Incarca pro installare %s</string>
     <string name="tap_to_update_format">Incarca pro agiornare %s</string>
     <string name="download_pending">Isetende pro incumintzare s\'iscarrigamentu…</string>
@@ -472,4 +472,9 @@ Depes
 	<item quantity="one">Agiornadu oe</item>
 	<item quantity="other">Agiornadu %1$s dies faghet</item>
 </plurals>
-</resources>
+<string name="app_list__name__successfully_installed">%1$s installada</string>
+    <string name="nearby_splash__download_apps_from_people_nearby">Non ses in lìnia? Iscàrriga aplicatziones dae sa gente a curtzu de tie!</string>
+    <string name="nearby_splash__find_people_button">Agata persones a curtzu</string>
+    <string name="nearby_splash__both_parties_need_fdroid">Ambos tenides bisòngiu de %1$s pro impreare custa funtzionalidade.</string>
+
+    </resources>
