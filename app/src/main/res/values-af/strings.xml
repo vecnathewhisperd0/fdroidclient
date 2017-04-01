@@ -210,20 +210,17 @@ Let wel: Alle voorheen geïnstalleerde programme sal op jou toestel bly.</string
     <string name="touch_to_configure_local_repo">Tas om details te wys en laat ander toe om jou programme te deel.</string>
     <string name="copying_icons">Kopieer program simbooltjie na die argief…</string>
     <string name="icon">Simbooltjie</string>
-    <string name="status_download">Aflaai 
-%2$ s / 3$ s (4$ d % %) vanaf 
-%1$ s</string>
-
-    <string name="repo_disabled_notification">Afgeskakel %1$ s.
+    <string name="status_download">Aflaai\n%2$s / %3$s (%4$d%%) vanaf \n%1$s</string>
+    <string name="repo_disabled_notification">Afgeskakel %1$s.
 
 Jy moet 
  hierdie argief weer aktiveer om programme daaruit te kan installeer.</string>
-    <string name="repo_added">Gestoorde F-Droid argief %1$ s.</string>
+    <string name="repo_added">Gestoorde F-Droid argief %1$s.</string>
     <string name="repo_searching_address">Op soek na F-Droid argief by 
 %1$ s</string>
     <string name="minsdk_or_later">%s of later</string>
     <string name="up_to_maxsdk">Tot %s</string>
-    <string name="minsdk_up_to_maxsdk">%1$ s tot %2$ s</string>
+    <string name="minsdk_up_to_maxsdk">%1$ s tot %2$s</string>
     <string name="not_on_same_wifi">"Jou toestel is nie op die dieselfde Wi-Fi as die plaaslike argief  jy nou net gelaai het nie! Probeer hierdie netwerk aansluiting by: %s"</string>
     <string name="requires_features">Vereis: %1$ s</string>
     <string name="pref_language">Taal</string>
