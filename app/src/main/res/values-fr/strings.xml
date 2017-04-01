@@ -406,7 +406,7 @@ détails des opérations en cours pour aider à résoudre ce problème ?</string
     <string name="notification_action_install">Installer</string>
 
 <string name="app_version_x_available">Version %1$s disponible</string>
-    <string name="app_version_x_installed">Version n°</string>
+    <string name="app_version_x_installed">Version %1$s</string>
 
     <plurals name="my_apps_header_number_of_updateable">
 	<item quantity="one">%1$d mise à jour</item>

@@ -458,7 +458,7 @@ Bitte eine andere Kategorie wählen oder die Paketquellen aktualisieren.</string
 	<item quantity="other">Vor %1$d Tagen aktualisiert</item>
 </plurals>
 <plurals name="button_view_all_apps_in_category">
-	<item quantity="one"></item>
+	<item quantity="one">" %d ansehen "</item>
 	<item quantity="other">" Alle %d ansehen "</item>
 </plurals>
 

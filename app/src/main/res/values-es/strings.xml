@@ -395,8 +395,7 @@ detalles para ayudarnos a arreglar el problema?</string>
 
 
     <plurals name="button_view_all_apps_in_category">
-	<item quantity="one">" Aunque son lo mismo, la documentación de Android recomienda detallar siempre uno y otro:
-https://developer.android.com/guide/topics/resources/string-resource.html#Plurals "</item>
+	<item quantity="one">" Ver %d "</item>
 	<item quantity="other">" Ver todo %d "</item>
 </plurals>
 

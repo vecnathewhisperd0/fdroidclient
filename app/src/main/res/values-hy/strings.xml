@@ -23,7 +23,7 @@
     <string name="app_installed">Տեղադրված</string>
     <string name="app_not_installed">Չտեղադրված</string>
     <string name="app_inst_known_source">Տեղադրված (%s կողմից)</string>
-    <string name="app_inst_unknown_source">Տեղադրված (%s անհայտ աղբյուրից)</string>
+    <string name="app_inst_unknown_source">Տեղադրված (անհայտ աղբյուրից)</string>
     <string name="app_version_x_installed">Տարբերակ %1$s</string>
     <string name="app__newly_added">Նոր</string>
 

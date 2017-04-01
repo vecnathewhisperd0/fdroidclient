@@ -471,7 +471,7 @@
 </plurals>
 
     <plurals name="details_last_update_days">
-	<item quantity="one">Ажурирано данас</item>
+	<item quantity="one">Ажурирано пре %1$s дана</item>
 	<item quantity="few">Ажурирано пре %1$s дана</item>
 	<item quantity="other">Ажурирано пре %1$s дана</item>
 </plurals>

@@ -419,8 +419,7 @@ com os detalhes para ajudar a corrigir o problema?</string>
 
 
     <plurals name="button_view_all_apps_in_category">
-	<item quantity="one">" Mesmo que estes sejam iguais uns aos outros, a documentação do Android sugere sempre especificar
-pelo menos um e outro: https://developer.android.com/guide/topics/resources/string-resource.html#Plurals "</item>
+	<item quantity="one">" Ver %d "</item>
 	<item quantity="other">" Ver todas as %d "</item>
 </plurals>
 
