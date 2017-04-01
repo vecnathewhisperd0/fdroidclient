@@ -347,7 +347,7 @@ détails des opérations en cours pour aider à résoudre ce problème ?</string
     <string name="repo_provider">Dépôt : %s</string>
 
     <string name="update_auto_download">Télécharger les mises à jour automatiquement</string>
-    <string name="update_auto_download_summary">Télécharger les mises à jour en arrière-plan</string>
+    <string name="update_auto_download_summary">Les mises à jour sont téléchargées en arrière-plan. Vous êtes invités ensuite à les installer</string>
     <string name="tap_to_install_format">Appuyez pour installer %s</string>
     <string name="tap_to_update_format">Appuyez pour mettre à jour %s</string>
     <string name="download_pending">Téléchargement en attente…</string>
@@ -423,4 +423,59 @@ détails des opérations en cours pour aider à résoudre ce problème ?</string
 
 
     <string name="category">Catégorie</string>
+<string name="app_recommended_version_installed">Verrsion %1$s (recommandée)</string>
+    <string name="app__newly_added">Nouveau</string>
+    <string name="app__install_downloaded_update">Mise à jour</string>
+
+    <string name="app_list__name__downloaded_and_ready_to_update">Mise à jour %1$s</string>
+    <string name="app_list__name__downloaded_and_ready_to_install">Installer %1$s</string>
+    <string name="app_list__name__downloading_in_progress">Téléchargement %1$s en cours</string>
+    <string name="app_list__name__successfully_installed">%1$s installé</string>
+    <plurals name="app_list__age__released_x_days_ago">
+	<item quantity="one">Publié il y a %1$d jour</item>
+	<item quantity="other">Publié il y a %1$d jours</item>
+</plurals>
+
+    <string name="installed_apps__activity_title">Applications installées</string>
+    <string name="installed_app__updates_ignored">Mises à jour ignorées</string>
+    <string name="installed_app__updates_ignored_for_suggested_version">Mises à jour ignorées pour la Version %1$s</string>
+    <string name="updates__tts__download_app">Télécharger</string>
+    <string name="updates__tts__download_updates_for_all_apps">"Télécharger toutes les mises  jour"</string>
+
+    <string name="updates__hide_updateable_apps">Cacher les applications</string>
+    <string name="updates__show_updateable_apps">Montrer les applications</string>
+
+    <plurals name="updates__download_updates_for_apps">
+	<item quantity="one">Télécharger la mise à jour pour %1$d application.</item>
+	<item quantity="other">Télécharger les mises à jour pour %1$d applications.</item>
+</plurals>
+
+    <string name="preference_category__my_apps">Mes Applications</string>
+    <string name="preference_manage_installed_apps">Gère les applications installées</string>
+
+
+    <string name="details_new_in_version">Nouveauté de la version %s</string>
+
+    <string name="antifeatureswarning">Cette application a des fonctionalités qui peuvent ne pas vous plaire.</string>
+    <string name="antifeatures">fonctionalités antagonistes</string>
+    <plurals name="button_view_all_apps_in_category">
+	<item quantity="one">" voir %d "</item>
+	<item quantity="other">" voir toutes %d "</item>
+</plurals>
+
+    <string name="nearby_splash__download_apps_from_people_nearby">Sans connexion internet? Téléchargez les applications depuis des appareils de votre entourage!</string>
+    <string name="nearby_splash__find_people_button">Trouver des gens/appareils dans les environs</string>
+    <string name="nearby_splash__both_parties_need_fdroid">Chacun doit utiliser %1$s.</string>
+
+    <string name="tts_category_name">Catégorie %1$s</string>
+
+    <plurals name="tts_view_all_in_category">
+	<item quantity="one">Voir l\'application de la catégorie %2$s</item>
+	<item quantity="other">Voir toutes les applications de la catégorie %2$s</item>
+</plurals>
+
+    <plurals name="details_last_update_days">
+	<item quantity="one">Mis à jour il y a %1$s jour</item>
+	<item quantity="other">Mis à jour il y a %1$s jours</item>
+</plurals>
 </resources>
