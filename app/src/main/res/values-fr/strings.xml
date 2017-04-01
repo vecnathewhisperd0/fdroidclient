@@ -463,7 +463,7 @@ détails des opérations en cours pour aider à résoudre ce problème ?</string
 	<item quantity="other">" voir toutes %d "</item>
 </plurals>
 
-    <string name="nearby_splash__download_apps_from_people_nearby">Sans connexion internet? Téléchargez les applications depuis des appareils de votre entourage!</string>
+    <string name="nearby_splash__download_apps_from_people_nearby">Sans connexion internet? Téléchargez les applications depuis des appareils de votre entourage !</string>
     <string name="nearby_splash__find_people_button">Trouver des gens/appareils dans les environs</string>
     <string name="nearby_splash__both_parties_need_fdroid">Chacun doit utiliser %1$s.</string>
 
