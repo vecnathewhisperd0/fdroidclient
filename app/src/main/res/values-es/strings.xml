@@ -437,7 +437,7 @@ https://developer.android.com/guide/topics/resources/string-resource.html#Plural
     <string name="tts_category_name">Categoría %1$s</string>
 
     <plurals name="tts_view_all_in_category">
-	<item quantity="one">Ver la única «app» de la la categoría %2$s</item>
+	<item quantity="one">Ver la única «app» de la categoría %2$s</item>
 	<item quantity="other">Ver todas las «apps» de la categoría %2$s</item>
 </plurals>
 <string name="app__install_downloaded_update">Actualización</string>

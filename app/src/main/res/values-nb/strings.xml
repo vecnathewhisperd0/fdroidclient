@@ -369,7 +369,7 @@ i en e-post for å fikse problemet?</string>
     <string name="update_auto_install_summary">Last ned og installer programoppdateringer i bakgrunnen</string>
     <string name="hide_anti_feature_apps">Utgråing av programmer med anti-funksjoner</string>
     <string name="hide_anti_feature_apps_on">Utgråing av programmer som krever anti-funksjoner</string>
-    <string name="warning_no_internet">Kan ikke oppdatere. Er du koblet til internett?</string>
+    <string name="warning_no_internet">Kan ikke oppdatere. Er du koblet til Internett?</string>
     <string name="versions">Versjoner</string>
     <string name="app_details_donate_prompt_unknown_author">Spander kaffe på utviklerne av %1$s!</string>
     <string name="app_details_donate_prompt">%1$s lages av %2$s. Spander kaffe!</string>
