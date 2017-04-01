@@ -406,7 +406,6 @@ com os detalhes para ajudar a corrigir o problema?</string>
 <string name="app_version_x_available">Versão %1$s disponível</string>
     <string name="app_version_x_installed">Versão %1$s</string>
 
-    <string name="my_apps_btn_update_all">Atualizar tudo</string>
     <plurals name="my_apps_header_number_of_updateable">
 	<item quantity="one">%1$d Atualização</item>
 	<item quantity="other">%1$d Atualizações</item>
@@ -417,7 +416,6 @@ com os detalhes para ajudar a corrigir o problema?</string>
     <string name="main_menu__latest_apps">Mais recentes</string>
     <string name="main_menu__categories">Categorias</string>
     <string name="main_menu__swap_nearby">Perto</string>
-    <string name="main_menu__my_apps">Meus aplicativos</string>
 
 
     <plurals name="button_view_all_apps_in_category">
@@ -426,7 +424,6 @@ pelo menos um e outro: https://developer.android.com/guide/topics/resources/stri
 	<item quantity="other">" Ver todas as %d "</item>
 </plurals>
 
-    <string name="category">Categoria</string>
 <string name="app_recommended_version_installed">Versão %1$s (Recomendada)</string>
     <string name="app__newly_added">Novo</string>
     <string name="app__install_downloaded_update">Atualizar</string>

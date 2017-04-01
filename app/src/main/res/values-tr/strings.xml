@@ -392,7 +392,6 @@ Hiçbir özel erişim gerektirmez.</string>
     <string name="app_version_x_available">%1$s sürümü mevcut</string>
     <string name="app_version_x_installed">Sürüm %1$s</string>
 
-    <string name="my_apps_btn_update_all">Tümünü güncelle</string>
     <plurals name="my_apps_header_number_of_updateable">
 	<item quantity="one">%1$d Güncelleme</item>
 	<item quantity="other">%1$d Güncelleme</item>
@@ -404,7 +403,6 @@ Hiçbir özel erişim gerektirmez.</string>
     <string name="main_menu__latest_apps">En Son</string>
     <string name="main_menu__categories">Kategoriler</string>
     <string name="main_menu__swap_nearby">Yakındaki</string>
-    <string name="main_menu__my_apps">Uygulamalarım</string>
 
 
     <string name="notification_title_single_update_available">Güncelleme Mevcut</string>
@@ -430,7 +428,6 @@ Hiçbir özel erişim gerektirmez.</string>
     <string name="notification_action_cancel">İptal</string>
     <string name="notification_action_install">Yükle</string>
 
-    <string name="category">Kategori</string>
 <plurals name="button_view_all_apps_in_category">
 	<item quantity="one">" Tüm %d taneyi göster "</item>
 	<item quantity="other">" Tüm %d taneyi göster "</item>

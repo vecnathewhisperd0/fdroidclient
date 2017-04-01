@@ -29,7 +29,6 @@
 
     <string name="installed_apps__activity_title">Տեղադրված ափփեր</string>
     <string name="installed_app__updates_ignored">Առհամարված թարմացումներ</string>
-    <string name="my_apps_btn_update_all">Թարմացնել ամենը</string>
     <plurals name="my_apps_header_number_of_updateable">
 	<item quantity="one">%1$d թարմացում</item>
 	<item quantity="other">%1$d թարմացում</item>

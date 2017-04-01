@@ -324,7 +324,6 @@ Baie geluk! Al jou toepassings is op datum (of jou argiewe is verouderd).</strin
     <string name="app_version_x_available">Weergawe %1$s beskikbaar</string>
     <string name="app_version_x_installed">Weergawe %1$s</string>
 
-    <string name="my_apps_btn_update_all">Opdateer alles</string>
     <plurals name="my_apps_header_number_of_updateable">
 	<item quantity="one">%1$d Opdaterings</item>
 	<item quantity="other">%1$ d bywerking</item>
@@ -335,7 +334,6 @@ Baie geluk! Al jou toepassings is op datum (of jou argiewe is verouderd).</strin
     <string name="main_menu__latest_apps">Nuutste</string>
     <string name="main_menu__categories">Kategorieë</string>
     <string name="main_menu__swap_nearby">Naby</string>
-    <string name="main_menu__my_apps">My programme</string>
 
 
     <string name="status_download_unknown_size">Aflaai van 
@@ -439,5 +437,4 @@ Die opgadateerde progam sal toegang te kry tot:</string>
     <string name="notification_action_cancel">Kanselleer</string>
     <string name="notification_action_install">Installeer</string>
 
-    <string name="category">Kategorie</string>
 </resources>

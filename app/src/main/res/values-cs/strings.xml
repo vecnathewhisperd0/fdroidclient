@@ -377,7 +377,6 @@ Budete chtít odeslat detaily emailem a tím pomoci s napravením chyby?</string
     <string name="app_version_x_available">Je dostupná verze %1$s</string>
     <string name="app_version_x_installed">Verze %1$s</string>
 
-    <string name="my_apps_btn_update_all">Aktualizuj vše</string>
     <plurals name="my_apps_header_number_of_updateable">
 	<item quantity="one">%1$d aktualizace</item>
 	<item quantity="few">%1$d aktualizace</item>
@@ -390,7 +389,6 @@ Budete chtít odeslat detaily emailem a tím pomoci s napravením chyby?</string
     <string name="repositories_summary">Přidat další zdroje aplikací</string>
     <string name="main_menu__latest_apps">Nejnovější</string>
     <string name="main_menu__categories">Kategorie</string>
-    <string name="main_menu__my_apps">Moje aplikace</string>
 
 
     <string name="notification_title_single_update_available">Dostupná aktualizace</string>
@@ -416,7 +414,6 @@ Budete chtít odeslat detaily emailem a tím pomoci s napravením chyby?</string
     <string name="notification_action_cancel">Zrušit</string>
     <string name="notification_action_install">Instalovat</string>
 
-    <string name="category">Kategorie</string>
 <string name="app_recommended_version_installed">Verze %1$s (doporučeno)</string>
     <string name="app__newly_added">Novinka</string>
 

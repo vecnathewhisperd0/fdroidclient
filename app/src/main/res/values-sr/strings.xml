@@ -381,7 +381,6 @@
     <string name="app_version_x_available">Издање %1$s је доступно</string>
     <string name="app_version_x_installed">Издање %1$s</string>
 
-    <string name="my_apps_btn_update_all">Надогради све</string>
     <plurals name="my_apps_header_number_of_updateable">
 	<item quantity="one">%1$d надоградња</item>
 	<item quantity="few">%1$d надоградње</item>
@@ -393,7 +392,6 @@
     <string name="repositories_summary">Додај додатне изворе апликација</string>
     <string name="main_menu__latest_apps">Најновије</string>
     <string name="main_menu__categories">Категорије</string>
-    <string name="main_menu__my_apps">Моје апликације</string>
 
 
     <string name="notification_title_single_update_available">Доступна надоградња</string>
@@ -418,7 +416,6 @@
     <string name="notification_action_cancel">Одустани</string>
     <string name="notification_action_install">Угради</string>
 
-    <string name="category">Категорија</string>
 <string name="main_menu__swap_nearby">Оближње</string>
     <plurals name="button_view_all_apps_in_category">
 	<item quantity="one">" Прикажи %d "</item>

@@ -389,7 +389,6 @@ Uwaga: Wszystkie poprzednio zainstalowane aplikacje zostaną na urządzeniu.</st
 <string name="app_version_x_available">Wersja %1$s dostępna</string>
     <string name="app_version_x_installed">Wersja %1$s</string>
 
-    <string name="my_apps_btn_update_all">Aktualizuj wszystko</string>
     <plurals name="my_apps_header_number_of_updateable">
 	<item quantity="one">%1$d aktualizacja</item>
 	<item quantity="few">%1$d aktualizacje</item>
@@ -402,7 +401,6 @@ Uwaga: Wszystkie poprzednio zainstalowane aplikacje zostaną na urządzeniu.</st
     <string name="main_menu__latest_apps">Najnowsze</string>
     <string name="main_menu__categories">Kategorie</string>
     <string name="main_menu__swap_nearby">Blisko</string>
-    <string name="main_menu__my_apps">Moje aplikacje</string>
 
 
     <plurals name="button_view_all_apps_in_category">
@@ -412,7 +410,6 @@ Uwaga: Wszystkie poprzednio zainstalowane aplikacje zostaną na urządzeniu.</st
 	<item quantity="other"/>
 </plurals>
 
-    <string name="category">Kategoria</string>
 <string name="app_recommended_version_installed">Wersja %1$s (zalecana)</string>
     <string name="app__newly_added">Nowe</string>
 

@@ -398,7 +398,6 @@
 <string name="app_version_x_available">ﾊﾞｰｼﾞｮﾝ %1$s が利用可能</string>
     <string name="app_version_x_installed">ﾊﾞｰｼﾞｮﾝ %1$s</string>
 
-    <string name="my_apps_btn_update_all">すべて更新</string>
     <plurals name="my_apps_header_number_of_updateable">
 	<item quantity="one">%1$d の更新</item>
 	<item quantity="other"/>
@@ -408,9 +407,7 @@
 
     <string name="main_menu__latest_apps">最新</string>
     <string name="main_menu__categories">ｶﾃｺﾞﾘ</string>
-    <string name="category">ｶﾃｺﾞﾘ</string>
 <string name="main_menu__swap_nearby">近く</string>
-    <string name="main_menu__my_apps">ﾏｲｱﾌﾟﾘ</string>
 
 
     <plurals name="button_view_all_apps_in_category">

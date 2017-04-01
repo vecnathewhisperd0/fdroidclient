@@ -406,7 +406,6 @@ Depes
 <string name="app_version_x_available">Sa versione %1$s est disponìbile</string>
     <string name="app_version_x_installed">Versione %1$s</string>
 
-    <string name="my_apps_btn_update_all">Agiorna totu</string>
     <plurals name="my_apps_header_number_of_updateable">
 	<item quantity="one">%1$d Agiornamentu</item>
 	<item quantity="other">%1$d Agiornamentos</item>
@@ -415,7 +414,6 @@ Depes
     <string name="main_menu__latest_apps">Ùrtimas</string>
     <string name="main_menu__categories">Categorias</string>
     <string name="main_menu__swap_nearby">A curtzu</string>
-    <string name="main_menu__my_apps">Aplicatziones meas</string>
 
 
     <plurals name="button_view_all_apps_in_category">
@@ -423,7 +421,6 @@ Depes
 	<item quantity="other">" Càstia totu %d "</item>
 </plurals>
 
-    <string name="category">Categoria</string>
 <string name="clear_search">Inneta sa chirca</string>
 
     <string name="app_recommended_version_installed">Versione %1$s (Racumandada)</string>

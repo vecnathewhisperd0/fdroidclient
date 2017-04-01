@@ -389,7 +389,6 @@ non saranno rimossi. Non richiede alcun permesso speciale.</string>
     <string name="app_version_x_available">Versione %1$s disponibile</string>
     <string name="app_version_x_installed">Versione %1$s</string>
 
-    <string name="my_apps_btn_update_all">Aggiorna tutto</string>
     <plurals name="my_apps_header_number_of_updateable">
 	<item quantity="one">%1$d aggiornamento</item>
 	<item quantity="other">%1$d aggiornamenti</item>
@@ -400,7 +399,6 @@ non saranno rimossi. Non richiede alcun permesso speciale.</string>
     <string name="repositories_summary">Aggiungi ulteriori fonti per le applicazioni</string>
     <string name="main_menu__latest_apps">Più recenti</string>
     <string name="main_menu__categories">Categorie</string>
-    <string name="main_menu__my_apps">Mie app</string>
 
 
     <string name="notification_title_single_update_available">Aggiornamento disponibile</string>
@@ -426,6 +424,5 @@ non saranno rimossi. Non richiede alcun permesso speciale.</string>
     <string name="notification_action_cancel">Annulla</string>
     <string name="notification_action_install">Installa</string>
 
-    <string name="category">Categoria</string>
 <string name="main_menu__swap_nearby">Nelle vicinanze</string>
     </resources>

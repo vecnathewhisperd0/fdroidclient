@@ -392,7 +392,6 @@ Nota: Toate
     <string name="notification_action_cancel">Anulează</string>
     <string name="notification_action_install">Instalare</string>
 
-<string name="category">Categorie</string>
 <string name="tts_category_name">Categorie %1$s</string>
 
     <plurals name="tts_view_all_in_category">
