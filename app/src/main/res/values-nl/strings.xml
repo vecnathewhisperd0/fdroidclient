@@ -12,7 +12,7 @@
   <string name="update_interval">Automatisch vernieuwingsinterval</string>
   <string name="update_interval_zero">Applijsten worden niet automatisch vernieuwd</string>
   <string name="automatic_scan_wifi">Alleen via Wi-Fi</string>
-  <string name="automatic_scan_wifi_on">Update alleen automatisch op verbinding zonder datalimiet zoals Wi-Fi</string>
+  <string name="automatic_scan_wifi_on">Update alleen automatisch op verbinding zonder datalimiet zoals wifi</string>
   <string name="notify">Updatemeldingen</string>
   <string name="notify_on">Toon een melding wanneer er updates beschikbaar zijn</string>
   <string name="update_history">Updategeschiedenis</string>
@@ -251,7 +251,7 @@ Gefeliciteerd! Al je apps zijn up-to-date
     <string name="swap_not_enabled_description">Voordat we kunnen swappen, moet het apparaat zichtbaar gemaakt worden.</string>
 
     <string name="install_confirm">heeft toegang nodig tot</string>
-    <string name="install_confirm_update">Wil je een update voor deze bestaande applicatie installeren? De bestaande gegevens zullen niet verloren gaan. De nieuwe versie van de applicatie zal toegang krijgen tot:</string>
+    <string name="install_confirm_update">Wil je een update voor deze applicatie installeren? De bestaande gegevens zullen niet verloren gaan. De nieuwe versie van de applicatie zal toegang krijgen tot:</string>
     <string name="install_confirm_update_system">Wil je een update voor deze ingebouwde applicatie installeren?
 De bestaande gegevens zullen niet verloren gaan.
 De nieuwe versie van de applicatie zal toegang krijgen tot:</string>
