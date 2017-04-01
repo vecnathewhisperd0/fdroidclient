@@ -336,8 +336,8 @@
     <string name="swap_stopping_wifi">Wi-Fiの停止中…</string>
     <string name="repo_provider">ﾘﾎﾟｼﾞﾄﾘ: %s</string>
 
-    <string name="update_auto_download">自動的に更新をﾀﾞｳﾝﾛｰﾄﾞ</string>
-    <string name="update_auto_download_summary">ﾊﾞｯｸｸﾞﾗｳﾝﾄﾞで更新をﾀﾞｳﾝﾛｰﾄﾞします</string>
+    <string name="update_auto_download">自動的に更新を取得</string>
+    <string name="update_auto_download_summary">自動的に更新をﾀﾞｳﾝﾛｰﾄﾞして、ｲﾝｽﾄｰﾙする通知をします</string>
     <string name="tap_to_install_format">ﾀｯﾌﾟして %s をｲﾝｽﾄｰﾙ</string>
     <string name="tap_to_update_format">ﾀｯﾌﾟして %s を更新</string>
     <string name="download_pending">ﾀﾞｳﾝﾛｰﾄﾞの開始を待っています…</string>
@@ -461,6 +461,11 @@
     <string name="antifeatures">対策機能</string>
     <plurals name="details_last_update_days">
 	<item quantity="one">今日更新</item>
-	<item quantity="other"></item>
+	<item quantity="other"/>
 </plurals>
-</resources>
+<string name="app_list__name__successfully_installed">%1$s を正常にｲﾝｽﾄｰﾙしました</string>
+    <string name="nearby_splash__download_apps_from_people_nearby">ｲﾝﾀｰﾈｯﾄがありませんか? 近くの人からｱﾌﾟﾘをﾀﾞｳﾝﾛｰﾄﾞしてください!</string>
+    <string name="nearby_splash__find_people_button">近くの人を見つける</string>
+    <string name="nearby_splash__both_parties_need_fdroid">双方が近くで %1$s を使用する必要があります。</string>
+
+    </resources>
