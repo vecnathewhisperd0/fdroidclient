@@ -371,7 +371,7 @@ Budete chtít odeslat detaily emailem a tím pomoci s napravením chyby?</string
     <string name="hide_anti_feature_apps">Vyšedit \"anti-feature\" aplikace</string>
     <string name="hide_anti_feature_apps_on">Vyšedit aplikace vyžadující \"anti-features\"</string>
     <string name="warning_no_internet">Nemožno aktualizovat, jste připojený k internetu?</string>
-    <string name="app_details_donate_prompt_unknown_author">Koupit vývojářům kávu za %1$!</string>
+    <string name="app_details_donate_prompt_unknown_author">Koupit vývojářům kávu za %1$s!</string>
     <string name="app_details_donate_prompt">%1$s vytvořil %2$s. Kup mu kávu!</string>
 
     <string name="app_version_x_available">Je dostupná verze %1$s</string>

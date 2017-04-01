@@ -378,7 +378,7 @@ détails des opérations en cours pour aider à résoudre ce problème ?</string
     <string name="keep_install_history_summary">Enregistrer un journal de toutes les installations et désinstallations au sein de F-Droid</string>
     <string name="warning_no_internet">Mise à jour impossible, êtes-vous connecté à Internet ?</string>
     <string name="versions">Versions</string>
-    <string name="app_details_donate_prompt_unknown_author">Offrir un café aux développeurs de %1$ !</string>
+    <string name="app_details_donate_prompt_unknown_author">Offrir un café aux développeurs de %1$s !</string>
     <string name="app_details_donate_prompt">%1$s est créé par %2$s. Offrez-leur un café !</string>
 
     <string name="repositories_summary">Ajouter des sources additionnelles d’applications</string>

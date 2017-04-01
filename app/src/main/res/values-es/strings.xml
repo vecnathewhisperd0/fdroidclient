@@ -375,8 +375,8 @@ detalles para ayudarnos a arreglar el problema?</string>
     <string name="keep_install_history_summary">Guardar un registro de todas las instalaciones y desinstalaciones en F-Droid</string>
     <string name="warning_no_internet">No se puede actualizar, ¿estás conectado a internet?</string>
     <string name="versions">Versiones</string>
-    <string name="app_details_donate_prompt_unknown_author">¡Invite a los desarrolladores de %1$ a un café!</string>
-    <string name="app_details_donate_prompt">%2$ han creado %1$. ¡Invítelos a un café!</string>
+    <string name="app_details_donate_prompt_unknown_author">¡Invite a los desarrolladores de %1$s a un café!</string>
+    <string name="app_details_donate_prompt">%2$s han creado %1$s. ¡Invítelos a un café!</string>
 
     <string name="repositories_summary">Añadir orígenes adiccionales de aplicaciones</string>
     <string name="app_version_x_available">Versión %1$s disponible</string>
@@ -473,7 +473,7 @@ https://developer.android.com/guide/topics/resources/string-resource.html#Plural
 	<item quantity="one">Actualizada hoy</item>
 	<item quantity="other">Actualizadas hace %1$s días</item>
 </plurals>
-<string name="app_list__name__successfully_installed">%s$s se ha instalado con éxito</string>
+<string name="app_list__name__successfully_installed">%1$s se ha instalado con éxito</string>
     <string name="nearby_splash__download_apps_from_people_nearby">¿No tiene internet? ¡Descargue apps de la gente de su alrededor!</string>
     <string name="nearby_splash__find_people_button">Encontrar personas cerca de mí</string>
     <string name="nearby_splash__both_parties_need_fdroid">Ambas partes necesitan %1$s para usar la cercanía.</string>

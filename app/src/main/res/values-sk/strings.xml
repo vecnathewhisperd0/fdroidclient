@@ -376,7 +376,7 @@ a pomôť tak vyriešiť problém?</string>
     <string name="keep_install_history">Uchovať históriu inštalácií</string>
     <string name="keep_install_history_summary">Uchovávať záznamy o všetkých nainštalovaní a odinštalovaní v F-Droid-e</string>
     <string name="versions">Verzie</string>
-    <string name="app_details_donate_prompt_unknown_author">Kúpiť vývojárom kávu za %1$!</string>
+    <string name="app_details_donate_prompt_unknown_author">Kúpiť vývojárom kávu za %1$s!</string>
     <string name="app_details_donate_prompt">%1$s vytvorili %2$s. Kúp mu kávu!</string>
 
     <string name="repositories_summary">Pridať ďaľšie zdroje aplikácií</string>

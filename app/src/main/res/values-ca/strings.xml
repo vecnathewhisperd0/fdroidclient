@@ -375,8 +375,8 @@ per tal d\'ajudar a resoldre la incidència?</string>
     <string name="update_auto_install_summary">Descarregueu i instal·leu les actualitzacions de les apps en segon pla</string>
     <string name="versions">Versions</string>
     <string name="warning_no_internet">No es pot actualitzar: esteu connectat a internet?</string>
-    <string name="app_details_donate_prompt_unknown_author">Convideu els desenvolupadors de %1$ a un cafè!</string>
-    <string name="app_details_donate_prompt">%2$ ha creat %1$. Convideu-los a un cafè!</string>
+    <string name="app_details_donate_prompt_unknown_author">Convideu els desenvolupadors de %1$s a un cafè!</string>
+    <string name="app_details_donate_prompt">%2$s ha creat %1$s. Convideu-los a un cafè!</string>
 
     <string name="repositories_summary">Afegiu orígens d\'aplicacions addicionals</string>
     <string name="app_version_x_available">Versió %1$s disponible</string>
@@ -472,7 +472,7 @@ https://developer.android.com/guide/topics/resources/string-resource.html#Plural
 	<item quantity="one">Actualitzades avui</item>
 	<item quantity="other">Actualitzades fa %1$s dies</item>
 </plurals>
-<string name="app_list__name__successfully_installed">%s$s s\'ha instal·lat correctament</string>
+<string name="app_list__name__successfully_installed">%1$s s\'ha instal·lat correctament</string>
     <string name="antifeatures">Característiques no lliures</string>
     <string name="nearby_splash__download_apps_from_people_nearby">No teniu internet? Descarregueu apps de la gent que tingueu al voltant!</string>
     <string name="nearby_splash__find_people_button">Trobeu persones del voltant</string>
