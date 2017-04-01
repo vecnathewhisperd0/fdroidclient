@@ -343,8 +343,8 @@ detalles para ayudarnos a arreglar el problema?</string>
     <string name="useTorSummary">Forzar el tráfico de bajada a través de Tor para mejorar la privacidad</string>
     <string name="repo_provider">Repositorio: %s</string>
 
-    <string name="update_auto_download">Descargar actualizaciones automáticamente</string>
-    <string name="update_auto_download_summary">Descargar las actualizaciones en un segundo plano</string>
+    <string name="update_auto_download">Obtenga actualizaciones automáticamente</string>
+    <string name="update_auto_download_summary">Las actualizaciones se descargan automáticamente y se le avisará para instalarlas</string>
     <string name="tap_to_install_format">Pulsa para instalar %s</string>
     <string name="tap_to_update_format">Pulsa para actualizar %s</string>
     <string name="download_pending">Esperando a que empiece la descarga…</string>
@@ -468,9 +468,14 @@ https://developer.android.com/guide/topics/resources/string-resource.html#Plural
     <string name="details_new_in_version">Novedades en la versión %s</string>
 
     <string name="antifeatureswarning">Est app contiene características que podrían no gustarte.</string>
-    <string name="antifeatures"/>
+    <string name="antifeatures">Características no-libres</string>
     <plurals name="details_last_update_days">
 	<item quantity="one">Actualizada hoy</item>
 	<item quantity="other">Actualizadas hace %1$s días</item>
 </plurals>
-</resources>
+<string name="app_list__name__successfully_installed">%s$s se ha instalado con éxito</string>
+    <string name="nearby_splash__download_apps_from_people_nearby">¿No tiene internet? ¡Descargue apps de la gente de su alrededor!</string>
+    <string name="nearby_splash__find_people_button">Encontrar personas cerca de mí</string>
+    <string name="nearby_splash__both_parties_need_fdroid">Ambas partes necesitan %1$s para usar la cercanía.</string>
+
+    </resources>
