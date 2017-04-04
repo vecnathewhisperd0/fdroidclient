@@ -340,8 +340,8 @@ Hiçbir özel erişim gerektirmez.</string>
     <string name="swap_active_hotspot">%1$s (erişim noktanız)</string>
     <string name="by_author">şu tarafından</string>
     <string name="menu_email">Geliştiriciye E-posta At</string>
-    <string name="update_auto_download">Güncellemeleri otomatik indir</string>
-    <string name="update_auto_download_summary">Güncelleme dosyalarını arkaplanda indir</string>
+    <string name="update_auto_download">Güncellemeleri otomatik al</string>
+    <string name="update_auto_download_summary">Güncellemeler otomatik indirilir ve onları yüklemek için bilgilendirilirsiniz</string>
     <string name="repo_provider">Depo: %s</string>
 
     <string name="useTor">Tor Kullan</string>
@@ -462,7 +462,7 @@ Hiçbir özel erişim gerektirmez.</string>
 	<item quantity="other">%1$d uygulama için güncellemeleri indir.</item>
 </plurals>
 
-    <string name="details_new_in_version">%s sürümünde yeni</string>
+    <string name="details_new_in_version">%s sürümündeki yenilikler</string>
 
     <string name="antifeatureswarning">Bu uygulama sevmeyebileceğiniz özellikler içerir.</string>
     <string name="antifeatures">Ters-özellikler</string>
@@ -470,4 +470,9 @@ Hiçbir özel erişim gerektirmez.</string>
 	<item quantity="one">%1$s gün önce güncellendi</item>
 	<item quantity="other">%1$s gün önce güncellendi</item>
 </plurals>
-</resources>
+<string name="app_list__name__successfully_installed">%1$s başarıyla yüklendi</string>
+    <string name="nearby_splash__download_apps_from_people_nearby">İnternet yok mu? Uygulamaları yakınınızdaki kişilerden indirin!</string>
+    <string name="nearby_splash__find_people_button">Yakınımdaki kişileri bul</string>
+    <string name="nearby_splash__both_parties_need_fdroid">Her iki tarafın da yakınlarda %1$s kullanması gerekir.</string>
+
+    </resources>
