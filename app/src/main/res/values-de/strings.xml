@@ -7,7 +7,7 @@
   <string name="delete">Löschen</string>
   <string name="enable_nfc_send">NFC-Transfer aktivieren …</string>
   <string name="cache_downloaded">Zwischengespeicherte Apps behalten</string>
-  <string name="updates">Aktualisierungen</string>
+  <string name="updates">Updates</string>
   <string name="other">Andere</string>
   <string name="update_interval">Automatisches Aktualisierungsintervall</string>
   <string name="update_interval_zero">Keine automatischen Aktualisierungen der Anwendungsliste</string>
@@ -228,7 +228,7 @@ Bitte eine andere Kategorie wählen oder die Paketquellen aktualisieren.</string
     <string name="theme_dark">Dunkel</string>
     <string name="uninstall_system">Privilegierte Erweiterung aktualisieren oder deinstallieren</string>
     <string name="uninstall_system_summary">Detailansicht öffnen, um die privilegierte Erweiterung zu aktualisieren oder deinstallieren</string>
-    <string name="menu_settings">Einstellungen</string>
+    <string name="menu_settings">Optionen</string>
     <string name="menu_bitcoin">Bitcoin</string>
     <string name="menu_litecoin">Litecoin</string>
     <string name="menu_flattr">Flattr</string>
