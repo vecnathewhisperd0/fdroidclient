@@ -464,4 +464,7 @@ détails des opérations en cours pour aider à résoudre ce problème ?</string
 	<item quantity="one">Mis à jour il y a %1$s jour</item>
 	<item quantity="other">Mis à jour il y a %1$s jours</item>
 </plurals>
-</resources>
+<string name="latest__empty_state__no_recent_apps">Aucunes applications récentes trouvé</string>
+    <string name="categories__empty_state__no_categories">Aucune catégorie à afficher</string>
+
+    </resources>
