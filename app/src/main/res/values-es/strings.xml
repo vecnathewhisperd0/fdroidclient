@@ -428,7 +428,7 @@ detalles para ayudarnos a arreglar el problema?</string>
 	<item quantity="one">Ver la única «app» de la categoría %2$s</item>
 	<item quantity="other">Ver todas las «apps» de la categoría %2$s</item>
 </plurals>
-<string name="app__install_downloaded_update">Actualización</string>
+<string name="app__install_downloaded_update">Actualizar</string>
 
     <string name="app_list__name__downloaded_and_ready_to_update">Actualizar %1$s</string>
     <string name="app_list__name__downloaded_and_ready_to_install">Instalar %1$s</string>
