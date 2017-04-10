@@ -12,7 +12,7 @@
   <string name="update_interval">Intervalo de actualización automática</string>
   <string name="update_interval_zero">No actualizar la lista de aplicaciones automáticamente</string>
   <string name="automatic_scan_wifi">Sólo con Wi-Fi</string>
-  <string name="automatic_scan_wifi_on">Actualizar automáticamente sólo con Wi-Fi y otras redes de tarifa plana</string>
+  <string name="automatic_scan_wifi_on">Actualizar automáticamente solo con Wi-Fi y otras redes de tarifa plana</string>
   <string name="notify">Notificaciones de actualizaciones</string>
   <string name="notify_on">Muestra una notificación cuando hay actualizaciones</string>
   <string name="system_installer">Extensión con permisos de sistema</string>
@@ -384,8 +384,8 @@ detalles para ayudarnos a arreglar el problema?</string>
 
 
     <plurals name="button_view_all_apps_in_category">
-	<item quantity="one">" Ver %d "</item>
-	<item quantity="other">" Ver todo %d "</item>
+	<item quantity="one">" Ver (%d) "</item>
+	<item quantity="other">" Ver todos (%d) "</item>
 </plurals>
 
     <string name="notification_title_single_update_available">Actualización disponible</string>
