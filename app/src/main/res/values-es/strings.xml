@@ -469,4 +469,10 @@ detalles para ayudarnos a arreglar el problema?</string>
 
     <string name="categories__empty_state__no_categories">No hay categorías para mostrar</string>
 
+    <string name="latest__empty_state__no_recent_apps">No se encontraron aplicaciones recientes</string>
+    <string name="latest__empty_state__never_updated">Una vez que la lista de aplicaciones se actualice, aquí se mostrarán las últimas aplicaciones</string>
+    <string name="latest__empty_state__no_enabled_repos">Una vez que se habilite y actualice un repositorio, sus últimas aplicaciones se mostrarán aquí</string>
+
+    <string name="categories__empty_state__no_categories">No hay categorías para mostrar</string>
+
     </resources>
