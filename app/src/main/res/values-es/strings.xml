@@ -326,7 +326,7 @@ detalles para ayudarnos a arreglar el problema?</string>
     <string name="empty_search_can_update_app_list">No hay ninguna coincidencia con ninguna aplicación a actualizar.</string>
 
     <string name="by_author">por</string>
-    <string name="menu_email">Escriba un correo electrónico al autor</string>
+    <string name="menu_email">Escribir un correo electrónico al autor</string>
     <string name="swap_stopping_wifi">Deteniendo la Wi-Fi…</string>
     <string name="useTor">Usar Tor</string>
     <string name="useTorSummary">Forzar el tráfico de bajada a través de Tor para mejorar la privacidad</string>
@@ -462,12 +462,6 @@ detalles para ayudarnos a arreglar el problema?</string>
     <string name="nearby_splash__download_apps_from_people_nearby">¿No tiene internet? ¡Descargue apps de la gente de su alrededor!</string>
     <string name="nearby_splash__find_people_button">Encontrar personas cerca de mí</string>
     <string name="nearby_splash__both_parties_need_fdroid">Ambas partes necesitan %1$s para usar la proximidad.</string>
-
-    <string name="latest__empty_state__no_recent_apps">No se encontraron aplicaciones recientes</string>
-    <string name="latest__empty_state__never_updated">Una vez que la lista de aplicaciones se actualice, aquí se mostrarán las últimas aplicaciones</string>
-    <string name="latest__empty_state__no_enabled_repos">Una vez que se habilite y actualice un repositorio, sus últimas aplicaciones se mostrarán aquí</string>
-
-    <string name="categories__empty_state__no_categories">No hay categorías para mostrar</string>
 
     <string name="latest__empty_state__no_recent_apps">No se encontraron aplicaciones recientes</string>
     <string name="latest__empty_state__never_updated">Una vez que la lista de aplicaciones se actualice, aquí se mostrarán las últimas aplicaciones</string>
