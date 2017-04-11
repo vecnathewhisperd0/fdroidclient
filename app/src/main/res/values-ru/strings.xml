@@ -348,7 +348,7 @@
     <string name="hide_anti_feature_apps_on">Выделять серым цветом приложения, содержащие нежелательный функционал</string>
     <string name="warning_no_internet">Не могу обновить. Вы подключены к интернету?</string>
     <string name="versions">Версии</string>
-    <string name="app_details_donate_prompt_unknown_author">Купи разработчику %1$s чашечку кофе</string>
+    <string name="app_details_donate_prompt_unknown_author">Купи разработчику %1$s чашечку кофе!</string>
     <string name="updates__tts__download_updates_for_all_apps">Скачать все обновления</string>
 
     <string name="updates__hide_updateable_apps">Скрыть приложение</string>
@@ -382,4 +382,32 @@
     <string name="app_version_x_installed">Версия %1$s</string>
     <string name="app__newly_added">Новое</string>
     <string name="app_list__name__successfully_installed">%1$s успешно установлено</string>
-    </resources>
+    <plurals name="app_list__age__released_x_days_ago">
+	<item quantity="one">Выпущено %1$d день назад</item>
+	<item quantity="other">Выпущено %1$d дня назад</item>
+</plurals>
+
+    <string name="categories__empty_state__no_categories">Нет категорий для показа</string>
+
+    <plurals name="button_view_all_apps_in_category">
+	<item quantity="one">" Смотреть все %d "</item>
+	<item quantity="other">" Смотреть все %d "</item>
+</plurals>
+
+    <string name="nearby_splash__download_apps_from_people_nearby">Нет интернета? Скачивайте приложения через людей рядом с вами!</string>
+    <string name="notification_title_single_ready_to_install">Готово к установке</string>
+    <string name="notification_title_single_install_error">Установка не удалась</string>
+    <string name="notification_content_single_downloading">Загрузка \"%1$s\"…</string>
+    <string name="notification_content_single_downloading_update">Загрузка обновления для \"%1$s\"…</string>
+    <string name="notification_content_single_installing">Установка \"%1$s\"…</string>
+    <string name="notification_content_single_installed">Успешно установлено</string>
+    <string name="notification_content_single_install_error">Установка не удалась</string>
+    <string name="notification_title_summary_update_available">Доступно обновление</string>
+    <string name="notification_title_summary_downloading">Загрузка…</string>
+    <string name="notification_title_summary_downloading_update">Загрузка обновления…</string>
+    <string name="notification_action_update">Обновить</string>
+    <plurals name="details_last_update_days">
+	<item quantity="one">Обновлено сегодня</item>
+	<item quantity="other">Обновлено %1$s дня назад</item>
+</plurals>
+</resources>
