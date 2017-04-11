@@ -392,10 +392,10 @@
     <string name="categories__empty_state__no_categories">Нет категорий для показа</string>
 
     <plurals name="button_view_all_apps_in_category">
-	<item quantity="one">" Смотреть все %d "</item>
-	<item quantity="few">" Смотреть все %d "</item>
-	<item quantity="many">" Смотреть все %d "</item>
-	<item quantity="other"/>
+	<item quantity="one">Смотреть все %d</item>
+	<item quantity="few">Смотреть все %d</item>
+	<item quantity="many">Смотреть все %d</item>
+	<item quantity="other">Смотреть все %d</item>
 </plurals>
 
     <string name="nearby_splash__download_apps_from_people_nearby">Нет интернета? Скачивайте приложения через людей рядом с вами!</string>
@@ -411,10 +411,10 @@
     <string name="notification_title_summary_downloading_update">Загрузка обновления…</string>
     <string name="notification_action_update">Обновить</string>
     <plurals name="details_last_update_days">
-	<item quantity="one">Обновлено %1$s дня назад</item>
+    <item quantity="one">Обновлено %1$s дня назад</item>
 	<item quantity="few">Обновлено %1$s дня назад</item>
 	<item quantity="many">Обновлено %1$s дней назад</item>
-	<item quantity="other"/>
+    <item quantity="other">Обновлено %1$s дня назад</item>
 </plurals>
 <string name="app_details_donate_prompt">%1$s создано %2$s. Купи им чашечку кофе!</string>
 
@@ -451,4 +451,4 @@
 	<item quantity="other">Посмотреть %1$d приложения в категории %2$s</item>
 </plurals>
 
-    </resources>
+</resources>
