@@ -414,7 +414,7 @@
     <item quantity="one">Обновлено %1$s дня назад</item>
 	<item quantity="few">Обновлено %1$s дня назад</item>
 	<item quantity="many">Обновлено %1$s дней назад</item>
-	<item quantity="other"/>
+    <item quantity="other">Обновлено %1$s дня назад</item>
 </plurals>
 <string name="app_details_donate_prompt">%1$s создано %2$s. Купи им чашечку кофе!</string>
 
