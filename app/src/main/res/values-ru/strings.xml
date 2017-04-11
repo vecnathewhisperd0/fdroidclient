@@ -365,4 +365,21 @@
     <string name="details_new_in_version">Новое в версии %s</string>
 
     <string name="preference_category__my_apps">Мои приложения</string>
+    <string name="installed_apps__activity_title">Установленные приложения</string>
+    <string name="main_menu__swap_nearby">Рядом</string>
+
+    <string name="nearby_splash__find_people_button">Найти людей рядом со мной</string>
+    <string name="notification_title_single_update_available">Доступно обновление</string>
+    <string name="notification_title_single_ready_to_install_update">Обновление готово к установке</string>
+    <string name="notification_title_summary_ready_to_install">Готово к установке</string>
+    <string name="notification_title_summary_ready_to_install_update">Обновление готово к установке</string>
+    <string name="notification_action_cancel">Отмена</string>
+    <string name="notification_action_install">Установить</string>
+
+    <string name="tts_category_name">Категория %1$s</string>
+
+    <string name="app_version_x_available">Доступна версия %1$s</string>
+    <string name="app_version_x_installed">Версия %1$s</string>
+    <string name="app__newly_added">Новое</string>
+    <string name="app_list__name__successfully_installed">%1$s успешно установлено</string>
     </resources>
