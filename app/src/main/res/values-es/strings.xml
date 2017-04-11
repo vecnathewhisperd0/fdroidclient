@@ -434,8 +434,8 @@ detalles para ayudarnos a arreglar el problema?</string>
     <string name="app_list__name__downloaded_and_ready_to_install">Instalar %1$s</string>
     <string name="app_list__name__downloading_in_progress">Descargando %1$s</string>
     <plurals name="app_list__age__released_x_days_ago">
-	<item quantity="one">%1 publicada ayer</item>
-	<item quantity="other">%1 publicada hace $d días</item>
+	<item quantity="one">publicada ayer</item>
+	<item quantity="other">publicada hace %1$d días</item>
 </plurals>
 
     <string name="updates__tts__download_app">"El botón de descarga que se encuentra entre el texto en la pantalla de \"Actualizaciones\" solo usa
