@@ -390,8 +390,8 @@ Nota: Toate
 </plurals>
 <plurals name="details_last_update_days">
 	<item quantity="one">Actualizate azi</item>
-	<item quantity="few">Actualizate acum %1$ zile</item>
-	<item quantity="other">Actualizate acum %1$ de zile</item>
+	<item quantity="few">Actualizate acum %1$s zile</item>
+	<item quantity="other">Actualizate acum %1$s de zile</item>
 </plurals>
 <plurals name="button_view_all_apps_in_category">
 	<item quantity="one"/>
