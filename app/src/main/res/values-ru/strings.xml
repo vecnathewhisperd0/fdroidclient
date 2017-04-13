@@ -410,4 +410,7 @@
 	<item quantity="one">Обновлено сегодня</item>
 	<item quantity="other">Обновлено %1$s дня назад</item>
 </plurals>
-</resources>
+<string name="app_details_donate_prompt">%1$s создано %2$s. Купи им чашечку кофе!</string>
+
+    <string name="app_recommended_version_installed">Версия %1$s (Рекомендуемая)</string>
+    </resources>
