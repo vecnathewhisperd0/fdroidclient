@@ -415,4 +415,9 @@
     <string name="app_recommended_version_installed">Версия %1$s (Рекомендуемая)</string>
     <string name="app__install_downloaded_update">Обновить</string>
 
+    <plurals name="updates__download_updates_for_apps">
+	<item quantity="one">Скачать обновления для %1$d приложения</item>
+	<item quantity="other">Скачать обновления для %1$d приложений</item>
+</plurals>
+
     </resources>
