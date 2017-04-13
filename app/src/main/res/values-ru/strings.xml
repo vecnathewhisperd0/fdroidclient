@@ -413,4 +413,6 @@
 <string name="app_details_donate_prompt">%1$s создано %2$s. Купи им чашечку кофе!</string>
 
     <string name="app_recommended_version_installed">Версия %1$s (Рекомендуемая)</string>
+    <string name="app__install_downloaded_update">Обновить</string>
+
     </resources>
