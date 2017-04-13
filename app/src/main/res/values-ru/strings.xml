@@ -425,7 +425,7 @@
 	<item quantity="one">Скачать обновления для %1$d приложения.</item>
 	<item quantity="few">Скачать обновления для %1$d приложений.</item>
 	<item quantity="many">Скачать обновления для %1$d приложений.</item>
-	<item quantity="other"/>
+    <item quantity="other">Скачать обновления для %1$d приложений.</item>
 </plurals>
 
     <string name="app_list__name__downloaded_and_ready_to_update">Обновить %1$s</string>
