@@ -65,10 +65,10 @@
   <string name="details_notinstalled">Не е инсталирано</string>
   <string name="antiadslist">Приложението съдържа реклами</string>
   <string name="antitracklist">Приложението следи и докладва активността ви</string>
-  <string name="antinonfreeadlist">Приложението промотира не-безплатни добавки</string>
-  <string name="antinonfreenetlist">Приложението промотира не-безплатни услуги</string>
-  <string name="antinonfreedeplist">Приложението зависи от други не-безплатни приложения</string>
-  <string name="antiupstreamnonfreelist">Изходният код не е напълно безплатен</string>
+  <string name="antinonfreeadlist">Приложението промотира несвободни добавки</string>
+  <string name="antinonfreenetlist">Приложението промотира несвободни услуги</string>
+  <string name="antinonfreedeplist">Приложението зависи от други несвободни приложения</string>
+  <string name="antiupstreamnonfreelist">Изходният код не е напълно свободен</string>
   <string name="display">Дисплей</string>
   <string name="expert">Експертен режим</string>
   <string name="expert_on">Показва допълнителна информация и настройки</string>
