@@ -316,7 +316,7 @@
     <string name="swap_not_enabled_description">Для выполнения обмена следует сделать ваше устройство видимым.</string>
 
     <string name="perms_description_app">Предоставлено %1$s.</string>
-    <string name="update_auto_download">Получать обновления автоматически</string>
+    <string name="update_auto_download">Автоматически скачивать обновления</string>
     <string name="update_auto_download_summary">Скачивать файлы обновлений в фоне и выводить уведомление для их установки</string>
     <string name="system_install_not_supported">"Установка Привилегированного расширения F-Droid в настоящее время не поддерживается на  Android 5.1 или более поздних версиях."</string>
 
