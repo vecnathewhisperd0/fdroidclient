@@ -436,4 +436,7 @@
     <string name="latest__empty_state__never_updated">Как только список приложений обновится, тут появятся самые свежие приложения</string>
     <string name="latest__empty_state__no_enabled_repos">Как только Вы включите репозитории и позволите их обновлять, тут появятся свежие приложения</string>
 
+    <string name="antifeatures">Вредный функционал</string>
+    <string name="notification_summary_updates">%1$d обновлений</string>
+    <string name="notification_summary_installed">%1$d приложений установлено</string>
     </resources>
