@@ -439,4 +439,7 @@
     <string name="antifeatures">Вредный функционал</string>
     <string name="notification_summary_updates">%1$d обновлений</string>
     <string name="notification_summary_installed">%1$d приложений установлено</string>
+    <string name="notification_title_summary_installing">Установка</string>
+    <string name="notification_title_summary_installed">Успешно установлено</string>
+    <string name="notification_title_summary_install_error">Установка не удалась</string>
     </resources>
