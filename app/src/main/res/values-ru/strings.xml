@@ -433,4 +433,5 @@
     <string name="installed_app__updates_ignored">Обновления игнорируются</string>
     <string name="installed_app__updates_ignored_for_suggested_version">Обновления игнорируются для версии %1$s</string>
     <string name="main_menu__latest_apps">Новинки</string>
+    <string name="latest__empty_state__never_updated">Как только список приложений обновится, тут появятся самые свежие приложения</string>
     </resources>
