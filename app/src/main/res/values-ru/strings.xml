@@ -442,4 +442,9 @@
     <string name="notification_title_summary_installing">Установка</string>
     <string name="notification_title_summary_installed">Успешно установлено</string>
     <string name="notification_title_summary_install_error">Установка не удалась</string>
+    <plurals name="tts_view_all_in_category">
+	<item quantity="one">Посмотреть %1$d приложение в категории %2$s</item>
+	<item quantity="other">Посмотреть %1$d приложения в категории %2$s</item>
+</plurals>
+
     </resources>
