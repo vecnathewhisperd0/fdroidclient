@@ -395,7 +395,8 @@ Nota: Toate
 </plurals>
 <plurals name="button_view_all_apps_in_category">
 	<item quantity="one"/>
-	<item quantity="other">" Toate cele %d "</item>
+    <item quantity="few">Toate cele %d</item>
+    <item quantity="other">Toate cele %d</item>
 </plurals>
 
     <string name="antifeatures">Caracteristici negative</string>
@@ -435,6 +436,7 @@ Nota: Toate
     <string name="installed_apps__activity_title">Aplicatii instalate</string>
     <plurals name="app_list__age__released_x_days_ago">
 	<item quantity="one">Publicat acum %1$d zi</item>
+    <item quantity="few">Publicat acum %1$d zi</item>
 	<item quantity="other">Publicat acum %1$d zile</item>
 </plurals>
 

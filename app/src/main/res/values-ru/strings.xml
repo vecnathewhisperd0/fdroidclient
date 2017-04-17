@@ -384,6 +384,8 @@
     <string name="app_list__name__successfully_installed">%1$s успешно установлено</string>
     <plurals name="app_list__age__released_x_days_ago">
 	<item quantity="one">Выпущено %1$d день назад</item>
+    <item quantity="few">Выпущено %1$d день назад</item>
+    <item quantity="many">Выпущено %1$d день назад</item>
 	<item quantity="other">Выпущено %1$d дня назад</item>
 </plurals>
 
@@ -409,7 +411,7 @@
     <string name="notification_title_summary_downloading_update">Загрузка обновления…</string>
     <string name="notification_action_update">Обновить</string>
     <plurals name="details_last_update_days">
-	<item quantity="one">Обновлено сегодня</item>
+	<item quantity="one">Обновлено %1$s дня назад</item>
 	<item quantity="few">Обновлено %1$s дня назад</item>
 	<item quantity="many">Обновлено %1$s дней назад</item>
 	<item quantity="other"/>
@@ -444,6 +446,8 @@
     <string name="notification_title_summary_install_error">Установка не удалась</string>
     <plurals name="tts_view_all_in_category">
 	<item quantity="one">Посмотреть %1$d приложение в категории %2$s</item>
+    <item quantity="few">Посмотреть %1$d приложения в категории %2$s</item>
+    <item quantity="many">Посмотреть %1$d приложения в категории %2$s</item>
 	<item quantity="other">Посмотреть %1$d приложения в категории %2$s</item>
 </plurals>
 
