@@ -319,7 +319,7 @@
     <string name="uninstall_confirm">¿Quieres desinstalar esta aplicación?</string>
     <string name="tap_to_install">Descarga completada, toca para instalar</string>
 
-    <string name="perms_new_perm_prefix">"Nuevo: "</string>
+    <string name="perms_new_perm_prefix">Nuevos:</string>
     <string name="perms_description_app">Proporcionado por %1$s.</string>
     <string name="downloading">Descargando…</string>
 
@@ -533,9 +533,9 @@
     <string name="antifeatures">Características no-libres</string>
     <string name="details_last_updated_today">Actualizada hoy</string>
     <plurals name="details_last_update_days">
-        <item quantity="one">Actualizada hoy</item>
-        <item quantity="other">Actualizadas hace %1$s días</item>
-    </plurals>
+	<item quantity="one">Actualizada hoy</item>
+	<item quantity="other">Actualizada hace %1$s días</item>
+</plurals>
     <string name="app_list__name__successfully_installed">%1$s se ha instalado con éxito</string>
     <string name="nearby_splash__download_apps_from_people_nearby">¿No tiene internet? ¡Descargue apps de la gente de su
         alrededor!
