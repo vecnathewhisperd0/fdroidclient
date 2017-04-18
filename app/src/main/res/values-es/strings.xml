@@ -543,4 +543,5 @@ tenéis acceso a la misma red, uno de vosotros puede crear un punto de acceso Wi
 
     <string name="categories__empty_state__no_categories">No hay categorías para mostrar</string>
 
-</resources>
+<string name="menu_video">Vídeo</string>
+    </resources>
