@@ -152,9 +152,7 @@
     <string name="bluetooth_activity_not_found">Neniu Bludenta metodo de sendo trovita, elektu iun!</string>
     <string name="choose_bt_send">Elektu Bludentan metodon de sendo</string>
     <string name="repo_add_fingerprint">Fingrospuro (malnepra)</string>
-    <string name="repo_exists_add_fingerprint">Ĉi tiu deponejo estas jam instalita, tio aldonos novan informon pri
-        ŝlosilo.
-    </string>
+    <string name="repo_exists_add_fingerprint">Ĉi tiu deponejo estas jam instalita, tio aldonos novan informon pri ŝlosilo.</string>
     <string name="repo_exists_enable">Ĉi tiu deponejo estas jam instalita, konfirmu ke vi volas reaktivigi ĝin.</string>
     <string name="repo_exists_and_enabled">La deponejo estas jam instalita kaj aktiva.</string>
     <string name="bad_fingerprint">Erara fingrospuro</string>
@@ -176,9 +174,7 @@
     <string name="antinonfreeassetslist">Ĉi tiu aplikaĵo enhavas neliberan enhavon</string>
 
     <string name="local_repo_running">F-Droid estas preta por interŝanĝo</string>
-    <string name="touch_to_configure_local_repo">Tuŝu por rigardi detalojn kaj permesi aliajn interŝanĝi viajn
-        aplikaĵojn.
-    </string>
+    <string name="touch_to_configure_local_repo">Tuŝu por rigardi detalojn kaj permesi aliajn interŝanĝi viajn aplikaĵojn.</string>
     <string name="writing_index_jar">Konservado de subskribita indeksa dosiero (index.jar)…</string>
     <string name="proxy">Prokurilo</string>
     <string name="enable_proxy_title">Aktivigi HTTP prokurilon</string>
@@ -362,8 +358,7 @@
     <string name="newPerms">Nova(j)</string>
     <string name="allPerms">Ĉio</string>
     <string name="perm_costs_money">Ĉi tio povas elspezi vian monon</string>
-    <string name="uninstall_update_confirm">Ĉu vi volas anstataŭigi ĉi tiun aplikaĵon per la antaŭinstalita versio?
-    </string>
+    <string name="uninstall_update_confirm">Ĉu vi volas anstataŭigi ĉi tiun aplikaĵon per la antaŭinstalita versio?</string>
     <string name="uninstall_confirm">Ĉu vi volas malinstali ĉi tiun aplikaĵon?</string>
     <string name="tap_to_install">Elŝuto finiĝis, tuŝu por instali</string>
     <string name="download_error">Elŝuto malsukcesis</string>
@@ -522,8 +517,7 @@
     <string name="nearby_splash__download_apps_from_people_nearby">Seninterrete? Elŝutu aplikaĵojn el proksimaj uloj!
     </string>
     <string name="nearby_splash__find_people_button">Trovi proksimajn ulojn</string>
-    <string name="nearby_splash__both_parties_need_fdroid">Ambaŭ flankoj bezonas %1$s por uzi proksiman interŝanĝon.
-    </string>
+    <string name="nearby_splash__both_parties_need_fdroid">Ambaŭ flankoj bezonas %1$s por uzi proksiman interŝanĝon.</string>
 
     <string name="latest__empty_state__no_recent_apps">Neniuj novaj aplikaĵoj</string>
     <string name="latest__empty_state__never_updated">Kiam la listo de aplikaĵoj estos ĝisdatigita, plej novaj aplikaĵoj
