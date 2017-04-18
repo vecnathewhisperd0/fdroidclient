@@ -539,4 +539,5 @@
 <string name="app_list__age__released_today">Vandaag uitgebracht</string>
     <string name="app_list__age__released_yesterday">Gisteren uitgebracht</string>
     <string name="details_last_updated_today">Vandaag bijgewerkt</string>
+    <string name="menu_video">Video</string>
     </resources>
