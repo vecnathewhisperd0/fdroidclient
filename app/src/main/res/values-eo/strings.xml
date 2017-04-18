@@ -314,7 +314,8 @@
     <string name="swap_switch_to_wifi">Tuŝu por ŝanĝi al vifio</string>
     <string name="swap_confirm_connect">Ĉu vi volas elŝuti aplikaĵojn el %1$s nun?</string>
     <string name="swap_dont_show_again">Ne montri ĉi tion denove</string>
-    <string name="swap_scan_or_type_url">Iu ajn devas skani kodon, aŭ entajpi URL-n de aliulo en la foliumilo.</string>
+    <string name="swap_scan_or_type_url">"Unu persono devas skani la kodon, aŭ entajpi URL-n de aliulo en foliumilon.
+ "</string>
     <string name="swap_choose_apps">Elekti aplikaĵojn</string>
     <string name="swap_scan_qr">Skanu QR-kodon</string>
     <string name="swap_people_nearby">Homoj proksime</string>
@@ -367,7 +368,7 @@
     <string name="tap_to_install">Elŝuto finiĝis, tuŝu por instali</string>
     <string name="download_error">Elŝuto malsukcesis</string>
 
-    <string name="perms_new_perm_prefix">"Nova: "</string>
+    <string name="perms_new_perm_prefix">Nova:</string>
     <string name="downloading">Elŝutado…</string>
 
     <string name="perms_description_app">Liverita per %1$s.</string>
@@ -484,9 +485,9 @@
     <string name="tts_category_name">Kategorio %1$s</string>
 
     <plurals name="tts_view_all_in_category">
-        <item quantity="one">Montri la ununuran aplikaĵon en la kategorio %2$s</item>
-        <item quantity="other">Montri ĉiujn %1$s aplikaĵojn en la kategorio %2$s</item>
-    </plurals>
+	<item quantity="one">Montri %1$d aplikaĵon en la kategorio %2$s</item>
+	<item quantity="other">Montri ĉiujn %1$s aplikaĵojn en la kategorio %2$s</item>
+</plurals>
     <string name="app__install_downloaded_update">Ĝisdatigi</string>
 
     <string name="app_list__name__downloaded_and_ready_to_update">Ĝisdatigi %1$s</string>
@@ -514,9 +515,9 @@
     <string name="antifeatures">Fiebloj</string>
     <string name="details_last_updated_today">Ĝisdatigita hodiaŭ</string>
     <plurals name="details_last_update_days">
-        <item quantity="one">Ĝisdatigita hodiaŭ</item>
-        <item quantity="other">Ĝisdatigita antaŭ %1$s tagoj</item>
-    </plurals>
+	<item quantity="one">Ĝisdatigita antaŭ %1$s tago</item>
+	<item quantity="other">Ĝisdatigita antaŭ %1$s tagoj</item>
+</plurals>
     <string name="app_list__name__successfully_installed">%1$s instalita sukcese</string>
     <string name="nearby_splash__download_apps_from_people_nearby">Seninterrete? Elŝutu aplikaĵojn el proksimaj uloj!
     </string>
@@ -534,4 +535,6 @@
 
     <string name="categories__empty_state__no_categories">Neniuj kategorioj por montri</string>
 
-</resources>
+<string name="app_list__age__released_today">Eldonita hodiaŭ</string>
+    <string name="app_list__age__released_yesterday">Eldonita hieraŭ</string>
+    </resources>
