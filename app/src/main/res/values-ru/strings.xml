@@ -414,7 +414,7 @@
     <item quantity="one">Обновлено %1$s дня назад</item>
 	<item quantity="few">Обновлено %1$s дня назад</item>
 	<item quantity="many">Обновлено %1$s дней назад</item>
-    <item quantity="other">Обновлено %1$s дня назад</item>
+	<item quantity="other"/>
 </plurals>
 <string name="app_details_donate_prompt">%1$s создано %2$s. Купи им чашечку кофе!</string>
 
@@ -425,7 +425,7 @@
 	<item quantity="one">Скачать обновления для %1$d приложения.</item>
 	<item quantity="few">Скачать обновления для %1$d приложений.</item>
 	<item quantity="many">Скачать обновления для %1$d приложений.</item>
-    <item quantity="other">Скачать обновления для %1$d приложений.</item>
+	<item quantity="other"/>
 </plurals>
 
     <string name="app_list__name__downloaded_and_ready_to_update">Обновить %1$s</string>
