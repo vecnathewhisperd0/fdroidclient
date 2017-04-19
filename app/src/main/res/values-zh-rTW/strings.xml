@@ -5,7 +5,8 @@
     <string name="SignatureMismatch">
         此應用軟體的新版本被簽署了與舊版本不同的金鑰。如要安裝新版本，您必須將舊版本應用軟體先解除安裝。請於完成該操作後再嘗試一次。（注意解除安裝應用軟體時會清除任何由該應用軟體保存於系統中的所有資料）
     </string>
-    <string name="installIncompatible">看起來此軟體包與您的裝置並不相容。您無論如何都要嘗試安裝它嗎？</string>
+    <string name="installIncompatible">"看起來此軟體包與您的裝置並不相容。您無論如何都要嘗試安裝它嗎？
+ "</string>
     <string name="installDowngrade">您正在嘗試降級此應用軟體。這樣做可能會讓該應用軟體不能正常運作，甚至可能會造成您重要資料的流失。您確定無論如何都要試著降級它嗎？</string>
     <string name="version">版本</string>
     <string name="delete">刪除</string>
