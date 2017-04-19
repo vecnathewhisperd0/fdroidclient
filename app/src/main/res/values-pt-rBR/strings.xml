@@ -52,15 +52,12 @@
     <string name="add_key">Adicionar chave</string>
     <string name="overwrite">Sobrescrever</string>
     <string name="fdroid_updates_available">Atualizações do F-Droid disponíveis</string>
-    <string name="bluetooth_activity_not_found">Nenhum método de envio por Bluetooth foi encontrado, escolha um!
-    </string>
+    <string name="bluetooth_activity_not_found">Nenhum método de envio por Bluetooth foi encontrado, escolha um!</string>
     <string name="choose_bt_send">Escolher o método de envio Bluetooth</string>
     <string name="send_via_bluetooth">Enviar por bluetooth</string>
     <string name="repo_add_url">Endereço do repositório</string>
     <string name="repo_add_fingerprint">Fingerprint (opcional)</string>
-    <string name="repo_exists_add_fingerprint">Este repositório já está configurado, isto adicionará nova informação
-        sobre a chave.
-    </string>
+    <string name="repo_exists_add_fingerprint">Este repositório já está configurado, isto adicionará nova informação sobre a chave.</string>
     <string name="repo_exists_enable">Este repositório já está configurado, confirma que quer reativá-lo.</string>
     <string name="repo_exists_and_enabled">O repositório já está configurado e habilitado.</string>
     <string name="repo_delete_to_overwrite">Você deve apagar este repositório antes para poder adicionar um com uma
@@ -105,9 +102,7 @@
     <string name="ignoreTouch_on">Sempre incluir aplicativos que requerem tela sensível a toque</string>
     <string name="local_repo">Repositório local</string>
     <string name="local_repo_running">O F-Droid está pronto para permutar</string>
-    <string name="touch_to_configure_local_repo">Toque para ver detalhes e permitir que outros permutem seus
-        aplicativos.
-    </string>
+    <string name="touch_to_configure_local_repo">Toque para ver detalhes e permitir que outros permutem seus aplicativos.</string>
     <string name="deleting_repo">Apagando o repositório atual…</string>
     <string name="adding_apks_format">Adicionando %s ao repositório…</string>
     <string name="writing_index_jar">Escrevendo arquivo de índice assinado (index.jar)…</string>
@@ -328,7 +323,7 @@
     <string name="uninstall_confirm">Você quer desinstalar este aplicativo?</string>
     <string name="tap_to_install">Download concluído, toque para instalar</string>
 
-    <string name="perms_new_perm_prefix">"Novo: "</string>
+    <string name="perms_new_perm_prefix">Novo:</string>
     <string name="perms_description_app">Fornecido por %1$s.</string>
     <string name="downloading">Baixando…</string>
 
@@ -511,9 +506,9 @@
     <string name="tts_category_name">Categoria %1$s</string>
 
     <plurals name="tts_view_all_in_category">
-        <item quantity="one">Ver o único aplicativo na categoria %2$s</item>
-        <item quantity="other">Ver todos os %1$d aplicativos da categoria %2$s</item>
-    </plurals>
+	<item quantity="one">Ver %1$d aplicativo na categoria %2$s</item>
+	<item quantity="other">Ver todos os %1$d aplicativos da categoria %2$s</item>
+</plurals>
     <string name="app_list__name__successfully_installed">%1$s instalado com sucesso</string>
     <string name="latest__empty_state__no_recent_apps">Nenhum aplicativo recente encontrado</string>
     <string name="latest__empty_state__never_updated">Uma vez que a sua lista de aplicativos tenha sido atualizada, os
@@ -537,7 +532,10 @@
 
     <string name="details_last_updated_today">Atualizado hoje</string>
     <plurals name="details_last_update_days">
-        <item quantity="one">Atualizados %1$s dias atrás</item>
-        <item quantity="other">Atualizados %1$s dias atrás</item>
-    </plurals>
-</resources>
+	<item quantity="one">Atualizado %1$s dia atrás</item>
+	<item quantity="other">Atualizados %1$s dias atrás</item>
+</plurals>
+<string name="app_list__age__released_today">Lançado hoje</string>
+    <string name="app_list__age__released_yesterday">Lançado ontem</string>
+    <string name="menu_video">Vídeo</string>
+    </resources>
