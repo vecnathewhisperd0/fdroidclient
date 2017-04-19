@@ -233,7 +233,7 @@
 
     <string name="bluetooth_unavailable">Bluetooth nicht verfügbar</string>
     <string name="newPerms">Neu</string>
-    <string name="perms_new_perm_prefix">"Neu: "</string>
+    <string name="perms_new_perm_prefix">Neu:</string>
     <string name="interval_1h">Stündlich</string>
     <string name="interval_4h">Alle 4 Stunden</string>
     <string name="interval_12h">Alle 12 Stunden</string>
@@ -493,9 +493,9 @@
     <string name="tts_category_name">Kategorie %1$s</string>
 
     <plurals name="tts_view_all_in_category">
-        <item quantity="one">Die einzige Anwendung in der %2$s Kategorie ansehen</item>
-        <item quantity="other">Alle %1$s Anwendungen aus der %2$s Kategorie ansehen</item>
-    </plurals>
+	<item quantity="one">%1$d Anwendung in der Kategorie %2$s ansehen</item>
+	<item quantity="other">Alle %1$s Anwendungen aus der Kategorie %2$s ansehen</item>
+</plurals>
     <string name="app__install_downloaded_update">Aktualisieren</string>
 
     <string name="app_list__name__downloaded_and_ready_to_update">%1$s aktualisieren</string>
@@ -523,9 +523,9 @@
     <string name="antifeatures">Unfreie Merkmale</string>
     <string name="details_last_updated_today">Heute aktualisiert</string>
     <plurals name="details_last_update_days">
-        <item quantity="one">Heute aktualisiert</item>
-        <item quantity="other">Vor %1$d Tagen aktualisiert</item>
-    </plurals>
+	<item quantity="one">Vor %1$s Tag aktualisiert</item>
+	<item quantity="other">Vor %1$d Tagen aktualisiert</item>
+</plurals>
     <plurals name="button_view_all_apps_in_category">
         <item quantity="one">%d ansehen</item>
         <item quantity="other">Alle %d ansehen</item>
@@ -549,4 +549,7 @@
 
     <string name="categories__empty_state__no_categories">Keine Kategorien zum Anzeigen</string>
 
-</resources>
+<string name="app_list__age__released_today">Heute veröffentlicht</string>
+    <string name="app_list__age__released_yesterday">Gestern veröffentlicht</string>
+    <string name="menu_video">Film</string>
+    </resources>
