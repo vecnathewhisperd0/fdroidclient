@@ -58,11 +58,9 @@
     <string name="repo_add_url">Indiritzu depòsitu</string>
     <string name="repo_add_fingerprint">Arrastu/Imprenta (optzionale)</string>
     <string name="repo_exists_add_fingerprint">Custu depòsitu est giai cunfiguradu, custu at a annànghere
-        un\'informatzione crae noa.
-    </string>
+ un\'informatzione crae noa.</string>
     <string name="repo_exists_enable">Custu depòsitu est giai cunfiguradu, cunfirma s\'intentzione de lu bòlere torrare
-        a abilitare.
-    </string>
+ a abilitare.</string>
     <string name="repo_exists_and_enabled">Custu depòsitu est giai cunfiguradu e abilitadu.</string>
     <string name="repo_delete_to_overwrite">Depes burrare custu depòsitu in antis de nde pòdere annànghere unu cun
         un’àtera crae.
@@ -106,9 +104,8 @@
     <string name="ignoreTouch_on">Include semper sas aplicatziones chi tenet bisòngiu de su touchscreen</string>
     <string name="local_repo">Depòsitu locale</string>
     <string name="local_repo_running">F-Droid est prontu pro imbiare cun swap</string>
-    <string name="touch_to_configure_local_repo">Toca pro bìere sas minujas e permìtere a àteros de retzire sas
-        aplicatziones tuas.
-    </string>
+    <string name="touch_to_configure_local_repo">Toca pro bìdere sas minujas e permìtere a àteros de retzire sas
+ aplicatziones tuas.</string>
     <string name="deleting_repo">Burrende su depòsitu atuale…</string>
     <string name="adding_apks_format">Annanghende %s a su depòsitu…</string>
     <string name="writing_index_jar">Iscriende su documentu de ìnditze firmadu (index.jar)…</string>
@@ -307,8 +304,7 @@
     </string>
     <string name="loading">Carrighende…</string>
     <string name="swap_not_enabled">Cumpartzidura non abilitada</string>
-    <string name="swap_not_enabled_description">In antis de cumpartzire, su dispositivu depet èssere postu visìbile.
-    </string>
+    <string name="swap_not_enabled_description">In antis de cumpartzire, su dispositivu depet èssere postu visìbile.</string>
 
     <string name="install_confirm">at a tènnere atzessu a</string>
     <string name="install_confirm_update">Boles installare un’agiornamentu
@@ -475,9 +471,9 @@
 
 
     <plurals name="button_view_all_apps_in_category">
-        <item quantity="one">Càstia totu %d</item>
-        <item quantity="other">Càstia totu %d</item>
-    </plurals>
+	<item quantity="one">" Càstia %d "</item>
+	<item quantity="other">" Càstia totu %d "</item>
+</plurals>
 
     <string name="clear_search">Inneta sa chirca</string>
 
@@ -522,8 +518,7 @@
 
     <string name="details_new_in_version">Nou in sa versione %s</string>
 
-    <string name="antifeatureswarning">Custa aplicatzione tenet funtzionalidades chi ti diant pòdere non agradare.
-    </string>
+    <string name="antifeatureswarning">Custa aplicatzione tenet funtzionalidades chi ti diant pòdere non agradare.</string>
     <string name="antifeatures">Anti-funtzionalidades</string>
     <string name="details_last_updated_today">Agiornadu oe</string>
     <plurals name="details_last_update_days">
@@ -536,8 +531,7 @@
     </string>
     <string name="nearby_splash__find_people_button">Agata persones a curtzu</string>
     <string name="nearby_splash__both_parties_need_fdroid">Ambos tenides bisòngiu de %1$s pro impreare custa
-        funtzionalidade.
-    </string>
+ funtzionalidade.</string>
 
     <string name="latest__empty_state__no_recent_apps">Peruna aplicatzione reghente agatada</string>
     <string name="latest__empty_state__never_updated">Cando sa lista de sas aplicatziones at a èssere agiornada, sas
