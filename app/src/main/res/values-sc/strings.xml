@@ -334,7 +334,7 @@
     <string name="uninstall_confirm">Boles disinstallare custa aplicatzione?</string>
     <string name="tap_to_install">Iscarrigamentu cumpridu, toca pro installare</string>
 
-    <string name="perms_new_perm_prefix">"Nou: "</string>
+    <string name="perms_new_perm_prefix">Nou:</string>
     <string name="perms_description_app">Frunidu dae %1$s.</string>
     <string name="downloading">Iscarrighende…</string>
 
@@ -496,9 +496,9 @@
     <string name="tts_category_name">Categoria %1$s</string>
 
     <plurals name="tts_view_all_in_category">
-        <item quantity="one">Ammustra s\'aplicatzione in sa categoria %2$s</item>
-        <item quantity="other">Ammustra totu sas aplicatziones in sa categoria %2$s</item>
-    </plurals>
+	<item quantity="one">Ammustra s\'aplicatzione %1$d in sa categoria %2$s</item>
+	<item quantity="other">Ammustra totu sas aplicatziones %1$d in sa categoria %2$s</item>
+</plurals>
     <string name="app__install_downloaded_update">Agiorna</string>
 
     <string name="app_list__name__downloaded_and_ready_to_update">Agiorna %1$s</string>
@@ -527,9 +527,9 @@
     <string name="antifeatures">Anti-funtzionalidades</string>
     <string name="details_last_updated_today">Agiornadu oe</string>
     <plurals name="details_last_update_days">
-        <item quantity="one">Agiornadu oe</item>
-        <item quantity="other">Agiornadu %1$s dies faghet</item>
-    </plurals>
+	<item quantity="one">Agiornada %1$s die faghet</item>
+	<item quantity="other">Agiornadas %1$s dies faghet</item>
+</plurals>
     <string name="app_list__name__successfully_installed">%1$s installada</string>
     <string name="nearby_splash__download_apps_from_people_nearby">Non ses in lìnia? Iscàrriga aplicatziones dae sa
         gente a curtzu de tie!
@@ -549,4 +549,7 @@
 
     <string name="categories__empty_state__no_categories">Peruna categoria de ammustrare</string>
 
-</resources>
+<string name="app_list__age__released_today">Publicada oe</string>
+    <string name="app_list__age__released_yesterday">Publicada eris</string>
+    <string name="menu_video">Vìdeu</string>
+    </resources>
