@@ -326,7 +326,7 @@
     <string name="tap_to_install">Загрузка закончена, нажмите для установки</string>
     <string name="download_error">Загрузка не удалась</string>
 
-    <string name="perms_new_perm_prefix">"Новые: "</string>
+    <string name="perms_new_perm_prefix">Новые:</string>
     <string name="crash_dialog_title">Произошёл сбой F-Droid</string>
     <string name="crash_dialog_text">Непредвиденная ошибка привела к остановке приложения. Хотите отправить письмо с
         подробностями, чтобы помочь исправить эту ошибку?
@@ -346,7 +346,8 @@
     </string>
     <string name="system_install_question">Вы хотите установить привилегированное расширение F-Droid?</string>
     <string name="system_uninstall">Вы хотите удалить привилегированное расширение F-Droid?</string>
-    <string name="swap_nfc_description">Если у вашего друга есть F-Droid, а на ваших устройствах включен NFC.</string>
+    <string name="swap_nfc_description">"Если у вашего друга есть F-Droid и у Вас обоих включен NFC, приложите устройства друг к другу.
+ "</string>
     <string name="swap_join_this_hotspot">Помогите Вашему другу подключиться к Вашей точке доступа</string>
     <string name="swap_nfc_title">Нажмите для обмена</string>
     <string name="swap_join_same_wifi_desc">Чтобы выполнить обмен, используя Wi-Fi, убедитесь, что вы подключены к одной
@@ -488,11 +489,11 @@
     <string name="notification_action_update">Обновить</string>
     <string name="details_last_updated_today">Обновлено сегодня</string>
     <plurals name="details_last_update_days">
-        <item quantity="one">Обновлено %1$s дня назад</item>
-        <item quantity="few">Обновлено %1$s дня назад</item>
-        <item quantity="many">Обновлено %1$s дней назад</item>
-        <item quantity="other"/>
-    </plurals>
+	<item quantity="one">Обновлено %1$s день назад</item>
+	<item quantity="few">Обновлено %1$s дня назад</item>
+	<item quantity="many">Обновлено %1$s дней назад</item>
+	<item quantity="other"></item>
+</plurals>
     <string name="app_details_donate_prompt">%1$s создано %2$s. Купи им чашечку кофе!</string>
 
     <string name="app_recommended_version_installed">Версия %1$s (Рекомендуемая)</string>
@@ -526,14 +527,17 @@
     <string name="notification_title_summary_installed">Успешно установлено</string>
     <string name="notification_title_summary_install_error">Установка не удалась</string>
     <plurals name="tts_view_all_in_category">
-        <item quantity="one">Посмотреть %1$d приложение в категории %2$s</item>
-        <item quantity="few">Посмотреть %1$d приложения в категории %2$s</item>
-        <item quantity="many">Посмотреть %1$d приложений в категории %2$s</item>
-        <item quantity="other"/>
-    </plurals>
+	<item quantity="one">Посмотреть %1$d приложение в категории %2$s</item>
+	<item quantity="few">Посмотреть %1$d приложения в категории %2$s</item>
+	<item quantity="many">Посмотреть %1$d приложений в категории %2$s</item>
+	<item quantity="other"/>
+</plurals>
 
     <string name="latest__empty_state__no_recent_apps">Нет недавних приложений</string>
     <string name="nearby_splash__both_parties_need_fdroid">Обоим участникам нужен %1$s чтобы передавать приложения.
     </string>
 
-</resources>
+<string name="app_list__age__released_today">Опубликованные сегодня</string>
+    <string name="app_list__age__released_yesterday">Опубликованные вчера</string>
+    <string name="menu_video">Видео</string>
+    </resources>
