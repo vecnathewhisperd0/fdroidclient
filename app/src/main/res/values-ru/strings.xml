@@ -211,7 +211,7 @@
     <string name="update_notification_title">Обновление репозиториев</string>
     <string name="status_processing_xml_percent">Обработка %2$s / %3$s (%4$d%%) из %1$s</string>
     <string name="install_error_unknown">Установка не удалась из-за неизвестной ошибки</string>
-    <string name="uninstall_error_unknown">Удаление не удалось из-за неизвестной ошибки</string>
+    <string name="uninstall_error_unknown">Не получилось удалить из-за неизвестной ошибки</string>
     <string name="repo_details">Репозиторий</string>
     <string name="repo_url">Адрес</string>
     <string name="pref_language_default">Системный</string>
@@ -492,7 +492,7 @@
 	<item quantity="one">Обновлено %1$s день назад</item>
 	<item quantity="few">Обновлено %1$s дня назад</item>
 	<item quantity="many">Обновлено %1$s дней назад</item>
-	<item quantity="other"></item>
+	<item quantity="other"/>
 </plurals>
     <string name="app_details_donate_prompt">%1$s создано %2$s. Купи им чашечку кофе!</string>
 
@@ -534,8 +534,7 @@
 </plurals>
 
     <string name="latest__empty_state__no_recent_apps">Нет недавних приложений</string>
-    <string name="nearby_splash__both_parties_need_fdroid">Обоим участникам нужен %1$s чтобы передавать приложения.
-    </string>
+    <string name="nearby_splash__both_parties_need_fdroid">Обоим участникам нужен %1$s чтобы передавать приложения.</string>
 
 <string name="app_list__age__released_today">Опубликованные сегодня</string>
     <string name="app_list__age__released_yesterday">Опубликованные вчера</string>
