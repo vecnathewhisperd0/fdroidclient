@@ -146,7 +146,7 @@
     <string name="swap_join_same_wifi">Liity ystäväsi kanssa samaan Wi-Fi-verkkoon</string>
     <string name="swap">Vaihda sovelluksia</string>
     <string name="swap_no_wifi_network">Ei vielä verkkoa</string>
-    <string name="swap_view_available_networks">Napsauta avataksesi saatavilla olevat verkot</string>
+    <string name="swap_view_available_networks">Näytä saatavilla olevat verkot napauttamalla</string>
     <string name="open_qr_code_scanner">Avaa QR-koodilukija</string>
     <string name="swap_welcome">Tervetuloa F-Droidiin!</string>
     <string name="swap_confirm_connect">Haluatko saada sovellukset kohteesta %1$s nyt?</string>
@@ -230,7 +230,7 @@ asentamisesta
     <string name="update_notification_title">Päivitetään sovelluslähteitä</string>
     <string name="repo_exists_add_fingerprint">Tämä sovelluslähde on jo asennettu, tämä lisää uuden avaimen tiedot.</string>
     <string name="status_inserting_apps">Tallennetaan sovelluksen tietoja</string>
-    <string name="no_permissions">Käyttöoikeuksia ei ole pyydetty.</string>
+    <string name="no_permissions">Käyttöoikeuksia ei tarvita.</string>
     <string name="permissions">Käyttöoikeudet</string>
     <string name="unsigned">Allekirjoittamaton</string>
     <string name="repo_details">Sovelluslähde</string>
@@ -266,7 +266,7 @@ asentamisesta
     <string name="system_install_button_install">Asenna</string>
     <string name="system_install_installing">Asennetaan…</string>
     <string name="system_install_uninstalling">Poistetaan…</string>
-    <string name="system_install_warning">Tämä voi kestää jopa 10 sekuntia.</string>
+    <string name="system_install_warning">Tämä kestää jopa 10 sekuntia.</string>
     <string name="system_install_warning_lollipop">Tämä voi kestää jopa 10 sekuntia ja laite tullaan
         <b>käynnistämään uudelleen</b>
         sen jälkeen.
@@ -298,13 +298,13 @@ asentamisesta
     <string name="status_connecting_to_repo">Yhdistetään osoitteeseen
         %1$s
     </string>
-    <string name="no_handler_app">Sinulla ei ole saatavilla yhtään sovellusta joka pystyy käsittelemään %s.</string>
+    <string name="no_handler_app">Sinulla ei ole yhtään sovellusta, joka voi käsitellä %s.</string>
     <string name="repo_fingerprint">Allekirjoitusvarmenteen sormenjälki (SHA-256)</string>
     <string name="repo_searching_address">Etsitään F-Droid sovelluslähdettä osoitteesta
         %1$s
     </string>
     <string name="minsdk_or_later">%s tai uudempi</string>
-    <string name="category_Connectivity">Yhdistettävyys</string>
+    <string name="category_Connectivity">Liitettävyys</string>
     <string name="category_Graphics">Grafiikka</string>
     <string name="empty_installed_app_list">Ei asennettuja sovelluksia.
 
@@ -324,8 +324,8 @@ asentamisesta
     </string>
     <string name="up_to_maxsdk">%s asti</string>
     <string name="minsdk_up_to_maxsdk">%1$s alkaen %2$s asti</string>
-    <string name="empty_search_installed_app_list">Hakusi ei vastannut yhtään asennettua sovellusta.</string>
-    <string name="empty_search_available_app_list">Haulla ei löytynyt tuloksia.</string>
+    <string name="empty_search_installed_app_list">Haulla ei löytynyt asennettuja sovelluksia.</string>
+    <string name="empty_search_available_app_list">Haulla ei löytynyt sovelluksia.</string>
     <string name="empty_search_can_update_app_list">Haulla ei löytynyt päivitettäviä sovelluksia.</string>
 
     <string name="install_error_unknown">Asennus epäonnistui tuntemattoman virheen vuoksi</string>
@@ -334,27 +334,27 @@ asentamisesta
     </string>
     <string name="system_install_button_open">Avaa laajennus</string>
     <string name="system_install_installing_rebooting">Asennetaan ja käynnistetään uudelleen…</string>
-    <string name="swap_nfc_title">Kosketa vaihtaaksesi</string>
+    <string name="swap_nfc_title">Vaihda koskettamalla</string>
     <string name="swap_join_same_wifi_desc">Vaihtaaksesi sovelluksia Wi-Fin avulla, sinun tulee olla samassa verkossa.
         Jos sinulla ei ole pääsyä samaan verkkoon, voit luoda oman Wi-Fi-hotspotin.
     </string>
     <string name="swap_join_this_hotspot">Auta ystävääsi liittymään hotspottiisi</string>
     <string name="swap_success">Vaihtaminen onnistui!</string>
-    <string name="swap_switch_to_wifi">Napsauta vaihtaaksesi Wi-Fi-verkkoa</string>
+    <string name="swap_switch_to_wifi">Napauta vaihtaaksesi Wi-Fi-verkkoa</string>
     <string name="swap_scan_or_type_url">Henkilön tulee skannata koodi tai kirjoittaa toisen URL-osoite selaimeen.
     </string>
     <string name="swap_people_nearby">Lähellä olevat ihmiset</string>
     <string name="swap_scanning_for_peers">Etsitään lähellä olevia ihmisiä…</string>
     <string name="swap_nearby">Lähellä vaihto</string>
     <string name="swap_intro">Yhdistä ja vaihda sovelluksia lähellä olevien ihmisten kanssa.</string>
-    <string name="swap_visible_bluetooth">Nähtävissä Bluetoothin kautta</string>
-    <string name="swap_setting_up_bluetooth">Asetetaan Bluetoothia…</string>
+    <string name="swap_visible_bluetooth">Näkyvissä Bluetoothin kautta</string>
+    <string name="swap_setting_up_bluetooth">Valmistellaan Bluetoothia…</string>
     <string name="swap_not_visible_bluetooth">Ei nähtävissä Bluetoothin kautta</string>
-    <string name="swap_visible_wifi">Nähtävissä Wi-Fin kautta</string>
-    <string name="swap_setting_up_wifi">Asetetaan Wi-Fiä…</string>
+    <string name="swap_visible_wifi">Näkyvissä Wi-Fin kautta</string>
+    <string name="swap_setting_up_wifi">Valmistellaan Wi-Fiä…</string>
     <string name="swap_stopping_wifi">Pysäytetään WiFiä…</string>
     <string name="swap_not_visible_wifi">Ei nähtävissä Wi-Fin kautta</string>
-    <string name="swap_cant_find_peers">Etkö löydä etsimääsi?</string>
+    <string name="swap_cant_find_peers">Etkö löydä ketä etsit?</string>
     <string name="swap_no_peers_nearby">Ei löytynyt lähellä olevia ihmisiä joiden kanssa vaihtaa.</string>
     <string name="swap_connecting">Yhdistetään</string>
     <string name="swap_confirm">Vahvista vaihto</string>
@@ -368,8 +368,8 @@ asentamisesta
     <string name="swap_not_enabled">Vaihtaminen ei ole käytössä</string>
     <string name="swap_not_enabled_description">Ennen vaihtamista, laitteesi täytyy tehdä näkyväksi.</string>
 
-    <string name="tap_to_install_format">Napsauta asentaaksesi %s</string>
-    <string name="tap_to_update_format">Napsauta päivittääksesi %s</string>
+    <string name="tap_to_install_format">Napauta asentaaksesi %s</string>
+    <string name="tap_to_update_format">Napauta päivittääksesi %s</string>
     <string name="install_confirm">tarvitsee pääsyn</string>
     <string name="install_confirm_update">Haluatko asentaa päivityksen tähän olemassa olevaan sovellukseen? Nykyiset
         tietosi eivät häviä. Päivitetty sovellus saa pääsyn:
@@ -383,9 +383,9 @@ asentamisesta
     <string name="install_confirm_update_system_no_perms">Haluatko asentaa päivityksen tähän sisäänrakennettuun
         sovellukseen? Nykyiset tietosi eivät häviä. Sovellus ei tarvitse uusia lupia.
     </string>
-    <string name="perm_costs_money">Tämä voi maksaa sinulle rahaa</string>
+    <string name="perm_costs_money">Tämä voi olla maksullista</string>
     <string name="uninstall_update_confirm">Haluatko korvata tämän sovelluksen tehdasversiolla?</string>
-    <string name="tap_to_install">Lataus valmis, napsauta asentaaksesi</string>
+    <string name="tap_to_install">Lataus valmis, napauta asentaaksesi</string>
     <string name="download_pending">Odotetaan latauksen alkamista…</string>
     <string name="install_error_notify_title">Virhe asennettaessa %s</string>
     <string name="uninstall_error_notify_title">Virhe poistettaessa %s</string>
