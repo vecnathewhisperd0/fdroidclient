@@ -3,9 +3,9 @@
     <string name="version">Versiune</string>
     <string name="delete">Sterge</string>
     <string name="cache_downloaded">Pastreaza aplicatiile descarcate</string>
-    <string name="updates">Actualizat</string>
+    <string name="updates">Actualizări</string>
     <string name="other">Altele</string>
-    <string name="notify">Notificare actualizari</string>
+    <string name="notify">Notificări actualizări</string>
     <string name="app_details">Detalii aplicatie</string>
     <string name="about_title">Despre F-Droid</string>
     <string name="about_site">Site web</string>
@@ -350,10 +350,8 @@
     </string>
     <string name="system_installer_on">Folositi F-Droid Extension pentru a instala, actualiza si a înlătura pachete
     </string>
-    <string name="empty_can_update_app_list">Toate aplicatiile sunt la zi.
-
-        Felicitari! Toate aplicatiile tale sunt la zi (sau depozitele sunt prea vechi).
-    </string>
+    <string name="empty_can_update_app_list">"Felicitări! Toate aplicațiile tale sunt la zi (sau depozitele nu au fost actualizate).
+ "</string>
     <string name="empty_available_app_list">Nici o aplicatie in aceasta categorie.
 
         Incercati sa selectati o categorie diferita sau sa actualizati depozitele.
@@ -450,7 +448,7 @@
     <string name="main_menu__swap_nearby">In apropiere</string>
 
     <string name="main_menu__categories">Categorii</string>
-    <string name="main_menu__latest_apps">Cele mai noi</string>
+    <string name="main_menu__latest_apps">Noutăţi</string>
     <string name="clear_search">Curata cautarea</string>
 
     <plurals name="updates__download_updates_for_apps">
@@ -465,9 +463,8 @@
     <string name="updates__tts__download_updates_for_all_apps">Descarca toate actualizarile</string>
 
     <string name="updates__tts__download_app">Descarca</string>
-    <string name="installed_app__updates_ignored_for_suggested_version">Actualizarile ignorate pentru versiunea %1$s
-    </string>
-    <string name="installed_app__updates_ignored">Actualizarile ignorate</string>
+    <string name="installed_app__updates_ignored_for_suggested_version">Actualizări ignorate pentru versiunea %1$s</string>
+    <string name="installed_app__updates_ignored">Actualizări ignorate</string>
     <string name="installed_apps__activity_title">Aplicatii instalate</string>
     <plurals name="app_list__age__released_x_days_ago">
 	<item quantity="one">Publicat acum %1$d zi</item>
