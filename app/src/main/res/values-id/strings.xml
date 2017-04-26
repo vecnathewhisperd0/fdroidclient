@@ -548,4 +548,6 @@ Coba pilih kategori yang berbeda atau perbarui
     <string name="app_list__age__released_yesterday">Dirilis kemarin</string>
     <string name="menu_video">Video</string>
     <string name="details_last_updated_today">Diperbarui hari ini</string>
+    <string name="app__tts__cancel_download">Batalkan unduhan</string>
+    <string name="app__tts__downloading_progress">Mengunduh, %1$d%% selesai</string>
     </resources>
