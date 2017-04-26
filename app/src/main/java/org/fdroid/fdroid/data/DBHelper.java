@@ -192,7 +192,7 @@ class DBHelper extends SQLiteOpenHelper {
             + InstalledAppTable.Cols.HASH + " TEXT NOT NULL"
             + " );";
 
-    protected static final int DB_VERSION = 69;
+    protected static final int DB_VERSION = 70;
 
     private final Context context;
 
@@ -276,6 +276,42 @@ class DBHelper extends SQLiteOpenHelper {
         addIndexV1AppFields(db, oldVersion);
         recalculatePreferredMetadata(db, oldVersion);
         addWhatsNewAndVideo(db, oldVersion);
+        switchArchiveRepoPriorities(db, oldVersion);
+    }
+
+    private void switchArchiveRepoPriorities(SQLiteDatabase db, int oldVersion) {
+        if (oldVersion >= 70) {
+            return;
+        }
+
+        Log.i(TAG, "Making Archive repos have lower priorities than their non-archive counterparts.");
+        String[] newRepoOrder = new String[] {
+                "https://f-droid.org/archive",
+                "https://f-droid.org/repo",
+                "https://guardianproject.info/fdroid/archive",
+                "https://guardianproject.info/fdroid/repo",
+        };
+
+        for (int i = 0; i < newRepoOrder.length; i++) {
+            ContentValues values = new ContentValues(1);
+            values.put(RepoTable.Cols.PRIORITY, Integer.toString(i + 1));
+            db.update(RepoTable.NAME, values, RepoTable.Cols.ADDRESS + " = ?", new String[] {newRepoOrder[i]});
+        }
+
+        Cursor cursor = db.query(
+                RepoTable.NAME,
+                new String[] {RepoTable.Cols.ADDRESS},
+                RepoTable.Cols.IN_USE + " = 1 AND " + RepoTable.Cols.PRIORITY + " <= 4",
+                null, null, null, null
+        );
+
+        if (cursor != null) {
+            if (cursor.getCount() > 1) {
+                Log.i(TAG, "Forcing repo refresh because more than one of the default repos is enabled and we just shuffled their priority.");
+                resetTransient(db);
+            }
+            cursor.close();
+        }
     }
 
     private void addWhatsNewAndVideo(SQLiteDatabase db, int oldVersion) {
