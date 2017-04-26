@@ -538,4 +538,6 @@
 <string name="app_list__age__released_today">Lançado hoje</string>
     <string name="app_list__age__released_yesterday">Lançado ontem</string>
     <string name="menu_video">Vídeo</string>
+    <string name="app__tts__cancel_download">Cancelar download</string>
+    <string name="app__tts__downloading_progress">Download, %1$d%% completo</string>
     </resources>
