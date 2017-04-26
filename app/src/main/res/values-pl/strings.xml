@@ -532,4 +532,6 @@
 <string name="app_list__age__released_today">Wydany dzisiaj</string>
     <string name="app_list__age__released_yesterday">Wydany wczoraj</string>
     <string name="menu_video">Wideo</string>
+    <string name="app__tts__cancel_download">Anuluj pobieranie</string>
+    <string name="app__tts__downloading_progress">Pobieranie, %1$d%% ukończono</string>
     </resources>
