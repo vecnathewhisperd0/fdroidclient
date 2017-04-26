@@ -546,4 +546,6 @@
 <string name="app_list__age__released_today">Publicada oe</string>
     <string name="app_list__age__released_yesterday">Publicada eris</string>
     <string name="menu_video">Vìdeu</string>
+    <string name="app__tts__cancel_download">Firma s\'iscarrigamentu</string>
+    <string name="app__tts__downloading_progress">Iscarrighende, %1$d%% cumpridu</string>
     </resources>
