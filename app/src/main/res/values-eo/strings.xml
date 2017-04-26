@@ -532,4 +532,6 @@
 <string name="app_list__age__released_today">Eldonita hodiaŭ</string>
     <string name="app_list__age__released_yesterday">Eldonita hieraŭ</string>
     <string name="menu_video">Video</string>
+    <string name="app__tts__cancel_download">Nuligi elŝutadon</string>
+    <string name="app__tts__downloading_progress">Elŝutado, %1$d%% kompleta</string>
     </resources>
