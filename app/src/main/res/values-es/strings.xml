@@ -544,4 +544,6 @@ tenéis acceso a la misma red, uno de vosotros puede crear un punto de acceso Wi
     <string name="categories__empty_state__no_categories">No hay categorías para mostrar</string>
 
 <string name="menu_video">Vídeo</string>
+    <string name="app__tts__cancel_download">Cancelar descarga</string>
+    <string name="app__tts__downloading_progress">Descargando, %1$d%% completado</string>
     </resources>
