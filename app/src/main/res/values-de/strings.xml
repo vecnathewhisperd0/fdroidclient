@@ -541,4 +541,6 @@
 <string name="app_list__age__released_today">Heute veröffentlicht</string>
     <string name="app_list__age__released_yesterday">Gestern veröffentlicht</string>
     <string name="menu_video">Film</string>
+    <string name="app__tts__cancel_download">Herunterladen abbrechen</string>
+    <string name="app__tts__downloading_progress">wird heruntergeladen, %1$d%% vervollständigt</string>
     </resources>
