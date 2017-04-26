@@ -503,4 +503,6 @@
 <string name="app_list__age__released_today">今日ﾘﾘｰｽ</string>
     <string name="app_list__age__released_yesterday">昨日ﾘﾘｰｽ</string>
     <string name="menu_video">ﾋﾞﾃﾞｵ</string>
+    <string name="app__tts__cancel_download">ﾀﾞｳﾝﾛｰﾄﾞをｷｬﾝｾﾙ</string>
+    <string name="app__tts__downloading_progress">ﾀﾞｳﾝﾛｰﾄﾞ中、%1$d%% 完了</string>
     </resources>
