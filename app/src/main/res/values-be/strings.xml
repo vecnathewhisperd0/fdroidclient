@@ -559,4 +559,6 @@
  "</string>
 
     <string name="details_last_updated_today">Абноўлена сёння</string>
+    <string name="app__tts__cancel_download">Адмяніць спампоўку</string>
+    <string name="app__tts__downloading_progress">Спампоўка, %1$d% % скончана</string>
     </resources>
