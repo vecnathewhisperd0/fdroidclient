@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-    <string name="SignatureMismatch">Sa versione noa est firmada cun una crae diferente dae sa bècia. Pro la installare,
-        sa bècia depet èssere istada disinstallada in antis. Pro piaghere fàghe·lu e torra a proare. (Sa
-        disinstallatzione as a burrare totu sos datos sarbados in s\'aplicatzione)
-    </string>
+    <string name="SignatureMismatch">"Sa versione noa est firmada cun una crae diferente dae sa bècia. Pro la installare,
+\n sa bècia depet èssere istada disinstallada in antis. Pro piaghere fàghe·lu e torra a proare. (Sa
+\n disinstallatzione as a burrare totu sos datos sarvados in s\'aplicatzione)
+\n "</string>
     <string name="installIncompatible">Paret chi custu pachete non siat cumpatìbile cun su dispositivu tuo. Boles a
         proare a lu installare su matessi?
     </string>
@@ -158,7 +158,7 @@
         Depes
         torrare a abilitare custu depòsitu pro installare sas aplicatziones chi bi sunt in intro.
     </string>
-    <string name="repo_added">Sarbadu depòsitu F-Droid %1$s.</string>
+    <string name="repo_added">Depòsitu F-Droid %1$s sarvadu.</string>
     <string name="repo_searching_address">Chirchende unu depòsitu F-Droid in\n%1$s</string>
     <string name="minsdk_or_later">%s o imbeniente</string>
     <string name="up_to_maxsdk">Finas a %s</string>
@@ -378,7 +378,7 @@
 
     <string name="about_license">Litzèntzia</string>
 
-    <string name="status_inserting_apps">Sarbende sas minujas de sas aplicatziones</string>
+    <string name="status_inserting_apps">Sarvende sas minujas de sas aplicatziones</string>
     <string name="empty_search_installed_app_list">Peruna aplicatzione currispondente installada.</string>
     <string name="empty_search_available_app_list">Peruna aplicatzione currispondente disponìbile.</string>
     <string name="empty_search_can_update_app_list">Perunu agiornamentu currispondente disponìbile.</string>
@@ -430,10 +430,9 @@
     <string name="hide_anti_feature_apps_on">Marca in murru sas aplicatziones cun caraterìsticas cun controidas</string>
     <string name="update_auto_install">Installa sos agiornamentos automaticamente</string>
     <string name="update_auto_install_summary">Iscàrriga e installa sos agiornamentos automaticamente</string>
-    <string name="keep_install_history">Sarba s\'istòria de sas installatziones</string>
-    <string name="keep_install_history_summary">Sarba unu regitru de sas installatziones e de sas disinstallatziones in
-        F-Droid
-    </string>
+    <string name="keep_install_history">Sarva s\'istòria de sas installatziones</string>
+    <string name="keep_install_history_summary">Sarva unu registru de sas installatziones e de sas disinstallatziones in
+\n F-Droid</string>
     <string name="warning_no_internet">Impossìbile agiornare, ses connessu a ìnternet?</string>
     <string name="versions">Versiones</string>
     <string name="app_details_donate_prompt_unknown_author">Cùmbida unu cafè a sos isvilupadores de %1$s!</string>
