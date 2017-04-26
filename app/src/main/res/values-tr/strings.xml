@@ -539,4 +539,6 @@
     <string name="app_list__age__released_yesterday">Dün yayımlandı</string>
     <string name="menu_video">Video</string>
     <string name="details_last_updated_today">Bugün güncellendi</string>
+    <string name="app__tts__cancel_download">İndirmeyi iptal et</string>
+    <string name="app__tts__downloading_progress">İndiriliyor, %%%1$d tamamlandı</string>
     </resources>
