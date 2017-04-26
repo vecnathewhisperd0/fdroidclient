@@ -529,4 +529,5 @@
 
     <string name="details_last_updated_today">Ажурирана данас</string>
     <string name="menu_video">Видео</string>
+    <string name="app__tts__cancel_download">Откажи преузимање</string>
     </resources>
