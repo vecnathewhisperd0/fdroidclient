@@ -56,12 +56,8 @@
     <string name="send_via_bluetooth">Envia per Bluetooth</string>
     <string name="repo_add_url">Adreça del dipòsit</string>
     <string name="repo_add_fingerprint">Empremta digital (opcional)</string>
-    <string name="repo_exists_add_fingerprint">Ja teniu un dipòsit amb aquesta adreça, sou canviant l\'empremta
-        digital.
-    </string>
-    <string name="repo_exists_enable">L\'adreça coincideix amb la d\'un dipòsit inhabilitat, confirmeu que voleu
-        reactivar-lo.
-    </string>
+    <string name="repo_exists_add_fingerprint">Ja teniu un dipòsit amb aquesta adreça, sou canviant l\'empremta digital.</string>
+    <string name="repo_exists_enable">L\'adreça coincideix amb la d\'un dipòsit inhabilitat, confirmeu que voleu reactivar-lo.</string>
     <string name="repo_exists_and_enabled">Aquesta adreça ja està en ús per un altre dipòsit del dispositiu.</string>
     <string name="repo_delete_to_overwrite">Si voleu canviar la clau d\'aquest dipòsit, primer suprimiu el dipòsit.
     </string>
@@ -105,8 +101,7 @@
     <string name="ignoreTouch_on">Inclou sempre aplicacions que requereixin pantalla tàctil</string>
     <string name="local_repo">Dipòsit local</string>
     <string name="local_repo_running">F-Droid està a punt per a l\'intercanvi</string>
-    <string name="touch_to_configure_local_repo">Toqueu per veure més detalls i permetre l\'intercanvi d\'aplicacions.
-    </string>
+    <string name="touch_to_configure_local_repo">Toqueu per veure més detalls i permetre l\'intercanvi d\'aplicacions.</string>
     <string name="deleting_repo">S\'està esborrant el dipòsit actual…</string>
     <string name="adding_apks_format">Afegint %s al dipòsit…</string>
     <string name="writing_index_jar">S\'està escribint la llista d\'aplicacions (index.jar)…</string>
@@ -530,8 +525,7 @@
         tingueu al voltant!
     </string>
     <string name="nearby_splash__find_people_button">Trobeu persones del voltant</string>
-    <string name="nearby_splash__both_parties_need_fdroid">Ambdues parts necessiten %1$s per poder usar la proximitat.
-    </string>
+    <string name="nearby_splash__both_parties_need_fdroid">Ambdues parts necessiten %1$s per poder usar la proximitat.</string>
 
     <string name="latest__empty_state__no_recent_apps">Cap «app» recent trobada</string>
     <string name="latest__empty_state__never_updated">Un cop s\'hagi actualitzat la vostra llista d\'«apps», les «apps»
