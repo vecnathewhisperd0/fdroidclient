@@ -539,4 +539,6 @@
 <string name="app_list__age__released_today">Опубликованные сегодня</string>
     <string name="app_list__age__released_yesterday">Опубликованные вчера</string>
     <string name="menu_video">Видео</string>
+    <string name="app__tts__cancel_download">Отменить скачивание</string>
+    <string name="app__tts__downloading_progress">Скачано %1$d%%</string>
     </resources>
