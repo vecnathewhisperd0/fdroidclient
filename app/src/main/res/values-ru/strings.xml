@@ -57,10 +57,8 @@
     <string name="send_via_bluetooth">Отправить по Bluetooth</string>
     <string name="repo_add_url">Адрес репозитория</string>
     <string name="repo_add_fingerprint">Отпечаток ключа (необязательно)</string>
-    <string name="repo_exists_add_fingerprint">Этот репозиторий уже настроен, это действие обновит информацию о ключе.
-    </string>
-    <string name="repo_exists_enable">Этот репозиторий уже настроен, подтвердите, что вы хотите снова включить его.
-    </string>
+    <string name="repo_exists_add_fingerprint">Этот репозиторий уже настроен, это действие обновит информацию о ключе.</string>
+    <string name="repo_exists_enable">Этот репозиторий уже настроен, подтвердите, что вы хотите снова включить его.</string>
     <string name="repo_exists_and_enabled">Репозиторий уже настроен и включён.</string>
     <string name="repo_delete_to_overwrite">Вы должны сначала удалить этот репозиторий, а потом добавить его с другим
         ключом.
@@ -248,8 +246,7 @@
 
 
     <string name="touch_to_configure_local_repo">Коснитесь для просмотра подробностей и позволить другим скачать ваши
-        приложения.
-    </string>
+\n приложения.</string>
     <string name="status_download_unknown_size">Загрузка
         \n%2$s от
         \n%1$s
@@ -467,11 +464,11 @@
     <string name="categories__empty_state__no_categories">Нет категорий для показа</string>
 
     <plurals name="button_view_all_apps_in_category">
-        <item quantity="one">Смотреть все %d</item>
-        <item quantity="few">Смотреть все %d</item>
-        <item quantity="many">Смотреть все %d</item>
-        <item quantity="other"/>
-    </plurals>
+	<item quantity="one">" Посмотреть %d приложение "</item>
+	<item quantity="few">" Посмотреть %d приложения "</item>
+	<item quantity="many">" Посмотреть %d приложений "</item>
+	<item quantity="other"/>
+</plurals>
 
     <string name="nearby_splash__download_apps_from_people_nearby">Нет интернета? Скачивайте приложения через людей
         рядом с вами!
