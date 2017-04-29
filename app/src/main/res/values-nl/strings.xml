@@ -540,4 +540,6 @@
     <string name="app_list__age__released_yesterday">Gisteren uitgebracht</string>
     <string name="details_last_updated_today">Vandaag bijgewerkt</string>
     <string name="menu_video">Video</string>
+    <string name="app__tts__cancel_download">Download annuleren</string>
+    <string name="app__tts__downloading_progress">Downloaden, %1$d%% voltooid</string>
     </resources>
