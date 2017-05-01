@@ -507,7 +507,7 @@
     <string name="antifeatures">Niepożądane funkcje</string>
     <string name="details_last_updated_today">Uaktualniono dzisiaj</string>
     <plurals name="details_last_update_days">
-	<item quantity="one">Uaktualniono %1$d dzień temu</item>
+	<item quantity="one">Uaktualniono %1$s dzień temu</item>
 	<item quantity="few">Uaktualniono %1$s dni temu</item>
 	<item quantity="many">Uaktualniono %1$s dni temu</item>
 	<item quantity="other"/>
