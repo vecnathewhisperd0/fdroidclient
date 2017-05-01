@@ -519,4 +519,5 @@
 	<item quantity="one">‫%1$s روز پیش به‌روز شده</item>
 	<item quantity="other">‫%1$s روز پیش به‌روز شده</item>
 </plurals>
-</resources>
+<string name="menu_license">پروانه: %s</string>
+    </resources>
