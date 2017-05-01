@@ -303,8 +303,7 @@
     <string name="app_list__age__released_today">ယနေ့ထွက်ခဲ့သည်</string>
     <string name="app_list__age__released_yesterday">မနေ့ကထွက်ခဲ့သည်</string>
     <plurals name="app_list__age__released_x_days_ago">
-	<item quantity="one">%1$d ရက်ကြိုတင်ထွက်ခဲ့သည်</item>
-	<item quantity="other"/>
+	<item quantity="other">%1$d ရက်ကြိုတင်ထွက်ခဲ့သည်</item>
 </plurals>
 
     <string name="installed_apps__activity_title">သွင်းခဲ့သော အက်ပ်စ်များ</string>
@@ -316,8 +315,7 @@
     <string name="updates__show_updateable_apps">အက်ပ်စ်များကိုပြမည်</string>
 
     <plurals name="updates__download_updates_for_apps">
-	<item quantity="one">%1$d အက်ပ်များအတွက် အသစ်ထွက်ရှိမှုကိုဒေါင်းလုတ်ဆွဲမည်</item>
-	<item quantity="other"/>
+	<item quantity="other">%1$d အက်ပ်များအတွက် အသစ်ထွက်ရှိမှုကိုဒေါင်းလုတ်ဆွဲမည်</item>
 </plurals>
 
     <string name="versions">ဗားရှင်းများ</string>

@@ -480,8 +480,7 @@ Coba pilih kategori yang berbeda atau perbarui
 
 
     <plurals name="button_view_all_apps_in_category">
-        <item quantity="one">Tampilkan semua %d</item>
-        <item quantity="other"/>
+        <item quantity="other">Tampilkan semua %d</item>
     </plurals>
 
     <string name="main_menu__swap_nearby">Dekat</string>
@@ -491,8 +490,7 @@ Coba pilih kategori yang berbeda atau perbarui
     <string name="app_list__name__downloaded_and_ready_to_install">Pasang %1$s</string>
     <string name="app_list__name__downloading_in_progress">Mengunduh %1$s</string>
     <plurals name="app_list__age__released_x_days_ago">
-        <item quantity="one">Dirilis %1$d hari yang lalu</item>
-        <item quantity="other"/>
+        <item quantity="other">Dirilis %1$d hari yang lalu</item>
     </plurals>
 
     <string name="installed_apps__activity_title">Apl Terpasang</string>
@@ -505,8 +503,7 @@ Coba pilih kategori yang berbeda atau perbarui
     <string name="updates__show_updateable_apps">Tampilkan apl</string>
 
     <plurals name="updates__download_updates_for_apps">
-        <item quantity="one">Unduh pembaruan untuk %1$d apl.</item>
-        <item quantity="other"/>
+        <item quantity="other">Unduh pembaruan untuk %1$d apl.</item>
     </plurals>
 
     <string name="preference_manage_installed_apps">Kelola Apl Terpasang</string>

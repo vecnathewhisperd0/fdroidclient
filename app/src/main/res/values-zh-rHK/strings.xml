@@ -519,8 +519,7 @@ Android 5.1 或更新的版本。
 
     <string name="details_last_updated_today">今天更新</string>
     <plurals name="details_last_update_days">
-	<item quantity="one">%1$s 天前更新</item>
-	<item quantity="other"/>
+	<item quantity="other">%1$s 天前更新</item>
 </plurals>
 <string name="app__newly_added">最新</string>
     <string name="latest__empty_state__no_recent_apps">找不到近期用過的應用程式</string>

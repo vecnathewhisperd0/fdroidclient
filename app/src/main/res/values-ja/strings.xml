@@ -438,8 +438,7 @@
 
 
     <plurals name="button_view_all_apps_in_category">
-        <item quantity="one">%d すべて表示</item>
-        <item quantity="other"/>
+        <item quantity="other">%d すべて表示</item>
     </plurals>
 
     <string name="app_recommended_version_installed">ﾊﾞｰｼﾞｮﾝ %1$s (推奨)</string>
@@ -464,8 +463,7 @@
     <string name="app_list__name__downloaded_and_ready_to_install">%1$s をｲﾝｽﾄｰﾙ</string>
     <string name="app_list__name__downloading_in_progress">%1$s をﾀﾞｳﾝﾛｰﾄﾞ中</string>
     <plurals name="app_list__age__released_x_days_ago">
-        <item quantity="one">%1$d 日前にﾘﾘｰｽ</item>
-        <item quantity="other"/>
+        <item quantity="other">%1$d 日前にﾘﾘｰｽ</item>
     </plurals>
 
     <string name="updates__tts__download_app">ﾀﾞｳﾝﾛｰﾄﾞ</string>
