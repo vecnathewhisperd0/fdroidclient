@@ -486,12 +486,12 @@
     <string name="notification_action_cancel">Kanselleer</string>
     <string name="notification_action_install">Installeer</string>
 
-<string name="app_recommended_version_installed">Weergawe %1$ s (aanbeveel)</string>
+<string name="app_recommended_version_installed">Weergawe %1$s (aanbeveel)</string>
     <string name="app__newly_added">Nuwe</string>
     <string name="app__tts__cancel_download">Kanselleer aflaai</string>
     <string name="app__install_downloaded_update">Opdateer</string>
 
-    <string name="app_list__name__downloaded_and_ready_to_update">Opdateer %1$ s</string>
+    <string name="app_list__name__downloaded_and_ready_to_update">Opdateer %1$s</string>
     <string name="app_list__name__downloaded_and_ready_to_install">Installeer %1$s</string>
     <string name="app_list__name__downloading_in_progress">Aflaai %1$s</string>
     <string name="app_list__name__successfully_installed">%1$s suksesvol geïnstalleer</string>
@@ -499,7 +499,7 @@
     <string name="app_list__age__released_yesterday">Gister vrygestel</string>
     <plurals name="app_list__age__released_x_days_ago">
 	<item quantity="one">%1$d dae gelede vrygestel</item>
-	<item quantity="other">Vrygestel %1$ d dag gelede</item>
+	<item quantity="other">Vrygestel %1$d dag gelede</item>
 </plurals>
 
     <string name="installed_apps__activity_title">Geïnstalleerde programme</string>
@@ -513,7 +513,7 @@
 
     <plurals name="updates__download_updates_for_apps">
 	<item quantity="one">Laai opdaterings vir %1$d programme af.</item>
-	<item quantity="other">Laai bywerking vir %1$ d app.</item>
+	<item quantity="other">Laai bywerking vir %1$d app.</item>
 </plurals>
 
     <string name="menu_video">Video</string>
