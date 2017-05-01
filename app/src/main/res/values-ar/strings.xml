@@ -424,10 +424,6 @@
     <string name="nearby_splash__both_parties_need_fdroid">يحتاج كلا الطرفين إلى %1$s للمبادلة.</string>
 
     <string name="main_menu__latest_apps">الجديد</string>
-    <plurals name="button_view_all_apps_in_category">
-	<item quantity="one"/>
-	<item quantity="other"/>
-</plurals>
 
     <string name="app_list__name__downloaded_and_ready_to_install">تثبيت %1$s</string>
     <string name="app_list__name__successfully_installed">تم تثبيت %1$s بنجاح</string>
