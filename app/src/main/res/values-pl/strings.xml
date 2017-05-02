@@ -532,4 +532,5 @@
     <string name="menu_video">Wideo</string>
     <string name="app__tts__cancel_download">Anuluj pobieranie</string>
     <string name="app__tts__downloading_progress">Pobieranie, %1$d%% ukończono</string>
+    <string name="menu_license">Licencja: %s</string>
     </resources>
