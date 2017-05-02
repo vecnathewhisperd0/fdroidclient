@@ -264,8 +264,8 @@
     <string name="empty_search_available_app_list">Mevcut eşleşen uygulama yok.</string>
     <string name="empty_search_can_update_app_list">Güncelleme için eşleşen uygulama yok.</string>
 
-    <string name="install_error_unknown">Bilinmeyen bir hata nedeniyle kurulum başarısız oldu</string>
-    <string name="uninstall_error_unknown">Bilinmeyen bir hata nedeniyle kaldırma başarısız oldu</string>
+    <string name="install_error_unknown">Bilinmeyen bir hata nedeniyle kurulamadı</string>
+    <string name="uninstall_error_unknown">Bilinmeyen bir hata nedeniyle kaldırılamadı</string>
     <string name="system_install_button_install">Kur</string>
     <string name="system_install_installing">Kuruluyor…</string>
     <string name="system_install_installing_rebooting">Kuruluyor ve aygıt yeniden başlatılıyor…</string>
@@ -369,14 +369,11 @@
     </string>
     <string name="system_install_button_open">Uzantıyı Aç</string>
     <string name="system_install_post_success">F-Droid Ayrıcalıklı Uzantı başarıyla kuruldu</string>
-    <string name="system_install_post_fail">F-Droid Ayrıcalıklı Uzantı\'nın kurulumu başarısız oldu</string>
+    <string name="system_install_post_fail">F-Droid Ayrıcalıklı Uzantı\'nın kurulumu başarısız</string>
     <string name="system_install_post_success_message">F-Droid Ayrıcalıklı Uzantı başarılı bir şekilde kuruldu. Bu,
         F-Droid\'in kendi başına uygulamaları kurmasına, yükseltmesine ve kaldırmasına izin verir.
     </string>
-    <string name="system_install_post_fail_message">F-Droid Ayrıcalıklı Uzantı\'nın kurulması başarısız oldu. Kurulum
-        yöntemi her Android dağıtımı tarafından desteklenmeyebilir, daha fazla bilgi için lütfen F-Droid hata
-        izleyicisine başvurun.
-    </string>
+    <string name="system_install_post_fail_message">"F-Droid Ayrıcalıklı Uzantı\'nın kurulumu başarısız. Kurulum yöntemi her Android dağıtımı tarafından desteklenmeyebilir, daha fazla bilgi için lütfen F-Droid hata izleyicisine başvurun. "</string>
     <string name="system_install_question">F-Droid Ayrıcalıklı Uzantı\'yı kurmak istiyor musunuz?</string>
     <string name="system_uninstall">F-Droid Ayrıcalıklı Uzantı\'yı kaldırmak istiyor musunuz?</string>
     <string name="swap_join_same_wifi_desc">Wi-Fi ile takas yapmak istiyorsanız, aynı ağda olduğunuzdan emin olun. Eğer
@@ -393,7 +390,7 @@
     <string name="useTor">Tor Kullan</string>
     <string name="swap_stopping_wifi">Wi-Fi durduruluyor…</string>
     <string name="tap_to_install_format">%s kurmak için dokun</string>
-    <string name="tap_to_update_format">%s güncellemek için tıkla</string>
+    <string name="tap_to_update_format">%s güncellemek için dokun</string>
     <string name="useTorSummary">Arttırılmış gizlilik için indirme trafiğinin Tor\'dan geçmesini zorunlu kıl</string>
     <string name="download_pending">İndirmeye başlamak için bekleniyor…</string>
 
