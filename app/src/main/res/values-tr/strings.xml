@@ -256,10 +256,7 @@
 
         Başka bir kategori seçmeyi veya yeni bir uygulama listesi almak için depolarınızı güncellemeyi deneyin.
     </string>
-    <string name="empty_can_update_app_list">Tüm uygulamalar güncel.
-
-        Tebrikler! Tüm uygulamalarınız güncel (veya depolarınız güncel değil).
-    </string>
+    <string name="empty_can_update_app_list">"Tebrikler! Tüm uygulamalarınız güncel (veya depolarınız güncel değil). "</string>
     <string name="empty_search_installed_app_list">Eşleşen kurulu uygulama yok.</string>
     <string name="empty_search_available_app_list">Mevcut eşleşen uygulama yok.</string>
     <string name="empty_search_can_update_app_list">Güncelleme için eşleşen uygulama yok.</string>
