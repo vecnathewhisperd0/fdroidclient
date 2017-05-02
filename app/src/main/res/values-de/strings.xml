@@ -543,4 +543,6 @@
     <string name="menu_video">Film</string>
     <string name="app__tts__cancel_download">Herunterladen abbrechen</string>
     <string name="app__tts__downloading_progress">wird heruntergeladen, %1$d%% vervollständigt</string>
+    <string name="menu_license">Lizenz: %s</string>
+    <string name="install_error_not_yet_supported">Dateityp kann nicht installiert werden: %s</string>
     </resources>
