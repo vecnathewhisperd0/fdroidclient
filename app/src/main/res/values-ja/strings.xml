@@ -499,4 +499,5 @@
     <string name="menu_video">ﾋﾞﾃﾞｵ</string>
     <string name="app__tts__cancel_download">ﾀﾞｳﾝﾛｰﾄﾞをｷｬﾝｾﾙ</string>
     <string name="app__tts__downloading_progress">ﾀﾞｳﾝﾛｰﾄﾞ中、%1$d%% 完了</string>
+    <string name="menu_license">ライセンス: %s</string>
     </resources>
