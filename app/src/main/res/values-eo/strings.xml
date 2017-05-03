@@ -250,9 +250,7 @@
 
         Provu elekti alian kategorion aŭ ĝisdatigi viajn deponejojn por atingi freŝan liston de aplikaĵojn.
     </string>
-    <string name="empty_can_update_app_list">Ĉiuj aplikaĵoj estas ĝisdataj.\n\nGratulon! Ĉiuj viaj aplikaĵoj estas
-        ĝisdataj (aŭ viaj deponejoj estas neĝisdataj).
-    </string>
+    <string name="empty_can_update_app_list">"Bonege! Ĉiuj viaj aplikaĵoj estas ĝisdataj (aŭ viaj deponejoj estas neĝisdataj). "</string>
     <string name="empty_search_installed_app_list">Neniuj kongruaj instalitaj aplikaĵoj.</string>
     <string name="empty_search_available_app_list">Neniuj kongruaj aplikaĵoj disponeblaj.</string>
     <string name="empty_search_can_update_app_list">Neniuj kongruaj aplikaĵoj por ĝisdatigi.</string>
