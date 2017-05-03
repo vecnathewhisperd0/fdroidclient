@@ -208,9 +208,7 @@
     <string name="empty_available_app_list">Brak aplikacji w tej kategorii.\n\nSpróbuj wybrać inną kategorię lub
         zaktualizować swoje repozytoria.
     </string>
-    <string name="empty_can_update_app_list">Wszystkie aplikacje są w najnowszych wersjach.\n\nGratulacje! Wszystkie
-        Twoje aplikacje są w najnowszych wersjach (lub repozytoria nie mają najnowszych wersji).
-    </string>
+    <string name="empty_can_update_app_list">"Wspaniale! Wszystkie Twoje aplikacje są w najnowszych wersjach (lub repozytoria nie mają najnowszych wersji). "</string>
 
     <string name="install_error_unknown">Instalacja nie powiodła się przez nieznany nam problem</string>
     <string name="uninstall_error_unknown">Odinstalowywanie nie powiodło się przez nieznany nam problem</string>
