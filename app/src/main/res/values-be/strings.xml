@@ -282,10 +282,7 @@
 
         Паспрабуйце абраць іншую катэгорыю або абнавіць вашы рэпазіторыі, каб атрымаць свежы спіс праграм.
     </string>
-    <string name="empty_can_update_app_list">Усе праграмы абноўлены.
-
-        Віншуем! Усе вашы праграмы маюць апошнія версіі (або вашы рэпазіторыі застарэлі).
-    </string>
+    <string name="empty_can_update_app_list">"Віншуем! Усе вашы праграмы маюць апошнія версіі (або вашы рэпазіторыі застарэлі). "</string>
     <string name="empty_search_installed_app_list">Няма супадзенняў сярод усталяваных праграм.</string>
     <string name="empty_search_available_app_list">Няма супадзенняў сярод даступных праграм.</string>
     <string name="empty_search_can_update_app_list">Няма супадзенняў сярод абнаўленняў.</string>
