@@ -105,8 +105,7 @@
 
     <string name="back">Atzera</string>
     <string name="notification_summary_more">+%1$d gehiago…</string>
-    <string name="bluetooth_activity_not_found">Ez da aurkitu Bluetooth bidez bidaltzeko metodorik, aukeratu bat!
-    </string>
+    <string name="bluetooth_activity_not_found">Ez da aurkitu Bluetooth bidez bidaltzeko metodorik, aukeratu bat!</string>
     <string name="choose_bt_send">Aukeratu Bluetooth bidez bidaltzeko metodoa</string>
     <string name="send_via_bluetooth">Bidali Bluetooth bidez</string>
 
@@ -124,9 +123,7 @@
     <string name="local_repo_name_summary">Zure tokiko biltegiak iragarritako izenburua: %s</string>
     <string name="local_repo_https_on">Erabili zifratu gabeko HTTPS:// konexioa tokiko biltegiarentzat</string>
 
-    <string name="repo_exists_add_fingerprint">Biltegi hau ezarrita dago jada, honek gako informazio berria gehituko
-        du.
-    </string>
+    <string name="repo_exists_add_fingerprint">Biltegi hau ezarrita dago jada, honek gako informazio berria gehituko du.</string>
     <string name="repo_exists_enable">Biltegi hau ezarrita dago jada, berretsi berrezarri nahi duzula.</string>
     <string name="repo_exists_and_enabled">Sarrera biltegia ezarrita eta gaituta dago jada.</string>
     <string name="repo_delete_to_overwrite">Biltegi hau ezabatu behar duzu gako ezberdin batekin sinatutako beste bat
@@ -184,9 +181,7 @@
 
     <string name="rooted_on">Ez lainotu root baimena behar duten aplikazioak</string>
     <string name="local_repo_running">F-Droid partekatzeko prest dago</string>
-    <string name="touch_to_configure_local_repo">Ukitu xehetasunak ikusteko eta besteek zure aplikazioak hartzea
-        ahalbidetzeko.
-    </string>
+    <string name="touch_to_configure_local_repo">Ukitu xehetasunak ikusteko eta besteek zure aplikazioak hartzea ahalbidetzeko.</string>
     <string name="proxy_host_summary">Konfiguratu zure proxyaren zerbitzaria (adib. 127.0.0.1)</string>
     <string name="proxy_port">Proxyaren ataka</string>
     <string name="proxy_port_summary">Konfiguratu zure proxyaren ataka zenbakia (adib. 8118)</string>
