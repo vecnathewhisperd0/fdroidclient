@@ -364,7 +364,7 @@
     <string name="swap_setting_up_wifi">Настройка Wi-Fi…</string>
     <string name="swap_stopping_wifi">Остановка Wi-Fi…</string>
     <string name="swap_not_visible_wifi">Не видимо через Wi-Fi</string>
-    <string name="swap_cant_find_peers">Не можете найти того, кого ищите?</string>
+    <string name="swap_cant_find_peers">Не можете найти того, кого ищете?</string>
     <string name="swap_send_fdroid">Отправить F-Droid</string>
     <string name="swap_no_peers_nearby">Не удаётся найти людей рядом, чтобы обменяться с ними.</string>
     <string name="swap_confirm">Подтвердить обмен</string>
@@ -390,7 +390,7 @@
 
     <string name="download_pending">Ожидание начала загрузки…</string>
 
-    <string name="downloading_apk">Загрузжается %1$s</string>
+    <string name="downloading_apk">Загружается %1$s</string>
 
     <string name="keep_hour">1 час</string>
     <string name="keep_day">1 день</string>
