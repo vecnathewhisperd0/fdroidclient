@@ -245,8 +245,7 @@
     <string name="menu_flattr">Flattr</string>
 
 
-    <string name="touch_to_configure_local_repo">Коснитесь для просмотра подробностей и позволить другим скачать ваши
-\n приложения.</string>
+    <string name="touch_to_configure_local_repo">Нажмите здесь чтобы настроить локальный репозиторий.</string>
     <string name="status_download_unknown_size">Загрузка
         \n%2$s от
         \n%1$s
