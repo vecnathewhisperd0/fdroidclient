@@ -352,7 +352,7 @@
     <string name="swap_success">Обмен прошёл успешно!</string>
     <string name="swap_active_hotspot">%1$s (ваша точка доступа)</string>
     <string name="swap_switch_to_wifi">Нажмите, чтобы переключиться на сеть Wi-Fi</string>
-    <string name="swap_scan_or_type_url">"Одному из вас следует сканировать код или ввести в браузере URL другого участника. "</string>
+    <string name="swap_scan_or_type_url">"Одному из вас следует отсканировать код или ввести в браузере URL другого участника. "</string>
     <string name="swap_people_nearby">Люди поблизости</string>
     <string name="swap_scanning_for_peers">Поиск людей поблизости…</string>
     <string name="swap_nearby">Обмен поблизости</string>
