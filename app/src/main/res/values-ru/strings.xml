@@ -537,4 +537,5 @@
     <string name="menu_video">Видео</string>
     <string name="app__tts__cancel_download">Отменить скачивание</string>
     <string name="app__tts__downloading_progress">Скачано %1$d%%</string>
+    <string name="menu_license">Лицензия: %s</string>
     </resources>
