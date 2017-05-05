@@ -180,7 +180,7 @@
     <string name="swap_join_same_wifi">Подключиться к той же Wi-Fi сети, что и ваш друг</string>
     <string name="swap">Обмен файлами</string>
     <string name="swap_no_wifi_network">Нет сети в данный момент</string>
-    <string name="swap_view_available_networks">(Нажмите чтобы открыть список доступных сетей)</string>
+    <string name="swap_view_available_networks">(Нажмите, чтобы открыть список доступных сетей)</string>
     <string name="open_qr_code_scanner">Открыть сканер QR-кода</string>
     <string name="swap_welcome">Добро пожаловать в F-Droid!</string>
     <string name="swap_confirm_connect">Вы хотите получить приложения от %1$s сейчас?</string>
