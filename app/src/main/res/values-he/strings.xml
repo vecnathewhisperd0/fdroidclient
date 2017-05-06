@@ -89,97 +89,97 @@
     <string name="antinonfreeadlist">יישומון זה מקדם תוספים שאינם חופשיים</string>
     <string name="antinonfreenetlist">יישומון זה מקדם שירותי רשת שאינם חופשיים</string>
     <string name="antinonfreedeplist">יישומון זה תלוי ביישומונים אחרים שאינם חופשיים</string>
-    <string name="antiupstreamnonfreelist">קוד מקור upstream אינו חופשי לחלוטין</string>
+    <string name="antiupstreamnonfreelist">קוד המקור בתצורתו המקורית אינו חופשי לחלוטין</string>
 
     <string name="display">תצוגה</string>
 
     <string name="expert">מצב מומחה</string>
-    <string name="expert_on">הצג מידע נוסף ואפשר הגדרות נוספות</string>
+    <string name="expert_on">הצגת מידע נוסף והפעלת הגדרות נוספות</string>
 
-    <string name="search_hint">חפש אפליקציות</string>
+    <string name="search_hint">חיפוש יישומונים</string>
 
-    <string name="appcompatibility">תאימות אפליקציה</string>
+    <string name="appcompatibility">תאימות היישומון</string>
     <string name="show_incompat_versions">גרסאות לא תואמות</string>
-    <string name="show_incompat_versions_on">הצג גרסאות אפליקציה אשר לא תואמות עם המכשיר שלך</string>
-    <string name="rooted">התעלם מן שורש</string>
-    <string name="rooted_on">אל תאפיר אפליקציות אשר דורשות הרשאות שורש</string>
-    <string name="ignoreTouch">התעלם ממסך מגע</string>
-    <string name="ignoreTouch_on">תמיד הכלל אפליקציות אשר מצריכות מסך מגע</string>
+    <string name="show_incompat_versions_on">הצגת גרסאות היישומון שאינן תואמות להתקן</string>
+    <string name="rooted">התעלמות ממצב על (root)</string>
+    <string name="rooted_on">לא לסמן באפור יישומונים שדורשים הרשאות על (root)</string>
+    <string name="ignoreTouch">התעלמות ממסך מגע</string>
+    <string name="ignoreTouch_on">תמיד לכלול יישומונים שדורשים מסך מגע</string>
 
     <string name="local_repo">מאגר מקומי</string>
-    <string name="local_repo_running">F-Droid הינו מוכן להחליף</string>
-    <string name="touch_to_configure_local_repo">גע כדי לצפות בפרטים ולהתיר לאחרים להחליף עם האפליקציות שלך.</string>
-    <string name="deleting_repo">כעת מוחק מאגר נוכחי…</string>
-    <string name="adding_apks_format">הוסף את %s למאגר…</string>
-    <string name="writing_index_jar">כעת כותב קובץ אינדקס חתום (index.jar)…</string>
-    <string name="linking_apks">כעת מקשר APK לתוך המאגר…</string>
-    <string name="copying_icons">כעת מעתיק סמלי אפליקציה לתוך המאגר…</string>
+    <string name="local_repo_running">F-Droid מוכנה להחלפה</string>
+    <string name="touch_to_configure_local_repo">יש לגעת כדי לצפות בפרטים ולאפשר לאחרים להחליף אתך יישומונים.</string>
+    <string name="deleting_repo">המאגר הנוכחי נמחק…</string>
+    <string name="adding_apks_format">%s נוסף למאגר…</string>
+    <string name="writing_index_jar">קובץ המפתח החתום (index.jar) נכתב…</string>
+    <string name="linking_apks">ה־APKs מקושרים למאגר…</string>
+    <string name="copying_icons">סמלי יישומונים מועתיק כעת למאגר…</string>
     <string name="icon">סמל</string>
-    <string name="next">הלאה</string>
-    <string name="skip">דלג</string>
-    <string name="proxy">פרוקסי</string>
-    <string name="enable_proxy_title">אפשר פרוקסי HTTP</string>
-    <string name="enable_proxy_summary">הגדר פרוקסי HTTP Proxy לכל בקשת רשת</string>
-    <string name="proxy_host">מארח פרוקסי</string>
-    <string name="proxy_host_summary">הגדר שם משתמש פרוקסי (דוגמא 127.0.0.1)</string>
-    <string name="proxy_port">פורט פרוקסי</string>
-    <string name="proxy_port_summary">הגדר מספר פורט פרוקסי (דוגמא 8118)</string>
+    <string name="next">הבא</string>
+    <string name="skip">דילוג</string>
+    <string name="proxy">מתווך</string>
+    <string name="enable_proxy_title">הפעלת מתווך HTTP</string>
+    <string name="enable_proxy_summary">הגדרת מתווך HTTP לכל בקשות הרשת</string>
+    <string name="proxy_host">מארח מתווך</string>
+    <string name="proxy_host_summary">הגדרת שם משתמש למתווך (למשל: 127.0.0.1)</string>
+    <string name="proxy_port">פתחת מתווך</string>
+    <string name="proxy_port_summary">הגדרת מספר פתחת מתווך (למשל: 8118)</string>
 
 
-    <string name="status_download">כעת מוריד\n%2$s / %3$s (%4$d%%) מתוך\n%1$s</string>
-    <string name="update_notification_title">כעת מעדכן מאגרים</string>
-    <string name="status_processing_xml_percent">כעת מעבד %2$s / %3$s (%4$d%%) מתוך %1$s</string>
-    <string name="status_connecting_to_repo">כעת מתחבר אל\n%1$s</string>
-    <string name="repos_unchanged">כל המאגרים הינם מעודכנים</string>
-    <string name="all_other_repos_fine">כל שאר המאגרים לא יצרו שגיאות.</string>
+    <string name="status_download">מתבצעת הורדה
+\n%2$s / %3$s (%4$d%%) מתוך
+\n%1$s</string>
+    <string name="update_notification_title">המאגרים מתעדכנים</string>
+    <string name="status_processing_xml_percent">%2$s בהליכי עיבוד / %3$s (%4$d%%) מתוך %1$s</string>
+    <string name="status_connecting_to_repo">מתבצעת התחברות אל
+\n%1$s</string>
+    <string name="repos_unchanged">כל המאגרים מעודכנים</string>
+    <string name="all_other_repos_fine">כל שאר המאגרים לא נתקלו בשגיאות.</string>
     <string name="global_error_updating_repos">שגיאה במהלך עדכון: %s</string>
     <string name="no_permissions">אין הרשאות בשימוש.</string>
-    <string name="no_handler_app">אין לך שום אפליקציה זמינה אשר מסוגלת להתמודד עם %s.</string>
+    <string name="no_handler_app">לא מותקן יישומון זמין לטיפול בסוג %s.</string>
     <string name="theme">ערכת עיצוב</string>
     <string name="unsigned">לא חתום</string>
     <string name="unverified">לא מאומת</string>
-    <string name="repo_num_apps">מספר של אפליקציות</string>
+    <string name="repo_num_apps">מספר של יישומונים</string>
     <string name="repo_description">תיאור</string>
     <string name="repo_last_update">עדכון אחרון</string>
     <string name="repo_name">שם</string>
     <string name="unknown">לא ידוע</string>
     <string name="repo_confirm_delete_title">למחוק מאגר?</string>
-    <string name="repo_added">מאגר F-Droid שמור %1$s.</string>
-    <string name="minsdk_or_later">%s או מאוחר יותר</string>
+    <string name="repo_added">מאגר ה־F-Droid נשמר %1$s.</string>
+    <string name="minsdk_or_later">%s ומעלה</string>
     <string name="up_to_maxsdk">עד %s</string>
     <string name="minsdk_up_to_maxsdk">%1$s עד %2$s</string>
-    <string name="requires_features">מצריכה: %1$s</string>
+    <string name="requires_features">נדרש: %1$s</string>
     <string name="pref_language">שפה</string>
-    <string name="pref_language_default">שגרתית של מערכת</string>
+    <string name="pref_language_default">בררת המחדל של המערכת</string>
 
     <string name="category_Development">פיתוח</string>
     <string name="category_Games">משחקים</string>
     <string name="category_Internet">אינטרנט</string>
     <string name="category_Multimedia">מולטימדיה</string>
     <string name="category_Navigation">ניווט</string>
-    <string name="category_Phone_SMS">‏SMS וטלפון</string>
+    <string name="category_Phone_SMS">טלפון ומסרונים</string>
     <string name="category_Reading">קריאה</string>
-    <string name="category_Science_Education">חינוך ומדע</string>
+    <string name="category_Science_Education">מדע וחינוך</string>
     <string name="category_Security">אבטחה</string>
     <string name="category_System">מערכת</string>
-    <string name="empty_installed_app_list">אין אפליקציות מותקנות.\n\nאין אפליקציות מותקנות על מכשירך, אך אלו אינן
-        זמינות מתוך F-Droid. זה אפשרי מפני שעליך לעדכן את המאגרים שלך, או שלמאגרים באמת אין את האפליקציות שלך זמינות.
-    </string>
-    <string name="empty_available_app_list">אין אפליקציות בתוך קטגוריה זו.\n\nנסה לבחור קטגוריה אחרת או לעדכן את המאגרים
-        שלך כדי להשיג רשימה רעננה של אפליקציות.
-    </string>
-    <string name="empty_can_update_app_list">כל האפליקציות מעודכנות.\n\nברכותינו! כל האפליקציות שלך הינן מעודכנות (או
-        שהמאגרים שלך אינם מעודכנים).
-    </string>
+    <string name="empty_installed_app_list">"אין יישומונים מותקנים.
+\n
+\nיש יישומונים מותקנים על מכשירך, אך אלו אינם זמינים מתוך F-Droid. מצב זה עלול לקרות כאשר עליך לעדכן את המאגרים שלך או שבמאגרים באמת אין את היישומים שלך. "</string>
+    <string name="empty_available_app_list">"אין יישומונים בקטגוריה זו.
+\n
+\nכדאי לנסות לבחור קטגוריה אחרת או לעדכן את המאגרים שלך כדי להשיג רשימה עדכנית של יישומונים. "</string>
+    <string name="empty_can_update_app_list">"ברכותינו! כל היישומונים שלך עדכניים (או שהמאגרים שלך לא עדכניים). "</string>
 
-    <string name="requesting_root_access_body">כעת מבקש גישת שורש…</string>
-    <string name="root_access_denied_title">גישת שורש נאסרה</string>
-    <string name="root_access_denied_body">או שמכשיר Android אינו מושרש או שאסרת גישת שורש עבור F-Droid.</string>
-    <string name="install_error_unknown">נכשל להתקין בשל שגיאה לא מוכרת</string>
-    <string name="uninstall_error_unknown">נכשל לבטל התקנה בשל שגיאה לא מוכרת</string>
+    <string name="requesting_root_access_body">בקשה לגישת על (root)…</string>
+    <string name="root_access_denied_title">גישת על (root) נאסרה</string>
+    <string name="root_access_denied_body">"או שלמכשיר האנדרואיד שלך אין גישת על (root) או שדחית את הגישה ל־F-Droid. "</string>
+    <string name="install_error_unknown">ההתקנה נכשלה עקב שגיאה בלתי ידועה</string>
+    <string name="uninstall_error_unknown">ההסרה נכשלה עקב שגיאה בלתי ידועה</string>
     <string name="system_install_denied_title">הרשאות מערכת נאסרו</string>
-    <string name="system_install_denied_body">אפשרות זו הינה זמינה רק כאשר F-Droid הינה מותקנת בתור אפליקציה מועדפת.
-    </string>
+    <string name="system_install_denied_body">"אפשרות זו הינה זמינה רק כאשר F-Droid הינה מותקנת בתור אפליקציה מועדפת. "</string>
     <string name="system_install_post_success">התקין בהצלחה הרחבת F-Droid מועדף</string>
     <string name="system_install_post_fail">התקנת הרחבת F-Droid מועדף נכשלה</string>
     <string name="system_install_post_success_message">הרחבת F-Droid מועדף הותקנה בהצלחה בתור אפליקציה מועדפת. דבר זה
@@ -228,13 +228,14 @@
 
     <string name="app_incompatible">אין תאימות</string>
     <string name="back">אחורה</string>
-    <string name="repo_searching_address">כעת מחפש מאגר F-Droid אצל\n%1$s</string>
+    <string name="repo_searching_address">מתבצע חיפוש אחר מאגר ה־F-Droid אצל
+\n%1$s</string>
     <string name="wifi">Wi-Fi</string>
     <string name="wifi_ap">נקודה חמה</string>
 
     <string name="category_Connectivity">קישוריות</string>
     <string name="category_Graphics">גרפיקה</string>
-    <string name="category_Money">כספים</string>
+    <string name="category_Money">כלכלה</string>
     <string name="category_Sports_Health">ספורט ובריאות</string>
     <string name="category_Theming">עיצוב</string>
     <string name="category_Time">זמן</string>
@@ -293,24 +294,15 @@
     <string name="repo_exists_enable">מאגר זה כבר מותקן, נא לאמת כדי לאפשרו שוב.</string>
     <string name="repo_exists_and_enabled">המאגר הנכנס כבר מותקן ומאופשר.</string>
     <string name="repo_fingerprint">טביעת אצבע של מפתח החתימה (SHA-256)</string>
-    <string name="unsigned_description">משמעות הדבר היא שלא היתה אפשרות לאמת את הרשימה של האפליקציות. עליך להיזהר מן
-        אפליקציות אשר מורדות מתוך אינדקסים לא חתומים.
-    </string>
-    <string name="repo_not_yet_updated">מאגר זה לא נמצא בשימוש עדיין.
-        יש לאפשר אותו כדי לצפות ביישומונים שהמאגר הזה מציע.
-    </string>
-    <string name="repo_confirm_delete_body">מחיקת מאגר זה משמעה כי יישומונים מתוכו לא יהיו זמינים עוד מתוך F-Droid.
-
-        הערה: כל היישומונים שהותקנו בעבר יישארו על המכשיר שלך.
-    </string>
-    <string name="repo_disabled_notification">נוטרל %1$s.
-
-        עליך לאפשר שוב
-        את המאגר זה כדי להתקין יישומונים מתוכו.
-    </string>
-    <string name="not_on_same_wifi">המכשיר שלך אינו מצוי על גבי אותה רשת Wi-Fi כמו המאגר המקומי אשר הוספת עתה! נסה
-        להצטרף לרשת זו: %s
-    </string>
+    <string name="unsigned_description">"משמעות הדבר היא שאין אפשרות לאמת את רשימת היישומונים. יש לנקוט באמצעי זהירות עם יישומונים שהתקבלו ממפתחות בלתי חתומים. "</string>
+    <string name="repo_not_yet_updated">"מאגר זה לא היה בשימוש עדיין. יש לאפשר אותו כדי לצפות ביישומונים שהמאגר הזה מציע. "</string>
+    <string name="repo_confirm_delete_body">"מחיקת מאגר זה משמעה כי יישומונים מתוכו לא יהיו זמינים עוד מתוך F-Droid.
+\n
+\nהערה: כל היישומונים שהותקנו בעבר יישארו על המכשיר שלך. "</string>
+    <string name="repo_disabled_notification">"%1$s נוטרל.
+\n
+\nעליך לאפשר שוב את המאגר זה כדי להתקין יישומונים מתוכו. "</string>
+    <string name="not_on_same_wifi">"המכשיר שלך אינו מחובר לאותה רשת ה־WiFi כמו המאגר המקומי שהוספת כרגע! כדאי לנסות להצטרף לרשת הזו: %s "</string>
     <string name="swap_join_same_wifi_desc">כדי לבצע הֶחְלֵף באמצעות Wi-Fi, וודא כי אתה נמצא על גבי אותה רשת. אם אין לך
         גישה לאותה הרשת, אחד מכם יכול ליצור Wi-Fi Hotspot.
     </string>
@@ -338,13 +330,15 @@
     <string name="less">פחות</string>
 
     <string name="menu_settings">הגדרות</string>
-    <string name="status_download_unknown_size">כעת מוריד\n%2$s מתוך\n%1$s</string>
+    <string name="status_download_unknown_size">מתבצעת הורדה
+\n%2$s מתוך
+\n%1$s</string>
     <string name="permissions">הרשאות</string>
     <string name="repo_details">מאגר</string>
     <string name="repo_url">כתובת</string>
     <string name="system_install_denied_signature">החתימה של ההרחבה הינה שגויה! אנא צור bug report!</string>
-    <string name="system_install_button_install">התקן</string>
-    <string name="system_install_button_open">פתח הרחבה</string>
+    <string name="system_install_button_install">התקנה</string>
+    <string name="system_install_button_open">פתיחת הרחבה</string>
     <string name="system_install_installing_rebooting">כעת מתקין ומאתחל…</string>
     <string name="system_install_warning">פעולה זו לוקחת עד 10 שניות.</string>
     <string name="theme_night">לילה</string>
@@ -355,16 +349,16 @@
     <string name="repo_edit_credentials">החלפת ססמה</string>
     <string name="about_license">רישיון</string>
 
-    <string name="status_inserting_apps">כעת שומר פרטי אפליקציה</string>
+    <string name="status_inserting_apps">פרטי היישומון נשמרים</string>
     <string name="repo_error_empty_username">שם המשתמש ריק, פרטי הכניסה לא שונו</string>
 
     <string name="by_author">מאת</string>
     <string name="menu_email">שליחת דוא״ל ליוצר</string>
-    <string name="antinonfreeassetslist">אפליקציה זו מכילה נכסים לא חופשיים</string>
+    <string name="antinonfreeassetslist">יישומון זה מכיל נכסים בלתי חופשיים</string>
 
-    <string name="empty_search_installed_app_list">אין אפליקציות מותקנות תואמות.</string>
-    <string name="empty_search_available_app_list">אין אפליקציות תואמות זמינות.</string>
-    <string name="empty_search_can_update_app_list">אין אפליקציות מותקנות תואמות לצורך עדכון.</string>
+    <string name="empty_search_installed_app_list">אין יישומונים מותקנים תואמים.</string>
+    <string name="empty_search_available_app_list">אין יישומונים תואמים זמינים.</string>
+    <string name="empty_search_can_update_app_list">אין יישומונים תואמים מותקנים לצורך עדכון.</string>
 
     <string name="crash_dialog_title">‏F-Droid קרסה</string>
     <string name="crash_dialog_text">אירעה שגיאה לא פצויה אשר אילצה את עצירת האפליקציה. האם ברצונך לדוור בדוא״ל את
@@ -449,4 +443,13 @@
 
     <string name="antifeatureswarning">ייתכן שביישומון זה ישנן תכונות שלא תישאנה חן בעיניך.</string>
     <string name="antifeatures">תכונות שליליות</string>
+    <string name="hide_anti_feature_apps">סימון באפור יישומונים נוגדי תכונות</string>
+    <string name="hide_anti_feature_apps_on">סימון באפור יישומונים שדורשים נוגדי תכונות</string>
+    <string name="warning_no_internet">לא ניתן לעדכן, יש לך חיבור לאינטרנט?</string>
+    <plurals name="button_view_all_apps_in_category">
+	<item quantity="one">הצגת אחד</item>
+	<item quantity="other">הצגת כל ה־%d</item>
+</plurals>
+
+    <string name="install_error_not_yet_supported">עדיין לא ניתן להתקין את סוג הקובץ: %s</string>
     </resources>
