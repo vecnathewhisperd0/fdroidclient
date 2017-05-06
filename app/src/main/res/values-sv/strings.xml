@@ -257,9 +257,7 @@
     <string name="empty_available_app_list">Inga appar i denna kategori.\n\nProva att välja en annan kategori eller att
         uppdatera dina förråd för att få en färsk lista med appar.
     </string>
-    <string name="empty_can_update_app_list">Alla appar är uppdaterade.\n\nGrattis! Alla dina appar är uppdaterade
-        (eller så behöver dina förråd uppdateras).
-    </string>
+    <string name="empty_can_update_app_list">"Grattis! Alla dina appar är uppdaterade (eller så behöver dina förråd uppdateras). "</string>
     <string name="empty_search_installed_app_list">Inga installerade applikationer matchar.</string>
     <string name="empty_search_available_app_list">Inga matchande program är tillgängliga.</string>
     <string name="empty_search_can_update_app_list">Inga matchande app-uppdateringar.</string>
@@ -373,7 +371,7 @@
     <string name="interval_12h">Var 12:e timme</string>
     <string name="interval_1d">Dagligen</string>
     <string name="interval_1w">Veckovis</string>
-    <string name="interval_2w">Var 2:a vecka</string>
+    <string name="interval_2w">Varannan vecka</string>
 
     <string name="theme_light">Ljus</string>
     <string name="theme_dark">Mörk</string>
@@ -529,4 +527,8 @@
     <string name="app_list__age__released_yesterday">Utgiven igår</string>
     <string name="menu_video">Video</string>
     <string name="details_last_updated_today">Uppdaterad idag</string>
+    <string name="app__tts__cancel_download">Avbryt hämtning</string>
+    <string name="menu_license">Licens: %s</string>
+    <string name="install_error_not_yet_supported">Filtypen kan inte ännu installeras: %s</string>
+    <string name="app__tts__downloading_progress">Hämtar, %1$d%% färdigt</string>
     </resources>
