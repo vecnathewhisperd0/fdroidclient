@@ -523,7 +523,7 @@ tenéis acceso a la misma red, uno de vosotros puede crear un punto de acceso Wi
 	<item quantity="other">Actualizada hace %1$s días</item>
 </plurals>
     <string name="app_list__name__successfully_installed">%1$s se ha instalado con éxito</string>
-    <string name="nearby_splash__download_apps_from_people_nearby">¿Sin internet? ¡Descarga «apps» de gente cercana!</string>
+    <string name="nearby_splash__download_apps_from_people_nearby">"¿Sin internet? ¡Descarga «apps» de gente cercana! "</string>
     <string name="nearby_splash__find_people_button">Encontrar personas cerca de mí</string>
     <string name="nearby_splash__both_parties_need_fdroid">Ambas partes necesitan %1$s para usar la cercanía.</string>
 
