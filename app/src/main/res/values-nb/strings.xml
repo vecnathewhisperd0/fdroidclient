@@ -82,7 +82,7 @@
     <string name="details_installed">Versjon %s installert</string>
     <string name="details_notinstalled">Ikke installert</string>
     <string name="antiadslist">Dette programmet inneholder reklame</string>
-    <string name="antitracklist">Dette programmet sporer din aktivitet</string>
+    <string name="antitracklist">Dette programmet sporer og rapporterer din aktivitet</string>
     <string name="antinonfreeadlist">Dette programmet promoterer ufrie utvidelser</string>
     <string name="antinonfreenetlist">Dette programmet promoterer ufrie nettverkstjenester</string>
     <string name="antinonfreedeplist">Dette programmet avhenger av andre ufrie applikasjoner</string>
