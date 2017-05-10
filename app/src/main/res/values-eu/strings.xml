@@ -540,5 +540,5 @@
     <string name="nearby_splash__find_people_button">Aurkitu inguruko jendea</string>
     <string name="nearby_splash__both_parties_need_fdroid">Biek %1$s erabili behar dute inguruan elkar aurkitzeko.</string>
 
-    <string name="app__tts__downloading_progress">Deskargatzen, %%1$d% osatua</string>
+    <string name="app__tts__downloading_progress">Deskargatzen, %1$d%% osatua</string>
     </resources>

@@ -547,5 +547,5 @@
 </plurals>
 
     <string name="install_error_not_yet_supported">El tipus de fitxer no es pot instal·lar: %s</string>
-    <string name="app__tts__downloading_progress">Descarregant, %1 $d%% completat</string>
+    <string name="app__tts__downloading_progress">Descarregant, %1$d%% completat</string>
     </resources>
