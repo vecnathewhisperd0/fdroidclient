@@ -263,7 +263,7 @@
 \n
 \nCoba pilih kategori yang berbeda atau perbarui
 \nrepositori Anda untuk mendapatkan daftar apl yang baru. "</string>
-    <string name="empty_can_update_app_list">"Selamat! Semua apl Anda sudah yang paling baru (atau repositori Anda yang kedaluwarsa). "</string>
+    <string name="empty_can_update_app_list">Selamat! Semua apl Anda sudah yang paling baru (atau repositori Anda yang kedaluwarsa).</string>
     <string name="empty_search_installed_app_list">Tidak ada apl sesuai yang terpasang.</string>
     <string name="empty_search_available_app_list">Tidak ada aplikasi sesuai yang tersedia.</string>
     <string name="empty_search_can_update_app_list">Tidak ada aplikasi sesuai untuk pembaruan.</string>
@@ -324,7 +324,7 @@
     <string name="swap_welcome">Selamat datang di F-Droid!</string>
     <string name="swap_confirm_connect">Apa anda ingin mendapatkan apl dari %1$s sekarang?</string>
     <string name="swap_dont_show_again">Jangan tampilkan ini lagi</string>
-    <string name="swap_scan_or_type_url">"Salah satu orang perlu memindai kode, atau ketik URL orang yang lain diperamban. "</string>
+    <string name="swap_scan_or_type_url">Salah satu orang perlu memindai kode, atau ketik URL orang yang lain diperamban.</string>
     <string name="swap_choose_apps">Pilih Aplikasi</string>
     <string name="swap_scan_qr">Pindai Kode QR</string>
     <string name="swap_people_nearby">Orang Terdekat</string>

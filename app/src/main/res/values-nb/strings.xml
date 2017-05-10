@@ -298,7 +298,7 @@
     <string name="empty_available_app_list">Ingen programmer i denne kategorien.\n\nVelg en annen kategori eller
         oppdater pakkebrønnene dine for en fersk programopplisting.
     </string>
-    <string name="empty_can_update_app_list">"Alle dine programmer er av nyeste dato (eller så er pakkebrønnene dine foreldet). "</string>
+    <string name="empty_can_update_app_list">Alle dine programmer er av nyeste dato (eller så er pakkebrønnene dine foreldet).</string>
 
     <string name="system_install_denied_signature">Signaturen til tillegget er feil! Send inn en feilrapport om dette
         omgående!

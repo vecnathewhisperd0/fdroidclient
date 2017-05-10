@@ -71,7 +71,7 @@
     <string name="app_inst_known_source">ಅನುಸ್ಥಾಪಿಸಲಾಗಿದೆ(%s ನಿಂದ)</string>
     <string name="app_inst_unknown_source">ಅನುಸ್ಥಾಪಿಸಲಾಗಿದೆ (ಗೊತ್ತಿಲ್ಲದ ಮೂಲದಿಂದ)</string>
     <string name="app_version_x_available">%1$s ಆವೃತ್ತಿಯು ಲಭ್ಯವಿದೆ</string>
-    <string name="about_title">"ಎಫ್-ಡ್ರಾಯ್ಡ್  ಬಗ್ಗೆ"</string>
+    <string name="about_title">ಎಫ್-ಡ್ರಾಯ್ಡ್  ಬಗ್ಗೆ</string>
     <string name="about_version">ಆವೃತ್ತಿ</string>
     <string name="about_site">ಜಾಲತಾಣ</string>
     <string name="about_mail">ಮಿಂಚಂಚೆ</string>

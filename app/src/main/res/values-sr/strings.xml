@@ -177,7 +177,7 @@
     <string name="system_install_denied_body">Ова могућност је доступна само када је инсталирано повлашћено проширење за
         Ф-дроид.
     </string>
-    <string name="swap_nfc_description">"Ако ваш пријатељ има Ф-дроид и укључен НФЦ, додирните уређаје. "</string>
+    <string name="swap_nfc_description">Ако ваш пријатељ има Ф-дроид и укључен НФЦ, додирните уређаје.</string>
     <string name="swap_join_same_wifi">Повежите се на исту бежичну мрежу на којој је ваш пријатељ</string>
     <string name="swap">Размена апликација</string>
     <string name="swap_no_wifi_network">Још нема мреже</string>
@@ -278,7 +278,7 @@
     <string name="system_install_warning_lollipop">Ово траје десетак секунди и уређај ће након тога<b>поново да се
         покрене</b>.
     </string>
-    <string name="empty_can_update_app_list">"Честитке! Све ваше апликације су надограђене (или ризнице нису освежене). "</string>
+    <string name="empty_can_update_app_list">Честитке! Све ваше апликације су надограђене (или ризнице нису освежене).</string>
 
     <string name="swap_people_nearby">Људи у близини</string>
     <string name="swap_scanning_for_peers">Тражим људе у близини…</string>
@@ -304,7 +304,7 @@
     <string name="permissions">Дозволе</string>
     <string name="repo_details">Ризница</string>
     <string name="repo_url">Адреса</string>
-    <string name="system_install_denied_signature">"Потпис проширења је погрешан! Пријавите грешку! "</string>
+    <string name="system_install_denied_signature">Потпис проширења је погрешан! Пријавите грешку!</string>
     <string name="system_install_button_install">Инсталирај</string>
     <string name="system_install_denied_permissions">Повлашћене дозволе нису одобрене за проширење! Пријавите грешку!
     </string>
@@ -516,7 +516,7 @@
 
 <string name="app_list__age__released_today">Издато данас</string>
     <string name="app_list__age__released_yesterday">Издато јуче</string>
-    <string name="latest__empty_state__never_updated">"Када се списак апликација ажурира, најновије апликације ће бити приказане овде "</string>
+    <string name="latest__empty_state__never_updated">Када се списак апликација ажурира, најновије апликације ће бити приказане овде</string>
     <string name="latest__empty_state__no_enabled_repos">"Када укључите ризнице и дозволите да се ажурира, најновије
 апликације ће бити приказане овде
  "</string>

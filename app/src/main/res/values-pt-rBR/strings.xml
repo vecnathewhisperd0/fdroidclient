@@ -222,7 +222,7 @@
     <string name="empty_available_app_list">Nenhum aplicativo nesta categoria.\n\nTente selecionar uma categoria
         diferente ou atualizar seus repositórios para obter uma nova lista de aplicativos.
     </string>
-    <string name="empty_can_update_app_list">"Parabéns! Todos os seus aplicativos estão atualizados (ou os seus repositórios estão desatualizados). "</string>
+    <string name="empty_can_update_app_list">Parabéns! Todos os seus aplicativos estão atualizados (ou os seus repositórios estão desatualizados).</string>
 
     <string name="install_error_unknown">Falha ao instalar devido a um erro desconhecido</string>
     <string name="uninstall_error_unknown">Falha ao desinstalar devido a um erro desconhecido</string>
@@ -520,7 +520,7 @@
 
     <string name="antifeatureswarning">Este aplicativo tem características que você pode não gostar.</string>
     <string name="antifeatures">Características indesejadas</string>
-    <string name="nearby_splash__download_apps_from_people_nearby">"Sem internet? Baixe aplicativos de pessoas próximas a você! "</string>
+    <string name="nearby_splash__download_apps_from_people_nearby">Sem internet? Baixe aplicativos de pessoas próximas a você!</string>
     <string name="nearby_splash__find_people_button">Encontrar pessoas próximas de mim</string>
     <string name="nearby_splash__both_parties_need_fdroid">Ambas as partes precisam do %1$s para uso próximo.</string>
 

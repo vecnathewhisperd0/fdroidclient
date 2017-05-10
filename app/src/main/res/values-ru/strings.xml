@@ -342,7 +342,7 @@
     </string>
     <string name="system_install_question">Вы хотите установить привилегированное расширение F-Droid?</string>
     <string name="system_uninstall">Вы хотите удалить привилегированное расширение F-Droid?</string>
-    <string name="swap_nfc_description">"Если у вашего друга есть F-Droid и у вас обоих включен NFC, приложите устройства друг к другу. "</string>
+    <string name="swap_nfc_description">Если у вашего друга есть F-Droid и у вас обоих включен NFC, приложите устройства друг к другу.</string>
     <string name="swap_join_this_hotspot">Помогите Вашему другу подключиться к Вашей точке доступа</string>
     <string name="swap_nfc_title">Нажмите для обмена</string>
     <string name="swap_join_same_wifi_desc">Чтобы выполнить обмен, используя Wi-Fi, убедитесь, что вы подключены к одной
@@ -351,7 +351,7 @@
     <string name="swap_success">Обмен прошёл успешно!</string>
     <string name="swap_active_hotspot">%1$s (ваша точка доступа)</string>
     <string name="swap_switch_to_wifi">Нажмите, чтобы переключиться на сеть Wi-Fi</string>
-    <string name="swap_scan_or_type_url">"Одному из вас следует отсканировать код или ввести в браузере URL другого участника. "</string>
+    <string name="swap_scan_or_type_url">Одному из вас следует отсканировать код или ввести в браузере URL другого участника.</string>
     <string name="swap_people_nearby">Люди поблизости</string>
     <string name="swap_scanning_for_peers">Поиск людей поблизости…</string>
     <string name="swap_nearby">Обмен поблизости</string>
@@ -466,7 +466,7 @@
 	<item quantity="other"/>
 </plurals>
 
-    <string name="nearby_splash__download_apps_from_people_nearby">"Нет интернета? Скачивайте приложения у людей рядом с вами! "</string>
+    <string name="nearby_splash__download_apps_from_people_nearby">Нет интернета? Скачивайте приложения у людей рядом с вами!</string>
     <string name="notification_title_single_ready_to_install">Готово к установке</string>
     <string name="notification_title_single_install_error">Установка не удалась</string>
     <string name="notification_content_single_downloading">Загрузка \"%1$s\"…</string>

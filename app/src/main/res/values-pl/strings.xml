@@ -129,7 +129,7 @@
     <string name="system_install_denied_body">Opcja dostępna tylko wtedy, gdy F-Droid został zainstalowany jako
         aplikacja systemowa.
     </string>
-    <string name="swap_nfc_description">"Jeśli oba urządzenia mają F-Droida i NFC, możecie je zbliżyć do siebie. "</string>
+    <string name="swap_nfc_description">Jeśli oba urządzenia mają F-Droida i NFC, możecie je zbliżyć do siebie.</string>
     <string name="swap_join_same_wifi">Połącz się z tą samą siecią Wi-Fi</string>
     <string name="swap">Wymień aplikacje</string>
     <string name="swap_no_wifi_network">Brak sieci</string>
@@ -208,7 +208,7 @@
     <string name="empty_available_app_list">Brak aplikacji w tej kategorii.\n\nSpróbuj wybrać inną kategorię lub
         zaktualizować swoje repozytoria.
     </string>
-    <string name="empty_can_update_app_list">"Wspaniale! Wszystkie Twoje aplikacje są w najnowszych wersjach (lub repozytoria nie mają najnowszych wersji). "</string>
+    <string name="empty_can_update_app_list">Wspaniale! Wszystkie Twoje aplikacje są w najnowszych wersjach (lub repozytoria nie mają najnowszych wersji).</string>
 
     <string name="install_error_unknown">Instalacja nie powiodła się przez nieznany nam problem</string>
     <string name="uninstall_error_unknown">Odinstalowywanie nie powiodło się przez nieznany nam problem</string>
@@ -324,7 +324,7 @@
 
     <string name="download_error">Pobieranie nie powiodło się</string>
 
-    <string name="system_install_denied_signature">"Niepoprawny podpis dodatku! Prosimy o zgłoszenie błędu! "</string>
+    <string name="system_install_denied_signature">Niepoprawny podpis dodatku! Prosimy o zgłoszenie błędu!</string>
     <string name="system_install_denied_permissions">Uprzywilejowanemu dodatkowi nie zostały przyznane wymagane
         uprawnienia! Prosimy o zgłoszenie błędu!
     </string>

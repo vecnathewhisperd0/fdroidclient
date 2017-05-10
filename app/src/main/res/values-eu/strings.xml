@@ -530,13 +530,13 @@
     <string name="latest__empty_state__no_recent_apps">Ez da oraintsuko aplikaziorik aurkitu</string>
     <string name="app__tts__cancel_download">Utzi deskarga</string>
     <string name="menu_license">Lizentzia: %s</string>
-    <string name="latest__empty_state__never_updated">"Zure aplikazioen zerrenda eguneratzen denean, azken aplikazioak hemen agertuko dira "</string>
-    <string name="latest__empty_state__no_enabled_repos">"Biltegi bat gaitu eta eguneratzen duzunean, azken aplikazioak hemen agertuko dira "</string>
+    <string name="latest__empty_state__never_updated">Zure aplikazioen zerrenda eguneratzen denean, azken aplikazioak hemen agertuko dira</string>
+    <string name="latest__empty_state__no_enabled_repos">Biltegi bat gaitu eta eguneratzen duzunean, azken aplikazioak hemen agertuko dira</string>
 
     <string name="categories__empty_state__no_categories">Ez dago kategoriarik erakusteko</string>
 
     <string name="install_error_not_yet_supported">Fitxategi mota ezin da oraindik instalatu: %s</string>
-    <string name="nearby_splash__download_apps_from_people_nearby">"Internetik ez? Deskargatu aplikazioak inguruko jendearengandik! "</string>
+    <string name="nearby_splash__download_apps_from_people_nearby">Internetik ez? Deskargatu aplikazioak inguruko jendearengandik!</string>
     <string name="nearby_splash__find_people_button">Aurkitu inguruko jendea</string>
     <string name="nearby_splash__both_parties_need_fdroid">Biek %1$s erabili behar dute inguruan elkar aurkitzeko.</string>
 

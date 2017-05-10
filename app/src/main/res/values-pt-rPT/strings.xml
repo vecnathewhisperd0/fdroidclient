@@ -237,7 +237,7 @@
     <string name="empty_available_app_list">Não existem aplicações nesta categoria.\n\nSelecione uma categoria diferente
         ou atualize os repositórios para obter a lista de aplicações.
     </string>
-    <string name="empty_can_update_app_list">"Parabéns! Todas as aplicações estão atualizadas (ou os repositórios não o estão atualizados). "</string>
+    <string name="empty_can_update_app_list">Parabéns! Todas as aplicações estão atualizadas (ou os repositórios não o estão atualizados).</string>
 
     <string name="requesting_root_access_body">A solicitar acesso \'root\'…</string>
     <string name="root_access_denied_title">Acesso \'root\' recusado</string>
@@ -536,7 +536,7 @@
         <item quantity="other">Atualizada há %1$s dias</item>
     </plurals>
     <plurals name="tts_view_all_in_category">
-	<item quantity="one">"Ver  aplicação %1$d  da categoria %2$s"</item>
+	<item quantity="one">Ver  aplicação %1$d  da categoria %2$s</item>
 	<item quantity="other">Ver todas as %1$d aplicações da categoria %2$s</item>
 </plurals>
 

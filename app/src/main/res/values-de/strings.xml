@@ -246,7 +246,7 @@
 
         Bitte eine andere Kategorie wählen oder die Paketquellen aktualisieren.
     </string>
-    <string name="empty_can_update_app_list">"Glückwunsch! Alle Ihre Apps sind auf dem neuesten Stand (oder Ihre Paketquellen sind veraltet). "</string>
+    <string name="empty_can_update_app_list">Glückwunsch! Alle Ihre Apps sind auf dem neuesten Stand (oder Ihre Paketquellen sind veraltet).</string>
 
     <string name="swap_send_fdroid">F-Droid senden</string>
     <string name="swap_connecting">Verbindungsaufbau</string>

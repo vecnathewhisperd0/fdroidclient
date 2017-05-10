@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-    <string name="installIncompatible">"נראה כי חבילה זו אינה תואמת למכשירך. להתקין אותה בכל מקרה? "</string>
-    <string name="installDowngrade">"פעולה זו תחזיר אחורה את גרסת היישומון. פעולה זו עשויה לגרום לתקלה חמורה ביישומון ואף לאבדן מידע. לנסות להחזיר את הגרסה אחורה בכל זאת? "</string>
+    <string name="installIncompatible">נראה כי חבילה זו אינה תואמת למכשירך. להתקין אותה בכל מקרה?</string>
+    <string name="installDowngrade">פעולה זו תחזיר אחורה את גרסת היישומון. פעולה זו עשויה לגרום לתקלה חמורה ביישומון ואף לאבדן מידע. לנסות להחזיר את הגרסה אחורה בכל זאת?</string>
     <string name="version">גרסה</string>
     <string name="delete">מחיקה</string>
     <string name="enable_nfc_send">הפעלת שליחה עם NFC…</string>
@@ -58,7 +58,7 @@
 
     <string name="repo_add_url">כתובת מאגר</string>
     <string name="repo_add_fingerprint">טביעת אצבע (רשות)</string>
-    <string name="repo_delete_to_overwrite">"תחילה עליך למחוק את המאגר הזה לפני שתינתן לך האפשרות להוסיף אחר עם מפתח שונה. "</string>
+    <string name="repo_delete_to_overwrite">תחילה עליך למחוק את המאגר הזה לפני שתינתן לך האפשרות להוסיף אחר עם מפתח שונה.</string>
     <string name="bad_fingerprint">טביעת אצבע שגויה</string>
     <string name="invalid_url">כתובת זו אינה תקינה.</string>
     <string name="malformed_repo_uri">כתובת מאגר שגויה בהתעלמות: %s</string>
@@ -171,15 +171,15 @@
     <string name="empty_available_app_list">"אין יישומונים בקטגוריה זו.
 \n
 \nכדאי לנסות לבחור קטגוריה אחרת או לעדכן את המאגרים שלך כדי להשיג רשימה עדכנית של יישומונים. "</string>
-    <string name="empty_can_update_app_list">"ברכותינו! כל היישומונים שלך עדכניים (או שהמאגרים שלך לא עדכניים). "</string>
+    <string name="empty_can_update_app_list">ברכותינו! כל היישומונים שלך עדכניים (או שהמאגרים שלך לא עדכניים).</string>
 
     <string name="requesting_root_access_body">בקשה לגישת על (root)…</string>
     <string name="root_access_denied_title">גישת על (root) נאסרה</string>
-    <string name="root_access_denied_body">"או שלמכשיר האנדרואיד שלך אין גישת על (root) או שדחית את הגישה ל־F-Droid. "</string>
+    <string name="root_access_denied_body">או שלמכשיר האנדרואיד שלך אין גישת על (root) או שדחית את הגישה ל־F-Droid.</string>
     <string name="install_error_unknown">ההתקנה נכשלה עקב שגיאה בלתי ידועה</string>
     <string name="uninstall_error_unknown">ההסרה נכשלה עקב שגיאה בלתי ידועה</string>
     <string name="system_install_denied_title">הרשאות מערכת נאסרו</string>
-    <string name="system_install_denied_body">"אפשרות זו הינה זמינה רק כאשר F-Droid הינה מותקנת בתור אפליקציה מועדפת. "</string>
+    <string name="system_install_denied_body">אפשרות זו הינה זמינה רק כאשר F-Droid הינה מותקנת בתור אפליקציה מועדפת.</string>
     <string name="system_install_post_success">התקין בהצלחה הרחבת F-Droid מועדף</string>
     <string name="system_install_post_fail">התקנת הרחבת F-Droid מועדף נכשלה</string>
     <string name="system_install_post_success_message">הרחבת F-Droid מועדף הותקנה בהצלחה בתור אפליקציה מועדפת. דבר זה
@@ -294,15 +294,15 @@
     <string name="repo_exists_enable">מאגר זה כבר מותקן, נא לאמת כדי לאפשרו שוב.</string>
     <string name="repo_exists_and_enabled">המאגר הנכנס כבר מותקן ומאופשר.</string>
     <string name="repo_fingerprint">טביעת אצבע של מפתח החתימה (SHA-256)</string>
-    <string name="unsigned_description">"משמעות הדבר היא שאין אפשרות לאמת את רשימת היישומונים. יש לנקוט באמצעי זהירות עם יישומונים שהתקבלו ממפתחות בלתי חתומים. "</string>
-    <string name="repo_not_yet_updated">"מאגר זה לא היה בשימוש עדיין. יש לאפשר אותו כדי לצפות ביישומונים שהמאגר הזה מציע. "</string>
+    <string name="unsigned_description">משמעות הדבר היא שאין אפשרות לאמת את רשימת היישומונים. יש לנקוט באמצעי זהירות עם יישומונים שהתקבלו ממפתחות בלתי חתומים.</string>
+    <string name="repo_not_yet_updated">מאגר זה לא היה בשימוש עדיין. יש לאפשר אותו כדי לצפות ביישומונים שהמאגר הזה מציע.</string>
     <string name="repo_confirm_delete_body">"מחיקת מאגר זה משמעה כי יישומונים מתוכו לא יהיו זמינים עוד מתוך F-Droid.
 \n
 \nהערה: כל היישומונים שהותקנו בעבר יישארו על המכשיר שלך. "</string>
     <string name="repo_disabled_notification">"%1$s נוטרל.
 \n
 \nעליך לאפשר שוב את המאגר זה כדי להתקין יישומונים מתוכו. "</string>
-    <string name="not_on_same_wifi">"המכשיר שלך אינו מחובר לאותה רשת ה־WiFi כמו המאגר המקומי שהוספת כרגע! כדאי לנסות להצטרף לרשת הזו: %s "</string>
+    <string name="not_on_same_wifi">המכשיר שלך אינו מחובר לאותה רשת ה־WiFi כמו המאגר המקומי שהוספת כרגע! כדאי לנסות להצטרף לרשת הזו: %s</string>
     <string name="swap_join_same_wifi_desc">כדי לבצע הֶחְלֵף באמצעות Wi-Fi, וודא כי אתה נמצא על גבי אותה רשת. אם אין לך
         גישה לאותה הרשת, אחד מכם יכול ליצור Wi-Fi Hotspot.
     </string>
@@ -371,7 +371,7 @@
     <string name="useTorSummary">אילוץ העברת תעבורת העבודה דרך Tor להגברת הפרטיות</string>
     <string name="swap_stopping_wifi">חיבור הרשת האלחוטי מופסק…</string>
     <string name="update_auto_download">הורדת עדכונים אוטומטית</string>
-    <string name="update_auto_download_summary">"העדכונים מתקבלים אוטומטית ותופיע הודעה להתקין אותם "</string>
+    <string name="update_auto_download_summary">העדכונים מתקבלים אוטומטית ותופיע הודעה להתקין אותם</string>
     <string name="tap_to_install_format">הקש כדי להתקין %s</string>
     <string name="tap_to_update_format">הקש כדי לעדכן %s</string>
     <string name="download_pending">כעת ממתין להתחיל להוריד…</string>
@@ -432,8 +432,8 @@
     <string name="main_menu__swap_nearby">בקרבת מקום</string>
 
     <string name="latest__empty_state__no_recent_apps">לא נמצאו יישומונים אחרונים</string>
-    <string name="latest__empty_state__never_updated">"לאחר עדכון רשימת היישומונים, היישומונים העדכניים ביותר אמורים להופיע כאן "</string>
-    <string name="latest__empty_state__no_enabled_repos">"לאחר הפעלת מאגר ומשיכת עדכון ממנו, היישומים העדכניים ביותר אמור להופיע כאן "</string>
+    <string name="latest__empty_state__never_updated">לאחר עדכון רשימת היישומונים, היישומונים העדכניים ביותר אמורים להופיע כאן</string>
+    <string name="latest__empty_state__no_enabled_repos">לאחר הפעלת מאגר ומשיכת עדכון ממנו, היישומים העדכניים ביותר אמור להופיע כאן</string>
 
     <string name="categories__empty_state__no_categories">אין קטגוריות להצגה</string>
 

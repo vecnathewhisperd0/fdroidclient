@@ -250,7 +250,7 @@
 
         Provu elekti alian kategorion aŭ ĝisdatigi viajn deponejojn por atingi freŝan liston de aplikaĵojn.
     </string>
-    <string name="empty_can_update_app_list">"Bonege! Ĉiuj viaj aplikaĵoj estas ĝisdataj (aŭ viaj deponejoj estas neĝisdataj). "</string>
+    <string name="empty_can_update_app_list">Bonege! Ĉiuj viaj aplikaĵoj estas ĝisdataj (aŭ viaj deponejoj estas neĝisdataj).</string>
     <string name="empty_search_installed_app_list">Neniuj kongruaj instalitaj aplikaĵoj.</string>
     <string name="empty_search_available_app_list">Neniuj kongruaj aplikaĵoj disponeblaj.</string>
     <string name="empty_search_can_update_app_list">Neniuj kongruaj aplikaĵoj por ĝisdatigi.</string>
@@ -308,7 +308,7 @@
     <string name="swap_switch_to_wifi">Tuŝu por ŝanĝi al vifio</string>
     <string name="swap_confirm_connect">Ĉu vi volas elŝuti aplikaĵojn el %1$s nun?</string>
     <string name="swap_dont_show_again">Ne montri ĉi tion denove</string>
-    <string name="swap_scan_or_type_url">"Unu persono devas skani la kodon, aŭ entajpi URL-n de aliulo en foliumilon. "</string>
+    <string name="swap_scan_or_type_url">Unu persono devas skani la kodon, aŭ entajpi URL-n de aliulo en foliumilon.</string>
     <string name="swap_choose_apps">Elekti aplikaĵojn</string>
     <string name="swap_scan_qr">Skanu QR-kodon</string>
     <string name="swap_people_nearby">Homoj proksime</string>
