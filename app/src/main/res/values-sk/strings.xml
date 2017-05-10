@@ -479,8 +479,8 @@
 	<item quantity="one">Stiahnuť aktualizáciu pre %1$d aplikáciu.</item>
 	<item quantity="few">Stiahnuť aktualizácie pre %1$d aplikácie.</item>
 	<item quantity="many">Stiahnuť aktualizácie pre %1$d aplikácií.</item>
-	<item quantity="other"/>
-</plurals>
+	<item quantity="other">Stiahnuť aktualizácie pre %1$d aplikácií.</item>
+	</plurals>
 
     <string name="clear_search">Vymazať hľadanie</string>
 
@@ -508,8 +508,8 @@
 	<item quantity="one">Zobraziť %d</item>
 	<item quantity="few">Zobraziť: %d</item>
 	<item quantity="many">Zobraziť. %d</item>
-	<item quantity="other"/>
-</plurals>
+	<item quantity="other">Zobraziť. %d</item>
+	</plurals>
 
     <string name="install_error_not_yet_supported">Typ súboru zatiaľ nie je možné nainštalovať: %s</string>
     <string name="nearby_splash__download_apps_from_people_nearby">"Žiadny internet? Stiahnite si aplikácie od ľudí v blízkosti vás! "</string>
@@ -521,6 +521,7 @@
 
     <plurals name="tts_view_all_in_category">
 	<item quantity="one">Zobraziť %1$d aplikáciu v kategórií %2$s</item>
+	<item quantity="few">Zobraziť %1$d aplikácie v kategórií %2$s</item>
 	<item quantity="other">Zobraziť %1$d aplikácie v kategórií %2$s</item>
 </plurals>
 
@@ -529,6 +530,6 @@
 	<item quantity="one">Aktualizované pred %1$s dňom</item>
 	<item quantity="few">Aktualizované pred %1$s dňami</item>
 	<item quantity="many">Aktualizované pred %1$s dňami</item>
-	<item quantity="other"></item>
-</plurals>
+	<item quantity="other">Aktualizované pred %1$s dňami</item>
+	</plurals>
 </resources>

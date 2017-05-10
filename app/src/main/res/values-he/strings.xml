@@ -399,9 +399,11 @@
     <string name="app_list__age__released_today">יצא לאור היום</string>
     <string name="app_list__age__released_yesterday">יצא לאור אתמול</string>
     <plurals name="app_list__age__released_x_days_ago">
-	<item quantity="one">יצא לאור אתמול</item>
-	<item quantity="other">יצא לאור לפני %1$d ימים</item>
-</plurals>
+        <item quantity="one">יצא לאור אתמול</item>
+        <item quantity="two">יצא לאור לפני %1$d ימים</item>
+        <item quantity="many">יצא לאור לפני %1$d ימים</item>
+        <item quantity="other">יצא לאור לפני %1$d ימים</item>
+    </plurals>
 
     <string name="installed_apps__activity_title">יישומונים מותקנים</string>
     <string name="installed_app__updates_ignored">עדכונים בהתעלמות</string>
@@ -413,11 +415,11 @@
     <string name="updates__show_updateable_apps">הצגת יישומונים</string>
 
     <plurals name="updates__download_updates_for_apps">
-	<item quantity="one">הורדת עדכון ליישומון אחד.</item>
-	<item quantity="two">הורדת עדכון ל־%1$d יישומונים.</item>
-	<item quantity="many"/>
-	<item quantity="other"/>
-</plurals>
+        <item quantity="one">הורדת עדכון ליישומון אחד.</item>
+        <item quantity="two">הורדת עדכון ל־%1$d יישומונים.</item>
+        <item quantity="many">הורדת עדכון ל־%1$d יישומונים.</item>
+        <item quantity="other">הורדת עדכון ל־%1$d יישומונים.</item>
+    </plurals>
 
     <string name="versions">גרסאות</string>
     <string name="clear_search">פינוי החיפוש</string>
@@ -447,9 +449,11 @@
     <string name="hide_anti_feature_apps_on">סימון באפור יישומונים שדורשים נוגדי תכונות</string>
     <string name="warning_no_internet">לא ניתן לעדכן, יש לך חיבור לאינטרנט?</string>
     <plurals name="button_view_all_apps_in_category">
-	<item quantity="one">הצגת אחד</item>
-	<item quantity="other">הצגת כל ה־%d</item>
-</plurals>
+        <item quantity="one">הצגת אחד</item>
+        <item quantity="two">הצגת כל ה־%d</item>
+        <item quantity="many">הצגת כל ה־%d</item>
+        <item quantity="other">הצגת כל ה־%d</item>
+    </plurals>
 
     <string name="install_error_not_yet_supported">עדיין לא ניתן להתקין את סוג הקובץ: %s</string>
-    </resources>
+</resources>
