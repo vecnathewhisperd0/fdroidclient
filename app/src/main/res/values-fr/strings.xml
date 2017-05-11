@@ -214,9 +214,7 @@
     <string name="empty_available_app_list">Aucune appli dans cette catégorie.\n\nEssayez de sélectionner une autre
         catégorie ou de mettre à jour vos dépôts pour avoir une liste d\'applis récente.
     </string>
-    <string name="empty_can_update_app_list">Toutes les applis sont à jour.\n\nFélicitations ! Toutes vos applis sont à
-        jour (ou vos dépôts ne le sont pas).
-    </string>
+    <string name="empty_can_update_app_list">"Félicitations ! Toutes vos applis sont à jour (ou vos dépôts ne le sont pas). "</string>
 
     <string name="system_install_installing">Installation…</string>
     <string name="system_install_uninstalling">Désinstallation…</string>
@@ -504,9 +502,9 @@
     <string name="antifeatureswarning">Cette application a des fonctionnalités qui peuvent ne pas vous plaire.</string>
     <string name="antifeatures">Fonctionnalités qui n\'en sont pas</string>
     <plurals name="button_view_all_apps_in_category">
-        <item quantity="one">voir %d</item>
-        <item quantity="other">voir toutes %d</item>
-    </plurals>
+	<item quantity="one">Voir %d</item>
+	<item quantity="other">Voir toutes %d</item>
+</plurals>
 
     <string name="nearby_splash__download_apps_from_people_nearby">Sans connexion internet? Téléchargez les applications
         depuis des appareils de votre entourage !
@@ -539,4 +537,8 @@
     <string name="app_list__age__released_yesterday">Mis à disposition hier</string>
     <string name="menu_video">Vidéo</string>
     <string name="details_last_updated_today">Mis à jour aujourd\'hui</string>
+    <string name="app__tts__cancel_download">Annuler le téléchargement</string>
+    <string name="menu_license">Licence: %s</string>
+    <string name="install_error_not_yet_supported">Ce type de fichiers ne peut pas encore être installé: %s</string>
+    <string name="app__tts__downloading_progress">Téléchargement: %1$d%% terminé</string>
     </resources>
