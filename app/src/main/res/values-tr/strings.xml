@@ -366,7 +366,7 @@
     <string name="system_install_post_success_message">F-Droid Ayrıcalıklı Uzantı başarılı bir şekilde kuruldu. Bu,
         F-Droid\'in kendi başına uygulamaları kurmasına, yükseltmesine ve kaldırmasına izin verir.
     </string>
-    <string name="system_install_post_fail_message">"F-Droid Ayrıcalıklı Uzantı\'nın kurulumu başarısız. Kurulum yöntemi her Android dağıtımı tarafından desteklenmeyebilir, daha fazla bilgi için lütfen F-Droid hata izleyicisine başvurun. "</string>
+    <string name="system_install_post_fail_message">"F-Droid Ayrıcalıklı Uzantı\'nın kurulumu başarısız. Kurulum yöntemi her Android dağıtımı tarafından desteklenmeyebilir, daha çok bilgi için lütfen F-Droid hata izleyicisine başvurun. "</string>
     <string name="system_install_question">F-Droid Ayrıcalıklı Uzantı\'yı kurmak istiyor musunuz?</string>
     <string name="system_uninstall">F-Droid Ayrıcalıklı Uzantı\'yı kaldırmak istiyor musunuz?</string>
     <string name="swap_join_same_wifi_desc">Wi-Fi ile takas yapmak istiyorsanız, aynı ağda olduğunuzdan emin olun. Eğer
