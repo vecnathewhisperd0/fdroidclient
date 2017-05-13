@@ -230,7 +230,7 @@
     <string name="empty_available_app_list">No hay aplicaciones en esta categoría.\n\nPrueba a seleccionar una categoría
         diferente o actualizar los repositorios para obtener una lista reciente de aplicaciones.
     </string>
-    <string name="empty_can_update_app_list">"¡Felicidades! Todas tus aplicaciones están actualizadas (o los repositorios están desactualizados). "</string>
+    <string name="empty_can_update_app_list">"¡Enhorabuena! Todas tus aplicaciones están actualizadas (o los repositorios están desactualizados). "</string>
 
     <string name="install_error_unknown">Fallo al instalar, debido a un error desconocido</string>
     <string name="uninstall_error_unknown">Fallo al desinstalar, debido a un error desconocido</string>
