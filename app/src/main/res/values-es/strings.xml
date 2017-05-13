@@ -495,10 +495,7 @@ tenéis acceso a la misma red, uno de vosotros puede crear un punto de acceso Wi
         <item quantity="other">publicada hace %1$d días</item>
     </plurals>
 
-    <string name="updates__tts__download_app">"El botón de descarga que se encuentra entre el texto en la pantalla de
-        \"Actualizaciones\" solo usa
-        un icono y por tanto necesita algún texto descriptivo para el motor TTS"
-    </string>
+    <string name="updates__tts__download_app">Actualizaciones</string>
     <string name="updates__tts__download_updates_for_all_apps">Descargar todas las actualizaciones</string>
 
     <string name="updates__hide_updateable_apps">Ocultar apps</string>
