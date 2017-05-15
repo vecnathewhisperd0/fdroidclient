@@ -20,7 +20,7 @@
     <string name="update_interval">Intervalle de mise à jour automatique</string>
     <string name="update_interval_zero">Aucune mise à jour automatique de la liste d\'applis</string>
     <string name="automatic_scan_wifi">Uniquement via Wi-Fi</string>
-    <string name="automatic_scan_wifi_on">Ne mettre à jour automatiquement que lorsque connecté via Wifi</string>
+    <string name="automatic_scan_wifi_on">Mise à jour automatique uniquement à travers des réseaux non-limités/payant comme le Wi-Fi</string>
     <string name="notify">Notifications de mise à jour</string>
     <string name="notify_on">Afficher une notification quand des mises à jour sont disponibles</string>
     <string name="system_installer">Permissions étendues</string>
