@@ -523,4 +523,20 @@
     <string name="app__tts__downloading_progress">Pobieranie, %1$d%% ukończono</string>
     <string name="menu_license">Licencja: %s</string>
     <string name="install_error_not_yet_supported">Typ pliku nie może być jeszcze zainstalowany: %s</string>
+    <plurals name="notification_summary_updates">
+	<item quantity="one">%1$d Aktualizacja</item>
+	<item quantity="few">%1$d Aktualizacje</item>
+	<item quantity="many">%1$d Aktualizacji</item>
+	<item quantity="other"/>
+</plurals>
+    <plurals name="notification_summary_installed">
+	<item quantity="one">%1$d Zainstalowana Aplikacja</item>
+	<item quantity="few">%1$d Zainstalowane Aplikacje</item>
+	<item quantity="many">%1$d Zainstalowanych Aplikacji</item>
+	<item quantity="other"/>
+</plurals>
+    <plurals name="notification_summary_more">
+	<item quantity="one">+%1$d powiadomienie więcej…</item>
+	<item quantity="other">+%1$d powiadomienia więcej…</item>
+</plurals>
     </resources>
