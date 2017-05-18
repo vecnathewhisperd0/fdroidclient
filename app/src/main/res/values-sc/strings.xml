@@ -72,7 +72,7 @@
     <string name="menu_about">Informatziones</string>
     <string name="menu_search">Chirca</string>
     <string name="menu_add_repo">Depòsitu nou</string>
-    <string name="menu_launch">Allue</string>
+    <string name="menu_launch">Allughe</string>
     <string name="menu_share">Cumpartzi</string>
     <string name="menu_install">Installa</string>
     <string name="menu_uninstall">Disinstalla</string>
@@ -219,7 +219,7 @@
     <string name="empty_available_app_list">Peruna aplicatzione in custa categoria.\n\nProa a ischertare una categoria
         diferente o a agiornare sos depòsitos tuos pro tènnere una lista noa de aplicatziones.
     </string>
-    <string name="empty_can_update_app_list">Bene meda! Totu sas aplicatziones tuas sunt agiornadas (o sos depòsitos tuos non lu sunt).</string>
+    <string name="empty_can_update_app_list">"Bene meda! Totu sas aplicatziones tuas sunt agiornadas (o sos depòsitos tuos non lu sunt). "</string>
 
     <string name="install_error_unknown">Installatzione faddida pro cajone de una faddina disconnota</string>
     <string name="uninstall_error_unknown">Disinstallatzione faddida pro cajone de una faddina disconnota</string>
@@ -258,9 +258,7 @@
     <string name="system_install_installing">Installende…</string>
     <string name="system_install_uninstalling">Disinstallende…</string>
     <string name="system_install_question">Boles installare s’estensione F-Droid cun permissos de sistema?</string>
-    <string name="system_install_warning_lollipop">Custu podet durare finas a 10 segundos e su dispositivu, a pustis, at
-        a èssere<b>torradu a allùere</b>.
-    </string>
+    <string name="system_install_warning_lollipop">Custu podet durare finas a 10 segundos e su dispositivu, a pustis, at a èssere<b>torradu a allùghere</b>. </string>
     <string name="system_uninstall">Boles disinstallare s’estensione F-Droid cun permissos de sistema?</string>
     <string name="system_uninstall_button">Disinstalla</string>
 
@@ -356,7 +354,7 @@
     </string>
     <string name="system_install_button_install">Installa</string>
     <string name="system_install_button_open">Aberi estensione</string>
-    <string name="system_install_installing_rebooting">Installende e torrende a allùere…</string>
+    <string name="system_install_installing_rebooting">Installende e torrende a allùghere…</string>
     <string name="system_install_warning">Custu podet durare finas a 10 segundos.</string>
     <string name="repo_details">Depòsitu</string>
     <string name="repo_url">Indiritzu</string>
