@@ -1,2 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="app_name">F-Droid</string>
+
+    <string name="version">Viersija</string>
+    <string name="by_author">ad</string>
+    <string name="delete">Vydalić</string>
+    <string name="enable_nfc_send">Uklučyć adpraŭku pa NFC…</string>
+    <string name="cache_downloaded">Zbierahać kešavanyja prahramy</string>
+    <string name="updates">Abnaŭleńni</string>
+    <string name="unstable_updates">Niestabilnyja abnaŭleńnia</string>
+    <string name="other">Inšaje</string>
+
+    <string name="automatic_scan_wifi">Tolki praz Wi-Fi</string>
+    <plurals name="details_last_update_days">
+	<item quantity="one">Abnoŭlena %1$s dzień tamu</item>
+	<item quantity="other">Abnoŭlena %1$s dni tamu</item>
+</plurals>
+<string name="notification_title_summary_ready_to_install">Hatova da ŭstaloŭki</string>
+    <string name="notification_title_summary_ready_to_install_update">Abnaŭleńnie hatova da ŭstaloŭki</string>
+    <string name="notification_title_summary_installing">Ustaloŭka</string>
+    <string name="notification_title_summary_installed">Paspiachova ŭstaliovana</string>
+    </resources>
