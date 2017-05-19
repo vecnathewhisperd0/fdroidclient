@@ -48,6 +48,7 @@ dependencies {
     compile 'io.reactivex:rxjava:1.1.0'
     compile 'io.reactivex:rxandroid:0.23.0'
     compile 'com.hannesdorfmann:adapterdelegates3:3.0.1'
+    compile 'org.ocpsoft.prettytime:prettytime:3.2.7.Final'
 
     // Migrate this to upstream https://github.com/Ashok-Varma/BottomNavigation if PR #110 gets
     // accepted to drop the minSdk to 10.

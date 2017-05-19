@@ -15,14 +15,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.UpdateService;
-import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.AppProvider;
 import org.fdroid.fdroid.data.RepoProvider;
 import org.fdroid.fdroid.data.Schema;
 import org.fdroid.fdroid.views.apps.AppListActivity;
 import org.fdroid.fdroid.views.whatsnew.WhatsNewAdapter;
+import org.ocpsoft.prettytime.PrettyTime;
 
 import java.util.Date;
 
@@ -122,15 +123,9 @@ class WhatsNewViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
             if (lastUpdate == null) {
                 emptyStateText.append(activity.getString(R.string.latest__empty_state__never_updated));
             } else {
-                int daysSince = Utils.daysSince(lastUpdate);
-                Resources resources = activity.getResources();
-                String text;
-                if (daysSince < 1) {
-                    text = resources.getString(R.string.details_last_updated_today);
-                } else {
-                    text = resources.getQuantityString(R.plurals.details_last_update_days, daysSince, daysSince);
-                }
-                emptyStateText.append(text);
+                String timeSpan = new PrettyTime().format(lastUpdate);
+                Resources res = activity.getResources();
+                emptyStateText.append(res.getString(R.string.details_last_updated, timeSpan));
             }
         }
 

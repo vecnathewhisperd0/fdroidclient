@@ -33,9 +33,11 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.Utils;
@@ -46,6 +48,7 @@ import org.fdroid.fdroid.data.InstalledAppProvider;
 import org.fdroid.fdroid.data.RepoProvider;
 import org.fdroid.fdroid.privileged.views.AppDiff;
 import org.fdroid.fdroid.privileged.views.AppSecurityPermissions;
+import org.ocpsoft.prettytime.PrettyTime;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -408,15 +411,9 @@ public class AppDetailsRecyclerViewAdapter
                 authorView.setVisibility(View.GONE);
             }
             if (app.lastUpdated != null) {
-                int daysSince = Utils.daysSince(app.lastUpdated);
-                String text;
-                Resources resources = lastUpdateView.getContext().getResources();
-                if (daysSince < 1) {
-                    text = resources.getString(R.string.details_last_updated_today);
-                } else {
-                    text = resources.getQuantityString(R.plurals.details_last_update_days, daysSince, daysSince);
-                }
-                lastUpdateView.setText(text);
+                String timeSpan = new PrettyTime().format(app.lastUpdated);
+                Resources res = lastUpdateView.getContext().getResources();
+                lastUpdateView.setText(res.getString(R.string.details_last_updated, timeSpan));
                 lastUpdateView.setVisibility(View.VISIBLE);
             } else {
                 lastUpdateView.setVisibility(View.GONE);
