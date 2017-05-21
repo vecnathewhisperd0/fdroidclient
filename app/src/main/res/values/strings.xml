@@ -550,6 +550,7 @@
     </plurals>
 
     <string name="details_last_updated">Updated %1$s</string>
+    <string name="details_last_updated_today">Updated today</string>
     <plurals name="details_last_update_days">
         <item quantity="one">Updated %1$s day ago</item>
         <item quantity="other">Updated %1$s days ago</item>
