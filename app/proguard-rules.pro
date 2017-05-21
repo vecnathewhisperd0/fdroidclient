@@ -54,4 +54,3 @@ public static final org.codehaus.jackson.annotate.JsonAutoDetect$Visibility *; }
 -keep public class your.class.** {
   *;
 }
--keep class org.ocpsoft.prettytime.i18n.**

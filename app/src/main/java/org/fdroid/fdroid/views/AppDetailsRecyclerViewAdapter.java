@@ -48,7 +48,6 @@ import org.fdroid.fdroid.data.InstalledAppProvider;
 import org.fdroid.fdroid.data.RepoProvider;
 import org.fdroid.fdroid.privileged.views.AppDiff;
 import org.fdroid.fdroid.privileged.views.AppSecurityPermissions;
-import org.ocpsoft.prettytime.PrettyTime;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -411,9 +410,8 @@ public class AppDetailsRecyclerViewAdapter
                 authorView.setVisibility(View.GONE);
             }
             if (app.lastUpdated != null) {
-                String timeSpan = new PrettyTime().format(app.lastUpdated);
                 Resources res = lastUpdateView.getContext().getResources();
-                lastUpdateView.setText(res.getString(R.string.details_last_updated, timeSpan));
+                lastUpdateView.setText(Utils.formatLastUpdated(res, app.lastUpdated));
                 lastUpdateView.setVisibility(View.VISIBLE);
             } else {
                 lastUpdateView.setVisibility(View.GONE);

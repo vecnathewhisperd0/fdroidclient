@@ -1,7 +1,6 @@
 package org.fdroid.fdroid.views.main;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,12 +17,12 @@ import android.widget.TextView;
 
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.UpdateService;
+import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.AppProvider;
 import org.fdroid.fdroid.data.RepoProvider;
 import org.fdroid.fdroid.data.Schema;
 import org.fdroid.fdroid.views.apps.AppListActivity;
 import org.fdroid.fdroid.views.whatsnew.WhatsNewAdapter;
-import org.ocpsoft.prettytime.PrettyTime;
 
 import java.util.Date;
 
@@ -123,9 +122,7 @@ class WhatsNewViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
             if (lastUpdate == null) {
                 emptyStateText.append(activity.getString(R.string.latest__empty_state__never_updated));
             } else {
-                String timeSpan = new PrettyTime().format(lastUpdate);
-                Resources res = activity.getResources();
-                emptyStateText.append(res.getString(R.string.details_last_updated, timeSpan));
+                emptyStateText.append(Utils.formatLastUpdated(activity.getResources(), lastUpdate));
             }
         }
 
