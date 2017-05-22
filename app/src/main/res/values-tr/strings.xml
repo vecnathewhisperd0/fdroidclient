@@ -232,7 +232,7 @@
     <string name="repo_details">Depo</string>
     <string name="repo_url">Adres</string>
     <string name="pref_language">Dil</string>
-    <string name="pref_language_default">Sistem Varsayılanı</string>
+    <string name="pref_language_default">Sistem Öntanımlı</string>
 
     <string name="wifi">Wi-Fi</string>
     <string name="category_Connectivity">Bağlantı</string>
@@ -415,8 +415,8 @@
     <string name="versions">Sürümler</string>
     <string name="hide_anti_feature_apps">Karşıt-özellikli uygulamaları gri yap</string>
     <string name="hide_anti_feature_apps_on">Karşıt-özellik gerektiren uygulamaları gri yap</string>
-    <string name="app_details_donate_prompt_unknown_author">%1$s geliştiricilerine kahve alın!</string>
-    <string name="app_details_donate_prompt">%1$s, %2$s tarafından oluşturuldu. Onlara bir kahve al!</string>
+    <string name="app_details_donate_prompt_unknown_author">%1$s geliştiricilerine bir kahve al!</string>
+    <string name="app_details_donate_prompt">%1$s, %2$s tarafından yaratıldı. Onlara bir kahve al!</string>
 
     <string name="app_version_x_available">%1$s sürümü mevcut</string>
     <string name="app_version_x_installed">Sürüm %1$s</string>
@@ -538,4 +538,16 @@
 	<item quantity="one">%1$d Uygulama Kuruldu</item>
 	<item quantity="other">%1$d Uygulama Kuruldu</item>
 </plurals>
-    </resources>
+    <plurals name="details_last_update_weeks">
+	<item quantity="one">%1$s hafta önce güncellendi</item>
+	<item quantity="other">%1$s hafta önce güncellendi</item>
+</plurals>
+    <plurals name="details_last_update_months">
+	<item quantity="one">%1$s ay önce güncellendi</item>
+	<item quantity="other">%1$s ay önce güncellendi</item>
+</plurals>
+    <plurals name="details_last_update_years">
+	<item quantity="one">%1$s yıl önce güncellendi</item>
+	<item quantity="other">%1$s yıl önce güncellendi</item>
+</plurals>
+</resources>
