@@ -541,4 +541,28 @@
     <string name="menu_license">Licence: %s</string>
     <string name="install_error_not_yet_supported">Ce type de fichier ne peut être installé pour l\'instant: %s</string>
     <string name="app__tts__downloading_progress">Téléchargement, %1$d%% complété</string>
-    </resources>
+    <plurals name="notification_summary_more">
+	<item quantity="one">+%1$d autre…</item>
+	<item quantity="other">+%1$d autres…</item>
+</plurals>
+    <plurals name="notification_summary_updates">
+	<item quantity="one">%1$d Mise à jour</item>
+	<item quantity="other">%1$d Mises à jour</item>
+</plurals>
+    <plurals name="notification_summary_installed">
+	<item quantity="one">%1$d Application installée</item>
+	<item quantity="other">%1$d Applications installées</item>
+</plurals>
+    <plurals name="details_last_update_weeks">
+	<item quantity="one">Mis à jour il y à %1$s semaine</item>
+	<item quantity="other">Mis à jour il y à %1$s semaines</item>
+</plurals>
+    <plurals name="details_last_update_months">
+	<item quantity="one">Mis à jour il y à %1$s mois</item>
+	<item quantity="other">Mis à jour il y à %1$s mois</item>
+</plurals>
+    <plurals name="details_last_update_years">
+	<item quantity="one">Mis à jour il y a %1$s an</item>
+	<item quantity="other">Mis à jour il y a %1$s ans</item>
+</plurals>
+</resources>
