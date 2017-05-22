@@ -547,4 +547,16 @@ tenéis acceso a la misma red, uno de vosotros puede crear un punto de acceso Wi
 	<item quantity="one">%1$d «app» instalada</item>
 	<item quantity="other">%1$d «apps» instaladas</item>
 </plurals>
-    </resources>
+    <plurals name="details_last_update_weeks">
+	<item quantity="one">Actualizado hace una semana</item>
+	<item quantity="other">Actualizado hace %1$s semanas</item>
+</plurals>
+    <plurals name="details_last_update_months">
+	<item quantity="one">Actualizado hace un mes</item>
+	<item quantity="other">Actualizado hace %1$s meses</item>
+</plurals>
+    <plurals name="details_last_update_years">
+	<item quantity="one">Actualizado hace un año</item>
+	<item quantity="other">Actualizado hace %1$s años</item>
+</plurals>
+</resources>
