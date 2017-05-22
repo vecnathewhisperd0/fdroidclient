@@ -519,23 +519,23 @@ public final class Utils {
         return (int) TimeUnit.MILLISECONDS.toDays(msDiff);
     }
 
-    public static String formatLastUpdated(@NonNull Resources resources, @NonNull Date date) {
+    public static String formatLastUpdated(@NonNull Resources res, @NonNull Date date) {
         long msDiff = Calendar.getInstance().getTimeInMillis() - date.getTime();
         long days   = msDiff / DateUtils.DAY_IN_MILLIS;
-        long weeks  = msDiff / DateUtils.WEEK_IN_MILLIS;
-        long years  = msDiff / DateUtils.YEAR_IN_MILLIS;
+        long weeks  = msDiff / (DateUtils.DAY_IN_MILLIS * 7);
+        long months = msDiff / (DateUtils.DAY_IN_MILLIS * 30);
+        long years  = msDiff / (DateUtils.DAY_IN_MILLIS * 365);
 
         if (days < 1) {
-            return resources.getString(R.string.details_last_updated_today);
-        }
-        else if (weeks < 1) {
-            return resources.getQuantityString(R.plurals.details_last_update_days, (int) days, days);
-        }
-        else if (years < 1) {
-            return resources.getQuantityString(R.plurals.details_last_update_weeks, (int) weeks, weeks);
-        }
-        else {
-            return resources.getQuantityString(R.plurals.details_last_update_years, (int) years, years);
+            return res.getString(R.string.details_last_updated_today);
+        } else if (weeks < 1) {
+            return res.getQuantityString(R.plurals.details_last_update_days, (int) days, days);
+        } else if (months < 1) {
+            return res.getQuantityString(R.plurals.details_last_update_months, (int) months, months);
+        } else if (years < 1) {
+            return res.getQuantityString(R.plurals.details_last_update_weeks, (int) weeks, weeks);
+        } else {
+            return res.getQuantityString(R.plurals.details_last_update_years, (int) years, years);
         }
     }
 
