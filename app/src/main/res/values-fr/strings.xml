@@ -554,12 +554,12 @@
 	<item quantity="other">%1$d Applications installées</item>
 </plurals>
     <plurals name="details_last_update_weeks">
-	<item quantity="one">Mis à jour il y à %1$s semaine</item>
-	<item quantity="other">Mis à jour il y à %1$s semaines</item>
+	<item quantity="one">Mis à jour il y a %1$s semaine</item>
+	<item quantity="other">Mis à jour il y a %1$s semaines</item>
 </plurals>
     <plurals name="details_last_update_months">
-	<item quantity="one">Mis à jour il y à %1$s mois</item>
-	<item quantity="other">Mis à jour il y à %1$s mois</item>
+	<item quantity="one">Mis à jour il y a %1$s mois</item>
+	<item quantity="other">Mis à jour il y a %1$s mois</item>
 </plurals>
     <plurals name="details_last_update_years">
 	<item quantity="one">Mis à jour il y a %1$s an</item>
