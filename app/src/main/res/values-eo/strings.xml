@@ -541,4 +541,16 @@
 	<item quantity="one">%1$d instalita aplikaĵo</item>
 	<item quantity="other">%1$d instalitaj aplikaĵoj</item>
 </plurals>
-    </resources>
+    <plurals name="details_last_update_weeks">
+	<item quantity="one">Ĝisdatigita antaŭ %1$s semajno</item>
+	<item quantity="other">Ĝisdatigita antaŭ %1$s semajnoj</item>
+</plurals>
+    <plurals name="details_last_update_months">
+	<item quantity="one">Ĝisdatigita antaŭ %1$s monato</item>
+	<item quantity="other">Ĝisdatigita antaŭ %1$s monatoj</item>
+</plurals>
+    <plurals name="details_last_update_years">
+	<item quantity="one">Ĝisdatigita antaŭ %1$s jaro</item>
+	<item quantity="other">Ĝisdatigita antaŭ %1$s jaroj</item>
+</plurals>
+</resources>
