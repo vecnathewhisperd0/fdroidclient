@@ -539,4 +539,16 @@
 	<item quantity="one">+%1$d powiadomienie więcej…</item>
 	<item quantity="other">+%1$d powiadomienia więcej…</item>
 </plurals>
-    </resources>
+    <plurals name="details_last_update_weeks">
+	<item quantity="one">Uaktualniono %1$s tydzień temu</item>
+	<item quantity="other">Uaktualniono %1$s tygodnie temu</item>
+</plurals>
+    <plurals name="details_last_update_months">
+	<item quantity="one">Uaktualniono %1$s miesiąc temu</item>
+	<item quantity="other">Uaktualniono %1$s miesiące temu</item>
+</plurals>
+    <plurals name="details_last_update_years">
+	<item quantity="one">Uaktualniono %1$s rok temu</item>
+	<item quantity="other">Uaktualniono %1$s lata temu</item>
+</plurals>
+</resources>
