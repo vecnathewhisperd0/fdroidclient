@@ -548,4 +548,16 @@
 	<item quantity="one">%1$d app geïnstalleerd</item>
 	<item quantity="other">%1$d apps geïnstalleerd</item>
 </plurals>
-    </resources>
+    <plurals name="details_last_update_weeks">
+	<item quantity="one">%1$s week geleden bijgewerkt</item>
+	<item quantity="other">%1$s weken geleden bijgewerkt</item>
+</plurals>
+    <plurals name="details_last_update_months">
+	<item quantity="one">%1$s maand geleden bijgewerkt</item>
+	<item quantity="other">%1$s maand geleden bijgewerkt</item>
+</plurals>
+    <plurals name="details_last_update_years">
+	<item quantity="one">%1$s jaar geleden bijgewerkt</item>
+	<item quantity="other">%1$s jaar geleden bijgewerkt</item>
+</plurals>
+</resources>
