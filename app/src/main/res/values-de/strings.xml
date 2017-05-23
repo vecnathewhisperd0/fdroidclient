@@ -551,4 +551,16 @@
 	<item quantity="one">%1$d App installiert</item>
 	<item quantity="other">%1$d Apps installiert</item>
 </plurals>
-    </resources>
+    <plurals name="details_last_update_weeks">
+	<item quantity="one">Vor %1$s Woche aktualisiert</item>
+	<item quantity="other">Vor %1$s Wochen aktualisiert</item>
+</plurals>
+    <plurals name="details_last_update_months">
+	<item quantity="one">Vor %1$s Monat aktualisiert</item>
+	<item quantity="other">Vor %1$s Monaten aktualisiert</item>
+</plurals>
+    <plurals name="details_last_update_years">
+	<item quantity="one">Vor %1$s Jahr aktualisiert</item>
+	<item quantity="other">Vor %1$s Jahren aktualisiert</item>
+</plurals>
+</resources>
