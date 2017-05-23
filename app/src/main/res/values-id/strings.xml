@@ -548,6 +548,18 @@
 </plurals>
     <plurals name="notification_summary_installed">
 	<item quantity="one">%1$d Apl Terpasang</item>
+	<item quantity="other"/>
+</plurals>
+    <plurals name="details_last_update_weeks">
+	<item quantity="one">Diperbarui %1$s minggu yang lalu</item>
+	<item quantity="other"/>
+</plurals>
+    <plurals name="details_last_update_months">
+	<item quantity="one">Diperbarui %1$s bulan yang lalu</item>
+	<item quantity="other"/>
+</plurals>
+    <plurals name="details_last_update_years">
+	<item quantity="one">Diperbarui %1$s tahun yang lalu</item>
 	<item quantity="other"></item>
 </plurals>
-    </resources>
+</resources>
