@@ -522,4 +522,15 @@
 	<item quantity="one">%1$d 應用程式已安裝</item>
 	<item quantity="other"/>
 </plurals>
-    </resources>
+    <plurals name="details_last_update_weeks">
+	<item quantity="other">已更新於 %1$s 周前</item>
+</plurals>
+    <plurals name="details_last_update_months">
+	<item quantity="one">已更新於 %1$s 月前</item>
+	<item quantity="other"/>
+</plurals>
+    <plurals name="details_last_update_years">
+	<item quantity="one">已更新於 %1$s 年前</item>
+	<item quantity="other"></item>
+</plurals>
+</resources>
