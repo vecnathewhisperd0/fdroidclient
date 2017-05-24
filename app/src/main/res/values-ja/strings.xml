@@ -505,6 +505,18 @@
 </plurals>
     <plurals name="notification_summary_installed">
 	<item quantity="one">%1$d ｱﾌﾟﾘ ｲﾝｽﾄｰﾙ済</item>
+	<item quantity="other"/>
+</plurals>
+    <plurals name="details_last_update_weeks">
+	<item quantity="one">%1$s 週間前に更新</item>
+	<item quantity="other"/>
+</plurals>
+    <plurals name="details_last_update_months">
+	<item quantity="one">%1$s ヶ月前に更新</item>
+	<item quantity="other"/>
+</plurals>
+    <plurals name="details_last_update_years">
+	<item quantity="one">%1$s 年前に更新</item>
 	<item quantity="other"></item>
 </plurals>
-    </resources>
+</resources>
