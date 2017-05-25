@@ -79,8 +79,8 @@
     <string name="details_notinstalled">Kurulu değil</string>
     <string name="antiadslist">Bu uygulama reklam içerir</string>
     <string name="antitracklist">Bu uygulama etkinliklerinizi izler ve rapor eder</string>
-    <string name="antinonfreeadlist">Bu uygulama özgür olmayan eklentiler tavsiye eder</string>
-    <string name="antinonfreenetlist">Bu uygulama özgür olmayan ağ servisleri tavsiye eder</string>
+    <string name="antinonfreeadlist">Bu uygulama özgür olmayan eklentiler önerir</string>
+    <string name="antinonfreenetlist">Bu uygulama özgür olmayan ağ servisleri önerir</string>
     <string name="antinonfreedeplist">Bu uygulama özgür olmayan başka uygulamalara bağımlıdır</string>
     <string name="antiupstreamnonfreelist">Kaynak kod tamamen özgür değildir</string>
     <string name="display">Görüntüleme</string>
