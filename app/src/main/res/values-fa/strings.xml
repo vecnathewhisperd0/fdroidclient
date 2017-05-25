@@ -524,19 +524,19 @@
 	<item quantity="other">%1$d بروزرسانی ها</item>
 </plurals>
     <plurals name="notification_summary_installed">
-	<item quantity="one">%1$d برنامه نصب شد.</item>
-	<item quantity="other">%1$d برنامه ها نصب شدند.</item>
+	<item quantity="one">%1$d برنامه نصب شد</item>
+	<item quantity="other">%1$d برنامه ها نصب شدند</item>
 </plurals>
     <plurals name="details_last_update_weeks">
-	<item quantity="one">%1$s هفته پیش بروزرسانی شده است.</item>
-	<item quantity="other">%1$s هفته پیش بروزرسانی شده است.</item>
+	<item quantity="one">%1$s هفته پیش بروزرسانی شده است</item>
+	<item quantity="other">%1$s هفته پیش بروزرسانی شده است</item>
 </plurals>
     <plurals name="details_last_update_months">
-	<item quantity="one">%1$s ماه پیش بروزرسانی شده است.</item>
-	<item quantity="other">%1$s ماه پیش بروزرسانی شده است.</item>
+	<item quantity="one">%1$s ماه پیش بروزرسانی شده است</item>
+	<item quantity="other">%1$s ماه پیش بروزرسانی شده است</item>
 </plurals>
     <plurals name="details_last_update_years">
-	<item quantity="one">%1$s سال پیش بروزرسانی شده است.</item>
-	<item quantity="other">%1$s سال پیش بروزرسانی شده است.</item>
+	<item quantity="one">%1$s سال پیش بروزرسانی شده است</item>
+	<item quantity="other">%1$s سال پیش بروزرسانی شده است</item>
 </plurals>
 </resources>
