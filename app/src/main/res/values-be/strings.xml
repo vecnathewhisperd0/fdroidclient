@@ -537,16 +537,32 @@
     <string name="install_error_not_yet_supported">Тып файла не можа быць усталяваны: %s</string>
     <plurals name="notification_summary_updates">
 	<item quantity="one">%1$d абнаўленне</item>
-	<item quantity="other">%1$d абнаўлення</item>
+	<item quantity="few">%1$d абнаўленні</item>
+	<item quantity="many">%1$d абнаўленняў</item>
+	<item quantity="other"/>
 </plurals>
     <plurals name="notification_summary_installed">
 	<item quantity="one">%1$d праграма ўсталяваная</item>
-	<item quantity="other">%1$d праграмы ўсталяваныя</item>
+	<item quantity="few">%1$d праграмы ўсталяваныя</item>
+	<item quantity="many">%1$d праграм ўсталяваныя</item>
+	<item quantity="other"/>
 </plurals>
     <plurals name="notification_summary_more">
 	<item quantity="one">+%1$d больш…</item>
 	<item quantity="few">+%1$d больш…</item>
 	<item quantity="many">+%1$d больш…</item>
-	<item quantity="other"></item>
+	<item quantity="other"/>
 </plurals>
-    </resources>
+    <plurals name="details_last_update_weeks">
+	<item quantity="one">Абноўленая %1$s тыдзень назад</item>
+	<item quantity="other">Абноўленая %1$s тыдні назад</item>
+</plurals>
+    <plurals name="details_last_update_months">
+	<item quantity="one">Абноўленая %1$s месяц назад</item>
+	<item quantity="other">Абноўленая %1$s месяцы назад</item>
+</plurals>
+    <plurals name="details_last_update_years">
+	<item quantity="one">Абноўленая %1$s год назад</item>
+	<item quantity="other">Абноўленая %1$s гады назад</item>
+</plurals>
+</resources>
