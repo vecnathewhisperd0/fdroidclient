@@ -562,7 +562,7 @@
 	<item quantity="other">Agiornada %1$s meses a como</item>
 </plurals>
     <plurals name="details_last_update_years">
-	<item quantity="one">Agiornada %1$s annu faghet</item>
+	<item quantity="one">Agiornada %1$s annu a como</item>
 	<item quantity="other">Agiornada %1$s annos a como</item>
 </plurals>
 </resources>
