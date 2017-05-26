@@ -514,4 +514,28 @@
     <string name="app__tts__downloading_progress">Laster ned, %1$d%% fullført</string>
     <string name="menu_license">Lisens: %s</string>
     <string name="install_error_not_yet_supported">Filtypen kan ikke installeres enda: %s</string>
-    </resources>
+    <plurals name="notification_summary_more">
+	<item quantity="one">+%1$d til…</item>
+	<item quantity="other">+%1$d til…</item>
+</plurals>
+    <plurals name="notification_summary_updates">
+	<item quantity="one">%1$d oppdatering</item>
+	<item quantity="other">%1$d oppdateringer</item>
+</plurals>
+    <plurals name="notification_summary_installed">
+	<item quantity="one">%1$d program installert</item>
+	<item quantity="other">%1$d programmer installert</item>
+</plurals>
+    <plurals name="details_last_update_weeks">
+	<item quantity="one">Oppdatert for %1$d uke siden</item>
+	<item quantity="other">Oppdatert for %1$d uker siden</item>
+</plurals>
+    <plurals name="details_last_update_months">
+	<item quantity="one">Oppdatert %1$d måned siden</item>
+	<item quantity="other">Oppdatert %1$d måneder siden</item>
+</plurals>
+    <plurals name="details_last_update_years">
+	<item quantity="one">Oppdatert for %1$d år siden</item>
+	<item quantity="other">Oppdatert for %1$d år siden</item>
+</plurals>
+</resources>
