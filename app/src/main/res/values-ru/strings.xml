@@ -220,7 +220,7 @@
     <string name="empty_available_app_list">Нет приложений в этой категории.\n\nПопробуйте выбрать другую категорию или
         обновите репозитории, чтобы получить свежий список приложений.
     </string>
-    <string name="empty_can_update_app_list">"Поздравляем! У вас установлены самые свежие версии приложений (либо репозитории требуют обновления). "</string>
+    <string name="empty_can_update_app_list">Поздравляем! У вас установлены самые свежие версии приложений (либо репозитории требуют обновления).</string>
 
     <string name="permissions">Разрешения</string>
     <string name="menu_settings">Настройки</string>

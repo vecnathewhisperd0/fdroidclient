@@ -270,7 +270,7 @@
     <string name="install_error_unknown">La instal·lació ha fallat per un error desconegut</string>
     <string name="uninstall_error_unknown">La desinstal·lació ha fallat per un error desconegut</string>
     <string name="system_install_denied_title">L\'Extensió Privilegiada d\'F-Droid no està disponible</string>
-    <string name="empty_can_update_app_list">"Felicitats! Totes les vostres aplicacions estan actualitzades (o els repositoris no ho estan). "</string>
+    <string name="empty_can_update_app_list">Felicitats! Totes les vostres aplicacions estan actualitzades (o els repositoris no ho estan).</string>
 
     <string name="system_install_denied_signature">La signatura de l\'extensió és incorrecta! Si podeu, informeu
         d\'aquest error!

@@ -252,7 +252,7 @@
 
         Başka bir kategori seçmeyi veya yeni bir uygulama listesi almak için depolarınızı güncellemeyi deneyin.
     </string>
-    <string name="empty_can_update_app_list">"Tebrikler! Tüm uygulamalarınız güncel (veya depolarınız güncel değil). "</string>
+    <string name="empty_can_update_app_list">Tebrikler! Tüm uygulamalarınız güncel (veya depolarınız güncel değil).</string>
     <string name="empty_search_installed_app_list">Eşleşen kurulu uygulama yok.</string>
     <string name="empty_search_available_app_list">Mevcut eşleşen uygulama yok.</string>
     <string name="empty_search_can_update_app_list">Güncelleme için eşleşen uygulama yok.</string>
@@ -296,7 +296,7 @@
     <string name="swap_confirm">Takası onaylayın</string>
     <string name="swap_qr_isnt_for_swap">Taradığınız QR kodu bir takas kodu gibi görünmüyor.</string>
     <string name="bluetooth_unavailable">Bluetooth mevcut değil</string>
-    <string name="swap_cant_send_no_bluetooth">"F-Droid gönderilemiyor, çünkü bu aygıtta Bluetooth mevcut değil. "</string>
+    <string name="swap_cant_send_no_bluetooth">F-Droid gönderilemiyor, çünkü bu aygıtta Bluetooth mevcut değil.</string>
     <string name="loading">Yükleniyor…</string>
     <string name="swap_connection_misc_error">Aygıta bağlanılırken bir hata meydana geldi, onunla takas yapamıyoruz.
     </string>
@@ -356,7 +356,7 @@
     </string>
     <string name="wifi_ap">Hotspot</string>
 
-    <string name="system_install_denied_signature">"Uzantının imzası yanlış! Lütfen bir hata raporu oluşturun! "</string>
+    <string name="system_install_denied_signature">Uzantının imzası yanlış! Lütfen bir hata raporu oluşturun!</string>
     <string name="system_install_denied_permissions">Uzantıya ayrıcalıklı izinler verilmemiştir! Lütfen bir hata raporu
         oluşturun!
     </string>
@@ -366,7 +366,7 @@
     <string name="system_install_post_success_message">F-Droid Ayrıcalıklı Uzantı başarılı bir şekilde kuruldu. Bu,
         F-Droid\'in kendi başına uygulamaları kurmasına, yükseltmesine ve kaldırmasına izin verir.
     </string>
-    <string name="system_install_post_fail_message">"F-Droid Ayrıcalıklı Uzantı\'nın kurulumu başarısız. Kurulum yöntemi her Android dağıtımı tarafından desteklenmeyebilir, daha çok bilgi için lütfen F-Droid hata izleyicisine başvurun. "</string>
+    <string name="system_install_post_fail_message">F-Droid Ayrıcalıklı Uzantı\'nın kurulumu başarısız. Kurulum yöntemi her Android dağıtımı tarafından desteklenmeyebilir, daha çok bilgi için lütfen F-Droid hata izleyicisine başvurun.</string>
     <string name="system_install_question">F-Droid Ayrıcalıklı Uzantı\'yı kurmak istiyor musunuz?</string>
     <string name="system_uninstall">F-Droid Ayrıcalıklı Uzantı\'yı kaldırmak istiyor musunuz?</string>
     <string name="swap_join_same_wifi_desc">Wi-Fi ile takas yapmak istiyorsanız, aynı ağda olduğunuzdan emin olun. Eğer

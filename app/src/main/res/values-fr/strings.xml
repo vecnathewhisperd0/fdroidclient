@@ -214,7 +214,7 @@
     <string name="empty_available_app_list">Aucune appli dans cette catégorie.\n\nEssayez de sélectionner une autre
         catégorie ou de mettre à jour vos dépôts pour avoir une liste d\'applis récente.
     </string>
-    <string name="empty_can_update_app_list">"Félicitations ! Toutes vos applis sont à jour (ou vos dépôts ne le sont pas). "</string>
+    <string name="empty_can_update_app_list">Félicitations ! Toutes vos applis sont à jour (ou vos dépôts ne le sont pas).</string>
 
     <string name="system_install_installing">Installation…</string>
     <string name="system_install_uninstalling">Désinstallation…</string>
