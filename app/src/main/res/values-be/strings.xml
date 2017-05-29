@@ -539,20 +539,17 @@
 	<item quantity="one">%1$d абнаўленне</item>
 	<item quantity="few">%1$d абнаўленні</item>
 	<item quantity="many">%1$d абнаўленняў</item>
-	<item quantity="other"/>
-</plurals>
+	</plurals>
     <plurals name="notification_summary_installed">
 	<item quantity="one">%1$d праграма ўсталяваная</item>
 	<item quantity="few">%1$d праграмы ўсталяваныя</item>
 	<item quantity="many">%1$d праграм ўсталяваныя</item>
-	<item quantity="other"/>
-</plurals>
+	</plurals>
     <plurals name="notification_summary_more">
 	<item quantity="one">+%1$d больш…</item>
 	<item quantity="few">+%1$d больш…</item>
 	<item quantity="many">+%1$d больш…</item>
-	<item quantity="other"/>
-</plurals>
+	</plurals>
     <plurals name="details_last_update_weeks">
 	<item quantity="one">Абноўленая %1$s тыдзень назад</item>
 	<item quantity="other">Абноўленая %1$s тыдні назад</item>

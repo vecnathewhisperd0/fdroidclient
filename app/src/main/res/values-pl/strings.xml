@@ -527,20 +527,17 @@
 	<item quantity="one">%1$d Aktualizacja</item>
 	<item quantity="few">%1$d Aktualizacje</item>
 	<item quantity="many">%1$d Aktualizacji</item>
-	<item quantity="other"/>
-</plurals>
+	</plurals>
     <plurals name="notification_summary_installed">
 	<item quantity="one">%1$d Zainstalowana Aplikacja</item>
 	<item quantity="few">%1$d Zainstalowane Aplikacje</item>
 	<item quantity="many">%1$d Zainstalowanych Aplikacji</item>
-	<item quantity="other"/>
-</plurals>
+	</plurals>
     <plurals name="notification_summary_more">
 	<item quantity="one">+%1$d powiadomienie więcej…</item>
 	<item quantity="few">+%1$d powiadomienia więcej…</item>
 	<item quantity="many">+%1$d powiadomień więcej…</item>
-	<item quantity="other"></item>
-</plurals>
+	</plurals>
     <plurals name="details_last_update_weeks">
 	<item quantity="one">Uaktualniono %1$s tydzień temu</item>
 	<item quantity="other">Uaktualniono %1$s tygodnie temu</item>

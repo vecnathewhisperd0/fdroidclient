@@ -2,7 +2,6 @@
 <resources><string name="app_name">F-Droid</string>
 
     <string name="version">Viersija</string>
-    <string name="by_author">ad</string>
     <string name="delete">Vydalić</string>
     <string name="enable_nfc_send">Uklučyć adpraŭku pa NFC…</string>
     <string name="cache_downloaded">Zbierahać kešavanyja prahramy</string>
@@ -15,8 +14,7 @@
 	<item quantity="one">Abnoŭlena %1$s dzień tamu</item>
 	<item quantity="few">Abnoŭlena %1$s dni tamu</item>
 	<item quantity="many">Abnoŭlena %1$s dzion tamu</item>
-	<item quantity="other"></item>
-</plurals>
+	</plurals>
 <string name="notification_title_summary_ready_to_install">Hatova da ŭstaloŭki</string>
     <string name="notification_title_summary_ready_to_install_update">Abnaŭleńnie hatova da ŭstaloŭki</string>
     <string name="notification_title_summary_installing">Ustaloŭka</string>
