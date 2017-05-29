@@ -535,7 +535,7 @@
 </plurals>
     <plurals name="notification_summary_updates">
 	<item quantity="one">%1$d ĝisdatigo</item>
-	<item quantity="other">%1%d ĝisdatigoj</item>
+	<item quantity="other">%1$d ĝisdatigoj</item>
 </plurals>
     <plurals name="notification_summary_installed">
 	<item quantity="one">%1$d instalita aplikaĵo</item>
