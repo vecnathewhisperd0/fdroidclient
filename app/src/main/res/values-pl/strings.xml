@@ -540,14 +540,20 @@
 	</plurals>
     <plurals name="details_last_update_weeks">
 	<item quantity="one">Uaktualniono %1$s tydzień temu</item>
+        <item quantity="few">Uaktualniono %1$s tygodnie temu</item>
+        <item quantity="many">Uaktualniono %1$s tygodnie temu</item>
 	<item quantity="other">Uaktualniono %1$s tygodnie temu</item>
 </plurals>
     <plurals name="details_last_update_months">
 	<item quantity="one">Uaktualniono %1$s miesiąc temu</item>
+        <item quantity="few">Uaktualniono %1$s miesiące temu</item>
+        <item quantity="many">Uaktualniono %1$s miesiące temu</item>
 	<item quantity="other">Uaktualniono %1$s miesiące temu</item>
 </plurals>
     <plurals name="details_last_update_years">
 	<item quantity="one">Uaktualniono %1$s rok temu</item>
+        <item quantity="few">Uaktualniono %1$s lata temu</item>
+        <item quantity="many">Uaktualniono %1$s lata temu</item>
 	<item quantity="other">Uaktualniono %1$s lata temu</item>
 </plurals>
 </resources>

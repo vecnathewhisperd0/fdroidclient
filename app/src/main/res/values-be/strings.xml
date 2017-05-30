@@ -552,14 +552,20 @@
 	</plurals>
     <plurals name="details_last_update_weeks">
 	<item quantity="one">Абноўленая %1$s тыдзень назад</item>
+        <item quantity="few">Абноўленая %1$s тыдні назад</item>
+        <item quantity="many">Абноўленая %1$s тыдні назад</item>
 	<item quantity="other">Абноўленая %1$s тыдні назад</item>
 </plurals>
     <plurals name="details_last_update_months">
 	<item quantity="one">Абноўленая %1$s месяц назад</item>
+        <item quantity="few">Абноўленая %1$s месяцы назад</item>
+        <item quantity="many">Абноўленая %1$s месяцы назад</item>
 	<item quantity="other">Абноўленая %1$s месяцы назад</item>
 </plurals>
     <plurals name="details_last_update_years">
 	<item quantity="one">Абноўленая %1$s год назад</item>
+        <item quantity="few">Абноўленая %1$s гады назад</item>
+        <item quantity="many">Абноўленая %1$s гады назад</item>
 	<item quantity="other">Абноўленая %1$s гады назад</item>
 </plurals>
 </resources>

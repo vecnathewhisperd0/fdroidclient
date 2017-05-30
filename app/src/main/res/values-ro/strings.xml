@@ -501,14 +501,17 @@
 </plurals>
     <plurals name="details_last_update_years">
 	<item quantity="one">Actualizat acum %1$s an</item>
+        <item quantity="few">Actualizat acum %1$s ani</item>
 	<item quantity="other">Actualizat acum %1$s ani</item>
 </plurals>
 <plurals name="details_last_update_months">
 	<item quantity="one">Actualizat acum %1$s lună</item>
+    <item quantity="few">Actualizat acum %1$s luni</item>
 	<item quantity="other">Actualizat acum %1$s luni</item>
 </plurals>
     <plurals name="details_last_update_weeks">
 	<item quantity="one">Actualizat acum %1$s săptămână</item>
+        <item quantity="few">Actualizat acum %1$s săptămâni</item>
 	<item quantity="other">Actualizat acum %1$s săptămâni</item>
 </plurals>
     </resources>
