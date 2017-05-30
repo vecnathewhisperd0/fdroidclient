@@ -452,7 +452,7 @@
     <string name="tts_category_name">类别 %1$s</string>
 
     <plurals name="tts_view_all_in_category">
-	<item quantity="other">在 %2$ 的类别中查看 %1$d 个应用</item>
+	<item quantity="other">在 %2$s 的类别中查看 %1$d 个应用</item>
 </plurals>
 
     <string name="details_last_updated_today">今天更新</string>
