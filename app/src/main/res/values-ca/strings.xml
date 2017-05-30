@@ -478,7 +478,7 @@
 
     <plurals name="tts_view_all_in_category">
 	<item quantity="one">Mostreu %1$d «app» de la categoria %2$s</item>
-	<item quantity="other">Mostreu totes les %2$d «apps» de la categoria %2$s</item>
+	<item quantity="other">Mostreu totes les %1$d «apps» de la categoria %2$s</item>
 </plurals>
     <string name="app__install_downloaded_update">Actualitzeu</string>
 
