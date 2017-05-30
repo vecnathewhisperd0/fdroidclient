@@ -527,4 +527,5 @@
 	<item quantity="many">Uaktualniono %1$d lat temu</item>
 </plurals>
 <string name="by_author_format">od %s</string>
+    <string name="download_404">Nie znaleziono żądanego pliku.</string>
     </resources>
