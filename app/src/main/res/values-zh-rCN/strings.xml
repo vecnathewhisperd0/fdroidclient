@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-    <string name="SignatureMismatch">"新版本签名与旧版本不同，请先卸载旧版本应用再安装新版本。（注意：卸载旧版本会清除该应用存储的所有内部数据） "</string>
-    <string name="installIncompatible">"该应用程序好像与您的设备不兼容。您仍然要尝试安装吗？ "</string>
-    <string name="installDowngrade">"您正在降级该应用程序。这样做可能会使该程序无法工作，甚至丢失您的数据。您仍然要尝试降级吗？ "</string>
+    <string name="SignatureMismatch">新版本签名与旧版本不同，请先卸载旧版本应用再安装新版本。（注意：卸载旧版本会清除该应用存储的所有内部数据）</string>
+    <string name="installIncompatible">该应用程序好像与您的设备不兼容。您仍然要尝试安装吗？</string>
+    <string name="installDowngrade">您正在降级该应用程序。这样做可能会使该程序无法工作，甚至丢失您的数据。您仍然要尝试降级吗？</string>
     <string name="version">版本</string>
     <string name="delete">删除</string>
     <string name="enable_nfc_send">启用NFC发送…</string>
@@ -42,7 +42,7 @@
     <string name="repo_exists_add_fingerprint">此软件源已经设置，该操作将会添加新的密钥信息。</string>
     <string name="repo_exists_enable">此软件源已经设置，请确认您是否要重新启用它。</string>
     <string name="repo_exists_and_enabled">此软件源已经设置好并已启用。</string>
-    <string name="repo_delete_to_overwrite">"在您添加不同密钥的软件源之前，您需要先删除该软件源。 "</string>
+    <string name="repo_delete_to_overwrite">在您添加不同密钥的软件源之前，您需要先删除该软件源。</string>
     <string name="malformed_repo_uri">忽略异常格式的软件源URI：%s</string>
     <string name="menu_update_repo">更新软件库</string>
     <string name="menu_manage">管理软件源</string>
@@ -102,8 +102,8 @@
     <string name="repo_description">描述</string>
     <string name="repo_last_update">上次更新</string>
     <string name="repo_name">名称</string>
-    <string name="unsigned_description">"这意味着应用程序清单不能被认证。对于从未签名来源下载的应用程序您应该小心。 "</string>
-    <string name="repo_not_yet_updated">"该软件源尚未使用。 你需要启用它才能查看该软件源提供的应用程序。 "</string>
+    <string name="unsigned_description">这意味着应用程序清单不能被认证。对于从未签名来源下载的应用程序您应该小心。</string>
+    <string name="repo_not_yet_updated">该软件源尚未使用。 你需要启用它才能查看该软件源提供的应用程序。</string>
     <string name="unknown">未知</string>
     <string name="repo_confirm_delete_title">删除应用程序仓库？</string>
     <string name="repo_confirm_delete_body">删除软件源意味着来自该软件源的软件将不会出现在F-Droid上。
@@ -115,7 +115,7 @@
     <string name="minsdk_or_later">%s 或更新</string>
     <string name="up_to_maxsdk">最大 %s</string>
     <string name="minsdk_up_to_maxsdk">%1$s 到 %2$s</string>
-    <string name="not_on_same_wifi">"您的设备与刚刚添加的本地软件源不在同一个Wi-Fi上！尝试加入该网络：%s "</string>
+    <string name="not_on_same_wifi">您的设备与刚刚添加的本地软件源不在同一个Wi-Fi上！尝试加入该网络：%s</string>
     <string name="requires_features">需要：%1$s</string>
     <string name="category_Development">软件开发</string>
     <string name="category_Games">游戏</string>
@@ -208,20 +208,20 @@
     <string name="empty_available_app_list">"该类别中未找到任何应用程序。
 \n
 \n试试其它类别或者更新软件库获取最新的应用列表。 "</string>
-    <string name="empty_can_update_app_list">"好棒！你的应用都是最新的（或者你该更新软件库了）。 "</string>
+    <string name="empty_can_update_app_list">好棒！你的应用都是最新的（或者你该更新软件库了）。</string>
 
-    <string name="root_access_denied_body">"你的设备未 root，或者你拒绝了root请求。 "</string>
+    <string name="root_access_denied_body">你的设备未 root，或者你拒绝了root请求。</string>
     <string name="install_error_unknown">由于未知原因导致安装失败</string>
     <string name="uninstall_error_unknown">由于未知原因导致缷载失败</string>
     <string name="system_install_denied_title">F-Droid特权扩展不可用</string>
-    <string name="system_install_denied_body">"请先安装 F-Droid 特权扩展，然后该选项才可用。 "</string>
-    <string name="system_install_denied_signature">"该扩展的签名不正确！请报BUG！ "</string>
-    <string name="system_install_denied_permissions">"该扩展没有获得超级权限！请报BUG！ "</string>
+    <string name="system_install_denied_body">请先安装 F-Droid 特权扩展，然后该选项才可用。</string>
+    <string name="system_install_denied_signature">该扩展的签名不正确！请报BUG！</string>
+    <string name="system_install_denied_permissions">该扩展没有获得超级权限！请报BUG！</string>
     <string name="system_install_button_install">安装</string>
     <string name="system_install_button_open">打开扩展</string>
     <string name="system_install_post_success">安装F-Droid特权扩展成功</string>
     <string name="system_install_post_fail">安装F-Droid特权扩展失败</string>
-    <string name="system_install_post_success_message">"F-Droid 特权扩展已成功安装。将允许 F-Droid 安装，升级和卸载自己的应用程序。 "</string>
+    <string name="system_install_post_success_message">F-Droid 特权扩展已成功安装。将允许 F-Droid 安装，升级和卸载自己的应用程序。</string>
     <string name="system_install_post_fail_message">F-Droid特权扩展的安装失败。不是所有版本的Android都支持该安装方式，请咨询F-Droid的bug跟踪系统以获取更多信息。
     </string>
     <string name="system_install_installing">安装中…</string>
@@ -235,9 +235,9 @@
     <string name="system_uninstall_button">缷载</string>
 
     <string name="swap_nfc_title">点击开始交换</string>
-    <string name="swap_nfc_description">"如果您朋友的设备上有 F-Droid 及开启的 NFC，把你们的设备贴在一起。 "</string>
+    <string name="swap_nfc_description">如果您朋友的设备上有 F-Droid 及开启的 NFC，把你们的设备贴在一起。</string>
     <string name="swap_join_same_wifi">与你的朋友连上同一个Wi-Fi</string>
-    <string name="swap_join_same_wifi_desc">"要通过 Wi-Fi 交换，确保你们在同一个网络中。如果你们没有接入同一个网络，你可以创建一个 Wi-Fi 热点。 "</string>
+    <string name="swap_join_same_wifi_desc">要通过 Wi-Fi 交换，确保你们在同一个网络中。如果你们没有接入同一个网络，你可以创建一个 Wi-Fi 热点。</string>
     <string name="swap_join_this_hotspot">帮助你的朋友加入你的热点</string>
     <string name="swap">交换应用程序</string>
     <string name="swap_success">交换成功！</string>
@@ -248,7 +248,7 @@
     <string name="open_qr_code_scanner">扫描二维码</string>
     <string name="swap_confirm_connect">你想从 %1$s 获取应用程序吗？</string>
     <string name="swap_dont_show_again">不再显示</string>
-    <string name="swap_scan_or_type_url">"别人需要扫描该代码，或在浏览器输入其他的URL。 "</string>
+    <string name="swap_scan_or_type_url">别人需要扫描该代码，或在浏览器输入其他的URL。</string>
     <string name="swap_choose_apps">选择应用程序</string>
     <string name="swap_scan_qr">扫描二维码</string>
     <string name="swap_people_nearby">附近的人</string>
@@ -269,17 +269,17 @@
     <string name="swap_confirm">确认交换</string>
     <string name="swap_qr_isnt_for_swap">你扫描的二维码似乎不是一个交换代码。</string>
     <string name="bluetooth_unavailable">蓝牙不可用</string>
-    <string name="swap_cant_send_no_bluetooth">"不能发送 F-Droid，因为该设备蓝牙不可用。 "</string>
+    <string name="swap_cant_send_no_bluetooth">不能发送 F-Droid，因为该设备蓝牙不可用。</string>
     <string name="loading">加载中…</string>
-    <string name="swap_connection_misc_error">"连接到设备时发生错误，我们似乎无法与它交换。 "</string>
+    <string name="swap_connection_misc_error">连接到设备时发生错误，我们似乎无法与它交换。</string>
     <string name="swap_not_enabled">示启用交换功能</string>
     <string name="swap_not_enabled_description">交换之前，你的设备必须是可见的。</string>
 
     <string name="install_confirm">确定要安装这个应用吗？它将有以下权限</string>
-    <string name="install_confirm_update">"确定要为这个应用安装更新吗？你的已有数据会保留。更新后的应用程序将有下权限： "</string>
-    <string name="install_confirm_update_system">"确定要为这个内置应用安装更新吗？你的已有数据会保留。更新后的应用程序将有以下权限： "</string>
-    <string name="install_confirm_update_no_perms">"确定要为这个应用安装更新吗？你的已有数据会保留。该应用不需要任何特殊权限。 "</string>
-    <string name="install_confirm_update_system_no_perms">"确定要为这个内置应用安装更新吗？你的已有数据会保留。该应用不需要任何特殊权限。 "</string>
+    <string name="install_confirm_update">确定要为这个应用安装更新吗？你的已有数据会保留。更新后的应用程序将有下权限：</string>
+    <string name="install_confirm_update_system">确定要为这个内置应用安装更新吗？你的已有数据会保留。更新后的应用程序将有以下权限：</string>
+    <string name="install_confirm_update_no_perms">确定要为这个应用安装更新吗？你的已有数据会保留。该应用不需要任何特殊权限。</string>
+    <string name="install_confirm_update_system_no_perms">确定要为这个内置应用安装更新吗？你的已有数据会保留。该应用不需要任何特殊权限。</string>
     <string name="newPerms">新建</string>
     <string name="allPerms">所有</string>
     <string name="perm_costs_money">这可能会产生费用</string>
@@ -314,7 +314,7 @@
     <string name="antinonfreeassetslist">该此应用包括非自由资产</string>
 
     <string name="crash_dialog_title">F-Droid 已崩溃</string>
-    <string name="crash_dialog_text">"发生了一个意料之外的错误导致应用程序停止。你愿意邮件发送问题的细节以便修复吗？ "</string>
+    <string name="crash_dialog_text">发生了一个意料之外的错误导致应用程序停止。你愿意邮件发送问题的细节以便修复吗？</string>
     <string name="crash_dialog_comment_prompt">你可以在此添加额外的信息或者评论:</string>
     <string name="repo_provider">代码库: %s</string>
 
@@ -322,14 +322,14 @@
     <string name="useTorSummary">强制下载流量使用 Tor 以增强隐私保障</string>
     <string name="swap_stopping_wifi">正在停止 Wi-Fi…</string>
     <string name="update_auto_download">自动下载更新</string>
-    <string name="update_auto_download_summary">"后台下载更新文件 "</string>
+    <string name="update_auto_download_summary">后台下载更新文件</string>
     <string name="tap_to_install_format">点按以安装 %s</string>
     <string name="tap_to_update_format">点按以更新 %s</string>
     <string name="download_pending">正在等待开始下载…</string>
 
     <string name="downloading_apk">正在下载 %1$s</string>
 
-    <string name="system_install_not_supported">"F-Droid 特权扩展目前不支持安装在 Android 5.1 或更高版本上。 "</string>
+    <string name="system_install_not_supported">F-Droid 特权扩展目前不支持安装在 Android 5.1 或更高版本上。</string>
 
     <string name="keep_hour">1小时</string>
     <string name="keep_day">1天</string>
@@ -403,8 +403,8 @@
     <string name="menu_video">视频</string>
     <string name="menu_license">许可证：%s</string>
     <string name="latest__empty_state__no_recent_apps">没有找到最近使用的应用</string>
-    <string name="latest__empty_state__never_updated">"一旦更新了您的应用清单，最新的应用会在这里显示 "</string>
-    <string name="latest__empty_state__no_enabled_repos">"一旦更新了您的应用清单，最新的应用会在这里显示 "</string>
+    <string name="latest__empty_state__never_updated">一旦更新了您的应用清单，最新的应用会在这里显示</string>
+    <string name="latest__empty_state__no_enabled_repos">一旦更新了您的应用清单，最新的应用会在这里显示</string>
 
     <string name="categories__empty_state__no_categories">没有可显示的类别</string>
 
@@ -420,7 +420,7 @@
 </plurals>
 
     <string name="install_error_not_yet_supported">文件类型尚未被安装：%s</string>
-    <string name="nearby_splash__download_apps_from_people_nearby">"没有网络连接？您可以从附近的人下载应用！ "</string>
+    <string name="nearby_splash__download_apps_from_people_nearby">没有网络连接？您可以从附近的人下载应用！</string>
     <string name="nearby_splash__find_people_button">查找附近的人</string>
     <string name="nearby_splash__both_parties_need_fdroid">双方都需要 %1$s 才可使用附近的人功能。</string>
 
