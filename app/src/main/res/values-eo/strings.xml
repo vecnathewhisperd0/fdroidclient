@@ -525,4 +525,5 @@
 	<item quantity="other">Ĝisdatigita antaŭ %1$d jaroj</item>
 </plurals>
 <string name="by_author_format">de %s</string>
+    <string name="download_404">Ne trovis petitan dosieron.</string>
     </resources>
