@@ -539,4 +539,5 @@
 	<item quantity="other">Agiornada %1$d annos a como</item>
 </plurals>
 <string name="by_author_format">de %s</string>
+    <string name="download_404">Su documentu pedidu no est istadu agatadu.</string>
     </resources>
