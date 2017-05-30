@@ -381,8 +381,7 @@
     <string name="app_list__age__released_today">今天发布</string>
     <string name="app_list__age__released_yesterday">昨天发布</string>
     <plurals name="app_list__age__released_x_days_ago">
-	<item quantity="one">%1$d 天前发布</item>
-	<item quantity="other"/>
+	<item quantity="other">%1$d 天前发布</item>
 </plurals>
 
     <string name="installed_apps__activity_title">已安裝的应用</string>
@@ -394,8 +393,7 @@
     <string name="updates__show_updateable_apps">显示应用</string>
 
     <plurals name="updates__download_updates_for_apps">
-	<item quantity="one">为 %1$d 个应用下载更新。</item>
-	<item quantity="other"/>
+	<item quantity="other">为 %1$d 个应用下载更新。</item>
 </plurals>
 
     <string name="versions">版本</string>
@@ -418,8 +416,7 @@
     <string name="hide_anti_feature_apps">以暗灰色显示有 anti-feature 的应用</string>
     <string name="hide_anti_feature_apps_on">以暗灰色显示需要 anti-feature 的应用</string>
     <plurals name="button_view_all_apps_in_category">
-	<item quantity="one">查看全部 %d</item>
-	<item quantity="other"/>
+	<item quantity="other">查看全部 %d</item>
 </plurals>
 
     <string name="install_error_not_yet_supported">文件类型尚未被安装：%s</string>
@@ -429,8 +426,7 @@
 
     <string name="app__tts__downloading_progress">正在下载的 %1$d%% 完成</string>
     <plurals name="notification_summary_more">
-	<item quantity="one">+%1$d 更多…</item>
-	<item quantity="other"/>
+	<item quantity="other">+%1$d 更多…</item>
 </plurals>
     <string name="notification_title_single_ready_to_install">准备安装</string>
     <string name="notification_title_single_ready_to_install_update">已准备好开始安装</string>
@@ -441,12 +437,10 @@
     <string name="notification_content_single_installed">安装成功</string>
     <string name="notification_content_single_install_error">安装失败</string>
     <plurals name="notification_summary_updates">
-	<item quantity="one">%1$d 个更新</item>
-	<item quantity="other"/>
+	<item quantity="other">%1$d 个更新</item>
 </plurals>
     <plurals name="notification_summary_installed">
-	<item quantity="one">%1$d 个应用已安装</item>
-	<item quantity="other"/>
+	<item quantity="other">%1$d 个应用已安装</item>
 </plurals>
     <string name="notification_title_summary_update_available">可用的更新</string>
     <string name="notification_title_summary_downloading">正在下载…</string>
@@ -463,18 +457,15 @@
 
     <string name="details_last_updated_today">今天更新</string>
     <plurals name="details_last_update_days">
-	<item quantity="one">%1$s 天前更新</item>
-	<item quantity="other"/>
+	<item quantity="other">%1$s 天前更新</item>
 </plurals>
     <plurals name="details_last_update_weeks">
 	<item quantity="other">%1$s 周前更新</item>
 </plurals>
     <plurals name="details_last_update_months">
-	<item quantity="one">%1$s 月前更新</item>
-	<item quantity="other"/>
+	<item quantity="other">%1$s 月前更新</item>
 </plurals>
     <plurals name="details_last_update_years">
-	<item quantity="one">%1$s 年前更新</item>
-	<item quantity="other"/>
+	<item quantity="other">%1$s 年前更新</item>
 </plurals>
 </resources>
