@@ -445,4 +445,5 @@
 	<item quantity="other">更新于 %1$d 年前</item>
 </plurals>
 <string name="by_author_format">由 %s</string>
+    <string name="download_404">找不到所请求的文件。</string>
     </resources>
