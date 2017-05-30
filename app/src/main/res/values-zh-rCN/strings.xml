@@ -437,15 +437,16 @@
 
     <string name="details_last_updated_today">今天更新</string>
     <plurals name="details_last_update_days">
-	<item quantity="other">%1$s 天前更新</item>
+	<item quantity="other">更新于 %1$d 天前</item>
 </plurals>
     <plurals name="details_last_update_weeks">
-	<item quantity="other">%1$s 周前更新</item>
+	<item quantity="other">更新于 %1$d 周前</item>
 </plurals>
     <plurals name="details_last_update_months">
-	<item quantity="other">%1$s 月前更新</item>
+	<item quantity="other">更新于 %1$d 月前</item>
 </plurals>
     <plurals name="details_last_update_years">
-	<item quantity="other">%1$s 年前更新</item>
+	<item quantity="other">更新于 %1$d 年前</item>
 </plurals>
-</resources>
+<string name="by_author_format">由 %s</string>
+    </resources>
