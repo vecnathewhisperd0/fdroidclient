@@ -119,10 +119,6 @@
     <string name="root_access_denied_title">Odmówiono uprawnień roota</string>
     <string name="root_access_denied_body">Urządzenie nie zostało zrootowane lub odmówiono uprawnień roota F-Droidowi.
     </string>
-    <string name="system_install_denied_title">Odmówiono uprawnień systemowych</string>
-    <string name="system_install_denied_body">Opcja dostępna tylko wtedy, gdy F-Droid został zainstalowany jako
-        aplikacja systemowa.
-    </string>
     <string name="swap_nfc_description">Jeśli oba urządzenia mają F-Droida i NFC możecie je zbliżyć do siebie.</string>
     <string name="swap_join_same_wifi">Połącz się z tą samą siecią Wi-Fi</string>
     <string name="swap">Wymień aplikacje</string>
@@ -197,9 +193,6 @@
 
     <string name="empty_installed_app_list">Brak zainstalowanych aplikacji.\n\nMasz na swoim urządzeniu aplikacje, ale
         nie zostały one zainstalowane przez F-Droida. Być może musisz zaktualizować swoje repozytoria.
-    </string>
-    <string name="empty_available_app_list">Brak aplikacji w tej kategorii.\n\nSpróbuj wybrać inną kategorię lub
-        zaktualizować swoje repozytoria.
     </string>
     <string name="empty_can_update_app_list">Wspaniale! Wszystkie Twoje aplikacje są w najnowszych wersjach (lub repozytoria nie mają najnowszych wersji).</string>
 
