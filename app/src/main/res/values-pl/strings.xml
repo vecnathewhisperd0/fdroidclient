@@ -483,7 +483,6 @@
 	<item quantity="one">Uaktualniono %1$d dzień temu</item>
 	<item quantity="few">Uaktualniono %1$d dni temu</item>
 	<item quantity="many">Uaktualniono %1$d dni temu</item>
-	<item quantity="other"/>
 </plurals>
     <string name="app_list__name__successfully_installed">%1$s pomyślnie zainstalowano</string>
     <string name="nearby_splash__download_apps_from_people_nearby">Brak internetu? Pobierz aplikacje od ludzi w
@@ -528,19 +527,16 @@
 	<item quantity="one">Uaktualniono %1$d tydzień temu</item>
 	<item quantity="few">Uaktualniono %1$d tygodnie temu</item>
 	<item quantity="many">Uaktualniono %1$d tygodni temu</item>
-	<item quantity="other"/>
 </plurals>
     <plurals name="details_last_update_months">
 	<item quantity="one">Uaktualniono %1$d miesiąc temu</item>
 	<item quantity="few">Uaktualniono %1$d miesiące temu</item>
 	<item quantity="many">Uaktualniono %1$d miesięcy temu</item>
-	<item quantity="other"/>
 </plurals>
     <plurals name="details_last_update_years">
 	<item quantity="one">Uaktualniono %1$d rok temu</item>
 	<item quantity="few">Uaktualniono %1$d lata temu</item>
 	<item quantity="many">Uaktualniono %1$d lat temu</item>
-	<item quantity="other"/>
 </plurals>
 <string name="by_author_format">od %s</string>
     </resources>
