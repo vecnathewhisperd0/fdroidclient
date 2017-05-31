@@ -270,7 +270,7 @@
     <string name="system_install_warning_lollipop">Ово траје десетак секунди и уређај ће након тога<b>поново да се
         покрене</b>.
     </string>
-    <string name="empty_can_update_app_list">"Честитке! Све ваше апликације су надограђене (или ризнице нису освежене). "</string>
+    <string name="empty_can_update_app_list">Честитке! Све ваше апликације су надограђене (или ризнице нису освежене).</string>
 
     <string name="swap_people_nearby">Људи у близини</string>
     <string name="swap_scanning_for_peers">Тражим људе у близини…</string>
@@ -293,7 +293,7 @@
     <string name="permissions">Дозволе</string>
     <string name="repo_details">Ризница</string>
     <string name="repo_url">Адреса</string>
-    <string name="system_install_denied_signature">"Потпис проширења је погрешан! Пријавите грешку! "</string>
+    <string name="system_install_denied_signature">Потпис проширења је погрешан! Пријавите грешку!</string>
     <string name="system_install_button_install">Инсталирај</string>
     <string name="system_install_denied_permissions">Повлашћене дозволе нису одобрене за проширење! Пријавите грешку!
     </string>
