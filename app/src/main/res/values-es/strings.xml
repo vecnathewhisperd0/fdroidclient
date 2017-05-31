@@ -531,4 +531,6 @@ tenéis acceso a la misma red, uno de vosotros puede crear un punto de acceso Wi
 	<item quantity="one">Actualizado hace un año</item>
 	<item quantity="other">Actualizado hace %1$s años</item>
 </plurals>
-</resources>
+<string name="by_author_format">por %s</string>
+    <string name="download_404">No se ha encontrado archivo solicitado.</string>
+    </resources>
