@@ -236,6 +236,7 @@
         veya gerçekten depolar uygulamalarınızı bulundurmadığı için olabilir.
     </string>
     <string name="empty_can_update_app_list">Tebrikler! Tüm uygulamalarınız güncel (veya depolarınız güncel değil).</string>
+    <string name="empty_search_available_app_list">Mevcut eşleşen uygulama yok.</string>
 
     <string name="install_error_unknown">Bilinmeyen bir hata nedeniyle kurulamadı</string>
     <string name="uninstall_error_unknown">Bilinmeyen bir hata nedeniyle kaldırılamadı</string>
@@ -471,9 +472,9 @@
     <string name="antifeatureswarning">Bu uygulama sevmeyebileceğiniz özellikler içerir.</string>
     <string name="antifeatures">Karşıt-özellikler</string>
     <plurals name="details_last_update_days">
-        <item quantity="one">%1$s gün önce güncellendi</item>
-        <item quantity="other">%1$s gün önce güncellendi</item>
-    </plurals>
+	<item quantity="one">%1$d gün önce güncellendi</item>
+	<item quantity="other">%1$d gün önce güncellendi</item>
+</plurals>
     <string name="app_list__name__successfully_installed">%1$s başarıyla kuruldu</string>
     <string name="nearby_splash__download_apps_from_people_nearby">İnternet yok mu? Uygulamaları yakınınızdaki
         kişilerden indirin!
@@ -512,15 +513,17 @@
 	<item quantity="other">%1$d Uygulama Kuruldu</item>
 </plurals>
     <plurals name="details_last_update_weeks">
-	<item quantity="one">%1$s hafta önce güncellendi</item>
-	<item quantity="other">%1$s hafta önce güncellendi</item>
+	<item quantity="one">%1$d hafta önce güncellendi</item>
+	<item quantity="other">%1$d hafta önce güncellendi</item>
 </plurals>
     <plurals name="details_last_update_months">
-	<item quantity="one">%1$s ay önce güncellendi</item>
-	<item quantity="other">%1$s ay önce güncellendi</item>
+	<item quantity="one">%1$d ay önce güncellendi</item>
+	<item quantity="other">%1$d ay önce güncellendi</item>
 </plurals>
     <plurals name="details_last_update_years">
-	<item quantity="one">%1$s yıl önce güncellendi</item>
-	<item quantity="other">%1$s yıl önce güncellendi</item>
+	<item quantity="one">%1$d yıl önce güncellendi</item>
+	<item quantity="other">%1$d yıl önce güncellendi</item>
 </plurals>
-</resources>
+<string name="by_author_format">%s tarafından</string>
+    <string name="download_404">İstenen dosya bulunamadı.</string>
+    </resources>
