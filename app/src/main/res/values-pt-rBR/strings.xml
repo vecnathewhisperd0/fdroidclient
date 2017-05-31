@@ -518,15 +518,17 @@
 	<item quantity="other">%1$d Aplicativos instalados</item>
 </plurals>
     <plurals name="details_last_update_weeks">
-	<item quantity="one">Actualizado há %1$s semana atrás</item>
-	<item quantity="other">Actualizado há %1$s semanas atrás</item>
+	<item quantity="one">Actualizado há %1$d semana atrás</item>
+	<item quantity="other">Actualizado há %1$d semanas atrás</item>
 </plurals>
     <plurals name="details_last_update_months">
-	<item quantity="one">Atualizado há %1$s semana atrás</item>
-	<item quantity="other">Atualizado há %1$s semanas atrás</item>
+	<item quantity="one">Atualizado há %1$d semana atrás</item>
+	<item quantity="other">Atualizado há %1$d semanas atrás</item>
 </plurals>
     <plurals name="details_last_update_years">
-	<item quantity="one">Atualizado há %1$s ano atrás</item>
-	<item quantity="other">Atualizado há %1$s anos atrás</item>
+	<item quantity="one">Atualizado há %1$d ano atrás</item>
+	<item quantity="other">Atualizado há %1$d anos atrás</item>
 </plurals>
-</resources>
+<string name="by_author_format">por %s</string>
+    <string name="download_404">O arquivo solicitado não foi encontrado.</string>
+    </resources>
