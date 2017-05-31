@@ -329,7 +329,7 @@
     </string>
     <string name="system_installer_on">Folositi F-Droid Extension pentru a instala, actualiza si a înlătura pachete
     </string>
-    <string name="empty_can_update_app_list">Felicitări! Toate aplicațiile tale sunt la zi (sau depozitele nu au fost actualizate).</string>
+    <string name="empty_can_update_app_list">"Felicitări! Toate aplicațiile tale sunt la zi (sau depozitele nu au fost actualizate). "</string>
     <string name="empty_installed_app_list">Nici o aplicatie instalata.
 
         Exista aplicatii pe acest dispozitiv, dar nu sunt disponibile din F-Droid. Asta din cauza ca trebuie sa
@@ -388,10 +388,10 @@
     </plurals>
     <string name="details_last_updated_today">Actualizate azi</string>
     <plurals name="details_last_update_days">
-        <item quantity="one">Actualizate azi</item>
-        <item quantity="few">Actualizate acum %1$s zile</item>
-        <item quantity="other">Actualizate acum %1$s de zile</item>
-    </plurals>
+	<item quantity="one">Actualizate azi</item>
+	<item quantity="few">Actualizate acum %1$sd zile</item>
+	<item quantity="other">Actualizate acum %1$sd de zile</item>
+</plurals>
     <plurals name="button_view_all_apps_in_category">
 	<item quantity="one">Vezi %d</item>
 	<item quantity="few">Toate cele %d</item>
@@ -456,7 +456,7 @@
     <string name="menu_video">Video</string>
     <string name="menu_license">Licență: %s</string>
     <string name="install_error_not_yet_supported">Acest tip de fișier nu se poate încă instala: %s</string>
-    <string name="nearby_splash__download_apps_from_people_nearby">Nu ai acces la internet? Descarcă aplicații de la persoanele de lângă tine!</string>
+    <string name="nearby_splash__download_apps_from_people_nearby">"Nu ai acces la internet? Descarcă aplicații de la persoanele de lângă tine! "</string>
     <string name="nearby_splash__find_people_button">Găsește persoane lângă mine</string>
     <string name="nearby_splash__both_parties_need_fdroid">Ambele persoane au nevoie de %1$s pentru a putea folosi această opțiune.</string>
 
@@ -476,18 +476,18 @@
 	<item quantity="other">+ încă %1$d…</item>
 </plurals>
     <plurals name="details_last_update_years">
-	<item quantity="one">Actualizat acum %1$s an</item>
-        <item quantity="few">Actualizat acum %1$s ani</item>
-	<item quantity="other">Actualizat acum %1$s ani</item>
+	<item quantity="one">Actualizat acum un an</item>
+	<item quantity="few">Actualizat acum %1$s ani</item>
+	<item quantity="other">Actualizat acum %1$s de ani</item>
 </plurals>
 <plurals name="details_last_update_months">
-	<item quantity="one">Actualizat acum %1$s lună</item>
-    <item quantity="few">Actualizat acum %1$s luni</item>
-	<item quantity="other">Actualizat acum %1$s luni</item>
+	<item quantity="one">Actualizat acum o lună</item>
+	<item quantity="few">Actualizat acum %1$s luni</item>
+	<item quantity="other">Actualizat acum %1$s de luni</item>
 </plurals>
     <plurals name="details_last_update_weeks">
-	<item quantity="one">Actualizat acum %1$s săptămână</item>
-        <item quantity="few">Actualizat acum %1$s săptămâni</item>
+	<item quantity="one">Actualizat acum o săptămână</item>
+	<item quantity="few">Actualizat acum %1$s săptămâni</item>
 	<item quantity="other">Actualizat acum %1$s săptămâni</item>
 </plurals>
     </resources>
