@@ -509,22 +509,27 @@
 </plurals>
     <plurals name="notification_summary_updates">
 	<item quantity="one">%1$d надоградња</item>
+        <item quantity="few">%1$d надоградње</item>
 	<item quantity="other">%1$d надоградње</item>
 </plurals>
     <plurals name="notification_summary_installed">
 	<item quantity="one">%1$d апл. инсталирана</item>
+        <item quantity="few">%1$d апл. инсталиране</item>
 	<item quantity="other">%1$d апл. инсталиране</item>
 </plurals>
     <plurals name="details_last_update_weeks">
 	<item quantity="one">Надограђена пре %1$d седмицу</item>
+        <item quantity="few">Надограђена пре %1$d седмице</item>
 	<item quantity="other">Надограђена пре %1$d седмице</item>
 </plurals>
     <plurals name="details_last_update_months">
 	<item quantity="one">Надограђена пре %1$d месец</item>
+        <item quantity="few">Надограђена пре %1$d месеца</item>
 	<item quantity="other">Надограђена пре %1$d месеца</item>
 </plurals>
     <plurals name="details_last_update_years">
 	<item quantity="one">Надограђена пре %1$d годину</item>
+        <item quantity="few">Надограђена пре %1$d године</item>
 	<item quantity="other">Надограђена пре %1$d године</item>
 </plurals>
 </resources>
