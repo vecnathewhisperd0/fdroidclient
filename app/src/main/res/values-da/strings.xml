@@ -230,9 +230,7 @@
         ikke tilgængelige fra F-Droid. Det kan være fordi du skal opdatere dine depoter eller også tilbyder depoterne
         reelt ikke dine programmer.
     </string>
-    <string name="empty_can_update_app_list">Alle programmer er opdateret.\n\nTillykke! Alle dine programmer er
-        opdaterede (eller dine depoter er uddaterede).
-    </string>
+    <string name="empty_can_update_app_list">"Tillykke! Alle dine apps er opdaterede (eller dine depoter er uddaterede). "</string>
 
     <string name="requesting_root_access_body">Anmoder om root-adgang…</string>
     <string name="root_access_denied_title">Root-adgang nægtet</string>
@@ -287,7 +285,7 @@
     <string name="swap_welcome">Velkommen til F-Droid!</string>
     <string name="swap_confirm_connect">Vil du gerne modtage programmer fra %1$s nu?</string>
     <string name="swap_dont_show_again">Vis ikke dette igen</string>
-    <string name="swap_scan_or_type_url">En person skal skanne koden, eller skrive den andens URL i en browser.</string>
+    <string name="swap_scan_or_type_url">"En person skal skanne koden, eller skrive den andens URL i en browser. "</string>
     <string name="swap_choose_apps">Vælg Programmer</string>
     <string name="swap_scan_qr">Skan QR-kode</string>
     <string name="swap_people_nearby">Folk i nærheden</string>
@@ -363,7 +361,7 @@
     </string>
     <string name="crash_dialog_comment_prompt">Du kan tilføje ekstra information og kommentarer her:</string>
     <string name="update_auto_download">Hent automatisk opdateringer</string>
-    <string name="update_auto_download_summary">Henter filer til opdatering i baggrunden</string>
+    <string name="update_auto_download_summary">"Opdateringer hentes automatisk, og du vil blive underrettet når de er klar til installation "</string>
     <string name="repo_provider">Depot: %s</string>
 
     <string name="useTor">Brug Tor</string>
@@ -393,4 +391,134 @@
     <string name="update_auto_install">Installer automatisk opdateringer</string>
     <string name="update_auto_install_summary">Download og installer app opdateringer i baggrunden</string>
     <string name="warning_no_internet">Kan ikke opdatere, er du forbundet til internettet?</string>
-</resources>
+<string name="main_menu__latest_apps">Seneste</string>
+    <string name="main_menu__categories">Kategorier</string>
+    <string name="main_menu__swap_nearby">I nærheden</string>
+
+    <string name="preference_manage_installed_apps">Administrer installerede apps</string>
+
+
+    <string name="notification_action_update">Opdatér</string>
+    <string name="notification_action_cancel">Annullér</string>
+    <string name="notification_action_install">Installér</string>
+
+    <string name="app_list__name__downloaded_and_ready_to_install">Installér %1$s</string>
+    <string name="app_list__name__downloading_in_progress">Henter %1$s</string>
+    <string name="app_list__name__successfully_installed">%1$s blev installeret succesfuldt</string>
+    <string name="updates__tts__download_app">Hent</string>
+    <string name="notification_title_single_update_available">Opdatering tilgængelig</string>
+    <string name="notification_title_summary_install_error">Installationen fejlede</string>
+    <string name="by_author_format">af %s</string>
+    <string name="app_details_donate_prompt_unknown_author">Gi\' en kop kaffe til udviklerne bag %1$s!</string>
+    <string name="app_details_donate_prompt">%1$s er udviklet af %2$s. Gi\' dem en kop kaffe!</string>
+
+    <string name="app_version_x_available">Version %1$s tilgængelig</string>
+    <string name="app_version_x_installed">Version %1$s</string>
+    <string name="app_recommended_version_installed">Version %1$s (Anbefalet)</string>
+    <string name="app__newly_added">Nyhed</string>
+    <string name="app__tts__cancel_download">Stop download</string>
+    <string name="app__install_downloaded_update">Opdatér</string>
+
+    <string name="app_list__name__downloaded_and_ready_to_update">Updatér %1$s</string>
+    <string name="app_list__age__released_today">Udgivet i dag</string>
+    <string name="app_list__age__released_yesterday">Udgivet i går</string>
+    <plurals name="app_list__age__released_x_days_ago">
+	<item quantity="one">Udgivet for %1$d dag siden</item>
+	<item quantity="other">Udgivet for %1$d dage siden</item>
+</plurals>
+
+    <string name="installed_apps__activity_title">Installerede Apps</string>
+    <string name="installed_app__updates_ignored">Opdateringer ignoreres</string>
+    <string name="installed_app__updates_ignored_for_suggested_version">Opdateringer ignoreres for version %1$s</string>
+    <string name="updates__tts__download_updates_for_all_apps">Hent alle opdateringer</string>
+
+    <string name="updates__hide_updateable_apps">Skjul apps</string>
+    <string name="updates__show_updateable_apps">Vis apps</string>
+
+    <plurals name="updates__download_updates_for_apps">
+	<item quantity="one">Hen opdateringer for %1$d app.</item>
+	<item quantity="other">Hen opdateringer for %1$d apps.</item>
+</plurals>
+
+    <string name="versions">Versioner</string>
+    <string name="clear_search">Ryd søgning</string>
+
+    <string name="repositories_summary">Tilføj yderligere applikationsdepoter</string>
+    <string name="menu_video">Video</string>
+    <string name="menu_license">Licens: %s</string>
+    <string name="latest__empty_state__no_recent_apps">Ingen seneste apps fundet</string>
+    <string name="latest__empty_state__never_updated">"Når din liste over apps er opdateret, vil de seneste apps blive vist her "</string>
+    <string name="latest__empty_state__no_enabled_repos">"Når du aktiverer et depot og lader det opdatere, vil de seneste apps blive vist her "</string>
+
+    <string name="categories__empty_state__no_categories">Ingen kategorier at vise</string>
+
+    <string name="preference_category__my_apps">Mine apps</string>
+    <string name="details_new_in_version">Ny i version %s</string>
+
+    <string name="antifeatureswarning">Denne app indeholder funktionalitet, som du muligvis ikke synes om.</string>
+    <string name="antifeatures">Antifunktionalitet</string>
+    <string name="download_404">Den efterspurgte fil kunne ikke findes.</string>
+    <plurals name="button_view_all_apps_in_category">
+	<item quantity="one">Vis %d</item>
+	<item quantity="other">Vis alle %d</item>
+</plurals>
+
+    <string name="install_error_not_yet_supported">Kan endnu ikke installere filtypen: %s</string>
+    <string name="nearby_splash__download_apps_from_people_nearby">"Ingen internet? Hent apps fra folk i nærheden af dig! "</string>
+    <string name="nearby_splash__find_people_button">Find folk i nærheden af mig</string>
+    <string name="nearby_splash__both_parties_need_fdroid">Begge parter skal have %1$s for at benytte i nærheden.</string>
+
+    <string name="app__tts__downloading_progress">Henter, %1$d%% hentet</string>
+    <plurals name="notification_summary_more">
+	<item quantity="one">+%1$d mere…</item>
+	<item quantity="other">+%1$d mere…</item>
+</plurals>
+    <string name="notification_title_single_ready_to_install">Klar til installation</string>
+    <string name="notification_title_single_ready_to_install_update">Opdatering klar til installation</string>
+    <string name="notification_title_single_install_error">Installationen fejlede</string>
+    <string name="notification_content_single_downloading">Henter \"%1$s\"…</string>
+    <string name="notification_content_single_downloading_update">Henter opdatering til \"%1$s\"…</string>
+    <string name="notification_content_single_installing">Installerer \"%1$s\"…</string>
+    <string name="notification_content_single_installed">Installation fuldført</string>
+    <plurals name="notification_summary_updates">
+	<item quantity="one">%1$d opdatering</item>
+	<item quantity="other">%1$d opdateringer</item>
+</plurals>
+    <plurals name="notification_summary_installed">
+	<item quantity="one">%1$d app installeret</item>
+	<item quantity="other">%1$d apps installeret</item>
+</plurals>
+    <string name="notification_title_summary_update_available">Opdatering tilgængelig</string>
+    <string name="notification_title_summary_downloading">Henter…</string>
+    <string name="notification_title_summary_downloading_update">Henter opdatering…</string>
+    <string name="notification_title_summary_ready_to_install">Klar til installation</string>
+    <string name="notification_title_summary_ready_to_install_update">Opdatering klar til installation</string>
+    <string name="notification_title_summary_installing">Installerer</string>
+    <string name="notification_title_summary_installed">Installation fuldført</string>
+    <string name="tts_category_name">Kategori %1$s</string>
+
+    <plurals name="tts_view_all_in_category">
+	<item quantity="one">Vis %1$d app i kategorien %2$s</item>
+	<item quantity="other">Vis %1$d apps i kategorien %2$s</item>
+</plurals>
+
+    <string name="details_last_updated_today">Opdateret i dag</string>
+    <plurals name="details_last_update_days">
+	<item quantity="one">Opdateret i går</item>
+	<item quantity="other">Opdateret for %1$d dage siden</item>
+</plurals>
+    <plurals name="details_last_update_weeks">
+	<item quantity="one">Opdateret for %1$d uge siden</item>
+	<item quantity="other">Opdateret for %1$d uger siden</item>
+</plurals>
+    <plurals name="details_last_update_months">
+	<item quantity="one">Opdateret for %1$d måned siden</item>
+	<item quantity="other">Opdateret for %1$d måneder siden</item>
+</plurals>
+    <plurals name="details_last_update_years">
+	<item quantity="one">Opdateret for %1$d år siden</item>
+	<item quantity="other">Opdateret for %1$d år siden</item>
+</plurals>
+<string name="hide_anti_feature_apps">Nedton apps med antifunktionalitet</string>
+    <string name="hide_anti_feature_apps_on">Nedton apps som indeholder uønsket funktionalitet</string>
+    </resources>
