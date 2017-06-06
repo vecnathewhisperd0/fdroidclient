@@ -328,9 +328,7 @@
     <string name="system_install_installing_rebooting">Installation et redémarrage…</string>
     <string name="system_install_question">Voulez-vous installer F-Droid Privileged Extension ?</string>
     <string name="system_install_warning">Ceci peut prendre jusqu\'à 10 secondes.</string>
-    <string name="system_install_warning_lollipop">Ceci peut prendre jusqu\'à 10 secondes et l\'appareil sera ensuite<b>
-        redémarré</b>.
-    </string>
+    <string name="system_install_warning_lollipop">Ceci peut prendre jusqu\'à 10 secondes et l\'appareil sera ensuite <b>redémarré</b>.</string>
     <string name="system_uninstall">Voulez-vous désinstaller F-Droid Privileged Extension ?</string>
     <string name="system_uninstall_button">Désinstaller</string>
 
