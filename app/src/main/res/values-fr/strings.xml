@@ -532,7 +532,7 @@
 	<item quantity="other">Mis à jour il y a %1$s semaines</item>
 </plurals>
     <plurals name="details_last_update_months">
-	<item quantity="one">Mis à jour il y a %1$s mois</item>
+	<item quantity="one">Mis à jour il y a %1$d mois</item>
 	<item quantity="other"></item>
 </plurals>
     <plurals name="details_last_update_years">
