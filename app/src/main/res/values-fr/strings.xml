@@ -357,7 +357,7 @@
     <string name="status_inserting_apps">Enregistrement des détails d\'applications</string>
 
     <string name="crash_dialog_title">F-Droid s\'est arrêté de manière inattendue</string>
-    <string name="crash_dialog_comment_prompt">Vous pouvez ajouter des informations additionnelles :</string>
+    <string name="crash_dialog_comment_prompt">Vous pouvez ajouter des informations supplémentaires :</string>
     <string name="crash_dialog_text">Une erreur inattendue s’est produite
         entraînant l\'arrêt de l\'application. Acceptez-vous d\'envoyer les
         détails des opérations en cours pour aider à résoudre ce problème ?
@@ -533,7 +533,7 @@
 </plurals>
     <plurals name="details_last_update_months">
 	<item quantity="one">Mis à jour il y a %1$d mois</item>
-	<item quantity="other"></item>
+	<item quantity="other"/>
 </plurals>
     <plurals name="details_last_update_years">
 	<item quantity="one">Mis à jour il y a %1$s an</item>
