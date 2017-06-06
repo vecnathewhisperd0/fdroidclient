@@ -533,10 +533,12 @@
 </plurals>
     <plurals name="details_last_update_months">
 	<item quantity="one">Mis à jour il y a %1$s mois</item>
-	<item quantity="other">Mis à jour il y a %1$s mois</item>
+	<item quantity="other"></item>
 </plurals>
     <plurals name="details_last_update_years">
 	<item quantity="one">Mis à jour il y a %1$s an</item>
 	<item quantity="other">Mis à jour il y a %1$s ans</item>
 </plurals>
-</resources>
+<string name="by_author_format">par %s</string>
+    <string name="download_404">Le fichier n\'a pas été trouvé.</string>
+    </resources>
