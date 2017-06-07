@@ -114,11 +114,11 @@
     <string name="skip">דלג</string>
     <string name="proxy">פרוקסי</string>
     <string name="enable_proxy_title">אפשר פרוקסי HTTP</string>
-    <string name="enable_proxy_summary">הגדרת מתווך HTTP לכל בקשות הרשת</string>
-    <string name="proxy_host">מארח מתווך</string>
-    <string name="proxy_host_summary">הגדרת שם משתמש למתווך (למשל: 127.0.0.1)</string>
-    <string name="proxy_port">פתחת מתווך</string>
-    <string name="proxy_port_summary">הגדרת מספר פתחת מתווך (למשל: 8118)</string>
+    <string name="enable_proxy_summary">הגדר HTTP Proxy לכל בקשת רשת</string>
+    <string name="proxy_host">מארח פרוקסי</string>
+    <string name="proxy_host_summary">הגדר שם משתמש פרוקסי (דוגמא: 127.0.0.1)</string>
+    <string name="proxy_port">פורט פרוקסי</string>
+    <string name="proxy_port_summary">הגדר מספר פורט פרוקסי (דוגמא: 8118)</string>
 
 
     <string name="status_download">כעת מוריד
@@ -126,7 +126,7 @@
         \n%1$s
     </string>
     <string name="update_notification_title">כעת מעדכן מאגרים</string>
-    <string name="status_processing_xml_percent">%2$s בהליכי עיבוד / %3$s (%4$d%%) מתוך %1$s</string>
+    <string name="status_processing_xml_percent">כעת מעבד %2$s / %3$s (%4$d%%) מתוך %1$s</string>
     <string name="status_connecting_to_repo">כעת מתחבר אל
         \n%1$s
     </string>
@@ -172,10 +172,9 @@
         \nברכותינו! כל האפליקציות שלך הינן מעודכנות (או שהמאגרים שלך אינם מעודכנים). "
     </string>
 
-    <string name="requesting_root_access_body">בקשה לגישת על (root)…</string>
-    <string name="root_access_denied_title">גישת על (root) נאסרה</string>
-    <string name="root_access_denied_body">או שלמכשיר האנדרואיד שלך אין גישת על (root) או שדחית את הגישה ל־F-Droid.
-    </string>
+    <string name="requesting_root_access_body">כעת מבקש גישת שורש (root)…</string>
+    <string name="root_access_denied_title">גישת שורש (root) נאסרה</string>
+    <string name="root_access_denied_body">"או שמכשיר Android אינו מושרש (root) או שאסרת גישת שורש עבור F-Droid. "</string>
     <string name="install_error_unknown">נכשל להתקין בשל שגיאה לא מוכרת</string>
     <string name="uninstall_error_unknown">נכשל להסיר בשל שגיאה לא מוכרת</string>
     <string name="system_install_post_success">התקין בהצלחה הרחבת F-Droid מועדף</string>
@@ -244,7 +243,7 @@
     <string name="swap_choose_apps">בחר אפליקציות</string>
     <string name="swap_scan_qr">סרוק קוד QR</string>
     <string name="swap_people_nearby">אנשים בקרבת מקום</string>
-    <string name="swap_scanning_for_peers">כעת מחפש אחר אנשים בקרבת מקום…</string>
+    <string name="swap_scanning_for_peers">כעת מחפש אנשים בקרבת מקום…</string>
     <string name="swap_visible_bluetooth">נראה דרך Bluetooth</string>
     <string name="swap_setting_up_bluetooth">כעת מעלה Bluetooth…</string>
     <string name="swap_not_visible_bluetooth">לא נראה דרך Bluetooth</string>
@@ -357,7 +356,7 @@
     <string name="repo_edit_credentials">שנה סיסמה</string>
     <string name="about_license">רשיון</string>
 
-    <string name="status_inserting_apps">פרטי היישומון נשמרים</string>
+    <string name="status_inserting_apps">כעת שומר פרטי אפליקציה</string>
     <string name="repo_error_empty_username">נקה שם משתמש, פרטי התחברות לא שונו</string>
 
     <string name="menu_email">שלח דוא״ל למחבר</string>
@@ -397,13 +396,13 @@
     <string name="app_list__name__downloaded_and_ready_to_install">התקן את %1$s</string>
     <string name="app_list__name__downloading_in_progress">כעת מוריד את %1$s</string>
     <string name="app_list__name__successfully_installed">%1$s הותקנה בהצלחה</string>
-    <string name="app_list__age__released_today">יצא לאור היום</string>
-    <string name="app_list__age__released_yesterday">יצא לאור אתמול</string>
+    <string name="app_list__age__released_today">שוחררה היום</string>
+    <string name="app_list__age__released_yesterday">שוחררה אתמול</string>
     <plurals name="app_list__age__released_x_days_ago">
         <item quantity="one">יצא לאור אתמול</item>
         <item quantity="two">יצא לאור לפני %1$d ימים</item>
-        <item quantity="many"/>
-        <item quantity="other"/>
+        <item quantity="many">יצא לאור לפני %1$d ימים</item>
+        <item quantity="other">יצא לאור לפני %1$d ימים</item>
     </plurals>
 
     <string name="installed_apps__activity_title">אפליקציות מותקנות</string>
@@ -464,7 +463,7 @@
     <string name="nearby_splash__download_apps_from_people_nearby">"אין אינטרנט? הורד אפליקציות מאנשים בקרבתך! "
     </string>
     <string name="nearby_splash__find_people_button">מצא אנשים בקרבתי</string>
-    <string name="nearby_splash__both_parties_need_fdroid">שני הצדדים צריכים %1$s כדי להשתמש בקרבה.</string>
+    <string name="nearby_splash__both_parties_need_fdroid">שני הצדדים צריכים %1$s כדי להשתמש בקרבת מקום.</string>
 
     <string name="by_author_format">מאת %s</string>
     <string name="notification_action_update">עדכן</string>
