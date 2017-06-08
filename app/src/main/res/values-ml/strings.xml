@@ -284,4 +284,18 @@
 \n
 \nഈ സങ്കേതത്തില്‍ നിന്ന് പ്രയോഗങ്ങള്‍ സ്ഥാപിക്കാന്‍ ഇത് വീണ്ടും പ്രവർത്തനക്ഷമമാക്കേണ്ടതുണ്ട്. "</string>
     <string name="repo_added">എഫ്-ഡ്രോയ്ഡ് സങ്കേതം %1$s സൂക്ഷിച്ചു.</string>
+    <string name="repo_searching_address">എഫ്-ഡ്രോയ്ഡ് സംഭരണിക്ക് വേണ്ടി തിരയുന്നു
+\n%1$s ല്‍</string>
+    <string name="minsdk_or_later">%s ഓ പുതിയതോ</string>
+    <string name="up_to_maxsdk">%s വരെ</string>
+    <string name="minsdk_up_to_maxsdk">%1$s മുതല്‍ %2$s വരെ</string>
+    <string name="requires_features">വേണ്ടത്: %1$s</string>
+    <string name="wifi_ap">ഹോട്ട്സ്പോട്ട്</string>
+
+    <string tools:ignore="UnusedResources" name="category_Theming">തീമിംഗ്</string>
+    <plurals name="button_view_all_apps_in_category">
+	<item quantity="one">%d കാണുക</item>
+	<item quantity="other">എല്ലാ %d യും കാണുക</item>
+</plurals>
+
     </resources>
