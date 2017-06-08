@@ -239,4 +239,49 @@
 
     <string name="local_repo">പ്രാദേശിക സംഭരണി</string>
     <string name="local_repo_running">എഫ്-ഡ്രോയ്ഡ് കൈമാറ്റം ചെയ്യാന്‍ തയ്യാറാണ്</string>
+    <string name="touch_to_configure_local_repo">വിശദാംശങ്ങൾ കാണുന്നതിനും നിങ്ങളുടെ അപ്ലിക്കേഷനുകൾ കെെമാറ്റം ചെയ്യുന്നതിന് മറ്റുള്ളവരെ അനുവദിക്കുന്നതിനും തൊടുക.</string>
+    <string name="deleting_repo">നിലവിലെ സംഭരണി ഇല്ലാതാക്കുന്നു …</string>
+    <string name="adding_apks_format">റിപ്പോയിലേക്ക്% നെ ചേർക്കുന്നു …</string>
+    <string name="writing_index_jar">ഒപ്പുവെച്ച സൂചിക ഫയൽ (index.jar) എഴുതുന്നു …</string>
+    <string name="linking_apks">APKകള്‍ സംഭരണിയിലേക്ക് ബന്ധിക്കുന്നു…</string>
+    <string name="copying_icons">അപ്ലിക്കേഷൻ ഐക്കണുകൾ സംഭരണിയിലേക്ക് പകർത്തുന്നു …</string>
+    <string name="icon">ഐക്കൺ</string>
+    <string name="useTor">ടോർ ഉപയോഗിക്കുക</string>
+    <string name="useTorSummary">കൂടുതല്‍ സ്വകാര്യതക്ക് വേണ്ടി ടോർ വഴി ഡൗൺലോഡ് ചെയ്യാന്‍ നിര്‍ബന്ധിക്കുക</string>
+    <string name="proxy">പ്രോക്സി</string>
+    <string name="enable_proxy_title">പ്രോക്സി പ്രവർത്തനക്ഷമമാക്കുക</string>
+    <string name="status_download">ഡൗൺലോഡ് ചെയ്യുന്നു
+\n%2$s / %3$s (%4$d %%)
+\n%1$s ല്‍ നിന്ന്</string>
+
+    <string name="status_download_unknown_size">ഡൗൺലോഡ് ചെയ്യുന്നു
+\n%2$s നെ
+\n%1$s ല്‍ നിന്ന്</string>
+    <string name="download_404">അഭ്യർത്ഥിച്ച ഫയൽ കണ്ടെത്തിയില്ല.</string>
+    <string name="update_notification_title">സംഭരണികൾ പുതുക്കുന്നു</string>
+    <string name="status_connecting_to_repo">ബന്ധിപ്പിക്കുന്നു
+\n%1$s ലേക്ക്</string>
+    <string name="repos_unchanged">എല്ലാ സംഭരണികളും കാലികമാണ്</string>
+    <string name="all_other_repos_fine">മറ്റൊരു സംഭരികളും പിശകുകൾ സൃഷ്ടിച്ചില്ല.</string>
+    <string name="global_error_updating_repos">പുതുക്കുമ്പോള്‍ പിശക്: %s</string>
+    <string name="no_permissions">ഒരു അനുമതികളും ഉപയോഗിക്കുന്നില്ല.</string>
+    <string name="permissions">അനുമതികൾ</string>
+    <string name="no_handler_app">നിങ്ങൾക്ക് %s കൈകാര്യം ചെയ്യാൻ ഒരു പ്രയോഗവും ഇല്ല.</string>
+    <string name="theme">തീം</string>
+    <string name="repo_url">വിലാസം</string>
+    <string name="repo_num_apps">പ്രയോഗങ്ങളുടെ എണ്ണം</string>
+    <string name="repo_fingerprint">ഒപ്പിടുന്ന കീയുടെ (SHA-256) എന്ന ഫിംഗർപ്രിന്റ്</string>
+    <string name="repo_description">വിവരണം</string>
+    <string name="repo_name">പേര്</string>
+    <string name="unsigned_description">"ഈ പ്രയോഗങ്ങളുടെ പട്ടിക പരിശോധിക്കാൻ കഴിഞ്ഞില്ല. ഒപ്പു വെക്കാത്ത ഇൻഡെക്സുകളിൽ നിന്നും ഡൌൺലോഡ് ചെയ്ത പ്രയോഗങ്ങളുമായി നിങ്ങൾ ജാഗ്രത പാലിക്കണം. "</string>
+    <string name="repo_not_yet_updated">"ഈ സങ്കേതം ഇതുവരെ ഉപയോഗിച്ചിട്ടില്ല. ഇതിലുള്ള പ്രയോഗങ്ങള്‍ കാണാന്‍ ഇത് സജ്ജമാക്കേണ്ടതുണ്ട്. "</string>
+    <string name="unknown">അജ്ഞാതം</string>
+    <string name="repo_confirm_delete_title">സങ്കേതം ഇല്ലാതാക്കുക?</string>
+    <string name="repo_confirm_delete_body">"ഒരു സങ്കേതം ഇല്ലാതാക്കിയാൽ അതില്‍ നിന്നുള്ള പ്രയോഗങ്ങള്‍ ഇനി എഫ്-ഡ്രോയ്ഡില്‍ ലഭ്യമാകുില്ല.
+\n
+\nകുറിപ്പ്:  മുമ്പ് സ്ഥാപിച്ച എല്ലാ പ്രയോഗങ്ങളും നിങ്ങളുടെ ഉപകരണത്തില്‍ തന്നെ ഉണ്ടാകും. "</string>
+    <string name="repo_disabled_notification">"%1$s പ്രവര്‍ത്തനരഹിതമാക്കി.
+\n
+\nഈ സങ്കേതത്തില്‍ നിന്ന് പ്രയോഗങ്ങള്‍ സ്ഥാപിക്കാന്‍ ഇത് വീണ്ടും പ്രവർത്തനക്ഷമമാക്കേണ്ടതുണ്ട്. "</string>
+    <string name="repo_added">എഫ്-ഡ്രോയ്ഡ് സങ്കേതം %1$s സൂക്ഷിച്ചു.</string>
     </resources>
