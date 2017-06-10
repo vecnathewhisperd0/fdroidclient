@@ -47,7 +47,7 @@
     <string name="antinonfreedeplist">این کاره، به دیگر کاره‌های غیر آزاد وابسته است</string>
     <string name="antiupstreamnonfreelist">کد مبدأ بالادستی، کاملاً آزاد نیست</string>
     <string name="display">نمایش</string>
-    <string name="expert_on">نمایش اطّلاعات و فعّال کردن تنظیمات اضافی</string>
+    <string name="expert_on">نمایش اطّلاعات اضافی و فعّال کردن تنظیمات اضافی</string>
     <string name="search_hint">جست‌وجوی برنامه‌ها</string>
     <string name="appcompatibility">سازگاری برنامه</string>
     <string name="rooted">نادیده گرفتن ریشه</string>
@@ -75,13 +75,13 @@
     <string name="enable_nfc_send">فعّال کردن ارسال NFC…</string>
     <string name="unstable_updates">به‌روز رسانی‌های ناپایدار</string>
     <string name="unstable_updates_summary">پیشنهاد به‌روز رسانی به نگارش‌های ناپایدار</string>
-    <string name="notify">آگهی‌های به‌روز رسانی</string>
+    <string name="notify">به روز رسانی اعلان ها</string>
     <string name="system_installer">افزونهٔ ممتاز</string>
     <string name="system_installer_on">استفاده از افزونهٔ ممتاز اف‌دروید برای نصب، به‌روز رسانی و حذف بسته‌ها</string>
     <string name="uninstall_system">به‌روز رسانی/حذف افزونهٔ ممتاز</string>
     <string name="uninstall_system_summary">گشودن صفحهٔ جزییات افزونهٔ ممتاز برای به‌روز رسانی/حذف آن</string>
     <string name="local_repo_name">نام مخزن محلّی شما</string>
-    <string name="local_repo_name_summary">عنوان تبلغی مخزن محلّی شما: %s</string>
+    <string name="local_repo_name_summary">عنوان تبلغاتی مخزن محلّی شما: %s</string>
     <string name="local_repo_https_on">استفاده از اتّصال رمز شدهٔ http برای مخزن محلّی</string>
 
     <string name="login_title">نیاز به تأیید هویت</string>
@@ -147,7 +147,7 @@
     <string name="enable_proxy_title">فعّال کردن پیشکار http</string>
     <string name="enable_proxy_summary">پیکربندی پیشکار http برای تمام درخواست‌های شبکه</string>
     <string name="proxy_host">میزبان پیشکار</string>
-    <string name="proxy_host_summary">پیکربندی نام میزبان پیشکارتان (مثلاً 127.0.0.1)</string>
+    <string name="proxy_host_summary">نام میزبان پروکسی را پیکربندی کنید (مثلاً 127.0.0.1)</string>
     <string name="proxy_port">درگاه پیشکار</string>
     <string name="proxy_port_summary">پیکربندی شمارهٔ درگاه پیشکارتان (مثلاً 8118)</string>
 
@@ -227,7 +227,7 @@
     <string name="swap_visible_wifi">قابل مشاهده از طریق وای‌فای</string>
     <string name="swap_setting_up_wifi">در حال برپا سازی وای‌فای…</string>
     <string name="swap_not_visible_wifi">غیرقابل مشاهده از طریق وای‌فای</string>
-    <string name="swap_wifi_device_name">نام افزاره</string>
+    <string name="swap_wifi_device_name">نام دستگاه</string>
     <string name="swap_cant_find_peers">نمی‌توانید کسی که دنبالشید را پیدا کنید؟</string>
     <string name="swap_send_fdroid">ارسال اف‌دروید</string>
     <string name="swap_no_peers_nearby">نمی‌توان افراد نزدیک را برای تبادل با آن‌ها پیدا کرد.</string>
@@ -284,7 +284,7 @@
     </string>
     <string name="system_install_button_install">نصب</string>
     <string name="system_install_post_success">افزونهٔ ممتاز اف‌دروید با موفّقیت نصب شد</string>
-    <string name="system_install_post_fail">نصب افزونهٔ ممتاز اف‌دروید شکست خورد</string>
+    <string name="system_install_post_fail">نصب افزونهٔ مجاز اف‌دروید ناموفق بود</string>
     <string name="system_install_post_success_message">افزونهٔ ممتاز اف‌دروید با موفّقیت نصب شد. این مار به اف‌دروید
         اجازه می‌دهد کاره‌ها را توسّط خودش نصب کرده، ارتفا دهد و حدف کند.
     </string>
@@ -309,8 +309,7 @@
     </string>
     <string name="swap_qr_isnt_for_swap">رمز QR ای که پوییدید، شبیه یک رمز تبادل نیست.</string>
     <string name="bluetooth_unavailable">بلوتوث موجود نیست</string>
-    <string name="swap_cant_send_no_bluetooth">نمی‌توان اف‌دروید را فرستاد، زیرا بلوتوث روی این افزاره موحود نیست.
-    </string>
+    <string name="swap_cant_send_no_bluetooth">"نمی‌توان اف‌دروید را فرستاد، زیرا بلوتوث روی این دستگاه موحود نیست. "</string>
     <string name="loading">در حال بار کردن…</string>
     <string name="swap_connection_misc_error">هنگام اتّصال به افزاره خطایی رخ داد. به نظر می‌رسد با این وضع نمی‌توانیم
         تبادل کنیم.
@@ -333,7 +332,7 @@
     </string>
     <string name="uninstall_update_confirm">مایلید این نرم‌افزار را جایگزین نسخه کارخانه کنید؟</string>
     <string name="uninstall_confirm">می‌خواهید این نرم‌افزار را حذف کنید؟</string>
-    <string name="menu_email">رایانامه به نویسنده</string>
+    <string name="menu_email">ایمیل به نویسنده</string>
     <string name="antinonfreeassetslist">این کاره شامل ابزارهای غیرآزاد است</string>
 
 
@@ -404,8 +403,8 @@
     <string name="updates__show_updateable_apps">نمایش کاره‌ها</string>
 
     <plurals name="updates__download_updates_for_apps">
-	<item quantity="one">بارگیری به‌روز رسانی برای %1$d کاره.</item>
-	<item quantity="other">بارگیری به‌روز رسانی‌ها برای %1$d کاره.</item>
+	<item quantity="one">بارگیری به‌روز رسانی برای %1$d برنامه.</item>
+	<item quantity="other">بارگیری به‌روز رسانی‌ها برای %1$d برنامه.</item>
 </plurals>
 
     <string name="versions">نگارش‌ها</string>
@@ -433,14 +432,14 @@
 
     <string name="details_new_in_version">جدید در نگارش %s</string>
 
-    <string name="antifeatureswarning">این کاره، ویژگی‌هایی دارد که شاید نپسندید.</string>
+    <string name="antifeatureswarning">این برنامه، ویژگی‌هایی دارد که شاید نپسندید.</string>
     <string name="antifeatures">ضدّویژگی‌ها</string>
     <string name="hide_anti_feature_apps">خاکستری کردن کاره‌های دارای ضدّویژگی</string>
     <string name="hide_anti_feature_apps_on">خاکستری کردن کاره‌هایی کخ نیازمند ضدّویژگی هستند</string>
     <string name="warning_no_internet">نمی‌توان به‌روزرسانی کرد. به اینترنت وصل هستید؟</string>
     <plurals name="button_view_all_apps_in_category">
-	<item quantity="one">نمایش همهٔ %d</item>
-	<item quantity="other">نمایش‌ همهٔ %d</item>
+	<item quantity="one">نمایش %d</item>
+	<item quantity="other">نمایش‌ همه %d</item>
 </plurals>
 
     <string name="nearby_splash__download_apps_from_people_nearby">"اینترنت  ندارید؟ کاره‌ها را از اطرافیاتتان بارگیری کنید!
@@ -473,7 +472,7 @@
 
     <plurals name="tts_view_all_in_category">
 	<item quantity="one">نمایش %1$d کارهٔ دستهٔ %2$s</item>
-	<item quantity="other">نمایش تمام %1$d کارهٔ دستهٔ %2$s</item>
+	<item quantity="other">نمایش همه ی %1$d کارهٔ های دستهٔ %2$s</item>
 </plurals>
 
     <string name="details_last_updated_today">امروز به‌روز شده</string>
@@ -489,7 +488,7 @@
 </plurals>
     <plurals name="notification_summary_updates">
 	<item quantity="one">%1$d بروزرسانی</item>
-	<item quantity="other">%1$d بروزرسانی ها</item>
+	<item quantity="other">%1$d بروزرسانی</item>
 </plurals>
     <plurals name="notification_summary_installed">
 	<item quantity="one">%1$d برنامه نصب شد</item>
