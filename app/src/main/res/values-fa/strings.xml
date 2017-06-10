@@ -4,7 +4,7 @@
         آزمایش و نصب کنید؟
     </string>
     <string name="delete">حذف</string>
-    <string name="cache_downloaded">نگه‌داری کاره‌های انبار شده</string>
+    <string name="cache_downloaded">نگه‌داری برنامه های انبار شده</string>
     <string name="updates">به‌روزرسانی‌ها</string>
     <string name="other">دیگر</string>
     <string name="update_interval">به‌روزرسانی دوره‌ای خودکار</string>
@@ -33,7 +33,7 @@
     <string name="repo_add_fingerprint">اثر انگشت (اختیاری)</string>
     <string name="menu_manage">مخزن‌ها</string>
     <string name="menu_search">جست‌وجو</string>
-    <string name="menu_share">هم‌رسانی</string>
+    <string name="menu_share">به اشتراک گذاری</string>
     <string name="menu_install">نصب</string>
     <string name="menu_uninstall">حذف نصب</string>
     <string name="menu_issues">اشکال‌ها</string>
@@ -41,7 +41,7 @@
     <string name="menu_donate">اعانه</string>
     <string name="details_notinstalled">نصب نشده</string>
     <string name="antiadslist">این کاره دارای تبلیغات است</string>
-    <string name="antitracklist">این کاره، فعّالیت‌هایتان را ردیابی و گزارش می‌کند</string>
+    <string name="antitracklist">این برنامه، فعّالیت‌هایتان را ردیابی و گزارش می‌کند</string>
     <string name="antinonfreeadlist">این کاره، افزونه‌های غیر آزاد را تبلیغ می‌کند</string>
     <string name="antinonfreenetlist">این کاره، خدمات شبکه‌های غیر آزاد را تبلیغ می‌کند</string>
     <string name="antinonfreedeplist">این کاره، به دیگر کاره‌های غیر آزاد وابسته است</string>
@@ -70,10 +70,7 @@
     <string name="requires_features">نیاز دارد: %1$s</string>
     <string name="app_name">اف‌دروید</string>
 
-    <string name="SignatureMismatch">نگارش جدید با کلیدی متفاوت با قبلی امضا شده است. برای نصب نگارش جدید، باید نخست
-        نگارش قدیمی را حذف کرد. لطفاً این کار را انجام داده و دوباره تلاش کنید. (به خاطر داشته باشید که حذف نصب، تمام
-        داده‌های درونی ذخیره شدهٔ کاره را پاک می‌کند)
-    </string>
+    <string name="SignatureMismatch">نگارش جدید با کلیدی متفاوت با قبلی امضا شده است. برای نصب نگارش جدید، باید نخست نگارش قدیمی را حذف کرد. لطفاً این کار را انجام داده و دوباره تلاش کنید. (به خاطر داشته باشید که حذف نصب، تمام داده‌های درونی ذخیره شدهٔ برنامه را پاک می‌کند)</string>
     <string name="version">نگارش</string>
     <string name="enable_nfc_send">فعّال کردن ارسال NFC…</string>
     <string name="unstable_updates">به‌روز رسانی‌های ناپایدار</string>
@@ -93,7 +90,7 @@
     <string name="repo_edit_credentials">تغییر گذرواژه</string>
     <string name="repo_error_empty_username">نام کاربری خالی، مشخّصات تغییری نکرد</string>
 
-    <string name="app_details">جزییات کاره</string>
+    <string name="app_details">جزییات برنامه</string>
     <string name="about_version">نگارش</string>
     <string name="about_site">پایگاه وب</string>
     <string name="about_source">کد مبدأ</string>
@@ -104,8 +101,8 @@
     <string name="app_inst_unknown_source">نصب شده (از مبدأ ناشناس)</string>
 
     <string name="links">پیوندها</string>
-    <string name="more">بیش‌تر</string>
-    <string name="less">کم‌تر</string>
+    <string name="more">بیشتر</string>
+    <string name="less">کمتر</string>
 
     <string name="back">بازگشت</string>
 
@@ -113,6 +110,7 @@
     <string name="repo_exists_enable">این مخزن از پیش برپا شده است. تأیید کنید که می‌خواهید دوباره فعّالش کنید.</string>
     <string name="bad_fingerprint">اثر انگشت بد</string>
     <string name="invalid_url">این یک نشانی اینترنتی معتیبر نیست.</string>
+    <string name="menu_send_apk_bt">به اشتراک گذاری اف‌دروید با بلوتوث</string>
     <string name="menu_settings">تنظیمات</string>
     <string name="menu_add_repo">مخزن جدید</string>
 
@@ -167,11 +165,10 @@
     <string name="repo_num_apps">تعداد کاره‌ها</string>
     <string name="repo_fingerprint">اثر انگشت کلید امضا (SHA-256)</string>
     <string name="repo_confirm_delete_title">حذف مخزن؟</string>
-    <string name="not_on_same_wifi">"افزاره‌تان روی همان وای‌فای مخزن محلّی‌ای که افزودید نیست!
-\nلطفاً به این شبکه وصل شوید: %s
-\n "</string>
+    <string name="not_on_same_wifi">"دستگاه شما روی همان شبکه وای‌فای مخزن محلّی‌ای که افزودید نیست! 
+\nلطفاً به این شبکه وصل شوید: %s "</string>
     <string name="pref_language">زبان</string>
-    <string name="pref_language_default">پیش‌گزیدهٔ سامانه</string>
+    <string name="pref_language_default">پیش فرض سیستم</string>
 
     <string name="wifi">وای‌فای</string>
     <string name="wifi_ap">نقطهٔ داغ</string>
@@ -189,13 +186,13 @@
     <string name="category_Science_Education">علم و آموزش</string>
     <string name="category_Security">امنیت</string>
     <string name="category_Sports_Health">ورزش و سلامت</string>
-    <string name="category_System">سامانه</string>
+    <string name="category_System">سیستم</string>
     <string name="category_Theming">شخصی‌سازی</string>
     <string name="category_Time">زمان</string>
     <string name="category_Writing">نوشتن</string>
 
     <string name="requesting_root_access_body">در حال درخواست دسترسی ریشه…</string>
-    <string name="empty_can_update_app_list">تبریک! تمام کاره‌هایتان به‌روز هستند (یا مخزن‌هایتان منقضی شده‌اند).</string>
+    <string name="empty_can_update_app_list">تبریک! تمام کاره‌هایتان به‌روز هستند (یا مخزن‌هایتان منقضی شده‌اند) .</string>
 
     <string name="root_access_denied_title">دسترسی ریشه داده نشد</string>
     <string name="root_access_denied_body">یا افزارهٔ اندرویدیتان روت شده نیست، یا درخواست ریشه برای اف‌دروید را رد
@@ -341,9 +338,7 @@
 
 
     <string name="crash_dialog_title">اف‌دروید از کار افتاد</string>
-    <string name="crash_dialog_text">خطایی پیش‌بینی نشده رخ داد که برنامه را وادار به توقّف کرد. می‌خواهید جزئیات را
-        برای کمک به حل کردن مشکل رایانامه کنید؟
-    </string>
+    <string name="crash_dialog_text">خطایی پیش‌بینی نشده رخ داد که برنامه را وادار به توقّف کرد. می‌خواهید جزئیات را برای کمک به حل کردن مشکل، ایمیل کنید؟</string>
     <string name="crash_dialog_comment_prompt">در این‌جا می‌توانید اطّلاعات اضافی و نظرها را بیفزایید:</string>
     <string name="useTor">استفاده از تور</string>
     <string name="useTorSummary">اجبار ترافیک بارگیری به استفاده از تور برای محرمانگی بیش‌تر</string>
@@ -433,7 +428,7 @@
     <string name="categories__empty_state__no_categories">هیچ دسته‌ای برای نمایش نیست</string>
 
     <string name="preference_category__my_apps">کاره‌های من</string>
-    <string name="preference_manage_installed_apps">مدیریت کاره‌های نصب شده</string>
+    <string name="preference_manage_installed_apps">مدیریت برنامه های نصب شده</string>
 
 
     <string name="details_new_in_version">جدید در نگارش %s</string>
@@ -442,7 +437,7 @@
     <string name="antifeatures">ضدّویژگی‌ها</string>
     <string name="hide_anti_feature_apps">خاکستری کردن کاره‌های دارای ضدّویژگی</string>
     <string name="hide_anti_feature_apps_on">خاکستری کردن کاره‌هایی کخ نیازمند ضدّویژگی هستند</string>
-    <string name="warning_no_internet">نمی‌توان به‌روز کرد. به اینترنت وصل هستید؟</string>
+    <string name="warning_no_internet">نمی‌توان به‌روزرسانی کرد. به اینترنت وصل هستید؟</string>
     <plurals name="button_view_all_apps_in_category">
 	<item quantity="one">نمایش همهٔ %d</item>
 	<item quantity="other">نمایش‌ همهٔ %d</item>
@@ -469,7 +464,7 @@
     <string name="notification_title_summary_ready_to_install_update">به‌روز رسانی آماده برای نصب</string>
     <string name="notification_title_summary_installing">در حال نصب</string>
     <string name="notification_title_summary_installed">با موفّقیت نصب شد</string>
-    <string name="notification_title_summary_install_error">نصب شکست خورد</string>
+    <string name="notification_title_summary_install_error">نصب ناموفق بود</string>
     <string name="notification_action_update">به‌روز رسانی</string>
     <string name="notification_action_cancel">لغو</string>
     <string name="notification_action_install">نصب</string>
@@ -483,8 +478,8 @@
 
     <string name="details_last_updated_today">امروز به‌روز شده</string>
     <plurals name="details_last_update_days">
-	<item quantity="one">‫%1$s روز پیش به‌روز شده</item>
-	<item quantity="other">‫%1$s روز پیش به‌روز شده‌</item>
+	<item quantity="one">%1$sd روز پیش به‌روز شده</item>
+	<item quantity="other">%1$sd روز پیش به‌روز شده‌</item>
 </plurals>
 <string name="menu_license">پروانه: %s</string>
     <string name="install_error_not_yet_supported">این نوع فایل نمی تواند نصب شود: %s</string>
@@ -501,15 +496,17 @@
 	<item quantity="other">%1$d برنامه ها نصب شدند</item>
 </plurals>
     <plurals name="details_last_update_weeks">
-	<item quantity="one">%1$s هفته پیش بروزرسانی شده است</item>
-	<item quantity="other">%1$s هفته پیش بروزرسانی شده است</item>
+	<item quantity="one">%1$sd هفته پیش بروزرسانی شده است</item>
+	<item quantity="other">%1$sd هفته پیش بروزرسانی شده است</item>
 </plurals>
     <plurals name="details_last_update_months">
-	<item quantity="one">%1$s ماه پیش بروزرسانی شده است</item>
-	<item quantity="other">%1$s ماه پیش بروزرسانی شده است</item>
+	<item quantity="one">%1$sd ماه پیش بروزرسانی شده است</item>
+	<item quantity="other">%1$sd ماه پیش بروزرسانی شده است</item>
 </plurals>
     <plurals name="details_last_update_years">
-	<item quantity="one">%1$s سال پیش بروزرسانی شده است</item>
-	<item quantity="other">%1$s سال پیش بروزرسانی شده است</item>
+	<item quantity="one">%1$sd سال پیش بروزرسانی شده است</item>
+	<item quantity="other">%1$sd سال پیش بروزرسانی شده است</item>
 </plurals>
-</resources>
+<string name="by_author_format">توسط %s</string>
+    <string name="download_404">فایل درخواستی یافت نشد.</string>
+    </resources>
