@@ -298,4 +298,57 @@
 	<item quantity="other">എല്ലാ %d യും കാണുക</item>
 </plurals>
 
+    <string name="empty_installed_app_list">"പ്രയോഗങ്ങളൊന്നും സ്ഥാപിക്കപ്പെട്ടിട്ടില്ല.
+\n
+\nനിങ്ങളുടെ ഉപകരണത്തിൽ പ്രയോഗങ്ങള്‍ ഉണ്ട്, എന്നാൽ അവ എഫ്-ഡ്രോയ്ഡില്‍ ലഭ്യമല്ല. ഇത് നിങ്ങളുടെ സംഭരണികള്‍ പുതുക്കേണ്ടതു കൊണ്ടാകാം, അല്ലെങ്കിൽ നിങ്ങളുടെ പ്രയോഗങ്ങള്‍ സംഭരണികളില്‍ ലഭ്യമല്ലാത്തതു കൊണ്ടുമാകാം. "</string>
+    <string name="empty_can_update_app_list">"അഭിനന്ദനങ്ങൾ! നിങ്ങളുടെ പ്രയോഗങ്ങളെല്ലാം കാലികമാണ് (അല്ലെങ്കിൽ നിങ്ങളുടെ സംഭരണികള്‍ കാലഹരണപ്പെട്ടതാണ്). "</string>
+    <string name="empty_search_available_app_list">പൊരുത്തപ്പെടുന്ന പ്രയോഗങ്ങള്‍ ലഭ്യമല്ല.</string>
+
+    <string name="install_error_unknown">ഒരു അജ്ഞാത പിശക് കാരണം സ്ഥാപിക്കല്‍ പരാജയപ്പെട്ടു</string>
+    <string name="uninstall_error_unknown">കാരണം ഒരു അജ്ഞാത പിശക് ഒഴിവാക്കല്‍ പരാജയപ്പെട്ടു</string>
+    <string name="install_error_not_yet_supported">ഫയൽ തരം സ്ഥാപിക്കാന്‍ കഴിയില്ല: %s</string>
+    <string name="system_install_denied_signature">"വിപുലീകരണത്തിന്റെ ഒപ്പ് തെറ്റാണ്! ഒരു ബഗ് റിപ്പോർട്ട് സൃഷ്ടിക്കുക! "</string>
+    <string name="system_install_denied_permissions">"പ്രത്യേക അനുമതികൾ വിപുലീകരണത്തിന് നൽകിയിട്ടില്ല! ഒരു ബഗ് റിപ്പോർട്ട് സൃഷ്ടിക്കുക! "</string>
+    <string name="system_install_post_success">പ്രത്യേക അനുമതി ആവശ്യമുള്ള എഫ്-ഡ്രോയ്ഡ് വിപുലീകരണം വിജയകരമായി സ്ഥാപിച്ചു</string>
+    <string name="system_install_post_fail">പ്രത്യേക അനുമതി ആവശ്യമുള്ള എഫ്-ഡ്രോയ്ഡ് വിപുലീകരണം സ്ഥാപിക്കല്‍ പരാജയപ്പെട്ടു</string>
+    <string name="system_install_post_success_message">"പ്രത്യേക അനുമതി ആവശ്യമുള്ള എഫ്-ഡ്രോയ്ഡ് വിപുലീകരണം വിജയകരമായി സ്ഥാപിച്ചു. ഇത് പ്രയോഗങ്ങളെ സ്ഥാപിക്കാനും പുതുക്കാനും ഒഴിവാക്കാനും എഫ്-ഡ്രോയ്ഡിനെ സ്വയം പ്രാപ്തമാക്കുന്നു. "</string>
+    <string name="system_install_installing">സ്ഥാപിക്കുന്നു…</string>
+    <string name="system_install_installing_rebooting">സ്ഥാപിക്കുന്നു, റീബൂട്ട് ചെയ്യുന്നു…</string>
+    <string name="system_install_uninstalling">ഒഴിവാക്കുന്നു…</string>
+    <string name="system_install_question">നിങ്ങൾക്ക് പ്രത്യേകാവകാശ എഫ്-ഡ്രോയ്ഡ് വിപുലീകരണം സ്ഥാപിക്കണോ?</string>
+    <string name="system_install_warning">ഇത് 10 സെക്കന്റ് വരെ എടുക്കും.</string>
+    <string name="system_install_warning_lollipop">ഇത് 10 സെക്കന്റ് വരെ എടുക്കും. ശേഷം ഉപകരണം <b>റീബൂട്ട്</b> ചെയ്യും. </string>
+    <string name="system_uninstall">നിങ്ങൾക്ക് പ്രത്യേകാവകാശ എഫ്-ഡ്രോയ്ഡ് വിപുലീകരണം ഒഴിവാക്കണോ?</string>
+    <string name="system_install_not_supported">"എഫ്-ഡ്രോയ്ഡിന്റെ പ്രത്യേകാവകാശ വിപുലീകരണം നിലവിൽ Android 5.1 ഓ അല്ലെങ്കിൽ പുതിയതോ പിന്തുണയ്ക്കുന്നില്ല. "</string>
+
+    <string name="nearby_splash__download_apps_from_people_nearby">"ഇന്റർനെറ്റ് ഇല്ലേ? നിങ്ങളുടെ അടുത്തുള്ള ആളുകളിൽ നിന്ന് പ്രയോഗങ്ങള്‍ ഡൗൺലോഡ് ചെയ്യൂ! "</string>
+    <string name="nearby_splash__find_people_button">എന്റെ അരികിലുള്ള ആളുകളെ കണ്ടെത്തുക</string>
+    <string name="nearby_splash__both_parties_need_fdroid">നിയര്‍ബെെ ഉപയോഗിക്കാന്‍ രണ്ട് കൂട്ടരും %1$s ഉപയോഗിക്കേണ്ടതുണ്ട്.</string>
+
+    <string name="swap_nfc_title">കെെമാറ്റം ചെയ്യാന്‍ സ്പർശിക്കുക</string>
+    <string name="swap_join_same_wifi">നിങ്ങളുടെ സുഹൃത്തിന്റെ അതേ വൈ-ഫൈ യില്‍ ചേരുക</string>
+    <string name="swap_join_this_hotspot">നിങ്ങളുടെ ഹോട്ട്സ്പോട്ടില്‍ ചേരാൻ സുഹൃത്തിനെ സഹായിക്കുക</string>
+    <string name="swap">പ്രയോഗങ്ങള്‍ കെെമാറ്റം ചെയ്യുക</string>
+    <string name="swap_success">വിജയകരമായി കെെമാറ്റം ചെയ്തു!</string>
+    <string name="swap_no_wifi_network">ഇതുവരെ നെറ്റ്വർക്ക് ഇല്ല</string>
+    <string name="swap_active_hotspot">%1$s (നിങ്ങളുടെ ഹോട്ട്സ്പോട്ട്)</string>
+    <string name="swap_view_available_networks">ലഭ്യമായ നെറ്റ്വർക്കുകൾ തുറക്കാൻ തൊടുക</string>
+    <string name="swap_switch_to_wifi">ഒരു വൈഫൈ നെറ്റ്വർക്ക് മാറുന്നതിന് തൊടുക</string>
+    <string name="open_qr_code_scanner">QR സ്കാനർ തുറക്കുക</string>
+    <string name="swap_choose_apps">പ്രയോഗങ്ങള്‍ തിരഞ്ഞെടുക്കുക</string>
+    <string name="swap_scan_qr">QR കോഡ് സ്കാൻ ചെയ്യുക</string>
+    <string name="swap_people_nearby">അടുത്തുള്ള ആളുകൾ</string>
+    <string name="swap_scanning_for_peers">സമീപത്തുള്ള ആളുകൾക്കായി തിരയുന്നു …</string>
+    <string name="swap_visible_bluetooth">ബ്ലൂടൂത്ത് വഴി ദൃശ്യം</string>
+    <string name="swap_setting_up_bluetooth">ബ്ലൂടൂത്ത് സജ്ജീകരിക്കുന്നു …</string>
+    <string name="swap_not_visible_bluetooth">ബ്ലൂടൂത്ത് വഴി ദൃശ്യമല്ല</string>
+    <string name="swap_visible_wifi">വൈ-ഫൈ വഴി ദൃശ്യം</string>
+    <string name="swap_setting_up_wifi">വൈ-ഫൈ സജ്ജീകരിക്കുന്നു …</string>
+    <string name="swap_stopping_wifi">വൈ-ഫൈ നിർത്തുന്നു …</string>
+    <string name="swap_not_visible_wifi">വൈ-ഫൈ വഴി ദൃശ്യമല്ല</string>
+    <string name="swap_wifi_device_name">ഉപകരണത്തിന്റെ പേര്</string>
+    <string name="swap_cant_find_peers">നിങ്ങൾ തിരയുന്ന ആളെ കണ്ടെത്താൻ കഴിയുന്നില്ലേ?</string>
+    <string name="swap_no_peers_nearby">കെെമാറ്റം ചെയ്യാന്‍ അടുത്തുള്ള ആളുകളെ കണ്ടെത്താൻ കഴിഞ്ഞില്ല.</string>
+    <string name="swap_connecting">ബന്ധിപ്പിക്കുന്നു</string>
+    <string name="swap_confirm">കെെമാറ്റം സ്ഥിരീകരിക്കുക</string>
     </resources>
