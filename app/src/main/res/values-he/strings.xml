@@ -380,6 +380,8 @@
     <plurals name="updates__download_updates_for_apps">
         <item quantity="one">הורד עדכון עבור אפליקציה אחת.</item>
         <item quantity="two">הורד עדכונים עבור %1$d אפליקציות.</item>
+        <item quantity="many">הורד עדכונים עבור %1$d אפליקציות.</item>
+        <item quantity="other">הורד עדכונים עבור %1$d אפליקציות.</item>
     </plurals>
 
     <string name="versions">גרסאות</string>

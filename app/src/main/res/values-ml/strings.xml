@@ -239,7 +239,7 @@
     <string name="local_repo_running">എഫ്-ഡ്രോയ്ഡ് കൈമാറ്റം ചെയ്യാന്‍ തയ്യാറാണ്</string>
     <string name="touch_to_configure_local_repo">വിശദാംശങ്ങൾ കാണുന്നതിനും നിങ്ങളുടെ അപ്ലിക്കേഷനുകൾ കെെമാറ്റം ചെയ്യുന്നതിന് മറ്റുള്ളവരെ അനുവദിക്കുന്നതിനും തൊടുക.</string>
     <string name="deleting_repo">നിലവിലെ സംഭരണി ഇല്ലാതാക്കുന്നു …</string>
-    <string name="adding_apks_format">റിപ്പോയിലേക്ക്% നെ ചേർക്കുന്നു …</string>
+    <string name="adding_apks_format">റിപ്പോയിലേക്ക്%s നെ ചേർക്കുന്നു …</string>
     <string name="writing_index_jar">ഒപ്പുവെച്ച സൂചിക ഫയൽ (index.jar) എഴുതുന്നു …</string>
     <string name="linking_apks">APKകള്‍ സംഭരണിയിലേക്ക് ബന്ധിക്കുന്നു…</string>
     <string name="copying_icons">അപ്ലിക്കേഷൻ ഐക്കണുകൾ സംഭരണിയിലേക്ക് പകർത്തുന്നു …</string>
