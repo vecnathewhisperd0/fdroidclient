@@ -263,9 +263,7 @@
     <string name="system_install_uninstalling">Malinstalado…</string>
     <string name="system_install_question">Ĉu vi volas instali privilegian F-Droid-aldonaĵon?</string>
     <string name="system_install_warning">Ĉi tio daŭros ĝis 10 sekundoj.</string>
-    <string name="system_install_warning_lollipop">Ĉi tio daŭros ĝis 10 sekundoj kaj la aparato estos poste<b>
-        restartita</b>.
-    </string>
+    <string name="system_install_warning_lollipop">Ĉi tio daŭros ĝis 10 sekundoj kaj la aparato estos poste <b>restartita</b>.</string>
     <string name="system_uninstall">Ĉu vi certe volas malinstali privilegian F-Droid-aldonaĵon?</string>
     <string name="system_uninstall_button">Malinstali</string>
 
