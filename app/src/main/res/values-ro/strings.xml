@@ -329,7 +329,7 @@
     </string>
     <string name="system_installer_on">Folositi F-Droid Extension pentru a instala, actualiza si a înlătura pachete
     </string>
-    <string name="empty_can_update_app_list">"Felicitări! Toate aplicațiile tale sunt la zi (sau depozitele nu au fost actualizate). "</string>
+    <string name="empty_can_update_app_list">Felicitări! Toate aplicațiile tale sunt la zi (sau depozitele nu au fost actualizate).</string>
     <string name="empty_installed_app_list">Nici o aplicatie instalata.
 
         Exista aplicatii pe acest dispozitiv, dar nu sunt disponibile din F-Droid. Asta din cauza ca trebuie sa
@@ -456,7 +456,7 @@
     <string name="menu_video">Video</string>
     <string name="menu_license">Licență: %s</string>
     <string name="install_error_not_yet_supported">Acest tip de fișier nu se poate încă instala: %s</string>
-    <string name="nearby_splash__download_apps_from_people_nearby">"Nu ai acces la internet? Descarcă aplicații de la persoanele de lângă tine! "</string>
+    <string name="nearby_splash__download_apps_from_people_nearby">Nu ai acces la internet? Descarcă aplicații de la persoanele de lângă tine!</string>
     <string name="nearby_splash__find_people_button">Găsește persoane lângă mine</string>
     <string name="nearby_splash__both_parties_need_fdroid">Ambele persoane au nevoie de %1$s pentru a putea folosi această opțiune.</string>
 
