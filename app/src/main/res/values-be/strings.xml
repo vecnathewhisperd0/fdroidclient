@@ -296,9 +296,7 @@
     <string name="system_install_uninstalling">Выдаленне…</string>
     <string name="system_install_question">Жадаеце ўсталяваць прывілеваны дадатак F-Droid?</string>
     <string name="system_install_warning">Гэта зойме прыблізнва 10 секунд.</string>
-    <string name="system_install_warning_lollipop">Гэта зойме прыблізна 10 секунд, пасля чаго прылада будзе<b>
-        перазагружана</b>.
-    </string>
+    <string name="system_install_warning_lollipop">Гэта зойме прыблізна 10 секунд, пасля чаго прылада будзе<b> перазагружана</b>.</string>
     <string name="system_uninstall">Жадаеце выдаліць прывілеяваны дадатак F-Droid?</string>
     <string name="system_uninstall_button">Выдаліць</string>
     <string name="system_install_not_supported">Усталёўка прывілеяванага дадатаку F-Droid у цяперашні час не
