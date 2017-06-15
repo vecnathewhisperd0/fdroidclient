@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools"><string name="app_name">എഫ്-ഡ്രോയ്ഡ്</string>
+<resources><string name="app_name">എഫ്-ഡ്രോയ്ഡ്</string>
 
     <string name="updates">പുതുക്കലുകള്‍</string>
     <string name="ok">ശരി</string>
@@ -32,20 +32,20 @@
     <string name="pref_language">ഭാഷ</string>
     <string name="pref_language_default">സ്വതവേയുള്ളത്</string>
 
-    <string tools:ignore="UnusedResources" name="category_Connectivity">കൂട്ടുകെട്ട്‌</string>
-    <string tools:ignore="UnusedResources" name="category_Development">ഡെവലപ്മെന്റ്</string>
-    <string tools:ignore="UnusedResources" name="category_Games">കളികള്‍</string>
-    <string tools:ignore="UnusedResources" name="category_Graphics">ചിത്രങ്ങള്‍</string>
-    <string tools:ignore="UnusedResources" name="category_Internet">ഇന്റര്‍നെറ്റ്</string>
-    <string tools:ignore="UnusedResources" name="category_Money">സാമ്പത്തികം</string>
-    <string tools:ignore="UnusedResources" name="category_Multimedia">മൾട്ടിമീഡിയ</string>
-    <string tools:ignore="UnusedResources" name="category_Navigation">ഗതിനിയന്ത്രണം</string>
-    <string tools:ignore="UnusedResources" name="category_Phone_SMS">ഫോണും സന്ദേശങ്ങളും</string>
-    <string tools:ignore="UnusedResources" name="category_Reading">വായന</string>
-    <string tools:ignore="UnusedResources" name="category_Science_Education">ശാസ്ത്രവും വിദ്യാഭ്യാസവും</string>
-    <string tools:ignore="UnusedResources" name="category_Security">സുരക്ഷ</string>
-    <string tools:ignore="UnusedResources" name="category_Time">സമയം</string>
-    <string tools:ignore="UnusedResources" name="category_Writing">എഴുത്ത്</string>
+    <string name="category_Connectivity">കൂട്ടുകെട്ട്‌</string>
+    <string name="category_Development">ഡെവലപ്മെന്റ്</string>
+    <string name="category_Games">കളികള്‍</string>
+    <string name="category_Graphics">ചിത്രങ്ങള്‍</string>
+    <string name="category_Internet">ഇന്റര്‍നെറ്റ്</string>
+    <string name="category_Money">സാമ്പത്തികം</string>
+    <string name="category_Multimedia">മൾട്ടിമീഡിയ</string>
+    <string name="category_Navigation">ഗതിനിയന്ത്രണം</string>
+    <string name="category_Phone_SMS">ഫോണും സന്ദേശങ്ങളും</string>
+    <string name="category_Reading">വായന</string>
+    <string name="category_Science_Education">ശാസ്ത്രവും വിദ്യാഭ്യാസവും</string>
+    <string name="category_Security">സുരക്ഷ</string>
+    <string name="category_Time">സമയം</string>
+    <string name="category_Writing">എഴുത്ത്</string>
 
     <string name="system_install_button_install">സ്ഥാപിക്കുക</string>
     <string name="system_uninstall_button">ഒഴിവാക്കുക</string>
@@ -65,7 +65,6 @@
     <string name="more">കൂടുതല്‍</string>
     <string name="less">കുറവ്</string>
 
-    <string name="menu_send_apk_bt">ബ്ലൂടൂത്ത് വഴി എഫ്-ഡ്രോയ്ഡിനെ പങ്കിടുക</string>
     <string name="antitracklist">ഈ പ്രയോഗം നിങ്ങളുടെ പ്രവര്‍ത്തനങ്ങള്‍ നിരീക്ഷിക്കുകയും പ്രസിദ്ധപ്പെടുത്തുകയും ചെയ്യുന്നു</string>
     <string name="warning_no_internet">പുതുക്കാന്‍ കഴിയുന്നില്ല, നിങ്ങൾ ഇന്റർനെറ്റിലേക്ക് കണക്റ്റുചെയ്തിട്ടുണ്ടോ?</string>
     <string name="unsigned">ഒപ്പുവയ്‌ക്കാത്തത്</string>
@@ -74,8 +73,8 @@
     <string name="repo_last_update">അവസാനം പുതുക്കിയത്</string>
     <string name="not_on_same_wifi">നിങ്ങളുടെ ഉപകരണം നിങ്ങൾ ഇപ്പോൾ ചേർത്ത പ്രാദേശിക റിപ്പോയുടെ അതേ വൈഫൈയിലല്ല! ഈ ശൃംഖലയില്‍ ചേരാൻ ശ്രമിക്കുക: %s</string>
     <string name="wifi">വെെ-ഫെെ</string>
-    <string tools:ignore="UnusedResources" name="category_Sports_Health">കായികവും ആരോഗ്യവും</string>
-    <string tools:ignore="UnusedResources" name="category_System">സിസ്റ്റം</string>
+    <string name="category_Sports_Health">കായികവും ആരോഗ്യവും</string>
+    <string name="category_System">സിസ്റ്റം</string>
     <string name="swap_send_fdroid">എഫ്-ഡ്രോയ്ഡ് അയ്ക്കുക</string>
     <string name="crash_dialog_title">എഫ്-ഡ്രോയ്ഡ് തകര്‍ന്നു</string>
     <string name="crash_dialog_text">പ്രയോഗം നിർത്തുന്നതിന് ഒരു അപ്രതീക്ഷിത പിശക് സംഭവിച്ചു. പ്രശ്നം പരിഹരിക്കാൻ സഹായിക്കുന്നതിന് വിശദാംശങ്ങൾ ഇ-മെയിൽ ചെയ്യാൻ നിങ്ങൾ ആഗ്രഹിക്കുന്നുണ്ടോ?</string>
@@ -83,7 +82,6 @@
     <string name="notification_title_summary_install_error">സ്ഥാപിക്കല്‍ പരാജയപ്പെട്ടു</string>
     <string name="SignatureMismatch">പുതിയ പതിപ്പ് പഴയതില്‍ നിന്ന് വ്യത്യസ്തമായ ഒരു കീ ഉപയോഗിച്ച് ഒപ്പ് വെച്ചിരിക്കുന്നു. പുതിയ പതിപ്പ് ഇൻസ്റ്റാൾ ചെയ്യുന്നതിന്, പഴയത് ആദ്യം ഒഴിവാക്കേണ്ടതുണ്ട്. അതിനുശേഷം വീണ്ടും ശ്രമിക്കുക. (ഒഴിവാക്കുന്നത് പ്രയോഗത്തില്‍ സംഭരിച്ചിട്ടുള്ള എല്ലാ ആന്തരിക ഡേറ്റയും മായ്ക്കും)</string>
     <string name="installIncompatible">ഈ പാക്കേജ് നിങ്ങളുടെ ഉപകരണത്തിന് അനുയോജ്യമല്ലെന്ന് തോന്നുന്നു. എന്തായാലും അത് സ്ഥാപിക്കണോ ?</string>
-    <string name="installDowngrade">നിങ്ങൾ ഈ അപ്ലിക്കേഷൻ തരംതാഴ്ത്താൻ ശ്രമിക്കുന്നു. അങ്ങനെ ചെയ്യുന്നതിലൂടെ അതിന് തകരാറ് വരികയോ നിങ്ങളുടെ ഡാറ്റ നഷ്ടപ്പെടുകയോ വരെ ചെയ്തേക്കാം. ഏതുവിധേനയും ഡൌൺഗ്രേഡ് ചെയ്യണോ?</string>
     <string name="version">പതിപ്പ്</string>
     <string name="by_author_format">%s എഴുതിയത്</string>
     <string name="delete">മായ്ക്കുക</string>
@@ -292,7 +290,7 @@
     <string name="requires_features">വേണ്ടത്: %1$s</string>
     <string name="wifi_ap">ഹോട്ട്സ്പോട്ട്</string>
 
-    <string tools:ignore="UnusedResources" name="category_Theming">തീമിംഗ്</string>
+    <string name="category_Theming">തീമിംഗ്</string>
     <plurals name="button_view_all_apps_in_category">
 	<item quantity="one">%d കാണുക</item>
 	<item quantity="other">എല്ലാ %d യും കാണുക</item>
@@ -302,8 +300,6 @@
 \n
 \nനിങ്ങളുടെ ഉപകരണത്തിൽ പ്രയോഗങ്ങള്‍ ഉണ്ട്, എന്നാൽ അവ എഫ്-ഡ്രോയ്ഡില്‍ ലഭ്യമല്ല. ഇത് നിങ്ങളുടെ സംഭരണികള്‍ പുതുക്കേണ്ടതു കൊണ്ടാകാം, അല്ലെങ്കിൽ നിങ്ങളുടെ പ്രയോഗങ്ങള്‍ സംഭരണികളില്‍ ലഭ്യമല്ലാത്തതു കൊണ്ടുമാകാം. "</string>
     <string name="empty_can_update_app_list">അഭിനന്ദനങ്ങൾ! നിങ്ങളുടെ പ്രയോഗങ്ങളെല്ലാം കാലികമാണ് (അല്ലെങ്കിൽ നിങ്ങളുടെ സംഭരണികള്‍ കാലഹരണപ്പെട്ടതാണ്).</string>
-    <string name="empty_search_available_app_list">പൊരുത്തപ്പെടുന്ന പ്രയോഗങ്ങള്‍ ലഭ്യമല്ല.</string>
-
     <string name="install_error_unknown">ഒരു അജ്ഞാത പിശക് കാരണം സ്ഥാപിക്കല്‍ പരാജയപ്പെട്ടു</string>
     <string name="uninstall_error_unknown">കാരണം ഒരു അജ്ഞാത പിശക് ഒഴിവാക്കല്‍ പരാജയപ്പെട്ടു</string>
     <string name="install_error_not_yet_supported">ഫയൽ തരം സ്ഥാപിക്കാന്‍ കഴിയില്ല: %s</string>

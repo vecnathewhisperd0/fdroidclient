@@ -450,7 +450,6 @@
 	<item quantity="one">Обновлено %1$d день назад</item>
 	<item quantity="few">Обновлено %1$d дня назад</item>
 	<item quantity="many">Обновлено %1$d дней назад</item>
-	<item quantity="other"/>
 </plurals>
     <string name="app_details_donate_prompt">%1$s создано %2$s. Купи им чашечку кофе!</string>
 
@@ -501,13 +500,11 @@
 	<item quantity="one">%1$d обновление</item>
 	<item quantity="few">%1$d обновления</item>
 	<item quantity="many">%1$d обновлений</item>
-	<item quantity="other"/>
 </plurals>
     <plurals name="notification_summary_installed">
 	<item quantity="one">%1$d приложение установлено</item>
 	<item quantity="few">%1$d приложения установлено</item>
 	<item quantity="many">%1$d приложений установлено</item>
-	<item quantity="other"/>
 </plurals>
     <plurals name="notification_summary_more">
 	<item quantity="one">+ещё %1$d…</item>

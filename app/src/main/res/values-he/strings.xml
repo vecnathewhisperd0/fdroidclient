@@ -61,7 +61,6 @@
     <string name="malformed_repo_uri">מתעלם מן URI מאגר פגום: %s</string>
 
     <string name="menu_manage">מאגרים</string>
-    <string name="menu_send_apk_bt">שתף את F-Droid בעזרת Bluetooth</string>
     <string name="menu_search">חיפוש</string>
     <string name="menu_add_repo">מאגר חדש</string>
     <string name="menu_launch">הפעלה</string>
@@ -330,8 +329,6 @@
     <string name="menu_email">שליחת דוא״ל ליוצר</string>
     <string name="antinonfreeassetslist">יישומון זה מכיל נכסים בלתי חופשיים</string>
 
-    <string name="empty_search_available_app_list">אין יישומונים תואמים זמינים.</string>
-
     <string name="crash_dialog_title">‏F-Droid קרסה</string>
     <string name="crash_dialog_text">אירעה שגיאה לא צפויה אשר אילצה את עצירת היישומון. לשלוח בדוא״ל את הפרטים כדי לעזור לפתור את הבעיה?</string>
     <string name="crash_dialog_comment_prompt">באפשרותך להוסיף מידע והערות נוספים כאן:</string>
@@ -383,8 +380,6 @@
     <plurals name="updates__download_updates_for_apps">
         <item quantity="one">הורד עדכון עבור אפליקציה אחת.</item>
         <item quantity="two">הורד עדכונים עבור %1$d אפליקציות.</item>
-        <item quantity="many"/>
-        <item quantity="other"/>
     </plurals>
 
     <string name="versions">גרסאות</string>

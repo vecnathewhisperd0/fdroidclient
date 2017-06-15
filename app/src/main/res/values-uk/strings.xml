@@ -459,8 +459,7 @@
 	<item quantity="one">Випущено %1$d день по тому</item>
 	<item quantity="few">Випущено %1$d дні по тому</item>
 	<item quantity="many">Випущено %1$d днів по тому</item>
-	<item quantity="other"></item>
-</plurals>
+	</plurals>
 
     <string name="updates__tts__download_updates_for_all_apps">Завантажити всі оновлення</string>
 
