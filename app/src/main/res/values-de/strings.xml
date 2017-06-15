@@ -226,7 +226,7 @@
         liegen, dass Sie Ihre Paketquellen aktualisieren müssen oder diese tatsächlich keine Ihrer Anwendungen
         beinhalten.
     </string>
-    <string name="empty_can_update_app_list">"Glückwunsch! Alle Ihre Apps sind auf dem neuesten Stand (oder Ihre Paketquellen sind veraltet). "</string>
+    <string name="empty_can_update_app_list">Glückwunsch! Alle Ihre Apps sind auf dem neuesten Stand (oder Ihre Paketquellen sind veraltet).</string>
 
     <string name="swap_send_fdroid">F-Droid senden</string>
     <string name="swap_connecting">Verbindungsaufbau</string>
@@ -263,9 +263,7 @@
     <string name="system_install_installing_rebooting">Installation und Neustart läuft …</string>
     <string name="system_install_uninstalling">Wird deinstalliert …</string>
     <string name="system_install_warning">Das wird bis zu 10 Sekunden dauern.</string>
-    <string name="system_install_warning_lollipop">Das wird bis zu 10 Sekunden dauern und das Gerät wird anschließend<b>
-        neu gestartet</b>.
-    </string>
+    <string name="system_install_warning_lollipop">Das wird bis zu 10 Sekunden dauern und das Gerät wird anschließend <b>neu gestartet</b>.</string>
     <string name="swap_nfc_title">Berühren, um zu tauschen</string>
     <string name="swap_join_this_hotspot">Ihrem Freund helfen, Ihrem Hotspot beizutreten</string>
     <string name="swap_success">Tausch erfolgreich!</string>
