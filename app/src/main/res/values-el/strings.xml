@@ -219,7 +219,7 @@
         αλλά δεν είναι διαθέσιμες από το F-Droid. Αυτό θα μπορούσε να είναι γιατί θα πρέπει να ενημερώσετε τα αποθετήριά
         σας, ή τα αποθετήρια δεν περιέχουν τις εφαρμογές σας.
     </string>
-    <string name="empty_can_update_app_list">"Συγχαρητήρια! Όλες οι εφαρμογές σας είναι ενημερωμένες (ή τα αποθετήρια σας είναι παρωχημένα). "</string>
+    <string name="empty_can_update_app_list">Συγχαρητήρια! Όλες οι εφαρμογές σας είναι ενημερωμένες (ή τα αποθετήρια σας είναι παρωχημένα).</string>
 
     <string name="requesting_root_access_body">Αίτηση πρόσβασης υπερχρήστη…</string>
     <string name="root_access_denied_title">Άρνηση πρόσβασης υπερχρήστη</string>
@@ -363,7 +363,7 @@
         στο F-Droid
     </string>
     <string name="update_auto_download">Αυτόματη λήψη ενημερώσεων</string>
-    <string name="update_auto_download_summary">"Οι ενημερώσεις θα λαμβάνονται αυτόματα και θα ειδοποιείστε για την εγκατάσταση τους "</string>
+    <string name="update_auto_download_summary">Οι ενημερώσεις θα λαμβάνονται αυτόματα και θα ειδοποιείστε για την εγκατάσταση τους</string>
     <string name="update_auto_install">Αυτόματη εγκατάσταση αναβαθμίσεων</string>
     <string name="update_auto_install_summary">Λήψη και εγκατάσταση αναβαθμίσεων εφαρμογών στο παρασκήνιο</string>
     <string name="repo_error_empty_username">Κενό όνομα χρήστη, τα διαπιστευτήρια δεν άλλαξαν</string>
@@ -406,7 +406,7 @@
     <string name="hide_anti_feature_apps">Γκριζάρισμα εφαρμογών με αντενδείξεις</string>
 <string name="main_menu__latest_apps">Τελευταία</string>
     <string name="main_menu__categories">Κατηγορίες</string>
-    <string name="preference_manage_installed_apps">"Διαχείριση  εγκατεστημένων εφαρμογών"</string>
+    <string name="preference_manage_installed_apps">Διαχείριση  εγκατεστημένων εφαρμογών</string>
 
 
     <string name="notification_action_update">Ενημέρωση</string>

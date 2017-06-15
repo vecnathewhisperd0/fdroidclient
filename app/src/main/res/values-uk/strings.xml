@@ -188,7 +188,7 @@
     <string name="icon">Піктограма</string>
     <string name="no_permissions">Не потребує дозволів.</string>
     <string name="requires_features">Залежності: %1$s</string>
-    <string name="empty_can_update_app_list">"Вітаємо! Всі ваші додатки мають крайні версії (або ж ваші репозиторії застаріли). "</string>
+    <string name="empty_can_update_app_list">Вітаємо! Всі ваші додатки мають крайні версії (або ж ваші репозиторії застаріли).</string>
 
     <string name="install_error_unknown">Не вдалося встановити через невідому помилку</string>
     <string name="system_install_warning">Це забере приблизно 10 секунд.</string>
@@ -326,7 +326,7 @@
         мережі. Якщо ж ви не маєте доступу до тієї ж мережі, єдине що лишається, це створити власну Wi-Fi точку доступу.
     </string>
     <string name="swap_join_this_hotspot">Допоможіть вашим друзям приєднатись до вашої точки доступу</string>
-    <string name="swap_scan_or_type_url">"Один з вас повинен відреагувати код, чи ввести URL іншого в оглядачу. "</string>
+    <string name="swap_scan_or_type_url">Один з вас повинен відреагувати код, чи ввести URL іншого в оглядачу.</string>
     <string name="swap_people_nearby">Люди поблизу</string>
     <string name="swap_cant_find_peers">Не можете знайти хто вас шукає?</string>
     <string name="swap_no_peers_nearby">Не вдалося знайти людей поблизу для обміну.</string>
