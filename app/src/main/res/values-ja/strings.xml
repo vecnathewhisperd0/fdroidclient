@@ -458,6 +458,6 @@
 </plurals>
 <string name="by_author_format">開発者 %s</string>
     <string name="download_404">要求されたﾌｧｲﾙが見つかりませんでした。</string>
-    <string name="force_old_index">古いｲﾝﾃﾞｯｸｽ形式を強制する</string>
-    <string name="force_old_index_summary">ﾊﾞｸﾞや互換性の問題がある場合に、XML ｱﾌﾟﾘｲﾝﾃﾞｯｸｽを使用します</string>
+    <string name="force_old_index">古い索引形式を強制する</string>
+    <string name="force_old_index_summary">ﾊﾞｸﾞや互換性の問題がある場合に、XML ｱﾌﾟﾘ索引を使用します</string>
     </resources>
