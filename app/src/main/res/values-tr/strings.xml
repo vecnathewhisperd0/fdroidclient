@@ -99,7 +99,7 @@
     <string name="proxy_host">Vekil Sunucu</string>
     <string name="proxy_host_summary">Vekil sunucu adı (örn. 127.0.0.1)</string>
     <string name="proxy_port">Vekil Bağlantı Noktası</string>
-    <string name="proxy_port_summary">Vekil bağlantı noktası numarası (örn. 8118)</string>
+    <string name="proxy_port_summary">Vekil bağlantı noktası (örn. 8118)</string>
     <string name="status_download">İndiriliyor
         %1$s konumundan
         %2$s / %3$s (%%%4$d)
@@ -306,10 +306,7 @@
     <string name="theme_night">Gece</string>
 
     <string name="crash_dialog_title">F-Droid çöktü</string>
-    <string name="crash_dialog_text">Uygulamanın durmasına neden olan beklenmedik bir hata
-        meydana geldi. Sorunun giderilmesine yardım etmek
-        için ayrıntıları e-posta ile yollamak ister misiniz?
-    </string>
+    <string name="crash_dialog_text">Uygulamanın durmasına neden olan beklenmedik bir hata oluştu. Sorunun giderilmesine yardım etmek için ayrıntıları e-posta ile yollamak ister misiniz?</string>
     <string name="crash_dialog_comment_prompt">Ek bilgi ve yorumları buraya ekleyebilirsiniz:</string>
     <string name="uninstall_system">Ayrıcalıklı Uzantıyı Güncelle/Kaldır</string>
     <string name="uninstall_system_summary">Güncellemek/kaldırmak için Ayrıcalıklı Uzantı\'nın ayrıntılar ekranını
@@ -493,6 +490,6 @@
 </plurals>
 <string name="by_author_format">%s tarafından</string>
     <string name="download_404">İstenen dosya bulunamadı.</string>
-    <string name="force_old_index">Eski indeks biçimini zorla</string>
+    <string name="force_old_index">Eski indeks biçimini zorunlu kıl</string>
     <string name="force_old_index_summary">Hatalar ve uyumluluk sorunları olması halinde, XML uygulama indeksini kullan</string>
     </resources>
