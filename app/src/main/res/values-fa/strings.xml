@@ -1,8 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-    <string name="installIncompatible">به‌نظر می‌رسد این بسته با دستگاه شما هماهنگ نیست. آیا می‌خواهید آن را به هر قیمتی
-        آزمایش و نصب کنید؟
-    </string>
+    <string name="installIncompatible">به‌نظر می‌رسد این برنامه با دستگاه شما هماهنگ نیست. آیا می‌خواهید آن را به هر قیمتی نصب کنید؟</string>
     <string name="delete">حذف</string>
     <string name="cache_downloaded">نگه‌داری برنامه های انبار شده</string>
     <string name="updates">به‌روزرسانی‌ها</string>
@@ -14,7 +12,7 @@
     <string name="notify_on">نمایش یک آگهی هنگام موجود بودن به‌روز رسانی‌ها</string>
     <string name="no_such_app">چنین کاره‌ای پیدا نشد.</string>
     <string name="about_title">دربارهٔ F-Droid</string>
-    <string name="about_mail">رایانامه</string>
+    <string name="about_mail">ایمیل</string>
     <string name="app_installed">نصب شده</string>
     <string name="app_not_installed">نصب نشده</string>
     <string name="added_on">در %s افزوده شد</string>
@@ -60,9 +58,7 @@
     <string name="repo_description">شرح</string>
     <string name="repo_last_update">آخرین به‌روز رسانی</string>
     <string name="repo_name">نام</string>
-    <string name="unsigned_description">این یعنی فهرست برنامه‌ها نتوانست تأیید شود. باید مراقب برنامه‌های بارگیری شده از
-        شاخص‌های امضا نشده باشید.
-    </string>
+    <string name="unsigned_description">این یعنی فهرست برنامه‌ها نتوانست تأیید شود. باید مراقب برنامه‌های بارگیری شده از فهرست های امضا نشده باشید.</string>
     <string name="unknown">ناشناخته</string>
     <string name="minsdk_or_later">%s یا جدیدتر</string>
     <string name="up_to_maxsdk">تا %s</string>
@@ -75,7 +71,7 @@
     <string name="enable_nfc_send">فعّال کردن ارسال NFC…</string>
     <string name="unstable_updates">به‌روز رسانی‌های ناپایدار</string>
     <string name="unstable_updates_summary">پیشنهاد به‌روز رسانی به نگارش‌های ناپایدار</string>
-    <string name="notify">به روز رسانی اعلان ها</string>
+    <string name="notify">نمایش به روزرسانی های موجود</string>
     <string name="system_installer">افزونهٔ ممتاز</string>
     <string name="system_installer_on">استفاده از افزونهٔ ممتاز اف‌دروید برای نصب، به‌روز رسانی و حذف بسته‌ها</string>
     <string name="uninstall_system">به‌روز رسانی/حذف افزونهٔ ممتاز</string>
@@ -146,9 +142,9 @@
     <string name="enable_proxy_title">فعّال کردن پیشکار http</string>
     <string name="enable_proxy_summary">پیکربندی پیشکار http برای تمام درخواست‌های شبکه</string>
     <string name="proxy_host">میزبان پیشکار</string>
-    <string name="proxy_host_summary">نام میزبان پروکسی را پیکربندی کنید (مثلاً 127.0.0.1)</string>
+    <string name="proxy_host_summary">نام میزبان پروکسی (مثلاً 127.0.0.1)</string>
     <string name="proxy_port">درگاه پیشکار</string>
-    <string name="proxy_port_summary">پیکربندی شمارهٔ درگاه پیشکارتان (مثلاً 8118)</string>
+    <string name="proxy_port_summary">شمارهٔ درگاه پروکسی (مثلاً 8118)</string>
 
     <string name="status_download_unknown_size">در حال بارگیری\n%2$s از\n%1$s</string>
     <string name="update_notification_title">در حال به‌روز رسانی مخزن‌ها</string>
@@ -235,7 +231,7 @@
     <string name="newPerms">جدید</string>
     <string name="allPerms">همه</string>
     <string name="perm_costs_money">ممکن است این کار برایتان خرج داشته باشد</string>
-    <string name="download_error">بارگیری موفّق نبود</string>
+    <string name="download_error">بارگیری ناموفق!</string>
 
     <string name="perms_new_perm_prefix">جدید:</string>
     <string name="perms_description_app">فراهم شده توسّط: %1$s.</string>
@@ -278,11 +274,9 @@
         کنید!
     </string>
     <string name="system_install_button_install">نصب</string>
-    <string name="system_install_post_success">افزونهٔ ممتاز اف‌دروید با موفّقیت نصب شد</string>
+    <string name="system_install_post_success">افزونه ی مجاز اف‌دروید نصب شد</string>
     <string name="system_install_post_fail">نصب افزونهٔ مجاز اف‌دروید ناموفق بود</string>
-    <string name="system_install_post_success_message">افزونهٔ ممتاز اف‌دروید با موفّقیت نصب شد. این مار به اف‌دروید
-        اجازه می‌دهد کاره‌ها را توسّط خودش نصب کرده، ارتفا دهد و حدف کند.
-    </string>
+    <string name="system_install_post_success_message">افزونه ی مجاز اف‌دروید با موفّقیت نصب شد. این کار به اف‌دروید اجازه می‌دهد کاره‌ها را توسّط خودش نصب کرده، ارتفا دهد و حدف کند.</string>
     <string name="system_install_post_fail_message">نصب افزونهٔ ممتاز اف‌دروید شکست خورد. روش نصب توسّط همهٔ توزیع‌های
         اندروید پشتیبانی نمی‌شود. لطفاً برای اطّلاعات بیش‌تر با ردیاب مشکل اف‌دروید مشاوره کنید.
     </string>
@@ -303,9 +297,7 @@
     <string name="bluetooth_unavailable">بلوتوث موجود نیست</string>
     <string name="swap_cant_send_no_bluetooth">نمی‌توان اف‌دروید را فرستاد، زیرا بلوتوث روی این دستگاه موحود نیست.</string>
     <string name="loading">در حال بار کردن…</string>
-    <string name="swap_connection_misc_error">هنگام اتّصال به افزاره خطایی رخ داد. به نظر می‌رسد با این وضع نمی‌توانیم
-        تبادل کنیم.
-    </string>
+    <string name="swap_connection_misc_error">هنگام اتّصال به دستگاه خطایی رخ داد، نمی‌توان تبادل کرد!</string>
     <string name="swap_not_enabled">تبادل فعّال نیست</string>
     <string name="swap_not_enabled_description">پیش از تبادل، افزاره‌تان باید قابل مشاهده باشد.</string>
 
@@ -373,7 +365,13 @@
     <string name="app__install_downloaded_update">به‌روز رسانی</string>
 
     <string name="app_list__name__downloading_in_progress">در حال بارگیری %1$s</string>
-    <string name="app_list__name__successfully_installed">‫%1$s با موفّقیت نصب شد</string>
+    <string name="app_list__name__successfully_installed">‫%1$s نصب شد</string>
+    <string name="app_list__age__released_today">امروز منتشر شده</string>
+    <string name="app_list__age__released_yesterday">دیروز منتشر شده</string>
+    <plurals name="app_list__age__released_x_days_ago">
+	<item quantity="one">‫%1$d روز پیش منتشر شده</item>
+	<item quantity="other">‫%1$d روز پیش منتشر ‌شده</item>
+</plurals>
 
     <string name="installed_apps__activity_title">کاره‌های نصب شده</string>
     <string name="installed_app__updates_ignored">صرف‌نظر از به‌روز رسانی</string>
@@ -420,7 +418,7 @@
 	<item quantity="other">نمایش‌ همه %d</item>
 </plurals>
 
-    <string name="nearby_splash__download_apps_from_people_nearby">اینترنت  ندارید؟ برنامه ها را از اطرافیاتتان بارگیری کنید!</string>
+    <string name="nearby_splash__download_apps_from_people_nearby">اینترنت ندارید؟ برنامه ها را از افراد نزدیک بگیرید!</string>
     <string name="nearby_splash__find_people_button">یافتن اطرافیانم</string>
     <string name="nearby_splash__both_parties_need_fdroid">برای استفاده از این ویژگی، دو طرف به %1$s نیاز دارند.</string>
 
@@ -485,4 +483,6 @@
 </plurals>
 <string name="by_author_format">توسط %s</string>
     <string name="download_404">فایل درخواستی یافت نشد.</string>
+    <string name="force_old_index">به اجبار، فرمت فهرست قدیمی</string>
+    <string name="force_old_index_summary">در صورت وجود باگ یا مشکلات عدم سازگاری، از فهرست xml برنامه استفاده کنید</string>
     </resources>
