@@ -484,4 +484,6 @@
     <string name="download_404">Ne trovis petitan dosieron.</string>
     <string name="force_old_index">Devigi malnovan formon de indekso</string>
     <string name="force_old_index_summary">Por okazo de eraroj aŭ kongruec-problemoj, uzi XML aplikaĵan indekson</string>
+    <string name="app_list_download_ready">Elŝutita kaj instalpreta</string>
+
     </resources>
