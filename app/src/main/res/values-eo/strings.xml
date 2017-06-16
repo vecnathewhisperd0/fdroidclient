@@ -5,7 +5,7 @@
     <string name="updates">Ĝisdatigoj</string>
     <string name="other">Aliaj</string>
     <string name="automatic_scan_wifi">Nur per vifio</string>
-    <string name="notify">Sciigoj pri ĝisdatigoj</string>
+    <string name="notify">Montri disponeblajn ĝisdatigojn</string>
     <string name="notify_on">Sciigi kiam ĝisdatigoj estas disponeblaj</string>
     <string name="app_details">Aplikaĵaj detaloj</string>
     <string name="no_such_app">Neniu aplikaĵo trovita.</string>
@@ -96,15 +96,10 @@
     <string name="swap_welcome">Bonvenon al F-Droid!</string>
     <string name="app_name">F-Droid</string>
 
-    <string name="installIncompatible">Ŝajnas ke ĉi tiu pakaĵo ne kongruas kun via aparato. Ĉu vi malgraŭe volas provi
-        instali ĝin?
-    </string>
+    <string name="installIncompatible">Aplikaĵo nekongruas kun via aparato, ĉu instali ĝin malgraŭ tio?</string>
     <string name="unstable_updates">Nestabilaj ĝisdatigoj</string>
     <string name="update_interval">Intervalo de aŭtomata ĝisdatigo</string>
-    <string name="SignatureMismatch">La nova versio estas subskribita per diferenca ŝlosilo. Por instali la novan
-        version, la malnova devas esti malinstalita unue. Bonvolu fari tion kaj reprovi. (rigardu ke malinstalado
-        forigos ĉiujn internajn datumojn konservitajn en la aplikaĵo)
-    </string>
+    <string name="SignatureMismatch">La nova versio estas subskribita per malsama ŝlosilo. Por instali la novan version, la malnova devas esti malinstalita unue. Bonvolu fari tion kaj reprovi. (rigardu ke malinstalo forigos ĉiujn internajn datumojn konservitajn en la aplikaĵo)</string>
     <string name="enable_nfc_send">Aktivigi sendadon tra NFC…</string>
     <string name="cache_downloaded">Kaŝmemorigi apk-dosierojn</string>
     <string name="unstable_updates_summary">Proponi ĝisdatigojn al nestabilaj versioj</string>
@@ -169,8 +164,8 @@
     <string name="enable_proxy_summary">Uzi HTTP prokurilon por ĉiuj retkonektoj</string>
     <string name="proxy_host">Prokurila adreso</string>
     <string name="proxy_port">Prokurila pordo</string>
-    <string name="proxy_host_summary">Agordi adreson de via prokurilo (ekz. 127.0.0.1)</string>
-    <string name="proxy_port_summary">Agordi pordan numeron de via prokurilo (ekz. 8118)</string>
+    <string name="proxy_host_summary">Adreso de via prokurilo (ekz. 127.0.0.1)</string>
+    <string name="proxy_port_summary">Porda numero de via prokurilo (ekz. 8118)</string>
 
     <string name="status_download">Elŝutado
         %2$s / %3$s (%4$d%%) el
@@ -248,11 +243,9 @@
     <string name="system_install_denied_permissions">La privilegia aldonaĵo ne akiris ĉefuzantan permeson! Bonvolu krei
         erar-raporton!
     </string>
-    <string name="system_install_post_success">Sukcese instalis privilegian F-Droid-aldonaĵon</string>
+    <string name="system_install_post_success">Privilegian F-Droid-aldonaĵon instalita</string>
     <string name="system_install_post_fail">Instalado de privilegia F-Droid-aldonaĵo malsukcesis</string>
-    <string name="system_install_post_success_message">Privilegia F-Droid-aldonaĵo estas instalita senerare. Ĉi tio
-        ebligos al F-Droid instali, ĝisdatigi kaj malinstali aplikaĵojn per si mem.
-    </string>
+    <string name="system_install_post_success_message">Privilegia F-Droid-aldonaĵo estis instalita. Ĉi tio ebligos al F-Droid instali, ĝisdatigi kaj malinstali aplikaĵojn per si mem.</string>
     <string name="system_install_post_fail_message">La instalado de Privilegia F-Droid-aldonaĵo malsukcesis. La instala
         metodo ne estas subtenata de ĉiuj Androidaj distribuaĵoj, bonvolu konsiliĝi en la F-Droida erar-spurilo por pli
         da informoj.
@@ -306,9 +299,7 @@
         aparato.
     </string>
     <string name="loading">Prilaborado…</string>
-    <string name="swap_connection_misc_error">Eraro okazis dum konektado al aparato, verŝajne ne povas interŝanĝi kun
-        ĝi.
-    </string>
+    <string name="swap_connection_misc_error">Eraro okazis dum konektado al aparato, ne povas interŝanĝi kun ĝi.</string>
     <string name="swap_not_enabled">Interŝanĝo malaktiva</string>
     <string name="swap_not_enabled_description">Antaŭ interŝanĝo via aparato devas esti videbla.</string>
 
@@ -330,7 +321,7 @@
     <string name="perm_costs_money">Ĉi tio povas elspezi vian monon</string>
     <string name="uninstall_update_confirm">Ĉu vi volas anstataŭigi ĉi tiun aplikaĵon per la antaŭinstalita versio?</string>
     <string name="uninstall_confirm">Ĉu vi volas malinstali ĉi tiun aplikaĵon?</string>
-    <string name="download_error">Elŝuto malsukcesis</string>
+    <string name="download_error">Elŝuto fiaskis!</string>
 
     <string name="perms_new_perm_prefix">Nova:</string>
     <string name="downloading">Elŝutado…</string>
@@ -469,7 +460,7 @@
 	<item quantity="one">Ĝisdatigita antaŭ %1$d tago</item>
 	<item quantity="other">Ĝisdatigita antaŭ %1$d tagoj</item>
 </plurals>
-    <string name="app_list__name__successfully_installed">%1$s instalita sukcese</string>
+    <string name="app_list__name__successfully_installed">%1$s instalita</string>
     <string name="nearby_splash__download_apps_from_people_nearby">Seninterrete? Elŝutu aplikaĵojn el proksimaj uloj!
     </string>
     <string name="nearby_splash__find_people_button">Trovi proksimajn ulojn</string>
@@ -516,4 +507,6 @@
 </plurals>
 <string name="by_author_format">de %s</string>
     <string name="download_404">Ne trovis petitan dosieron.</string>
+    <string name="force_old_index">Devigi malnovan formon de indekso</string>
+    <string name="force_old_index_summary">Por okazo de eraroj aŭ kongruec-problemoj, uzi XML aplikaĵan indekson</string>
     </resources>
