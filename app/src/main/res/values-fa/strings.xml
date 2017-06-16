@@ -6,10 +6,10 @@
     <string name="updates">به‌روزرسانی‌ها</string>
     <string name="other">دیگر</string>
     <string name="update_interval">به‌روزرسانی دوره‌ای خودکار</string>
-    <string name="update_interval_zero">به‌روزرسانی‌نکردن خودکار فهرست برنامه‌ها</string>
+    <string name="update_interval_zero">به‌روزرسانی‌ نکردن خودکار فهرست برنامه‌ ها</string>
     <string name="automatic_scan_wifi">فقط روی وای‌فای</string>
     <string name="automatic_scan_wifi_on">به‌روز رسانی خودکار  فقط روی شبکه‌های اندازه‌گیری نشده مثل وای‌فای</string>
-    <string name="notify_on">نمایش یک آگهی هنگام موجود بودن به‌روز رسانی‌ها</string>
+    <string name="notify_on">نمایش یک اعلان هنگام موجود بودن به‌روز رسانی‌ها</string>
     <string name="no_such_app">چنین کاره‌ای پیدا نشد.</string>
     <string name="about_title">دربارهٔ F-Droid</string>
     <string name="about_mail">ایمیل</string>
@@ -66,19 +66,19 @@
     <string name="requires_features">نیاز دارد: %1$s</string>
     <string name="app_name">اف‌دروید</string>
 
-    <string name="SignatureMismatch">نگارش جدید با کلیدی متفاوت با قبلی امضا شده است. برای نصب نگارش جدید، باید نخست نگارش قدیمی را حذف کرد. لطفاً این کار را انجام داده و دوباره تلاش کنید. (به خاطر داشته باشید که حذف نصب، تمام داده‌های درونی ذخیره شدهٔ برنامه را پاک می‌کند)</string>
+    <string name="SignatureMismatch">نگارش جدید با کلیدی متفاوت با قبلی امضا شده است. برای نصب نگارش جدید، باید نخست نگارش قدیمی را حذف کرد. لطفاً این کار را انجام داده و دوباره تلاش کنید. (به خاطر داشته باشید که حذف نصب، تمام داده‌های ذخیره درونی شدهٔ برنامه را پاک می‌کند)</string>
     <string name="version">نگارش</string>
     <string name="enable_nfc_send">فعّال کردن ارسال NFC…</string>
     <string name="unstable_updates">به‌روز رسانی‌های ناپایدار</string>
     <string name="unstable_updates_summary">پیشنهاد به‌روز رسانی به نگارش‌های ناپایدار</string>
     <string name="notify">نمایش به روزرسانی های موجود</string>
-    <string name="system_installer">افزونهٔ ممتاز</string>
-    <string name="system_installer_on">استفاده از افزونهٔ ممتاز اف‌دروید برای نصب، به‌روز رسانی و حذف بسته‌ها</string>
+    <string name="system_installer">افزونه مجاز</string>
+    <string name="system_installer_on">استفاده از افزونهٔ مجاز اف‌دروید برای نصب، به‌روز رسانی و حذف بسته‌ها</string>
     <string name="uninstall_system">به‌روز رسانی/حذف افزونهٔ ممتاز</string>
-    <string name="uninstall_system_summary">گشودن صفحهٔ جزییات افزونهٔ ممتاز برای به‌روز رسانی/حذف آن</string>
+    <string name="uninstall_system_summary">گشودن صفحهٔ جزییات افزونهٔ مجاز برای به‌روز رسانی/حذف آن</string>
     <string name="local_repo_name">نام مخزن محلّی شما</string>
-    <string name="local_repo_name_summary">عنوان تبلغاتی مخزن محلّی شما: %s</string>
-    <string name="local_repo_https_on">استفاده از اتّصال رمز شدهٔ http برای مخزن محلّی</string>
+    <string name="local_repo_name_summary">عنوان تبلیغاتی مخزن محلّی شما: %s</string>
+    <string name="local_repo_https_on">استفاده از ارتباط رمز شدهٔ http برای مخزن محلّی</string>
 
     <string name="login_title">نیاز به تأیید هویت</string>
     <string name="login_name">نام کاربری</string>
@@ -160,8 +160,9 @@
     <string name="repo_num_apps">تعداد کاره‌ها</string>
     <string name="repo_fingerprint">اثر انگشت کلید امضا (SHA-256)</string>
     <string name="repo_confirm_delete_title">حذف مخزن؟</string>
-    <string name="not_on_same_wifi">"دستگاه شما روی همان شبکه وای‌فای مخزن محلّی‌ای که افزودید نیست! 
-\nلطفاً به این شبکه وصل شوید: %s "</string>
+    <string name="not_on_same_wifi">دستگاه شما روی همان شبکه وای‌فای مخزن محلّی‌ای که افزودید نیست! 
+\n
+\nلطفاً به این شبکه وصل شوید: %s</string>
     <string name="pref_language">زبان</string>
     <string name="pref_language_default">پیش فرض سیستم</string>
 
@@ -483,6 +484,6 @@
 </plurals>
 <string name="by_author_format">توسط %s</string>
     <string name="download_404">فایل درخواستی یافت نشد.</string>
-    <string name="force_old_index">به اجبار، فرمت فهرست قدیمی</string>
+    <string name="force_old_index">فرمت فهرست قدیمی به اجبار</string>
     <string name="force_old_index_summary">در صورت وجود باگ یا مشکلات عدم سازگاری، از فهرست xml برنامه استفاده کنید</string>
     </resources>
