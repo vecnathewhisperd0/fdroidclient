@@ -1,12 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-    <string name="SignatureMismatch">Нова версія підписана не тим ключем, що стара. Перш ніж встановити нову версію,
-        самостійно зітріть стару. (Зауважте, що стирання програми призведе до знищення всіх даних цієї програми)
-    </string>
+    <string name="SignatureMismatch">Нова версія підписана не тим ключем, що стара. Перш ніж встановити нову версію, самостійно зітріть стару. (Зауважте, що стирання застосунку призведе до знищення всіх даних цього застосунку)</string>
     <string name="version">Версія</string>
     <string name="cache_downloaded">Зберігати кешовані пакунки</string>
     <string name="updates">Оновлення</string>
-    <string name="notify">Сповіщення про оновлення</string>
+    <string name="notify">Показати наявні оновлення</string>
     <string name="about_title">Про F-Droid</string>
     <string name="about_site">Сайт</string>
     <string name="about_mail">Електронна пошта</string>
@@ -32,15 +30,13 @@
     <string name="menu_donate">Пожертва</string>
     <string name="details_notinstalled">Не встановлено</string>
     <string name="expert">Експертний режим</string>
-    <string name="search_hint">Пошук програм</string>
-    <string name="appcompatibility">Сумісність</string>
-    <string name="rooted">Ігнорувати Суперкористувача</string>
+    <string name="search_hint">Шукати застосунки</string>
+    <string name="appcompatibility">Сумісність застосунків</string>
+    <string name="rooted">Іґнорувати суперкористувача</string>
     <string name="ignoreTouch">Ігнорувати тачскрін</string>
     <string name="app_name">F-Droid</string>
 
-    <string name="installIncompatible">Схоже, ця програма не сумісна з вашим пристроєм. Спробувати встановити її все
-        одно?
-    </string>
+    <string name="installIncompatible">Схоже, цей застосунук не сумісний з вашим пристроєм. Спробувати встановити його попри все?</string>
     <string name="delete">Видалити</string>
     <string name="other">Інше</string>
     <string name="update_interval">Інтервал автооновлення</string>
@@ -71,7 +67,7 @@
     <string name="interval_never">Ніколи</string>
     <string name="downloading">Завантаження…</string>
 
-    <string name="app_details">Деталі додатку</string>
+    <string name="app_details">Деталі застосунку</string>
     <string name="no_such_app">Не знайдено додатку.</string>
 
     <string name="about_source">Джерельний код</string>
@@ -99,7 +95,7 @@
     <string name="skip">Пропустити</string>
 
     <string name="proxy">Проксі</string>
-    <string name="download_error">Не вдалося завантажити</string>
+    <string name="download_error">Стягнення невдале!</string>
 
     <string name="uninstall_confirm">Бажаєте видалити цей додаток?</string>
     <string name="local_repo_name">Назва вашого локального репозиторію</string>
@@ -109,12 +105,12 @@
 
     <string name="bad_fingerprint">Поганий відбиток</string>
     <string name="invalid_url">Це не правильний URL.</string>
-    <string name="antitracklist">Цей додаток збирає дані та звітує про вашу активність</string>
-    <string name="antinonfreedeplist">Цей додаток залежить від іншого не вільного додатку</string>
+    <string name="antitracklist">Цей застосунок збирає дані та звітує про вашу активність</string>
+    <string name="antinonfreedeplist">Цей застосунок залежить від іншого не вільного застосунку</string>
     <string name="expert_on">Показати додаткову інформацію та ввімкнути розширені параметри</string>
 
-    <string name="rooted_on">Не підсвічувати сірим додатки, які потребують прав суперкористувача</string>
-    <string name="ignoreTouch_on">Завжди включати додатки, які потребують сенсорного екрану</string>
+    <string name="rooted_on">Не підсвічувати сірим застосунки, які потребують прав суперкористувача</string>
+    <string name="ignoreTouch_on">Завжди включати застосунки, які потребують сенсорного екрану</string>
 
     <string name="local_repo">Локальний репозиторій</string>
     <string name="deleting_repo">Видалення поточного репозиторію…</string>
@@ -123,9 +119,9 @@
     <string name="enable_proxy_title">Використовувати HTTP проксі</string>
     <string name="enable_proxy_summary">Налаштувати HTTP проксі для всіх мережевих запитів</string>
     <string name="proxy_host">Проксі хост</string>
-    <string name="proxy_host_summary">Налаштувати назву хосту вашого проксі (наприклад 127.0.0.1)</string>
+    <string name="proxy_host_summary">Назва вашого госту проксі (наприклад 127.0.0.1)</string>
     <string name="proxy_port">Проксі порт</string>
-    <string name="proxy_port_summary">Налаштувати номер порту вашого проксі (наприклад 8118)</string>
+    <string name="proxy_port_summary">Номер порту вашого прокси (наприклад 8118)</string>
 
     <string name="status_download">Завантаження\n%2$s / %3$s (%4$d%%) з\n%1$s</string>
     <string name="update_notification_title">Оновлення репозиторіїв</string>
@@ -183,7 +179,7 @@
     <string name="allPerms">Всі</string>
     <string name="enable_nfc_send">Ввімкнути надсилання через NFC…</string>
     <string name="repo_add_fingerprint">Відбиток (опція)</string>
-    <string name="antiadslist">Цей додаток містить рекламні пропозиції</string>
+    <string name="antiadslist">Цей застосунок містить рекламні пропозиції</string>
     <string name="copying_icons">Копіювання піктограми додатку до репозиторію…</string>
     <string name="icon">Піктограма</string>
     <string name="no_permissions">Не потребує дозволів.</string>
@@ -216,14 +212,14 @@
     </string>
     <string name="malformed_repo_uri">Ігнорування не правильного URI репозиторію: %s</string>
 
-    <string name="antinonfreeadlist">Цей додаток пропонує не вільні доповнення</string>
-    <string name="antinonfreenetlist">Цей додаток пропонує не вільні мережеві послуги</string>
+    <string name="antinonfreeadlist">Цей застосунок пропонує не вільні доповнення</string>
+    <string name="antinonfreenetlist">Цей застосунок пропонує не вільні мережеві послуги</string>
     <string name="antiupstreamnonfreelist">Джерельний код не є повністю вільним</string>
 
     <string name="display">Вигляд</string>
 
     <string name="show_incompat_versions">Не сумісні версії</string>
-    <string name="show_incompat_versions_on">Показувати версії додатків, які не сумісні з пристроєм</string>
+    <string name="show_incompat_versions_on">Показувати версії застосунків, які не сумісні з пристроєм</string>
     <string name="local_repo_running">F-Droid готовий до обміну</string>
     <string name="writing_index_jar">Запис підписаного файлу індексу (index.jar)…</string>
     <string name="linking_apks">Включення APK-файлів до репозиторію…</string>
@@ -231,10 +227,7 @@
     <string name="no_handler_app">Ви не маєте додатку для обробки «%s».</string>
     <string name="repo_num_apps">Кількість додатків</string>
     <string name="repo_fingerprint">Відбиток ключа підпису (SHA-256)</string>
-    <string name="unsigned_description">Це означає, що список додатків
-        не може бути перевірено. Ви повинні бути обачними
-        із додатками, які завантажуєте з не підписаних джерел.
-    </string>
+    <string name="unsigned_description">Це означає, що список застосунків не може бути перевірено. Ви маєте бути обачними з застосунками, які завантажуєте з непідписаних джерел.</string>
     <string name="repo_not_yet_updated">Цей репозиторій ще не використовувався.
         Ввімкніть його, аби побачити додатки, які він містить.
     </string>
@@ -262,7 +255,7 @@
     </string>
     <string name="system_install_denied_signature">Підпис розширення не сходиться! Будь ласка, повідомте про помилку!
     </string>
-    <string name="system_install_post_success">Привілейоване розширення F-Droid успішно встановлено</string>
+    <string name="system_install_post_success">Привілейоване розширення F-Droid встановлене</string>
     <string name="system_install_post_fail">Виникла посилка під час встановлення привілейованого розширення F-Droid
     </string>
     <string name="system_install_question">Бажаєте встановити привілейоване розширення F-Droid?</string>
@@ -284,34 +277,18 @@
     <string name="system_install_denied_permissions">Привілейований доступ не був наданий розширенню! Будь ласка,
         відзвітуйте про цю ваду!
     </string>
-    <string name="system_install_post_success_message">Привілейоване розширення F-Droid встановлено. Це дозволить
-        встановлювати, оновлювати та вилучати додатки за допомогою F-Droid.
-    </string>
-    <string name="system_install_warning_lollipop">Це забере приблизно 10 секунд, після чого пристрій буде<b>
-        перезавантажено</b>.
-    </string>
+    <string name="system_install_post_success_message">Привілейоване розширення F-Droid встановлено. Це дозволяє встановлювати, оновлювати та вилучати застосунки за допомогою F-Droid.</string>
+    <string name="system_install_warning_lollipop">Це забере приблизно 10 секунд, після чого пристрій буде <b>перезавантажено</b>.</string>
     <string name="swap_active_hotspot">%1$s (ваша точка доступу)</string>
     <string name="swap_scanning_for_peers">Пошук людей поблизу…</string>
     <string name="swap_nearby">Ближній обмін</string>
     <string name="swap_not_visible_bluetooth">Не видимий через Bluetooth</string>
     <string name="swap_not_enabled_description">Перед обміном, ви повинні зробити пристрій видимим.</string>
 
-    <string name="install_confirm_update">Бажаєте встановити оновлення
-        на наявний додаток? Це не видалить ваші наявні дані.
-        Оновлений додаток матиме доступ до:
-    </string>
-    <string name="install_confirm_update_system">Бажаєте встановити оновлення
-        на вбудований додаток? Ваші наявні дані не буде втрачено.
-        Оновлений додаток матиме доступ до:
-    </string>
-    <string name="install_confirm_update_no_perms">Бажаєте встановити оновлення
-        на наявний додаток? Ваші наявні дані не буде втрачено.
-        Оновлений додаток не потребує спеціальних дозволів.
-    </string>
-    <string name="install_confirm_update_system_no_perms">Бажаєте встановити оновлення на вбудований додаток?
-        Ваші наявні дані не буде втрачено.
-        Оновлений додаток не потребує спеціальних дозволів.
-    </string>
+    <string name="install_confirm_update">Бажаєте встановити оновлення на наявний застосунок Це не видалить ваші наявні дані. Оновлений застосунок матиме доступ до:</string>
+    <string name="install_confirm_update_system">Бажаєте встановити оновлення на вбудований застосунок? Ваші наявні дані не буде втрачено. Оновлений застосунок матиме доступ до:</string>
+    <string name="install_confirm_update_no_perms">Бажаєте встановити оновлення на наявний застосунок? Ваші наявні дані не буде втрачено. Оновлений додаток не потребує спеціальних дозволів.</string>
+    <string name="install_confirm_update_system_no_perms">Бажаєте встановити оновлення на вбудований застосунок? Ваші наявні дані не буде втрачено. Оновлений додаток не потребує спеціальних дозволів.</string>
     <string name="uninstall_update_confirm">Бажаєте замінити цей додаток заводською версією?</string>
     <string name="perms_new_perm_prefix">Нові:</string>
     <string name="empty_installed_app_list">Жодного додатку не встановлено.\n\nДодатки, які встановлені на вашому
@@ -333,9 +310,7 @@
     <string name="swap_qr_isnt_for_swap">QR-код, який ви просканувати, не містить коду для обміну.</string>
     <string name="repo_added">F-Droid ропозиторій %1$s збережено.</string>
     <string name="category_Theming">Графічні теми</string>
-    <string name="swap_connection_misc_error">Трапилася помилка під час доступу до пристрою, не можливо продовжити обмін
-        з ним.
-    </string>
+    <string name="swap_connection_misc_error">Трапилась помилка під час з\'єднання з пристроєм, не можливо продовжити обмін з ним!</string>
     <string name="repo_details">Репозиторій</string>
     <string name="repo_url">Адреса</string>
     <string name="status_download_unknown_size">Завантаження\n%2$s з\n%1$s</string>
@@ -357,17 +332,14 @@
     <string name="perms_description_app">Надано %1$s.</string>
     <string name="about_license">Ліцензія</string>
 
-    <string name="status_inserting_apps">Збереження подробиць по додаткам</string>
+    <string name="status_inserting_apps">Збереження подробиць по застосункам</string>
 
     <string name="crash_dialog_title">F-Droid зазнав збою</string>
-    <string name="crash_dialog_text">Несподівана помилка припинила роботу програми.
-        Хочете надіслати листа з подробицями,
-        які допоможуть нам усунути цю ваду?
-    </string>
+    <string name="crash_dialog_text">Несподівана помилка зупипинила застосунок. Хочете надіслати листа з подробицями, які допоможуть нам усунути цю ваду?</string>
     <string name="crash_dialog_comment_prompt">Можете ввести додаткову інформацію та коментарі тут:</string>
-    <string name="antinonfreeassetslist">Цей додаток містить не вільний вміст</string>
+    <string name="antinonfreeassetslist">Цей застосунок містить не вільний вміст</string>
 
-    <string name="menu_email">Написати листа автору</string>
+    <string name="menu_email">Написати листа авторові</string>
     <string name="useTor">Використовувати Tor</string>
     <string name="useTorSummary">Форсоване завантаження трафіку через мережу Tor для підвищення приватності</string>
     <string name="swap_stopping_wifi">Зупинка Wi-Fi…</string>
@@ -400,12 +372,12 @@
     <string name="update_auto_install_summary">Завантажити та встановити оновлення в фоні</string>
     <string name="update_auto_install">Автоматично встановлені оновлення</string>
     <string name="keep_install_history">Зберігати історію встановлення</string>
-    <string name="keep_install_history_summary">Зберігати звіт про всі встановлення та видалення в F-Droid</string>
+    <string name="keep_install_history_summary">Зберігати звіт про всі встановлення та видалення з F-Droid</string>
     <string name="versions">Версії</string>
-    <string name="hide_anti_feature_apps">Позначати додатки з не бажаним функціоналом</string>
-    <string name="hide_anti_feature_apps_on">Позначати сірим додатки, які потребують не бажаний функціонал</string>
+    <string name="hide_anti_feature_apps">Позначати застосунки з небажаним функціоналом</string>
+    <string name="hide_anti_feature_apps_on">Позначати сірим застосунки, які потребують не бажаний функціонал</string>
     <string name="warning_no_internet">Не можливо оновитися, чи підключено пристрій до інтернету?</string>
-    <string name="repositories_summary">Додати додаткові джерела для додатку</string>
+    <string name="repositories_summary">Додати додаткові джерела до застосунку</string>
     <string name="notification_title_single_update_available">Доступне оновлення</string>
     <string name="notification_title_single_ready_to_install">Готове до встановлення</string>
     <string name="notification_title_single_ready_to_install_update">Оновлення готове до встановлення</string>
@@ -443,7 +415,7 @@
     <string name="main_menu__swap_nearby">Сусідні</string>
 
     <string name="preference_category__my_apps">Мої додатки</string>
-    <string name="preference_manage_installed_apps">Керування встановленими додатками</string>
+    <string name="preference_manage_installed_apps">Керування встановленими застосунками</string>
 
 
     <string name="tts_category_name">Категорія %1$s</string>
@@ -453,6 +425,11 @@
 
     <string name="app_list__name__downloading_in_progress">Завантаження %1$s</string>
     <string name="app_list__name__successfully_installed">%1$s встановлено</string>
+    <plurals name="app_list__age__released_x_days_ago">
+	<item quantity="one">Випущено %1$d день по тому</item>
+	<item quantity="few">Випущено %1$d дні по тому</item>
+	<item quantity="many">Випущено %1$d днів по тому</item>
+	</plurals>
 
     <string name="updates__tts__download_updates_for_all_apps">Завантажити всі оновлення</string>
 
@@ -467,21 +444,74 @@
 
     <string name="details_new_in_version">Нове у версії %s</string>
 
-    <string name="antifeatureswarning">Цей додаток містить функції, які можуть бути вам не до вподоби.</string>
-    <string name="nearby_splash__download_apps_from_people_nearby">Немає інтернету? Завантажуйте додати від людей
-        навколо!
-    </string>
+    <string name="antifeatureswarning">Цей застосунок містить функції, які можуть бути вам не до вподоби.</string>
+    <string name="nearby_splash__download_apps_from_people_nearby">Не маєш інтернету? Завантажуйте застосунки від людей навколо!</string>
     <string name="nearby_splash__find_people_button">Знайти людей навколо мене</string>
     <plurals name="details_last_update_days">
-        <item quantity="one">Оновлено %1$s сьогодні</item>
-        <item quantity="few">Оновлено %1$s дні тому</item>
-        <item quantity="many">Оновлено %1$s дні тому</item>
-        <item quantity="other">Оновлено %1$s дні тому</item>
-    </plurals>
+	<item quantity="one">Оновлено %1$s сьогодні</item>
+	<item quantity="few">Оновлено %1$d дні тому</item>
+	<item quantity="many">Оновлено %1$d днів тому</item>
+</plurals>
 <string name="updates__tts__download_app">Завантажити</string>
     <string name="by_author_format">від %s</string>
     <string name="app__tts__cancel_download">Скасувати завантажити</string>
     <string name="menu_video">Відео</string>
     <string name="menu_license">Ліцензія: %s</string>
     <string name="details_last_updated_today">Оновлено сьогодні</string>
-    </resources>
+    <string name="antifeatures">Недоліки</string>
+    <plurals name="notification_summary_more">
+	<item quantity="one">+%1$d звістка…</item>
+	<item quantity="few">+%1$d звістки…</item>
+	<item quantity="many">+%1$d звісток…</item>
+</plurals>
+    <string name="force_old_index">Примусово старий формат індексу</string>
+    <string name="force_old_index_summary">На випадок наявність хиб, використовуйте індекс XML застосунку</string>
+    <string name="latest__empty_state__no_recent_apps">Недавніх застосунків не виявлено</string>
+    <string name="latest__empty_state__never_updated">Коли ваш лист застосунків був оновлений, найновіші застосунки мають відображатися тут</string>
+    <string name="latest__empty_state__no_enabled_repos">Коли ви умікнули репозиторій та оновили його, найновіші застосунки мають відображатися тут</string>
+
+    <string name="categories__empty_state__no_categories">Немає категорій для відображення</string>
+
+    <string name="download_404">Проханий файл не було знайдено.</string>
+    <plurals name="button_view_all_apps_in_category">
+	<item quantity="one">%d застосунок</item>
+	<item quantity="few">Усі %d застосунки</item>
+	<item quantity="many">Усіх %d застосунків</item>
+</plurals>
+
+    <string name="install_error_not_yet_supported">Цей вид файлу не може бути встановленим: %s</string>
+    <string name="nearby_splash__both_parties_need_fdroid">Обидві частини потребують %1$s для користання поблизу.</string>
+
+    <string name="app__tts__downloading_progress">Стягування, %1$d%% записано</string>
+    <plurals name="notification_summary_updates">
+	<item quantity="one">%1$d оновлення</item>
+	<item quantity="few">%1$d oновлення</item>
+	<item quantity="many">%1$d оновлень</item>
+</plurals>
+    <plurals name="notification_summary_installed">
+	<item quantity="one">%1$d встановлений застосунок</item>
+	<item quantity="few">%1$d встановлених застосунка</item>
+	<item quantity="many">%1$d встановлених застосунків</item>
+</plurals>
+    <plurals name="tts_view_all_in_category">
+	<item quantity="one">Показати %1$d застосунок у категорії %2$s</item>
+	<item quantity="few">Показати %1$d застосунка у категорії %2$s</item>
+	<item quantity="many">Показати %1$d застосунків у категорії %2$s</item>
+</plurals>
+
+    <plurals name="details_last_update_weeks">
+	<item quantity="one">Оновлено %1$d тиждень тому</item>
+	<item quantity="few">Оновлено %1$d тижня тому</item>
+	<item quantity="many">Оновлено %1$d тижнів тому</item>
+</plurals>
+    <plurals name="details_last_update_months">
+	<item quantity="one">Оновлено %1$d місяць тому</item>
+	<item quantity="few">Оновлено %1$d місяці тому</item>
+	<item quantity="many">Оновлено %1$d місяців тому</item>
+</plurals>
+    <plurals name="details_last_update_years">
+	<item quantity="one">Оновлено %1$d рік тому</item>
+	<item quantity="few">Оновлено %1$d роки тому</item>
+	<item quantity="many">Оновлено %1$d років тому</item>
+</plurals>
+</resources>
