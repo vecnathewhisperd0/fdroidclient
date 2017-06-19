@@ -520,4 +520,6 @@
 </plurals>
 <string name="by_author_format">de %s</string>
     <string name="download_404">Su documentu pedidu no est istadu agatadu.</string>
+    <string name="force_old_index">Fortza su formatu betzu de s\'ìnditze</string>
+    <string name="force_old_index_summary">In casu chi bi siant errores o problemas de compatibilidade, imprea s\'ìnditze XML de s\'aplicatzione</string>
     </resources>
