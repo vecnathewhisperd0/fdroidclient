@@ -1,9 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-    <string name="SignatureMismatch">Die neue Version wurde mit einem anderen Schlüssel signiert als die alte. Um die
-        neue Version zu installieren, muss zunächst die alte entfernt werden. Versuchen Sie es bitte danach nochmal.
-        (Hinweis: Beim Entfernen werden alle intern gespeicherten Daten dieser Anwendung gelöscht.)
-    </string>
+    <string name="SignatureMismatch">Die neue Version wurde mit einem anderen Schlüssel signiert als die alte. Um die neue Version zu installieren, muss zunächst die alte entfernt werden. Versuchen Sie es bitte danach nochmal. (Hinweis: Beim Entfernen werden alle intern gespeicherten Daten dieser Anwendung gelöscht.)</string>
     <string name="installIncompatible">Diese Anwendung ist nicht kompatibel mit Deinem Gerät, trotzdem installieren?</string>
     <string name="version">Version</string>
     <string name="delete">Löschen</string>
@@ -104,7 +101,7 @@
     <string name="enable_proxy_title">HTTP-Proxy aktivieren</string>
     <string name="enable_proxy_summary">HTTP-Proxy für alle Netzwerkanfragen konfigurieren</string>
     <string name="proxy_host">Proxy-Rechner</string>
-    <string name="proxy_host_summary">Bitte Ihren Proxy-Rechnernamen konfigurieren (z.B. 127.0.0.1)</string>
+    <string name="proxy_host_summary">Proxy-Rechnernamen konfigurieren (z.B. 127.0.0.1)</string>
     <string name="proxy_port">Proxy-Port</string>
     <string name="proxy_port_summary">Proxy-Port konfigurieren (z.B. 8818)</string>
     <string name="status_download">%2$s / %3$s (%4$d%%) von\n%1$s\nwird heruntergeladen</string>
@@ -272,7 +269,7 @@
     <string name="swap_scanning_for_peers">Nach Leuten in der Nähe wird gesucht …</string>
     <string name="wifi_ap">Hotspot</string>
 
-    <string name="system_install_post_success_message">Privilegierte F-Droid-Erweiterung wurde erfolgreich installiert. Das erlaubt F-Droid, selbständig Anwendungen zu installieren, aktualisieren und zu entfernen.</string>
+    <string name="system_install_post_success_message">Die privilegierte F-Droid-Erweiterung wurde erfolgreich installiert. Das erlaubt F-Droid, selbständig Anwendungen zu installieren, aktualisieren und zu entfernen.</string>
     <string name="system_install_post_fail_message">Die Installation der privilegierten F-Droid-Erweiterung ist
         fehlgeschlagen. Diese Installationsmethode wird nicht durch alle Android-Distributionen unterstützt, bitte in
         der F-Droid-Fehlerdatenbank für weitere Informationen nachsehen.
@@ -317,10 +314,7 @@
         installieren? Ihre bestehenden Daten gehen nicht verloren. Die aktualisierte Anwendung erhält danach Zugriff
         auf:
     </string>
-    <string name="install_confirm_update_system_no_perms">Wollen Sie eine Aktualisierung dieser vorinstallierten
-        Anwendung installieren? Ihre bestehenden Daten gehen nicht verloren. Es werden keine besonderen Zugriffsrechte
-        erfordert.
-    </string>
+    <string name="install_confirm_update_system_no_perms">Wollen Sie eine Aktualisierung dieser vorinstallierten Anwendung installieren? Ihre bestehenden Daten gehen nicht verloren. Es werden keine besonderen Zugriffsrechte erfordert.</string>
     <string name="allPerms">Alle</string>
     <string name="perm_costs_money">Das könnte Sie Geld kosten</string>
     <string name="uninstall_update_confirm">Möchten Sie diese App durch die Version des Werkszustands ersetzen?</string>
