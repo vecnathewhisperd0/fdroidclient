@@ -501,4 +501,6 @@
     <string name="download_404">No se ha encontrado archivo solicitado.</string>
     <string name="force_old_index">Forzar al formato de índice antiguo</string>
     <string name="force_old_index_summary">En caso de que haya problemas o incopatibilidades, usa el índice XML de la aplicación</string>
+    <string name="app_list_download_ready">Descargado, listo para instalar</string>
+
     </resources>
