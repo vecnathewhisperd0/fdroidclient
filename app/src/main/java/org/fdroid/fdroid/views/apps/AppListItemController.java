@@ -278,11 +278,7 @@ public class AppListItemController extends RecyclerView.ViewHolder {
             downloadReady.setVisibility(View.GONE);
         }
         if (currentStatus != null && currentStatus.status == AppUpdateStatusManager.Status.ReadyToInstall) {
-            if (app.isInstalled()) {
-                name.setText(app.name);
-            } else {
-                name.setText(app.name);
-            }
+            name.setText(app.name);
             if (downloadReady != null) {
                 downloadReady.setVisibility(View.VISIBLE);
             }
