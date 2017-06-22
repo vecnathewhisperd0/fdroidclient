@@ -425,8 +425,6 @@
 
     <string name="app_list__name__downloaded_and_ready_to_update">قم بتحديث %1$s</string>
     <string name="app_list__name__downloading_in_progress">تنزيل %1$s</string>
-    <string name="app_list__age__released_today">صدر اليوم</string>
-    <string name="app_list__age__released_yesterday">صدر البارحة</string>
     <string name="updates__tts__download_updates_for_all_apps">قم بتنزيل كل التحديثات</string>
 
     <string name="updates__hide_updateable_apps">إخفاء التطبيقات</string>

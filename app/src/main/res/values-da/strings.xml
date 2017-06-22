@@ -397,12 +397,6 @@
     <string name="app__install_downloaded_update">Opdatér</string>
 
     <string name="app_list__name__downloaded_and_ready_to_update">Updatér %1$s</string>
-    <string name="app_list__age__released_today">Udgivet i dag</string>
-    <string name="app_list__age__released_yesterday">Udgivet i går</string>
-    <plurals name="app_list__age__released_x_days_ago">
-	<item quantity="one">Udgivet for %1$d dag siden</item>
-	<item quantity="other">Udgivet for %1$d dage siden</item>
-</plurals>
 
     <string name="installed_apps__activity_title">Installerede Apps</string>
     <string name="installed_app__updates_ignored">Opdateringer ignoreres</string>

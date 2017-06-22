@@ -272,23 +272,7 @@ public class AppListItemController extends RecyclerView.ViewHolder {
         if (currentStatus != null && currentStatus.status == AppUpdateStatusManager.Status.ReadyToInstall) {
             if (app.isInstalled()) {
                 String appName = activity.getString(R.string.app_list__name__downloaded_and_ready_to_update, app.name);
-                if (app.lastUpdated != null) {
-                    long ageInMillis = System.currentTimeMillis() - app.lastUpdated.getTime();
-                    int ageInDays = (int) (ageInMillis / 1000 / 60 / 60 / 24);
-                    Resources resources = activity.getResources();
-                    String age;
-                    if (ageInDays == 0) {
-                        age = resources.getString(R.string.app_list__age__released_today);
-                    } else if (ageInDays == 1) {
-                        age = resources.getString(R.string.app_list__age__released_yesterday);
-                    } else {
-                        age = resources.getQuantityString(R.plurals.app_list__age__released_x_days_ago,
-                                ageInDays, ageInDays);
-                    }
-                    name.setText(appName + "\n" + age);
-                } else {
-                    name.setText(appName);
-                }
+                name.setText(appName);
             } else {
                 name.setText(activity.getString(R.string.app_list__name__downloaded_and_ready_to_install, app.name));
             }
