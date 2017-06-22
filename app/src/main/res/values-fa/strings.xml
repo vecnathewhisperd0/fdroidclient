@@ -24,7 +24,7 @@
     <string name="cancel">لغو</string>
     <string name="enable">فعّال کردن</string>
     <string name="add_key">افزودن کلید</string>
-    <string name="overwrite">جانویسی</string>
+    <string name="overwrite">رونویسی</string>
     <string name="bluetooth_activity_not_found">هیچ روش ارسال با بلوتوثی پیدا نشد، یکی را برگزینید!</string>
     <string name="choose_bt_send">گزینش روش ارسال بلوتوث</string>
     <string name="repo_add_url">نشانی مخزن</string>
@@ -36,14 +36,14 @@
     <string name="menu_uninstall">حذف نصب</string>
     <string name="menu_issues">اشکال‌ها</string>
     <string name="menu_source">کد مبدأ</string>
-    <string name="menu_donate">اعانه</string>
+    <string name="menu_donate">کمک مالی</string>
     <string name="details_notinstalled">نصب نشده</string>
-    <string name="antiadslist">این کاره دارای تبلیغات است</string>
+    <string name="antiadslist">این برنامه دارای تبلیغات است</string>
     <string name="antitracklist">این برنامه، فعّالیت‌هایتان را ردیابی و گزارش می‌کند</string>
-    <string name="antinonfreeadlist">این کاره، افزونه‌های غیر آزاد را تبلیغ می‌کند</string>
-    <string name="antinonfreenetlist">این کاره، خدمات شبکه‌های غیر آزاد را تبلیغ می‌کند</string>
-    <string name="antinonfreedeplist">این کاره، به دیگر کاره‌های غیر آزاد وابسته است</string>
-    <string name="antiupstreamnonfreelist">کد مبدأ بالادستی، کاملاً آزاد نیست</string>
+    <string name="antinonfreeadlist">این برنامه، افزونه‌های غیر آزاد را تبلیغ می‌کند</string>
+    <string name="antinonfreenetlist">این برنامه، خدمات شبکه‌های غیر آزاد را تبلیغ می‌کند</string>
+    <string name="antinonfreedeplist">این برنامه، به دیگر کاره‌های غیر آزاد وابسته است</string>
+    <string name="antiupstreamnonfreelist">کد مبدأ بالادستی کاملاً رایگان نیست</string>
     <string name="display">نمایش</string>
     <string name="expert_on">نمایش اطّلاعات اضافی و فعّال کردن تنظیمات اضافی</string>
     <string name="search_hint">جست‌وجوی برنامه‌ها</string>
@@ -52,8 +52,8 @@
     <string name="ignoreTouch">نادیده گرفتن صفحه‌لمسی</string>
     <string name="status_download">در حال بارگیری\n%2$s / %3$s (%4$d%%) از\n%1$s</string>
     <string name="status_connecting_to_repo">درحال اتّصال به\n%1$s</string>
-    <string name="no_permissions">اجازه‌ای استفاده نشده است.</string>
-    <string name="theme">زمینه</string>
+    <string name="no_permissions">دسترسی ای استفاده نشده است.</string>
+    <string name="theme">پوسته</string>
     <string name="unsigned">امضا نشده</string>
     <string name="repo_description">شرح</string>
     <string name="repo_last_update">آخرین به‌روز رسانی</string>
@@ -102,7 +102,7 @@
 
     <string name="back">بازگشت</string>
 
-    <string name="repo_exists_add_fingerprint">این مخزن از پیش برپا شده است. این کار، اطّلاعات کلید جدیدی را می‌افزاید.</string>
+    <string name="repo_exists_add_fingerprint">این مخزن از قبل برپا شده است. این کار، اطّلاعات کلید جدیدی را می‌افزاید.</string>
     <string name="repo_exists_enable">این مخزن از پیش برپا شده است. تأیید کنید که می‌خواهید دوباره فعّالش کنید.</string>
     <string name="bad_fingerprint">اثر انگشت بد</string>
     <string name="invalid_url">این یک نشانی اینترنتی معتیبر نیست.</string>
@@ -122,24 +122,24 @@
 
     <string name="expert">حالت حرفه‌ای</string>
     <string name="show_incompat_versions">نگارش‌های ناسازگار</string>
-    <string name="show_incompat_versions_on">نمایش نگارش‌های ناساگار کاره با این افزاره</string>
-    <string name="rooted_on">خاکستری نکردن کاره‌های نیازمند دسترسی ریشه</string>
-    <string name="ignoreTouch_on">همواره شامل کاره‌هایی که نیازمند صفحه‌لمسی هستند</string>
+    <string name="show_incompat_versions_on">نمایش نگارش‌های ناساگار برنامه با این دستگاه</string>
+    <string name="rooted_on">برنامه هایی که به دسترسی ریشه نیاز دارند را غیر فعال نکن</string>
+    <string name="ignoreTouch_on">همواره برنامه هایی که نیازمند صفحه‌لمسی هستند را مشمول کن</string>
 
     <string name="local_repo">مخزن محلّی</string>
     <string name="local_repo_running">اف‌دروید آمادهٔ تبادل است</string>
-    <string name="touch_to_configure_local_repo">برای دیدن جزییات و اجازه به دیگران برای تبادل کاره‌هایتان، لمس کنید.</string>
+    <string name="touch_to_configure_local_repo">برای دیدن جزییات و اجازه به دیگران برای تبادل برنامه هایتان، لمس کنید.</string>
     <string name="deleting_repo">در حال حذف مخزن جاری…</string>
     <string name="adding_apks_format">در حال افزودن %s به مخزن…</string>
     <string name="writing_index_jar">در حال نوشتن پروندهٔ شاخص امضا شده (index.jar)…</string>
-    <string name="icon">نقشک</string>
-    <string name="linking_apks">در حال پیوند دادن apkها در مخزن…</string>
-    <string name="copying_icons">در حال رونوشت نقشک کاره‌ها در مخزن…</string>
+    <string name="icon">آیکون</string>
+    <string name="linking_apks">در حال پیوند دادن apkها به مخزن…</string>
+    <string name="copying_icons">در حال کپی کردن آیکون کاره‌ها در مخزن…</string>
     <string name="next">بعدی</string>
     <string name="skip">پرش</string>
 
-    <string name="proxy">پیشکار</string>
-    <string name="enable_proxy_title">فعّال کردن پیشکار http</string>
+    <string name="proxy">پروکسی</string>
+    <string name="enable_proxy_title">فعّال کردن پروکسی http</string>
     <string name="enable_proxy_summary">پیکربندی پیشکار http برای تمام درخواست‌های شبکه</string>
     <string name="proxy_host">میزبان پیشکار</string>
     <string name="proxy_host_summary">نام میزبان پروکسی (مثلاً 127.0.0.1)</string>
@@ -152,12 +152,12 @@
     <string name="status_inserting_apps">در حال ذخیرهٔ جزییات برنامه</string>
     <string name="repos_unchanged">تمام مخزن‌ها به‌روز هستند</string>
     <string name="global_error_updating_repos">خطا هنگام به‌روز رسانی: %s</string>
-    <string name="permissions">اجازه‌ها</string>
+    <string name="permissions">دسترسی ها</string>
     <string name="no_handler_app">هیچ برنامه‌ای موجود ندارید که بتواند %s را مدیریت کند.</string>
     <string name="unverified">تأیید نشده</string>
     <string name="repo_details">مخزن</string>
     <string name="repo_url">نشانی</string>
-    <string name="repo_num_apps">تعداد کاره‌ها</string>
+    <string name="repo_num_apps">تعداد برنامه ها</string>
     <string name="repo_fingerprint">اثر انگشت کلید امضا (SHA-256)</string>
     <string name="repo_confirm_delete_title">حذف مخزن؟</string>
     <string name="not_on_same_wifi">دستگاه شما روی همان شبکه وای‌فای مخزن محلّی‌ای که افزودید نیست! 
@@ -253,15 +253,14 @@
     <string name="repo_delete_to_overwrite">باید پیش از افزودن مخزنی جدید با کلیدی متفاوت، این مخزن را حذف کنید.</string>
     <string name="malformed_repo_uri">نادیده گرفتن نشانی اینترنتی مخزن ناهنجار: %s</string>
 
-    <string name="all_other_repos_fine">تمام مخزن‌های دیگر خطایی ایاد نکردند.</string>
-    <string name="repo_not_yet_updated">این مخزن هنوز استفاده نشده است. برای دیدن کاره‌هایی که فراهم می‌کند، باید فعّالش
-        کنید.
-    </string>
-    <string name="repo_confirm_delete_body">حذف یک مخزن به این معناست که کاره‌هایش دیگر در اف‌دروید موجود نخواهند
-        بود.\n\nتوجّه: تمام کاره‌های نصب شدهٔ پیشین، روی افزاره‌تان باقی خواهند ماند.
-    </string>
-    <string name="repo_disabled_notification">%1$s غیرفعّال شد.\n\nبرای نصب کاره‌ها از آن باید دوباره فعّالش کنید.
-    </string>
+    <string name="all_other_repos_fine">تمام مخزن‌های دیگر خطایی ایجاد نکردند.</string>
+    <string name="repo_not_yet_updated">این مخزن هنوز استفاده نشده است. برای دیدن برنامه هایی که فراهم می‌کند، باید فعّالش کنید.</string>
+    <string name="repo_confirm_delete_body">حذف یک مخزن به این معناست که برنامه هایش دیگر در اف‌دروید موجود نخواهند بود.
+\n
+\nتوجّه: تمام برنامه نصب شدهٔ پیشین، روی دستگاهتان باقی خواهند ماند.</string>
+    <string name="repo_disabled_notification">%1$s غیرفعّال شد.
+\n
+\nبرای نصب برنامه ها از آن، باید دوباره فعّالش کنید.</string>
     <string name="repo_added">مخزن اف‌دروید %1$s ذخیره شد.</string>
     <string name="repo_searching_address">در حال گشتن به دنبال مخزن اف‌دروید در\n%1$s</string>
     <string name="empty_installed_app_list">هیچ کاره‌ای نصب نشده است.\n\nکاره‌هایی روی افزاره‌تان وجود دارند، ولی در
@@ -318,14 +317,14 @@
     <string name="uninstall_update_confirm">مایلید این نرم‌افزار را جایگزین نسخه کارخانه کنید؟</string>
     <string name="uninstall_confirm">می‌خواهید این نرم‌افزار را حذف کنید؟</string>
     <string name="menu_email">ایمیل به نویسنده</string>
-    <string name="antinonfreeassetslist">این کاره شامل ابزارهای غیرآزاد است</string>
+    <string name="antinonfreeassetslist">این کاره شامل ابزارهای پولی است</string>
 
 
     <string name="crash_dialog_title">اف‌دروید از کار افتاد</string>
     <string name="crash_dialog_text">خطایی پیش‌بینی نشده رخ داد که برنامه را وادار به توقّف کرد. می‌خواهید جزئیات را برای کمک به حل کردن مشکل، ایمیل کنید؟</string>
     <string name="crash_dialog_comment_prompt">در این‌جا می‌توانید اطّلاعات اضافی و نظرها را بیفزایید:</string>
-    <string name="useTor">استفاده از تور</string>
-    <string name="useTorSummary">اجبار ترافیک بارگیری به استفاده از تور برای محرمانگی بیش‌تر</string>
+    <string name="useTor">استفاده از Tor</string>
+    <string name="useTorSummary">اجبار ترافیک دانلود به استفاده از Tor برای محرمانه تر بودن</string>
     <string name="swap_stopping_wifi">در حال توقّف وای‌فای…</string>
     <string name="repo_provider">مخزن: %s</string>
 
@@ -374,14 +373,14 @@
 	<item quantity="other">‫%1$d روز پیش منتشر ‌شده</item>
 </plurals>
 
-    <string name="installed_apps__activity_title">کاره‌های نصب شده</string>
+    <string name="installed_apps__activity_title">برنامه نصب شده</string>
     <string name="installed_app__updates_ignored">صرف‌نظر از به‌روز رسانی</string>
-    <string name="installed_app__updates_ignored_for_suggested_version">صرف‌نظر از به‌روز رسانی برای نگارش %1$s</string>
+    <string name="installed_app__updates_ignored_for_suggested_version">از به‌روز رسانی برای نگارش صرف‌نظر شده است %1$s</string>
     <string name="updates__tts__download_app">بارگیری</string>
     <string name="updates__tts__download_updates_for_all_apps">بارگیری تمام به‌روز رسانی‌ها</string>
 
-    <string name="updates__hide_updateable_apps">نهفتن کاره‌ها</string>
-    <string name="updates__show_updateable_apps">نمایش کاره‌ها</string>
+    <string name="updates__hide_updateable_apps">مخفی کردن برنامه ها</string>
+    <string name="updates__show_updateable_apps">نمایش برنامه ها</string>
 
     <plurals name="updates__download_updates_for_apps">
 	<item quantity="one">بارگیری به‌روز رسانی برای %1$d برنامه.</item>
@@ -397,22 +396,22 @@
     <string name="main_menu__categories">دسته‌ها</string>
     <string name="main_menu__swap_nearby">نزدیک</string>
 
-    <string name="latest__empty_state__no_recent_apps">کارهٔ اخیری پیدا نشد</string>
+    <string name="latest__empty_state__no_recent_apps">برنامه ی اخیری پیدا نشد</string>
     <string name="latest__empty_state__never_updated">به محض به‌روز رسانی فهرست برنامه هایتان، جدیدترین برنامه ها باید در این‌ جا نمایش داده شوند</string>
-    <string name="latest__empty_state__no_enabled_repos">به محض فعّال کردن یک مخزن و به‌روز کردنش، جدیدترین کاره‌ها باید در این‌جا نمایش داده شوند</string>
+    <string name="latest__empty_state__no_enabled_repos">به محض فعّال کردن یک مخزن و به‌روز کردنش، جدیدترین برنامه ها باید در این‌جا نمایش داده شوند</string>
 
     <string name="categories__empty_state__no_categories">هیچ دسته‌ای برای نمایش نیست</string>
 
-    <string name="preference_category__my_apps">کاره‌های من</string>
+    <string name="preference_category__my_apps">برنامه های من</string>
     <string name="preference_manage_installed_apps">مدیریت برنامه های نصب شده</string>
 
 
     <string name="details_new_in_version">جدید در نگارش %s</string>
 
     <string name="antifeatureswarning">این برنامه، ویژگی‌هایی دارد که شاید نپسندید.</string>
-    <string name="antifeatures">ضدّویژگی‌ها</string>
-    <string name="hide_anti_feature_apps">خاکستری کردن کاره‌های دارای ضدّویژگی</string>
-    <string name="hide_anti_feature_apps_on">خاکستری کردن کاره‌هایی کخ نیازمند ضدّویژگی هستند</string>
+    <string name="antifeatures">ضد ویژگی‌ها</string>
+    <string name="hide_anti_feature_apps">غیر فعال کردن برنامه های دارای ضد ویژگی</string>
+    <string name="hide_anti_feature_apps_on">خاکستری کردن برنامه هایی که نیازمند ضد ویژگی هستند</string>
     <string name="warning_no_internet">نمی‌توان به‌روزرسانی کرد. به اینترنت وصل هستید؟</string>
     <plurals name="button_view_all_apps_in_category">
 	<item quantity="one">نمایش %d</item>
