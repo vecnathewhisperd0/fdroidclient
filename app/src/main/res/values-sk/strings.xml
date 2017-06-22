@@ -422,8 +422,6 @@
     <string name="app__newly_added">Novinka</string>
     <string name="app__install_downloaded_update">Aktualizovať</string>
 
-    <string name="app_list__name__downloaded_and_ready_to_update">Aktualizovať %1$s</string>
-    <string name="app_list__name__downloaded_and_ready_to_install">Inštalovať %1$s</string>
     <string name="app_list__name__downloading_in_progress">Sťahovanie %1$s</string>
     <string name="app_list__name__successfully_installed">%1$s úspešne nainštalovaná</string>
 

@@ -436,8 +436,6 @@
 
     <string name="app_list__name__successfully_installed">%1$s instalat cu succes</string>
     <string name="app_list__name__downloading_in_progress">Se descarca %1$s</string>
-    <string name="app_list__name__downloaded_and_ready_to_install">Instalare %1$s</string>
-    <string name="app_list__name__downloaded_and_ready_to_update">Actualizare %1$s</string>
     <string name="app__install_downloaded_update">Actualizare</string>
 
     <string name="app__newly_added">Nou</string>

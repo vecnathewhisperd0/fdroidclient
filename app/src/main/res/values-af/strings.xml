@@ -451,8 +451,6 @@
     <string name="app__tts__cancel_download">Kanselleer aflaai</string>
     <string name="app__install_downloaded_update">Opdateer</string>
 
-    <string name="app_list__name__downloaded_and_ready_to_update">Opdateer %1$s</string>
-    <string name="app_list__name__downloaded_and_ready_to_install">Installeer %1$s</string>
     <string name="app_list__name__downloading_in_progress">Aflaai %1$s</string>
     <string name="app_list__name__successfully_installed">%1$s suksesvol geïnstalleer</string>
 

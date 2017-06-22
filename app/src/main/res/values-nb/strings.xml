@@ -432,8 +432,6 @@
 </plurals>
     <string name="app__install_downloaded_update">Oppdater</string>
 
-    <string name="app_list__name__downloaded_and_ready_to_update">Oppdater %1$s</string>
-    <string name="app_list__name__downloaded_and_ready_to_install">Installer %1$s</string>
     <string name="app_list__name__downloading_in_progress">Henter %1$s</string>
 
     <string name="updates__tts__download_app">Last ned</string>

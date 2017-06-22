@@ -412,8 +412,6 @@
     <string name="app__newly_added">Nieuw</string>
     <string name="app__install_downloaded_update">Bijwerken</string>
 
-    <string name="app_list__name__downloaded_and_ready_to_update">%1$s bijwerken</string>
-    <string name="app_list__name__downloaded_and_ready_to_install">%1$s installeren</string>
     <string name="app_list__name__downloading_in_progress">%1$s wordt gedownload</string>
 
     <string name="installed_apps__activity_title">Geïnstalleerde apps</string>

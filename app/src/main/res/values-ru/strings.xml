@@ -457,8 +457,6 @@
         <item quantity="many">Скачать обновления для %1$d приложений.</item>
         </plurals>
 
-    <string name="app_list__name__downloaded_and_ready_to_update">Обновить %1$s</string>
-    <string name="app_list__name__downloaded_and_ready_to_install">Установить %1$s</string>
     <string name="app_list__name__downloading_in_progress">Загружается %1$s</string>
     <string name="updates__tts__download_app">Скачать</string>
     <string name="installed_app__updates_ignored">Пропущенные обновления</string>

@@ -430,8 +430,6 @@
 </plurals>
     <string name="app__install_downloaded_update">Güncelle</string>
 
-    <string name="app_list__name__downloaded_and_ready_to_update">%1$s uygulamasını güncelle</string>
-    <string name="app_list__name__downloaded_and_ready_to_install">%1$s uygulamasını kur</string>
     <string name="app_list__name__downloading_in_progress">%1$s indiriliyor</string>
 
     <string name="updates__tts__download_app">İndir</string>

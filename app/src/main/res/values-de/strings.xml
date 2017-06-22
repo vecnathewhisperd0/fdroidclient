@@ -451,8 +451,6 @@
 </plurals>
     <string name="app__install_downloaded_update">Aktualisieren</string>
 
-    <string name="app_list__name__downloaded_and_ready_to_update">%1$s aktualisieren</string>
-    <string name="app_list__name__downloaded_and_ready_to_install">%1$s installieren</string>
     <string name="app_list__name__downloading_in_progress">%1$s wird heruntergeladen</string>
 
     <string name="updates__tts__download_app">Herunterladen</string>

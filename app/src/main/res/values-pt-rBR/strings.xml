@@ -433,8 +433,6 @@
     <string name="app__newly_added">Novo</string>
     <string name="app__install_downloaded_update">Atualizar</string>
 
-    <string name="app_list__name__downloaded_and_ready_to_update">Atualizar %1$s</string>
-    <string name="app_list__name__downloaded_and_ready_to_install">Instalar %1$s</string>
     <string name="app_list__name__downloading_in_progress">Baixando %1$s</string>
 
     <string name="installed_apps__activity_title">Aplicativos instalados</string>

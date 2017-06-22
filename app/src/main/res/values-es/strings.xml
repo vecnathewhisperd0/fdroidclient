@@ -457,8 +457,6 @@ tenéis acceso a la misma red, uno de vosotros puede crear un punto de acceso Wi
     </plurals>
     <string name="app__install_downloaded_update">Actualizar</string>
 
-    <string name="app_list__name__downloaded_and_ready_to_update">Actualizar %1$s</string>
-    <string name="app_list__name__downloaded_and_ready_to_install">Instalar %1$s</string>
     <string name="app_list__name__downloading_in_progress">Descargando %1$s</string>
 
     <string name="updates__tts__download_app">Actualizaciones</string>

@@ -437,8 +437,6 @@
 
     <string name="app__install_downloaded_update">Надогради</string>
 
-    <string name="app_list__name__downloaded_and_ready_to_update">Надогради %1$s</string>
-    <string name="app_list__name__downloaded_and_ready_to_install">Угради %1$s</string>
     <string name="app_list__name__downloading_in_progress">Преузимам %1$s</string>
 
     <string name="updates__tts__download_app">Преузми</string>

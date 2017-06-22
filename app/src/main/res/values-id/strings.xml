@@ -446,8 +446,6 @@
     <string name="main_menu__swap_nearby">Dekat</string>
     <string name="app_recommended_version_installed">Versi %1$s (Direkomendasikan)</string>
     <string name="app__newly_added">Baru</string>
-    <string name="app_list__name__downloaded_and_ready_to_update">Perbarui %1$s</string>
-    <string name="app_list__name__downloaded_and_ready_to_install">Pasang %1$s</string>
     <string name="app_list__name__downloading_in_progress">Mengunduh %1$s</string>
 
     <string name="installed_apps__activity_title">Apl Terpasang</string>

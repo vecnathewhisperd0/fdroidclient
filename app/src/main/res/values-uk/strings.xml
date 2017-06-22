@@ -451,8 +451,6 @@
     <string name="app_details_donate_prompt_unknown_author">Придбай розробнику %1$s філіжанку кави!</string>
     <string name="app__install_downloaded_update">Оновити</string>
 
-    <string name="app_list__name__downloaded_and_ready_to_update">Оновити %1$s</string>
-    <string name="app_list__name__downloaded_and_ready_to_install">Встановити %1$s</string>
     <string name="app_list__name__downloading_in_progress">Завантаження %1$s</string>
     <string name="app_list__name__successfully_installed">%1$s встановлено</string>
 

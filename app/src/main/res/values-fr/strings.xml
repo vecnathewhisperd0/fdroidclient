@@ -438,8 +438,6 @@
     <string name="app__newly_added">Nouveau</string>
     <string name="app__install_downloaded_update">Mise à jour</string>
 
-    <string name="app_list__name__downloaded_and_ready_to_update">Mise à jour %1$s</string>
-    <string name="app_list__name__downloaded_and_ready_to_install">Installer %1$s</string>
     <string name="app_list__name__downloading_in_progress">Téléchargement %1$s en cours</string>
     <string name="app_list__name__successfully_installed">%1$s installé</string>
 

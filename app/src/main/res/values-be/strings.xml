@@ -454,8 +454,6 @@
 	</plurals>
     <string name="app__install_downloaded_update">Абнавіць</string>
 
-    <string name="app_list__name__downloaded_and_ready_to_update">Абнавіць %1$s</string>
-    <string name="app_list__name__downloaded_and_ready_to_install">Усталяваць %1$s</string>
     <string name="app_list__name__downloading_in_progress">Спампоўка %1$s</string>
 
     <string name="updates__tts__download_app">Спампаваць</string>

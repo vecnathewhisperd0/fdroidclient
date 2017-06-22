@@ -396,8 +396,6 @@ Android 5.1 或更新的版本。
     <string name="app_recommended_version_installed">版本 %1$s (建議使用)</string>
     <string name="app__install_downloaded_update">更新</string>
 
-    <string name="app_list__name__downloaded_and_ready_to_update">更新 %1$s</string>
-    <string name="app_list__name__downloaded_and_ready_to_install">安裝 %1$s</string>
     <string name="app_list__name__downloading_in_progress">正在下載 %1$s</string>
     <string name="app_list__name__successfully_installed">已成功安裝 %1$s</string>
 

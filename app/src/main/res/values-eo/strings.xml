@@ -447,8 +447,6 @@
 </plurals>
     <string name="app__install_downloaded_update">Ĝisdatigi</string>
 
-    <string name="app_list__name__downloaded_and_ready_to_update">Ĝisdatigi %1$s</string>
-    <string name="app_list__name__downloaded_and_ready_to_install">Instali %1$s</string>
     <string name="app_list__name__downloading_in_progress">Elŝutado de %1$s</string>
 
     <string name="updates__tts__download_app">Elŝuti</string>

@@ -413,8 +413,6 @@
     <string name="app__newly_added">Nova</string>
     <string name="app__install_downloaded_update">Atualização</string>
 
-    <string name="app_list__name__downloaded_and_ready_to_update">Atualizar %1$s</string>
-    <string name="app_list__name__downloaded_and_ready_to_install">Instalar %1$s</string>
     <string name="app_list__name__downloading_in_progress">A descarregar %1$s</string>
     <string name="app_list__name__successfully_installed">%1$s instalada com sucesso</string>
 

@@ -66,6 +66,9 @@ public class AppListItemController extends RecyclerView.ViewHolder {
     private final TextView status;
 
     @Nullable
+    private final TextView downloadReady;
+
+    @Nullable
     private final TextView installedVersion;
 
     @Nullable
@@ -122,6 +125,7 @@ public class AppListItemController extends RecyclerView.ViewHolder {
         icon = (ImageView) itemView.findViewById(R.id.icon);
         name = (TextView) itemView.findViewById(R.id.app_name);
         status = (TextView) itemView.findViewById(R.id.status);
+        downloadReady = (TextView) itemView.findViewById(R.id.download_ready);
         installedVersion = (TextView) itemView.findViewById(R.id.installed_version);
         ignoredStatus = (TextView) itemView.findViewById(R.id.ignored_status);
         progressBar = (ProgressBar) itemView.findViewById(R.id.progress_bar);
@@ -269,12 +273,17 @@ public class AppListItemController extends RecyclerView.ViewHolder {
      * <li> If downloaded and ready to install, mention that it is ready to update/install.
      */
     private void configureAppName(@NonNull App app) {
+        if (downloadReady != null) {
+            downloadReady.setVisibility(View.GONE);
+        }
         if (currentStatus != null && currentStatus.status == AppUpdateStatusManager.Status.ReadyToInstall) {
             if (app.isInstalled()) {
-                String appName = activity.getString(R.string.app_list__name__downloaded_and_ready_to_update, app.name);
-                name.setText(appName);
+                name.setText(app.name);
             } else {
-                name.setText(activity.getString(R.string.app_list__name__downloaded_and_ready_to_install, app.name));
+                name.setText(app.name);
+            }
+            if (downloadReady != null) {
+                downloadReady.setVisibility(View.VISIBLE);
             }
         } else if (currentStatus != null && currentStatus.status == AppUpdateStatusManager.Status.Downloading) {
             name.setText(activity.getString(R.string.app_list__name__downloading_in_progress, app.name));

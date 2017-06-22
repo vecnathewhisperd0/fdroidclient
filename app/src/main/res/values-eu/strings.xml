@@ -461,8 +461,6 @@
 </plurals>
     <string name="app__install_downloaded_update">Eguneratu</string>
 
-    <string name="app_list__name__downloaded_and_ready_to_update">Eguneratu %1$s</string>
-    <string name="app_list__name__downloaded_and_ready_to_install">Instalatu %1$s</string>
     <string name="app_list__name__downloading_in_progress">%1$s deskargatzen</string>
 
     <string name="updates__tts__download_app">Deskargatu</string>

@@ -430,8 +430,6 @@
 </plurals>
     <string name="app__install_downloaded_update">更新</string>
 
-    <string name="app_list__name__downloaded_and_ready_to_update">更新 %1$s</string>
-    <string name="app_list__name__downloaded_and_ready_to_install">安裝 %1$s</string>
     <string name="app_list__name__downloading_in_progress">正在下載 %1$s</string>
 
     <string name="updates__tts__download_updates_for_all_apps">下載所有的更新</string>
