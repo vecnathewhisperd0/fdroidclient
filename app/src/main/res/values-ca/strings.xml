@@ -1,9 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-    <string name="SignatureMismatch">La nova versió està signada amb una clau diferent de la vella. Per a instal·lar la
-        nova versió, cal desinstaŀlar primer la vella. Si us plau feu-ho i proveu altre cop. (Sapigueu que
-        desintal·lar-la suprimirà qualsevol dada interna que l\'aplicació hagi desat)
-    </string>
+    <string name="SignatureMismatch">La nova versió està signada amb una clau diferent de l\'antiga. Per a instal·lar la nova versió, cal desinstal·lar primer la vella. Si us plau feu-ho i proveu altre cop. (Sapigueu que desinstal·lar-la suprimirà qualsevol dada interna que l\'«app» hagi desat)</string>
     <string name="installIncompatible">L\'«app» és incompatible amb el vostre dispositiu. La voleu instal·lar de totes maneres?</string>
     <string name="version">Versió</string>
     <string name="delete">Esborrar</string>
