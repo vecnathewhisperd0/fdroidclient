@@ -140,10 +140,10 @@
 
     <string name="proxy">پروکسی</string>
     <string name="enable_proxy_title">فعّال کردن پروکسی http</string>
-    <string name="enable_proxy_summary">پیکربندی پیشکار http برای تمام درخواست‌های شبکه</string>
-    <string name="proxy_host">میزبان پیشکار</string>
+    <string name="enable_proxy_summary">پیکربندی پروکسی http برای تمام درخواست‌های شبکه</string>
+    <string name="proxy_host">میزبان پروکسی</string>
     <string name="proxy_host_summary">نام میزبان پروکسی (مثلاً 127.0.0.1)</string>
-    <string name="proxy_port">درگاه پیشکار</string>
+    <string name="proxy_port">درگاه پروکسی</string>
     <string name="proxy_port_summary">شمارهٔ درگاه پروکسی (مثلاً 8118)</string>
 
     <string name="status_download_unknown_size">در حال بارگیری\n%2$s از\n%1$s</string>
@@ -191,32 +191,29 @@
     <string name="empty_can_update_app_list">تبریک! تمام برنامه هایتان به‌روز هستند (یا مخزن‌هایتان منقضی شده‌اند) .</string>
 
     <string name="root_access_denied_title">دسترسی ریشه داده نشد</string>
-    <string name="root_access_denied_body">یا افزارهٔ اندرویدیتان روت شده نیست، یا درخواست ریشه برای اف‌دروید را رد
-        کردید.
-    </string>
+    <string name="root_access_denied_body">یا دستگاهاندرویدیتان روت شده نیست، یا درخواست روت برای اف‌دروید را رد کردید.</string>
     <string name="system_uninstall_button">حذف نصب</string>
 
     <string name="swap_nfc_title">برای تبادل، لمس کنید</string>
     <string name="swap_join_same_wifi">به همان وای‌فای دوستتان بپیوندید</string>
-    <string name="swap_join_this_hotspot">دوستتان را در پیوستن به نقطهٔ داغتان راهنمایی کنید</string>
-    <string name="swap">تبادل کاره‌ها</string>
+    <string name="swap_join_this_hotspot">دوستتان را در پیوستن به هاتسپاتتان راهنمایی کنید</string>
+    <string name="swap">تبادل برنامه ها</string>
     <string name="swap_success">تبادل موفّقیت‌آمیز!</string>
     <string name="swap_no_wifi_network">هنوز هیچ شبکه‌ای وجود ندارد</string>
-    <string name="swap_active_hotspot">%1$s (نقطهٔ داغتان)</string>
-    <string name="swap_view_available_networks">برای گشودن شبکه‌های موجود، ضربه بزنید</string>
-    <string name="swap_switch_to_wifi">برای تعویض به یک شبکهٔ وای‌فای، ضربه بزنید</string>
-    <string name="open_qr_code_scanner">گشودن پویشگر QR</string>
+    <string name="swap_active_hotspot">%1$s (هاتسپات شما)</string>
+    <string name="swap_view_available_networks">برای گشودن شبکه‌های موجود، لمس کنید</string>
+    <string name="swap_switch_to_wifi">برای تعویض به یک شبکهٔ وای‌فای، لمس کنید</string>
+    <string name="open_qr_code_scanner">باز کردن اسکنر QR</string>
     <string name="swap_welcome">به اف‌دروید خوش آمدید!</string>
-    <string name="swap_confirm_connect">می‌خواهید اکنون کاره‌ها را از %1$s بگیرید؟</string>
+    <string name="swap_confirm_connect">می‌خواهید اکنون برنامه ها را از %1$s بگیرید؟</string>
     <string name="swap_dont_show_again">دیگر این را نشان نده</string>
-    <string name="swap_scan_or_type_url">لازم است یک نفر رمز دیگری را پوییده، یا نشانی اینترنتیش را در مرورگری بنویسد.
-    </string>
-    <string name="swap_choose_apps">گزینش کاره‌ها</string>
-    <string name="swap_scan_qr">پویش رمز QR</string>
+    <string name="swap_scan_or_type_url">لازم است یک نفر رمز دیگری را اسکن کرده، یا نشانی اینترنتیش را در مرورگری بنویسد.</string>
+    <string name="swap_choose_apps">گزینش برنامه ها</string>
+    <string name="swap_scan_qr">اسکن رمز QR</string>
     <string name="swap_people_nearby">افراد نزدیک</string>
     <string name="swap_scanning_for_peers">در حال جست‌وجو برای افراد نزدیک…</string>
     <string name="swap_nearby">تبادل نزدیک</string>
-    <string name="swap_intro">اتّصال و مبادلهٔ کاره‌ها با افراد نزدیکتان.</string>
+    <string name="swap_intro">وصل شده و برنامه ها را با افراد نزدیکتان تبادل کنید.</string>
     <string name="swap_visible_bluetooth">قابل مشاهده از طریق بلوتوث</string>
     <string name="swap_setting_up_bluetooth">در حال برپا سازی بلوتوث…</string>
     <string name="swap_not_visible_bluetooth">غیرقابل مشاهده از طریق بلوتوث</string>
@@ -224,7 +221,7 @@
     <string name="swap_setting_up_wifi">در حال برپا سازی وای‌فای…</string>
     <string name="swap_not_visible_wifi">غیرقابل مشاهده از طریق وای‌فای</string>
     <string name="swap_wifi_device_name">نام دستگاه</string>
-    <string name="swap_cant_find_peers">نمی‌توانید کسی که دنبالشید را پیدا کنید؟</string>
+    <string name="swap_cant_find_peers">نمی‌توانید کسی که دنبالش هستید را پیدا کنید؟</string>
     <string name="swap_send_fdroid">ارسال اف‌دروید</string>
     <string name="swap_no_peers_nearby">نمی‌توان افراد نزدیک را برای تبادل با آن‌ها پیدا کرد.</string>
     <string name="swap_connecting">در حال اتّصال</string>
@@ -282,21 +279,17 @@
     <string name="system_install_warning">این کار بیش از ۱۰ ثانیه زمان می‌برد.</string>
     <string name="system_install_warning_lollipop">این کار بیش از ۱۰ ثانیه زمان برده و پس از آن، افزاره <b>راه‌اندازی مجدّد</b> خواهد شد.</string>
     <string name="system_uninstall">می‌خواهید افزونهٔ مجاز اف‌دروید را حذف کنید؟</string>
-    <string name="swap_nfc_description">اگر دوستتان اف‌دروید داشته و NFC اش روشن است، افزاره‌هایتان را با هم تماس
-        بدهید.
-    </string>
-    <string name="swap_join_same_wifi_desc">برای تبادل با استفاده از وای‌فای، مطمئن شوید که روی شبکهٔ یک‌سانی هستید. اگر
-        به شبکهٔ یک‌سان دسترسی ندارید، یکی از شما می‌تواند یک نقطهٔ داغ وای‌فای ایجاد کند.
-    </string>
-    <string name="swap_qr_isnt_for_swap">رمز QR ای که پوییدید، شبیه یک رمز تبادل نیست.</string>
+    <string name="swap_nfc_description">اگر دوستتان اف‌دروید دارد و NFC اش روشن است، دستگاه هایتان را با هم تماس بدهید.</string>
+    <string name="swap_join_same_wifi_desc">برای تبادل با استفاده از وای‌فای، مطمئن شوید که روی شبکهٔ یکسانی هستید. اگر به شبکهٔ یکسان دسترسی ندارید، یکی از شما می‌تواند یک هاتسپات وای‌فای ایجاد کند.</string>
+    <string name="swap_qr_isnt_for_swap">رمز QR ای که اسکن کردید، شبیه یک رمز تبادل نیست.</string>
     <string name="bluetooth_unavailable">بلوتوث موجود نیست</string>
-    <string name="swap_cant_send_no_bluetooth">نمی‌توان اف‌دروید را فرستاد، زیرا بلوتوث روی این دستگاه موحود نیست.</string>
-    <string name="loading">در حال بار کردن…</string>
+    <string name="swap_cant_send_no_bluetooth">نمی‌توان اف‌دروید را فرستاد، زیرا بلوتوث روی این دستگاه موجود نیست.</string>
+    <string name="loading">در حال بارگزاری…</string>
     <string name="swap_connection_misc_error">هنگام اتّصال به دستگاه خطایی رخ داد، نمی‌توان تبادل کرد!</string>
     <string name="swap_not_enabled">تبادل فعّال نیست</string>
-    <string name="swap_not_enabled_description">پیش از تبادل، افزاره‌تان باید قابل مشاهده باشد.</string>
+    <string name="swap_not_enabled_description">پیش از تبادل، دستگاهتان باید قابل مشاهده باشد.</string>
 
-    <string name="install_confirm">نیاز به دسترسی به</string>
+    <string name="install_confirm">نیازمند دسترسی به</string>
     <string name="install_confirm_update">می‌خواهید به‌روزرسانی‌ای برای این برنامه نصب کنید؟ داده‌های موجودتان از بین
         نخواهند رفت. برنامهٔ به‌روز شده دسترسی‌های زیر را خواهد داشت:
     </string>
@@ -336,7 +329,7 @@
     <string name="keep_year">۱ سال</string>
     <string name="keep_forever">برای همیشه</string>
 
-    <string name="uninstalling">درحال حذف نصب…</string>
+    <string name="uninstalling">در حال حذف نصب…</string>
 
     <string name="installing">در حال نصب…</string>
     <string name="install_error_notify_title">خطای نصب %s</string>
@@ -418,7 +411,7 @@
     <string name="app__tts__downloading_progress">در حال بارگیری، %1$d%% کامل</string>
     <string name="notification_title_single_update_available">به‌روز رسانی موجود است</string>
     <string name="notification_title_single_ready_to_install">آماده برای نصب</string>
-    <string name="notification_title_single_ready_to_install_update">به‌روز رسانی آماده برای تصب</string>
+    <string name="notification_title_single_ready_to_install_update">به‌روز رسانی آماده برای نصب</string>
     <string name="notification_title_single_install_error">نصب شکست خورد</string>
     <string name="notification_content_single_downloading">در حال بارگیری «%1$s»…</string>
     <string name="notification_content_single_downloading_update">در حال بارگیری به‌روز رسانی برای «%1$s»…</string>
@@ -439,8 +432,8 @@
     <string name="tts_category_name">دستهٔ %1$s</string>
 
     <plurals name="tts_view_all_in_category">
-	<item quantity="one">نمایش %1$d کارهٔ دستهٔ %2$s</item>
-	<item quantity="other">نمایش همه ی %1$d کارهٔ های دستهٔ %2$s</item>
+	<item quantity="one">نمایش %1$d برنامه ی دستهٔ %2$s</item>
+	<item quantity="other">نمایش همه ی %1$d برنامه های دستهٔ %2$s</item>
 </plurals>
 
     <string name="details_last_updated_today">امروز به‌روز شده</string>
@@ -460,7 +453,7 @@
 </plurals>
     <plurals name="notification_summary_installed">
 	<item quantity="one">%1$d برنامه نصب شد</item>
-	<item quantity="other">%1$d برنامه ها نصب شدند</item>
+	<item quantity="other">%1$d برنامه نصب شدند</item>
 </plurals>
     <plurals name="details_last_update_weeks">
 	<item quantity="one">%1$sd هفته پیش بروزرسانی شده است</item>
