@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-    <string name="SignatureMismatch">Die neue Version wurde mit einem anderen Schlüssel signiert als die alte. Um die neue Version zu installieren, muss zunächst die alte entfernt werden. Versuchen Sie es bitte danach nochmal. (Hinweis: Beim Entfernen werden alle intern gespeicherten Daten dieser Anwendung gelöscht.)</string>
-    <string name="installIncompatible">Diese Anwendung ist nicht kompatibel mit Deinem Gerät, trotzdem installieren?</string>
+    <string name="SignatureMismatch">Die neue Version wurde mit einem anderen Schlüssel signiert als die alte. Um die neue Version zu installieren, muss zunächst die alte entfernt werden. Versuchen Sie es bitte danach nochmal. (Hinweis: beim Entfernen werden alle intern gespeicherten Daten dieser Anwendung gelöscht.)</string>
+    <string name="installIncompatible">Diese Anwendung ist nicht kompatibel mit Ihrem Gerät. Trotzdem installieren?</string>
     <string name="version">Version</string>
     <string name="delete">Löschen</string>
     <string name="enable_nfc_send">NFC-Transfer aktivieren …</string>
@@ -269,7 +269,7 @@
     <string name="swap_scanning_for_peers">Nach Leuten in der Nähe wird gesucht …</string>
     <string name="wifi_ap">Hotspot</string>
 
-    <string name="system_install_post_success_message">Die privilegierte F-Droid-Erweiterung wurde erfolgreich installiert. Das erlaubt F-Droid, selbständig Anwendungen zu installieren, aktualisieren und zu entfernen.</string>
+    <string name="system_install_post_success_message">Die privilegierte F-Droid-Erweiterung wurde installiert. Das erlaubt F-Droid selbständig Anwendungen zu installieren, aktualisieren und zu entfernen.</string>
     <string name="system_install_post_fail_message">Die Installation der privilegierten F-Droid-Erweiterung ist
         fehlgeschlagen. Diese Installationsmethode wird nicht durch alle Android-Distributionen unterstützt, bitte in
         der F-Droid-Fehlerdatenbank für weitere Informationen nachsehen.
@@ -463,7 +463,7 @@
 </plurals>
 
     <string name="app_list__name__successfully_installed">%1$s erfolgreich installiert</string>
-    <string name="nearby_splash__download_apps_from_people_nearby">Kein Internet? Laden Sie Apps von Menschen in Ihrer Nähe herunter!</string>
+    <string name="nearby_splash__download_apps_from_people_nearby">Kein Internet? Lade Apps von Menschen in deiner Nähe herunter!</string>
     <string name="nearby_splash__find_people_button">Menschen in der Nähe finden</string>
     <string name="nearby_splash__both_parties_need_fdroid">Beide benötigen %1$s, um die Nahfunktion zu verwenden.</string>
 
@@ -508,6 +508,6 @@
 </plurals>
 <string name="by_author_format">von %s</string>
     <string name="download_404">Die angeforderte Datei wurde nicht gefunden.</string>
-    <string name="force_old_index">Altes Index Format erzwingen</string>
-    <string name="force_old_index_summary">Sollten Fehler oder Kompatibilitätsprobleme auftauchen, verwende den XML App Index</string>
+    <string name="force_old_index">Altes Index-Format erzwingen</string>
+    <string name="force_old_index_summary">Sollten Fehler oder Kompatibilitätsprobleme auftauchen, verwende den XML-App-Index</string>
     </resources>
