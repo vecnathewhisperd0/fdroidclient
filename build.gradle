@@ -5,6 +5,7 @@ buildscript {
     dependencies {
         // 2.2.2 is the version that is included in Debian/stretch
         classpath 'com.android.tools.build:gradle:2.2.2'
+        classpath 'me.tatarka:gradle-retrolambda:3.3.0'
         classpath files('libs/gradle-witness.jar')
     }
 }

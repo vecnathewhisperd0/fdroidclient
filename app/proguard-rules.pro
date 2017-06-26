@@ -54,3 +54,8 @@ public static final org.codehaus.jackson.annotate.JsonAutoDetect$Visibility *; }
 -keep public class your.class.** {
   *;
 }
+
+# Recommended Proguard rules for retrolambda:
+# https://github.com/evant/gradle-retrolambda#proguard
+-dontwarn java.lang.invoke.*
+-dontwarn **$$Lambda$*
