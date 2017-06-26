@@ -88,7 +88,7 @@ public class RepoUpdater {
     //TODO rename RepoUpdater to IndexV0Updater
     private static final String TAG = "RepoUpdater";
 
-    private final String indexUrl;
+    final String indexUrl;
 
     @NonNull
     final Context context;
@@ -98,8 +98,18 @@ public class RepoUpdater {
 
     @Nullable
     ProgressListener downloadProgressListener;
-    ProgressListener committingProgressListener;
-    ProgressListener processXmlProgressListener;
+
+    /**
+     * If an updater is unable to know how many apps it has to process (i.e. it is streaming apps to the database or
+     * performing a large database query which touches all apps, but is unable to report progress), then it call this
+     * listener with `totalBytes = 0`. Doing so will result in a message of "Saving app details" sent to the user. If
+     * you know how many apps you have processed, then a message of "Saving app details (x/total)" is displayed.
+     */
+    @Nullable
+    ProgressListener processingAppsListener;
+
+    @Nullable
+    ProgressListener processIndexProgressListener;
 
     private String cacheTag;
     private X509Certificate signingCertFromJar;
@@ -131,12 +141,12 @@ public class RepoUpdater {
         this.downloadProgressListener = progressListener;
     }
 
-    public void setProcessXmlProgressListener(ProgressListener progressListener) {
-        this.processXmlProgressListener = progressListener;
+    public void setProcessIndexProgressListener(ProgressListener progressListener) {
+        this.processIndexProgressListener = progressListener;
     }
 
-    public void setCommittingProgressListener(ProgressListener progressListener) {
-        this.committingProgressListener = progressListener;
+    public void setProcessingAppsListener(ProgressListener progressListener) {
+        this.processingAppsListener = progressListener;
     }
 
     public boolean hasChanged() {
@@ -238,7 +248,7 @@ public class RepoUpdater {
             JarFile jarFile = new JarFile(downloadedFile, true);
             JarEntry indexEntry = (JarEntry) jarFile.getEntry("index.xml");
             indexInputStream = new ProgressBufferedInputStream(jarFile.getInputStream(indexEntry),
-                    processXmlProgressListener, new URL(repo.address), (int) indexEntry.getSize());
+                    processIndexProgressListener, new URL(repo.address), (int) indexEntry.getSize());
 
             // Process the index...
             SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -274,16 +284,19 @@ public class RepoUpdater {
         }
     }
 
-    private void commitToDb() throws UpdateException {
-        Log.i(TAG, "Repo signature verified, saving app metadata to database.");
-        if (committingProgressListener != null) {
+    protected void notifyCommittingToDb() {
+        if (processingAppsListener != null) {
             try {
-                //TODO this should be an event, not a progress listener
-                committingProgressListener.onProgress(new URL(indexUrl), 0, -1);
+                processingAppsListener.onProgress(new URL(indexUrl), 0, -1);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void commitToDb() throws UpdateException {
+        Log.i(TAG, "Repo signature verified, saving app metadata to database.");
+        notifyCommittingToDb();
         persister.commit(repoDetailsToSave);
     }
 

@@ -408,10 +408,9 @@ public class UpdateService extends IntentService {
 
                 try {
                     RepoUpdater updater = new IndexV1Updater(this, repo);
-                    //TODO setProgressListeners(updater);
+                    setProgressListeners(updater);
                     if (Preferences.get().isForceOldIndexEnabled() || !updater.update()) {
                         updater = new RepoUpdater(getBaseContext(), repo);
-                        setProgressListeners(updater);
                         updater.update();
                     }
                     if (updater.hasChanged()) {
@@ -528,7 +527,7 @@ public class UpdateService extends IntentService {
             }
         });
 
-        updater.setProcessXmlProgressListener(new ProgressListener() {
+        updater.setProcessIndexProgressListener(new ProgressListener() {
             @Override
             public void onProgress(URL sourceUrl, int bytesRead, int totalBytes) {
                 String downloadedSize = Utils.getFriendlySize(bytesRead);
@@ -542,10 +541,15 @@ public class UpdateService extends IntentService {
             }
         });
 
-        updater.setCommittingProgressListener(new ProgressListener() {
+        updater.setProcessingAppsListener(new ProgressListener() {
             @Override
             public void onProgress(URL sourceUrl, int bytesRead, int totalBytes) {
-                String message = getString(R.string.status_inserting_apps);
+                String message;
+                if (totalBytes > 0) {
+                    message = getString(R.string.status_inserting_x_apps, bytesRead, totalBytes, sourceUrl);
+                } else {
+                    message = getString(R.string.status_inserting_apps);
+                }
                 sendStatus(getApplicationContext(), STATUS_INFO, message);
             }
         });
