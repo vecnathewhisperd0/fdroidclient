@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.UpdateService;
 import org.fdroid.fdroid.Utils;
@@ -56,21 +57,13 @@ class WhatsNewViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
 
         final SwipeRefreshLayout swipeToRefresh = (SwipeRefreshLayout) whatsNewView
                 .findViewById(R.id.swipe_to_refresh);
-        swipeToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeToRefresh.setRefreshing(false);
-                UpdateService.updateNow(activity);
-            }
+        swipeToRefresh.setOnRefreshListener(() -> {
+            swipeToRefresh.setRefreshing(false);
+            UpdateService.updateNow(activity);
         });
 
         FloatingActionButton searchFab = (FloatingActionButton) whatsNewView.findViewById(R.id.btn_search);
-        searchFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.startActivity(new Intent(activity, AppListActivity.class));
-            }
-        });
+        searchFab.setOnClickListener(v -> activity.startActivity(new Intent(activity, AppListActivity.class)));
 
         activity.getSupportLoaderManager().initLoader(LOADER_ID, null, this);
     }

@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -44,19 +43,9 @@ public class ConfirmReceive extends RelativeLayout implements SwapWorkflowActivi
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        findViewById(R.id.no_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().denySwap();
-            }
-        });
+        findViewById(R.id.no_button).setOnClickListener(v -> getActivity().denySwap());
 
-        findViewById(R.id.yes_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().swapWith(config);
-            }
-        });
+        findViewById(R.id.yes_button).setOnClickListener(v -> getActivity().swapWith(config));
     }
 
     @Override

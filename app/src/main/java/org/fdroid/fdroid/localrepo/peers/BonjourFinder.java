@@ -16,27 +16,18 @@ import javax.jmdns.ServiceListener;
 
 import rx.Observable;
 import rx.Subscriber;
-import rx.functions.Action0;
 import rx.subscriptions.Subscriptions;
 
 @SuppressWarnings("LineLength")
 final class BonjourFinder extends PeerFinder implements ServiceListener {
 
     public static Observable<Peer> createBonjourObservable(final Context context) {
-        return Observable.create(new Observable.OnSubscribe<Peer>() {
-            @Override
-            public void call(Subscriber<? super Peer> subscriber) {
-                final BonjourFinder finder = new BonjourFinder(context, subscriber);
+        return Observable.create(subscriber -> {
+            final BonjourFinder finder = new BonjourFinder(context, subscriber);
 
-                subscriber.add(Subscriptions.create(new Action0() {
-                    @Override
-                    public void call() {
-                        finder.cancel();
-                    }
-                }));
+            subscriber.add(Subscriptions.create(() -> finder.cancel()));
 
-                finder.scan();
-            }
+            finder.scan();
         });
     }
 

@@ -14,7 +14,6 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
@@ -70,12 +69,7 @@ public class WifiQrView extends ScrollView implements SwapWorkflowActivity.Inner
         qrImage.setColorFilter(new LightingColorFilter(0xffffffff, getResources().getColor(R.color.swap_blue)));
 
         Button openQr = (Button) findViewById(R.id.btn_qr_scanner);
-        openQr.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().initiateQrScan();
-            }
-        });
+        openQr.setOnClickListener(v -> getActivity().initiateQrScan());
 
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(
                 onWifiStateChanged, new IntentFilter(WifiStateChangeService.BROADCAST));

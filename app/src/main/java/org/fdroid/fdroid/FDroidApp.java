@@ -35,39 +35,37 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StrictMode;
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
+
 import com.nostra13.universalimageloader.cache.disc.impl.LimitedAgeDiskCache;
-import com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import info.guardianproject.netcipher.NetCipher;
-import info.guardianproject.netcipher.proxy.OrbotHelper;
+
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
 import org.apache.commons.net.util.SubnetUtils;
-import org.fdroid.fdroid.Preferences.ChangeListener;
 import org.fdroid.fdroid.Preferences.Theme;
 import org.fdroid.fdroid.compat.PRNGFixes;
 import org.fdroid.fdroid.data.AppProvider;
 import org.fdroid.fdroid.data.InstalledAppProviderService;
 import org.fdroid.fdroid.data.Repo;
-import org.fdroid.fdroid.installer.ApkFileProvider;
 import org.fdroid.fdroid.data.SanitizedFile;
+import org.fdroid.fdroid.installer.ApkFileProvider;
 import org.fdroid.fdroid.installer.InstallHistoryService;
 import org.fdroid.fdroid.net.ImageLoaderForUIL;
 import org.fdroid.fdroid.net.WifiStateChangeService;
-import sun.net.www.protocol.bluetooth.Handler;
 
 import java.io.IOException;
 import java.net.URL;
-import java.net.URLStreamHandler;
-import java.net.URLStreamHandlerFactory;
 import java.security.Security;
 import java.util.List;
+
+import info.guardianproject.netcipher.NetCipher;
+import info.guardianproject.netcipher.proxy.OrbotHelper;
+import sun.net.www.protocol.bluetooth.Handler;
 
 @ReportsCrashes(mailTo = "reports@f-droid.org",
         mode = ReportingInteractionMode.DIALOG,
@@ -233,40 +231,20 @@ public class FDroidApp extends Application {
         // If the user changes the preference to do with filtering rooted apps,
         // it is easier to just notify a change in the app provider,
         // so that the newly updated list will correctly filter relevant apps.
-        Preferences.get().registerAppsRequiringRootChangeListener(new Preferences.ChangeListener() {
-            @Override
-            public void onPreferenceChange() {
-                getContentResolver().notifyChange(AppProvider.getContentUri(), null);
-            }
-        });
+        Preferences.get().registerAppsRequiringRootChangeListener(() -> getContentResolver().notifyChange(AppProvider.getContentUri(), null));
 
         // If the user changes the preference to do with filtering anti-feature apps,
         // it is easier to just notify a change in the app provider,
         // so that the newly updated list will correctly filter relevant apps.
-        Preferences.get().registerAppsRequiringAntiFeaturesChangeListener(new Preferences.ChangeListener() {
-            @Override
-            public void onPreferenceChange() {
-                getContentResolver().notifyChange(AppProvider.getContentUri(), null);
-            }
-        });
+        Preferences.get().registerAppsRequiringAntiFeaturesChangeListener(() -> getContentResolver().notifyChange(AppProvider.getContentUri(), null));
 
         // This is added so that the bluetooth:// scheme we use for URLs the BluetoothDownloader
         // understands is not treated as invalid by the java.net.URL class. The actual Handler does
         // nothing, but its presence is enough.
-        URL.setURLStreamHandlerFactory(new URLStreamHandlerFactory() {
-            @Override
-            public URLStreamHandler createURLStreamHandler(String protocol) {
-                return TextUtils.equals(protocol, "bluetooth") ? new Handler() : null;
-            }
-        });
+        URL.setURLStreamHandlerFactory(protocol -> TextUtils.equals(protocol, "bluetooth") ? new Handler() : null);
 
         final Context context = this;
-        Preferences.get().registerUnstableUpdatesChangeListener(new Preferences.ChangeListener() {
-            @Override
-            public void onPreferenceChange() {
-                AppProvider.Helper.calcSuggestedApks(context);
-            }
-        });
+        Preferences.get().registerUnstableUpdatesChangeListener(() -> AppProvider.Helper.calcSuggestedApks(context));
 
         CleanCacheService.schedule(this);
 
@@ -279,25 +257,21 @@ public class FDroidApp extends Application {
                 .diskCache(new LimitedAgeDiskCache(
                         Utils.getImageCacheDir(this),
                         null,
-                        new FileNameGenerator() {
-                            @NonNull
-                            @Override
-                            public String generate(String imageUri) {
-                                if (TextUtils.isEmpty(imageUri)) {
-                                    return "null";
-                                }
-
-                                String fileNameToSanitize;
-                                Uri uri = Uri.parse(imageUri);
-                                if (TextUtils.isEmpty(uri.getPath())) {
-                                    // files with URL like "drawable://213083835209" used by the category backgrounds
-                                    fileNameToSanitize = imageUri.replaceAll("[:/]", "");
-                                } else {
-                                    fileNameToSanitize = uri.getPath().replace("/", "-");
-                                }
-
-                                return SanitizedFile.sanitizeFileName(fileNameToSanitize);
+                        imageUri -> {
+                            if (TextUtils.isEmpty(imageUri)) {
+                                return "null";
                             }
+
+                            String fileNameToSanitize;
+                            Uri uri = Uri.parse(imageUri);
+                            if (TextUtils.isEmpty(uri.getPath())) {
+                                // files with URL like "drawable://213083835209" used by the category backgrounds
+                                fileNameToSanitize = imageUri.replaceAll("[:/]", "");
+                            } else {
+                                fileNameToSanitize = uri.getPath().replace("/", "-");
+                            }
+
+                            return SanitizedFile.sanitizeFileName(fileNameToSanitize);
                         },
                         // 30 days in secs: 30*24*60*60 = 2592000
                         2592000)
@@ -310,12 +284,7 @@ public class FDroidApp extends Application {
         FDroidApp.initWifiSettings();
         startService(new Intent(this, WifiStateChangeService.class));
         // if the HTTPS pref changes, then update all affected things
-        Preferences.get().registerLocalRepoHttpsListeners(new ChangeListener() {
-            @Override
-            public void onPreferenceChange() {
-                startService(new Intent(FDroidApp.this, WifiStateChangeService.class));
-            }
-        });
+        Preferences.get().registerLocalRepoHttpsListeners(() -> startService(new Intent(FDroidApp.this, WifiStateChangeService.class)));
 
         configureTor(Preferences.get().isTorEnabled());
 

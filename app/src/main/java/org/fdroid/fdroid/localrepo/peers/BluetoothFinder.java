@@ -13,27 +13,18 @@ import org.fdroid.fdroid.Utils;
 
 import rx.Observable;
 import rx.Subscriber;
-import rx.functions.Action0;
 import rx.subscriptions.Subscriptions;
 
 @SuppressWarnings("LineLength")
 final class BluetoothFinder extends PeerFinder {
 
     public static Observable<Peer> createBluetoothObservable(final Context context) {
-        return Observable.create(new Observable.OnSubscribe<Peer>() {
-            @Override
-            public void call(Subscriber<? super Peer> subscriber) {
-                final BluetoothFinder finder = new BluetoothFinder(context, subscriber);
+        return Observable.create(subscriber -> {
+            final BluetoothFinder finder = new BluetoothFinder(context, subscriber);
 
-                subscriber.add(Subscriptions.create(new Action0() {
-                    @Override
-                    public void call() {
-                        finder.cancel();
-                    }
-                }));
+            subscriber.add(Subscriptions.create(() -> finder.cancel()));
 
-                finder.scan();
-            }
+            finder.scan();
         });
     }
 

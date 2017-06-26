@@ -10,8 +10,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
+
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.localrepo.SwapService;
@@ -43,12 +43,7 @@ public class NfcView extends RelativeLayout implements SwapWorkflowActivity.Inne
     protected void onFinishInflate() {
         super.onFinishInflate();
         CheckBox dontShowAgain = (CheckBox) findViewById(R.id.checkbox_dont_show);
-        dontShowAgain.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Preferences.get().setShowNfcDuringSwap(!isChecked);
-            }
-        });
+        dontShowAgain.setOnCheckedChangeListener((buttonView, isChecked) -> Preferences.get().setShowNfcDuringSwap(!isChecked));
     }
 
     @Override
@@ -57,12 +52,9 @@ public class NfcView extends RelativeLayout implements SwapWorkflowActivity.Inne
         MenuItem next = menu.findItem(R.id.action_next);
         MenuItemCompat.setShowAsAction(next,
                 MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-        next.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                getActivity().showWifiQr();
-                return true;
-            }
+        next.setOnMenuItemClickListener(item -> {
+            getActivity().showWifiQr();
+            return true;
         });
         return true;
     }

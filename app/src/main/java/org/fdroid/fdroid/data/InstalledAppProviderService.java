@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import rx.subjects.PublishSubject;
 
@@ -75,13 +74,10 @@ public class InstalledAppProviderService extends IntentService {
         packageChangeNotifier
                 .subscribeOn(Schedulers.newThread())
                 .debounce(3, TimeUnit.SECONDS)
-                .subscribe(new Action1<String>() {
-                        @Override
-                        public void call(String packageName) {
-                            Utils.debugLog(TAG, "Notifying content providers (so they can update the relevant views).");
-                            getContentResolver().notifyChange(AppProvider.getContentUri(), null);
-                            getContentResolver().notifyChange(ApkProvider.getContentUri(), null);
-                        }
+                .subscribe(packageName -> {
+                    Utils.debugLog(TAG, "Notifying content providers (so they can update the relevant views).");
+                    getContentResolver().notifyChange(AppProvider.getContentUri(), null);
+                    getContentResolver().notifyChange(ApkProvider.getContentUri(), null);
                 });
 
         // ...alternatively, this non-debounced version will instantly emit an event about the
@@ -92,13 +88,8 @@ public class InstalledAppProviderService extends IntentService {
         // general notification (e.g. to AppProvider.getContentUri()) is fired, but not when a
         // sibling such as AppProvider.getHighestPriorityMetadataUri() is fired.
         packageChangeNotifier.subscribeOn(Schedulers.newThread())
-                .subscribe(new Action1<String>() {
-                    @Override
-                    public void call(String packageName) {
-                        getContentResolver()
-                                .notifyChange(AppProvider.getHighestPriorityMetadataUri(packageName), null);
-                    }
-                });
+                .subscribe(packageName -> getContentResolver()
+                        .notifyChange(AppProvider.getHighestPriorityMetadataUri(packageName), null));
     }
 
     /**
@@ -203,12 +194,7 @@ public class InstalledAppProviderService extends IntentService {
                 Log.i(TAG, "Marking " + packageName + " as installed");
                 File apk = new File(packageInfo.applicationInfo.publicSourceDir);
                 if (apk.isDirectory()) {
-                    FilenameFilter filter = new FilenameFilter() {
-                        @Override
-                        public boolean accept(File dir, String name) {
-                            return name.endsWith(".apk");
-                        }
-                    };
+                    FilenameFilter filter = (dir, name) -> name.endsWith(".apk");
                     File[] files = apk.listFiles(filter);
                     if (files == null) {
                         String msg = packageName + " sourceDir has no APKs: "

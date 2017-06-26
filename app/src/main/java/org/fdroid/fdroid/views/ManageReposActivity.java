@@ -44,12 +44,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.UpdateService;
@@ -105,12 +105,9 @@ public class ManageReposActivity extends AppCompatActivity implements LoaderMana
         repoAdapter = RepoAdapter.create(this, null, CursorAdapterCompat.FLAG_AUTO_REQUERY);
         repoAdapter.setEnabledListener(this);
         repoList.setAdapter(repoAdapter);
-        repoList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Repo repo = new Repo((Cursor) repoList.getItemAtPosition(position));
-                editRepo(repo);
-            }
+        repoList.setOnItemClickListener((parent, view, position, id) -> {
+            Repo repo = new Repo((Cursor) repoList.getItemAtPosition(position));
+            editRepo(repo);
         });
     }
 
@@ -218,12 +215,7 @@ public class ManageReposActivity extends AppCompatActivity implements LoaderMana
             addRepoDialog.setTitle(R.string.repo_add_title);
             addRepoDialog.setButton(DialogInterface.BUTTON_NEGATIVE,
                     getString(R.string.cancel),
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
+                    (dialog, which) -> dialog.dismiss());
 
             // HACK:
             // After adding a new repo, need to show feedback to the user.
@@ -240,10 +232,7 @@ public class ManageReposActivity extends AppCompatActivity implements LoaderMana
             // Thus, the hack described at http://stackoverflow.com/a/15619098 is implemented.
             addRepoDialog.setButton(DialogInterface.BUTTON_POSITIVE,
                     getString(R.string.repo_add_add),
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                        }
+                    (dialog, which) -> {
                     });
 
             addRepoDialog.show();
@@ -251,46 +240,43 @@ public class ManageReposActivity extends AppCompatActivity implements LoaderMana
             // This must be *after* addRepoDialog.show() otherwise getButtion() returns null:
             // https://code.google.com/p/android/issues/detail?id=6360
             addRepoDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
+                    v -> {
 
-                            String url = uriEditText.getText().toString();
+                        String url = uriEditText.getText().toString();
 
-                            try {
-                                url = normalizeUrl(url);
-                            } catch (URISyntaxException e) {
-                                invalidUrl();
-                                return;
-                            }
+                        try {
+                            url = normalizeUrl(url);
+                        } catch (URISyntaxException e) {
+                            invalidUrl();
+                            return;
+                        }
 
-                            String fp = fingerprintEditText.getText().toString();
-                            // remove any whitespace from fingerprint
-                            fp = fp.replaceAll("\\s", "");
+                        String fp = fingerprintEditText.getText().toString();
+                        // remove any whitespace from fingerprint
+                        fp = fp.replaceAll("\\s", "");
 
-                            switch (addRepoState) {
-                                case DOESNT_EXIST:
-                                    prepareToCreateNewRepo(url, fp);
-                                    break;
+                        switch (addRepoState) {
+                            case DOESNT_EXIST:
+                                prepareToCreateNewRepo(url, fp);
+                                break;
 
-                                case IS_SWAP:
-                                    Utils.debugLog(TAG, "Removing existing swap repo " + url + " before adding new repo.");
-                                    Repo repo = RepoProvider.Helper.findByAddress(context, url);
-                                    RepoProvider.Helper.remove(context, repo.getId());
-                                    prepareToCreateNewRepo(url, fp);
-                                    break;
+                            case IS_SWAP:
+                                Utils.debugLog(TAG, "Removing existing swap repo " + url + " before adding new repo.");
+                                Repo repo = RepoProvider.Helper.findByAddress(context, url);
+                                RepoProvider.Helper.remove(context, repo.getId());
+                                prepareToCreateNewRepo(url, fp);
+                                break;
 
-                                case EXISTS_DISABLED:
-                                case EXISTS_UPGRADABLE_TO_SIGNED:
-                                case EXISTS_FINGERPRINT_MATCH:
-                                    updateAndEnableExistingRepo(url, fp);
-                                    finishedAddingRepo();
-                                    break;
+                            case EXISTS_DISABLED:
+                            case EXISTS_UPGRADABLE_TO_SIGNED:
+                            case EXISTS_FINGERPRINT_MATCH:
+                                updateAndEnableExistingRepo(url, fp);
+                                finishedAddingRepo();
+                                break;
 
-                                default:
-                                    finishedAddingRepo();
-                                    break;
-                            }
+                            default:
+                                finishedAddingRepo();
+                                break;
                         }
                     }
             );
@@ -507,23 +493,15 @@ public class ManageReposActivity extends AppCompatActivity implements LoaderMana
                             credentialsDialog.setTitle(R.string.login_title);
                             credentialsDialog.setButton(DialogInterface.BUTTON_NEGATIVE,
                                     getString(R.string.cancel),
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                            // cancel parent dialog, don't add repo
-                                            addRepoDialog.cancel();
-                                        }
+                                    (dialog, which) -> {
+                                        dialog.dismiss();
+                                        // cancel parent dialog, don't add repo
+                                        addRepoDialog.cancel();
                                     });
 
                             credentialsDialog.setButton(DialogInterface.BUTTON_POSITIVE,
                                     getString(R.string.ok),
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            createNewRepo(newAddress, fingerprint, nameInput.getText().toString(), passwordInput.getText().toString());
-                                        }
-                                    });
+                                    (dialog, which) -> createNewRepo(newAddress, fingerprint, nameInput.getText().toString(), passwordInput.getText().toString()));
 
                             credentialsDialog.show();
 
@@ -538,18 +516,15 @@ public class ManageReposActivity extends AppCompatActivity implements LoaderMana
 
             Button skip = addRepoDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
             skip.setText(R.string.skip);
-            skip.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Still proceed with adding the repo, just don't bother searching for
-                    // a better alternative than the one provided.
-                    // The reason for this is that if they are not connected to the internet,
-                    // or their internet is playing up, then you'd have to wait for several
-                    // connection timeouts before being able to proceed.
+            skip.setOnClickListener(v -> {
+                // Still proceed with adding the repo, just don't bother searching for
+                // a better alternative than the one provided.
+                // The reason for this is that if they are not connected to the internet,
+                // or their internet is playing up, then you'd have to wait for several
+                // connection timeouts before being able to proceed.
 
-                    createNewRepo(originalAddress, fingerprint);
-                    checker.cancel(false);
-                }
+                createNewRepo(originalAddress, fingerprint);
+                checker.cancel(false);
             });
 
             checker.execute(originalAddress);

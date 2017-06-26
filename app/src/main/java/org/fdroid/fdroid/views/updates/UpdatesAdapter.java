@@ -13,7 +13,9 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
+
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegatesManager;
+
 import org.fdroid.fdroid.AppUpdateStatusManager;
 import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.data.AppProvider;
@@ -25,7 +27,6 @@ import org.fdroid.fdroid.views.updates.items.UpdateableAppsHeader;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -112,12 +113,7 @@ public class UpdatesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             }
         }
 
-        Collections.sort(appsToShowStatus, new Comparator<AppStatus>() {
-            @Override
-            public int compare(AppStatus o1, AppStatus o2) {
-                return o1.status.app.name.compareTo(o2.status.app.name);
-            }
-        });
+        Collections.sort(appsToShowStatus, (o1, o2) -> o1.status.app.name.compareTo(o2.status.app.name));
 
         populateItems();
     }

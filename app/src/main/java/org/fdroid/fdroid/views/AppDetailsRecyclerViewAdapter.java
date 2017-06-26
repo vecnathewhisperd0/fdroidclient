@@ -340,25 +340,22 @@ public class AppDetailsRecyclerViewAdapter
                     .build();
             descriptionView.setMaxLines(MAX_LINES);
             descriptionView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
-            descriptionMoreView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Make this "header section" the focused child, so that RecyclerView will use
-                    // it as the anchor in the layout process. Otherwise the RV might select another
-                    // view as the anchor, resulting in that the top of this view is instead scrolled
-                    // off the screen. Refer to LinearLayoutManager.updateAnchorFromChildren(...).
-                    recyclerView.requestChildFocus(itemView, itemView);
-                    if (TextViewCompat.getMaxLines(descriptionView) != MAX_LINES) {
-                        descriptionView.setMaxLines(MAX_LINES);
-                        descriptionMoreView.setText(R.string.more);
-                        descriptionIsExpanded = false;
-                    } else {
-                        descriptionView.setMaxLines(Integer.MAX_VALUE);
-                        descriptionMoreView.setText(R.string.less);
-                        descriptionIsExpanded = true;
-                    }
-                    updateAntiFeaturesWarning();
+            descriptionMoreView.setOnClickListener(v -> {
+                // Make this "header section" the focused child, so that RecyclerView will use
+                // it as the anchor in the layout process. Otherwise the RV might select another
+                // view as the anchor, resulting in that the top of this view is instead scrolled
+                // off the screen. Refer to LinearLayoutManager.updateAnchorFromChildren(...).
+                recyclerView.requestChildFocus(itemView, itemView);
+                if (TextViewCompat.getMaxLines(descriptionView) != MAX_LINES) {
+                    descriptionView.setMaxLines(MAX_LINES);
+                    descriptionMoreView.setText(R.string.more);
+                    descriptionIsExpanded = false;
+                } else {
+                    descriptionView.setMaxLines(Integer.MAX_VALUE);
+                    descriptionMoreView.setText(R.string.less);
+                    descriptionIsExpanded = true;
                 }
+                updateAntiFeaturesWarning();
             });
         }
 
@@ -444,14 +441,11 @@ public class AppDetailsRecyclerViewAdapter
                     spannable.setSpan(safeUrlSpan, start, end, flags);
                 }
             }
-            descriptionView.post(new Runnable() {
-                @Override
-                public void run() {
-                    if (descriptionView.getLineCount() <= HeaderViewHolder.MAX_LINES && app.antiFeatures == null) {
-                        descriptionMoreView.setVisibility(View.GONE);
-                    } else {
-                        descriptionMoreView.setVisibility(View.VISIBLE);
-                    }
+            descriptionView.post(() -> {
+                if (descriptionView.getLineCount() <= HeaderViewHolder.MAX_LINES && app.antiFeatures == null) {
+                    descriptionMoreView.setVisibility(View.GONE);
+                } else {
+                    descriptionMoreView.setVisibility(View.VISIBLE);
                 }
             });
             if (app.antiFeatures != null) {
@@ -505,12 +499,7 @@ public class AppDetailsRecyclerViewAdapter
                 buttonLayout.setVisibility(View.VISIBLE);
                 progressLayout.setVisibility(View.GONE);
             }
-            progressCancel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    callbacks.installCancel();
-                }
-            });
+            progressCancel.setOnClickListener(v -> callbacks.installCancel());
 
         }
 
@@ -629,12 +618,7 @@ public class AppDetailsRecyclerViewAdapter
         private void addDonateOption(@LayoutRes int layout, final String uri) {
             LayoutInflater inflater = LayoutInflater.from(context);
             View option = inflater.inflate(layout, donationOptionsLayout, false);
-            option.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onLinkClicked(uri);
-                }
-            });
+            option.setOnClickListener(v -> onLinkClicked(uri));
             donationOptionsLayout.addView(option);
         }
     }
@@ -667,12 +651,9 @@ public class AppDetailsRecyclerViewAdapter
         }
 
         public void bindModel() {
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    setShowVersions(!showVersions);
-                    updateExpandableItem(showVersions);
-                }
+            itemView.setOnClickListener(v -> {
+                setShowVersions(!showVersions);
+                updateExpandableItem(showVersions);
             });
             headerView.setText(R.string.versions);
             updateExpandableItem(showVersions);
@@ -690,15 +671,12 @@ public class AppDetailsRecyclerViewAdapter
         }
 
         public void bindModel() {
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    boolean shouldBeVisible = contentView.getVisibility() != View.VISIBLE;
-                    contentView.setVisibility(shouldBeVisible ? View.VISIBLE : View.GONE);
-                    updateExpandableItem(shouldBeVisible);
-                    if (shouldBeVisible && recyclerView != null) {
-                        ((LinearLayoutManager) recyclerView.getLayoutManager()).scrollToPositionWithOffset(items.indexOf(VIEWTYPE_PERMISSIONS), 0);
-                    }
+            itemView.setOnClickListener(v -> {
+                boolean shouldBeVisible = contentView.getVisibility() != View.VISIBLE;
+                contentView.setVisibility(shouldBeVisible ? View.VISIBLE : View.GONE);
+                updateExpandableItem(shouldBeVisible);
+                if (shouldBeVisible && recyclerView != null) {
+                    ((LinearLayoutManager) recyclerView.getLayoutManager()).scrollToPositionWithOffset(items.indexOf(VIEWTYPE_PERMISSIONS), 0);
                 }
             });
             headerView.setText(R.string.permissions);
@@ -721,15 +699,12 @@ public class AppDetailsRecyclerViewAdapter
         }
 
         public void bindModel() {
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    boolean shouldBeVisible = contentView.getVisibility() != View.VISIBLE;
-                    contentView.setVisibility(shouldBeVisible ? View.VISIBLE : View.GONE);
-                    updateExpandableItem(shouldBeVisible);
-                    if (shouldBeVisible && recyclerView != null) {
-                        ((LinearLayoutManager) recyclerView.getLayoutManager()).scrollToPositionWithOffset(items.indexOf(VIEWTYPE_LINKS), 0);
-                    }
+            itemView.setOnClickListener(v -> {
+                boolean shouldBeVisible = contentView.getVisibility() != View.VISIBLE;
+                contentView.setVisibility(shouldBeVisible ? View.VISIBLE : View.GONE);
+                updateExpandableItem(shouldBeVisible);
+                if (shouldBeVisible && recyclerView != null) {
+                    ((LinearLayoutManager) recyclerView.getLayoutManager()).scrollToPositionWithOffset(items.indexOf(VIEWTYPE_LINKS), 0);
                 }
             });
             headerView.setText(R.string.links);
@@ -896,12 +871,7 @@ public class AppDetailsRecyclerViewAdapter
             for (final View v : views) {
                 v.setEnabled(apk.compatible);
             }
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    callbacks.installApk(apk);
-                }
-            });
+            itemView.setOnClickListener(v -> callbacks.installApk(apk));
         }
     }
 
@@ -919,12 +889,7 @@ public class AppDetailsRecyclerViewAdapter
         }
         TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(view, resIdDrawable, 0, 0, 0);
         parent.addView(view);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onLinkClicked(url);
-            }
-        });
+        view.setOnClickListener(v -> onLinkClicked(url));
     }
 
     private String getInstalledStatus(final Apk apk) {

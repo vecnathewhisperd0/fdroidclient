@@ -6,7 +6,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.net.Uri;
@@ -233,24 +232,11 @@ public class SwapWorkflowActivity extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.swap_join_same_wifi)
                 .setMessage(R.string.swap_join_same_wifi_desc)
-                .setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Do nothing
-                    }
+                .setNeutralButton(R.string.cancel, (dialog, which) -> {
+                    // Do nothing
                 }
-                ).setPositiveButton(R.string.wifi, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
-                    }
-                }
-                ).setNegativeButton(R.string.wifi_ap, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        promptToSetupWifiAP();
-                    }
-                }
+                ).setPositiveButton(R.string.wifi, (dialog, which) -> startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK))
+        ).setNegativeButton(R.string.wifi_ap, (dialog, which) -> promptToSetupWifiAP()
         ).create().show();
     }
 
@@ -345,12 +331,7 @@ public class SwapWorkflowActivity extends AppCompatActivity {
         toolbar.setBackgroundColor(getResources().getColor(currentView.getToolbarColour()));
         toolbar.setTitle(currentView.getToolbarTitle());
         toolbar.setNavigationIcon(R.drawable.ic_close_white);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onToolbarCancel();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> onToolbarCancel());
         container.addView(view);
         supportInvalidateOptionsMenu();
 
@@ -391,11 +372,8 @@ public class SwapWorkflowActivity extends AppCompatActivity {
                     .setTitle(R.string.swap_not_enabled)
                     .setMessage(R.string.swap_not_enabled_description)
                     .setCancelable(true)
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            // Do nothing. The dialog will get dismissed anyway, which is all we ever wanted...
-                        }
+                    .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                        // Do nothing. The dialog will get dismissed anyway, which is all we ever wanted...
                     })
                     .create().show();
         } else {
@@ -425,10 +403,7 @@ public class SwapWorkflowActivity extends AppCompatActivity {
                     .setMessage(R.string.swap_cant_send_no_bluetooth)
                     .setNegativeButton(
                             R.string.cancel,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) { }
-                            }
+                            (dialog, which) -> { }
                     ).create().show();
         }
     }

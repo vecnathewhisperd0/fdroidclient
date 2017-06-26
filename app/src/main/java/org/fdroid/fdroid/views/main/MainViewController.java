@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.views.fragments.PreferencesFragment;
 import org.fdroid.fdroid.views.swap.SwapWorkflowActivity;
@@ -82,12 +83,7 @@ class MainViewController extends RecyclerView.ViewHolder {
                 activity.getString(R.string.app_name)));
 
         Button startButton = (Button) swapView.findViewById(R.id.button);
-        startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.startActivity(new Intent(activity, SwapWorkflowActivity.class));
-            }
-        });
+        startButton.setOnClickListener(v -> activity.startActivity(new Intent(activity, SwapWorkflowActivity.class)));
     }
 
     /**

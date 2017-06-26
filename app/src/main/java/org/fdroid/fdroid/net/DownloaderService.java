@@ -32,7 +32,6 @@ import android.os.Process;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 
-import org.fdroid.fdroid.ProgressListener;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.SanitizedFile;
@@ -40,7 +39,6 @@ import org.fdroid.fdroid.installer.ApkCache;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 /**
  * DownloaderService is a service that handles asynchronous download requests
@@ -192,15 +190,12 @@ public class DownloaderService extends Service {
 
         try {
             downloader = DownloaderFactory.create(this, uri, localFile);
-            downloader.setListener(new ProgressListener() {
-                @Override
-                public void onProgress(URL sourceUrl, int bytesRead, int totalBytes) {
-                    Intent intent = new Intent(Downloader.ACTION_PROGRESS);
-                    intent.setData(uri);
-                    intent.putExtra(Downloader.EXTRA_BYTES_READ, bytesRead);
-                    intent.putExtra(Downloader.EXTRA_TOTAL_BYTES, totalBytes);
-                    localBroadcastManager.sendBroadcast(intent);
-                }
+            downloader.setListener((sourceUrl, bytesRead, totalBytes) -> {
+                Intent intent1 = new Intent(Downloader.ACTION_PROGRESS);
+                intent1.setData(uri);
+                intent1.putExtra(Downloader.EXTRA_BYTES_READ, bytesRead);
+                intent1.putExtra(Downloader.EXTRA_TOTAL_BYTES, totalBytes);
+                localBroadcastManager.sendBroadcast(intent1);
             });
             downloader.download();
             if (downloader.isNotFound()) {

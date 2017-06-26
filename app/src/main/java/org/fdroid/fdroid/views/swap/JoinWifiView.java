@@ -15,10 +15,10 @@ import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.localrepo.SwapService;
@@ -50,12 +50,7 @@ public class JoinWifiView extends RelativeLayout implements SwapWorkflowActivity
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openAvailableNetworks();
-            }
-        });
+        setOnClickListener(v -> openAvailableNetworks());
         refreshWifiState();
 
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(
@@ -112,12 +107,9 @@ public class JoinWifiView extends RelativeLayout implements SwapWorkflowActivity
         MenuItem next = menu.findItem(R.id.action_next);
         MenuItemCompat.setShowAsAction(next,
                 MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);
-        next.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                getActivity().showSelectApps();
-                return true;
-            }
+        next.setOnMenuItemClickListener(item -> {
+            getActivity().showSelectApps();
+            return true;
         });
         return true;
     }

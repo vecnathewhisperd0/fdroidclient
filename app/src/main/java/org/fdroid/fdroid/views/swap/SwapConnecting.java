@@ -53,12 +53,7 @@ public class SwapConnecting extends LinearLayout implements SwapWorkflowActivity
         super.onFinishInflate();
 
         ((TextView) findViewById(R.id.heading)).setText(R.string.swap_connecting);
-        findViewById(R.id.back).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().showIntro();
-            }
-        });
+        findViewById(R.id.back).setOnClickListener(v -> getActivity().showIntro());
 
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(
                 repoUpdateReceiver, new IntentFilter(UpdateService.LOCAL_ACTION_STATUS));

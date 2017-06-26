@@ -590,12 +590,9 @@ public class SwapService extends Service {
     }
 
     @SuppressWarnings("FieldCanBeLocal") // The constructor will get bloated if these are all local...
-    private final Preferences.ChangeListener httpsEnabledListener = new Preferences.ChangeListener() {
-        @Override
-        public void onPreferenceChange() {
-            Log.i(TAG, "Swap over HTTPS preference changed.");
-            stopWifiIfEnabled(true);
-        }
+    private final Preferences.ChangeListener httpsEnabledListener = () -> {
+        Log.i(TAG, "Swap over HTTPS preference changed.");
+        stopWifiIfEnabled(true);
     };
 
     @SuppressWarnings("FieldCanBeLocal") // The constructor will get bloated if these are all local...

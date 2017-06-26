@@ -12,9 +12,9 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.support.v4.preference.PreferenceFragment;
 import android.text.TextUtils;
+
 import com.geecko.QuickLyric.view.AppCompatListPreference;
-import info.guardianproject.netcipher.NetCipher;
-import info.guardianproject.netcipher.proxy.OrbotHelper;
+
 import org.fdroid.fdroid.AppDetails2;
 import org.fdroid.fdroid.CleanCacheService;
 import org.fdroid.fdroid.FDroidApp;
@@ -25,6 +25,9 @@ import org.fdroid.fdroid.UpdateService;
 import org.fdroid.fdroid.data.RepoProvider;
 import org.fdroid.fdroid.installer.InstallHistoryService;
 import org.fdroid.fdroid.installer.PrivilegedInstaller;
+
+import info.guardianproject.netcipher.NetCipher;
+import info.guardianproject.netcipher.proxy.OrbotHelper;
 
 public class PreferencesFragment extends PreferenceFragment
         implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -257,18 +260,15 @@ public class PreferencesFragment extends PreferenceFragment
             pref.setDefaultValue(installed);
             pref.setChecked(enabled && installed);
 
-            pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    SharedPreferences.Editor editor = pref.getSharedPreferences().edit();
-                    if (pref.isChecked()) {
-                        editor.remove(Preferences.PREF_PRIVILEGED_INSTALLER);
-                    } else {
-                        editor.putBoolean(Preferences.PREF_PRIVILEGED_INSTALLER, false);
-                    }
-                    editor.apply();
-                    return true;
+            pref.setOnPreferenceClickListener(preference -> {
+                SharedPreferences.Editor editor = pref.getSharedPreferences().edit();
+                if (pref.isChecked()) {
+                    editor.remove(Preferences.PREF_PRIVILEGED_INSTALLER);
+                } else {
+                    editor.putBoolean(Preferences.PREF_PRIVILEGED_INSTALLER, false);
                 }
+                editor.apply();
+                return true;
             });
         }
     }
@@ -281,18 +281,14 @@ public class PreferencesFragment extends PreferenceFragment
             return;
         }
         updatePrivilegedExtensionPref.setPersistent(false);
-        updatePrivilegedExtensionPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+        updatePrivilegedExtensionPref.setOnPreferenceClickListener(preference -> {
+            // Open details of F-Droid Privileged
+            Intent intent = new Intent(getActivity(), AppDetails2.class);
+            intent.putExtra(AppDetails2.EXTRA_APPID,
+                    PrivilegedInstaller.PRIVILEGED_EXTENSION_PACKAGE_NAME);
+            startActivity(intent);
 
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                // Open details of F-Droid Privileged
-                Intent intent = new Intent(getActivity(), AppDetails2.class);
-                intent.putExtra(AppDetails2.EXTRA_APPID,
-                        PrivilegedInstaller.PRIVILEGED_EXTENSION_PACKAGE_NAME);
-                startActivity(intent);
-
-                return true;
-            }
+            return true;
         });
     }
 
@@ -303,15 +299,11 @@ public class PreferencesFragment extends PreferenceFragment
      * will actually _install_ apps, not just fetch their .apk file automatically.
      */
     private void initAutoFetchUpdatesPreference() {
-        updateAutoDownloadPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                if (newValue instanceof Boolean && (boolean) newValue) {
-                    UpdateService.autoDownloadUpdates(getContext());
-                }
-                return true;
+        updateAutoDownloadPref.setOnPreferenceChangeListener((preference, newValue) -> {
+            if (newValue instanceof Boolean && (boolean) newValue) {
+                UpdateService.autoDownloadUpdates(getContext());
             }
+            return true;
         });
 
         if (PrivilegedInstaller.isDefault(getContext())) {
@@ -327,24 +319,21 @@ public class PreferencesFragment extends PreferenceFragment
         boolean useTor = Preferences.get().isTorEnabled();
         useTorCheckPref.setDefaultValue(useTor);
         useTorCheckPref.setChecked(useTor);
-        useTorCheckPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object enabled) {
-                if ((Boolean) enabled) {
-                    final Activity activity = getActivity();
-                    enableProxyCheckPref.setEnabled(false);
-                    if (OrbotHelper.isOrbotInstalled(activity)) {
-                        NetCipher.useTor();
-                    } else {
-                        Intent intent = OrbotHelper.getOrbotInstallIntent(activity);
-                        activity.startActivityForResult(intent, REQUEST_INSTALL_ORBOT);
-                    }
+        useTorCheckPref.setOnPreferenceChangeListener((preference, enabled) -> {
+            if ((Boolean) enabled) {
+                final Activity activity = getActivity();
+                enableProxyCheckPref.setEnabled(false);
+                if (OrbotHelper.isOrbotInstalled(activity)) {
+                    NetCipher.useTor();
                 } else {
-                    enableProxyCheckPref.setEnabled(true);
-                    NetCipher.clearProxy();
+                    Intent intent = OrbotHelper.getOrbotInstallIntent(activity);
+                    activity.startActivityForResult(intent, REQUEST_INSTALL_ORBOT);
                 }
-                return true;
+            } else {
+                enableProxyCheckPref.setEnabled(true);
+                NetCipher.clearProxy();
             }
+            return true;
         });
     }
 

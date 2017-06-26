@@ -26,7 +26,6 @@ import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
@@ -49,7 +48,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewTreeObserver;
 import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -164,12 +162,9 @@ public class AppDetails2 extends AppCompatActivity implements ShareChooserDialog
         recyclerView.setAdapter(adapter);
 
         recyclerView.getViewTreeObserver().addOnPreDrawListener(
-                new ViewTreeObserver.OnPreDrawListener() {
-                    @Override
-                    public boolean onPreDraw() {
-                        supportStartPostponedEnterTransition();
-                        return true;
-                    }
+                () -> {
+                    supportStartPostponedEnterTransition();
+                    return true;
                 }
         );
 
@@ -381,19 +376,9 @@ public class AppDetails2 extends AppCompatActivity implements ShareChooserDialog
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(R.string.installIncompatible);
             builder.setPositiveButton(R.string.yes,
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog,
-                                            int whichButton) {
-                            initiateInstall(apk);
-                        }
-                    });
+                    (dialog, whichButton) -> initiateInstall(apk));
             builder.setNegativeButton(R.string.no,
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog,
-                                            int whichButton) {
-                        }
+                    (dialog, whichButton) -> {
                     });
             AlertDialog alert = builder.create();
             alert.show();
@@ -404,12 +389,7 @@ public class AppDetails2 extends AppCompatActivity implements ShareChooserDialog
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(R.string.SignatureMismatch).setPositiveButton(
                     R.string.ok,
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
+                    (dialog, id) -> dialog.cancel());
             AlertDialog alert = builder.create();
             alert.show();
             return;
@@ -671,18 +651,15 @@ public class AppDetails2 extends AppCompatActivity implements ShareChooserDialog
     }
 
     private void onAppChanged() {
-        recyclerView.post(new Runnable() {
-            @Override
-            public void run() {
-                if (!reset(app.packageName)) {
-                    AppDetails2.this.finish();
-                    return;
-                }
-                AppDetailsRecyclerViewAdapter adapter = (AppDetailsRecyclerViewAdapter) recyclerView.getAdapter();
-                adapter.updateItems(app);
-                refreshStatus();
-                supportInvalidateOptionsMenu();
+        recyclerView.post(() -> {
+            if (!reset(app.packageName)) {
+                AppDetails2.this.finish();
+                return;
             }
+            AppDetailsRecyclerViewAdapter adapter = (AppDetailsRecyclerViewAdapter) recyclerView.getAdapter();
+            adapter.updateItems(app);
+            refreshStatus();
+            supportInvalidateOptionsMenu();
         });
     }
 

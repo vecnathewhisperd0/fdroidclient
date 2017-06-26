@@ -27,6 +27,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.NfcHelper;
 import org.fdroid.fdroid.NfcNotEnabledActivity;
@@ -123,12 +124,7 @@ public class RepoDetailsActivity extends ActionBarActivity {
     @TargetApi(14)
     private void setNfc() {
         if (NfcHelper.setPushMessage(this, Utils.getSharingUri(repo))) {
-            findViewById(android.R.id.content).post(new Runnable() {
-                @Override
-                public void run() {
-                    onNewIntent(getIntent());
-                }
-            });
+            findViewById(android.R.id.content).post(() -> onNewIntent(getIntent()));
         }
     }
 
@@ -347,20 +343,14 @@ public class RepoDetailsActivity extends ActionBarActivity {
         new AlertDialog.Builder(this)
             .setTitle(R.string.repo_confirm_delete_title)
             .setMessage(R.string.repo_confirm_delete_body)
-            .setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    RepoProvider.Helper.remove(getApplicationContext(), repoId);
-                    finish();
-                }
+            .setPositiveButton(R.string.delete, (dialog, which) -> {
+                RepoProvider.Helper.remove(getApplicationContext(), repoId);
+                finish();
             }).setNegativeButton(android.R.string.cancel,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Do nothing...
-                    }
+                (dialog, which) -> {
+                    // Do nothing...
                 }
-            ).show();
+        ).show();
     }
 
     public void showChangePasswordDialog(final View parentView) {
@@ -376,39 +366,31 @@ public class RepoDetailsActivity extends ActionBarActivity {
         credentialsDialog.setTitle(R.string.repo_edit_credentials);
         credentialsDialog.setButton(DialogInterface.BUTTON_NEGATIVE,
                 getString(R.string.cancel),
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
+                (dialog, which) -> dialog.dismiss());
 
         credentialsDialog.setButton(DialogInterface.BUTTON_POSITIVE,
                 getString(R.string.ok),
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                (dialog, which) -> {
 
-                        final String name = nameInput.getText().toString();
-                        final String password = passwordInput.getText().toString();
+                    final String name = nameInput.getText().toString();
+                    final String password = passwordInput.getText().toString();
 
-                        if (!TextUtils.isEmpty(name)) {
+                    if (!TextUtils.isEmpty(name)) {
 
-                            final ContentValues values = new ContentValues(2);
-                            values.put(RepoTable.Cols.USERNAME, name);
-                            values.put(RepoTable.Cols.PASSWORD, password);
+                        final ContentValues values = new ContentValues(2);
+                        values.put(RepoTable.Cols.USERNAME, name);
+                        values.put(RepoTable.Cols.PASSWORD, password);
 
-                            RepoProvider.Helper.update(RepoDetailsActivity.this, repo, values);
+                        RepoProvider.Helper.update(RepoDetailsActivity.this, repo, values);
 
-                            updateRepoView();
+                        updateRepoView();
 
-                            dialog.dismiss();
+                        dialog.dismiss();
 
-                        } else {
+                    } else {
 
-                            Toast.makeText(RepoDetailsActivity.this, R.string.repo_error_empty_username,
-                                    Toast.LENGTH_LONG).show();
-                        }
+                        Toast.makeText(RepoDetailsActivity.this, R.string.repo_error_empty_username,
+                                Toast.LENGTH_LONG).show();
                     }
                 });
 

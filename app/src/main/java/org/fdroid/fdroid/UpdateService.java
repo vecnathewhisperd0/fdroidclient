@@ -51,7 +51,6 @@ import org.fdroid.fdroid.data.Schema;
 import org.fdroid.fdroid.installer.InstallManagerService;
 import org.fdroid.fdroid.views.main.MainActivity;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -335,13 +334,8 @@ public class UpdateService extends IntentService {
         if (toastHandler == null) {
             toastHandler = new Handler(Looper.getMainLooper());
         }
-        toastHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(getApplicationContext(),
-                        R.string.warning_no_internet, Toast.LENGTH_SHORT).show();
-            }
-        });
+        toastHandler.post(() -> Toast.makeText(getApplicationContext(),
+                R.string.warning_no_internet, Toast.LENGTH_SHORT).show());
     }
 
     @Override
@@ -507,47 +501,38 @@ public class UpdateService extends IntentService {
      * be set again for each download.
      */
     private void setProgressListeners(RepoUpdater updater) {
-        updater.setDownloadProgressListener(new ProgressListener() {
-            @Override
-            public void onProgress(URL sourceUrl, int bytesRead, int totalBytes) {
-                Log.i(TAG, "downloadProgressReceiver " + sourceUrl);
-                String downloadedSizeFriendly = Utils.getFriendlySize(bytesRead);
-                int percent = -1;
-                if (totalBytes > 0) {
-                    percent = (int) ((double) bytesRead / totalBytes * 100);
-                }
-                String message;
-                if (totalBytes == -1) {
-                    message = getString(R.string.status_download_unknown_size, sourceUrl, downloadedSizeFriendly);
-                    percent = -1;
-                } else {
-                    String totalSizeFriendly = Utils.getFriendlySize(totalBytes);
-                    message = getString(R.string.status_download, sourceUrl, downloadedSizeFriendly, totalSizeFriendly, percent);
-                }
-                sendStatus(getApplicationContext(), STATUS_INFO, message, percent);
+        updater.setDownloadProgressListener((sourceUrl, bytesRead, totalBytes) -> {
+            Log.i(TAG, "downloadProgressReceiver " + sourceUrl);
+            String downloadedSizeFriendly = Utils.getFriendlySize(bytesRead);
+            int percent = -1;
+            if (totalBytes > 0) {
+                percent = (int) ((double) bytesRead / totalBytes * 100);
             }
+            String message;
+            if (totalBytes == -1) {
+                message = getString(R.string.status_download_unknown_size, sourceUrl, downloadedSizeFriendly);
+                percent = -1;
+            } else {
+                String totalSizeFriendly = Utils.getFriendlySize(totalBytes);
+                message = getString(R.string.status_download, sourceUrl, downloadedSizeFriendly, totalSizeFriendly, percent);
+            }
+            sendStatus(getApplicationContext(), STATUS_INFO, message, percent);
         });
 
-        updater.setProcessXmlProgressListener(new ProgressListener() {
-            @Override
-            public void onProgress(URL sourceUrl, int bytesRead, int totalBytes) {
-                String downloadedSize = Utils.getFriendlySize(bytesRead);
-                String totalSize = Utils.getFriendlySize(totalBytes);
-                int percent = -1;
-                if (totalBytes > 0) {
-                    percent = (int) ((double) bytesRead / totalBytes * 100);
-                }
-                String message = getString(R.string.status_processing_xml_percent, sourceUrl, downloadedSize, totalSize, percent);
-                sendStatus(getApplicationContext(), STATUS_INFO, message, percent);
+        updater.setProcessXmlProgressListener((sourceUrl, bytesRead, totalBytes) -> {
+            String downloadedSize = Utils.getFriendlySize(bytesRead);
+            String totalSize = Utils.getFriendlySize(totalBytes);
+            int percent = -1;
+            if (totalBytes > 0) {
+                percent = (int) ((double) bytesRead / totalBytes * 100);
             }
+            String message = getString(R.string.status_processing_xml_percent, sourceUrl, downloadedSize, totalSize, percent);
+            sendStatus(getApplicationContext(), STATUS_INFO, message, percent);
         });
 
-        updater.setCommittingProgressListener(new ProgressListener() {
-            @Override
-            public void onProgress(URL sourceUrl, int bytesRead, int totalBytes) {
-                String message = getString(R.string.status_inserting_apps);
-                sendStatus(getApplicationContext(), STATUS_INFO, message);
-            }
+        updater.setCommittingProgressListener((sourceUrl, bytesRead, totalBytes) -> {
+            String message = getString(R.string.status_inserting_apps);
+            sendStatus(getApplicationContext(), STATUS_INFO, message);
         });
     }
 }

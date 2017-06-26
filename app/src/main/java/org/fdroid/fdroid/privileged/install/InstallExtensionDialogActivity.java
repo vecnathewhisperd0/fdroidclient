@@ -21,7 +21,6 @@ package org.fdroid.fdroid.privileged.install;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -94,12 +93,9 @@ public class InstallExtensionDialogActivity extends FragmentActivity {
         if (android.os.Build.VERSION.SDK_INT >= 22) {
             AlertDialog.Builder alertBuilder = new AlertDialog.Builder(theme);
             alertBuilder.setMessage(R.string.system_install_not_supported);
-            alertBuilder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    InstallExtensionDialogActivity.this.setResult(Activity.RESULT_CANCELED);
-                    InstallExtensionDialogActivity.this.finish();
-                }
+            alertBuilder.setPositiveButton(R.string.ok, (dialog, which) -> {
+                InstallExtensionDialogActivity.this.setResult(Activity.RESULT_CANCELED);
+                InstallExtensionDialogActivity.this.finish();
             });
             alertBuilder.create().show();
             return;
@@ -109,18 +105,10 @@ public class InstallExtensionDialogActivity extends FragmentActivity {
         alertBuilder.setTitle(R.string.system_install_question);
         String message = InstallExtension.create(getApplicationContext()).getWarningString();
         alertBuilder.setMessage(Html.fromHtml(message));
-        alertBuilder.setPositiveButton(R.string.system_install_button_install, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                checkRootTask.execute();
-            }
-        });
-        alertBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                InstallExtensionDialogActivity.this.setResult(Activity.RESULT_CANCELED);
-                InstallExtensionDialogActivity.this.finish();
-            }
+        alertBuilder.setPositiveButton(R.string.system_install_button_install, (dialog, which) -> checkRootTask.execute());
+        alertBuilder.setNegativeButton(R.string.cancel, (dialog, which) -> {
+            InstallExtensionDialogActivity.this.setResult(Activity.RESULT_CANCELED);
+            InstallExtensionDialogActivity.this.finish();
         });
         alertBuilder.create().show();
     }
@@ -177,12 +165,9 @@ public class InstallExtensionDialogActivity extends FragmentActivity {
                 AlertDialog.Builder alertBuilder = new AlertDialog.Builder(theme)
                         .setTitle(R.string.root_access_denied_title)
                         .setMessage(getString(R.string.root_access_denied_body))
-                        .setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                InstallExtensionDialogActivity.this.setResult(Activity.RESULT_CANCELED);
-                                InstallExtensionDialogActivity.this.finish();
-                            }
+                        .setNeutralButton(android.R.string.ok, (dialog, which) -> {
+                            InstallExtensionDialogActivity.this.setResult(Activity.RESULT_CANCELED);
+                            InstallExtensionDialogActivity.this.finish();
                         });
                 alertBuilder.create().show();
             }
@@ -254,13 +239,10 @@ public class InstallExtensionDialogActivity extends FragmentActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(theme)
                 .setTitle(title)
                 .setMessage(message)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        InstallExtensionDialogActivity.this.setResult(result);
-                        InstallExtensionDialogActivity.this.finish();
-                        startActivity(new Intent(InstallExtensionDialogActivity.this, MainActivity.class));
-                    }
+                .setPositiveButton(R.string.ok, (dialogInterface, i) -> {
+                    InstallExtensionDialogActivity.this.setResult(result);
+                    InstallExtensionDialogActivity.this.finish();
+                    startActivity(new Intent(InstallExtensionDialogActivity.this, MainActivity.class));
                 })
                 .setCancelable(false);
         builder.create().show();
@@ -278,18 +260,10 @@ public class InstallExtensionDialogActivity extends FragmentActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(theme)
                     .setTitle(R.string.system_uninstall)
                     .setMessage(Html.fromHtml(message))
-                    .setPositiveButton(R.string.system_uninstall_button, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            checkRootTask.execute();
-                        }
-                    })
-                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            InstallExtensionDialogActivity.this.setResult(Activity.RESULT_CANCELED);
-                            InstallExtensionDialogActivity.this.finish();
-                        }
+                    .setPositiveButton(R.string.system_uninstall_button, (dialogInterface, i) -> checkRootTask.execute())
+                    .setNegativeButton(R.string.cancel, (dialog, which) -> {
+                        InstallExtensionDialogActivity.this.setResult(Activity.RESULT_CANCELED);
+                        InstallExtensionDialogActivity.this.finish();
                     });
             builder.create().show();
         } else {

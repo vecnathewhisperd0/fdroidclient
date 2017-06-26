@@ -20,7 +20,6 @@
 package org.fdroid.fdroid.privileged.views;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -84,30 +83,21 @@ public class UninstallDialogActivity extends FragmentActivity {
         builder.setTitle(appInfo.loadLabel(pm));
         builder.setIcon(appInfo.loadIcon(pm));
         builder.setPositiveButton(android.R.string.ok,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent data = new Intent();
-                        data.putExtra(Installer.EXTRA_APK, apk);
-                        setResult(Activity.RESULT_OK, intent);
-                        finish();
-                    }
+                (dialog, which) -> {
+                    Intent data = new Intent();
+                    data.putExtra(Installer.EXTRA_APK, apk);
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
                 });
         builder.setNegativeButton(android.R.string.cancel,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        setResult(Activity.RESULT_CANCELED);
-                        finish();
-                    }
+                (dialog, which) -> {
+                    setResult(Activity.RESULT_CANCELED);
+                    finish();
                 });
         builder.setOnCancelListener(
-                new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        setResult(Activity.RESULT_CANCELED);
-                        finish();
-                    }
+                dialog -> {
+                    setResult(Activity.RESULT_CANCELED);
+                    finish();
                 });
         builder.setMessage(messageId);
         builder.create().show();

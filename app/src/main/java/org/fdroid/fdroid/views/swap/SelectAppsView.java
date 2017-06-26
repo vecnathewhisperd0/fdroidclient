@@ -26,9 +26,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -86,11 +84,7 @@ public class SelectAppsView extends ListView implements
         // either reconnect with an existing loader or start a new one
         getActivity().getSupportLoaderManager().initLoader(LOADER_INSTALLED_APPS, null, this);
 
-        setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                toggleAppSelected(position);
-            }
-        });
+        setOnItemClickListener((parent, v, position, id) -> toggleAppSelected(position));
     }
 
     @Override
@@ -100,12 +94,9 @@ public class SelectAppsView extends ListView implements
         MenuItem nextMenuItem = menu.findItem(R.id.action_next);
         int flags = MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT;
         MenuItemCompat.setShowAsAction(nextMenuItem, flags);
-        nextMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                getActivity().onAppsSelected();
-                return true;
-            }
+        nextMenuItem.setOnMenuItemClickListener(item -> {
+            getActivity().onAppsSelected();
+            return true;
         });
 
         SearchView searchView = new SearchView(getActivity());
@@ -282,12 +273,9 @@ public class SelectAppsView extends ListView implements
                 checkBox.setOnCheckedChangeListener(null);
 
                 checkBox.setChecked(listView.isItemChecked(listPosition));
-                checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        listView.setItemChecked(listPosition, isChecked);
-                        toggleAppSelected(listPosition);
-                    }
+                checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    listView.setItemChecked(listPosition, isChecked);
+                    toggleAppSelected(listPosition);
                 });
             }
 

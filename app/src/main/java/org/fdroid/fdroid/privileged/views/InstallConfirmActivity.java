@@ -36,9 +36,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
+
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.data.Apk;
@@ -93,10 +95,7 @@ public class InstallConfirmActivity extends FragmentActivity implements OnCancel
         tabHost.setup();
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         TabsAdapter adapter = new TabsAdapter(this, tabHost, viewPager);
-        adapter.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-            @Override
-            public void onTabChanged(String tabId) {
-            }
+        adapter.setOnTabChangedListener(tabId -> {
         });
 
         boolean permVisible = false;
@@ -171,12 +170,9 @@ public class InstallConfirmActivity extends FragmentActivity implements OnCancel
             okButton.setText(R.string.menu_install);
             okCanInstall = true;
         } else {
-            scrollView.setFullScrollAction(new Runnable() {
-                @Override
-                public void run() {
-                    okButton.setText(R.string.menu_install);
-                    okCanInstall = true;
-                }
+            scrollView.setFullScrollAction(() -> {
+                okButton.setText(R.string.menu_install);
+                okCanInstall = true;
             });
         }
     }

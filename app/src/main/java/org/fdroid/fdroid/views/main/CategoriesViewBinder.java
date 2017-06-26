@@ -23,7 +23,6 @@ import org.fdroid.fdroid.views.categories.CategoryController;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -55,12 +54,7 @@ class CategoriesViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
         categoriesList.setAdapter(categoryAdapter);
 
         FloatingActionButton searchFab = (FloatingActionButton) categoriesView.findViewById(R.id.btn_search);
-        searchFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.startActivity(new Intent(activity, AppListActivity.class));
-            }
-        });
+        searchFab.setOnClickListener(v -> activity.startActivity(new Intent(activity, AppListActivity.class)));
 
         activity.getSupportLoaderManager().initLoader(LOADER_ID, null, this);
     }
@@ -103,13 +97,10 @@ class CategoriesViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
             cursor.moveToNext();
         }
 
-        Collections.sort(categoryNames, new Comparator<String>() {
-            @Override
-            public int compare(String categoryOne, String categoryTwo) {
-                String localizedCategoryOne = CategoryController.translateCategory(activity, categoryOne);
-                String localizedCategoryTwo = CategoryController.translateCategory(activity, categoryTwo);
-                return localizedCategoryOne.compareTo(localizedCategoryTwo);
-            }
+        Collections.sort(categoryNames, (categoryOne, categoryTwo) -> {
+            String localizedCategoryOne = CategoryController.translateCategory(activity, categoryOne);
+            String localizedCategoryTwo = CategoryController.translateCategory(activity, categoryTwo);
+            return localizedCategoryOne.compareTo(localizedCategoryTwo);
         });
 
         categoryAdapter.setCategories(categoryNames);

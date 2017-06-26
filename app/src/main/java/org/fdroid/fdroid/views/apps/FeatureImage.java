@@ -156,6 +156,8 @@ public class FeatureImage extends AppCompatImageView {
         }
 
         alphaAnimator = ValueAnimator.ofInt(0, 255).setDuration(150);
+        // Can't use a lambda here because lint fails due to
+        // "NewApi: Calling new methods on older versions", and we can't set @TargetApi on a lambda.
         alphaAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -268,12 +270,9 @@ public class FeatureImage extends AppCompatImageView {
             @Override
             public void onLoadingComplete(String imageUri, View view, final Bitmap loadedImage) {
                 if (loadedImage != null) {
-                    new Palette.Builder(loadedImage).generate(new Palette.PaletteAsyncListener() {
-                        @Override
-                        public void onGenerated(Palette palette) {
-                            if (palette != null) {
-                                setColorAndAnimateChange(palette.getDominantColor(Color.LTGRAY));
-                            }
+                    new Palette.Builder(loadedImage).generate(palette -> {
+                        if (palette != null) {
+                            setColorAndAnimateChange(palette.getDominantColor(Color.LTGRAY));
                         }
                     });
                 }

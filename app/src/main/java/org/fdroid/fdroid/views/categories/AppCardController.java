@@ -18,10 +18,12 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+
 import org.fdroid.fdroid.AppDetails2;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.Utils;
@@ -185,12 +187,7 @@ public class AppCardController extends RecyclerView.ViewHolder
                 && TextUtils.isEmpty(currentApp.featureGraphic)
                 && featuredImage != null
                 && loadedImage != null) {
-            new Palette.Builder(loadedImage).generate(new Palette.PaletteAsyncListener() {
-                @Override
-                public void onGenerated(Palette palette) {
-                    featuredImage.setColorAndAnimateChange(palette.getDominantColor(Color.LTGRAY));
-                }
-            });
+            new Palette.Builder(loadedImage).generate(palette -> featuredImage.setColorAndAnimateChange(palette.getDominantColor(Color.LTGRAY)));
         }
     }
 

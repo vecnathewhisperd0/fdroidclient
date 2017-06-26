@@ -4,7 +4,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.TextView;
 
 public class AboutActivity extends AppCompatActivity {
@@ -24,11 +23,6 @@ public class AboutActivity extends AppCompatActivity {
             ((TextView) findViewById(R.id.version)).setText(versionName);
         }
 
-        findViewById(R.id.ok_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        findViewById(R.id.ok_button).setOnClickListener(v -> finish());
     }
 }

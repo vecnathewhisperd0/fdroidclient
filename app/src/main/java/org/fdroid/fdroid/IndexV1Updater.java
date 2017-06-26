@@ -86,15 +86,12 @@ public class IndexV1Updater extends RepoUpdater {
             final Uri dataUri = Uri.parse(repo.address).buildUpon().appendPath(SIGNED_FILE_NAME).build();
             downloader = DownloaderFactory.create(context, dataUri.toString());
             downloader.setCacheTag(repo.lastetag);
-            downloader.setListener(new ProgressListener() {
-                @Override
-                public void onProgress(URL sourceUrl, int bytesRead, int totalBytes) {
-                    Intent intent = new Intent(Downloader.ACTION_PROGRESS);
-                    intent.setData(dataUri);
-                    intent.putExtra(Downloader.EXTRA_BYTES_READ, bytesRead);
-                    intent.putExtra(Downloader.EXTRA_TOTAL_BYTES, totalBytes);
-                    localBroadcastManager.sendBroadcast(intent);
-                }
+            downloader.setListener((sourceUrl, bytesRead, totalBytes) -> {
+                Intent intent = new Intent(Downloader.ACTION_PROGRESS);
+                intent.setData(dataUri);
+                intent.putExtra(Downloader.EXTRA_BYTES_READ, bytesRead);
+                intent.putExtra(Downloader.EXTRA_TOTAL_BYTES, totalBytes);
+                localBroadcastManager.sendBroadcast(intent);
             });
             downloader.download();
             if (downloader.isNotFound()) {

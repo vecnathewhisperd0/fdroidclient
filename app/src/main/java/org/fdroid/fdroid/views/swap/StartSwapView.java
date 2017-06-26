@@ -19,7 +19,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -27,17 +26,19 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import cc.mvdan.accesspoint.WifiApControl;
+
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.localrepo.SwapService;
 import org.fdroid.fdroid.localrepo.peers.Peer;
 import org.fdroid.fdroid.net.WifiStateChangeService;
-import rx.Subscriber;
-import rx.Subscription;
 
 import java.util.ArrayList;
+
+import cc.mvdan.accesspoint.WifiApControl;
+import rx.Subscriber;
+import rx.Subscription;
 
 @SuppressWarnings("LineLength")
 public class StartSwapView extends RelativeLayout implements SwapWorkflowActivity.InnerView {
@@ -193,19 +194,9 @@ public class StartSwapView extends RelativeLayout implements SwapWorkflowActivit
     };
 
     private void uiInitButtons() {
-        findViewById(R.id.btn_send_fdroid).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().sendFDroid();
-            }
-        });
+        findViewById(R.id.btn_send_fdroid).setOnClickListener(v -> getActivity().sendFDroid());
 
-        findViewById(R.id.btn_qr_scanner).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().startQrWorkflow();
-            }
-        });
+        findViewById(R.id.btn_qr_scanner).setOnClickListener(v -> getActivity().startQrWorkflow());
     }
 
     /**
@@ -221,12 +212,9 @@ public class StartSwapView extends RelativeLayout implements SwapWorkflowActivit
         peopleNearbyAdapter = new PeopleNearbyAdapter(getContext());
         peopleNearbyList.setAdapter(peopleNearbyAdapter);
 
-        peopleNearbyList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Peer peer = peopleNearbyAdapter.getItem(position);
-                onPeerSelected(peer);
-            }
+        peopleNearbyList.setOnItemClickListener((parent, view, position, id) -> {
+            Peer peer = peopleNearbyAdapter.getItem(position);
+            onPeerSelected(peer);
         });
     }
 
@@ -346,12 +334,7 @@ public class StartSwapView extends RelativeLayout implements SwapWorkflowActivit
         // is ready, even if Bonjour is not yet.
         LocalBroadcastManager.getInstance(getContext()).registerReceiver(onWifiSwapStateChanged, new IntentFilter(SwapService.WIFI_STATE_CHANGE));
 
-        viewWifiNetwork.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().promptToSelectWifiNetwork();
-            }
-        });
+        viewWifiNetwork.setOnClickListener(v -> getActivity().promptToSelectWifiNetwork());
 
         uiUpdateWifiNetwork();
     }
@@ -416,18 +399,15 @@ public class StartSwapView extends RelativeLayout implements SwapWorkflowActivit
      * Both of these actions will be performed in a background thread which will send broadcast
      * intents when they are completed.
      */
-    private final CompoundButton.OnCheckedChangeListener onWifiSwitchToggled = new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (isChecked) {
-                Utils.debugLog(TAG, "Received onCheckChanged(true) for WiFi swap, asking in background thread to ensure WiFi swap is running.");
-                getManager().getWifiSwap().ensureRunningInBackground();
-            } else {
-                Utils.debugLog(TAG, "Received onCheckChanged(false) for WiFi swap, disabling WiFi swap in background thread.");
-                getManager().getWifiSwap().stopInBackground();
-            }
-            uiUpdateWifiNetwork();
+    private final CompoundButton.OnCheckedChangeListener onWifiSwitchToggled = (buttonView, isChecked) -> {
+        if (isChecked) {
+            Utils.debugLog(TAG, "Received onCheckChanged(true) for WiFi swap, asking in background thread to ensure WiFi swap is running.");
+            getManager().getWifiSwap().ensureRunningInBackground();
+        } else {
+            Utils.debugLog(TAG, "Received onCheckChanged(false) for WiFi swap, disabling WiFi swap in background thread.");
+            getManager().getWifiSwap().stopInBackground();
         }
+        uiUpdateWifiNetwork();
     };
 
     private void uiUpdateWifiNetwork() {

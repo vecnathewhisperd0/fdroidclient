@@ -81,12 +81,9 @@ public class RepoAdapter extends CursorAdapter {
 
         // Add this listener *after* setting the checked status, so we don't
         // invoke the listener while setting up the view...
-        switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (enabledListener != null) {
-                    enabledListener.onSetEnabled(repo, isChecked);
-                }
+        switchView.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (enabledListener != null) {
+                enabledListener.onSetEnabled(repo, isChecked);
             }
         });
 
