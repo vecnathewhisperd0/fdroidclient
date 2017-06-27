@@ -327,7 +327,7 @@
     <string name="keep_install_history">保持安装历史</string>
     <string name="keep_install_history_summary">在 F-Droid 内存储日志，记录所有安装和卸载</string>
     <string name="warning_no_internet">无法更新，是否连接到互联网？</string>
-<string name="main_menu__latest_apps">最新的</string>
+<string name="main_menu__latest_apps">最新</string>
     <string name="main_menu__categories">类别</string>
     <string name="main_menu__swap_nearby">附近</string>
 
