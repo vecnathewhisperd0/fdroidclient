@@ -521,4 +521,6 @@
 	<item quantity="one">Orain dela urte %1$d eguneratua</item>
 	<item quantity="other">Orain dela %1$d urte eguneratua</item>
 </plurals>
-</resources>
+<string name="app_list_download_ready">Deskargatuta, instalatzeko prest</string>
+
+    </resources>
