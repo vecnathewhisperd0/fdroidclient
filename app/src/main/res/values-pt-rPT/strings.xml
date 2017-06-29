@@ -434,12 +434,8 @@
     <string name="main_menu__swap_nearby">Vizinhança</string>
 
     <string name="latest__empty_state__no_recent_apps">Nenhuma aplicação recente</string>
-    <string name="latest__empty_state__never_updated">Assim que a lista de aplicações estiver atualizada, as aplicações
-        mais recentes serão mostradas aqui.
-    </string>
-    <string name="latest__empty_state__no_enabled_repos">Assim que ativar um repositório e este estiver atualizado, as
-        aplicações mais recentes serão mostradas aqui.
-    </string>
+    <string name="latest__empty_state__never_updated">Assim que a lista de aplicações estiver atualizada, as aplicações mais recentes serão mostradas aqui</string>
+    <string name="latest__empty_state__no_enabled_repos">Assim que ativar um repositório e o atualizar, as aplicações mais recentes serão mostradas aqui</string>
 
     <string name="categories__empty_state__no_categories">Nenhuma categoria para mostrar</string>
 
