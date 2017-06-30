@@ -417,11 +417,6 @@
 
     <string name="app_list__name__downloading_in_progress">Sťahovanie %1$s</string>
     <string name="app_list__name__successfully_installed">%1$s nainštalovaná</string>
-    <plurals name="app_list__age__released_x_days_ago">
-	<item quantity="one">Od vydania prešiel %1$d deň</item>
-	<item quantity="few">Od vydania prešli %1$d dni</item>
-	<item quantity="other">Od vydania prešlo %1$d dní</item>
-</plurals>
 
     <string name="installed_apps__activity_title">Nainštalované aplikácie</string>
     <string name="installed_app__updates_ignored">Vynechané aktualizácie</string>

@@ -478,10 +478,6 @@
     <string name="app__tts__cancel_download">Hætta við niðurhal</string>
     <string name="app__install_downloaded_update">Uppfæra</string>
 
-    <plurals name="app_list__age__released_x_days_ago">
-	<item quantity="one">Gefið út fyrir %1$d degi síðan</item>
-	<item quantity="other">Gefið út fyrir %1$d dögum</item>
-</plurals>
 
     <string name="updates__tts__download_updates_for_all_apps">Sækja allar uppfærslur</string>
 

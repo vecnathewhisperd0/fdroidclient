@@ -405,10 +405,6 @@
 
     <string name="app_list__name__downloading_in_progress">A descarregar %1$s</string>
     <string name="app_list__name__successfully_installed">%1$s foi instalada</string>
-    <plurals name="app_list__age__released_x_days_ago">
-        <item quantity="one">Disponibilizada há %1$s dia</item>
-        <item quantity="other">Disponibilizada há %1$s dias</item>
-    </plurals>
 
     <string name="installed_apps__activity_title">Aplicações instaladas</string>
     <string name="installed_app__updates_ignored">Atualizações ignoradas</string>
