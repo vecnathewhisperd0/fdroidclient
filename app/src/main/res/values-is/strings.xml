@@ -471,17 +471,13 @@
 	<item quantity="one">Skoða %1$d forritið í %2$s flokknum</item>
 	<item quantity="other">Skoða öll %1$d forritin í %2$s flokknum</item>
 </plurals>
-<string name="app_list__name__downloaded_and_ready_to_install">Setja upp %1$s</string>
-    <string name="app_list__name__downloading_in_progress">Sæki %1$s</string>
+<string name="app_list__name__downloading_in_progress">Sæki %1$s</string>
     <string name="app_list__name__successfully_installed">%1$s er uppsett</string>
     <string name="updates__tts__download_app">Sækja</string>
     <string name="by_author_format">frá %s</string>
     <string name="app__tts__cancel_download">Hætta við niðurhal</string>
     <string name="app__install_downloaded_update">Uppfæra</string>
 
-    <string name="app_list__name__downloaded_and_ready_to_update">Uppfæra %1$s</string>
-    <string name="app_list__age__released_today">Gefið út í dag</string>
-    <string name="app_list__age__released_yesterday">Gefið út í gær</string>
     <plurals name="app_list__age__released_x_days_ago">
 	<item quantity="one">Gefið út fyrir %1$d degi síðan</item>
 	<item quantity="other">Gefið út fyrir %1$d dögum</item>

@@ -432,7 +432,6 @@
 	<item quantity="one">Завантажити оновлення для %1$d застосунку.</item>
 	<item quantity="few">Завантажити оновлення для %1$d застосунків.</item>
 	<item quantity="many">Завантажити оновлення для %1$d застосункiв.</item>
-	<item quantity="other"/>
 </plurals>
 
     <string name="details_new_in_version">Нове у версії %s</string>

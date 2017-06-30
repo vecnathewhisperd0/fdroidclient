@@ -486,8 +486,6 @@
     <string name="warning_no_internet">Невъзможна актуализация, проверете свързани ли сте към интернет?</string>
     <string name="notification_title_single_update_available">Налична актуализация</string>
     <string name="notification_title_summary_install_error">Провалена иснталация</string>
-    <string name="app_list__age__released_today">Публикувано днес</string>
-    <string name="app_list__age__released_yesterday">Публикувано вчера</string>
     <plurals name="button_view_all_apps_in_category">
 	<item quantity="one">Покажи %d</item>
 	<item quantity="other">Покажи всички %d</item>

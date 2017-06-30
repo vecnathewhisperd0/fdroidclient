@@ -404,8 +404,6 @@
     <string name="app_list__name__downloading_in_progress">Baxando %1$s</string>
     <string name="app__install_downloaded_update">Anovar</string>
 
-    <string name="app_list__name__downloaded_and_ready_to_update">Anovar %1$s</string>
-    <string name="app_list__name__downloaded_and_ready_to_install">Instalar %1$s</string>
     <string name="app_list__name__successfully_installed">instalóse %1$s</string>
     <string name="updates__tts__download_app">Baxar</string>
     <string name="updates__tts__download_updates_for_all_apps">Baxar tolos anovamientos</string>
@@ -451,8 +449,6 @@
     <string name="force_old_index_summary">En casu d\'haber fallos o problemes de compatibilidá, usa l\'índiz XML de la app</string>
     <string name="app__newly_added">Nueva</string>
     <string name="app__tts__cancel_download">Encaboxar descarga</string>
-    <string name="app_list__age__released_today">Publicada güei</string>
-    <string name="app_list__age__released_yesterday">Publicada ayeri</string>
     <string name="menu_email">Mandar un corréu al autor</string>
     <string name="menu_video">Videu</string>
     <string name="menu_license">Llicencia: %s</string>
