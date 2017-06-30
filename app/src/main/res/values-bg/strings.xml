@@ -420,7 +420,7 @@
     <string name="updates__tts__download_app">Сваляне</string>
     <string name="menu_video">Видео</string>
     <string name="menu_license">Лиценз: %s</string>
-    <string name="latest__empty_state__never_updated">"След  обновяване на листа с приложения, новите приложения трябва да се покажат тук"</string>
+    <string name="latest__empty_state__never_updated">След  обновяване на листа с приложения, новите приложения трябва да се покажат тук</string>
     <string name="latest__empty_state__no_enabled_repos">Веднъж след като активирате източник и той се обнови, последните приложения трябва да се покажат тук</string>
 
     <string name="categories__empty_state__no_categories">Няма категории за показване</string>
@@ -458,8 +458,8 @@
     <string name="tts_category_name">Категория %1$s</string>
 
     <plurals name="tts_view_all_in_category">
-	<item quantity="one">"Покажи %1$d  приложение в %2$s категория"</item>
-	<item quantity="other">"Покажи всички %1$d  приложения от %2$s категория"</item>
+	<item quantity="one">Покажи %1$d  приложение в %2$s категория</item>
+	<item quantity="other">Покажи всички %1$d  приложения от %2$s категория</item>
 </plurals>
 
     <string name="details_last_updated_today">Актуализирано днес</string>
@@ -498,12 +498,12 @@
     <string name="uninstall_error_notify_title">Грешка при деинсталирането на %s</string>
 
 
-    <string name="app__tts__downloading_progress">"Изтеглянето на %1$d%%  завърши"</string>
+    <string name="app__tts__downloading_progress">Изтеглянето на %1$d%%  завърши</string>
     <string name="installing">Инсталиране…</string>
     <string name="uninstalling">Деинсталиране…</string>
 
     <plurals name="notification_summary_more">
-	<item quantity="one">"+%1$d  още…"</item>
-	<item quantity="other">"+%1$d  повече…"</item>
+	<item quantity="one">+%1$d  още…</item>
+	<item quantity="other">+%1$d  повече…</item>
 </plurals>
     </resources>

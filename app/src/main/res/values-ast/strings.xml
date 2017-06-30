@@ -453,7 +453,7 @@
     <string name="menu_video">Videu</string>
     <string name="menu_license">Llicencia: %s</string>
     <string name="antifeatures">Carauterístiques non llibres</string>
-    <string name="hide_anti_feature_apps">"Poner en buxu  les apps con componentes non llibres"</string>
+    <string name="hide_anti_feature_apps">Poner en buxu  les apps con componentes non llibres</string>
     <string name="download_404">Nun s\'alcontró el ficheru solicitáu.</string>
     <plurals name="button_view_all_apps_in_category">
 	<item quantity="one">Ver %d</item>

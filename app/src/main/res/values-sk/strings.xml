@@ -279,7 +279,7 @@
         hlásenie chýb!
     </string>
     <string name="system_install_button_install">Inštalovať</string>
-    <string name="system_install_post_success_message">"Privilegovaný doplnok  F-Droidu bol nainštalovaný. Umožňuje F-Droidu samostatne inštalovať, aktualizovať a odinštalovať aplikácie."</string>
+    <string name="system_install_post_success_message">Privilegovaný doplnok  F-Droidu bol nainštalovaný. Umožňuje F-Droidu samostatne inštalovať, aktualizovať a odinštalovať aplikácie.</string>
     <string name="login_title">Vyžaduje sa overenie</string>
     <string name="login_name">Prihlasovacie meno</string>
     <string name="login_password">Heslo</string>
