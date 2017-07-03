@@ -504,4 +504,8 @@
         <item quantity="many">עודכנה לפני %1$d שנים</item>
         <item quantity="other">עודכנה לפני %1$d שנים</item>
     </plurals>
-</resources>
+<string name="force_old_index">אילוץ שימוש בתבנית המפתח הישנה</string>
+    <string name="force_old_index_summary">במקרה שמופיעות תקלות או בעיות תאימות, יש להשתמש במפתח היישומים בתבנית XML</string>
+    <string name="app_list_download_ready">התקבל, בהמתנה להתקנה</string>
+
+    </resources>
