@@ -353,9 +353,11 @@
     <string name="updates__show_updateable_apps">הצגת יישומונים</string>
 
     <plurals name="updates__download_updates_for_apps">
-	<item quantity="one">הורדת עדכון ליישומון אחד.</item>
-	<item quantity="other">הורדת עדכון ל־%1$d יישומונים.</item>
-</plurals>
+        <item quantity="one">הורד עדכון עבור אפליקציה אחת.</item>
+        <item quantity="two">הורד עדכונים עבור %1$d אפליקציות.</item>
+        <item quantity="many">הורד עדכונים עבור %1$d אפליקציות.</item>
+        <item quantity="other">הורד עדכונים עבור %1$d אפליקציות.</item>
+    </plurals>
 
     <string name="versions">גירסאות</string>
     <string name="clear_search">פינוי החיפוש</string>
@@ -435,13 +437,17 @@
     <string name="notification_content_single_installing">ההתקנה של „%1$s“ מתבצעת כעת…</string>
     <string name="notification_content_single_installed">ההתקנה הצליחה</string>
     <plurals name="notification_summary_updates">
-	<item quantity="one">עדכון אחד</item>
-	<item quantity="other">%1$d עדכונים</item>
-</plurals>
+        <item quantity="one">עדכון %1$d</item>
+        <item quantity="two">%1$d עדכונים</item>
+        <item quantity="many">%1$d עדכונים</item>
+        <item quantity="other">%1$d עדכונים</item>
+    </plurals>
     <plurals name="notification_summary_installed">
-	<item quantity="one">יישומון הותקן</item>
-	<item quantity="other">%1$d יישומונים הותקנו</item>
-</plurals>
+        <item quantity="one">אפליקציה %1$d הותקנה</item>
+        <item quantity="two">%1$d אפליקציות הותקנו</item>
+        <item quantity="many">%1$d אפליקציות הותקנו</item>
+        <item quantity="other">%1$d אפליקציות הותקנו</item>
+    </plurals>
     <string name="notification_title_summary_update_available">עדכון זמין</string>
     <string name="notification_title_summary_downloading">מתבצעת הורדה כעת…</string>
     <string name="notification_title_summary_downloading_update">העדכון מתקבל כעת…</string>
@@ -452,29 +458,39 @@
     <string name="tts_category_name">קטגוריה %1$s</string>
 
     <plurals name="tts_view_all_in_category">
-	<item quantity="one">הצגת יישומון %1$d בקטגוריה %2$s</item>
-	<item quantity="other">הצגת כל %1$d היישומונים בקטגוריה %2$s</item>
-</plurals>
+        <item quantity="one">הצג אפליקציה %1$d בתוך הקטגוריה %2$s</item>
+        <item quantity="two">הצג את כל %1$d האפליקציות מתוך הקטגוריה %2$s</item>
+        <item quantity="many">הצג את כל %1$d האפליקציות מתוך הקטגוריה %2$s</item>
+        <item quantity="other">הצג את כל %1$d האפליקציות מתוך הקטגוריה %2$s</item>
+    </plurals>
 
     <string name="details_last_updated_today">עודכן היום</string>
     <plurals name="details_last_update_days">
-	<item quantity="one">עודכן לפני יום</item>
-	<item quantity="other">עודכן לפני %1$d ימים</item>
-</plurals>
+        <item quantity="one">עודכנה לפני יום %1$d</item>
+        <item quantity="two">עודכנה לפני %1$d ימים</item>
+        <item quantity="many">עודכנה לפני %1$d ימים</item>
+        <item quantity="other">עודכנה לפני %1$d ימים</item>
+    </plurals>
     <plurals name="details_last_update_weeks">
-	<item quantity="one">עודכן לפני שבוע</item>
-	<item quantity="other">עודכן לפני %1$d שבועות</item>
-</plurals>
+        <item quantity="one">עודכנה לפני שבוע %1$d</item>
+        <item quantity="two">עודכנה לפני שבוע %1$d</item>
+        <item quantity="many">עודכנה לפני %1$d שבועות</item>
+        <item quantity="other">עודכנה לפני %1$d שבועות</item>
+    </plurals>
     <plurals name="details_last_update_months">
-	<item quantity="one">עודכן לפני חודש</item>
-	<item quantity="other">עודכן לפני %1$d חודשים</item>
-</plurals>
+        <item quantity="one">עודכנה לפני חודש %1$d</item>
+        <item quantity="two">עודכנה לפני חודש %1$d</item>
+        <item quantity="many">עודכנה לפני %1$d חודשים</item>
+        <item quantity="other">עודכנה לפני %1$d חודשים</item>
+    </plurals>
     <plurals name="details_last_update_years">
-	<item quantity="one">עודכן לפני שנה</item>
-	<item quantity="other">עודכן לפני %1$d שנים</item>
-</plurals>
-<string name="force_old_index">אילוץ מבנה המפתח הישן</string>
-    <string name="force_old_index_summary">במקרה שנתקלת בבאג או בתקלת תאימות, יש להשתמש במפתח יישומונים ב־XML</string>
+        <item quantity="one">עודכנה לפני שנה %1$d</item>
+        <item quantity="two">עודכנה לפני שנה %1$d</item>
+        <item quantity="many">עודכנה לפני %1$d שנים</item>
+        <item quantity="other">עודכנה לפני %1$d שנים</item>
+    </plurals>
+<string name="force_old_index">אילוץ שימוש בתבנית המפתח הישנה</string>
+    <string name="force_old_index_summary">במקרה שמופיעות תקלות או בעיות תאימות, יש להשתמש במפתח היישומים בתבנית XML</string>
     <string name="app_list_download_ready">התקבל, בהמתנה להתקנה</string>
 
     <string name="status_inserting_x_apps">פרטי היישומון נשמרים (%1$d/%2$d) מתוך %3$s</string>
