@@ -454,4 +454,6 @@
     <string name="details_new_in_version">Nuovo nella versione %s</string>
 
     <string name="antifeatureswarning">Questa app ha caratteristiche che potrebbero non piacerti.</string>
+    <string name="antifeatures">Anti-features</string>
+    <string name="by_author_format">da %s</string>
     </resources>
