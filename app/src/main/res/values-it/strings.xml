@@ -503,8 +503,8 @@
     <string name="nearby_splash__both_parties_need_fdroid">Entrambi le parti hanno bisogno di %1$s per l\'uso nelle vicinanze.</string>
 
     <plurals name="notification_summary_more">
-	<item quantity="one">+%1$d altro…</item>
-	<item quantity="other">+%1$d altro…</item>
+	<item quantity="one">+%1$d altra…</item>
+	<item quantity="other">+%1$d altre…</item>
 </plurals>
     <plurals name="tts_view_all_in_category">
 	<item quantity="one">Mostra %1$d app nella categoria %2$s</item>
