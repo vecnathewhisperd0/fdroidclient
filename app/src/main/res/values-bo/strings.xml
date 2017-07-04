@@ -1,2 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="menu_manage">མཛོད་ཁང་།</string>
+    <string name="menu_settings">སྒྲིག་བཀོད།</string>
+    <string name="menu_search">འཚོལ།</string>
+    <string name="menu_add_repo">མཛོད་ཁང་གསར་པ།</string>
+
+    <string name="menu_launch">འཁོར་སྐྱོད།</string>
+    </resources>
