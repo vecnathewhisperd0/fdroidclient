@@ -503,4 +503,5 @@
     <string name="force_old_index_summary">En caso de que haya problemas o incopatibilidades, usa el índice XML de la aplicación</string>
     <string name="app_list_download_ready">Descargado, listo para instalar</string>
 
+    <string name="status_inserting_x_apps">Guardando detalles de la aplicación (%1$d/%2$d) de %3$s</string>
     </resources>
