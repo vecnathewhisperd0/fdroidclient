@@ -441,4 +441,17 @@
     <string name="notification_action_install">Installa</string>
 
     <string name="main_menu__swap_nearby">Nelle vicinanze</string>
-</resources>
+<string name="preference_category__my_apps">Mie App</string>
+    <string name="preference_manage_installed_apps">Gestisci App Installate</string>
+
+
+    <string name="latest__empty_state__never_updated">Una volta aggiornata la tua lista delle applicazioni, le ultime applicazioni dovrebbero apparire qui</string>
+    <string name="latest__empty_state__no_recent_apps">Nessuna app recente trovata</string>
+    <string name="latest__empty_state__no_enabled_repos">Una volta abilitato un repository e fatto aggiornare, le ultime applicazioni dovrebbero apparire qui</string>
+
+    <string name="categories__empty_state__no_categories">Nessuna categoria da visualizzare</string>
+
+    <string name="details_new_in_version">Nuovo nella versione %s</string>
+
+    <string name="antifeatureswarning">Questa app ha caratteristiche che potrebbero non piacerti.</string>
+    </resources>
