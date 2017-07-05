@@ -442,7 +442,7 @@
     <string name="details_new_in_version">Nuovo nella versione %s</string>
 
     <string name="antifeatureswarning">Questa app ha caratteristiche che potrebbero non piacerti.</string>
-    <string name="antifeatures">Anti-features</string>
+    <string name="antifeatures">Anti-caratteristiche</string>
     <string name="by_author_format">da %s</string>
     <string name="app_list__name__downloading_in_progress">Scaricando %1$s</string>
     <string name="app_list__name__successfully_installed">%1$s installato</string>
