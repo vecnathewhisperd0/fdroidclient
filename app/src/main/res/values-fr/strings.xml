@@ -465,9 +465,7 @@
 	<item quantity="other">Voir toutes %d</item>
 </plurals>
 
-    <string name="nearby_splash__download_apps_from_people_nearby">Sans connexion internet? Téléchargez les applications
-        depuis des appareils de votre entourage !
-    </string>
+    <string name="nearby_splash__download_apps_from_people_nearby">Pas de connexion Internet? Obtenez les applications depuis des appareils de votre entourage !</string>
     <string name="nearby_splash__find_people_button">Trouver des gens/appareils dans les environs</string>
     <string name="nearby_splash__both_parties_need_fdroid">Chacun utilisateur proche doit utiliser %1$s.</string>
 
@@ -524,4 +522,8 @@
 <string name="by_author_format">par %s</string>
     <string name="download_404">Le fichier n\'a pas été trouvé.</string>
     <string name="force_old_index">Forcer l\'ancien format d\'index</string>
+    <string name="force_old_index_summary">Dans le cas où des erreurs ou des incompatibilités apparaissent, utiliser l\'index d\'application XML</string>
+    <string name="app_list_download_ready">Téléchargé, prêt à installer</string>
+
+    <string name="status_inserting_x_apps">Sauvegarder les détails de l\'application (%1$d/%2$d) depuis %3$s</string>
     </resources>
