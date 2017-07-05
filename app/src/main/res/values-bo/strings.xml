@@ -258,4 +258,19 @@
     <string name="minsdk_or_later">%s ཡང་ན་རྗེས་ལ།</string>
     <string name="up_to_maxsdk">%s འདི་བར།</string>
     <string name="minsdk_up_to_maxsdk">%1$s འདི་ནས་དེའི་བར་དུ། %2$s</string>
+    <string name="requires_features">དགསོ་མཁོ་:%1$s</string>
+    <string name="wifi_ap">དྲྭ་འཛོམས།</string>
+
+    <string tools:ignore="UnusedResources" name="category_Theming">བརྗོད་གཞི་གླེང་བཞིན་པ།</string>
+    <plurals name="button_view_all_apps_in_category">
+	<item quantity="other">ཚང་མར་བལྟས། %d</item>
+</plurals>
+
+    <string name="empty_installed_app_list">མཉེན་ཆས་འགྲིག་བཅུག་བྱེད་མེད།
+\nཁྱེད་རང་གི་ཡོ་བྱད་སྒང་ལ་མཉེན་ཆས་འདུག འོན་ཀྱང་དེ་ཚོ་ཕྷོ་རོཌ་རྒྱུད་ནས་ཐོབ་པ་མ་རེད། འདིའི་རྒྱུ་མཚན་ནི་གཅིག་བྱས་ན་ཁྱེད་རང་གི་མཛོད་ཁང་གསར་བསྒྱུར་བྱེད་དགོས་ཀྱི་ཡོད་པའམ་ཡང་ན་མཛོད་ཁང་ནང་ལ་དོན་ངོ་མའི་ཐོག་ལ་ཁྱེད་རང་གི་མཉེན་ཆས་འདི་མེད་པའི་རྐྱེན་གྱིས་བྱས་པ་རེད།</string>
+    <string name="empty_can_update_app_list">བཀྲིས་བདེ་ལེགས་!ཁྱེད་རང་གི་མཉེན་ཆས་ཡོངས་རྫོགས་དུས་ཐོག་སྒང་ལ་འདུག (ཡང་ན་ཁྱེད་རང་གི་མཛོད་ཁང་དུས་ཚོད་རྫོགས་ཡོད་ས་རེད།)</string>
+
+    <string name="install_error_unknown">རྒྱུས་མེད་པའི་སྐྱོན་ཞིག་བྱུང་བའི་རྐྱེན་གྱིས་འགྲིག་བཅུག་བྱེད་ཐུབ་མ་སོང་།</string>
+    <string name="uninstall_error_unknown">རྒྱུས་མེད་པའི་སྐྱོན་ཞིག་བྱུང་བའི་རྐྱེན་གྱིས་འགྲིག་བཅུག་ཕྱིར་འཐེན་བྱེད་ཐུབ་མ་སོང་།</string>
+    <string name="install_error_not_yet_supported">ཡིག་ཆ་འདིའི་རིགས་དེ་ད་དུང་ཡང་འགྲིག་བཅུག་ཐུབ་ཀྱི་མིན་འདུག:%s</string>
     </resources>
