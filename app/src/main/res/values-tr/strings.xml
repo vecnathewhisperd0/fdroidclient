@@ -491,4 +491,7 @@
     <string name="download_404">İstenen dosya bulunamadı.</string>
     <string name="force_old_index">Eski indeks biçimini zorunlu kıl</string>
     <string name="force_old_index_summary">Hatalar ve uyumluluk sorunları olması halinde, XML uygulama indeksini kullan</string>
+    <string name="app_list_download_ready">İndirildi, kurmaya hazır</string>
+
+    <string name="status_inserting_x_apps">Uygulama ayrıntıları (%1$d/%2$d) %3$s konumundan kaydediliyor</string>
     </resources>
