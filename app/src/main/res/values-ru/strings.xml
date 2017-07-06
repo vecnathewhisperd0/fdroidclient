@@ -381,6 +381,8 @@
     <string name="update_auto_install_summary">Загружать и устанавливать обновления в фоне</string>
     <string name="keep_install_history">Хранить историю установок</string>
     <string name="keep_install_history_summary">Хранить в F-Droid журнал всех установок и удалений</string>
+    <string name="force_old_index">Старый формат индекса (принудительно)</string>
+    <string name="force_old_index_summary">Использовать индекс приложений XML в случае проблем с совместимостью</string>
     <string name="hide_anti_feature_apps">Сомнительные приложения</string>
     <string name="hide_anti_feature_apps_on">Выделять серым цветом приложения, содержащие нежелательный функционал
     </string>
