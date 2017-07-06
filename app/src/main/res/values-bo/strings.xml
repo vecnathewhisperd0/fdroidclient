@@ -299,4 +299,35 @@
     <string name="swap_no_wifi_network">ད་ལྟ་དྲྭ་རྒྱ་མིན་འདུག</string>
     <string name="swap_active_hotspot">%1$s (ཁྱེད་རང་གི་དྲྭ་འཛོམས་)</string>
     <string name="swap_view_available_networks">དྲྭ་རྒྱ་བེད་སྤྱོད་ཡོད་པ་ཞིག་ལ་སྣོན་ནས་ཁ་ཕྱེས།</string>
+    <string name="swap_switch_to_wifi">ཝཡེ་ཕྷཡེ་དྲྭ་རྒྱར་བརྗེ་པོ་རྒྱབ་པའི་ཆེད་དུ་སྣོན།</string>
+    <string name="open_qr_code_scanner">QR འཚག་རྒྱབ་སྒོ་ཕྱེས།</string>
+    <string name="swap_confirm_connect">ཁྱེད་རང་ལ་%1$s འདི་ནས་ད་ལྟ་མཉེན་ཆས་དགོས་སམ།</string>
+    <string name="swap_scan_or_type_url">མི་གཅིག་གིས་ཨང་རྟགས་འཚག་རྒྱབ་དགོས། ཡང་ན་བལྟ་ཆས་གཞན་གྱི་URL མཐེབ་གཞོང་རྒྱབ།</string>
+    <string name="swap_choose_apps">མཉེས་ཆས་འདེམས།</string>
+    <string name="swap_scan_qr">QR ཨང་རྟགས་འཚག་རྒྱབ།</string>
+    <string name="swap_people_nearby">ཉེ་འགྲམ་གྱི་མི།</string>
+    <string name="swap_scanning_for_peers">ཉེ་འགྲམ་གྱི་མི་འཚོལ་བཞིན་པ།</string>
+    <string name="swap_nearby">ཉེ་འགྲམ་བརྗེ་ལེན།</string>
+    <string name="swap_intro">རང་གི་ཉེ་འགྲམ་གྱི་མི་དང་མཉམ་དུ་མཉེན་ཆས་མཐུད་ནས་བརྗེ་ལེན་བྱེད་།</string>
+    <string name="swap_visible_bluetooth">བྷུ་ལུ་ཊུཐ་རྒྱུད་དེ་མཐོང་།</string>
+    <string name="swap_setting_up_bluetooth">བྷུ་ལུ་ཊུཐ་སྒྲིག་བཀོད།.…</string>
+    <string name="swap_not_visible_bluetooth">བྷུ་ལུ་ཊུཐ་རྒྱུད་དེ་མཐོང་མི་ཐུབ།</string>
+    <string name="swap_visible_wifi">ཝཡེ་ཕྷཡེ་རྒྱུད་དེ་མཐོང་།</string>
+    <string name="swap_setting_up_wifi">ཝཡེ་ཕྷཡེ་སྒྲིག་བཀོད་བྱེད་བཞིན་པ།</string>
+    <string name="swap_stopping_wifi">ཝཡེ་ཕྷཡེ་མཚམས་འཇོག་བཞིན་པ།</string>
+    <string name="swap_not_visible_wifi">ཝཡེ་ཕྷཡེ་རྒྱུད་དེ་མཐོང་མི་ཐུབ།</string>
+    <string name="swap_wifi_device_name">ཡོ་བྱད་ཀྱི་མིང་།</string>
+    <string name="swap_cant_find_peers">ཁྱེད་རང་གིས་འཚོལ་བཞིན་པ་དེ་རྙེད་ཀྱི་མིན་འདུག</string>
+    <string name="swap_no_peers_nearby">ཉེ་འགྲམ་གྱི་བརྗེ་ལེན་བྱས་སའི་མི་རྙེད་ཀྱི་མིན་འདུག</string>
+    <string name="swap_connecting">མཐུད་བཞིན་པ།</string>
+    <string name="swap_confirm">བརྗེ་ལེན་གཏན་འཁེལ།</string>
+    <string name="swap_qr_isnt_for_swap">ཁྱེད་རང་གིས་འཚག་རྒྱག་པའི་QR ཨང་རྟགས་འདི་བརྗེ་ལེན་ཨང་རྟགས་དང་འདྲ་མཚུངས་མིན་འདུག</string>
+    <string name="bluetooth_unavailable">བྷུ་ལུ་ཊོཐ་མིན་འདུག</string>
+    <string name="swap_cant_send_no_bluetooth">ཕྷོན་རོཌ་གཏོང་ཐུབ་ཀྱི་མིན་འདུག གང་ཡིན་ཟེར་ན་ཡོ་བྱད་འདིའི་སྒང་ལ་བྷུ་ལུ་ཊོཐ་མིན་འདུག</string>
+    <string name="loading">བཅུག་བཞིན་པ།..…</string>
+    <string name="swap_connection_misc_error">ཡོ་བྱད་ལ་མཐུད་པའི་སྐབས་སུ་སྐྱོན་ཤོར་སོང་བས་དེ་དང་བརྗེ་ལེན་བྱེད་ཐུབ་ཀྱི་མིན་འདུག!</string>
+    <string name="swap_not_enabled">བརྗེ་ལེན་སྒོ་ཕྱེས་མིན་འདུག</string>
+    <string name="swap_not_enabled_description">བརྗེ་ལེན་མ་བྱེད་གོང་ལ་ཁྱེད་རང་གི་ཡོ་བྱད་དེ་ངེས་པར་དུ་མཐོང་ཐུབ་པ་བཟོ་དགོས།</string>
+
+    <string name="install_confirm">འདི་ལ་བེད་སྤྱོད་དགོས།</string>
     </resources>
