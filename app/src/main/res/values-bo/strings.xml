@@ -273,4 +273,30 @@
     <string name="install_error_unknown">རྒྱུས་མེད་པའི་སྐྱོན་ཞིག་བྱུང་བའི་རྐྱེན་གྱིས་འགྲིག་བཅུག་བྱེད་ཐུབ་མ་སོང་།</string>
     <string name="uninstall_error_unknown">རྒྱུས་མེད་པའི་སྐྱོན་ཞིག་བྱུང་བའི་རྐྱེན་གྱིས་འགྲིག་བཅུག་ཕྱིར་འཐེན་བྱེད་ཐུབ་མ་སོང་།</string>
     <string name="install_error_not_yet_supported">ཡིག་ཆ་འདིའི་རིགས་དེ་ད་དུང་ཡང་འགྲིག་བཅུག་ཐུབ་ཀྱི་མིན་འདུག:%s</string>
+    <string name="system_install_post_success">ཨེཕྷ་རོཌ་ཁེ་ཕན་འཕཪ་མ་འགྲིག་བཅུག་བྱས་ཟིན།</string>
+    <string name="system_install_post_fail">ཨེཕྷ་རོཌ་ཁེ་ཕན་འཕར་མ་འགྲིག་བཅུག་བྱེད་ཐུབ་མ་སོང་།</string>
+    <string name="status_inserting_x_apps">མཉེན་ཆས་ཀྱི་ཞིབ་ཕྲ་ཉར་ཚགས་བྱེད་བཞིན་པ། (%1$d/%2$d) ནས་ %3$s</string>
+    <string name="system_install_installing">འགྲིག་བཅུག་བྱེད་བཞིན་པ།</string>
+    <string name="system_install_installing_rebooting">འགྲིག་བཅུག་དང་སྐྱར་སློང་བྱེད་བཞིན་པ།....…</string>
+    <string name="system_install_uninstalling">འགྲིག་བཅུག་ཕྱིར་འཐེན་བྱེད་བཞིན་པ།...…</string>
+    <string name="system_install_question">ཁྱེད་རང་ཨེཕྷ་རོཌ་ཁེ་ཕན་འཕར་མ་འགྲིག་བཅུག་བྱེད་འདོད་ཡོད་དམ།?</string>
+    <string name="system_install_warning">འདི་ལ་སྐར་ཆ་ ༡༠ བར་འགོར་གྱི་རེད།</string>
+    <string name="system_install_warning_lollipop">འདི་ལ་སྐར་ཆ་ ༡༠ ཙམ་འགོར་གྱི་རེད་ལ་ཡོ་བྱད་འདི་<b>སྐྱར་སློང་</b> རྗེས་ལ།</string>
+    <string name="system_uninstall">ཁྱེད་རང་ཨེཕྷ་རོཌ་ཁེ་ཕན་འཕར་མའི་འགྲིག་བཅུག་ཕྱིར་འཐེན་བྱེད་འདོད་ཡོད་དམ།</string>
+    <string name="system_install_not_supported">ཨེཕྷ་རོཌ་ཁེ་ཕན་འཕར་མའི་འགྲིག་བཅུག་དེ་ད་ལྟ་ཨིན་ཀྲོཌ་5.1 དང་ཡང་ན་ཕྱི་མ་རྣམས་ཀྱི་སྒང་ལ་རྒྱབ་སྐྱོར་བྱེད་ཀྱི་མིན་འདུག</string>
+
+    <string name="nearby_splash__download_apps_from_people_nearby">དྲྭ་རྒྱ་མིན་འདུག ཁྱེད་རང་གི་ཉེ་འགྲམ་ལ་ཡོད་པའི་མིའི་ཁྲིད་ནས་མཉེན་ཆས་འདི་ལེན་རོགས།!</string>
+    <string name="nearby_splash__find_people_button">ངའི་ཉེ་འགྲམ་ལ་ཡོད་པའི་མི་འཚོལ།</string>
+    <string name="nearby_splash__both_parties_need_fdroid">ཚོགས་སྡེ་གཉིས་ཀར་ཉེ་འདབ་བེད་སྤྱོད་བྱས་པ་ལ་%1$s འདི་དགོས།</string>
+
+    <string name="swap_nfc_title">བརྗེ་ལེན་ཆེད་དུ་འདི་ལ་རེག</string>
+    <string name="swap_nfc_description">གལ་ཏེ་ཁྱེད་རང་གི་གྲོགས་པོར་ཨེཕྷ་རོཌ་དང་ཡོ་བྱད་དང་མཉམ་དུ་རེག་ནས་NFCཁ་ཕྱེས་</string>
+    <string name="swap_join_same_wifi">ཁྱེད་རང་གི་གྲོགས་པོ་དང་ཝཡེ་ཕྷཡེ་གཅིག་པ་མཐུད་</string>
+    <string name="swap_join_same_wifi_desc">ཝཡེ་ཕྷཡེ་རྒྱུད་དེ་བརྗེ་ལེན་བྱེད་དགོས་ན་ཁྱེད་གཉིས་ངེས་པར་དུ་དྲྭ་རྒྱ་གཅིག་པ་ཞིག་དགོས། གལ་ཏེ་དྲྭ་རྒྱ་གཅིག་པ་བེད་སྤྱོད་མ་བྱས་ན་ཁྱེད་གཉིས་གང་རུང་གཅིག་གིས་ཝཡེ་ཕྷཡེ་དྲྭ་འཛོམས་བཟོས།</string>
+    <string name="swap_join_this_hotspot">ཁྱེད་རང་གི་གྲོགས་པོ་རང་གི་དྲྭ་འཛོམས་ལ་མཐུད་རོགས་བྱེད།</string>
+    <string name="swap">མཉེས་ཆས་བརྗེ་ལེན།</string>
+    <string name="swap_success">བརྗེ་ལེན་ལེགས་གྲུབ་!</string>
+    <string name="swap_no_wifi_network">ད་ལྟ་དྲྭ་རྒྱ་མིན་འདུག</string>
+    <string name="swap_active_hotspot">%1$s (ཁྱེད་རང་གི་དྲྭ་འཛོམས་)</string>
+    <string name="swap_view_available_networks">དྲྭ་རྒྱ་བེད་སྤྱོད་ཡོད་པ་ཞིག་ལ་སྣོན་ནས་ཁ་ཕྱེས།</string>
     </resources>
