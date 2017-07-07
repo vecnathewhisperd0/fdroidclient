@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools"><string name="menu_manage">མཛོད་ཁང་།</string>
+<resources><string name="menu_manage">མཛོད་ཁང་།</string>
     <string name="menu_settings">སྒྲིག་བཀོད།</string>
     <string name="menu_search">འཚོལ།</string>
     <string name="menu_add_repo">མཛོད་ཁང་གསར་པ།</string>
@@ -23,20 +23,20 @@
     <string name="pref_language">སྐད་ཡིག།</string>
     <string name="pref_language_default">མ་ལག་སོར་བཞག</string>
 
-    <string tools:ignore="UnusedResources" name="category_Connectivity">མཐུད་མཚམས།</string>
-    <string tools:ignore="UnusedResources" name="category_Development">ཡར་རྒྱས།</string>
-    <string tools:ignore="UnusedResources" name="category_Games">རྕེད་རིགས།</string>
-    <string tools:ignore="UnusedResources" name="category_Graphics">བརྐོས་རིས།</string>
-    <string tools:ignore="UnusedResources" name="category_Internet">དྲྭ་རྒྱ།</string>
-    <string tools:ignore="UnusedResources" name="category_Money">དངུལ།</string>
-    <string tools:ignore="UnusedResources" name="category_Multimedia">བརྒྱུད་ལམ་སྣ་ཚོགས།</string>
-    <string tools:ignore="UnusedResources" name="category_Navigation">ཕྱོགས་ཁྲིད།</string>
-    <string tools:ignore="UnusedResources" name="category_Phone_SMS">ཁ་པར་དང་འཕྲིན་ཐུང་།</string>
-    <string tools:ignore="UnusedResources" name="category_Reading">ཀློག་བཞིན་པ།</string>
-    <string tools:ignore="UnusedResources" name="category_Science_Education">ཚན་རིག་དང་ཤེས་ཡོན།</string>
-    <string tools:ignore="UnusedResources" name="category_Security">སྲུང་སྐྱོབ།</string>
-    <string tools:ignore="UnusedResources" name="category_Time">དུས་ཚོད།</string>
-    <string tools:ignore="UnusedResources" name="category_Writing">འབྲི་བཞིན་པ།</string>
+    <string name="category_Connectivity">མཐུད་མཚམས།</string>
+    <string name="category_Development">ཡར་རྒྱས།</string>
+    <string name="category_Games">རྕེད་རིགས།</string>
+    <string name="category_Graphics">བརྐོས་རིས།</string>
+    <string name="category_Internet">དྲྭ་རྒྱ།</string>
+    <string name="category_Money">དངུལ།</string>
+    <string name="category_Multimedia">བརྒྱུད་ལམ་སྣ་ཚོགས།</string>
+    <string name="category_Navigation">ཕྱོགས་ཁྲིད།</string>
+    <string name="category_Phone_SMS">ཁ་པར་དང་འཕྲིན་ཐུང་།</string>
+    <string name="category_Reading">ཀློག་བཞིན་པ།</string>
+    <string name="category_Science_Education">ཚན་རིག་དང་ཤེས་ཡོན།</string>
+    <string name="category_Security">སྲུང་སྐྱོབ།</string>
+    <string name="category_Time">དུས་ཚོད།</string>
+    <string name="category_Writing">འབྲི་བཞིན་པ།</string>
 
     <string name="system_install_button_install">འགྲིག་བཅུག</string>
     <string name="system_uninstall_button">འགྲིག་བཅུག་ཕྱིར་འཐེན།</string>
@@ -63,8 +63,8 @@
     <string name="repo_last_update">ཐ་མའི་གསར་བསྒྱུར།</string>
     <string name="not_on_same_wifi">ཁྱེད་རང་གི་ད་ལྟ་ཁ་སྣོན་བྱས་པའི་རཱེ་པོ་བསྟི་གནས་དང་ཡོ་བྱད་གཉིས་ཝཡེ་ཕྷཡེ་གཅིག་པའི་སྒང་ལ་མིན་འདུག དྲྭ་རྒྱ་འདིར་མཐུད་ཐབས་བྱེད་ཀྱི་ཡོད།:%s</string>
     <string name="wifi">ཝཡེ་ཕྷཡེ།</string>
-    <string tools:ignore="UnusedResources" name="category_Sports_Health">རྕེད་རིགས་དང་འཕྲོད་བསྟེན།</string>
-    <string tools:ignore="UnusedResources" name="category_System">མ་ལག</string>
+    <string name="category_Sports_Health">རྕེད་རིགས་དང་འཕྲོད་བསྟེན།</string>
+    <string name="category_System">མ་ལག</string>
     <string name="swap_send_fdroid">ཨེཕྷ་རོཌ་གཏོང་།</string>
     <string name="crash_dialog_title">ཨེཕྷ་རོཌ་ལ་གཏོར་སྐྱོན་ཤོར་འདུག</string>
     <string name="crash_dialog_text">གློ་བུར་དུ་སྐྱོན་ཆ་ཞིག་ཤོར་སོང་བས་མཉེན་ཆས་འདི་སྒོ་མ་རྒྱབ་ཀ་མེད་ཐུག་སོང་། ཁྱེད་རང་གིས་གློག་འཕྲིན་གཏོང་ནས་གནད་དོན་འདི་སེལ་འདོད་དམ།?</string>
@@ -261,7 +261,7 @@
     <string name="requires_features">དགསོ་མཁོ་:%1$s</string>
     <string name="wifi_ap">དྲྭ་འཛོམས།</string>
 
-    <string tools:ignore="UnusedResources" name="category_Theming">བརྗོད་གཞི་གླེང་བཞིན་པ།</string>
+    <string name="category_Theming">བརྗོད་གཞི་གླེང་བཞིན་པ།</string>
     <plurals name="button_view_all_apps_in_category">
 	<item quantity="other">ཚང་མར་བལྟས། %d</item>
 </plurals>
