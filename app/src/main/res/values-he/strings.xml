@@ -354,7 +354,7 @@
 
     <plurals name="updates__download_updates_for_apps">
 	<item quantity="one">הורדת עדכון ליישומון אחד.</item>
-	<item quantity="two">הורדת עדכון ל־%1$d יישומונים.</item>
+	<item quantity="other">הורדת עדכון ל־%1$d יישומונים.</item>
 </plurals>
 
     <string name="versions">גירסאות</string>
@@ -436,11 +436,11 @@
     <string name="notification_content_single_installed">ההתקנה הצליחה</string>
     <plurals name="notification_summary_updates">
 	<item quantity="one">עדכון אחד</item>
-	<item quantity="two">%1$d עדכונים</item>
+	<item quantity="other">%1$d עדכונים</item>
 </plurals>
     <plurals name="notification_summary_installed">
 	<item quantity="one">יישומון הותקן</item>
-	<item quantity="two">%1$d יישומונים הותקנו</item>
+	<item quantity="other">%1$d יישומונים הותקנו</item>
 </plurals>
     <string name="notification_title_summary_update_available">עדכון זמין</string>
     <string name="notification_title_summary_downloading">מתבצעת הורדה כעת…</string>
@@ -453,25 +453,25 @@
 
     <plurals name="tts_view_all_in_category">
 	<item quantity="one">הצגת יישומון %1$d בקטגוריה %2$s</item>
-	<item quantity="two">הצגת כל %1$d היישומונים בקטגוריה %2$s</item>
+	<item quantity="other">הצגת כל %1$d היישומונים בקטגוריה %2$s</item>
 </plurals>
 
     <string name="details_last_updated_today">עודכן היום</string>
     <plurals name="details_last_update_days">
 	<item quantity="one">עודכן לפני יום</item>
-	<item quantity="two">עודכן לפני %1$d ימים</item>
+	<item quantity="other">עודכן לפני %1$d ימים</item>
 </plurals>
     <plurals name="details_last_update_weeks">
 	<item quantity="one">עודכן לפני שבוע</item>
-	<item quantity="two">עודכן לפני %1$d שבועות</item>
+	<item quantity="other">עודכן לפני %1$d שבועות</item>
 </plurals>
     <plurals name="details_last_update_months">
 	<item quantity="one">עודכן לפני חודש</item>
-	<item quantity="two">עודכן לפני %1$d חודשים</item>
+	<item quantity="other">עודכן לפני %1$d חודשים</item>
 </plurals>
     <plurals name="details_last_update_years">
 	<item quantity="one">עודכן לפני שנה</item>
-	<item quantity="two">עודכן לפני %1$d שנים</item>
+	<item quantity="other">עודכן לפני %1$d שנים</item>
 </plurals>
 <string name="force_old_index">אילוץ מבנה המפתח הישן</string>
     <string name="force_old_index_summary">במקרה שנתקלת בבאג או בתקלת תאימות, יש להשתמש במפתח יישומונים ב־XML</string>
