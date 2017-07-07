@@ -236,7 +236,7 @@
     <string name="global_error_updating_repos">གསར་བསྒྱུར་བྱས་སྐབས་སྐྱོན་ཤོར་བ་:%s</string>
     <string name="no_permissions">ཆོག་མཆན་མེད་པ་རྣམས་བེད་སྤྱོད་བྱེད།</string>
     <string name="permissions">ཆོག་མཆན།</string>
-    <string name="no_handler_app">ཁྱེད་རང་གིས་ལག་བསྟར་བྱེད་ཐུབ་པའི་མཉེན་ཆས་རིགས་རྩ་བ་ནས་མིན་འདུག</string>
+    <string name="no_handler_app">ཁྱེད་རང་གིས་ལག་བསྟར་བྱེད་ཐུབ་པའི་མཉེན་ཆས་རིགས་རྩ་བ་ནས་མིན་འདུག %s</string>
     <string name="theme">བརྗོད་གཞི།</string>
     <string name="repo_url">ཁ་བྱང་།</string>
     <string name="repo_num_apps">མཉེས་ཆས་ཀྱི་གྲངས།</string>
@@ -415,7 +415,6 @@
     <string name="notification_title_summary_ready_to_install_update">གསར་བསྒྱུར་འགྲིག་བཅུག་བྱེད་རྒྱུར་གྲ་སྒྲིག་ཡིན།</string>
     <string name="notification_title_summary_installing">འགྲིག་བཅུག་བྱེད་བཞིན་པ།</string>
     <string name="notification_title_summary_installed">འགྲིག་བཅུག་ལེགས་གྲུབ་བྱུང་།</string>
-    <string name="tts_category_name">འཚོལ་སྒམ་ནང་ལ་\"Chip\" ཟེར་བའི་སྡེ་ཚན་ཞིག་ཐོན་ན་འདི་TTSའཕྲུལ་ཆས་གྱིས་བེད་སྤྱོད་བཏང་གི་ཡོད།</string>
 
     <plurals name="tts_view_all_in_category">
 	<item quantity="other">ཚང་མར་ལྟོས་ %1$d མཉེན་ཆས་དེ་ནས་ %2$s སྡེ་ཚན།</item>
