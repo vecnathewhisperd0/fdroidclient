@@ -526,4 +526,7 @@
     <string name="app_list_download_ready">Запампованая, гатовая да ўсталявання</string>
 
     <string name="status_inserting_x_apps">Захаванне дэталей праграмы (%1$d/%2$d) з %3$s</string>
+    <string name="app_installed_media">Файл усталяваны ў %s</string>
+    <string name="app_permission_storage">F-Droid патрабуе дазвол на ўсталёўку гэтага ў сховішча. Калі ласка, дайце дазвол на наступным экране для працягу ўсталёўкі.</string>
+
     </resources>
