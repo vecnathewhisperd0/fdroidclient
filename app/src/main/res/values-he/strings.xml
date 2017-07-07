@@ -494,4 +494,7 @@
     <string name="app_list_download_ready">התקבל, בהמתנה להתקנה</string>
 
     <string name="status_inserting_x_apps">פרטי היישומון נשמרים (%1$d/%2$d) מתוך %3$s</string>
+    <string name="app_installed_media">הקובץ הותקן אל %s</string>
+    <string name="app_permission_storage">ל־F-Droid נדרשת הרשאה לגשת לאחסון כדי להתקין זאת לאחסון. נא להרשות זאת במסך הבא כדי להמשיך בהתקנה.</string>
+
     </resources>
