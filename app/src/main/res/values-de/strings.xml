@@ -221,7 +221,7 @@
         liegen, dass Sie Ihre Paketquellen aktualisieren müssen oder diese tatsächlich keine Ihrer Anwendungen
         beinhalten.
     </string>
-    <string name="empty_can_update_app_list">Glückwunsch! Alle Ihre Apps sind auf dem neuesten Stand (oder Ihre Paketquellen sind veraltet).</string>
+    <string name="empty_can_update_app_list">Glückwunsch! Ihre Apps sind auf dem neuesten Stand.</string>
 
     <string name="swap_send_fdroid">F-Droid senden</string>
     <string name="swap_connecting">Verbindungsaufbau</string>
@@ -314,7 +314,7 @@
         installieren? Ihre bestehenden Daten gehen nicht verloren. Die aktualisierte Anwendung erhält danach Zugriff
         auf:
     </string>
-    <string name="install_confirm_update_system_no_perms">Wollen Sie eine Aktualisierung dieser vorinstallierten Anwendung installieren? Ihre bestehenden Daten gehen nicht verloren. Es werden keine besonderen Zugriffsrechte erfordert.</string>
+    <string name="install_confirm_update_system_no_perms">Wollen Sie eine Aktualisierung dieser vorinstallierten Anwendung installieren? Ihre bestehenden Daten gehen nicht verloren. Es werden keine besonderen Zugriffsrechte benötigt.</string>
     <string name="allPerms">Alle</string>
     <string name="perm_costs_money">Das könnte Sie Geld kosten</string>
     <string name="uninstall_update_confirm">Möchten Sie diese App durch die Version des Werkszustands ersetzen?</string>
@@ -511,4 +511,8 @@
     <string name="force_old_index_summary">Sollten Fehler oder Kompatibilitätsprobleme auftauchen, bitte den XML-App-Index verwenden.</string>
     <string name="app_list_download_ready">Heruntergeladen und bereit zur Installation!</string>
 
+    <string name="app_installed_media">Datei wurde nach %s installiert</string>
+    <string name="app_permission_storage">F-Droid benötigt Zugriffsrechte auf den Speicher, um es dort zu installieren. Bitte beim nächsten Bildschirm bestätigen, um mit der Installation fortzufahren.</string>
+
+    <string name="status_inserting_x_apps">App-Details werden von %3$s gespeichert (%1$d/%2$d)</string>
     </resources>
