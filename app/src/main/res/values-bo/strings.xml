@@ -337,4 +337,117 @@
     <string name="menu_litecoin">ལཱ་ཡིཊ་ཀོ་ཡེན།</string>
     <string name="menu_flattr">ཕྷེ་ལེ་ཊར།</string>
 
+    <string name="app_name">ཨེཕ་རོཌ་</string>
+
+    <string name="updates">གསར་བསྒྱུར་ཁག</string>
+    <string name="ok">འགྲིག</string>
+
+    <string name="yes">རེད།</string>
+    <string name="no">མ་རེད།</string>
+    <string name="back">རྒྱབ།</string>
+    <string name="cancel">བརྩི་མེད།</string>
+    <string name="force_old_index">བརྡ་སྟོན་རྙིང་པ་དེ་ནན་སྐུལ་གྱིས་མེད་པ་བཟོས།</string>
+    <string name="app_installed_media">ཡིག་ཆ་འགྲིག་བཅུག་འདི་ལ%s</string>
+    <string name="app_permission_storage">ཨེཕ་རོཌ་གསོག་ཉར་ཁང་ནང་ལ་འདི་བཅུག་པའི་ཆེད་དུ་གསོག་ཉར་ཆོག་མཆན་དགོས། དྲྭ་ཤེལ་རྗེས་མ་དེའི་སྒང་ལ་སྒྲིག་བཅུག་བྱས་པ་དང་མཉམ་དུ་མུ་མཐུད་ཆོག་གི་རེད།</string>
+
+    <string name="antinonfreeadlist">མཉེན་ཆས་འདི་རིན་མེད་མ་ཡིན་པའི་ཆ་རྐྱེན་འཕར་མ་རྒྱབ་སྐྱོར་བྱེད་ཀྱི་ཡོད།</string>
+    <string name="system_install_denied_signature">མིང་རྟགས་ཀྱི་འཇུག་མཐུད་དེ་ནོར་འདུག སྐྱོན་ཅན་ཡིན་པའི་བརྡ་གཏོང་རོགས།</string>
+    <string name="system_install_denied_permissions">མཇུག་མཐུད་དེ་ལ་ཁེ་ཕན་ཆོག་མཆན་སྤྲད་མེད། སྐྱོན་ཅན་ཡིན་པའི་བརྡ་གཏོང་རོགས།!</string>
+    <string name="system_install_post_success_message">ཨེཕ་རོཌ་ཁེ་ཕན་འཕར་མ་འགྲིག་བཅུག འདིས་ཨེཕ་རོཌ་རང་ཉིད་ཀྱིས་འགྲིག་བཅུག་དང་། གསར་བསྒྱུར། འགྲིག་བཅུག་ཕྱིར་འཐེན་བཅས་བྱེད་ཐུབ།</string>
+    <string name="system_install_post_fail_message">ཨེཕ་རོཌ་ཁེ་ཕན་འཕར་མ་འགྲིག་བཅུག་བྱེད་ཐུབ་མ་སོང་། འགྲིག་བཅུག་གི་ཐབས་ལམ་འདི་ཨེན་ཀྲེན་འགྲེམ་སྤེལ་ཞུ་མཁན་གྱིས་རྒྱབ་སྐྱོར་བྱེད་ཀྱི་མེད། གནས་ཚུལ་འཕར་མའི་ཆེད་དུ་ཨེཕ་རོཌ་སྐྱོན་དེད་མཁན་ལ་ལམ་སྟོན་ཞུས།</string>
+    <string name="install_confirm_update">ད་ལྟ་ཡོད་བཞིན་པའི་མཉེན་ཆས་འདི་གསར་བསྒྱུར་འགྲིག་བཅུག་བྱེད་འདོད་དམ། ཁྱེད་རང་ལ་ཡོད་པའི་ཡིག་ཆ་བོར་བརླགས་ཤོར་གྱི་མེ་རེད། གསར་བསྒྱུར་བྱས་ཟིན་པའི་མཉེན་ཆས་འདི་དག་རག་ཐུབ།:</string>
+    <string name="install_confirm_update_system">ད་ལྟ་ཡོད་བཞིན་པའི་ནང་འགྲིག་མཉེན་ཆས་འདི་གསར་བསྒྱུར་འགྲིག་བཅུག་བྱེད་འདོད་དམ། ཁྱེད་རང་ལ་ཡོད་པའི་ཡིག་ཆ་བོར་བརླགས་ཤོར་གྱི་མེ་རེད། གསར་བསྒྱུར་བྱས་ཟིན་པའི་མཉེན་ཆས་འདི་དག་རག་ཐུབ།:</string>
+    <string name="install_confirm_update_no_perms">ད་ལྟ་ཡོད་བཞིན་པའི་མཉེན་ཆས་འདི་གསར་བསྒྱུར་འགྲིག་བཅུག་བྱེད་འདོད་དམ། ཁྱེད་རང་ལ་ཡོད་པའི་ཡིག་ཆ་བོར་བརླགས་ཤོར་གྱི་མེ་རེད། འདི་ལྟ་ཐུབ་པའི་ཆེད་དུ་དམིགས་བསལ་གྱི་དགོས་མཁོ་མེད།</string>
+    <string name="install_confirm_update_system_no_perms">ད་ལྟ་ཡོད་བཞིན་པའི་ནང་འགྲིག་མཉེན་ཆས་འདི་གསར་བསྒྱུར་འགྲིག་བཅུག་བྱེད་འདོད་དམ། ཁྱེད་རང་ལ་ཡོད་པའི་ཡིག་ཆ་བོར་བརླགས་ཤོར་གྱི་མེ་རེད། འདི་ལྟ་ཐུབ་པའི་ཆེད་དུ་དམིགས་བསལ་དགོས་མཁོ་མེད།</string>
+    <string name="allPerms">ཚང་མ།</string>
+    <string name="perm_costs_money">དངུལ་སྤྲད་དགོས་སྲིད།</string>
+    <string name="uninstall_update_confirm">ཁྱེད་རང་གི་མཉེན་ཆས་འདི་བཟོ་ལས་ཐོན་རིམ་དང་བརྗེ་པོ་རྒྱབ་འདོད་ཡོད་དམ།</string>
+    <string name="uninstall_confirm">ཁྱེད་རང་གིས་མཉེས་ཆས་དེ་འགྲིག་བཅུག་ཕྱིར་འཐེན་བྱེད་འདོད་ཡོད་དམ།</string>
+    <string name="download_error">ཕབ་ལེན་བྱེད་ཐུབ་མ་སོང་།</string>
+    <string name="download_pending">ཕབ་ལེན་འགོ་བཙུགས་རེ་སྒུག་བྱེད་བཞིན་པ།…</string>
+    <string name="install_error_notify_title">འགྲིག་བཅུག་ལ་སྐྱོན་ཤོར་བ་%s</string>
+    <string name="uninstall_error_notify_title">འགྲིག་བཅུག་ཕྱིར་འཐེན་ལ་སྐྱོན་ཤོར་བ།%s</string>
+
+
+    <string name="perms_new_perm_prefix">གསར་པ།:</string>
+    <string name="perms_description_app">སྤྲད་མཁན་%1$s.</string>
+    <string name="downloading">ཕན་ལེན་བྱེད་བཞིན་པ་…</string>
+    <string name="app__tts__downloading_progress">ཕབ་ལེན་བྱེད་བཞིན་པ་%1$d%% ཚར་སོང་།</string>
+    <string name="installing">འགྲིག་བཅུག་བྱེད་བཞིན་པ།…</string>
+    <string name="uninstalling">འགྲིག་བཅུག་ཕྱིར་འཐེན་བྱེད་བཞིན་པ།…</string>
+
+    <string name="interval_never">ནམ་ཡང་།</string>
+    <string name="interval_1h">ཆུ་ཚོད་རེ།</string>
+    <string name="interval_4h">ཆུ་ཚུད་ ༤ རེ་རེ་ལ།</string>
+    <string name="interval_12h">ཆུ་ཚོད་ ༡༢ རེ་རེ་ལ་</string>
+    <string name="interval_1d">ཉིན་ལྟར།</string>
+    <string name="interval_1w">བདུན་ཕྲག་རེ།</string>
+    <string name="interval_2w">བདུན་ཕྲག་ ༢ རེ་ལ།</string>
+
+    <string name="keep_hour">ཆུ་ཚོད་ ༡</string>
+    <string name="keep_day">ཉིན་ ༡</string>
+    <string name="keep_week">བདུན་ཕྲག་ ༡</string>
+    <string name="keep_month">ཟླ་བ་ ༡</string>
+    <string name="keep_year">ལོ་ ༡</string>
+    <string name="keep_forever">དུས་རྟག་ཏུ།</string>
+
+    <string name="crash_dialog_comment_prompt">ཁྱེད་རང་གིས་གནས་ཚུལ་འཕར་མ་དང་མཆན་འདིར་བཀོད་ཐུབ།:</string>
+
+    <plurals name="notification_summary_more">
+	<item quantity="other">+%1$d དེ་ལས་མང་བ།…</item>
+</plurals>
+    <string name="notification_title_single_ready_to_install">འགྲིག་བཅུག་བྱེད་རྒྱུར་གྲ་སྒྲིག་ཡོད།</string>
+    <string name="notification_title_single_ready_to_install_update">གསར་བསྒྱུར་འགྲིག་བཅུག་བྱེད་རྒྱུར་གྲ་སྒྲིག་ཡིན།</string>
+    <string name="notification_title_single_install_error">འགྲིག་བཅུག་བྱེད་ཐུབ་མ་སོང་།</string>
+    <string name="notification_content_single_downloading">ཕབ་ལེན་བྱེད་བཞིན་པ་\"%1$s\"…</string>
+    <string name="notification_content_single_downloading_update">གསར་བསྒྱུར་ཕབ་ལེན་འདིའི་ཆེད་དུ་བྱེད་བཞིན་པ་\"%1$s\"…</string>
+    <string name="notification_content_single_installing">འགྲིག་བཅུག་བྱེད་བཞིན་པ།\"%1$s\"…</string>
+    <string name="notification_content_single_installed">འགྲིག་བཅུག་ལེགས་གྲུབ་ཐུབ།</string>
+    <plurals name="notification_summary_updates">
+	<item quantity="other">%1$d གསར་བསྒྱུར་ཁག</item>
+</plurals>
+    <plurals name="notification_summary_installed">
+	<item quantity="other">%1$d མཉེན་ཆས་འགྲིག་བཅུག་བྱས་ཚར་བ།</item>
+</plurals>
+    <string name="notification_title_summary_update_available">གསར་བསྒྱུར་ཡོད།</string>
+    <string name="notification_title_summary_downloading">ཕབ་ལེན་བྱེད་བཞིན་པ།…</string>
+    <string name="notification_title_summary_downloading_update">གསར་བསྒྱུར་ཕབ་ལེན་བྱེད་བཞིན་པ་…</string>
+    <string name="notification_title_summary_ready_to_install">འགྲིག་བཅུག་བྱེད་རྒྱུར་གྲ་སྒྲིག་ཡིན།</string>
+    <string name="notification_title_summary_ready_to_install_update">གསར་བསྒྱུར་འགྲིག་བཅུག་བྱེད་རྒྱུར་གྲ་སྒྲིག་ཡིན།</string>
+    <string name="notification_title_summary_installing">འགྲིག་བཅུག་བྱེད་བཞིན་པ།</string>
+    <string name="notification_title_summary_installed">འགྲིག་བཅུག་ལེགས་གྲུབ་བྱུང་།</string>
+    <string name="tts_category_name">འཚོལ་སྒམ་ནང་ལ་\"Chip\" ཟེར་བའི་སྡེ་ཚན་ཞིག་ཐོན་ན་འདི་TTSའཕྲུལ་ཆས་གྱིས་བེད་སྤྱོད་བཏང་གི་ཡོད།</string>
+
+    <plurals name="tts_view_all_in_category">
+	<item quantity="other">ཚང་མར་ལྟོས་ %1$d མཉེན་ཆས་དེ་ནས་ %2$s སྡེ་ཚན།</item>
+</plurals>
+
+    <string name="details_last_updated_today">དེ་རེས་གསར་བསྒྱུར་བྱས་ཟིན།</string>
+    <plurals name="details_last_update_days">
+	<item quantity="other">གསར་བསྒྱུར་%1$d ཉིན་ཤས་གོང་ལ་བྱས་ཟིན།</item>
+</plurals>
+    <plurals name="details_last_update_weeks">
+	<item quantity="other">གསར་བསྒྱུར་%1$d བདུན་ཕྲག་ཁ་ཤས་གོང་ལ་བྱས་ཟིན།</item>
+</plurals>
+    <plurals name="details_last_update_months">
+	<item quantity="other">གསར་བསྒྱུར་%1$d ཟླ་ཤས་གོང་ལ་བྱས་ཟིན།</item>
+</plurals>
+    <plurals name="details_last_update_years">
+	<item quantity="other">གསར་བསྒྱུར་%1$d ལོ་ཤས་གོང་ལ་བྱས་ཟིན།</item>
+</plurals>
+<string name="enable_proxy_summary">དྲྭ་རྒྱའི་རེ་སྐུལ་ཆ་ཚང་ལ་ HTTP ངོ་ཚབ་སྒྲིག་བཀོད་བྱས།</string>
+    <string name="proxy_host">དོ་བདག་ངོ་ཚབ།</string>
+    <string name="proxy_host_summary">ཁྱེད་རང་གི་ངོ་ཚབ་ཀྱི་དོ་བདག་མིང་(དཔེར་ན། 127.0.0.1)</string>
+    <string name="proxy_port">ངོ་ཚབ་མཐུད་སྒོ།</string>
+    <string name="proxy_port_summary">ཁྱེད་རང་གི་ངོ་ཚབ་མཐུད་སྒོའི་ཨང་གྲངས་(དཔེར་ན། 8118)</string>
+
+    <string name="status_processing_xml_percent">འགྲོ་བཞིན་པ་ %2$s / %3$s (%4$d%%) དེ་ནས་ %1$s</string>
+    <string name="status_inserting_apps">མཉེས་ཆས་ཞིབ་ཕྲ་ཉར་ཚགས་བྱེད་བཞིན་པ།</string>
+    <string name="theme_light">དཀར་མདངས།</string>
+    <string name="theme_dark">ནག་པོ།</string>
+    <string name="theme_night">མཚན་མོ།</string>
+
+    <string name="requesting_root_access_body">ཡོ་བྱད་ཨ་མ་ལྟ་ཐུབ་པར་རེ་སྐུལ་ཞུ་བཞིན་པ།</string>
+    <string name="root_access_denied_title">ཡོ་བྱད་ཨ་མ་ལྟ་བར་འགོག་རྐྱེན།</string>
+    <string name="root_access_denied_body">གཅིག་བྱས་ན་ཁྱེད་རང་གི་ཨེན་ཀྲོཌ་ཡོ་བྱད་འདི་ཆོག་མཆན་ཆ་ཚང་ཡོད་པའི་ཡོ་བྱད་ཨ་མ་བཟོས་མེད་པའམ་ཡང་ན་ཨེཕ་རོཌ་ལ་ཡོ་བྱད་ཨ་མས་བཀག་འདུག</string>
     </resources>
