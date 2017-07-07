@@ -330,4 +330,11 @@
     <string name="swap_not_enabled_description">བརྗེ་ལེན་མ་བྱེད་གོང་ལ་ཁྱེད་རང་གི་ཡོ་བྱད་དེ་ངེས་པར་དུ་མཐོང་ཐུབ་པ་བཟོ་དགོས།</string>
 
     <string name="install_confirm">འདི་ལ་བེད་སྤྱོད་དགོས།</string>
+    <string name="bluetooth_activity_not_found">བྷུ་ལུ་ཊུཐ་གཏོང་ཐབས་རྙེད་མ་སོང་། གཅིག་འདེམས།!</string>
+    <string name="choose_bt_send">བྷུ་ལུ་ཊུཐ་གཏོང་ཐབས་འདེམས།</string>
+
+    <string name="menu_bitcoin">དྲྭ་དངུལ།</string>
+    <string name="menu_litecoin">ལཱ་ཡིཊ་ཀོ་ཡེན།</string>
+    <string name="menu_flattr">ཕྷེ་ལེ་ཊར།</string>
+
     </resources>
