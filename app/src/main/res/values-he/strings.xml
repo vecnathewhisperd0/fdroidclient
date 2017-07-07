@@ -158,7 +158,7 @@
     <string name="empty_installed_app_list">אין יישומונים מותקנים.
 \n
 \nיש יישומונים מותקנים על מכשירך, אך אלו אינם זמינים מתוך F-Droid. מצב זה עלול לקרות כאשר עליך לעדכן את המאגרים שלך או שבמאגרים באמת אין את היישומונים שלך.</string>
-    <string name="empty_can_update_app_list">ברכותינו! כל היישומונים שלך עדכניים (או שהמאגרים שלך לא עדכניים).</string>
+    <string name="empty_can_update_app_list">ברכותינו! היישומונים שלך עדכניים.</string>
 
     <string name="requesting_root_access_body">בקשה לגישת על (root)…</string>
     <string name="root_access_denied_title">גישת על (root) נאסרה</string>
