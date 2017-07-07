@@ -323,7 +323,7 @@
     <string name="useTorSummary">אילוץ העברת תעבורת ההורדה דרך Tor להגברת הפרטיות</string>
     <string name="swap_stopping_wifi">חיבור הרשת האלחוטי מופסק…</string>
     <string name="update_auto_download">הורדת עדכונים אוטומטית</string>
-    <string name="update_auto_download_summary">"העדכונים מתקבלים אוטומטית ותופיע הודעה להתקין אותם "</string>
+    <string name="update_auto_download_summary">העדכונים מתקבלים אוטומטית ותופיע הודעה להתקין אותם</string>
     <string name="download_pending">בהמתנה להתחלת ההורדה…</string>
 
     <string name="keep_install_history">לשמור על היסטוריית ההתקנות</string>
