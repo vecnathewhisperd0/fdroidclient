@@ -272,7 +272,6 @@
 
     <string name="install_error_unknown">རྒྱུས་མེད་པའི་སྐྱོན་ཞིག་བྱུང་བའི་རྐྱེན་གྱིས་འགྲིག་བཅུག་བྱེད་ཐུབ་མ་སོང་།</string>
     <string name="uninstall_error_unknown">རྒྱུས་མེད་པའི་སྐྱོན་ཞིག་བྱུང་བའི་རྐྱེན་གྱིས་འགྲིག་བཅུག་ཕྱིར་འཐེན་བྱེད་ཐུབ་མ་སོང་།</string>
-    <string name="install_error_not_yet_supported">ཡིག་ཆ་འདིའི་རིགས་དེ་ད་དུང་ཡང་འགྲིག་བཅུག་ཐུབ་ཀྱི་མིན་འདུག:%s</string>
     <string name="system_install_post_success">ཨེཕྷ་རོཌ་ཁེ་ཕན་འཕཪ་མ་འགྲིག་བཅུག་བྱས་ཟིན།</string>
     <string name="system_install_post_fail">ཨེཕྷ་རོཌ་ཁེ་ཕན་འཕར་མ་འགྲིག་བཅུག་བྱེད་ཐུབ་མ་སོང་།</string>
     <string name="status_inserting_x_apps">མཉེན་ཆས་ཀྱི་ཞིབ་ཕྲ་ཉར་ཚགས་བྱེད་བཞིན་པ། (%1$d/%2$d) ནས་ %3$s</string>

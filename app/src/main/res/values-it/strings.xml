@@ -497,7 +497,6 @@
 </plurals>
     <string name="app__tts__downloading_progress">Scaricamento, %1$d%% completato</string>
     <string name="download_404">Il file richiesto non è stato trovato.</string>
-    <string name="install_error_not_yet_supported">Questo tipo di file non può ancora essere installato: %s</string>
     <string name="nearby_splash__download_apps_from_people_nearby">Senza Internet? Ottieni le app da persone vicine a te!</string>
     <string name="nearby_splash__find_people_button">Trova persone vicine a me</string>
     <string name="nearby_splash__both_parties_need_fdroid">Entrambi le parti hanno bisogno di %1$s per l\'uso nelle vicinanze.</string>
