@@ -452,4 +452,6 @@
     <string name="hide_anti_feature_apps">ཁྱད་ཆོས་འགལ་ཟླའི་མཉེས་ཆས་ཐལ་མདོག་བཟོས།</string>
     <string name="hide_anti_feature_apps_on">ཁྱད་ཆོས་འགལ་ཟླའི་དོགས་མཁོ་ཡོད་པའི་ཐལ་མདོག་བཟོས།</string>
 
+    <string name="tts_category_name">སྡེ་ཚན་%1$s</string>
+
     </resources>
