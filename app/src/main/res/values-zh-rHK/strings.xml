@@ -332,7 +332,7 @@
     <string name="keep_install_history_summary">在 F-Droid 中儲存所有安裝及卸載的紀錄</string>
     <string name="update_auto_install">自動安裝更新</string>
     <string name="update_auto_install_summary">在背景下載及安裝應用程式更新</string>
-<string name="app_version_x_available">已可以下載版本 %1$s</string>
+<string name="app_version_x_available">已可以下載 %1$s 版</string>
     <string name="app_details_donate_prompt_unknown_author">給 %1$s 的開發者買一杯咖啡吧！</string>
     <string name="app_details_donate_prompt">%2$s 是 %1$s 的開發者，給他們買一杯咖啡吧！</string>
 
@@ -345,7 +345,7 @@
 
     <string name="installed_apps__activity_title">已安裝的應用程式</string>
     <string name="installed_app__updates_ignored">已略過的更新</string>
-    <string name="installed_app__updates_ignored_for_suggested_version">已略過版本 %1$s 的更新</string>
+    <string name="installed_app__updates_ignored_for_suggested_version">已略過 %1$s 版的更新</string>
     <string name="updates__tts__download_updates_for_all_apps">下載所有更新</string>
 
     <string name="updates__hide_updateable_apps">隱藏應用程式</string>
@@ -372,7 +372,7 @@
     <string name="preference_manage_installed_apps">管理已安裝的應用程式</string>
 
 
-    <string name="details_new_in_version">版本 %s 的新功能</string>
+    <string name="details_new_in_version">%s 版有下列的新功能</string>
 
     <string name="antifeatureswarning">此應用程式有些您未必喜歡的功能。</string>
     <string name="antifeatures">反功能</string>
