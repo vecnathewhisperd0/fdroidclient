@@ -69,7 +69,7 @@
     <string name="antinonfreenetlist">Приложението промотира несвободни мрежови услуги</string>
     <string name="antinonfreedeplist">Приложението зависи от други несвободни приложения</string>
     <string name="antiupstreamnonfreelist">Изходният код не е напълно свободен</string>
-    <string name="display">Дисплей</string>
+    <string name="display">Изглед</string>
     <string name="expert">Експертен режим</string>
     <string name="expert_on">Показва допълнителна информация и настройки</string>
     <string name="search_hint">Търсене на приложения</string>
@@ -90,9 +90,9 @@
     <string name="enable_proxy_title">Включване на HTTP прокси</string>
     <string name="enable_proxy_summary">Настройка на HTTP прокси за всички мрежови заявки</string>
     <string name="proxy_host">Хост на проксито</string>
-    <string name="proxy_host_summary">Въведете име на хоста за проксито (напр. 127.0.0.1)</string>
+    <string name="proxy_host_summary">Име на хоста за посредника (напр. 127.0.0.1)</string>
     <string name="proxy_port">Порт за проксито</string>
-    <string name="proxy_port_summary">Въведете номер за порта на проксито (напр. 8118)</string>
+    <string name="proxy_port_summary">Номер на порта за посредника (напр. 8118)</string>
     <string name="status_download">Сваляне
         %2$s / %3$s (%4$d%%) от
         %1$s
@@ -305,7 +305,7 @@
         осъществи.
     </string>
     <string name="newPerms">Нови</string>
-    <string name="uninstall_update_confirm">Желаете ли приложението да бъде заменено от фабричната му версия?</string>
+    <string name="uninstall_update_confirm">Искате ли да замените приложението със заводската му версия?</string>
     <string name="download_error">Свалянето се провали</string>
 
     <string name="perms_new_perm_prefix">Ново:</string>
