@@ -188,9 +188,7 @@
 
     <string name="category_Connectivity">Connectivité</string>
     <string name="category_Sports_Health">Sport &amp; Santé</string>
-    <string name="empty_can_update_app_list">Toutes les applis sont à jour.\n\nFélicitations ! Toutes vos applis sont à
-        jour (ou vos dépôts ne le sont pas).
-    </string>
+    <string name="empty_can_update_app_list">Félicitations ! Vos applications sont à jour.</string>
 
     <string name="system_install_installing">Installation…</string>
     <string name="system_install_uninstalling">Désinstallation…</string>
