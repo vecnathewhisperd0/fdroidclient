@@ -478,28 +478,28 @@
 </plurals>
     <plurals name="notification_summary_updates">
 	<item quantity="one">%1$d надоградња</item>
-        <item quantity="few">%1$d надоградње</item>
-	<item quantity="other">%1$d надоградње</item>
+	<item quantity="few">%1$d надоградње</item>
+	<item quantity="other">%1$d надоградњи</item>
 </plurals>
     <plurals name="notification_summary_installed">
-	<item quantity="one">%1$d апл. инсталирана</item>
-        <item quantity="few">%1$d апл. инсталиране</item>
-	<item quantity="other">%1$d апл. инсталиране</item>
+	<item quantity="one">%1$d апл. уграђена</item>
+	<item quantity="few">%1$d апл. уграђене</item>
+	<item quantity="other">%1$d апл. уграђено</item>
 </plurals>
     <plurals name="details_last_update_weeks">
 	<item quantity="one">Надограђена пре %1$d седмицу</item>
-        <item quantity="few">Надограђена пре %1$d седмице</item>
-	<item quantity="other">Надограђена пре %1$d седмице</item>
+	<item quantity="few">Надограђена пре %1$d седмице</item>
+	<item quantity="other">Надограђена пре %1$d седмица</item>
 </plurals>
     <plurals name="details_last_update_months">
 	<item quantity="one">Надограђена пре %1$d месец</item>
-        <item quantity="few">Надограђена пре %1$d месеца</item>
-	<item quantity="other">Надограђена пре %1$d месеца</item>
+	<item quantity="few">Надограђена пре %1$d месеца</item>
+	<item quantity="other">Надограђена пре %1$d месеци</item>
 </plurals>
     <plurals name="details_last_update_years">
 	<item quantity="one">Надограђена пре %1$d годину</item>
-        <item quantity="few">Надограђена пре %1$d године</item>
-	<item quantity="other">Надограђена пре %1$d године</item>
+	<item quantity="few">Надограђена пре %1$d године</item>
+	<item quantity="other">Надограђена пре %1$d година</item>
 </plurals>
 <string name="force_old_index">Присили стари формат индекса</string>
     <string name="force_old_index_summary">У случају грешака или проблема са усклађеношћу, користите ИксМЛ индекс апликација</string>
