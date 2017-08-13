@@ -394,7 +394,7 @@
     <string name="update_auto_install">Instalatu eguneraketak automatikoki</string>
     <string name="update_auto_install_summary">Deskargatu eta instalatu aplikazioen eguneraketak bigarren planoan
     </string>
-    <string name="keep_install_history">Mantendu instalazio historiala</string>
+    <string name="keep_install_history">Mantendu instalazioen historiala</string>
     <string name="keep_install_history_summary">Gorde instalazio eta desinstalazioen egunkari bat F-Droiden</string>
     <string name="warning_no_internet">Ezin da eguneratu, Internetera konektatuta zaude?</string>
     <string name="versions">Bertsioak</string>
@@ -493,7 +493,7 @@
 
     <string name="app__tts__downloading_progress">Deskargatzen, %1$d%% osatua</string>
     <string name="by_author_format">egilea: %s</string>
-    <string name="force_old_index">Indize zaharreko formatua behartu</string>
+    <string name="force_old_index">Behartu indize-formatu zaharra</string>
     <string name="force_old_index_summary">Errorerik edo bateragarritasun arazorik izanez gero, erabili aplikazioaren XML indizea</string>
     <string name="download_404">Ez da aurkitu eskatutako fitxategia.</string>
     <plurals name="notification_summary_more">
