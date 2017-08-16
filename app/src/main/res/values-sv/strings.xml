@@ -493,4 +493,12 @@
 </plurals>
 <string name="by_author_format">av %s</string>
     <string name="download_404">Den begärda filen hittades inte.</string>
+    <string name="force_old_index">Tvinga gammalt indexformat</string>
+    <string name="force_old_index_summary">Om det finns fel eller kompatibilitetsproblem, använd XML-appindexet</string>
+    <string name="app_installed_media">Fil installerad till %s</string>
+    <string name="app_permission_storage">F-Droid behöver lagringstillstånd för att installera detta till lagring. Vänligen tillåt det på nästa skärm för att fortsätta med installationen.</string>
+
+    <string name="app_list_download_ready">Hämtat, redo att installera</string>
+
+    <string name="status_inserting_x_apps">Sparar appdetaljer (%1$d/%2$d) från %3$s</string>
     </resources>
