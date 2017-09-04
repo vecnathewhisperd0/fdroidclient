@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="version">Versija</string>
     <string name="delete">Dzēst</string>
     <string name="enable_nfc_send">Ieslēgt sūtīšanu caur NFC…</string>
@@ -124,8 +124,8 @@
     <string name="unverified">Neapstiprināts</string>
     <string name="repo_last_update">Pēdējais atjauninājums</string>
     <string name="not_on_same_wifi">Jūsu ierīce nav tajā pašā Wi-Fi tīklā kā pēdējais repozitorijs, ko jūs pievienojāt! Mēģiniet pievienoties šim tīklam: %s</string>
-    <string tools:ignore="UnusedResources" name="category_Sports_Health">Sports un veselība</string>
-    <string tools:ignore="UnusedResources" name="category_System">Sistēmas</string>
+    <string name="category_Sports_Health">Sports un veselība</string>
+    <string name="category_System">Sistēmas</string>
     <string name="swap_send_fdroid">Sūtīt F-Droid</string>
     <string name="crash_dialog_title">F-Droid beidza strādāt</string>
     <string name="crash_dialog_text">Nezināma kļūme lika aplikācijai beigt strādāt. Vai jūs vēlētos nosūtīt e-pastu ar informāciju, lai palīdzētu salabot šo problēmu?</string>
