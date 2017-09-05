@@ -496,4 +496,10 @@
     <string name="app_installed_media">הקובץ הותקן אל %s</string>
     <string name="app_permission_storage">ל־F-Droid נדרשת הרשאה לגשת לאחסון כדי להתקין זאת לאחסון. נא להרשות זאת במסך הבא כדי להמשיך בהתקנה.</string>
 
+    <string name="app_details__incompatible_mismatched_signature">חתימה שונה מהגרסה המותקנת</string>
+    <string name="app_details__no_versions__show_incompat_versions">כדי להציג את הגרסה נטולת התמיכה להלן בכל מקרה, יש להפעיל את ההגדרה „%1$s“.</string>
+    <string name="app_details__no_versions__no_compatible_signatures">אין גרסאות עם חתימה תואמת</string>
+    <string name="app_details__no_versions__none_compatible_with_device">אין גרסאות תואמות להתקן זה</string>
+    <string name="app_details__no_versions__explain_incompatible_signatures">הגרסה המותקנת אינה תואמת לכל הגרסאות הנתמכות. הסרת היישומון תאפשר לך לצפות ולהתקין גרסאות תואמות. מצב זה קורה לרוב עם יישומים שמותקנים דרך Google Play או מקורות אחרים, אם היישומונים נחתמו עם אישור אחר.</string>
+
     </resources>
