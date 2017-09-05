@@ -226,6 +226,12 @@ public class IndexV1Updater extends RepoUpdater {
 
                 if (apks.size() > 0) {
                     app.preferredSigner = apks.get(0).sig;
+                    app.isMedia = false;
+                    for (Apk apk : apks) {
+                        if (!apk.isApk()) {
+                            app.isMedia = true;
+                        }
+                    }
                 }
 
                 if (appCount % 50 == 0) {
