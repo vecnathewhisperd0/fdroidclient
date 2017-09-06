@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-    <string name="SignatureMismatch">Нова версія підписана не тим ключем, що стара. Перш ніж встановити нову версію, самостійно зітріть стару. (Зауважте, що стирання застосунку призведе до знищення всіх даних цього застосунку)</string>
+    <string name="SignatureMismatch">Нова версія підписана іншим ключем чим існуюча. Щоб встановити нову версію, спочатку потрібно видалити існуючу. Будь ласка, спробуйте ще раз. (Зауважте, що при видаленні будуть видалені будь-які внутрішні дані, що зберігаються в застосунку)</string>
     <string name="version">Версія</string>
     <string name="cache_downloaded">Зберігати кешовані пакунки</string>
     <string name="updates">Оновлення</string>
@@ -36,7 +36,7 @@
     <string name="ignoreTouch">Ігнорувати тачскрін</string>
     <string name="app_name">F-Droid</string>
 
-    <string name="installIncompatible">Схоже, цей застосунук не сумісний з вашим пристроєм. Спробувати встановити його попри все?</string>
+    <string name="installIncompatible">Застосунок, несумісний з вашим пристроєм, встановити попри все?</string>
     <string name="delete">Видалити</string>
     <string name="other">Інше</string>
     <string name="update_interval">Інтервал автооновлення</string>
