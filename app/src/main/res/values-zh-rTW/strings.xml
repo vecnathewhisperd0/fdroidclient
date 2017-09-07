@@ -478,6 +478,6 @@
     <string name="app_details__no_versions__show_incompat_versions">若要在這裡顯示不相容的版本，請啟用 \"%1$s\" 設定。</string>
     <string name="app_details__no_versions__no_compatible_signatures">沒有相容簽名的版本</string>
     <string name="app_details__no_versions__none_compatible_with_device">沒有與裝置相容的版本</string>
-    <string name="app_details__no_versions__explain_incompatible_signatures">已安裝的版本不相容於任何可用的版本。解除安裝該應用程式將能使您能夠查看和安裝相容的版本。這通常是透過 Google Play 或其它來源安裝的應用程式，如果它們由不同的證書簽署時才會發生。</string>
+    <string name="app_details__no_versions__explain_incompatible_signatures">已安裝的版本不相容於任何可用的版本。解除安裝該應用程式將能使您能夠查看和安裝相容的版本。這通常是透過 Google Play 或其它來源安裝的應用程式，如果它們是由不同的證書簽署時才會發生。</string>
 
     </resources>
