@@ -506,4 +506,10 @@
     <string name="app_installed_media">Archivo instalado en %s</string>
     <string name="app_permission_storage">F-Droid necesita el permiso instalar esto en su almacenamiento. Por favor permita que en la siguiente pantalla continúe con la instalación.</string>
 
+    <string name="app_details__incompatible_mismatched_signature">La firma no coincide con la de la versión instalada</string>
+    <string name="app_details__no_versions__show_incompat_versions">Para mostrar versiones incompatibles aquí de todos modos, habilita la opción \"%1$s\".</string>
+    <string name="app_details__no_versions__no_compatible_signatures">No hay versiones con una firma compatible</string>
+    <string name="app_details__no_versions__none_compatible_with_device">No hay versiones compatibles con el dispositivo</string>
+    <string name="app_details__no_versions__explain_incompatible_signatures">La versión instalada no es compatible con ninguna de las versiones disponibles. Desinstalar la aplicación te permitirá ver e instalar las versiones compatibles. Esto ocurre a menudo con aplicaciones instaladas a través de Google Play o de otras fuentes, si se han firmado con un certificado diferente.</string>
+
     </resources>
