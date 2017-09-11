@@ -151,7 +151,7 @@ class DBHelper extends SQLiteOpenHelper {
             + AppMetadataTable.Cols.TEN_INCH_SCREENSHOTS + " string,"
             + AppMetadataTable.Cols.TV_SCREENSHOTS + " string,"
             + AppMetadataTable.Cols.WEAR_SCREENSHOTS + " string,"
-            + AppMetadataTable.Cols.IS_MEDIA + " boolean,"
+            + AppMetadataTable.Cols.IS_APP + " boolean,"
             + "primary key(" + AppMetadataTable.Cols.PACKAGE_ID + ", " + AppMetadataTable.Cols.REPO_ID + "));";
 
     private static final String CREATE_TABLE_APP_PREFS = "CREATE TABLE " + AppPrefsTable.NAME
@@ -282,27 +282,27 @@ class DBHelper extends SQLiteOpenHelper {
         addIntegerPrimaryKeyToInstalledApps(db, oldVersion);
         addPreferredSignerToApp(db, oldVersion);
         updatePreferredSignerIfEmpty(db, oldVersion);
-        addIsMediaToApp(db, oldVersion);
+        addIsAppToApp(db, oldVersion);
     }
 
-    private void addIsMediaToApp(SQLiteDatabase db, int oldVersion) {
+    private void addIsAppToApp(SQLiteDatabase db, int oldVersion) {
         if (oldVersion >= 74) {
             return;
         }
 
-        if (!columnExists(db, AppMetadataTable.NAME, AppMetadataTable.Cols.IS_MEDIA)) {
+        if (!columnExists(db, AppMetadataTable.NAME, AppMetadataTable.Cols.IS_APP)) {
             Log.i(TAG, "Figuring out whether each \"app\" is actually an app, or it represents other media.");
-            db.execSQL("alter table " + AppMetadataTable.NAME + " add column " + AppMetadataTable.Cols.IS_MEDIA + " boolean;");
+            db.execSQL("alter table " + AppMetadataTable.NAME + " add column " + AppMetadataTable.Cols.IS_APP + " boolean;");
 
             // Find all apks for which their filename DOESN'T end in ".apk", and if there is more than one, the
             // corresponding app is updated to be marked as media.
             String apkName = ApkTable.Cols.NAME;
-            String query = "UPDATE " + AppMetadataTable.NAME + " SET " + AppMetadataTable.Cols.IS_MEDIA + " = (" +
+            String query = "UPDATE " + AppMetadataTable.NAME + " SET " + AppMetadataTable.Cols.IS_APP + " = (" +
                     "  SELECT COUNT(*) FROM " + ApkTable.NAME + " AS apk" +
                     "  WHERE " +
                     "    " + ApkTable.Cols.APP_ID + " = " + AppMetadataTable.NAME + "." + AppMetadataTable.Cols.ROW_ID +
                     "    AND SUBSTR(" + apkName + ", LENGTH(" + apkName + ") - 3) != '.apk'" +
-                    ") > 0;";
+                    ") = 0;";
             Log.i(TAG, query);
             db.execSQL(query);
         }

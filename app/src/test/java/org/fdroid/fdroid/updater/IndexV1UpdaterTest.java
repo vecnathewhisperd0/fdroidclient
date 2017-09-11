@@ -335,7 +335,7 @@ public class IndexV1UpdaterTest extends FDroidProviderTest {
                 "hash",
                 "hashType",
                 "incompatibleReasons",
-                "isMedia",
+                "isApp",
                 "maxSdkVersion",
                 "minSdkVersion",
                 "nativecode",

@@ -105,7 +105,7 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
     @NonNull
     public String preferredSigner;
     @JsonIgnore
-    public boolean isMedia;
+    public boolean isApp;
 
     @JacksonInject("repoId")
     public long repoId;
@@ -349,8 +349,8 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
                 case Cols.WEAR_SCREENSHOTS:
                     wearScreenshots = Utils.parseCommaSeparatedString(cursor.getString(i));
                     break;
-                case Cols.IS_MEDIA:
-                    isMedia = cursor.getInt(i) == 1;
+                case Cols.IS_APP:
+                    isApp = cursor.getInt(i) == 1;
                     break;
                 case Cols.InstalledApp.VERSION_CODE:
                     installedVersionCode = cursor.getInt(i);
@@ -859,19 +859,19 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         values.put(Cols.TV_SCREENSHOTS, Utils.serializeCommaSeparatedString(tvScreenshots));
         values.put(Cols.WEAR_SCREENSHOTS, Utils.serializeCommaSeparatedString(wearScreenshots));
         values.put(Cols.IS_COMPATIBLE, compatible ? 1 : 0);
-        values.put(Cols.IS_MEDIA, isMedia ? 1 : 0);
+        values.put(Cols.IS_APP, isApp ? 1 : 0);
 
         return values;
     }
 
     public boolean isInstalled(Context context) {
-        // First check isMedia() before isMediaInstalled() because the latter is quite expensive,
+        // First check isApp() before isMediaInstalled() because the latter is quite expensive,
         // hitting the database for each apk version, then the disk to check for installed media.
-        return installedVersionCode > 0 || (isMedia() && isMediaInstalled(context));
+        return installedVersionCode > 0 || (!isApp() && isMediaInstalled(context));
     }
 
-    private boolean isMedia() {
-        return isMedia;
+    private boolean isApp() {
+        return isApp;
     }
 
     public boolean isMediaInstalled(Context context) {
@@ -1076,7 +1076,7 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         dest.writeStringArray(this.tenInchScreenshots);
         dest.writeStringArray(this.tvScreenshots);
         dest.writeStringArray(this.wearScreenshots);
-        dest.writeByte(this.isMedia ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.isApp ? (byte) 1 : (byte) 0);
         dest.writeString(this.installedVersionName);
         dest.writeInt(this.installedVersionCode);
         dest.writeParcelable(this.installedApk, flags);
@@ -1127,7 +1127,7 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         this.tenInchScreenshots = in.createStringArray();
         this.tvScreenshots = in.createStringArray();
         this.wearScreenshots = in.createStringArray();
-        this.isMedia = in.readByte() != 0;
+        this.isApp = in.readByte() != 0;
         this.installedVersionName = in.readString();
         this.installedVersionCode = in.readInt();
         this.installedApk = in.readParcelable(Apk.class.getClassLoader());
