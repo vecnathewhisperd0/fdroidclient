@@ -111,7 +111,7 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
     public long repoId;
 
     // the remaining properties are set directly from the index metadata
-    public String packageName = "funknown";
+    public String packageName = "unknown";
     public String name = "Unknown";
 
     public String summary = "Unknown application";
