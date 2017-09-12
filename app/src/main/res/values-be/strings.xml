@@ -530,7 +530,7 @@
     <string name="app_permission_storage">F-Droid патрабуе дазвол на ўсталёўку гэтага ў сховішча. Калі ласка, дайце дазвол на наступным экране для працягу ўсталёўкі.</string>
 
     <string name="app_details__incompatible_mismatched_signature">Іншы подпіс у параўнанні з устляванай версіяй</string>
-    <string name="app_details__no_versions__show_incompat_versions">Каб паказваць несумясцімыя версіі заўседы, уключыце наладу «%1».</string>
+    <string name="app_details__no_versions__show_incompat_versions">Каб паказваць несумясцімыя версіі заўседы, уключыце наладу «%1$s».</string>
     <string name="app_details__no_versions__no_compatible_signatures">Няма версій з сумясцімым подпісам</string>
     <string name="app_details__no_versions__none_compatible_with_device">Няма версій сумясцімых з прыладай</string>
     <string name="app_details__no_versions__explain_incompatible_signatures">Усталяваная версія несумясцімая не з адной даступнай версіяй. Выдаленне праграмы дазволіць убачыць і ўсталявая сумясцімыя версіі. Гэтак часта адбываецца з праграмамі, якія ўстляваныя праз Google Play ці іншыя крыніцы, і калі яны падпісныя рознымі сертыфікатамі.</string>
