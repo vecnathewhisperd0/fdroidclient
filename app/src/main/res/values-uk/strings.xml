@@ -428,8 +428,8 @@
 	<item quantity="one">Оновлено %1$s день тому</item>
 	<item quantity="few">Оновлено %1$d дні тому</item>
 	<item quantity="many">Оновлено %1$d днів тому</item>
-	<item quantity="other"></item>
-</plurals>
+	<item quantity="other">Оновлено %1$d днів тому</item>
+	</plurals>
 <string name="updates__tts__download_app">Завантажити</string>
     <string name="by_author_format">від %s</string>
     <string name="app__tts__cancel_download">Скасувати завантаження</string>
@@ -441,8 +441,8 @@
 	<item quantity="one">+%1$d звістка…</item>
 	<item quantity="few">+%1$d звістки…</item>
 	<item quantity="many">+%1$d звісток…</item>
-	<item quantity="other"></item>
-</plurals>
+	<item quantity="other">+%1$d звісток…</item>
+	</plurals>
     <string name="force_old_index">Примусово старий формат індексу</string>
     <string name="force_old_index_summary">У разі виникнення помилок або проблем сумісності використовуйте XML індекс застосунку</string>
     <string name="latest__empty_state__no_recent_apps">Недавніх застосунків не виявлено</string>
@@ -456,8 +456,8 @@
 	<item quantity="one">Оглянути %d застосунок</item>
 	<item quantity="few">Оглянути усі %d застосунки</item>
 	<item quantity="many">Оглянути усі %d застосунків</item>
-	<item quantity="other"></item>
-</plurals>
+	<item quantity="other">Оглянути усі %d застосунків</item>
+	</plurals>
 
     <string name="nearby_splash__both_parties_need_fdroid">Обидві сторони потребують %1$s використовувати поруч.</string>
 
