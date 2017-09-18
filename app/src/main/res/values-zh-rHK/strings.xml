@@ -222,9 +222,9 @@
     <string name="swap_not_visible_wifi">不可在 Wi-Fi 上被偵測</string>
     <string name="swap_setting_up_wifi">正在設定 Wi-Fi…</string>
     <string name="swap_visible_wifi">可在 Wi-Fi 上被偵測</string>
-    <string name="swap_not_visible_bluetooth">不可在藍牙上被偵測</string>
+    <string name="swap_not_visible_bluetooth">不可透過藍牙被偵測</string>
     <string name="swap_setting_up_bluetooth">正在設定藍牙…</string>
-    <string name="swap_visible_bluetooth">可在藍牙上被偵測</string>
+    <string name="swap_visible_bluetooth">可在透過藍牙被偵測</string>
     <string name="swap_intro">與附近的人交換應用程式。</string>
     <string name="swap_nearby">近距交換</string>
     <string name="swap_scan_or_type_url">其中一人需掃描 QR 碼或在瀏覽器中輸入另一人的網址。</string>
