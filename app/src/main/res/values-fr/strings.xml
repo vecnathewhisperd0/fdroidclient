@@ -309,7 +309,7 @@
     <string name="system_uninstall_button">Désinstaller</string>
 
     <string name="swap_cant_find_peers">Vous n\'arrivez pas à trouver ce que vous cherchez ?</string>
-    <string name="swap_connection_misc_error">Une erreur a eu lieu lors de la connexion à l\'appareil, impossible de faire l\'échange avec !</string>
+    <string name="swap_connection_misc_error">Une erreur a eu lieu lors de la connexion à l\'appareil, impossible d\'échanger avec lui !</string>
     <string name="swap_not_enabled">Échange désactivé</string>
     <string name="category_Time">Temps</string>
     <string name="more">Plus</string>
@@ -503,10 +503,10 @@
 <string name="by_author_format">par %s</string>
     <string name="download_404">Le fichier n\'a pas été trouvé.</string>
     <string name="force_old_index">Forcer l\'ancien format d\'index</string>
-    <string name="force_old_index_summary">Dans le cas où des erreurs ou des incompatibilités apparaissent, utiliser l\'index d\'application XML</string>
+    <string name="force_old_index_summary">Dans le cas où des erreurs ou des incompatibilités apparaitraient, utilisez l\'index des applications en XML</string>
     <string name="app_list_download_ready">Téléchargé, prêt à installer</string>
 
-    <string name="status_inserting_x_apps">Sauvegarder les détails de l\'application (%1$d/%2$d) depuis %3$s</string>
+    <string name="status_inserting_x_apps">Sauvegarde des détails de l\'application (%1$d/%2$d) depuis %3$s</string>
     <string name="app_installed_media">Fichier installé dans %s</string>
     <string name="app_permission_storage">F-Droid a besoin de votre permission pour l\'installer à cet emplacement. Veuillez l\'autoriser sur l\'écran suivant pour pouvoir continuer l\'installation.</string>
 
