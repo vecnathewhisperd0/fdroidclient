@@ -85,9 +85,7 @@
     </string>
     <string name="bad_fingerprint">Halb sõrmejälg</string>
     <string name="invalid_url">See ei ole kehtiv URL.</string>
-    <string name="install_confirm_update">Kas soovid paigaldada värskenduse sellele rakendusele? Olemasolevad andmed
-        jäävad alles. Värskendatud rakendus saab ligipääsu:
-    </string>
+    <string name="install_confirm_update">Kas sa soovid paigaldada selle rakenduse värskenduse? Olemasolevad andmed jäävad alles. Värskendatud rakendus saab ligipääsu:</string>
     <string name="menu_email">Saada autorile meil</string>
 
     <string name="malformed_repo_uri">Vahele jäetakse hoidla ebakorrektne URI: %s</string>
@@ -268,9 +266,7 @@
     <string name="system_install_uninstalling">Eemaldamine…</string>
     <string name="system_install_question">Kas sa soovid paigaldada F-Droidi priviligeeritud laienduse?</string>
     <string name="system_install_warning">Selleks kulub kuni 10 sekundit.</string>
-    <string name="system_install_warning_lollipop">Selleks kulub kuni 10 sekundit ja seadmele tehakse hiljem<b>
-        taaskäivitus</b>.
-    </string>
+    <string name="system_install_warning_lollipop">Selleks kulub kuni 10 sekundit ja seadmele tehakse hiljem<b> taaskäivitus</b>.</string>
     <string name="system_uninstall">Kas soovid eemaldada F-Droidi priviligeeritud laienduse?</string>
     <string name="system_uninstall_button">Eemalda</string>
     <string name="system_install_not_supported">Android 5.1 ja uuematega ei ole hetkel F-Droidi privilegeeritud
@@ -366,8 +362,7 @@
     <string name="swap_join_same_wifi_desc">WiFi kaudu vahetamiseks peate olema samas võrgus. Kui sul puudub ligipääs
         samasse võrku, siis saab teist üks luua WiFi tööpunkti.
     </string>
-    <string name="swap_connection_misc_error">Seadmega ühendumine nurjus. Sellega vahetamine ei ole vist võimalik.
-    </string>
+    <string name="swap_connection_misc_error">Seadmega ühendumine nurjus. Sellega vahetamine ei ole võimalik!</string>
     <string name="crash_dialog_text">Ootamatu viga põhjustas rakenduse krahhi.
         Kas sa soovid saata selle detailid e-mailiga, et probleem parandada?
     </string>
