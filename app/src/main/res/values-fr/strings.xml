@@ -309,7 +309,7 @@
     <string name="system_uninstall_button">Désinstaller</string>
 
     <string name="swap_cant_find_peers">Vous n\'arrivez pas à trouver ce que vous cherchez ?</string>
-    <string name="swap_connection_misc_error">Une erreur a eu lieu lors de la connexion à l\'appareil, impossible d\'échanger avec lui !</string>
+    <string name="swap_connection_misc_error">Une erreur a eu lieu lors de la connexion à l\'appareil, impossible de faire l\'échange !</string>
     <string name="swap_not_enabled">Échange désactivé</string>
     <string name="category_Time">Temps</string>
     <string name="more">Plus</string>
@@ -508,7 +508,7 @@
 
     <string name="status_inserting_x_apps">Sauvegarde des détails de l\'application (%1$d/%2$d) depuis %3$s</string>
     <string name="app_installed_media">Fichier installé dans %s</string>
-    <string name="app_permission_storage">F-Droid a besoin de votre permission pour l\'installer à cet emplacement. Veuillez l\'autoriser sur l\'écran suivant pour pouvoir continuer l\'installation.</string>
+    <string name="app_permission_storage">F-Droid a besoin de la permission de stockage pour l\'installer à cet emplacement. Veuillez l\'autoriser sur l\'écran suivant pour pouvoir continuer l\'installation.</string>
 
     <string name="app_details__no_versions__none_compatible_with_device">Aucune version compatible avec l\'appareil</string>
     <string name="app_details__incompatible_mismatched_signature">La signature diffère de la version déjà installée</string>
