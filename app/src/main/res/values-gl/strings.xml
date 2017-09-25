@@ -344,4 +344,16 @@
 <string name="menu_settings">Axustes</string>
     <string name="main_menu__latest_apps">Últimas</string>
     <string name="main_menu__categories">Categorías</string>
+    <string name="main_menu__swap_nearby">Veciñanza</string>
+
+    <string name="preference_manage_installed_apps">Xestionar aplicacións instaladas</string>
+
+
+    <string name="notification_action_update">Anovar</string>
+    <string name="notification_action_cancel">Cancelar</string>
+    <string name="notification_action_install">Instalar</string>
+
+    <string name="app_list__name__downloading_in_progress">Baixando %1$s</string>
+    <string name="app_list__name__successfully_installed">%1$s foi instalada</string>
+    <string name="updates__tts__download_app">Descargar</string>
     </resources>
