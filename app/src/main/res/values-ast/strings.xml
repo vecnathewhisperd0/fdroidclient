@@ -334,7 +334,7 @@
     <string name="antinonfreeassetslist">Esta aplicación contién activos non llibres</string>
 
     <string name="useTor">Usar Tor</string>
-    <string name="useTorSummary">Forcia la descaga\'l tráficu pente Tor pa una privacidá aumentada</string>
+    <string name="useTorSummary">Forciar el tráficu de descarga per Tor pa mayor intimidá. Rique Orbot</string>
     <string name="swap_stopping_wifi">Parando Wi-Fi…</string>
     <string name="update_auto_download">Baxar anovamientos automáticamente</string>
     <string name="update_auto_download_summary">Los anovamientos báxense de fondu automáticamente y avisarásete pa
