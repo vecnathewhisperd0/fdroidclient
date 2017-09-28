@@ -507,4 +507,8 @@
     <string name="updates__app_with_known_vulnerability__prompt_upgrade">מצאנו חולשה אצל %1$s. אנו ממליצים לשדרג את היישומון הזה לגרסה החדשה ביותר מיידית.</string>
     <string name="updates__app_with_known_vulnerability__ignore">התעלמות</string>
 
+    <string name="app_list__dismiss_app_update">העדכון בהתעלמות</string>
+    <string name="app_list__dismiss_vulnerable_app">החולשה בהתעלמות</string>
+    <string name="app_list__dismiss_downloading_app">ההורדה בוטלה</string>
+
     </resources>
