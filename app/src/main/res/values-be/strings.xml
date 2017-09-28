@@ -164,7 +164,7 @@
     <string name="skip">Прапусціць</string>
 
     <string name="useTor">Выкарыстоўваць Tor</string>
-    <string name="useTorSummary">Сілком спампоўваць праз Tor для павелічэнне прыватнасці</string>
+    <string name="useTorSummary">Сілком спампоўваць праз Tor для павелічэнне прыватнасці. Патрабуе Orbot</string>
     <string name="proxy">Проксі</string>
     <string name="enable_proxy_title">Выкарыстоўваць HTTP-проксі</string>
     <string name="enable_proxy_summary">Наладзіць HTTP-проксі для ўсіх сеткавых запытаў</string>
