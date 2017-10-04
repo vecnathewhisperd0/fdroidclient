@@ -390,7 +390,7 @@
     <string name="force_old_index_summary">Kasuta vigade või ühilduvusprobleemide ilmnemisel rakenduste XML indeksit</string>
     <string name="update_auto_install">Paigalda värskendused automaatselt</string>
     <string name="update_auto_install_summary">Laadi alla ja paigalda rakenduste värskendused taustal</string>
-    <string name="app_details_donate_prompt_unknown_author">"Osta %1$s  arendajatele kohvi!"</string>
+    <string name="app_details_donate_prompt_unknown_author">Osta %1$s  arendajatele kohvi!</string>
     <string name="app_details_donate_prompt">%1$s loojad on %2$s. Osta neile kohvi!</string>
 
     <string name="app_details__incompatible_mismatched_signature">Signatuur erineb paigaldatud versiooni omast</string>

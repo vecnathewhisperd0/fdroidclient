@@ -346,14 +346,14 @@
     <string name="installed_apps__activity_title">Telepített Alkalmazások</string>
     <string name="menu_video">Videó</string>
     <string name="preference_category__my_apps">Az én-m Apps</string>
-    <string name="app_list__name__downloading_in_progress">%1$ letöltése</string>
-    <string name="app_list__name__successfully_installed">%1$ telepítve</string>
+    <string name="app_list__name__downloading_in_progress">%1$s letöltése</string>
+    <string name="app_list__name__successfully_installed">%1$s telepítve</string>
     <string name="warning_no_internet">Nem sikerült a frissítés. Csatlakozva vagy az internethez?</string>
     <string name="not_on_same_wifi">Az eszközöd nem ugyanazon a Wi-Fi-n van, mint a hozzáadott helyi tároló! Próbálj ehhez a hálózathoz csatlakozni: %s</string>
     <string name="notification_title_single_update_available">Frissítés elérhető</string>
     <string name="notification_title_summary_install_error">A telepítés sikertelen</string>
     <string name="force_old_index_summary">Abban az esetben, ha bugok, vagy kompatibilitási problémák vannak, használd az XML app indexet</string>
-    <string name="app_details_donate_prompt_unknown_author">Fizess egy kávét a %1$ fejlesztőinek!</string>
+    <string name="app_details_donate_prompt_unknown_author">Fizess egy kávét a %1$s fejlesztőinek!</string>
     <string name="app_details__no_versions__show_incompat_versions">Az inkompatibilis verziók mutatásához engedélyezd a \"%1$s\" beállítást.</string>
     <string name="app_details__no_versions__no_compatible_signatures">Nem található kompatibilis aláírással rendelkező verzió</string>
     <string name="app_details__no_versions__none_compatible_with_device">Nem található az eszközöddel kompatibilis verzió</string>
