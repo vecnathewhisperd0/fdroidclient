@@ -3,6 +3,7 @@ package org.fdroid.fdroid.views.main;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -12,6 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import org.fdroid.fdroid.R;
@@ -54,8 +57,7 @@ class WhatsNewViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
         appList.setLayoutManager(layoutManager);
         appList.setAdapter(whatsNewAdapter);
 
-        final SwipeRefreshLayout swipeToRefresh = (SwipeRefreshLayout) whatsNewView
-                .findViewById(R.id.swipe_to_refresh);
+        final SwipeRefreshLayout swipeToRefresh = (SwipeRefreshLayout) whatsNewView.findViewById(R.id.swipe_to_refresh);
         swipeToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -64,11 +66,25 @@ class WhatsNewViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
             }
         });
 
-        FloatingActionButton searchFab = (FloatingActionButton) whatsNewView.findViewById(R.id.btn_search);
+        final Animation searchFabAnimation = AnimationUtils.loadAnimation(activity, R.anim.search_fab);
+        final FloatingActionButton searchFab = (FloatingActionButton) whatsNewView.findViewById(R.id.btn_search);
         searchFab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                activity.startActivity(new Intent(activity, AppListActivity.class));
+            public void onClick(final View v) {
+                v.setEnabled(false);  //Avoid several clicks on the search button
+
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        activity.startActivity(new Intent(activity, AppListActivity.class));
+
+                        //Re-enable the search button
+                        v.setEnabled(true);
+                    }
+                }, 400);
+
+                v.startAnimation(searchFabAnimation);
             }
         });
 
