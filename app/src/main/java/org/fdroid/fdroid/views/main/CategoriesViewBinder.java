@@ -59,7 +59,8 @@ class CategoriesViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
         categoriesList.setLayoutManager(new LinearLayoutManager(activity));
         categoriesList.setAdapter(categoryAdapter);
 
-        final SwipeRefreshLayout swipeToRefresh = (SwipeRefreshLayout) categoriesView.findViewById(R.id.swipe_to_refresh);
+        final SwipeRefreshLayout swipeToRefresh = (SwipeRefreshLayout)
+                categoriesView.findViewById(R.id.swipe_to_refresh);
         swipeToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

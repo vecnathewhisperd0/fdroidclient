@@ -17,6 +17,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.UpdateService;
 import org.fdroid.fdroid.Utils;
@@ -57,7 +58,8 @@ class WhatsNewViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
         appList.setLayoutManager(layoutManager);
         appList.setAdapter(whatsNewAdapter);
 
-        final SwipeRefreshLayout swipeToRefresh = (SwipeRefreshLayout) whatsNewView.findViewById(R.id.swipe_to_refresh);
+        final SwipeRefreshLayout swipeToRefresh = (SwipeRefreshLayout)
+                whatsNewView.findViewById(R.id.swipe_to_refresh);
         swipeToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -97,14 +99,7 @@ class WhatsNewViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
             return null;
         }
 
-        return new CursorLoader(
-                activity,
-                AppProvider.getRecentlyUpdatedUri(),
-                Schema.AppMetadataTable.Cols.ALL,
-                null,
-                null,
-                null
-        );
+        return new CursorLoader(activity, AppProvider.getRecentlyUpdatedUri(), Schema.AppMetadataTable.Cols.ALL, null, null, null);
     }
 
     @Override
