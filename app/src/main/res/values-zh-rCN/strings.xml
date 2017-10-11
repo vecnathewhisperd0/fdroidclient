@@ -94,7 +94,7 @@
     <string name="repo_num_apps">应用程序数量</string>
     <string name="repo_fingerprint">签名密钥的指纹 (SHA-256)</string>
     <string name="repo_description">描述</string>
-    <string name="repo_last_update">上次更新</string>
+    <string name="repo_last_update">最近更新</string>
     <string name="repo_name">名称</string>
     <string name="unsigned_description">这表示应用列表无法通过验证。对于从未签名索引下载的应用，应谨慎处理。</string>
     <string name="repo_not_yet_updated">该软件源尚未使用。 你需要启用它才能查看该软件源提供的应用程序。</string>
