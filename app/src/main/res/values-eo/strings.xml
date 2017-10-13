@@ -397,7 +397,7 @@
 
     <plurals name="button_view_all_apps_in_category">
 	<item quantity="one">%d aplikaĵo</item>
-	<item quantity="other">Ĉiuj %d aplikaĵoj</item>
+	<item quantity="other">%d aplikaĵoj</item>
 </plurals>
 
     <string name="app_recommended_version_installed">Versio %1$s (konsilinda)</string>
