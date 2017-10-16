@@ -531,4 +531,5 @@
     <string name="app_details__no_versions__none_compatible_with_device">Нет версий, совместимых с устройством</string>
     <string name="app_details__no_versions__explain_incompatible_signatures">Установленная версия несовместима со всеми доступными версиями. Удаление приложения позволит вам установить совместимые версии. Это часто происходит с приложениями, установленными из Google Play или других источников.</string>
 
+    <string name="app_list__dismiss_app_update">Обновление игнорируется</string>
     </resources>
