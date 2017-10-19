@@ -357,7 +357,7 @@
     <string name="empty_search_available_app_list">Non è disponibile nessuna app corrispondente.</string>
 
     <string name="useTor">Usa Tor</string>
-    <string name="useTorSummary">Forza lo scaricamento attraverso Tor per aumentare la privacy</string>
+    <string name="useTorSummary">Forza lo scaricamento attraverso Tor per aumentare la privacy. Richiede Orbot</string>
     <string name="swap_stopping_wifi">Spegnimento del Wi-Fi…</string>
     <string name="update_auto_download_summary">Gli aggiornamenti vengono scaricati automaticamente e ti sarai notificato per installarli</string>
     <string name="update_auto_download">Ottieni automaticamente gli aggiornamenti</string>
