@@ -312,7 +312,7 @@
 * Using NFC during swap now initiates a proper swap, rather than redirecting to
   the "Repositories" screen
 
-* Drop ANT support to greatly simplify the build process and its maintenance
+* Drop Ant support to greatly simplify the build process and its maintenance
 
 ### 0.92 (2015-06-08)
 
@@ -349,7 +349,7 @@
 
 * Don't crash if links on descriptions cannot be handled by any application
 
-* Support building as part of a ROM via an Android.mk using gradle
+* Support building as part of a ROM via an Android.mk using Gradle
 
 ### 0.88 (2015-04-28)
 
@@ -420,7 +420,7 @@
 
 * Update Universal-Image-Loader and the Support libraries
 
-* Switch the directory structure to better suit building with gradle
+* Switch the directory structure to better suit building with Gradle
 
 * Translation updates
 
