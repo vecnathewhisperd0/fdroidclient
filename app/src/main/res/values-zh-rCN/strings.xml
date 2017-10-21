@@ -44,7 +44,7 @@
     <string name="malformed_repo_uri">忽略异常格式的软件源URI：%s</string>
     <string name="menu_manage">管理软件源</string>
     <string name="menu_search">搜索</string>
-    <string name="menu_add_repo">添加新软件源</string>
+    <string name="menu_add_repo">新加软件源</string>
     <string name="menu_launch">运行</string>
     <string name="menu_share">分享</string>
     <string name="menu_install">安装</string>
@@ -99,7 +99,7 @@
     <string name="unsigned_description">这表示应用列表无法通过验证。对于从未签名索引下载的应用，应谨慎处理。</string>
     <string name="repo_not_yet_updated">该软件源尚未使用。 你需要启用它才能查看该软件源提供的应用程序。</string>
     <string name="unknown">未知</string>
-    <string name="repo_confirm_delete_title">删除应用程序仓库？</string>
+    <string name="repo_confirm_delete_title">删除软件源？</string>
     <string name="repo_confirm_delete_body">删除软件源意味着来自该软件源的软件将不会出现在 F-Droid 上。 
 \n
 \n注意： 之前安装的所有应用会保留在您的设备上。</string>
@@ -171,16 +171,17 @@
     <string name="skip">跳过</string>
 
     <string name="status_download_unknown_size">下载中\n%2$s 来自\n%1$s</string>
-    <string name="update_notification_title">正在更新厍</string>
+    <string name="update_notification_title">正在更新库</string>
     <string name="status_processing_xml_percent">处理中 %2$s / %3$s (%4$d%%) 来自 %1$s</string>
     <string name="repos_unchanged">所有的软件库已是最新的</string>
     <string name="all_other_repos_fine">所有其他的软件源并没有产生错误。</string>
     <string name="global_error_updating_repos">更新出错: %s</string>
     <string name="permissions">权限</string>
-    <string name="repo_details">库</string>
+    <string name="repo_details">软件源</string>
     <string name="repo_url">地址</string>
-    <string name="repo_added">已保存 F-Droid 软件库 %1$s。</string>
-    <string name="repo_searching_address">查找软件库从\n%1$s</string>
+    <string name="repo_added">已保存 F-Droid 软件源 %1$s。</string>
+    <string name="repo_searching_address">正在 %1$s
+\n里查找 F-Droid 软件源</string>
     <string name="pref_language">语言</string>
     <string name="pref_language_default">系统默认</string>
 
@@ -298,7 +299,7 @@
     <string name="crash_dialog_title">F-Droid 已崩溃</string>
     <string name="crash_dialog_text">出现意外错误，导致应用停止。是否发送电子邮件提交详细情况，以便修复该问题？</string>
     <string name="crash_dialog_comment_prompt">你可以在此添加额外的信息或者评论:</string>
-    <string name="repo_provider">代码库: %s</string>
+    <string name="repo_provider">软件源：%s</string>
 
     <string name="useTor">使用 Tor</string>
     <string name="useTorSummary">强制下载流量使用 Tor 以增强隐私保障</string>
@@ -374,7 +375,7 @@
     <string name="menu_license">许可证：%s</string>
     <string name="latest__empty_state__no_recent_apps">没有找到最近使用的应用</string>
     <string name="latest__empty_state__never_updated">应用程序列表更新之后，最新应用将在这里显示</string>
-    <string name="latest__empty_state__no_enabled_repos">启用资源库并对其更新之后，最新应用将在这里显示</string>
+    <string name="latest__empty_state__no_enabled_repos">启用软件源并对其更新之后，最新应用将在这里显示</string>
 
     <string name="categories__empty_state__no_categories">没有可显示的类别</string>
 
@@ -446,4 +447,19 @@
     <string name="app_list_download_ready">已下载， 安装准备就绪</string>
 
     <string name="status_inserting_x_apps">正在从 %3$s 保存应用程序的详细信息 (%1$d/%2$d)</string>
+    <string name="app_details__incompatible_mismatched_signature">与已安装版本的签名不符</string>
+    <string name="app_details__no_versions__show_incompat_versions">如果仍要在这里显示不兼容的版本，请启用“%1$s”的设置。</string>
+    <string name="app_details__no_versions__no_compatible_signatures">没有兼容签名的版本</string>
+    <string name="app_details__no_versions__none_compatible_with_device">没有与设备兼容的版本</string>
+    <string name="app_details__no_versions__explain_incompatible_signatures">已安装版本不与任何可用版本兼容。卸载该应用将让您可以查看和安装兼容的版本。这种情况通常发生在通过 Google Play 或其他软件源安装的应用上，如果它们是由不同的证书签名的。</string>
+
+    <string name="app_list__dismiss_app_update">已忽略更新</string>
+    <string name="app_list__dismiss_vulnerable_app">已忽略漏洞</string>
+    <string name="app_list__dismiss_downloading_app">已取消下载</string>
+
+    <string name="installed_app__file_corrupt">F-Droid 收到了 EIO 错误：%s 很可能已经崩溃！</string>
+    <string name="updates__app_with_known_vulnerability__prompt_uninstall">我们发现了关于 %1$s 的漏洞，建议您立即卸载此应用。</string>
+    <string name="updates__app_with_known_vulnerability__prompt_upgrade">我们发现了关于 %1$s 的漏洞，建议您立即升级到最新的版本。</string>
+    <string name="updates__app_with_known_vulnerability__ignore">忽略</string>
+
     </resources>
