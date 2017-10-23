@@ -455,9 +455,8 @@
     <plurals name="updates__download_updates_for_apps">
 	<item quantity="one">Stáhnout aktualizaci pro %1$d aplikaci.</item>
 	<item quantity="few">Stáhnout aktualizace pro %1$d aplikace.</item>
-	<item quantity="many">Stáhnout aktualizace pro %1$d aplikací.</item>
-	<item quantity="other"></item>
-</plurals>
+	<item quantity="other">Stáhnout aktualizace pro %1$d aplikací.</item>
+	</plurals>
 
     <string name="menu_video">Video</string>
     <string name="menu_license">Licence: %s</string>
@@ -476,9 +475,8 @@
     <plurals name="button_view_all_apps_in_category">
 	<item quantity="one">Zobrazit %d</item>
 	<item quantity="few">Zobrazit %d</item>
-	<item quantity="many">Zobrazit všech %d</item>
-	<item quantity="other"></item>
-</plurals>
+	<item quantity="other">Zobrazit všech %d</item>
+	</plurals>
 
     <string name="nearby_splash__download_apps_from_people_nearby">Není k dispozici připojení k Internetu? Získejte aplikace od lidí poblíž!</string>
     <string name="nearby_splash__find_people_button">Najít lidi poblíž</string>
@@ -488,51 +486,43 @@
     <plurals name="notification_summary_more">
 	<item quantity="one">+%1$d další…</item>
 	<item quantity="few">+%1$d další…</item>
-	<item quantity="many">+%1$d dalších…</item>
-	<item quantity="other"></item>
-</plurals>
+	<item quantity="other">+%1$d dalších…</item>
+	</plurals>
     <plurals name="notification_summary_updates">
 	<item quantity="one">%1$d aktualizace</item>
 	<item quantity="few">%1$d aktualizace</item>
-	<item quantity="many">%1$d aktualizací</item>
-	<item quantity="other"></item>
-</plurals>
+	<item quantity="other">%1$d aktualizací</item>
+	</plurals>
     <plurals name="notification_summary_installed">
 	<item quantity="one">Nainstalována %1$d aplikace</item>
 	<item quantity="few">Nainstalovány %1$d aplikace</item>
-	<item quantity="many">Nainstalováno %1$d aplikací</item>
-	<item quantity="other"></item>
-</plurals>
+	<item quantity="other">Nainstalováno %1$d aplikací</item>
+	</plurals>
     <plurals name="tts_view_all_in_category">
 	<item quantity="one">Zobrazit %1$d aplikaci v %2$s kategorii</item>
 	<item quantity="few">Zobrazit %1$d aplikace v %2$s kategoriích</item>
-	<item quantity="many">Zobrazit %1$d aplikací v %2$s kategoriích</item>
-	<item quantity="other"></item>
-</plurals>
+	<item quantity="other">Zobrazit %1$d aplikací v %2$s kategoriích</item>
+	</plurals>
 
     <string name="details_last_updated_today">Aktualizováno dnes</string>
     <plurals name="details_last_update_days">
 	<item quantity="one">Aktualizováno před %1$d dnem</item>
 	<item quantity="few">Aktualizováno před %1$d dny</item>
-	<item quantity="many">Aktualizováno před %1$d dny</item>
-	<item quantity="other"></item>
-</plurals>
+	<item quantity="other">Aktualizováno před %1$d dny</item>
+	</plurals>
     <plurals name="details_last_update_weeks">
 	<item quantity="one">Aktualizováno před %1$d týdnem</item>
 	<item quantity="few">Aktualizováno před %1$d týdny</item>
-	<item quantity="many">Aktualizováno před %1$d týdny</item>
-	<item quantity="other"></item>
-</plurals>
+	<item quantity="other">Aktualizováno před %1$d týdny</item>
+	</plurals>
     <plurals name="details_last_update_months">
 	<item quantity="one">Aktualizováno před %1$d měsícem</item>
 	<item quantity="few">Aktualizováno před %1$d měsíci</item>
-	<item quantity="many">Aktualizováno před %1$d měsíci</item>
-	<item quantity="other"></item>
-</plurals>
+	<item quantity="other">Aktualizováno před %1$d měsíci</item>
+	</plurals>
     <plurals name="details_last_update_years">
 	<item quantity="one">Aktualizováno před %1$d rokem</item>
 	<item quantity="few">Aktualizováno před %1$d roky</item>
-	<item quantity="many">Aktualizováno před %1$d lety</item>
-	<item quantity="other"></item>
-</plurals>
+	<item quantity="other">Aktualizováno před %1$d lety</item>
+	</plurals>
 </resources>
