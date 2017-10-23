@@ -532,7 +532,7 @@
 
     <string name="installed_app__file_corrupt">F-Droid obdržal chybu EIO: %s je pravdepodobne poškodený!</string>
     <string name="updates__app_with_known_vulnerability__prompt_uninstall">Zistili sme zraniteľnosť %1$s. Odporúčame okamžite odinštalovať túto aplikáciu.</string>
-    <string name="updates__app_with_known_vulnerability__prompt_upgrade">"Objavili sme zraniteľnosť  %1$s. Odporúčame ihneď aktualizovať na najnovšiu verziu."</string>
+    <string name="updates__app_with_known_vulnerability__prompt_upgrade">Objavili sme zraniteľnosť  %1$s. Odporúčame ihneď aktualizovať na najnovšiu verziu.</string>
     <string name="updates__app_with_known_vulnerability__ignore">Ignorovať</string>
 
     <string name="status_inserting_x_apps">Ukladanie podrobností aplikácie (%1$d/%2$d) z %3$s</string>
