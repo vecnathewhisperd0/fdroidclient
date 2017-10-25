@@ -467,4 +467,20 @@
     <string name="app_details_donate_prompt">%1$s تم تطويره من طرف %2$s. إشتري لهم مشروبا !</string>
 
     <string name="app_installed_media">تم تثبيت الملف على %s</string>
+    <string name="app_list_download_ready">تم تنزيله و متوفر للتثبيت</string>
+    <string name="app_list__dismiss_downloading_app">تم إلغاء التنزيل</string>
+
+    <string name="updates__app_with_known_vulnerability__ignore">تخطي</string>
+
+    <string name="details_new_in_version">جديد في الإصدار %s</string>
+
+    <plurals name="button_view_all_apps_in_category">
+	<item quantity="zero">عرض %d</item>
+	<item quantity="one">عرض الكل %d</item>
+	<item quantity="two">عرض الكل %d</item>
+	<item quantity="few">عرض الكل %d</item>
+	<item quantity="many">عرض الكل %d</item>
+	<item quantity="other">عرض الكل %d</item>
+</plurals>
+
     </resources>
