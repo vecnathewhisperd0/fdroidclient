@@ -178,7 +178,7 @@
     <string name="show_incompat_versions">Ühildumatud versioonid</string>
     <string name="show_incompat_versions_on">Kuva seadmega ühildumatute rakenduste versioonid</string>
     <string name="rooted">Ignoreeri juur-kasutajat</string>
-    <string name="rooted_on">Ära märgi halliga rakendusi, mis vajavad juur-kasutaja õiguseid</string>
+    <string name="rooted_on">Ära märgi halliga rakendusi, mis vajavad juur-kasutaja privileege</string>
     <string name="ignoreTouch">Ignoreeri puuteekraani</string>
     <string name="ignoreTouch_on">Alati kaasa puuteekraani vajavad rakendused</string>
 
