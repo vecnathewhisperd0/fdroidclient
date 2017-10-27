@@ -446,8 +446,8 @@
 	<item quantity="other">Voir toutes %d</item>
 </plurals>
 
-    <string name="nearby_splash__download_apps_from_people_nearby">Pas de connexion Internet ? Obtenez les applications depuis des appareils de votre entourage !</string>
-    <string name="nearby_splash__find_people_button">Trouver des personnes dans les environs</string>
+    <string name="nearby_splash__download_apps_from_people_nearby">Aucune connexion Internet ? Installez les applications depuis les appareils de votre entourage !</string>
+    <string name="nearby_splash__find_people_button">Trouvez des personnes autour de vous</string>
     <string name="nearby_splash__both_parties_need_fdroid">Les deux personnes doivent utiliser %1$s en étant proches.</string>
 
     <string name="tts_category_name">Catégorie %1$s</string>
