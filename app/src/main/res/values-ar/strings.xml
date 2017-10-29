@@ -480,4 +480,8 @@
 
     <string name="force_old_index">تطبيق صيغة الأرشفة القديمة بالقوة</string>
     <string name="force_old_index_summary">في حالة وجود أخطاء أو أخطاء تكامل، إستخدم أرشفة تطبيق XML</string>
+    <string name="app_details__incompatible_mismatched_signature">توقيع مختلف عن التطبيق المُثبت</string>
+    <string name="app_details__no_versions__show_incompat_versions">لكي تُظهر النسخ الغير متكاملة أيضاً، فعل الإعداد \"%1$s\" .</string>
+    <string name="app_details__no_versions__no_compatible_signatures">لا نسخ مع توقعيات متوافقة</string>
+    <string name="app_details__no_versions__none_compatible_with_device">لا نسخ متكاملة مع الجهاز</string>
     </resources>
