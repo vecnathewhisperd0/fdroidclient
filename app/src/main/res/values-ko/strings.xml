@@ -346,8 +346,8 @@
     <string name="force_old_index_summary">버그나 호환성 이슈가 있는 경우, XML 앱 색인을 사용합니다</string>
     <string name="update_auto_install">자동으로 업데이트 설치</string>
     <string name="update_auto_install_summary">백그라운드에서 업데이트 앱을 다운로드 및 설치합니다</string>
-    <string name="app_details_donate_prompt_unknown_author">%1$s의 개발자에게 기부해주세요!</string>
-    <string name="app_details_donate_prompt">%1$s 앱은 %2$s님이 만들었습니다. 그들에게 기부해주세요!</string>
+    <string name="app_details_donate_prompt_unknown_author">%1$s의 개발자에게 후원해주세요!</string>
+    <string name="app_details_donate_prompt">%1$s 앱은 %2$s님이 만들었습니다. 그들에게 후원해주세요!</string>
 
     <string name="app_details__incompatible_mismatched_signature">설치된 버전의 서명과 다름</string>
     <string name="app_details__no_versions__no_compatible_signatures">호환되는 서명으로 된 버전이 없습니다</string>
