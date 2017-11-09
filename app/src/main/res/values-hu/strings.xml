@@ -22,7 +22,7 @@
     <string name="about_version">Verzió</string>
     <string name="app_installed">Telepítve</string>
     <string name="app_not_installed">Nincs telepítve</string>
-    <string name="added_on">Hozzáadva %s</string>
+    <string name="added_on">Hozzáadva: %s</string>
     <string name="ok">Oké</string>
     <string name="yes">Igen</string>
     <string name="no">Nem</string>
