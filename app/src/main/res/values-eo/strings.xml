@@ -157,7 +157,7 @@
     <string name="writing_index_jar">Konservado de subskribita indeksa dosiero (index.jar)…</string>
     <string name="proxy">Retperanto</string>
     <string name="enable_proxy_title">Aktivigi HTTP-retperanton</string>
-    <string name="enable_proxy_summary">"Uzi HTTP-retperanton  por ĉiuj retkonektoj"</string>
+    <string name="enable_proxy_summary">Uzi HTTP-retperanton  por ĉiuj retkonektoj</string>
     <string name="proxy_host">Adreso de retperanto</string>
     <string name="proxy_port">Pordo de retperanto</string>
     <string name="proxy_host_summary">Adreso de via retperanto (ekz. 127.0.0.1)</string>
