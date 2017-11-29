@@ -556,4 +556,6 @@
 
     <string name="privacy">Прыватнасць</string>
     <string name="preventScreenshots_title">Прадухіліць здымкі экрана</string>
+    <string name="preventScreenshots_summary">Блакуе здымкі экрана з апошніх праграм</string>
+
     </resources>
