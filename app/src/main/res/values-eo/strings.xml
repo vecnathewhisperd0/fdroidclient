@@ -506,4 +506,8 @@
     <string name="updates__app_with_known_vulnerability__prompt_upgrade">Oni trovis sekurec-problemon en %1$s. Estas konsilinde senprokraste ĝisdatigi ĝin al la plej nova versio.</string>
     <string name="updates__app_with_known_vulnerability__ignore">Ignori</string>
 
+    <string name="privacy">Privateco</string>
+    <string name="preventScreenshots_title">Bloki ekranokopiojn</string>
+    <string name="preventScreenshots_summary">Bloki fari ekranokopiojn kaj kaŝi enhavon ĉe ekrano de lastaj aplikaĵoj</string>
+
     </resources>
