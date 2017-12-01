@@ -521,4 +521,6 @@
 
     <string name="privacy">Privatsphäre</string>
     <string name="preventScreenshots_title">Bildschirmfotos verhindern</string>
+    <string name="preventScreenshots_summary">Blockiert das Aufnehmen von Bildschirmfotos und versteckt die App in der Appübersicht</string>
+
     </resources>
