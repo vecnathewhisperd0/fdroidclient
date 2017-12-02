@@ -502,4 +502,8 @@
     <string name="updates__app_with_known_vulnerability__prompt_upgrade">Er zit een kwetsbaarheid in %1$s. We raden aan onmiddellijk bij te werken naar de meest recente versie.</string>
     <string name="updates__app_with_known_vulnerability__ignore">Negeren</string>
 
+    <string name="privacy">Privacy</string>
+    <string name="preventScreenshots_title">Blokkeer schermafdrukken</string>
+    <string name="preventScreenshots_summary">Zorgt dat er geen schermafdrukken genomen kunnen worden, en verbergt de inhoud van de app in het overzicht van recente apps</string>
+
     </resources>
