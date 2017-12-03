@@ -480,4 +480,8 @@
     <string name="updates__app_with_known_vulnerability__prompt_upgrade">S-a detectat o vulnerabilitate în %1$s. Se recomandă actualizarea imediată la cea mai nouă versiune.</string>
     <string name="updates__app_with_known_vulnerability__ignore">Ignoră</string>
 
+    <string name="privacy">Intimitate</string>
+    <string name="preventScreenshots_title">Previne poze cu aplicația</string>
+    <string name="preventScreenshots_summary">Blochează posibilitatea de a înregistra ecranul aplicației și ascunde conținutul în lista de aplicații recente</string>
+
     </resources>
