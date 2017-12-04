@@ -37,7 +37,7 @@ set -x
 ./gradlew assembleDebug -PdisablePreDex
 
 mkdir config/nightly-repo/repo/
-mv app/build/outputs/apk/app-debug.apk  config/nightly-repo/repo/
+mv app/build/outputs/apk/app-*debug.apk  config/nightly-repo/repo/
 cd config/nightly-repo
 
 pw=android
