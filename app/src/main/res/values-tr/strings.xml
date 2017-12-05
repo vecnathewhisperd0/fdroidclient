@@ -512,4 +512,8 @@
     <string name="updates__app_with_known_vulnerability__prompt_upgrade">%1$s içinde bir güvenlik açığı bulduk. Hemen en yeni sürüme yükseltmenizi öneririz.</string>
     <string name="updates__app_with_known_vulnerability__ignore">Yok say</string>
 
+    <string name="privacy">Gizlilik</string>
+    <string name="preventScreenshots_title">Ekran Görüntüsü Almayı Engelle</string>
+    <string name="preventScreenshots_summary">Ekran görüntüsü almayı engeller ve uygulama içeriğini en son uygulamalar ekranında gizler</string>
+
     </resources>
