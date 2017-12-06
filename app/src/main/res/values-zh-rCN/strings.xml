@@ -464,4 +464,6 @@
 
     <string name="privacy">隐私</string>
     <string name="preventScreenshots_title">阻止屏幕截图</string>
+    <string name="preventScreenshots_summary">阻止屏幕截图，且在最近的应用屏幕中隐藏应用内容</string>
+
     </resources>
