@@ -466,7 +466,7 @@
     <string name="details_last_updated_today">Актуализирано днес</string>
     <plurals name="details_last_update_days">
 	<item quantity="one">Актуализирано преди %1$d ден</item>
-	<item quantity="other">Актуализирано преди %1$d дени</item>
+	<item quantity="other">Актуализирано преди %1$d дни</item>
 </plurals>
     <plurals name="details_last_update_weeks">
 	<item quantity="one">Актуализирано преди %1$d седмица</item>
