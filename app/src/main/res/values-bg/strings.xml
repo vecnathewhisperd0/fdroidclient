@@ -8,7 +8,7 @@
     <string name="version">Версия</string>
     <string name="delete">Изтриване</string>
     <string name="enable_nfc_send">Активирай NFC изпращане…</string>
-    <string name="cache_downloaded">Запазване на кешираните приложения</string>
+    <string name="cache_downloaded">Кеширане на приложенията</string>
     <string name="updates">Обновления</string>
     <string name="other">Други</string>
     <string name="update_interval">Проверка за актуализации</string>
