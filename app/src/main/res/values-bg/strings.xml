@@ -4,7 +4,7 @@
         деинсталирате старата версия. (Забележка: деинсталирането ще доведе до изтриване на данни съхранявани от старата
         версия.)
     </string>
-    <string name="installIncompatible">Приложението не е съвместим с вашето устройство. Да бъде направен опит за инсталиране въпреки това?</string>
+    <string name="installIncompatible">Приложението не е съвместимо с вашето устройство. Да бъде ли направен опит за инсталиране въпреки това?</string>
     <string name="version">Версия</string>
     <string name="delete">Изтриване</string>
     <string name="enable_nfc_send">Активирай NFC изпращане…</string>
@@ -26,7 +26,7 @@
     <string name="local_repo_name">Име на локалното хранилище</string>
     <string name="local_repo_name_summary">Обявява хранилището под името: %s</string>
     <string name="local_repo_https_on">Ползва криптирана HTTPS:// връзка за комуникацията с локалното хранилище</string>
-    <string name="app_details">Детайли за приложението</string>
+    <string name="app_details">Още информация</string>
     <string name="no_such_app">Не е намерено такова приложение.</string>
     <string name="about_title">Относно F-Droid</string>
     <string name="about_site">Уебсайт</string>
