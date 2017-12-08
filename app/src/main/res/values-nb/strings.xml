@@ -517,4 +517,8 @@
     <string name="updates__app_with_known_vulnerability__prompt_upgrade">Det er funnet en sårbarhet i %1$s. Det anbefales å hente den nyeste versjonen umiddelbart.</string>
     <string name="updates__app_with_known_vulnerability__ignore">Ignorer</string>
 
+    <string name="privacy">Personvern</string>
+    <string name="preventScreenshots_title">Forhindre skjermavbildninger</string>
+    <string name="preventScreenshots_summary">Blokkerer avbildning av skjermen, og skjuler programinnhold fra nylige programmer</string>
+
     </resources>
