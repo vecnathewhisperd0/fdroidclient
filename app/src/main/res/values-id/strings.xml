@@ -191,7 +191,7 @@
 
     <string name="touch_to_configure_local_repo">Ketuk untuk melihat rincian dan izinkan yang lain untuk menukar apl Anda.</string>
     <string name="useTor">Gunakan Tor</string>
-    <string name="useTorSummary">Paksa jalur unduhan lewat Tor untuk meningkatkan privasi</string>
+    <string name="useTorSummary">Paksa jalur download melalui Tor untuk meningkatkan kerahasiaan. Memerlukan Orbot</string>
     <string name="status_inserting_apps">Menyimpan detail apl</string>
     <string name="all_other_repos_fine">Semua repo lainnya tidak membuat galat.</string>
     <string name="repo_fingerprint">Sidik jari kunci penandatanganan (SHA-256)</string>
@@ -500,5 +500,17 @@
 
     <string name="installed_app__file_corrupt">F-Droid menerima galat EIO: %s mungkin rusak!</string>
     <string name="updates__app_with_known_vulnerability__ignore">Abaikan</string>
+
+    <string name="app_details__incompatible_mismatched_signature">Tanda tangan berbeda dari versi terpasang</string>
+    <string name="app_details__no_versions__no_compatible_signatures">Tidak ditemukan versi dengan tanda tangan yang cocok</string>
+    <string name="app_details__no_versions__none_compatible_with_device">Tidak ada versi yang cocok dengan perangkat</string>
+    <string name="app_details__no_versions__explain_incompatible_signatures">Versi yang terpasang tidak cocok dengan versi-versi yang tersedia. Mencopot pemasangan aplikasi akan memampukanmu melihat dan memasang versi yang cocok. Ini biasanya terjadi pada aplikasi yang terpasang melalu Google Play atau sumber lain, jika aplikasi tersebut ditandatangani dengan sertifikat berbeda.</string>
+
+    <string name="app_list__dismiss_vulnerable_app">Kerentanan diabaikan</string>
+    <string name="updates__app_with_known_vulnerability__prompt_uninstall">Kami menemukan sebuah celah keamanan dengan %1$s. Kami merekomendasikan mencabut pemasangan aplikasi ini segera.</string>
+    <string name="updates__app_with_known_vulnerability__prompt_upgrade">Kami menemukan sebuah celah keamanan dengan %1$s. Kami merekomendasikan memperbaharui aplikasi ke versi terbaru segera.</string>
+    <string name="privacy">Kerahasiaan</string>
+    <string name="preventScreenshots_title">Cegah tangkapan layar</string>
+    <string name="preventScreenshots_summary">Blok pengambilan tangkapan layar dan sembunyikan isi aplikasi dari layar aplikasi saat ini</string>
 
     </resources>
