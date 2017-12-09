@@ -126,11 +126,9 @@
         tilgjengelige i F-droid.
         \n\nMerk: Alle tidligere installerte programmer vil fremdeles være å finne på din enhet.
     </string>
-    <string name="repo_disabled_notification">Avskrudd \"%1$s\".
-
-        Du må
-        skru på denne pakkebrønnen igjen for å installere programmer fra den.
-    </string>
+    <string name="repo_disabled_notification">Avskrudde \"%1$s\".
+\n
+\nDu må skru på denne pakkebrønnen igjen for å installere programmer fra den.</string>
     <string name="repo_added">Lagret F-Droid-pakkebrønnen %1$s.</string>
     <string name="repo_searching_address">Ser etter F-Droid-pakkebrønn på\n%1$s</string>
     <string name="minsdk_or_later">%s eller senere</string>
