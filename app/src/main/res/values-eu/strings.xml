@@ -364,7 +364,7 @@
 
     <string name="swap_stopping_wifi">Wi-Fia gelditzen…</string>
     <string name="crash_dialog_title">F-droid kraskatu da</string>
-    <string name="useTorSummary">Behartu Tor bidezko deskarga pribatutasuna areagotzeko</string>
+    <string name="useTorSummary">Behartu Tor bidezko deskarga pribatutasuna areagotzeko. Orbot behar da</string>
     <string name="crash_dialog_text">Ustekabeko errorea gertatu da aplikazioa geldiaraztean.
         Xehetasunak e-posta bidez bidali nahi dituzu arazoa
         konpontzen laguntzeko?
@@ -540,5 +540,9 @@
     <string name="updates__app_with_known_vulnerability__prompt_uninstall">Segurtasun ahultasun bat aurkitu dugu %1$s aplikazioan. Berehala desinstalatzea aholkatzen dugu.</string>
     <string name="updates__app_with_known_vulnerability__prompt_upgrade">Segurtasun ahultasun bat aurkitu dugu %1$s aplikazioan. Berehala azken bertsiora eguneratzea aholkatzen dugu.</string>
     <string name="updates__app_with_known_vulnerability__ignore">Ezikusi</string>
+
+    <string name="privacy">Pribatutasuna</string>
+    <string name="preventScreenshots_title">Eragotzi pantaila-argazkiak</string>
+    <string name="preventScreenshots_summary">Pantaila-argazkiak ateratzea eragozten du eta aplikazioaren edukia ezkutatzen du azken aplikazioen pantailan</string>
 
     </resources>
