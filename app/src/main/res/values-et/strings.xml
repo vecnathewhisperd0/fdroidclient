@@ -511,4 +511,8 @@
 	<item quantity="one">Värskendati %1$d aasta tagasi</item>
 	<item quantity="other">Värskendati %1$d aastat tagasi</item>
 </plurals>
-</resources>
+<string name="privacy">Privaatsus</string>
+    <string name="preventScreenshots_title">Väldi ekraanitõmmiseid</string>
+    <string name="preventScreenshots_summary">Keelab ekraanitõmmiste tegemise ja peidab rakenduse sisu viimaste rakenduste vaatest</string>
+
+    </resources>
