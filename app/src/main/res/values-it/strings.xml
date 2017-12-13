@@ -447,7 +447,7 @@
     <string name="updates__tts__download_app">Scarica</string>
     <string name="app_recommended_version_installed">Versione %1$s (Raccomandata)</string>
     <string name="app__newly_added">Nuovo</string>
-    <string name="app__tts__cancel_download">Annulla Scaricamento</string>
+    <string name="app__tts__cancel_download">Annulla scaricamento</string>
     <string name="app__install_downloaded_update">Aggiorna</string>
 
     <string name="app_list_download_ready">Scaricato, pronto per l\'installazione</string>
