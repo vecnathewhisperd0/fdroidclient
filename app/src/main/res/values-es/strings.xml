@@ -525,4 +525,20 @@
     <string name="preventScreenshots_title">Evitar capturas de pantalla</string>
     <string name="preventScreenshots_summary">Bloquea la captura de pantalla y oculta el contenido de la aplicación de la pantalla de aplicaciones recientes</string>
 
+    <string name="panic_app_setting_title">Aplicación de botón de pánico</string>
+    <string name="panic_app_unknown_app">una aplicación desconocida</string>
+    <string name="panic_app_setting_summary">No se ha establecido aplicación</string>
+    <string name="panic_app_setting_none">Ninguna</string>
+    <string name="panic_app_dialog_title">Confirmar aplicación de pánico</string>
+    <string name="panic_app_dialog_message">¿Seguro que desea permitir que %1$s desencadene acciones destructivas como botón de pánico?</string>
+    <string name="allow">Permitir</string>
+
+    <string name="panic_settings">Ajustes de botón de pánico</string>
+    <string name="panic_settings_summary">Acciones a tomar en caso de emergencia</string>
+    <string name="panic_exit_title">Salir de la aplicación</string>
+    <string name="panic_exit_summary">Se cerrará la aplicación</string>
+    <string name="panic_destructive_actions">Acciones destructivas</string>
+    <string name="panic_hide_title">Ocultar %s</string>
+    <string name="panic_hide_summary">La aplicación se ocultará</string>
+
     </resources>
