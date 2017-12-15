@@ -404,7 +404,7 @@
     <string name="app_version_x_installed">Version %1$s</string>
     <string name="clear_search">Effacer la recherche</string>
 
-    <string name="main_menu__latest_apps">Dernière</string>
+    <string name="main_menu__latest_apps">Nouveautés</string>
     <string name="main_menu__categories">Catégories</string>
     <string name="main_menu__swap_nearby">À proximité</string>
 
@@ -526,4 +526,12 @@
     <string name="preventScreenshots_title">Interdire les copies écran</string>
     <string name="preventScreenshots_summary">Bloque les copies écran et masque le contenu d\'application dans les applications récentes</string>
 
+    <string name="panic_app_unknown_app">une application inconnue</string>
+    <string name="panic_app_setting_summary">Aucune application n\'a été définie</string>
+    <string name="panic_app_setting_none">Aucun</string>
+    <string name="allow">Autoriser</string>
+
+    <string name="panic_exit_title">Quitter l\'application</string>
+    <string name="panic_exit_summary">L\'application va être fermée</string>
+    <string name="panic_hide_title">Masquer %s</string>
     </resources>
