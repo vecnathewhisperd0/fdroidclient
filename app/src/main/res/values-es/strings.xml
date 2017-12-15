@@ -481,7 +481,7 @@
 	<item quantity="other">%1$d actualizaciones</item>
 </plurals>
     <plurals name="notification_summary_installed">
-	<item quantity="one">%1$d apli instalada</item>
+	<item quantity="one">%1$d aplicación instalada</item>
 	<item quantity="other">%1$d aplicaciones instaladas</item>
 </plurals>
     <plurals name="details_last_update_weeks">
