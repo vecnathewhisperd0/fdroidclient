@@ -493,4 +493,17 @@
     <string name="preventScreenshots_title">阻止螢幕快照</string>
     <string name="preventScreenshots_summary">阻擋攝取螢幕快照，並自最新的應用程式螢幕中隱藏應用程式內容</string>
 
+    <string name="panic_app_setting_title">應急按鈕應用程式</string>
+    <string name="panic_app_unknown_app">未知的應用程式</string>
+    <string name="panic_app_setting_summary">沒有應用程式被設定</string>
+    <string name="panic_app_setting_none">無</string>
+    <string name="panic_app_dialog_title">確認應急應用程式</string>
+    <string name="allow">允許</string>
+
+    <string name="panic_settings">應急按鈕設定</string>
+    <string name="panic_exit_title">退出應用程式</string>
+    <string name="panic_exit_summary">應用程式將被關閉</string>
+    <string name="panic_hide_title">隱藏 %s</string>
+    <string name="panic_hide_summary">應用程式將隱藏自己</string>
+
     </resources>
