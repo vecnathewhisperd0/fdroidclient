@@ -537,9 +537,17 @@
 
     <string name="privacy">Privacy</string>
     <string name="preventScreenshots_title">Impedisci schermate</string>
-    <string name="preventScreenshots_summary">Blocca l\'acquisizione di screenshot e nascondi il contenuto dell\'app dalla schermata della app recenti.</string>
+    <string name="preventScreenshots_summary">Blocca l\'acquisizione di screenshot e nascondi il contenuto dell\'app dalla schermata delle app recenti</string>
 
     <string name="panic_app_unknown_app">un\'applicazione sconosciuta</string>
     <string name="panic_app_setting_summary">Nessuna applicazione è stata impostata</string>
     <string name="panic_app_setting_none">Nessuno</string>
+    <string name="allow">Permetti</string>
+
+    <string name="panic_settings_summary">Azioni da intraprendere in caso di emergenza</string>
+    <string name="panic_exit_summary">L\'applicazione sarà chiusa</string>
+    <string name="panic_destructive_actions">Azioni Distruttive</string>
+    <string name="panic_hide_title">Nascondi %s</string>
+    <string name="panic_hide_summary">L\'applicazione si auto-nasconderà</string>
+
     </resources>
