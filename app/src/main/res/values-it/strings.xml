@@ -537,4 +537,6 @@
 
     <string name="privacy">Privacy</string>
     <string name="preventScreenshots_title">Impedisci schermate</string>
+    <string name="preventScreenshots_summary">Blocca l\'acquisizione di screenshot e nascondi il contenuto dell\'app dalla schermata della app recenti.</string>
+
     </resources>
