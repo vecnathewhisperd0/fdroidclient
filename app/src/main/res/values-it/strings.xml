@@ -539,4 +539,7 @@
     <string name="preventScreenshots_title">Impedisci schermate</string>
     <string name="preventScreenshots_summary">Blocca l\'acquisizione di screenshot e nascondi il contenuto dell\'app dalla schermata della app recenti.</string>
 
+    <string name="panic_app_unknown_app">un\'applicazione sconosciuta</string>
+    <string name="panic_app_setting_summary">Nessuna applicazione è stata impostata</string>
+    <string name="panic_app_setting_none">Nessuno</string>
     </resources>
