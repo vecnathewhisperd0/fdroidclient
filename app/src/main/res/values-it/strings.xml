@@ -535,4 +535,6 @@
     <string name="updates__app_with_known_vulnerability__prompt_upgrade">Abbiamo trovato una vulnerabilità in %1$s. Ti raccomandiamo di aggiornare all\'ultima versione immediatamente.</string>
     <string name="updates__app_with_known_vulnerability__ignore">Ignora</string>
 
+    <string name="privacy">Privacy</string>
+    <string name="preventScreenshots_title">Impedisci schermate</string>
     </resources>
