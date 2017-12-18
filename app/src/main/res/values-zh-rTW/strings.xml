@@ -508,5 +508,5 @@
 
     <string name="panic_app_dialog_message">確認同意讓 %1$s 啟動破壞式的緊急按鈕動作?</string>
     <string name="panic_settings_summary">危急狀況下要採取的行動</string>
-    <string name="panic_destructive_actions">破壤式行動</string>
+    <string name="panic_destructive_actions">破壞式行動</string>
     </resources>
