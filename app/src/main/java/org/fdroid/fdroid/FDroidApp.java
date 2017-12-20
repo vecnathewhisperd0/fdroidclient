@@ -368,7 +368,7 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
     public void onCreate() {
         super.onCreate();
         instance = this;
-        if (BuildConfig.DEBUG) {
+        if (false) { // NOPMD
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
                     .detectAll()
                     .penaltyLog()
