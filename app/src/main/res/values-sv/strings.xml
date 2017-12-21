@@ -429,8 +429,8 @@
     <string name="antifeatureswarning">Denna app har funktioner som du kanske inte gillar.</string>
     <string name="antifeatures">Anti-funktioner</string>
     <plurals name="details_last_update_days">
-	<item quantity="one">Uppdaterade för %1$d dag sedan</item>
-	<item quantity="other">Uppdaterade för %1$d dagar sedan</item>
+	<item quantity="one">Uppdaterad för %1$d dag sedan</item>
+	<item quantity="other">Uppdaterad för %1$d dagar sedan</item>
 </plurals>
     <string name="app_list__name__successfully_installed">%1$s installerad</string>
     <string name="nearby_splash__download_apps_from_people_nearby">Inget Internet? Få appar från personer nära dig!</string>
@@ -514,7 +514,7 @@
     <string name="panic_hide_title">Göm %s</string>
     <string name="panic_hide_summary">Appen kommer att gömmas</string>
 
-    <string name="preventScreenshots_summary">Förhindrar skärmdumpar och döljer appinnehåll från senaste</string>
+    <string name="preventScreenshots_summary">Förhindrar skärmdumpar och döljer appinnehåll från senaste skärmar</string>
 
     <string name="panic_app_setting_title">Panikknappsapp</string>
     </resources>
