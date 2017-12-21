@@ -497,4 +497,16 @@
     <string name="updates__app_with_known_vulnerability__prompt_upgrade">Vi hittade en sårbarhet hos %1$s. Du rekommenderas uppgradera till den nyaste versionen omedelbart.</string>
     <string name="updates__app_with_known_vulnerability__ignore">Ignorera</string>
 
+    <string name="privacy">Integritet</string>
+    <string name="preventScreenshots_title">Förhindra skärmdumpar</string>
+    <string name="panic_app_unknown_app">en okänd app</string>
+    <string name="panic_app_setting_summary">Ingen app har valts</string>
+    <string name="panic_app_setting_none">Ingen</string>
+    <string name="panic_app_dialog_title">Bekräfta Panikapp</string>
+    <string name="panic_app_dialog_message">Är du säker på att du vill tillåta %1$s att utlösa destruktiva panikknappsåtgärder?</string>
+    <string name="allow">Tillåt</string>
+
+    <string name="panic_settings">Panikknappsinställningar</string>
+    <string name="panic_settings_summary">Återgärder i nödfall</string>
+    <string name="panic_exit_title">Avsluta appen</string>
     </resources>
