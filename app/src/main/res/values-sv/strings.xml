@@ -514,4 +514,7 @@
     <string name="panic_hide_title">Göm %s</string>
     <string name="panic_hide_summary">Appen kommer att gömmas</string>
 
+    <string name="preventScreenshots_summary">Förhindrar skärmdumpar och döljer appinnehåll från senaste</string>
+
+    <string name="panic_app_setting_title">Panikknappsapp</string>
     </resources>
