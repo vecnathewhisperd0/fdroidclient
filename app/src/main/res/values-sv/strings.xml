@@ -509,4 +509,5 @@
     <string name="panic_settings">Panikknappsinställningar</string>
     <string name="panic_settings_summary">Återgärder i nödfall</string>
     <string name="panic_exit_title">Avsluta appen</string>
+    <string name="panic_exit_summary">Appen kommer att stängas</string>
     </resources>
