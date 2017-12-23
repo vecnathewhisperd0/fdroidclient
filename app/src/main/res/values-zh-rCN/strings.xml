@@ -78,8 +78,8 @@
     <string name="deleting_repo">正在删除当前软件源…</string>
     <string name="icon">图标</string>
     <string name="proxy">代理</string>
-    <string name="enable_proxy_title">启用http代理</string>
-    <string name="enable_proxy_summary">为所有的网络请求启用http代理</string>
+    <string name="enable_proxy_title">启用 http 代理</string>
+    <string name="enable_proxy_summary">为所有的网络请求启用 http 代理</string>
     <string name="proxy_host">代理主机</string>
     <string name="proxy_host_summary">本机代理主机名（比如 127.0.0.1）</string>
     <string name="proxy_port">代理端口</string>
@@ -201,7 +201,7 @@
 \n在您的设备上有这些应用程序，但无法从 F-Droid 获取它们。这可能是因为需要更新你的软件库，或者在库里真的没有这些应用程序。</string>
     <string name="empty_can_update_app_list">好棒！您的应用是最新的啦。</string>
 
-    <string name="root_access_denied_body">你的设备未 root，或者你拒绝了root请求。</string>
+    <string name="root_access_denied_body">您未取得设备的 root 权限，或者您拒绝了 F-Droid 的 root 请求。</string>
     <string name="install_error_unknown">由于未知原因导致安装失败</string>
     <string name="uninstall_error_unknown">由于未知原因导致卸载失败</string>
     <string name="system_install_denied_signature">该扩展的签名不正确！请回报BUG！</string>
@@ -279,8 +279,8 @@
 
     <string name="interval_never">从不</string>
     <string name="interval_1h">每小时</string>
-    <string name="interval_4h">每4小时</string>
-    <string name="interval_12h">每12小时</string>
+    <string name="interval_4h">每 4 小时</string>
+    <string name="interval_12h">每 12 小时</string>
     <string name="interval_1d">每天</string>
     <string name="interval_1w">每周</string>
     <string name="interval_2w">每两周</string>
@@ -466,4 +466,14 @@
     <string name="preventScreenshots_title">阻止屏幕截图</string>
     <string name="preventScreenshots_summary">阻止屏幕截图，且在最近的应用屏幕中隐藏应用内容</string>
 
+    <string name="panic_app_setting_title">应急按钮应用程序</string>
+    <string name="panic_app_unknown_app">未知的应用程序</string>
+    <string name="panic_app_setting_summary">没有设置任何应用程序</string>
+    <string name="panic_app_dialog_message">您确认要允许 %1$s 触发破坏式的应急按钮动作吗？</string>
+    <string name="allow">允许</string>
+
+    <string name="panic_settings">应急按钮设置</string>
+    <string name="panic_settings_summary">危急状况下要采取的行动</string>
+    <string name="panic_exit_title">退出应用程序</string>
+    <string name="panic_exit_summary">应用程序将被关闭</string>
     </resources>
