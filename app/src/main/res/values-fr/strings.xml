@@ -498,7 +498,7 @@
 	<item quantity="other">Mis à jour il y a %1$s ans</item>
 </plurals>
 <string name="by_author_format">par %s</string>
-    <string name="download_404">Le fichier n\'a pas été trouvé.</string>
+    <string name="download_404">Le fichier demandé n\'a pas été trouvé.</string>
     <string name="force_old_index">Forcer l\'ancien format d\'index</string>
     <string name="force_old_index_summary">Dans le cas où des erreurs ou des incompatibilités apparaitraient, utilisez l\'index des applications en XML</string>
     <string name="app_list_download_ready">Téléchargé, prêt à installer</string>
@@ -534,4 +534,6 @@
     <string name="panic_exit_title">Quitter l\'application</string>
     <string name="panic_exit_summary">L\'application va être fermée</string>
     <string name="panic_hide_title">Masquer %s</string>
+    <string name="panic_hide_summary">L\'application vas se cacher</string>
+
     </resources>
