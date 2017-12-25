@@ -534,6 +534,6 @@
     <string name="panic_exit_title">Quitter l\'application</string>
     <string name="panic_exit_summary">L\'application va être fermée</string>
     <string name="panic_hide_title">Masquer %s</string>
-    <string name="panic_hide_summary">L\'application vas se cacher</string>
+    <string name="panic_hide_summary">L\'application sera masquée</string>
 
     </resources>
