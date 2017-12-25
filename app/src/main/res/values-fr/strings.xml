@@ -536,4 +536,6 @@
     <string name="panic_hide_title">Masquer %s</string>
     <string name="panic_hide_summary">L\'application sera masquée</string>
 
+    <string name="panic_settings">Paramètres du bouton de panique</string>
+    <string name="panic_settings_summary">Actions à exécuter en cas d\'urgence</string>
     </resources>
