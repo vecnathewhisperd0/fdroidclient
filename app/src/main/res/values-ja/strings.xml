@@ -4,7 +4,7 @@
     <string name="installIncompatible">アプリはお使いの端末と互換性がありません。それでもインストールしますか？</string>
     <string name="version">バージョン</string>
     <string name="delete">削除</string>
-    <string name="enable_nfc_send">NFC送信を有効にする</string>
+    <string name="enable_nfc_send">NFC送信を有効にする。。。</string>
     <string name="cache_downloaded">キャッシュしたアプリを残す</string>
     <string name="updates">アップデート</string>
     <string name="other">その他</string>
@@ -83,9 +83,9 @@
     <string name="local_repo">ローカルリポジトリ</string>
     <string name="local_repo_running">F-Droidは交換の準備ができました</string>
     <string name="touch_to_configure_local_repo">タッチすると詳細を表示し、アプリの交換ができるようになります。</string>
-    <string name="deleting_repo">現在のリポジトリを削除中</string>
-    <string name="adding_apks_format">リポジトリに%sを追加中</string>
-    <string name="writing_index_jar">署名されたインデックスファイル(index.jar)を書き込み中</string>
+    <string name="deleting_repo">現在のリポジトリを削除中。。。</string>
+    <string name="adding_apks_format">リポジトリに%sを追加中。。。</string>
+    <string name="writing_index_jar">署名されたインデックスファイル(index.jar)を書き込み中。。。</string>
     <string name="linking_apks">リポジトリにAPKを関連付けています</string>
     <string name="copying_icons">リポジトリにアプリのアイコンをコピー中</string>
     <string name="icon">アイコン</string>
@@ -287,7 +287,7 @@
     <string name="login_name">ユーザー名</string>
     <string name="login_password">パスワード</string>
     <string name="repo_edit_credentials">パスワードを変更</string>
-    <string name="repo_error_empty_username">ユーザー名が空です。資格情報は変更されていません。</string>
+    <string name="repo_error_empty_username">ユーザー名が空です。資格情報は変更されていません</string>
 
     <string name="about_license">ライセンス</string>
     <string name="empty_search_available_app_list">一致する利用可能なアプリはありません。</string>
@@ -444,7 +444,7 @@
     <string name="download_404">要求されたファイルが見つかりませんでした。</string>
     <string name="force_old_index">古いインデックスフォーマットを強制する</string>
     <string name="force_old_index_summary">バグや互換性の問題がある場合に、XMLアプリインデックスを使用します</string>
-    <string name="app_list_download_ready">ダウンロードが完了しました。今すぐインストールできます。</string>
+    <string name="app_list_download_ready">ダウンロードが完了しました。今すぐインストールできます</string>
 
     <string name="app_installed_media">%sにファイルをインストールしました</string>
     <string name="app_permission_storage">F-Droidがストレージにインストールするためにはストレージの権限が必要です。インストールを続行するには次の画面で許可してください。</string>
