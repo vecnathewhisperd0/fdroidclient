@@ -519,4 +519,20 @@
     <string name="preventScreenshots_title">Forhindre skjermavbildninger</string>
     <string name="preventScreenshots_summary">Blokkerer avbildning av skjermen, og skjuler programinnhold fra nylige programmer</string>
 
+    <string name="panic_app_setting_title">Panikkprogram-knapp</string>
+    <string name="panic_app_unknown_app">et ukjent program</string>
+    <string name="panic_app_setting_summary">Inget program har blitt valgt</string>
+    <string name="panic_app_setting_none">Ingen</string>
+    <string name="panic_app_dialog_title">Bekreft panikkprogram</string>
+    <string name="panic_app_dialog_message">Er du sikker på at du vil tillate %1$s å utløse ødeleggende panikknappehandlinger?</string>
+    <string name="allow">Tillat</string>
+
+    <string name="panic_settings">Panikknappeinnstillinger</string>
+    <string name="panic_settings_summary">Handlinger å utføre i nødsfall</string>
+    <string name="panic_exit_title">Avslutt program</string>
+    <string name="panic_exit_summary">Programmet vil bli lukket</string>
+    <string name="panic_destructive_actions">Ødeleggende handlinger</string>
+    <string name="panic_hide_title">Skjul %s</string>
+    <string name="panic_hide_summary">Programmet vil skjule seg selv</string>
+
     </resources>
