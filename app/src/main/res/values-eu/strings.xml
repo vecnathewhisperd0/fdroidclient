@@ -277,12 +277,12 @@
     <string name="swap_scanning_for_peers">Inguruko jendearen bila…</string>
     <string name="swap_nearby">Ingurukoekin partekatu</string>
     <string name="swap_intro">Konektatu eta trukatu aplikazioak inguruko jendearekin.</string>
-    <string name="swap_visible_bluetooth">Bluetooth bidez ikusgarri</string>
+    <string name="swap_visible_bluetooth">Bluetooth bidez ikusgai</string>
     <string name="swap_setting_up_bluetooth">Bluetooth ezartzen…</string>
-    <string name="swap_not_visible_bluetooth">Bluetooth bidez ez ikusgarri</string>
-    <string name="swap_visible_wifi">Wi-Fi bidez ikusgarri</string>
+    <string name="swap_not_visible_bluetooth">Bluetooth bidez ez ikusgai</string>
+    <string name="swap_visible_wifi">Wi-Fi bidez ikusgai</string>
     <string name="swap_setting_up_wifi">Wi-Fi ezartzen…</string>
-    <string name="swap_not_visible_wifi">Wi-Fi bidez ez ikusgarri</string>
+    <string name="swap_not_visible_wifi">Wi-Fi bidez ez ikusgai</string>
     <string name="swap_cant_find_peers">Ezin duzu bilatzen ari zarena aurkitu?</string>
     <string name="swap_send_fdroid">Bidali F-Droid</string>
     <string name="swap_no_peers_nearby">Ezin izan da inguruan partekatzeko jenderik aurkitu.</string>
@@ -309,7 +309,7 @@
     </string>
     <string name="swap_connection_misc_error">Errore bat gertatu da gailura konektatzean, ezin dugu honekin trukatu!</string>
     <string name="swap_not_enabled">Trukea ez dago gaituta</string>
-    <string name="swap_not_enabled_description">Trukatu aurretik, gailua ikusgarri jarri behar duzu.</string>
+    <string name="swap_not_enabled_description">Trukatu aurretik, gailua ikusgai jarri behar duzu.</string>
 
     <string name="install_confirm">baimen hauek behar ditu</string>
     <string name="install_confirm_update">Aurretik dagoen aplikazio honen bertsio berriagoa
