@@ -1,3 +1,5 @@
+### 1.0.2 (2017-12-04)
+
 ### 1.1-alpha0 (2017-11-09)
 
 * automatically choose between official repo mirrors
