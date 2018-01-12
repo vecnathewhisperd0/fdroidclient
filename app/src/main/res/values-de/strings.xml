@@ -64,7 +64,7 @@
     <string name="menu_website">Internetseite</string>
     <string name="menu_issues">Probleme</string>
     <string name="menu_source">Quelltext</string>
-    <string name="menu_upgrade">Erneuert</string>
+    <string name="menu_upgrade">Update</string>
     <string name="menu_donate">Spenden</string>
     <string name="details_notinstalled">Nicht installiert</string>
     <string name="antiadslist">Diese Anwendung enthält Werbung</string>
@@ -525,4 +525,7 @@
 
     <string name="allow">Erlauben</string>
 
+    <string name="panic_app_setting_none">Keine</string>
+    <string name="panic_settings_summary">Massnahmen für den Notfall</string>
+    <string name="panic_exit_title">App schließen</string>
     </resources>
