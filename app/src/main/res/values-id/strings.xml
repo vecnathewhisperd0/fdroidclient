@@ -99,9 +99,9 @@
     <string name="details_notinstalled">Tidak terpasang</string>
     <string name="antiadslist">Aplikasi ini berisi iklan</string>
     <string name="antitracklist">Aplikasi ini melacak dan melaporkan aktivitas Anda</string>
-    <string name="antinonfreeadlist">Aplikasi ini mempromosikan pengaya berbayar</string>
-    <string name="antinonfreenetlist">Aplikasi ini mempromosikan layanan jaringan berbayar</string>
-    <string name="antinonfreedeplist">Aplikasi ini bergantung pada aplikasi berbayar lainnya</string>
+    <string name="antinonfreeadlist">Aplikasi ini mempromosikan pengaya tak-bebas</string>
+    <string name="antinonfreenetlist">Aplikasi ini mempromosikan layanan jaringan tak-bebas</string>
+    <string name="antinonfreedeplist">Aplikasi ini bergantung pada aplikasi tak-bebas lainnya</string>
     <string name="antiupstreamnonfreelist">Kode sumber utama tidak sepenuhnya Bebas</string>
 
     <string name="display">Tampilan</string>
