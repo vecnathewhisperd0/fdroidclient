@@ -445,7 +445,7 @@
     <string name="force_old_index">Υποχρεωτική χρήση παλαιάς μορφής ευρετηρίου</string>
     <string name="force_old_index_summary">Σε περίπτωση που υπάρχουν σφάλματα ή ασυμβατότητες, χρήση του ευρετηρίου εφαρμογών XML</string>
     <string name="app_details_donate_prompt_unknown_author">Κεράστε στους προγραμματιστές του %1$s ένα καφεδάκι!</string>
-    <string name="app_details_donate_prompt">Το %1$s δημιουργήθηκε απο %2$s. Κεράστε έναν καφέ!</string>
+    <string name="app_details_donate_prompt">Το %1$s αναπτύσσεται από %1$s. Κεράστε τους ένα καφέ!</string>
 
     <string name="app_details__incompatible_mismatched_signature">Διαφορετική υπογραφή από την εγκατεστημένη έκδοση</string>
     <string name="app_details__no_versions__show_incompat_versions">Για εμφάνιση ασύμβατων εκδόσεων εδώ, ενεργοποιήστε την \"%1$s\" επιλογή.</string>
@@ -468,7 +468,7 @@
 
     <plurals name="updates__download_updates_for_apps">
 	<item quantity="one">Λήψη εγκατάστασης για %1$d εφαρμογές.</item>
-	<item quantity="other"></item>
+	<item quantity="other"/>
 </plurals>
 
     <string name="repositories_summary">Προσθέστε εναλλακτικής πηγές εφαρμογών</string>
