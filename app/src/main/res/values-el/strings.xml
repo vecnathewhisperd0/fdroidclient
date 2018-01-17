@@ -243,7 +243,7 @@
     <string name="system_install_question">Θέλετε να εγκαταστήσετε την επέκταση του F-Droid με δικαιώματα συστήματος;</string>
     <string name="system_install_warning">Αυτό διαρκεί έως 10 δευτερόλεπτα.</string>
     <string name="system_install_warning_lollipop">Αυτό διαρκεί έως 10 δευτερόλεπτα και η συσκευή θα <b>επανεκκινηθεί</b> έπειτα.</string>
-    <string name="system_uninstall">Θέλετε να απεγκαταστήσετε την επέκταση του F-Droid με δικαιώματα συστήματος;</string>
+    <string name="system_uninstall">Θέλετε να απεγκαταστήσετε την επέκταση του F-Droid με δικαιώματα συστήματος?</string>
     <string name="system_uninstall_button">Απεγκατάσταση</string>
 
     <string name="swap_join_same_wifi">Γίνετε μέλος του ίδιου ασύρματου δικτύου με τον φίλο σας</string>
@@ -306,7 +306,7 @@
     <string name="newPerms">Νέες εφαρμογές</string>
     <string name="allPerms">Όλες οι εφαρμογές</string>
     <string name="perm_costs_money">Αυτό μπορεί να σας κοστίσει χρήματα</string>
-    <string name="uninstall_update_confirm">Θέλετε να αντικαταστήσετε αυτή την εφαρμογή με την εργοστασιακή έκδοση;</string>
+    <string name="uninstall_update_confirm">Θέλετε να αντικαταστήσετε αυτή την εφαρμογή με την εργοστασιακή έκδοση?</string>
     <string name="uninstall_confirm">Θέλετε να απεγκαταστήσετε αυτή την εφαρμογή;</string>
     <string name="download_error">Ανεπιτυχής λήψη!</string>
 
@@ -467,8 +467,8 @@
     <string name="updates__app_with_known_vulnerability__ignore">Αγνοήστε</string>
 
     <plurals name="updates__download_updates_for_apps">
-	<item quantity="one">Λήψη εγκατάστασης για %1$d εφαρμογές.</item>
-	<item quantity="other"/>
+	<item quantity="one">Λήψη εγκατάστασης για %1$d εφαρμογή.</item>
+	<item quantity="other">Λήψη εγκατάστασης για %1$d εφαρμογές.</item>
 </plurals>
 
     <string name="repositories_summary">Προσθέστε εναλλακτικής πηγές εφαρμογών</string>
@@ -514,7 +514,7 @@
     <string name="app__tts__downloading_progress">"Λήψη,  %1$d%% ολοκληρώθηκε"</string>
     <plurals name="notification_summary_more">
 	<item quantity="one">+%1$d επιπλέον…</item>
-	<item quantity="other">+%1$d επιπλέον…</item>
+	<item quantity="other">+%1$d επιπλέον….</item>
 </plurals>
     <string name="notification_content_single_downloading_update">Λήψη αναβάθμισης για \"%1$s\"…</string>
     <plurals name="notification_summary_updates">
