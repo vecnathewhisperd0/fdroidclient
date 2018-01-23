@@ -143,7 +143,7 @@
     <string name="malformed_repo_uri">Transsaltis eraran URI de deponejo: %s</string>
 
     <string name="menu_settings">Agordoj</string>
-    <string name="menu_email">Aŭtora retpoŝtadreso</string>
+    <string name="menu_email">Retleteri programiston</string>
     <string name="menu_changelog">Protokolo pri ŝanĝoj</string>
     <string name="menu_bitcoin">Bitmono</string>
     <string name="menu_litecoin">Litecoin</string>
