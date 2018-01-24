@@ -49,7 +49,7 @@
     <string name="menu_upgrade">Bertsio-berritu</string>
     <string name="menu_donate">Egin dohaintza</string>
     <string name="details_notinstalled">Instalatu gabe</string>
-    <string name="antiadslist">Tämä ohjelma sisältää mainontaa</string>
+    <string name="antiadslist">Aplikazio honek iragarkiak ditu</string>
     <string name="display">Bistaratu</string>
     <string name="expert">Modu aditua</string>
     <string name="search_hint">Bilatu aplikazioak</string>
@@ -467,7 +467,7 @@
     <string name="details_new_in_version">%s bertsioan berria</string>
 
     <string name="antifeatureswarning">Aplikazio honek gustuko izan ez ditzakezun ezaugarriak ditu.</string>
-    <string name="antifeatures">Anti-ezaugarriak</string>
+    <string name="antifeatures">Ezaugarri zalantzagarriak</string>
     <plurals name="button_view_all_apps_in_category">
 	<item quantity="one">Ikusi %d</item>
 	<item quantity="other">Ikusi guztiak: %d</item>
