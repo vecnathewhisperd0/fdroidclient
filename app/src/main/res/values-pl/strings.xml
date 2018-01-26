@@ -549,7 +549,7 @@
     <string name="panic_exit_title">Zamknij aplikację</string>
     <string name="panic_exit_summary">Aplikacja zostanie zamknięta</string>
     <string name="panic_destructive_actions">Niszczące akcje</string>
-    <string name="panic_hide_title">Ukryj</string>
+    <string name="panic_hide_title">Ukryj %s</string>
     <string name="panic_hide_summary">Aplikacja zostanie ukryta</string>
 
     </resources>
