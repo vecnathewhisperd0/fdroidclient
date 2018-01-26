@@ -229,7 +229,7 @@
         Παρακαλώ δημιουργήστε μια αναφορά σφάλματος!
     </string>
     <string name="system_install_button_install">Εγκατάσταση</string>
-    <string name="system_install_post_success">"Έγινε η  εγκατάσταση της επέκτασης του F-Droid με δικαιώματα συστήματος"</string>
+    <string name="system_install_post_success">Έγινε η  εγκατάσταση της επέκτασης του F-Droid με δικαιώματα συστήματος</string>
     <string name="system_install_post_fail">Απέτυχε η εγκατάσταση της επέκτασης του F-Droid με δικαιώματα συστήματος
     </string>
     <string name="system_install_post_success_message">Έγινε η εγκατάσταση της επέκτασης του F-Droid με δικαιώματα συστήματος. Αυτό επιτρέπει στο F-Droid να εγκαθιστά, αναβαθμίζει και απεγκαθιστά εφαρμογές από μόνο του.</string>
@@ -511,7 +511,7 @@
     <string name="nearby_splash__find_people_button">Βρείτε άλλους κοντά μου</string>
     <string name="nearby_splash__both_parties_need_fdroid">Και οι δύο πρέπει να %1$s για να χρησιμοποιήσουν το \"Κοντά\".</string>
 
-    <string name="app__tts__downloading_progress">"Λήψη,  %1$d%% ολοκληρώθηκε"</string>
+    <string name="app__tts__downloading_progress">Λήψη,  %1$d%% ολοκληρώθηκε</string>
     <plurals name="notification_summary_more">
 	<item quantity="one">+%1$d επιπλέον…</item>
 	<item quantity="other">+%1$d επιπλέον…</item>
@@ -528,7 +528,7 @@
     <string name="tts_category_name">Κατηγορία %1$s</string>
 
     <plurals name="tts_view_all_in_category">
-	<item quantity="one">"Προβολή %1$d  εφαρμογής από τη κατηγορία %2$s"</item>
+	<item quantity="one">Προβολή %1$d  εφαρμογής από τη κατηγορία %2$s</item>
 	<item quantity="other">Προβολή όλων των %1$d εφαρμογών από τη κατηγορία %2$s</item>
 </plurals>
 
