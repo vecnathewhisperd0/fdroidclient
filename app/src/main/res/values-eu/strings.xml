@@ -550,7 +550,8 @@
     <string name="panic_app_setting_summary">Ez da aplikaziorik ezarri</string>
     <string name="panic_app_setting_none">Bat ere ez</string>
     <string name="panic_app_dialog_title">Berretsi larrialdietarako aplikazioa</string>
-    <string name="panic_app_dialog_message">Ziur %1$ aplikazioari eragiketa suntsikorrak abiatzea baimendu nahi diozula?</string>
+    <string name="panic_app_dialog_message">Ziur %1$s aplikazioari eragiketa suntsikorrak abiatzea baimendu nahi
+        diozula?</string>
     <string name="allow">Baimendu</string>
 
     <string name="panic_settings">Larrialdi botoiaren ezarpenak</string>
