@@ -533,7 +533,7 @@
 
     <string name="privacy">Privacidade</string>
     <string name="preventScreenshots_title">Prevenir Capturas de tela</string>
-    <string name="preventScreenshots_summary">Bloqueia as capturas de tela e esconde o conteúdo conteúdo da tela de aplicativos recentes</string>
+    <string name="preventScreenshots_summary">Bloqueia as capturas de tela e esconde o conteúdo da tela de aplicativos recentes</string>
 
     <string name="panic_app_unknown_app">um aplicativo desconhecido</string>
     <string name="panic_app_setting_summary">Nenhum aplicativo foi configurado</string>
