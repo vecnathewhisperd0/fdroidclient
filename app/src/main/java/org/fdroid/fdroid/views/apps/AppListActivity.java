@@ -12,30 +12,39 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.data.AppProvider;
 import org.fdroid.fdroid.data.Schema;
 
-public class AppListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,
-        CategoryTextWatcher.SearchTermsChangedListener {
+import static org.fdroid.fdroid.R.menu.app_list_activity;
 
-    public static final String EXTRA_CATEGORY
-            = "org.fdroid.fdroid.views.apps.AppListActivity.EXTRA_CATEGORY";
-    public static final String EXTRA_SEARCH_TERMS
-            = "org.fdroid.fdroid.views.apps.AppListActivity.EXTRA_SEARCH_TERMS";
+public class AppListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>, CategoryTextWatcher.SearchTermsChangedListener {
+
+    public static final String EXTRA_CATEGORY = "org.fdroid.fdroid.views.apps.AppListActivity.EXTRA_CATEGORY";
+    public static final String EXTRA_SEARCH_TERMS = "org.fdroid.fdroid.views.apps.AppListActivity.EXTRA_SEARCH_TERMS";
 
     private RecyclerView appView;
     private AppListAdapter appAdapter;
     private String category;
     private String searchTerms;
+    private String sortClauseSelected = SortClause.LAST_UPDATED;
     private TextView emptyState;
     private EditText searchInput;
+
+    private interface SortClause {
+        String NAME = "fdroid_app.name asc";
+        String LAST_UPDATED = "fdroid_app.lastUpdated desc";
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +52,9 @@ public class AppListActivity extends AppCompatActivity implements LoaderManager.
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_app_list);
+        final android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         searchInput = (EditText) findViewById(R.id.search);
         searchInput.addTextChangedListener(new CategoryTextWatcher(this, searchInput, this));
@@ -64,14 +76,6 @@ public class AppListActivity extends AppCompatActivity implements LoaderManager.
 
         emptyState = (TextView) findViewById(R.id.empty_state);
 
-        View backButton = findViewById(R.id.back);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
         View clearButton = findViewById(R.id.clear);
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +92,38 @@ public class AppListActivity extends AppCompatActivity implements LoaderManager.
         appView.setAdapter(appAdapter);
 
         parseIntentForSearchQuery();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        final MenuInflater inflater = getMenuInflater();
+        inflater.inflate(app_list_activity, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            default:
+                return super.onOptionsItemSelected(item);
+
+            case R.id.action_sort:
+                return true;
+
+            case R.id.action_sort_by_name:
+                sortClauseSelected = SortClause.NAME;
+                break;
+
+            case R.id.action_sort_by_last_updated:
+                sortClauseSelected = SortClause.LAST_UPDATED;
+                break;
+        }
+
+        // Common to selected items
+        item.setChecked(true);
+        getSupportLoaderManager().restartLoader(0, null, this);
+        appView.scrollToPosition(0);
+        return true;
     }
 
     private void parseIntentForSearchQuery() {
@@ -122,14 +158,7 @@ public class AppListActivity extends AppCompatActivity implements LoaderManager.
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(
-                this,
-                AppProvider.getSearchUri(searchTerms, category),
-                Schema.AppMetadataTable.Cols.ALL,
-                null,
-                null,
-                Schema.AppMetadataTable.Cols.NAME
-        );
+        return new CursorLoader(this, AppProvider.getSearchUri(searchTerms, category), Schema.AppMetadataTable.Cols.ALL, null, null, sortClauseSelected);
     }
 
     @Override

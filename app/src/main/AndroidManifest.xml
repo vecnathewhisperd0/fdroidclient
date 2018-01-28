@@ -513,7 +513,8 @@
 
         </activity>
 
-        <activity android:name=".views.apps.AppListActivity" />
+        <activity android:name=".views.apps.AppListActivity"
+                  android:parentActivityName=".views.main.MainActivity"/>
 
         <activity android:name=".views.installed.InstalledAppsActivity"
             android:parentActivityName=".views.main.MainActivity">

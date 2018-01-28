@@ -149,6 +149,9 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="repositories_summary">Add additional sources of apps</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_search">Search</string>
+    <string name="menu_sort">Sort</string>
+    <string name="menu_sort_by_name">Name</string>
+    <string name="menu_sort_by_last_updated">Last updated</string>
     <string name="menu_add_repo">New Repository</string>
 
     <string name="menu_launch">Run</string>
