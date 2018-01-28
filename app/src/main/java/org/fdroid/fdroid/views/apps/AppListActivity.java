@@ -11,6 +11,7 @@ import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,8 +27,6 @@ import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.data.AppProvider;
 import org.fdroid.fdroid.data.Schema;
 
-import static org.fdroid.fdroid.R.menu.app_list_activity;
-
 public class AppListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>, CategoryTextWatcher.SearchTermsChangedListener {
 
     public static final String EXTRA_CATEGORY = "org.fdroid.fdroid.views.apps.AppListActivity.EXTRA_CATEGORY";
@@ -40,6 +39,7 @@ public class AppListActivity extends AppCompatActivity implements LoaderManager.
     private String sortClauseSelected = SortClause.LAST_UPDATED;
     private TextView emptyState;
     private EditText searchInput;
+    private Toolbar toolbar;
 
     private interface SortClause {
         String NAME = "fdroid_app.name asc";
@@ -52,7 +52,7 @@ public class AppListActivity extends AppCompatActivity implements LoaderManager.
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_app_list);
-        final android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -97,7 +97,7 @@ public class AppListActivity extends AppCompatActivity implements LoaderManager.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         final MenuInflater inflater = getMenuInflater();
-        inflater.inflate(app_list_activity, menu);
+        inflater.inflate(R.menu.app_list_activity, menu);
         return true;
     }
 
@@ -158,7 +158,14 @@ public class AppListActivity extends AppCompatActivity implements LoaderManager.
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(this, AppProvider.getSearchUri(searchTerms, category), Schema.AppMetadataTable.Cols.ALL, null, null, sortClauseSelected);
+        return new CursorLoader(
+                this,
+                AppProvider.getSearchUri(searchTerms, category),
+                Schema.AppMetadataTable.Cols.ALL,
+                null,
+                null,
+                sortClauseSelected
+        );
     }
 
     @Override
