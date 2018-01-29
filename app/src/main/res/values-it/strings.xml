@@ -551,5 +551,5 @@
     <string name="panic_hide_summary">L\'applicazione si auto-nasconderà</string>
 
     <string name="panic_exit_title">Esci dall\'app</string>
-    <string name="panic_app_setting_title">Applicazione Pulsante d\'Allarme</string>
+    <string name="panic_app_setting_title">Applicazione per Pulsante d\'Allarme</string>
     </resources>
