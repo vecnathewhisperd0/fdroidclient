@@ -42,8 +42,8 @@ public class AppListActivity extends AppCompatActivity implements LoaderManager.
     private Toolbar toolbar;
 
     private interface SortClause {
-        String NAME = "fdroid_app.name asc";
-        String LAST_UPDATED = "fdroid_app.lastUpdated desc";
+        String NAME = Schema.AppMetadataTable.NAME + "." + Schema.AppMetadataTable.Cols.NAME + " asc";
+        String LAST_UPDATED = Schema.AppMetadataTable.NAME + "." + Schema.AppMetadataTable.Cols.LAST_UPDATED + " desc";
     }
 
     @Override
