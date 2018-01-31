@@ -573,4 +573,5 @@
     <string name="panic_hide_title">Схаваць %s</string>
     <string name="panic_hide_summary">Праграма схавае сама сябе</string>
 
+    <string name="panic_exit_title">Выйсці з праграмы</string>
     </resources>
