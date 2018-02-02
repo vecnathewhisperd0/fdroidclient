@@ -492,7 +492,7 @@
     <string name="panic_app_dialog_message">Sunteți siguri că doriți să permiteți aplicației %1$s să efectueze acțiuni distructive la apăsarea butonului de panică?</string>
     <string name="allow">Permite</string>
 
-    <string name="panic_settings">Setări bunton de panică</string>
+    <string name="panic_settings">Setări buton de panică</string>
     <string name="panic_settings_summary">Acțiuni ce se vor executa în caz de urgență</string>
     <string name="panic_exit_title">Ieșire aplicație</string>
     <string name="panic_exit_summary">Aplicația se va închide</string>
