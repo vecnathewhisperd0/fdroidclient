@@ -494,4 +494,14 @@
     <string name="panic_app_dialog_message">確認同意讓 %1$s 啟動破壞式的緊急按鈕動作？</string>
     <string name="panic_settings_summary">危急狀況下要採取的行動</string>
     <string name="panic_destructive_actions">破壞式行動</string>
+    <string name="panic_hide_warning_title">記住如何還原</string>
+    <string name="panic_hide_warning_message">在緊急情況下，這將會從啟動程式刪除 %1$s。只有在仿造的 %3$s 應用程式中輸入 \"%2$d\" 才可以將其還原。</string>
+
+    <string name="hiding_calculator">計算機</string>
+    <string name="hiding_dialog_title">立即隱藏 %s</string>
+    <string name="hiding_dialog_message">您確定要從啓動器移除 %1$s 嗎？只有在仿造的 %3$s 應用程式中輸入 \"%2$d\" 才能還原。</string>
+    <string name="hiding_dialog_warning">警告：主畫面上任何的應用程式捷徑也將被移除，並需要重新手動新增。</string>
+    <string name="hide_on_long_search_press_title">隱藏搜尋按鈕</string>
+    <string name="hide_on_long_search_press_summary">長按搜尋按鈕將會隱藏應用程式</string>
+
     </resources>
