@@ -500,4 +500,8 @@
     <string name="panic_hide_title">Ascunde %s</string>
     <string name="panic_hide_summary">Aplicația se va ascunde</string>
 
+    <string name="panic_hide_warning_title">Țineți minte cum să restaurați</string>
+    <string name="hiding_calculator">Calculator</string>
+    <string name="hiding_dialog_title">Ascunde %s acum</string>
+    <string name="hide_on_long_search_press_title">Ascunde cu butonul de căutare</string>
     </resources>
