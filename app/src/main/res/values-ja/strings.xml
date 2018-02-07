@@ -183,7 +183,7 @@
     <string name="system_install_post_success">F-Droidの特権拡張機能をインストールしました</string>
     <string name="system_install_post_fail">F-Droidの特権拡張機能のインストールに失敗しました</string>
     <string name="system_install_post_success_message">F-Droid特権拡張機能をインストールしました。これはF-Droid が独自にｱﾌﾟﾘをｲﾝｽﾄｰﾙ、ｱｯﾌﾟｸﾞﾚｰﾄﾞ､及びｱﾝｲﾝｽﾄｰﾙをすることができます｡</string>
-    <string name="system_install_post_fail_message">F-Droidの特権拡張機能のインストールに失敗しました。すべてのAndroidで、このインストール方法が使用できる訳ではありません。詳細についてはF-Droidのバグトラッカーを参照してください。</string>
+    <string name="system_install_post_fail_message">F-Droidの特権拡張機能のインストールに失敗しました。すべてのAndroidでこのインストール方法が使用できる訳ではありません。詳細については、F-Droidのバグトラッカーを参照してください。</string>
     <string name="system_install_installing">インストール中</string>
     <string name="system_install_uninstalling">アンインストール中</string>
     <string name="system_install_question">F-Droidの特権拡張機能をインストールしてもよろしいですか？</string>
@@ -366,7 +366,7 @@
 
 
     <plurals name="button_view_all_apps_in_category">
-	<item quantity="other">%dをすべて表示</item>
+	<item quantity="other">%d個のアプリをすべて表示</item>
 </plurals>
 
     <string name="app_recommended_version_installed">バージョン%1$s(推奨)</string>
@@ -383,7 +383,7 @@
     <string name="tts_category_name">カテゴリ%1$s</string>
 
     <plurals name="tts_view_all_in_category">
-	<item quantity="other">%2$sカテゴリから%1$d個のアプリをすべて表示</item>
+	<item quantity="other">%2$sカテゴリの%1$d個のアプリをすべて表示</item>
 </plurals>
     <string name="app__install_downloaded_update">更新</string>
 
