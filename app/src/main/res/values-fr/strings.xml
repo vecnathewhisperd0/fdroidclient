@@ -546,7 +546,7 @@
     <string name="panic_hide_warning_message">En cas d\'urgence, cela supprimera %1$s du lanceur. Vous ne pouvez le restaurer qu\'en tapant « %2$d » dans la fausse application %3$s.</string>
 
     <string name="hiding_calculator">Calculatrice</string>
-    <string name="hiding_dialog_title">Cacher %s maintenant</string>
+    <string name="hiding_dialog_title">Masquer %s maintenant</string>
     <string name="hiding_dialog_message">Êtes-vous sûr de vouloir supprimer %1$s du lanceur. Vous ne pouvez le restaurer qu\'en tapant « %2$d » dans la fausse application %3$s.</string>
     <string name="hiding_dialog_warning">Attention : les raccourcis d\'applications sur l\'écran d\'accueil seront aussi supprimés et devront être rajoutés manuellement.</string>
     </resources>
