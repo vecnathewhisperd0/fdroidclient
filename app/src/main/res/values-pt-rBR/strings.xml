@@ -83,7 +83,7 @@
     <string name="search_hint">Procurar aplicativos</string>
     <string name="appcompatibility">Compatibilidade de aplicativo</string>
     <string name="show_incompat_versions">Versões incompatíveis</string>
-    <string name="show_incompat_versions_on">Mostrar versões de aplicativos incompatíveis com o dispositivo</string>
+    <string name="show_incompat_versions_on">Mostrar versões de aplicativos que são incompatíveis com o dispositivo</string>
     <string name="rooted">Ignorar o root</string>
     <string name="rooted_on">Não marcar de cinza os aplicativos que requerem privilégios de root</string>
     <string name="force_touch_apps">Ignorar tela sensível ao toque</string>
