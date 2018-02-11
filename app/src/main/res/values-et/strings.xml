@@ -536,4 +536,11 @@
     <string name="hiding_calculator">Kalkulaator</string>
     <string name="hide_on_long_search_press_summary">Pikk vajutus otsingunupul peidab rakenduse</string>
 
+    <string name="panic_hide_warning_title">Meenuta, kuidas taastada</string>
+    <string name="panic_hide_warning_message">Paanika sündmuse korral eemaldab see %1$s käivitajast. Ainult \"2$d\" sisestamine võltsrakendusse %3$s saab selle taastada.</string>
+
+    <string name="hiding_dialog_title">Peida %s nüüd</string>
+    <string name="hiding_dialog_message">Kas sa oled kindel, et soovid käivitajast eemaldada rakenduse %1$s? Ainult \"%2$d\" sisestamine võltsrakendusse %3$s taastab selle.</string>
+    <string name="hiding_dialog_warning">Hoiatus: avakuvalt eemaldatakse ka kõigi rakenduste otseteed ja need on vaja käsitsi uuesti lisada.</string>
+    <string name="hide_on_long_search_press_title">Peida otsingunupuga</string>
     </resources>
