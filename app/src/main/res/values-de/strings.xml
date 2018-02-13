@@ -519,7 +519,7 @@
     <string name="updates__app_with_known_vulnerability__prompt_upgrade">In „%1$s” wurden Sicherheitslücken festgestellt. Es wird empfohlen, diese App unverzüglich zu aktualisieren.</string>
     <string name="updates__app_with_known_vulnerability__ignore">Ignorieren</string>
 
-    <string name="privacy">Privatsphäre</string>
+    <string name="privacy">Datenschutz</string>
     <string name="preventScreenshots_title">Bildschirmfotos verhindern</string>
     <string name="preventScreenshots_summary">Blockiert das Aufnehmen von Bildschirmfotos und versteckt die App in der Appübersicht</string>
 
