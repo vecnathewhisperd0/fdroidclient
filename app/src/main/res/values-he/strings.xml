@@ -536,7 +536,7 @@
 
     <string name="hiding_calculator">מחשבון</string>
     <string name="hiding_dialog_title">הסתרת %s כעת</string>
-    <string name="hiding_dialog_message">להסיר את %s מהמשגר? רק הקלדה של „%2$d” ביישומון המזויף %3$s תאפשר שחזור שלו.</string>
+    <string name="hiding_dialog_message">להסיר את %1$s מהמשגר? רק הקלדה של „%2$d” ביישומון המזויף %3$s תאפשר שחזור שלו.</string>
     <string name="hiding_dialog_warning">אזהרה: כל קיצור דרך ליישומון על מסך הבית יוסר גם כן ויהיה להוסיף אותו מחדש ידנית.</string>
     <string name="hide_on_long_search_press_title">הסתרה עם כפתור החיפוש</string>
     <string name="hide_on_long_search_press_summary">לחיצה ארוכה על כפתור החיפוש תסתיר את היישומון</string>
