@@ -563,7 +563,7 @@
 
     <string name="rooted">Ezikusi root</string>
     <string name="panic_hide_warning_title">Gogoratu nola berrezarri</string>
-    <string name="panic_hide_warning_message">Larrialdi egoera batean, honek %1$s kenduko du abiarazletik. 3$s aplikazio faltsuan \"%2$d\" idatziz berreskuratu daiteke bakarrik.</string>
+    <string name="panic_hide_warning_message">Larrialdi egoera batean, honek %1$s kenduko du abiarazletik. %3$s aplikazio faltsuan \"%2$d\" idatziz berreskuratu daiteke bakarrik.</string>
 
     <string name="hiding_calculator">Kalkulagailua</string>
     <string name="hiding_dialog_title">Ezkutatu %s orain</string>

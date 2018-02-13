@@ -524,7 +524,7 @@
     <string name="panic_hide_summary">Aplikaĵo kaŝiĝos</string>
 
     <string name="panic_hide_warning_title">Memori kiel restarigi</string>
-    <string name="panic_hide_warning_message">En kriza okazo, tio ĉi forigos %1$s el la lanĉilo. Nur tajpado de “%2$s” en la ŝajn-aplikaĵo %3$s povas restarigi ĝin.</string>
+    <string name="panic_hide_warning_message">En kriza okazo, tio ĉi forigos %1$s el la lanĉilo. Nur tajpado de “%2$d” en la ŝajn-aplikaĵo %3$s povas restarigi ĝin.</string>
 
     <string name="hiding_calculator">Kalkulilo</string>
     <string name="hiding_dialog_title">Kaŝi %s nun</string>

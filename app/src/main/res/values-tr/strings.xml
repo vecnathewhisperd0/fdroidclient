@@ -536,10 +536,10 @@
     <string name="panic_hide_warning_message">Bu, bir panik durumunda, başlatıcıdan %1$s ögesini kaldırır. Yalnızca sahte %3$s uygulamasında \"%2$d\" yazmak onu geri yükleyebilir.</string>
 
     <string name="hiding_calculator">Hesap Makinesi</string>
-    <string name="hiding_dialog_title">"%s Ögesini Şimdi Gizle "</string>
+    <string name="hiding_dialog_title">%s Ögesini Şimdi Gizle</string>
     <string name="hiding_dialog_message">%1$s ögesini başlatıcıdan kaldırmak istediğinize emin misiniz? Yalnızca sahte %3$s uygulamasında \"%2$d\" yazmak onu geri yükleyebilir.</string>
     <string name="hiding_dialog_warning">Uyarı: Ana ekrandaki her bir uygulama kısayolu da kaldırılacak ve elle yeniden eklenmesi gerekecek.</string>
-    <string name="hide_on_long_search_press_title">"Arama düğmesiyle gizle "</string>
+    <string name="hide_on_long_search_press_title">Arama düğmesiyle gizle</string>
     <string name="hide_on_long_search_press_summary">Arama düğmesine uzun basmak uygulamayı gizler</string>
 
     </resources>
