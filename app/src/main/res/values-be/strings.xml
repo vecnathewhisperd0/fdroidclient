@@ -575,4 +575,14 @@
 
     <string name="panic_exit_title">Выйсці з праграмы</string>
     <string name="panic_hide_warning_title">Запомніць як аднаўляць</string>
+    <string name="sort_search">Сартаваць знойдзенае</string>
+
+    <string name="panic_hide_warning_message">У выпадку панікі, гэта выдаліць %1$s з панэлі пуску. Толькі ўвод «%2$d» у фальшывым прыкладанні %3$s можа аднавіць гэта.</string>
+
+    <string name="hiding_calculator">Калькулятар</string>
+    <string name="hiding_dialog_title">Схаваць %s зараз жа</string>
+    <string name="hiding_dialog_message">Вы ўпэўненыя, што хочаце выдаліць %1$s з панэлі пуску? Толькі ўвод «%2$d» у фальшывым прыкладанні %3$s можа аднавіль гэта.</string>
+    <string name="hiding_dialog_warning">Папярэджанне: кожны ярлык прыкладання на галоўным экране таксама будзе выдалены, і спатрэбіцца паўторна дадаць яго ўручную.</string>
+    <string name="hide_on_long_search_press_title">Схаваць з кнопкай пошуку</string>
+    <string name="hide_on_long_search_press_summary">Працяглы націск кнопкі пошуку схавае прыкладанне</string>
 </resources>
