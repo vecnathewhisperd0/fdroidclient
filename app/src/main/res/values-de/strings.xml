@@ -9,7 +9,7 @@
     <string name="updates">Aktualisierungen</string>
     <string name="other">Andere</string>
     <string name="update_interval">Automatisches Aktualisierungsintervall</string>
-    <string name="update_interval_zero">Keine automatischen Aktualisierungen der Anwendungsliste</string>
+    <string name="update_interval_zero">Anwendungsliste nicht automatisch aktualisieren</string>
     <string name="automatic_scan_wifi">Nur über WLAN</string>
     <string name="automatic_scan_wifi_on">Anwendungsliste nur über gebührenfreie Netze wie WLAN automatisch
         aktualisieren
@@ -340,7 +340,7 @@
     <string name="useTorSummary">Herunterladen über Tor erzwingen, zum besseren Schutz der Privatsphäre. Orbot wird benötigt</string>
     <string name="swap_stopping_wifi">WLAN wird angehalten …</string>
     <string name="update_auto_download">Automatisch abrufen</string>
-    <string name="update_auto_download_summary">Aktualisierungen werden automatisch heruntergeladen und Sie werden benachrichtigt, sie zu installieren.</string>
+    <string name="update_auto_download_summary">Aktualisierungen werden automatisch heruntergeladen und Sie werden benachrichtigt, um sie zu installieren.</string>
     <string name="download_pending">Auf den Start der Übertragung wird gewartet …</string>
 
     <string name="keep_hour">1 Stunde</string>
