@@ -532,4 +532,7 @@
     <string name="hide_on_long_search_press_title">Verbergen met zoekknop</string>
     <string name="hide_on_long_search_press_summary">De zoekknop lang ingedrukt houden zal de app verbergen</string>
     <string name="sort_search">Zoekresultaten sorteren</string>
+
+    <string name="menu_liberapay">Liberapay</string>
+
 </resources>
