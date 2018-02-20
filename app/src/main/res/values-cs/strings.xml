@@ -555,4 +555,7 @@
     <string name="hide_on_long_search_press_title">Skrýt tlačítko vyhledávání</string>
     <string name="hide_on_long_search_press_summary">Dlouhý stisk tlačítka hledání skryje aplikaci</string>
     <string name="sort_search">Setřídit hledání</string>
+
+    <string name="menu_liberapay">Liberapay</string>
+
 </resources>
