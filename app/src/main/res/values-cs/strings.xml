@@ -315,7 +315,7 @@
     <string name="repo_provider">Repozitář: %s</string>
 
     <string name="useTor">Použít Tor</string>
-    <string name="useTorSummary">Vynutit stahování přes Tor pro zvýšení bezpečnosti. Vyžaduje Orbot</string>
+    <string name="useTorSummary">Vynutit stahování přes Tor pro zvýšené soukromí. Vyžaduje aplikaci Orbot</string>
     <string name="system_install_not_supported">Instalace rozšíření oprávnění F-Droidu není momentálně podporována na
         Androidu 5.1 nebo pozdějším.
     </string>
