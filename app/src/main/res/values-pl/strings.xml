@@ -562,4 +562,7 @@
     <string name="hide_on_long_search_press_title">Ukryj przyciskiem szukania</string>
     <string name="hide_on_long_search_press_summary">Przytrzymanie przycisku szukania ukryje aplikację</string>
     <string name="sort_search">Sortuj wyszukiwanie</string>
+
+    <string name="menu_liberapay">Liberapay</string>
+
 </resources>
