@@ -477,4 +477,18 @@
     <string name="panic_hide_title">%s 숨기기</string>
     <string name="panic_hide_summary">앱 자체가 숨을 것입니다</string>
 
+    <string name="sort_search">검색 정렬</string>
+
+    <string name="menu_liberapay">Liberapay</string>
+
+    <string name="panic_hide_warning_title">복원 방법을 기억하기</string>
+    <string name="panic_hide_warning_message">패닉 이벤트에서, 이 동작은 %1$s을(를) 런처에서 제거할 것입니다. \"%2$d\"을(를) 입력하는 것만이 가짜 %3$s 앱을 그것으로 복원할 수 있습니다.</string>
+
+    <string name="hiding_calculator">계산기</string>
+    <string name="hiding_dialog_title">이제 %s 숨기기</string>
+    <string name="hiding_dialog_message">런처에서 %1$s을(를) 제거하기를 원합니까? \"%2$d\"을(를) 입력하는 것만이 가짜 %3$s 앱을 그것으로 복원할 수 있습니다.</string>
+    <string name="hiding_dialog_warning">경고: 홈 화면의 어떠한 앱 바로 가기도 또한 제거될 것이므로 수동으로 다시 추가할 필요가 있습니다.</string>
+    <string name="hide_on_long_search_press_title">검색 버튼으로 숨기기</string>
+    <string name="hide_on_long_search_press_summary">검색 버튼을 길게 누르면 앱을 숨길 것입니다</string>
+
 </resources>
