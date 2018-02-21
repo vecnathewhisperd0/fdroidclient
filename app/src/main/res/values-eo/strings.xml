@@ -533,4 +533,7 @@
     <string name="hide_on_long_search_press_title">Kaŝi per serĉ-butono</string>
     <string name="hide_on_long_search_press_summary">Longe premu la serĉ-butonon por kaŝi la aplikaĵon</string>
     <string name="sort_search">Ordigi serĉon</string>
+
+    <string name="menu_liberapay">Liberapay</string>
+
 </resources>
