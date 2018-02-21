@@ -585,4 +585,7 @@
     <string name="hiding_dialog_warning">Папярэджанне: кожны ярлык прыкладання на галоўным экране таксама будзе выдалены, і спатрэбіцца паўторна дадаць яго ўручную.</string>
     <string name="hide_on_long_search_press_title">Схаваць з кнопкай пошуку</string>
     <string name="hide_on_long_search_press_summary">Працяглы націск кнопкі пошуку схавае прыкладанне</string>
+
+    <string name="menu_liberapay">Liberapay</string>
+
 </resources>
