@@ -106,7 +106,7 @@
     <string name="repo_disabled_notification">已禁用 %1$s。
 \n
 \n需重新启用该资源库才能安装其中的应用。</string>
-    <string name="minsdk_or_later">%s 及以上</string>
+    <string name="minsdk_or_later">%s 及更新</string>
     <string name="up_to_maxsdk">最大 %s</string>
     <string name="minsdk_up_to_maxsdk">%1$s 到 %2$s</string>
     <string name="not_on_same_wifi">您的装置与刚添加的本地软件库不在同一个Wi-Fi网络上！请尝试加入该网络：%s</string>
@@ -479,4 +479,20 @@
     <string name="panic_app_setting_none">无</string>
     <string name="panic_hide_title">隐藏 %s</string>
     <string name="panic_hide_summary">应用程序将隐藏自己</string>
+    <string name="sort_search">搜索排序</string>
+
+    <string name="menu_liberapay">Liberapay</string>
+
+    <string name="panic_app_dialog_title">确认紧急应用</string>
+    <string name="panic_destructive_actions">危险动作</string>
+    <string name="panic_hide_warning_title">请记住如何还原</string>
+    <string name="panic_hide_warning_message">在紧急情况下，这从启动器中移除 %1$s。只有在假的 %3$s 应用中输入“%2$s”才能恢复它。</string>
+
+    <string name="hiding_calculator">计算器</string>
+    <string name="hiding_dialog_title">立即隐藏 %s</string>
+    <string name="hiding_dialog_message">确定要从启动器中移除 %1$s 吗？只有在假的 %3$s 应用中输入“%2$s”才能恢复它。</string>
+    <string name="hiding_dialog_warning">警告：主屏幕上的任何应用捷径也将被移除，需要手动重新添加。</string>
+    <string name="hide_on_long_search_press_title">用搜索按钮隐藏</string>
+    <string name="hide_on_long_search_press_summary">长按搜索按钮将隐藏此应用</string>
+
 </resources>
