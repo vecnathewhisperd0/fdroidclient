@@ -515,4 +515,7 @@
     <string name="hide_on_long_search_press_title">پنهان کردن با دکمهٔ جست‌وجو</string>
     <string name="hide_on_long_search_press_summary">لمس طولانی دکمهٔ جست‌وجو، کاره را پنهان می‌کند</string>
     <string name="sort_search">چینش جست‌وجو</string>
+
+    <string name="menu_liberapay">لیبراپی</string>
+
 </resources>
