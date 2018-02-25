@@ -43,7 +43,7 @@
     <string name="antinonfreeadlist">این برنامه، افزونه‌های غیر آزاد را تبلیغ می‌کند</string>
     <string name="antinonfreenetlist">این برنامه، خدمات شبکه‌های غیر آزاد را تبلیغ می‌کند</string>
     <string name="antinonfreedeplist">این برنامه، به دیگر کاره‌های غیر آزاد وابسته است</string>
-    <string name="antiupstreamnonfreelist">کد مبدأ بالادستی کاملاً رایگان نیست</string>
+    <string name="antiupstreamnonfreelist">کد مبدأ بالادستی کاملاً آزاد نیست</string>
     <string name="display">نمایش</string>
     <string name="expert_on">نمایش اطّلاعات اضافی و فعّال کردن تنظیمات اضافی</string>
     <string name="search_hint">جست‌وجوی برنامه‌ها</string>
@@ -427,39 +427,39 @@
     <string name="tts_category_name">دستهٔ %1$s</string>
 
     <plurals name="tts_view_all_in_category">
-	<item quantity="one">نمایش %1$d برنامه ی دستهٔ %2$s</item>
-	<item quantity="other">نمایش همه ی %1$d برنامه های دستهٔ %2$s</item>
+	<item quantity="one">نمایش %1$d برنامه در دستهٔ %2$s</item>
+	<item quantity="other">نمایش تمام %1$d برنامه از دستهٔ %2$s</item>
 </plurals>
 
     <string name="details_last_updated_today">امروز به‌روز شده</string>
     <plurals name="details_last_update_days">
-	<item quantity="one">%1$sd روز پیش به‌روز شده</item>
-	<item quantity="other">%1$sd روز پیش به‌روز شده‌</item>
+	<item quantity="one">%1$d روز پیش به‌روز شده</item>
+	<item quantity="other">%1$d روز پیش به‌روز شده‌</item>
 </plurals>
 <string name="menu_license">پروانه: %s</string>
     <plurals name="notification_summary_more">
-	<item quantity="one">+%1$d بیشتر…</item>
-	<item quantity="other">+%1$d بیشتر…</item>
+	<item quantity="one">+%1$d بیش‌تر…</item>
+	<item quantity="other">+%1$d بیش‌تر…</item>
 </plurals>
     <plurals name="notification_summary_updates">
-	<item quantity="one">%1$d بروزرسانی</item>
-	<item quantity="other">%1$d بروزرسانی</item>
+	<item quantity="one">%1$d به‌روز رسانی</item>
+	<item quantity="other">%1$d به‌روز رسانی</item>
 </plurals>
     <plurals name="notification_summary_installed">
-	<item quantity="one">%1$d برنامه نصب شد</item>
-	<item quantity="other">%1$d برنامه نصب شدند</item>
+	<item quantity="one">%1$d کاره نصب شد</item>
+	<item quantity="other">%1$d کاره نصب شدند</item>
 </plurals>
     <plurals name="details_last_update_weeks">
-	<item quantity="one">%1$sd هفته پیش بروزرسانی شده است</item>
-	<item quantity="other">%1$sd هفته پیش بروزرسانی شده است</item>
+	<item quantity="one">%1$d هفته پیش به‌روز شده</item>
+	<item quantity="other">%1$d هفته پیش به‌روز شده</item>
 </plurals>
     <plurals name="details_last_update_months">
-	<item quantity="one">%1$sd ماه پیش بروزرسانی شده است</item>
-	<item quantity="other">%1$sd ماه پیش بروزرسانی شده است</item>
+	<item quantity="one">%1$d ماه پیش به‌روز شده</item>
+	<item quantity="other">%1$d ماه پیش به‌روز شده</item>
 </plurals>
     <plurals name="details_last_update_years">
-	<item quantity="one">%1$sd سال پیش بروزرسانی شده است</item>
-	<item quantity="other">%1$sd سال پیش بروزرسانی شده است</item>
+	<item quantity="one">%1$d سال پیش به‌روز شده</item>
+	<item quantity="other">%1$d سال پیش به‌روز شده</item>
 </plurals>
 <string name="by_author_format">توسط %s</string>
     <string name="download_404">فایل درخواستی یافت نشد.</string>
