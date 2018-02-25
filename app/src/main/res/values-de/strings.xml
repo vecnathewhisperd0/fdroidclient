@@ -540,14 +540,16 @@
     <string name="panic_hide_summary">App wird sich selbst verstecken</string>
 
     <string name="hiding_calculator">Rechner</string>
-    <string name="hiding_dialog_title">Verstecke %s jetzt</string>
+    <string name="hiding_dialog_title">%s jetzt verstecken</string>
     <string name="hiding_dialog_message">Wirklich %1$s vom Starter entfernen? Eingabe von \"%2$d\" in die falsche %3$s App kann diese wiederherstellen.</string>
-    <string name="hide_on_long_search_press_title">Verstecke mit Such-Schaltfläche</string>
+    <string name="hide_on_long_search_press_title">Mit Such-Schaltfläche verstecken</string>
     <string name="hide_on_long_search_press_summary">Langes Drücken der Such-Schaltfläche versteckt die App</string>
 
     <string name="panic_hide_warning_message">In einem Krisenereignis werden %1$s aus dem Programmstarter entfernt. Nur die Eingabe von „%2$d” in der gefälschten %3$s-App kann sie wiederherstellen.</string>
 
     <string name="hiding_dialog_warning">Warnhinweis. Alle Verknüpfungen auf dem Startbildschirm werden ebenfalls entfernt und müssen manuell hinzugefügt werden.</string>
     <string name="sort_search">Suchergebnis sortieren</string>
+
+    <string name="menu_liberapay">Liberapay</string>
 
 </resources>
