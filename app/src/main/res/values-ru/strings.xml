@@ -81,7 +81,7 @@
     <string name="search_hint">Искать приложения</string>
     <string name="appcompatibility">Совместимость приложений</string>
     <string name="show_incompat_versions">Несовместимые версии</string>
-    <string name="show_incompat_versions_on">Показать версии программ, несовместимые с устройством</string>
+    <string name="show_incompat_versions_on">Показать версии приложений, несовместимые с устройством</string>
     <string name="rooted">Суперпользователь</string>
     <string name="rooted_on">Не выделять серым цветом приложения, требующие привилегии суперпользователя</string>
     <string name="force_touch_apps">Сенсорный экран</string>
