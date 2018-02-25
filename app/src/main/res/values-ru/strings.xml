@@ -545,4 +545,6 @@
     <string name="preventScreenshots_title">Предотвратить Скриншоты</string>
     <string name="preventScreenshots_summary">Блокировать скриншоты от последних приложений</string>
 
+    <string name="sort_search">Сортировка поиска</string>
+
 </resources>
