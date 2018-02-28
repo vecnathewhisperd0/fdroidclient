@@ -32,7 +32,7 @@
     <string name="app_inst_known_source">Installée (depuis %s)</string>
     <string name="app_inst_unknown_source">Installée (depuis une source inconnue)</string>
     <string name="added_on">Ajoutée le %s</string>
-    <string name="ok">OK</string>
+    <string name="ok">Ok</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
     <string name="repo_add_title">Ajouter un nouveau dépôt</string>
@@ -545,17 +545,17 @@
     <string name="panic_app_dialog_message">Souhaitez-vous vraiment autoriser %1$s à déclencher les actions destructrices du bouton d\'urgence ?</string>
     <string name="panic_destructive_actions">Actions destructrices</string>
     <string name="panic_hide_warning_title">Mémoriser comment restaurer</string>
-    <string name="panic_hide_warning_message">En cas d\'urgence, cela supprimera %1$s du lanceur. Vous ne pouvez le restaurer qu\'en tapant « %2$d » dans la fausse application %3$s.</string>
+    <string name="panic_hide_warning_message">En cas de nécessité absolue, cela supprimera %1$s du lanceur. Vous ne pourrez restaurer cette application qu\'en tapant « %2$d » dans la fausse application %3$s.</string>
 
     <string name="hiding_calculator">Calculatrice</string>
     <string name="hiding_dialog_title">Masquer %s maintenant</string>
-    <string name="hiding_dialog_message">Êtes-vous sûr de vouloir supprimer %1$s du lanceur. Vous ne pouvez le restaurer qu\'en tapant « %2$d » dans la fausse application %3$s.</string>
+    <string name="hiding_dialog_message">Êtes-vous sûr de vouloir supprimer %1$s du lanceur ? Vous ne pourrez restaurer cette application qu\'en tapant « %2$d » dans la fausse application %3$s.</string>
     <string name="hiding_dialog_warning">Attention : les raccourcis d\'applications sur l\'écran d\'accueil seront aussi supprimés et devront être rajoutés manuellement.</string>
     <string name="sort_search">Trier la recherche</string>
 
     <string name="menu_liberapay">Liberapay</string>
 
-    <string name="hide_on_long_search_press_title">Cacher avec le bouton de recherche</string>
+    <string name="hide_on_long_search_press_title">Cacher à l\'aide du bouton de recherche</string>
     <string name="hide_on_long_search_press_summary">Appuyez longuement sur le bouton de recherche pour cacher l\'application</string>
 
 </resources>
