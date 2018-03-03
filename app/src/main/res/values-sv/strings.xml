@@ -517,4 +517,18 @@
     <string name="preventScreenshots_summary">Förhindrar skärmdumpar och döljer appinnehåll från senaste skärmar</string>
 
     <string name="panic_app_setting_title">Panikknappsapp</string>
+    <string name="sort_search">Sortera sökning</string>
+
+    <string name="menu_liberapay">Liberapay</string>
+
+    <string name="panic_hide_warning_title">Kom ihåg hur du återställer</string>
+    <string name="panic_hide_warning_message">Under en panikhändelse kommer detta ta bort %1$s från startaren. Att bara skriva in \"%2$d\" i %3$ fejk-app kan återställa det.</string>
+
+    <string name="hiding_calculator">Kalkylator</string>
+    <string name="hiding_dialog_title">Göm %s Nu</string>
+    <string name="hiding_dialog_message">Är du säker på att du vill ta bort %1$s från startaren? Att bara skriva in \"%2$d\" i %3$s fejk-app kan återställa det.</string>
+    <string name="hiding_dialog_warning">Varning: Alla app-genvägar på hemskärmen kommer också att tas bort och kommer att behöva läggas till igen manuellt.</string>
+    <string name="hide_on_long_search_press_title">Göm med sökknappen</string>
+    <string name="hide_on_long_search_press_summary">Att trycka och hålla in sökknappen kommer att gömma appen</string>
+
 </resources>
