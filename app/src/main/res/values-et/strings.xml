@@ -544,4 +544,7 @@
     <string name="hiding_dialog_warning">Hoiatus: avakuvalt eemaldatakse ka kõigi rakenduste otseteed ja need on vaja käsitsi uuesti lisada.</string>
     <string name="hide_on_long_search_press_title">Peida otsingunupuga</string>
     <string name="sort_search">Otsingu sortimine</string>
+
+    <string name="menu_liberapay">Liberapay</string>
+
 </resources>
