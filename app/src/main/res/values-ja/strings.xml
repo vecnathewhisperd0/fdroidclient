@@ -366,7 +366,7 @@
 
 
     <plurals name="button_view_all_apps_in_category">
-	<item quantity="other">%d個のアプリをすべて表示</item>
+        <item quantity="other">%d個のアプリをすべて表示</item>
 </plurals>
 
     <string name="app_recommended_version_installed">バージョン%1$s(推奨)</string>
@@ -383,7 +383,7 @@
     <string name="tts_category_name">カテゴリ%1$s</string>
 
     <plurals name="tts_view_all_in_category">
-	<item quantity="other">%2$sカテゴリの%1$d個のアプリをすべて表示</item>
+        <item quantity="other">%2$sカテゴリの%1$d個のアプリをすべて表示</item>
 </plurals>
     <string name="app__install_downloaded_update">更新</string>
 
@@ -396,7 +396,7 @@
     <string name="updates__show_updateable_apps">アプリを表示</string>
 
     <plurals name="updates__download_updates_for_apps">
-	<item quantity="other">%1$d個のアプリの更新をダウンロードします。</item>
+        <item quantity="other">%1$d個のアプリの更新をダウンロードします。</item>
 </plurals>
 
     <string name="details_new_in_version">バージョン%sの新機能</string>
@@ -404,7 +404,7 @@
     <string name="antifeatureswarning">このアプリは好ましくない機能を含んでいるかもしれません。</string>
     <string name="antifeatures">対策機能</string>
     <plurals name="details_last_update_days">
-	<item quantity="other">%1$d日前に更新しました</item>
+        <item quantity="other">%1$d日前に更新しました</item>
 </plurals>
     <string name="details_last_updated_today">今日更新</string>
     <string name="app_list__name__successfully_installed">%1$sをインストールしました</string>
@@ -423,22 +423,22 @@
     <string name="app__tts__downloading_progress">ダウンロード中、%1$d%%完了</string>
     <string name="menu_license">ライセンス: %s</string>
     <plurals name="notification_summary_more">
-	<item quantity="other">さらに+%1$d</item>
+        <item quantity="other">さらに+%1$d</item>
 </plurals>
     <plurals name="notification_summary_updates">
-	<item quantity="other">%1$d個の更新</item>
+        <item quantity="other">%1$d個の更新</item>
 </plurals>
     <plurals name="notification_summary_installed">
-	<item quantity="other">%1$d個のインストール済みアプリ</item>
+        <item quantity="other">%1$d個のインストール済みアプリ</item>
 </plurals>
     <plurals name="details_last_update_weeks">
-	<item quantity="other">%1$d週間前に更新</item>
+        <item quantity="other">%1$d週間前に更新</item>
 </plurals>
     <plurals name="details_last_update_months">
-	<item quantity="other">%1$dヶ月前に更新</item>
+        <item quantity="other">%1$dヶ月前に更新</item>
 </plurals>
     <plurals name="details_last_update_years">
-	<item quantity="other">%1$d年前に更新</item>
+        <item quantity="other">%1$d年前に更新</item>
 </plurals>
 <string name="by_author_format">開発者: %s</string>
     <string name="download_404">要求されたファイルが見つかりませんでした。</string>

@@ -419,8 +419,8 @@
     <string name="tts_category_name">Kategorie %1$s</string>
 
     <plurals name="tts_view_all_in_category">
-	<item quantity="one">%1$d Anwendung in der Kategorie %2$s ansehen</item>
-	<item quantity="other">Alle %1$s Anwendungen aus der Kategorie %2$s ansehen</item>
+        <item quantity="one">%1$d Anwendung in der Kategorie %2$s ansehen</item>
+        <item quantity="other">Alle %1$s Anwendungen aus der Kategorie %2$s ansehen</item>
 </plurals>
     <string name="app__install_downloaded_update">Aktualisieren</string>
 
@@ -443,12 +443,12 @@
     <string name="antifeatures">Bedenkliche Eigenschaften</string>
     <string name="details_last_updated_today">Heute aktualisiert</string>
     <plurals name="details_last_update_days">
-	<item quantity="one">Vor %1$d Tag aktualisiert</item>
-	<item quantity="other">Vor %1$d Tagen aktualisiert</item>
+        <item quantity="one">Vor %1$d Tag aktualisiert</item>
+        <item quantity="other">Vor %1$d Tagen aktualisiert</item>
 </plurals>
     <plurals name="button_view_all_apps_in_category">
-	<item quantity="one">%d ansehen</item>
-	<item quantity="other">Alle %d ansehen</item>
+        <item quantity="one">%d ansehen</item>
+        <item quantity="other">Alle %d ansehen</item>
 </plurals>
 
     <string name="app_list__name__successfully_installed">%1$s installiert</string>
@@ -471,28 +471,28 @@
     <string name="app__tts__downloading_progress">wird heruntergeladen, %1$d%% vervollständigt</string>
     <string name="menu_license">Lizenz: %s</string>
     <plurals name="notification_summary_more">
-	<item quantity="one">+%1$d weitere …</item>
-	<item quantity="other">+%1$d weitere …</item>
+        <item quantity="one">+%1$d weitere …</item>
+        <item quantity="other">+%1$d weitere …</item>
 </plurals>
     <plurals name="notification_summary_updates">
-	<item quantity="one">%1$d Aktualisierung</item>
-	<item quantity="other">%1$d Aktualisierungen</item>
+        <item quantity="one">%1$d Aktualisierung</item>
+        <item quantity="other">%1$d Aktualisierungen</item>
 </plurals>
     <plurals name="notification_summary_installed">
-	<item quantity="one">%1$d App installiert</item>
-	<item quantity="other">%1$d Apps installiert</item>
+        <item quantity="one">%1$d App installiert</item>
+        <item quantity="other">%1$d Apps installiert</item>
 </plurals>
     <plurals name="details_last_update_weeks">
-	<item quantity="one">Vor %1$d Woche aktualisiert</item>
-	<item quantity="other">Vor %1$d Wochen aktualisiert</item>
+        <item quantity="one">Vor %1$d Woche aktualisiert</item>
+        <item quantity="other">Vor %1$d Wochen aktualisiert</item>
 </plurals>
     <plurals name="details_last_update_months">
-	<item quantity="one">Vor %1$d Monat aktualisiert</item>
-	<item quantity="other">Vor %1$d Monaten aktualisiert</item>
+        <item quantity="one">Vor %1$d Monat aktualisiert</item>
+        <item quantity="other">Vor %1$d Monaten aktualisiert</item>
 </plurals>
     <plurals name="details_last_update_years">
-	<item quantity="one">Vor %1$d Jahr aktualisiert</item>
-	<item quantity="other">Vor %1$d Jahren aktualisiert</item>
+        <item quantity="one">Vor %1$d Jahr aktualisiert</item>
+        <item quantity="other">Vor %1$d Jahren aktualisiert</item>
 </plurals>
 <string name="by_author_format">von %s</string>
     <string name="download_404">Die angeforderte Datei wurde nicht gefunden.</string>

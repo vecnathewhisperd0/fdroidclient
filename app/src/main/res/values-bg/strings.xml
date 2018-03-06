@@ -425,12 +425,12 @@
     <string name="notification_content_single_installing">Инсталиране \"%1$s\"…</string>
     <string name="notification_content_single_installed">Успешна инсталация</string>
     <plurals name="notification_summary_updates">
-	<item quantity="one">%1$d Актуализация</item>
-	<item quantity="other">%1$d Актуализации</item>
+        <item quantity="one">%1$d Актуализация</item>
+        <item quantity="other">%1$d Актуализации</item>
 </plurals>
     <plurals name="notification_summary_installed">
-	<item quantity="one">%1$d Инсталирано приложение</item>
-	<item quantity="other">%1$d Инсталирани приложения</item>
+        <item quantity="one">%1$d Инсталирано приложение</item>
+        <item quantity="other">%1$d Инсталирани приложения</item>
 </plurals>
     <string name="notification_title_summary_update_available">Налична актуализация</string>
     <string name="notification_title_summary_downloading">Сваляне…</string>
@@ -442,26 +442,26 @@
     <string name="tts_category_name">Категория %1$s</string>
 
     <plurals name="tts_view_all_in_category">
-	<item quantity="one">Покажи %1$d  приложение в %2$s категория</item>
-	<item quantity="other">Покажи всички %1$d  приложения от %2$s категория</item>
+        <item quantity="one">Покажи %1$d  приложение в %2$s категория</item>
+        <item quantity="other">Покажи всички %1$d  приложения от %2$s категория</item>
 </plurals>
 
     <string name="details_last_updated_today">Актуализирано днес</string>
     <plurals name="details_last_update_days">
-	<item quantity="one">Актуализирано преди %1$d ден</item>
-	<item quantity="other">Актуализирано преди %1$d дни</item>
+        <item quantity="one">Актуализирано преди %1$d ден</item>
+        <item quantity="other">Актуализирано преди %1$d дни</item>
 </plurals>
     <plurals name="details_last_update_weeks">
-	<item quantity="one">Актуализирано преди %1$d седмица</item>
-	<item quantity="other">Актуализирано преди %1$d седмици</item>
+        <item quantity="one">Актуализирано преди %1$d седмица</item>
+        <item quantity="other">Актуализирано преди %1$d седмици</item>
 </plurals>
     <plurals name="details_last_update_months">
-	<item quantity="one">Актуализирано преди %1$d месец</item>
-	<item quantity="other">Актуализирано преди %1$d месеца</item>
+        <item quantity="one">Актуализирано преди %1$d месец</item>
+        <item quantity="other">Актуализирано преди %1$d месеца</item>
 </plurals>
     <plurals name="details_last_update_years">
-	<item quantity="one">Актуализирано преди %1$d година</item>
-	<item quantity="other">Актуализирано преди %1$d години</item>
+        <item quantity="one">Актуализирано преди %1$d година</item>
+        <item quantity="other">Актуализирано преди %1$d години</item>
 </plurals>
 <string name="notification_action_update">Актуализация</string>
     <string name="notification_action_cancel">Отказ</string>
@@ -471,8 +471,8 @@
     <string name="notification_title_single_update_available">Налично обновление</string>
     <string name="notification_title_summary_install_error">Инсталирането е неуспешно</string>
     <plurals name="button_view_all_apps_in_category">
-	<item quantity="one">Покажи %d</item>
-	<item quantity="other">Покажи всички %d</item>
+        <item quantity="one">Покажи %d</item>
+        <item quantity="other">Покажи всички %d</item>
 </plurals>
 
     <string name="nearby_splash__download_apps_from_people_nearby">Нямате връзка с Интернет? Вземете приложения от хората около вас!</string>
@@ -487,8 +487,8 @@
     <string name="uninstalling">Деинсталиране…</string>
 
     <plurals name="notification_summary_more">
-	<item quantity="one">+%1$d  още…</item>
-	<item quantity="other">+%1$d  повече…</item>
+        <item quantity="one">+%1$d  още…</item>
+        <item quantity="other">+%1$d  повече…</item>
 </plurals>
     <string name="force_old_index">Принудителен стар формат на индексиране</string>
     <string name="app_details__incompatible_mismatched_signature">Различен подпис от инсталираната версия</string>

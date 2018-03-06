@@ -379,8 +379,8 @@
 
 
     <plurals name="button_view_all_apps_in_category">
-	<item quantity="one">Visa %d</item>
-	<item quantity="other">Visa alla %d</item>
+        <item quantity="one">Visa %d</item>
+        <item quantity="other">Visa alla %d</item>
 </plurals>
 
     <string name="notification_title_single_update_available">Uppdatering tillgänglig</string>
@@ -406,8 +406,8 @@
     <string name="tts_category_name">Kategori %1$s</string>
 
     <plurals name="tts_view_all_in_category">
-	<item quantity="one">Visa %1$d app i %2$s kategorin</item>
-	<item quantity="other">Visa alla %1$d appar från %2$s kategorin</item>
+        <item quantity="one">Visa %1$d app i %2$s kategorin</item>
+        <item quantity="other">Visa alla %1$d appar från %2$s kategorin</item>
 </plurals>
     <string name="app__install_downloaded_update">Uppdatera</string>
 
@@ -429,8 +429,8 @@
     <string name="antifeatureswarning">Denna app har funktioner som du kanske inte gillar.</string>
     <string name="antifeatures">Anti-funktioner</string>
     <plurals name="details_last_update_days">
-	<item quantity="one">Uppdaterad för %1$d dag sedan</item>
-	<item quantity="other">Uppdaterad för %1$d dagar sedan</item>
+        <item quantity="one">Uppdaterad för %1$d dag sedan</item>
+        <item quantity="other">Uppdaterad för %1$d dagar sedan</item>
 </plurals>
     <string name="app_list__name__successfully_installed">%1$s installerad</string>
     <string name="nearby_splash__download_apps_from_people_nearby">Inget Internet? Få appar från personer nära dig!</string>
@@ -449,28 +449,28 @@
     <string name="menu_license">Licens: %s</string>
     <string name="app__tts__downloading_progress">Hämtar, %1$d%% färdigt</string>
     <plurals name="notification_summary_more">
-	<item quantity="one">+%1$d till…</item>
-	<item quantity="other">+%1$d till…</item>
+        <item quantity="one">+%1$d till…</item>
+        <item quantity="other">+%1$d till…</item>
 </plurals>
     <plurals name="notification_summary_updates">
-	<item quantity="one">%1$d uppdatering</item>
-	<item quantity="other">%1$d uppdateringar</item>
+        <item quantity="one">%1$d uppdatering</item>
+        <item quantity="other">%1$d uppdateringar</item>
 </plurals>
     <plurals name="notification_summary_installed">
-	<item quantity="one">%1$d app installerad</item>
-	<item quantity="other">%1$d appar installerade</item>
+        <item quantity="one">%1$d app installerad</item>
+        <item quantity="other">%1$d appar installerade</item>
 </plurals>
     <plurals name="details_last_update_weeks">
-	<item quantity="one">Uppdaterad för %1$d vecka sedan</item>
-	<item quantity="other">Uppdaterad för %1$d veckor sedan</item>
+        <item quantity="one">Uppdaterad för %1$d vecka sedan</item>
+        <item quantity="other">Uppdaterad för %1$d veckor sedan</item>
 </plurals>
     <plurals name="details_last_update_months">
-	<item quantity="one">Uppdaterad för %1$d månad sedan</item>
-	<item quantity="other">Uppdaterad för %1$d månader sedan</item>
+        <item quantity="one">Uppdaterad för %1$d månad sedan</item>
+        <item quantity="other">Uppdaterad för %1$d månader sedan</item>
 </plurals>
     <plurals name="details_last_update_years">
-	<item quantity="one">Uppdaterad för %1$d år sedan</item>
-	<item quantity="other">Uppdaterad för %1$d år sedan</item>
+        <item quantity="one">Uppdaterad för %1$d år sedan</item>
+        <item quantity="other">Uppdaterad för %1$d år sedan</item>
 </plurals>
 <string name="by_author_format">av %s</string>
     <string name="download_404">Den begärda filen hittades inte.</string>

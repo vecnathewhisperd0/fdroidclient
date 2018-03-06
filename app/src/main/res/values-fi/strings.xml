@@ -405,8 +405,8 @@
     <string name="updates__show_updateable_apps">Näytä sovellukset</string>
 
     <plurals name="updates__download_updates_for_apps">
-	<item quantity="one">Lataa päivitys sovellukselle %1$d.</item>
-	<item quantity="other">Lataa päivitykset sovelluksille %1$d.</item>
+        <item quantity="one">Lataa päivitys sovellukselle %1$d.</item>
+        <item quantity="other">Lataa päivitykset sovelluksille %1$d.</item>
 </plurals>
 
     <string name="clear_search">Tyhjennä haku</string>
@@ -451,8 +451,8 @@
 
     <string name="details_last_updated_today">Päivitetty tänään</string>
     <plurals name="details_last_update_days">
-	<item quantity="one">Päivitetty %1$s päivä sitten</item>
-	<item quantity="other">Päivitetty %1$s päivää sitten</item>
+        <item quantity="one">Päivitetty %1$s päivä sitten</item>
+        <item quantity="other">Päivitetty %1$s päivää sitten</item>
 </plurals>
 <string name="installed_app__updates_ignored">Päivitykset ohitetaan</string>
     <string name="app_details_donate_prompt_unknown_author">Osta sovelluksen %1$s kehittäjille kahvi!</string>
@@ -466,8 +466,8 @@
 \n "</string>
 
     <plurals name="button_view_all_apps_in_category">
-	<item quantity="one">Näytä kaikki %d</item>
-	<item quantity="other">Näytä kaikki %d</item>
+        <item quantity="one">Näytä kaikki %d</item>
+        <item quantity="other">Näytä kaikki %d</item>
 </plurals>
 
     <string name="nearby_splash__both_parties_need_fdroid">Molemmilla osapuolilla tulee olla %1$s ominaisuuden käyttämiseksi.</string>
@@ -476,8 +476,8 @@
 
     <string name="antifeatures">Anti-ominaisuudet</string>
     <plurals name="tts_view_all_in_category">
-	<item quantity="one">Näytä sovellus %1$d kategoriassa %2$s</item>
-	<item quantity="other">Näytä kaikki %1$d -sovellukset kategoriasta %2$s</item>
+        <item quantity="one">Näytä sovellus %1$d kategoriassa %2$s</item>
+        <item quantity="other">Näytä kaikki %1$d -sovellukset kategoriasta %2$s</item>
 </plurals>
 
     </resources>

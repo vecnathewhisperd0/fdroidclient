@@ -351,14 +351,14 @@
     </plurals>
     <string name="details_last_updated_today">Actualizate azi</string>
     <plurals name="details_last_update_days">
-	<item quantity="one">Actualizate azi</item>
-	<item quantity="few">Actualizate acum %1$d zile</item>
-	<item quantity="other">Actualizate acum %1$d de zile</item>
+        <item quantity="one">Actualizate azi</item>
+        <item quantity="few">Actualizate acum %1$d zile</item>
+        <item quantity="other">Actualizate acum %1$d de zile</item>
 </plurals>
     <plurals name="button_view_all_apps_in_category">
-	<item quantity="one">Vezi %d</item>
-	<item quantity="few">Toate cele %d</item>
-	<item quantity="other">Toate cele %d</item>
+        <item quantity="one">Vezi %d</item>
+        <item quantity="few">Toate cele %d</item>
+        <item quantity="other">Toate cele %d</item>
 </plurals>
 
     <string name="antifeatures">Caracteristici negative</string>
@@ -414,34 +414,34 @@
     <string name="nearby_splash__both_parties_need_fdroid">Ambele persoane au nevoie de %1$s pentru a putea folosi această opțiune.</string>
 
     <plurals name="notification_summary_installed">
-	<item quantity="one">%1$d aplicație instalată</item>
-	<item quantity="few">%1$d aplicații instalate</item>
-	<item quantity="other">%1$d de aplicații instalate</item>
+        <item quantity="one">%1$d aplicație instalată</item>
+        <item quantity="few">%1$d aplicații instalate</item>
+        <item quantity="other">%1$d de aplicații instalate</item>
 </plurals>
     <plurals name="notification_summary_updates">
-	<item quantity="one">%1$d actualizare</item>
-	<item quantity="few">%1$d actualizări</item>
-	<item quantity="other">%1$d de actualizări</item>
+        <item quantity="one">%1$d actualizare</item>
+        <item quantity="few">%1$d actualizări</item>
+        <item quantity="other">%1$d de actualizări</item>
 </plurals>
     <plurals name="notification_summary_more">
-	<item quantity="one">+ încă %1$d…</item>
-	<item quantity="few">+ încă %1$d…</item>
-	<item quantity="other">+ încă %1$d…</item>
+        <item quantity="one">+ încă %1$d…</item>
+        <item quantity="few">+ încă %1$d…</item>
+        <item quantity="other">+ încă %1$d…</item>
 </plurals>
     <plurals name="details_last_update_years">
-	<item quantity="one">Actualizat acum un an</item>
-	<item quantity="few">Actualizat acum %1$s ani</item>
-	<item quantity="other">Actualizat acum %1$s de ani</item>
+        <item quantity="one">Actualizat acum un an</item>
+        <item quantity="few">Actualizat acum %1$s ani</item>
+        <item quantity="other">Actualizat acum %1$s de ani</item>
 </plurals>
 <plurals name="details_last_update_months">
-	<item quantity="one">Actualizat acum o lună</item>
-	<item quantity="few">Actualizat acum %1$s luni</item>
-	<item quantity="other">Actualizat acum %1$s de luni</item>
+        <item quantity="one">Actualizat acum o lună</item>
+        <item quantity="few">Actualizat acum %1$s luni</item>
+        <item quantity="other">Actualizat acum %1$s de luni</item>
 </plurals>
     <plurals name="details_last_update_weeks">
-	<item quantity="one">Actualizat acum o săptămână</item>
-	<item quantity="few">Actualizat acum %1$s săptămâni</item>
-	<item quantity="other">Actualizat acum %1$s săptămâni</item>
+        <item quantity="one">Actualizat acum o săptămână</item>
+        <item quantity="few">Actualizat acum %1$s săptămâni</item>
+        <item quantity="other">Actualizat acum %1$s săptămâni</item>
 </plurals>
     <string name="force_old_index">Forțează vechiul format de index</string>
     <string name="force_old_index_summary">În caz de probleme legate de compatibilitate, folosește indexul de aplicații XML</string>

@@ -398,8 +398,8 @@
     <string name="notification_action_install">Kur</string>
 
     <plurals name="button_view_all_apps_in_category">
-	<item quantity="one">Tüm %d taneyi göster</item>
-	<item quantity="other">Tüm %d taneyi göster</item>
+        <item quantity="one">Tüm %d taneyi göster</item>
+        <item quantity="other">Tüm %d taneyi göster</item>
 </plurals>
 
     <string name="app_recommended_version_installed">Sürüm %1$s (Önerilen)</string>
@@ -417,8 +417,8 @@
     <string name="tts_category_name">Kategori %1$s</string>
 
     <plurals name="tts_view_all_in_category">
-	<item quantity="one">%2$s kategorisindeki %1$d uygulamayı göster</item>
-	<item quantity="other">%2$s kategorisindeki %1$d uygulamayı göster</item>
+        <item quantity="one">%2$s kategorisindeki %1$d uygulamayı göster</item>
+        <item quantity="other">%2$s kategorisindeki %1$d uygulamayı göster</item>
 </plurals>
     <string name="app__install_downloaded_update">Güncelle</string>
 
@@ -440,8 +440,8 @@
     <string name="antifeatureswarning">Bu uygulama sevmeyebileceğiniz özellikler içerir.</string>
     <string name="antifeatures">Karşıt-özellikler</string>
     <plurals name="details_last_update_days">
-	<item quantity="one">%1$d gün önce güncellendi</item>
-	<item quantity="other">%1$d gün önce güncellendi</item>
+        <item quantity="one">%1$d gün önce güncellendi</item>
+        <item quantity="other">%1$d gün önce güncellendi</item>
 </plurals>
     <string name="app_list__name__successfully_installed">%1$s kuruldu</string>
     <string name="nearby_splash__download_apps_from_people_nearby">İnternet yok mu? Uygulamaları yakınınızdaki kişilerden alın!</string>
@@ -464,28 +464,28 @@
     <string name="app__tts__downloading_progress">İndiriliyor, %%%1$d tamamlandı</string>
     <string name="menu_license">Lisans: %s</string>
     <plurals name="notification_summary_more">
-	<item quantity="one">+%1$d daha…</item>
-	<item quantity="other">+%1$d daha…</item>
+        <item quantity="one">+%1$d daha…</item>
+        <item quantity="other">+%1$d daha…</item>
 </plurals>
     <plurals name="notification_summary_updates">
-	<item quantity="one">%1$d Güncelleme</item>
-	<item quantity="other">%1$d Güncelleme</item>
+        <item quantity="one">%1$d Güncelleme</item>
+        <item quantity="other">%1$d Güncelleme</item>
 </plurals>
     <plurals name="notification_summary_installed">
-	<item quantity="one">%1$d Uygulama Kuruldu</item>
-	<item quantity="other">%1$d Uygulama Kuruldu</item>
+        <item quantity="one">%1$d Uygulama Kuruldu</item>
+        <item quantity="other">%1$d Uygulama Kuruldu</item>
 </plurals>
     <plurals name="details_last_update_weeks">
-	<item quantity="one">%1$d hafta önce güncellendi</item>
-	<item quantity="other">%1$d hafta önce güncellendi</item>
+        <item quantity="one">%1$d hafta önce güncellendi</item>
+        <item quantity="other">%1$d hafta önce güncellendi</item>
 </plurals>
     <plurals name="details_last_update_months">
-	<item quantity="one">%1$d ay önce güncellendi</item>
-	<item quantity="other">%1$d ay önce güncellendi</item>
+        <item quantity="one">%1$d ay önce güncellendi</item>
+        <item quantity="other">%1$d ay önce güncellendi</item>
 </plurals>
     <plurals name="details_last_update_years">
-	<item quantity="one">%1$d yıl önce güncellendi</item>
-	<item quantity="other">%1$d yıl önce güncellendi</item>
+        <item quantity="one">%1$d yıl önce güncellendi</item>
+        <item quantity="other">%1$d yıl önce güncellendi</item>
 </plurals>
 <string name="by_author_format">%s tarafından</string>
     <string name="download_404">İstenen dosya bulunamadı.</string>

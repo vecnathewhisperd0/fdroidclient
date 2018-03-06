@@ -120,8 +120,8 @@
     <string name="keep_year">Aseggas</string>
     <string name="notification_title_single_install_error">Asebdeded yecceḍ</string>
     <plurals name="notification_summary_installed">
-	<item quantity="one">%1$d n usnas yebded</item>
-	<item quantity="other">%1$d n isnasen bedden</item>
+        <item quantity="one">%1$d n usnas yebded</item>
+        <item quantity="other">%1$d n isnasen bedden</item>
 </plurals>
     <string name="notification_title_summary_update_available">Amucceḍ yewjed</string>
     <string name="notification_title_summary_downloading">Azdam…</string>
@@ -164,12 +164,12 @@
     <string name="keep_forever">Yal tikelt</string>
 
     <plurals name="notification_summary_more">
-	<item quantity="one">+%1$d nniḍen …</item>
-	<item quantity="other">+%1$d nniḍen …</item>
+        <item quantity="one">+%1$d nniḍen …</item>
+        <item quantity="other">+%1$d nniḍen …</item>
 </plurals>
     <plurals name="notification_summary_updates">
-	<item quantity="one">%1$d n lqem</item>
-	<item quantity="other">%1$d n ileqman</item>
+        <item quantity="one">%1$d n lqem</item>
+        <item quantity="other">%1$d n ileqman</item>
 </plurals>
     <string name="tts_category_name">Taggayt %1$s</string>
 

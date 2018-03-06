@@ -393,8 +393,8 @@
 
 
     <plurals name="button_view_all_apps_in_category">
-	<item quantity="one">%d aplikaĵo</item>
-	<item quantity="other">%d aplikaĵoj</item>
+        <item quantity="one">%d aplikaĵo</item>
+        <item quantity="other">%d aplikaĵoj</item>
 </plurals>
 
     <string name="app_recommended_version_installed">Versio %1$s (konsilinda)</string>
@@ -411,8 +411,8 @@
     <string name="tts_category_name">Kategorio %1$s</string>
 
     <plurals name="tts_view_all_in_category">
-	<item quantity="one">Montri %1$d aplikaĵon en la kategorio %2$s</item>
-	<item quantity="other">Montri ĉiujn %1$s aplikaĵojn en la kategorio %2$s</item>
+        <item quantity="one">Montri %1$d aplikaĵon en la kategorio %2$s</item>
+        <item quantity="other">Montri ĉiujn %1$s aplikaĵojn en la kategorio %2$s</item>
 </plurals>
     <string name="app__install_downloaded_update">Ĝisdatigi</string>
 
@@ -435,8 +435,8 @@
     <string name="antifeatures">Fiebloj</string>
     <string name="details_last_updated_today">Ĝisdatigita hodiaŭ</string>
     <plurals name="details_last_update_days">
-	<item quantity="one">Ĝisdatigita antaŭ %1$d tago</item>
-	<item quantity="other">Ĝisdatigita antaŭ %1$d tagoj</item>
+        <item quantity="one">Ĝisdatigita antaŭ %1$d tago</item>
+        <item quantity="other">Ĝisdatigita antaŭ %1$d tagoj</item>
 </plurals>
     <string name="app_list__name__successfully_installed">%1$s instalita</string>
     <string name="nearby_splash__download_apps_from_people_nearby">Seninterrete? Elŝutu aplikaĵojn el proksimaj uloj!
@@ -455,28 +455,28 @@
     <string name="app__tts__downloading_progress">Elŝutado, %1$d%% kompleta</string>
     <string name="menu_license">Permesilo: %s</string>
     <plurals name="notification_summary_more">
-	<item quantity="one">+%1$d pli…</item>
-	<item quantity="other">+1$d pli…</item>
+        <item quantity="one">+%1$d pli…</item>
+        <item quantity="other">+1$d pli…</item>
 </plurals>
     <plurals name="notification_summary_updates">
-	<item quantity="one">%1$d ĝisdatigo</item>
-	<item quantity="other">%1$d ĝisdatigoj</item>
+        <item quantity="one">%1$d ĝisdatigo</item>
+        <item quantity="other">%1$d ĝisdatigoj</item>
 </plurals>
     <plurals name="notification_summary_installed">
-	<item quantity="one">%1$d instalita aplikaĵo</item>
-	<item quantity="other">%1$d instalitaj aplikaĵoj</item>
+        <item quantity="one">%1$d instalita aplikaĵo</item>
+        <item quantity="other">%1$d instalitaj aplikaĵoj</item>
 </plurals>
     <plurals name="details_last_update_weeks">
-	<item quantity="one">Ĝisdatigita antaŭ %1$d semajno</item>
-	<item quantity="other">Ĝisdatigita antaŭ %1$d semajnoj</item>
+        <item quantity="one">Ĝisdatigita antaŭ %1$d semajno</item>
+        <item quantity="other">Ĝisdatigita antaŭ %1$d semajnoj</item>
 </plurals>
     <plurals name="details_last_update_months">
-	<item quantity="one">Ĝisdatigita antaŭ %1$d monato</item>
-	<item quantity="other">Ĝisdatigita antaŭ %1$d monatoj</item>
+        <item quantity="one">Ĝisdatigita antaŭ %1$d monato</item>
+        <item quantity="other">Ĝisdatigita antaŭ %1$d monatoj</item>
 </plurals>
     <plurals name="details_last_update_years">
-	<item quantity="one">Ĝisdatigita antaŭ %1$d jaro</item>
-	<item quantity="other">Ĝisdatigita antaŭ %1$d jaroj</item>
+        <item quantity="one">Ĝisdatigita antaŭ %1$d jaro</item>
+        <item quantity="other">Ĝisdatigita antaŭ %1$d jaroj</item>
 </plurals>
 <string name="by_author_format">de %s</string>
     <string name="download_404">Ne trovis petitan dosieron.</string>
