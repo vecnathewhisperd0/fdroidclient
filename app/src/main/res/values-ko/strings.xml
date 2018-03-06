@@ -375,7 +375,7 @@
     <string name="updates__show_updateable_apps">앱 보이기</string>
     <plurals name="updates__download_updates_for_apps">
         <item quantity="other">앱 %1$d개의 업데이트를 다운로드합니다.</item>
-</plurals>
+    </plurals>
 
     <string name="versions">버전</string>
     <string name="clear_search">검색 지우기</string>
@@ -398,7 +398,7 @@
     <string name="status_inserting_x_apps">%3$s에서 앱 자세한 사항(%1$d/%2$d)을 저장 중</string>
     <plurals name="button_view_all_apps_in_category">
         <item quantity="other">%d개 모두 보기</item>
-</plurals>
+    </plurals>
 
     <string name="nearby_splash__download_apps_from_people_nearby">인터넷이 안되나요? 근처 사람들로부터 앱을 받으세요!</string>
     <string name="nearby_splash__find_people_button">내 근처의 사람들 찾기</string>
@@ -407,7 +407,7 @@
     <string name="app__tts__downloading_progress">다운로드 중, %1$d%% 완료</string>
     <plurals name="notification_summary_more">
         <item quantity="other">+%1$d개 더 보기…</item>
-</plurals>
+    </plurals>
     <string name="notification_title_single_ready_to_install">설치할 준비가 되었습니다</string>
     <string name="notification_title_single_ready_to_install_update">업데이트를 설치할 준비가 되었습니다</string>
     <string name="notification_title_single_install_error">설치에 실패되었습니다</string>
@@ -417,10 +417,10 @@
     <string name="notification_content_single_installed">성공적으로 설치되었습니다</string>
     <plurals name="notification_summary_updates">
         <item quantity="other">업데이트 %1$d개</item>
-</plurals>
+    </plurals>
     <plurals name="notification_summary_installed">
         <item quantity="other">설치된 앱 %1$d개</item>
-</plurals>
+    </plurals>
     <string name="notification_title_summary_update_available">업데이트 사용 가능</string>
     <string name="notification_title_summary_downloading">다운로드 중…</string>
     <string name="notification_title_summary_downloading_update">업데이트를 다운로드 중…</string>
@@ -432,21 +432,21 @@
 
     <plurals name="tts_view_all_in_category">
         <item quantity="other">%2$s 카테고리에서 앱 %1$d개 모두 보기</item>
-</plurals>
+    </plurals>
 
     <string name="details_last_updated_today">오늘 업데이트됨</string>
     <plurals name="details_last_update_days">
         <item quantity="other">%1$d일 전에 업데이트됨</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_weeks">
         <item quantity="other">%1$d주 전에 업데이트됨</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_months">
         <item quantity="other">%1$d달 전에 업데이트됨</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_years">
         <item quantity="other">%1$d년 전에 업데이트됨</item>
-</plurals>
+    </plurals>
 <string name="app_details__no_versions__show_incompat_versions">어쨌든 여기에 호환되지 않는 버전을 보여주려면, \"%1$s\" 설정을 활성화하세요.</string>
     <string name="app_details__no_versions__explain_incompatible_signatures">설치된 버전은 모든 사용 가능한 버전과 호환되지 않습니다. 앱을 제거하는 것은 호환되는 버전을 보고 설치할 수 있도록 합니다. 이는 때때로, 앱들이 다른 인증서으로 서명되어 있다면, Google Play 또는 다른 출처를 통해 설치된 앱에서 발생합니다.</string>
 

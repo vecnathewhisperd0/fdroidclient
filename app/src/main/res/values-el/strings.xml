@@ -469,7 +469,7 @@
     <plurals name="updates__download_updates_for_apps">
         <item quantity="one">Λήψη εγκατάστασης για %1$d εφαρμογή.</item>
         <item quantity="other">Λήψη εγκατάστασης για %1$d εφαρμογές.</item>
-</plurals>
+    </plurals>
 
     <string name="repositories_summary">Προσθέστε εναλλακτικής πηγές εφαρμογών</string>
     <string name="latest__empty_state__never_updated">Μόλις ανανεωθεί η λίστα εφαρμογών, οι τελευταίες εφαρμογές θα εμφανιστούν εδώ</string>
@@ -503,7 +503,7 @@
     <plurals name="button_view_all_apps_in_category">
         <item quantity="one">Προβολή %d</item>
         <item quantity="other">Προβολή όλων %d</item>
-</plurals>
+    </plurals>
 
     <string name="empty_search_available_app_list">Δεν βρέθηκαν εφαρμογές.</string>
 
@@ -515,37 +515,37 @@
     <plurals name="notification_summary_more">
         <item quantity="one">+%1$d επιπλέον…</item>
         <item quantity="other">+%1$d επιπλέον…</item>
-</plurals>
+    </plurals>
     <string name="notification_content_single_downloading_update">Λήψη αναβάθμισης για \"%1$s\"…</string>
     <plurals name="notification_summary_updates">
         <item quantity="one">%1$d αναβάθμιση</item>
         <item quantity="other">%1$d αναβαθμίσεις</item>
-</plurals>
+    </plurals>
     <plurals name="notification_summary_installed">
         <item quantity="one">%1$d Εφαρμογή εγκαταστάθηκε</item>
         <item quantity="other">%1$d Εφαρμογές εγκαταστάθηκαν</item>
-</plurals>
+    </plurals>
     <string name="tts_category_name">Κατηγορία %1$s</string>
 
     <plurals name="tts_view_all_in_category">
         <item quantity="one">Προβολή %1$d  εφαρμογής από τη κατηγορία %2$s</item>
         <item quantity="other">Προβολή όλων των %1$d εφαρμογών από τη κατηγορία %2$s</item>
-</plurals>
+    </plurals>
 
     <plurals name="details_last_update_days">
         <item quantity="one">Αναβαθμίστηκε %1$d μέρα πριν</item>
         <item quantity="other">Αναβαθμίστηκε %1$d μέρες πριν</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_weeks">
         <item quantity="one">Αναβαθμίστηκε %1$d εβδομάδα πριν</item>
         <item quantity="other">Αναβαθμίστηκε %1$d εβδομάδες πριν</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_months">
         <item quantity="one">Αναβαθμίστηκε %1$d μήνα πριν</item>
         <item quantity="other">Αναβαθμίστηκε %1$d μήνες πριν</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_years">
         <item quantity="one">Αναβαθμίστηκε %1$d χρόνο πριν</item>
         <item quantity="other">Αναβαθμίστηκε %1$d χρόνια πριν</item>
-</plurals>
+    </plurals>
 </resources>

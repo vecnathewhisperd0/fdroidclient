@@ -289,7 +289,7 @@
 
     <plurals name="updates__download_updates_for_apps">
         <item quantity="other">%1$d အက်ပ်များအတွက် အသစ်ထွက်ရှိမှုကိုဒေါင်းလုတ်ဆွဲမည်</item>
-</plurals>
+    </plurals>
 
     <string name="versions">ဗားရှင်းများ</string>
     <string name="clear_search">ရှာဖွေထားမည်ကိုရှင်းမည်</string>
@@ -321,6 +321,6 @@
     <string name="no_handler_app">%s ကိုကိုင်တွယ်ရန်အတွက် သင့်တွင် ရရှိထားသော အက်ပ်မရှိပါ</string>
     <plurals name="button_view_all_apps_in_category">
         <item quantity="other">%d အားလုံးကိုကြည့်မည်</item>
-</plurals>
+    </plurals>
 
     </resources>

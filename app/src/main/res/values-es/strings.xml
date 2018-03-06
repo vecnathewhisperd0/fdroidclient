@@ -389,7 +389,7 @@
     <plurals name="button_view_all_apps_in_category">
         <item quantity="one">Ver (%d)</item>
         <item quantity="other">Ver todos (%d)</item>
-</plurals>
+    </plurals>
 
     <string name="notification_title_single_update_available">Actualización disponible</string>
     <string name="notification_title_single_ready_to_install">Listo para instalar</string>
@@ -428,7 +428,7 @@
     <plurals name="tts_view_all_in_category">
         <item quantity="one">Ver la única aplicación en la %2$s categoría</item>
         <item quantity="other">Ver todas %1$d aplicaciones en la %2$s categoría</item>
-</plurals>
+    </plurals>
     <string name="app__install_downloaded_update">Actualizar</string>
 
     <string name="app_list__name__downloading_in_progress">Descargando %1$s</string>
@@ -452,7 +452,7 @@
     <plurals name="details_last_update_days">
         <item quantity="one">Actualizada ayer</item>
         <item quantity="other">Actualizada hace %1$d días</item>
-</plurals>
+    </plurals>
     <string name="app_list__name__successfully_installed">%1$s se ha instalado</string>
     <string name="nearby_splash__download_apps_from_people_nearby">¿No tienes Internet? ¡Descarga aplicaciones de gente cercana!</string>
     <string name="nearby_splash__find_people_button">Encontrar personas cerca de mí</string>
@@ -475,27 +475,27 @@
     <plurals name="notification_summary_more">
         <item quantity="one">+%1$d más…</item>
         <item quantity="other">+%1$d más…</item>
-</plurals>
+    </plurals>
     <plurals name="notification_summary_updates">
         <item quantity="one">%1$d actualización</item>
         <item quantity="other">%1$d actualizaciones</item>
-</plurals>
+    </plurals>
     <plurals name="notification_summary_installed">
         <item quantity="one">%1$d aplicación instalada</item>
         <item quantity="other">%1$d aplicaciones instaladas</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_weeks">
         <item quantity="one">Actualizado hace una semana</item>
         <item quantity="other">Actualizado hace %1$d semanas</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_months">
         <item quantity="one">Actualizado hace un mes</item>
         <item quantity="other">Actualizado hace %1$d meses</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_years">
         <item quantity="one">Actualizado hace un año</item>
         <item quantity="other">Actualizado hace %1$d años</item>
-</plurals>
+    </plurals>
 <string name="by_author_format">por %s</string>
     <string name="download_404">No se ha encontrado archivo solicitado.</string>
     <string name="force_old_index">Forzar al formato de índice antiguo</string>

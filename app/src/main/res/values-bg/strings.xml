@@ -427,11 +427,11 @@
     <plurals name="notification_summary_updates">
         <item quantity="one">%1$d Актуализация</item>
         <item quantity="other">%1$d Актуализации</item>
-</plurals>
+    </plurals>
     <plurals name="notification_summary_installed">
         <item quantity="one">%1$d Инсталирано приложение</item>
         <item quantity="other">%1$d Инсталирани приложения</item>
-</plurals>
+    </plurals>
     <string name="notification_title_summary_update_available">Налична актуализация</string>
     <string name="notification_title_summary_downloading">Сваляне…</string>
     <string name="notification_title_summary_downloading_update">Изтегляне на актуализацията…</string>
@@ -444,25 +444,25 @@
     <plurals name="tts_view_all_in_category">
         <item quantity="one">Покажи %1$d  приложение в %2$s категория</item>
         <item quantity="other">Покажи всички %1$d  приложения от %2$s категория</item>
-</plurals>
+    </plurals>
 
     <string name="details_last_updated_today">Актуализирано днес</string>
     <plurals name="details_last_update_days">
         <item quantity="one">Актуализирано преди %1$d ден</item>
         <item quantity="other">Актуализирано преди %1$d дни</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_weeks">
         <item quantity="one">Актуализирано преди %1$d седмица</item>
         <item quantity="other">Актуализирано преди %1$d седмици</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_months">
         <item quantity="one">Актуализирано преди %1$d месец</item>
         <item quantity="other">Актуализирано преди %1$d месеца</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_years">
         <item quantity="one">Актуализирано преди %1$d година</item>
         <item quantity="other">Актуализирано преди %1$d години</item>
-</plurals>
+    </plurals>
 <string name="notification_action_update">Актуализация</string>
     <string name="notification_action_cancel">Отказ</string>
     <string name="notification_action_install">Инсталирай</string>
@@ -473,7 +473,7 @@
     <plurals name="button_view_all_apps_in_category">
         <item quantity="one">Покажи %d</item>
         <item quantity="other">Покажи всички %d</item>
-</plurals>
+    </plurals>
 
     <string name="nearby_splash__download_apps_from_people_nearby">Нямате връзка с Интернет? Вземете приложения от хората около вас!</string>
     <string name="nearby_splash__find_people_button">Откриване на близки устройства</string>
@@ -489,7 +489,7 @@
     <plurals name="notification_summary_more">
         <item quantity="one">+%1$d  още…</item>
         <item quantity="other">+%1$d  повече…</item>
-</plurals>
+    </plurals>
     <string name="force_old_index">Принудителен стар формат на индексиране</string>
     <string name="app_details__incompatible_mismatched_signature">Различен подпис от инсталираната версия</string>
     <string name="app_details__no_versions__no_compatible_signatures">Няма налични версии със съвместим подпис</string>

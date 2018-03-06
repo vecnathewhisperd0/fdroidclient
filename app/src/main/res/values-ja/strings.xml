@@ -367,7 +367,7 @@
 
     <plurals name="button_view_all_apps_in_category">
         <item quantity="other">%d個のアプリをすべて表示</item>
-</plurals>
+    </plurals>
 
     <string name="app_recommended_version_installed">バージョン%1$s(推奨)</string>
     <string name="app__newly_added">新規</string>
@@ -384,7 +384,7 @@
 
     <plurals name="tts_view_all_in_category">
         <item quantity="other">%2$sカテゴリの%1$d個のアプリをすべて表示</item>
-</plurals>
+    </plurals>
     <string name="app__install_downloaded_update">更新</string>
 
     <string name="app_list__name__downloading_in_progress">%1$sをダウンロード中</string>
@@ -397,7 +397,7 @@
 
     <plurals name="updates__download_updates_for_apps">
         <item quantity="other">%1$d個のアプリの更新をダウンロードします。</item>
-</plurals>
+    </plurals>
 
     <string name="details_new_in_version">バージョン%sの新機能</string>
 
@@ -405,7 +405,7 @@
     <string name="antifeatures">対策機能</string>
     <plurals name="details_last_update_days">
         <item quantity="other">%1$d日前に更新しました</item>
-</plurals>
+    </plurals>
     <string name="details_last_updated_today">今日更新</string>
     <string name="app_list__name__successfully_installed">%1$sをインストールしました</string>
     <string name="nearby_splash__download_apps_from_people_nearby">インターネット接続がありませんか？近くの人からアプリをもらってみましょう！</string>
@@ -424,22 +424,22 @@
     <string name="menu_license">ライセンス: %s</string>
     <plurals name="notification_summary_more">
         <item quantity="other">さらに+%1$d</item>
-</plurals>
+    </plurals>
     <plurals name="notification_summary_updates">
         <item quantity="other">%1$d個の更新</item>
-</plurals>
+    </plurals>
     <plurals name="notification_summary_installed">
         <item quantity="other">%1$d個のインストール済みアプリ</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_weeks">
         <item quantity="other">%1$d週間前に更新</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_months">
         <item quantity="other">%1$dヶ月前に更新</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_years">
         <item quantity="other">%1$d年前に更新</item>
-</plurals>
+    </plurals>
 <string name="by_author_format">開発者: %s</string>
     <string name="download_404">要求されたファイルが見つかりませんでした。</string>
     <string name="force_old_index">古いインデックスフォーマットを強制する</string>

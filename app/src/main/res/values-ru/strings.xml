@@ -395,7 +395,7 @@
         <item quantity="few">Посмотреть %d приложения</item>
         <item quantity="many">Посмотреть %d приложений</item>
         <item quantity="other">Посмотреть %d приложений</item>
-	</plurals>
+    </plurals>
 
     <string name="nearby_splash__download_apps_from_people_nearby">Нет интернета? Получайте приложения от людей рядом с вами!</string>
     <string name="notification_title_single_ready_to_install">Готово к установке</string>
@@ -414,7 +414,7 @@
         <item quantity="few">Обновлено %1$d дня назад</item>
         <item quantity="many">Обновлено %1$d дней назад</item>
         <item quantity="other">Обновлено %1$d дней назад</item>
-</plurals>
+    </plurals>
     <string name="app_details_donate_prompt">%1$s создано %2$s. Купи им чашечку кофе!</string>
 
     <string name="app_recommended_version_installed">Версия %1$s (Рекомендуемая)</string>
@@ -425,7 +425,7 @@
         <item quantity="few">Скачать обновления для %1$d приложений.</item>
         <item quantity="many">Скачать обновления для %1$d приложений.</item>
         <item quantity="other">Скачать обновления для %1$d приложений.</item>
-        </plurals>
+    </plurals>
 
     <string name="app_list__name__downloading_in_progress">Загружается %1$s</string>
     <string name="updates__tts__download_app">Скачать</string>
@@ -444,7 +444,7 @@
         <item quantity="few">Посмотреть %1$d приложения в категории %2$s</item>
         <item quantity="many">Посмотреть %1$d приложений в категории %2$s</item>
         <item quantity="other">Посмотреть %1$d приложений в категории %2$s</item>
-	</plurals>
+    </plurals>
 
     <string name="latest__empty_state__no_recent_apps">Не найдено недавно обновленных приложений</string>
     <string name="nearby_splash__both_parties_need_fdroid">Обоим участникам нужен %1$s чтобы передавать приложения.</string>
@@ -458,18 +458,18 @@
         <item quantity="few">%1$d обновления</item>
         <item quantity="many">%1$d обновлений</item>
         <item quantity="other">%1$d обновлений</item>
-</plurals>
+    </plurals>
     <plurals name="notification_summary_installed">
         <item quantity="one">%1$d приложение установлено</item>
         <item quantity="few">%1$d приложения установлено</item>
         <item quantity="many">%1$d приложений установлено</item>
         <item quantity="other">%1$d приложений установлено</item>
-</plurals>
+    </plurals>
     <plurals name="notification_summary_more">
         <item quantity="one">+еще %1$d…</item>
         <item quantity="few">+еще %1$d…</item>
         <item quantity="many">+еще %1$d…</item>
-</plurals>
+    </plurals>
     <string name="by_author_format">от %s</string>
     <string name="download_404">Запрошенный файл не найден.</string>
     <plurals name="details_last_update_weeks">
@@ -477,7 +477,7 @@
         <item quantity="few">Обновлено %1$d недели назад</item>
         <item quantity="many">Обновлено %1$d недель назад</item>
         <item quantity="other">Обновлено %1$d недель назад</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_months">
         <item quantity="one">Обновлено %1$d месяц назад</item>
         <item quantity="few">Обновлено %1$d месяца назад</item>

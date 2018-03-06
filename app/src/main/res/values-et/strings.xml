@@ -430,7 +430,7 @@
     <plurals name="updates__download_updates_for_apps">
         <item quantity="one">Laadi alla %1$d rakenduse värskendus.</item>
         <item quantity="other">Laadi alla %1$d rakenduse värskendus.</item>
-</plurals>
+    </plurals>
 
     <string name="versions">Versioonid</string>
     <string name="clear_search">Tühjenda otsing</string>
@@ -456,7 +456,7 @@
     <plurals name="button_view_all_apps_in_category">
         <item quantity="one">Kuva %d</item>
         <item quantity="other">Kuva kõik %d</item>
-</plurals>
+    </plurals>
 
     <string name="nearby_splash__download_apps_from_people_nearby">Internetti ei ole? Hangi rakendused sinu lähedal olevatelt inimestelt!</string>
     <string name="nearby_splash__find_people_button">Otsi inimesi mu lähedal</string>
@@ -466,7 +466,7 @@
     <plurals name="notification_summary_more">
         <item quantity="one">veel +%1$d…</item>
         <item quantity="other">veel +%1$d…</item>
-</plurals>
+    </plurals>
     <string name="notification_title_single_ready_to_install">Valmis paigaldamiseks</string>
     <string name="notification_title_single_ready_to_install_update">Värskendused on valmis paigalduseks</string>
     <string name="notification_title_single_install_error">Paigaldamine nurjus</string>
@@ -477,11 +477,11 @@
     <plurals name="notification_summary_updates">
         <item quantity="one">%1$d värskendus</item>
         <item quantity="other">%1$d värskendust</item>
-</plurals>
+    </plurals>
     <plurals name="notification_summary_installed">
         <item quantity="one">%1$d rakendus paigaldatud</item>
         <item quantity="other">%1$d rakendust paigaldatud</item>
-</plurals>
+    </plurals>
     <string name="notification_title_summary_update_available">Värskendus on saadaval</string>
     <string name="notification_title_summary_downloading">Allalaadimine…</string>
     <string name="notification_title_summary_downloading_update">Värskenduse allalaadimine…</string>
@@ -494,25 +494,25 @@
     <plurals name="tts_view_all_in_category">
         <item quantity="one">Kuva %1$d rakendus kategoorias %2$s</item>
         <item quantity="other">Kuva kõik %1$d rakendust kategoorias %2$s</item>
-</plurals>
+    </plurals>
 
     <string name="details_last_updated_today">Värskendati täna</string>
     <plurals name="details_last_update_days">
         <item quantity="one">Värskendati %1$d päev tagasi</item>
         <item quantity="other">Värskendati %1$d päeva tagasi</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_weeks">
         <item quantity="one">Värskendati %1$d nädal tagasi</item>
         <item quantity="other">Värskendati %1$d nädalat tagasi</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_months">
         <item quantity="one">Värskendati %1$d kuu tagasi</item>
         <item quantity="other">Värskendati %1$d kuud tagasi</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_years">
         <item quantity="one">Värskendati %1$d aasta tagasi</item>
         <item quantity="other">Värskendati %1$d aastat tagasi</item>
-</plurals>
+    </plurals>
 <string name="privacy">Privaatsus</string>
     <string name="preventScreenshots_title">Väldi ekraanitõmmiseid</string>
     <string name="preventScreenshots_summary">Keelab ekraanitõmmiste tegemise ja peidab rakenduse sisu viimaste rakenduste vaatest</string>

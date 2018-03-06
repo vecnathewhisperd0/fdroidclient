@@ -403,7 +403,7 @@
     <plurals name="tts_view_all_in_category">
         <item quantity="one">Mostra %1$d aplicació de la categoria %2$s</item>
         <item quantity="other">Mostra les %1$d aplicacions de la categoria %2$s</item>
-</plurals>
+    </plurals>
     <string name="app__install_downloaded_update">Actualitza</string>
 
     <string name="app_list__name__downloading_in_progress">Baixant %1$s</string>
@@ -417,7 +417,7 @@
     <plurals name="updates__download_updates_for_apps">
         <item quantity="one">%1$d actualització disponible:</item>
         <item quantity="other">%1$d actualitzacions disponibles:</item>
-</plurals>
+    </plurals>
 
     <string name="details_new_in_version">Novetats a la versió %s</string>
 
@@ -426,7 +426,7 @@
     <plurals name="details_last_update_days">
         <item quantity="one">Actualitzada fa %1$d dia</item>
         <item quantity="other">Actualitzada fa %1$d dies</item>
-</plurals>
+    </plurals>
     <string name="app_list__name__successfully_installed">%1$s s\'ha instal·lat</string>
     <string name="antifeatures">Característiques no lliures</string>
     <string name="nearby_splash__download_apps_from_people_nearby">No teniu internet? Aconseguiu aplicacions de la gent que tingueu al voltant!</string>
@@ -445,33 +445,33 @@
     <plurals name="button_view_all_apps_in_category">
         <item quantity="one">Mostra %d</item>
         <item quantity="other">Mostra els %d</item>
-</plurals>
+    </plurals>
 
     <string name="app__tts__downloading_progress">Baixant, %1$d%% completat</string>
     <plurals name="notification_summary_updates">
         <item quantity="one">%1$d actualització</item>
         <item quantity="other">%1$d actualitzacions</item>
-</plurals>
+    </plurals>
     <plurals name="notification_summary_installed">
         <item quantity="one">%1$d aplicació instal·lada</item>
         <item quantity="other">%1$d aplicacions instal·lades</item>
-</plurals>
+    </plurals>
     <plurals name="notification_summary_more">
         <item quantity="one">+%1$d més…</item>
         <item quantity="other">+%1$d més…</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_weeks">
         <item quantity="one">Actualitzada fa %1$d setmana</item>
         <item quantity="other">Actualitzada %1$d setmanes</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_months">
         <item quantity="one">Actualitzada fa %1$d mes</item>
         <item quantity="other">Actualitzada fa %1$d mesos</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_years">
         <item quantity="one">Actualitzada fa %1$d any</item>
         <item quantity="other">Actualitzada fa %1$d anys</item>
-</plurals>
+    </plurals>
 <string name="by_author_format">per %s</string>
     <string name="download_404">No s\'ha trobat l\'arxiu sol·licitat.</string>
     <string name="force_old_index">Forceu el format d\'índex antic</string>

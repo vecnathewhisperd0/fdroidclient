@@ -427,7 +427,7 @@
         <item quantity="few">Убачыць усе %d праграмы</item>
         <item quantity="many">Убачыць усе %d праграм</item>
         <item quantity="other">Убачыць усе %d праграм</item>
-	</plurals>
+    </plurals>
 
     <string name="app_recommended_version_installed">Версія %1$s (рэкамендуецца)</string>
     <string name="app__newly_added">Новая</string>
@@ -447,7 +447,7 @@
         <item quantity="few">Паказаць %1$s праграмы ў катэгорыі %2$s</item>
         <item quantity="many">Паказаць %1$s праграм ў катэгорыі %2$s</item>
         <item quantity="other">Паказаць %1$s праграм ў катэгорыі %2$s</item>
-	</plurals>
+    </plurals>
     <string name="app__install_downloaded_update">Абнавіць</string>
 
     <string name="app_list__name__downloading_in_progress">Спампоўка %1$s</string>
@@ -463,7 +463,7 @@
         <item quantity="few">Спампаваць абнаўленні для %1$d праграм.</item>
         <item quantity="many">Спампаваць абнаўленні для %1$d праграм.</item>
         <item quantity="other">Спампаваць абнаўленні для %1$d праграм.</item>
-        </plurals>
+    </plurals>
 
     <string name="details_new_in_version">Навае ў версіі %s</string>
 
@@ -473,7 +473,7 @@
         <item quantity="few">Абноўлена %1$d дні таму</item>
         <item quantity="many">Абноўлена %1$d дзён таму</item>
         <item quantity="other">Абноўлена %1$d дзён таму</item>
-</plurals>
+    </plurals>
     <string name="antifeatureswarning">Гэтая праграма мае функцыі, што могуць вам не спадабацца.</string>
     <string name="app_list__name__successfully_installed">%1$s усталявана</string>
     <string name="nearby_splash__download_apps_from_people_nearby">Няма інтэрнэту? Атрымайце праграмы ад людзей паблізу!</string>
@@ -496,37 +496,37 @@
         <item quantity="few">%1$d абнаўленні</item>
         <item quantity="many">%1$d абнаўленняў</item>
         <item quantity="other">%1$d абнаўленняў</item>
-	</plurals>
+    </plurals>
     <plurals name="notification_summary_installed">
         <item quantity="one">%1$d праграма ўсталяваная</item>
         <item quantity="few">%1$d праграмы ўсталяваныя</item>
         <item quantity="many">%1$d праграм ўсталяваныя</item>
         <item quantity="other">%1$d праграм ўсталяваныя</item>
-	</plurals>
+    </plurals>
     <plurals name="notification_summary_more">
         <item quantity="one">+%1$d больш…</item>
         <item quantity="few">+%1$d больш…</item>
         <item quantity="many">+%1$d больш…</item>
         <item quantity="other">+%1$d больш…</item>
-	</plurals>
+    </plurals>
     <plurals name="details_last_update_weeks">
         <item quantity="one">Абноўленая %1$s тыдзень назад</item>
         <item quantity="few">Абноўленая %1$s тыдні назад</item>
         <item quantity="many">Абноўленая %1$s тыдняў назад</item>
         <item quantity="other">Абноўленая %1$s тыдняў назад</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_months">
         <item quantity="one">Абноўленая %1$s месяц назад</item>
         <item quantity="few">Абноўленая %1$s месяцы назад</item>
         <item quantity="many">Абноўленая %1$s месяцаў назад</item>
         <item quantity="other">Абноўленая %1$s месяцаў назад</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_years">
         <item quantity="one">Абноўленая %1$s год назад</item>
         <item quantity="few">Абноўленая %1$s гады назад</item>
         <item quantity="many">Абноўленая %1$s гадоў назад</item>
         <item quantity="other">Абноўленая %1$s гадоў назад</item>
-	</plurals>
+    </plurals>
 <string name="by_author_format">ад %s</string>
     <string name="download_404">Запытаны файл не знойдзены.</string>
     <string name="force_old_index">Прымусова ўжываць стары фармат індэкса</string>

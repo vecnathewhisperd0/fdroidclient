@@ -428,7 +428,7 @@
         <item quantity="few">حمل التحديثات  %1$s تطبيقات.</item>
         <item quantity="many">حمل التحديثات ل  %1$s تطبيقا.</item>
         <item quantity="other">حمل التحديثات ل  %1$s تطبيق.</item>
-</plurals>
+    </plurals>
 
     <string name="repositories_summary">أضف مصادر إضافية للتطبيقات</string>
     <string name="menu_license">الرخصة: %s</string>
@@ -453,7 +453,7 @@
         <item quantity="few">عرض الكل %d</item>
         <item quantity="many">عرض الكل %d</item>
         <item quantity="other">عرض الكل %d</item>
-</plurals>
+    </plurals>
 
     <string name="force_old_index">تطبيق صيغة الأرشفة القديمة بالقوة</string>
     <string name="force_old_index_summary">في حالة وجود أخطاء أو أخطاء تكامل، إستخدم أرشفة تطبيق XML</string>
@@ -482,7 +482,7 @@
         <item quantity="few">تحديثات…</item>
         <item quantity="many">بعض تحديث…</item>
         <item quantity="other">+%1$d بكثرة…</item>
-</plurals>
+    </plurals>
     <plurals name="notification_summary_updates">
         <item quantity="zero">لا تحديثات</item>
         <item quantity="one">تحديث واحد</item>
@@ -490,7 +490,7 @@
         <item quantity="few">تحديثات</item>
         <item quantity="many">تحاديث</item>
         <item quantity="other">التحاديث</item>
-</plurals>
+    </plurals>
     <plurals name="notification_summary_installed">
         <item quantity="zero">لا شئ</item>
         <item quantity="one">تطبيق واحد</item>
@@ -498,7 +498,7 @@
         <item quantity="few">تطبيقات</item>
         <item quantity="many">تطابيق</item>
         <item quantity="other">التطبيقات</item>
-</plurals>
+    </plurals>
     <string name="privacy">الخصوصية</string>
     <string name="preventScreenshots_title">منع لقطات الشاشة</string>
     <string name="preventScreenshots_summary">أخفاء لقطات الشاشة حتى لايتم استخدامها ويخفي محتوى التطبيق من شاشة التطبيقات الأخيرة</string>

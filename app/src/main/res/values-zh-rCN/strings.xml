@@ -365,7 +365,7 @@
 
     <plurals name="updates__download_updates_for_apps">
         <item quantity="other">为%1$d个应用下载更新。</item>
-</plurals>
+    </plurals>
 
     <string name="versions">版本</string>
     <string name="clear_search">清除搜索</string>
@@ -388,7 +388,7 @@
     <string name="hide_anti_feature_apps_on">以暗灰色显示需要 anti-feature 的应用</string>
     <plurals name="button_view_all_apps_in_category">
         <item quantity="other">查看全部 %d</item>
-</plurals>
+    </plurals>
 
     <string name="nearby_splash__download_apps_from_people_nearby">没有连上互联网？请从附近的 F-Droid 用户那里获取应用！</string>
     <string name="nearby_splash__find_people_button">查找附近的人</string>
@@ -397,7 +397,7 @@
     <string name="app__tts__downloading_progress">正在下载的 %1$d%% 完成</string>
     <plurals name="notification_summary_more">
         <item quantity="other">+%1$d 更多…</item>
-</plurals>
+    </plurals>
     <string name="notification_title_single_ready_to_install">准备安装</string>
     <string name="notification_title_single_ready_to_install_update">已准备好开始安装</string>
     <string name="notification_title_single_install_error">安装失败</string>
@@ -407,10 +407,10 @@
     <string name="notification_content_single_installed">安装成功</string>
     <plurals name="notification_summary_updates">
         <item quantity="other">%1$d 个更新</item>
-</plurals>
+    </plurals>
     <plurals name="notification_summary_installed">
         <item quantity="other">%1$d 个应用已安装</item>
-</plurals>
+    </plurals>
     <string name="notification_title_summary_update_available">有更新可用</string>
     <string name="notification_title_summary_downloading">正在下载…</string>
     <string name="notification_title_summary_downloading_update">正在下载更新…</string>
@@ -422,21 +422,21 @@
 
     <plurals name="tts_view_all_in_category">
         <item quantity="other">在 %2$s 的类别中查看全部 %1$d 个应用</item>
-</plurals>
+    </plurals>
 
     <string name="details_last_updated_today">今天更新</string>
     <plurals name="details_last_update_days">
         <item quantity="other">更新于 %1$d 天前</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_weeks">
         <item quantity="other">更新于 %1$d 周前</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_months">
         <item quantity="other">更新于 %1$d 月前</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_years">
         <item quantity="other">更新于 %1$d 年前</item>
-</plurals>
+    </plurals>
 <string name="by_author_format">作者：%s</string>
     <string name="download_404">找不到所请求的文件。</string>
     <string name="force_old_index">强制使用旧索引格式</string>

@@ -401,7 +401,7 @@
     <plurals name="updates__download_updates_for_apps">
         <item quantity="one">Hen opdateringer for %1$d app.</item>
         <item quantity="other">Hen opdateringer for %1$d apps.</item>
-</plurals>
+    </plurals>
 
     <string name="versions">Versioner</string>
     <string name="clear_search">Ryd søgning</string>
@@ -424,7 +424,7 @@
     <plurals name="button_view_all_apps_in_category">
         <item quantity="one">Vis %d</item>
         <item quantity="other">Vis alle %d</item>
-</plurals>
+    </plurals>
 
     <string name="nearby_splash__download_apps_from_people_nearby">Ingen Internet? Hent apps fra folk i nærheden af dig!</string>
     <string name="nearby_splash__find_people_button">Find folk i nærheden af mig</string>
@@ -434,7 +434,7 @@
     <plurals name="notification_summary_more">
         <item quantity="one">+%1$d mere…</item>
         <item quantity="other">+%1$d mere…</item>
-</plurals>
+    </plurals>
     <string name="notification_title_single_ready_to_install">Klar til installation</string>
     <string name="notification_title_single_ready_to_install_update">Opdatering klar til installation</string>
     <string name="notification_title_single_install_error">Installationen fejlede</string>
@@ -445,11 +445,11 @@
     <plurals name="notification_summary_updates">
         <item quantity="one">%1$d opdatering</item>
         <item quantity="other">%1$d opdateringer</item>
-</plurals>
+    </plurals>
     <plurals name="notification_summary_installed">
         <item quantity="one">%1$d app installeret</item>
         <item quantity="other">%1$d apps installeret</item>
-</plurals>
+    </plurals>
     <string name="notification_title_summary_update_available">Opdatering tilgængelig</string>
     <string name="notification_title_summary_downloading">Henter…</string>
     <string name="notification_title_summary_downloading_update">Henter opdatering…</string>
@@ -462,25 +462,25 @@
     <plurals name="tts_view_all_in_category">
         <item quantity="one">Vis %1$d app i kategorien %2$s</item>
         <item quantity="other">Vis %1$d apps i kategorien %2$s</item>
-</plurals>
+    </plurals>
 
     <string name="details_last_updated_today">Opdateret i dag</string>
     <plurals name="details_last_update_days">
         <item quantity="one">Opdateret i går</item>
         <item quantity="other">Opdateret for %1$d dage siden</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_weeks">
         <item quantity="one">Opdateret for %1$d uge siden</item>
         <item quantity="other">Opdateret for %1$d uger siden</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_months">
         <item quantity="one">Opdateret for %1$d måned siden</item>
         <item quantity="other">Opdateret for %1$d måneder siden</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_years">
         <item quantity="one">Opdateret for %1$d år siden</item>
         <item quantity="other">Opdateret for %1$d år siden</item>
-</plurals>
+    </plurals>
 <string name="hide_anti_feature_apps">Nedton apps med antifunktionalitet</string>
     <string name="hide_anti_feature_apps_on">Nedton apps som indeholder uønsket funktionalitet</string>
     <string name="force_old_index">Gennemtving gammelt indeksformat</string>

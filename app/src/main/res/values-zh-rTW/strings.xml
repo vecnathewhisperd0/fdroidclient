@@ -395,7 +395,7 @@
 
     <plurals name="tts_view_all_in_category">
         <item quantity="other">從 %2$s 類別中查看所有 %1$d 的應用程式</item>
-</plurals>
+    </plurals>
     <string name="app__install_downloaded_update">更新</string>
 
     <string name="app_list__name__downloading_in_progress">正在下載 %1$s</string>
@@ -407,14 +407,14 @@
 
     <plurals name="updates__download_updates_for_apps">
         <item quantity="other">為 %1$d 個應用程式下載更新。</item>
-</plurals>
+    </plurals>
 
     <string name="details_new_in_version">新的版本在 %s</string>
 
     <string name="antifeatureswarning">此應用程式可能有您不喜歡的功能。</string>
     <plurals name="details_last_update_days">
         <item quantity="other">%1$d 天前已更新</item>
-</plurals>
+    </plurals>
     <string name="updates__tts__download_app">下載</string>
     <string name="antifeatures">反特徵</string>
     <string name="app_list__name__successfully_installed">%1$s 已安裝</string>
@@ -437,22 +437,22 @@
     <string name="menu_license">授權：%s</string>
     <plurals name="notification_summary_more">
         <item quantity="other">+%1$d 更多…</item>
-	</plurals>
+    </plurals>
     <plurals name="notification_summary_updates">
         <item quantity="other">%1$d 更新</item>
-	</plurals>
+    </plurals>
     <plurals name="notification_summary_installed">
         <item quantity="other">%1$d 個應用程式已安裝</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_weeks">
         <item quantity="other">%1$d 周前已更新</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_months">
         <item quantity="other">%1$d 月前已更新</item>
-</plurals>
+    </plurals>
     <plurals name="details_last_update_years">
         <item quantity="other">%1$d 年前已更新</item>
-</plurals>
+    </plurals>
 <string name="by_author_format">由 %s</string>
     <string name="download_404">找不到要求的檔案。</string>
     <string name="force_old_index">強制使用舊的索引格式</string>
