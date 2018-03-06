@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools"><string name="updates">Amucceḍ</string>
+<resources><string name="updates">Amucceḍ</string>
     <string name="ok">IH</string>
 
     <string name="yes">Ih</string>
@@ -235,5 +235,4 @@
     <string name="status_processing_xml_percent">Asesfer n  %2$s / %3$s (%4$d%%) from %1$s</string>
     <string name="notification_title_single_ready_to_install">Iwjed i usebded</string>
     <string name="notification_title_single_ready_to_install_update">Alqem iwjed i usebded</string>
-    <string tools:ignore="UnusedResources" name="category_Graphics"></string>
 </resources>

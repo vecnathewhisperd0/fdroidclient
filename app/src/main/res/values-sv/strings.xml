@@ -522,7 +522,7 @@
     <string name="menu_liberapay">Liberapay</string>
 
     <string name="panic_hide_warning_title">Kom ihåg hur du återställer</string>
-    <string name="panic_hide_warning_message">Under en panikhändelse kommer detta ta bort %1$s från startaren. Att bara skriva in \"%2$d\" i %3$ fejk-app kan återställa det.</string>
+    <string name="panic_hide_warning_message">Under en panikhändelse kommer detta ta bort %1$s från startaren. Att bara skriva in \"%2$d\" i %3$s fejk-app kan återställa det.</string>
 
     <string name="hiding_calculator">Kalkylator</string>
     <string name="hiding_dialog_title">Göm %s Nu</string>
