@@ -214,7 +214,7 @@
     <string name="display">Вигляд</string>
 
     <string name="show_incompat_versions">Несумісні версії</string>
-    <string name="show_incompat_versions_on">Показувати версії застосунків, які несумісні з пристроєм</string>
+    <string name="show_incompat_versions_on">Показувати версії застосунків, які несумісні з цим пристроєм</string>
     <string name="local_repo_running">F-Droid готовий до обміну</string>
     <string name="writing_index_jar">Запис підписаного файлу індексу (index.jar)…</string>
     <string name="linking_apks">Включення APK-файлів до репозиторію…</string>
@@ -528,4 +528,8 @@
 
     <string name="panic_exit_title">Вийти з додатку</string>
     <string name="panic_hide_title">Приховати %s</string>
-</resources>
+<string name="sort_search">Розсортувати за пошуком</string>
+
+    <string name="menu_liberapay">Liberapay</string>
+
+    </resources>
