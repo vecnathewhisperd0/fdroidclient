@@ -497,4 +497,5 @@
 
     <string name="menu_liberapay">Liberapay</string>
 
-</resources>
+<string name="warning_scaning_qr_code">お使いのカメラはオートフォーカスがないようです。コードをスキャンするのが難しいことがあるかもしれません。</string>
+    </resources>
