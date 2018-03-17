@@ -335,7 +335,7 @@
     <string name="menu_email">Escribir al autor por correo electrónico</string>
     <string name="swap_stopping_wifi">Deteniendo la Wi-Fi…</string>
     <string name="useTor">Usar Tor</string>
-    <string name="useTorSummary">Forzar el tráfico de bajada a través de Tor para mejorar la privacidad. Requiere Orbot</string>
+    <string name="useTorSummary">Forzar el tráfico de descarga a través de Tor para mejorar la privacidad. Requiere Orbot</string>
     <string name="repo_provider">Repositorio: %s</string>
 
     <string name="update_auto_download">Obtenga actualizaciones automáticamente</string>
