@@ -544,7 +544,7 @@
     <string name="menu_liberapay">Liberapay</string>
 
     <string name="panic_hide_warning_title">Recordar cómo restaurar</string>
-    <string name="panic_hide_warning_message">En un momento de pánico, se eliminará %1$s de la pantalla de inicio. Solo se restaurará escribiendo \"%2$d\" en la apli falsa %3$3.</string>
+    <string name="panic_hide_warning_message">En un momento de pánico, se eliminará %1$s de la pantalla de inicio. Solo se restaurará escribiendo \"%2$d\" en la apli falsa %3$s.</string>
 
     <string name="hiding_calculator">Calculadora</string>
     <string name="hiding_dialog_title">Ocultar %s ahora</string>
