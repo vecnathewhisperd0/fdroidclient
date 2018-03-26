@@ -532,7 +532,7 @@
     <string name="panic_hide_title">%s verstecken</string>
     <string name="panic_hide_summary">App wird sich selbst verstecken</string>
 
-    <string name="hiding_calculator">Rechner</string>
+    <string name="hiding_calculator">Taschenrechner</string>
     <string name="hiding_dialog_title">%s jetzt verstecken</string>
     <string name="hiding_dialog_message">Wirklich %1$s vom Starter entfernen? Eingabe von \"%2$d\" in die falsche %3$s App kann diese wiederherstellen.</string>
     <string name="hide_on_long_search_press_title">Mit Such-Schaltfläche verstecken</string>
