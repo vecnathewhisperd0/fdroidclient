@@ -547,4 +547,6 @@
 
     <string name="panic_hide_warning_title">Sicherungsmethode beibehalten</string>
 <string name="warning_scaning_qr_code">Ihre Kamera scheint keinen Autofokus zu haben. Es könnte schwierig sein, den Code zu scannen.</string>
+    <string name="show_root_apps">Root-Apps einbeziehen</string>
+    <string name="show_root_apps_on">Apps anzeigen, die Root-Berechtigungen benötigen</string>
     </resources>
