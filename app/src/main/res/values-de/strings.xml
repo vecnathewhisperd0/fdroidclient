@@ -521,10 +521,10 @@
     <string name="panic_app_setting_none">Keine</string>
     <string name="panic_settings_summary">Maßnahmen, die im Notfall ergriffen werden sollen</string>
     <string name="panic_exit_title">App beenden</string>
-    <string name="panic_app_setting_title">Notfalltasten-App</string>
+    <string name="panic_app_setting_title">Notfallknopf-App</string>
     <string name="panic_app_unknown_app">Eine unbekannte App</string>
     <string name="panic_app_setting_summary">Keine App festgelegt</string>
-    <string name="panic_app_dialog_title">Bestätigung der Panik-App</string>
+    <string name="panic_app_dialog_title">Notfall-App bestätigen</string>
     <string name="panic_app_dialog_message">Möchten Sie %1$s erlauben, zerstörerische Notfallmaßnahmen auszulösen zu dürfen?</string>
     <string name="panic_settings">Notfallknopf-Einstellungen</string>
     <string name="panic_exit_summary">App wird geschlossen</string>
