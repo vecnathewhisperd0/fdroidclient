@@ -78,7 +78,7 @@
     <string name="expert_on">Zusätzliche Informationen anzeigen und zusätzliche Einstellungen aktivieren</string>
     <string name="search_hint">Anwendungen suchen</string>
     <string name="appcompatibility">Kompatibilität der Anwendung</string>
-    <string name="show_incompat_versions">Inkompatible Versionen</string>
+    <string name="show_incompat_versions">Inkompatible Versionen einbeziehen</string>
     <string name="show_incompat_versions_on">Mit diesem Gerät inkompatible App-Versionen anzeigen</string>
     <string name="local_repo">Lokale Paketquelle</string>
     <string name="local_repo_running">F-Droid ist zum Tausch bereit</string>
