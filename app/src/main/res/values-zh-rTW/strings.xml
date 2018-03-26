@@ -173,7 +173,8 @@
     <string name="category_Phone_SMS">通話與簡訊</string>
     <string name="category_Writing">書寫</string>
 
-    <string name="empty_can_update_app_list">恭喜！您的應用程式都是最新的。</string>
+    <string name="empty_can_update_app_list">恭喜！
+\n您的應用程式都是最新的。</string>
     <string name="uninstall_error_unknown">不明的錯誤導致解除安裝失敗</string>
     <string name="add_key">加入金鑰</string>
     <string name="repo_exists_add_fingerprint">此軟體庫已經設定，此動作將會加入新的金鑰資訊。</string>
