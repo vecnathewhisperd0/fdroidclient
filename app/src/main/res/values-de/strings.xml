@@ -524,7 +524,7 @@
     <string name="panic_app_setting_title">Notfallknopf-App</string>
     <string name="panic_app_unknown_app">Eine unbekannte App</string>
     <string name="panic_app_setting_summary">Keine App festgelegt</string>
-    <string name="panic_app_dialog_title">Notfall-App bestätigen</string>
+    <string name="panic_app_dialog_title">Notfallknopf-App bestätigen</string>
     <string name="panic_app_dialog_message">Möchten Sie %1$s erlauben, zerstörerische Notfallmaßnahmen auszulösen zu dürfen?</string>
     <string name="panic_settings">Notfallknopf-Einstellungen</string>
     <string name="panic_exit_summary">App wird geschlossen</string>
