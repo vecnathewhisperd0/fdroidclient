@@ -553,4 +553,5 @@
 
 <string name="warning_scaning_qr_code">Votre appareil-photo n’a pas de mise au point automatique. Il sera peut-être difficile de scanner le code.</string>
     <string name="show_root_apps">Inclure les applications nécessitant le root</string>
+    <string name="show_root_apps_on">Afficher les applications nécessitant les privilèges root</string>
     </resources>
