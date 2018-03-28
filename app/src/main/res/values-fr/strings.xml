@@ -552,4 +552,5 @@
     <string name="hide_on_long_search_press_summary">Appuyez longuement sur le bouton de recherche pour cacher l\'application</string>
 
 <string name="warning_scaning_qr_code">Votre appareil-photo n’a pas de mise au point automatique. Il sera peut-être difficile de scanner le code.</string>
+    <string name="show_root_apps">Inclure les applications nécessitant le root</string>
     </resources>
