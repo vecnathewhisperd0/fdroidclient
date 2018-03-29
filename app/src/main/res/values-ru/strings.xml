@@ -540,6 +540,6 @@
     <string name="hide_on_long_search_press_summary">Длительное нажатие кнопки поиска скроет приложение</string>
 
 <string name="warning_scaning_qr_code">Ваша камера не поддерживает автофокус. Сканирование кода может быть затруднено.</string>
-    <string name="show_root_apps">"Включить root-приложения "</string>
+    <string name="show_root_apps">Включить root-приложения</string>
     <string name="show_root_apps_on">Показать приложения, требующие привилегий root</string>
     </resources>
