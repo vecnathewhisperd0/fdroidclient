@@ -154,7 +154,8 @@
     <string name="empty_installed_app_list">אין יישומונים מותקנים. 
 \n 
 \nיש יישומונים מותקנים על מכשירך, אך אלו אינם זמינים מתוך F-Droid. מצב זה עלול לקרות כאשר עליך לעדכן את המאגרים שלך או שבמאגרים באמת אין את היישומונים שלך.</string>
-    <string name="empty_can_update_app_list">ברכותינו! היישומונים שלך עדכניים.</string>
+    <string name="empty_can_update_app_list">ברכותינו!
+\nהיישומונים שלך עדכניים.</string>
 
     <string name="requesting_root_access_body">בקשה לגישת על (root)…</string>
     <string name="root_access_denied_title">גישת על (root) נאסרה</string>
@@ -540,5 +541,9 @@
 <string name="warning_scaning_qr_code">כנראה שלמצלמה שלך אין מיקוד אוטומטי. סריקת הקוד עשויה להוות מכשול.</string>
     <string name="show_root_apps">לכלול גרסאות שדורשות גישת על</string>
     <string name="show_root_apps_on">הצגת יישומונים שדורשים גישת על למכשיר</string>
-    <string name="show_anti_feature_apps">לכלול יישומונים שמכינים תכונות שליליות</string>
+    <string name="show_anti_feature_apps">לכלול יישומונים שמכילים תכונות שליליות</string>
+    <string name="show_anti_feature_apps_on">הצגת יישומונים שדורשים תכונות שליליות</string>
+    <string name="force_touch_apps">לכלול יישומוני מסך מגע</string>
+    <string name="force_touch_apps_on">הצגת יישומונים שדורשים מסך מגע ללא תלות בתמיכת החומרה</string>
+
     </resources>
