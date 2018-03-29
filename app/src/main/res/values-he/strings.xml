@@ -90,7 +90,7 @@
     <string name="search_hint">חיפוש יישומונים</string>
 
     <string name="appcompatibility">תאימות היישומון</string>
-    <string name="show_incompat_versions">גירסאות לא תואמות</string>
+    <string name="show_incompat_versions">לכלול גרסאות שאינן תואמות</string>
     <string name="show_incompat_versions_on">הצגת גירסאות היישומון שאינן תואמות להתקן</string>
 
     <string name="local_repo">מאגר מקומי</string>
@@ -538,4 +538,7 @@
     <string name="menu_liberapay">Liberapay</string>
 
 <string name="warning_scaning_qr_code">כנראה שלמצלמה שלך אין מיקוד אוטומטי. סריקת הקוד עשויה להוות מכשול.</string>
+    <string name="show_root_apps">לכלול גרסאות שדורשות גישת על</string>
+    <string name="show_root_apps_on">הצגת יישומונים שדורשים גישת על למכשיר</string>
+    <string name="show_anti_feature_apps">לכלול יישומונים שמכינים תכונות שליליות</string>
     </resources>
