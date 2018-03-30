@@ -581,4 +581,12 @@
     <string name="force_touch_apps">Паказваць прыкладанні для сэнсарнага экрана</string>
     <string name="force_touch_apps_on">Паказваць прыкладанні, якія патрабуюць сэнсарны экран незалежна ад наяўнасці апаратнай падтрымкі</string>
 
+    <string name="repo_add_mirror"></string>
+    <string name="repo_exists_add_fingerprint"></string>
+    <string name="repo_exists_enable"></string>
+    <string name="repo_exists_and_enabled"></string>
+    <string name="repo_delete_to_overwrite"></string>
+    <string name="repo_exists_add_mirror"></string>
+    <string name="repo_official_mirrors"></string>
+    <string name="repo_user_mirrors"></string>
     </resources>
