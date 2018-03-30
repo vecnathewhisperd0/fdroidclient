@@ -516,4 +516,12 @@
     <string name="panic_hide_summary">Aplikasi akan sembunyi dengan sendirinya</string>
     <string name="sort_search">Atur pencarian</string>
 
-</resources>
+<string name="repo_add_mirror">Tambah mirror</string>
+    <string name="repo_exists_add_fingerprint">%1$s sudah diatur, ini akan menambah informasi kunci baru.</string>
+    <string name="repo_exists_enable">%1$s sudah diatur, konfirmasikan bahwa kamu ingin mengaktifkannya lagi.</string>
+    <string name="repo_exists_and_enabled">%1$s sudah diatur dan telah diaktifkan.</string>
+    <string name="repo_delete_to_overwrite">Pertama hapus %1$s untuk menambahkan ini dengan kunci yang sedang konflik.</string>
+    <string name="repo_exists_add_mirror">Ini adalah salinan dari %1$s, tambahkan sebagai mirror?</string>
+    <string name="menu_liberapay">Liberapay</string>
+
+    </resources>
