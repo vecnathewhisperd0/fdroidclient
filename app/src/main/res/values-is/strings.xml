@@ -584,4 +584,6 @@
 
     <string name="repo_add_mirror">Bæta við spegli</string>
     <string name="repo_exists_add_mirror">Þetta er afrit af %1$s, bæta því við sem spegli?</string>
+    <string name="repo_official_mirrors">Opinberir speglar</string>
+    <string name="repo_user_mirrors">Speglar frá notendum</string>
     </resources>
