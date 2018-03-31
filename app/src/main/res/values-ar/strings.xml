@@ -546,4 +546,12 @@
 	<item quantity="many">تم تحديثه قبل %1$d أشهر</item>
 	<item quantity="other">تم تحديثه قبل %1$d أشهر</item>
 </plurals>
-    </resources>
+    <plurals name="details_last_update_years">
+	<item quantity="zero">تم تحديثه قبل %1$d سنوات</item>
+	<item quantity="one">تم تحديثه قبل %1$d سنة</item>
+	<item quantity="two">تم تحديثه قبل %1$d سنتين</item>
+	<item quantity="few">تم تحديثه قبل %1$d سنوات</item>
+	<item quantity="many">تم تحديثه قبل %1$d سنوات</item>
+	<item quantity="other">تم تحديثه قبل %1$d سنوات</item>
+</plurals>
+</resources>
