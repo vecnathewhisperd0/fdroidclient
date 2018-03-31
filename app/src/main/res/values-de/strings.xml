@@ -543,4 +543,14 @@
 <string name="warning_scaning_qr_code">Ihre Kamera scheint keinen Autofokus zu haben. Es könnte schwierig sein, den Code zu scannen.</string>
     <string name="show_root_apps">Root-Apps einbeziehen</string>
     <string name="show_root_apps_on">Apps anzeigen, die Root-Berechtigungen benötigen</string>
+    <string name="repo_add_mirror">Mirror hinzufügen</string>
+    <string name="repo_exists_add_fingerprint">%1$s ist bereits eingerichtet, dies fügt neue Schlüsselinformationen hinzu.</string>
+    <string name="repo_exists_enable">%1$s ist bereits eingestellt, bestätigen Sie, dass Sie erneut aktivieren möchten.</string>
+    <string name="repo_exists_and_enabled">%1$s ist bereits eingerichtet und aktiviert.</string>
+    <string name="repo_exists_add_mirror">Dies ist eine Kopie von %1$s, als Spiegel hinzufügen?</string>
+    <string name="show_anti_feature_apps">Anti-Feature-Apps einbeziehen</string>
+    <string name="show_anti_feature_apps_on">Apps anzeigen, die Anti-Features benötigen</string>
+    <string name="force_touch_apps">Touchscreen-Apps einbeziehen</string>
+    <string name="force_touch_apps_on">Apps anzeigen, die unabhängig von der Hardwareunterstützung einen Touchscreen benötigen.</string>
+
     </resources>
