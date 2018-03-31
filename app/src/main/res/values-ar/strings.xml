@@ -515,5 +515,7 @@
     <string name="sort_search">ترتيب البحث</string>
 
     <string name="show_root_apps">إضافة التطبيقات التي تحتاج إلى التصريحات الجذرية</string>
-    <string name="show_root_apps_on">إظهار التطبيقات التي تحتاج التصريحات الجذرية</string>
+    <string name="show_root_apps_on">إظهار التطبيقات التي تتطلّب التصريحات الجذرية</string>
+    <string name="force_touch_apps">إضافة التطبيقات التي تتطلّب لمس الشاشة</string>
+    <string name="hide_on_long_search_press_title">الإخفاء عن طريق زر البحث</string>
     </resources>
