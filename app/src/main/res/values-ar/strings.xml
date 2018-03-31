@@ -140,7 +140,7 @@
     <string name="search_hint">بحث في التطبيقات</string>
 
     <string name="appcompatibility">توافق التطبيق</string>
-    <string name="show_incompat_versions">إصدارات غير متوافقة</string>
+    <string name="show_incompat_versions">إضافة الإصدارات غير المتوافقة</string>
     <string name="show_incompat_versions_on">إظهار إصدارات التطبيق غير المتوافقة مع الجهاز</string>
 
     <string name="local_repo_running">اف-درويد على استعداد التبديل</string>
@@ -220,7 +220,8 @@
     <string name="empty_installed_app_list">لا يوجد تطبيقات مثبتة.\n\nهناك تطبيقات على جهازك، ولكن لم تكن متوفرة في
         اف-درويد. يمكن أنك تحتاج إلى تحديث المستودعات الخاصة بك، أو المستودعات بالفعل لا تملك تطبيقات متوفرة خاصة بك.
     </string>
-    <string name="empty_can_update_app_list">تهانينا ! كل تطبيقاتك محدثة.</string>
+    <string name="empty_can_update_app_list">تهانينا !
+\nإنَّ كافة تطبيقاتك مُحدّثة.</string>
     <string name="empty_search_available_app_list">لا توجد تطبيقات مطابقة متوفرة.</string>
 
     <string name="requesting_root_access_body">طلب وصول إلى النواة…</string>
@@ -506,7 +507,7 @@
     <string name="panic_hide_title">إخفاء %s</string>
     <string name="panic_hide_summary">التطبيق سوف يخفي نفسه</string>
 
-<string name="menu_liberapay">Liberapay</string>
+<string name="menu_liberapay">ليبراباي</string>
 
     <string name="panic_hide_warning_title">تذكر كيفية الإسترجاع</string>
     <string name="hiding_calculator">الحاسبة</string>
@@ -554,4 +555,8 @@
 	<item quantity="many">تم تحديثه قبل %1$d سنوات</item>
 	<item quantity="other">تم تحديثه قبل %1$d سنوات</item>
 </plurals>
-</resources>
+<string name="repo_exists_add_fingerprint"></string>
+    <string name="repo_exists_enable"></string>
+    <string name="repo_exists_and_enabled"></string>
+    <string name="repo_delete_to_overwrite"></string>
+    </resources>
