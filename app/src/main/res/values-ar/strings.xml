@@ -511,4 +511,9 @@
     <string name="panic_hide_warning_title">تذكر كيفية الإسترجاع</string>
     <string name="hiding_calculator">الحاسبة</string>
     <string name="hiding_dialog_title">إخفاء %s الآن</string>
+    <string name="repo_add_mirror">إضافة مستودع مِرآة</string>
+    <string name="sort_search">ترتيب البحث</string>
+
+    <string name="show_root_apps">إضافة التطبيقات التي تحتاج إلى التصريحات الجذرية</string>
+    <string name="show_root_apps_on">إظهار التطبيقات التي تحتاج التصريحات الجذرية</string>
     </resources>
