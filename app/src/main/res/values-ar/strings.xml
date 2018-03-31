@@ -518,4 +518,8 @@
     <string name="show_root_apps_on">إظهار التطبيقات التي تتطلّب التصريحات الجذرية</string>
     <string name="force_touch_apps">إضافة التطبيقات التي تتطلّب لمس الشاشة</string>
     <string name="hide_on_long_search_press_title">الإخفاء عن طريق زر البحث</string>
+    <string name="hide_on_long_search_press_summary">الضغط المُطوّل على زر البحث يُمكّن مِن إخفاء التطبيق</string>
+
+    <string name="repo_official_mirrors">مستودعات المِرآة الرسمية</string>
+    <string name="repo_user_mirrors">إستخدم مستودعات المرايا البديلة</string>
     </resources>
