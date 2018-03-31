@@ -525,9 +525,17 @@
     <plurals name="details_last_update_days">
 	<item quantity="zero"></item>
 	<item quantity="one">تم تحديثه قبل %1$d يوم</item>
-	<item quantity="two"></item>
-	<item quantity="few"></item>
-	<item quantity="many"></item>
+	<item quantity="two">تم تحديثه قبل %1$d يومين</item>
+	<item quantity="few">تم تحديثه قبل %1$d أيام</item>
+	<item quantity="many">تم تحديثه قبل %1$d أيام</item>
 	<item quantity="other">تم تحديثه قبل %1$d أيام</item>
+</plurals>
+    <plurals name="details_last_update_weeks">
+	<item quantity="zero"></item>
+	<item quantity="one">تم تحديثه قبل %1$d أسبوع</item>
+	<item quantity="two">تم تحديثه قبل %1$d أسبوعين</item>
+	<item quantity="few">تم تحديثه قبل %1$d أسابيع</item>
+	<item quantity="many">تم تحديثه قبل %1$d أسابيع</item>
+	<item quantity="other">تم تحديثه قبل %1$d أسابيع</item>
 </plurals>
     </resources>
