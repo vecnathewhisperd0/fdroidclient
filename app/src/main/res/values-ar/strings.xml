@@ -521,5 +521,13 @@
     <string name="hide_on_long_search_press_summary">الضغط المُطوّل على زر البحث يُمكّن مِن إخفاء التطبيق</string>
 
     <string name="repo_official_mirrors">مستودعات المِرآة الرسمية</string>
-    <string name="repo_user_mirrors">إستخدم مستودعات المرايا البديلة</string>
+    <string name="repo_user_mirrors">مستخدم مستودعات المرايا البديلة</string>
+    <plurals name="details_last_update_days">
+	<item quantity="zero"></item>
+	<item quantity="one">تم تحديثه قبل %1$d يوم</item>
+	<item quantity="two"></item>
+	<item quantity="few"></item>
+	<item quantity="many"></item>
+	<item quantity="other">تم تحديثه قبل %1$d أيام</item>
+</plurals>
     </resources>
