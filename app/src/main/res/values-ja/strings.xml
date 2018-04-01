@@ -392,7 +392,7 @@
 
     <string name="details_new_in_version">バージョン%sの新機能</string>
 
-    <string name="antifeatureswarning">このアプリは好ましくない機能を含んでいるかもしれません。</string>
+    <string name="antifeatureswarning">このアプリは好ましくないかもしれない機能を含んでいます。</string>
     <string name="antifeatures">好ましくない機能</string>
     <plurals name="details_last_update_days">
         <item quantity="other">%1$d日前に更新しました</item>
