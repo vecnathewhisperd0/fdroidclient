@@ -428,7 +428,7 @@
     <string name="details_new_in_version">Neu in Version %s</string>
 
     <string name="antifeatureswarning">Diese Anwendung besitzt Merkmale, die möglicherweise unerwünscht sind.</string>
-    <string name="antifeatures">Anti-features</string>
+    <string name="antifeatures">Unerwünschte Merkmale</string>
     <string name="details_last_updated_today">Heute aktualisiert</string>
     <plurals name="details_last_update_days">
         <item quantity="one">Vor %1$d Tag aktualisiert</item>
