@@ -524,12 +524,12 @@
     <string name="repo_official_mirrors">مستودعات المِرآة الرسمية</string>
     <string name="repo_user_mirrors">مستخدم مستودعات المرايا البديلة</string>
     <plurals name="details_last_update_days">
-	<item quantity="zero"/>
-	<item quantity="one">تم تحديثه قبل %1$d يوم</item>
-	<item quantity="two">تم تحديثه قبل %1$d يومين</item>
-	<item quantity="few">تم تحديثه قبل %1$d أيام</item>
-	<item quantity="many">تم تحديثه قبل %1$d أيام</item>
-	<item quantity="other">تم تحديثه قبل %1$d أيام</item>
+	<item quantity="zero">تم تحديثه منذ %1$d يوم</item>
+	<item quantity="one">تم تحديثه منذ %1$d يوم</item>
+	<item quantity="two">تم تحديثه منذ %1$d يومين</item>
+	<item quantity="few">تم تحديثه منذ %1$d أيام</item>
+	<item quantity="many">تم تحديثه منذ %1$d أيام</item>
+	<item quantity="other">تم تحديثه منذ %1$d أيام</item>
 </plurals>
     <plurals name="details_last_update_weeks">
 	<item quantity="zero">تم تحديثه قبل %1$d أسابيع</item>
@@ -560,5 +560,5 @@
     <string name="repo_exists_and_enabled"/>
     <string name="repo_delete_to_overwrite"/>
     <string name="show_anti_feature_apps">يحتوي على ميزات مضادة للتطبيقات</string>
-    <string name="show_anti_feature_apps_on">عرض التطبيقات التي تحتوي على ميزات مضادة</string>
+    <string name="show_anti_feature_apps_on">عرض التطبيقات التي تتطلّب تشغيل ميزات مضادة</string>
     </resources>
