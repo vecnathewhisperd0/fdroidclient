@@ -589,4 +589,6 @@
     <string name="repo_exists_add_mirror">Гэта копія %1$s, дадаць яго як люстру?</string>
     <string name="repo_official_mirrors">Афіцыйныя люстры</string>
     <string name="repo_user_mirrors">Люстры карыстальніка</string>
+    <string name="show_anti_feature_apps">Уключаць праграмы з непажаданымі функцыямі</string>
+    <string name="show_anti_feature_apps_on">Паказаць праграмы, які патрабуюць непажаданыя функцыі</string>
     </resources>
