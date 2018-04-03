@@ -433,7 +433,7 @@
 
     <string name="updates__app_with_known_vulnerability__ignore">تخطي</string>
 
-    <string name="details_new_in_version">جديد في النسخة %s</string>
+    <string name="details_new_in_version">مُستجدَّات النسخة %s</string>
 
     <plurals name="button_view_all_apps_in_category">
         <item quantity="zero">عرض %d</item>
@@ -555,8 +555,10 @@
 	<item quantity="many">تم تحديثه قبل %1$d سنوات</item>
 	<item quantity="other">تم تحديثه قبل %1$d سنوات</item>
 </plurals>
-<string name="repo_exists_add_fingerprint"></string>
-    <string name="repo_exists_enable"></string>
-    <string name="repo_exists_and_enabled"></string>
-    <string name="repo_delete_to_overwrite"></string>
+<string name="repo_exists_add_fingerprint"/>
+    <string name="repo_exists_enable"/>
+    <string name="repo_exists_and_enabled"/>
+    <string name="repo_delete_to_overwrite"/>
+    <string name="show_anti_feature_apps">يحتوي على ميزات مضادة للتطبيقات</string>
+    <string name="show_anti_feature_apps_on">عرض التطبيقات التي تحتوي على ميزات مضادة</string>
     </resources>
