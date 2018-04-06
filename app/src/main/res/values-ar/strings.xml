@@ -555,10 +555,6 @@
 	<item quantity="many">تم تحديثه قبل %1$d سنوات</item>
 	<item quantity="other">تم تحديثه قبل %1$d سنوات</item>
 </plurals>
-<string name="repo_exists_add_fingerprint"/>
-    <string name="repo_exists_enable"/>
-    <string name="repo_exists_and_enabled"/>
-    <string name="repo_delete_to_overwrite"/>
     <string name="show_anti_feature_apps">يحتوي على ميزات مضادة للتطبيقات</string>
     <string name="show_anti_feature_apps_on">عرض التطبيقات التي تتطلّب تشغيل ميزات مضادة</string>
     </resources>
