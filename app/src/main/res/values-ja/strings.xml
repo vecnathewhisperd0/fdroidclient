@@ -494,10 +494,10 @@
     <string name="repo_exists_enable">%1$sはすでに設定されています。再度有効にするか確認してください。</string>
     <string name="repo_exists_and_enabled">入力中のリポジトリはすでに設定されて有効にされています。</string>
     <string name="repo_delete_to_overwrite">競合する鍵でこのリポジトリを追加するためには、先に%1$sを削除してください。</string>
-    <string name="repo_exists_add_mirror">これは %1$s のｺﾋﾟｰです。ﾐﾗｰとして追加しますか?</string>
+    <string name="repo_exists_add_mirror">これは%1$sの複製です。ミラーとして追加しますか？</string>
     <string name="show_root_apps">root ｱﾌﾟﾘを含める</string>
     <string name="show_root_apps_on">root 権限が必要なｱﾌﾟﾘを表示します</string>
-    <string name="show_anti_feature_apps">好ましくない機能を含むアプリを含める</string>
+    <string name="show_anti_feature_apps">ｱﾝﾁ機能ｱﾌﾟﾘを含める</string>
     <string name="show_anti_feature_apps_on">好ましくない機能を必要とするアプリを表示します</string>
     <string name="force_touch_apps">タッチスクリーンを使用するアプリ</string>
     <string name="force_touch_apps_on">ﾊｰﾄﾞｳｪｱｻﾎﾟｰﾄに関係なくﾀｯﾁｽｸﾘｰﾝを必要とするｱﾌﾟﾘを表示します</string>
