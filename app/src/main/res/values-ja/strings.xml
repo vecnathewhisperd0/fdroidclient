@@ -497,10 +497,10 @@
     <string name="repo_exists_add_mirror">これは%1$sの複製です。ミラーとして追加しますか？</string>
     <string name="show_root_apps">root ｱﾌﾟﾘを含める</string>
     <string name="show_root_apps_on">root 権限が必要なｱﾌﾟﾘを表示します</string>
-    <string name="show_anti_feature_apps">ｱﾝﾁ機能ｱﾌﾟﾘを含める</string>
+    <string name="show_anti_feature_apps">好ましくない機能を含むアプリを含める</string>
     <string name="show_anti_feature_apps_on">好ましくない機能を必要とするアプリを表示します</string>
     <string name="force_touch_apps">タッチスクリーンを使用するアプリ</string>
-    <string name="force_touch_apps_on">ﾊｰﾄﾞｳｪｱｻﾎﾟｰﾄに関係なくﾀｯﾁｽｸﾘｰﾝを必要とするｱﾌﾟﾘを表示します</string>
+    <string name="force_touch_apps_on">ハードウェアでサポートされていない場合でも、タッチスクリーンの使用を要求するアプリを表示します</string>
 
     <string name="repo_official_mirrors">公式ﾐﾗｰ</string>
     <string name="repo_user_mirrors">ﾕｰｻﾞｰﾐﾗｰ</string>
