@@ -70,7 +70,7 @@
     <string name="expert_on">拡張情報を表示し、拡張設定を有効にします</string>
     <string name="search_hint">アプリを検索</string>
     <string name="appcompatibility">アプリの互換性</string>
-    <string name="show_incompat_versions">互換性の無いﾊﾞｰｼﾞｮﾝを含める</string>
+    <string name="show_incompat_versions">互換性の無いバージョン</string>
     <string name="show_incompat_versions_on">端末と互換性のないバージョンを表示します</string>
     <string name="local_repo">ローカルリポジトリ</string>
     <string name="local_repo_running">F-Droidは交換の準備ができました</string>
@@ -494,7 +494,7 @@
     <string name="repo_exists_enable">%1$sはすでに設定されています。再度有効にするか確認してください。</string>
     <string name="repo_exists_and_enabled">入力中のリポジトリはすでに設定されて有効にされています。</string>
     <string name="repo_delete_to_overwrite">競合する鍵でこのリポジトリを追加するためには、先に%1$sを削除してください。</string>
-    <string name="repo_exists_add_mirror">これは%1$sの複製です。ミラーとして追加しますか？</string>
+    <string name="repo_exists_add_mirror">これは %1$s のｺﾋﾟｰです。ﾐﾗｰとして追加しますか?</string>
     <string name="show_root_apps">root ｱﾌﾟﾘを含める</string>
     <string name="show_root_apps_on">root 権限が必要なｱﾌﾟﾘを表示します</string>
     <string name="show_anti_feature_apps">好ましくない機能を含むアプリを含める</string>
