@@ -168,7 +168,11 @@
     <string name="swap_nfc_title">タッチして交換</string>
     <string name="swap_join_same_wifi_desc">Wi-Fiを使用して交換するには、同じネットワークに接続しているか確認してください。同じネットワークにアクセスしていない場合は、Wi-Fiホットスポットを作成できます。</string>
     <string name="swap_join_this_hotspot">友達がホットスポットに接続するのを助けましょう</string>
-    <string name="empty_can_update_app_list">おめでとうございます！すべてのアプリが最新です。</string>
+    <string name="empty_can_update_app_list">"全てのｱﾌﾟﾘは最新です。
+\n
+\nおめでとう! 全てのｱﾌﾟﾘは最新の状態です
+\n (または、ﾘﾎﾟｼﾞﾄﾘが更新されていません)。
+\n "</string>
 
     <string name="install_error_unknown">不明なエラーのためインストールに失敗しました</string>
     <string name="uninstall_error_unknown">不明なエラーのためアンインストールに失敗しました</string>
@@ -492,8 +496,8 @@
     <string name="repo_exists_add_fingerprint">%1$s は既にｾｯﾄｱｯﾌﾟ済です。これは新しいｷｰ情報を追加します。</string>
     <string name="repo_exists_enable">%1$sはすでに設定されています。再度有効にするか確認してください。</string>
     <string name="repo_exists_and_enabled">入力中のリポジトリはすでに設定されて有効にされています。</string>
-    <string name="repo_delete_to_overwrite">競合するｷｰでこれを追加するために、先に %1$s を削除してください。</string>
-    <string name="repo_exists_add_mirror">これは %1$s のｺﾋﾟｰです。ﾐﾗｰとして追加しますか?</string>
+    <string name="repo_delete_to_overwrite">競合する鍵でこのリポジトリを追加するためには、先に%1$sを削除してください。</string>
+    <string name="repo_exists_add_mirror">これは%1$sの複製です。ミラーとして追加しますか？</string>
     <string name="show_root_apps">root ｱﾌﾟﾘを含める</string>
     <string name="show_root_apps_on">root 権限が必要なｱﾌﾟﾘを表示します</string>
     <string name="show_anti_feature_apps">ｱﾝﾁ機能ｱﾌﾟﾘを含める</string>
