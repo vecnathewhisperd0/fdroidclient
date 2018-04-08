@@ -168,11 +168,7 @@
     <string name="swap_nfc_title">タッチして交換</string>
     <string name="swap_join_same_wifi_desc">Wi-Fiを使用して交換するには、同じネットワークに接続しているか確認してください。同じネットワークにアクセスしていない場合は、Wi-Fiホットスポットを作成できます。</string>
     <string name="swap_join_this_hotspot">友達がホットスポットに接続するのを助けましょう</string>
-    <string name="empty_can_update_app_list">"全てのｱﾌﾟﾘは最新です。
-\n
-\nおめでとう! 全てのｱﾌﾟﾘは最新の状態です
-\n (または、ﾘﾎﾟｼﾞﾄﾘが更新されていません)。
-\n "</string>
+    <string name="empty_can_update_app_list">おめでとうございます！すべてのアプリが最新です。</string>
 
     <string name="install_error_unknown">不明なエラーのためインストールに失敗しました</string>
     <string name="uninstall_error_unknown">不明なエラーのためアンインストールに失敗しました</string>
