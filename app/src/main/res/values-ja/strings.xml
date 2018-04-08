@@ -490,15 +490,15 @@
 
 <string name="warning_scaning_qr_code">お使いのカメラはオートフォーカスがないようです。コードをスキャンするのが難しいことがあるかもしれません。</string>
     <string name="repo_add_mirror">ﾐﾗｰを追加</string>
-    <string name="repo_exists_add_fingerprint">%1$s は既にｾｯﾄｱｯﾌﾟ済です。これは新しいｷｰ情報を追加します。</string>
+    <string name="repo_exists_add_fingerprint">%1$sは既に設定されているため、新しい鍵の情報が追加されます。</string>
     <string name="repo_exists_enable">%1$sはすでに設定されています。再度有効にすることを承認してください。</string>
     <string name="repo_exists_and_enabled">%1$sはすでに設定済みで有効です。</string>
     <string name="repo_delete_to_overwrite">競合する鍵でこのリポジトリを追加するためには、先に%1$sを削除してください。</string>
     <string name="repo_exists_add_mirror">これは%1$sの複製です。ミラーとして追加しますか？</string>
-    <string name="show_root_apps">root権限が必要なアプリ</string>
-    <string name="show_root_apps_on">root権限を必要とするアプリを表示します</string>
-    <string name="show_anti_feature_apps">好ましくない機能が必要なアプリ</string>
-    <string name="show_anti_feature_apps_on">好ましくない機能を必要とするアプリを表示します</string>
+    <string name="show_root_apps">root権限の使用が必要なアプリ</string>
+    <string name="show_root_apps_on">root権限の使用を必要とするアプリを表示します</string>
+    <string name="show_anti_feature_apps">好ましくない機能の使用が必要なアプリ</string>
+    <string name="show_anti_feature_apps_on">好ましくない機能の使用を必要とするアプリを表示します</string>
     <string name="force_touch_apps">タッチスクリーンの使用が必要なアプリ</string>
     <string name="force_touch_apps_on">ハードウェアでサポートされていない場合でも、タッチスクリーンの使用を必要とするアプリを表示します</string>
 
