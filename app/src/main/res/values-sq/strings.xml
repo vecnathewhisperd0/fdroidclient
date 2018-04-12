@@ -150,7 +150,7 @@
     <string name="app_details__incompatible_mismatched_signature">Nënshkrimi i ndryshëm nga verzioni i instaluar</string>
     <string name="app_details__no_versions__show_incompat_versions">Për të shfaqur versione jo të pajtueshëm megjithatë, aktivizo zgjedhjen \"%1$s\"</string>
     <string name="app_details__no_versions__no_compatible_signatures">Verzione me nënshkrim të përshtatshëm nuk gjinden</string>
-    <string name="app_details__no_versions__none_compatible_with_device">"Verzione të përshtatshëm me pajisjen tuaj nuk ka "</string>
+    <string name="app_details__no_versions__none_compatible_with_device">Verzione të përshtatshëm me pajisjen tuaj nuk ka</string>
     <string name="app_details__no_versions__explain_incompatible_signatures">Verzioni i instaluar nuk është i përshtatshëm me verzione të tjera të mundshëm. Uninstalimi i aplikacionit do të mundësoj për ju të shihni dhe të instaloni verzione të përshtatshme. Kjo shpesh ndodhë për shkak të aplikacioneve të instaluara nga Google Play ose burime të tjera, nëse ata janë të nënshkruar nga një certifikatë të ndryshme.</string>
 
     <string name="about_site">Faqja e Internetit</string>
@@ -204,7 +204,7 @@
     <string name="repo_delete_to_overwrite">Së pari hiqni %1$s në mënyrë që të shtoni kto me çelësin kontradiktor.</string>
     <string name="repo_exists_add_mirror">Ky është një kopje e %1$s, shtoje si pasqyrë?</string>
     <string name="bad_fingerprint">Gjurma e gabuar e gishtit</string>
-    <string name="invalid_url">"Ky nuk është  URL e vlefshme."</string>
+    <string name="invalid_url">Ky nuk është  URL e vlefshme.</string>
     <string name="malformed_repo_uri">Ignorohet depoja e shformuar URI: %s</string>
     <string name="repo_provider">Depoja: %s</string>
 
