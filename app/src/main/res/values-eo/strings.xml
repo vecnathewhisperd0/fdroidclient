@@ -537,4 +537,9 @@
     <string name="repo_exists_add_mirror">Tio ĉi estas kopio de %1$s, ĉe aldoni ĝin kiel spegul-servilo?</string>
     <string name="repo_official_mirrors">Oficialaj spegul-serviloj</string>
     <string name="repo_user_mirrors">Uzi spegul-servilojn</string>
+    <string name="use_bluetooth">Uzi Bludenton</string>
+    <string name="swap_toast_invalid_url">Erara ligilo por interŝanĝi: %1$s</string>
+    <string name="swap_toast_hotspot_enabled">Vifi-retkaptejo aktiva</string>
+    <string name="swap_toast_could_not_enable_hotspot">Ne povis aktivigi vifi-retkaptejon!</string>
+
     </resources>
