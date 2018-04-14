@@ -548,4 +548,9 @@
     <string name="repo_exists_add_mirror">מדובר בעותק של %1$s, להוסיף כאתר מראה?</string>
     <string name="repo_official_mirrors">אתרי מראה רשמיים</string>
     <string name="repo_user_mirrors">אתרי מראה של משתמשים</string>
+    <string name="use_bluetooth">שימוש ב־Bluetooth</string>
+    <string name="swap_toast_invalid_url">כתובת שגויה להחלפה: %1$s</string>
+    <string name="swap_toast_hotspot_enabled">נקודת גישה חמה אלחוטית פעילה</string>
+    <string name="swap_toast_could_not_enable_hotspot">לא ניתן להפעיל נקודת גישה אלחוטית חמה!</string>
+
     </resources>
