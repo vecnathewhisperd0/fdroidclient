@@ -114,8 +114,8 @@
 
     <string name="login_title">Aanmelding is vereist</string>
     <string name="login_name">Gebruikersnaam</string>
-    <string name="login_password">Wachtwoord</string>
-    <string name="repo_edit_credentials">Wachtwoord wijzigen</string>
+    <string name="login_password">Paswoord</string>
+    <string name="repo_edit_credentials">Paswoord wijzigen</string>
     <string name="repo_error_empty_username">Lege gebruikersnaam, referenties niet gewijzigd</string>
 
     <string name="no_such_app">Geen dergelijken app gevonden.</string>
