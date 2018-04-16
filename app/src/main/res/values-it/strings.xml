@@ -535,4 +535,7 @@
     <string name="panic_app_dialog_title">Conferma Applicazione Pulsante di Panico</string>
     <string name="panic_app_dialog_message">Sei sicuro di voler permettere %1$s di eseguire azioni distruttive del pulsante di panico?</string>
     <string name="panic_settings">Impostazioni Pulsante di Panico</string>
-</resources>
+<string name="repo_add_mirror">Aggiungi mirror</string>
+    <string name="sort_search">Ordina ricerca</string>
+
+    </resources>
