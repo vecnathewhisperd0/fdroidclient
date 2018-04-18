@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools"><string name="app_name">F-Droid</string>
+<resources><string name="app_name">F-Droid</string>
 
     <string name="updates">Updates</string>
     <string name="ok">Oké</string>
@@ -32,20 +32,20 @@
     <string name="pref_language">Taal</string>
     <string name="pref_language_default">Systeemstandaard</string>
 
-    <string tools:ignore="UnusedResources" name="category_Connectivity">Connectiviteit</string>
-    <string tools:ignore="UnusedResources" name="category_Development">Ontwikkeling</string>
-    <string tools:ignore="UnusedResources" name="category_Games">Spellen</string>
-    <string tools:ignore="UnusedResources" name="category_Graphics">Grafisch</string>
-    <string tools:ignore="UnusedResources" name="category_Internet">Internet</string>
-    <string tools:ignore="UnusedResources" name="category_Money">Geld</string>
-    <string tools:ignore="UnusedResources" name="category_Multimedia">Multimedia</string>
-    <string tools:ignore="UnusedResources" name="category_Navigation">Navigatie</string>
-    <string tools:ignore="UnusedResources" name="category_Phone_SMS">Gsm &amp; sms</string>
-    <string tools:ignore="UnusedResources" name="category_Reading">Lezen</string>
-    <string tools:ignore="UnusedResources" name="category_Science_Education">Onderwijs &amp; wetenschap</string>
-    <string tools:ignore="UnusedResources" name="category_Security">Beveiliging</string>
-    <string tools:ignore="UnusedResources" name="category_Time">Tijd</string>
-    <string tools:ignore="UnusedResources" name="category_Writing">Schrijven</string>
+    <string name="category_Connectivity">Connectiviteit</string>
+    <string name="category_Development">Ontwikkeling</string>
+    <string name="category_Games">Spellen</string>
+    <string name="category_Graphics">Grafisch</string>
+    <string name="category_Internet">Internet</string>
+    <string name="category_Money">Geld</string>
+    <string name="category_Multimedia">Multimedia</string>
+    <string name="category_Navigation">Navigatie</string>
+    <string name="category_Phone_SMS">Gsm &amp; sms</string>
+    <string name="category_Reading">Lezen</string>
+    <string name="category_Science_Education">Onderwijs &amp; wetenschap</string>
+    <string name="category_Security">Beveiliging</string>
+    <string name="category_Time">Tijd</string>
+    <string name="category_Writing">Schrijven</string>
 
     <string name="system_install_button_install">Installeren</string>
     <string name="system_uninstall_button">Verwijderen</string>
@@ -72,8 +72,8 @@
     <string name="repo_last_update">Meest recente update</string>
     <string name="not_on_same_wifi">Uw apparaat zit niet op hetzelfde wifinetwerk als de lokalen bron die ge zojuist hebt toegevoegd! Probeer voor te verbinden met dit netwerk: %s</string>
     <string name="wifi">Wifi</string>
-    <string tools:ignore="UnusedResources" name="category_Sports_Health">Sport &amp; gezondheid</string>
-    <string tools:ignore="UnusedResources" name="category_System">Systeem</string>
+    <string name="category_Sports_Health">Sport &amp; gezondheid</string>
+    <string name="category_System">Systeem</string>
     <string name="swap_send_fdroid">Verstuur F-Droid</string>
     <string name="crash_dialog_title">F-Droid is gecrasht</string>
     <string name="crash_dialog_text">Een onverwachte fout is opgetreden waardoor den app is gestopt. Wilt ge de details over deze fout e-mailen voor zo het probleem helpen op te lossen?</string>
@@ -325,7 +325,7 @@
     <string name="requires_features">Benodigd: %1$s</string>
     <string name="wifi_ap">Hotspot</string>
 
-    <string tools:ignore="UnusedResources" name="category_Theming">Thema’s</string>
+    <string name="category_Theming">Thema’s</string>
     <plurals name="button_view_all_apps_in_category">
 	<item quantity="one">%d weergeven</item>
 	<item quantity="other">Alle %d weergeven</item>
