@@ -569,4 +569,5 @@
     <string name="swap_toast_could_not_enable_hotspot">Impossibile attivare l\'hotspot Wi-Fi!</string>
 
     <string name="warning_scaning_qr_code">La tua fotocamera non ha l\'autofocus. Potrebbe essere complicato scansionare il codice.</string>
+    <string name="swap_toast_invalid_url">URL per scambio non valido: %1$s</string>
     </resources>
