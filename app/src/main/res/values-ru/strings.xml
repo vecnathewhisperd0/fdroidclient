@@ -534,7 +534,7 @@
     <string name="repo_add_mirror">Добавить зеркало</string>
     <string name="repo_exists_add_mirror">Это копия %1$s, добавить ее как зеркало?</string>
     <string name="show_anti_feature_apps">Включить приложения с сомнительным функционалом</string>
-    <string name="show_anti_feature_apps_on">Показывать приложения, включающие функции, которые вам могут не понравиться</string>
+    <string name="show_anti_feature_apps_on">Показывать приложения с функциями, которые могут вам не понравиться</string>
     <string name="force_touch_apps">Включить приложения, требущие сенсорного экрана</string>
     <string name="force_touch_apps_on">Показывать приложения, требующие сенсорного экрана, независимо от поддержки его устройством</string>
 
