@@ -240,13 +240,13 @@
     <string name="perms_description_app">Aangeboden door %1$s.</string>
     <string name="downloading">Downloaden…</string>
 
-    <string name="interval_never">Nooit</string>
-    <string name="interval_1h">Elk uur</string>
-    <string name="interval_4h">Elke 4 uur</string>
-    <string name="interval_12h">Elke 12 uur</string>
-    <string name="interval_1d">Dagelijks</string>
-    <string name="interval_1w">Wekelijks</string>
-    <string name="interval_2w">Elke 2 weken</string>
+    <string name="interval_never">Geen automatische app-updates</string>
+    <string name="interval_1h">Elk uur controleren op updates</string>
+    <string name="interval_4h">Elke 4 uur controleren op updates</string>
+    <string name="interval_12h">Elke 12 uren controleren op updates</string>
+    <string name="interval_1d">Dagelijks controleren op updates</string>
+    <string name="interval_1w">Wekelijks controleren op updates</string>
+    <string name="interval_2w">Elke 2 weken controleren op updates</string>
 
     <string name="theme_light">Licht</string>
     <string name="theme_dark">Donker</string>
@@ -535,5 +535,13 @@
     <string name="swap_toast_invalid_url">Ongeldige URL voor uitwisselen: %1$s</string>
     <string name="swap_toast_hotspot_enabled">Wifi-hotspot ingeschakeld</string>
     <string name="swap_toast_could_not_enable_hotspot">Kon wifi-hotspot niet inschakelen!</string>
+
+    <string name="over_wifi">Via wifi</string>
+    <string name="over_data">Via mobiel netwerk</string>
+    <string name="over_network_always_summary">Deze verbinding altijd gebruiken indien beschikbaar</string>
+    <string name="over_network_on_demand_summary">Deze verbinding alleen gebruiken wanneer ik tik om te downloaden</string>
+    <string name="over_network_never_summary">Nooit downloaden via deze verbinding</string>
+    <string name="antidisabledalgorithmlist">Deze app heeft een zwakke beveiligingshandtekening</string>
+    <string name="antiknownvulnlist">Deze app bevat een bekend probleem in de beveiliging</string>
 
     </resources>
