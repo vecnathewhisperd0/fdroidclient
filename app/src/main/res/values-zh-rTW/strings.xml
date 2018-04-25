@@ -186,13 +186,13 @@
     <string name="no_permissions">不需要任何權限。</string>
     <string name="downloading">正在下載…</string>
 
-    <string name="interval_never">從不</string>
-    <string name="interval_1h">每小時</string>
-    <string name="interval_4h">每四小時</string>
-    <string name="interval_12h">每十二小時</string>
-    <string name="interval_1d">每天</string>
-    <string name="interval_1w">每星期</string>
-    <string name="interval_2w">每兩星期</string>
+    <string name="interval_never">不要自動更新應用程式</string>
+    <string name="interval_1h">每小時都檢查更新</string>
+    <string name="interval_4h">每四小時檢查更新</string>
+    <string name="interval_12h">每十二小時檢查更新</string>
+    <string name="interval_1d">每天檢查更新</string>
+    <string name="interval_1w">每星期檢查更新</string>
+    <string name="interval_2w">每兩星期檢查更新</string>
 
     <string name="theme_light">亮</string>
     <string name="crash_dialog_title">F-Droid 已當機</string>
@@ -519,4 +519,12 @@
     <string name="swap_toast_could_not_enable_hotspot">無法啟用 Wi-Fi 熱點！</string>
 
     <string name="swap_toast_invalid_url">無效的交換網址：%1$s</string>
+    <string name="over_wifi">透過 Wi-Fi</string>
+    <string name="over_data">透過行動網路</string>
+    <string name="over_network_always_summary">在可用時總是使用此連線</string>
+    <string name="over_network_on_demand_summary">當我點按下載時僅使用此連線</string>
+    <string name="over_network_never_summary">不要使用此連線下載任何東西</string>
+    <string name="antidisabledalgorithmlist">這個應用程式的安全簽章較弱</string>
+    <string name="antiknownvulnlist">這個應用程式包含了已知的安全性漏洞</string>
+
     </resources>
