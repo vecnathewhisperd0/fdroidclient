@@ -22,7 +22,7 @@
     <string name="main_menu__categories">Categorieën</string>
     <string name="main_menu__swap_nearby">Dichtbij</string>
 
-    <string name="preference_manage_installed_apps">Geïnstalleerde apps beheren</string>
+    <string name="preference_manage_installed_apps">G\'installeerde apps beheren</string>
 
 
     <string name="details_notinstalled">Niet geïnstalleerd</string>
@@ -420,13 +420,13 @@
     <string name="installing">Installeren…</string>
     <string name="uninstalling">Verwijderen…</string>
 
-    <string name="interval_never">Nooit</string>
-    <string name="interval_1h">Elk uur</string>
-    <string name="interval_4h">Elke 4 uur</string>
-    <string name="interval_12h">Elke 12 uur</string>
-    <string name="interval_1d">Dagelijks</string>
-    <string name="interval_1w">Wekelijks</string>
-    <string name="interval_2w">Elke 2 weken</string>
+    <string name="interval_never">Geen automatische app-updates</string>
+    <string name="interval_1h">Elk uur controleren op updates</string>
+    <string name="interval_4h">Elke 4 uur controleren op updates</string>
+    <string name="interval_12h">Elke 12 uur controleren op updates</string>
+    <string name="interval_1d">Dagelijks controleren op updates</string>
+    <string name="interval_1w">Wekelijks controleren op updates</string>
+    <string name="interval_2w">Elke 2 weken controleren op updates</string>
 
     <string name="keep_hour">1 uur</string>
     <string name="keep_day">1 dag</string>
@@ -503,4 +503,12 @@
     <string name="requesting_root_access_body">Roottoegang aanvragen…</string>
     <string name="root_access_denied_title">Roottoegang geweigerd</string>
     <string name="root_access_denied_body">Uw Android-apparaat is niet geroot, of ge hebd F-Droid geen roottoegang gegeven.</string>
+    <string name="over_wifi">Via wifi</string>
+    <string name="over_data">Via mobiel netwerk</string>
+    <string name="over_network_always_summary">Deze verbinding altijd gebruiken indien beschikbaar</string>
+    <string name="over_network_on_demand_summary">Deze verbinding alleen gebruiken wanneer dat ik tik voor te downloaden</string>
+    <string name="over_network_never_summary">Nooit downloaden via deze verbinding</string>
+    <string name="antidisabledalgorithmlist">Dezen app heefd een zwakke beveiligingshandtekening</string>
+    <string name="antiknownvulnlist">Dezen app bevat een gekend probleem met de beveiliging</string>
+
     </resources>
