@@ -6,7 +6,7 @@
     <string name="delete">削除</string>
     <string name="enable_nfc_send">NFC送信を有効にする。。。</string>
     <string name="cache_downloaded">キャッシュしたアプリを残す</string>
-    <string name="updates">アップデート</string>
+    <string name="updates">更新</string>
     <string name="other">その他</string>
     <string name="update_interval">自動更新の間隔</string>
     <string name="notify">利用可能な更新を表示</string>
@@ -172,7 +172,7 @@
     <string name="uninstall_error_unknown">不明なエラーのためアンインストールに失敗しました</string>
     <string name="system_install_post_success">F-Droidの特権拡張機能をインストールしました</string>
     <string name="system_install_post_fail">F-Droidの特権拡張機能のインストールに失敗しました</string>
-    <string name="system_install_post_success_message">F-Droid特権拡張機能をインストールしました。これはF-Droid が独自にｱﾌﾟﾘをｲﾝｽﾄｰﾙ、ｱｯﾌﾟｸﾞﾚｰﾄﾞ､及びｱﾝｲﾝｽﾄｰﾙをすることができます｡</string>
+    <string name="system_install_post_success_message">F-Droid特権拡張機能はインストール済みです。これによりF-Droidは独自にアプリをインストール、更新、アンインストールすることができます。</string>
     <string name="system_install_post_fail_message">F-Droidの特権拡張機能のインストールに失敗しました。すべてのAndroidでこのインストール方法が使用できる訳ではありません。詳細については、F-Droidのバグトラッカーを参照してください。</string>
     <string name="system_install_installing">インストール中</string>
     <string name="system_install_uninstalling">アンインストール中</string>
@@ -217,7 +217,7 @@
 
     <string name="install_confirm">アクセス権限が必要</string>
     <string name="install_confirm_update">インストール済みのアプリにアップデートをインストールしますか？既存のデータは失われません。更新されたアプリの権限:</string>
-    <string name="install_confirm_update_system">このビルトインアプリに更新をインストールしますか？既存のデータが失われることはありません。更新されたｱﾌﾟﾘのｱｸｾｽ許可:</string>
+    <string name="install_confirm_update_system">このビルトインアプリに更新をインストールしますか？既存のデータが失われることはありません。更新されたアプリの権限:</string>
     <string name="install_confirm_update_no_perms">インストール済みのアプリに更新をインストールしますか？既存のデータが失われることはありません。特別な権限は不要です。</string>
     <string name="install_confirm_update_system_no_perms">ビルトインアプリにアップデートをインストールしますか？既存のデータが失われることはありません。特別な権限は不要です。</string>
     <string name="newPerms">新規</string>
@@ -333,7 +333,7 @@
     <string name="notification_title_summary_update_available">更新が利用可能です</string>
     <string name="notification_title_summary_downloading_update">更新をダウンロードしています</string>
     <string name="notification_title_summary_ready_to_install_update">アップデートをインストールする準備ができました</string>
-    <string name="notification_action_update">アップデート</string>
+    <string name="notification_action_update">更新</string>
     <string name="notification_title_summary_downloading">ダウンロード中</string>
     <string name="notification_title_summary_ready_to_install">インストールの準備完了</string>
     <string name="notification_title_summary_installing">インストール中</string>
