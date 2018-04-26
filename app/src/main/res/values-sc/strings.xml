@@ -278,13 +278,13 @@
     <string name="perms_description_app">Frunidu dae %1$s.</string>
     <string name="downloading">Iscarrighende…</string>
 
-    <string name="interval_never">Mai</string>
-    <string name="interval_1h">Cada ora</string>
-    <string name="interval_4h">Cada 4 oras</string>
-    <string name="interval_12h">Cada 12 oras</string>
-    <string name="interval_1d">Cada die</string>
-    <string name="interval_1w">Cada chida</string>
-    <string name="interval_2w">Cada 2 chidas</string>
+    <string name="interval_never">Perunu agiornamentu automàticu</string>
+    <string name="interval_1h">Chirca agiornamentos cada ora</string>
+    <string name="interval_4h">Chirca agiornamentos cada 4 oras</string>
+    <string name="interval_12h">Chirca agiornamentos cada 12 oras</string>
+    <string name="interval_1d">Chirca agiornamentos cada die</string>
+    <string name="interval_1w">Chirca agiornamentos cada chida</string>
+    <string name="interval_2w">Chirca agiornamentos cada 2 chidas</string>
 
     <string name="theme_light">Craru</string>
     <string name="theme_dark">Iscuru</string>
@@ -571,5 +571,13 @@
     <string name="swap_toast_invalid_url">URL pro cuncàmbiu non vàlidu: %1$s</string>
     <string name="swap_toast_hotspot_enabled">Hotspot Wi-Fi abilitadu</string>
     <string name="swap_toast_could_not_enable_hotspot">Impossìbile abilitare s\'Hotspot Wi-Fi!</string>
+
+    <string name="over_wifi">Impreende su Wi-Fi</string>
+    <string name="over_data">Impreende sa connessione datos</string>
+    <string name="over_network_always_summary">Imprea semper custa connessione cando est disponìbile</string>
+    <string name="over_network_on_demand_summary">Imprea petzi custa connessione cando incarco pro iscarrigare</string>
+    <string name="over_network_never_summary">No iscàrrighes nudda impreende custa connessione</string>
+    <string name="antidisabledalgorithmlist">Custa aplicatzione tenet una firma de seguresa dèbile</string>
+    <string name="antiknownvulnlist">Custa aplicatzione tenet una vulnerabilidade de seguresa connota</string>
 
     </resources>
