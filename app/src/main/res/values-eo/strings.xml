@@ -539,4 +539,5 @@
     <string name="swap_toast_hotspot_enabled">Vifi-retkaptejo aktiva</string>
     <string name="swap_toast_could_not_enable_hotspot">Ne povis aktivigi vifi-retkaptejon!</string>
 
+    <string name="over_wifi">Tra vifio</string>
     </resources>
