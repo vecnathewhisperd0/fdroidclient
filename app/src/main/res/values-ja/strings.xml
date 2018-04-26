@@ -108,9 +108,9 @@
     <string name="repo_not_yet_updated">このリポジトリはまだ使用されていません。アプリを表示するには、リポジトリを有効にする必要があります。</string>
     <string name="unknown">不明</string>
     <string name="repo_confirm_delete_title">リポジトリを削除しますか？</string>
-    <string name="repo_confirm_delete_body">リポジトリを削除すると、アプリをF-Droidからインストールすることができなくなります。
-\n
-\n注: これまでにインストールたアプリはすべて端末に残ります。</string>
+    <string name="repo_confirm_delete_body">リポジトリを削除すると、アプリをF-Droidからインストールすることができなくなります。 
+\n 
+\n注: これまでにインストールしたアプリはすべて端末に残ります。</string>
     <string name="repo_disabled_notification">%1$sを無効にしました。 
 \n
 \nアプリをインストールするにはこのリポジトリを再度有効にする必要があります。</string>
@@ -398,7 +398,7 @@
     <string name="nearby_splash__find_people_button">近くの人を探す</string>
     <string name="nearby_splash__both_parties_need_fdroid">お互いが近くで%1$sを使用する必要があります。</string>
 
-    <string name="latest__empty_state__no_recent_apps">最近のアプリが見つかりません</string>
+    <string name="latest__empty_state__no_recent_apps">新着アプリが見つかりません</string>
     <string name="latest__empty_state__never_updated">一度アプリのリストを更新すると、新着のアプリがここに表示されます</string>
     <string name="latest__empty_state__no_enabled_repos">一度リポジトリを有効にして更新すると、新着アプリがここに表示されます</string>
 
@@ -484,7 +484,7 @@
     <string name="menu_liberapay">Liberapay</string>
 
 <string name="warning_scaning_qr_code">お使いのカメラはオートフォーカスがないようです。コードをスキャンするのが難しいことがあるかもしれません。</string>
-    <string name="repo_add_mirror">ﾐﾗｰを追加</string>
+    <string name="repo_add_mirror">ミラーを追加</string>
     <string name="repo_exists_add_fingerprint">%1$sは既に設定されているため、新しい鍵の情報が追加されます。</string>
     <string name="repo_exists_enable">%1$sはすでに設定されています。再度有効にすることを承認してください。</string>
     <string name="repo_exists_and_enabled">%1$sはすでに設定済みで有効です。</string>
