@@ -268,13 +268,13 @@
     <string name="perms_description_app">Poskytováno %1$s.</string>
     <string name="downloading">Stahování…</string>
 
-    <string name="interval_never">Nikdy</string>
-    <string name="interval_1h">Každou hodinu</string>
-    <string name="interval_4h">Každé 4 hodiny</string>
-    <string name="interval_12h">Každých 12 hodin</string>
-    <string name="interval_1d">Denně</string>
-    <string name="interval_1w">Týdenně</string>
-    <string name="interval_2w">Každé 2 týdny</string>
+    <string name="interval_never">Žádné automatické aktualizace aplikace</string>
+    <string name="interval_1h">Zjišťovat aktualizace každou hodinu</string>
+    <string name="interval_4h">Zjišťovat aktualizace každé 4 hodiny</string>
+    <string name="interval_12h">"Zjišťovat aktualizace  každých 12 hodin"</string>
+    <string name="interval_1d">Zjišťovat aktualizace každý den</string>
+    <string name="interval_1w">Zjišťovat aktualizace každý týden</string>
+    <string name="interval_2w">"Zjišťovat aktualizace  každé 2 týdny"</string>
 
     <string name="theme_light">Světlý</string>
     <string name="theme_dark">Tmavý</string>
@@ -558,5 +558,13 @@
     <string name="swap_toast_invalid_url">Neplatná URL adresa pro prohození: %1$s</string>
     <string name="swap_toast_hotspot_enabled">Wi-Fi přístupový bod zapnut</string>
     <string name="swap_toast_could_not_enable_hotspot">Nedaří se zapnout Wi-Fi přístupový bod!</string>
+
+    <string name="over_wifi">Přes Wi-Fi</string>
+    <string name="over_data">Přes mobilní data</string>
+    <string name="over_network_always_summary">Pokud je k dispozici, vždy použít toto připojení</string>
+    <string name="over_network_on_demand_summary">Toto připojení použít pouze pokud kliknu na stahování</string>
+    <string name="over_network_never_summary">Přes toto připojení nikdy nic nestahovat</string>
+    <string name="antidisabledalgorithmlist">Tato aplikace má slabý bezpečnostní podpis</string>
+    <string name="antiknownvulnlist">Tato aplikace má známou zranitelnost v zabezpečení</string>
 
     </resources>
