@@ -149,12 +149,12 @@
     <string name="about_source">Исходный код</string>
     <string name="links">Ссылки</string>
     <string name="interval_never">Никогда</string>
-    <string name="interval_1h">Каждый час</string>
-    <string name="interval_4h">Каждые 4 часа</string>
-    <string name="interval_12h">Каждые 12 часов</string>
-    <string name="interval_1d">Ежедневно</string>
-    <string name="interval_1w">Еженедельно</string>
-    <string name="interval_2w">Каждые 2 недели</string>
+    <string name="interval_1h">Проверять обновления ежечасно</string>
+    <string name="interval_4h">Проверять обновления каждые 4 часа</string>
+    <string name="interval_12h">Проверять обновления каждые 12 часов</string>
+    <string name="interval_1d">Проверять обновления ежедневно</string>
+    <string name="interval_1w">Проверять обновления еженедельно</string>
+    <string name="interval_2w">Проверять обновления каждые 2 недели</string>
 
     <string name="theme_light">Светлая</string>
     <string name="theme_dark">Темная</string>
@@ -549,4 +549,10 @@
     <string name="repo_exists_enable">%1$s уже настроен, подтвердите, что вы хотите снова его включить.</string>
     <string name="repo_exists_and_enabled">%1$s уже настроен и включен.</string>
     <string name="repo_delete_to_overwrite">Сначала удалите %1$s, чтобы добавить его с конфликтующим ключом.</string>
+    <string name="over_wifi">Через Wi-Fi</string>
+    <string name="over_data">Через мобильную сеть</string>
+    <string name="over_network_always_summary">Всегда использовать это соединение, если оно доступно</string>
+    <string name="over_network_on_demand_summary">Использовать это соединение только для загрузки</string>
+    <string name="antiknownvulnlist">Это приложение содержит известную уязвимость безопасности</string>
+
     </resources>
