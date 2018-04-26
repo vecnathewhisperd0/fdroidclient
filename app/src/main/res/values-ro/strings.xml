@@ -225,25 +225,25 @@
     <string name="crash_dialog_title">F-Droid s-a oprit</string>
     <string name="theme_light">Luminoasă</string>
     <string name="theme_dark">Întunecată</string>
-    <string name="interval_1h">O dată pe oră</string>
+    <string name="interval_1h">Verificare actualizări o dată pe oră</string>
     <string name="perms_new_perm_prefix">Nou:</string>
     <string name="allPerms">Toate</string>
     <string name="uninstall_update_confirm">Vrei sa înlocuiești aceasta aplicație cu versiunea din fabrica?</string>
     <string name="download_error">Descărcare eșuată!</string>
 
-    <string name="interval_2w">O data la 2 săptămâni</string>
+    <string name="interval_2w">Verificare actualizări o dată la 2 săptămâni</string>
 
-    <string name="interval_4h">La fiecare 4 ore</string>
+    <string name="interval_4h">Verificare actualizări o dată la 4 ore</string>
     <string name="uninstall_confirm">Vrei sa dezinstalezi aceasta aplicație?</string>
     <string name="perm_costs_money">Aceasta s-ar putea să coste bani</string>
     <string name="newPerms">Nou</string>
     <string name="downloading">Descărcare…</string>
 
-    <string name="interval_never">Niciodată</string>
+    <string name="interval_never">Fără actualizări automate de aplicații</string>
     <string name="perms_description_app">Disponibil de la %1$s.</string>
-    <string name="interval_1w">Săptămânal</string>
-    <string name="interval_1d">Zilnic</string>
-    <string name="interval_12h">La fiecare 12 ore</string>
+    <string name="interval_1w">Verificare actualizări săptămânal</string>
+    <string name="interval_1d">Verificare actualizări zilnic</string>
+    <string name="interval_12h">Verificare actualizări o dată la 12 ore</string>
     <string name="swap_not_enabled">Schimbul nu este activat</string>
     <string name="swap_not_visible_wifi">Nu este vizibil prin Wi-Fi</string>
     <string name="enable_proxy_summary">Configurează proxy HTTP pentru toate conexiunile de rețea</string>
@@ -513,4 +513,13 @@
     <string name="repo_exists_add_mirror">Acesta este o copie a %1$s, îl adăugăm ca server de rezervă?</string>
     <string name="repo_official_mirrors">Servere de rezervă oficiale</string>
     <string name="repo_user_mirrors">Folosire servere de rezervă</string>
+    <string name="over_wifi">Prin Wi-Fi</string>
+    <string name="over_data">Prin date mobile</string>
+    <string name="over_network_always_summary">Folosește mereu această conexiune dacă este disponibilă</string>
+    <string name="over_network_on_demand_summary">Folosește această conexiune doar dacă apăs descărcare</string>
+    <string name="over_network_never_summary">Nu descărca niciodată nimic prin această conexiune</string>
+    <string name="antidisabledalgorithmlist">Aplicația are o semnătură slab securizată</string>
+    <string name="antiknownvulnlist">Aplicația conține o vulnerabilitate de securitate cunoscută</string>
+
+    <string name="use_bluetooth">Folosește Bluetooth</string>
     </resources>
