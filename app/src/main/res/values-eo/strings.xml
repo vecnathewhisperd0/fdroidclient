@@ -292,13 +292,13 @@
     <string name="downloading">Elŝutado…</string>
 
     <string name="perms_description_app">Liverita per %1$s.</string>
-    <string name="interval_never">Neniam</string>
-    <string name="interval_1h">Ĉiuhore</string>
-    <string name="interval_4h">Ĉiuj 4 horoj</string>
-    <string name="interval_12h">Ĉiuj 12 horoj</string>
-    <string name="interval_1d">Ĉiutage</string>
-    <string name="interval_1w">Ĉiusemajne</string>
-    <string name="interval_2w">Ĉiuj 2 semajnoj</string>
+    <string name="interval_never">Sen aŭtomataj ĝisdatigoj</string>
+    <string name="interval_1h">Kontroli pri ĝisdatigoj ĉiuhore</string>
+    <string name="interval_4h">Kontroli pri ĝisdatigoj ĉiu-4-hore</string>
+    <string name="interval_12h">Kontroli pri ĝisdatigoj ĉiu-12-hore</string>
+    <string name="interval_1d">Kontroli pri ĝisdatigoj ĉiutage</string>
+    <string name="interval_1w">Kontroli pri ĝisdatigoj ĉiusemajne</string>
+    <string name="interval_2w">Kontroli pri ĝisdatigoj ĉiu-2-semajne</string>
 
     <string name="theme_light">Hela</string>
     <string name="theme_dark">Malhela</string>
@@ -486,8 +486,8 @@
     <string name="updates__app_with_known_vulnerability__ignore">Ignori</string>
 
     <string name="privacy">Privateco</string>
-    <string name="preventScreenshots_title">Bloki ekranokopiojn</string>
-    <string name="preventScreenshots_summary">Bloki fari ekranokopiojn kaj kaŝi enhavon ĉe ekrano de lastaj aplikaĵoj</string>
+    <string name="preventScreenshots_title">Bloki ekrankopiojn</string>
+    <string name="preventScreenshots_summary">Bloki fari ekran-kopiojn kaj kaŝi enhavon ĉe ekrano de lastaj aplikaĵoj</string>
 
     <string name="panic_app_setting_title">Aplikaĵo de panika butono</string>
     <string name="panic_app_unknown_app">nekonata aplikaĵo</string>
@@ -497,7 +497,7 @@
     <string name="panic_app_dialog_message">Ĉu vi certas, ke vi volas permesi al %1$s por agordi detruajn agojn de panika butono?</string>
     <string name="allow">Permesi</string>
 
-    <string name="panic_settings">Agordoj de Panika Butono</string>
+    <string name="panic_settings">Agordoj de panika butono</string>
     <string name="panic_settings_summary">Agoj por esti prenita en kazo de krizo</string>
     <string name="panic_exit_title">Fermi aplikaĵon</string>
     <string name="panic_exit_summary">Aplikaĵo fermiĝos</string>
@@ -540,4 +540,11 @@
     <string name="swap_toast_could_not_enable_hotspot">Ne povis aktivigi vifi-retkaptejon!</string>
 
     <string name="over_wifi">Tra vifio</string>
+    <string name="over_data">Tra datum-konekto</string>
+    <string name="over_network_always_summary">Ĉiam uzi tiun ĉi konekton kiam disponebla</string>
+    <string name="over_network_on_demand_summary">Nur uzi tiun ĉi konekton kiam mi elektas elŝuti</string>
+    <string name="over_network_never_summary">Neniam elŝuti ion ajn per tiu ĉi konekto</string>
+    <string name="antidisabledalgorithmlist">Tiu ĉi aplikaĵo posedas malfortan sekurecan subskribon</string>
+    <string name="antiknownvulnlist">Tiu ĉi aplikaĵo posedas sekurecan vundeblon</string>
+
     </resources>
