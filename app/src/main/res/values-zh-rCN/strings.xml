@@ -314,7 +314,7 @@
     <string name="update_auto_install">自动安装更新</string>
     <string name="update_auto_install_summary">在后台下载和安装应用更新</string>
     <string name="keep_install_history">保留安装历史</string>
-    <string name="keep_install_history_summary">在F-Droid内记录所有安装和卸载</string>
+    <string name="keep_install_history_summary">在 F-Droid 内记录所有安装和卸载</string>
     <string name="warning_no_internet">无法更新，你有可用的网络连接吗？</string>
 <string name="main_menu__latest_apps">最新</string>
     <string name="main_menu__categories">分类</string>
@@ -491,4 +491,12 @@
     <string name="repo_official_mirrors">官方镜像</string>
     <string name="repo_user_mirrors">用户镜像</string>
     <string name="use_bluetooth">使用蓝牙</string>
+    <string name="over_wifi">通过 Wi-Fi</string>
+    <string name="over_data">通过数据连接</string>
+    <string name="over_network_always_summary">当可用时，总是使用此连接</string>
+    <string name="over_network_on_demand_summary">仅当我点击下载时才使用此连接</string>
+    <string name="over_network_never_summary">从不使用此连接下载任何内容</string>
+    <string name="antidisabledalgorithmlist">这个应用程序的安全签章较弱</string>
+    <string name="antiknownvulnlist">这个应用程序包含已知的安全漏洞</string>
+
     </resources>
