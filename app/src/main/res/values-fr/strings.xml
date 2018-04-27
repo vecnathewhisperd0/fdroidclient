@@ -204,12 +204,12 @@
     <string name="perms_new_perm_prefix">Nouveauté :</string>
     <string name="downloading">Téléchargement…</string>
 
-    <string name="interval_never">Jamais</string>
-    <string name="interval_4h">Toutes les 4 heures</string>
-    <string name="interval_12h">Toutes les 12 heures</string>
-    <string name="interval_1d">Chaque jour</string>
-    <string name="interval_1w">Chaque semaine</string>
-    <string name="interval_2w">Toutes les 2 semaines</string>
+    <string name="interval_never">Pas de mises à jour automatiques</string>
+    <string name="interval_4h">Chercher les mises à jour toutes les 4 heures</string>
+    <string name="interval_12h">Chercher les mises à jour toutes les 12 heures</string>
+    <string name="interval_1d">Chercher les mises à jour quotidiennement</string>
+    <string name="interval_1w">Chercher les mises à jour une fois par semaine</string>
+    <string name="interval_2w">Chercher les mises à jour toutes les 2 semaines</string>
 
     <string name="theme_light">Clair</string>
     <string name="theme_dark">Sombre</string>
@@ -259,7 +259,7 @@
     <string name="swap_qr_isnt_for_swap">Le code QR que vous avez scanné ne ressemble pas à un code d\'échange.</string>
     <string name="swap_not_enabled_description">Votre appareil doit être visible avant de pouvoir commencer l\'échange.</string>
 
-    <string name="interval_1h">Toutes les heures</string>
+    <string name="interval_1h">Chercher les mises à jour toutes les heures</string>
     <string name="perms_description_app">Fourni par %1$s.</string>
     <string name="uninstall_system_summary">Ouvrir l\'écran des détails de l\'appli F-Droid Privileged Extension pour la
         mettre à jour/la désinstaller
@@ -509,7 +509,7 @@
     <string name="updates__app_with_known_vulnerability__ignore">Ignorer</string>
 
     <string name="privacy">Vie privée</string>
-    <string name="preventScreenshots_title">Interdire les copies écran</string>
+    <string name="preventScreenshots_title">Bloquer les captures d\'écran</string>
     <string name="preventScreenshots_summary">Bloque les copies écran et masque le contenu d\'application dans les applications récentes</string>
 
     <string name="panic_app_unknown_app">une application inconnue</string>
@@ -559,5 +559,13 @@
     <string name="swap_toast_invalid_url">URL invalide pour l\'échange : %1$s</string>
     <string name="swap_toast_hotspot_enabled">Hotspot Wi-Fi activé</string>
     <string name="swap_toast_could_not_enable_hotspot">Impossible d\'activer le Wi-Fi Hotspot !</string>
+
+    <string name="over_wifi">Via Wi-Fi</string>
+    <string name="over_data">Via le réseau mobile</string>
+    <string name="over_network_always_summary">Toujours utiliser cette connexion si disponible</string>
+    <string name="over_network_on_demand_summary">Utiliser cette connexion seulement lors du clic sur télécharger</string>
+    <string name="over_network_never_summary">Ne jamais télécharger sur cette connexion</string>
+    <string name="antidisabledalgorithmlist">La signature de sécurité de cette application est faible</string>
+    <string name="antiknownvulnlist">Cette application contient une vulnérabilité de sécurité</string>
 
     </resources>
