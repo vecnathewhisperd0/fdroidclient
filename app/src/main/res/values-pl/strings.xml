@@ -257,13 +257,13 @@
     <string name="perms_description_app">Dostarczone przez %1$s.</string>
     <string name="downloading">Pobieranie…</string>
 
-    <string name="interval_never">Nigdy</string>
-    <string name="interval_1h">Co godzinę</string>
-    <string name="interval_4h">Co 4 godziny</string>
-    <string name="interval_12h">Co 12 godzin</string>
-    <string name="interval_1d">Co dobę</string>
-    <string name="interval_1w">Co tydzień</string>
-    <string name="interval_2w">Co 2 tygodnie</string>
+    <string name="interval_never">Brak automatycznych aktualizacji</string>
+    <string name="interval_1h">Sprawdzaj aktualizacje co godzinę</string>
+    <string name="interval_4h">Sprawdzaj aktualizacje co 4 godziny</string>
+    <string name="interval_12h">Sprawdzaj aktualizacje co 12 godzin</string>
+    <string name="interval_1d">Sprawdzaj aktualizacje codziennie</string>
+    <string name="interval_1w">Sprawdzaj aktualizacje co tydzień</string>
+    <string name="interval_2w">Sprawdzaj aktualizacje co 2 tygodnie</string>
 
     <string name="theme_light">Jasny</string>
     <string name="theme_dark">Ciemny</string>
@@ -564,5 +564,13 @@
     <string name="swap_toast_invalid_url">Błędny URL wymiany: %1$s</string>
     <string name="swap_toast_hotspot_enabled">Włączono hotspot Wi-Fi</string>
     <string name="swap_toast_could_not_enable_hotspot">Nie można włączyć hotspotu Wi-Fi!</string>
+
+    <string name="over_wifi">Przez Wi-Fi</string>
+    <string name="over_data">Przez połączenie danych</string>
+    <string name="over_network_always_summary">Zawsze używaj tego połączenia, jeżeli dostępne</string>
+    <string name="over_network_on_demand_summary">Używaj tego połączenia tylko wtedy, gdy wybiorę pobierz</string>
+    <string name="over_network_never_summary">Nie pobieraj czegokolwiek przez to połączenie</string>
+    <string name="antidisabledalgorithmlist">Ta aplikacja posiada słabą sygnaturę bezpieczeństwa</string>
+    <string name="antiknownvulnlist">Ta aplikacja ma znaną podatność bezpieczeństwa</string>
 
     </resources>
