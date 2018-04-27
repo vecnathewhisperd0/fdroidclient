@@ -189,11 +189,11 @@
 
     <string name="newPerms">Neu</string>
     <string name="perms_new_perm_prefix">Neu:</string>
-    <string name="interval_1h">Stündlich</string>
-    <string name="interval_4h">Alle 4 Stunden</string>
-    <string name="interval_12h">Alle 12 Stunden</string>
-    <string name="interval_1d">Täglich</string>
-    <string name="interval_1w">Wöchentlich</string>
+    <string name="interval_1h">Stündlich nach Updates suchen</string>
+    <string name="interval_4h">Alle 4 Stunden nach Updates suchen</string>
+    <string name="interval_12h">Alle 12 Stunden nach Updates suchen</string>
+    <string name="interval_1d">Täglich nach Updates suchen</string>
+    <string name="interval_1w">Wöchentlich nach Updates suchen</string>
     <string name="more">Mehr</string>
     <string name="less">Weniger</string>
 
@@ -207,8 +207,8 @@
 
     <string name="swap_send_fdroid">F-Droid senden</string>
     <string name="swap_connecting">Verbindungsaufbau</string>
-    <string name="interval_never">Nie</string>
-    <string name="interval_2w">Alle zwei Wochen</string>
+    <string name="interval_never">Keine automatischen App-Updates</string>
+    <string name="interval_2w">Alle zwei Wochen nach Updates suchen</string>
 
     <string name="theme_light">Hell</string>
     <string name="theme_dark">Dunkel</string>
@@ -550,4 +550,12 @@
     <string name="swap_toast_could_not_enable_hotspot">Konnte WLAN-Hotspot nicht aktivieren!</string>
 
     <string name="swap_toast_invalid_url">Ungültige URL zum Tauschen: %1$s</string>
+    <string name="over_wifi">Über WLAN</string>
+    <string name="over_data">Über Daten</string>
+    <string name="over_network_always_summary">Diese Verbindung immer verwenden, wenn sie verfügbar ist</string>
+    <string name="over_network_on_demand_summary">Diese Verbindung nur verwenden, wenn ich zum Download klicke</string>
+    <string name="over_network_never_summary">Niemals etwas über diese Verbindung herunterladen</string>
+    <string name="antidisabledalgorithmlist">Diese App hat eine schwache Sicherheitssignatur</string>
+    <string name="antiknownvulnlist">Diese App enthält eine bekannte Sicherheitslücke</string>
+
     </resources>
