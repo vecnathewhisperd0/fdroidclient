@@ -547,4 +547,16 @@
     <string name="swap_toast_hotspot_enabled">Lokalt Wi-Fi -nettverk påskrudd</string>
     <string name="swap_toast_could_not_enable_hotspot">Kunne ikke skru på lokalt Wi-Fi -nettverk!</string>
 
+    <string name="over_wifi">Over Wi-Fi</string>
+    <string name="over_data">Over data</string>
+    <string name="over_network_always_summary">Alltid bruk denne tilkoblingen når tilgjengelig</string>
+    <string name="over_network_on_demand_summary">Kun bruk denne tilkoblingen når jeg klikker for å laste ned</string>
+    <string name="over_network_never_summary">Aldri last ned noe på denne tilkoblingen</string>
+    <string name="repo_exists_add_fingerprint">%1$s er allerede satt opp, dette legger til ny nøkkelinformasjon.</string>
+    <string name="repo_exists_enable">%1$s er allerede satt opp, bekreft at du ønsker å slå det på igjen.</string>
+    <string name="repo_exists_and_enabled">%1$s er allerede satt opp og påslått.</string>
+    <string name="repo_delete_to_overwrite">Slett %1$s først for å legge til dette uten en konflikterende nøkkel.</string>
+    <string name="antidisabledalgorithmlist">Dette programmet har en svak sikkerhetssignatur</string>
+    <string name="antiknownvulnlist">Dette programmet inneholder en kjent sikkerhetsfeil</string>
+
     </resources>
