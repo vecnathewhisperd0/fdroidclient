@@ -388,7 +388,7 @@
     <plurals name="tts_view_all_in_category">
         <item quantity="other">從 %2$s 類別中查看所有 %1$d 的應用程式</item>
     </plurals>
-    <string name="app__install_downloaded_update">個更新</string>
+    <string name="app__install_downloaded_update">更新</string>
 
     <string name="app_list__name__downloading_in_progress">正在下載 %1$s</string>
 
