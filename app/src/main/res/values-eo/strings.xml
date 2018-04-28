@@ -165,7 +165,7 @@
 \n%1$s</string>
     <string name="status_inserting_apps">Konservado de aplikaĵaj detaloj</string>
     <string name="repos_unchanged">Ĉiuj deponejoj estas ĝisdatigitaj</string>
-    <string name="all_other_repos_fine">En ĉiuj aliaj deponejoj ne okazis erarojn.</string>
+    <string name="all_other_repos_fine">En ĉiuj aliaj deponejoj ne okazis eraroj.</string>
     <string name="global_error_updating_repos">Eraro dum ĝisdatigado: %s</string>
     <string name="permissions">Permesoj</string>
     <string name="no_handler_app">Vi ne havas iun ajn disponeblan aplikaĵon, kiu povas trakti %s.</string>
