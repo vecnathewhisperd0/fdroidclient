@@ -5,9 +5,9 @@
         pozorni na dejstvo, da bodo zaradi odstranitve izbrisani vsi notranji podatki shranjeni v aplikaciji)
     </string>
     <string name="version">Različica</string>
-    <string name="cache_downloaded">Predpomnilnik naloženih aplikacij</string>
+    <string name="cache_downloaded">Ohranite predpomnjene aplikacije</string>
     <string name="updates">Posodobitve</string>
-    <string name="notify">Opozorilo za posodobitve</string>
+    <string name="notify">Pokaži posodobitve, ki so na voljo</string>
     <string name="about_site">Spletna stran:</string>
     <string name="about_mail">E-pošta:</string>
     <string name="about_version">Različica:</string>
@@ -37,9 +37,7 @@
     <string name="show_incompat_versions">Yhteensopimattomat versiot</string>
     <string name="app_name">F-Droid</string>
 
-    <string name="installIncompatible">Izgleda da aplikacija ni kompatibilna z vašo napravo. Ali jo želite vseeno
-        poskusiti namestiti?
-    </string>
+    <string name="installIncompatible">Izgleda, da aplikacija ni kompatibilna z vašo napravo. Ali jo želite vseeno poskusiti namestiti?</string>
     <string name="delete">Izbriši</string>
     <string name="enable_nfc_send">Omogoči NFC pošiljanje</string>
     <string name="unstable_updates">Nestabilne posodobitve</string>
@@ -111,4 +109,16 @@
     <string name="crash_dialog_text">Zaradi nepričakovane napake se je aplikacija prisilno ustavila. Nam želite v e-pošti posredovati podrobnosti in s tem pomagati odpraviti napako?</string>
     <string name="notification_title_single_update_available">Posodobitev na voljo</string>
     <string name="notification_title_summary_install_error">Namestitev neuspešna</string>
-</resources>
+<string name="by_author_format">od avtorja %s</string>
+    <string name="keep_install_history">Ohranite zgodovino namestitev</string>
+    <string name="over_wifi">Preko Wi-Fi</string>
+    <string name="over_data">Preko mobilnih podatkov</string>
+    <string name="over_network_always_summary">Vedno uporabi to povezavo, ko je na voljo</string>
+    <string name="update_auto_download">Samodejno prenesi posodobitve</string>
+    <string name="update_auto_install">Samodejno namesti posodobitve</string>
+    <string name="links">Povezave</string>
+    <string name="versions">Različice</string>
+    <string name="enable">Omogoči</string>
+    <string name="add_key">Dodaj ključ</string>
+    <string name="overwrite">Prepiši</string>
+    </resources>
