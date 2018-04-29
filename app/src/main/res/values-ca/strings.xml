@@ -197,8 +197,8 @@
 
     <string name="wifi_ap">Punt d\'accés</string>
 
-    <string name="interval_never">Mai</string>
-    <string name="interval_1h">Cada hora</string>
+    <string name="interval_never">No actualitzes automàticament</string>
+    <string name="interval_1h">Cerca actualitzacions cada hora</string>
     <string name="interval_4h">Cada 4 hores</string>
     <string name="interval_12h">Cada 12 hores</string>
     <string name="interval_1d">Diàriament</string>
@@ -378,7 +378,7 @@
     </string>
 
     <string name="preference_category__my_apps">Les meves aplicacions</string>
-    <string name="preference_manage_installed_apps">Administració d\'aplicacions instal·lades</string>
+    <string name="preference_manage_installed_apps">Gestiona les aplicacions instal·lades</string>
 
 
     <string name="tts_category_name">Categoria %1$s</string>
@@ -508,4 +508,31 @@
 
     <string name="hiding_calculator">Calculadora</string>
     <string name="hiding_dialog_title">Amaga %s ara</string>
+    <string name="over_wifi">Amb wifi</string>
+    <string name="over_data">Amb dades</string>
+    <string name="over_network_always_summary">Fes servir aquesta connexió si està disponible</string>
+    <string name="over_network_on_demand_summary">Fes servir aquesta connexió quan faci clic per a descarregar</string>
+    <string name="over_network_never_summary">No descarreguis res amb aquesta connexió</string>
+    <string name="repo_add_mirror">Afegeix una rèplica</string>
+    <string name="repo_exists_and_enabled">%1$s ja és configurat i activat.</string>
+    <string name="repo_exists_add_mirror">Això és una còpia de %1$s, voleu afegir-la com a rèplica?</string>
+    <string name="antidisabledalgorithmlist">La signatura de seguretat de l\'aplicació és feble</string>
+    <string name="antiknownvulnlist">Aquesta aplicació té un problema de seguretat conegut</string>
+
+    <string name="show_root_apps">Inclou aplicacions amb accés d\'administrador</string>
+    <string name="show_anti_feature_apps">Inclou aplicacions amb anti-característiques</string>
+    <string name="show_anti_feature_apps_on">Mostra aplicacions que requereixen anti-característiques</string>
+    <string name="force_touch_apps">Inclou aplicacions de pantalla tàctil</string>
+    <string name="force_touch_apps_on">Mostra les aplicacions que requereixen pantalla tàctil, independent del hardware que tinc</string>
+
+    <string name="hiding_dialog_warning">Alerta: s\'eliminarà qualsevol icona de la pantalla d\'inici i caldrà tornar a afegir-la manualment.</string>
+    <string name="hide_on_long_search_press_summary">Si manteniu premut el botó de cerca l\'aplicació s\'amagarà</string>
+
+    <string name="repo_official_mirrors">Rèpliques oficials</string>
+    <string name="repo_user_mirrors">Rèpliques mantingudes per usuaris</string>
+    <string name="use_bluetooth">Usa bluetooth</string>
+    <string name="swap_toast_hotspot_enabled">Punt d\'accés wifi actiu</string>
+    <string name="swap_toast_could_not_enable_hotspot">No ha estat possible activar el punt d\'accés wifi!</string>
+
+    <string name="warning_scaning_qr_code">Sembla que la càmera no té sistema d\'autoenfocament. Potser difícil d\'escanejar el codi.</string>
     </resources>
