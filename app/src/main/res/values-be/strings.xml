@@ -348,13 +348,13 @@
     <string name="installing">Усталёўка…</string>
     <string name="uninstalling">Выдаленне…</string>
 
-    <string name="interval_never">Ніколі</string>
-    <string name="interval_1h">Штогадзінна</string>
-    <string name="interval_4h">Кожныя 4 гадзіны</string>
-    <string name="interval_12h">Кожныя 12 гадзін</string>
-    <string name="interval_1d">Штодзённа</string>
-    <string name="interval_1w">Штотыднёва</string>
-    <string name="interval_2w">Кожныя 2 тыдні</string>
+    <string name="interval_never">Не абнаўляць праграмы аўтаматычна</string>
+    <string name="interval_1h">Штогадзінна правяраць абнаўленні</string>
+    <string name="interval_4h">Правяраць абнаўленні кожныя 4 гадзіны</string>
+    <string name="interval_12h">Правяраць абнаўленні кожныя 12 гадзін</string>
+    <string name="interval_1d">Правяраць абнаўленні штодзённа</string>
+    <string name="interval_1w">Правяраць абнаўленні штотыднёва</string>
+    <string name="interval_2w">Правяраць абнаўленні кожныя 2 тыдні</string>
 
     <string name="keep_hour">1 гадзіна</string>
     <string name="keep_day">1 дзень</string>
@@ -418,7 +418,7 @@
     <string name="installed_app__updates_ignored_for_suggested_version">Абнаўленні ігнаруюцца для версіі %1$s</string>
 
     <string name="preference_category__my_apps">Мае праграмы</string>
-    <string name="preference_manage_installed_apps">Кіраваць усталяванымі праграмамі</string>
+    <string name="preference_manage_installed_apps">Кіраванне усталяванымі праграмамі</string>
 
 
     <string name="tts_category_name">Катэгорыя %1$s</string>
@@ -588,5 +588,13 @@
     <string name="swap_toast_invalid_url">Некарэктны URL для абмену: %1$s</string>
     <string name="swap_toast_hotspot_enabled">Wi-Fi Hotspot уключаны</string>
     <string name="swap_toast_could_not_enable_hotspot">Не атрымалася ўключыць Wi-Fi Hotspot!</string>
+
+    <string name="over_wifi">Праз Wi-Fi</string>
+    <string name="over_data">Праз мабільную сетку</string>
+    <string name="over_network_always_summary">Заўсёды выкарыстоўваць гэта злучэнне пры даступнасці</string>
+    <string name="over_network_on_demand_summary">Выкарыстоўваць гэта злучэнне толька для спампоўкі</string>
+    <string name="over_network_never_summary">Ніколі нічога не спампоўваць праз гэта злучэнне</string>
+    <string name="antidisabledalgorithmlist">Гэтая праграма мае слабы подпіс бяспекі</string>
+    <string name="antiknownvulnlist">Гэтая праграма змяшчае вядомую ўразлівасць бяспекі</string>
 
     </resources>
