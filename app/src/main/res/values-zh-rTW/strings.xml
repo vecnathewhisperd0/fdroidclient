@@ -58,9 +58,9 @@
 
     <string name="repo_add_url">軟體庫網址</string>
     <string name="repo_add_fingerprint">指紋（選填）</string>
-    <string name="theme_night">夜晚</string>
+    <string name="theme_night">夜間</string>
     <string name="theme_dark">暗</string>
-    <string name="crash_dialog_comment_prompt">您可以在此加入額外的資料及評論：</string>
+    <string name="crash_dialog_comment_prompt">您可以在此加入額外的資訊及評論：</string>
     <string name="overwrite">覆寫</string>
 
     <string name="bluetooth_activity_not_found">未找到藍牙傳送方式，請選擇一個！</string>
@@ -137,10 +137,10 @@
     <string name="system_install_uninstalling">解除安裝中…</string>
     <string name="system_uninstall_button">解除安裝</string>
 
-    <string name="open_qr_code_scanner">開啟 QR Code 掃描器</string>
+    <string name="open_qr_code_scanner">開啟 QR 碼掃描器</string>
     <string name="swap_welcome">歡迎使用 F-Droid！</string>
     <string name="swap_dont_show_again">不要再顯示</string>
-    <string name="swap_scan_qr">掃描 QR Code</string>
+    <string name="swap_scan_qr">掃描 QR 碼</string>
     <string name="menu_manage">軟體庫</string>
     <string name="menu_add_repo">新增軟體庫</string>
 
@@ -191,8 +191,8 @@
     <string name="interval_4h">每四小時檢查更新</string>
     <string name="interval_12h">每十二小時檢查更新</string>
     <string name="interval_1d">每天檢查更新</string>
-    <string name="interval_1w">每星期檢查更新</string>
-    <string name="interval_2w">每兩星期檢查更新</string>
+    <string name="interval_1w">每週檢查更新</string>
+    <string name="interval_2w">每兩週檢查更新</string>
 
     <string name="theme_light">亮</string>
     <string name="crash_dialog_title">F-Droid 已當機</string>
@@ -286,12 +286,12 @@
     <string name="swap_confirm_connect">您現在想要從 %1$s 取得應用程式嗎？</string>
     <string name="swap_nearby">近距交換</string>
     <string name="swap_intro">與您附近的人連結並且交換應用程式。</string>
-    <string name="swap_scan_or_type_url">一個人要掃描 QR 碼或在瀏覽器鍵入另一個的網址。</string>
+    <string name="swap_scan_or_type_url">一個人需要掃描 QR 碼或在瀏覽器鍵入另一個的網址。</string>
     <string name="swap_visible_bluetooth">經由藍牙可看見</string>
     <string name="swap_not_visible_bluetooth">經由藍牙不可看見</string>
     <string name="swap_visible_wifi">經由 Wi-Fi 可看見</string>
     <string name="swap_not_visible_wifi">經由 Wi-Fi 不可看見</string>
-    <string name="swap_connecting">連線</string>
+    <string name="swap_connecting">正在連線</string>
     <string name="system_install_post_success_message">F-Droid 特權擴充已安裝。這允許 F-Droid 自行安裝、更新以及解除安裝應用程式。</string>
     <string name="system_install_post_fail_message">F-Droid 特權擴充安裝失敗。此安裝方式並不支援所有發行的 Android 版本，請查閱 F-Droid 的 bug
         追蹤以取得詳細資訊。
@@ -300,31 +300,31 @@
 
     <string name="keep_hour">一小時</string>
     <string name="keep_day">一天</string>
-    <string name="keep_week">一星期</string>
+    <string name="keep_week">一週</string>
     <string name="keep_month">一個月</string>
     <string name="keep_year">一年</string>
     <string name="installing">正在安裝…</string>
-    <string name="uninstalling">解除安裝中…</string>
+    <string name="uninstalling">正在解除安裝…</string>
 
     <string name="perms_new_perm_prefix">新的：</string>
     <string name="perms_description_app">由 %1$s 提供。</string>
     <string name="newPerms">新</string>
     <string name="allPerms">全部</string>
-    <string name="perm_costs_money">這可能會花費您的錢</string>
+    <string name="perm_costs_money">這或許會有資金消耗</string>
     <string name="download_pending">等待開始下載…</string>
     <string name="install_confirm">需要存取</string>
     <string name="loading">正在載入…</string>
     <string name="swap_not_enabled_description">在交換之前，您的裝置必須可以被看見。</string>
 
-    <string name="uninstall_update_confirm">您確定要以原始版本替換這個應用程式嗎？</string>
+    <string name="uninstall_update_confirm">您確定要以原始版本取代此應用程式嗎？</string>
     <string name="install_error_notify_title">%s 安裝時錯誤</string>
     <string name="uninstall_error_notify_title">%s 解除安裝時錯誤</string>
 
 
     <string name="install_confirm_update">您想要安裝更新到現有的應用程式嗎？您不會遺失現有的資料。更新後的應用程式會獲得以下的存取權：</string>
-    <string name="install_confirm_update_system">您想要安裝更新到內置的應用程式嗎？您不會遺失現有的資料。更新後的應用程式會獲得以下的存取權：</string>
+    <string name="install_confirm_update_system">您想要安裝更新到內建的應用程式嗎？您不會遺失現有的資料。更新後的應用程式會獲得以下的存取權：</string>
     <string name="install_confirm_update_no_perms">您想要安裝更新到現有的應用程式嗎？您不會遺失現有的資料。它不需要任何特殊的存取權限。</string>
-    <string name="install_confirm_update_system_no_perms">您想要安裝更新到內置的應用程式嗎？您不會遺失現有的資料。它不需要任何特殊的存取權限。</string>
+    <string name="install_confirm_update_system_no_perms">您想要安裝更新到內建的應用程式嗎？您不會遺失現有的資料。它不需要任何特殊的存取權限。</string>
     <string name="crash_dialog_text">出現意外的錯誤，迫使應用程式停止。您願意以電子郵件提供詳細資訊，以協助修復這個問題嗎？</string>
     <string name="swap_join_same_wifi_desc">要使用 Wi-Fi 進行交換，確保雙方是在同個一網路上。如果您不能 存取同個網絡，你們其中的一個，可以建立一個 Wi-Fi 熱點。</string>
     <string name="swap_qr_isnt_for_swap">您掃描的 QR 碼看起來並不是一個交換碼。</string>
@@ -386,8 +386,8 @@
     <string name="tts_category_name">類別 %1$s</string>
 
     <plurals name="tts_view_all_in_category">
-        <item quantity="other">從 %2$s 類別中查看所有 %1$d 的應用程式</item>
-    </plurals>
+	<item quantity="other">從 %2$s 類別中檢視所有 %1$d 的應用程式</item>
+</plurals>
     <string name="app__install_downloaded_update">更新</string>
 
     <string name="app_list__name__downloading_in_progress">正在下載 %1$s</string>
@@ -422,10 +422,10 @@
 
     <string name="categories__empty_state__no_categories">沒有要顯示的類別</string>
 
-    <string name="menu_video">視頻</string>
+    <string name="menu_video">影片</string>
     <string name="details_last_updated_today">今天更新</string>
     <string name="app__tts__cancel_download">取消下載</string>
-    <string name="app__tts__downloading_progress">正在下载的 %1$d%% 完成</string>
+    <string name="app__tts__downloading_progress">正在下載的 %1$d%% 完成</string>
     <string name="menu_license">授權：%s</string>
     <plurals name="notification_summary_more">
         <item quantity="other">+%1$d 更多…</item>
@@ -437,8 +437,8 @@
         <item quantity="other">%1$d 個應用程式已安裝</item>
     </plurals>
     <plurals name="details_last_update_weeks">
-        <item quantity="other">%1$d 周前已更新</item>
-    </plurals>
+	<item quantity="other">%1$d 週前已更新</item>
+</plurals>
     <plurals name="details_last_update_months">
         <item quantity="other">%1$d 月前已更新</item>
     </plurals>
