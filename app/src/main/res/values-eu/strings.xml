@@ -120,16 +120,16 @@
 
     <string name="proxy">Proxya</string>
     <string name="enable_proxy_title">Gaitu HTTP Proxya</string>
-    <string name="interval_2w">Bi asterik behin</string>
+    <string name="interval_2w">"Egiaztatu eguneraketak  bi asterik behin"</string>
 
-    <string name="interval_4h">4 ordurik behin</string>
+    <string name="interval_4h">Egiaztatu eguneraketak 4 ordurik behin</string>
     <string name="downloading">Deskargatzen…</string>
 
-    <string name="interval_1w">Astero</string>
-    <string name="interval_1h">Orduro</string>
-    <string name="interval_never">Inoiz ez</string>
-    <string name="interval_12h">12 ordurik behin</string>
-    <string name="interval_1d">Egunero</string>
+    <string name="interval_1w">"Egiaztatu eguneraketak  astero"</string>
+    <string name="interval_1h">Egiaztatu eguneraketak orduero</string>
+    <string name="interval_never">Aplikazioen eguneraketa automatikorik ez</string>
+    <string name="interval_12h">Egiaztatu eguneraketak 12 ordurik behin</string>
+    <string name="interval_1d">Egiaztatu eguneraketak egunero</string>
 
     <string name="newPerms">Berria</string>
     <string name="allPerms">Guztiak</string>
@@ -572,5 +572,13 @@
     <string name="swap_toast_invalid_url">Trukaketarako URL baliogabea: %1$s</string>
     <string name="swap_toast_hotspot_enabled">Wi-Fi sarrera gunea gaituta</string>
     <string name="swap_toast_could_not_enable_hotspot">Ezin izan da Wi-Fi sarrera gunea gaitu!</string>
+
+    <string name="over_wifi">Wi-Fi bidez</string>
+    <string name="over_data">Datuak erabiliz</string>
+    <string name="over_network_always_summary">Erabili beti konexio hau erabilgarri badago</string>
+    <string name="over_network_on_demand_summary">Erabili konexio hau nik deskargatzeko klik egiten dudanean besterik ez</string>
+    <string name="over_network_never_summary">Ez deskargatu inoiz ezer konexio hau erabiliz</string>
+    <string name="antidisabledalgorithmlist">Aplikazio honek segurtasun sinadura ahula du</string>
+    <string name="antiknownvulnlist">Aplikazio honek segurtasun arazo ezagun bat du</string>
 
     </resources>
