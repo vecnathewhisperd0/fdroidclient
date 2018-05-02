@@ -47,7 +47,7 @@
     <string name="repo_exists_enable">%1$s est déjà configuré, confirmez que vous voulez le réactiver.</string>
     <string name="repo_exists_and_enabled">%1$s est déjà configuré et activé.</string>
     <string name="malformed_repo_uri">URI de dépôt malformé ignoré : %s</string>
-    <string name="menu_manage">Gestion des dépôts</string>
+    <string name="menu_manage">Dépôts</string>
     <string name="menu_search">Rechercher</string>
     <string name="menu_add_repo">Nouveau dépôt</string>
     <string name="menu_launch">Lancer</string>
