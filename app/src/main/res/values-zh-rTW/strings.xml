@@ -355,7 +355,7 @@
     <string name="notification_title_summary_installing">正在安裝</string>
     <string name="notification_title_summary_installed">安裝成功</string>
     <string name="notification_title_summary_install_error">安裝失敗</string>
-    <string name="notification_action_update">個更新</string>
+    <string name="notification_action_update">更新</string>
     <string name="notification_action_cancel">取消</string>
     <string name="notification_action_install">安裝</string>
 
