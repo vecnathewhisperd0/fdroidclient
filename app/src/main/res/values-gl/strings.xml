@@ -432,9 +432,9 @@
     <string name="crash_dialog_comment_prompt">Pode engadir información adicional e comentarios aquí:</string>
 
     <plurals name="notification_summary_more">
-        <item quantity="one">máis +%1$d …</item>
-        <item quantity="other">máis +%1$d …</item>
-    </plurals>
+	<item quantity="one">máis +%1$d …</item>
+	<item quantity="other">+%1$d máis …</item>
+</plurals>
     <string name="notification_title_single_ready_to_install">Preparado para anovar</string>
     <string name="notification_title_single_ready_to_install_update">Anovación lista para instalar</string>
     <string name="notification_title_single_install_error">Fallou a instalación</string>
