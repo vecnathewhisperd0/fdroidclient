@@ -86,7 +86,7 @@
 
     <string name="details_notinstalled">未安裝</string>
     <string name="antiadslist">此應用程式含有廣告</string>
-    <string name="antitracklist">此應用程式會追蹤及彙報您的行為</string>
+    <string name="antitracklist">本應用程式會記錄和報告您的行為</string>
     <string name="antinonfreeadlist">此應用程式推廣非自由的附加元件</string>
     <string name="antinonfreenetlist">此應用程式推廣非自由的網路服務</string>
     <string name="antinonfreedeplist">此應用程式依賴其他非自由的應用程式</string>
@@ -155,7 +155,7 @@
     <string name="unverified">未驗證</string>
     <string name="repo_details">軟體庫</string>
     <string name="repo_num_apps">應用程式數量</string>
-    <string name="repo_last_update">上次更新</string>
+    <string name="repo_last_update">最近更新</string>
     <string name="unsigned_description">這表示應用程式清單無法被驗證。 您應該小心從未簽署索引所下載的應用程式。</string>
     <string name="repo_not_yet_updated">此軟體庫尚未被使用。您需要啟用它才能檢視其中的應用程式。</string>
     <string name="repo_confirm_delete_title">要刪除軟體庫嗎？</string>
@@ -195,7 +195,7 @@
     <string name="interval_2w">每兩週檢查更新</string>
 
     <string name="theme_light">亮</string>
-    <string name="crash_dialog_title">F-Droid 已當機</string>
+    <string name="crash_dialog_title">F-Droid無法繼續運作</string>
     <string name="bad_fingerprint">指紋無效</string>
     <string name="status_inserting_apps">正在儲存應用程式的詳細資料</string>
     <string name="unsigned">未簽署</string>
@@ -214,7 +214,7 @@
     <string name="swap_stopping_wifi">正在停止 Wi-Fi…</string>
     <string name="swap_wifi_device_name">裝置名稱</string>
     <string name="swap_cant_find_peers">找不到您想找的人?</string>
-    <string name="swap_send_fdroid">傳送 F-Droid</string>
+    <string name="swap_send_fdroid">傳送F-Droid</string>
     <string name="swap_no_peers_nearby">找不到附近的人來進行交換。</string>
     <string name="swap_confirm">確認交換</string>
     <string name="swap_not_enabled">沒有啟用交換功能</string>
@@ -260,7 +260,7 @@
     <string name="minsdk_up_to_maxsdk">%1$s 直到 %2$s</string>
     <string name="empty_search_available_app_list">沒有相符合的應用程式可用。</string>
     <string name="repo_searching_address">查看 F-Droid 軟體庫於 %1$s</string>
-    <string name="not_on_same_wifi">您的裝置與剛新增的軟體庫並不在同一個 Wi-Fi 網路上！請嘗試加入這個網路：%s</string>
+    <string name="not_on_same_wifi">您的裝置與剛新增的本地軟體庫不在同一個Wi-Fi網絡上！請加入此網絡：%s</string>
     <string name="requesting_root_access_body">正在要求 root 權限…</string>
     <string name="empty_installed_app_list">未安裝應用程式。
 \n
@@ -333,7 +333,7 @@
     <string name="keep_install_history_summary">在 F-Droid 中儲存安裝和解除安裝紀錄</string>
     <string name="update_auto_install">自動安裝更新</string>
     <string name="update_auto_install_summary">在背景中下載並且更新應用程式</string>
-    <string name="warning_no_internet">無法更新，您是否已連線至網路？</string>
+    <string name="warning_no_internet">無法更新。您有可用的網絡連線嗎？</string>
     <string name="versions">版本</string>
     <string name="app_details_donate_prompt_unknown_author">為 %1$s 的開發者買杯咖啡！</string>
     <string name="app_details_donate_prompt">%1$s 由 %2$s 所建立。為他們買杯咖啡吧！</string>
