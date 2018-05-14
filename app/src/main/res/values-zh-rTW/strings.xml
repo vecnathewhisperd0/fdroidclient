@@ -325,7 +325,7 @@
     <string name="install_confirm_update_system">您想要安裝更新到內建的應用程式嗎？您不會遺失現有的資料。更新後的應用程式會獲得以下的存取權：</string>
     <string name="install_confirm_update_no_perms">您想要安裝更新到現有的應用程式嗎？您不會遺失現有的資料。它不需要任何特殊的存取權限。</string>
     <string name="install_confirm_update_system_no_perms">您想要安裝更新到內建的應用程式嗎？您不會遺失現有的資料。它不需要任何特殊的存取權限。</string>
-    <string name="crash_dialog_text">應用程式因意外問題而停止運作。您願意透過電子郵件向我們提供資訊，以協助修復此問題嗎？</string>
+    <string name="crash_dialog_text">應用程式因意外問題而迫使停止。您願意用電子郵件向我們提供詳細資訊，以協助修復此問題嗎？</string>
     <string name="swap_join_same_wifi_desc">要使用 Wi-Fi 進行交換，確保雙方是在同個一網路上。如果您不能存取同個網路，你們其中的一個，可以建立一個 Wi-Fi 熱點。</string>
     <string name="swap_qr_isnt_for_swap">您掃描的 QR 碼看起來並不是一個交換碼。</string>
     <string name="swap_connection_misc_error">連線到裝置時發生錯誤，不能與它進行交換！</string>
@@ -339,7 +339,7 @@
     <string name="app_details_donate_prompt">%1$s 由 %2$s 所建立。為他們買杯咖啡吧！</string>
 
     <string name="repositories_summary">為應用程式增加其他的來源</string>
-    <string name="notification_title_single_update_available">可更新</string>
+    <string name="notification_title_single_update_available">可更新的</string>
     <string name="notification_title_single_ready_to_install">準備安裝</string>
     <string name="notification_title_single_ready_to_install_update">更新就緒準備安裝</string>
     <string name="notification_title_single_install_error">安裝失敗</string>
