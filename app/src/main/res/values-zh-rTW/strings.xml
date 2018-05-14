@@ -376,7 +376,7 @@
 
     <string name="installed_apps__activity_title">已安裝的應用程式</string>
     <string name="installed_app__updates_ignored">已忽略的更新</string>
-    <string name="installed_app__updates_ignored_for_suggested_version">已忽略 %1$s 版本更新</string>
+    <string name="installed_app__updates_ignored_for_suggested_version">已忽略%1$s版本更新</string>
 
     <string name="preference_category__my_apps">我的應用程式</string>
     <string name="preference_manage_installed_apps">管理已安裝的應用程式</string>
@@ -464,7 +464,7 @@
     <string name="app_list__dismiss_vulnerable_app">已忽略漏洞</string>
     <string name="app_list__dismiss_downloading_app">已取消下載</string>
 
-    <string name="updates__app_with_known_vulnerability__prompt_uninstall">我們發現了 %1$s 的漏洞，建議您立即解除安裝此應用程式。</string>
+    <string name="updates__app_with_known_vulnerability__prompt_uninstall">我們發現了%1$s的漏洞，建議您立即解除安裝此應用程式。</string>
     <string name="updates__app_with_known_vulnerability__prompt_upgrade">我們發現了 %1$s 的漏洞，建議您立即更新到最新版本。</string>
     <string name="updates__app_with_known_vulnerability__ignore">忽略</string>
 
