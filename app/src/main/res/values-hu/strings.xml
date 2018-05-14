@@ -465,4 +465,16 @@
     <string name="perms_description_app">A(z) %1$s által biztosítva.</string>
     <string name="tts_category_name">Kategória %1$s</string>
 
-</resources>
+<string name="over_wifi">Wi-Fin keresztül</string>
+    <string name="over_network_always_summary">Mindig ezt a kapcsolatot használja, ha elérhető</string>
+    <string name="over_network_on_demand_summary">Csak akkor használja ezt a kapcsolatot, ha a letöltésre kattintok</string>
+    <string name="over_network_never_summary">Soha ne töltsön le semmit ezen a kapcsolaton keresztül</string>
+    <string name="repo_add_mirror">Tükör hozzáadása</string>
+    <string name="sort_search">Keresési eredmények sorba rendezése</string>
+
+    <string name="repo_exists_add_mirror">Ez a(z) %1$s másolata. Hozzáadjuk tükörként?</string>
+    <string name="antidisabledalgorithmlist">Ennek az alkalmazásnak gyönge a biztonsági aláírása</string>
+    <string name="antiknownvulnlist">Ez az alkalmazás ismert biztonsági rést tartalmaz</string>
+
+    <string name="show_root_apps">Gyökéralkalmazások belefoglalása</string>
+    </resources>
