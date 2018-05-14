@@ -23,20 +23,20 @@
     <string name="login_title">需要驗證</string>
     <string name="login_name">使用者名稱</string>
     <string name="login_password">密碼</string>
-    <string name="repo_edit_credentials">變更密碼</string>
+    <string name="repo_edit_credentials">更改密碼</string>
     <string name="app_details">應用程式詳情</string>
-    <string name="no_such_app">找不到此應用程式。</string>
+    <string name="no_such_app">沒有此類應用程式。</string>
 
     <string name="about_title">關於 F-Droid</string>
     <string name="about_version">版本</string>
     <string name="about_site">網站</string>
     <string name="about_source">原始碼</string>
-    <string name="about_mail">電子郵件</string>
+    <string name="about_mail">電郵地址</string>
     <string name="about_license">授權條款</string>
 
-    <string name="app_incompatible">與您的裝置不相容</string>
+    <string name="app_incompatible">不相容</string>
     <string name="app_installed">已安裝</string>
-    <string name="app_not_installed">尚未安裝</string>
+    <string name="app_not_installed">未安裝</string>
     <string name="app_inst_known_source">已安裝（來自 %s）</string>
     <string name="app_inst_unknown_source">已安裝（來源不明）</string>
 
@@ -224,7 +224,7 @@
     <string name="system_installer_on">使用F-Droid特權擴充套件安裝、更新和卸載應用程式</string>
     <string name="uninstall_system">更新或卸載特權擴充套件</string>
     <string name="uninstall_system_summary">開啟特權擴充套件的詳細資料來更新或解除安裝</string>
-    <string name="repo_error_empty_username">空白的使用者名稱，憑證未改變</string>
+    <string name="repo_error_empty_username">使用者名稱被留空，沒有更改憑證</string>
 
     <string name="repo_exists_enable">%1$s 已經設立。請確認您要重新啟用它。</string>
     <string name="repo_exists_and_enabled">%1$s 已設立並已啟用。</string>
@@ -334,8 +334,8 @@
     <string name="update_auto_install_summary">在背景下載並更新應用程式</string>
     <string name="warning_no_internet">無法更新，您是否已連線到網路？</string>
     <string name="versions">版本</string>
-    <string name="app_details_donate_prompt_unknown_author">為 %1$s 的開發者買杯咖啡！</string>
-    <string name="app_details_donate_prompt">%1$s 由 %2$s 所建立。為他們買杯咖啡吧！</string>
+    <string name="app_details_donate_prompt_unknown_author">給%1$s的開發者買杯咖啡吧！</string>
+    <string name="app_details_donate_prompt">%1$s由%2$s開發，給他們買杯咖啡吧！</string>
 
     <string name="repositories_summary">為應用程式增加其他的來源</string>
     <string name="notification_title_single_update_available">可更新的</string>
@@ -454,11 +454,11 @@
     <string name="app_permission_storage">F-Droid 需要檔案存取權限以將其安裝到裝置。請在下一個畫面允許它以繼續安裝。</string>
 
     <string name="status_inserting_x_apps">正從 %3$s 儲存應用程式的詳細資訊 (%1$d/%2$d)</string>
-    <string name="app_details__incompatible_mismatched_signature">與已安裝版本的簽名不符</string>
-    <string name="app_details__no_versions__show_incompat_versions">若要在這裡顯示不相容的版本，請啟用 \"%1$s\" 設定。</string>
-    <string name="app_details__no_versions__no_compatible_signatures">沒有相容簽名的版本</string>
+    <string name="app_details__incompatible_mismatched_signature">與已安裝版本的簽署不符</string>
+    <string name="app_details__no_versions__show_incompat_versions">若要在這裡顯示不相容的版本，請啟用「%1$s」設定。</string>
+    <string name="app_details__no_versions__no_compatible_signatures">沒有相容簽署的版本</string>
     <string name="app_details__no_versions__none_compatible_with_device">沒有與裝置相容的版本</string>
-    <string name="app_details__no_versions__explain_incompatible_signatures">已安裝的版本不相容於任何可用的版本。解除安裝該應用程式，將使您能夠查看和安裝相容的版本。這通常是透過 Google Play 或其它來源安裝的應用程式，如果它們是由不同的證書簽署時才會發生。</string>
+    <string name="app_details__no_versions__explain_incompatible_signatures">已安裝的版本不相容於任何可用的版本。卸載該應用程式，將使您能夠查看和安裝相容的版本。這通常是透過Google Play或其它來源安裝的應用程式，如果它們是由不同的證書簽署時才會發生。</string>
 
     <string name="app_list__dismiss_app_update">已忽略更新</string>
     <string name="app_list__dismiss_vulnerable_app">已忽略漏洞</string>
