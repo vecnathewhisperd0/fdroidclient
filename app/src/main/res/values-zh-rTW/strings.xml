@@ -40,7 +40,7 @@
     <string name="app_inst_known_source">已安裝（來自 %s）</string>
     <string name="app_inst_unknown_source">已安裝（來源不明）</string>
 
-    <string name="added_on">於 %s 新增</string>
+    <string name="added_on">於%s新增</string>
 
     <string name="ok">確定</string>
 
@@ -358,7 +358,7 @@
     <string name="notification_action_cancel">取消</string>
     <string name="notification_action_install">安裝</string>
 
-    <string name="app_version_x_available">有版本 %1$s 可用</string>
+    <string name="app_version_x_available">版本%1$s可用</string>
     <string name="app_version_x_installed">版本 %1$s</string>
     <string name="clear_search">清除搜尋</string>
 
@@ -371,11 +371,11 @@
         <item quantity="other">查看全部 %d</item>
     </plurals>
 
-    <string name="app_recommended_version_installed">版本 %1$s （推薦）</string>
-    <string name="app__newly_added">新的</string>
+    <string name="app_recommended_version_installed">版本%1$s （推薦）</string>
+    <string name="app__newly_added">新品</string>
 
     <string name="installed_apps__activity_title">已安裝的應用程式</string>
-    <string name="installed_app__updates_ignored">已忽略更新</string>
+    <string name="installed_app__updates_ignored">已忽略的更新</string>
     <string name="installed_app__updates_ignored_for_suggested_version">已忽略 %1$s 版本更新</string>
 
     <string name="preference_category__my_apps">我的應用程式</string>
@@ -450,8 +450,8 @@
     <string name="force_old_index_summary">如果出現錯誤或相容問題，請使用XML應用程式索引</string>
     <string name="app_list_download_ready">已下載，安裝準備就緒</string>
 
-    <string name="app_installed_media">檔案已安裝到 %s</string>
-    <string name="app_permission_storage">F-Droid 需要檔案存取權限以將其安裝到裝置。請在下一個畫面允許它以繼續安裝。</string>
+    <string name="app_installed_media">檔案已安裝到%s</string>
+    <string name="app_permission_storage">F-Droid需要檔案存取權以將其安裝到裝置。請在下一個畫面允許它以繼續安裝。</string>
 
     <string name="status_inserting_x_apps">正從 %3$s 儲存應用程式的詳細資訊 (%1$d/%2$d)</string>
     <string name="app_details__incompatible_mismatched_signature">與已安裝版本的簽署不符</string>
