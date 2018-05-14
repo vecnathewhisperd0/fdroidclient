@@ -227,7 +227,7 @@
     <string name="repo_error_empty_username">使用者名稱被留空，沒有更改憑證</string>
 
     <string name="repo_exists_enable">%1$s已經設立。請確認您要重新啟用它。</string>
-    <string name="repo_exists_and_enabled">%1$s已設立並啟用。</string>
+    <string name="repo_exists_and_enabled">%1$s 已安裝並啟用。</string>
     <string name="malformed_repo_uri">略過異常的軟體庫 URI：%s</string>
     <string name="repo_provider">軟體庫：%s</string>
 
@@ -497,7 +497,7 @@
     <string name="hiding_dialog_warning">警告：主畫面上任何的應用程式捷徑也將被移除，並需要重新手動新增。</string>
     <string name="hide_on_long_search_press_title">隱藏搜尋按鈕</string>
     <string name="hide_on_long_search_press_summary">長按搜尋按鈕將會隱藏應用程式</string>
-    <string name="sort_search">搜尋排列</string>
+    <string name="sort_search">搜尋排序</string>
 
     <string name="menu_liberapay">Liberapay</string>
 
