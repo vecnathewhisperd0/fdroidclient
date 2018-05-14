@@ -65,7 +65,7 @@
 
     <string name="bluetooth_activity_not_found">未找到藍牙傳送方式，請選擇一個！</string>
     <string name="choose_bt_send">選擇藍牙傳送方式</string>
-    <string name="invalid_url">這不是有效的網址。</string>
+    <string name="invalid_url">地址無效。</string>
     <string name="menu_settings">設定</string>
     <string name="menu_search">搜尋</string>
     <string name="menu_launch">執行</string>
@@ -228,10 +228,10 @@
 
     <string name="repo_exists_enable">%1$s已經設立。請確認您要重新啟用它。</string>
     <string name="repo_exists_and_enabled">%1$s 已安裝並啟用。</string>
-    <string name="malformed_repo_uri">略過異常的軟體庫 URI：%s</string>
+    <string name="malformed_repo_uri">略過異常的軟體庫URI：%s</string>
     <string name="repo_provider">軟體庫：%s</string>
 
-    <string name="menu_email">E-Mail 作者</string>
+    <string name="menu_email">電郵作者</string>
     <string name="menu_issues">問題</string>
     <string name="local_repo_running">F-Droid 已準備好交換</string>
     <string name="touch_to_configure_local_repo">點觸以便檢視詳細資料並允許其他去交換您的應用程式。</string>
@@ -400,7 +400,7 @@
 	<item quantity="other">為%1$d個應用程式下載更新。</item>
 </plurals>
 
-    <string name="details_new_in_version">新的版本在 %s</string>
+    <string name="details_new_in_version">版本%s的新功能</string>
 
     <string name="antifeatureswarning">此應用程式可能有您不喜歡的功能。</string>
     <plurals name="details_last_update_days">
@@ -414,12 +414,12 @@
     <string name="nearby_splash__find_people_button">找我附近的人</string>
     <string name="nearby_splash__both_parties_need_fdroid">雙方都需要 %1$s 才能在附近使用。</string>
 
-    <string name="latest__empty_state__no_recent_apps">沒有找到新近的應用程式</string>
+    <string name="latest__empty_state__no_recent_apps">找不到最近使用的應用程式</string>
     <string name="latest__empty_state__never_updated">一旦您的應用程式清單已更新，最新的應用程式應在這裡顯示
 </string>
     <string name="latest__empty_state__no_enabled_repos">一旦您啟用軟體庫並讓它更新，最新的應用程式應該在這裡顯示</string>
 
-    <string name="categories__empty_state__no_categories">沒有要顯示的類別</string>
+    <string name="categories__empty_state__no_categories">沒有可顯示的分類</string>
 
     <string name="menu_video">影片</string>
     <string name="details_last_updated_today">今天更新</string>
@@ -510,7 +510,7 @@
     <string name="force_touch_apps_on">顯示需要觸控式螢幕的應用程式，而不管硬體的支援度如何</string>
 
     <string name="repo_add_mirror">增加鏡像</string>
-    <string name="repo_exists_add_mirror">這是%1$s的副本，將其增為鏡像？</string>
+    <string name="repo_exists_add_mirror">這是%1$s的副本，您要將其增為鏡像嗎？</string>
     <string name="repo_official_mirrors">官方鏡像</string>
     <string name="repo_user_mirrors">使用者鏡像</string>
     <string name="use_bluetooth">使用藍牙</string>
