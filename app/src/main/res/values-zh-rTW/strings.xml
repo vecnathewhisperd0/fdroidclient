@@ -335,7 +335,7 @@
     <string name="warning_no_internet">無法更新，您是否已連線到網路？</string>
     <string name="versions">版本</string>
     <string name="app_details_donate_prompt_unknown_author">給%1$s的開發者買杯咖啡吧！</string>
-    <string name="app_details_donate_prompt">%1$s由%2$s開發，給他們買杯咖啡吧！</string>
+    <string name="app_details_donate_prompt">%1$s 由 %2$s 開發，給他們買杯咖啡吧！</string>
 
     <string name="repositories_summary">為應用程式增加其他的來源</string>
     <string name="notification_title_single_update_available">可更新的</string>
@@ -464,8 +464,8 @@
     <string name="app_list__dismiss_vulnerable_app">已忽略漏洞</string>
     <string name="app_list__dismiss_downloading_app">已取消下載</string>
 
-    <string name="updates__app_with_known_vulnerability__prompt_uninstall">我們發現了%1$s的漏洞，建議您立刻卸載此應用程式。</string>
-    <string name="updates__app_with_known_vulnerability__prompt_upgrade">我們發現了%1$s的漏洞，建議您立即更新至最新版本。</string>
+    <string name="updates__app_with_known_vulnerability__prompt_uninstall">我們發現了 %1$s 的漏洞，建議您立即解除安裝此應用程式。</string>
+    <string name="updates__app_with_known_vulnerability__prompt_upgrade">我們發現了 %1$s 的漏洞，建議您立即更新至最新版本。</string>
     <string name="updates__app_with_known_vulnerability__ignore">忽略</string>
 
     <string name="privacy">隱私權</string>
