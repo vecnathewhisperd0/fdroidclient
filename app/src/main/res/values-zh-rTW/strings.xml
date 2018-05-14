@@ -40,7 +40,7 @@
     <string name="app_inst_known_source">已安裝（來自 %s）</string>
     <string name="app_inst_unknown_source">已安裝（來源不明）</string>
 
-    <string name="added_on">於%s新增</string>
+    <string name="added_on">於 %s 新增</string>
 
     <string name="ok">確定</string>
 
@@ -372,7 +372,7 @@
     </plurals>
 
     <string name="app_recommended_version_installed">版本%1$s （推薦）</string>
-    <string name="app__newly_added">新品</string>
+    <string name="app__newly_added">最新</string>
 
     <string name="installed_apps__activity_title">已安裝的應用程式</string>
     <string name="installed_app__updates_ignored">已忽略的更新</string>
