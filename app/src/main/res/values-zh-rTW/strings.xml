@@ -27,7 +27,7 @@
     <string name="app_details">應用程式詳情</string>
     <string name="no_such_app">找不到此應用程式。</string>
 
-    <string name="about_title">關於F-Droid</string>
+    <string name="about_title">關於 F-Droid</string>
     <string name="about_version">版本</string>
     <string name="about_site">網站</string>
     <string name="about_source">原始碼</string>
@@ -123,7 +123,7 @@
     <string name="category_Development">開發</string>
     <string name="category_Games">遊戲</string>
     <string name="category_Graphics">圖形</string>
-    <string name="category_Internet">網絡</string>
+    <string name="category_Internet">網路</string>
     <string name="category_Multimedia">多媒體</string>
     <string name="category_Reading">閱讀</string>
     <string name="category_Science_Education">科學與教育</string>
@@ -135,10 +135,10 @@
     <string name="system_install_installing">安裝中…</string>
     <string name="system_install_installing_rebooting">正在安裝和重新啟動…</string>
     <string name="system_install_uninstalling">解除安裝中…</string>
-    <string name="system_uninstall_button">卸載</string>
+    <string name="system_uninstall_button">解除安裝</string>
 
     <string name="open_qr_code_scanner">開啟 QR 碼掃描器</string>
-    <string name="swap_welcome">歡迎使用F-Droid！</string>
+    <string name="swap_welcome">歡迎使用 F-Droid！</string>
     <string name="swap_dont_show_again">不再顯示</string>
     <string name="swap_scan_qr">掃描 QR 碼</string>
     <string name="menu_manage">軟體庫</string>
@@ -390,7 +390,7 @@
 </plurals>
     <string name="app__install_downloaded_update">更新</string>
 
-    <string name="app_list__name__downloading_in_progress">正在下載%1$s</string>
+    <string name="app_list__name__downloading_in_progress">正在下載 %1$s</string>
 
     <string name="updates__tts__download_updates_for_all_apps">下載所有更新</string>
 
@@ -409,7 +409,7 @@
     </plurals>
     <string name="updates__tts__download_app">下載</string>
     <string name="antifeatures">反特徵</string>
-    <string name="app_list__name__successfully_installed">已安裝%1$s</string>
+    <string name="app_list__name__successfully_installed">已安裝 %1$s</string>
     <string name="nearby_splash__download_apps_from_people_nearby">沒有網路嗎？從您附近的人下載應用程式！
 </string>
     <string name="nearby_splash__find_people_button">找我附近的人</string>
