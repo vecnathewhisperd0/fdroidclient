@@ -4,7 +4,7 @@
     <string name="installIncompatible">アプリはお使いの端末と互換性がありません。それでもインストールしますか？</string>
     <string name="version">バージョン</string>
     <string name="delete">削除</string>
-    <string name="enable_nfc_send">NFC送信を有効にする。。。</string>
+    <string name="enable_nfc_send">NFC送信を有効にする…</string>
     <string name="cache_downloaded">キャッシュしたアプリを残す</string>
     <string name="updates">更新</string>
     <string name="other">その他</string>
@@ -262,7 +262,7 @@
     <string name="system_install_button_install">インストール</string>
     <string name="system_install_installing_rebooting">インストール、および再起動中</string>
     <string name="system_install_warning">これには、約10秒程かかります｡</string>
-    <string name="more">詳細はこちら</string>
+    <string name="more">詳細を表示</string>
     <string name="less">詳細を隠す</string>
 
     <string name="status_download_unknown_size">ダウンロード中
@@ -504,4 +504,9 @@
     <string name="swap_toast_hotspot_enabled">Wi-Fi ホットスポットが有効です</string>
     <string name="swap_toast_could_not_enable_hotspot">Wi-Fi ホットスポットを有効にできませんでした!</string>
 
+    <string name="over_wifi">Wi-Fi接続</string>
+    <string name="over_data">データ接続</string>
+    <string name="over_network_always_summary">利用可能な場合には、常にこの接続を使用する</string>
+    <string name="over_network_on_demand_summary">ダウンロードをタップした時のみ、この接続を使用する</string>
+    <string name="over_network_never_summary">この接続を使用して何もダウンロードしない</string>
     </resources>
