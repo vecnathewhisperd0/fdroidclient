@@ -50,7 +50,7 @@
     <string name="repo_add_add">新增</string>
     <string name="links">連結</string>
     <string name="more">顯示更多</string>
-    <string name="less">收起</string>
+    <string name="less">顯示較少</string>
 
     <string name="back">返回</string>
     <string name="cancel">取消</string>
@@ -86,7 +86,7 @@
 
     <string name="details_notinstalled">未安裝</string>
     <string name="antiadslist">此應用程式含有廣告</string>
-    <string name="antitracklist">本應用程式會記錄和報告您的行為</string>
+    <string name="antitracklist">本應用程式會追蹤和彙報您的行為</string>
     <string name="antinonfreeadlist">此應用程式推廣非自由的附加元件</string>
     <string name="antinonfreenetlist">此應用程式推廣非自由的網路服務</string>
     <string name="antinonfreedeplist">此應用程式依賴其他非自由的應用程式</string>
