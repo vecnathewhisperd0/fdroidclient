@@ -189,7 +189,7 @@
 
     <string name="newPerms">Neu</string>
     <string name="perms_new_perm_prefix">Neu:</string>
-    <string name="interval_1h">stündlich nach Aktualisierungen suchen</string>
+    <string name="interval_1h">Stündlich nach Aktualisierungen suchen</string>
     <string name="interval_4h">Alle 4 Stunden nach Updates suchen</string>
     <string name="interval_12h">Alle 12 Stunden nach Updates suchen</string>
     <string name="interval_1d">Täglich nach Updates suchen</string>
