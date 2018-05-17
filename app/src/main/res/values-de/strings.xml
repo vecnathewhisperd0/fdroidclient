@@ -190,10 +190,10 @@
     <string name="newPerms">Neu</string>
     <string name="perms_new_perm_prefix">Neu:</string>
     <string name="interval_1h">Stündlich nach Aktualisierungen suchen</string>
-    <string name="interval_4h">Alle 4 Stunden nach Updates suchen</string>
-    <string name="interval_12h">Alle 12 Stunden nach Updates suchen</string>
-    <string name="interval_1d">Täglich nach Updates suchen</string>
-    <string name="interval_1w">Wöchentlich nach Updates suchen</string>
+    <string name="interval_4h">Alle 4 Stunden nach Aktualisierungen suchen</string>
+    <string name="interval_12h">Alle 12 Stunden nach Aktualisierungen suchen</string>
+    <string name="interval_1d">Täglich nach Aktualisierungen suchen</string>
+    <string name="interval_1w">Wöchentlich nach Aktualisierungen suchen</string>
     <string name="more">Mehr</string>
     <string name="less">Weniger</string>
 
@@ -208,7 +208,7 @@
     <string name="swap_send_fdroid">F-Droid senden</string>
     <string name="swap_connecting">Verbindungsaufbau</string>
     <string name="interval_never">Keine automatischen App-Updates</string>
-    <string name="interval_2w">Alle zwei Wochen nach Updates suchen</string>
+    <string name="interval_2w">Alle zwei Wochen nach Aktualisierungen suchen</string>
 
     <string name="theme_light">Hell</string>
     <string name="theme_dark">Dunkel</string>
