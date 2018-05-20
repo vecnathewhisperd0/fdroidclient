@@ -557,4 +557,5 @@
     <string name="over_wifi">على الواي فاي</string>
     <string name="over_data">في وضع بيانات الجوال</string>
     <string name="over_network_always_summary">إستخدم دائما هذا الإتصال عند توفره</string>
+    <string name="over_network_never_summary">لا تقم بتنزيل أي شيء باستخدام هذا الاتصال</string>
     </resources>
