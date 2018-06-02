@@ -55,7 +55,7 @@
     <string name="expert_on">További információkat jelenít meg, és további beállításokat engedélyez</string>
     <string name="search_hint">Alkalmazások keresése</string>
     <string name="appcompatibility">Alkalmazáskompatibilitás</string>
-    <string name="show_incompat_versions">Inkompatibilis verziók</string>
+    <string name="show_incompat_versions">Inkompatibilis verziók belefoglalása</string>
     <string name="show_incompat_versions_on">Azon alkalmazásverziók megjelenítése, melyek nem kompatibilisek az eszközzel</string>
     <string name="status_download">Letöltés\n%2$s / %3$s (%4$d%%), forrás:\n%1$s</string>
     <string name="status_connecting_to_repo">Kapcsolódás ehhez:\n%1$s</string>
@@ -235,7 +235,7 @@
     <string name="root_access_denied_body">A készüléke vagy nem rootolt, vagy megtagadta az F-Droid root hozzáférését.
     </string>
     <string name="menu_email">E-mail a készítőnek</string>
-    <string name="useTorSummary">Letöltési forgalom kényszerítése Tor használatára az adatvédelem növeléséért. Orbot szükséges hozzá</string>
+    <string name="useTorSummary">Letöltési forgalom Tor használatára kényszerítése az adatvédelem növeléséért. Orbot szükséges hozzá</string>
     <string name="status_processing_xml_percent">%2$s / %3$s (%4$d%%) feldolgozása, forrás: %1$s</string>
     <string name="bluetooth_activity_not_found">Nem található Bluetooth küldési mód, válasszon egyet!</string>
     <string name="antinonfreeassetslist">Ez az alkalmazás nem szabad eszközöket tartalmaz</string>
@@ -311,7 +311,7 @@
     <string name="not_on_same_wifi">Az eszköze nem ugyanazon a Wi-Fi-n van, mint a hozzáadott helyi tároló! Próbáljon ehhez a hálózathoz csatlakozni: %s</string>
     <string name="notification_title_single_update_available">Frissítés érhető el</string>
     <string name="notification_title_summary_install_error">A telepítés sikertelen</string>
-    <string name="force_old_index_summary">Abban az esetben, ha bugok, vagy kompatibilitási problémák vannak, használja az XML alkalmazás indexet</string>
+    <string name="force_old_index_summary">Abban az esetben, ha hibák vagy kompatibilitási problémák vannak, használja az XML alkalmazás indexet</string>
     <string name="app_details_donate_prompt_unknown_author">Vegyen egy kávét a(z) %1$s fejlesztőinek!</string>
     <string name="app_details__no_versions__show_incompat_versions">Az inkompatibilis verziók megjelenítéséhez engedélyezze az „%1$s” beállítást.</string>
     <string name="app_details__no_versions__no_compatible_signatures">Nem található kompatibilis aláírással rendelkező verzió</string>
@@ -472,9 +472,25 @@
     <string name="repo_add_mirror">Tükör hozzáadása</string>
     <string name="sort_search">Keresési eredmények sorba rendezése</string>
 
-    <string name="repo_exists_add_mirror">Ez a(z) %1$s másolata. Hozzáadjuk tükörként?</string>
+    <string name="repo_exists_add_mirror">Ez a(z) %1$s másolata, hozzáadja tükörként?</string>
     <string name="antidisabledalgorithmlist">Ennek az alkalmazásnak gyönge a biztonsági aláírása</string>
     <string name="antiknownvulnlist">Ez az alkalmazás ismert biztonsági rést tartalmaz</string>
 
-    <string name="show_root_apps">Gyökéralkalmazások belefoglalása</string>
+    <string name="show_root_apps">Root jogot igénylő alkalmazások belefoglalása</string>
+    <string name="over_data">Adatkapcsolaton keresztül</string>
+    <string name="repo_exists_add_fingerprint">A(z) %1$s már be lett állítva, ez új kulcsinformációkat fog hozzáadni.</string>
+    <string name="repo_exists_enable">A(z) %1$s már be lett állítva, erősítse meg, hogy újra engedélyezni akarja.</string>
+    <string name="repo_exists_and_enabled">A(z) %1$s már be lett állítva és engedélyezett.</string>
+    <string name="repo_delete_to_overwrite">Először törölje a(z) %1$s alkalmazást, hogy hozzáadhassa egy ütköző kulccsal.</string>
+    <string name="menu_liberapay">Liberapay</string>
+
+    <string name="show_root_apps_on">Azon alkalmazások megjelenítése, melyekhez root jogosultság szükséges</string>
+    <string name="show_anti_feature_apps">Előnytelen funkciókkal rendelkező alkalmazások belefoglalása</string>
+    <string name="show_anti_feature_apps_on">Azon alkalmazások megjelenítése, melyek előnytelen funkciókkal rendelkeznek</string>
+    <string name="force_touch_apps">Érintőképernyős alkalmazások belefoglalása</string>
+    <string name="force_touch_apps_on">Azon alkalmazások megjelenítése, melyekhez érintőképernyő szükséges, a hardvertámogatástól függetlenül</string>
+
+    <string name="privacy">Adatvédelem</string>
+    <string name="preventScreenshots_title">Képernyőképek megakadályozása</string>
+    <string name="hiding_calculator">Számológép</string>
     </resources>
