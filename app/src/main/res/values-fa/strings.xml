@@ -530,6 +530,6 @@
     <string name="use_bluetooth">استفاده از بلوتوث</string>
     <string name="swap_toast_invalid_url">نشانی نامعتبر برای تاخت زدن: %1$s</string>
     <string name="swap_toast_hotspot_enabled">نقطهٔ داغ وای‌فای فعّال است</string>
-    <string name="swap_toast_could_not_enable_hotspot">نمی‌توان نقطهٔ داغ وای‌فای را فعّال کرد</string>
+    <string name="swap_toast_could_not_enable_hotspot">نمی‌توان نقطهٔ داغ وای‌فای را فعّال کرد!</string>
 
     </resources>
