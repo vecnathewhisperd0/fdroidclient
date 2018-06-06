@@ -12,9 +12,7 @@
     <string name="notify">Показывать доступные обновления</string>
     <string name="notify_on">Отображать уведомление когда есть обновления</string>
     <string name="system_installer">Привилегированное расширение</string>
-    <string name="system_installer_on">Использовать привилегированное расширение F-Droid для установки, обновления и
-        удаления пакетов
-    </string>
+    <string name="system_installer_on">Использовать привилегированное расширение для установки, обновления и удаления пакетов</string>
     <string name="local_repo_name">Название локального репозитория</string>
     <string name="local_repo_name_summary">Публичное название вашего локального репозитория: %s</string>
     <string name="local_repo_https_on">Использовать защищенное HTTPS:// соединение для локального репозитория</string>
@@ -111,7 +109,7 @@
     <string name="repo_not_yet_updated">Этот репозиторий еще не использовался. Включите его, чтобы просмотреть содержащиеся в нем приложения.</string>
     <string name="unknown">Неизвестно</string>
     <string name="repo_confirm_delete_title">Удалить репозиторий?</string>
-    <string name="repo_confirm_delete_body">Удаление репозитория означает, что приложения из него больше не будут доступны в F-Droid. 
+    <string name="repo_confirm_delete_body">Удаление репозитория означает, что приложения из него больше доступны не будут. 
 \n 
 \nПримечание: все ранее установленные приложения останутся на вашем устройстве.</string>
     <string name="repo_disabled_notification">%1$s отключен.
@@ -204,7 +202,7 @@
     <string name="status_download_unknown_size">Загрузка
 \n%2$s из
 \n%1$s</string>
-    <string name="repo_added">Сохранен F-Droid репозиторий %1$s.</string>
+    <string name="repo_added">Сохранен репозиторий пакетов %1$s.</string>
     <string name="about_license">Лицензия</string>
 
     <string name="status_inserting_apps">Сохранение информации о приложениях</string>
@@ -215,7 +213,8 @@
     <string name="repo_edit_credentials">Изменить пароль</string>
     <string name="repo_error_empty_username">Не задано имя пользователя, учетные данные не изменены</string>
 
-    <string name="repo_searching_address">Поиск репозитория F-Droid на\n%1$s</string>
+    <string name="repo_searching_address">Поиск репозитория пакетов в
+\n%1$s</string>
     <string name="wifi_ap">Точка доступа</string>
 
     <string name="category_Theming">Темы</string>
@@ -333,7 +332,7 @@
     <string name="update_auto_install">Устанавливать обновления автоматически</string>
     <string name="update_auto_install_summary">Загружать и устанавливать обновления в фоне</string>
     <string name="keep_install_history">Хранить историю установок</string>
-    <string name="keep_install_history_summary">Хранить в F-Droid журнал всех установок и удалений</string>
+    <string name="keep_install_history_summary">Хранить журнал всех установок и деинсталляций в приватном магазине</string>
     <string name="warning_no_internet">Не удается обновить. Вы подключены к Интернету?</string>
     <string name="versions">Версии</string>
     <string name="app_details_donate_prompt_unknown_author">Купи разработчику %1$s чашечку кофе!</string>
