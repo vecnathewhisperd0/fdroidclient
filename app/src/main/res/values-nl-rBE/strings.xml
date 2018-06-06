@@ -89,7 +89,7 @@
     <string name="unstable_updates">Instabiele updates</string>
     <string name="unstable_updates_summary">Geefd updates weer voor instabiele versies</string>
     <string name="keep_install_history">Bewaard installatiegeschiedenis</string>
-    <string name="keep_install_history_summary">Bewaard een logbestand van alle installaties en verwijderingen in F-Droid</string>
+    <string name="keep_install_history_summary">Bewaard een logbestand van alle installaties en verwijderingen in een privéopslagplaats</string>
     <string name="force_old_index">Oud indexformaat afdwingen</string>
     <string name="force_old_index_summary">Gebruikt den XML-app-index in geval van programmafouten of compatibiliteitsproblemen</string>
     <string name="other">Overig</string>
@@ -102,7 +102,7 @@
     <string name="notify">Toond beschikbare updates</string>
     <string name="notify_on">Toond een melding wanneer dat der updates beschikbaar zijn</string>
     <string name="system_installer">Systeemrechtenextensie</string>
-    <string name="system_installer_on">Gebruikt de F-Droid-systeemrechtenextensie voor pakketten te installeren, bij te werken en verwijderen</string>
+    <string name="system_installer_on">Gebruikt de systeemrechtenextensie voor pakketten te installeren, bij te werken en verwijderen</string>
     <string name="uninstall_system">Systeemrechtenextensie bijwerken/verwijderen</string>
     <string name="uninstall_system_summary">Opend detailscherm van systeemrechtenextensie voor deze bij te werken of te verwijderen</string>
     <string name="local_repo_name">Naam van collectie gedeelde apps</string>
@@ -312,10 +312,10 @@
     <string name="repo_not_yet_updated">Dezen bron is nog niet gebruikt. Schakeld hem in voor de beschikbare apps te kunnen zien.</string>
     <string name="unknown">Onbekend</string>
     <string name="repo_confirm_delete_title">Softwarebron verwijderen?</string>
-    <string name="repo_confirm_delete_body">Als nen bron verwijderd word, zijn de apps in dienen bron niet meer beschikbaar via F-Droid. Let op: eerder geïnstalleerde apps blijven op uw apparaat staan.</string>
+    <string name="repo_confirm_delete_body">Als nen bron verwijderd word, zijn de apps in dienen bron niet meer beschikbaar. Let op: eerder geïnstalleerde apps blijven op uw apparaat staan.</string>
     <string name="repo_disabled_notification">%1$s uitgeschakeld. Ge moet dezen bron terug inschakelen indien ge der apps van wild installeren.</string>
-    <string name="repo_added">F-Droid-bron %1$s opgeslagen.</string>
-    <string name="repo_searching_address">Zoeken naar F-Droid-bron op %1$s</string>
+    <string name="repo_added">Pakketbron %1$s opgeslagen.</string>
+    <string name="repo_searching_address">Zoeken naar pakketbron op %1$s</string>
     <string name="minsdk_or_later">%s of later</string>
     <string name="up_to_maxsdk">Tot en met %s</string>
     <string name="minsdk_up_to_maxsdk">%1$s tot en met %2$s</string>
