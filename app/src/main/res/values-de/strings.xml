@@ -550,6 +550,6 @@
     <string name="over_network_on_demand_summary">Diese Verbindung nur verwenden, wenn ich zum Download klicke</string>
     <string name="over_network_never_summary">Niemals etwas über diese Verbindung herunterladen</string>
     <string name="antidisabledalgorithmlist">Diese App hat eine schwache Sicherheitssignatur</string>
-    <string name="antiknownvulnlist">Diese Anwendung enthält eine bekannte Sicherheitslücke.</string>
+    <string name="antiknownvulnlist">Diese Anwendung enthält eine bekannte Sicherheitslücke</string>
 
     </resources>
