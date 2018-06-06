@@ -12,7 +12,7 @@
     <string name="notify">Toon beschikbare updates</string>
     <string name="notify_on">Toon een melding wanneer er updates beschikbaar zijn</string>
     <string name="system_installer">Systeemrechtenextensie</string>
-    <string name="system_installer_on">Gebruik de F-Droid-systeemrechtenextensie om pakketten te installeren, bij te werken en verwijderen</string>
+    <string name="system_installer_on">Gebruik de systeemrechtenextensie om pakketten te installeren, bij te werken en verwijderen</string>
     <string name="local_repo_name">Naam van collectie gedeelde apps</string>
     <string name="local_repo_name_summary">De geadverteerde titel van jouw collectie gedeelde apps: %s</string>
     <string name="local_repo_https_on">Gebruik versleutelde HTTPS://-verbinding voor gedeelde apps</string>
@@ -113,19 +113,13 @@
     </string>
     <string name="unknown">Onbekend</string>
     <string name="repo_confirm_delete_title">Softwarebron verwijderen?</string>
-    <string name="repo_confirm_delete_body">Als een bron verwijderd wordt, zijn de apps in die bron niet meer
-        beschikbaar via F-Droid.
-
-        Let op: eerder geïnstalleerde apps blijven op je apparaat staan.
-    </string>
+    <string name="repo_confirm_delete_body">Als een bron verwijderd wordt, zijn de apps in die bron niet meer beschikbaar. Let op: eerder geïnstalleerde apps blijven op je apparaat staan.</string>
     <string name="repo_disabled_notification">%1$s uitgeschakeld.
 
         Je moet deze bron weer inschakelen indien je er apps van wil installeren.
     </string>
-    <string name="repo_added">F-Droid-bron %1$s opgeslagen.</string>
-    <string name="repo_searching_address">Zoeken naar F-Droid-bron op
-        %1$s
-    </string>
+    <string name="repo_added">Pakketbron %1$s opgeslagen.</string>
+    <string name="repo_searching_address">Zoeken naar pakketbron op %1$s</string>
     <string name="minsdk_or_later">%s of later</string>
     <string name="up_to_maxsdk">Tot en met %s</string>
     <string name="minsdk_up_to_maxsdk">%1$s tot en met %2$s</string>
@@ -338,7 +332,7 @@
     <string name="update_auto_install">Installeer updates automatisch</string>
     <string name="update_auto_install_summary">Download en installeer updates in de achtergrond</string>
     <string name="keep_install_history">Bewaar installatiegeschiedenis</string>
-    <string name="keep_install_history_summary">Bewaar een logbestand van alle installaties en verwijderingen in F-Droid</string>
+    <string name="keep_install_history_summary">Bewaar een logbestand van alle installaties en verwijderingen in een privéopslagplaats</string>
     <string name="warning_no_internet">Kan niet updaten, ben je verbonden met het internet?</string>
     <string name="versions">Versies</string>
     <string name="app_details_donate_prompt_unknown_author">Bestel een kopje koffie voor de ontwikkelaars van %1$s!</string>
