@@ -73,9 +73,7 @@
     <string name="other">Bestelakoak</string>
     <string name="update_interval">Eguneratze-maiztasuna</string>
     <string name="system_installer">Pribilegiodun Luzapena</string>
-    <string name="system_installer_on">Erabili Pribilegiodun F-Droid Luzapena paketeak instalatu, eguneratu eta
-        kentzeko
-    </string>
+    <string name="system_installer_on">Erabili pribilegiodun luzapena paketeak instalatu, eguneratu eta kentzeko</string>
     <string name="uninstall_system">Eguneratu/Desinstalatu Pribilegiodun Luzapena</string>
     <string name="uninstall_system_summary">Ireki Pribilegiodun Luzapenaren xehetasunen pantaila berau eguneratu edo
         desinstalatzeko
@@ -171,19 +169,17 @@
     <string name="repo_not_yet_updated">Biltegi hau ez da erabili oraindik.
         Gaitu behar duzu dauzkan aplikazioak ikusteko.
     </string>
-    <string name="repo_confirm_delete_body">Biltegi bat ezabatzeak esan nahi du bertako
-        aplikazioak ez direla F-Droiden eskuragarri izango.
-
-        Oharra: Aurretik instalatutako aplikazio guztiak
-        gailuan jarraituko dute.
-    </string>
+    <string name="repo_confirm_delete_body">Biltegi bat ezabatzeak esan nahi du bertako aplikazioak ez direla eskuragarri izango. 
+\n
+\nOharra: Aurretik instalatutako aplikazio guztiak gailuan jarraituko dute.</string>
     <string name="repo_disabled_notification">%1$s desgaitu da.
 
         Bertako aplikazioak
         instalatu ahal izateko gaitu egin beharko duzu.
     </string>
-    <string name="repo_added">%1$s F-Droid biltegia gorde da.</string>
-    <string name="repo_searching_address">F-Droid biltegia bilatzen hemen:\n%1$s</string>
+    <string name="repo_added">%1$s pakete-biltegia gorde da.</string>
+    <string name="repo_searching_address">Pakete-biltegia hemen bilatzen:
+\n%1$s</string>
     <string name="minsdk_or_later">%s edo berriagoa</string>
     <string name="up_to_maxsdk">%s arte</string>
     <string name="minsdk_up_to_maxsdk">%1$stik %2$sra</string>
@@ -374,7 +370,7 @@
     <string name="update_auto_install_summary">Deskargatu eta instalatu aplikazioen eguneraketak bigarren planoan
     </string>
     <string name="keep_install_history">Mantendu instalazioen historiala</string>
-    <string name="keep_install_history_summary">Gorde instalazio eta desinstalazioen egunkari bat F-Droiden</string>
+    <string name="keep_install_history_summary">Gorde instalazio eta desinstalazio guztien egunkari bat biltegi pribatu batean</string>
     <string name="warning_no_internet">Ezin da eguneratu, Internetera konektatuta zaude?</string>
     <string name="versions">Bertsioak</string>
     <string name="app_details_donate_prompt_unknown_author">Gonbidatu %1$s garatzaileak kafe batetara!</string>
