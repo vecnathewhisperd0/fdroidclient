@@ -159,13 +159,13 @@
     <string name="unsigned_description">這表示應用程式清單無法被驗證。 您應該小心從未簽署索引所下載的應用程式。</string>
     <string name="repo_not_yet_updated">此軟體庫尚未被使用。您需要啟用它才能檢視其中的應用程式。</string>
     <string name="repo_confirm_delete_title">要刪除軟體庫嗎？</string>
-    <string name="repo_confirm_delete_body">軟體庫被刪除後，軟體庫中的應用程式將不會在 F-Droid 出現。
-\n
+    <string name="repo_confirm_delete_body">刪除軟體庫，是指來自軟體庫中的應用程式將不再出現。
+\n 
 \n注意：所有之前已安裝的應用程式會保留在您的裝置上。</string>
     <string name="repo_disabled_notification">已停用 %1$s。
 \n
 \n您需重新啟用此軟體庫，才能安裝其中的應用程式。</string>
-    <string name="repo_added">已儲存 F-Droid 軟體庫 %1$s。</string>
+    <string name="repo_added">已儲存封裝的軟體庫 %1$s。</string>
     <string name="category_Money">理財</string>
     <string name="category_Phone_SMS">通話與簡訊</string>
     <string name="category_Writing">書寫</string>
@@ -221,7 +221,7 @@
     <string name="uninstall_confirm">您想要解除安裝此應用程式嗎？</string>
     <string name="download_error">下載失敗！</string>
 
-    <string name="system_installer_on">使用 F-Droid 特權擴充套件安裝、更新和移除應用程式</string>
+    <string name="system_installer_on">使用 特權擴充套件安裝、更新和移除應用程式</string>
     <string name="uninstall_system">更新或解除安裝特權擴充套件</string>
     <string name="uninstall_system_summary">開啟特權擴充套件的詳細資料來更新或解除安裝</string>
     <string name="repo_error_empty_username">使用者名稱空白，憑證未更改</string>
@@ -258,7 +258,7 @@
     <string name="up_to_maxsdk">直到 %s</string>
     <string name="minsdk_up_to_maxsdk">%1$s 直到 %2$s</string>
     <string name="empty_search_available_app_list">沒有相符合的應用程式可用。</string>
-    <string name="repo_searching_address">查看 F-Droid 軟體庫於 %1$s</string>
+    <string name="repo_searching_address">在 %1$s 查看封裝的軟體庫</string>
     <string name="not_on_same_wifi">您的裝置與剛新增的本地軟體庫不在同一個 Wi-Fi 網路上！請試著加入此網路：%s</string>
     <string name="requesting_root_access_body">正在要求 root 權限…</string>
     <string name="empty_installed_app_list">未安裝應用程式。
@@ -329,7 +329,7 @@
     <string name="swap_qr_isnt_for_swap">您掃描的 QR 碼看起來並不是一個交換碼。</string>
     <string name="swap_connection_misc_error">連線到裝置時發生錯誤，不能與它進行交換！</string>
     <string name="keep_install_history">保留安裝紀錄</string>
-    <string name="keep_install_history_summary">在 F-Droid 內記錄所有的安裝和解除安裝</string>
+    <string name="keep_install_history_summary">將所有的安裝和解除安裝記錄存儲在專用儲存區</string>
     <string name="update_auto_install">自動安裝更新</string>
     <string name="update_auto_install_summary">在背景下載並更新應用程式</string>
     <string name="warning_no_internet">無法更新，您是否已連線到網路？</string>
