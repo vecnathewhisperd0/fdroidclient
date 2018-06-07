@@ -12,8 +12,7 @@
     <string name="notify">Kullanılabilir güncellemeleri göster</string>
     <string name="notify_on">Güncellemeler varsa bir bildirim göster</string>
     <string name="system_installer">Ayrıcalıklı Uzantı</string>
-    <string name="system_installer_on">Paket kurmak, güncellemek ve kaldırmak için F-Droid Ayrıcalıklı Uzantıyı kullan
-    </string>
+    <string name="system_installer_on">Paket kurmak, güncellemek ve kaldırmak için Ayrıcalıklı Uzantıyı kullan</string>
     <string name="local_repo_name">Yerel deponuzun adı</string>
     <string name="local_repo_name_summary">Yerel deponuzun duyurulan adı: %s</string>
     <string name="local_repo_https_on">Yerel depo için şifrelenmiş HTTPS:// bağlantısı kullan</string>
@@ -118,21 +117,17 @@
     </string>
     <string name="unknown">Bilinmiyor</string>
     <string name="repo_confirm_delete_title">Depo silinsin mi?</string>
-    <string name="repo_confirm_delete_body">Bir depoyu silmek, oradaki uygulamaların bundan
-        böyle F-Droid\'den sağlanamayacağı anlamına gelir.
-
-        Not: Tüm
-        önceden kurulan uygulamalar aygıtınızda kalacaktır.
-    </string>
+    <string name="repo_confirm_delete_body">Bir depoyu silmek, oradaki uygulamaların artık bulunamayacağı anlamına gelir.
+\n
+\nNot: Önceden kurulan tüm uygulamalar aygıtınızda kalacaktır.</string>
     <string name="repo_disabled_notification">\"%1$s\" devre dışı bırakıldı.
 
         Oradan uygulama indirmek için
         bu depoyu tekrar etkinleştirmeniz gerekecektir.
     </string>
-    <string name="repo_added">F-Droid deposu %1$s kaydedildi.</string>
-    <string name="repo_searching_address">%1$s konumunda
-        F-Droid deposu aranıyor
-    </string>
+    <string name="repo_added">Paket deposu %1$s kaydedildi.</string>
+    <string name="repo_searching_address">%1$s konumunda paket deposu
+\naranıyor</string>
     <string name="minsdk_or_later">%s veya sonrası</string>
     <string name="up_to_maxsdk">%s değerine kadar</string>
     <string name="minsdk_up_to_maxsdk">%1$s değerinden %2$s değerine kadar</string>
@@ -342,8 +337,7 @@
     <string name="keep_forever">Daima</string>
 
     <string name="keep_install_history">Kurulum geçmişi tut</string>
-    <string name="keep_install_history_summary">F-Droid içindeki tüm kurulumların ve kaldırmaların günlüğünü depola
-    </string>
+    <string name="keep_install_history_summary">Tüm kurulumların ve kaldırmaların bir günlüğünü özel bir depoda sakla</string>
     <string name="update_auto_install">Güncellemeleri kendiliğinden kur</string>
     <string name="warning_no_internet">Güncellenemiyor, İnternete bağlı mısınız?</string>
     <string name="update_auto_install_summary">Uygulama güncellemelerini arka planda indir ve kur</string>
