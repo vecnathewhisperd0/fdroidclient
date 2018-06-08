@@ -98,7 +98,7 @@
 
     <string name="skip">ئاتلا</string>
 
-    <string tools:ignore="UnusedResources" name="category_Connectivity">ماسلىشىشچانلىق</string>
+    <string tools:ignore="UnusedResources" name="category_Connectivity">ئۇلىنىشچانلىق</string>
     <string name="notification_action_install">ئورنىتىش</string>
 
     <string name="app_list__name__downloading_in_progress">"%1$s چۈشۈرۈلىۋاتىدۇ "</string>
@@ -283,4 +283,10 @@
     <string name="proxy_host">ۋاكالەتچى كومپىيوتېر</string>
     <string name="proxy_port">ۋاكالەتچى ئېغىزى</string>
     <string name="status_inserting_apps">ئۇيغۇلىما تەپسىلاتىنى ساقلاۋاتىدۇ</string>
+    <string name="requires_features">تەلەپ: %1$s</string>
+    <string name="empty_can_update_app_list">تەبرىكلەر!
+\nسىزنىڭ ئۇيغۇلىمىلىرڭىز گۈنجەل.</string>
+
+    <string name="empty_search_available_app_list">ماس كېلىدىغان ئۇيغۇلىما يوق.</string>
+
     </resources>
