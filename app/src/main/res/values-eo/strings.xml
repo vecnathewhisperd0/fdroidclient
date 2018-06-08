@@ -180,7 +180,7 @@
     <string name="repo_not_yet_updated">La deponejo ne estas jam uzita. Vi devas aktivigi ĝin por vidi la aplikaĵojn,
         kiujn ĝi liveras.
     </string>
-    <string name="repo_confirm_delete_body">Forigado de deponejo kaŭzos, ke ĝiaj aplikaĵoj ne plu estos disponeblaj.
+    <string name="repo_confirm_delete_body">Forigado de deponejo kaŭzos, ke ĝiaj aplikaĵoj ne plu montriĝos en F-Droid.
 \n
 \nRimarko: ĉiuj antaŭe instalitaj aplikaĵoj restos en via aparato.</string>
     <string name="repo_disabled_notification">%1$s malaktiva. Vi devos reaktivigi tiun ĉi deponejon por instali aplikaĵojn el ĝi.</string>
