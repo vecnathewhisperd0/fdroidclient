@@ -12,7 +12,7 @@
     <string name="notify">Visa tillgängliga uppdateringar</string>
     <string name="notify_on">Visa avisering när uppdateringar finns tillgängliga</string>
     <string name="system_installer">Privilegierad utökning</string>
-    <string name="system_installer_on">Använd F-Droid privilegierad utökning för att installera, uppdatera och ta bort paket</string>
+    <string name="system_installer_on">Använd privilegierad utökning för att installera, uppdatera och ta bort paket</string>
     <string name="local_repo_name">Namn på ditt lokala förråd</string>
     <string name="local_repo_name_summary">Annonserade titeln på ditt lokala förråd: %s</string>
     <string name="local_repo_https_on">Använd krypterad HTTPS://-anslutning för lokalt förråd</string>
@@ -110,13 +110,13 @@
     </string>
     <string name="unknown">Okänd</string>
     <string name="repo_confirm_delete_title">Ta bort förråd?</string>
-    <string name="repo_confirm_delete_body">Att ta bort ett förråd betyder att dess appar inte längre kommer att vara tillgängliga från F-Droid. 
+    <string name="repo_confirm_delete_body">Att ta bort ett förråd betyder att dess appar inte längre kommer att vara tillgängliga. 
 \n 
 \nObservera: Alla tidigare installerade appar kommer kvarstå på din enhet.</string>
     <string name="repo_disabled_notification">Inaktiverade %1$s. 
 \n 
 \nDu kommer behöva återaktivera det här förrådet för att kunna installera appar från det.</string>
-    <string name="repo_searching_address">Söker F-Droid-förråd på
+    <string name="repo_searching_address">Söker efter paketförråd på 
 \n%1$s</string>
     <string name="minsdk_or_later">%s eller senare</string>
     <string name="up_to_maxsdk">Upp till %s</string>
@@ -195,7 +195,7 @@
     <string name="useTorSummary">Tvinga nerladdningstrafik genom Tor för ökad integritet. Kräver Orbot</string>
     <string name="status_processing_xml_percent">Bearbetar %2$s / %3$s (%4$d%%) från %1$s</string>
     <string name="status_inserting_apps">Sparar appdetaljer</string>
-    <string name="repo_added">Sparade F-Droid-förråd %1$s.</string>
+    <string name="repo_added">Sparat paketförråd %1$s.</string>
     <string name="wifi_ap">Surfzon</string>
 
     <string name="category_Connectivity">Anslutbarhet</string>
@@ -334,7 +334,7 @@
     <string name="uninstalling">Avinstallera…</string>
 
     <string name="keep_install_history">Behåll installeringshistoria</string>
-    <string name="keep_install_history_summary">Lagra en logg över alla installationer och avinstallationer i F-Droid</string>
+    <string name="keep_install_history_summary">Lagra en logg över alla installationer och avinstallationer i en privat butik</string>
     <string name="update_auto_install">Installera uppdateringar automatiskt</string>
     <string name="update_auto_install_summary">Hämta och installera uppdateringsappar i bakgrunden</string>
     <string name="warning_no_internet">Kan inte att uppdatera, är du ansluten till Internet?</string>
