@@ -11,9 +11,7 @@
     <string name="notify">Mostreu les actualitzacions disponibles</string>
     <string name="notify_on">Ensenya una notificació quan hi hagi actualitzacions disponibles</string>
     <string name="system_installer">Extensió Privilegiada</string>
-    <string name="system_installer_on">Instal·la, actualitza i suprimeix paquets fent servir l\'extensió privilegiada de
-        l\'F-Droid
-    </string>
+    <string name="system_installer_on">Instal·la, actualitza i suprimeix paquets fent servir l\'extensió privilegiada</string>
     <string name="local_repo_name">Nom del vostre dipòsit local</string>
     <string name="local_repo_name_summary">Títol per difondre el vostre dipòsit local: %s</string>
     <string name="local_repo_https_on">Connexió encriptada (HTTPS://) per els dipòsits locals</string>
@@ -111,12 +109,14 @@
     </string>
     <string name="unknown">Desconegut</string>
     <string name="repo_confirm_delete_title">Voleu suprimir el dipòsit?</string>
-    <string name="repo_confirm_delete_body">Suprimir-ho implica que les aplicacions d\'aquest dipòsit ja no seran accessibles des de l\'F-Droid. Nota: No perdreu les aplicacions ja instal·lades.</string>
+    <string name="repo_confirm_delete_body">Suprimir-ho implica que les aplicacions d\'aquest dipòsit ja no seran accessibles.
+\n
+\nNota: No perdreu les aplicacions ja instal·lades.</string>
     <string name="repo_disabled_notification">\"%1$s\" Inhabilitat.
 \n
 \nHabiliteu el dipòsit novament per instal·lar les aplicacions que conté.</string>
-    <string name="repo_added">S\'ha desat el dipòsit %1$s de l\'F-Droid.</string>
-    <string name="repo_searching_address">S\'està cercant un dipòsit de l\'F-Droid a
+    <string name="repo_added">S\'ha desat el dipòsit %1$s del paquet.</string>
+    <string name="repo_searching_address">S\'està cercant un dipòsit del paquet a 
 \n%1$s</string>
     <string name="minsdk_or_later">%s o més recent</string>
     <string name="up_to_maxsdk">Fins a %s</string>
@@ -329,9 +329,7 @@
 
     <string name="keep_hour">1 hora</string>
     <string name="keep_install_history">Mantingueu l\'historial d\'instal·lació</string>
-    <string name="keep_install_history_summary">Deseu un registre de totes les instal·lacions i desinstal·lacions fetes
-        per l\'F-Droid
-    </string>
+    <string name="keep_install_history_summary">Deseu un registre de totes les instal·lacions i desinstal·lacions en un emmagatzemament privat</string>
     <string name="update_auto_install">Instal·leu les actualitzacions automàticament</string>
     <string name="update_auto_install_summary">Baixa i instal·la actualitzacions d\'aplicacions en rerefons</string>
     <string name="versions">Versions</string>
