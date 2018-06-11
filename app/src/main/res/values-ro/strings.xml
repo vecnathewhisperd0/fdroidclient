@@ -140,7 +140,7 @@
     <string name="pref_language_default">Setare implicită sistem</string>
 
     <string name="up_to_maxsdk">Până la %s</string>
-    <string name="repo_searching_address">Căutare depozit F-Droid la
+    <string name="repo_searching_address">Căutare depozit de pachete la 
 \n%1$s</string>
     <string name="repo_confirm_delete_title">Șterge depozit?</string>
     <string name="repo_description">Descriere</string>
@@ -164,7 +164,7 @@
     <string name="menu_bitcoin">Bitcoin</string>
     <string name="menu_settings">Setări</string>
     <string name="menu_manage">Depozite</string>
-    <string name="repo_added">Depozit F-Droid salvat %1$s.</string>
+    <string name="repo_added">Depozit de pachete salvat %1$s.</string>
     <string name="minsdk_or_later">%s sau mai nou</string>
     <string name="minsdk_up_to_maxsdk">%1$s pana la %2$s</string>
     <string name="pref_language">Limba</string>
@@ -293,13 +293,13 @@
     <string name="update_auto_install_summary">Descarcă și instalează actualizările aplicațiilor în fundal</string>
     <string name="keep_install_history">Păstrează istoricul instalărilor</string>
     <string name="keep_install_history_summary">Toate instalările și dezinstalările se notează într-un jurnal privat</string>
-    <string name="system_installer_on">Folosiți F-Droid Extension pentru a instala, actualiza și a înlătura pachete</string>
+    <string name="system_installer_on">Folosiți Privileged Extension pentru a instala, actualiza și a înlătura pachete</string>
     <string name="empty_can_update_app_list">Felicitări!\nAplicațiile tale sunt la zi.</string>
     <string name="empty_installed_app_list">Nici o aplicație instalată. Exista aplicații pe acest dispozitiv, dar nu sunt disponibile în F-Droid. Aceasta poate fi din cauză că trebuie să actualizați depozitele sau poate depozitele chiar nu conțin aplicațiile dumneavoastră.</string>
     <string name="repo_disabled_notification">\'%1$s dezactivat.
 \n
 \nVa trebui sa reactivați acest depozit pentru a putea instala aplicații din el.</string>
-    <string name="repo_confirm_delete_body">Ștergerea unui depozit inseamna ca aplicațiile din el nu vor mai fie disponibile.
+    <string name="repo_confirm_delete_body">Ștergerea unui depozit înseamnă ca aplicațiile din el nu vor mai fie disponibile.
 \n
 \nNotă: Toate aplicațiile instalate anterior vor rămâne pe dispozitivul dumneavoastră.</string>
     <string name="repo_not_yet_updated">Acest depozit nu a fost folosit încă. Trebuie sa îl activați pentru a putea vedea ce aplicații are disponibile.</string>
@@ -524,9 +524,10 @@
     <string name="antiknownvulnlist">Aplicația conține o vulnerabilitate de securitate cunoscută</string>
 
     <string name="use_bluetooth">Folosește Bluetooth</string>
-    <string name="swap_cant_find_peers">Nu gasiti ce cautati?</string>
-    <string name="swap_no_peers_nearby">Nu au fost gasite persoane</string>
+    <string name="swap_cant_find_peers">Nu găsiți ceea ce căutați?</string>
+    <string name="swap_no_peers_nearby">Nu au fost găsite persoane în apropiere cu care să faceți schimburi.</string>
     <string name="swap_toast_hotspot_enabled">Hotspot Wi-Fi activat</string>
     <string name="swap_toast_could_not_enable_hotspot">Nu s-a putut crea hotspot Wi-Fi!</string>
 
+    <string name="swap_toast_invalid_url">Adresă invalidă pentru schimb: %1$s</string>
     </resources>
