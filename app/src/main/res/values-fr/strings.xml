@@ -12,9 +12,7 @@
     <string name="notify">Afficher les mises à jour disponibles</string>
     <string name="notify_on">Afficher une notification quand des mises à jour sont disponibles</string>
     <string name="system_installer">Permissions étendues</string>
-    <string name="system_installer_on">Utiliser F-Droid Privileged Extension pour installer, mettre à jour et supprimer
-        des paquets
-    </string>
+    <string name="system_installer_on">Utiliser l\'extension des privilèges pour installer, mettre à jour et supprimer des paquets</string>
     <string name="local_repo_name">Nom de votre dépôt local</string>
     <string name="local_repo_name_summary">Le nom public de votre dépôt local : %s</string>
     <string name="local_repo_https_on">Utiliser une connexion chiffrée HTTPS pour le dépôt local</string>
@@ -117,12 +115,9 @@
     </string>
     <string name="unknown">Inconnu</string>
     <string name="repo_confirm_delete_title">Supprimer le dépôt ?</string>
-    <string name="repo_confirm_delete_body">Supprimer un dépôt signifie
-        que ses applis ne seront plus disponibles via F-Droid.
-
-        Note : toutes
-        les applis précédemment installées vont rester sur votre appareil.
-    </string>
+    <string name="repo_confirm_delete_body">Supprimer un dépôt signifie que ses applis ne seront plus disponibles.
+\n
+\nNote : toutes les applications précédemment installées resteront sur votre appareil.</string>
     <string name="repo_disabled_notification">%1$s a été désactivé.
 
         Vous devez
@@ -219,10 +214,9 @@
 
 
     <string name="status_processing_xml_percent">Traitement de %2$s / %3$s (%4$d%%) de %1$s</string>
-    <string name="repo_added">Le dépôt F-Droid %1$s a été sauvegardé.</string>
-    <string name="repo_searching_address">Recherche d\'un dépôt F-Droid sur
-        \n%1$s
-    </string>
+    <string name="repo_added">Le dépôt d\'applications %1$s a été enregistré.</string>
+    <string name="repo_searching_address">Recherche d\'un dépôt d\'applications sur
+\n%1$s</string>
     <string name="category_Graphics">Graphisme</string>
     <string name="empty_installed_app_list">Aucune appli installée.\n\nIl y a des applis sur votre appareil, mais aucune
         n\'est disponible sur F-Droid. Vous devriez peut-être mettre à jour vos dépôts, ou vos applis ne sont pas
@@ -358,9 +352,7 @@
     <string name="update_auto_install_summary">Télécharger et installer les mises à jour des applications en
         arrière-plan
     </string>
-    <string name="keep_install_history_summary">Enregistrer un journal de toutes les installations et désinstallations
-        au sein de F-Droid
-    </string>
+    <string name="keep_install_history_summary">Conserver la liste de toutes les installations et désinstallations dans un journal privé</string>
     <string name="warning_no_internet">Impossible de mettre à jour, êtes-vous connecté à Internet ?</string>
     <string name="versions">Versions</string>
     <string name="app_details_donate_prompt_unknown_author">Offrir un café aux développeurs de %1$s !</string>
