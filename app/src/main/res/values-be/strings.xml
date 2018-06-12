@@ -381,7 +381,7 @@
     <string name="notification_title_summary_downloading">Спампоўка…</string>
     <string name="notification_title_summary_downloading_update">Спампоўка абнаўлення…</string>
     <string name="notification_title_summary_ready_to_install">Гатовая да ўсталёўкі</string>
-    <string name="notification_title_summary_ready_to_install_update">Абнаўленна гатовае да ўсталёўкі</string>
+    <string name="notification_title_summary_ready_to_install_update">Гатовае да ўсталёўкі абнаўленне</string>
     <string name="notification_title_summary_installing">Усталёўка</string>
     <string name="notification_title_summary_installed">Паспяхова ўсталёвана</string>
     <string name="notification_title_summary_install_error">Не атрымалася ўсталяваць</string>
