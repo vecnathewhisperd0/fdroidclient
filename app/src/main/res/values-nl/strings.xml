@@ -166,10 +166,10 @@
     <string name="empty_can_update_app_list">Al je apps zijn up-to-date!</string>
 
     <string name="install_error_unknown">Kon niet installeren door een onbekende fout</string>
-    <string name="uninstall_error_unknown">Kon niet deïnstalleren door een onbekende fout</string>
+    <string name="uninstall_error_unknown">Kon niet verwijderen door een onbekende fout</string>
     <string name="system_install_installing">Installeren…</string>
     <string name="system_install_uninstalling">Deïnstalleren…</string>
-    <string name="system_uninstall_button">Deïnstalleren</string>
+    <string name="system_uninstall_button">Verwijderen</string>
 
     <string name="swap_nfc_title">Raak aan om uit te wisselen</string>
     <string name="swap_nfc_description">Als je vriend F-Droid heeft geïnstalleerd en NFC is ingeschakeld, hou dan de
@@ -228,7 +228,7 @@
     <string name="allPerms">Alles</string>
     <string name="perm_costs_money">Dit kan geld kosten</string>
     <string name="uninstall_update_confirm">Wil je deze app vervangen door de fabrieksversie?</string>
-    <string name="uninstall_confirm">Wil je deze app deïnstalleren?</string>
+    <string name="uninstall_confirm">Wil je deze app verwijderen?</string>
 
     <string name="perms_new_perm_prefix">Nieuw:</string>
     <string name="perms_description_app">Aangeboden door %1$s.</string>
@@ -272,13 +272,13 @@
     <string name="system_install_button_install">Installeren</string>
     <string name="system_install_post_success">F-Droid-systeemrechtenextensie is geïnstalleerd</string>
     <string name="system_install_post_fail">Installatie van F-Droid-systeemrechtenextensie is mislukt</string>
-    <string name="system_install_post_success_message">F-Droid-systeemrechtenextensie is geïnstalleerd. F-Droid kan hiermee zelf apps installeren, updaten en deïnstalleren.</string>
+    <string name="system_install_post_success_message">F-Droid-systeemrechtenextensie is geïnstalleerd. F-Droid kan hiermee zelf apps installeren, bijwerken en verwijderen.</string>
     <string name="system_install_post_fail_message">De installatie van de F-Droid-systeemrechtenextensie is mislukt. De installatiemethode wordt niet door alle Android-systemen ondersteund. Zie de F-Droid-bugtracker voor meer informatie.</string>
     <string name="system_install_installing_rebooting">Installeren en opnieuw opstarten…</string>
     <string name="system_install_question">Wil je de F-Droid-systeemrechtenextensie installeren?</string>
     <string name="system_install_warning">Dit kan tot 10 seconden duren.</string>
     <string name="system_install_warning_lollipop">Dit kan tot 10 seconden duren en het apparaat zal <b>opnieuw opgestart</b> worden.</string>
-    <string name="system_uninstall">Wil je de F-Droid-systeemrechtenextensie deïnstalleren?</string>
+    <string name="system_uninstall">Wil je de F-Droid-systeemrechtenextensie verwijderen?</string>
     <string name="download_error">Download mislukt!</string>
 
     <string name="theme_night">Nacht</string>
