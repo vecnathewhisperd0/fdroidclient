@@ -12,7 +12,7 @@
     <string name="notify">利用可能な更新を表示</string>
     <string name="notify_on">アップデートが利用可能になると通知を表示します</string>
     <string name="system_installer">特権拡張機能</string>
-    <string name="system_installer_on">F-Droidの特権拡張機能を使用してパッケージをインストール、更新、および削除します｡</string>
+    <string name="system_installer_on">特権拡張機能を使用してパッケージをインストール、更新、および削除します</string>
     <string name="local_repo_name">ローカルリポジトリの名前</string>
     <string name="local_repo_name_summary">公開するローカルリポジトリのタイトル: %s</string>
     <string name="local_repo_https_on">ローカルリポジトリに暗号化されたHTTPS://接続を使用する</string>
@@ -108,14 +108,15 @@
     <string name="repo_not_yet_updated">このリポジトリはまだ使用されていません。アプリを表示するには、リポジトリを有効にする必要があります。</string>
     <string name="unknown">不明</string>
     <string name="repo_confirm_delete_title">リポジトリを削除しますか？</string>
-    <string name="repo_confirm_delete_body">リポジトリを削除すると、アプリをF-Droidからインストールすることができなくなります。 
+    <string name="repo_confirm_delete_body">リポジトリを削除すると、リポジトリからアプリが利用できなくなります。 
 \n 
 \n注: これまでにインストールしたアプリはすべて端末に残ります。</string>
     <string name="repo_disabled_notification">%1$sを無効にしました。 
 \n
 \nアプリをインストールするにはこのリポジトリを再度有効にする必要があります。</string>
-    <string name="repo_added">F-Droidリポジトリ%1$sを保存しました。</string>
-    <string name="repo_searching_address">%1$sでF-Droidリポジトリを検索中</string>
+    <string name="repo_added">パッケージリポジトリ%1$sを保存しました。</string>
+    <string name="repo_searching_address">リポジトリを検索中
+\n%1$s</string>
     <string name="minsdk_or_later">%s以上</string>
     <string name="up_to_maxsdk">最大%s</string>
     <string name="minsdk_up_to_maxsdk">%1$sから%2$s</string>
@@ -227,13 +228,13 @@
     <string name="uninstall_confirm">このアプリをアンインストールしてもよろしいですか？</string>
     <string name="perms_new_perm_prefix">新規:</string>
     <string name="perms_description_app">%1$sによって提供されます。</string>
-    <string name="interval_never">なし</string>
-    <string name="interval_1h">1時間毎</string>
-    <string name="interval_4h">4時間毎</string>
-    <string name="interval_12h">12時間毎</string>
-    <string name="interval_1d">毎日</string>
-    <string name="interval_1w">毎週</string>
-    <string name="interval_2w">2週間毎</string>
+    <string name="interval_never">自動アプリ更新しません</string>
+    <string name="interval_1h">1時間毎にチェック</string>
+    <string name="interval_4h">4時間毎にチェック</string>
+    <string name="interval_12h">12時間毎にチェック</string>
+    <string name="interval_1d">毎日チェック</string>
+    <string name="interval_1w">毎週チェック</string>
+    <string name="interval_2w">2週間毎にチェック</string>
 
     <string name="theme_light">ライト</string>
     <string name="theme_dark">ダーク</string>
@@ -315,7 +316,7 @@
     <string name="update_auto_install">自動的に更新をインストール</string>
     <string name="update_auto_install_summary">バックグラウンドでアプリのアップデートをダウンロードしてインストールします</string>
     <string name="keep_install_history">インストール履歴を保存する</string>
-    <string name="keep_install_history_summary">F-Droid内でのすべてのインストールとアンインストールのログを保存します</string>
+    <string name="keep_install_history_summary">すべてのインストールとアンインストールのログはプライベートストアに保存します</string>
     <string name="warning_no_internet">更新できません。インターネットに接続していますか？</string>
     <string name="versions">バージョン</string>
     <string name="app_details_donate_prompt_unknown_author">%1$sの開発者にコーヒーを奢る！</string>
@@ -509,4 +510,7 @@
     <string name="over_network_always_summary">利用可能な場合には、常にこの接続を使用する</string>
     <string name="over_network_on_demand_summary">ダウンロードをタップした時のみ、この接続を使用する</string>
     <string name="over_network_never_summary">この接続を使用して何もダウンロードしない</string>
+    <string name="antidisabledalgorithmlist">このアプリは弱いセキュリティ署名を使用しています</string>
+    <string name="antiknownvulnlist">このアプリは既知のセキュリティ脆弱性が含まれています</string>
+
     </resources>
