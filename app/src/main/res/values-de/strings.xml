@@ -53,7 +53,7 @@
     <string name="menu_website">Internetseite</string>
     <string name="menu_issues">Probleme</string>
     <string name="menu_source">Quelltext</string>
-    <string name="menu_upgrade">Update</string>
+    <string name="menu_upgrade">Aktualisieren</string>
     <string name="menu_donate">Spenden</string>
     <string name="details_notinstalled">Nicht installiert</string>
     <string name="antiadslist">Diese Anwendung enthält Werbung</string>
@@ -203,7 +203,7 @@
 
     <string name="swap_send_fdroid">F-Droid senden</string>
     <string name="swap_connecting">Verbindungsaufbau</string>
-    <string name="interval_never">Keine automatischen App-Updates</string>
+    <string name="interval_never">Keine automatischen App-Aktualisierungen</string>
     <string name="interval_2w">Alle zwei Wochen nach Aktualisierungen suchen</string>
 
     <string name="theme_light">Hell</string>
@@ -540,10 +540,10 @@
     <string name="repo_user_mirrors">Benutzer-Spiegel</string>
     <string name="repo_delete_to_overwrite">Löschen Sie zuerst %1$s, um es mit einem widersprüchlichen Schlüssel hinzuzufügen.</string>
     <string name="use_bluetooth">Bluetooth nutzen</string>
-    <string name="swap_toast_hotspot_enabled">Wi-Fi-Hotspot aktiviert</string>
-    <string name="swap_toast_could_not_enable_hotspot">Konnte WLAN-Hotspot nicht aktivieren!</string>
+    <string name="swap_toast_hotspot_enabled">WLAN-Hotspot aktiviert</string>
+    <string name="swap_toast_could_not_enable_hotspot">WLAN-Hotspot konnte nicht aktiviert werden!</string>
 
-    <string name="swap_toast_invalid_url">Ungültige URL zum Tauschen: %1$s</string>
+    <string name="swap_toast_invalid_url">Ungültige Adresse zum Tauschen: %1$s</string>
     <string name="over_wifi">Über WLAN</string>
     <string name="over_data">über Mobilfunk</string>
     <string name="over_network_always_summary">Diese Verbindung immer verwenden, wenn sie verfügbar ist</string>
