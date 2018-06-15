@@ -112,7 +112,7 @@
     <string name="unverified">جەزىملەنمىگەن</string>
     <string name="repo_details">ئامبار</string>
     <string name="repo_last_update">ئاخىرقى يېڭىلانما</string>
-    <string name="not_on_same_wifi">ئۈسكۈنىڭىز سىز بايىلا يەرلىك ئامبار قوشقاندىكى سىمسىز-تورغا باغلانمىغان! بۇ تورغا باغلىنىپ سىناپ بېقىڭ: s%</string>
+    <string name="not_on_same_wifi">ئۈسكۈنىڭىز سىز بايىلا يەرلىك ئامبار قوشقاندىكى سىمسىز-تورغا باغلانمىغان! بۇ تورغا باغلىنىپ سىناپ بېقىڭ: %s</string>
     <string name="wifi">سىمسىز-تور</string>
     <string tools:ignore="UnusedResources" name="category_Sports_Health">تەنتەربىيە &amp; ساغلاملىق</string>
     <string tools:ignore="UnusedResources" name="category_System">سىستېما</string>

@@ -516,7 +516,7 @@
     <string name="over_network_on_demand_summary">Använd endast denna anslutning när jag klickar för att hämta</string>
     <string name="over_network_never_summary">Hämta aldrig någonting via denna anslutning</string>
     <string name="repo_add_mirror">Lägg till spegel</string>
-    <string name="repo_exists_add_fingerprint">$1$s är redan inställaded, detta kommer att lägga till ny nyckelinformation.</string>
+    <string name="repo_exists_add_fingerprint">%1$s är redan inställaded, detta kommer att lägga till ny nyckelinformation.</string>
     <string name="repo_exists_enable">%1$s är redan installerad, bekräfta att du vill återaktivera den.</string>
     <string name="repo_exists_and_enabled">%1$s är redan installerad och aktiverad.</string>
     <string name="repo_delete_to_overwrite">Ta först bort %1$s för att lägga till denna med en nyckel som står i konflikt.</string>

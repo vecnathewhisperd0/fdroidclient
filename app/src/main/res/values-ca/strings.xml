@@ -537,7 +537,7 @@
     <string name="repo_exists_add_fingerprint">%1$s ja està configurat, això afegirà informació de la nova clau.</string>
     <string name="repo_exists_enable">%1$s ja està configurat, confirmeu que el voleu reactivar.</string>
     <string name="repo_delete_to_overwrite">Elimineu primer %1$s per tal d\'afegir-ho amb una clau conflictiva.</string>
-    <string name="hiding_dialog_message">Esteu segur que voleu eliminar %1$ del llançador? Tan sols escrivint \"%2$d\" a l\'app %3$ simulada podreu restaurar-ho.</string>
+    <string name="hiding_dialog_message">Esteu segur que voleu eliminar %1$s del llançador? Tan sols escrivint \"%2$d\" a l\'app %3$s simulada podreu restaurar-ho.</string>
     <string name="hide_on_long_search_press_title">Amagueu amb el botó de cerca</string>
     <string name="swap_toast_invalid_url">URL incorrecta per l\'intercanvi: %1$s</string>
     </resources>
