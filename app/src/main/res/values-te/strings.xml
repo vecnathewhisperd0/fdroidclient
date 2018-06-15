@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools"><string name="app_name">F-డ్రాయిడ్</string>
+<resources><string name="app_name">F-డ్రాయిడ్</string>
 
     <string name="updates">నవీకరణలు</string>
     <string name="ok">సరే</string>
@@ -18,7 +18,7 @@
 
     <string name="next">తదుపరి</string>
     <string name="pref_language">భాష</string>
-    <string tools:ignore="UnusedResources" name="category_Games">ఆటలు</string>
+    <string name="category_Games">ఆటలు</string>
     <string name="system_install_button_install">స్థాపించు</string>
     <string name="notification_action_cancel">రద్దుచేయి</string>
     <string name="notification_action_install">స్థాపించు</string>
@@ -27,7 +27,7 @@
     <string name="about_title">F-డ్రాయిడ్ గురించి</string>
     <string name="more">మరింత</string>
     <string name="wifi">వై-ఫై</string>
-    <string tools:ignore="UnusedResources" name="category_Sports_Health">క్రీడలు &amp; ఆరోగ్యం</string>
+    <string name="category_Sports_Health">క్రీడలు &amp; ఆరోగ్యం</string>
     <string name="delete">తొలగించు</string>
     <string name="login_name">వాడుకరి పేరు</string>
     <string name="login_password">సంకేతపదం</string>
@@ -75,18 +75,18 @@
 
     <string name="pref_language_default">సిస్టం డీఫాల్ట్</string>
 
-    <string tools:ignore="UnusedResources" name="category_Connectivity">బంధత్వం</string>
-    <string tools:ignore="UnusedResources" name="category_Development">అభివృద్ధి</string>
-    <string tools:ignore="UnusedResources" name="category_Graphics">గ్రాఫిక్స్</string>
-    <string tools:ignore="UnusedResources" name="category_Internet">అంతర్జాలం</string>
-    <string tools:ignore="UnusedResources" name="category_Money">డబ్బు</string>
-    <string tools:ignore="UnusedResources" name="category_Multimedia">మల్టీమీడియా</string>
-    <string tools:ignore="UnusedResources" name="category_Phone_SMS">ఫోన్ &amp; ఎస్ఎంఎస్</string>
-    <string tools:ignore="UnusedResources" name="category_Reading">చదవటం</string>
-    <string tools:ignore="UnusedResources" name="category_Science_Education">విజ్ఞానం &amp; విద్య</string>
-    <string tools:ignore="UnusedResources" name="category_Security">రక్షణ</string>
-    <string tools:ignore="UnusedResources" name="category_Time">సమయం</string>
-    <string tools:ignore="UnusedResources" name="category_Writing">వ్రాయటం</string>
+    <string name="category_Connectivity">బంధత్వం</string>
+    <string name="category_Development">అభివృద్ధి</string>
+    <string name="category_Graphics">గ్రాఫిక్స్</string>
+    <string name="category_Internet">అంతర్జాలం</string>
+    <string name="category_Money">డబ్బు</string>
+    <string name="category_Multimedia">మల్టీమీడియా</string>
+    <string name="category_Phone_SMS">ఫోన్ &amp; ఎస్ఎంఎస్</string>
+    <string name="category_Reading">చదవటం</string>
+    <string name="category_Science_Education">విజ్ఞానం &amp; విద్య</string>
+    <string name="category_Security">రక్షణ</string>
+    <string name="category_Time">సమయం</string>
+    <string name="category_Writing">వ్రాయటం</string>
 
     <string name="swap_welcome">ఎఫ్-డ్రాయిడ్ కు సుస్వాగతం !</string>
     <string name="swap_dont_show_again">మళ్ళీ చూపించకు</string>
@@ -102,7 +102,7 @@
     <string name="unverified">ధృవీకరణ లేనిది</string>
     <string name="repo_details">రెపోజిటరి</string>
     <string name="repo_last_update">చివరి నవీకరణ</string>
-    <string tools:ignore="UnusedResources" name="category_System">వ్యవస్థ</string>
+    <string name="category_System">వ్యవస్థ</string>
     <string name="swap_send_fdroid">ఎఫ్-డ్రాయిడ్ ను పంపు</string>
     <string name="crash_dialog_title">ఎఫ్-డ్రాయిడ్ ఇబ్బంది ఎదుర్కొంది</string>
     <string name="notification_title_single_update_available">నవీకరణ అందుబాటులో ఉంది</string>

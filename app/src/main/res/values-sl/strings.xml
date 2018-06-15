@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="SignatureMismatch">Nova različica je overjena z drugim ključem kot starejša. V primeru, da želite namestiti novejšo različico morate najprej odstraniti staro. Poskusite ponovno, ko ste to naredili. (Bodite pozorni na dejstvo, da bodo zaradi odstranitve izbrisani vsi notranji podatki shranjeni v aplikaciji)</string>
     <string name="version">Različica</string>
     <string name="cache_downloaded">Ohranite predpomnjene aplikacije</string>
@@ -288,7 +288,7 @@
     <string name="requires_features">Potrebuje: %1$s</string>
     <string name="wifi_ap">Hotspot</string>
 
-    <string tools:ignore="UnusedResources" name="category_Theming">Izgled</string>
+    <string name="category_Theming">Izgled</string>
     <string name="empty_can_update_app_list">Čestitke!
 \nVaše aplikacije so posodobljene.</string>
 

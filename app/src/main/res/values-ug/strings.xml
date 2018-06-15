@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="SignatureMismatch">بۇ يېڭى نەشرىگە كونا نەشرىنىڭكىگە ئوخشىمايدىغان ئاچقۇچ بىلەن ئىمزا قويۇلغان. ئالدى بىلەن كونا نەشرىنى ئۆچۈرۈۋېتىپ ئاندىن يېڭى نەشرىنى ئورنىتىڭ. بۇ مەشغۇلاتنى قىلىپ ئاندىن قايتا سىناڭ. (دىققەت كونا نەشرى ئۆچۈرۈلسە شۇ ئەپتە ساقلانغان ھەممە سانلىق مەلۇماتلارمۇ ئۆچۈرۈلىدۇ)</string>
     <string name="installIncompatible">بۇ بوغچا ئۈسكۈنىڭىز بىلەن ماسلاشمايدىغاندەك تۇرىدۇ، ئۇنى سىناپ ئورنىتىۋېرەمسىز؟
     </string>
@@ -69,19 +69,19 @@
     <string name="pref_language">تىل</string>
     <string name="pref_language_default">سىستېما سۈكۈت</string>
 
-    <string tools:ignore="UnusedResources" name="category_Development">تەرەققىيات</string>
-    <string tools:ignore="UnusedResources" name="category_Games">ئويۇنلار</string>
-    <string tools:ignore="UnusedResources" name="category_Graphics">رەسىملەر</string>
-    <string tools:ignore="UnusedResources" name="category_Internet">تور</string>
-    <string tools:ignore="UnusedResources" name="category_Money">پۇل</string>
-    <string tools:ignore="UnusedResources" name="category_Multimedia">كۆپ ۋاسىتە</string>
-    <string tools:ignore="UnusedResources" name="category_Navigation">يول باشلاش</string>
-    <string tools:ignore="UnusedResources" name="category_Phone_SMS">فون &amp; قىسقا ئۇچۇر</string>
-    <string tools:ignore="UnusedResources" name="category_Reading">ئوقۇشلۇق</string>
-    <string tools:ignore="UnusedResources" name="category_Science_Education">پەن &amp; مائارىپ</string>
-    <string tools:ignore="UnusedResources" name="category_Security">بىخەتەرلىك</string>
-    <string tools:ignore="UnusedResources" name="category_Time">ۋاقىت</string>
-    <string tools:ignore="UnusedResources" name="category_Writing">يېزىقچىلىق</string>
+    <string name="category_Development">تەرەققىيات</string>
+    <string name="category_Games">ئويۇنلار</string>
+    <string name="category_Graphics">رەسىملەر</string>
+    <string name="category_Internet">تور</string>
+    <string name="category_Money">پۇل</string>
+    <string name="category_Multimedia">كۆپ ۋاسىتە</string>
+    <string name="category_Navigation">يول باشلاش</string>
+    <string name="category_Phone_SMS">فون &amp; قىسقا ئۇچۇر</string>
+    <string name="category_Reading">ئوقۇشلۇق</string>
+    <string name="category_Science_Education">پەن &amp; مائارىپ</string>
+    <string name="category_Security">بىخەتەرلىك</string>
+    <string name="category_Time">ۋاقىت</string>
+    <string name="category_Writing">يېزىقچىلىق</string>
 
     <string name="system_install_button_install">ئورنىتىش</string>
     <string name="system_uninstall_button">يۇيىۋېتىش</string>
@@ -98,7 +98,7 @@
 
     <string name="skip">ئاتلا</string>
 
-    <string tools:ignore="UnusedResources" name="category_Connectivity">ئۇلىنىشچانلىق</string>
+    <string name="category_Connectivity">ئۇلىنىشچانلىق</string>
     <string name="notification_action_install">ئورنىتىش</string>
 
     <string name="app_list__name__downloading_in_progress">%1$s چۈشۈرۈلىۋاتىدۇ</string>
@@ -114,8 +114,8 @@
     <string name="repo_last_update">ئاخىرقى يېڭىلانما</string>
     <string name="not_on_same_wifi">ئۈسكۈنىڭىز سىز بايىلا يەرلىك ئامبار قوشقاندىكى سىمسىز-تورغا باغلانمىغان! بۇ تورغا باغلىنىپ سىناپ بېقىڭ: %s</string>
     <string name="wifi">سىمسىز-تور</string>
-    <string tools:ignore="UnusedResources" name="category_Sports_Health">تەنتەربىيە &amp; ساغلاملىق</string>
-    <string tools:ignore="UnusedResources" name="category_System">سىستېما</string>
+    <string name="category_Sports_Health">تەنتەربىيە &amp; ساغلاملىق</string>
+    <string name="category_System">سىستېما</string>
     <string name="swap_send_fdroid">ف-درويدنى يوللاش</string>
     <string name="crash_dialog_title">ف-درويد موللاق ئاتتى</string>
     <string name="crash_dialog_text">كۈتۈلمىگەن بىر خاتالىق ئۇيغۇلىمىنى توختاشقا زورلاۋاتىدۇ. تەپسىلاتىنى ئېلخەت بىلەن يوللاپ مەسىلىنى ھەل قىلىشنى خالامسىز؟</string>
@@ -237,7 +237,7 @@
     <string name="repo_confirm_delete_title">ئامبارنى ئۆچۈرەمسىز؟</string>
     <string name="wifi_ap">قىزىقنۇقتا</string>
 
-    <string tools:ignore="UnusedResources" name="category_Theming">ئاساسىي ئۇسلۇب</string>
+    <string name="category_Theming">ئاساسىي ئۇسلۇب</string>
     <plurals name="button_view_all_apps_in_category">
 	<item quantity="one">كۆرۈش %d</item>
 	<item quantity="other">ھەممىسىنى كۆرۈش %d</item>
