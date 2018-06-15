@@ -270,10 +270,10 @@
     <string name="interval_never">Žádné automatické aktualizace aplikace</string>
     <string name="interval_1h">Zjišťovat aktualizace každou hodinu</string>
     <string name="interval_4h">Zjišťovat aktualizace každé 4 hodiny</string>
-    <string name="interval_12h">"Zjišťovat aktualizace  každých 12 hodin"</string>
+    <string name="interval_12h">Zjišťovat aktualizace  každých 12 hodin</string>
     <string name="interval_1d">Zjišťovat aktualizace každý den</string>
     <string name="interval_1w">Zjišťovat aktualizace každý týden</string>
-    <string name="interval_2w">"Zjišťovat aktualizace  každé 2 týdny"</string>
+    <string name="interval_2w">Zjišťovat aktualizace  každé 2 týdny</string>
 
     <string name="theme_light">Světlý</string>
     <string name="theme_dark">Tmavý</string>

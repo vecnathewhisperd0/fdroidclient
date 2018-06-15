@@ -118,12 +118,12 @@
 
     <string name="proxy">Proxya</string>
     <string name="enable_proxy_title">Gaitu HTTP Proxya</string>
-    <string name="interval_2w">"Egiaztatu eguneraketak  bi asterik behin"</string>
+    <string name="interval_2w">Egiaztatu eguneraketak  bi asterik behin</string>
 
     <string name="interval_4h">Egiaztatu eguneraketak 4 ordurik behin</string>
     <string name="downloading">Deskargatzen…</string>
 
-    <string name="interval_1w">"Egiaztatu eguneraketak  astero"</string>
+    <string name="interval_1w">Egiaztatu eguneraketak  astero</string>
     <string name="interval_1h">Egiaztatu eguneraketak orduero</string>
     <string name="interval_never">Aplikazioen eguneraketa automatikorik ez</string>
     <string name="interval_12h">Egiaztatu eguneraketak 12 ordurik behin</string>

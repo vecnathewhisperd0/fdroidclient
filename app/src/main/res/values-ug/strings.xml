@@ -101,7 +101,7 @@
     <string tools:ignore="UnusedResources" name="category_Connectivity">ئۇلىنىشچانلىق</string>
     <string name="notification_action_install">ئورنىتىش</string>
 
-    <string name="app_list__name__downloading_in_progress">"%1$s چۈشۈرۈلىۋاتىدۇ "</string>
+    <string name="app_list__name__downloading_in_progress">%1$s چۈشۈرۈلىۋاتىدۇ</string>
     <string name="app_list__name__successfully_installed">%1$s ئورنىتىلدى</string>
     <string name="updates__tts__download_app">چۈشۈرۈش</string>
     <string name="more">جىقراق</string>
@@ -121,7 +121,7 @@
     <string name="crash_dialog_text">كۈتۈلمىگەن بىر خاتالىق ئۇيغۇلىمىنى توختاشقا زورلاۋاتىدۇ. تەپسىلاتىنى ئېلخەت بىلەن يوللاپ مەسىلىنى ھەل قىلىشنى خالامسىز؟</string>
     <string name="notification_title_single_update_available">ئېرىشىشچان يېڭىلانما</string>
     <string name="notification_title_summary_install_error">ئورنىتىش مەغلۇب</string>
-    <string name="by_author_format">"%s گە ئاساسەن "</string>
+    <string name="by_author_format">%s گە ئاساسەن</string>
     <string name="enable_nfc_send">NFC يوللىغۇچنى قوزغىتىش…</string>
     <string name="unstable_updates">تۇراقسىز يېڭىلانمىلار</string>
     <string name="unstable_updates_summary">تۇراقسىز نەشىرىگە قارىتا تەۋسىيەلىك يېڭىلانمىلار</string>
@@ -239,8 +239,8 @@
 
     <string tools:ignore="UnusedResources" name="category_Theming">ئاساسىي ئۇسلۇب</string>
     <plurals name="button_view_all_apps_in_category">
-	<item quantity="one">"كۆرۈش %d "</item>
-	<item quantity="other">"ھەممىسىنى كۆرۈش %d "</item>
+	<item quantity="one">كۆرۈش %d</item>
+	<item quantity="other">ھەممىسىنى كۆرۈش %d</item>
 </plurals>
 
     <string name="keep_day">1 كۈن</string>
@@ -277,7 +277,7 @@
     <string name="notification_title_summary_ready_to_install_update">يېڭىلانما ئورنىتىشقا تەييار</string>
     <string name="notification_title_summary_installing">ئورنىتىۋاتىدۇ</string>
     <string name="notification_title_summary_installed">ئوڭۇشلۇق ئورنىتىلدى</string>
-    <string name="tts_category_name">"%1$s تۈر "</string>
+    <string name="tts_category_name">%1$s تۈر</string>
 
     <string name="details_last_updated_today">بۇگۈن يېڭىلا</string>
     <string name="proxy_host">ۋاكالەتچى كومپىيوتېر</string>

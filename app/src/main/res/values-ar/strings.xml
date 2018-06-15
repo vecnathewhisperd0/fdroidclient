@@ -103,7 +103,7 @@
     <string name="bluetooth_activity_not_found">لا توجد طريقة إرسال بلوتوث، فضلاً إختر واحدة !</string>
     <string name="bad_fingerprint">البصمة خاطئة</string>
     <string name="invalid_url">هذا ليس عنوان URL صالح للاستخدام.</string>
-    <string name="malformed_repo_uri">"تجاهل عناوين URI للمستودعات  التالفة : %s"</string>
+    <string name="malformed_repo_uri">تجاهل عناوين URI للمستودعات  التالفة : %s</string>
     <string name="repo_provider">مستودع: %s</string>
 
     <string name="menu_settings">إعدادات</string>
@@ -111,7 +111,7 @@
 
     <string name="menu_website">الموقع الإلكتروني</string>
     <string name="menu_issues">الأخطاء</string>
-    <string name="menu_changelog">"سجل التغييرات "</string>
+    <string name="menu_changelog">سجل التغييرات</string>
     <string name="menu_upgrade">تحديث</string>
     <string name="menu_bitcoin">عملة البيتكوين (BitCoin)</string>
     <string name="menu_litecoin">عملة اللايت كوين (Litecoin)</string>
