@@ -124,10 +124,9 @@
     <string name="repo_disabled_notification">%1$s deshabilitado.
         \n\nNecesitarás volver a habilitar este repositorio para instalar aplicaciones desde él.
     </string>
-    <string name="repo_added">Guardado el repositorio de F-Droid %1$s.</string>
-    <string name="repo_searching_address">Buscando repositorio de F-Droid en
-        \n%1$s
-    </string>
+    <string name="repo_added">Repositorio de paquetes guardado %1$s.</string>
+    <string name="repo_searching_address">Buscando repositorio de paquetes en
+\n%1$s</string>
     <string name="minsdk_or_later">%s o posterior</string>
     <string name="up_to_maxsdk">Hasta %s</string>
     <string name="minsdk_up_to_maxsdk">De %1$s a %2$s</string>
