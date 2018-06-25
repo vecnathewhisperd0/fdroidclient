@@ -146,7 +146,7 @@
     <string name="repo_name">Heiti</string>
     <string name="unknown">Óþekkt</string>
     <string name="repo_confirm_delete_title">Eyða hugbúnaðarsafni?</string>
-    <string name="repo_added">"Vistaði  %1$s hugbúnaðarsafnið."</string>
+    <string name="repo_added">Vistaði  %1$s hugbúnaðarsafnið.</string>
     <string name="repo_searching_address">Leita að hugbúnaðarsafni á %1$s</string>
     <string name="minsdk_or_later">%s eða nýrra</string>
     <string name="up_to_maxsdk">Upp að %s</string>
