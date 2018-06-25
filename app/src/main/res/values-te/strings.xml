@@ -121,7 +121,7 @@
     <string tools:ignore="UnusedResources" name="category_Navigation">నౌకాయానం</string>
     <string name="system_uninstall_button">నివర్తించు</string>
     <string name="app_list__name__successfully_installed">%1$s సంస్థాపన అయ్యింది</string>
-    <string name="not_on_same_wifi">మీరు జోడించిన స్థానిక రిపో మీ పరికరం అదే Wi-Fi లో లేదు! ఈ నెట్వర్క్లో చేరడానికి ప్రయత్నించండి:% s</string>
+    <string name="not_on_same_wifi">మీరు జోడించిన స్థానిక రిపో మీ పరికరం అదే Wi-Fi లో లేదు! ఈ నెట్వర్క్లో చేరడానికి ప్రయత్నించండి:%s</string>
     <string name="notification_title_summary_install_error">వ్యవస్థాపన విఫలమైంది</string>
     <string name="other">ఇతర</string>
 
