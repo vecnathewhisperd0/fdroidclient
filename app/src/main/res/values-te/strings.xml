@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools"><string name="app_name">ఎఫ్-డ్రాయిడ్</string>
+<resources><string name="app_name">ఎఫ్-డ్రాయిడ్</string>
 
     <string name="updates">నవీకరణలు</string>
     <string name="ok">సరే</string>
@@ -118,7 +118,7 @@
 
 
     <string name="details_notinstalled">సంస్థాపన చేసి లేదు</string>
-    <string tools:ignore="UnusedResources" name="category_Navigation">నౌకాయానం</string>
+    <string name="category_Navigation">నౌకాయానం</string>
     <string name="system_uninstall_button">నివర్తించు</string>
     <string name="app_list__name__successfully_installed">%1$s సంస్థాపన అయ్యింది</string>
     <string name="not_on_same_wifi">మీరు జోడించిన స్థానిక రిపో మీ పరికరం అదే Wi-Fi లో లేదు! ఈ నెట్వర్క్లో చేరడానికి ప్రయత్నించండి:%s</string>
