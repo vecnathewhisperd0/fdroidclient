@@ -556,4 +556,6 @@
     <string name="antidisabledalgorithmlist">ליישומון זה יש חתימת אבטחה חלשה</string>
     <string name="antiknownvulnlist">יישומון זה מכיל חולשת אבטחה ידועה</string>
 
+    <string name="hide_all_notifications">הסתרת כל ההתראות</string>
+    <string name="hide_all_notifications_summary">למנוע מכל הפעולות להופיע בשורת המצב ובמגירת ההתראות.</string>
     </resources>
