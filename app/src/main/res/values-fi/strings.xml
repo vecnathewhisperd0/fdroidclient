@@ -246,8 +246,7 @@
 
     <string name="installing">Asennetaan…</string>
     <string name="keep_install_history">Säilytä asennushistoria</string>
-    <string name="keep_install_history_summary">Säilytä lokia kaikista asennuksista ja poistoista F-Droidin sisällä
-    </string>
+    <string name="keep_install_history_summary">Säilytä lokia kaikista asennuksista ja poistoista yksityisessä säilössä</string>
     <string name="update_auto_install_summary">Lataa ja asenna päivitykset sovelluksiin taustalla</string>
     <string name="malformed_repo_uri">Ohitetaan virheellisesti muodostettu sovelluslähteen URI: %s</string>
     <string name="antinonfreeassetslist">Tämä sovellus sisältää ei-vapaita osia</string>
@@ -457,4 +456,7 @@
         <item quantity="other">Näytä kaikki %1$d -sovellukset kategoriasta %2$s</item>
     </plurals>
 
-</resources>
+<string name="by_author_format">tekijältä %s</string>
+    <string name="hide_all_notifications">Piilota kaikki ilmoitukset</string>
+    <string name="hide_all_notifications_summary">Estä kaikkien toimintojen näkyminen tilapalkissa ja ilmoitusruudussa.</string>
+    </resources>
