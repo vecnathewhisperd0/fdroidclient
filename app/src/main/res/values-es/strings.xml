@@ -560,4 +560,9 @@
     <string name="antiknownvulnlist">Esta aplicación contiene una vulnerabilidad de seguridad conocida</string>
 
     <string name="hide_all_notifications">Ocultar todas las notificaciones</string>
+    <string name="prompt_to_send_crash_reports_summary">Recopilar datos sobre fallos y pedir que se los envíen al desarrollador</string>
+    <string name="install_history">Historial de instalación</string>
+    <string name="install_history_summary">Ver el registro privado de todas las instalaciones y desinstalaciones</string>
+    <string name="send_version_and_uuid">Enviar versión y UUID a los servidores</string>
+    <string name="send_version_and_uuid_summary">Incluir la versión de esta aplicación, un ID aleatorio y único cuando se está descargando, toma efecto en el próximo reinicio de la aplicación.</string>
     </resources>
