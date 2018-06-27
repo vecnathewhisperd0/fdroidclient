@@ -460,4 +460,5 @@
     <string name="hide_all_notifications">Piilota kaikki ilmoitukset</string>
     <string name="hide_all_notifications_summary">Estä kaikkien toimintojen näkyminen tilapalkissa ja ilmoitusruudussa.</string>
     <string name="force_old_index">Pakota vanha ideksiformaatti</string>
+    <string name="force_old_index_summary">Bugien tai yhteensopivuusongelmien sattuessa, käytä XML-ohjelmaindeksiä</string>
     </resources>
