@@ -551,4 +551,6 @@
 	<item quantity="one">Päivitetty %1$d vuosi sitten</item>
 	<item quantity="other">Päivitetty %1$d vuotta sitten</item>
 </plurals>
-</resources>
+<string name="app_details__incompatible_mismatched_signature">Poikkeava allekirjoitus asennettuun versioon nähden</string>
+    <string name="app_details__no_versions__show_incompat_versions">Nähdäksesi yhteensopimattomatkin versiot, käytä \"%1$s\" asetusta.</string>
+    </resources>
