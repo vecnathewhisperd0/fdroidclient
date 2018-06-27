@@ -121,9 +121,7 @@
     <string name="minsdk_or_later">%s eller senare</string>
     <string name="up_to_maxsdk">Upp till %s</string>
     <string name="minsdk_up_to_maxsdk">%1$s upp till %2$s</string>
-    <string name="not_on_same_wifi">Din enhet är inte på samma wifi som det lokala förrådet du just lagt till! Försök
-        ansluta till detta nätverk: %s
-    </string>
+    <string name="not_on_same_wifi">Din enhet är inte på samma wifi som det lokala förrådet du just lagt till! Försök ansluta till detta nätverk: %s</string>
     <string name="requires_features">Kräver: %1$s</string>
     <string name="category_Development">Utveckling</string>
     <string name="category_Games">Spel</string>
@@ -332,7 +330,7 @@
     <string name="keep_install_history_summary">Lagra en logg över alla installationer och avinstallationer i en privat butik</string>
     <string name="update_auto_install">Installera uppdateringar automatiskt</string>
     <string name="update_auto_install_summary">Hämta och installera uppdateringsappar i bakgrunden</string>
-    <string name="warning_no_internet">Kan inte att uppdatera, är du ansluten till Internet?</string>
+    <string name="warning_no_internet">Kan inte att uppdatera, är du ansluten till internet?</string>
     <string name="versions">Versioner</string>
     <string name="app_details_donate_prompt_unknown_author">Köp en kopp kaffe till utvecklarna av %1$s!</string>
     <string name="app_details_donate_prompt">%1$s är skapad av %2$s. Köp dem en kaffe!</string>
@@ -537,4 +535,12 @@
     <string name="swap_toast_could_not_enable_hotspot">Kunde inte aktivera Wi-Fi-accesspunkt!</string>
 
     <string name="warning_scaning_qr_code">Din kamera verkar inte har autofokus. Det kan vara svårt att läsa av koden.</string>
+    <string name="prompt_to_send_crash_reports">Tillfråga om att skicka kraschrapporter</string>
+    <string name="prompt_to_send_crash_reports_summary">Samla data om krascher och be att få skicka den till utvecklaren</string>
+    <string name="hide_all_notifications">Dölj alla notifieringar</string>
+    <string name="hide_all_notifications_summary">Förhindra alla händelser från att visas i statusfältet samt notifikationsfönstret.</string>
+    <string name="install_history">Installationshistorik</string>
+    <string name="install_history_summary">Visa privat logg av samtliga installationer och avinstallationer</string>
+    <string name="send_version_and_uuid">Sänd versionnummer och UUID till servrarna</string>
+    <string name="send_version_and_uuid_summary">Inkludera appens versionnummer samt en slumpvald, unik ID vid nedladdning. Börjar gälla först efter omstart.</string>
     </resources>
