@@ -459,4 +459,5 @@
 <string name="by_author_format">tekijältä %s</string>
     <string name="hide_all_notifications">Piilota kaikki ilmoitukset</string>
     <string name="hide_all_notifications_summary">Estä kaikkien toimintojen näkyminen tilapalkissa ja ilmoitusruudussa.</string>
+    <string name="force_old_index">Pakota vanha ideksiformaatti</string>
     </resources>
