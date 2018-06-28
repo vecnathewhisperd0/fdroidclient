@@ -338,8 +338,8 @@
     <string name="update_auto_install_summary">Anwendungsaktualisierungen im Hintergrund herunterladen und
         installieren
     </string>
-    <string name="keep_install_history">Installationsverlauf behalten</string>
-    <string name="keep_install_history_summary">Ein Protokoll aller Installationen und Deinstallationen in einem privaten Speicher</string>
+    <string name="keep_install_history">Installationsverlauf aufbewahren</string>
+    <string name="keep_install_history_summary">Ein Protokoll zu allen Installationen und Deinstallationen in einem privaten Speicher anlegen</string>
     <string name="warning_no_internet">Aktualisierung kann nicht durchgeführt werden! Besteht eine Internetverbindung?</string>
     <string name="versions">Versionen</string>
     <string name="app_details_donate_prompt_unknown_author">Den Entwicklern von %1$s einen Kaffee kaufen!</string>
