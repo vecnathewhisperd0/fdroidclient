@@ -550,4 +550,9 @@
     <string name="antidisabledalgorithmlist">Diese App hat eine schwache Sicherheitssignatur</string>
     <string name="antiknownvulnlist">Diese Anwendung enthält eine bekannte Sicherheitslücke</string>
 
+    <string name="prompt_to_send_crash_reports_summary">Sammele Daten über den Absturz und frage ob diese an den Entwickler übersendet werden dürfen</string>
+    <string name="hide_all_notifications">Verstecke alle Benachrichtigungen</string>
+    <string name="install_history">Installation Historie</string>
+    <string name="install_history_summary">Betrachte alle Installations- und Deinstallationslogs</string>
+    <string name="send_version_and_uuid">Version und UUID an Server verschicken</string>
     </resources>
