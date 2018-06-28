@@ -556,4 +556,10 @@
     <string name="antidisabledalgorithmlist">Это приложение имеет слабую подпись безопасности</string>
     <string name="hide_all_notifications">Скрыть все уведомления</string>
     <string name="hide_all_notifications_summary">Запретить показ всех действий в строке состояния и панели уведомлений.</string>
+    <string name="prompt_to_send_crash_reports">Запрос на отправку отчетов о сбоях</string>
+    <string name="prompt_to_send_crash_reports_summary">Сбор информации о сбоях и запрос на отправку ее разработчику</string>
+    <string name="install_history">История инсталляций</string>
+    <string name="install_history_summary">Просмотр личного журнала всех установок и удалений</string>
+    <string name="send_version_and_uuid">Отправить версию и UUID на сервер</string>
+    <string name="send_version_and_uuid_summary">Включите в эту версию приложения случайный и уникальный идентификатор при загрузке, который вступает в силу при следующем перезапуске приложения.</string>
     </resources>
