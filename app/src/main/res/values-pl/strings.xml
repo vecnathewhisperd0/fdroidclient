@@ -576,4 +576,5 @@
     <string name="install_history_summary">Wyświetl prywatny dziennik wszystkich instalacji i dezinstalacji</string>
     <string name="send_version_and_uuid">Przesyłaj na serwery wersję i UUID</string>
     <string name="send_version_and_uuid_summary">Umieść wersję aplikacji i losowy unikalny identyfikator podczas pobierań, wymagany restart aplikacji.</string>
+    <string name="share_repository">Udostępnij repozytorium</string>
     </resources>
