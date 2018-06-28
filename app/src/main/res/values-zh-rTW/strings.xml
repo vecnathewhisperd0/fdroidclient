@@ -532,4 +532,5 @@
     <string name="install_history_summary">檢視所有安裝和解除安裝的個人日誌</string>
     <string name="send_version_and_uuid">將版本和 UUID 發送到伺服器</string>
     <string name="send_version_and_uuid_summary">包括這個應用程式的版本和一個下載時隨機的唯一 ID，這會影響下下次應用程式重新啟動。</string>
+    <string name="share_repository">分享軟體庫</string>
     </resources>
