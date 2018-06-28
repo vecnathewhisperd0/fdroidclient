@@ -526,4 +526,10 @@
 
     <string name="hide_all_notifications">隱藏所有通知</string>
     <string name="hide_all_notifications_summary">避免在狀態列和通知欄中顯示所有操作。</string>
+    <string name="prompt_to_send_crash_reports">提示發送崩潰報告</string>
+    <string name="prompt_to_send_crash_reports_summary">收集有關崩潰的資料和要求將它們發送給開發人員</string>
+    <string name="install_history">安裝履歷</string>
+    <string name="install_history_summary">檢視所有安裝和解除安裝的個人日誌</string>
+    <string name="send_version_and_uuid">將版本和 UUID 發送到伺服器</string>
+    <string name="send_version_and_uuid_summary">包括這個應用程式的版本和一個下載時隨機的唯一 ID，這會影響下下次應用程式重新啟動。</string>
     </resources>
