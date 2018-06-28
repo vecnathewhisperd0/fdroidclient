@@ -551,4 +551,11 @@
 
     <string name="hide_all_notifications">Tüm bildirimleri gizle</string>
     <string name="hide_all_notifications_summary">Tüm eylemlerin durum çubuğunda ve bildirim çekmecesinde gösterilmesini önle.</string>
+    <string name="prompt_to_send_crash_reports">Kilitlenme raporları göndermeyi isteme</string>
+    <string name="prompt_to_send_crash_reports_summary">Çökmelerle ilgili verileri toplayın ve bunları geliştiriciye göndermenizi isteyin</string>
+    <string name="install_history">Geçmişi yükle</string>
+    <string name="install_history_summary">Tüm yüklemelerin ve kaldırmaların özel günlüğünü görüntüleyin</string>
+    <string name="send_version_and_uuid">Sunucuya sürüm ve UUID gönder</string>
+    <string name="send_version_and_uuid_summary">Bu uygulamanın sürümünü ve indirme yaparken rastgele, benzersiz bir kimliği ekleyin, bir sonraki uygulama yeniden başlatmayı etkiler.</string>
+    <string name="share_repository">Paylaşım Deposu</string>
     </resources>
