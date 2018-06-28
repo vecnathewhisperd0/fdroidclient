@@ -117,10 +117,9 @@
     </string>
     <string name="unknown">Desconocido</string>
     <string name="repo_confirm_delete_title">¿Borrar repositorio?</string>
-    <string name="repo_confirm_delete_body">Borrar un repositorio significa que sus aplicaciones ya no estarán
-        disponibles en F-Droid.
-        \n\nNota: todas las aplicaciones previamente instaladas se quedarán en tu dispositivo.
-    </string>
+    <string name="repo_confirm_delete_body">Borrar un repositorio significa que sus aplicaciones ya no estarán disponibles. 
+\n
+\nNota: todas las aplicaciones previamente instaladas se quedarán en tu dispositivo.</string>
     <string name="repo_disabled_notification">%1$s deshabilitado.
         \n\nNecesitarás volver a habilitar este repositorio para instalar aplicaciones desde él.
     </string>
@@ -565,4 +564,5 @@
     <string name="install_history_summary">Ver el registro privado de todas las instalaciones y desinstalaciones</string>
     <string name="send_version_and_uuid">Enviar versión y UUID a los servidores</string>
     <string name="send_version_and_uuid_summary">Incluir la versión de esta aplicación, un ID aleatorio y único cuando se está descargando, toma efecto en el próximo reinicio de la aplicación.</string>
+    <string name="share_repository">Compartir Repositorio</string>
     </resources>
