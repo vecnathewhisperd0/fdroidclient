@@ -551,4 +551,5 @@
     <string name="install_history_summary">Montri privatan protokolon pri ĉiuj (mal)instaladoj</string>
     <string name="send_version_and_uuid">Sendi version kaj identigilon al serviloj</string>
     <string name="send_version_and_uuid_summary">Ampleksi version de aplikaĵo kaj hazardan unikan identigilon (UUID) dum elŝutado, efikas post la sekva restarto de aplikaĵo.</string>
+    <string name="share_repository">Kunhavigi deponejon</string>
     </resources>
