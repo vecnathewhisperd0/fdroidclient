@@ -583,4 +583,5 @@
     <string name="install_history_summary">Ikusi instalazio eta desinstalazio guztien egunkari pribatua</string>
     <string name="send_version_and_uuid">Bidali bertsioa eta UUID zerbitzarietara</string>
     <string name="send_version_and_uuid_summary">"Gehitu aplikazio honen bertsioa eta ausazko ID bakan  bat deskargatzean, hurrengo aplikazioa berrabiarazi eta gero aplikatuko da."</string>
+    <string name="share_repository">Partekatu biltegia</string>
     </resources>
