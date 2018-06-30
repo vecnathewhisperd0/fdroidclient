@@ -596,4 +596,7 @@
     <string name="install_history_summary">Паглядзець прыватны журнал усіх усталёвак і выдаленняў</string>
     <string name="send_version_and_uuid">Адправіць версію і UUID на серверы</string>
     <string name="send_version_and_uuid_summary">Уключае версію гэтай праграмы і выпадковы ўнікальны ідэнтыфікатар падчас спампоўкі. Падзейнічае пасля перазапуску праграмы.</string>
+    <string name="prompt_to_send_crash_reports">Запыт на адпраўку справаздач аб хібах</string>
+    <string name="prompt_to_send_crash_reports_summary">Збор інфармацыі ад падзеннях і запыт на адпраўку яе распрацоўшчыку</string>
+    <string name="share_repository">Падзяліцца рэпазіторыям</string>
     </resources>
