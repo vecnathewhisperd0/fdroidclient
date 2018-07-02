@@ -565,4 +565,6 @@
     <string name="send_version_and_uuid">Enviar versión y UUID a los servidores</string>
     <string name="send_version_and_uuid_summary">Incluir la versión de esta aplicación, un ID aleatorio y único cuando se está descargando, toma efecto en el próximo reinicio de la aplicación.</string>
     <string name="share_repository">Compartir Repositorio</string>
+    <string name="prompt_to_send_crash_reports">Preguntar si mandar informes de fallo</string>
+    <string name="hide_all_notifications_summary">Evitar mostrar acciones en la barra y el panel de notificaciones.</string>
     </resources>
