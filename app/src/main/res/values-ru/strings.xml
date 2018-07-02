@@ -562,4 +562,5 @@
     <string name="install_history_summary">Просмотр личного журнала всех установок и удалений</string>
     <string name="send_version_and_uuid">Отправить версию и UUID на сервер</string>
     <string name="send_version_and_uuid_summary">Включить в эту версию приложения случайный и уникальный идентификатор при загрузке, который вступает в силу при следующем перезапуске приложения.</string>
+    <string name="share_repository">Поделиться репозиторием</string>
     </resources>
