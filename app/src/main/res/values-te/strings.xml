@@ -338,4 +338,8 @@
     <string name="notification_title_summary_ready_to_install">స్థాపనకు తయారుగావుంది</string>
     <string name="notification_title_summary_ready_to_install_update">తాజాకరణ స్థాపనకు తయారుగావుంది</string>
     <string name="notification_title_summary_installing">స్తాపిస్తోంది</string>
+    <string name="clear_search">శోధనను తుడిచివేయి</string>
+    <string name="sort_search">శోధనను క్రమీకరించు</string>
+
+    <string name="bluetooth_activity_not_found">బ్లూటూత్ పంపే పంపిన పద్ధతి కనుగొనబడలేదు, ఒక్కదాన్ని ఎంచుకోండి!</string>
     </resources>
