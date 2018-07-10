@@ -559,4 +559,5 @@
     <string name="install_history_summary">Voir le journal privé des installations et désinstallations</string>
     <string name="send_version_and_uuid">Envoyer la version et l\'identifiant aux serveurs</string>
     <string name="send_version_and_uuid_summary">Inclure dans cette version de l\'application un identifiant aléatoire et unique lors du téléchargement, qui prend effet au prochain redémarrage de l\'application.</string>
+    <string name="share_repository">Partager le dépôt</string>
     </resources>
