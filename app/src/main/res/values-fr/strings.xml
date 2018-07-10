@@ -554,7 +554,7 @@
     <string name="hide_all_notifications">Masquer toutes les notifications</string>
     <string name="hide_all_notifications_summary">Empêcher l\'affichage d\'éléments dans la barre de statut ou le volet de notification.</string>
     <string name="prompt_to_send_crash_reports">Invitation à envoyer des rapports de plantage</string>
-    <string name="prompt_to_send_crash_reports_summary">Collecter des informations de plantage et demander de les envoyer au développeur</string>
+    <string name="prompt_to_send_crash_reports_summary">Recueillir les données de plantage et demander de les envoyer au développeur</string>
     <string name="install_history">Historique d\'installation</string>
     <string name="install_history_summary">Voir le journal privé des installations et désinstallations</string>
     <string name="send_version_and_uuid">Envoyer la version et l\'identifiant aux serveurs</string>
