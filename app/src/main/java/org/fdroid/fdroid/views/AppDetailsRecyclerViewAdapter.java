@@ -478,7 +478,7 @@ public class AppDetailsRecyclerViewAdapter
             buttonPrimaryView.setText(R.string.menu_install);
             buttonPrimaryView.setVisibility(versions.size() > 0 ? View.VISIBLE : View.GONE);
             if (callbacks.isAppDownloading()) {
-                buttonPrimaryView.setText(R.string.downloading);
+                setProgress(-1, -1, 0); // Dummy
                 buttonPrimaryView.setEnabled(false);
             } else if (!app.isInstalled(context) && suggestedApk != null) {
                 // Check count > 0 due to incompatible apps resulting in an empty list.
