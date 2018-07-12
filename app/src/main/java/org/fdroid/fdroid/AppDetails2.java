@@ -516,6 +516,12 @@ public class AppDetails2 extends AppCompatActivity
                 }
                 break;
 
+            case DownloadCancelled:
+                if (justReceived) {
+                    adapter.clearProgress();
+                }
+                break;
+
             case Installing:
             case Installed:
             case UpdateAvailable:

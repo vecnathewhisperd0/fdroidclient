@@ -97,7 +97,8 @@ public final class AppUpdateStatusManager {
         ReadyToInstall,
         Installing,
         Installed,
-        InstallError
+        InstallError,
+        DownloadCancelled
     }
 
     public static AppUpdateStatusManager getInstance(Context context) {
@@ -375,6 +376,7 @@ public final class AppUpdateStatusManager {
             AppUpdateStatus entry = appMapping.remove(key);
             if (entry != null) {
                 Utils.debugLog(LOGTAG, "Remove APK " + entry.apk.apkName);
+                entry.status = Status.DownloadCancelled;
                 notifyRemove(entry);
             }
         }
