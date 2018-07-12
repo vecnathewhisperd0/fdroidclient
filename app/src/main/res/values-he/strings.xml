@@ -565,4 +565,6 @@
     <string name="send_version_and_uuid">שליחת גרסה ומזהה ייחודי גלובלי לשרתים</string>
     <string name="send_version_and_uuid_summary">לכלול את גרסת היישומון ומזהה אקראי וייחודי בעת ההורדה, יחול עם הפעלת היישומון מחדש.</string>
     <string name="share_repository">שיתוף מאגר</string>
+    <string name="antinosourcesince">קוד המקור אינו זמין עוד, אין עדכונים.</string>
+
     </resources>
