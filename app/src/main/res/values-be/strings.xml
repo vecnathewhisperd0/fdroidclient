@@ -599,4 +599,8 @@
     <string name="prompt_to_send_crash_reports">Запыт на адпраўку справаздач аб хібах</string>
     <string name="prompt_to_send_crash_reports_summary">Збор інфармацыі ад падзеннях і запыт на адпраўку яе распрацоўшчыку</string>
     <string name="share_repository">Падзяліцца рэпазіторыям</string>
+    <string name="allow_push_requests">Дазволіць рэпазіторыям усталёўваць/выдаляць праграмы</string>
+    <string name="allow_push_requests_summary">Метаданыя рэпазіторыяў можа ўключаць запыты на ўсталяванне ці выдаленне праграм</string>
+    <string name="antinosourcesince">Зыходны код больш недаступны — абноўленні немагчымыя.</string>
+
     </resources>
