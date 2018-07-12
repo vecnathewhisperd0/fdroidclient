@@ -330,7 +330,7 @@
     <string name="update_auto_install">Устанавливать обновления автоматически</string>
     <string name="update_auto_install_summary">Загружать и устанавливать обновления в фоне</string>
     <string name="keep_install_history">Хранить историю установок</string>
-    <string name="keep_install_history_summary">Хранить журнал всех установок и деинсталляций в приватном магазине</string>
+    <string name="keep_install_history_summary">Хранить журнал всех установок и деинсталляций в приватном хранилище</string>
     <string name="warning_no_internet">Не удается обновить. Вы подключены к Интернету?</string>
     <string name="versions">Версии</string>
     <string name="app_details_donate_prompt_unknown_author">Купи разработчику %1$s чашечку кофе!</string>
