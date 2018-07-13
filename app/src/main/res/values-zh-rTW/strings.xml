@@ -256,7 +256,7 @@
     <string name="up_to_maxsdk">直到 %s</string>
     <string name="minsdk_up_to_maxsdk">%1$s 直到 %2$s</string>
     <string name="empty_search_available_app_list">沒有相符合的應用程式可用。</string>
-    <string name="repo_searching_address">在 %1$s 查看封裝的軟體庫</string>
+    <string name="repo_searching_address">正在 %1$s 查看封裝的軟體庫</string>
     <string name="not_on_same_wifi">您的裝置與剛新增的本地軟體庫不在同一個 Wi-Fi 網路上！請試著加入此網路：%s</string>
     <string name="requesting_root_access_body">正在要求 root 權限…</string>
     <string name="empty_installed_app_list">未安裝應用程式。
