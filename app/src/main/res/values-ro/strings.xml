@@ -549,4 +549,8 @@
     <string name="system_install_not_supported">Instalarea F-Droid Privileged Extension nu este momentan suportată pe Android 5.1 sau mai nou.</string>
 
     <string name="swap_join_same_wifi_desc">Pentru a face schimb prin Wi-Fi, asigurați-vă ca sunteți conectați la aceeași rețea. Dacă nu aveți acces la o rețea comună, unul(a) dintre voi poate crea un punct de acces Wi-Fi.</string>
+    <string name="allow_push_requests">Permite depozitelor sa dez/instaleze aplicații</string>
+    <string name="allow_push_requests_summary">Metadatele depozitelor pot include acțiuni de instalare sau dezinstalare aplicații</string>
+    <string name="antinosourcesince">Codul sursă nu mai este disponibil, nu mai există posibilitatea de a actualiza.</string>
+
     </resources>
