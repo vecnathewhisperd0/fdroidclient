@@ -582,5 +582,5 @@
     <string name="install_history_summary">Leghe su registru privadu de totu sas installatziones e disinstallatziones</string>
     <string name="send_version_and_uuid">Imbia sa versione e s\'UUID a sos servers</string>
     <string name="send_version_and_uuid_summary">Inclue sa versione de custa aplicatzione e un\'ID ùnicu a casu cando ses iscarrighende. At a tènnere efetu a pustis de s\'allughìngiu imbeniente de s\'aplicatzione.</string>
-    <string name="share_repository">"Cumpartzi Depòsitu "</string>
+    <string name="share_repository">Cumpartzi Depòsitu</string>
     </resources>
