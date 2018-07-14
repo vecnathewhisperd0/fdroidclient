@@ -92,6 +92,7 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="app_not_installed">Not Installed</string>
     <string name="app_inst_known_source">Installed (from %s)</string>
     <string name="app_inst_unknown_source">Installed (from unknown source)</string>
+    <string name="app_version_x_to_y">Version %1$s —> %2$s</string>
     <string name="app_version_x_available">Version %1$s available</string>
     <string name="app_version_x_installed">Version %1$s</string>
     <string name="app_recommended_version_installed">Version %1$s (Recommended)</string>
