@@ -15,10 +15,10 @@ import org.fdroid.fdroid.views.apps.AppListItemState;
 import org.fdroid.fdroid.views.updates.DismissResult;
 
 /**
- * Very trimmed down list item. Only displays the app icon, name, and a download button.
- * We don't even need to show download progress, because the intention is that as soon as
- * we have started downloading the app, it is removed from the list (and replaced with an
- * {@link AppStatusListItemController}.
+ * Very trimmed down list item. Displays the app icon, name, version changes from old to new
+ * and a download button. We don't even need to show download progress, because the intention
+ * is that as soon as we have started downloading the app, it is removed from the list
+ * (and replaced with an {@link AppStatusListItemController}.
  */
 public class UpdateableAppListItemController extends AppListItemController {
     public UpdateableAppListItemController(Activity activity, View itemView) {
