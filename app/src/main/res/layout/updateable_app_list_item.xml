@@ -43,6 +43,17 @@
         app:layout_constraintTop_toTopOf="@+id/icon"
         app:layout_constraintBottom_toBottomOf="@+id/icon" />
 
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="@string/app_version_x_to_y"
+        style="@style/AppListItemStatusText"
+        app:layout_constraintTop_toBottomOf="@+id/app_name"
+        app:layout_constraintStart_toEndOf="@+id/icon"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp" />
+
     <ImageView
         android:id="@+id/install"
         tools:src="@drawable/ic_download"
