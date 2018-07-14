@@ -363,6 +363,7 @@
     <string name="notification_action_cancel">Anuluj</string>
     <string name="notification_action_install">Zainstaluj</string>
 
+    <string name="app_version_x_to_y">Wersja %1$s —> %2$s</string>
     <string name="app_version_x_available">Wersja %1$s dostępna</string>
     <string name="app_version_x_installed">Wersja %1$s</string>
     <string name="clear_search">Wyczyść wyszukiwanie</string>
