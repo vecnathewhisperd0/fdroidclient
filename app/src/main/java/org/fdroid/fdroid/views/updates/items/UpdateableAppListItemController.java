@@ -30,7 +30,14 @@ public class UpdateableAppListItemController extends AppListItemController {
     protected AppListItemState getCurrentViewState(
             @NonNull App app, @Nullable AppUpdateStatusManager.AppUpdateStatus appStatus) {
         return new AppListItemState(app)
-                .setShowInstallButton(true);
+                .setShowInstallButton(true)
+                .setStatusText(getStatusText(app));
+    }
+
+    @Nullable
+    private CharSequence getStatusText(@NonNull App app) {
+        return activity.getString(R.string.app_version_x_to_y,
+                app.installedVersionName, app.getSuggestedVersionName());
     }
 
     @Override
