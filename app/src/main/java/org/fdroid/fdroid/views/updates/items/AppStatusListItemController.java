@@ -30,7 +30,7 @@ public class AppStatusListItemController extends AppListItemController {
 
         return super.getCurrentViewState(app, appStatus)
                 .setStatusText(getStatusText(appStatus))
-                .setSecondaryStatusText((getSecondaryStatusText(app, appStatus)));
+                .setSecondaryStatusText(getSecondaryStatusText(app, appStatus));
     }
 
     @Nullable
