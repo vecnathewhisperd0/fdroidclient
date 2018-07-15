@@ -29,7 +29,8 @@ public class AppStatusListItemController extends AppListItemController {
     protected AppListItemState getCurrentViewState(@NonNull App app, @Nullable AppUpdateStatus appStatus) {
 
         return super.getCurrentViewState(app, appStatus)
-                .setStatusText(getStatusText(appStatus));
+                .setStatusText(getStatusText(appStatus))
+                .setSecondaryStatusText((getSecondaryStatusText(app, appStatus)));
     }
 
     @Nullable
@@ -42,6 +43,16 @@ public class AppStatusListItemController extends AppListItemController {
                 case Installed:
                     return activity.getString(R.string.notification_content_single_installed);
             }
+        }
+
+        return null;
+    }
+
+    @Nullable
+    private CharSequence getSecondaryStatusText(@NonNull App app, @Nullable AppUpdateStatus appStatus) {
+        if (appStatus != null && appStatus.status != AppUpdateStatusManager.Status.Downloading) {
+            return activity.getString(R.string.app_version_x_to_y,
+                    app.installedVersionName, app.getSuggestedVersionName());
         }
 
         return null;
