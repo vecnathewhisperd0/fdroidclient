@@ -562,4 +562,6 @@
     <string name="allow_push_requests_summary">Repo meta verileri, uygulamaları yüklemek veya kaldırmak için push istekleri içerebilir</string>
     <string name="antinosourcesince">Kaynak kodu artık mevcut değil, güncelleme mümkün değil.</string>
 
+    <string name="send_install_history">Yükleme Geçmişini Gönder</string>
+    <string name="send_history_csv">%s geçmişi CSV dosyası olarak yükle</string>
     </resources>
