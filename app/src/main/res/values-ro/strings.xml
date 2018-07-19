@@ -553,4 +553,6 @@
     <string name="allow_push_requests_summary">Metadatele depozitelor pot include acțiuni de instalare sau dezinstalare aplicații</string>
     <string name="antinosourcesince">Codul sursă nu mai este disponibil, nu mai există posibilitatea de a actualiza.</string>
 
+    <string name="send_install_history">Trimite istoricul instalărilor</string>
+    <string name="send_history_csv">%s istoric instalări ca fișier CSV</string>
     </resources>
