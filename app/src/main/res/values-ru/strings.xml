@@ -567,4 +567,6 @@
     <string name="allow_push_requests_summary">Метаданные репозитория могут включать push-запросы на установку или удаление приложений</string>
     <string name="antinosourcesince">Исходный код больше недоступен, обновления невозможны.</string>
 
+    <string name="send_install_history">Отправить историю установок</string>
+    <string name="send_history_csv">%s история установок как CSV-файл</string>
     </resources>
