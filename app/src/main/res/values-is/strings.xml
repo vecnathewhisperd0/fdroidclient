@@ -594,4 +594,9 @@
     <string name="install_history_summary">Skoða einkaannál yfir uppsetningar og fjarlægingar á hugbúnaði</string>
     <string name="send_version_and_uuid">Senda útgáfu og UUID-auðkenni til netþjóna</string>
     <string name="share_repository">Deila hugbúnaðarsafni</string>
+    <string name="send_install_history">Senda feril uppsetninga</string>
+    <string name="send_history_csv">%s feril uppsetninga sem CSV-skrá</string>
+    <string name="allow_push_requests">Leyfa hugbúnaðarsöfnum að fjarlægja/setja upp hugbúnað</string>
+    <string name="antinosourcesince">Grunnkóðinn er ekki lengur tiltækur, engar uppfærslur eru mögulegar.</string>
+
     </resources>
