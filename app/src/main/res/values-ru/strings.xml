@@ -569,4 +569,6 @@
 
     <string name="send_install_history">Отправить историю установок</string>
     <string name="send_history_csv">%s история установок как CSV-файл</string>
+    <string name="updates_disabled_by_settings">Все обновления отключены из-за настроек передачи данных</string>
+
     </resources>
