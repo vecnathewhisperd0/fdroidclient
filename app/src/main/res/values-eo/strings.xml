@@ -556,4 +556,6 @@
     <string name="allow_push_requests_summary">Metadatumoj de deponejoj povas enhavi petojn pri instali aŭ malinstali aplikaĵojn</string>
     <string name="antinosourcesince">La fontkodo ne estas plu disponebla, neniuj eblaj ĝisdatigoj.</string>
 
+    <string name="send_install_history">Sendi historion de instaladoj</string>
+    <string name="send_history_csv">Historio de instaladoj de %s kiel CSV-dosiero</string>
     </resources>
