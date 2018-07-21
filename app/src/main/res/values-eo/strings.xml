@@ -558,4 +558,6 @@
 
     <string name="send_install_history">Sendi historion de instaladoj</string>
     <string name="send_history_csv">Historio de instaladoj de %s kiel CSV-dosiero</string>
+    <string name="updates_disabled_by_settings">Ĉiuj ĝisdatigoj malaktivigitaj per agordoj de konektoj</string>
+
     </resources>
