@@ -564,4 +564,6 @@
 
     <string name="send_install_history">Yükleme Geçmişini Gönder</string>
     <string name="send_history_csv">%s geçmişi CSV dosyası olarak yükle</string>
+    <string name="updates_disabled_by_settings">Tüm güncellemeler Veri/WiFi Ayarları tarafından devre dışı bırakıldı</string>
+
     </resources>
