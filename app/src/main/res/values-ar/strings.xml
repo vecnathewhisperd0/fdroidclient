@@ -586,4 +586,8 @@
     <string name="panic_hide_warning_message">في حالة الهلع ، سيؤدي هذا إلى إزالة%1$s من درج التطبيقات. يمكن فقط للكتابة \"%2$d\" في تطبيق المزيف %3$s ويمكن استعادته.</string>
 
     <string name="share_repository">مشاركة المستودع</string>
+    <string name="send_install_history">إرسال محفوظات التثبيت</string>
+    <string name="send_history_csv">%s تاريخ التثبيت كملف CSV</string>
+    <string name="updates_disabled_by_settings">جميع التحديثات معطلة عن طريق إعدادات البيانات / واي فاي</string>
+
     </resources>
