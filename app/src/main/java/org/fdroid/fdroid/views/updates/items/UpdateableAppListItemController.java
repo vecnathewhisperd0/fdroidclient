@@ -41,7 +41,7 @@ public class UpdateableAppListItemController extends AppListItemController {
 
     @Override
     public boolean canDismiss() {
-        return false;
+        return true;
     }
 
     @Override
