@@ -15,8 +15,8 @@
         android:id="@+id/icon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         tools:src="@drawable/ic_launcher"
         android:scaleType="fitCenter"
         android:layout_marginStart="16dp"
@@ -38,10 +38,25 @@
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+	android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toEndOf="@+id/icon"
         app:layout_constraintEnd_toStartOf="@+id/install"
         app:layout_constraintTop_toTopOf="@+id/icon"
-        app:layout_constraintBottom_toBottomOf="@+id/icon" />
+        app:layout_constraintVertical_bias="0.333" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="@string/app_list_download_ready"
+        style="@style/AppListItemStatusText"
+        app:layout_constraintTop_toBottomOf="@+id/app_name"
+        app:layout_constraintStart_toEndOf="@+id/icon"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:visibility="gone"
+        tools:visibility="visible"/>
 
     <ImageView
         android:id="@+id/install"

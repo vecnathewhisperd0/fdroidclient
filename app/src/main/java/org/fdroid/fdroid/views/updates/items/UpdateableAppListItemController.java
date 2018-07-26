@@ -30,12 +30,18 @@ public class UpdateableAppListItemController extends AppListItemController {
     protected AppListItemState getCurrentViewState(
             @NonNull App app, @Nullable AppUpdateStatusManager.AppUpdateStatus appStatus) {
         return new AppListItemState(app)
-                .setShowInstallButton(true);
+	    .setShowInstallButton(true)
+	    .setStatusText(getStatusText(app));
+    }
+
+    @Nullable
+    private CharSequence getStatusText(@Nullable App app) {
+	return app.installedVersionName+" -> "+app.getSuggestedVersionName();
     }
 
     @Override
     public boolean canDismiss() {
-        return true;
+        return false;
     }
 
     @Override
