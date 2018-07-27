@@ -556,4 +556,6 @@
 
     <string name="send_install_history">Trimite istoricul instalărilor</string>
     <string name="send_history_csv">%s istoric instalări ca fișier CSV</string>
+    <string name="updates_disabled_by_settings">Toate actualizările sunt oprite din setările de date mobile/Wi-Fi</string>
+
     </resources>
