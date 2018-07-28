@@ -561,7 +561,7 @@
     <string name="share_repository">Paketquelle teilen</string>
     <string name="allow_push_requests">Repos erlauben, Apps zu installieren/deinstallieren</string>
     <string name="allow_push_requests_summary">Repo-Metadaten können Push-Anfragen zur Installation oder Deinstallation von Anwendungen enthalten</string>
-    <string name="antinosourcesince">Der Quellcode ist nicht mehr verfügbar, keine Updates möglich.</string>
+    <string name="antinosourcesince">Der Quelltext ist nicht mehr verfügbar, keine Aktualisierungen möglich.</string>
 
     <string name="send_install_history">Installationsverlauf senden</string>
     <string name="updates_disabled_by_settings">Mobilfunk-/WLAN-Einstellungen verhindern sämtliche Aktualisierungen</string>
