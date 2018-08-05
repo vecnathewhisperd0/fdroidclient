@@ -221,12 +221,12 @@
     <string name="downloading">Laster ned…</string>
 
     <string name="interval_never">Ingen automatiske programoppdateringer</string>
-    <string name="interval_1h">Timevis</string>
-    <string name="interval_4h">Hver fjerde time</string>
-    <string name="interval_12h">Hver tolvte time</string>
-    <string name="interval_1d">Daglig</string>
-    <string name="interval_1w">Ukentlig</string>
-    <string name="interval_2w">Hver andre uke</string>
+    <string name="interval_1h">Sjekk etter oppdateringer hver time</string>
+    <string name="interval_4h">Sjekk etter oppdateringer hver 4. time</string>
+    <string name="interval_12h">Sjekk etter oppdateringer hver 12. time</string>
+    <string name="interval_1d">Sjekk etter oppdateringer daglig</string>
+    <string name="interval_1w">Sjekk etter oppdateringer hver uke</string>
+    <string name="interval_2w">Sjekk etter oppdateringer hver 2 uker</string>
 
     <string name="theme_light">Lyst</string>
     <string name="uninstall_system">Oppdater/avinstaller priviligert tillegg</string>
@@ -539,8 +539,8 @@
     <string name="repo_user_mirrors">Bruker-speil</string>
     <string name="use_bluetooth">Bruk Blåtann</string>
     <string name="swap_toast_invalid_url">Ugyldig nettadresse for utveksling: %1$s</string>
-    <string name="swap_toast_hotspot_enabled">Lokalt Wi-Fi -nettverk påskrudd</string>
-    <string name="swap_toast_could_not_enable_hotspot">Kunne ikke skru på lokalt Wi-Fi -nettverk!</string>
+    <string name="swap_toast_hotspot_enabled">Lokalt Wi-Fi-nettverk påskrudd</string>
+    <string name="swap_toast_could_not_enable_hotspot">Kunne ikke skru på lokalt Wi-Fi-nettverk!</string>
 
     <string name="over_wifi">Over Wi-Fi</string>
     <string name="over_data">Over data</string>
@@ -568,5 +568,7 @@
     <string name="allow_push_requests">Tillat pakkebrønner å installere/avinstallere programmer</string>
     <string name="allow_push_requests_summary">Pakkebrønnsmetadata kan inneholde push-forespørsler om installasjon eller avinstallasjon av programmer</string>
     <string name="antinosourcesince">Kildekoden er ikke lenger tilgengelig, ingen oppgraderinger mulig.</string>
+
+    <string name="updates_disabled_by_settings">Alle oppdateringer deaktivert av Data/WiFi-innstillinger</string>
 
     </resources>
