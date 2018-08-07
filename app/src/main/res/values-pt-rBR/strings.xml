@@ -570,7 +570,7 @@
     <string name="send_version_and_uuid">Enviar versão e UUID aos servidores</string>
     <string name="send_version_and_uuid_summary">Enviar a versão do aplicativo e um ID gerado aleatoriamente ao baixar. Tem efeito após reiniciar o aplicativo.</string>
     <string name="allow_push_requests">Repositórios permitidos para instalar/desinstalar aplicativos</string>
-    <string name="updates_disabled_by_settings">"Todas as atualizações estão desativadas por causa das configurações de Dados/WiFi "</string>
+    <string name="updates_disabled_by_settings">Todas as atualizações estão desativadas por causa das configurações de Dados/WiFi</string>
 
     <string name="antinosourcesince">Não é possível atualizar, o código fonte não está mais disponivel.</string>
 
