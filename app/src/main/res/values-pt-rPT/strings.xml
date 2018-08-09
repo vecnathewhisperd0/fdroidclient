@@ -156,12 +156,9 @@
     </string>
     <string name="unknown">Desconhecido</string>
     <string name="repo_confirm_delete_title">Apagar repositório?</string>
-    <string name="repo_confirm_delete_body">Ao apagar um repositório, as aplicações por ele
-        disponibilizadas não estarão disponíveis no F-Droid.
-
-        Nota:
-        todas as aplicações instaladas não serão afetadas.
-    </string>
+    <string name="repo_confirm_delete_body">Ao apagar um repositório, as aplicações por ele disponibilizadas ficarão indisponíveis.
+\n
+\nNota: todas as aplicações instaladas não serão afetadas.</string>
     <string name="repo_disabled_notification">%1$s desativado.
 
         Tem que ativar o repositório para poder instalar aplicações.
@@ -535,4 +532,16 @@
     <string name="repo_official_mirrors">\'Mirrors\' oficiais</string>
     <string name="repo_user_mirrors">\'Mirrors\' do utilizador</string>
     <string name="warning_scaning_qr_code">Parece que a sua câmara não possui foco automático. Poderá ser difícil digitalizar o código.</string>
+    <string name="prompt_to_send_crash_reports">Pedir para enviar relatórios de erros</string>
+    <string name="prompt_to_send_crash_reports_summary">Recolher dados sobre os erros e pedir para os enviar ao programador</string>
+    <string name="hide_all_notifications">Ocultar todas as notificações</string>
+    <string name="send_install_history">Enviar histórico de instalações</string>
+    <string name="install_history">Histórico de instalação</string>
+    <string name="over_wifi">Em Wi-fi</string>
+    <string name="over_data">Em dados móveis</string>
+    <string name="over_network_always_summary">Utilizar sempre esta ligação se disposnível</string>
+    <string name="over_network_on_demand_summary">Apenas utilizar esta ligação ao clicar em Descarregar</string>
+    <string name="over_network_never_summary">Nunca descarregar através desta ligação</string>
+    <string name="share_repository">Partilhar repositório</string>
+    <string name="use_bluetooth">Utilizar Bluetooth</string>
     </resources>
