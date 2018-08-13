@@ -401,7 +401,7 @@
     <string name="menu_video">影片</string>
     <string name="details_last_updated_today">今天更新</string>
     <string name="app__tts__cancel_download">取消下載</string>
-    <string name="app__tts__downloading_progress">正在下載， %1$d%% 完成</string>
+    <string name="app__tts__downloading_progress">正在下載，%1$d%% 完成</string>
     <string name="menu_license">授權：%s</string>
     <plurals name="notification_summary_more">
         <item quantity="other">+%1$d 更多…</item>
