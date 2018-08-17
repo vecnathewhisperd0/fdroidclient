@@ -536,4 +536,8 @@
     <string name="share_repository">Partager le dépôt</string>
     <string name="send_install_history">Envoyer l\'historique des installations</string>
     <string name="allow_push_requests">Autoriser les dépôts à installer/désinstaller des applications</string>
+    <string name="send_installed_apps">Partager les applis installées</string>
+    <string name="menu_open">Ouvrir</string>
+    <string name="antinosourcesince">Le code source n\'est désormais plus en accès libre, les mises à jour ne sont plus possibles.</string>
+
     </resources>
