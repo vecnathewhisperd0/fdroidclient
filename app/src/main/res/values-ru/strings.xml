@@ -545,4 +545,5 @@
 
     <string name="send_installed_apps">Поделиться установленными приложениями</string>
     <string name="send_installed_apps_csv">Приложения, установленные в F-Droid как файл CSV</string>
+    <string name="menu_open">Открыть</string>
     </resources>
