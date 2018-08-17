@@ -541,6 +541,7 @@
     <string name="antinosourcesince">Le code source n\'est désormais plus en accès libre, les mises à jour ne sont plus possibles.</string>
 
     <string name="send_history_csv">%s historique d\'installation sous forme de fichier CSV</string>
-    <string name="updates_disabled_by_settings">Toutes les mises à jour sont désactivées par les paramètres Data/WiFi</string>
+    <string name="updates_disabled_by_settings">Les mises à jour sont désactivées en raison des paramètres Données / Wifi</string>
 
+    <string name="send_installed_apps_csv">Applis installées via F-Droid comme fichier CSV</string>
     </resources>
