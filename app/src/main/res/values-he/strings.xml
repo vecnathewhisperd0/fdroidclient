@@ -552,4 +552,7 @@
     <string name="send_history_csv">%s היסטוריית ההתקנות כקובץ CSV</string>
     <string name="updates_disabled_by_settings">כל העדכונים מושבתים בהגדרות תקשורת הנתונים/רשת אלחוטית</string>
 
+    <string name="send_installed_apps">שיתוף היישומונים המותקנים</string>
+    <string name="send_installed_apps_csv">יישומונים שהותקנו דרך F-Droid כקובץ CSV</string>
+    <string name="menu_open">פתיחה</string>
     </resources>
