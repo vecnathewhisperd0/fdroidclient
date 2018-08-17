@@ -540,5 +540,5 @@
     <string name="menu_open">Ouvrir</string>
     <string name="antinosourcesince">Le code source n\'est désormais plus en accès libre, les mises à jour ne sont plus possibles.</string>
 
-    <string name="send_history_csv">%s historique d\'installation sous forme de fichier CVS</string>
+    <string name="send_history_csv">%s historique d\'installation sous forme de fichier CSV</string>
     </resources>
