@@ -517,4 +517,6 @@
     <string name="send_history_csv">%s 安裝履歷為 CSV 檔案</string>
     <string name="updates_disabled_by_settings">所有更新都被行動數據／WiFi 設定所停用</string>
 
+    <string name="send_installed_apps">分享已安裝的應用程式</string>
+    <string name="menu_open">開啟</string>
     </resources>
