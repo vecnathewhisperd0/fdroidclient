@@ -138,15 +138,15 @@ public final class Request {
 
     private String readLine() throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        String line = null;
 
-        while (line == null) {
+        while (true) {
 
             while (input.available() > 0) {
 
                 int b = input.read();
 
                 if (((char) b) == '\n') {
+                    String line = null;
                     if (baos.size() > 0) {
                         line = new String(baos.toByteArray());
                     }
@@ -163,8 +163,6 @@ public final class Request {
                 // ignore
             }
         }
-
-        return line;
     }
 
     /**
