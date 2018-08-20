@@ -27,9 +27,7 @@ public class PackageManagerCompat {
 
     private static final String TAG = "PackageManagerCompat";
 
-    @TargetApi(11)
     public static void setInstaller(Context context, PackageManager mPm, String packageName) {
-        if (Build.VERSION.SDK_INT < 11) return;
         try {
             if (Build.VERSION.SDK_INT >= 24 && PrivilegedInstaller.isDefault(context)) {
                 mPm.setInstallerPackageName(packageName, PrivilegedInstaller.PRIVILEGED_EXTENSION_PACKAGE_NAME);

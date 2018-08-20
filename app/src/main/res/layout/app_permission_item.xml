@@ -22,7 +22,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="?android:attr/selectableItemBackground">
 
     <ImageView
         android:id="@+id/perm_icon"
@@ -32,11 +33,13 @@
         android:layout_marginStart="16dp"
         android:layout_marginRight="8dp"
         android:layout_marginEnd="8dp"
-        android:scaleType="fitCenter" />
+        android:scaleType="fitCenter"
+        android:tint="@android:color/black" />
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="?android:attr/dividerVertical" />
 
     <TextView
         android:id="@+id/perm_name"

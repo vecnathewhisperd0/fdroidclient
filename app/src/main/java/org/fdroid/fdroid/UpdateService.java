@@ -267,18 +267,6 @@ public class UpdateService extends JobIntentService {
                 .setCategory(NotificationCompat.CATEGORY_SERVICE)
                 .setContentTitle(getString(R.string.update_notification_title));
         appUpdateStatusManager = AppUpdateStatusManager.getInstance(this);
-
-        // Android docs are a little sketchy, however it seems that Gingerbread is the last
-        // sdk that made a content intent mandatory:
-        //
-        //   http://stackoverflow.com/a/20032920
-        //
-        if (Build.VERSION.SDK_INT <= 10) {
-            Intent pendingIntent = new Intent(this, MainActivity.class);
-            pendingIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            notificationBuilder.setContentIntent(
-                    PendingIntent.getActivity(this, 0, pendingIntent, PendingIntent.FLAG_UPDATE_CURRENT));
-        }
     }
 
     @Override

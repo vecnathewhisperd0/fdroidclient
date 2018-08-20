@@ -11,6 +11,7 @@
     android:paddingLeft="10dp"
     android:paddingEnd="10dp"
     android:paddingRight="10dp"
+    android:textAllCaps="true"
     android:textColor="@color/fdroid_blue"
     android:background="@drawable/app_tag_new_background"
     />

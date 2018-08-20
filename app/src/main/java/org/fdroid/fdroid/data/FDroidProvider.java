@@ -105,20 +105,8 @@ public abstract class FDroidProvider extends ContentProvider {
         return sb.toString();
     }
 
-    @TargetApi(11)
     private Set<String> getKeySet(ContentValues values) {
-
-        if (Build.VERSION.SDK_INT >= 11) {
-            return values.keySet();
-        }
-
-        Set<String> keySet = new HashSet<>();
-        for (Map.Entry<String, Object> item : values.valueSet()) {
-            String key = item.getKey();
-            keySet.add(key);
-        }
-        return keySet;
-
+        return values.keySet();
     }
 
     protected void validateFields(String[] validFields, ContentValues values)

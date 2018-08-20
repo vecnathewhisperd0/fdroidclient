@@ -32,21 +32,22 @@
         tools:src="@drawable/ic_launcher"
         tools:ignore="ContentDescription" />
 
-    <CheckBox
-        android:id="@+id/checkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="?attr/listPreferredItemPaddingLeft"
-        android:layout_marginStart="?android:attr/listPreferredItemPaddingStart"
+    <ImageView
+        android:id="@+id/checked"
+        android:layout_width="32dip"
+        android:layout_height="32dip"
+        android:layout_marginRight="?attr/listPreferredItemPaddingLeft"
+        android:layout_marginEnd="?android:attr/listPreferredItemPaddingStart"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_add_circle_outline_white" />
 
     <TwoLineListItem
         android:layout_toRightOf="@android:id/icon"
         android:layout_toEndOf="@android:id/icon"
-        android:layout_toLeftOf="@id/checkbox"
-        android:layout_toStartOf="@id/checkbox"
+        android:layout_toLeftOf="@id/checked"
+        android:layout_toStartOf="@id/checked"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:mode="twoLine" >
