@@ -16,7 +16,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
@@ -426,9 +425,8 @@ public abstract class AppListItemController extends RecyclerView.ViewHolder {
             intent.putExtra(AppDetails2.EXTRA_APPID, currentApp.packageName);
             if (Build.VERSION.SDK_INT >= 21) {
                 String transitionAppIcon = activity.getString(R.string.transition_app_item_icon);
-                Pair<View, String> iconTransitionPair = Pair.create((View) icon, transitionAppIcon);
                 Bundle bundle = ActivityOptionsCompat
-                        .makeSceneTransitionAnimation(activity, iconTransitionPair).toBundle();
+                        .makeSceneTransitionAnimation(activity, icon, transitionAppIcon).toBundle();
                 activity.startActivity(intent, bundle);
             } else {
                 activity.startActivity(intent);
