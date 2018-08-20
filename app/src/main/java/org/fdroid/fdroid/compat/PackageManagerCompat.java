@@ -1,6 +1,5 @@
 package org.fdroid.fdroid.compat;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;

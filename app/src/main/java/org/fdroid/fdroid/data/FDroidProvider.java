@@ -1,6 +1,5 @@
 package org.fdroid.fdroid.data;
 
-import android.annotation.TargetApi;
 import android.content.ContentProvider;
 import android.content.ContentProviderOperation;
 import android.content.ContentProviderResult;
@@ -9,13 +8,10 @@ import android.content.OperationApplicationException;
 import android.content.UriMatcher;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import org.fdroid.fdroid.BuildConfig;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 public abstract class FDroidProvider extends ContentProvider {

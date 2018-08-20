@@ -54,7 +54,6 @@ import org.fdroid.fdroid.data.Schema;
 import org.fdroid.fdroid.installer.InstallManagerService;
 import org.fdroid.fdroid.net.BluetoothDownloader;
 import org.fdroid.fdroid.net.ConnectivityMonitorService;
-import org.fdroid.fdroid.views.main.MainActivity;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
