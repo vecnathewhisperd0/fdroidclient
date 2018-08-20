@@ -139,9 +139,7 @@ public class ShareChooserDialog extends BottomSheetDialogFragment {
                 if (showNearby) {
                     intents.add(null);
                 }
-                for (ResolveInfo ri : targetedShareIntents) {
-                    intents.add(ri);
-                }
+                intents.addAll(targetedShareIntents);
                 return this;
             }
 
