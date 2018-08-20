@@ -39,7 +39,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
 import java.net.URL;
 
 /**
@@ -82,7 +81,7 @@ public class HttpDownloader extends Downloader {
      * @throws MalformedURLException
      */
     HttpDownloader(Uri uri, File destFile, String username, String password)
-            throws FileNotFoundException, MalformedURLException {
+            throws MalformedURLException {
         super(uri, destFile);
         this.sourceUrl = new URL(urlString);
         this.username = username;
@@ -161,7 +160,7 @@ public class HttpDownloader extends Downloader {
                 && FDroidApp.subnetInfo.isInRange(host); // on the same subnet as we are
     }
 
-    private HttpURLConnection getConnection() throws SocketTimeoutException, IOException {
+    private HttpURLConnection getConnection() throws IOException {
         HttpURLConnection connection;
         if (isSwapUrl(sourceUrl)) {
             // swap never works with a proxy, its unrouted IP on the same subnet
