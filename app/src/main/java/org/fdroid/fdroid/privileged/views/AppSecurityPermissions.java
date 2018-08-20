@@ -369,8 +369,8 @@ public class AppSecurityPermissions {
         return n;
     }
 
-    public View getPermissionsView(int which) {
-        LinearLayout permsView = (LinearLayout) inflater.inflate(R.layout.app_perms_summary, null);
+    public View getPermissionsView(ViewGroup root, int which) {
+        LinearLayout permsView = (LinearLayout) inflater.inflate(R.layout.app_perms_summary, root);
         LinearLayout displayList = (LinearLayout) permsView.findViewById(R.id.perms_list);
         View noPermsView = permsView.findViewById(R.id.no_permissions);
 

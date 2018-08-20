@@ -103,7 +103,7 @@ public class InstallConfirmActivity extends FragmentActivity implements OnCancel
                     perms.getPermissionCount(AppSecurityPermissions.WHICH_NEW) > 0;
             if (newPermissionsFound) {
                 permVisible = true;
-                scrollView.addView(perms.getPermissionsView(
+                scrollView.addView(perms.getPermissionsView(scrollView,
                         AppSecurityPermissions.WHICH_NEW));
             } else {
                 throw new RuntimeException("This should not happen. No new permissions were found"
@@ -125,7 +125,7 @@ public class InstallConfirmActivity extends FragmentActivity implements OnCancel
                 scrollView = (CaffeinatedScrollView) root.findViewById(R.id.scrollview);
             }
             final ViewGroup permList = (ViewGroup) root.findViewById(R.id.permission_list);
-            permList.addView(perms.getPermissionsView(AppSecurityPermissions.WHICH_ALL));
+            permList.addView(perms.getPermissionsView(permList, AppSecurityPermissions.WHICH_ALL));
             adapter.addTab(tabHost.newTabSpec(TAB_ID_ALL).setIndicator(
                     getText(R.string.allPerms)), root);
         }

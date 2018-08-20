@@ -863,7 +863,7 @@ public class AppDetailsRecyclerViewAdapter
             contentView.removeAllViews();
             AppDiff appDiff = new AppDiff(context, versions.get(0));
             AppSecurityPermissions perms = new AppSecurityPermissions(context, appDiff.apkPackageInfo);
-            contentView.addView(perms.getPermissionsView(AppSecurityPermissions.WHICH_ALL));
+            contentView.addView(perms.getPermissionsView(contentView, AppSecurityPermissions.WHICH_ALL));
         }
 
         @DrawableRes
