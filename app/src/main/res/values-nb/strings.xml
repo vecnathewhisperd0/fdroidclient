@@ -541,4 +541,7 @@
 
     <string name="updates_disabled_by_settings">Alle oppdateringer avskrudd av Data/Wi-Fi-innstillinger</string>
 
+    <string name="send_installed_apps">Del installerte programmer</string>
+    <string name="send_installed_apps_csv">Programmer installert av F-Droid fra CSV-fil</string>
+    <string name="menu_open">Åpne</string>
     </resources>
