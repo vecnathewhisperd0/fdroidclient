@@ -388,8 +388,8 @@
     <string name="app__tts__downloading_progress">ダウンロード中、%1$d%%完了</string>
     <string name="menu_license">ライセンス: %s</string>
     <plurals name="notification_summary_more">
-        <item quantity="other">さらに+%1$d</item>
-    </plurals>
+	<item quantity="other">さらに+%1$d…</item>
+</plurals>
     <plurals name="notification_summary_updates">
         <item quantity="other">%1$d個の更新</item>
     </plurals>
