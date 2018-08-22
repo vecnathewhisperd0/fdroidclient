@@ -467,7 +467,7 @@
     <string name="repo_official_mirrors">官方镜像</string>
     <string name="repo_user_mirrors">用户镜像</string>
     <string name="use_bluetooth">使用蓝牙</string>
-    <string name="over_wifi">通过Wi-Fi</string>
+    <string name="over_wifi">通过 Wi-Fi</string>
     <string name="over_data">通过数据连接</string>
     <string name="over_network_always_summary">当此连接可用时，总是使用它</string>
     <string name="over_network_on_demand_summary">仅当我点击下载时才使用此连接</string>
