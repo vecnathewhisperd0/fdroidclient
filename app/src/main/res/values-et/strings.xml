@@ -502,4 +502,5 @@
     <string name="repo_exists_add_fingerprint">%1$s on juba seadistatud; see lisab teabe uuest võtmest.</string>
     <string name="repo_exists_enable">%1$s on juba üles seatud; kinnita, et soovid ta uuesti lubada.</string>
     <string name="repo_exists_and_enabled">%1$s on juba seadistatud ja lubatud.</string>
+    <string name="repo_delete_to_overwrite">Selle lisamiseks konfliktse võtmega kustuta esmalt %1$s.</string>
     </resources>
