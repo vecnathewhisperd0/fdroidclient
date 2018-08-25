@@ -543,4 +543,11 @@
     <string name="force_touch_apps">Включити застосунки, які потребують тачскрин</string>
     <string name="force_touch_apps_on">Показати застосунки, які потребують тачскрин, незалежно від апаратного підтримування</string>
 
+    <string name="panic_hide_warning_message">У разі небезпеки, це усуне %1$s з лавнчеру. Лише набрання \"%2$d\", у фейковому застосункові %3$s, зможе його поновити.</string>
+
+    <string name="hiding_dialog_message">Чи ви певні що хочете усунути %1$s з лавнчеру? Тільки набрання \"%2$d\", у фейковому застосункові %3$s, зможе його поновити.</string>
+    <string name="hiding_dialog_warning">Увага: всі застосункові значки на домашньому екранові буде усунено, їх треба буде потім повернути вручну.</string>
+    <string name="hide_on_long_search_press_summary">Затиснення пошувого ґудзика приховає застосунок</string>
+
+    <string name="swap_toast_invalid_url">URL для обміну є хибним: %1$s</string>
     </resources>
