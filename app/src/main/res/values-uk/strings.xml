@@ -281,7 +281,7 @@
     <string name="menu_email">Написати листа авторові</string>
     <string name="useTor">Використовувати Tor</string>
     <string name="useTorSummary">Примусове завантаження трафіку через мережу Tor для підвищення конфіденційності. Потрібен Orbot</string>
-    <string name="swap_stopping_wifi">Зупинка Wi-Fi…</string>
+    <string name="swap_stopping_wifi">Зупиняю Wi-Fi…</string>
     <string name="repo_provider">Репозиторій: %s</string>
 
     <string name="update_auto_download">Автоматично завантажувати оновлення</string>
