@@ -166,7 +166,7 @@
     <string name="swap_confirm_connect">Бажаєте отримати застосунки з %1$s зараз?</string>
     <string name="swap_dont_show_again">Не показувати це знову</string>
     <string name="swap_visible_bluetooth">Видимий через Bluetooth</string>
-    <string name="swap_setting_up_bluetooth">Налаштування Bluetooth…</string>
+    <string name="swap_setting_up_bluetooth">Налаштовую Bluetooth…</string>
     <string name="install_confirm">потребує доступу до</string>
     <string name="perm_costs_money">Це може вам коштувати грошей</string>
     <string name="unstable_updates_summary">Пропонувати оновлення до нестабільних версій</string>
