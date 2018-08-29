@@ -148,10 +148,15 @@ class NotificationHelper {
     }
 
     private boolean shouldIgnoreEntry(AppUpdateStatusManager.AppUpdateStatus entry) {
+        // Ignore if app is unavailable
+        if (entry.app == null) {
+            return true;
+        }
         // Ignore unknown status
         if (entry.status == AppUpdateStatusManager.Status.DownloadInterrupted) {
             return true;
-        } else if ((entry.status == AppUpdateStatusManager.Status.Downloading ||
+        }
+        if ((entry.status == AppUpdateStatusManager.Status.Downloading ||
                 entry.status == AppUpdateStatusManager.Status.ReadyToInstall ||
                 entry.status == AppUpdateStatusManager.Status.InstallError) &&
                 AppDetails2.isAppVisible(entry.app.packageName)) {
