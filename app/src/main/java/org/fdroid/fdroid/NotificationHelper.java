@@ -149,21 +149,15 @@ class NotificationHelper {
 
     private boolean shouldIgnoreEntry(AppUpdateStatusManager.AppUpdateStatus entry) {
         // Ignore if app is unavailable
-        if (entry.app == null) {
-            return true;
-        }
-        // Ignore unknown status
-        if (entry.status == AppUpdateStatusManager.Status.DownloadInterrupted) {
-            return true;
-        }
-        if ((entry.status == AppUpdateStatusManager.Status.Downloading ||
-                entry.status == AppUpdateStatusManager.Status.ReadyToInstall ||
-                entry.status == AppUpdateStatusManager.Status.InstallError) &&
-                AppDetails2.isAppVisible(entry.app.packageName)) {
-            // Ignore downloading, readyToInstall and installError if we are showing the details screen for this app
-            return true;
-        }
-        return false;
+        return entry.app == null ||
+                // Ignore unknown status
+                entry.status == AppUpdateStatusManager.Status.DownloadInterrupted ||
+                // Ignore downloading, readyToInstall and installError
+                // if we are showing the details screen for this app
+                ((entry.status == AppUpdateStatusManager.Status.Downloading ||
+                        entry.status == AppUpdateStatusManager.Status.ReadyToInstall ||
+                        entry.status == AppUpdateStatusManager.Status.InstallError) &&
+                        AppDetails2.isAppVisible(entry.app.packageName));
     }
 
     private void createNotification(AppUpdateStatusManager.AppUpdateStatus entry) {
