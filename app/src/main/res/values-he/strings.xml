@@ -555,4 +555,5 @@
     <string name="send_installed_apps">שיתוף היישומונים המותקנים</string>
     <string name="send_installed_apps_csv">יישומונים שהותקנו דרך F-Droid כקובץ CSV</string>
     <string name="menu_open">פתיחה</string>
+    <string name="about_forum">פורום תמיכה</string>
     </resources>
