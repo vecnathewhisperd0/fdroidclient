@@ -559,4 +559,5 @@
     <string name="app_suggested">הצעה</string>
     <string name="app_size">גודל: %1$s</string>
 
+    <string name="menu_downgrade">שנמוך</string>
     </resources>
