@@ -293,7 +293,7 @@
     <string name="login_title">Απαιτείται πιστοποίηση</string>
     <string name="useTor">Χρήση Tor</string>
     <string name="keep_install_history">Αποθήκευση ιστορικού εγκαταστάσεων</string>
-    <string name="keep_install_history_summary">"Αποθηκεύστε ένα αρχείο καταγραφής όλων των εγκαταστάσεων και απεγκαταστάσεων "</string>
+    <string name="keep_install_history_summary">Αποθηκεύστε ένα αρχείο καταγραφής όλων των εγκαταστάσεων και απεγκαταστάσεων</string>
     <string name="update_auto_download">Αυτόματη λήψη ενημερώσεων</string>
     <string name="update_auto_download_summary">Οι ενημερώσεις θα λαμβάνονται αυτόματα και θα ειδοποιείστε για την εγκατάσταση τους</string>
     <string name="update_auto_install">Αυτόματη εγκατάσταση αναβαθμίσεων</string>

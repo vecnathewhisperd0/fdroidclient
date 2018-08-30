@@ -505,7 +505,7 @@
     <string name="repo_exists_and_enabled">%1$s on juba seadistatud ja lubatud.</string>
     <string name="repo_delete_to_overwrite">Konflikti lahendamiseks kustuta esmalt %1$s ning lisa varamu teise võtmega.</string>
     <string name="prompt_to_send_crash_reports">Küsi luba krahhiraportite saatmiseks</string>
-    <string name="prompt_to_send_crash_reports_summary">"Kogu krahhide andmeid  ja küsi luba nende saatmiseks arendajale"</string>
+    <string name="prompt_to_send_crash_reports_summary">Kogu krahhide andmeid  ja küsi luba nende saatmiseks arendajale</string>
     <string name="hide_all_notifications">Paida kõik märguanded</string>
     <string name="hide_all_notifications_summary">Väldi kõigi tegevuste kuvamist olekuribal ja märguannete sahtlis.</string>
     <string name="send_install_history">Saada paigalduste ajalugu</string>

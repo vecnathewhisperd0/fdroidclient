@@ -535,7 +535,7 @@
     <string name="repo_exists_add_mirror">Це є копією файлу %1$s, чи додати її як дзеркало файлу?</string>
     <string name="menu_open">Відкрити</string>
     <string name="antidisabledalgorithmlist">Цей застосунок має слабкий підпис безпеки</string>
-    <string name="antiknownvulnlist">"Цей застосунок містить знану вразливість безпеки "</string>
+    <string name="antiknownvulnlist">Цей застосунок містить знану вразливість безпеки</string>
     <string name="antinosourcesince">Джерельний код вже не є доступним, оновлення не є можливими.</string>
 
     <string name="show_anti_feature_apps">Включити застосунки з сумнівними можливостями</string>
