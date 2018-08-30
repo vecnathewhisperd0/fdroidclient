@@ -540,4 +540,5 @@
     <string name="send_installed_apps">Partajează aplicațiile instalate</string>
     <string name="send_installed_apps_csv">Lista de aplicații instalate ca fișier CSV</string>
     <string name="menu_open">Deschide</string>
+    <string name="about_forum">Forum suport tehnic</string>
     </resources>
