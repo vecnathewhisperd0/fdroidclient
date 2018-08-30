@@ -544,4 +544,5 @@
     <string name="send_installed_apps">Del installerte programmer</string>
     <string name="send_installed_apps_csv">Programmer installert av F-Droid fra CSV-fil</string>
     <string name="menu_open">Åpne</string>
+    <string name="about_forum">Brukerstøtteforum</string>
     </resources>
