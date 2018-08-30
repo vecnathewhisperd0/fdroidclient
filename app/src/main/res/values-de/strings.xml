@@ -547,4 +547,5 @@
     <string name="send_installed_apps_csv">Von F-Droid installierte Apps als CSV-Datei</string>
     <string name="menu_open">Öffnen</string>
     <string name="about_forum">Support-Forum</string>
+    <string name="app_suggested">Vorgeschlagen</string>
     </resources>
