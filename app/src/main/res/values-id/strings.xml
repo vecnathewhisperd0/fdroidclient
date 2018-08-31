@@ -6,7 +6,7 @@
     <string name="version">Versi</string>
     <string name="delete">Hapus</string>
     <string name="enable_nfc_send">Aktifkan Pengirimian NFC…</string>
-    <string name="cache_downloaded">Simpan hasil unduhan</string>
+    <string name="cache_downloaded">Simpan cache aplikasi</string>
     <string name="updates">Pembaruan</string>
     <string name="unstable_updates">Pembaruan tidak stabil</string>
     <string name="unstable_updates_summary">Sarankan pembaruan ke versi tidak stabil</string>
@@ -537,7 +537,7 @@
 
     <string name="menu_open">Buka</string>
     <string name="menu_downgrade">Turunkan</string>
-    <string name="antinosourcesince">Sumber kode ini sudah tidak tersedia, tidak akan ada pembaharuan</string>
+    <string name="antinosourcesince">Sumber kode ini sudah tidak tersedia, tidak akan ada pembaharuan.</string>
 
     <string name="share_repository">Bagikan Repositori</string>
     </resources>
