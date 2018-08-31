@@ -541,4 +541,8 @@
     <string name="send_installed_apps_csv">Lista de aplicații instalate ca fișier CSV</string>
     <string name="menu_open">Deschide</string>
     <string name="about_forum">Forum suport tehnic</string>
+    <string name="app_suggested">Recomandată</string>
+    <string name="app_size">Mărime: %1$s</string>
+
+    <string name="menu_downgrade">Retrogradare</string>
     </resources>
