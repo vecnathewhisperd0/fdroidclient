@@ -509,9 +509,9 @@
     <string name="antinosourcesince">ソースコードはもう利用できません。更新できません。</string>
 
     <string name="share_repository">リポジトリを共有</string>
-    <string name="about_forum">Forum bantuan</string>
-    <string name="app_suggested">Disarankan</string>
-    <string name="app_size">Ukuran: %1$s</string>
+    <string name="about_forum"></string>
+    <string name="app_suggested"></string>
+    <string name="app_size"></string>
 
-    <string name="menu_downgrade">Turunkan</string>
+    <string name="menu_downgrade"></string>
     </resources>
