@@ -71,6 +71,7 @@ public class UpdateService extends JobIntentService {
     public static final String EXTRA_STATUS_CODE = "status";
     public static final String EXTRA_MANUAL_UPDATE = "manualUpdate";
     public static final String EXTRA_FORCED_UPDATE = "forcedUpdate";
+    public static final String EXTRA_REPOS_TO_UPDATE = "reposToUpdate";
     public static final String EXTRA_PROGRESS = "progress";
 
     public static final int STATUS_COMPLETE_WITH_CHANGES = 0;
@@ -92,15 +93,19 @@ public class UpdateService extends JobIntentService {
     private AppUpdateStatusManager appUpdateStatusManager;
 
     public static void updateNow(Context context) {
-        updateRepoNow(context, null);
+        updateReposNow(context, null);
     }
 
-    public static void updateRepoNow(Context context, String address) {
+    public static void updateRepoNow(Context context, String repoAddress) {
+        ArrayList<String> repoAddresses = new ArrayList<>();
+        repoAddresses.add(repoAddress);
+        updateReposNow(context, repoAddresses);
+    }
+
+    public static void updateReposNow(Context context, ArrayList<String> repoAddresses) {
         Intent intent = new Intent(context, UpdateService.class);
         intent.putExtra(EXTRA_MANUAL_UPDATE, true);
-        if (!TextUtils.isEmpty(address)) {
-            intent.setData(Uri.parse(address));
-        }
+        intent.putStringArrayListExtra(EXTRA_REPOS_TO_UPDATE, repoAddresses);
         enqueueWork(context, intent);
     }
 
@@ -412,13 +417,19 @@ public class UpdateService extends JobIntentService {
         final long startTime = System.currentTimeMillis();
         boolean manualUpdate = intent.getBooleanExtra(EXTRA_MANUAL_UPDATE, false);
         boolean forcedUpdate = intent.getBooleanExtra(EXTRA_FORCED_UPDATE, false);
-        String address = intent.getDataString();
+
+        ArrayList<String> repoAddresses = intent.getStringArrayListExtra(EXTRA_REPOS_TO_UPDATE);
+        boolean allReposUpdate = repoAddresses == null || repoAddresses.isEmpty();
+
+        // Detect single swap repo update through Bluetooth
+        boolean swapRepoUpdate = repoAddresses != null && repoAddresses.size() == 1 &&
+                repoAddresses.get(0) != null && repoAddresses.get(0).startsWith(BluetoothDownloader.SCHEME);
 
         try {
             final Preferences fdroidPrefs = Preferences.get();
             // See if it's time to actually do anything yet...
             int netState = ConnectivityMonitorService.getNetworkState(this);
-            if (address != null && address.startsWith(BluetoothDownloader.SCHEME)) {
+            if (swapRepoUpdate) {
                 Utils.debugLog(TAG, "skipping internet check, this is bluetooth");
             } else if (netState == ConnectivityMonitorService.FLAG_NET_UNAVAILABLE) {
                 Utils.debugLog(TAG, "No internet, cannot update");
@@ -446,16 +457,16 @@ public class UpdateService extends JobIntentService {
             int errorRepos = 0;
             ArrayList<CharSequence> repoErrors = new ArrayList<>();
             boolean changes = false;
-            boolean singleRepoUpdate = !TextUtils.isEmpty(address);
             for (final Repo repo : repos) {
                 if (!repo.inuse) {
                     continue;
                 }
-                if (singleRepoUpdate && !repo.address.equals(address)) {
+                if (allReposUpdate) {
+                    if (repo.isSwap) {
+                        continue;
+                    }
+                } else if (!repoAddresses.contains(repo.address)) {
                     unchangedRepos++;
-                    continue;
-                }
-                if (!singleRepoUpdate && repo.isSwap) {
                     continue;
                 }
 
