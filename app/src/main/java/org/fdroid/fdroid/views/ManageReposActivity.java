@@ -338,11 +338,10 @@ public class ManageReposActivity extends AppCompatActivity
                                 case EXISTS_UPGRADABLE_TO_SIGNED:
                                 case EXISTS_ADD_MIRROR:
                                     updateAndEnableExistingRepo(url, fp);
-                                    finishedAddingRepo();
                                     break;
 
                                 default:
-                                    finishedAddingRepo();
+                                    finishedAddingRepo(url);
                                     break;
                             }
                         }
@@ -756,7 +755,7 @@ public class ManageReposActivity extends AppCompatActivity
             }
 
             RepoProvider.Helper.insert(context, values);
-            finishedAddingRepo();
+            finishedAddingRepo(address);
             Toast.makeText(context, getString(R.string.repo_added, address), Toast.LENGTH_SHORT).show();
         }
 
@@ -803,7 +802,7 @@ public class ManageReposActivity extends AppCompatActivity
             RepoProvider.Helper.update(context, repo, values);
 
             notifyDataSetChanged();
-            finishedAddingRepo();
+            finishedAddingRepo(url);
         }
 
         /**
@@ -811,8 +810,8 @@ public class ManageReposActivity extends AppCompatActivity
          * will set a result and finish. Otherwise, we'll updateViews the list of repos
          * to reflect the newly created repo.
          */
-        private void finishedAddingRepo() {
-            UpdateService.updateNow(ManageReposActivity.this);
+        private void finishedAddingRepo(String address) {
+            UpdateService.updateRepoNow(ManageReposActivity.this, address);
             if (addRepoDialog.isShowing()) {
                 addRepoDialog.dismiss();
             }
