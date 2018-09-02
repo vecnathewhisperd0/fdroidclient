@@ -865,6 +865,7 @@ public class ManageReposActivity extends AppCompatActivity
         final String[] projection = {
                 RepoTable.Cols._ID,
                 RepoTable.Cols.NAME,
+                RepoTable.Cols.ADDRESS,
                 RepoTable.Cols.SIGNING_CERT,
                 RepoTable.Cols.FINGERPRINT,
                 RepoTable.Cols.IN_USE,
@@ -905,7 +906,7 @@ public class ManageReposActivity extends AppCompatActivity
             RepoProvider.Helper.update(this, repo, values);
 
             if (isEnabled) {
-                UpdateService.updateNow(this);
+                UpdateService.updateRepoNow(this, repo.address);
             } else {
                 RepoProvider.Helper.purgeApps(this, repo);
                 String notification = getString(R.string.repo_disabled_notification, repo.name);
