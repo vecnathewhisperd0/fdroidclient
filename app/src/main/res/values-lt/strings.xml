@@ -184,4 +184,85 @@
     <string name="no_permissions">Nebuvo panaudoti jokie įgaliojimai</string>
     <string name="permissions">Įgaliojimai</string>
     <string name="repo_url">Adresas</string>
+    <string name="not_on_same_wifi">Jūsų įrenginys prijungtas prie skirtingo Wi-Fi, nei tik ką pridėta saugykla! Pabandykite prisijungti prie šio Wi-Fi: %s</string>
+    <string name="by_author_format">pagal %s</string>
+    <string name="prompt_to_send_crash_reports_summary">Rinkti info apie klaidas ir siųsti jas kūrėjui</string>
+    <string name="hide_all_notifications">Paslėpti visus pranešimus</string>
+    <string name="send_install_history">Siųsti instaliavimo istoriją</string>
+    <string name="install_history">Instaliavimo istorija</string>
+    <string name="install_history_summary">Peržiūrėti visų instaliavimų ir ištrinimų žurnalą</string>
+    <string name="send_version_and_uuid">Siųsti versiją ir UUID serveriams</string>
+    <string name="allow_push_requests">Leisti saugykloms instaliuoti/ištrinti programas</string>
+    <string name="over_wifi">Per Wi-Fi</string>
+    <string name="over_data">Per mobiliuosius duomenis</string>
+    <string name="over_network_always_summary">Visą laik naudoti šį ryšį kai įmanoma</string>
+    <string name="over_network_on_demand_summary">Naudoti tik šį ryšį spaudžiant atsiųsti</string>
+    <string name="over_network_never_summary">Nesiųsti nieko naudojant šį ryšį</string>
+    <string name="update_auto_download">Automatiškai tikrinti atnaujinimus</string>
+    <string name="update_auto_install">Automatiškai įdiegti atnaujinimus</string>
+    <string name="update_auto_install_summary">Atsiųsti ir suinstaliuoti atnaujinimus fone</string>
+    <string name="system_installer">Privilegijuoti papildiniai</string>
+    <string name="login_title">Reikalingas autentifikavimas</string>
+    <string name="login_name">Vartotojo vardas</string>
+    <string name="login_password">Slaptažodis</string>
+    <string name="repo_edit_credentials">Pakeisti slaptažodį</string>
+    <string name="repo_error_empty_username">Tusčias vartotojo vardas, duomenys nepakeisti</string>
+
+    <string name="no_such_app">Ši programa nerasta</string>
+
+    <string name="app_details__no_versions__show_incompat_versions">Norint pamatyti nepalaikomas versijas, įjunkite \"%1$s\" nustatyma.</string>
+    <string name="app_details__no_versions__none_compatible_with_device">Nėra palaikomos versijos su jūsų įrenginiu</string>
+    <string name="about_forum">Pagalbos forumas</string>
+    <string name="about_source">Pradinis kodas</string>
+    <string name="about_license">Licenzija</string>
+
+    <string name="app_suggested">Pasiūlytas</string>
+    <string name="app_incompatible">Nepalaikomas</string>
+    <string name="app_inst_known_source">Suinstaliuotas (iš %s)</string>
+    <string name="app_inst_unknown_source">Suinstaliuotas (iš nežinomo šaltinio)</string>
+    <string name="app_version_x_available">Versija %1$s pasiekiama</string>
+    <string name="app_version_x_installed">Versija %1$s</string>
+    <string name="app_recommended_version_installed">Versija %1$s (rekomenduojama)</string>
+    <string name="app__newly_added">Nauja</string>
+    <string name="app__tts__cancel_download">Atšaukti siuntimą</string>
+    <string name="app__install_downloaded_update">Atnaujinti</string>
+    <string name="app_installed_media">Failas suinstaliuotas %s</string>
+    <string name="app_size">Dydis: %1$s</string>
+
+    <string name="app_list_download_ready">Atsiųsta, paruošta instaliavimui</string>
+    <string name="app_list__dismiss_app_update">Atnaujinimas praleistas</string>
+    <string name="app_list__dismiss_downloading_app">Atsiuntimas atšauktas</string>
+
+    <string name="installed_apps__activity_title">Suinstaliuotos programos</string>
+    <string name="send_installed_apps">Pasidalinti suinstaliuotomis programomis</string>
+    <string name="installed_app__updates_ignored">Atnaujinimai praleisti</string>
+    <string name="installed_app__updates_ignored_for_suggested_version">Atnaujinimai praleisti %1$s versijai</string>
+    <string name="updates__tts__download_updates_for_all_apps">Atsiųsti visus atnaujinimus</string>
+
+    <string name="updates__app_with_known_vulnerability__ignore">Ignoruoti</string>
+
+    <string name="updates__hide_updateable_apps">Paslėpti programas</string>
+    <string name="updates__show_updateable_apps">Parodyti programas</string>
+    <plurals name="updates__download_updates_for_apps">
+	<item quantity="one">Atsiųsti atnaujinimą %1$d programai</item>
+	<item quantity="few">Atsiųsti atnaujinimus %1$d programoms</item>
+	<item quantity="other">Atsiųsti atnaujinimus %1$d programoms</item>
+</plurals>
+    <string name="updates_disabled_by_settings">Visi atnaujinimai atšaukti pagal Mob. duomenų/WiFi nustatymus</string>
+
+    <string name="links">Nuorodos</string>
+    <string name="versions">Versijos</string>
+    <string name="clear_search">Pašalinti paiešką</string>
+    <string name="sort_search">Sugrupuoti paiešką</string>
+
+    <string name="repo_add_fingerprint">Piršto antspaudas</string>
+    <string name="repo_exists_and_enabled">%1$s yra nustatytas ir įjungtas</string>
+    <string name="bad_fingerprint">Netinkamas piršto antspaudas</string>
+    <string name="invalid_url">Tai nėra teisingas URL</string>
+    <string name="repo_provider">Saugykla : %s</string>
+
+    <string name="menu_open">Atidaryta</string>
+    <string name="menu_ignore_all">Ignoruoti visus atnaujinimus</string>
+    <string name="menu_ignore_this">Ignoruoti šį atnaujinimą</string>
+    <string name="menu_issues">Klaidos</string>
     </resources>
