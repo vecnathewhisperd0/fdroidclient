@@ -6,12 +6,12 @@
     <string name="updates">Atnaujinimai</string>
     <string name="other">Kita</string>
     <string name="update_interval">Automatinis programų sąrašų naujinimas</string>
-    <string name="notify">Informuoti</string>
+    <string name="notify">Rodyti prieinamus naujinius</string>
     <string name="notify_on">Pranešti, kai atsiras atnaujinimų</string>
     <string name="local_repo_name">Šio įrenginio saugyklos pavadinimas</string>
     <string name="about_title">Apie F-Droid</string>
-    <string name="about_site">Svetainė:</string>
-    <string name="about_version">Versija:</string>
+    <string name="about_site">Svetainė</string>
+    <string name="about_version">Versija</string>
     <string name="app_installed">Įdiegta</string>
     <string name="app_not_installed">Neįdiegta</string>
     <string name="added_on">Išleista %s</string>
@@ -31,14 +31,14 @@
     <string name="menu_launch">Vykdyti</string>
     <string name="menu_share">Dalintis</string>
     <string name="menu_install">Įdiegti</string>
-    <string name="menu_uninstall">Išmesti</string>
+    <string name="menu_uninstall">Pašalinti</string>
     <string name="menu_website">Svetainė</string>
     <string name="menu_source">Išeities tekstai</string>
     <string name="menu_upgrade">Atnaujinti</string>
     <string name="menu_donate">Paaukoti</string>
     <string name="details_notinstalled">Neįdiegta</string>
     <string name="display">Rodymas</string>
-    <string name="show_incompat_versions">Nesuderintos versijos</string>
+    <string name="show_incompat_versions">Rodyti nesuderinamas versijas</string>
     <string name="show_incompat_versions_on">Rodyti programų laidas, netinkamas šiam įrenginiui</string>
     <string name="deleting_repo">Šalinama pasirinkta saugykla…</string>
     <string name="next">Toliau</string>
@@ -159,7 +159,7 @@
     <string name="icon">Ikona</string>
     <string name="useTor">Naudoti Tor</string>
     <string name="proxy">Proxy</string>
-    <string name="enable_proxy_title">Įgalinti HTTP Proxy</string>
+    <string name="enable_proxy_title">Naudoti HTTP Proxy</string>
     <string name="privacy">Privatumas</string>
     <string name="panic_app_unknown_app">Nežinoma programa</string>
     <string name="panic_app_setting_summary">Jokia programa nebuvo nustatyta</string>
@@ -177,11 +177,11 @@
     <string name="hide_on_long_search_press_title">Paslėpti su paieškos mygtuku</string>
     <string name="hide_on_long_search_press_summary">Ilgai palaikus paieškos mygtuka programa bus paslėpta</string>
 
-    <string name="download_404">Prašomas failas nebuvo rastas</string>
+    <string name="download_404">Prašomas failas nebuvo rastas.</string>
     <string name="update_notification_title">Atnaujinamos saugyklos</string>
     <string name="status_inserting_x_apps">Saugojama programos informacija (%1$d/%2$d) nuo %3$s</string>
-    <string name="all_other_repos_fine">Visos kitos saugyklos nesukūrė klaidų</string>
-    <string name="no_permissions">Nebuvo panaudoti jokie įgaliojimai</string>
+    <string name="all_other_repos_fine">Visos kitos saugyklos nesukūrė klaidų.</string>
+    <string name="no_permissions">Nebuvo panaudoti jokie įgaliojimai.</string>
     <string name="permissions">Įgaliojimai</string>
     <string name="repo_url">Adresas</string>
     <string name="not_on_same_wifi">Jūsų įrenginys prijungtas prie skirtingo Wi-Fi, nei tik ką pridėta saugykla! Pabandykite prisijungti prie šio Wi-Fi: %s</string>
@@ -208,7 +208,7 @@
     <string name="repo_edit_credentials">Pakeisti slaptažodį</string>
     <string name="repo_error_empty_username">Tusčias vartotojo vardas, duomenys nepakeisti</string>
 
-    <string name="no_such_app">Ši programa nerasta</string>
+    <string name="no_such_app">Ši programa nerasta.</string>
 
     <string name="app_details__no_versions__show_incompat_versions">Norint pamatyti nepalaikomas versijas, įjunkite \"%1$s\" nustatyma.</string>
     <string name="app_details__no_versions__none_compatible_with_device">Nėra palaikomos versijos su jūsų įrenginiu</string>
@@ -256,13 +256,13 @@
     <string name="sort_search">Sugrupuoti paiešką</string>
 
     <string name="repo_add_fingerprint">Piršto antspaudas</string>
-    <string name="repo_exists_and_enabled">%1$s yra nustatytas ir įjungtas</string>
+    <string name="repo_exists_and_enabled">%1$s yra nustatytas ir įjungtas.</string>
     <string name="bad_fingerprint">Netinkamas piršto antspaudas</string>
-    <string name="invalid_url">Tai nėra teisingas URL</string>
+    <string name="invalid_url">Tai nėra tinkamas URL.</string>
     <string name="repo_provider">Saugykla : %s</string>
 
-    <string name="menu_open">Atidaryta</string>
-    <string name="menu_ignore_all">Ignoruoti visus atnaujinimus</string>
-    <string name="menu_ignore_this">Ignoruoti šį atnaujinimą</string>
+    <string name="menu_open">Atverti</string>
+    <string name="menu_ignore_all">Ignoruoti visus naujinimus</string>
+    <string name="menu_ignore_this">Ignoruoti šį naujinimą</string>
     <string name="menu_issues">Klaidos</string>
     </resources>
