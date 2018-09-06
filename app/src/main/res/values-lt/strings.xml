@@ -208,7 +208,7 @@
     <string name="repo_edit_credentials">Pakeisti slaptažodį</string>
     <string name="repo_error_empty_username">Tusčias vartotojo vardas, duomenys nepakeisti</string>
 
-    <string name="no_such_app">Ši programa nerasta.</string>
+    <string name="no_such_app">Nerasta tokia programa</string>
 
     <string name="app_details__no_versions__show_incompat_versions">Norint pamatyti nepalaikomas versijas, įjunkite \"%1$s\" nustatyma.</string>
     <string name="app_details__no_versions__none_compatible_with_device">Nėra palaikomos versijos su jūsų įrenginiu</string>
@@ -265,4 +265,28 @@
     <string name="menu_ignore_all">Ignoruoti visus naujinimus</string>
     <string name="menu_ignore_this">Ignoruoti šį naujinimą</string>
     <string name="menu_issues">Klaidos</string>
+    <string name="app_details__no_versions__no_compatible_signatures">Nėra versijos su palaikomu įrenginio parašu</string>
+    <string name="app_permission_storage">F-Droid reikia saugyklos keitimo leidimo, norint instaliuoti. Prašome paspausti Leisti kitame, ekrane matome lange</string>
+    <string name="send_installed_apps_csv">Programos suinstaliuotos F-Droid kaip CSV failas</string>
+    <string name="bluetooth_activity_not_found">Nerasta Bluetooth siuntimo metodų, pasirinkite!</string>
+    <string name="choose_bt_send">Pasirinkti Bluetooth siuntimo metodą</string>
+
+    <string name="repo_exists_enable">%1$s yra jau nustatytas, patvirtinkite, jog norite jį perjungti</string>
+    <string name="repo_exists_add_mirror">Tai yra %1$s kopija, pridėti ją kaip veidrodį?</string>
+    <string name="repositories_summary">Pridėti papildomus programų šaltinius</string>
+    <string name="menu_email">El. Laiško autorius</string>
+    <string name="menu_video">Video</string>
+    <string name="menu_license">Licencija: %s</string>
+    <string name="menu_downgrade">Pažeminti</string>
+    <string name="menu_bitcoin">Bitcoin</string>
+    <string name="menu_litecoin">Litecoin</string>
+    <string name="menu_flattr">Flattr</string>
+    <string name="menu_liberapay">Liberapay</string>
+
+    <string name="latest__empty_state__no_enabled_repos">Kai įjungsite saugykla ir leisite jai atsinaujinti, programų atnaujinimus matysite čia</string>
+
+    <string name="antinonfreeassetslist">Ši programa palaiko mokamas lėšas</string>
+    <string name="antidisabledalgorithmlist">Ši programa turi silpnai apsaugotą parašą</string>
+    <string name="force_touch_apps">Įtraukti programas liečiamam ekranui</string>
+    <string name="local_repo">Vietinė saugykla</string>
     </resources>
