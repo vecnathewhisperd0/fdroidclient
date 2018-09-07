@@ -1059,13 +1059,18 @@ public class AppDetailsRecyclerViewAdapter
             }
 
             // Added date
-            java.text.DateFormat df = DateFormat.getDateFormat(context);
-            added.setText(context.getString(R.string.added_on, df.format(apk.added)));
+            if (apk.added != null) {
+                java.text.DateFormat df = DateFormat.getDateFormat(context);
+                added.setText(context.getString(R.string.added_on, df.format(apk.added)));
+            } else {
+                added.setText(context.getString(R.string.added_unknown));
+            }
 
             // Repository name, APK size and required Android version
             Repo repo = RepoProvider.Helper.findById(context, apk.repoId);
-            repository.setText(repo != null ? repo.getName() : context.getString(R.string.unknown));
-            size.setText(context.getString(R.string.app_size, Utils.getFriendlySize(apk.size)));
+            repository.setText(repo != null ? repo.getName() : context.getString(R.string.repo_unknown));
+            size.setText(apk.size > 0 ? context.getString(R.string.app_size, Utils.getFriendlySize(apk.size)) :
+                    context.getString(R.string.app_size_unknown));
             api.setText(getApiText(apk));
 
             // Figuring out whether to show Install/Upgrade button or Downgrade button

@@ -98,11 +98,13 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="app_recommended_version_installed">Version %1$s (Recommended)</string>
     <string name="app__newly_added">New</string>
     <string name="added_on">Added on %s</string>
+    <string name="added_unknown">Unknown added date</string>
     <string name="app__tts__cancel_download">Cancel download</string>
     <string name="app__install_downloaded_update">Update</string>
     <string name="app_installed_media">File installed to %s</string>
     <string name="app_permission_storage">F-Droid needs the storage permission to install this to storage. Please allow it on the next screen to proceed with installation.</string>
     <string name="app_size">Size: %1$s</string>
+    <string name="app_size_unknown">Unknown file size</string>
 
     <string name="app_list__name__downloading_in_progress">Downloading %1$s</string>
     <string name="app_list__name__successfully_installed">%1$s installed</string>
@@ -344,6 +346,7 @@ This often occurs with apps installed via Google Play or other sources, if they 
         You need to enable it to view the apps it provides.
     </string>
     <string name="unknown">Unknown</string>
+    <string name="repo_unknown">Unknown repository</string>
     <string name="repo_confirm_delete_title">Delete Repository?</string>
     <string name="repo_confirm_delete_body">Deleting a repository means
         apps from it will no longer be available.\n\nNote: All
