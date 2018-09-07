@@ -165,7 +165,6 @@ public class AppDetailsRecyclerViewAdapter
             installedApk.compatible = true;
             installedApk.sig = app.installedSig;
             installedApk.maxSdkVersion = Build.VERSION.SDK_INT;
-            app.installedApk = installedApk;
             apks.add(installedApk);
         }
     }
