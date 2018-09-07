@@ -289,4 +289,7 @@
     <string name="antidisabledalgorithmlist">Ši programa turi silpnai apsaugotą parašą</string>
     <string name="force_touch_apps">Įtraukti programas liečiamam ekranui</string>
     <string name="local_repo">Vietinė saugykla</string>
+    <string name="repo_official_mirrors">Oficialūs veidrodžiai</string>
+    <string name="unknown">Nežinomas</string>
+    <string name="repo_added">Išsaugota paketo saugykla %1$s.</string>
     </resources>
