@@ -123,6 +123,7 @@ public class AppDetailsRecyclerViewAdapter
         versions = new ArrayList<>();
         compatibleVersionsDifferentSig = new ArrayList<>();
         final List<Apk> apks = ApkProvider.Helper.findByPackageName(context, this.app.packageName);
+        ensureInstalledApkExists(apks);
         boolean showIncompatibleVersions = Preferences.get().showIncompatibleVersions();
         for (final Apk apk : apks) {
             boolean allowByCompatibility = apk.compatible || showIncompatibleVersions;
@@ -156,6 +157,17 @@ public class AppDetailsRecyclerViewAdapter
         }
 
         notifyDataSetChanged();
+    }
+
+    private void ensureInstalledApkExists(final List<Apk> apks) {
+        Apk installedApk = app.getInstalledApk(this.context);
+        if (installedApk != null && installedApk.added == null && installedApk.sig == null) {
+            installedApk.compatible = true;
+            installedApk.sig = app.installedSig;
+            installedApk.maxSdkVersion = Build.VERSION.SDK_INT;
+            app.installedApk = installedApk;
+            apks.add(installedApk);
+        }
     }
 
     void setShowVersions(boolean showVersions) {
