@@ -92,7 +92,8 @@ public class AppDetailsRecyclerViewAdapter
     private static final int VIEWTYPE_LINKS = 3;
     private static final int VIEWTYPE_PERMISSIONS = 4;
     private static final int VIEWTYPE_VERSIONS = 5;
-    private static final int VIEWTYPE_VERSION = 6;
+    private static final int VIEWTYPE_NO_VERSIONS = 6;
+    private static final int VIEWTYPE_VERSION = 7;
 
     private final Context context;
     @NonNull
@@ -151,9 +152,13 @@ public class AppDetailsRecyclerViewAdapter
         addItem(VIEWTYPE_DONATE);
         addItem(VIEWTYPE_LINKS);
         addItem(VIEWTYPE_PERMISSIONS);
-        addItem(VIEWTYPE_VERSIONS);
-        if (showVersions) {
-            setShowVersions(true);
+        if (versions.size() > 0) {
+            addItem(VIEWTYPE_VERSIONS);
+            if (showVersions) {
+                setShowVersions(true);
+            }
+        } else {
+            addItem(VIEWTYPE_NO_VERSIONS);
         }
 
         notifyDataSetChanged();
@@ -301,11 +306,10 @@ public class AppDetailsRecyclerViewAdapter
                 return new PermissionsViewHolder(permissions);
             case VIEWTYPE_VERSIONS:
                 View versionsView = inflater.inflate(R.layout.app_details2_links, parent, false);
-                if (versions.size() == 0) {
-                    return new NoVersionsViewHolder(versionsView);
-                } else {
-                    return new VersionsViewHolder(versionsView);
-                }
+                return new VersionsViewHolder(versionsView);
+            case VIEWTYPE_NO_VERSIONS:
+                View noVersionsView = inflater.inflate(R.layout.app_details2_links, parent, false);
+                return new NoVersionsViewHolder(noVersionsView);
             case VIEWTYPE_VERSION:
                 View version = inflater.inflate(R.layout.app_details2_version_item, parent, false);
                 return new VersionViewHolder(version);
@@ -329,6 +333,7 @@ public class AppDetailsRecyclerViewAdapter
             case VIEWTYPE_LINKS:
             case VIEWTYPE_PERMISSIONS:
             case VIEWTYPE_VERSIONS:
+            case VIEWTYPE_NO_VERSIONS:
                 ((AppDetailsViewHolder) holder).bindModel();
                 break;
 
