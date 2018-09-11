@@ -1095,18 +1095,9 @@ public class AppDetailsRecyclerViewAdapter
             } else {
                 repository.setVisibility(View.INVISIBLE);
             }
-            if (apk.size > 0) {
-                size.setVisibility(View.VISIBLE);
-                size.setText(context.getString(R.string.app_size, Utils.getFriendlySize(apk.size)));
-            } else {
-                size.setVisibility(View.INVISIBLE);
-            }
-            if (apk.maxSdkVersion > -1) {
-                api.setVisibility(View.VISIBLE);
-                api.setText(getApiText(apk));
-            } else {
-                api.setVisibility(View.INVISIBLE);
-            }
+            size.setText(context.getString(R.string.app_size, Utils.getFriendlySize(apk.size)));
+            api.setText(getApiText(apk));
+
 
             // Figuring out whether to show Install/Upgrade button or Downgrade button
             buttonDowngrade.setVisibility(View.GONE);
