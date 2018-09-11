@@ -169,7 +169,7 @@ public class AppDetailsRecyclerViewAdapter
         if (installedApk != null && installedApk.added == null && installedApk.sig == null) {
             installedApk.compatible = true;
             installedApk.sig = app.installedSig;
-            installedApk.maxSdkVersion = Build.VERSION.SDK_INT;
+            installedApk.maxSdkVersion = -1;
             apks.add(installedApk);
         }
     }
@@ -1077,17 +1077,32 @@ public class AppDetailsRecyclerViewAdapter
             // Added date
             if (apk.added != null) {
                 java.text.DateFormat df = DateFormat.getDateFormat(context);
+                added.setVisibility(View.VISIBLE);
                 added.setText(context.getString(R.string.added_on, df.format(apk.added)));
             } else {
-                added.setText(context.getString(R.string.added_unknown));
+                added.setVisibility(View.INVISIBLE);
             }
 
             // Repository name, APK size and required Android version
             Repo repo = RepoProvider.Helper.findById(context, apk.repoId);
-            repository.setText(repo != null ? repo.getName() : context.getString(R.string.repo_unknown));
-            size.setText(apk.size > 0 ? context.getString(R.string.app_size, Utils.getFriendlySize(apk.size)) :
-                    context.getString(R.string.app_size_unknown));
-            api.setText(getApiText(apk));
+            if (repo != null) {
+                repository.setVisibility(View.VISIBLE);
+                repository.setText(repo.getName());
+            } else {
+                repository.setVisibility(View.INVISIBLE);
+            }
+            if (apk.size > 0) {
+                size.setVisibility(View.VISIBLE);
+                size.setText(context.getString(R.string.app_size, Utils.getFriendlySize(apk.size)));
+            } else {
+                size.setVisibility(View.INVISIBLE);
+            }
+            if (apk.maxSdkVersion > -1) {
+                api.setVisibility(View.VISIBLE);
+                api.setText(getApiText(apk));
+            } else {
+                api.setVisibility(View.INVISIBLE);
+            }
 
             // Figuring out whether to show Install/Upgrade button or Downgrade button
             buttonDowngrade.setVisibility(View.GONE);
