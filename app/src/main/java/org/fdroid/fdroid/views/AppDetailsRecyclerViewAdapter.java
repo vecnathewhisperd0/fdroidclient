@@ -1058,6 +1058,8 @@ public class AppDetailsRecyclerViewAdapter
                     TextUtils.equals(apk.sig, app.getMostAppropriateSignature());
             boolean isApkDownloading = callbacks.isAppDownloading() && downloadedApk != null &&
                     downloadedApk.compareTo(apk) == 0 && TextUtils.equals(apk.apkName, downloadedApk.apkName);
+            boolean isApkInstalledDummy = apk.versionCode == app.installedVersionCode &&
+                    apk.compatible && apk.size == 0 && apk.maxSdkVersion == -1;
 
             // Version name and statuses
             version.setText(apk.versionName);
@@ -1143,13 +1145,21 @@ public class AppDetailsRecyclerViewAdapter
             // Expand the view if it was previously expanded or when downloading
             expand(versionsExpandTracker.get(apk.apkName) || isApkDownloading);
 
-            // Toggle expanded view when clicking the whole version item
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    toggleExpanded();
-                }
-            });
+            // Toggle expanded view when clicking the whole version item,
+            // unless it's an installed app version dummy item - it doesn't
+            // contain any meaningful info, so there is no reason to expand it.
+            if (!isApkInstalledDummy) {
+                expandArrow.setAlpha(1f);
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        toggleExpanded();
+                    }
+                });
+            } else {
+                expandArrow.setAlpha(0.3f);
+                itemView.setOnClickListener(null);
+            }
         }
 
         private String getApiText(final Apk apk) {
