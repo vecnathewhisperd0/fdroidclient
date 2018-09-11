@@ -166,6 +166,8 @@ public class AppDetailsRecyclerViewAdapter
 
     private void ensureInstalledApkExists(final List<Apk> apks) {
         Apk installedApk = app.getInstalledApk(this.context);
+        // These conditions should be enough to determine if the installedApk
+        // is a generated dummy or a proper APK containing data from a repository.
         if (installedApk != null && installedApk.added == null && installedApk.sig == null) {
             installedApk.compatible = true;
             installedApk.sig = app.installedSig;
