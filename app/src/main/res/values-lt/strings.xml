@@ -153,8 +153,8 @@
     <string name="appcompatibility">Programos palaikymas</string>
     <string name="force_touch_apps_on">Rodyti programas, kurioms reikia liečiamo ekrano nepriklausomai nuo įrangos suderinamumo</string>
 
-    <string name="adding_apks_format">"Pridedama %s  saugyklai…"</string>
-    <string name="linking_apks">"Susiejami APKs  su saugykla…"</string>
+    <string name="adding_apks_format">Pridedama %s  saugyklai…</string>
+    <string name="linking_apks">Susiejami APKs  su saugykla…</string>
     <string name="copying_icons">Kopijuojamos programos ikonos į saugyklą…</string>
     <string name="icon">Ikona</string>
     <string name="useTor">Naudoti Tor</string>
