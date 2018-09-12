@@ -556,7 +556,7 @@
     <string name="swap_toast_hotspot_enabled">Hotspot Wifi ativado</string>
     <string name="swap_toast_could_not_enable_hotspot">Hotspot Wifi não ativado!</string>
 
-    <string name="send_history_csv">% s instale o histórico como arquivo CSV</string>
+    <string name="send_history_csv">%s instale o histórico como arquivo CSV</string>
     <string name="send_version_and_uuid_summary">Inclua a versão deste app e uma identificação aleatória e original ao transferir, entrando em efeito apos a reinicialização seguinte do app.</string>
     <string name="allow_push_requests_summary">Os metadados do repo podem incluir solicitações push para instalar ou desinstalar apps</string>
     <string name="send_installed_apps">Compartilhar apps instalados</string>
