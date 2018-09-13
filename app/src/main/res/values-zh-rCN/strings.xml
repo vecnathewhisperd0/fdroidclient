@@ -88,9 +88,9 @@
     <string name="repo_not_yet_updated">该软件源尚未使用。 你需要启用它才能查看该软件源提供的应用程序。</string>
     <string name="unknown">未知</string>
     <string name="repo_confirm_delete_title">删除软件源？</string>
-    <string name="repo_confirm_delete_body">删除软件源意味着来自该软件源的软件将不会出现在 F-Droid 上。 
-\n
-\n注意： 之前安装的所有应用会保留在您的设备上。</string>
+    <string name="repo_confirm_delete_body">删除软件源意味着来自该软件源的软件将不再提供。 
+\n 
+\n注意：之前安装的所有应用会保留在您的设备上。</string>
     <string name="repo_disabled_notification">已禁用 %1$s。
 \n
 \n需重新启用该资源库才能安装其中的应用。</string>
@@ -499,8 +499,11 @@
     <string name="send_installed_apps">分享已安装的应用程序</string>
     <string name="share_repository">分享软件源</string>
     <string name="swap_toast_invalid_url">无效的交换 URL：%1$s</string>
-    <string name="about_forum">论坛</string>
+    <string name="about_forum">支持论坛</string>
     <string name="app_size">大小：%1$s</string>
 
     <string name="menu_downgrade">降级</string>
+    <string name="app_suggested">建议</string>
+    <string name="send_installed_apps_csv">通过 F-Droid 安装的应用程序列表，以 CSV 格式文件存储</string>
+    <string name="menu_open">打开</string>
     </resources>
