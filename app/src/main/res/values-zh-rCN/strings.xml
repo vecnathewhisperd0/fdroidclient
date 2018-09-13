@@ -94,7 +94,7 @@
     <string name="repo_disabled_notification">已禁用 %1$s。
 \n
 \n需重新启用该资源库才能安装其中的应用。</string>
-    <string name="minsdk_or_later">%s 及更新</string>
+    <string name="minsdk_or_later">%s 及以上</string>
     <string name="up_to_maxsdk">最大 %s</string>
     <string name="minsdk_up_to_maxsdk">%1$s 到 %2$s</string>
     <string name="not_on_same_wifi">您的设备与刚添加的本地软件源不在同一个 Wi-Fi 网络下！请加入此网络：%s</string>
@@ -506,4 +506,5 @@
     <string name="app_suggested">建议</string>
     <string name="send_installed_apps_csv">通过 F-Droid 安装的应用程序列表，以 CSV 格式文件存储</string>
     <string name="menu_open">打开</string>
+    <string name="allow_push_requests_summary">软件源的元数据可以含有安装或卸载应用的推送请求</string>
     </resources>
