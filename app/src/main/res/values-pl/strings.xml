@@ -467,7 +467,7 @@
 
     <string name="status_inserting_x_apps">Zapisywanie szczegółów aplikacji (%1$d/%2$d) z %3$s</string>
     <string name="app_installed_media">Plik zainstalowany do %s</string>
-    <string name="app_permission_storage">F-Droid potrzebuje uprawnienia do pamięci, aby tam to zainstalować. Udziel go na następnym ekranie, aby kontynuować instalację.</string>
+    <string name="app_permission_storage">F-Droid potrzebuje pozwolenia na przechowywanie, aby zainstalować to w pamięci masowej. Proszę pozwolić na następnym ekranie, aby kontynuować instalację.</string>
 
     <string name="app_details__incompatible_mismatched_signature">Inna sygnatura niż zainstalowanej wersji</string>
     <string name="app_details__no_versions__show_incompat_versions">Aby pomimo tego wyświetlić niekompatybilne wersje, włącz ustawienie „%1$s” w opcjach.</string>
