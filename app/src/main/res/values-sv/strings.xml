@@ -307,7 +307,7 @@
     <string name="update_auto_install_summary">Ladda ner och installera uppdateringsappar i bakgrunden</string>
     <string name="warning_no_internet">Kan inte att uppdatera, är du ansluten till internet?</string>
     <string name="versions">Versioner</string>
-    <string name="app_details_donate_prompt_unknown_author">Köp en kopp kaffe till utvecklarna av %1$s!</string>
+    <string name="app_details_donate_prompt_unknown_author">Köp en kopp kaffe till %1$s-utvecklarna!</string>
     <string name="app_details_donate_prompt">%1$s är skapad av %2$s. Köp en kaffe till dem!</string>
 
     <string name="repositories_summary">Lägg till ytterligare källor till appar</string>
