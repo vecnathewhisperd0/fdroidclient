@@ -516,7 +516,7 @@
     <string name="install_history_summary">Visa privat logg av samtliga installationer och avinstallationer</string>
     <string name="send_version_and_uuid">Sänd versionnummer och UUID till servrarna</string>
     <string name="send_version_and_uuid_summary">Inkludera appens versionnummer samt en slumpvald, unik ID vid nedladdning. Börjar gälla först efter omstart.</string>
-    <string name="share_repository">Dela ut filförråd</string>
+    <string name="share_repository">Dela förråd</string>
     <string name="send_install_history">Skicka installationshistorik</string>
     <string name="send_history_csv">%s installera historiken som en CSV-fil</string>
     <string name="allow_push_requests">Tillåt filförråd att installera/avinstallera appar</string>
