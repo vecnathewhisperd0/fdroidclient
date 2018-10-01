@@ -462,11 +462,11 @@
     <string name="preventScreenshots_title">Torgar les captures de pantalla</string>
     <string name="preventScreenshots_summary">Torga la toma d\'imáxenes de pantalla y anubre\'l conteníu de la pantalla d\'aplicaciones recién</string>
 
-    <string name="panic_app_setting_title">App de «Botón del espantu»</string>
-    <string name="panic_app_unknown_app">una app desconocida</string>
-    <string name="panic_app_setting_summary">Nun se definió nenguna app</string>
+    <string name="panic_app_setting_title">Aplicación botón de medrana</string>
+    <string name="panic_app_unknown_app">una aplicación desconocida</string>
+    <string name="panic_app_setting_summary">Nun esbillasti denguna aplicación</string>
     <string name="panic_app_setting_none">Nenguna</string>
-    <string name="panic_app_dialog_title">Confirmar «App del espantu»</string>
+    <string name="panic_app_dialog_title">Confirmar aplicación de medrana</string>
     <string name="panic_app_dialog_message">¿Confirmes que quies permitir a %1$s llanzar les aiciones destructives de «Botón del espantu»?</string>
     <string name="allow">Permitir</string>
 
@@ -482,4 +482,20 @@
     <string name="repo_exists_enable">%1$s yá ta configuráu, confirma que quies volver a activalu.</string>
     <string name="repo_exists_and_enabled">%1$s yá ta configuráu y activáu.</string>
     <string name="repo_delete_to_overwrite">Primero desanicia %1$s p\'agregar esti con una clave en conflictu.</string>
+    <string name="prompt_to_send_crash_reports">Entrugar si mandar informes de fallu</string>
+    <string name="prompt_to_send_crash_reports_summary">Collechar datos de los fallos y entrugar pa unvialos al desendolcador</string>
+    <string name="hide_all_notifications">Tapecer toles notificaciones</string>
+    <string name="hide_all_notifications_summary">Torgar qu\'apaezan toles aiciones na barra d\'estáu y nel panel de notificaciones.</string>
+    <string name="send_install_history">Unviar l\'historial d\'instalaciones</string>
+    <string name="send_history_csv">%s historial d\'instalaciones como ficheru CSV</string>
+    <string name="install_history">Historial d\'instalación</string>
+    <string name="install_history_summary">Ver el rexistru priváu de toles instalaciones y desinstalaciones</string>
+    <string name="send_version_and_uuid">Unviar versión y UUID a los sirvidores</string>
+    <string name="send_version_and_uuid_summary">Incluir la versión d\'esta aplicación, y un ID al debalu y únicu al descargar; tendrá efectu nel siguiente reaniciu de l\'aplicación.</string>
+    <string name="allow_push_requests">Permitir que los repositorios instalen/desinstalen aplicaciones</string>
+    <string name="over_wifi">Usando Wi-Fi</string>
+    <string name="over_data">Usando la rede de datos</string>
+    <string name="over_network_always_summary">Usar siempre esta conexón cuando tea disponible</string>
+    <string name="over_network_on_demand_summary">Usar sólo esta conexón cuando pulsie descargar</string>
+    <string name="over_network_never_summary">Nunca descargar nada usando esta conexón</string>
     </resources>
