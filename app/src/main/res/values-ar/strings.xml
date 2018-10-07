@@ -568,4 +568,7 @@
 
     <string name="send_installed_apps">شارك التطبيقات المثبّتة</string>
     <string name="menu_open">إفتح</string>
+    <string name="app_suggested">إقتراحات</string>
+    <string name="send_installed_apps_csv">تطبيقات مثبتة بواسطة F-Droid ك ملف CSV</string>
+    <string name="menu_downgrade">تراجع عن الترقية</string>
     </resources>
