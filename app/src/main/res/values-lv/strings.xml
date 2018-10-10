@@ -45,7 +45,7 @@
     <string name="menu_install">Instalēt</string>
     <string name="menu_uninstall">Izdzēst</string>
     <string name="menu_ignore_all">Ignorēt visus atjauninājumus</string>
-    <string name="menu_ignore_this">Ignorēt atjauninājumu</string>
+    <string name="menu_ignore_this">Ignorēt šo atjauninājumu</string>
     <string name="menu_website">Mājaslapa</string>
     <string name="menu_source">Pirmkods</string>
     <string name="menu_upgrade">Atjaunot</string>
@@ -59,9 +59,9 @@
 
     <string name="menu_settings">Iestatījumi</string>
     <string name="menu_email">Autora Epasts</string>
-    <string name="menu_issues">Issues</string>
-    <string name="menu_bitcoin">Bitmonētas</string>
-    <string name="menu_litecoin">Laitmonētas</string>
+    <string name="menu_issues">Problēmas</string>
+    <string name="menu_bitcoin">Bitcoin</string>
+    <string name="menu_litecoin">Litecoin</string>
     <string name="menu_flattr">Flattr</string>
 
 
@@ -192,4 +192,17 @@
     <string name="app_list__dismiss_vulnerable_app">Ievainojamība ignorēta</string>
     <string name="app_list__dismiss_downloading_app">Lejupielāde atcelta</string>
 
+    <string name="invalid_url">Šīs nav derīgs URL.</string>
+    <string name="repo_provider">Repozitorija: %s</string>
+
+    <string name="repositories_summary">Pievienot citus avotus priekš aplikācijām</string>
+    <string name="menu_open">Atvērt</string>
+    <string name="menu_changelog">Jaunumi</string>
+    <string name="menu_video">Video</string>
+    <string name="menu_license">Licence: %s</string>
+    <string name="menu_downgrade">Pazemināt</string>
+    <string name="menu_liberapay">Liberapay</string>
+
+    <string name="latest__empty_state__no_recent_apps">Netika atrasta neviena nesen izmantota aplikācija</string>
+    <string name="latest__empty_state__never_updated">Tiklīdz jūsu aplikāciju saraksts tiks atjaunināts, jaunākajām aplikācijām vajadzētu šeit parādīties</string>
     </resources>
