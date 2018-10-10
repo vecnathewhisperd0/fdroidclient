@@ -259,15 +259,18 @@ public class FDroidApp extends Application {
                 lastWorkingMirror = repo2.address;
             }
             if (numTries <= 0) {
-                if (timeout == 10000) {
-                    timeout = 30000;
-                    numTries = Integer.MAX_VALUE;
-                } else if (timeout == 30000) {
-                    timeout = 60000;
-                    numTries = Integer.MAX_VALUE;
-                } else {
-                    Utils.debugLog(TAG, "Mirrors: Giving up");
-                    throw new IOException("Ran out of mirrors");
+                switch (timeout) {
+                    case 10000:
+                        timeout = 30000;
+                        numTries = Integer.MAX_VALUE;
+                        break;
+                    case 30000:
+                        timeout = 60000;
+                        numTries = Integer.MAX_VALUE;
+                        break;
+                    default:
+                        Utils.debugLog(TAG, "Mirrors: Giving up");
+                        throw new IOException("Ran out of mirrors");
                 }
             }
             if (numTries == Integer.MAX_VALUE) {

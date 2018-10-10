@@ -65,11 +65,11 @@ public class LinearLayoutManagerSnapHelper extends LinearSnapHelper {
                 int currentSmallestDistance = Integer.MAX_VALUE;
                 View currentSmallestDistanceView = null;
 
-                int snappedViewIndex = ((LinearLayoutManager) layoutManager).getPosition(snappedView);
+                int snappedViewIndex = layoutManager.getPosition(snappedView);
                 if (snappedViewIndex != RecyclerView.NO_POSITION) {
 
-                    int snapPositionFirst = orientationHelper.getDecoratedMeasurement(((LinearLayoutManager) layoutManager).findViewByPosition(firstChild)) / 2;
-                    int snapPositionLast = orientationHelper.getTotalSpace() - orientationHelper.getDecoratedMeasurement(((LinearLayoutManager) layoutManager).findViewByPosition(lastChild)) / 2;
+                    int snapPositionFirst = orientationHelper.getDecoratedMeasurement(layoutManager.findViewByPosition(firstChild)) / 2;
+                    int snapPositionLast = orientationHelper.getTotalSpace() - orientationHelper.getDecoratedMeasurement(layoutManager.findViewByPosition(lastChild)) / 2;
 
                     // If first item not on screen, ignore views 0..snappedViewIndex-1
                     if (firstChild != 0) {
@@ -82,7 +82,7 @@ public class LinearLayoutManagerSnapHelper extends LinearSnapHelper {
                     }
 
                     for (int i = firstChild; i <= lastChild; i++) {
-                        View view = ((LinearLayoutManager) layoutManager).findViewByPosition(i);
+                        View view = layoutManager.findViewByPosition(i);
 
                         // Start by interpolating a snap position for (the center of) this view.
                         //

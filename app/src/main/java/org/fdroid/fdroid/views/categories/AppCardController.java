@@ -78,8 +78,8 @@ public class AppCardController extends RecyclerView.ViewHolder
         icon = (ImageView) findViewAndEnsureNonNull(itemView, R.id.icon);
         summary = (TextView) findViewAndEnsureNonNull(itemView, R.id.summary);
 
-        featuredImage = (FeatureImage) itemView.findViewById(R.id.featured_image);
-        newTag = (TextView) itemView.findViewById(R.id.new_tag);
+        featuredImage = itemView.findViewById(R.id.featured_image);
+        newTag = itemView.findViewById(R.id.new_tag);
 
         itemView.setOnClickListener(this);
     }

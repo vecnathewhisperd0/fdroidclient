@@ -99,7 +99,7 @@ public class RepoDetailsActivity extends AppCompatActivity {
 
         setContentView(R.layout.repodetails);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -115,7 +115,7 @@ public class RepoDetailsActivity extends AppCompatActivity {
         };
         repo = RepoProvider.Helper.findById(this, repoId, projection);
 
-        TextView inputUrl = (TextView) findViewById(R.id.input_repo_url);
+        TextView inputUrl = findViewById(R.id.input_repo_url);
         inputUrl.setText(repo.address);
 
         if (repo.address.startsWith("content://")) {
@@ -273,8 +273,8 @@ public class RepoDetailsActivity extends AppCompatActivity {
 
     private void setupDescription(View parent, Repo repo) {
 
-        TextView descriptionLabel = (TextView) parent.findViewById(R.id.label_description);
-        TextView description = (TextView) parent.findViewById(R.id.text_description);
+        TextView descriptionLabel = parent.findViewById(R.id.label_description);
+        TextView description = parent.findViewById(R.id.text_description);
 
         if (TextUtils.isEmpty(repo.description)) {
             descriptionLabel.setVisibility(View.GONE);
@@ -288,8 +288,8 @@ public class RepoDetailsActivity extends AppCompatActivity {
     }
 
     private void setupRepoFingerprint(View parent, Repo repo) {
-        TextView repoFingerprintView = (TextView) parent.findViewById(R.id.text_repo_fingerprint);
-        TextView repoFingerprintDescView = (TextView) parent.findViewById(R.id.text_repo_fingerprint_description);
+        TextView repoFingerprintView = parent.findViewById(R.id.text_repo_fingerprint);
+        TextView repoFingerprintDescView = parent.findViewById(R.id.text_repo_fingerprint_description);
 
         String repoFingerprint;
 
@@ -310,9 +310,9 @@ public class RepoDetailsActivity extends AppCompatActivity {
 
     private void setupCredentials(View parent, Repo repo) {
 
-        TextView usernameLabel = (TextView) parent.findViewById(R.id.label_username);
-        TextView username = (TextView) parent.findViewById(R.id.text_username);
-        Button changePassword = (Button) parent.findViewById(R.id.button_edit_credentials);
+        TextView usernameLabel = parent.findViewById(R.id.label_username);
+        TextView username = parent.findViewById(R.id.text_username);
+        Button changePassword = parent.findViewById(R.id.button_edit_credentials);
 
         if (TextUtils.isEmpty(repo.username)) {
             usernameLabel.setVisibility(View.GONE);
@@ -346,14 +346,14 @@ public class RepoDetailsActivity extends AppCompatActivity {
         setMultipleViewVisibility(repoView, SHOW_IF_EXISTS, View.VISIBLE);
         setMultipleViewVisibility(repoView, HIDE_IF_EXISTS, View.GONE);
 
-        TextView name = (TextView) repoView.findViewById(R.id.text_repo_name);
-        TextView numApps = (TextView) repoView.findViewById(R.id.text_num_apps);
-        TextView lastUpdated = (TextView) repoView.findViewById(R.id.text_last_update);
+        TextView name = repoView.findViewById(R.id.text_repo_name);
+        TextView numApps = repoView.findViewById(R.id.text_num_apps);
+        TextView lastUpdated = repoView.findViewById(R.id.text_last_update);
 
         if (repo.mirrors != null) {
-            TextView officialMirrorsLabel = (TextView) repoView.findViewById(R.id.label_official_mirrors);
+            TextView officialMirrorsLabel = repoView.findViewById(R.id.label_official_mirrors);
             officialMirrorsLabel.setVisibility(View.VISIBLE);
-            TextView officialMirrorsText = (TextView) repoView.findViewById(R.id.text_official_mirrors);
+            TextView officialMirrorsText = repoView.findViewById(R.id.text_official_mirrors);
             officialMirrorsText.setVisibility(View.VISIBLE);
             StringBuilder builder = new StringBuilder();
             for (String url : repo.mirrors) {
@@ -364,9 +364,9 @@ public class RepoDetailsActivity extends AppCompatActivity {
             officialMirrorsText.setText(builder.toString());
         }
         if (repo.userMirrors != null) {
-            TextView userMirrorsLabel = (TextView) repoView.findViewById(R.id.label_user_mirrors);
+            TextView userMirrorsLabel = repoView.findViewById(R.id.label_user_mirrors);
             userMirrorsLabel.setVisibility(View.VISIBLE);
-            TextView userMirrorsText = (TextView) repoView.findViewById(R.id.text_user_mirrors);
+            TextView userMirrorsText = repoView.findViewById(R.id.text_user_mirrors);
             userMirrorsText.setVisibility(View.VISIBLE);
             StringBuilder builder = new StringBuilder();
             for (String url : repo.userMirrors) {
@@ -422,8 +422,8 @@ public class RepoDetailsActivity extends AppCompatActivity {
 
         final View view = getLayoutInflater().inflate(R.layout.login, null);
         final AlertDialog credentialsDialog = new AlertDialog.Builder(this).setView(view).create();
-        final EditText nameInput = (EditText) view.findViewById(R.id.edit_name);
-        final EditText passwordInput = (EditText) view.findViewById(R.id.edit_password);
+        final EditText nameInput = view.findViewById(R.id.edit_name);
+        final EditText passwordInput = view.findViewById(R.id.edit_password);
 
         nameInput.setText(repo.username);
         passwordInput.requestFocus();

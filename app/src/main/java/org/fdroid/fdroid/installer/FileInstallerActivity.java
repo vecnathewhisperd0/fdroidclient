@@ -54,22 +54,25 @@ public class FileInstallerActivity extends FragmentActivity {
         downloadUri = intent.getParcelableExtra(Installer.EXTRA_DOWNLOAD_URI);
         apk = intent.getParcelableExtra(Installer.EXTRA_APK);
         installer = new FileInstaller(this, apk);
-        if (ACTION_INSTALL_FILE.equals(action)) {
-            if (hasStoragePermission()) {
-                installPackage(localApkUri, downloadUri, apk);
-            } else {
-                requestPermission();
-                act = 1;
-            }
-        } else if (ACTION_UNINSTALL_FILE.equals(action)) {
-            if (hasStoragePermission()) {
-                uninstallPackage(apk);
-            } else {
-                requestPermission();
-                act = 2;
-            }
-        } else {
-            throw new IllegalStateException("Intent action not specified!");
+        switch (action) {
+            case ACTION_INSTALL_FILE:
+                if (hasStoragePermission()) {
+                    installPackage(localApkUri, downloadUri, apk);
+                } else {
+                    requestPermission();
+                    act = 1;
+                }
+                break;
+            case ACTION_UNINSTALL_FILE:
+                if (hasStoragePermission()) {
+                    uninstallPackage(apk);
+                } else {
+                    requestPermission();
+                    act = 2;
+                }
+                break;
+            default:
+                throw new IllegalStateException("Intent action not specified!");
         }
 
     }

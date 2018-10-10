@@ -71,16 +71,16 @@ public class InstallConfirmActivity extends FragmentActivity implements OnCancel
 
     private void startInstallConfirm() {
         View appSnippet = findViewById(R.id.app_snippet);
-        TextView appName = (TextView) appSnippet.findViewById(R.id.app_name);
-        ImageView appIcon = (ImageView) appSnippet.findViewById(R.id.app_icon);
-        TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
+        TextView appName = appSnippet.findViewById(R.id.app_name);
+        ImageView appIcon = appSnippet.findViewById(R.id.app_icon);
+        TabHost tabHost = findViewById(android.R.id.tabhost);
 
         appName.setText(app.name);
         ImageLoader.getInstance().displayImage(app.iconUrl, appIcon,
                 Utils.getRepoAppDisplayImageOptions());
 
         tabHost.setup();
-        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        ViewPager viewPager = findViewById(R.id.pager);
         TabsAdapter adapter = new TabsAdapter(this, tabHost, viewPager);
         adapter.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
@@ -122,9 +122,9 @@ public class InstallConfirmActivity extends FragmentActivity implements OnCancel
                     Context.LAYOUT_INFLATER_SERVICE);
             View root = inflater.inflate(R.layout.permissions_list, null);
             if (scrollView == null) {
-                scrollView = (CaffeinatedScrollView) root.findViewById(R.id.scrollview);
+                scrollView = root.findViewById(R.id.scrollview);
             }
-            final ViewGroup permList = (ViewGroup) root.findViewById(R.id.permission_list);
+            final ViewGroup permList = root.findViewById(R.id.permission_list);
             permList.addView(perms.getPermissionsView(AppSecurityPermissions.WHICH_ALL));
             adapter.addTab(tabHost.newTabSpec(TAB_ID_ALL).setIndicator(
                     getText(R.string.allPerms)), root);
@@ -150,8 +150,8 @@ public class InstallConfirmActivity extends FragmentActivity implements OnCancel
             ((TextView) findViewById(R.id.install_confirm)).setText(msg);
         }
         installConfirm.setVisibility(View.VISIBLE);
-        okButton = (Button) findViewById(R.id.ok_button);
-        cancelButton = (Button) findViewById(R.id.cancel_button);
+        okButton = findViewById(R.id.ok_button);
+        cancelButton = findViewById(R.id.cancel_button);
         okButton.setOnClickListener(this);
         cancelButton.setOnClickListener(this);
         if (scrollView == null) {

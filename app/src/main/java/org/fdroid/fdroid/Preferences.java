@@ -238,20 +238,28 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
         }
         int updateInterval = 3;
         String value = preferences.getString(OLD_PREF_UPDATE_INTERVAL, String.valueOf(24));
-        if ("1".equals(value)) { // 1 hour
-            updateInterval = 6;
-        } else if ("4".equals(value)) { // 4 hours
-            updateInterval = 5;
-        } else if ("12".equals(value)) { // 12 hours
-            updateInterval = 4;
-        } else if ("24".equals(value)) { // 1 day
-            updateInterval = 3;
-        } else if ("168".equals(value)) { // 2 weeks
-            updateInterval = 2;
-        } else if ("336".equals(value)) { // 1 week
-            updateInterval = 1;
-        } else if ("0".equals(value)) { // never
-            updateInterval = 0;
+        switch (value) {
+            case "1":  // 1 hour
+                updateInterval = 6;
+                break;
+            case "4":  // 4 hours
+                updateInterval = 5;
+                break;
+            case "12":  // 12 hours
+                updateInterval = 4;
+                break;
+            case "24":  // 1 day
+                updateInterval = 3;
+                break;
+            case "168":  // 2 weeks
+                updateInterval = 2;
+                break;
+            case "336":  // 1 week
+                updateInterval = 1;
+                break;
+            case "0":  // never
+                updateInterval = 0;
+                break;
         }
         editor
                 .putInt(PREF_UPDATE_INTERVAL, updateInterval)

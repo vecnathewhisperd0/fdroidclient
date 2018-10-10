@@ -30,7 +30,7 @@ import java.util.List;
 @SuppressWarnings("MemberName")
 public class UiWatchers {
     private static final String LOG_TAG = UiWatchers.class.getSimpleName();
-    private final List<String> mErrors = new ArrayList<String>();
+    private final List<String> mErrors = new ArrayList<>();
 
     /**
      * We can use the UiDevice registerWatcher to register a small script to be executed when the

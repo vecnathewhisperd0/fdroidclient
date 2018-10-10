@@ -106,7 +106,7 @@ public abstract class AppListItemController extends RecyclerView.ViewHolder {
         super(itemView);
         this.activity = activity;
 
-        installButton = (ImageView) itemView.findViewById(R.id.install);
+        installButton = itemView.findViewById(R.id.install);
         if (installButton != null) {
             installButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -135,14 +135,14 @@ public abstract class AppListItemController extends RecyclerView.ViewHolder {
             }
         }
 
-        icon = (ImageView) itemView.findViewById(R.id.icon);
-        name = (TextView) itemView.findViewById(R.id.app_name);
-        status = (TextView) itemView.findViewById(R.id.status);
-        secondaryStatus = (TextView) itemView.findViewById(R.id.secondary_status);
-        progressBar = (ProgressBar) itemView.findViewById(R.id.progress_bar);
-        cancelButton = (ImageButton) itemView.findViewById(R.id.cancel_button);
-        actionButton = (Button) itemView.findViewById(R.id.action_button);
-        secondaryButton = (Button) itemView.findViewById(R.id.secondary_button);
+        icon = itemView.findViewById(R.id.icon);
+        name = itemView.findViewById(R.id.app_name);
+        status = itemView.findViewById(R.id.status);
+        secondaryStatus = itemView.findViewById(R.id.secondary_status);
+        progressBar = itemView.findViewById(R.id.progress_bar);
+        cancelButton = itemView.findViewById(R.id.cancel_button);
+        actionButton = itemView.findViewById(R.id.action_button);
+        secondaryButton = itemView.findViewById(R.id.secondary_button);
 
         if (actionButton != null) {
             actionButton.setEnabled(true);

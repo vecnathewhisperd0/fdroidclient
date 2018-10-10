@@ -43,16 +43,21 @@ public class WhatsNewAdapter extends RecyclerView.Adapter<AppCardController> {
     @Override
     public AppCardController onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         int layout;
-        if (viewType == R.id.whats_new_feature) {
-            layout = R.layout.app_card_featured;
-        } else if (viewType == R.id.whats_new_large_tile) {
-            layout = R.layout.app_card_large;
-        } else if (viewType == R.id.whats_new_small_tile) {
-            layout = R.layout.app_card_horizontal;
-        } else if (viewType == R.id.whats_new_regular_list) {
-            layout = R.layout.app_card_list_item;
-        } else {
-            throw new IllegalArgumentException("Unknown view type when rendering \"Whats New\": " + viewType);
+        switch (viewType) {
+            case R.id.whats_new_feature:
+                layout = R.layout.app_card_featured;
+                break;
+            case R.id.whats_new_large_tile:
+                layout = R.layout.app_card_large;
+                break;
+            case R.id.whats_new_small_tile:
+                layout = R.layout.app_card_horizontal;
+                break;
+            case R.id.whats_new_regular_list:
+                layout = R.layout.app_card_list_item;
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown view type when rendering \"Whats New\": " + viewType);
         }
 
         return new AppCardController(activity, activity.getLayoutInflater().inflate(layout, parent, false));

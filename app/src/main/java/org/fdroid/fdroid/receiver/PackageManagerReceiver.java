@@ -23,16 +23,20 @@ public class PackageManagerReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if (intent != null) {
             String action = intent.getAction();
-            if (Intent.ACTION_PACKAGE_ADDED.equals(action)) {
-                InstalledAppProviderService.insert(context, intent.getData());
-            } else if (Intent.ACTION_PACKAGE_REMOVED.equals(action)) {
-                if (TextUtils.equals(context.getPackageName(), intent.getData().getSchemeSpecificPart())) {
-                    Log.i(TAG, "Ignoring request to remove ourselves from cache.");
-                } else {
-                    InstalledAppProviderService.delete(context, intent.getData());
-                }
-            } else {
-                Log.i(TAG, "unsupported action: " + action + " " + intent);
+            switch (action) {
+                case Intent.ACTION_PACKAGE_ADDED:
+                    InstalledAppProviderService.insert(context, intent.getData());
+                    break;
+                case Intent.ACTION_PACKAGE_REMOVED:
+                    if (TextUtils.equals(context.getPackageName(), intent.getData().getSchemeSpecificPart())) {
+                        Log.i(TAG, "Ignoring request to remove ourselves from cache.");
+                    } else {
+                        InstalledAppProviderService.delete(context, intent.getData());
+                    }
+                    break;
+                default:
+                    Log.i(TAG, "unsupported action: " + action + " " + intent);
+                    break;
             }
         }
     }

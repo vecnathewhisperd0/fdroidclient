@@ -460,50 +460,54 @@ public class RepoUpdater {
         for (RepoPushRequest repoPushRequest : requestEntries) {
             String packageName = repoPushRequest.packageName;
             PackageInfo packageInfo = Utils.getPackageInfo(context, packageName);
-            if (RepoPushRequest.INSTALL.equals(repoPushRequest.request)) {
-                ContentResolver cr = context.getContentResolver();
+            switch (repoPushRequest.request) {
+                case RepoPushRequest.INSTALL:
+                    ContentResolver cr = context.getContentResolver();
 
-                // TODO: In the future, this needs to be able to specify which repository to get
-                // the package from. Better yet, we should be able to specify the hash of a package
-                // to install (especially when we move to using hashes more as identifiers than we
-                // do right now).
-                App app = AppProvider.Helper.findHighestPriorityMetadata(cr, packageName);
-                if (app == null) {
-                    Utils.debugLog(TAG, packageName + " not in local database, ignoring request to"
-                            + repoPushRequest.request);
-                    continue;
-                }
-                int versionCode;
-                if (repoPushRequest.versionCode == null) {
-                    versionCode = app.suggestedVersionCode;
-                } else {
-                    versionCode = repoPushRequest.versionCode;
-                }
-                if (packageInfo != null && versionCode == packageInfo.versionCode) {
-                    Utils.debugLog(TAG, repoPushRequest + " already installed, ignoring");
-                } else {
-                    Apk apk = ApkProvider.Helper.findApkFromAnyRepo(context, packageName, versionCode);
-                    InstallManagerService.queue(context, app, apk);
-                }
-            } else if (RepoPushRequest.UNINSTALL.equals(repoPushRequest.request)) {
-                if (packageInfo == null) {
-                    Utils.debugLog(TAG, "ignoring request, not installed: " + repoPushRequest);
-                    continue;
-                }
-                if (repoPushRequest.versionCode == null
-                        || repoPushRequest.versionCode == packageInfo.versionCode) {
-                    Apk apk = ApkProvider.Helper.findApkFromAnyRepo(context, repoPushRequest.packageName,
-                            packageInfo.versionCode);
-                    if (apk == null) {
-                        Log.i(TAG, "Push " + repoPushRequest.packageName + " request not found in any repo!");
-                    } else {
-                        InstallerService.uninstall(context, apk);
+                    // TODO: In the future, this needs to be able to specify which repository to get
+                    // the package from. Better yet, we should be able to specify the hash of a package
+                    // to install (especially when we move to using hashes more as identifiers than we
+                    // do right now).
+                    App app = AppProvider.Helper.findHighestPriorityMetadata(cr, packageName);
+                    if (app == null) {
+                        Utils.debugLog(TAG, packageName + " not in local database, ignoring request to"
+                                + repoPushRequest.request);
+                        continue;
                     }
-                } else {
-                    Utils.debugLog(TAG, "ignoring request based on versionCode:" + repoPushRequest);
-                }
-            } else {
-                Utils.debugLog(TAG, "Unknown Repo Push Request: " + repoPushRequest.request);
+                    int versionCode;
+                    if (repoPushRequest.versionCode == null) {
+                        versionCode = app.suggestedVersionCode;
+                    } else {
+                        versionCode = repoPushRequest.versionCode;
+                    }
+                    if (packageInfo != null && versionCode == packageInfo.versionCode) {
+                        Utils.debugLog(TAG, repoPushRequest + " already installed, ignoring");
+                    } else {
+                        Apk apk = ApkProvider.Helper.findApkFromAnyRepo(context, packageName, versionCode);
+                        InstallManagerService.queue(context, app, apk);
+                    }
+                    break;
+                case RepoPushRequest.UNINSTALL:
+                    if (packageInfo == null) {
+                        Utils.debugLog(TAG, "ignoring request, not installed: " + repoPushRequest);
+                        continue;
+                    }
+                    if (repoPushRequest.versionCode == null
+                            || repoPushRequest.versionCode == packageInfo.versionCode) {
+                        Apk apk = ApkProvider.Helper.findApkFromAnyRepo(context, repoPushRequest.packageName,
+                                packageInfo.versionCode);
+                        if (apk == null) {
+                            Log.i(TAG, "Push " + repoPushRequest.packageName + " request not found in any repo!");
+                        } else {
+                            InstallerService.uninstall(context, apk);
+                        }
+                    } else {
+                        Utils.debugLog(TAG, "ignoring request based on versionCode:" + repoPushRequest);
+                    }
+                    break;
+                default:
+                    Utils.debugLog(TAG, "Unknown Repo Push Request: " + repoPushRequest.request);
+                    break;
             }
         }
     }

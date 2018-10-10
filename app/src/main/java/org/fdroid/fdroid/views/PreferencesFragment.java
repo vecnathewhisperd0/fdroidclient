@@ -197,14 +197,15 @@ public class PreferencesFragment extends PreferenceFragment
     }
 
     private String getNetworkSeekBarSummary(int position) {
-        if (position == 0) {
-            return getString(R.string.over_network_never_summary);
-        } else if (position == 1) {
-            return getString(R.string.over_network_on_demand_summary);
-        } else if (position == 2) {
-            return getString(R.string.over_network_always_summary);
-        } else {
-            throw new IllegalArgumentException("Unknown seekbar position");
+        switch (position) {
+            case 0:
+                return getString(R.string.over_network_never_summary);
+            case 1:
+                return getString(R.string.over_network_on_demand_summary);
+            case 2:
+                return getString(R.string.over_network_always_summary);
+            default:
+                throw new IllegalArgumentException("Unknown seekbar position");
         }
     }
 

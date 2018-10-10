@@ -9,8 +9,8 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -27,7 +27,7 @@ public class ProvisionerTest {
     }
 
     @Test
-    public void provisionLookup() throws IOException {
+    public void provisionLookup() {
         // wired hack for getting resource dir path ...
         String resourceDir = getResourceFile(
                 "demo_credentials_user1.fdrp").getParent();
@@ -60,9 +60,9 @@ public class ProvisionerTest {
     }
 
     @Test
-    public void extractProvisionsPlaintextUnobfuscated() throws IOException {
+    public void extractProvisionsPlaintextUnobfuscated() {
         Provisioner p = new Provisioner();
-        List<File> files = Arrays.asList(getResourceFile("demo_credentials_user2.fdrp"));
+        List<File> files = Collections.singletonList(getResourceFile("demo_credentials_user2.fdrp"));
         List<Provisioner.ProvisionPlaintext> result = p.extractProvisionsPlaintext(files);
 
         Assert.assertEquals(result.size(), 1);
@@ -71,9 +71,9 @@ public class ProvisionerTest {
     }
 
     @Test
-    public void extractProvisionsPlaintextObfuscated() throws IOException {
+    public void extractProvisionsPlaintextObfuscated() {
         Provisioner p = new Provisioner();
-        List<File> files = Arrays.asList(getResourceFile("demo_credentials_user1.fdrp"));
+        List<File> files = Collections.singletonList(getResourceFile("demo_credentials_user1.fdrp"));
         List<Provisioner.ProvisionPlaintext> result = p.extractProvisionsPlaintext(files);
 
         Assert.assertEquals(result.size(), 1);

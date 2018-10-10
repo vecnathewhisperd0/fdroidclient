@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
 
         adapter = new MainViewAdapter(this);
 
-        pager = (RecyclerView) findViewById(R.id.main_view_pager);
+        pager = findViewById(R.id.main_view_pager);
         pager.setHasFixedSize(true);
         pager.setLayoutManager(new NonScrollingHorizontalLayoutManager(this));
         pager.setAdapter(adapter);
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
 
         updatesBadge = new TextBadgeItem().hide(false);
 
-        bottomNavigation = (BottomNavigationBar) findViewById(R.id.bottom_navigation);
+        bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation
                 .addItem(new BottomNavigationItem(R.drawable.ic_latest, R.string.main_menu__latest_apps));
         if (BuildConfig.FLAVOR.startsWith("full")) {

@@ -77,7 +77,7 @@ public abstract class MultiRepoUpdaterTest extends FDroidProviderTest {
                     "e8af60597c4ae2977977cf61dc715a572e241ae717cafdb4f71781943945ac52e0f50b";
 
     @Before
-    public final void setupMultiRepo() throws Exception {
+    public final void setupMultiRepo() {
         // On a fresh database install, there will be F-Droid + GP repos, including their Archive
         // repos that we are not interested in.
         RepoProvider.Helper.remove(context, 1);

@@ -392,23 +392,23 @@ public class AppDetailsRecyclerViewAdapter
 
         HeaderViewHolder(View view) {
             super(view);
-            iconView = (ImageView) view.findViewById(R.id.icon);
-            titleView = (TextView) view.findViewById(R.id.title);
-            authorView = (TextView) view.findViewById(R.id.author);
-            lastUpdateView = (TextView) view.findViewById(R.id.text_last_update);
-            whatsNewView = (TextView) view.findViewById(R.id.whats_new);
-            descriptionView = (TextView) view.findViewById(R.id.description);
-            descriptionMoreView = (TextView) view.findViewById(R.id.description_more);
-            antiFeaturesLabelView = (TextView) view.findViewById(R.id.label_anti_features);
-            antiFeaturesView = (TextView) view.findViewById(R.id.text_anti_features);
+            iconView = view.findViewById(R.id.icon);
+            titleView = view.findViewById(R.id.title);
+            authorView = view.findViewById(R.id.author);
+            lastUpdateView = view.findViewById(R.id.text_last_update);
+            whatsNewView = view.findViewById(R.id.whats_new);
+            descriptionView = view.findViewById(R.id.description);
+            descriptionMoreView = view.findViewById(R.id.description_more);
+            antiFeaturesLabelView = view.findViewById(R.id.label_anti_features);
+            antiFeaturesView = view.findViewById(R.id.text_anti_features);
             antiFeaturesWarningView = view.findViewById(R.id.anti_features_warning);
             buttonLayout = view.findViewById(R.id.button_layout);
-            buttonPrimaryView = (Button) view.findViewById(R.id.primaryButtonView);
-            buttonSecondaryView = (Button) view.findViewById(R.id.secondaryButtonView);
+            buttonPrimaryView = view.findViewById(R.id.primaryButtonView);
+            buttonSecondaryView = view.findViewById(R.id.secondaryButtonView);
             progressLayout = view.findViewById(R.id.progress_layout);
-            progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
-            progressLabel = (TextView) view.findViewById(R.id.progress_label);
-            progressPercent = (TextView) view.findViewById(R.id.progress_percent);
+            progressBar = view.findViewById(R.id.progress_bar);
+            progressLabel = view.findViewById(R.id.progress_label);
+            progressPercent = view.findViewById(R.id.progress_percent);
             progressCancel = view.findViewById(R.id.progress_cancel);
             descriptionView.setMaxLines(MAX_LINES);
             descriptionView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
@@ -705,7 +705,7 @@ public class AppDetailsRecyclerViewAdapter
 
         ScreenShotsViewHolder(View view) {
             super(view);
-            recyclerView = (RecyclerView) view.findViewById(R.id.screenshots);
+            recyclerView = view.findViewById(R.id.screenshots);
         }
 
         @Override
@@ -735,8 +735,8 @@ public class AppDetailsRecyclerViewAdapter
 
         DonateViewHolder(View view) {
             super(view);
-            donateHeading = (TextView) view.findViewById(R.id.donate_header);
-            donationOptionsLayout = (GridLayout) view.findViewById(R.id.donation_options);
+            donateHeading = view.findViewById(R.id.donate_header);
+            donationOptionsLayout = view.findViewById(R.id.donation_options);
         }
 
         @Override
@@ -794,8 +794,8 @@ public class AppDetailsRecyclerViewAdapter
 
         ExpandableLinearLayoutViewHolder(View view) {
             super(view);
-            headerView = (TextView) view.findViewById(R.id.information);
-            contentView = (LinearLayout) view.findViewById(R.id.ll_content);
+            headerView = view.findViewById(R.id.information);
+            contentView = view.findViewById(R.id.ll_content);
         }
 
         @DrawableRes
@@ -840,7 +840,7 @@ public class AppDetailsRecyclerViewAdapter
 
         NoVersionsViewHolder(View view) {
             super(view);
-            headerView = (TextView) view.findViewById(R.id.information);
+            headerView = view.findViewById(R.id.information);
             TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(headerView, R.drawable.ic_access_time_24dp_grey600, 0, 0, 0);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -1029,21 +1029,21 @@ public class AppDetailsRecyclerViewAdapter
 
         VersionViewHolder(View view) {
             super(view);
-            version = (TextView) view.findViewById(R.id.version);
-            statusInstalled = (TextView) view.findViewById(R.id.status_installed);
-            statusSuggested = (TextView) view.findViewById(R.id.status_suggested);
-            statusIncompatible = (TextView) view.findViewById(R.id.status_incompatible);
-            added = (TextView) view.findViewById(R.id.added);
-            expandArrow = (ImageView) view.findViewById(R.id.expand_arrow);
-            expandedLayout = (View) view.findViewById(R.id.expanded_layout);
-            repository = (TextView) view.findViewById(R.id.repository);
-            size = (TextView) view.findViewById(R.id.size);
-            api = (TextView) view.findViewById(R.id.api);
-            buttonInstallUpgrade = (Button) view.findViewById(R.id.button_install_upgrade);
-            buttonDowngrade = (Button) view.findViewById(R.id.button_downgrade);
-            busyIndicator = (View) view.findViewById(R.id.busy_indicator);
-            incompatibleReasons = (TextView) view.findViewById(R.id.incompatible_reasons);
-            targetArch = (TextView) view.findViewById(R.id.target_arch);
+            version = view.findViewById(R.id.version);
+            statusInstalled = view.findViewById(R.id.status_installed);
+            statusSuggested = view.findViewById(R.id.status_suggested);
+            statusIncompatible = view.findViewById(R.id.status_incompatible);
+            added = view.findViewById(R.id.added);
+            expandArrow = view.findViewById(R.id.expand_arrow);
+            expandedLayout = view.findViewById(R.id.expanded_layout);
+            repository = view.findViewById(R.id.repository);
+            size = view.findViewById(R.id.size);
+            api = view.findViewById(R.id.api);
+            buttonInstallUpgrade = view.findViewById(R.id.button_install_upgrade);
+            buttonDowngrade = view.findViewById(R.id.button_downgrade);
+            busyIndicator = view.findViewById(R.id.busy_indicator);
+            incompatibleReasons = view.findViewById(R.id.incompatible_reasons);
+            targetArch = view.findViewById(R.id.target_arch);
 
             int margin = context.getResources().getDimensionPixelSize(R.dimen.layout_horizontal_margin);
             int padding = context.getResources().getDimensionPixelSize(R.dimen.details_activity_padding);

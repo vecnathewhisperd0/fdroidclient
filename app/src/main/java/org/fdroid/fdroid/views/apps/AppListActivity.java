@@ -57,7 +57,7 @@ public class AppListActivity extends AppCompatActivity implements LoaderManager.
 
         setContentView(R.layout.activity_app_list);
 
-        searchInput = (EditText) findViewById(R.id.search);
+        searchInput = findViewById(R.id.search);
         searchInput.addTextChangedListener(new CategoryTextWatcher(this, searchInput, this));
         searchInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -75,7 +75,7 @@ public class AppListActivity extends AppCompatActivity implements LoaderManager.
             }
         });
 
-        sortImage = (ImageView) findViewById(R.id.sort);
+        sortImage = findViewById(R.id.sort);
         if (FDroidApp.isAppThemeLight()) {
             sortImage.setImageResource(R.drawable.ic_last_updated_black);
         } else {
@@ -104,7 +104,7 @@ public class AppListActivity extends AppCompatActivity implements LoaderManager.
             }
         });
 
-        emptyState = (TextView) findViewById(R.id.empty_state);
+        emptyState = findViewById(R.id.empty_state);
 
         View backButton = findViewById(R.id.back);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +124,7 @@ public class AppListActivity extends AppCompatActivity implements LoaderManager.
 
         appAdapter = new AppListAdapter(this);
 
-        appView = (RecyclerView) findViewById(R.id.app_list);
+        appView = findViewById(R.id.app_list);
         appView.setHasFixedSize(true);
         appView.setLayoutManager(new LinearLayoutManager(this));
         appView.setAdapter(appAdapter);

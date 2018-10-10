@@ -98,7 +98,7 @@ public class AppDetails2 extends AppCompatActivity
         fdroidApp.applyTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.app_details2);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(""); // Nice and clean toolbar
         toolbar.setNavigationIcon(R.drawable.ic_back);
         setSupportActionBar(toolbar);
@@ -113,7 +113,7 @@ public class AppDetails2 extends AppCompatActivity
 
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
 
-        recyclerView = (RecyclerView) findViewById(R.id.rvDetails);
+        recyclerView = findViewById(R.id.rvDetails);
         adapter = new AppDetailsRecyclerViewAdapter(this, app, this);
         LinearLayoutManager lm = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         lm.setStackFromEnd(false);
@@ -135,7 +135,7 @@ public class AppDetails2 extends AppCompatActivity
         );
 
         // Load the feature graphic, if present
-        final FeatureImage featureImage = (FeatureImage) findViewById(R.id.feature_graphic);
+        final FeatureImage featureImage = findViewById(R.id.feature_graphic);
         DisplayImageOptions displayImageOptions = Utils.getRepoAppDisplayImageOptions();
         String featureGraphicUrl = app.getFeatureGraphicUrl(this);
         featureImage.loadImageAndDisplay(ImageLoader.getInstance(), displayImageOptions,
@@ -247,34 +247,35 @@ public class AppDetails2 extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_share) {
-            Intent shareIntent = new Intent(Intent.ACTION_SEND);
-            shareIntent.setType("text/plain");
-            shareIntent.putExtra(Intent.EXTRA_SUBJECT, app.name);
-            shareIntent.putExtra(Intent.EXTRA_TEXT, app.name + " (" + app.summary
-                    + ") - https://f-droid.org/app/" + app.packageName);
+        switch (item.getItemId()) {
+            case R.id.action_share:
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, app.name);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, app.name + " (" + app.summary
+                        + ") - https://f-droid.org/app/" + app.packageName);
 
-            boolean showNearbyItem = app.isInstalled(getApplicationContext()) && fdroidApp.bluetoothAdapter != null;
-            CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.rootCoordinator);
-            ShareChooserDialog.createChooser(coordinatorLayout, this, this, shareIntent, showNearbyItem);
-            return true;
-        } else if (item.getItemId() == R.id.action_ignore_all) {
-            app.getPrefs(this).ignoreAllUpdates ^= true;
-            item.setChecked(app.getPrefs(this).ignoreAllUpdates);
-            AppPrefsProvider.Helper.update(this, app, app.getPrefs(this));
-            return true;
-        } else if (item.getItemId() == R.id.action_ignore_this) {
-            if (app.getPrefs(this).ignoreThisUpdate >= app.suggestedVersionCode) {
-                app.getPrefs(this).ignoreThisUpdate = 0;
-            } else {
-                app.getPrefs(this).ignoreThisUpdate = app.suggestedVersionCode;
-            }
-            item.setChecked(app.getPrefs(this).ignoreThisUpdate > 0);
-            AppPrefsProvider.Helper.update(this, app, app.getPrefs(this));
-            return true;
-        } else if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
-            return true;
+                boolean showNearbyItem = app.isInstalled(getApplicationContext()) && fdroidApp.bluetoothAdapter != null;
+                CoordinatorLayout coordinatorLayout = findViewById(R.id.rootCoordinator);
+                ShareChooserDialog.createChooser(coordinatorLayout, this, this, shareIntent, showNearbyItem);
+                return true;
+            case R.id.action_ignore_all:
+                app.getPrefs(this).ignoreAllUpdates ^= true;
+                item.setChecked(app.getPrefs(this).ignoreAllUpdates);
+                AppPrefsProvider.Helper.update(this, app, app.getPrefs(this));
+                return true;
+            case R.id.action_ignore_this:
+                if (app.getPrefs(this).ignoreThisUpdate >= app.suggestedVersionCode) {
+                    app.getPrefs(this).ignoreThisUpdate = 0;
+                } else {
+                    app.getPrefs(this).ignoreThisUpdate = app.suggestedVersionCode;
+                }
+                item.setChecked(app.getPrefs(this).ignoreThisUpdate > 0);
+                AppPrefsProvider.Helper.update(this, app, app.getPrefs(this));
+                return true;
+            case android.R.id.home:
+                onBackPressed();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

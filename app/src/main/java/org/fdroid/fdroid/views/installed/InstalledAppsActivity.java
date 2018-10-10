@@ -54,19 +54,19 @@ public class InstalledAppsActivity extends AppCompatActivity implements LoaderMa
 
         setContentView(R.layout.installed_apps_layout);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle(getString(R.string.installed_apps__activity_title));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         adapter = new InstalledAppListAdapter(this);
 
-        appList = (RecyclerView) findViewById(R.id.app_list);
+        appList = findViewById(R.id.app_list);
         appList.setHasFixedSize(true);
         appList.setLayoutManager(new LinearLayoutManager(this));
         appList.setAdapter(adapter);
 
-        emptyState = (TextView) findViewById(R.id.empty_state);
+        emptyState = findViewById(R.id.empty_state);
     }
 
     @Override

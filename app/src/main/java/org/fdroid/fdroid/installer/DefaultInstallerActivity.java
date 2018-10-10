@@ -60,14 +60,17 @@ public class DefaultInstallerActivity extends FragmentActivity {
         String action = intent.getAction();
         Apk apk = intent.getParcelableExtra(Installer.EXTRA_APK);
         installer = new DefaultInstaller(this, apk);
-        if (ACTION_INSTALL_PACKAGE.equals(action)) {
-            Uri localApkUri = intent.getData();
-            downloadUri = intent.getParcelableExtra(Installer.EXTRA_DOWNLOAD_URI);
-            installPackage(localApkUri);
-        } else if (ACTION_UNINSTALL_PACKAGE.equals(action)) {
-            uninstallPackage(apk.packageName);
-        } else {
-            throw new IllegalStateException("Intent action not specified!");
+        switch (action) {
+            case ACTION_INSTALL_PACKAGE:
+                Uri localApkUri = intent.getData();
+                downloadUri = intent.getParcelableExtra(Installer.EXTRA_DOWNLOAD_URI);
+                installPackage(localApkUri);
+                break;
+            case ACTION_UNINSTALL_PACKAGE:
+                uninstallPackage(apk.packageName);
+                break;
+            default:
+                throw new IllegalStateException("Intent action not specified!");
         }
     }
 

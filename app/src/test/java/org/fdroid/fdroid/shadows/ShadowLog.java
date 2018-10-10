@@ -22,11 +22,8 @@ public class ShadowLog extends org.robolectric.shadows.ShadowLog {
 
     @Implementation
     public static synchronized boolean isLoggable(String tag, int level) {
-        if ((TextUtils.equals(tag, "CursorWindowStats") && level <= Log.INFO)
-                || (TextUtils.equals(tag, "SQLiteCursor") && level <= Log.DEBUG)) {
-            return false;
-        }
+        return (!TextUtils.equals(tag, "CursorWindowStats") || level > Log.INFO)
+                && (!TextUtils.equals(tag, "SQLiteCursor") || level > Log.DEBUG) && org.robolectric.shadows.ShadowLog.isLoggable(tag, level);
 
-        return org.robolectric.shadows.ShadowLog.isLoggable(tag, level);
     }
 }

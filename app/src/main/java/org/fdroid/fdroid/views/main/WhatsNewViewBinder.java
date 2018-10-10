@@ -54,14 +54,14 @@ class WhatsNewViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
         GridLayoutManager layoutManager = new GridLayoutManager(activity, 2);
         layoutManager.setSpanSizeLookup(new WhatsNewAdapter.SpanSizeLookup());
 
-        emptyState = (TextView) whatsNewView.findViewById(R.id.empty_state);
+        emptyState = whatsNewView.findViewById(R.id.empty_state);
 
-        appList = (RecyclerView) whatsNewView.findViewById(R.id.app_list);
+        appList = whatsNewView.findViewById(R.id.app_list);
         appList.setHasFixedSize(true);
         appList.setLayoutManager(layoutManager);
         appList.setAdapter(whatsNewAdapter);
 
-        final SwipeRefreshLayout swipeToRefresh = (SwipeRefreshLayout) whatsNewView
+        final SwipeRefreshLayout swipeToRefresh = whatsNewView
                 .findViewById(R.id.swipe_to_refresh);
         swipeToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -71,7 +71,7 @@ class WhatsNewViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
             }
         });
 
-        FloatingActionButton searchFab = (FloatingActionButton) whatsNewView.findViewById(R.id.fab_search);
+        FloatingActionButton searchFab = whatsNewView.findViewById(R.id.fab_search);
         searchFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

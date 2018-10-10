@@ -344,7 +344,7 @@ public class Repo extends ValueObject {
     }
 
     public List<String> getMirrorList() {
-        final ArrayList<String> allMirrors = new ArrayList<String>();
+        final ArrayList<String> allMirrors = new ArrayList<>();
         if (userMirrors != null) {
             allMirrors.addAll(Arrays.asList(userMirrors));
         }

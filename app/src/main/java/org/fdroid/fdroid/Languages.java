@@ -36,8 +36,7 @@ public final class Languages {
     }
 
     private Languages(Activity activity) {
-        Set<Locale> localeSet = new LinkedHashSet<>();
-        localeSet.addAll(Arrays.asList(LOCALES_TO_TEST));
+        Set<Locale> localeSet = new LinkedHashSet<>(Arrays.asList(LOCALES_TO_TEST));
 
         for (Locale locale : localeSet) {
             if (locale.equals(TIBETAN)) {

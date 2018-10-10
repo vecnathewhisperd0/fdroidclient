@@ -54,7 +54,7 @@ public abstract class FDroidProvider extends ContentProvider {
     @Override
     public ContentProviderResult[] applyBatch(@NonNull ArrayList<ContentProviderOperation> operations)
             throws OperationApplicationException {
-        ContentProviderResult[] result = null;
+        ContentProviderResult[] result;
         isApplyingBatch = true;
         final SQLiteDatabase db = db();
         db.beginTransaction();

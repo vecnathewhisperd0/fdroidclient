@@ -55,14 +55,14 @@ public class CategoryController extends RecyclerView.ViewHolder implements Loade
 
         appCardsAdapter = new AppPreviewAdapter(activity);
 
-        viewAll = (Button) itemView.findViewById(R.id.button);
+        viewAll = itemView.findViewById(R.id.button);
         viewAll.setOnClickListener(onViewAll);
 
-        heading = (TextView) itemView.findViewById(R.id.name);
-        image = (FeatureImage) itemView.findViewById(R.id.category_image);
-        background = (FrameLayout) itemView.findViewById(R.id.category_background);
+        heading = itemView.findViewById(R.id.name);
+        image = itemView.findViewById(R.id.category_image);
+        background = itemView.findViewById(R.id.category_background);
 
-        RecyclerView appCards = (RecyclerView) itemView.findViewById(R.id.app_cards);
+        RecyclerView appCards = itemView.findViewById(R.id.app_cards);
         appCards.setAdapter(appCardsAdapter);
         appCards.addItemDecoration(new ItemDecorator(activity));
 

@@ -59,7 +59,7 @@ public class RepoAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        CompoundButton switchView = (CompoundButton) view.findViewById(R.id.repo_switch);
+        CompoundButton switchView = view.findViewById(R.id.repo_switch);
 
         // Remove old listener (because we are reusing this view, we don't want
         // to invoke the listener for the last repo to use it - particularly
@@ -85,7 +85,7 @@ public class RepoAdapter extends CursorAdapter {
             }
         });
 
-        TextView nameView = (TextView) view.findViewById(R.id.repo_name);
+        TextView nameView = view.findViewById(R.id.repo_name);
         nameView.setText(repo.getName());
 
         View unsignedView = view.findViewById(R.id.repo_unsigned);

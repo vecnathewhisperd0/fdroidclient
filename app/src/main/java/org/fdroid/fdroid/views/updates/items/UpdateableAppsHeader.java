@@ -76,10 +76,10 @@ public class UpdateableAppsHeader extends AppUpdateData {
         public ViewHolder(View itemView) {
             super(itemView);
 
-            updatesAvailable = (TextView) itemView.findViewById(R.id.text_updates_available);
-            downloadAll = (ImageView) itemView.findViewById(R.id.button_download_all);
-            appsToUpdate = (TextView) itemView.findViewById(R.id.text_apps_to_update);
-            toggleAppsToUpdate = (Button) itemView.findViewById(R.id.button_toggle_apps_to_update);
+            updatesAvailable = itemView.findViewById(R.id.text_updates_available);
+            downloadAll = itemView.findViewById(R.id.button_download_all);
+            appsToUpdate = itemView.findViewById(R.id.text_apps_to_update);
+            toggleAppsToUpdate = itemView.findViewById(R.id.button_toggle_apps_to_update);
 
             toggleAppsToUpdate.setOnClickListener(new View.OnClickListener() {
                 @Override

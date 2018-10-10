@@ -29,7 +29,7 @@ public class CrashReportActivity extends BaseCrashReportDialog
         dialog.setOnDismissListener(this);
         dialog.show();
 
-        comment = (EditText) dialog.findViewById(android.R.id.input);
+        comment = dialog.findViewById(android.R.id.input);
         if (savedInstanceState != null) {
             comment.setText(savedInstanceState.getString(STATE_COMMENT));
         }

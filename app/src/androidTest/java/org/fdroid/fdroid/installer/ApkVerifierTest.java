@@ -290,8 +290,7 @@ public class ApkVerifierTest {
     public void testExtendedPerms() throws IOException,
             ApkVerifier.ApkPermissionUnequalException, ApkVerifier.ApkVerificationException {
         RepoDetails actualDetails = getFromFile(extendedPermsXml);
-        HashSet<String> expectedSet = new HashSet<>(Arrays.asList(new String[]{
-                "android.permission.ACCESS_NETWORK_STATE",
+        HashSet<String> expectedSet = new HashSet<>(Arrays.asList("android.permission.ACCESS_NETWORK_STATE",
                 "android.permission.ACCESS_WIFI_STATE",
                 "android.permission.INTERNET",
                 "android.permission.READ_SYNC_STATS",
@@ -301,8 +300,7 @@ public class ApkVerifierTest {
                 "android.permission.READ_CONTACTS",
                 "android.permission.WRITE_CONTACTS",
                 "android.permission.READ_CALENDAR",
-                "android.permission.WRITE_CALENDAR",
-        }));
+                "android.permission.WRITE_CALENDAR"));
         if (Build.VERSION.SDK_INT <= 18) {
             expectedSet.add("android.permission.READ_EXTERNAL_STORAGE");
             expectedSet.add("android.permission.WRITE_EXTERNAL_STORAGE");

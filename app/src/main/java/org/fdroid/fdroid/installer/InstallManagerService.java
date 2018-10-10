@@ -153,22 +153,24 @@ public class InstallManagerService extends Service {
 
         String action = intent.getAction();
 
-        if (ACTION_CANCEL.equals(action)) {
-            DownloaderService.cancel(this, urlString);
-            Apk apk = appUpdateStatusManager.getApk(urlString);
-            if (apk != null) {
-                DownloaderService.cancel(this, apk.getPatchObbUrl());
-                DownloaderService.cancel(this, apk.getMainObbUrl());
-            }
-            return START_NOT_STICKY;
-        } else if (ACTION_INSTALL.equals(action)) {
-            if (!isPendingInstall(urlString)) {
-                Log.i(TAG, "Ignoring INSTALL that is not Pending Install: " + intent);
+        switch (action) {
+            case ACTION_CANCEL:
+                DownloaderService.cancel(this, urlString);
+                Apk apk = appUpdateStatusManager.getApk(urlString);
+                if (apk != null) {
+                    DownloaderService.cancel(this, apk.getPatchObbUrl());
+                    DownloaderService.cancel(this, apk.getMainObbUrl());
+                }
                 return START_NOT_STICKY;
-            }
-        } else {
-            Log.i(TAG, "Ignoring unknown intent action: " + intent);
-            return START_NOT_STICKY;
+            case ACTION_INSTALL:
+                if (!isPendingInstall(urlString)) {
+                    Log.i(TAG, "Ignoring INSTALL that is not Pending Install: " + intent);
+                    return START_NOT_STICKY;
+                }
+                break;
+            default:
+                Log.i(TAG, "Ignoring unknown intent action: " + intent);
+                return START_NOT_STICKY;
         }
 
         if (!intent.hasExtra(EXTRA_APP) || !intent.hasExtra(EXTRA_APK)) {
@@ -252,47 +254,53 @@ public class InstallManagerService extends Service {
                     return;
                 }
                 String action = intent.getAction();
-                if (Downloader.ACTION_STARTED.equals(action)) {
-                    Utils.debugLog(TAG, action + " " + intent);
-                } else if (Downloader.ACTION_PROGRESS.equals(action)) {
+                switch (action) {
+                    case Downloader.ACTION_STARTED:
+                        Utils.debugLog(TAG, action + " " + intent);
+                        break;
+                    case Downloader.ACTION_PROGRESS:
 
-                    long bytesRead = intent.getLongExtra(Downloader.EXTRA_BYTES_READ, 0);
-                    long totalBytes = intent.getLongExtra(Downloader.EXTRA_TOTAL_BYTES, 0);
-                    appUpdateStatusManager.updateApkProgress(urlString, totalBytes, bytesRead);
-                } else if (Downloader.ACTION_COMPLETE.equals(action)) {
-                    localBroadcastManager.unregisterReceiver(this);
-                    File localFile = new File(intent.getStringExtra(Downloader.EXTRA_DOWNLOAD_PATH));
-                    Uri localApkUri = Uri.fromFile(localFile);
-                    Utils.debugLog(TAG, "OBB download completed " + intent.getDataString()
-                            + " to " + localApkUri);
+                        long bytesRead = intent.getLongExtra(Downloader.EXTRA_BYTES_READ, 0);
+                        long totalBytes = intent.getLongExtra(Downloader.EXTRA_TOTAL_BYTES, 0);
+                        appUpdateStatusManager.updateApkProgress(urlString, totalBytes, bytesRead);
+                        break;
+                    case Downloader.ACTION_COMPLETE:
+                        localBroadcastManager.unregisterReceiver(this);
+                        File localFile = new File(intent.getStringExtra(Downloader.EXTRA_DOWNLOAD_PATH));
+                        Uri localApkUri = Uri.fromFile(localFile);
+                        Utils.debugLog(TAG, "OBB download completed " + intent.getDataString()
+                                + " to " + localApkUri);
 
-                    try {
-                        if (Hasher.isFileMatchingHash(localFile, hash, "sha256")) {
-                            Utils.debugLog(TAG, "Installing OBB " + localFile + " to " + obbDestFile);
-                            FileUtils.forceMkdirParent(obbDestFile);
-                            FileUtils.copyFile(localFile, obbDestFile);
-                            FileFilter filter = new WildcardFileFilter(
-                                    obbDestFile.getName().substring(0, 4) + "*.obb");
-                            for (File f : obbDestFile.getParentFile().listFiles(filter)) {
-                                if (!f.equals(obbDestFile)) {
-                                    Utils.debugLog(TAG, "Deleting obsolete OBB " + f);
-                                    FileUtils.deleteQuietly(f);
+                        try {
+                            if (Hasher.isFileMatchingHash(localFile, hash, "sha256")) {
+                                Utils.debugLog(TAG, "Installing OBB " + localFile + " to " + obbDestFile);
+                                FileUtils.forceMkdirParent(obbDestFile);
+                                FileUtils.copyFile(localFile, obbDestFile);
+                                FileFilter filter = new WildcardFileFilter(
+                                        obbDestFile.getName().substring(0, 4) + "*.obb");
+                                for (File f : obbDestFile.getParentFile().listFiles(filter)) {
+                                    if (!f.equals(obbDestFile)) {
+                                        Utils.debugLog(TAG, "Deleting obsolete OBB " + f);
+                                        FileUtils.deleteQuietly(f);
+                                    }
                                 }
+                            } else {
+                                Utils.debugLog(TAG, localFile + " deleted, did not match hash: " + hash);
                             }
-                        } else {
-                            Utils.debugLog(TAG, localFile + " deleted, did not match hash: " + hash);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } finally {
+                            FileUtils.deleteQuietly(localFile);
                         }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } finally {
-                        FileUtils.deleteQuietly(localFile);
-                    }
-                } else if (Downloader.ACTION_INTERRUPTED.equals(action)) {
-                    localBroadcastManager.unregisterReceiver(this);
-                } else if (Downloader.ACTION_CONNECTION_FAILED.equals(action)) {
-                    DownloaderService.queue(context, urlString, 0, urlString);
-                } else {
-                    throw new RuntimeException("intent action not handled!");
+                        break;
+                    case Downloader.ACTION_INTERRUPTED:
+                        localBroadcastManager.unregisterReceiver(this);
+                        break;
+                    case Downloader.ACTION_CONNECTION_FAILED:
+                        DownloaderService.queue(context, urlString, 0, urlString);
+                        break;
+                    default:
+                        throw new RuntimeException("intent action not handled!");
                 }
             }
         };

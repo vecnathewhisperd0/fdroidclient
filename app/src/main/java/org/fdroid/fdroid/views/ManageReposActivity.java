@@ -103,11 +103,11 @@ public class ManageReposActivity extends AppCompatActivity
 
         setContentView(R.layout.repo_list_activity);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        final ListView repoList = (ListView) findViewById(R.id.list);
+        final ListView repoList = findViewById(R.id.list);
         repoAdapter = RepoAdapter.create(this, null, CursorAdapterCompat.FLAG_AUTO_REQUERY);
         repoAdapter.setEnabledListener(this);
         repoList.setAdapter(repoAdapter);
@@ -262,8 +262,8 @@ public class ManageReposActivity extends AppCompatActivity
 
             final View view = getLayoutInflater().inflate(R.layout.addrepo, null);
             addRepoDialog = new AlertDialog.Builder(context).setView(view).create();
-            final EditText uriEditText = (EditText) view.findViewById(R.id.edit_uri);
-            final EditText fingerprintEditText = (EditText) view.findViewById(R.id.edit_fingerprint);
+            final EditText uriEditText = view.findViewById(R.id.edit_uri);
+            final EditText fingerprintEditText = view.findViewById(R.id.edit_fingerprint);
 
             addRepoDialog.setTitle(R.string.repo_add_title);
             addRepoDialog.setButton(DialogInterface.BUTTON_NEGATIVE,
@@ -350,7 +350,7 @@ public class ManageReposActivity extends AppCompatActivity
             );
 
             addButton = addRepoDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-            overwriteMessage = (TextView) view.findViewById(R.id.overwrite_message);
+            overwriteMessage = view.findViewById(R.id.overwrite_message);
             overwriteMessage.setVisibility(View.GONE);
             defaultTextColour = overwriteMessage.getTextColors();
 
@@ -533,7 +533,7 @@ public class ManageReposActivity extends AppCompatActivity
             final View positiveButton = addRepoDialog.getButton(AlertDialog.BUTTON_POSITIVE);
             positiveButton.setVisibility(View.GONE);
 
-            final TextView textSearching = (TextView) addRepoDialog.findViewById(R.id.text_searching_for_repo);
+            final TextView textSearching = addRepoDialog.findViewById(R.id.text_searching_for_repo);
             textSearching.setText(getString(R.string.repo_searching_address, originalAddress));
 
             final Button skip = addRepoDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
@@ -610,57 +610,61 @@ public class ManageReposActivity extends AppCompatActivity
 
                     if (addRepoDialog.isShowing()) {
 
-                        if (statusCode == HTTP_UNAUTHORIZED) {
+                        switch (statusCode) {
+                            case HTTP_UNAUTHORIZED:
 
-                            final View view = getLayoutInflater().inflate(R.layout.login, null);
-                            final AlertDialog credentialsDialog = new AlertDialog.Builder(context)
-                                    .setView(view).create();
-                            final EditText nameInput = (EditText) view.findViewById(R.id.edit_name);
-                            final EditText passwordInput = (EditText) view.findViewById(R.id.edit_password);
+                                final View view = getLayoutInflater().inflate(R.layout.login, null);
+                                final AlertDialog credentialsDialog = new AlertDialog.Builder(context)
+                                        .setView(view).create();
+                                final EditText nameInput = view.findViewById(R.id.edit_name);
+                                final EditText passwordInput = view.findViewById(R.id.edit_password);
 
-                            if (username != null) {
-                                nameInput.setText(username);
-                            }
-                            if (password != null) {
-                                passwordInput.setText(password);
-                            }
+                                if (username != null) {
+                                    nameInput.setText(username);
+                                }
+                                if (password != null) {
+                                    passwordInput.setText(password);
+                                }
 
-                            credentialsDialog.setTitle(R.string.login_title);
-                            credentialsDialog.setButton(DialogInterface.BUTTON_NEGATIVE,
-                                    getString(R.string.cancel),
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                            // cancel parent dialog, don't add repo
-                                            addRepoDialog.cancel();
-                                        }
-                                    });
+                                credentialsDialog.setTitle(R.string.login_title);
+                                credentialsDialog.setButton(DialogInterface.BUTTON_NEGATIVE,
+                                        getString(R.string.cancel),
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
+                                                // cancel parent dialog, don't add repo
+                                                addRepoDialog.cancel();
+                                            }
+                                        });
 
-                            credentialsDialog.setButton(DialogInterface.BUTTON_POSITIVE,
-                                    getString(R.string.ok),
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            createNewRepo(newAddress, fingerprint,
-                                                    nameInput.getText().toString(),
-                                                    passwordInput.getText().toString());
-                                        }
-                                    });
+                                credentialsDialog.setButton(DialogInterface.BUTTON_POSITIVE,
+                                        getString(R.string.ok),
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                createNewRepo(newAddress, fingerprint,
+                                                        nameInput.getText().toString(),
+                                                        passwordInput.getText().toString());
+                                            }
+                                        });
 
-                            credentialsDialog.show();
+                                credentialsDialog.show();
 
-                        } else if (statusCode == REFRESH_DIALOG) {
-                            addRepoForm.setVisibility(View.VISIBLE);
-                            positiveButton.setVisibility(View.VISIBLE);
-                            textSearching.setText("");
-                            skip.setText(R.string.cancel);
-                            skip.setOnClickListener(null);
-                            validateRepoDetails(newAddress, fingerprint);
-                        } else {
+                                break;
+                            case REFRESH_DIALOG:
+                                addRepoForm.setVisibility(View.VISIBLE);
+                                positiveButton.setVisibility(View.VISIBLE);
+                                textSearching.setText("");
+                                skip.setText(R.string.cancel);
+                                skip.setOnClickListener(null);
+                                validateRepoDetails(newAddress, fingerprint);
+                                break;
+                            default:
 
-                            // create repo without username/password
-                            createNewRepo(newAddress, fingerprint);
+                                // create repo without username/password
+                                createNewRepo(newAddress, fingerprint);
+                                break;
                         }
                     }
                 }

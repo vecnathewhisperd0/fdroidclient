@@ -60,7 +60,7 @@ public class ScreenShotsActivity extends AppCompatActivity {
         App app = AppProvider.Helper.findHighestPriorityMetadata(getContentResolver(), packageName);
         String[] screenshots = app.getAllScreenshots(this);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.screenshot_view_pager);
+        ViewPager viewPager = findViewById(R.id.screenshot_view_pager);
         ScreenShotPagerAdapter adapter = new ScreenShotPagerAdapter(getSupportFragmentManager(), screenshots);
         viewPager.setAdapter(adapter);
         viewPager.setCurrentItem(startPosition);
@@ -137,7 +137,7 @@ public class ScreenShotsActivity extends AppCompatActivity {
 
             View rootView = inflater.inflate(R.layout.activity_screenshots_page, container, false);
 
-            ImageView screenshotView = (ImageView) rootView.findViewById(R.id.screenshot);
+            ImageView screenshotView = rootView.findViewById(R.id.screenshot);
             ImageLoader.getInstance().displayImage(screenshotUrl, screenshotView, displayImageOptions);
 
             return rootView;

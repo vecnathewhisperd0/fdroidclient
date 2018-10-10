@@ -26,7 +26,7 @@ public class UpdatesViewBinder {
         adapter = new UpdatesAdapter(activity);
         adapter.registerAdapterDataObserver(adapterChangeListener);
 
-        list = (RecyclerView) view.findViewById(R.id.list);
+        list = view.findViewById(R.id.list);
         list.setHasFixedSize(true);
         list.setLayoutManager(new LinearLayoutManager(activity));
         list.setAdapter(adapter);
@@ -34,10 +34,10 @@ public class UpdatesViewBinder {
         ItemTouchHelper touchHelper = new ItemTouchHelper(new UpdatesItemTouchCallback(activity, adapter));
         touchHelper.attachToRecyclerView(list);
 
-        emptyState = (TextView) view.findViewById(R.id.empty_state);
-        emptyImage = (ImageView) view.findViewById(R.id.image);
+        emptyState = view.findViewById(R.id.empty_state);
+        emptyImage = view.findViewById(R.id.image);
 
-        final SwipeRefreshLayout swipeToRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipe_to_refresh);
+        final SwipeRefreshLayout swipeToRefresh = view.findViewById(R.id.swipe_to_refresh);
         swipeToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

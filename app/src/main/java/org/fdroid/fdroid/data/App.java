@@ -1068,12 +1068,16 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
             while (eventType != XmlPullParser.END_DOCUMENT) {
                 if (eventType == XmlPullParser.START_TAG && "uses-sdk".equals(xml.getName())) {
                     for (int j = 0; j < xml.getAttributeCount(); j++) {
-                        if (xml.getAttributeName(j).equals("minSdkVersion")) {
-                            minSdkVersion = Integer.parseInt(xml.getAttributeValue(j));
-                        } else if (xml.getAttributeName(j).equals("targetSdkVersion")) {
-                            targetSdkVersion = Integer.parseInt(xml.getAttributeValue(j));
-                        } else if (xml.getAttributeName(j).equals("maxSdkVersion")) {
-                            maxSdkVersion = Integer.parseInt(xml.getAttributeValue(j));
+                        switch (xml.getAttributeName(j)) {
+                            case "minSdkVersion":
+                                minSdkVersion = Integer.parseInt(xml.getAttributeValue(j));
+                                break;
+                            case "targetSdkVersion":
+                                targetSdkVersion = Integer.parseInt(xml.getAttributeValue(j));
+                                break;
+                            case "maxSdkVersion":
+                                maxSdkVersion = Integer.parseInt(xml.getAttributeValue(j));
+                                break;
                         }
                     }
                     break;

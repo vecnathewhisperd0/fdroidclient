@@ -167,8 +167,8 @@ public class AppSecurityPermissions {
             group = grp;
             this.perm = perm;
 
-            ImageView permGrpIcon = (ImageView) findViewById(R.id.perm_icon);
-            TextView permNameView = (TextView) findViewById(R.id.perm_name);
+            ImageView permGrpIcon = findViewById(R.id.perm_icon);
+            TextView permNameView = findViewById(R.id.perm_name);
 
             PackageManager pm = getContext().getPackageManager();
             Drawable icon = null;
@@ -345,11 +345,8 @@ public class AppSecurityPermissions {
      */
     @TargetApi(16)
     private static boolean isNewPermission(PackageInfo installedPkgInfo, int existingFlags) {
-        if (installedPkgInfo == null || Build.VERSION.SDK_INT < 16) {
-            return false;
-        }
+        return installedPkgInfo != null && Build.VERSION.SDK_INT >= 16 && (existingFlags & PackageInfo.REQUESTED_PERMISSION_GRANTED) == 0;
 
-        return (existingFlags & PackageInfo.REQUESTED_PERMISSION_GRANTED) == 0;
     }
 
     private List<MyPermissionInfo> getPermissionList(MyPermissionGroupInfo grp, int which) {
@@ -371,7 +368,7 @@ public class AppSecurityPermissions {
 
     public View getPermissionsView(int which) {
         LinearLayout permsView = (LinearLayout) inflater.inflate(R.layout.app_perms_summary, null);
-        LinearLayout displayList = (LinearLayout) permsView.findViewById(R.id.perms_list);
+        LinearLayout displayList = permsView.findViewById(R.id.perms_list);
         View noPermsView = permsView.findViewById(R.id.no_permissions);
 
         displayPermissions(permGroupsList, displayList, which);

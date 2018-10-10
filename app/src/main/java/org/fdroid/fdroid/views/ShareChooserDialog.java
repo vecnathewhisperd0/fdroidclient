@@ -97,7 +97,7 @@ public class ShareChooserDialog extends BottomSheetDialogFragment {
     }
 
     private void setupView(View v) {
-        recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view_apps);
+        recyclerView = v.findViewById(R.id.recycler_view_apps);
 
         // Figure out how many columns that fit in the given parent width. Give them 100dp.
         int appWidth = Utils.dpToPx(80, getContext());
@@ -125,8 +125,8 @@ public class ShareChooserDialog extends BottomSheetDialogFragment {
 
             VH(View itemView) {
                 super(itemView);
-                icon = (ImageView) itemView.findViewById(R.id.ivShare);
-                label = (TextView) itemView.findViewById(R.id.tvShare);
+                icon = itemView.findViewById(R.id.ivShare);
+                label = itemView.findViewById(R.id.tvShare);
             }
         }
 
@@ -139,9 +139,7 @@ public class ShareChooserDialog extends BottomSheetDialogFragment {
                 if (showNearby) {
                     intents.add(null);
                 }
-                for (ResolveInfo ri : targetedShareIntents) {
-                    intents.add(ri);
-                }
+                intents.addAll(targetedShareIntents);
                 return this;
             }
 

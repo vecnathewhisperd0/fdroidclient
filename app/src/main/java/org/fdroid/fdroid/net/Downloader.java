@@ -11,7 +11,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.ConnectException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -96,7 +95,7 @@ public abstract class Downloader {
 
     protected abstract long totalDownloadSize();
 
-    public abstract void download() throws ConnectException, IOException, InterruptedException;
+    public abstract void download() throws IOException, InterruptedException;
 
     /**
      * @return whether the requested file was not found in the repo (e.g. HTTP 404 Not Found)

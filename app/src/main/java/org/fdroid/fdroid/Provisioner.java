@@ -126,10 +126,7 @@ public class Provisioner {
             File[] files = file.listFiles(new FilenameFilter() {
                 @Override
                 public boolean accept(File dir, String name) {
-                    if (name != null && name.endsWith(".fdrp")) {
-                        return true;
-                    }
-                    return false;
+                    return name != null && name.endsWith(".fdrp");
                 }
             });
             return files != null ? Arrays.asList(files) : null;

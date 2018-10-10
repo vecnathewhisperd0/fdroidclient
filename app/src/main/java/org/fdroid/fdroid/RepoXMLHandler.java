@@ -95,8 +95,7 @@ public class RepoXMLHandler extends DefaultHandler {
     }
 
     @Override
-    public void endElement(String uri, String localName, String qName)
-            throws SAXException {
+    public void endElement(String uri, String localName, String qName) {
 
         if ("application".equals(localName) && curapp != null) {
             onApplicationParsed();
