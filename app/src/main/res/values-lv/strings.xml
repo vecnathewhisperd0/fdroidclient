@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="version">Versija</string>
     <string name="delete">Dzēst</string>
     <string name="enable_nfc_send">Ieslēgt sūtīšanu caur NFC…</string>
@@ -152,11 +152,11 @@
     <string name="app__tts__cancel_download">Atcelt lejupielādi</string>
     <string name="app__install_downloaded_update">Atjaunināt</string>
     <string name="app_installed_media">Fails ieinstalēts uz %s</string>
-<string tools:ignore="UnusedResources" name="category_Connectivity">Savienojamība</string>
-    <string tools:ignore="UnusedResources" name="category_Development">Izstrādāšana</string>
-    <string tools:ignore="UnusedResources" name="category_Science_Education">Zinātne un Izglītība</string>
-    <string tools:ignore="UnusedResources" name="category_Security">Drošība</string>
-    <string tools:ignore="UnusedResources" name="category_Writing">Rakstīšana</string>
+<string name="category_Connectivity">Savienojamība</string>
+    <string name="category_Development">Izstrādāšana</string>
+    <string name="category_Science_Education">Zinātne un Izglītība</string>
+    <string name="category_Security">Drošība</string>
+    <string name="category_Writing">Rakstīšana</string>
 
     <string name="swap_welcome">Sveicināti F-Droid!</string>
     <string name="swap_dont_show_again">Turpmāk nerādīt šo</string>

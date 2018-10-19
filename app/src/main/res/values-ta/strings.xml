@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="installIncompatible">நீங்கள் நிறுவ விரும்பும் இச்செயலி உங்கள் சாதனத்திற்கு ஏற்புடையதாக தெரியவில்லை.
         எனினும் நீங்கள் இதை நிறுவ முயற்சி செய்ய விரும்புகிறீர்களா?
     </string>
@@ -81,8 +81,8 @@
 <string name="menu_launch">இயக்க</string>
     <string name="main_menu__latest_apps">சமீபத்திய</string>
     <string name="main_menu__categories">பகுப்புகள்</string>
-    <string tools:ignore="UnusedResources" name="category_Internet">இணையம்</string>
-    <string tools:ignore="UnusedResources" name="category_Money">பணம்</string>
+    <string name="category_Internet">இணையம்</string>
+    <string name="category_Money">பணம்</string>
     <string name="newPerms">புதியன</string>
     <string name="notification_action_install">நிறுவு</string>
 
