@@ -487,11 +487,11 @@
     <string name="send_version_and_uuid">发送版本和 UUID 到服务器</string>
     <string name="antinosourcesince">源代码不再可用，无法更新。</string>
 
-    <string name="hide_all_notifications_summary">避免在状态栏和通知抽屉中显示任何操作。</string>
+    <string name="hide_all_notifications_summary">阻止所有活动在状态栏和通知菜单中显示。</string>
     <string name="send_install_history">发送安装历史</string>
-    <string name="send_history_csv">以 CSV 文件 %s 安装历史</string>
+    <string name="send_history_csv">%s 安装历史为 CSV 文件</string>
     <string name="install_history_summary">浏览所有关于安装与卸载的私有日志</string>
-    <string name="send_version_and_uuid_summary">在下载时包含此应用的版本和一个随机的唯一 ID，在应用下一次启动时生效。</string>
+    <string name="send_version_and_uuid_summary">在下载时包含此应用的版本和一个随机唯一 ID，将在下次重新启动应用程序时生效。</string>
     <string name="allow_push_requests">允许软件源去安装/卸载应用</string>
     <string name="send_installed_apps">分享已安装的应用程序</string>
     <string name="share_repository">分享软件源</string>
@@ -504,4 +504,6 @@
     <string name="send_installed_apps_csv">通过 F-Droid 安装的应用程序列表，以 CSV 格式文件存储</string>
     <string name="menu_open">打开</string>
     <string name="allow_push_requests_summary">软件源的元数据可以含有安装或卸载应用的推送请求</string>
+    <string name="updates_disabled_by_settings">由于数据/WiFi 设置全部更新已禁用</string>
+
     </resources>
