@@ -11,7 +11,6 @@ import os
 import requests
 import sys
 
-
 projectbasedir = os.path.dirname(os.path.dirname(__file__))
 print(projectbasedir)
 
@@ -54,7 +53,7 @@ for remote in repo.remotes:
         found = True
 
 if not found:
-    print('ERROR: there must be a weblate remote to preserve incomplete translations!')
+    print('ERROR: There must be a weblate remote to preserve incomplete translations!')
     sys.exit(1)
 
 repo.index.commit(msg)

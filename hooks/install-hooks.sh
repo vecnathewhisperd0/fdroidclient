@@ -6,7 +6,7 @@ BASE_DIR="$(cd $(dirname $0); pwd -P)"
 HOOK_NAMES="applypatch-msg pre-applypatch post-applypatch pre-commit prepare-commit-msg commit-msg post-commit pre-rebase post-checkout post-merge pre-push post-push pre-receive update post-receive post-update pre-auto-gc"
 HOOK_DIR="$(git rev-parse --show-toplevel)/.git/hooks"
 
-for hook in $HOOK_NAMES; do
+for hook in ${HOOK_NAMES}; do
 
 	shipped_hook="$BASE_DIR/$hook"
 	installed_hook="$HOOK_DIR/$hook"

@@ -45,7 +45,7 @@ for d in sorted(glob.glob(os.path.join(resdir, 'values-*'))):
     with open(str_path, 'rb') as fp:
         contents = fp.read()
     contents = contents.replace(b' tools:ignore="UnusedResources"', b'') \
-                       .replace(b' xmlns:tools="http://schemas.android.com/tools"', b'')
+        .replace(b' xmlns:tools="http://schemas.android.com/tools"', b'')
     root = ElementTree.fromstring(contents)
 
     for e in root.findall('.//string'):

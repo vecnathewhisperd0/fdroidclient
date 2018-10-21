@@ -4,8 +4,8 @@
 
 import glob
 import os
-import sys
 import re
+import sys
 from xml.etree import ElementTree
 
 formatRe = re.compile(r'(%%|%[^%](\$.)?)')
@@ -67,4 +67,3 @@ for d in sorted(glob.glob(os.path.join(resdir, 'values-*'))):
 if count > 0:
     print("%d misformatted strings found!" % count)
     sys.exit(1)
-

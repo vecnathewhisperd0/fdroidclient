@@ -1,6 +1,6 @@
 # F-Droid Client
 
-[![build status](https://gitlab.com/fdroid/fdroidclient/badges/master/build.svg)](https://gitlab.com/fdroid/fdroidclient/builds)
+[![Build status](https://gitlab.com/fdroid/fdroidclient/badges/master/build.svg)](https://gitlab.com/fdroid/fdroidclient/builds)
 [![Translation status](https://hosted.weblate.org/widgets/f-droid/-/svg-badge.svg)](https://hosted.weblate.org/engage/f-droid/)
 
 Client for [F-Droid](https://f-droid.org), the Free Software repository system
@@ -13,12 +13,12 @@ for Android.
 ## Direct download
 
 You can [download the application](https://f-droid.org/FDroid.apk) directly
-from our site or [browse it in the repo](https://f-droid.org/app/org.fdroid.fdroid).
+from our site or [browse it in the repo](hhttps://f-droid.org/packages/org.fdroid.fdroid/).
 
 ## Contributing
 
 See our [Contributing doc](CONTRIBUTING.md) for information on how to report
-issues, translate the app into your language or help with development.
+issues, help translate the app into your language, or help with development.
 
 ## IRC
 
@@ -36,9 +36,10 @@ to what Google Play does.
 * Can I avoid enabling "Unknown Sources" by installing F-Droid as a
   privileged system app?
 
-This used to be the case, but no longer is. Now the [Privileged
+This used to be the case, but it no longer is. Now the [Privileged
 Extension](https://gitlab.com/fdroid/privileged-extension) is the one that should be placed in
-the system. It can be bundled with a ROM or installed via a zip.
+the system. It can be bundled with a ROM or installed via zip.
+
 ## License
 
 This program is Free Software: You can use, study share and improve it at your
@@ -61,7 +62,7 @@ released under an
 
 ## Translation
 
-Everything can be translated.  See
+Everything can be translated. See
 [Translation and Localization](https://f-droid.org/docs/Translation_and_Localization)
 for more info.
 [![translation status](https://hosted.weblate.org/widgets/f-droid/-/f-droid/multi-auto.svg)](https://hosted.weblate.org/engage/f-droid/?utm_source=widget)
