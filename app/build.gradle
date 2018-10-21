@@ -29,7 +29,7 @@ android {
         targetSdkVersion 25 //28
 
         versionCode 1005000
-        //versionName getVersionName()
+        versionName getVersionName()
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         /*
