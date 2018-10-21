@@ -55,24 +55,29 @@ public class TempApkProvider extends ApkProvider {
         return Uri.parse("content://" + getAuthority());
     }
 
-    public static class Helper {
+    private void initTable(long repoIdBeingUpdated) {
+        final SQLiteDatabase db = db();
+        final String memoryDbName = TempAppProvider.DB;
+        db.execSQL(DBHelper.CREATE_TABLE_APK.replaceFirst(ApkTable.NAME, memoryDbName + "." + getTableName()));
+        db.execSQL(DBHelper.CREATE_TABLE_APK_ANTI_FEATURE_JOIN.replaceFirst(Schema.ApkAntiFeatureJoinTable.NAME, memoryDbName + "." + getApkAntiFeatureJoinTableName()));
 
-        /**
-         * Deletes the old temporary table (if it exists). Then creates a new temporary apk provider
-         * table and populates it with all the data from the real apk provider table.
-         *
-         * This is package local because it must be invoked after
-         * {@link org.fdroid.fdroid.data.TempAppProvider.Helper#init(Context, long)}. Due to this
-         * dependence, that method invokes this one itself, rather than leaving it to the
-         * {@link RepoPersister}.
-         */
-        static void init(Context context, long repoIdToUpdate) {
-            Uri uri = getContentUri().buildUpon()
-                    .appendPath(PATH_INIT)
-                    .appendPath(Long.toString(repoIdToUpdate))
-                    .build();
-            context.getContentResolver().insert(uri, new ContentValues());
-        }
+        String where = ApkTable.NAME + "." + Cols.REPO_ID + " != ?";
+        String[] whereArgs = new String[]{Long.toString(repoIdBeingUpdated)};
+        db.execSQL(TempAppProvider.copyData(Cols.ALL_COLS, ApkTable.NAME, memoryDbName + "." + getTableName(), where), whereArgs);
+
+        String antiFeaturesWhere =
+                Schema.ApkAntiFeatureJoinTable.NAME + "." + Schema.ApkAntiFeatureJoinTable.Cols.APK_ID + " IN " +
+                        "(SELECT innerApk." + Cols.ROW_ID + " FROM " + ApkTable.NAME + " AS innerApk " +
+                        "WHERE innerApk." + Cols.REPO_ID + " != ?)";
+
+        db.execSQL(TempAppProvider.copyData(
+                Schema.ApkAntiFeatureJoinTable.Cols.ALL_COLS,
+                Schema.ApkAntiFeatureJoinTable.NAME,
+                memoryDbName + "." + getApkAntiFeatureJoinTableName(),
+                antiFeaturesWhere), whereArgs);
+
+        db.execSQL("CREATE INDEX IF NOT EXISTS " + memoryDbName + ".apk_appId on " + getTableName() + " (" + Cols.APP_ID + ");");
+        db.execSQL("CREATE INDEX IF NOT EXISTS " + memoryDbName + ".apk_compatible ON " + getTableName() + " (" + Cols.IS_COMPATIBLE + ");");
     }
 
     @Override
@@ -95,29 +100,24 @@ public class TempApkProvider extends ApkProvider {
         throw new UnsupportedOperationException("Invalid URI for apk content provider: " + uri);
     }
 
-    private void initTable(long repoIdBeingUpdated) {
-        final SQLiteDatabase db = db();
-        final String memoryDbName = TempAppProvider.DB;
-        db.execSQL(DBHelper.CREATE_TABLE_APK.replaceFirst(ApkTable.NAME, memoryDbName + "." + getTableName()));
-        db.execSQL(DBHelper.CREATE_TABLE_APK_ANTI_FEATURE_JOIN.replaceFirst(Schema.ApkAntiFeatureJoinTable.NAME, memoryDbName + "." + getApkAntiFeatureJoinTableName()));
+    public static class Helper {
 
-        String where = ApkTable.NAME + "." + Cols.REPO_ID + " != ?";
-        String[] whereArgs = new String[]{Long.toString(repoIdBeingUpdated)};
-        db.execSQL(TempAppProvider.copyData(Cols.ALL_COLS, ApkTable.NAME, memoryDbName + "." + getTableName(), where), whereArgs);
-
-        String antiFeaturesWhere =
-                Schema.ApkAntiFeatureJoinTable.NAME + "." + Schema.ApkAntiFeatureJoinTable.Cols.APK_ID + " IN " +
-                "(SELECT innerApk." + Cols.ROW_ID + " FROM " + ApkTable.NAME + " AS innerApk " +
-                "WHERE innerApk." + Cols.REPO_ID + " != ?)";
-
-        db.execSQL(TempAppProvider.copyData(
-                Schema.ApkAntiFeatureJoinTable.Cols.ALL_COLS,
-                Schema.ApkAntiFeatureJoinTable.NAME,
-                memoryDbName + "." + getApkAntiFeatureJoinTableName(),
-                antiFeaturesWhere), whereArgs);
-
-        db.execSQL("CREATE INDEX IF NOT EXISTS " + memoryDbName + ".apk_appId on " + getTableName() + " (" + Cols.APP_ID + ");");
-        db.execSQL("CREATE INDEX IF NOT EXISTS " + memoryDbName + ".apk_compatible ON " + getTableName() + " (" + Cols.IS_COMPATIBLE + ");");
+        /**
+         * Deletes the old temporary table (if it exists). Then creates a new temporary apk provider
+         * table and populates it with all the data from the real apk provider table.
+         * <p>
+         * This is package local because it must be invoked after
+         * {@link org.fdroid.fdroid.data.TempAppProvider.Helper#init(Context, long)}. Due to this
+         * dependence, that method invokes this one itself, rather than leaving it to the
+         * {@link RepoPersister}.
+         */
+        static void init(Context context, long repoIdToUpdate) {
+            Uri uri = getContentUri().buildUpon()
+                    .appendPath(PATH_INIT)
+                    .appendPath(Long.toString(repoIdToUpdate))
+                    .build();
+            context.getContentResolver().insert(uri, new ContentValues());
+        }
     }
 
 }

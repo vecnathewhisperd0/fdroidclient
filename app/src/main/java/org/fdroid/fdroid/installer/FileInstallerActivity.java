@@ -1,7 +1,6 @@
 package org.fdroid.fdroid.installer;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -100,22 +99,16 @@ public class FileInstallerActivity extends FragmentActivity {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(theme);
         builder.setMessage(R.string.app_permission_storage)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        ActivityCompat.requestPermissions(activity,
-                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                MY_PERMISSIONS_REQUEST_STORAGE);
+                .setPositiveButton(R.string.ok, (dialog, id) -> ActivityCompat.requestPermissions(activity,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_REQUEST_STORAGE))
+                .setNegativeButton(R.string.cancel, (dialog, id) -> {
+                    if (act == 1) {
+                        installer.sendBroadcastInstall(downloadUri, Installer.ACTION_INSTALL_INTERRUPTED);
+                    } else if (act == 2) {
+                        installer.sendBroadcastUninstall(Installer.ACTION_UNINSTALL_INTERRUPTED);
                     }
-                })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        if (act == 1) {
-                            installer.sendBroadcastInstall(downloadUri, Installer.ACTION_INSTALL_INTERRUPTED);
-                        } else if (act == 2) {
-                            installer.sendBroadcastUninstall(Installer.ACTION_UNINSTALL_INTERRUPTED);
-                        }
-                        finish();
-                    }
+                    finish();
                 })
                 .create().show();
     }

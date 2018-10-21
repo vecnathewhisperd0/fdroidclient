@@ -31,6 +31,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.annotation.NonNull;
 import android.util.Log;
+
 import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.R;
@@ -315,7 +316,7 @@ public class PrivilegedInstaller extends Installer {
 
                 IPrivilegedCallback callback = new IPrivilegedCallback.Stub() {
                     @Override
-                    public void handleResult(String packageName, int returnCode) throws RemoteException {
+                    public void handleResult(String packageName, int returnCode) {
                         if (returnCode == INSTALL_SUCCEEDED) {
                             sendBroadcastInstall(downloadUri, ACTION_INSTALL_COMPLETE);
                         } else {
@@ -361,7 +362,7 @@ public class PrivilegedInstaller extends Installer {
 
                 IPrivilegedCallback callback = new IPrivilegedCallback.Stub() {
                     @Override
-                    public void handleResult(String packageName, int returnCode) throws RemoteException {
+                    public void handleResult(String packageName, int returnCode) {
                         if (returnCode == DELETE_SUCCEEDED) {
                             sendBroadcastUninstall(ACTION_UNINSTALL_COMPLETE);
                         } else {

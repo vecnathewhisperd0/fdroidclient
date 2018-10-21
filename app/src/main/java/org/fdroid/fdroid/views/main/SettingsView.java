@@ -7,6 +7,7 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
+
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.views.PreferencesFragment;
 

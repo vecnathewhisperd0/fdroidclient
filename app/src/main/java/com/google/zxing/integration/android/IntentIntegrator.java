@@ -19,7 +19,6 @@ package com.google.zxing.integration.android;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -106,7 +105,7 @@ import java.util.Map;
  * @author Isaac Potoczny-Jones
  * @author Brad Drehmer
  * @author gcstang
-*/
+ */
 @SuppressWarnings("LineLength")
 public class IntentIntegrator {
 
@@ -138,7 +137,7 @@ public class IntentIntegrator {
             BSPLUS_PACKAGE + ".simple", // Barcode Scanner+ Simple
             BS_PACKAGE                  // Barcode Scanner
             // What else supports this intent?
-            );
+    );
 
     private final Activity activity;
     private final Fragment fragment;
@@ -161,8 +160,8 @@ public class IntentIntegrator {
 
     /**
      * @param fragment {@link Fragment} invoking the integration.
-     *  {@link #startActivityForResult(Intent, int)} will be called on the {@link Fragment} instead
-     *  of an {@link Activity}
+     *                 {@link #startActivityForResult(Intent, int)} will be called on the {@link Fragment} instead
+     *                 of an {@link Activity}
      */
     public IntentIntegrator(Fragment fragment) {
         this.activity = fragment.getActivity();
@@ -250,10 +249,41 @@ public class IntentIntegrator {
     }
 
     /**
+     * <p>Call this from your {@link Activity}'s
+     * {@link Activity#onActivityResult(int, int, Intent)} method.</p>
+     *
+     * @param requestCode request code from {@code onActivityResult()}
+     * @param resultCode  result code from {@code onActivityResult()}
+     * @param intent      {@link Intent} from {@code onActivityResult()}
+     * @return null if the event handled here was not related to this class, or
+     * else an {@link IntentResult} containing the result of the scan. If the user cancelled scanning,
+     * the fields will be null.
+     */
+    public static IntentResult parseActivityResult(int requestCode, int resultCode, Intent intent) {
+        if (requestCode == REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                String contents = intent.getStringExtra("SCAN_RESULT");
+                String formatName = intent.getStringExtra("SCAN_RESULT_FORMAT");
+                byte[] rawBytes = intent.getByteArrayExtra("SCAN_RESULT_BYTES");
+                int intentOrientation = intent.getIntExtra("SCAN_RESULT_ORIENTATION", Integer.MIN_VALUE);
+                Integer orientation = intentOrientation == Integer.MIN_VALUE ? null : intentOrientation;
+                String errorCorrectionLevel = intent.getStringExtra("SCAN_RESULT_ERROR_CORRECTION_LEVEL");
+                return new IntentResult(contents,
+                        formatName,
+                        rawBytes,
+                        orientation,
+                        errorCorrectionLevel);
+            }
+            return new IntentResult();
+        }
+        return null;
+    }
+
+    /**
      * Initiates a scan for all known barcode types with the default camera.
      *
      * @return the {@link AlertDialog} that was shown to the user prompting them to download the app
-     *   if a prompt was needed, or null otherwise.
+     * if a prompt was needed, or null otherwise.
      */
     public final AlertDialog initiateScan() {
         return initiateScan(ALL_CODE_TYPES, -1);
@@ -264,7 +294,7 @@ public class IntentIntegrator {
      *
      * @param cameraId camera ID of the camera to use. A negative value means "no preference".
      * @return the {@link AlertDialog} that was shown to the user prompting them to download the app
-     *   if a prompt was needed, or null otherwise.
+     * if a prompt was needed, or null otherwise.
      */
     public final AlertDialog initiateScan(int cameraId) {
         return initiateScan(ALL_CODE_TYPES, cameraId);
@@ -277,7 +307,7 @@ public class IntentIntegrator {
      *
      * @param desiredBarcodeFormats names of {@code BarcodeFormat}s to scan for
      * @return the {@link AlertDialog} that was shown to the user prompting them to download the app
-     *   if a prompt was needed, or null otherwise.
+     * if a prompt was needed, or null otherwise.
      */
     public final AlertDialog initiateScan(Collection<String> desiredBarcodeFormats) {
         return initiateScan(desiredBarcodeFormats, -1);
@@ -289,9 +319,9 @@ public class IntentIntegrator {
      * like {@link #PRODUCT_CODE_TYPES} for example.
      *
      * @param desiredBarcodeFormats names of {@code BarcodeFormat}s to scan for
-     * @param cameraId camera ID of the camera to use. A negative value means "no preference".
+     * @param cameraId              camera ID of the camera to use. A negative value means "no preference".
      * @return the {@link AlertDialog} that was shown to the user prompting them to download the app
-     *   if a prompt was needed, or null otherwise
+     * if a prompt was needed, or null otherwise
      */
     public final AlertDialog initiateScan(Collection<String> desiredBarcodeFormats, int cameraId) {
         Intent intentScan = new Intent(BS_PACKAGE + ".SCAN");
@@ -327,23 +357,6 @@ public class IntentIntegrator {
         return null;
     }
 
-    /**
-     * Start an activity. This method is defined to allow different methods of activity starting for
-     * newer versions of Android and for compatibility library.
-     *
-     * @param intent Intent to start.
-     * @param code Request code for the activity
-     * @see android.app.Activity#startActivityForResult(Intent, int)
-     * @see android.app.Fragment#startActivityForResult(Intent, int)
-     */
-    protected void startActivityForResult(Intent intent, int code) {
-        if (fragment == null) {
-            activity.startActivityForResult(intent, code);
-        } else {
-            fragment.startActivityForResult(intent, code);
-        }
-    }
-
     private String findTargetAppPackage(Intent intent) {
         PackageManager pm = activity.getPackageManager();
         List<ResolveInfo> availableApps = pm.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
@@ -367,33 +380,47 @@ public class IntentIntegrator {
         return false;
     }
 
+    /**
+     * Start an activity. This method is defined to allow different methods of activity starting for
+     * newer versions of Android and for compatibility library.
+     *
+     * @param intent Intent to start.
+     * @param code   Request code for the activity
+     * @see android.app.Activity#startActivityForResult(Intent, int)
+     * @see android.app.Fragment#startActivityForResult(Intent, int)
+     */
+    protected void startActivityForResult(Intent intent, int code) {
+        if (fragment == null) {
+            activity.startActivityForResult(intent, code);
+        } else {
+            fragment.startActivityForResult(intent, code);
+        }
+    }
+
     private AlertDialog showDownloadDialog() {
         AlertDialog.Builder downloadDialog = new AlertDialog.Builder(activity);
         downloadDialog.setTitle(title);
         downloadDialog.setMessage(message);
-        downloadDialog.setPositiveButton(buttonYes, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                String packageName;
-                if (targetApplications.contains(BS_PACKAGE)) {
-                    // Prefer to suggest download of BS if it's anywhere in the list
-                    packageName = BS_PACKAGE;
+        downloadDialog.setPositiveButton(buttonYes, (dialogInterface, i) -> {
+            String packageName;
+            if (targetApplications.contains(BS_PACKAGE)) {
+                // Prefer to suggest download of BS if it's anywhere in the list
+                packageName = BS_PACKAGE;
+            } else {
+                // Otherwise, first option:
+                packageName = targetApplications.get(0);
+            }
+            Uri uri = Uri.parse("market://details?id=" + packageName);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            try {
+                if (fragment == null) {
+                    activity.startActivity(intent);
                 } else {
-                    // Otherwise, first option:
-                    packageName = targetApplications.get(0);
+                    fragment.startActivity(intent);
                 }
-                Uri uri = Uri.parse("market://details?id=" + packageName);
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                try {
-                    if (fragment == null) {
-                        activity.startActivity(intent);
-                    } else {
-                        fragment.startActivity(intent);
-                    }
-                } catch (ActivityNotFoundException anfe) {
-                    // Hmm, market is not installed
-                    Log.w(TAG, "Google Play is not installed; cannot install " + packageName);
-                }
+            } catch (ActivityNotFoundException anfe) {
+                // Hmm, market is not installed
+                Log.w(TAG, "Google Play is not installed; cannot install " + packageName);
             }
         });
         downloadDialog.setNegativeButton(buttonNo, null);
@@ -402,42 +429,11 @@ public class IntentIntegrator {
     }
 
     /**
-     * <p>Call this from your {@link Activity}'s
-     * {@link Activity#onActivityResult(int, int, Intent)} method.</p>
-     *
-     * @param requestCode request code from {@code onActivityResult()}
-     * @param resultCode result code from {@code onActivityResult()}
-     * @param intent {@link Intent} from {@code onActivityResult()}
-     * @return null if the event handled here was not related to this class, or
-     *  else an {@link IntentResult} containing the result of the scan. If the user cancelled scanning,
-     *  the fields will be null.
-     */
-    public static IntentResult parseActivityResult(int requestCode, int resultCode, Intent intent) {
-        if (requestCode == REQUEST_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                String contents = intent.getStringExtra("SCAN_RESULT");
-                String formatName = intent.getStringExtra("SCAN_RESULT_FORMAT");
-                byte[] rawBytes = intent.getByteArrayExtra("SCAN_RESULT_BYTES");
-                int intentOrientation = intent.getIntExtra("SCAN_RESULT_ORIENTATION", Integer.MIN_VALUE);
-                Integer orientation = intentOrientation == Integer.MIN_VALUE ? null : intentOrientation;
-                String errorCorrectionLevel = intent.getStringExtra("SCAN_RESULT_ERROR_CORRECTION_LEVEL");
-                return new IntentResult(contents,
-                        formatName,
-                        rawBytes,
-                        orientation,
-                        errorCorrectionLevel);
-            }
-            return new IntentResult();
-        }
-        return null;
-    }
-
-    /**
      * Defaults to type "TEXT_TYPE".
      *
      * @param text the text string to encode as a barcode
      * @return the {@link AlertDialog} that was shown to the user prompting them to download the app
-     *   if a prompt was needed, or null otherwise
+     * if a prompt was needed, or null otherwise
      * @see #shareText(CharSequence, CharSequence)
      */
     public final AlertDialog shareText(CharSequence text) {
@@ -451,7 +447,7 @@ public class IntentIntegrator {
      * @param text the text string to encode as a barcode
      * @param type type of data to encode. See {@code com.google.zxing.client.android.Contents.Type} constants.
      * @return the {@link AlertDialog} that was shown to the user prompting them to download the app
-     *   if a prompt was needed, or null otherwise
+     * if a prompt was needed, or null otherwise
      */
     public final AlertDialog shareText(CharSequence text, CharSequence type) {
         Intent intent = new Intent();

@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.view.Display;
 import android.widget.ImageView;
+
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.encode.Contents;
@@ -59,7 +60,7 @@ public class QrGenAsyncTask extends AsyncTask<String, Void, Void> {
 
     @Override
     protected void onPostExecute(Void v) {
-        ImageView qrCodeImageView = (ImageView) activity.findViewById(viewId);
+        ImageView qrCodeImageView = activity.findViewById(viewId);
 
         // If the generation takes too long for whatever reason, then this view, and indeed the entire
         // activity may not be around any more.

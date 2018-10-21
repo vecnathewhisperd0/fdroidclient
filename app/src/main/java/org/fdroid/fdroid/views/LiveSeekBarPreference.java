@@ -6,6 +6,7 @@ import android.support.v7.preference.SeekBarPreference;
 import android.util.AttributeSet;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
 import org.fdroid.fdroid.R;
 
 public class LiveSeekBarPreference extends SeekBarPreference {

@@ -19,9 +19,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.fasterxml.jackson.annotation.JacksonInject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import org.apache.commons.io.filefilter.RegexFileFilter;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Preferences;
@@ -407,134 +409,47 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
     }
 
     /**
-     * Parses the {@code localized} block in the incoming index metadata,
-     * choosing the best match in terms of locale/language while filling as
-     * many fields as possible.  It first sets up a locale list based on user
-     * preference and the locales available for this app, then picks the texts
-     * based on that list.  One thing that makes this tricky is that any given
-     * locale block in the index might not have all the fields.  So when filling
-     * out each value, it needs to go through the whole preference list each time,
-     * rather than just taking the whole block for a specific locale.  This is to
-     * ensure that there is something to show, as often as possible.
-     * <p>
-     * It is still possible that the fields will be loaded directly by Jackson
-     * without any locale info.  This comes from the old-style, inline app metadata
-     * fields that do not have locale info.  They should not be used if the
-     * {@code localized} block is included in the index.  Also, null strings in
-     * the {@code localized} block should not overwrite Name/Summary/Description
-     * strings with empty/null if they were set directly by Jackson.
-     * <p>
-     * Choosing the locale to use follows two sets of rules, one for Android versions
-     * older than {@code android-24} and the other for {@code android-24} or newer.
-     * The system-wide language preference list was added in {@code android-24}.
-     * <ul>
-     * <li>{@code >= android-24}<ol>
-     * <li>the country variant {@code de-AT} from the user locale list
-     * <li>only the language {@code de} from the above locale
-     * <li>{@code en-US} since its the most common English for software
-     * <li>the first available {@code en} locale
-     * </ol></li>
-     * <li>{@code < android-24}<ol>
-     * <li>the country variant from the user locale: {@code de-AT}
-     * <li>only the language from the above locale:  {@code de}
-     * <li>all available locales with the same language:  {@code de-BE}
-     * <li>{@code en-US} since its the most common English for software
-     * <li>all available {@code en} locales
-     * </ol></li>
-     * </ul>
-     * On {@code >= android-24}, it is by design that this does not fallback to other
-     * country-specific locales, e.g. {@code fr-CH} does not fall back on {@code fr-FR}.
-     * If someone wants to fallback to {@code fr-FR}, they can add it to the system
-     * language list.  There are many cases where it is inappropriate to fallback to a
-     * different country-specific locale, for example {@code de-DE --> de-CH} or
-     * {@code zh-CN --> zh-TW}.
-     * <p>
-     * On {@code < android-24}, the user can only set a single
-     * locale with a country as an option, so here it makes sense to try to fallback
-     * on other country-specific locales, rather than English.
+     * {@link PackageManager} doesn't give us {@code minSdkVersion}, {@code targetSdkVersion},
+     * and {@code maxSdkVersion}, so we have to parse it straight from {@code <uses-sdk>} in
+     * {@code AndroidManifest.xml}.  If {@code targetSdkVersion} is not set, then it is
+     * equal to {@code minSdkVersion}
+     *
+     * @see <a href="https://developer.android.com/guide/topics/manifest/uses-sdk-element.html">&lt;uses-sdk&gt;</a>
      */
-    @JsonProperty("localized")
-    private void setLocalized(Map<String, Map<String, Object>> localized) { // NOPMD
-        Locale defaultLocale = Locale.getDefault();
-        String languageTag = defaultLocale.getLanguage();
-        String countryTag = defaultLocale.getCountry();
-        String localeTag;
-        if (TextUtils.isEmpty(countryTag)) {
-            localeTag = languageTag;
-        } else {
-            localeTag = languageTag + "-" + countryTag;
-        }
-
-        Set<String> availableLocales = localized.keySet();
-        Set<String> localesToUse = new LinkedHashSet<>();
-        if (availableLocales.contains(localeTag)) {
-            localesToUse.add(localeTag);
-        }
-        if (availableLocales.contains(languageTag)) {
-            localesToUse.add(languageTag);
-        }
-        if (Build.VERSION.SDK_INT >= 24) {
-            LocaleList localeList = Resources.getSystem().getConfiguration().getLocales();
-            String[] sortedLocaleList = localeList.toLanguageTags().split(",");
-            Arrays.sort(sortedLocaleList, new java.util.Comparator<String>() {
-                @Override
-                public int compare(String s1, String s2) {
-                    return s1.length() - s2.length();
-                }
-            });
-            for (String toUse : sortedLocaleList) {
-                localesToUse.add(toUse);
-                for (String l : availableLocales) {
-                    if (l.equals(toUse.split("-")[0])) {
-                        localesToUse.add(l);
-                        break;
+    private static int[] getMinTargetMaxSdkVersions(Context context, String packageName) {
+        int minSdkVersion = Apk.SDK_VERSION_MIN_VALUE;
+        int targetSdkVersion = Apk.SDK_VERSION_MIN_VALUE;
+        int maxSdkVersion = Apk.SDK_VERSION_MAX_VALUE;
+        try {
+            AssetManager am = context.createPackageContext(packageName, 0).getAssets();
+            XmlResourceParser xml = am.openXmlResourceParser("AndroidManifest.xml");
+            int eventType = xml.getEventType();
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                if (eventType == XmlPullParser.START_TAG && "uses-sdk".equals(xml.getName())) {
+                    for (int j = 0; j < xml.getAttributeCount(); j++) {
+                        switch (xml.getAttributeName(j)) {
+                            case "minSdkVersion":
+                                minSdkVersion = Integer.parseInt(xml.getAttributeValue(j));
+                                break;
+                            case "targetSdkVersion":
+                                targetSdkVersion = Integer.parseInt(xml.getAttributeValue(j));
+                                break;
+                            case "maxSdkVersion":
+                                maxSdkVersion = Integer.parseInt(xml.getAttributeValue(j));
+                                break;
+                        }
                     }
+                    break;
                 }
+                eventType = xml.nextToken();
             }
-        } else {
-            for (String l : availableLocales) {
-                if (l.startsWith(languageTag)) {
-                    localesToUse.add(l);
-                }
-            }
+        } catch (PackageManager.NameNotFoundException | IOException | XmlPullParserException e) {
+            Log.e(TAG, "Could not get min/max sdk version", e);
         }
-        if (availableLocales.contains("en-US")) {
-            localesToUse.add("en-US");
+        if (targetSdkVersion < minSdkVersion) {
+            targetSdkVersion = minSdkVersion;
         }
-        for (String l : availableLocales) {
-            if (l.startsWith("en")) {
-                localesToUse.add(l);
-                break;
-            }
-        }
-
-        whatsNew = getLocalizedEntry(localized, localesToUse, "whatsNew");
-        String value = getLocalizedEntry(localized, localesToUse, "video");
-        if (!TextUtils.isEmpty(value)) {
-            video = value.split("\n", 1)[0];
-        }
-        value = getLocalizedEntry(localized, localesToUse, "name");
-        if (!TextUtils.isEmpty(value)) {
-            name = value;
-        }
-        value = getLocalizedEntry(localized, localesToUse, "summary");
-        if (!TextUtils.isEmpty(value)) {
-            summary = value;
-        }
-        value = getLocalizedEntry(localized, localesToUse, "description");
-        if (!TextUtils.isEmpty(value)) {
-            description = formatDescription(value);
-        }
-
-        featureGraphic = getLocalizedGraphicsEntry(localized, localesToUse, "featureGraphic");
-        promoGraphic = getLocalizedGraphicsEntry(localized, localesToUse, "promoGraphic");
-        tvBanner = getLocalizedGraphicsEntry(localized, localesToUse, "tvBanner");
-
-        wearScreenshots = getLocalizedListEntry(localized, localesToUse, "wearScreenshots");
-        phoneScreenshots = getLocalizedListEntry(localized, localesToUse, "phoneScreenshots");
-        sevenInchScreenshots = getLocalizedListEntry(localized, localesToUse, "sevenInchScreenshots");
-        tenInchScreenshots = getLocalizedListEntry(localized, localesToUse, "tenInchScreenshots");
-        tvScreenshots = getLocalizedListEntry(localized, localesToUse, "tvScreenshots");
+        return new int[]{minSdkVersion, targetSdkVersion, maxSdkVersion};
     }
 
     /**
@@ -743,104 +658,130 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         }
     }
 
-    @SuppressWarnings("EmptyForIteratorPad")
-    private void initInstalledApk(Context context, Apk apk, PackageInfo packageInfo, SanitizedFile apkFile)
-            throws IOException, CertificateEncodingException {
-        apk.compatible = true;
-        apk.versionName = packageInfo.versionName;
-        apk.versionCode = packageInfo.versionCode;
-        apk.added = this.added;
-        int[] minTargetMax = getMinTargetMaxSdkVersions(context, packageName);
-        apk.minSdkVersion = minTargetMax[0];
-        apk.targetSdkVersion = minTargetMax[1];
-        apk.maxSdkVersion = minTargetMax[2];
-        apk.packageName = this.packageName;
-        apk.requestedPermissions = packageInfo.requestedPermissions;
-        apk.apkName = apk.packageName + "_" + apk.versionCode + ".apk";
+    /**
+     * Parses the {@code localized} block in the incoming index metadata,
+     * choosing the best match in terms of locale/language while filling as
+     * many fields as possible.  It first sets up a locale list based on user
+     * preference and the locales available for this app, then picks the texts
+     * based on that list.  One thing that makes this tricky is that any given
+     * locale block in the index might not have all the fields.  So when filling
+     * out each value, it needs to go through the whole preference list each time,
+     * rather than just taking the whole block for a specific locale.  This is to
+     * ensure that there is something to show, as often as possible.
+     * <p>
+     * It is still possible that the fields will be loaded directly by Jackson
+     * without any locale info.  This comes from the old-style, inline app metadata
+     * fields that do not have locale info.  They should not be used if the
+     * {@code localized} block is included in the index.  Also, null strings in
+     * the {@code localized} block should not overwrite Name/Summary/Description
+     * strings with empty/null if they were set directly by Jackson.
+     * <p>
+     * Choosing the locale to use follows two sets of rules, one for Android versions
+     * older than {@code android-24} and the other for {@code android-24} or newer.
+     * The system-wide language preference list was added in {@code android-24}.
+     * <ul>
+     * <li>{@code >= android-24}<ol>
+     * <li>the country variant {@code de-AT} from the user locale list
+     * <li>only the language {@code de} from the above locale
+     * <li>{@code en-US} since its the most common English for software
+     * <li>the first available {@code en} locale
+     * </ol></li>
+     * <li>{@code < android-24}<ol>
+     * <li>the country variant from the user locale: {@code de-AT}
+     * <li>only the language from the above locale:  {@code de}
+     * <li>all available locales with the same language:  {@code de-BE}
+     * <li>{@code en-US} since its the most common English for software
+     * <li>all available {@code en} locales
+     * </ol></li>
+     * </ul>
+     * On {@code >= android-24}, it is by design that this does not fallback to other
+     * country-specific locales, e.g. {@code fr-CH} does not fall back on {@code fr-FR}.
+     * If someone wants to fallback to {@code fr-FR}, they can add it to the system
+     * language list.  There are many cases where it is inappropriate to fallback to a
+     * different country-specific locale, for example {@code de-DE --> de-CH} or
+     * {@code zh-CN --> zh-TW}.
+     * <p>
+     * On {@code < android-24}, the user can only set a single
+     * locale with a country as an option, so here it makes sense to try to fallback
+     * on other country-specific locales, rather than English.
+     */
+    @JsonProperty("localized")
+    private void setLocalized(Map<String, Map<String, Object>> localized) { // NOPMD
+        Locale defaultLocale = Locale.getDefault();
+        String languageTag = defaultLocale.getLanguage();
+        String countryTag = defaultLocale.getCountry();
+        String localeTag;
+        if (TextUtils.isEmpty(countryTag)) {
+            localeTag = languageTag;
+        } else {
+            localeTag = languageTag + "-" + countryTag;
+        }
 
-        initInstalledObbFiles(apk);
-
-        final FeatureInfo[] features = packageInfo.reqFeatures;
-        if (features != null && features.length > 0) {
-            apk.features = new String[features.length];
-            for (int i = 0; i < features.length; i++) {
-                apk.features[i] = features[i].name;
+        Set<String> availableLocales = localized.keySet();
+        Set<String> localesToUse = new LinkedHashSet<>();
+        if (availableLocales.contains(localeTag)) {
+            localesToUse.add(localeTag);
+        }
+        if (availableLocales.contains(languageTag)) {
+            localesToUse.add(languageTag);
+        }
+        if (Build.VERSION.SDK_INT >= 24) {
+            LocaleList localeList = Resources.getSystem().getConfiguration().getLocales();
+            String[] sortedLocaleList = localeList.toLanguageTags().split(",");
+            Arrays.sort(sortedLocaleList, (s1, s2) -> s1.length() - s2.length());
+            for (String toUse : sortedLocaleList) {
+                localesToUse.add(toUse);
+                for (String l : availableLocales) {
+                    if (l.equals(toUse.split("-")[0])) {
+                        localesToUse.add(l);
+                        break;
+                    }
+                }
+            }
+        } else {
+            for (String l : availableLocales) {
+                if (l.startsWith(languageTag)) {
+                    localesToUse.add(l);
+                }
+            }
+        }
+        if (availableLocales.contains("en-US")) {
+            localesToUse.add("en-US");
+        }
+        for (String l : availableLocales) {
+            if (l.startsWith("en")) {
+                localesToUse.add(l);
+                break;
             }
         }
 
-        if (!apkFile.canRead()) {
-            return;
+        whatsNew = getLocalizedEntry(localized, localesToUse, "whatsNew");
+        String value = getLocalizedEntry(localized, localesToUse, "video");
+        if (!TextUtils.isEmpty(value)) {
+            video = value.split("\n", 1)[0];
+        }
+        value = getLocalizedEntry(localized, localesToUse, "name");
+        if (!TextUtils.isEmpty(value)) {
+            name = value;
+        }
+        value = getLocalizedEntry(localized, localesToUse, "summary");
+        if (!TextUtils.isEmpty(value)) {
+            summary = value;
+        }
+        value = getLocalizedEntry(localized, localesToUse, "description");
+        if (!TextUtils.isEmpty(value)) {
+            description = formatDescription(value);
         }
 
-        apk.installedFile = apkFile;
-        JarFile apkJar = new JarFile(apkFile);
-        HashSet<String> abis = new HashSet<>(3);
-        Pattern pattern = Pattern.compile("^lib/([a-z0-9-]+)/.*");
-        for (Enumeration<JarEntry> jarEntries = apkJar.entries(); jarEntries.hasMoreElements(); ) {
-            JarEntry jarEntry = jarEntries.nextElement();
-            Matcher matcher = pattern.matcher(jarEntry.getName());
-            if (matcher.matches()) {
-                abis.add(matcher.group(1));
-            }
-        }
-        apk.nativecode = abis.toArray(new String[abis.size()]);
+        featureGraphic = getLocalizedGraphicsEntry(localized, localesToUse, "featureGraphic");
+        promoGraphic = getLocalizedGraphicsEntry(localized, localesToUse, "promoGraphic");
+        tvBanner = getLocalizedGraphicsEntry(localized, localesToUse, "tvBanner");
 
-        final JarEntry aSignedEntry = (JarEntry) apkJar.getEntry("AndroidManifest.xml");
-
-        if (aSignedEntry == null) {
-            apkJar.close();
-            throw new CertificateEncodingException("null signed entry!");
-        }
-
-        byte[] rawCertBytes;
-
-        // Due to a bug in android 5.0 lollipop, the inclusion of BouncyCastle causes
-        // breakage when verifying the signature of most .jars. For more
-        // details, check out https://gitlab.com/fdroid/fdroidclient/issues/111.
-        try {
-            FDroidApp.disableBouncyCastleOnLollipop();
-            final InputStream tmpIn = apkJar.getInputStream(aSignedEntry);
-            byte[] buff = new byte[2048];
-            //noinspection StatementWithEmptyBody
-            while (tmpIn.read(buff, 0, buff.length) != -1) {
-                /*
-                 * NOP - apparently have to READ from the JarEntry before you can
-                 * call getCerficates() and have it return != null. Yay Java.
-                 */
-            }
-            tmpIn.close();
-
-            if (aSignedEntry.getCertificates() == null
-                    || aSignedEntry.getCertificates().length == 0) {
-                apkJar.close();
-                throw new CertificateEncodingException("No Certificates found!");
-            }
-
-            final Certificate signer = aSignedEntry.getCertificates()[0];
-            rawCertBytes = signer.getEncoded();
-        } finally {
-            FDroidApp.enableBouncyCastleOnLollipop();
-        }
-        apkJar.close();
-
-        /*
-         * I don't fully understand the loop used here. I've copied it verbatim
-         * from getsig.java bundled with FDroidServer. I *believe* it is taking
-         * the raw byte encoding of the certificate & converting it to a byte
-         * array of the hex representation of the original certificate byte
-         * array. This is then MD5 sum'd. It's a really bad way to be doing this
-         * if I'm right... If I'm not right, I really don't know! see lines
-         * 67->75 in getsig.java bundled with Fdroidserver
-         */
-        final byte[] fdroidSig = new byte[rawCertBytes.length * 2];
-        for (int j = 0; j < rawCertBytes.length; j++) {
-            byte v = rawCertBytes[j];
-            int d = (v >> 4) & 0xF;
-            fdroidSig[j * 2] = (byte) (d >= 10 ? ('a' + d - 10) : ('0' + d));
-            d = v & 0xF;
-            fdroidSig[j * 2 + 1] = (byte) (d >= 10 ? ('a' + d - 10) : ('0' + d));
-        }
-        apk.sig = Utils.hashBytes(fdroidSig, "md5");
+        wearScreenshots = getLocalizedListEntry(localized, localesToUse, "wearScreenshots");
+        phoneScreenshots = getLocalizedListEntry(localized, localesToUse, "phoneScreenshots");
+        sevenInchScreenshots = getLocalizedListEntry(localized, localesToUse, "sevenInchScreenshots");
+        tenInchScreenshots = getLocalizedListEntry(localized, localesToUse, "tenInchScreenshots");
+        tvScreenshots = getLocalizedListEntry(localized, localesToUse, "tvScreenshots");
     }
 
     /**
@@ -951,34 +892,108 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         return isApk;
     }
 
-    public boolean isMediaInstalled(Context context) {
-        return getMediaApkifInstalled(context) != null;
-    }
+    @SuppressWarnings("EmptyForIteratorPad")
+    private void initInstalledApk(Context context, Apk apk, PackageInfo packageInfo, SanitizedFile apkFile)
+            throws IOException, CertificateEncodingException {
+        apk.compatible = true;
+        apk.versionName = packageInfo.versionName;
+        apk.versionCode = packageInfo.versionCode;
+        apk.added = this.added;
+        int[] minTargetMax = getMinTargetMaxSdkVersions(context, packageName);
+        apk.minSdkVersion = minTargetMax[0];
+        apk.targetSdkVersion = minTargetMax[1];
+        apk.maxSdkVersion = minTargetMax[2];
+        apk.packageName = this.packageName;
+        apk.requestedPermissions = packageInfo.requestedPermissions;
+        apk.apkName = apk.packageName + "_" + apk.versionCode + ".apk";
 
-    /**
-     * Gets the installed media apk from all the apks of this {@link App}, if any.
-     *
-     * @return The installed media {@link Apk} if it exists, null otherwise.
-     */
-    public Apk getMediaApkifInstalled(Context context) {
-        // This is always null for media files. We could skip the code below completely if it wasn't
-        if (this.installedApk != null && !this.installedApk.isApk() && this.installedApk.isMediaInstalled(context)) {
-            return this.installedApk;
-        }
-        // This code comes from AppDetailsRecyclerViewAdapter
-        final List<Apk> apks = ApkProvider.Helper.findByPackageName(context, this.packageName);
-        for (final Apk apk : apks) {
-            boolean allowByCompatability = apk.compatible || Preferences.get().showIncompatibleVersions();
-            boolean allowBySig = this.installedSig == null || TextUtils.equals(this.installedSig, apk.sig);
-            if (allowByCompatability && allowBySig) {
-                if (!apk.isApk()) {
-                    if (apk.isMediaInstalled(context)) {
-                        return apk;
-                    }
-                }
+        initInstalledObbFiles(apk);
+
+        final FeatureInfo[] features = packageInfo.reqFeatures;
+        if (features != null && features.length > 0) {
+            apk.features = new String[features.length];
+            for (int i = 0; i < features.length; i++) {
+                apk.features[i] = features[i].name;
             }
         }
-        return null;
+
+        if (!apkFile.canRead()) {
+            return;
+        }
+
+        apk.installedFile = apkFile;
+        JarFile apkJar = new JarFile(apkFile);
+        HashSet<String> abis = new HashSet<>(3);
+        Pattern pattern = Pattern.compile("^lib/([a-z0-9-]+)/.*");
+        for (Enumeration<JarEntry> jarEntries = apkJar.entries(); jarEntries.hasMoreElements(); ) {
+            JarEntry jarEntry = jarEntries.nextElement();
+            Matcher matcher = pattern.matcher(jarEntry.getName());
+            if (matcher.matches()) {
+                abis.add(matcher.group(1));
+            }
+        }
+        apk.nativecode = abis.toArray(new String[0]);
+
+        final JarEntry aSignedEntry = (JarEntry) apkJar.getEntry("AndroidManifest.xml");
+
+        if (aSignedEntry == null) {
+            apkJar.close();
+            throw new CertificateEncodingException("null signed entry!");
+        }
+
+        byte[] rawCertBytes;
+
+        // Due to a bug in android 5.0 lollipop, the inclusion of BouncyCastle causes
+        // breakage when verifying the signature of most .jars. For more
+        // details, check out https://gitlab.com/fdroid/fdroidclient/issues/111.
+        try {
+            FDroidApp.disableBouncyCastleOnLollipop();
+            final InputStream tmpIn = apkJar.getInputStream(aSignedEntry);
+            byte[] buff = new byte[2048];
+            //noinspection StatementWithEmptyBody
+            while (tmpIn.read(buff, 0, buff.length) != -1) {
+                /*
+                 * NOP - apparently have to READ from the JarEntry before you can
+                 * call getCertificates() and have it return != null. Yay Java.
+                 */
+            }
+            tmpIn.close();
+
+            if (aSignedEntry.getCertificates() == null
+                    || aSignedEntry.getCertificates().length == 0) {
+                apkJar.close();
+                throw new CertificateEncodingException("No Certificates found!");
+            }
+
+            final Certificate signer = aSignedEntry.getCertificates()[0];
+            rawCertBytes = signer.getEncoded();
+        } finally {
+            FDroidApp.enableBouncyCastleOnLollipop();
+        }
+        apkJar.close();
+
+        /*
+         * I don't fully understand the loop used here. I've copied it verbatim
+         * from getsig.java bundled with FDroidServer. I *believe* it is taking
+         * the raw byte encoding of the certificate & converting it to a byte
+         * array of the hex representation of the original certificate byte
+         * array. This is then MD5 sum'd. It's a really bad way to be doing this
+         * if I'm right... If I'm not right, I really don't know! see lines
+         * 67->75 in getsig.java bundled with Fdroidserver
+         */
+        final byte[] fdroidSig = new byte[rawCertBytes.length * 2];
+        for (int j = 0; j < rawCertBytes.length; j++) {
+            byte v = rawCertBytes[j];
+            int d = (v >> 4) & 0xF;
+            fdroidSig[j * 2] = (byte) (d >= 10 ? ('a' + d - 10) : ('0' + d));
+            d = v & 0xF;
+            fdroidSig[j * 2 + 1] = (byte) (d >= 10 ? ('a' + d - 10) : ('0' + d));
+        }
+        apk.sig = Utils.hashBytes(fdroidSig, "md5");
+    }
+
+    public boolean isMediaInstalled(Context context) {
+        return getMediaApkIfInstalled(context) != null;
     }
 
     /**
@@ -1050,43 +1065,29 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
     }
 
     /**
-     * {@link PackageManager} doesn't give us {@code minSdkVersion}, {@code targetSdkVersion},
-     * and {@code maxSdkVersion}, so we have to parse it straight from {@code <uses-sdk>} in
-     * {@code AndroidManifest.xml}.  If {@code targetSdkVersion} is not set, then it is
-     * equal to {@code minSdkVersion}
+     * Gets the installed media apk from all the apks of this {@link App}, if any.
      *
-     * @see <a href="https://developer.android.com/guide/topics/manifest/uses-sdk-element.html">&lt;uses-sdk&gt;</a>
+     * @return The installed media {@link Apk} if it exists, null otherwise.
      */
-    private static int[] getMinTargetMaxSdkVersions(Context context, String packageName) {
-        int minSdkVersion = Apk.SDK_VERSION_MIN_VALUE;
-        int targetSdkVersion = Apk.SDK_VERSION_MIN_VALUE;
-        int maxSdkVersion = Apk.SDK_VERSION_MAX_VALUE;
-        try {
-            AssetManager am = context.createPackageContext(packageName, 0).getAssets();
-            XmlResourceParser xml = am.openXmlResourceParser("AndroidManifest.xml");
-            int eventType = xml.getEventType();
-            while (eventType != XmlPullParser.END_DOCUMENT) {
-                if (eventType == XmlPullParser.START_TAG && "uses-sdk".equals(xml.getName())) {
-                    for (int j = 0; j < xml.getAttributeCount(); j++) {
-                        if (xml.getAttributeName(j).equals("minSdkVersion")) {
-                            minSdkVersion = Integer.parseInt(xml.getAttributeValue(j));
-                        } else if (xml.getAttributeName(j).equals("targetSdkVersion")) {
-                            targetSdkVersion = Integer.parseInt(xml.getAttributeValue(j));
-                        } else if (xml.getAttributeName(j).equals("maxSdkVersion")) {
-                            maxSdkVersion = Integer.parseInt(xml.getAttributeValue(j));
-                        }
+    public Apk getMediaApkIfInstalled(Context context) {
+        // This is always null for media files. We could skip the code below completely if it wasn't
+        if (this.installedApk != null && !this.installedApk.isApk() && this.installedApk.isMediaInstalled(context)) {
+            return this.installedApk;
+        }
+        // This code comes from AppDetailsRecyclerViewAdapter
+        final List<Apk> apks = ApkProvider.Helper.findByPackageName(context, this.packageName);
+        for (final Apk apk : apks) {
+            boolean allowByCompatibility = apk.compatible || Preferences.get().showIncompatibleVersions();
+            boolean allowBySig = this.installedSig == null || TextUtils.equals(this.installedSig, apk.sig);
+            if (allowByCompatibility && allowBySig) {
+                if (!apk.isApk()) {
+                    if (apk.isMediaInstalled(context)) {
+                        return apk;
                     }
-                    break;
                 }
-                eventType = xml.nextToken();
             }
-        } catch (PackageManager.NameNotFoundException | IOException | XmlPullParserException e) {
-            Log.e(TAG, "Could not get min/max sdk version", e);
         }
-        if (targetSdkVersion < minSdkVersion) {
-            targetSdkVersion = minSdkVersion;
-        }
-        return new int[]{minSdkVersion, targetSdkVersion, maxSdkVersion};
+        return null;
     }
 
     public long getId() {

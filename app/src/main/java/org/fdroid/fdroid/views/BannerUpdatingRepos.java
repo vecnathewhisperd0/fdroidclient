@@ -8,6 +8,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
+
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.UpdateService;
 

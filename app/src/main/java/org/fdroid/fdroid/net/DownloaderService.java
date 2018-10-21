@@ -32,16 +32,12 @@ import android.os.Process;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
-import org.fdroid.fdroid.ProgressListener;
+
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.SanitizedFile;
 import org.fdroid.fdroid.installer.ApkCache;
 
-import javax.net.ssl.SSLHandshakeException;
-import javax.net.ssl.SSLKeyException;
-import javax.net.ssl.SSLPeerUnverifiedException;
-import javax.net.ssl.SSLProtocolException;
 import java.io.File;
 import java.io.IOException;
 import java.net.ConnectException;
@@ -50,6 +46,11 @@ import java.net.NoRouteToHostException;
 import java.net.ProtocolException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
+
+import javax.net.ssl.SSLHandshakeException;
+import javax.net.ssl.SSLKeyException;
+import javax.net.ssl.SSLPeerUnverifiedException;
+import javax.net.ssl.SSLProtocolException;
 
 /**
  * DownloaderService is a service that handles asynchronous download requests
@@ -144,7 +145,7 @@ public class DownloaderService extends Service {
                 Utils.debugLog(TAG, "Removing download with ID of " + whatToRemove
                         + " from service handler, then sending interrupted event.");
                 serviceHandler.removeMessages(whatToRemove);
-                sendBroadcast(intent.getData(), Downloader.ACTION_INTERRUPTED);
+                sendBroadcast(intent.getData());
             } else if (isActive(uriString)) {
                 downloader.cancelDownload();
             } else {
@@ -205,15 +206,12 @@ public class DownloaderService extends Service {
 
         try {
             downloader = DownloaderFactory.create(this, uri, localFile);
-            downloader.setListener(new ProgressListener() {
-                @Override
-                public void onProgress(String urlString, long bytesRead, long totalBytes) {
-                    Intent intent = new Intent(Downloader.ACTION_PROGRESS);
-                    intent.setData(uri);
-                    intent.putExtra(Downloader.EXTRA_BYTES_READ, bytesRead);
-                    intent.putExtra(Downloader.EXTRA_TOTAL_BYTES, totalBytes);
-                    localBroadcastManager.sendBroadcast(intent);
-                }
+            downloader.setListener((urlString, bytesRead, totalBytes) -> {
+                Intent intent1 = new Intent(Downloader.ACTION_PROGRESS);
+                intent1.setData(uri);
+                intent1.putExtra(Downloader.EXTRA_BYTES_READ, bytesRead);
+                intent1.putExtra(Downloader.EXTRA_TOTAL_BYTES, totalBytes);
+                localBroadcastManager.sendBroadcast(intent1);
             });
             downloader.setTimeout(timeout);
             downloader.download();
@@ -243,16 +241,16 @@ public class DownloaderService extends Service {
         downloader = null;
     }
 
-    private void sendBroadcast(Uri uri, String action) {
-        sendBroadcast(uri, action, null, null);
+    private void sendBroadcast(Uri uri) {
+        sendBroadcast(uri, null);
     }
 
     private void sendBroadcast(Uri uri, String action, File file, long repoId, String originalUrlString) {
         sendBroadcast(uri, action, file, null, repoId, originalUrlString);
     }
 
-    private void sendBroadcast(Uri uri, String action, File file, String errorMessage) {
-        sendBroadcast(uri, action, file, errorMessage, 0, null);
+    private void sendBroadcast(Uri uri, String errorMessage) {
+        sendBroadcast(uri, Downloader.ACTION_INTERRUPTED, null, errorMessage, 0, null);
     }
 
     private void sendBroadcast(Uri uri, String action, File file, String errorMessage, long repoId,

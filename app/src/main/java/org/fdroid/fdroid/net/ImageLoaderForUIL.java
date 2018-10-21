@@ -1,6 +1,7 @@
 package org.fdroid.fdroid.net;
 
 import android.content.Context;
+
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 
 import java.io.IOException;

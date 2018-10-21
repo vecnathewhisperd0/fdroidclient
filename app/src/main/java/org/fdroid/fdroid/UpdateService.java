@@ -43,6 +43,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
+
 import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.data.ApkProvider;
 import org.fdroid.fdroid.data.App;
@@ -55,7 +56,6 @@ import org.fdroid.fdroid.data.Schema;
 import org.fdroid.fdroid.installer.InstallManagerService;
 import org.fdroid.fdroid.net.BluetoothDownloader;
 import org.fdroid.fdroid.net.ConnectivityMonitorService;
-import org.fdroid.fdroid.views.main.MainActivity;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -268,18 +268,6 @@ public class UpdateService extends JobIntentService {
                 .setCategory(NotificationCompat.CATEGORY_SERVICE)
                 .setContentTitle(getString(R.string.update_notification_title));
         appUpdateStatusManager = AppUpdateStatusManager.getInstance(this);
-
-        // Android docs are a little sketchy, however it seems that Gingerbread is the last
-        // sdk that made a content intent mandatory:
-        //
-        //   http://stackoverflow.com/a/20032920
-        //
-        if (Build.VERSION.SDK_INT <= 10) {
-            Intent pendingIntent = new Intent(this, MainActivity.class);
-            pendingIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            notificationBuilder.setContentIntent(
-                    PendingIntent.getActivity(this, 0, pendingIntent, PendingIntent.FLAG_UPDATE_CURRENT));
-        }
     }
 
     @Override
@@ -311,7 +299,7 @@ public class UpdateService extends JobIntentService {
     private void sendRepoErrorStatus(int statusCode, ArrayList<CharSequence> repoErrors) {
         Intent intent = new Intent(LOCAL_ACTION_STATUS);
         intent.putExtra(EXTRA_STATUS_CODE, statusCode);
-        intent.putExtra(EXTRA_REPO_ERRORS, repoErrors.toArray(new CharSequence[repoErrors.size()]));
+        intent.putExtra(EXTRA_REPO_ERRORS, repoErrors.toArray(new CharSequence[0]));
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
@@ -397,13 +385,8 @@ public class UpdateService extends JobIntentService {
         if (toastHandler == null) {
             toastHandler = new Handler(Looper.getMainLooper());
         }
-        toastHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(getApplicationContext(),
-                        R.string.warning_no_internet, Toast.LENGTH_SHORT).show();
-            }
-        });
+        toastHandler.post(() -> Toast.makeText(getApplicationContext(),
+                R.string.warning_no_internet, Toast.LENGTH_SHORT).show());
     }
 
     @Override

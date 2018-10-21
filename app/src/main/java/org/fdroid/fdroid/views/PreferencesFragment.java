@@ -44,8 +44,7 @@ import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.WindowManager;
-import info.guardianproject.netcipher.NetCipher;
-import info.guardianproject.netcipher.proxy.OrbotHelper;
+
 import org.fdroid.fdroid.CleanCacheService;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Languages;
@@ -56,6 +55,9 @@ import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.RepoProvider;
 import org.fdroid.fdroid.installer.InstallHistoryService;
 import org.fdroid.fdroid.installer.PrivilegedInstaller;
+
+import info.guardianproject.netcipher.NetCipher;
+import info.guardianproject.netcipher.proxy.OrbotHelper;
 
 public class PreferencesFragment extends PreferenceFragment
         implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -126,28 +128,13 @@ public class PreferencesFragment extends PreferenceFragment
 
         overWifiSeekBar = (LiveSeekBarPreference) findPreference(Preferences.PREF_OVER_WIFI);
         overWifiPrevious = overWifiSeekBar.getValue();
-        overWifiSeekBar.setSeekBarLiveUpdater(new LiveSeekBarPreference.SeekBarLiveUpdater() {
-            @Override
-            public String seekBarUpdated(int position) {
-                return getNetworkSeekBarSummary(position);
-            }
-        });
+        overWifiSeekBar.setSeekBarLiveUpdater(this::getNetworkSeekBarSummary);
         overDataSeekBar = (LiveSeekBarPreference) findPreference(Preferences.PREF_OVER_DATA);
         overDataPrevious = overDataSeekBar.getValue();
-        overDataSeekBar.setSeekBarLiveUpdater(new LiveSeekBarPreference.SeekBarLiveUpdater() {
-            @Override
-            public String seekBarUpdated(int position) {
-                return getNetworkSeekBarSummary(position);
-            }
-        });
+        overDataSeekBar.setSeekBarLiveUpdater(this::getNetworkSeekBarSummary);
         updateIntervalSeekBar = (LiveSeekBarPreference) findPreference(Preferences.PREF_UPDATE_INTERVAL);
         updateIntervalPrevious = updateIntervalSeekBar.getValue();
-        updateIntervalSeekBar.setSeekBarLiveUpdater(new LiveSeekBarPreference.SeekBarLiveUpdater() {
-            @Override
-            public String seekBarUpdated(int position) {
-                return getString(UPDATE_INTERVAL_NAMES[position]);
-            }
-        });
+        updateIntervalSeekBar.setSeekBarLiveUpdater(position -> getString(UPDATE_INTERVAL_NAMES[position]));
 
         ListPreference languagePref = (ListPreference) findPreference(Preferences.PREF_LANGUAGE);
         if (Build.VERSION.SDK_INT >= 24) {
@@ -187,12 +174,12 @@ public class PreferencesFragment extends PreferenceFragment
         }
     }
 
-    private void textSummary(String key, int resId) {
+    private void textSummary(String key) {
         EditTextPreference pref = (EditTextPreference) findPreference(key);
         if (pref == null) {
             Utils.debugLog(TAG, "null preference found for " + key);
         } else {
-            pref.setSummary(getString(resId, pref.getText()));
+            pref.setSummary(getString(R.string.local_repo_name_summary, pref.getText()));
         }
     }
 
@@ -274,7 +261,7 @@ public class PreferencesFragment extends PreferenceFragment
                 break;
 
             case Preferences.PREF_LOCAL_REPO_NAME:
-                textSummary(key, R.string.local_repo_name_summary);
+                textSummary(key);
                 break;
 
             case Preferences.PREF_LOCAL_REPO_HTTPS:
@@ -394,26 +381,21 @@ public class PreferencesFragment extends PreferenceFragment
         // is no benefit showing it to them (it will only be disabled and we can't offer any
         // way to easily install from here.
         if (Build.VERSION.SDK_INT > 19 && !installed) {
-            if (pref != null) {
-                otherPrefGroup.removePreference(pref);
-            }
+            otherPrefGroup.removePreference(pref);
         } else {
             pref.setEnabled(installed);
             pref.setDefaultValue(installed);
             pref.setChecked(enabled && installed);
 
-            pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    SharedPreferences.Editor editor = pref.getSharedPreferences().edit();
-                    if (pref.isChecked()) {
-                        editor.remove(Preferences.PREF_PRIVILEGED_INSTALLER);
-                    } else {
-                        editor.putBoolean(Preferences.PREF_PRIVILEGED_INSTALLER, false);
-                    }
-                    editor.apply();
-                    return true;
+            pref.setOnPreferenceClickListener(preference -> {
+                SharedPreferences.Editor editor = pref.getSharedPreferences().edit();
+                if (pref.isChecked()) {
+                    editor.remove(Preferences.PREF_PRIVILEGED_INSTALLER);
+                } else {
+                    editor.putBoolean(Preferences.PREF_PRIVILEGED_INSTALLER, false);
                 }
+                editor.apply();
+                return true;
             });
         }
     }
@@ -421,19 +403,15 @@ public class PreferencesFragment extends PreferenceFragment
     /**
      * If a user specifies they want to fetch updates automatically, then start the download of relevant
      * updates as soon as they enable the feature.
-     * Also, if the user has the priv extention installed then change the label to indicate that it
+     * Also, if the user has the priv extension installed then change the label to indicate that it
      * will actually _install_ apps, not just fetch their .apk file automatically.
      */
     private void initAutoFetchUpdatesPreference() {
-        updateAutoDownloadPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                if (newValue instanceof Boolean && (boolean) newValue) {
-                    UpdateService.autoDownloadUpdates(getActivity());
-                }
-                return true;
+        updateAutoDownloadPref.setOnPreferenceChangeListener((preference, newValue) -> {
+            if (newValue instanceof Boolean && (boolean) newValue) {
+                UpdateService.autoDownloadUpdates(getActivity());
             }
+            return true;
         });
 
         if (PrivilegedInstaller.isDefault(getActivity())) {
@@ -449,24 +427,21 @@ public class PreferencesFragment extends PreferenceFragment
         boolean useTor = Preferences.get().isTorEnabled();
         useTorCheckPref.setDefaultValue(useTor);
         useTorCheckPref.setChecked(useTor);
-        useTorCheckPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object enabled) {
-                if ((Boolean) enabled) {
-                    final Activity activity = getActivity();
-                    enableProxyCheckPref.setEnabled(false);
-                    if (OrbotHelper.isOrbotInstalled(activity)) {
-                        NetCipher.useTor();
-                    } else {
-                        Intent intent = OrbotHelper.getOrbotInstallIntent(activity);
-                        activity.startActivityForResult(intent, REQUEST_INSTALL_ORBOT);
-                    }
+        useTorCheckPref.setOnPreferenceChangeListener((preference, enabled) -> {
+            if ((Boolean) enabled) {
+                final Activity activity = getActivity();
+                enableProxyCheckPref.setEnabled(false);
+                if (OrbotHelper.isOrbotInstalled(activity)) {
+                    NetCipher.useTor();
                 } else {
-                    enableProxyCheckPref.setEnabled(true);
-                    NetCipher.clearProxy();
+                    Intent intent = OrbotHelper.getOrbotInstallIntent(activity);
+                    activity.startActivityForResult(intent, REQUEST_INSTALL_ORBOT);
                 }
-                return true;
+            } else {
+                enableProxyCheckPref.setEnabled(true);
+                NetCipher.clearProxy();
             }
+            return true;
         });
     }
 
@@ -502,8 +477,7 @@ public class PreferencesFragment extends PreferenceFragment
     }
 
     @Override
-    public void onSharedPreferenceChanged(
-            SharedPreferences sharedPreferences, String key) {
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         updateSummary(key, true);
         if (key.equals(Preferences.PREF_PREVENT_SCREENSHOTS)) {
             if (Preferences.get().preventScreenshots()) {

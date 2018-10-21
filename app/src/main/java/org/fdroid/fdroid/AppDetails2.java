@@ -26,7 +26,6 @@ import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.ContentObserver;
@@ -45,10 +44,11 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewTreeObserver;
 import android.widget.Toast;
+
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+
 import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.data.ApkProvider;
 import org.fdroid.fdroid.data.App;
@@ -92,55 +92,77 @@ public class AppDetails2 extends AppCompatActivity
 
     private static String visiblePackageName;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        fdroidApp = (FDroidApp) getApplication();
-        fdroidApp.applyTheme(this);
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.app_details2);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(""); // Nice and clean toolbar
-        toolbar.setNavigationIcon(R.drawable.ic_back);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        supportPostponeEnterTransition();
+    private final BroadcastReceiver installReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            switch (intent.getAction()) {
+                case Installer.ACTION_INSTALL_STARTED:
+                    adapter.setIndeterminateProgress(R.string.installing);
+                    break;
+                case Installer.ACTION_INSTALL_COMPLETE:
+                    adapter.clearProgress();
+                    unregisterInstallReceiver();
+                    // Ideally, we wouldn't try to update the view here, because the InstalledAppProviderService
+                    // hasn't had time to do its thing and mark the app as installed. Instead, we
+                    // wait for that service to notify us, and then we will respond in appObserver.
 
-        String packageName = getPackageNameFromIntent(getIntent());
-        if (!resetCurrentApp(packageName)) {
-            finish();
-            return;
-        }
+                    // Having said that, there are some cases where the PackageManager doesn't
+                    // return control back to us until after it has already broadcast to the
+                    // InstalledAppProviderService. This means that we are not listening for any
+                    // feedback from InstalledAppProviderService (we intentionally stop listening in
+                    // onPause). Empirically, this happens when upgrading an app rather than a clean
+                    // install. However given the nature of this race condition, it may be different
+                    // on different operating systems. As such, we'll just update our view now. It may
+                    // happen again in our appObserver, but that will only cause a little more load
+                    // on the system, it shouldn't cause a different UX.
+                    onAppChanged();
+                    break;
+                case Installer.ACTION_INSTALL_INTERRUPTED:
+                    adapter.clearProgress();
+                    onAppChanged();
 
-        localBroadcastManager = LocalBroadcastManager.getInstance(this);
+                    String errorMessage =
+                            intent.getStringExtra(Installer.EXTRA_ERROR_MESSAGE);
 
-        recyclerView = (RecyclerView) findViewById(R.id.rvDetails);
-        adapter = new AppDetailsRecyclerViewAdapter(this, app, this);
-        LinearLayoutManager lm = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        lm.setStackFromEnd(false);
+                    if (!TextUtils.isEmpty(errorMessage) && !isFinishing()) {
+                        Log.e(TAG, "install aborted with errorMessage: " + errorMessage);
 
-        // Has to be invoked after AppDetailsRecyclerViewAdapter is created.
-        refreshStatus();
+                        String title = String.format(
+                                getString(R.string.install_error_notify_title),
+                                app.name);
 
-        recyclerView.setLayoutManager(lm);
-        recyclerView.setAdapter(adapter);
-
-        recyclerView.getViewTreeObserver().addOnPreDrawListener(
-                new ViewTreeObserver.OnPreDrawListener() {
-                    @Override
-                    public boolean onPreDraw() {
-                        supportStartPostponedEnterTransition();
-                        return true;
+                        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(AppDetails2.this);
+                        alertBuilder.setTitle(title);
+                        alertBuilder.setMessage(errorMessage);
+                        alertBuilder.setNeutralButton(android.R.string.ok, null);
+                        alertBuilder.create().show();
                     }
-                }
-        );
+                    unregisterInstallReceiver();
+                    break;
+                case Installer.ACTION_INSTALL_USER_INTERACTION:
+                    Apk apk = intent.getParcelableExtra(Installer.EXTRA_APK);
+                    if (!isAppVisible(apk.packageName)) {
+                        Utils.debugLog(TAG, "Ignore request for user interaction from installer, because "
+                                + apk.packageName + " is no longer showing.");
+                        break;
+                    }
 
-        // Load the feature graphic, if present
-        final FeatureImage featureImage = (FeatureImage) findViewById(R.id.feature_graphic);
-        DisplayImageOptions displayImageOptions = Utils.getRepoAppDisplayImageOptions();
-        String featureGraphicUrl = app.getFeatureGraphicUrl(this);
-        featureImage.loadImageAndDisplay(ImageLoader.getInstance(), displayImageOptions,
-                featureGraphicUrl, app.iconUrl);
-    }
+                    Utils.debugLog(TAG, "Automatically showing package manager for " + apk.packageName
+                            + " as it is being viewed by the user.");
+                    PendingIntent pendingIntent = intent.getParcelableExtra(Installer.EXTRA_USER_INTERACTION_PI);
+
+                    try {
+                        pendingIntent.send();
+                    } catch (PendingIntent.CanceledException e) {
+                        Log.e(TAG, "PI canceled", e);
+                    }
+
+                    break;
+                default:
+                    throw new RuntimeException("intent action not handled!");
+            }
+        }
+    };
 
     private String getPackageNameFromIntent(Intent intent) {
         if (!intent.hasExtra(EXTRA_APPID)) {
@@ -246,37 +268,50 @@ public class AppDetails2 extends AppCompatActivity
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_share) {
-            Intent shareIntent = new Intent(Intent.ACTION_SEND);
-            shareIntent.setType("text/plain");
-            shareIntent.putExtra(Intent.EXTRA_SUBJECT, app.name);
-            shareIntent.putExtra(Intent.EXTRA_TEXT, app.name + " (" + app.summary
-                    + ") - https://f-droid.org/app/" + app.packageName);
+    protected void onCreate(Bundle savedInstanceState) {
+        fdroidApp = (FDroidApp) getApplication();
+        fdroidApp.applyTheme(this);
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.app_details2);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(""); // Nice and clean toolbar
+        toolbar.setNavigationIcon(R.drawable.ic_back);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        supportPostponeEnterTransition();
 
-            boolean showNearbyItem = app.isInstalled(getApplicationContext()) && fdroidApp.bluetoothAdapter != null;
-            CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.rootCoordinator);
-            ShareChooserDialog.createChooser(coordinatorLayout, this, this, shareIntent, showNearbyItem);
-            return true;
-        } else if (item.getItemId() == R.id.action_ignore_all) {
-            app.getPrefs(this).ignoreAllUpdates ^= true;
-            item.setChecked(app.getPrefs(this).ignoreAllUpdates);
-            AppPrefsProvider.Helper.update(this, app, app.getPrefs(this));
-            return true;
-        } else if (item.getItemId() == R.id.action_ignore_this) {
-            if (app.getPrefs(this).ignoreThisUpdate >= app.suggestedVersionCode) {
-                app.getPrefs(this).ignoreThisUpdate = 0;
-            } else {
-                app.getPrefs(this).ignoreThisUpdate = app.suggestedVersionCode;
-            }
-            item.setChecked(app.getPrefs(this).ignoreThisUpdate > 0);
-            AppPrefsProvider.Helper.update(this, app, app.getPrefs(this));
-            return true;
-        } else if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
-            return true;
+        String packageName = getPackageNameFromIntent(getIntent());
+        if (resetCurrentApp(packageName)) {
+            finish();
+            return;
         }
-        return super.onOptionsItemSelected(item);
+
+        localBroadcastManager = LocalBroadcastManager.getInstance(this);
+
+        recyclerView = findViewById(R.id.rvDetails);
+        adapter = new AppDetailsRecyclerViewAdapter(this, app, this);
+        LinearLayoutManager lm = new LinearLayoutManager(this,
+                LinearLayoutManager.VERTICAL, false);
+        lm.setStackFromEnd(false);
+
+        // Has to be invoked after AppDetailsRecyclerViewAdapter is created.
+        refreshStatus();
+
+        recyclerView.setLayoutManager(lm);
+        recyclerView.setAdapter(adapter);
+
+        recyclerView.getViewTreeObserver().addOnPreDrawListener(() -> {
+                    supportStartPostponedEnterTransition();
+                    return true;
+                }
+        );
+
+        // Load the feature graphic, if present
+        final FeatureImage featureImage = findViewById(R.id.feature_graphic);
+        DisplayImageOptions displayImageOptions = Utils.getRepoAppDisplayImageOptions();
+        String featureGraphicUrl = app.getFeatureGraphicUrl(this);
+        featureImage.loadImageAndDisplay(ImageLoader.getInstance(), displayImageOptions,
+                featureGraphicUrl, app.iconUrl);
     }
 
     @Override
@@ -321,56 +356,38 @@ public class AppDetails2 extends AppCompatActivity
         installApk(apkToInstall);
     }
 
-    // Install the version of this app denoted by 'app.curApk'.
     @Override
-    public void installApk(final Apk apk) {
-        if (isFinishing()) {
-            return;
-        }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_share) {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, app.name);
+            shareIntent.putExtra(Intent.EXTRA_TEXT, app.name + " (" + app.summary
+                    + ") - https://f-droid.org/app/" + app.packageName);
 
-        if (!apk.compatible) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(R.string.installIncompatible);
-            builder.setPositiveButton(R.string.yes,
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog,
-                                            int whichButton) {
-                            initiateInstall(apk);
-                        }
-                    });
-            builder.setNegativeButton(R.string.no,
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog,
-                                            int whichButton) {
-                        }
-                    });
-            AlertDialog alert = builder.create();
-            alert.show();
-            return;
+            boolean showNearbyItem = app.isInstalled(getApplicationContext()) && fdroidApp.bluetoothAdapter != null;
+            CoordinatorLayout coordinatorLayout = findViewById(R.id.rootCoordinator);
+            ShareChooserDialog.createChooser(coordinatorLayout, this, this, shareIntent, showNearbyItem);
+            return true;
+        } else if (item.getItemId() == R.id.action_ignore_all) {
+            app.getPrefs(this).ignoreAllUpdates ^= true;
+            item.setChecked(app.getPrefs(this).ignoreAllUpdates);
+            AppPrefsProvider.Helper.update(this, app, app.getPrefs(this));
+            return true;
+        } else if (item.getItemId() == R.id.action_ignore_this) {
+            if (app.getPrefs(this).ignoreThisUpdate >= app.suggestedVersionCode) {
+                app.getPrefs(this).ignoreThisUpdate = 0;
+            } else {
+                app.getPrefs(this).ignoreThisUpdate = app.suggestedVersionCode;
+            }
+            item.setChecked(app.getPrefs(this).ignoreThisUpdate > 0);
+            AppPrefsProvider.Helper.update(this, app, app.getPrefs(this));
+            return true;
+        } else if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
-        if (app.installedSig != null && apk.sig != null
-                && !apk.sig.equals(app.installedSig)) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(R.string.SignatureMismatch).setPositiveButton(
-                    R.string.ok,
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
-            AlertDialog alert = builder.create();
-            alert.show();
-            return;
-        }
-        initiateInstall(apk);
-
-        // Scroll back to the header, so that the user can see the progress beginning. This can be
-        // removed once https://gitlab.com/fdroid/fdroidclient/issues/903 is implemented. However
-        // for now it adds valuable feedback to the user about the download they just initiated.
-        ((LinearLayoutManager) recyclerView.getLayoutManager()).scrollToPositionWithOffset(0, 0);
+        return super.onOptionsItemSelected(item);
     }
 
     private void initiateInstall(Apk apk) {
@@ -491,77 +508,42 @@ public class AppDetails2 extends AppCompatActivity
         }
     };
 
-    private final BroadcastReceiver installReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            switch (intent.getAction()) {
-                case Installer.ACTION_INSTALL_STARTED:
-                    adapter.setIndeterminateProgress(R.string.installing);
-                    break;
-                case Installer.ACTION_INSTALL_COMPLETE:
-                    adapter.clearProgress();
-                    unregisterInstallReceiver();
-                    // Ideally, we wouldn't try to update the view here, because the InstalledAppProviderService
-                    // hasn't had time to do its thing and mark the app as installed. Instead, we
-                    // wait for that service to notify us, and then we will respond in appObserver.
-
-                    // Having said that, there are some cases where the PackageManager doesn't
-                    // return control back to us until after it has already braodcast to the
-                    // InstalledAppProviderService. This means that we are not listening for any
-                    // feedback from InstalledAppProviderService (we intentionally stop listening in
-                    // onPause). Empirically, this happens when upgrading an app rather than a clean
-                    // install. However given the nature of this race condition, it may be different
-                    // on different operating systems. As such, we'll just update our view now. It may
-                    // happen again in our appObserver, but that will only cause a little more load
-                    // on the system, it shouldn't cause a different UX.
-                    onAppChanged();
-                    break;
-                case Installer.ACTION_INSTALL_INTERRUPTED:
-                    adapter.clearProgress();
-                    onAppChanged();
-
-                    String errorMessage =
-                            intent.getStringExtra(Installer.EXTRA_ERROR_MESSAGE);
-
-                    if (!TextUtils.isEmpty(errorMessage) && !isFinishing()) {
-                        Log.e(TAG, "install aborted with errorMessage: " + errorMessage);
-
-                        String title = String.format(
-                                getString(R.string.install_error_notify_title),
-                                app.name);
-
-                        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(AppDetails2.this);
-                        alertBuilder.setTitle(title);
-                        alertBuilder.setMessage(errorMessage);
-                        alertBuilder.setNeutralButton(android.R.string.ok, null);
-                        alertBuilder.create().show();
-                    }
-                    unregisterInstallReceiver();
-                    break;
-                case Installer.ACTION_INSTALL_USER_INTERACTION:
-                    Apk apk = intent.getParcelableExtra(Installer.EXTRA_APK);
-                    if (!isAppVisible(apk.packageName)) {
-                        Utils.debugLog(TAG, "Ignore request for user interaction from installer, because "
-                                + apk.packageName + " is no longer showing.");
-                        break;
-                    }
-
-                    Utils.debugLog(TAG, "Automatically showing package manager for " + apk.packageName
-                            + " as it is being viewed by the user.");
-                    PendingIntent pendingIntent = intent.getParcelableExtra(Installer.EXTRA_USER_INTERACTION_PI);
-
-                    try {
-                        pendingIntent.send();
-                    } catch (PendingIntent.CanceledException e) {
-                        Log.e(TAG, "PI canceled", e);
-                    }
-
-                    break;
-                default:
-                    throw new RuntimeException("intent action not handled!");
-            }
+    // Install the version of this app denoted by 'app.curApk'.
+    @Override
+    public void installApk(final Apk apk) {
+        if (isFinishing()) {
+            return;
         }
-    };
+
+        if (!apk.compatible) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(R.string.installIncompatible);
+            builder.setPositiveButton(R.string.yes,
+                    (dialog, whichButton) -> initiateInstall(apk));
+            builder.setNegativeButton(R.string.no,
+                    (dialog, whichButton) -> {
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+            return;
+        }
+        if (app.installedSig != null && apk.sig != null
+                && !apk.sig.equals(app.installedSig)) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(R.string.SignatureMismatch).setPositiveButton(
+                    R.string.ok,
+                    (dialog, id) -> dialog.cancel());
+            AlertDialog alert = builder.create();
+            alert.show();
+            return;
+        }
+        initiateInstall(apk);
+
+        // Scroll back to the header, so that the user can see the progress beginning. This can be
+        // removed once https://gitlab.com/fdroid/fdroidclient/issues/903 is implemented. However
+        // for now it adds valuable feedback to the user about the download they just initiated.
+        ((LinearLayoutManager) recyclerView.getLayoutManager()).scrollToPositionWithOffset(0, 0);
+    }
 
     private final BroadcastReceiver uninstallReceiver = new BroadcastReceiver() {
         @Override
@@ -630,7 +612,7 @@ public class AppDetails2 extends AppCompatActivity
      */
     private boolean resetCurrentApp(String packageName) {
         if (TextUtils.isEmpty(packageName)) {
-            return false;
+            return true;
         }
         app = AppProvider.Helper.findHighestPriorityMetadata(getContentResolver(), packageName);
 
@@ -643,26 +625,23 @@ public class AppDetails2 extends AppCompatActivity
         }
         if (app == null) {
             Toast.makeText(this, R.string.no_such_app, Toast.LENGTH_LONG).show();
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     private void onAppChanged() {
-        recyclerView.post(new Runnable() {
-            @Override
-            public void run() {
-                String packageName = app != null ? app.packageName : null;
-                if (!resetCurrentApp(packageName)) {
-                    AppDetails2.this.finish();
-                    return;
-                }
-                AppDetailsRecyclerViewAdapter adapter = (AppDetailsRecyclerViewAdapter) recyclerView.getAdapter();
-                adapter.updateItems(app);
-                refreshStatus();
-                supportInvalidateOptionsMenu();
+        recyclerView.post(() -> {
+            String packageName = app != null ? app.packageName : null;
+            if (resetCurrentApp(packageName)) {
+                AppDetails2.this.finish();
+                return;
             }
+            AppDetailsRecyclerViewAdapter adapter = (AppDetailsRecyclerViewAdapter) recyclerView.getAdapter();
+            adapter.updateItems(app);
+            refreshStatus();
+            supportInvalidateOptionsMenu();
         });
     }
 
@@ -727,7 +706,7 @@ public class AppDetails2 extends AppCompatActivity
     public void uninstallApk() {
         Apk apk = app.installedApk;
         if (apk == null) {
-            apk = app.getMediaApkifInstalled(getApplicationContext());
+            apk = app.getMediaApkIfInstalled(getApplicationContext());
             if (apk == null) {
                 // When the app isn't a media file - the above workaround refers to this.
                 apk = app.getInstalledApk(this);

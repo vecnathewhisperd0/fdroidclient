@@ -13,9 +13,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.webkit.MimeTypeMap;
+
 import com.fasterxml.jackson.annotation.JacksonInject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import org.fdroid.fdroid.RepoXMLHandler;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.Schema.ApkTable.Cols;
@@ -363,7 +365,7 @@ public class Apk extends ValueObject implements Comparable<Apk>, Parcelable {
     @TargetApi(19)
     public int compareTo(@NonNull Apk apk) {
         if (Build.VERSION.SDK_INT < 19) {
-            return Integer.valueOf(versionCode).compareTo(apk.versionCode);
+            return Integer.compare(versionCode, apk.versionCode);
         }
         return Integer.compare(versionCode, apk.versionCode);
     }
@@ -456,7 +458,7 @@ public class Apk extends ValueObject implements Comparable<Apk>, Parcelable {
             for (String permission : array) {
                 requestedPermissionsSet.add(RepoXMLHandler.fdroidToAndroidPermission(permission));
             }
-            return requestedPermissionsSet.toArray(new String[requestedPermissionsSet.size()]);
+            return requestedPermissionsSet.toArray(new String[0]);
         }
         return null;
     }
@@ -487,7 +489,7 @@ public class Apk extends ValueObject implements Comparable<Apk>, Parcelable {
                 set.add((String) versions[0]);
             }
         }
-        requestedPermissions = set.toArray(new String[set.size()]);
+        requestedPermissions = set.toArray(new String[0]);
     }
 
     /**

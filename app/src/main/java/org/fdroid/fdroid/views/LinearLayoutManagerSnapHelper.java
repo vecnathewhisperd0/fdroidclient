@@ -13,28 +13,6 @@ public class LinearLayoutManagerSnapHelper extends LinearSnapHelper {
     private View lastSavedTarget;
     private int lastSavedDistance;
 
-    public interface LinearSnapHelperListener {
-        /**
-         * Tells the listener that we have selected a view to snap to.
-         * @param view The selected view (may be null)
-         * @param position Adapter position of the snapped to view (or NO_POSITION if none)
-         */
-        void onSnappedToView(View view, int position);
-    }
-
-    private final LinearLayoutManager layoutManager;
-    private final OrientationHelper orientationHelper;
-    private LinearSnapHelperListener listener;
-
-    public LinearLayoutManagerSnapHelper(LinearLayoutManager layoutManager) {
-        this.layoutManager = layoutManager;
-        this.orientationHelper = OrientationHelper.createHorizontalHelper(this.layoutManager);
-    }
-
-    public void setLinearSnapHelperListener(LinearSnapHelperListener listener) {
-        this.listener = listener;
-    }
-
     @Override
     public View findSnapView(RecyclerView.LayoutManager layoutManager) {
         View snappedView = super.findSnapView(layoutManager);
@@ -65,11 +43,11 @@ public class LinearLayoutManagerSnapHelper extends LinearSnapHelper {
                 int currentSmallestDistance = Integer.MAX_VALUE;
                 View currentSmallestDistanceView = null;
 
-                int snappedViewIndex = ((LinearLayoutManager) layoutManager).getPosition(snappedView);
+                int snappedViewIndex = layoutManager.getPosition(snappedView);
                 if (snappedViewIndex != RecyclerView.NO_POSITION) {
 
-                    int snapPositionFirst = orientationHelper.getDecoratedMeasurement(((LinearLayoutManager) layoutManager).findViewByPosition(firstChild)) / 2;
-                    int snapPositionLast = orientationHelper.getTotalSpace() - orientationHelper.getDecoratedMeasurement(((LinearLayoutManager) layoutManager).findViewByPosition(lastChild)) / 2;
+                    int snapPositionFirst = orientationHelper.getDecoratedMeasurement(layoutManager.findViewByPosition(firstChild)) / 2;
+                    int snapPositionLast = orientationHelper.getTotalSpace() - orientationHelper.getDecoratedMeasurement(layoutManager.findViewByPosition(lastChild)) / 2;
 
                     // If first item not on screen, ignore views 0..snappedViewIndex-1
                     if (firstChild != 0) {
@@ -82,7 +60,7 @@ public class LinearLayoutManagerSnapHelper extends LinearSnapHelper {
                     }
 
                     for (int i = firstChild; i <= lastChild; i++) {
-                        View view = ((LinearLayoutManager) layoutManager).findViewByPosition(i);
+                        View view = layoutManager.findViewByPosition(i);
 
                         // Start by interpolating a snap position for (the center of) this view.
                         //
@@ -123,6 +101,29 @@ public class LinearLayoutManagerSnapHelper extends LinearSnapHelper {
             listener.onSnappedToView(snappedView, snappedPosition);
         }
         return snappedView;
+    }
+
+    private final LinearLayoutManager layoutManager;
+    private final OrientationHelper orientationHelper;
+    private LinearSnapHelperListener listener;
+
+    public LinearLayoutManagerSnapHelper(LinearLayoutManager layoutManager) {
+        this.layoutManager = layoutManager;
+        this.orientationHelper = OrientationHelper.createHorizontalHelper(this.layoutManager);
+    }
+
+    public void setLinearSnapHelperListener(LinearSnapHelperListener listener) {
+        this.listener = listener;
+    }
+
+    public interface LinearSnapHelperListener {
+        /**
+         * Tells the listener that we have selected a view to snap to.
+         *
+         * @param view     The selected view (may be null)
+         * @param position Adapter position of the snapped to view (or NO_POSITION if none)
+         */
+        void onSnappedToView(View view, int position);
     }
 
     @Override

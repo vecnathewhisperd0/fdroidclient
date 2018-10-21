@@ -13,11 +13,12 @@ import android.util.AttributeSet;
 public class OverscrollLinearLayoutManager extends LinearLayoutManager {
 
     /**
-     * A listener interface to get overscroll infromation.
+     * A listener interface to get overscroll information.
      */
     public interface OnOverscrollListener {
         /**
          * Notifies the listener that an overscroll has happened in the x direction.
+         *
          * @param overscroll If negative, the recycler view has been scrolled to the "start"
          *                   position. If positive to the "end" position.
          * @return Return the amount of overscroll consumed. Returning 0 will let the
@@ -28,6 +29,7 @@ public class OverscrollLinearLayoutManager extends LinearLayoutManager {
 
         /**
          * Notifies the listener that an overscroll has happened in the y direction.
+         *
          * @param overscroll If negative, the recycler view has been scrolled to the "top"
          *                   position. If positive to the "bottom" position.
          * @return Return the amount of overscroll consumed. Returning 0 will let the

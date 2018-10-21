@@ -7,8 +7,8 @@ import java.util.Locale;
 public abstract class Header {
 
     private static final Header[] VALID_HEADERS = {
-        new ContentLengthHeader(),
-        new ETagHeader(),
+            new ContentLengthHeader(),
+            new ETagHeader(),
     };
 
     protected abstract String getName();

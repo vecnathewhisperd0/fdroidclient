@@ -28,6 +28,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonFactory;
@@ -36,6 +37,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.InjectableValues;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.apache.commons.io.FileUtils;
 import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.data.App;
@@ -47,10 +49,6 @@ import org.fdroid.fdroid.data.Schema;
 import org.fdroid.fdroid.net.Downloader;
 import org.fdroid.fdroid.net.DownloaderFactory;
 
-import javax.net.ssl.SSLHandshakeException;
-import javax.net.ssl.SSLKeyException;
-import javax.net.ssl.SSLPeerUnverifiedException;
-import javax.net.ssl.SSLProtocolException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -68,6 +66,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+
+import javax.net.ssl.SSLHandshakeException;
+import javax.net.ssl.SSLKeyException;
+import javax.net.ssl.SSLPeerUnverifiedException;
+import javax.net.ssl.SSLProtocolException;
 
 /**
  * Receives the index data about all available apps and packages via the V1
@@ -357,7 +360,7 @@ public class IndexV1Updater extends RepoUpdater {
 
     private int getIntRepoValue(Map<String, Object> repoMap, String key) {
         Object value = repoMap.get(key);
-        if (value != null && value instanceof Integer) {
+        if (value instanceof Integer) {
             return (Integer) value;
         }
         return Repo.INT_UNSET_VALUE;
@@ -365,7 +368,7 @@ public class IndexV1Updater extends RepoUpdater {
 
     private String getStringRepoValue(Map<String, Object> repoMap, String key) {
         Object value = repoMap.get(key);
-        if (value != null && value instanceof String) {
+        if (value instanceof String) {
             return (String) value;
         }
         return null;
@@ -374,9 +377,9 @@ public class IndexV1Updater extends RepoUpdater {
     @SuppressWarnings("unchecked")
     private String[] getStringArrayRepoValue(Map<String, Object> repoMap, String key) {
         Object value = repoMap.get(key);
-        if (value != null && value instanceof ArrayList) {
+        if (value instanceof ArrayList) {
             ArrayList<String> list = (ArrayList<String>) value;
-            return list.toArray(new String[list.size()]);
+            return list.toArray(new String[0]);
         }
         return null;
     }

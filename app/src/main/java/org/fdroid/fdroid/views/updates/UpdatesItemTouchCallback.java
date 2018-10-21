@@ -15,20 +15,20 @@ import org.fdroid.fdroid.views.updates.items.UpdateableAppListItemController;
  * is a different behaviour, but all of it revolves around dismissing the item.
  *
  * <ul>
- *   <li>
- *     {@link KnownVulnAppListItemController}: Will be marked as "Ignored" and wont warn the user in the future.
- *   </li>
- *   <li>
- *     {@link UpdateableAppListItemController}: Will get marked as "Ignore this update".
- *   </li>
- *   <li>
- *     {@link AppStatusListItemController}:
- *     <ul>
- *         <li>If downloading or queued to download, cancel the download.</li>
- *         <li>If downloaded waiting to install, forget that we downloaded it.</li>
- *         <li>If installed ready to run, stop prompting the user to run the app.</li>
- *     </ul>
- *   <li>
+ * <li>
+ * {@link KnownVulnAppListItemController}: Will be marked as "Ignored" and wont warn the user in the future.
+ * </li>
+ * <li>
+ * {@link UpdateableAppListItemController}: Will get marked as "Ignore this update".
+ * </li>
+ * <li>
+ * {@link AppStatusListItemController}:
+ * <ul>
+ * <li>If downloading or queued to download, cancel the download.</li>
+ * <li>If downloaded waiting to install, forget that we downloaded it.</li>
+ * <li>If installed ready to run, stop prompting the user to run the app.</li>
+ * </ul>
+ * <li>
  * </ul>
  */
 public class UpdatesItemTouchCallback extends ItemTouchHelper.Callback {

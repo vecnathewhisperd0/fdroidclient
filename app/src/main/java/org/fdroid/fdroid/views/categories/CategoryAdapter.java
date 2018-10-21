@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
+
 import org.fdroid.fdroid.R;
 
 import java.util.Collections;
@@ -13,7 +14,7 @@ import java.util.List;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryController> {
 
     @NonNull
-    private List<String> unlocalizedCategoryNames = Collections.<String>emptyList();
+    private List<String> unlocalizedCategoryNames = Collections.emptyList();
 
     private final Activity activity;
     private final LoaderManager loaderManager;

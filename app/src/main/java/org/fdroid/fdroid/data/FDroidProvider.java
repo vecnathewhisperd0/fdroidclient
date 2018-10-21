@@ -9,13 +9,11 @@ import android.content.OperationApplicationException;
 import android.content.UriMatcher;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.os.Build;
 import android.support.annotation.NonNull;
+
 import org.fdroid.fdroid.BuildConfig;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 public abstract class FDroidProvider extends ContentProvider {
@@ -47,14 +45,14 @@ public abstract class FDroidProvider extends ContentProvider {
      * Based on http://stackoverflow.com/a/15886915.
      */
     protected final boolean isApplyingBatch() {
-        return this.isApplyingBatch;
+        return !this.isApplyingBatch;
     }
 
     @NonNull
     @Override
     public ContentProviderResult[] applyBatch(@NonNull ArrayList<ContentProviderOperation> operations)
             throws OperationApplicationException {
-        ContentProviderResult[] result = null;
+        ContentProviderResult[] result;
         isApplyingBatch = true;
         final SQLiteDatabase db = db();
         db.beginTransaction();
@@ -107,25 +105,14 @@ public abstract class FDroidProvider extends ContentProvider {
 
     @TargetApi(11)
     private Set<String> getKeySet(ContentValues values) {
-
-        if (Build.VERSION.SDK_INT >= 11) {
-            return values.keySet();
-        }
-
-        Set<String> keySet = new HashSet<>();
-        for (Map.Entry<String, Object> item : values.valueSet()) {
-            String key = item.getKey();
-            keySet.add(key);
-        }
-        return keySet;
-
+        return values.keySet();
     }
 
-    protected void validateFields(String[] validFields, ContentValues values)
+    protected void validateFields(ContentValues values)
             throws IllegalArgumentException {
         for (final String key : getKeySet(values)) {
             boolean isValid = false;
-            for (final String validKey : validFields) {
+            for (final String validKey : Schema.ApkTable.Cols.ALL) {
                 if (validKey.equals(key)) {
                     isValid = true;
                     break;

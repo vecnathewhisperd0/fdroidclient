@@ -8,6 +8,7 @@ import org.fdroid.fdroid.data.App;
 
 /**
  * A dumb model which is used to specify what should/should not be shown  in an {@link AppListItemController}.
+ *
  * @see AppListItemController and its subclasses.
  */
 public class AppListItemState {

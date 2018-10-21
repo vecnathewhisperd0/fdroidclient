@@ -31,6 +31,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
 import org.apache.commons.io.IOUtils;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.data.Repo;

@@ -26,7 +26,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.Base64;
-import info.guardianproject.netcipher.NetCipher;
+
 import org.apache.commons.io.FileUtils;
 import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.FDroidApp;
@@ -39,8 +39,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
 import java.net.URL;
+
+import info.guardianproject.netcipher.NetCipher;
 
 /**
  * Download files over HTTP, with support for proxies, {@code .onion} addresses,
@@ -81,7 +82,7 @@ public class HttpDownloader extends Downloader {
      * @throws MalformedURLException
      */
     HttpDownloader(Uri uri, File destFile, String username, String password)
-            throws FileNotFoundException, MalformedURLException {
+            throws MalformedURLException {
         super(uri, destFile);
         this.sourceUrl = new URL(urlString);
         this.username = username;
@@ -160,7 +161,7 @@ public class HttpDownloader extends Downloader {
                 && FDroidApp.subnetInfo.isInRange(host); // on the same subnet as we are
     }
 
-    private HttpURLConnection getConnection() throws SocketTimeoutException, IOException {
+    private HttpURLConnection getConnection() throws IOException {
         HttpURLConnection connection;
         if (isSwapUrl(sourceUrl)) {
             // swap never works with a proxy, its unrouted IP on the same subnet

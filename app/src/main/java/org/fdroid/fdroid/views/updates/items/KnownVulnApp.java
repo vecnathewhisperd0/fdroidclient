@@ -18,7 +18,7 @@ import java.util.List;
  * @see KnownVulnApp The data that is bound to this view.
  * @see R.layout#known_vuln_app_list_item The view that this binds to.
  * @see KnownVulnAppListItemController Used for binding the {@link App} to
- *      the {@link R.layout#known_vuln_app_list_item}
+ * the {@link R.layout#known_vuln_app_list_item}
  */
 public class KnownVulnApp extends AppUpdateData {
 

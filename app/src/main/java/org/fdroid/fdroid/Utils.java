@@ -42,10 +42,12 @@ import android.text.style.TypefaceSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.utils.StorageUtils;
+
 import org.fdroid.fdroid.compat.FileCompat;
 import org.fdroid.fdroid.data.Repo;
 import org.fdroid.fdroid.data.SanitizedFile;
@@ -291,7 +293,7 @@ public final class Utils {
         }
         StringBuilder displayFP = new StringBuilder(fingerprint.substring(0, 2));
         for (int i = 2; i < fingerprint.length(); i = i + 2) {
-            displayFP.append(" ").append(fingerprint.substring(i, i + 2));
+            displayFP.append(" ").append(fingerprint, i, i + 2);
         }
         return displayFP.toString();
     }

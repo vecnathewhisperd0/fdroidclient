@@ -22,6 +22,7 @@ package org.fdroid.fdroid;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
 import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.data.Repo;
@@ -94,9 +95,71 @@ public class RepoXMLHandler extends DefaultHandler {
         curchars.append(ch, start, length);
     }
 
+    private static long parseLong(String str) {
+        if (str == null || str.length() == 0) {
+            return (long) 0;
+        }
+        long result;
+        try {
+            result = Long.parseLong(str);
+        } catch (NumberFormatException e) {
+            result = (long) 0;
+        }
+        return result;
+    }
+
+    private static final Pattern OLD_FDROID_PERMISSION = Pattern.compile("[A-Z_]+");
+
+    /**
+     * It appears that the default Android permissions in android.Manifest.permissions
+     * are prefixed with "android.permission." and then the constant name.
+     * FDroid just includes the constant name in the apk list, so we prefix it
+     * with "android.permission."
+     *
+     * @see <a href="https://gitlab.com/fdroid/fdroidserver/blob/1afa8cfc/update.py#L91">
+     * More info into index - size, permissions, features, sdk version</a>
+     */
+    public static String fdroidToAndroidPermission(String permission) {
+        if (OLD_FDROID_PERMISSION.matcher(permission).matches()) {
+            return "android.permission." + permission;
+        }
+
+        return permission;
+    }
+
+    private void addRequestedPermission(String permission) {
+        requestedPermissionsSet.add(permission);
+    }
+
+    private void addCommaSeparatedPermissions(String permissions) {
+        String[] array = Utils.parseCommaSeparatedString(permissions);
+        if (array != null) {
+            for (String permission : array) {
+                requestedPermissionsSet.add(fdroidToAndroidPermission(permission));
+            }
+        }
+    }
+
+    private void removeRequestedPermission(String permission) {
+        requestedPermissionsSet.remove(permission);
+    }
+
+    private void onApplicationParsed() {
+        receiver.receiveApp(curapp, apksList);
+        curapp = null;
+        apksList = new ArrayList<>();
+        // If the app packageName is already present in this apps list, then it
+        // means the same index file has a duplicate app, which should
+        // not be allowed.
+        // However, I'm thinking that it should be undefined behaviour,
+        // because it is probably a bug in the fdroid server that made it
+        // happen, and I don't *think* it will crash the client, because
+        // the first app will insert, the second one will update the newly
+        // inserted one.
+    }
+
     @Override
-    public void endElement(String uri, String localName, String qName)
-            throws SAXException {
+    public void endElement(String uri, String localName, String qName) {
 
         if ("application".equals(localName) && curapp != null) {
             onApplicationParsed();
@@ -126,10 +189,6 @@ public class RepoXMLHandler extends DefaultHandler {
                     break;
                 case ApkTable.Cols.HASH:
                     if (currentApkHashType == null || "md5".equals(currentApkHashType)) {
-                        if (curapk.hash == null) {
-                            curapk.hash = str;
-                            curapk.hashType = "sha256";
-                        }
                     } else if ("sha256".equals(currentApkHashType)) {
                         curapk.hash = str;
                         curapk.hashType = "sha256";
@@ -138,9 +197,6 @@ public class RepoXMLHandler extends DefaultHandler {
                 case ApkTable.Cols.SIGNATURE:
                     curapk.sig = str;
                     // the first APK in the list provides the preferred signature
-                    if (curapp.preferredSigner == null) {
-                        curapp.preferredSigner = str;
-                    }
                     break;
                 case ApkTable.Cols.SOURCE_NAME:
                     curapk.srcname = str;
@@ -272,63 +328,17 @@ public class RepoXMLHandler extends DefaultHandler {
         }
     }
 
-    private static final Pattern OLD_FDROID_PERMISSION = Pattern.compile("[A-Z_]+");
-
-    /**
-     * It appears that the default Android permissions in android.Manifest.permissions
-     * are prefixed with "android.permission." and then the constant name.
-     * FDroid just includes the constant name in the apk list, so we prefix it
-     * with "android.permission."
-     *
-     * @see <a href="https://gitlab.com/fdroid/fdroidserver/blob/1afa8cfc/update.py#L91">
-     * More info into index - size, permissions, features, sdk version</a>
-     */
-    public static String fdroidToAndroidPermission(String permission) {
-        if (OLD_FDROID_PERMISSION.matcher(permission).matches()) {
-            return "android.permission." + permission;
-        }
-
-        return permission;
-    }
-
-    private void addRequestedPermission(String permission) {
-        requestedPermissionsSet.add(permission);
-    }
-
-    private void addCommaSeparatedPermissions(String permissions) {
-        String[] array = Utils.parseCommaSeparatedString(permissions);
-        if (array != null) {
-            for (String permission : array) {
-                requestedPermissionsSet.add(fdroidToAndroidPermission(permission));
-            }
-        }
-    }
-
-    private void removeRequestedPermission(String permission) {
-        requestedPermissionsSet.remove(permission);
-    }
-
-    private void onApplicationParsed() {
-        receiver.receiveApp(curapp, apksList);
-        curapp = null;
-        apksList = new ArrayList<>();
-        // If the app packageName is already present in this apps list, then it
-        // means the same index file has a duplicate app, which should
-        // not be allowed.
-        // However, I'm thinking that it should be undefined behaviour,
-        // because it is probably a bug in the fdroid server that made it
-        // happen, and I don't *think* it will crash the client, because
-        // the first app will insert, the second one will update the newly
-        // inserted one.
+    private void onRepoPushRequestParsed(RepoPushRequest repoPushRequest) {
+        receiver.receiveRepoPushRequest(repoPushRequest);
     }
 
     private void onRepoParsed() {
         receiver.receiveRepo(repoName, repoDescription, repoSigningCert, repoMaxAge, repoVersion,
-                repoTimestamp, repoIcon, repoMirrors.toArray(new String[repoMirrors.size()]));
+                repoTimestamp, repoIcon, repoMirrors.toArray(new String[0]));
     }
 
-    private void onRepoPushRequestParsed(RepoPushRequest repoPushRequest) {
-        receiver.receiveRepoPushRequest(repoPushRequest);
+    private static String cleanWhiteSpace(@Nullable String str) {
+        return str == null ? null : str.replaceAll("\\s", " ");
     }
 
     @Override
@@ -342,7 +352,7 @@ public class RepoXMLHandler extends DefaultHandler {
             repoVersion = Utils.parseInt(attributes.getValue("", "version"), -1);
             repoName = cleanWhiteSpace(attributes.getValue("", "name"));
             repoDescription = cleanWhiteSpace(attributes.getValue("", "description"));
-            repoTimestamp = parseLong(attributes.getValue("", "timestamp"), 0);
+            repoTimestamp = parseLong(attributes.getValue("", "timestamp"));
             repoIcon = attributes.getValue("", "icon");
         } else if (RepoPushRequest.INSTALL.equals(localName)
                 || RepoPushRequest.UNINSTALL.equals(localName)) {
@@ -387,22 +397,5 @@ public class RepoXMLHandler extends DefaultHandler {
             }
         }
         curchars.setLength(0);
-    }
-
-    private static String cleanWhiteSpace(@Nullable String str) {
-        return str == null ? null : str.replaceAll("\\s", " ");
-    }
-
-    private static long parseLong(String str, long fallback) {
-        if (str == null || str.length() == 0) {
-            return fallback;
-        }
-        long result;
-        try {
-            result = Long.parseLong(str);
-        } catch (NumberFormatException e) {
-            result = fallback;
-        }
-        return result;
     }
 }

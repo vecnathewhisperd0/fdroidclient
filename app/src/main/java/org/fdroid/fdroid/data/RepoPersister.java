@@ -184,12 +184,11 @@ public class RepoPersister {
             final List<String> reasons = checker.getIncompatibleReasons(apk);
             if (reasons.size() > 0) {
                 apk.compatible = false;
-                apk.incompatibleReasons = reasons.toArray(new String[reasons.size()]);
+                apk.incompatibleReasons = reasons.toArray(new String[0]);
             } else {
                 apk.compatible = true;
                 apk.incompatibleReasons = null;
             }
         }
     }
-
 }

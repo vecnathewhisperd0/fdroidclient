@@ -36,7 +36,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -48,21 +47,19 @@ import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 import android.widget.Toast;
+
 import com.nostra13.universalimageloader.cache.disc.DiskCache;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.impl.ext.LruDiskCache;
 import com.nostra13.universalimageloader.core.DefaultConfigurationFactory;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.process.BitmapProcessor;
-import info.guardianproject.netcipher.NetCipher;
-import info.guardianproject.netcipher.proxy.OrbotHelper;
+
 import org.acra.ACRA;
 import org.acra.ReportField;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
 import org.apache.commons.net.util.SubnetUtils;
-import org.fdroid.fdroid.Preferences.ChangeListener;
 import org.fdroid.fdroid.Preferences.Theme;
 import org.fdroid.fdroid.compat.PRNGFixes;
 import org.fdroid.fdroid.data.AppProvider;
@@ -77,12 +74,16 @@ import org.fdroid.fdroid.net.ImageLoaderForUIL;
 import org.fdroid.fdroid.net.WifiStateChangeService;
 import org.fdroid.fdroid.views.hiding.HidingManager;
 
-import javax.microedition.khronos.opengles.GL10;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.security.Security;
 import java.util.List;
 import java.util.UUID;
+
+import javax.microedition.khronos.opengles.GL10;
+
+import info.guardianproject.netcipher.NetCipher;
+import info.guardianproject.netcipher.proxy.OrbotHelper;
 
 @ReportsCrashes(mailTo = "reports@f-droid.org",
         mode = ReportingInteractionMode.DIALOG,
@@ -376,19 +377,9 @@ public class FDroidApp extends Application {
         // If the user changes the preference to do with filtering anti-feature apps,
         // it is easier to just notify a change in the app provider,
         // so that the newly updated list will correctly filter relevant apps.
-        preferences.registerAppsRequiringAntiFeaturesChangeListener(new Preferences.ChangeListener() {
-            @Override
-            public void onPreferenceChange() {
-                getContentResolver().notifyChange(AppProvider.getContentUri(), null);
-            }
-        });
+        preferences.registerAppsRequiringAntiFeaturesChangeListener(() -> getContentResolver().notifyChange(AppProvider.getContentUri(), null));
 
-        preferences.registerUnstableUpdatesChangeListener(new Preferences.ChangeListener() {
-            @Override
-            public void onPreferenceChange() {
-                AppProvider.Helper.calcSuggestedApks(FDroidApp.this);
-            }
-        });
+        preferences.registerUnstableUpdatesChangeListener(() -> AppProvider.Helper.calcSuggestedApks(FDroidApp.this));
 
         CleanCacheService.schedule(this);
 
@@ -430,12 +421,9 @@ public class FDroidApp extends Application {
                 .imageDownloader(new ImageLoaderForUIL(getApplicationContext()))
                 .defaultDisplayImageOptions(Utils.getDefaultDisplayImageOptionsBuilder().build())
                 .diskCache(diskCache)
-                .diskCacheExtraOptions(maxSize, maxSize, new BitmapProcessor() {
-                    @Override
-                    public Bitmap process(Bitmap bitmap) {
-                        // converting JPEGs to Bitmaps, then saving them removes EXIF metadata
-                        return bitmap;
-                    }
+                .diskCacheExtraOptions(maxSize, maxSize, bitmap -> {
+                    // converting JPEGs to Bitmaps, then saving them removes EXIF metadata
+                    return bitmap;
                 })
                 .threadPoolSize(getThreadPoolSize())
                 .build();
@@ -451,12 +439,7 @@ public class FDroidApp extends Application {
         FDroidApp.initWifiSettings();
         WifiStateChangeService.start(this, null);
         // if the HTTPS pref changes, then update all affected things
-        preferences.registerLocalRepoHttpsListeners(new ChangeListener() {
-            @Override
-            public void onPreferenceChange() {
-                WifiStateChangeService.start(getApplicationContext(), null);
-            }
-        });
+        preferences.registerLocalRepoHttpsListeners(() -> WifiStateChangeService.start(getApplicationContext(), null));
 
         configureTor(preferences.isTorEnabled());
 

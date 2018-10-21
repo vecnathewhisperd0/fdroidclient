@@ -26,7 +26,9 @@ package org.fdroid.fdroid.data;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.text.TextUtils;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.Schema.RepoTable.Cols;
@@ -220,7 +222,7 @@ public class Repo extends ValueObject {
     }
 
     /**
-     * This happens when a repo is configed with a fingerprint, but the client
+     * This happens when a repo is configured with a fingerprint, but the client
      * has not connected to it yet to download its signing certificate
      */
     public boolean isSignedButUnverified() {
@@ -344,7 +346,7 @@ public class Repo extends ValueObject {
     }
 
     public List<String> getMirrorList() {
-        final ArrayList<String> allMirrors = new ArrayList<String>();
+        final ArrayList<String> allMirrors = new ArrayList<>();
         if (userMirrors != null) {
             allMirrors.addAll(Arrays.asList(userMirrors));
         }

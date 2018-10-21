@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
+
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.Schema.AntiFeatureTable;
 import org.fdroid.fdroid.data.Schema.ApkAntiFeatureJoinTable;
@@ -566,14 +567,14 @@ public class ApkProvider extends FDroidProvider {
         }
 
         removeFieldsFromOtherTables(values);
-        validateFields(Cols.ALL, values);
+        validateFields(values);
         long newId = db().insertOrThrow(getTableName(), null, values);
 
         if (saveAntiFeatures) {
             ensureAntiFeatures(antiFeatures, newId);
         }
 
-        if (!isApplyingBatch()) {
+        if (isApplyingBatch()) {
             getContext().getContentResolver().notifyChange(uri, null);
         }
         return getApkUri(newId);
@@ -667,7 +668,7 @@ public class ApkProvider extends FDroidProvider {
             values.remove(Cols.AntiFeatures.ANTI_FEATURES);
         }
 
-        validateFields(Cols.ALL, values);
+        validateFields(values);
         removeFieldsFromOtherTables(values);
 
         QuerySelection query = new QuerySelection(where, whereArgs);
@@ -687,7 +688,7 @@ public class ApkProvider extends FDroidProvider {
             }
         }
 
-        if (!isApplyingBatch()) {
+        if (isApplyingBatch()) {
             getContext().getContentResolver().notifyChange(uri, null);
         }
         return numRows;

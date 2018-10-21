@@ -20,7 +20,6 @@
 package org.fdroid.fdroid.installer;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -48,22 +47,14 @@ public class ErrorDialogActivity extends FragmentActivity {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(theme);
         builder.setTitle(title);
-        builder.setNeutralButton(android.R.string.ok,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        setResult(Activity.RESULT_OK);
-                        finish();
-                    }
-                });
-        builder.setOnCancelListener(
-                new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        setResult(Activity.RESULT_CANCELED);
-                        finish();
-                    }
-                });
+        builder.setNeutralButton(android.R.string.ok, (dialog, which) -> {
+            setResult(Activity.RESULT_OK);
+            finish();
+        });
+        builder.setOnCancelListener(dialog -> {
+            setResult(Activity.RESULT_CANCELED);
+            finish();
+        });
         builder.setMessage(message);
         builder.create().show();
     }

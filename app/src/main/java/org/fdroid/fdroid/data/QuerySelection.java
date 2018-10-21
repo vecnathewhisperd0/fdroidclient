@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Helper class used by sublasses of ContentProvider to make the constraints
+ * Helper class used by subclasses of ContentProvider to make the constraints
  * required for a given content URI (e.g. all apps that belong to a repo)
  * easily appendable to the constraints which are passed into, e.g. the query()
  * method in the content provider.
@@ -19,7 +19,7 @@ public class QuerySelection {
 
     public QuerySelection(String selection) {
         this.selection = selection;
-        this.args = new String[] {};
+        this.args = new String[]{};
     }
 
     public QuerySelection(String selection, String[] args) {
@@ -28,7 +28,7 @@ public class QuerySelection {
     }
 
     public QuerySelection(String selection, List<String> args) {
-        this.args = new String[ args.size() ];
+        this.args = new String[args.size()];
         args.toArray(this.args);
         this.selection = selection;
     }
@@ -63,7 +63,7 @@ public class QuerySelection {
             s = query.selection;
         }
 
-        int thisNumArgs  = this.hasArgs() ? this.args.length : 0;
+        int thisNumArgs = this.hasArgs() ? this.args.length : 0;
         int queryNumArgs = query.hasArgs() ? query.args.length : 0;
         List<String> a = new ArrayList<>(thisNumArgs + queryNumArgs);
 

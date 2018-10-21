@@ -13,6 +13,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
+
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.Schema.InstalledAppTable;
@@ -153,7 +154,7 @@ public class InstalledAppProvider extends FDroidProvider {
                     cursor.close();
                 }
             }
-            systemSignatures = signatures.toArray(new String[signatures.size()]);
+            systemSignatures = signatures.toArray(new String[0]);
         }
 
         Log.i(TAG, "excluding InstalledApps signed by system signatures");

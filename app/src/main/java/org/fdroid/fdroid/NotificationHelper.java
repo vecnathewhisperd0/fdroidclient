@@ -21,11 +21,13 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.StyleSpan;
 import android.view.View;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageSize;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.utils.DiskCacheUtils;
+
 import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.views.main.MainActivity;
 
@@ -151,14 +153,10 @@ class NotificationHelper {
         // Ignore unknown status
         if (entry.status == AppUpdateStatusManager.Status.DownloadInterrupted) {
             return true;
-        } else if ((entry.status == AppUpdateStatusManager.Status.Downloading ||
+        } else return (entry.status == AppUpdateStatusManager.Status.Downloading ||
                 entry.status == AppUpdateStatusManager.Status.ReadyToInstall ||
                 entry.status == AppUpdateStatusManager.Status.InstallError) &&
-                AppDetails2.isAppVisible(entry.app.packageName)) {
-            // Ignore downloading, readyToInstall and installError if we are showing the details screen for this app
-            return true;
-        }
-        return false;
+                AppDetails2.isAppVisible(entry.app.packageName);
     }
 
     private void createNotification(AppUpdateStatusManager.AppUpdateStatus entry) {

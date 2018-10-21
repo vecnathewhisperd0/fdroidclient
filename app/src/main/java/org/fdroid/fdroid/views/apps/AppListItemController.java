@@ -26,7 +26,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
+
 import org.fdroid.fdroid.AppDetails2;
 import org.fdroid.fdroid.AppUpdateStatusManager;
 import org.fdroid.fdroid.AppUpdateStatusManager.AppUpdateStatus;
@@ -101,70 +103,27 @@ public abstract class AppListItemController extends RecyclerView.ViewHolder {
     @Nullable
     private AppUpdateStatus currentStatus;
 
-    @TargetApi(21)
-    public AppListItemController(final Activity activity, View itemView) {
-        super(itemView);
-        this.activity = activity;
+    @SuppressWarnings("FieldCanBeLocal")
+    private final View.OnClickListener onAppClicked = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (currentApp == null) {
+                return;
+            }
 
-        installButton = (ImageView) itemView.findViewById(R.id.install);
-        if (installButton != null) {
-            installButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onActionButtonPressed(currentApp);
-                }
-            });
-
+            Intent intent = new Intent(activity, AppDetails2.class);
+            intent.putExtra(AppDetails2.EXTRA_APPID, currentApp.packageName);
             if (Build.VERSION.SDK_INT >= 21) {
-                installButton.setOutlineProvider(new ViewOutlineProvider() {
-                    @Override
-                    public void getOutline(View view, Outline outline) {
-                        float density = activity.getResources().getDisplayMetrics().density;
-
-                        // This is a bit hacky/hardcoded/too-specific to the particular icons we're using.
-                        // This is because the default "download & install" and "downloaded & ready to install"
-                        // icons are smaller than the "downloading progress" button. Hence, we can't just use
-                        // the width/height of the view to calculate the outline size.
-                        int xPadding = (int) (8 * density);
-                        int yPadding = (int) (9 * density);
-                        int right = installButton.getWidth() - xPadding;
-                        int bottom = installButton.getHeight() - yPadding;
-                        outline.setOval(xPadding, yPadding, right, bottom);
-                    }
-                });
+                String transitionAppIcon = activity.getString(R.string.transition_app_item_icon);
+                Pair<View, String> iconTransitionPair = Pair.create(icon, transitionAppIcon);
+                Bundle bundle = ActivityOptionsCompat
+                        .makeSceneTransitionAnimation(activity, iconTransitionPair).toBundle();
+                activity.startActivity(intent, bundle);
+            } else {
+                activity.startActivity(intent);
             }
         }
-
-        icon = (ImageView) itemView.findViewById(R.id.icon);
-        name = (TextView) itemView.findViewById(R.id.app_name);
-        status = (TextView) itemView.findViewById(R.id.status);
-        secondaryStatus = (TextView) itemView.findViewById(R.id.secondary_status);
-        progressBar = (ProgressBar) itemView.findViewById(R.id.progress_bar);
-        cancelButton = (ImageButton) itemView.findViewById(R.id.cancel_button);
-        actionButton = (Button) itemView.findViewById(R.id.action_button);
-        secondaryButton = (Button) itemView.findViewById(R.id.secondary_button);
-
-        if (actionButton != null) {
-            actionButton.setEnabled(true);
-            actionButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    actionButton.setEnabled(false);
-                    onActionButtonPressed(currentApp);
-                }
-            });
-        }
-
-        if (secondaryButton != null) {
-            secondaryButton.setOnClickListener(onSecondaryButtonClicked);
-        }
-
-        if (cancelButton != null) {
-            cancelButton.setOnClickListener(onCancelDownload);
-        }
-
-        itemView.setOnClickListener(onAppClicked);
-    }
+    };
 
     @Nullable
     protected final AppUpdateStatus getCurrentStatus() {
@@ -413,28 +372,8 @@ public abstract class AppListItemController extends RecyclerView.ViewHolder {
      * to respond to.
      * =================================================================
      */
-
     @SuppressWarnings("FieldCanBeLocal")
-    private final View.OnClickListener onAppClicked = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (currentApp == null) {
-                return;
-            }
-
-            Intent intent = new Intent(activity, AppDetails2.class);
-            intent.putExtra(AppDetails2.EXTRA_APPID, currentApp.packageName);
-            if (Build.VERSION.SDK_INT >= 21) {
-                String transitionAppIcon = activity.getString(R.string.transition_app_item_icon);
-                Pair<View, String> iconTransitionPair = Pair.create((View) icon, transitionAppIcon);
-                Bundle bundle = ActivityOptionsCompat
-                        .makeSceneTransitionAnimation(activity, iconTransitionPair).toBundle();
-                activity.startActivity(intent, bundle);
-            } else {
-                activity.startActivity(intent);
-            }
-        }
-    };
+    private final View.OnClickListener onCancelDownload = v -> cancelDownload();
 
     private final BroadcastReceiver onStatusChanged = new BroadcastReceiver() {
         @Override
@@ -520,13 +459,62 @@ public abstract class AppListItemController extends RecyclerView.ViewHolder {
     protected void onSecondaryButtonPressed(@NonNull App app) {
     }
 
-    @SuppressWarnings("FieldCanBeLocal")
-    private final View.OnClickListener onCancelDownload = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            cancelDownload();
+    @TargetApi(21)
+    public AppListItemController(final Activity activity, View itemView) {
+        super(itemView);
+        this.activity = activity;
+
+        installButton = itemView.findViewById(R.id.install);
+        if (installButton != null) {
+            installButton.setOnClickListener(v -> onActionButtonPressed(currentApp));
+
+            if (Build.VERSION.SDK_INT >= 21) {
+                installButton.setOutlineProvider(new ViewOutlineProvider() {
+                    @Override
+                    public void getOutline(View view, Outline outline) {
+                        float density = activity.getResources().getDisplayMetrics().density;
+
+                        // This is a bit hacky/hardcoded/too-specific to the particular icons we're using.
+                        // This is because the default "download & install" and "downloaded & ready to install"
+                        // icons are smaller than the "downloading progress" button. Hence, we can't just use
+                        // the width/height of the view to calculate the outline size.
+                        int xPadding = (int) (8 * density);
+                        int yPadding = (int) (9 * density);
+                        int right = installButton.getWidth() - xPadding;
+                        int bottom = installButton.getHeight() - yPadding;
+                        outline.setOval(xPadding, yPadding, right, bottom);
+                    }
+                });
+            }
         }
-    };
+
+        icon = itemView.findViewById(R.id.icon);
+        name = itemView.findViewById(R.id.app_name);
+        status = itemView.findViewById(R.id.status);
+        secondaryStatus = itemView.findViewById(R.id.secondary_status);
+        progressBar = itemView.findViewById(R.id.progress_bar);
+        cancelButton = itemView.findViewById(R.id.cancel_button);
+        actionButton = itemView.findViewById(R.id.action_button);
+        secondaryButton = itemView.findViewById(R.id.secondary_button);
+
+        if (actionButton != null) {
+            actionButton.setEnabled(true);
+            actionButton.setOnClickListener(v -> {
+                actionButton.setEnabled(false);
+                onActionButtonPressed(currentApp);
+            });
+        }
+
+        if (secondaryButton != null) {
+            secondaryButton.setOnClickListener(onSecondaryButtonClicked);
+        }
+
+        if (cancelButton != null) {
+            cancelButton.setOnClickListener(onCancelDownload);
+        }
+
+        itemView.setOnClickListener(onAppClicked);
+    }
 
     protected final void cancelDownload() {
         if (currentStatus == null || currentStatus.status != AppUpdateStatusManager.Status.Downloading) {

@@ -15,9 +15,9 @@ import org.fdroid.fdroid.views.updates.DismissResult;
 
 /**
  * Shows apps which are:
- *  * In the process of being downloaded.
- *  * Downloaded and ready to install.
- *  * Recently installed and ready to run.
+ * * In the process of being downloaded.
+ * * Downloaded and ready to install.
+ * * Recently installed and ready to run.
  */
 public class AppStatusListItemController extends AppListItemController {
     public AppStatusListItemController(Activity activity, View itemView) {

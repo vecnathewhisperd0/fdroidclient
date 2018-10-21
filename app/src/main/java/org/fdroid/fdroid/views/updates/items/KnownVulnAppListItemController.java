@@ -141,7 +141,8 @@ public class KnownVulnAppListItemController extends AppListItemController {
 
                     try {
                         uninstallPendingIntent.send();
-                    } catch (PendingIntent.CanceledException ignored) { }
+                    } catch (PendingIntent.CanceledException ignored) {
+                    }
                     break;
             }
         }

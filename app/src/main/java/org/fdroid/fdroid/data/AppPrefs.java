@@ -29,7 +29,7 @@ public class AppPrefs extends ValueObject {
 
     @Override
     public boolean equals(Object o) {
-        return o != null && o instanceof AppPrefs &&
+        return o instanceof AppPrefs &&
                 ((AppPrefs) o).ignoreAllUpdates == ignoreAllUpdates &&
                 ((AppPrefs) o).ignoreThisUpdate == ignoreThisUpdate &&
                 ((AppPrefs) o).ignoreVulnerabilities == ignoreVulnerabilities;

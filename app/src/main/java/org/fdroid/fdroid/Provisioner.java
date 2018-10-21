@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Base64;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.apache.commons.io.IOUtils;
 import org.fdroid.fdroid.data.Repo;
 import org.fdroid.fdroid.data.RepoProvider;
@@ -13,7 +15,6 @@ import org.fdroid.fdroid.views.ManageReposActivity;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
@@ -123,15 +124,7 @@ public class Provisioner {
             return Collections.emptyList();
         }
         try {
-            File[] files = file.listFiles(new FilenameFilter() {
-                @Override
-                public boolean accept(File dir, String name) {
-                    if (name != null && name.endsWith(".fdrp")) {
-                        return true;
-                    }
-                    return false;
-                }
-            });
+            File[] files = file.listFiles((dir, name) -> name != null && name.endsWith(".fdrp"));
             return files != null ? Arrays.asList(files) : null;
         } catch (Exception e) {
             Utils.debugLog(TAG, "can not search for provisions, can not access: " + file.getAbsolutePath(), e);

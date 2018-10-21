@@ -3,6 +3,7 @@ package org.fdroid.fdroid.net;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.util.Log;
+
 import org.apache.commons.io.input.BoundedInputStream;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.net.bluetooth.BluetoothClient;
@@ -35,7 +36,7 @@ public class BluetoothDownloader extends Downloader {
                 && Pattern.matches("([0-9A-F]{2}-)+[0-9A-F]{2}", uri.getHost());
     }
 
-    public BluetoothDownloader(Uri uri, File destFile) throws IOException {
+    public BluetoothDownloader(Uri uri, File destFile) {
         super(uri, destFile);
         String macAddress = uri.getHost().replace("-", ":");
         this.connection = new BluetoothClient(macAddress).openConnection();

@@ -99,7 +99,7 @@ public class RepoProvider extends FDroidProvider {
         public static Repo findByAddress(Context context,
                                          String address, String[] projection) {
             List<Repo> repos = findBy(
-                    context, Cols.ADDRESS, address, projection);
+                    context, address, projection);
             return repos.size() > 0 ? repos.get(0) : null;
         }
 
@@ -115,14 +115,13 @@ public class RepoProvider extends FDroidProvider {
         }
 
         private static List<Repo> findBy(Context context,
-                                         String fieldName,
                                          String fieldValue,
                                          String[] projection) {
             ContentResolver resolver = context.getContentResolver();
             Uri uri = RepoProvider.getContentUri();
             final String[] args = {fieldValue};
             Cursor cursor = resolver.query(
-                    uri, projection, fieldName + " = ?", args, null);
+                    uri, projection, Cols.ADDRESS + " = ?", args, null);
             return cursorToList(cursor);
         }
 

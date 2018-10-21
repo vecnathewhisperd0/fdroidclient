@@ -18,10 +18,12 @@ import android.support.v7.widget.AppCompatImageView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
+
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+
 import org.fdroid.fdroid.R;
 
 import java.util.Random;
@@ -147,12 +149,9 @@ public class FeatureImage extends AppCompatImageView {
         }
 
         alphaAnimator = ValueAnimator.ofInt(0, 255).setDuration(150);
-        alphaAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                currentAlpha = (int) animation.getAnimatedValue();
-                invalidate();
-            }
+        alphaAnimator.addUpdateListener(animation -> {
+            currentAlpha = (int) animation.getAnimatedValue();
+            invalidate();
         });
 
         currentAlpha = 0;
@@ -259,14 +258,7 @@ public class FeatureImage extends AppCompatImageView {
             @Override
             public void onLoadingComplete(String imageUri, View view, final Bitmap loadedImage) {
                 if (loadedImage != null) {
-                    new Palette.Builder(loadedImage).generate(new Palette.PaletteAsyncListener() {
-                        @Override
-                        public void onGenerated(@NonNull Palette palette) {
-                            if (palette != null) {
-                                setColorAndAnimateChange(palette.getDominantColor(Color.LTGRAY));
-                            }
-                        }
-                    });
+                    new Palette.Builder(loadedImage).generate(palette -> setColorAndAnimateChange(palette.getDominantColor(Color.LTGRAY)));
                 }
             }
         });

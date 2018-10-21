@@ -36,8 +36,7 @@ public final class Languages {
     }
 
     private Languages(Activity activity) {
-        Set<Locale> localeSet = new LinkedHashSet<>();
-        localeSet.addAll(Arrays.asList(LOCALES_TO_TEST));
+        Set<Locale> localeSet = new LinkedHashSet<>(Arrays.asList(LOCALES_TO_TEST));
 
         for (Locale locale : localeSet) {
             if (locale.equals(TIBETAN)) {
@@ -141,7 +140,7 @@ public final class Languages {
      * match what is returned by {@link Languages#getSupportedLocales()}.
      */
     public String[] getAllNames() {
-        return nameMap.values().toArray(new String[nameMap.size()]);
+        return nameMap.values().toArray(new String[0]);
     }
 
     /**
@@ -149,7 +148,7 @@ public final class Languages {
      */
     public String[] getSupportedLocales() {
         Set<String> keys = nameMap.keySet();
-        return keys.toArray(new String[keys.size()]);
+        return keys.toArray(new String[0]);
     }
 
     private String capitalize(final String line) {

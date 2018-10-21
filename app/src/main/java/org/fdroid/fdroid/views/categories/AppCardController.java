@@ -18,9 +18,11 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+
 import org.fdroid.fdroid.AppDetails2;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.Utils;
@@ -78,8 +80,8 @@ public class AppCardController extends RecyclerView.ViewHolder
         icon = (ImageView) findViewAndEnsureNonNull(itemView, R.id.icon);
         summary = (TextView) findViewAndEnsureNonNull(itemView, R.id.summary);
 
-        featuredImage = (FeatureImage) itemView.findViewById(R.id.featured_image);
-        newTag = (TextView) itemView.findViewById(R.id.new_tag);
+        featuredImage = itemView.findViewById(R.id.featured_image);
+        newTag = itemView.findViewById(R.id.new_tag);
 
         itemView.setOnClickListener(this);
     }
@@ -136,7 +138,7 @@ public class AppCardController extends RecyclerView.ViewHolder
 
     private boolean isConsideredNew(@NonNull App app) {
         //noinspection SimplifiableIfStatement
-        if (app.added == null || app.lastUpdated == null || !app.added.equals(app.lastUpdated)) {
+        if (app.added == null || !app.added.equals(app.lastUpdated)) {
             return false;
         }
 
@@ -155,7 +157,7 @@ public class AppCardController extends RecyclerView.ViewHolder
         Intent intent = new Intent(activity, AppDetails2.class);
         intent.putExtra(AppDetails2.EXTRA_APPID, currentApp.packageName);
         if (Build.VERSION.SDK_INT >= 21) {
-            Pair<View, String> iconTransitionPair = Pair.create((View) icon,
+            Pair<View, String> iconTransitionPair = Pair.create(icon,
                     activity.getString(R.string.transition_app_item_icon));
 
             // unchecked since the right type is passed as 2nd varargs arg: Pair<View, String>
@@ -182,12 +184,7 @@ public class AppCardController extends RecyclerView.ViewHolder
                 && TextUtils.isEmpty(currentApp.featureGraphic)
                 && featuredImage != null
                 && loadedImage != null) {
-            new Palette.Builder(loadedImage).generate(new Palette.PaletteAsyncListener() {
-                @Override
-                public void onGenerated(@NonNull Palette palette) {
-                    featuredImage.setColorAndAnimateChange(palette.getDominantColor(Color.LTGRAY));
-                }
-            });
+            new Palette.Builder(loadedImage).generate(palette -> featuredImage.setColorAndAnimateChange(palette.getDominantColor(Color.LTGRAY)));
         }
     }
 

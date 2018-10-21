@@ -17,6 +17,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.UpdateService;
@@ -54,39 +55,28 @@ class WhatsNewViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
         GridLayoutManager layoutManager = new GridLayoutManager(activity, 2);
         layoutManager.setSpanSizeLookup(new WhatsNewAdapter.SpanSizeLookup());
 
-        emptyState = (TextView) whatsNewView.findViewById(R.id.empty_state);
+        emptyState = whatsNewView.findViewById(R.id.empty_state);
 
-        appList = (RecyclerView) whatsNewView.findViewById(R.id.app_list);
+        appList = whatsNewView.findViewById(R.id.app_list);
         appList.setHasFixedSize(true);
         appList.setLayoutManager(layoutManager);
         appList.setAdapter(whatsNewAdapter);
 
-        final SwipeRefreshLayout swipeToRefresh = (SwipeRefreshLayout) whatsNewView
+        final SwipeRefreshLayout swipeToRefresh = whatsNewView
                 .findViewById(R.id.swipe_to_refresh);
-        swipeToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeToRefresh.setRefreshing(false);
-                UpdateService.updateNow(activity);
-            }
+        swipeToRefresh.setOnRefreshListener(() -> {
+            swipeToRefresh.setRefreshing(false);
+            UpdateService.updateNow(activity);
         });
 
-        FloatingActionButton searchFab = (FloatingActionButton) whatsNewView.findViewById(R.id.fab_search);
-        searchFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activity.startActivity(new Intent(activity, AppListActivity.class));
-            }
-        });
-        searchFab.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                if (Preferences.get().hideOnLongPressSearch()) {
-                    HidingManager.showHideDialog(activity);
-                    return true;
-                } else {
-                    return false;
-                }
+        FloatingActionButton searchFab = whatsNewView.findViewById(R.id.fab_search);
+        searchFab.setOnClickListener(v -> activity.startActivity(new Intent(activity, AppListActivity.class)));
+        searchFab.setOnLongClickListener(view -> {
+            if (Preferences.get().hideOnLongPressSearch()) {
+                HidingManager.showHideDialog(activity);
+                return true;
+            } else {
+                return false;
             }
         });
 

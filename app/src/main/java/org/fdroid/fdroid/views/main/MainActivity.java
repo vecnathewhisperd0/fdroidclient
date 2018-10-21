@@ -38,9 +38,11 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.ashokvarma.bottomnavigation.TextBadgeItem;
+
 import org.fdroid.fdroid.AppDetails2;
 import org.fdroid.fdroid.AppUpdateStatusManager;
 import org.fdroid.fdroid.AppUpdateStatusManager.AppUpdateStatus;
@@ -91,63 +93,63 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     private int selectedMenuId;
     private TextBadgeItem updatesBadge;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        ((FDroidApp) getApplication()).applyTheme(this);
-        super.onCreate(savedInstanceState);
+    /**
+     * There are a bunch of reasons why we would get notified about app statuses.
+     * The ones we are interested in are those which would result in the "items requiring user interaction"
+     * to increase or decrease:
+     * * Change in status to:
+     * * {@link AppUpdateStatusManager.Status#ReadyToInstall} (Causes the count to go UP by one)
+     * * {@link AppUpdateStatusManager.Status#Installed} (Causes the count to go DOWN by one)
+     */
+    private final BroadcastReceiver onUpdatableAppsChanged = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            boolean updateBadge = false;
 
-        setContentView(R.layout.activity_main);
+            AppUpdateStatusManager manager = AppUpdateStatusManager.getInstance(context);
 
-        adapter = new MainViewAdapter(this);
+            String reason = intent.getStringExtra(AppUpdateStatusManager.EXTRA_REASON_FOR_CHANGE);
+            switch (intent.getAction()) {
+                // Apps which are added/removed from the list due to becoming ready to install or a repo being
+                // disabled both cause us to increase/decrease our badge count respectively.
+                case AppUpdateStatusManager.BROADCAST_APPSTATUS_LIST_CHANGED:
+                    if (AppUpdateStatusManager.REASON_READY_TO_INSTALL.equals(reason) ||
+                            AppUpdateStatusManager.REASON_REPO_DISABLED.equals(reason)) {
+                        updateBadge = true;
+                    }
+                    break;
 
-        pager = (RecyclerView) findViewById(R.id.main_view_pager);
-        pager.setHasFixedSize(true);
-        pager.setLayoutManager(new NonScrollingHorizontalLayoutManager(this));
-        pager.setAdapter(adapter);
+                // Apps which were previously "Ready to install" but have been removed. We need to lower our badge
+                // count in response to this.
+                case AppUpdateStatusManager.BROADCAST_APPSTATUS_REMOVED:
+                    AppUpdateStatus status = intent.getParcelableExtra(AppUpdateStatusManager.EXTRA_STATUS);
+                    if (status != null && status.status == AppUpdateStatusManager.Status.ReadyToInstall) {
+                        updateBadge = true;
+                    }
+                    break;
+            }
 
-        // Without this, the focus is completely busted on pre 15 devices. Trying to use them
-        // without this ends up with each child view showing for a fraction of a second, then
-        // reverting back to the "Latest" screen again, in completely non-deterministic ways.
-        if (Build.VERSION.SDK_INT <= 15) {
-            pager.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
+            // Check if we have moved into the ReadyToInstall or Installed state.
+            AppUpdateStatus status = manager.get(intent.getStringExtra(AppUpdateStatusManager.EXTRA_APK_URL));
+            boolean isStatusChange = intent.getBooleanExtra(AppUpdateStatusManager.EXTRA_IS_STATUS_UPDATE, false);
+            if (isStatusChange
+                    && status != null
+                    && (status.status == AppUpdateStatusManager.Status.ReadyToInstall || status.status == AppUpdateStatusManager.Status.Installed)) { // NOCHECKSTYLE LineLength
+                updateBadge = true;
+            }
+
+            if (updateBadge) {
+                int count = 0;
+                for (AppUpdateStatus s : manager.getAll()) {
+                    if (s.status == AppUpdateStatusManager.Status.ReadyToInstall) {
+                        count++;
+                    }
+                }
+
+                refreshUpdatesBadge(count);
+            }
         }
-
-        updatesBadge = new TextBadgeItem().hide(false);
-
-        bottomNavigation = (BottomNavigationBar) findViewById(R.id.bottom_navigation);
-        bottomNavigation
-                .addItem(new BottomNavigationItem(R.drawable.ic_latest, R.string.main_menu__latest_apps));
-        if (BuildConfig.FLAVOR.startsWith("full")) {
-            bottomNavigation
-                    .addItem(new BottomNavigationItem(R.drawable.ic_categories, R.string.main_menu__categories))
-                    .addItem(new BottomNavigationItem(R.drawable.ic_nearby, R.string.main_menu__swap_nearby));
-        }
-        bottomNavigation.setTabSelectedListener(this)
-                .setBarBackgroundColor(getBottomNavigationBackgroundColorResId())
-                .setInActiveColor(R.color.bottom_nav_items)
-                .setActiveColor(android.R.color.white)
-                .setMode(BottomNavigationBar.MODE_FIXED)
-                .addItem(new BottomNavigationItem(R.drawable.ic_updates, R.string.updates).setBadgeItem(updatesBadge))
-                .addItem(new BottomNavigationItem(R.drawable.ic_settings, R.string.menu_settings))
-                .initialise();
-
-        IntentFilter updateableAppsFilter = new IntentFilter(AppUpdateStatusManager.BROADCAST_APPSTATUS_LIST_CHANGED);
-        updateableAppsFilter.addAction(AppUpdateStatusManager.BROADCAST_APPSTATUS_CHANGED);
-        updateableAppsFilter.addAction(AppUpdateStatusManager.BROADCAST_APPSTATUS_REMOVED);
-        LocalBroadcastManager.getInstance(this).registerReceiver(onUpdateableAppsChanged, updateableAppsFilter);
-
-        if (savedInstanceState != null) {
-            selectedMenuId = savedInstanceState.getInt(STATE_SELECTED_MENU_ID, (int) adapter.getItemId(0));
-        } else {
-            selectedMenuId = (int) adapter.getItemId(0);
-        }
-        setSelectedMenuInNav();
-
-        initialRepoUpdateIfRequired();
-
-        Intent intent = getIntent();
-        handleSearchOrAppViewIntent(intent);
-    }
+    };
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -385,61 +387,57 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         }
     }
 
-    /**
-     * There are a bunch of reasons why we would get notified about app statuses.
-     * The ones we are interested in are those which would result in the "items requiring user interaction"
-     * to increase or decrease:
-     * * Change in status to:
-     * * {@link AppUpdateStatusManager.Status#ReadyToInstall} (Causes the count to go UP by one)
-     * * {@link AppUpdateStatusManager.Status#Installed} (Causes the count to go DOWN by one)
-     */
-    private final BroadcastReceiver onUpdateableAppsChanged = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            boolean updateBadge = false;
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        ((FDroidApp) getApplication()).applyTheme(this);
+        super.onCreate(savedInstanceState);
 
-            AppUpdateStatusManager manager = AppUpdateStatusManager.getInstance(context);
+        setContentView(R.layout.activity_main);
 
-            String reason = intent.getStringExtra(AppUpdateStatusManager.EXTRA_REASON_FOR_CHANGE);
-            switch (intent.getAction()) {
-                // Apps which are added/removed from the list due to becoming ready to install or a repo being
-                // disabled both cause us to increase/decrease our badge count respectively.
-                case AppUpdateStatusManager.BROADCAST_APPSTATUS_LIST_CHANGED:
-                    if (AppUpdateStatusManager.REASON_READY_TO_INSTALL.equals(reason) ||
-                            AppUpdateStatusManager.REASON_REPO_DISABLED.equals(reason)) {
-                        updateBadge = true;
-                    }
-                    break;
+        adapter = new MainViewAdapter(this);
 
-                // Apps which were previously "Ready to install" but have been removed. We need to lower our badge
-                // count in response to this.
-                case AppUpdateStatusManager.BROADCAST_APPSTATUS_REMOVED:
-                    AppUpdateStatus status = intent.getParcelableExtra(AppUpdateStatusManager.EXTRA_STATUS);
-                    if (status != null && status.status == AppUpdateStatusManager.Status.ReadyToInstall) {
-                        updateBadge = true;
-                    }
-                    break;
-            }
+        pager = findViewById(R.id.main_view_pager);
+        pager.setHasFixedSize(true);
+        pager.setLayoutManager(new NonScrollingHorizontalLayoutManager(this));
+        pager.setAdapter(adapter);
 
-            // Check if we have moved into the ReadyToInstall or Installed state.
-            AppUpdateStatus status = manager.get(intent.getStringExtra(AppUpdateStatusManager.EXTRA_APK_URL));
-            boolean isStatusChange = intent.getBooleanExtra(AppUpdateStatusManager.EXTRA_IS_STATUS_UPDATE, false);
-            if (isStatusChange
-                    && status != null
-                    && (status.status == AppUpdateStatusManager.Status.ReadyToInstall || status.status == AppUpdateStatusManager.Status.Installed)) { // NOCHECKSTYLE LineLength
-                updateBadge = true;
-            }
-
-            if (updateBadge) {
-                int count = 0;
-                for (AppUpdateStatus s : manager.getAll()) {
-                    if (s.status == AppUpdateStatusManager.Status.ReadyToInstall) {
-                        count++;
-                    }
-                }
-
-                refreshUpdatesBadge(count);
-            }
+        // Without this, the focus is completely busted on pre 15 devices. Trying to use them
+        // without this ends up with each child view showing for a fraction of a second, then
+        // reverting back to the "Latest" screen again, in completely non-deterministic ways.
+        if (Build.VERSION.SDK_INT <= 15) {
+            pager.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
         }
-    };
+
+        updatesBadge = new TextBadgeItem().hide(false);
+
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation
+                .addItem(new BottomNavigationItem(R.drawable.ic_latest, R.string.main_menu__latest_apps));
+        BuildConfig.FLAVOR.startsWith("full");
+        bottomNavigation.setTabSelectedListener(this)
+                .setBarBackgroundColor(getBottomNavigationBackgroundColorResId())
+                .setInActiveColor(R.color.bottom_nav_items)
+                .setActiveColor(android.R.color.white)
+                .setMode(BottomNavigationBar.MODE_FIXED)
+                .addItem(new BottomNavigationItem(R.drawable.ic_updates, R.string.updates).setBadgeItem(updatesBadge))
+                .addItem(new BottomNavigationItem(R.drawable.ic_settings, R.string.menu_settings))
+                .initialise();
+
+        IntentFilter updatableAppsFilter = new IntentFilter(AppUpdateStatusManager.BROADCAST_APPSTATUS_LIST_CHANGED);
+        updatableAppsFilter.addAction(AppUpdateStatusManager.BROADCAST_APPSTATUS_CHANGED);
+        updatableAppsFilter.addAction(AppUpdateStatusManager.BROADCAST_APPSTATUS_REMOVED);
+        LocalBroadcastManager.getInstance(this).registerReceiver(onUpdatableAppsChanged, updatableAppsFilter);
+
+        if (savedInstanceState != null) {
+            selectedMenuId = savedInstanceState.getInt(STATE_SELECTED_MENU_ID, (int) adapter.getItemId(0));
+        } else {
+            selectedMenuId = (int) adapter.getItemId(0);
+        }
+        setSelectedMenuInNav();
+
+        initialRepoUpdateIfRequired();
+
+        Intent intent = getIntent();
+        handleSearchOrAppViewIntent(intent);
+    }
 }

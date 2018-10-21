@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.data.Repo;
 
@@ -53,13 +54,13 @@ public class RepoAdapter extends CursorAdapter {
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         View view = inflater.inflate(R.layout.repo_item, parent, false);
-        setupView(cursor, view, (CompoundButton) view.findViewById(R.id.repo_switch));
+        setupView(cursor, view, view.findViewById(R.id.repo_switch));
         return view;
     }
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        CompoundButton switchView = (CompoundButton) view.findViewById(R.id.repo_switch);
+        CompoundButton switchView = view.findViewById(R.id.repo_switch);
 
         // Remove old listener (because we are reusing this view, we don't want
         // to invoke the listener for the last repo to use it - particularly
@@ -76,16 +77,13 @@ public class RepoAdapter extends CursorAdapter {
 
         // Add this listener *after* setting the checked status, so we don't
         // invoke the listener while setting up the view...
-        switchView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (enabledListener != null) {
-                    enabledListener.onSetEnabled(repo, isChecked);
-                }
+        switchView.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (enabledListener != null) {
+                enabledListener.onSetEnabled(repo, isChecked);
             }
         });
 
-        TextView nameView = (TextView) view.findViewById(R.id.repo_name);
+        TextView nameView = view.findViewById(R.id.repo_name);
         nameView.setText(repo.getName());
 
         View unsignedView = view.findViewById(R.id.repo_unsigned);

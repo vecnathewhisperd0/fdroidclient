@@ -11,21 +11,21 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.JobIntentService;
 import android.util.Log;
+
 import org.acra.ACRA;
 import org.fdroid.fdroid.AppUpdateStatusManager;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.Schema.InstalledAppTable;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
-import rx.subjects.PublishSubject;
 
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+import rx.schedulers.Schedulers;
+import rx.subjects.PublishSubject;
 
 /**
  * Handles all updates to {@link InstalledAppProvider}, whether checking the contents
@@ -58,49 +58,59 @@ public class InstalledAppProviderService extends JobIntentService {
     private static final String EXTRA_PACKAGE_INFO = "org.fdroid.fdroid.data.extra.PACKAGE_INFO";
 
     /**
-     * This is for notifing the users of this {@link android.content.ContentProvider}
+     * This is for notifying the users of this {@link android.content.ContentProvider}
      * that the contents has changed.  Since {@link Intent}s can come in slow
      * or fast, and this can trigger a lot of UI updates, the actual
      * notifications are rate limited to one per second.
      */
     private PublishSubject<String> packageChangeNotifier;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        packageChangeNotifier = PublishSubject.create();
+    /**
+     * Make sure that {@link InstalledAppProvider}, our database of installed apps,
+     * is in sync with what the {@link PackageManager} tells us is installed. Once
+     * completed, the relevant {@link android.content.ContentProvider}s will be
+     * notified of any changes to installed statuses.  The packages are processed
+     * in alphabetically order so that "{@code android}" is processed first.  That
+     * is always present and signed by the system key, so it is the source of the
+     * system key for comparing all packages.
+     * <p>
+     * The installed app cache could get out of sync, e.g. if F-Droid crashed/ or
+     * ran out of battery half way through responding to {@link Intent#ACTION_PACKAGE_ADDED}.
+     * This method returns immediately, and will continue to work in an
+     * {@link JobIntentService}.  It doesn't really matter where we put this in the
+     * bootstrap process, because it runs in its own thread, at the lowest priority:
+     * {@link Process#THREAD_PRIORITY_LOWEST}.
+     * <p>
+     * APKs installed in {@code /system} will often have zeroed out timestamps, like
+     * 2008-01-01 (ziptime) or 2009-01-01.  So instead anything older than 2010 every
+     * time since we have no way to know whether an APK wasn't changed as part of an
+     * OTA update.  An OTA update could change the APK without changing the
+     * {@link PackageInfo#versionCode} or {@link PackageInfo#lastUpdateTime}.
+     *
+     * @see <a href="https://gitlab.com/fdroid/fdroidclient/issues/819>issue #819</a>
+     */
+    public static void compareToPackageManager(Context context) {
+        Utils.debugLog(TAG, "Comparing package manager to our installed app cache.");
+        Map<String, Long> cachedInfo = InstalledAppProvider.Helper.all(context);
 
-        // This "debounced" event will queue up any number of invocations within one second, and
-        // only emit an event to the subscriber after it has not received any new events for one second.
-        // This ensures that we don't constantly ask our lists of apps to update as we iterate over
-        // the list of installed apps and insert them to the database...
-        packageChangeNotifier
-                .subscribeOn(Schedulers.newThread())
-                .debounce(3, TimeUnit.SECONDS)
-                .subscribe(new Action1<String>() {
-                    @Override
-                    public void call(String packageName) {
-                        Utils.debugLog(TAG, "Notifying content providers (so they can update the relevant views).");
-                        getContentResolver().notifyChange(AppProvider.getContentUri(), null);
-                        getContentResolver().notifyChange(ApkProvider.getContentUri(), null);
-                    }
-                });
+        List<PackageInfo> packageInfoList = context.getPackageManager()
+                .getInstalledPackages(PackageManager.GET_SIGNATURES);
+        Collections.sort(packageInfoList, (o1, o2) -> o1.packageName.compareTo(o2.packageName));
+        for (PackageInfo packageInfo : packageInfoList) {
+            if (cachedInfo.containsKey(packageInfo.packageName)) {
+                if (packageInfo.lastUpdateTime < 1262300400000L // 2010-01-01 00:00
+                        || packageInfo.lastUpdateTime > cachedInfo.get(packageInfo.packageName)) {
+                    insert(context, packageInfo);
+                }
+                cachedInfo.remove(packageInfo.packageName);
+            } else {
+                insert(context, packageInfo);
+            }
+        }
 
-        // ...alternatively, this non-debounced version will instantly emit an event about the
-        // particular package being updated. This is required so that our AppDetails view can update
-        // itself immediately in response to an app being installed/upgraded/removed.
-        // It does this _without_ triggering the main lists to update themselves, because they listen
-        // only for changes to specific URIs in the AppProvider. These are triggered when a more
-        // general notification (e.g. to AppProvider.getContentUri()) is fired, but not when a
-        // sibling such as AppProvider.getHighestPriorityMetadataUri() is fired.
-        packageChangeNotifier.subscribeOn(Schedulers.newThread())
-                .subscribe(new Action1<String>() {
-                    @Override
-                    public void call(String packageName) {
-                        getContentResolver()
-                                .notifyChange(AppProvider.getHighestPriorityMetadataUri(packageName), null);
-                    }
-                });
+        for (String packageName : cachedInfo.keySet()) {
+            delete(context, packageName);
+        }
     }
 
     /**
@@ -150,69 +160,11 @@ public class InstalledAppProviderService extends JobIntentService {
         enqueueWork(context, InstalledAppProviderService.class, 0x192834, intent);
     }
 
-    /**
-     * Make sure that {@link InstalledAppProvider}, our database of installed apps,
-     * is in sync with what the {@link PackageManager} tells us is installed. Once
-     * completed, the relevant {@link android.content.ContentProvider}s will be
-     * notified of any changes to installed statuses.  The packages are processed
-     * in alphabetically order so that "{@code android}" is processed first.  That
-     * is always present and signed by the system key, so it is the source of the
-     * system key for comparing all packages.
-     * <p>
-     * The installed app cache could get out of sync, e.g. if F-Droid crashed/ or
-     * ran out of battery half way through responding to {@link Intent#ACTION_PACKAGE_ADDED}.
-     * This method returns immediately, and will continue to work in an
-     * {@link JobIntentService}.  It doesn't really matter where we put this in the
-     * bootstrap process, because it runs in its own thread, at the lowest priority:
-     * {@link Process#THREAD_PRIORITY_LOWEST}.
-     * <p>
-     * APKs installed in {@code /system} will often have zeroed out timestamps, like
-     * 2008-01-01 (ziptime) or 2009-01-01.  So instead anything older than 2010 every
-     * time since we have no way to know whether an APK wasn't changed as part of an
-     * OTA update.  An OTA update could change the APK without changing the
-     * {@link PackageInfo#versionCode} or {@link PackageInfo#lastUpdateTime}.
-     *
-     * @see <a href="https://gitlab.com/fdroid/fdroidclient/issues/819>issue #819</a>
-     */
-    public static void compareToPackageManager(Context context) {
-        Utils.debugLog(TAG, "Comparing package manager to our installed app cache.");
-        Map<String, Long> cachedInfo = InstalledAppProvider.Helper.all(context);
-
-        List<PackageInfo> packageInfoList = context.getPackageManager()
-                .getInstalledPackages(PackageManager.GET_SIGNATURES);
-        Collections.sort(packageInfoList, new Comparator<PackageInfo>() {
-            @Override
-            public int compare(PackageInfo o1, PackageInfo o2) {
-                return o1.packageName.compareTo(o2.packageName);
-            }
-        });
-        for (PackageInfo packageInfo : packageInfoList) {
-            if (cachedInfo.containsKey(packageInfo.packageName)) {
-                if (packageInfo.lastUpdateTime < 1262300400000L // 2010-01-01 00:00
-                        || packageInfo.lastUpdateTime > cachedInfo.get(packageInfo.packageName)) {
-                    insert(context, packageInfo);
-                }
-                cachedInfo.remove(packageInfo.packageName);
-            } else {
-                insert(context, packageInfo);
-            }
-        }
-
-        for (String packageName : cachedInfo.keySet()) {
-            delete(context, packageName);
-        }
-    }
-
     @Nullable
     public static File getPathToInstalledApk(PackageInfo packageInfo) {
         File apk = new File(packageInfo.applicationInfo.publicSourceDir);
         if (apk.isDirectory()) {
-            FilenameFilter filter = new FilenameFilter() {
-                @Override
-                public boolean accept(File dir, String name) {
-                    return name.endsWith(".apk");
-                }
-            };
+            FilenameFilter filter = (dir, name) -> name.endsWith(".apk");
             File[] files = apk.listFiles(filter);
             if (files == null) {
                 String msg = packageInfo.packageName + " sourceDir has no APKs: " + apk.getAbsolutePath();
@@ -224,6 +176,36 @@ public class InstalledAppProviderService extends JobIntentService {
         }
 
         return apk;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        packageChangeNotifier = PublishSubject.create();
+
+        // This "debounced" event will queue up any number of invocations within one second, and
+        // only emit an event to the subscriber after it has not received any new events for one second.
+        // This ensures that we don't constantly ask our lists of apps to update as we iterate over
+        // the list of installed apps and insert them to the database...
+        packageChangeNotifier
+                .subscribeOn(Schedulers.newThread())
+                .debounce(3, TimeUnit.SECONDS)
+                .subscribe(packageName -> {
+                    Utils.debugLog(TAG, "Notifying content providers (so they can update the relevant views).");
+                    getContentResolver().notifyChange(AppProvider.getContentUri(), null);
+                    getContentResolver().notifyChange(ApkProvider.getContentUri(), null);
+                });
+
+        // ...alternatively, this non-debounced version will instantly emit an event about the
+        // particular package being updated. This is required so that our AppDetails view can update
+        // itself immediately in response to an app being installed/upgraded/removed.
+        // It does this _without_ triggering the main lists to update themselves, because they listen
+        // only for changes to specific URIs in the AppProvider. These are triggered when a more
+        // general notification (e.g. to AppProvider.getContentUri()) is fired, but not when a
+        // sibling such as AppProvider.getHighestPriorityMetadataUri() is fired.
+        packageChangeNotifier.subscribeOn(Schedulers.newThread())
+                .subscribe(packageName -> getContentResolver()
+                        .notifyChange(AppProvider.getHighestPriorityMetadataUri(packageName), null));
     }
 
     @Override

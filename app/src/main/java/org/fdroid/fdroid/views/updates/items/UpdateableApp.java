@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
+
 import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
+
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.data.App;
 
@@ -16,7 +18,7 @@ import java.util.List;
  * @see UpdateableApp The data that is bound to this view.
  * @see R.layout#updateable_app_list_item The view that this binds to.
  * @see UpdateableAppListItemController Used for binding the {@link App} to
- *      the {@link R.layout#updateable_app_list_item}
+ * the {@link R.layout#updateable_app_list_item}
  */
 public class UpdateableApp extends AppUpdateData {
 

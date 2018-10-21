@@ -10,6 +10,7 @@ import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.style.TtsSpan;
 import android.widget.EditText;
+
 import org.fdroid.fdroid.R;
 
 /**
@@ -55,7 +56,7 @@ public class CategoryTextWatcher implements TextWatcher {
         // right to the start. This could be if we are removing everything (in which case
         // there is no text to span), or we are removing somewhere from after the category
         // back to the start (in which case we've removed the category anyway and don't need
-        // to explicilty request it to be removed.
+        // to explicitly request it to be removed.
         if (start == 0 && removingOrReplacing) {
             return;
         }

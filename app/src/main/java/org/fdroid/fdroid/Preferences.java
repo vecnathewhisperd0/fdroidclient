@@ -29,7 +29,7 @@ import android.os.Build;
 import android.support.v7.preference.PreferenceManager;
 import android.text.format.DateUtils;
 import android.util.Log;
-import info.guardianproject.netcipher.NetCipher;
+
 import org.fdroid.fdroid.net.ConnectivityMonitorService;
 
 import java.net.InetSocketAddress;
@@ -41,6 +41,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+
+import info.guardianproject.netcipher.NetCipher;
 
 /**
  * Handles shared preferences for FDroid, looking after the names of
@@ -167,8 +169,8 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
         return initialized.containsKey(key) && initialized.get(key);
     }
 
-    private void initialize(String key) {
-        initialized.put(key, true);
+    private void initialize() {
+        initialized.put(Preferences.PREF_SHOW_ANTI_FEATURE_APPS, true);
     }
 
     private void uninitialize(String key) {
@@ -537,7 +539,7 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
             preferences.edit().putBoolean(PREF_SHOW_ANTI_FEATURE_APPS, !oldPreference).apply();
         }
         if (!isInitialized(PREF_SHOW_ANTI_FEATURE_APPS)) {
-            initialize(PREF_SHOW_ANTI_FEATURE_APPS);
+            initialize();
             showAppsWithAntiFeatures = preferences.getBoolean(PREF_SHOW_ANTI_FEATURE_APPS, IGNORED_B);
         }
         return showAppsWithAntiFeatures;

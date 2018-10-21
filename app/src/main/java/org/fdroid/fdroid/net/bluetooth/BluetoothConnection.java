@@ -1,6 +1,7 @@
 package org.fdroid.fdroid.net.bluetooth;
 
 import android.bluetooth.BluetoothSocket;
+
 import org.fdroid.fdroid.Utils;
 
 import java.io.BufferedInputStream;
@@ -47,7 +48,7 @@ public class BluetoothConnection {
         Utils.closeQuietly(socket);
     }
 
-    public void close() throws IOException {
+    public void close() {
         closeQuietly();
     }
 }

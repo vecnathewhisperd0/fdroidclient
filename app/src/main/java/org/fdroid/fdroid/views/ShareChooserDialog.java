@@ -2,7 +2,6 @@ package org.fdroid.fdroid.views;
 
 import android.app.Dialog;
 import android.content.ComponentName;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.graphics.Color;
@@ -20,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.Utils;
@@ -77,14 +77,11 @@ public class ShareChooserDialog extends BottomSheetDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final Dialog dialog = super.onCreateDialog(savedInstanceState);
-        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-            @Override
-            public void onShow(DialogInterface dialogInterface) {
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.getWindow().setLayout(
-                        parentWidth - Utils.dpToPx(0, getContext()), // Set margins here!
-                        ViewGroup.LayoutParams.MATCH_PARENT);
-            }
+        dialog.setOnShowListener(dialogInterface -> {
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.getWindow().setLayout(
+                    parentWidth - Utils.dpToPx(0, getContext()), // Set margins here!
+                    ViewGroup.LayoutParams.MATCH_PARENT);
         });
         return dialog;
     }
@@ -97,7 +94,7 @@ public class ShareChooserDialog extends BottomSheetDialogFragment {
     }
 
     private void setupView(View v) {
-        recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view_apps);
+        recyclerView = v.findViewById(R.id.recycler_view_apps);
 
         // Figure out how many columns that fit in the given parent width. Give them 100dp.
         int appWidth = Utils.dpToPx(80, getContext());
@@ -125,8 +122,8 @@ public class ShareChooserDialog extends BottomSheetDialogFragment {
 
             VH(View itemView) {
                 super(itemView);
-                icon = (ImageView) itemView.findViewById(R.id.ivShare);
-                label = (TextView) itemView.findViewById(R.id.tvShare);
+                icon = itemView.findViewById(R.id.ivShare);
+                label = itemView.findViewById(R.id.tvShare);
             }
         }
 
@@ -139,9 +136,7 @@ public class ShareChooserDialog extends BottomSheetDialogFragment {
                 if (showNearby) {
                     intents.add(null);
                 }
-                for (ResolveInfo ri : targetedShareIntents) {
-                    intents.add(ri);
-                }
+                intents.addAll(targetedShareIntents);
                 return this;
             }
 
@@ -165,32 +160,26 @@ public class ShareChooserDialog extends BottomSheetDialogFragment {
             @Override
             public void onBindViewHolder(@NonNull VH holder, int position) {
                 if (getItemViewType(position) == VIEWTYPE_SWAP) {
-                    holder.itemView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (listener != null) {
-                                listener.onNearby();
-                            }
-                            dismiss();
+                    holder.itemView.setOnClickListener(v1 -> {
+                        if (listener != null) {
+                            listener.onNearby();
                         }
+                        dismiss();
                     });
                     return;
                 }
                 final ResolveInfo ri = intents.get(position);
                 holder.icon.setImageDrawable(ri.loadIcon(getContext().getPackageManager()));
                 holder.label.setText(ri.loadLabel(getContext().getPackageManager()));
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (listener != null) {
-                            Intent intent = new Intent(shareIntent);
-                            ComponentName name = new ComponentName(ri.activityInfo.applicationInfo.packageName,
-                                    ri.activityInfo.name);
-                            intent.setComponent(name);
-                            listener.onResolvedShareIntent(intent);
-                        }
-                        dismiss();
+                holder.itemView.setOnClickListener(view -> {
+                    if (listener != null) {
+                        Intent intent = new Intent(shareIntent);
+                        ComponentName name = new ComponentName(ri.activityInfo.applicationInfo.packageName,
+                                ri.activityInfo.name);
+                        intent.setComponent(name);
+                        listener.onResolvedShareIntent(intent);
                     }
+                    dismiss();
                 });
             }
 
