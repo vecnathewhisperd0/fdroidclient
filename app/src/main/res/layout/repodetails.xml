@@ -22,10 +22,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingEnd="?attr/listPreferredItemPaddingRight"
+            android:paddingStart="?attr/listPreferredItemPaddingLeft"
             android:paddingLeft="?attr/listPreferredItemPaddingLeft"
-            android:paddingRight="?attr/listPreferredItemPaddingRight"
-            android:paddingStart="?attr/listPreferredItemPaddingLeft">
+            android:paddingEnd="?attr/listPreferredItemPaddingRight"
+            android:paddingRight="?attr/listPreferredItemPaddingRight">
 
             <!-- URL of this repo -->
             <TextView

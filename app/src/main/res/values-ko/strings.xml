@@ -472,7 +472,7 @@
     <string name="swap_toast_hotspot_enabled">Wi-Fi 핫스팟이 활성화됨</string>
     <string name="swap_toast_could_not_enable_hotspot">Wi-Fi 핫스팟을 활성화할 수 없었습니다!</string>
 
-    <string name="warning_scaning_qr_code">당신의 카메라가 오토포커스를 가진 것으로 보이지 않습니다. 코드를 스캔하는데 어려울 수도 있습니다.</string>
+    <string name="warning_scanning_qr_code">당신의 카메라가 오토포커스를 가진 것으로 보이지 않습니다. 코드를 스캔하는데 어려울 수도 있습니다.</string>
     <string name="over_wifi">Wi-Fi를 통해</string>
     <string name="over_data">데이터를 통해</string>
     <string name="over_network_always_summary">항상 이 연결을 사용 가능할 때 사용합니다</string>

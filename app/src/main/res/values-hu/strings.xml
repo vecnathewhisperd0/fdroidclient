@@ -501,7 +501,7 @@
     <string name="swap_toast_hotspot_enabled">Wi-Fi Hotspot engedélyezve</string>
     <string name="swap_toast_could_not_enable_hotspot">A Wi-Fi Hotspot nem engedélyezhető!</string>
 
-    <string name="warning_scaning_qr_code">A kamerának úgy tűnik nincs autofókusza. Így nehézkes lehet a kód leolvasása.</string>
+    <string name="warning_scanning_qr_code">A kamerának úgy tűnik nincs autofókusza. Így nehézkes lehet a kód leolvasása.</string>
     <string name="prompt_to_send_crash_reports">Kérdezzen az összeomlási jelentések küldésekor</string>
     <string name="prompt_to_send_crash_reports_summary">Adatok begyűjtése az összeomlásokról, és annak megkérdezése, hogy elküldje azokat a fejlesztőnek</string>
     <string name="hide_all_notifications">Minden értesítés elrejtése</string>

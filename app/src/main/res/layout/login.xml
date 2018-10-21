@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingLeft="24dp"
     android:paddingStart="24dp"
-    android:paddingRight="24dp"
+    android:paddingLeft="24dp"
+    android:paddingTop="20dp"
     android:paddingEnd="24dp"
-    android:paddingTop="20dp">
+    android:paddingRight="24dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,17 +43,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            tools:text="This repo is already setup, this will add new key information."/>
+            tools:text="This repo is already setup, this will add new key information." />
 
     </LinearLayout>
 
     <TextView
-        android:padding="10dp"
-        android:textSize="16sp"
         android:id="@+id/text_searching_for_repo"
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textSize="16sp"
         tools:text="Searching for repository at\nhttps://www.example.com/fdroid/repo/" />
 
 </RelativeLayout>

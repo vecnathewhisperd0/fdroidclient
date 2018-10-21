@@ -507,7 +507,7 @@
     <string name="swap_toast_hotspot_enabled">Wi-Fi-accesspunkt aktiverad</string>
     <string name="swap_toast_could_not_enable_hotspot">Kunde inte aktivera Wi-Fi-accesspunkt!</string>
 
-    <string name="warning_scaning_qr_code">Din kamera verkar inte ha autofokus. Det kan bli svårt att skanna koden.</string>
+    <string name="warning_scanning_qr_code">Din kamera verkar inte ha autofokus. Det kan bli svårt att skanna koden.</string>
     <string name="prompt_to_send_crash_reports">Fråga om att skicka kraschrapporter</string>
     <string name="prompt_to_send_crash_reports_summary">Samla data om krascher och be att få skicka den till utvecklaren</string>
     <string name="hide_all_notifications">Dölj alla aviseringar</string>

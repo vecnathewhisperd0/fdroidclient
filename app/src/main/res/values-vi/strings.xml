@@ -489,5 +489,5 @@
     <string name="swap_toast_hotspot_enabled">Đã bật điểm phát Wi-Fi</string>
     <string name="swap_toast_could_not_enable_hotspot">Không bật được điểm phát sóng Wi-Fi!</string>
 
-    <string name="warning_scaning_qr_code">Máy ảnh của bạn không có chức năng tự động lấy nét. Có thể khó quét được mã.</string>
+    <string name="warning_scanning_qr_code">Máy ảnh của bạn không có chức năng tự động lấy nét. Có thể khó quét được mã.</string>
     </resources>

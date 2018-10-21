@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="DetailsButtonStyleBase">
         <item name="android:textSize">12sp</item>
         <item name="android:textStyle">normal</item>
@@ -8,7 +9,7 @@
         <item name="android:padding">12dp</item>
     </style>
 
-    <style name="DetailsButtonStyle" parent="DetailsButtonStyleBase"/>
+    <style name="DetailsButtonStyle" parent="DetailsButtonStyleBase" />
 
     <style name="DetailsPrimaryButtonStyle" parent="DetailsButtonStyle">
         <item name="android:textColor">#ffffff</item>
@@ -40,6 +41,7 @@
     </style>
 
     <style name="DetailsLastUpdatedStyle" parent="TextAppearance.AppCompat.Small">
+
     </style>
 
     <style name="DetailsAntiFeaturesWarningStyle" parent="TextAppearance.AppCompat.Body1">

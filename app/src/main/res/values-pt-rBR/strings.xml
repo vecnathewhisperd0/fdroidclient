@@ -501,7 +501,7 @@
 
     <string name="menu_liberapay">Liberapay</string>
 
-    <string name="warning_scaning_qr_code">Sua câmera não parece ter focagem automática. Pode ser difícil escanear o código.</string>
+    <string name="warning_scanning_qr_code">Sua câmera não parece ter focagem automática. Pode ser difícil escanear o código.</string>
     <string name="repo_add_mirror">Adicionar mirror</string>
     <string name="repo_exists_add_mirror">Esta é uma copia de %1$s, adicionar ele como um mirror?</string>
     <string name="show_anti_feature_apps">Incluir aplicativos antifraude</string>

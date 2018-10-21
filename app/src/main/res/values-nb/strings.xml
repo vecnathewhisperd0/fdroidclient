@@ -497,7 +497,7 @@
 
     <string name="menu_liberapay">Liberapay</string>
 
-    <string name="warning_scaning_qr_code">Kameraet ditt mangler autofokus. Det kan vise seg vanskelig å skanne koden.</string>
+    <string name="warning_scanning_qr_code">Kameraet ditt mangler autofokus. Det kan vise seg vanskelig å skanne koden.</string>
     <string name="show_anti_feature_apps">Inkluder antifunksjons-programmer</string>
     <string name="show_anti_feature_apps_on">Vis programmer som krever anti-funksjoner</string>
     <string name="force_touch_apps">Inkluder pekeskjermsprogrammer</string>

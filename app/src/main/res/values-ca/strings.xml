@@ -506,7 +506,7 @@
     <string name="swap_toast_hotspot_enabled">Punt d\'accés wifi actiu</string>
     <string name="swap_toast_could_not_enable_hotspot">No ha estat possible activar el punt d\'accés wifi!</string>
 
-    <string name="warning_scaning_qr_code">Sembla que la càmera no té sistema d\'autoenfocament. Potser difícil d\'escanejar el codi.</string>
+    <string name="warning_scanning_qr_code">Sembla que la càmera no té sistema d\'autoenfocament. Potser difícil d\'escanejar el codi.</string>
     <string name="repo_exists_add_fingerprint">%1$s ja està configurat, això afegirà informació de la nova clau.</string>
     <string name="repo_exists_enable">%1$s ja està configurat, confirmeu que el voleu reactivar.</string>
     <string name="repo_delete_to_overwrite">Elimineu primer %1$s per tal d\'afegir-ho amb una clau conflictiva.</string>

@@ -1,57 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
     android:background="?attr/selectableItemBackground"
+    android:clickable="true"
     android:focusable="true">
 
     <!-- Ignore ContentDescription because it is kind of meaningless to have TTS read out "App icon"
          when it will inevitably read out the name of the app straight after. -->
     <ImageView
         android:id="@+id/icon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        tools:src="@drawable/ic_launcher"
-        android:scaleType="fitCenter"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
-        tools:ignore="ContentDescription" />
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/ic_launcher" />
 
     <TextView
         android:id="@+id/app_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:text="F-Droid Application manager with a long name that will wrap and then ellipsize"
-        android:textSize="18sp"
-        android:textColor="?attr/appListItem"
-        android:lines="2"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:ellipsize="end"
+        android:lines="2"
+        android:textColor="?attr/appListItem"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/buttons"
         app:layout_constraintStart_toEndOf="@+id/icon"
         app:layout_constraintTop_toTopOf="@+id/icon"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/buttons"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp" />
+        tools:text="F-Droid Application manager with a long name that will wrap and then ellipsize" />
 
     <TextView
         android:id="@+id/status"
+        style="@style/AppListItemStatusText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        tools:text="Installed"
-        style="@style/AppListItemStatusText"
-        app:layout_constraintTop_toBottomOf="@+id/app_name"
-        app:layout_constraintStart_toEndOf="@+id/icon"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp" />
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/icon"
+        app:layout_constraintTop_toBottomOf="@+id/app_name"
+        tools:text="Installed" />
 
     <FrameLayout
         android:id="@+id/buttons"
@@ -64,13 +63,13 @@
 
         <ImageView
             android:id="@+id/install"
-            tools:src="@drawable/ic_download"
-            android:scaleType="fitXY"
-            android:contentDescription="@string/menu_install"
             android:layout_width="64dp"
             android:layout_height="64dp"
+            android:contentDescription="@string/menu_install"
             android:elevation="2dp"
-            android:padding="4dp" />
+            android:padding="4dp"
+            android:scaleType="fitXY"
+            tools:src="@drawable/ic_download" />
 
         <Button
             android:id="@+id/action_button"

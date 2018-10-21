@@ -7,7 +7,7 @@
         version, the old one must be uninstalled first. Please do this and try again. (Note that uninstalling will erase
         any internal data stored by the app)
     </string>
-    <string name="installIncompatible">App incompatible with your device, install anyway?</string>
+    <string name="installIncompatible">App is incompatible with your device, install anyway?</string>
     <string name="version">Version</string>
     <string name="by_author_format">by %s</string>
     <string name="delete">Delete</string>
@@ -24,7 +24,7 @@
     <string name="hide_all_notifications_summary">Prevent all actions from showing in the status bar and notification
         drawer.
     </string>
-    <string name="send_install_history">Send Install History</string>
+    <string name="send_install_history">Send install history</string>
     <string name="send_history_csv">%s install history as CSV file</string>
     <string name="install_history">Install history</string>
     <string name="install_history_summary">View the private log of all installs and uninstalls</string>
@@ -32,7 +32,7 @@
     <string name="keep_install_history_summary">Store a log of all installs and uninstalls in a private store</string>
     <string name="send_version_and_uuid">Send version and UUID to servers</string>
     <string name="send_version_and_uuid_summary">Include this app\'s version and a random, unique ID when
-        downloading, takes affect next app restart.</string>
+        downloading (takes affect next app restart).</string>
     <string name="force_old_index">Force old index format</string>
     <string name="force_old_index_summary">In case there are bugs or compatibility issues, use the XML app index</string>
     <string name="allow_push_requests">Allow repos to install/uninstall apps</string>
@@ -76,9 +76,9 @@
     <string name="app_details__no_versions__show_incompat_versions">To show incompatible versions here anyway, enable the \"%1$s\" setting.</string>
     <string name="app_details__no_versions__no_compatible_signatures">No versions with compatible signature</string>
     <string name="app_details__no_versions__none_compatible_with_device">No versions compatible with device</string>
-    <string name="app_details__no_versions__explain_incompatible_signatures">The installed version is not compatible with any available versions. Uninstalling the app will enable you to view and install compatible versions.
-
-This often occurs with apps installed via Google Play or other sources, if they are signed by a different certificate.</string>
+    <string name="app_details__no_versions__explain_incompatible_signatures">The installed version is not compatible with any available versions.
+        Uninstalling the app will enable you to view and install compatible versions.
+        This often occurs with apps installed via Google Play or other sources, if they are signed with a different certificate.</string>
 
     <string name="about_title">About F-Droid</string>
     <string name="about_version">Version</string>
@@ -122,7 +122,7 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="updates__tts__download_updates_for_all_apps">Download all updates</string>
 
     <string name="updates__app_with_known_vulnerability__prompt_uninstall">We found a vulnerability with %1$s. We recommend uninstalling this app immediately.</string>
-    <string name="updates__app_with_known_vulnerability__prompt_upgrade">We found a vulnerability with %1$s. We recommend upgrading to the newest version immediately.</string>
+    <string name="updates__app_with_known_vulnerability__prompt_upgrade">We found a vulnerability with %1$s. We recommend updating to the newest version immediately.</string>
     <string name="updates__app_with_known_vulnerability__ignore">Ignore</string>
 
     <string name="updates__hide_updateable_apps">Hide apps</string>
@@ -131,7 +131,7 @@ This often occurs with apps installed via Google Play or other sources, if they 
         <item quantity="one">Download update for %1$d app.</item>
         <item quantity="other">Download updates for %1$d apps.</item>
     </plurals>
-    <string name="updates_disabled_by_settings">All updates disabled by Data/WiFi Settings</string>
+    <string name="updates_disabled_by_settings">All updates disabled by data/wifi settings</string>
 
     <string name="ok">OK</string>
 
@@ -150,19 +150,19 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="enable">Enable</string>
     <string name="add_key">Add Key</string>
     <string name="overwrite">Overwrite</string>
-    <string name="clear_search">Clear search</string>
-    <string name="sort_search">Sort search</string>
+    <string name="clear_search">Clear Search</string>
+    <string name="sort_search">Sort Search</string>
 
     <string name="bluetooth_activity_not_found">No Bluetooth send method found, choose one!</string>
     <string name="choose_bt_send">Choose Bluetooth send method</string>
 
     <string name="repo_add_url">Repository address</string>
     <string name="repo_add_fingerprint">Fingerprint (optional)</string>
-    <string name="repo_exists_add_fingerprint">%1$s is already setup, this will add new key information.</string>
-    <string name="repo_exists_enable">%1$s is already setup, confirm that you want to re-enable it.</string>
-    <string name="repo_exists_and_enabled">%1$s is already setup and enabled.</string>
-    <string name="repo_delete_to_overwrite">First delete %1$s in order to add this with a conflicting key.</string>
-    <string name="repo_exists_add_mirror">This is a copy of %1$s, add it as a mirror?</string>
+    <string name="repo_exists_add_fingerprint">%1$s is already set up; this will add new key information.</string>
+    <string name="repo_exists_enable">%1$s is already set up; confirm that you want to re-enable it.</string>
+    <string name="repo_exists_and_enabled">%1$s is already set up and enabled.</string>
+    <string name="repo_delete_to_overwrite">Delete %1$s in order to add this with a conflicting key.</string>
+    <string name="repo_exists_add_mirror">This is a copy of %1$s; add it as a mirror?</string>
     <string name="bad_fingerprint">Bad fingerprint</string>
     <string name="invalid_url">This is not a valid URL.</string>
     <string name="malformed_repo_uri">Ignoring malformed repo URI: %s</string>
@@ -224,11 +224,11 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="antinonfreeadlist">This app promotes non-free add-ons</string>
     <string name="antinonfreenetlist">This app promotes non-free network services</string>
     <string name="antinonfreedeplist">This app depends on other non-free apps</string>
-    <string name="antiupstreamnonfreelist">The upstream source code is not entirely Free</string>
+    <string name="antiupstreamnonfreelist">The upstream source code is not entirely free</string>
     <string name="antinonfreeassetslist">This app contains non-free assets</string>
     <string name="antidisabledalgorithmlist">This app has a weak security signature</string>
     <string name="antiknownvulnlist">This app contains a known security vulnerability</string>
-    <string name="antinosourcesince">The source code is no longer available, no updates possible.</string>
+    <string name="antinosourcesince">The source code is no longer available (no updates possible)</string>
 
     <string name="display">Display</string>
 
@@ -271,11 +271,11 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="preventScreenshots_title">Prevent screenshots</string>
     <string name="preventScreenshots_summary">Blocks screenshots from being taken and hides app content from recent apps screen</string>
 
-    <string name="panic_app_setting_title">Panic Button App</string>
-    <string name="panic_app_unknown_app">an unknown app</string>
+    <string name="panic_app_setting_title">Panic button app</string>
+    <string name="panic_app_unknown_app">An unknown app</string>
     <string name="panic_app_setting_summary">No app has been set</string>
     <string name="panic_app_setting_none">None</string>
-    <string name="panic_app_dialog_title">Confirm Panic App</string>
+    <string name="panic_app_dialog_title">Confirm panic app</string>
     <string name="panic_app_dialog_message">Are you sure that you want to allow %1$s to trigger destructive panic button actions?</string>
     <string name="allow">Allow</string>
 
@@ -292,7 +292,7 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="hiding_calculator">Calculator</string>
     <string name="hiding_dialog_title">Hide %s Now</string>
     <string name="hiding_dialog_message">Are you sure you want to remove %1$s from the launcher? Only typing \"%2$d\" in the fake %3$s app can restore it.</string>
-    <string name="hiding_dialog_warning">Warning: Any app shortcut on the home screen will also be removed and needs to be re-added manually.</string>
+    <string name="hiding_dialog_warning">Warning: Any app shortcut on the home screen will also be removed and will need to be re-added manually.</string>
     <string name="hide_on_long_search_press_title">Hide with search button</string>
     <string name="hide_on_long_search_press_summary">Long pressing the search button will hide the app</string>
 
@@ -311,17 +311,17 @@ This often occurs with apps installed via Google Play or other sources, if they 
       - Downloaded size (human readable)
     -->
     <string name="status_download_unknown_size">Downloading\n%2$s from\n%1$s</string>
-    <string name="download_404">The requested file was not found.</string>
+    <string name="download_404">The requested file was not found</string>
     <string name="update_notification_title">Updating repositories</string>
-    <string name="status_processing_xml_percent">Processing %2$s / %3$s (%4$d%%) from %1$s</string>
-    <string name="status_connecting_to_repo">Connecting to\n%1$s</string>
-    <string name="status_inserting_apps">Saving app details</string>
-    <string name="status_inserting_x_apps">Saving app details (%1$d/%2$d) from %3$s</string>
+    <string name="status_processing_xml_percent">Processing %2$s / %3$s (%4$d%%) from %1$s…</string>
+    <string name="status_connecting_to_repo">Connecting to\n%1$s…</string>
+    <string name="status_inserting_apps">Saving app details…</string>
+    <string name="status_inserting_x_apps">Saving app details (%1$d/%2$d) from %3$s…</string>
     <string name="repos_unchanged">All repositories are up to date</string>
-    <string name="all_other_repos_fine">All other repos didn\'t create errors.</string>
+    <string name="all_other_repos_fine">No other repos created errors</string>
     <string name="global_error_updating_repos">Error during update: %s</string>
-    <string name="warning_no_internet">Cannot update, are you connected to the Internet?</string>
-    <string name="no_permissions">No permissions are used.</string>
+    <string name="warning_no_internet">Cannot update, are you connected to the internet?</string>
+    <string name="no_permissions">No permissions are used</string>
     <string name="permissions">Permissions</string>
     <string name="no_handler_app">You don\'t have any available app that can handle %s.</string>
     <string name="theme">Theme</string>
@@ -344,7 +344,7 @@ This often occurs with apps installed via Google Play or other sources, if they 
         You need to enable it to view the apps it provides.
     </string>
     <string name="unknown">Unknown</string>
-    <string name="repo_confirm_delete_title">Delete Repository?</string>
+    <string name="repo_confirm_delete_title">Delete repository?</string>
     <string name="repo_confirm_delete_body">Deleting a repository means
         apps from it will no longer be available.\n\nNote: All
         previously installed apps will remain on your device.
@@ -368,23 +368,23 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="wifi">Wi-Fi</string>
     <string name="wifi_ap">Hotspot</string>
 
-    <string tools:ignore="UnusedResources" name="category_Connectivity">Connectivity</string>
-    <string tools:ignore="UnusedResources" name="category_Development">Development</string>
-    <string tools:ignore="UnusedResources" name="category_Games">Games</string>
-    <string tools:ignore="UnusedResources" name="category_Graphics">Graphics</string>
-    <string tools:ignore="UnusedResources" name="category_Internet">Internet</string>
-    <string tools:ignore="UnusedResources" name="category_Money">Money</string>
-    <string tools:ignore="UnusedResources" name="category_Multimedia">Multimedia</string>
-    <string tools:ignore="UnusedResources" name="category_Navigation">Navigation</string>
-    <string tools:ignore="UnusedResources" name="category_Phone_SMS">Phone &amp; SMS</string>
-    <string tools:ignore="UnusedResources" name="category_Reading">Reading</string>
-    <string tools:ignore="UnusedResources" name="category_Science_Education">Science &amp; Education</string>
-    <string tools:ignore="UnusedResources" name="category_Security">Security</string>
-    <string tools:ignore="UnusedResources" name="category_Sports_Health">Sports &amp; Health</string>
-    <string tools:ignore="UnusedResources" name="category_System">System</string>
-    <string tools:ignore="UnusedResources" name="category_Theming">Theming</string>
-    <string tools:ignore="UnusedResources" name="category_Time">Time</string>
-    <string tools:ignore="UnusedResources" name="category_Writing">Writing</string>
+    <string name="category_Connectivity" tools:ignore="UnusedResources">Connectivity</string>
+    <string name="category_Development" tools:ignore="UnusedResources">Development</string>
+    <string name="category_Games" tools:ignore="UnusedResources">Games</string>
+    <string name="category_Graphics" tools:ignore="UnusedResources">Graphics</string>
+    <string name="category_Internet" tools:ignore="UnusedResources">Internet</string>
+    <string name="category_Money" tools:ignore="UnusedResources">Money</string>
+    <string name="category_Multimedia" tools:ignore="UnusedResources">Multimedia</string>
+    <string name="category_Navigation" tools:ignore="UnusedResources">Navigation</string>
+    <string name="category_Phone_SMS" tools:ignore="UnusedResources">Phone &amp; SMS</string>
+    <string name="category_Reading" tools:ignore="UnusedResources">Reading</string>
+    <string name="category_Science_Education" tools:ignore="UnusedResources">Science &amp; Education</string>
+    <string name="category_Security" tools:ignore="UnusedResources">Security</string>
+    <string name="category_Sports_Health" tools:ignore="UnusedResources">Sports &amp; Health</string>
+    <string name="category_System" tools:ignore="UnusedResources">System</string>
+    <string name="category_Theming" tools:ignore="UnusedResources">Theming</string>
+    <string name="category_Time" tools:ignore="UnusedResources">Time</string>
+    <string name="category_Writing" tools:ignore="UnusedResources">Writing</string>
 
     <plurals name="button_view_all_apps_in_category">
         <item quantity="one">View %d</item>
@@ -395,7 +395,7 @@ This often occurs with apps installed via Google Play or other sources, if they 
         available from F-Droid. This could be because you need to update your repositories, or the repositories
         genuinely don\'t have your apps available.
     </string>
-    <string name="empty_can_update_app_list">Congratulations!\nYour apps are up to date.</string>
+    <string name="empty_can_update_app_list">Your apps are up to date.</string>
 
     <string name="empty_search_available_app_list">No matching applications available.</string>
 
@@ -405,12 +405,12 @@ This often occurs with apps installed via Google Play or other sources, if they 
         Please create a bug report!
     </string>
 
-    <string name="nearby_splash__download_apps_from_people_nearby">No Internet? Get apps from people near you!</string>
+    <string name="nearby_splash__download_apps_from_people_nearby">No internet? Get apps from people near you!</string>
     <string name="nearby_splash__find_people_button">Find people near me</string>
     <string name="nearby_splash__both_parties_need_fdroid">Both parties need %1$s to use nearby.</string>
 
     <string name="swap_nfc_title">Touch to swap</string>
-    <string name="swap_nfc_description">If your friend has F-Droid and NFC turned on touch your devices together.
+    <string name="swap_nfc_description">If your friend has F-Droid and NFC turned on, touch your devices together.
     </string>
     <string name="swap_join_same_wifi">Join the same Wi-Fi as your friend</string>
     <string name="swap_join_same_wifi_desc">To swap using Wi-Fi, ensure you are on the same network. If you don\'t have
@@ -418,7 +418,7 @@ This often occurs with apps installed via Google Play or other sources, if they 
     </string>
     <string name="swap_join_this_hotspot">Help your friend join your hotspot</string>
     <string name="swap">Swap apps</string>
-    <string name="swap_success">Swap success!</string>
+    <string name="swap_success">Swap successful!</string>
     <string name="swap_no_wifi_network">No network yet</string>
     <string name="swap_active_hotspot">%1$s (your hotspot)</string>
     <string name="swap_view_available_networks">Tap to open available networks</string>
@@ -434,7 +434,7 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="swap_people_nearby">People Nearby</string>
     <string name="swap_scanning_for_peers">Searching for nearby people…</string>
     <string name="swap_nearby">Nearby Swap</string>
-    <string name="swap_intro">Connect and trade apps with people near you.</string>
+    <string name="swap_intro">Connect and trade apps with people near you</string>
     <string name="swap_visible_bluetooth">Visible via Bluetooth</string>
     <string name="swap_setting_up_bluetooth">Setting up Bluetooth…</string>
     <string name="swap_not_visible_bluetooth">Not visible via Bluetooth</string>
@@ -446,12 +446,12 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="swap_cant_find_peers">Can\'t find who you\'re looking for?</string>
     <string name="swap_send_fdroid">Send F-Droid</string>
     <string name="swap_no_peers_nearby">Could not find people nearby to swap with.</string>
-    <string name="swap_connecting">Connecting</string>
+    <string name="swap_connecting">Connecting…</string>
     <string name="swap_confirm">Confirm swap</string>
     <string name="swap_qr_isnt_for_swap">The QR code you scanned doesn\'t look like a swap code.</string>
     <string name="use_bluetooth">Use Bluetooth</string>
     <string name="loading">Loading…</string>
-    <string name="swap_connection_misc_error">Error occurred while connecting to device, can\'t swap with it!</string>
+    <string name="swap_connection_misc_error">An error occurred while connecting to device; can\'t swap with it.</string>
     <string name="swap_not_enabled">Swapping not enabled</string>
     <string name="swap_not_enabled_description">Before swapping, your device must be made visible.</string>
     <string name="swap_toast_invalid_url">Invalid URL for swapping: %1$s</string>
@@ -485,7 +485,6 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="install_error_notify_title">Error installing %s</string>
     <string name="uninstall_error_notify_title">Error uninstalling %s</string>
 
-
     <string name="perms_new_perm_prefix">New:</string>
     <string name="perms_description_app">Provided by %1$s.</string>
     <string name="downloading">Downloading…</string>
@@ -513,7 +512,7 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="theme_night">Night</string>
 
     <string name="crash_dialog_title">F-Droid has crashed</string>
-    <string name="crash_dialog_text">An unexpected error occurred
+    <string name="crash_dialog_text">An unexpected error occurred,
         forcing the app to stop. Would you like to e-mail the
         details to help fix the issue?
     </string>
@@ -524,7 +523,7 @@ This often occurs with apps installed via Google Play or other sources, if they 
         <item quantity="one">+%1$d more…</item>
         <item quantity="other">+%1$d more…</item>
     </plurals>
-    <string name="notification_title_single_update_available">Update Available</string>
+    <string name="notification_title_single_update_available">Update available</string>
     <string name="notification_title_single_ready_to_install">Ready to install</string>
     <string name="notification_title_single_ready_to_install_update">Update ready to install</string>
     <string name="notification_title_single_install_error">Install Failed</string>
@@ -537,8 +536,8 @@ This often occurs with apps installed via Google Play or other sources, if they 
         <item quantity="other">%1$d Updates</item>
     </plurals>
     <plurals name="notification_summary_installed">
-        <item quantity="one">%1$d App Installed</item>
-        <item quantity="other">%1$d Apps Installed</item>
+        <item quantity="one">%1$d app installed</item>
+        <item quantity="other">%1$d apps installed</item>
     </plurals>
     <string name="notification_title_summary_update_available">Update available</string>
     <string name="notification_title_summary_downloading">Downloading&#8230;</string>
@@ -547,7 +546,7 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="notification_title_summary_ready_to_install_update">Update ready to install</string>
     <string name="notification_title_summary_installing">Installing</string>
     <string name="notification_title_summary_installed">Successfully installed</string>
-    <string name="notification_title_summary_install_error">Install Failed</string>
+    <string name="notification_title_summary_install_error">Installation failed</string>
     <string name="notification_action_update">Update</string>
     <string name="notification_action_cancel">Cancel</string>
     <string name="notification_action_install">Install</string>
@@ -561,7 +560,9 @@ This often occurs with apps installed via Google Play or other sources, if they 
     </plurals>
 
     <string name="details_last_updated_today">Updated today</string>
-    <string name="warning_scaning_qr_code">Your camera doesn\'t seem to have an autofocus. It might be difficult to scan the code.</string>
+    <string name="warning_scanning_qr_code">Your camera doesn\'t seem to have an autofocus.
+        It might be difficult to scan the code.
+    </string>
     <plurals name="details_last_update_days">
         <item quantity="one">Updated %1$d day ago</item>
         <item quantity="other">Updated %1$d days ago</item>

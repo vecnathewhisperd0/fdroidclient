@@ -506,7 +506,7 @@
 	<item quantity="one">%1$d sovellus asennettu</item>
 	<item quantity="other">%1$d sovellusta asennettu</item>
 </plurals>
-    <string name="warning_scaning_qr_code">Kamerassasi ei näytä olevan automaattitarkennusta. Koodin skannaus voi olla hankalaa.</string>
+    <string name="warning_scanning_qr_code">Kamerassasi ei näytä olevan automaattitarkennusta. Koodin skannaus voi olla hankalaa.</string>
     <plurals name="details_last_update_weeks">
 	<item quantity="one">Päivitetty %1$d viikko sitten</item>
 	<item quantity="other">Päivitetty %1$d viikkoa sitten</item>

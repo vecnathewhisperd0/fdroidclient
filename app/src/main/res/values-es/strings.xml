@@ -499,7 +499,7 @@
     <string name="hide_on_long_search_press_title">Ocultar con el botón de búsqueda</string>
     <string name="hide_on_long_search_press_summary">Manteniendo pulsado el botón de búsqueda se ocultará la aplicación</string>
 
-    <string name="warning_scaning_qr_code">Parece que tu cámara no tiene autoenfoque. Puede resultar difícil escanear el código.</string>
+    <string name="warning_scanning_qr_code">Parece que tu cámara no tiene autoenfoque. Puede resultar difícil escanear el código.</string>
     <string name="repo_add_mirror">Agregar réplica</string>
     <string name="repo_exists_add_fingerprint">%1$s ya está configurado, esto agregará la información nueva sobre la clave.</string>
     <string name="repo_exists_enable">%1$s ya está configurado, confirma que quieres volver a habilitarlo.</string>

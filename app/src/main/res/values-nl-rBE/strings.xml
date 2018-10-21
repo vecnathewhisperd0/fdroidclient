@@ -451,7 +451,7 @@
 </plurals>
 
     <string name="details_last_updated_today">Vandaag bijgewerkt</string>
-    <string name="warning_scaning_qr_code">Uw camera lijkt niet over autofocus te beschikken. Het kan moeilijk zijn voor de code te scannen.</string>
+    <string name="warning_scanning_qr_code">Uw camera lijkt niet over autofocus te beschikken. Het kan moeilijk zijn voor de code te scannen.</string>
     <plurals name="details_last_update_days">
 	<item quantity="one">%1$d dag geleden bijgewerkt</item>
 	<item quantity="other">%1$d dagen geleden bijgewerkt</item>

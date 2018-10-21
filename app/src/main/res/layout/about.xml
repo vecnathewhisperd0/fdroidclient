@@ -6,65 +6,70 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:paddingLeft="24dp"
-        android:paddingRight="24dp"
         android:paddingTop="4dp"
-        android:orientation="vertical">
+        android:paddingRight="24dp">
 
         <TextView
-            android:text="@string/about_version"
-            style="@style/CaptionText" />
+            style="@style/CaptionText"
+            android:text="@string/about_version" />
+
         <TextView
             android:id="@+id/version"
-            android:text="@string/unknown"
-            style="@style/BodyText" />
+            style="@style/BodyText"
+            android:text="@string/unknown" />
 
         <TextView
-            android:text="@string/about_site"
-            style="@style/CaptionText" />
+            style="@style/CaptionText"
+            android:text="@string/about_site" />
+
         <TextView
-            android:text="@string/site_link"
+            style="@style/BodyText"
             android:autoLink="web"
-            style="@style/BodyText" />
+            android:text="@string/site_link" />
 
         <TextView
-            android:text="@string/about_forum"
-            style="@style/CaptionText" />
+            style="@style/CaptionText"
+            android:text="@string/about_forum" />
+
         <TextView
-            android:text="@string/forum_link"
+            style="@style/BodyText"
             android:autoLink="web"
-            style="@style/BodyText" />
+            android:text="@string/forum_link" />
 
         <TextView
-            android:text="@string/about_source"
-            style="@style/CaptionText" />
+            style="@style/CaptionText"
+            android:text="@string/about_source" />
+
         <TextView
-            android:text="@string/source_link"
+            style="@style/BodyText"
             android:autoLink="web"
-            style="@style/BodyText" />
+            android:text="@string/source_link" />
 
         <TextView
-            android:text="@string/about_license"
-            style="@style/CaptionText" />
+            style="@style/CaptionText"
+            android:text="@string/about_license" />
+
         <TextView
-            android:text="@string/license_gplv3_later"
-            style="@style/BodyText" />
+            style="@style/BodyText"
+            android:text="@string/license_gplv3_later" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
             android:layout_marginTop="12dp"
-            android:paddingBottom="16dp"
-            android:clipToPadding="false">
+            android:clipToPadding="false"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="16dp">
 
             <Button
-                android:layout_width="wrap_content"
-                android:minWidth="100dp"
-                android:layout_height="wrap_content"
-                style="@style/DetailsPrimaryButtonStyle"
                 android:id="@+id/ok_button"
+                style="@style/DetailsPrimaryButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="100dp"
                 android:text="@string/ok" />
 
         </LinearLayout>

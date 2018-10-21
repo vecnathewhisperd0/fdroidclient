@@ -529,7 +529,7 @@
     <string name="hiding_dialog_warning">Aviso: qualquer atalho existente no ecrã será removido e terá que ser adicionado manualmente.</string>
     <string name="repo_official_mirrors">\'Mirrors\' oficiais</string>
     <string name="repo_user_mirrors">\'Mirrors\' do utilizador</string>
-    <string name="warning_scaning_qr_code">Parece que a sua câmara não possui foco automático. Poderá ser difícil digitalizar o código.</string>
+    <string name="warning_scanning_qr_code">Parece que a sua câmara não possui foco automático. Poderá ser difícil digitalizar o código.</string>
     <string name="prompt_to_send_crash_reports">Pedir para enviar relatórios de erros</string>
     <string name="prompt_to_send_crash_reports_summary">Recolher dados sobre os erros e pedir para os enviar ao programador</string>
     <string name="hide_all_notifications">Ocultar todas as notificações</string>

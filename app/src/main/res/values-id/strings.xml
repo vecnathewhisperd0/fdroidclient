@@ -501,7 +501,7 @@
 
     <string name="repo_official_mirrors">Mirror resmi</string>
     <string name="repo_user_mirrors">Mirror pengguna</string>
-    <string name="warning_scaning_qr_code">Kamera kamu sepertinya tidak memiliki autofokus. Mungkin akan susah untuk memindai kode.</string>
+    <string name="warning_scanning_qr_code">Kamera kamu sepertinya tidak memiliki autofokus. Mungkin akan susah untuk memindai kode.</string>
     <string name="over_wifi">Melalui Wi-Fi</string>
     <string name="over_data">Melalui data</string>
     <string name="over_network_always_summary">Selalu gunakan koneksi ini ketika tersedia</string>

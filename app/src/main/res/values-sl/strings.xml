@@ -398,7 +398,7 @@
     <string name="tts_category_name">Kategorija %1$s</string>
 
     <string name="details_last_updated_today">Danes posodobljeno</string>
-    <string name="warning_scaning_qr_code">Zgleda, da vaša kamera nima automatskega fokusa. To morda povzroča težave s skeniranjem kode.</string>
+    <string name="warning_scanning_qr_code">Zgleda, da vaša kamera nima automatskega fokusa. To morda povzroča težave s skeniranjem kode.</string>
     <plurals name="details_last_update_days">
 	<item quantity="one">Posodobljeno pred %1$d dnevom</item>
 	<item quantity="two">Posodobljeno pred %1$d dnevoma</item>

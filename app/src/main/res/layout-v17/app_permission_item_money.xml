@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2012 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2012 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -18,12 +17,12 @@
   Defines the layout of a single permission item that costs money.
 -->
 
-<view class="org.fdroid.fdroid.privileged.views.AppSecurityPermissions$PermissionItemView"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<view xmlns:android="http://schemas.android.com/apk/res/android"
+    class="org.fdroid.fdroid.privileged.views.AppSecurityPermissions$PermissionItemView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:background="?android:attr/selectableItemBackground">
+    android:background="?android:attr/selectableItemBackground"
+    android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/perm_icon"
@@ -41,37 +40,39 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        >
+        android:layout_marginStart="8dp">
+
         <TextView
             android:id="@+id/perm_name"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true" />
+            android:layout_alignParentTop="true"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="16sp" />
+
         <ImageView
             android:id="@+id/perm_money_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
             android:layout_alignBottom="@+id/perm_money_label"
+            android:layout_alignParentStart="true"
             android:scaleType="fitCenter"
+            android:src="@drawable/ic_coins_s"
             android:tint="@color/perms_costs_money"
-            android:tintMode="src_in"
-            android:src="@drawable/ic_coins_s" />
+            android:tintMode="src_in" />
+
         <TextView
             android:id="@+id/perm_money_label"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textSize="16sp"
-            android:textColor="@color/perms_costs_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/perm_money_icon"
             android:layout_below="@id/perm_name"
             android:layout_marginStart="8dp"
-            android:text="@string/perm_costs_money" />
+            android:layout_toEndOf="@id/perm_money_icon"
+            android:text="@string/perm_costs_money"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/perms_costs_money"
+            android:textSize="16sp" />
     </RelativeLayout>
 
 </view>

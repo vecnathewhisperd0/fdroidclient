@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item type="id" name="preference_fragment_parent"/>
+    <item name="preference_fragment_parent" type="id" />
 
-    <item type="id" name="whats_new_feature"/>
-    <item type="id" name="whats_new_large_tile"/>
-    <item type="id" name="whats_new_small_tile"/>
-    <item type="id" name="whats_new_regular_list"/>
+    <item name="whats_new_feature" type="id" />
+    <item name="whats_new_large_tile" type="id" />
+    <item name="whats_new_small_tile" type="id" />
+    <item name="whats_new_regular_list" type="id" />
 
     <!-- Make sure these always exist, e.g. in the 'basic' build flavor -->
-    <item type="id" name="whats_new"/>
-    <item type="id" name="categories"/>
-    <item type="id" name="nearby"/>
+    <item name="whats_new" type="id" />
+    <item name="categories" type="id" />
+    <item name="nearby" type="id" />
 </resources>

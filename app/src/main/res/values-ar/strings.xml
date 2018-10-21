@@ -541,7 +541,7 @@
     <string name="hiding_dialog_message">هل أنت متأكد من أنك تريد إزالة %1$s من درج التطبيقات؟ فقط اكتب \"%2$d\" في المزيف %3$s التطبيق يمكنه استرداده.</string>
     <string name="hiding_dialog_warning">تحذير: سيتم أيضًا إزالة أي اختصار للتطبيق على الشاشة الرئيسية ويجب إعادة إضافته يدويًا.</string>
     <string name="swap_toast_invalid_url">عنوان URL غير صالح للتبديل : %1$s</string>
-    <string name="warning_scaning_qr_code">لا يبدو أن الكاميرا تحتوي على تركيز تلقائي للصورة. قد يكون من الصعب قراءة الرمز.</string>
+    <string name="warning_scanning_qr_code">لا يبدو أن الكاميرا تحتوي على تركيز تلقائي للصورة. قد يكون من الصعب قراءة الرمز.</string>
     <string name="prompt_to_send_crash_reports">تنبيه لإرسال تقارير الأعطال</string>
     <string name="prompt_to_send_crash_reports_summary">اجمع بيانات حول الأعطال واطلب إرسالها إلى مطوّر البرامج</string>
     <string name="hide_all_notifications">اخفاء جميع التنبيهات</string>
