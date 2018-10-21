@@ -103,5 +103,4 @@ public class BluetoothDownloader extends Downloader {
             connection.closeQuietly();
         }
     }
-
 }
