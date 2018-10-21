@@ -13,7 +13,7 @@ for Android.
 ## Direct download
 
 You can [download the application](https://f-droid.org/FDroid.apk) directly
-from our site or [browse it in the repo](hhttps://f-droid.org/packages/org.fdroid.fdroid/).
+from our site or [browse it in the repo](https://f-droid.org/packages/org.fdroid.fdroid/).
 
 ## Contributing
 
