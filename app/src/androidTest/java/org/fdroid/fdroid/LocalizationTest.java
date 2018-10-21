@@ -10,6 +10,7 @@ import android.support.test.runner.AndroidJUnit4;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

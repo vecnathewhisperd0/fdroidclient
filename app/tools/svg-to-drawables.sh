@@ -34,7 +34,7 @@ RES_LDPI=drawable-ldpi
 if (( $# < 2 ))
 then
 	usage "ERROR: Requires at least svg-image and res-directory to be passed to script"
-elif [ ! -d $OUTPUT_RES_DIR ]
+elif [ ! -d ${OUTPUT_RES_DIR} ]
 then
 	usage "ERROR: $OUTPUT_RES_DIR is not a directory"
 fi
@@ -42,37 +42,37 @@ fi
 function convert_drawable {
 	DIR=$1
 	FILE_PATH=$2
-	FILE_NAME=`basename $FILE_PATH`
+	FILE_NAME=`basename ${FILE_PATH}`
 	SCALE=$3
 	PNG_FILE=${FILE_NAME/.svg}.png
-	DRAWABLE_DIR=$OUTPUT_RES_DIR/$DIR
-	OUTPUT_PATH=$DRAWABLE_DIR/$PNG_FILE
+	DRAWABLE_DIR=${OUTPUT_RES_DIR}/${DIR}
+	OUTPUT_PATH=${DRAWABLE_DIR}/${PNG_FILE}
 
-	if [ ! -d $DRAWABLE_DIR ]; then
-		mkdir $DRAWABLE_DIR
+	if [ ! -d ${DRAWABLE_DIR} ]; then
+		mkdir ${DRAWABLE_DIR}
 	fi
 
-	if [ -f $OUTPUT_PATH ]; then
-		rm $OUTPUT_PATH
+	if [ -f ${OUTPUT_PATH} ]; then
+		rm ${OUTPUT_PATH}
 	fi
 
 	INFO=""
-	if [ -f $SCALED_RES_DIR/$DIR/$FILE_NAME ]; then
+	if [ -f $SCALED_RES_DIR/${DIR}/${FILE_NAME} ]; then
 		INFO=" (Using manually scaled file from $DIR/$FILE_NAME)"
-		convert -background none $SCALED_RES_DIR/$DIR/$FILE $OUTPUT_PATH || exit
+		convert -background none ${SCALED_RES_DIR}/${DIR}/${FILE} ${OUTPUT_PATH} || exit
 	else
 		INFO=" (Scaled by $SCALE%)"
-		convert -background none $FILE_PATH[$SCALE%] $OUTPUT_PATH || exit
+		convert -background none ${FILE_PATH}[$SCALE%] ${OUTPUT_PATH} || exit
 	fi
 	echo "  $OUTPUT_PATH$INFO"
 
 }
 
 echo "Processing $SVG_FILE" 
-convert_drawable $RES_NORMAL  $SVG_FILE 100
-convert_drawable $RES_XXXHDPI $SVG_FILE 150
-convert_drawable $RES_XXHDPI  $SVG_FILE 125
-convert_drawable $RES_XHDPI   $SVG_FILE 100
-convert_drawable $RES_HDPI    $SVG_FILE 75
-convert_drawable $RES_MDPI    $SVG_FILE 50
-convert_drawable $RES_LDPI    $SVG_FILE 37.5
+convert_drawable ${RES_NORMAL}  ${SVG_FILE} 100
+convert_drawable ${RES_XXXHDPI} ${SVG_FILE} 150
+convert_drawable ${RES_XXHDPI}  ${SVG_FILE} 125
+convert_drawable ${RES_XHDPI}   ${SVG_FILE} 100
+convert_drawable ${RES_HDPI}    ${SVG_FILE} 75
+convert_drawable ${RES_MDPI}    ${SVG_FILE} 50
+convert_drawable ${RES_LDPI}    ${SVG_FILE} 37.5

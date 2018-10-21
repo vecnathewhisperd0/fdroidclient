@@ -1,7 +1,5 @@
-
 package kellinwood.security.zipsigner.optional;
 
-import kellinwood.security.zipsigner.KeySet;
 import org.bouncycastle.jce.X509Principal;
 import org.bouncycastle.x509.X509V3CertificateGenerator;
 
@@ -15,6 +13,7 @@ import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 import java.util.Date;
 
+import kellinwood.security.zipsigner.KeySet;
 
 /**
  * All methods create self-signed certificates.

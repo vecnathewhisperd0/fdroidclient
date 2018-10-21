@@ -1,9 +1,5 @@
-
 package kellinwood.security.zipsigner.optional;
 
-
-import kellinwood.logging.LoggerInterface;
-import kellinwood.logging.LoggerManager;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import java.io.File;
@@ -19,6 +15,9 @@ import java.security.Security;
 import java.security.cert.Certificate;
 import java.util.Locale;
 
+import kellinwood.logging.LoggerInterface;
+import kellinwood.logging.LoggerManager;
+
 
 /**
  */
@@ -31,7 +30,8 @@ public class KeyStoreFileManager {
     }
 
     public static void setProvider(Provider provider) {
-        if (KeyStoreFileManager.provider != null) Security.removeProvider(KeyStoreFileManager.provider.getName());
+        if (KeyStoreFileManager.provider != null)
+            Security.removeProvider(KeyStoreFileManager.provider.getName());
         KeyStoreFileManager.provider = provider;
         Security.addProvider(provider);
     }

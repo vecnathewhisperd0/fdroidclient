@@ -1,13 +1,14 @@
 
 package kellinwood.security.zipsigner.optional;
 
-import kellinwood.logging.LoggerInterface;
-import kellinwood.logging.LoggerManager;
-import kellinwood.security.zipsigner.Base64;
 import org.bouncycastle.util.encoders.HexTranslator;
 
 import java.security.MessageDigest;
 import java.util.Locale;
+
+import kellinwood.logging.LoggerInterface;
+import kellinwood.logging.LoggerManager;
+import kellinwood.security.zipsigner.Base64;
 
 /**
  * User: ken

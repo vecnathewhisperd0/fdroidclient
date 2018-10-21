@@ -41,7 +41,7 @@
                 android:id="@+id/warning_qr_scanner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/warning_scaning_qr_code"
+            android:text="@string/warning_scanning_qr_code"
                 android:visibility="gone"
                 style="@style/SwapTheme.Wizard.QRScanWarningText"/>
 

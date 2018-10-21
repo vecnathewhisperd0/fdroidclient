@@ -1,13 +1,12 @@
-
 package kellinwood.security.zipsigner.optional;
-
-import kellinwood.security.zipsigner.ZipSigner;
 
 import java.security.Key;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
+
+import kellinwood.security.zipsigner.ZipSigner;
 
 /**
  */

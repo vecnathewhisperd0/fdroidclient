@@ -47,6 +47,4 @@ public interface LoggerInterface {
     public void debug(String message);
 
     public void debug(String message, Throwable t);
-
-
 }

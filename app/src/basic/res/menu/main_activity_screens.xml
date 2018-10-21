@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:title="@string/main_menu__latest_apps"
+        android:id="@+id/whats_new"
         android:icon="@drawable/ic_latest"
-        app:showAsAction="ifRoom|withText"
-        android:id="@+id/whats_new" />
+        android:title="@string/main_menu__latest_apps"
+        app:showAsAction="ifRoom|withText" />
     <item
-        android:title="@string/updates"
+        android:id="@+id/updates"
         android:icon="@drawable/ic_updates"
-        app:showAsAction="ifRoom|withText"
-        android:id="@+id/updates" />
+        android:title="@string/updates"
+        app:showAsAction="ifRoom|withText" />
     <item
-        android:title="@string/menu_settings"
+        android:id="@+id/settings"
         android:icon="@drawable/ic_settings"
-        app:showAsAction="ifRoom|withText"
-        android:id="@+id/settings" />
+        android:title="@string/menu_settings"
+        app:showAsAction="ifRoom|withText" />
 </menu>

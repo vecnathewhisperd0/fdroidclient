@@ -1,7 +1,6 @@
 
 package kellinwood.security.zipsigner.optional;
 
-import kellinwood.security.zipsigner.KeySet;
 import org.bouncycastle.cert.jcajce.JcaCertStore;
 import org.bouncycastle.cms.CMSProcessableByteArray;
 import org.bouncycastle.cms.CMSSignedData;
@@ -17,6 +16,8 @@ import org.bouncycastle.util.Store;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import kellinwood.security.zipsigner.KeySet;
 
 /**
  *

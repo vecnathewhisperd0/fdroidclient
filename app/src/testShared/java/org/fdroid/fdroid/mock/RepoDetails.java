@@ -85,6 +85,4 @@ public class RepoDetails implements RepoXMLHandler.IndexReceiver {
             return null;
         }
     }
-
 }
-

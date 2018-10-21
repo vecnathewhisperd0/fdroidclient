@@ -35,6 +35,7 @@ package org.fdroid.fdroid.net;
 
 import android.content.Context;
 import android.text.TextUtils;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.junit.After;

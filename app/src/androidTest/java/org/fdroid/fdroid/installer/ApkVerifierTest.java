@@ -103,7 +103,7 @@ public class ApkVerifierTest {
     public void testNulls() {
         assertTrue(ApkVerifier.requestedPermissionsEqual(null, null));
 
-        String[] perms = new String[] {"Blah"};
+        String[] perms = new String[]{"Blah"};
         assertFalse(ApkVerifier.requestedPermissionsEqual(perms, null));
         assertFalse(ApkVerifier.requestedPermissionsEqual(null, perms));
     }
@@ -161,14 +161,14 @@ public class ApkVerifierTest {
         if (Build.VERSION.SDK_INT >= 23) {
             permissionsList.add("android.permission.ACCESS_FINE_LOCATION");
         }
-        apk.requestedPermissions = permissionsList.toArray(new String[permissionsList.size()]);
+        apk.requestedPermissions = permissionsList.toArray(new String[0]);
 
         Uri uri = Uri.fromFile(minMaxApk);
         ApkVerifier apkVerifier = new ApkVerifier(instrumentation.getContext(), uri, apk);
         apkVerifier.verifyApk();
 
         permissionsList.add("ADDITIONAL_PERMISSION");
-        apk.requestedPermissions = permissionsList.toArray(new String[permissionsList.size()]);
+        apk.requestedPermissions = permissionsList.toArray(new String[0]);
         apkVerifier.verifyApk();
     }
 
@@ -290,8 +290,7 @@ public class ApkVerifierTest {
     public void testExtendedPerms() throws IOException,
             ApkVerifier.ApkPermissionUnequalException, ApkVerifier.ApkVerificationException {
         RepoDetails actualDetails = getFromFile(extendedPermsXml);
-        HashSet<String> expectedSet = new HashSet<>(Arrays.asList(new String[]{
-                "android.permission.ACCESS_NETWORK_STATE",
+        HashSet<String> expectedSet = new HashSet<>(Arrays.asList("android.permission.ACCESS_NETWORK_STATE",
                 "android.permission.ACCESS_WIFI_STATE",
                 "android.permission.INTERNET",
                 "android.permission.READ_SYNC_STATS",
@@ -301,8 +300,7 @@ public class ApkVerifierTest {
                 "android.permission.READ_CONTACTS",
                 "android.permission.WRITE_CONTACTS",
                 "android.permission.READ_CALENDAR",
-                "android.permission.WRITE_CALENDAR",
-        }));
+                "android.permission.WRITE_CALENDAR"));
         if (Build.VERSION.SDK_INT <= 18) {
             expectedSet.add("android.permission.READ_EXTERNAL_STORAGE");
             expectedSet.add("android.permission.WRITE_EXTERNAL_STORAGE");
@@ -332,7 +330,7 @@ public class ApkVerifierTest {
                         + Build.VERSION.SDK_INT + ")");
             }
         }
-        String[] expectedPermissions = expectedSet.toArray(new String[expectedSet.size()]);
+        String[] expectedPermissions = expectedSet.toArray(new String[0]);
         assertTrue(ApkVerifier.requestedPermissionsEqual(expectedPermissions, apk.requestedPermissions));
 
         String[] badPermissions = Arrays.copyOf(expectedPermissions, expectedPermissions.length + 1);

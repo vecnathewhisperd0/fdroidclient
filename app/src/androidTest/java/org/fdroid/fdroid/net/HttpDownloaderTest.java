@@ -1,8 +1,7 @@
-
 package org.fdroid.fdroid.net;
 
 import android.net.Uri;
-import org.fdroid.fdroid.ProgressListener;
+
 import org.junit.Test;
 
 import java.io.File;
@@ -49,12 +48,7 @@ public class HttpDownloaderTest {
         Uri uri = Uri.parse(urlString);
         File destFile = File.createTempFile("dl-", "");
         final HttpDownloader httpDownloader = new HttpDownloader(uri, destFile);
-        httpDownloader.setListener(new ProgressListener() {
-            @Override
-            public void onProgress(String urlString, long bytesRead, long totalBytes) {
-                receivedProgress = true;
-            }
-        });
+        httpDownloader.setListener((urlString1, bytesRead, totalBytes) -> receivedProgress = true);
         new Thread() {
             @Override
             public void run() {
@@ -111,12 +105,9 @@ public class HttpDownloaderTest {
         Uri uri = Uri.parse("https://f-droid.org/repo/index.jar");
         File destFile = File.createTempFile("dl-", "");
         final HttpDownloader httpDownloader = new HttpDownloader(uri, destFile);
-        httpDownloader.setListener(new ProgressListener() {
-            @Override
-            public void onProgress(String urlString, long bytesRead, long totalBytes) {
-                receivedProgress = true;
-                latch.countDown();
-            }
+        httpDownloader.setListener((urlString, bytesRead, totalBytes) -> {
+            receivedProgress = true;
+            latch.countDown();
         });
         new Thread() {
             @Override

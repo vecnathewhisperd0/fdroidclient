@@ -59,12 +59,9 @@ public class NullLoggerFactory implements LoggerFactory {
 
         public void warning(String message, Throwable t) {
         }
-
     };
-
 
     public LoggerInterface getLogger(String category) {
         return logger;
     }
-
 }

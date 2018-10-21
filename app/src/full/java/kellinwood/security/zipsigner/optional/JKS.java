@@ -25,8 +25,6 @@ and it is irresponsible for them to claim they can.  */
 
 package kellinwood.security.zipsigner.optional;
 
-import javax.crypto.EncryptedPrivateKeyInfo;
-import javax.crypto.spec.SecretKeySpec;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -54,6 +52,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Vector;
+
+import javax.crypto.EncryptedPrivateKeyInfo;
+import javax.crypto.spec.SecretKeySpec;
 
 /**
  * This is an implementation of Sun's proprietary key store
@@ -139,12 +140,12 @@ import java.util.Vector;
  * href="http://metastatic.org/source/JKS.java">JKS.java</a>.
  *
  * @author Casey Marshall (rsdio@metastatic.org)
- *         <p>
- *         Changes by Ken Ellinwood:
- *         ** Fixed a NullPointerException in engineLoad(). This method must return gracefully if the keystore input stream is null.
- *         ** engineGetCertificateEntry() was updated to return the first cert in the chain for private key entries.
- *         ** Lowercase the alias names, otherwise keytool chokes on the file created by this code.
- *         ** Fixed the integrity check in engineLoad(), previously the exception was never thrown regardless of password value.
+ * <p>
+ * Changes by Ken Ellinwood:
+ * ** Fixed a NullPointerException in engineLoad(). This method must return gracefully if the keystore input stream is null.
+ * ** engineGetCertificateEntry() was updated to return the first cert in the chain for private key entries.
+ * ** Lowercase the alias names, otherwise keytool chokes on the file created by this code.
+ * ** Fixed the integrity check in engineLoad(), previously the exception was never thrown regardless of password value.
  */
 public class JKS extends KeyStoreSpi {
 

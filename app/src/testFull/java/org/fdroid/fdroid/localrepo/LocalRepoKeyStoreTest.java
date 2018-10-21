@@ -2,6 +2,7 @@ package org.fdroid.fdroid.localrepo;
 
 import android.content.Context;
 import android.text.TextUtils;
+
 import org.apache.commons.io.IOUtils;
 import org.fdroid.fdroid.RepoUpdater;
 import org.fdroid.fdroid.Utils;
