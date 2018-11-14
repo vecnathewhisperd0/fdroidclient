@@ -17,7 +17,7 @@
     <string name="local_repo_name_summary">El títulu alvertíu del to repositoriu llocal: %s</string>
     <string name="local_repo_https_on">Usar conexón HTTPS:// cifrada pal to repositoriu llocal</string>
     <string name="app_details">Detalles d\'aplicación</string>
-    <string name="no_such_app">Nun s\'alcontraron aplicaciones.</string>
+    <string name="no_such_app">Nun s\'alcontró aplicación tala.</string>
     <string name="about_title">Tocante a F-Droid</string>
     <string name="about_site">Sitiu web</string>
     <string name="about_version">Versión</string>
@@ -36,7 +36,7 @@
     <string name="add_key">Amestar clave</string>
     <string name="overwrite">Sobrescribir</string>
     <string name="bluetooth_activity_not_found">Nun s\'alcontró dengún métodu d\'unviu per Bluetooth, ¡escueyi ún!</string>
-    <string name="choose_bt_send">Escueyi\'l métodu d\'unvu pente Bluetooth</string>
+    <string name="choose_bt_send">Escoyeta del métodu d\'unviu per Bluetooth</string>
     <string name="repo_add_url">Direición del depósitu</string>
     <string name="repo_add_fingerprint">Buelga (opcional)</string>
     <string name="malformed_repo_uri">Inorando l\'URI de repositoriu mal formáu: %s</string>
@@ -63,19 +63,19 @@
     <string name="antiupstreamnonfreelist">El códigu fonte principal nun ye llibre dafechu</string>
     <string name="display">Pantalla</string>
     <string name="expert">Mou espertu</string>
-    <string name="expert_on">Amuesa información adicional y activa axustes adicionales</string>
-    <string name="search_hint">Guetar apps</string>
+    <string name="expert_on">Amuesa la información adicional y activa axustes adicionales</string>
+    <string name="search_hint">Gueta d\'aplicaciones</string>
     <string name="appcompatibility">Compatibilidá d\'aplicaciones</string>
     <string name="show_incompat_versions">Incluyir versiones incompatibles</string>
     <string name="show_incompat_versions_on">Amuesa les versiones de les aplicaciones que seyan incompatibles col preséu</string>
     <string name="local_repo">Depósitu llocal</string>
     <string name="local_repo_running">F-Droid ta preparáu pa intercambiar</string>
     <string name="touch_to_configure_local_repo">Toca pa ver los detalles y permitir a otros intercambiar aplicaciones.</string>
-    <string name="deleting_repo">Desaniciando\'l repositoriu actual…</string>
+    <string name="deleting_repo">Desaniciando\'l depósitu actual…</string>
     <string name="adding_apks_format">Amestando %s al depósitu…</string>
     <string name="writing_index_jar">Escribiendo\'l ficheru d\'índiz robláu (index.jar)…</string>
-    <string name="linking_apks">Enllazando APKs nel repositoriu…</string>
-    <string name="copying_icons">Copiando iconos d\'aplicaciones al repositoriu…</string>
+    <string name="linking_apks">Enllazando APKs al depósitu…</string>
+    <string name="copying_icons">Copiando nel depósitu los iconos de les aplicaciones…</string>
     <string name="icon">Iconu</string>
     <string name="next">Siguiente</string>
     <string name="skip">Saltar</string>
@@ -97,7 +97,7 @@
     <string name="no_permissions">Nun s\'usa dengún permisu.</string>
     <string name="no_handler_app">Nun tienes denguna aplicación disponible que puea remanar %s.</string>
     <string name="theme">Estilu</string>
-    <string name="unsigned">Non robáu</string>
+    <string name="unsigned">Nun se robló</string>
     <string name="unverified">Nun se verificó</string>
     <string name="repo_num_apps">Númberu d\'aplicaciones</string>
     <string name="repo_fingerprint">Buelga de la clave de robláu (SHA-256)</string>
@@ -153,7 +153,7 @@
     <string name="perm_costs_money">Esto podría costate dineru</string>
     <string name="loading">Cargando…</string>
     <string name="swap_connecting">Coneutando</string>
-    <string name="swap_cant_find_peers">¿Nun pues alcontrar a quien tas guetando?</string>
+    <string name="swap_cant_find_peers">¿Nun alcuentres a quién tas guetando\?</string>
     <string name="swap_send_fdroid">Unviar F-Droid</string>
     <string name="swap_qr_isnt_for_swap">El códigu QR qu\'escaniesti nun paez un códigu d\'intercambéu.</string>
     <string name="swap_connection_misc_error">Asocedió un fallu mentanto se coneutaba col preséu, ¡nun pue intercambiase con elli!</string>
@@ -177,7 +177,7 @@
     <string name="menu_changelog">Rexistru de cambeos</string>
     <string name="update_notification_title">Anovando depósitos</string>
     <string name="pref_language">Llingua</string>
-    <string name="pref_language_default">Por defeutu del sistema</string>
+    <string name="pref_language_default">La del sistema</string>
 
     <string name="wifi">Wi-Fi</string>
     <string name="category_Connectivity">Coneutividá</string>
@@ -203,7 +203,7 @@
     <string name="swap_choose_apps">Escoyeta d\'aplicaciones</string>
     <string name="swap_scan_qr">Escaniar códigu QR</string>
     <string name="swap_people_nearby">Xente cercano</string>
-    <string name="swap_nearby">Intercambéu per cercanía</string>
+    <string name="swap_nearby">Intercambéu pela cercanía</string>
     <string name="swap_intro">Coneuta ya intercambia aplicaciones con xente cercano a ti.</string>
     <string name="swap_not_visible_bluetooth">Invisible per Bluetooth</string>
     <string name="swap_visible_wifi">Visible na Wi-Fi</string>
@@ -261,7 +261,7 @@
     <string name="crash_dialog_title">F-Droid cascó</string>
     <string name="crash_dialog_text">Asocedió un fallu inesperáu forciando la parada de l\'aplicación. ¿Prestaríate unviar un corréu colos detalles p\'ayudar a iguar el problema\?</string>
     <string name="crash_dialog_comment_prompt">Equí pues amestar información adicional y comentarios:</string>
-    <string name="antinonfreeassetslist">Esta aplicación contién activos non llibres</string>
+    <string name="antinonfreeassetslist">Esta aplicación contién gráficos y/o música que nun son llibres</string>
 
     <string name="useTor">Usar Tor</string>
     <string name="useTorSummary">Forcia\'l tráficu de les descargues pente Tor pa más privacidá. Rique Orbot</string>
@@ -346,12 +346,8 @@
     <string name="notification_action_update">Anovar</string>
     <string name="app_details_donate_prompt_unknown_author">¡Convida al desendolcador de %1$s a sidres!</string>
     <string name="latest__empty_state__no_recent_apps">Nun s\'alcontraron aplicaciones recientes</string>
-    <string name="latest__empty_state__never_updated">Namái que s\'anueve\'l to llistáu aplicaciones, equí deberíen
-        amosase les aplicaciones caberes
-    </string>
-    <string name="latest__empty_state__no_enabled_repos">Namái qu\'habilites un repositoriu y lu dexes anovase, equí
-        deberíen amosase les aplicaciones caberes
-    </string>
+    <string name="latest__empty_state__never_updated">Nel momentu que s\'anueve la llista d\'aplicaciones, equí van amosase les últimes aplicaciones</string>
+    <string name="latest__empty_state__no_enabled_repos">Nel momentu qu\'actives un depósitu y dexes que s\'anueve, equí van amosase les últimes aplicaciones</string>
 
     <string name="categories__empty_state__no_categories">Nun hai estayes p\'amosar</string>
 
@@ -367,7 +363,7 @@
     <string name="force_old_index_summary">En casu d\'haber fallos o problemes de compatibilidá, usa l\'índiz XML de la app</string>
     <string name="app_new">Novedá</string>
     <string name="app__tts__cancel_download">Encaboxar descarga</string>
-    <string name="menu_email">Mandar un corréu al autor</string>
+    <string name="menu_email">Unviar un corréu al autor</string>
     <string name="menu_video">Videu</string>
     <string name="menu_license">Llicencia: %s</string>
     <string name="antifeatures">Carauterístiques indeseyables</string>
@@ -386,7 +382,7 @@
         <item quantity="one">+%1$d más…</item>
         <item quantity="other">+%1$d más…</item>
     </plurals>
-    <string name="notification_title_single_ready_to_install">Preparáu pa instalar</string>
+    <string name="notification_title_single_ready_to_install">Ta pa instalar</string>
     <string name="notification_title_single_ready_to_install_update">L\'anovamientu ta preparáu pa instalase</string>
     <plurals name="notification_summary_updates">
         <item quantity="one">%1$d anovamientu</item>
@@ -396,7 +392,7 @@
 	<item quantity="one">Instalóse %1$d aplicación</item>
 	<item quantity="other">Instaláronse %1$d aplicaciones</item>
 </plurals>
-    <string name="notification_title_summary_ready_to_install">Preparáu pa instalar</string>
+    <string name="notification_title_summary_ready_to_install">Ta pa instalar</string>
     <string name="notification_title_summary_ready_to_install_update">L\'anovamientu ta preparáu pa instalase</string>
     <string name="notification_title_summary_installed">Instalóse con ésitu</string>
     <plurals name="tts_view_all_in_category">
@@ -419,8 +415,8 @@
 <string name="app_list_download_ready">Baxóse y ta pa instalar</string>
 
     <string name="status_inserting_x_apps">Guardando detalles d\'aplicaciones (%1$d/%2$d) de %3$s</string>
-    <string name="app_installed_media">Ficheru instaláu en %s</string>
-    <string name="app_permission_storage">F-Droid necesita permisu de guardar pa instalar esto nel almacenamientu. Da esi permisu na siguiente pantalla pa siguir cola instalación.</string>
+    <string name="app_installed_media">El ficheru instalóse en %s</string>
+    <string name="app_permission_storage">F-Droid precisa\'l permisu d\'almacenamientu pa instalar esto. Concéde-ylu na pantalla siguiente pa siguir cola instalación.</string>
 
     <string name="app_details__incompatible_mismatched_signature">La robla ye distinta de la versión instalada</string>
     <string name="app_details__no_versions__show_incompat_versions">Sicasí, p\'amosar equí les versiones incompatibles activa l\'axuste «%1$s».</string>
@@ -428,9 +424,9 @@
     <string name="app_details__no_versions__none_compatible_with_device">Nun hai versiones compatibles col preséu</string>
     <string name="app_details__no_versions__explain_incompatible_signatures">La versión instalada nun ye compatible con denguna disponible. La desinstalación de l\'aplicación va permitite ver ya instalar versiones compatibles. Esto ocurre davezu coles aplicaciones instalaes dende Google Play u otres fontes si tán roblaes con un certificáu distintu.</string>
 
-    <string name="app_list__dismiss_app_update">Anovamientu inoráu</string>
-    <string name="app_list__dismiss_vulnerable_app">Inseguridá inorada</string>
-    <string name="app_list__dismiss_downloading_app">Descarga encaboxada</string>
+    <string name="app_list__dismiss_app_update">Inoróse l\'anovamientu</string>
+    <string name="app_list__dismiss_vulnerable_app">Inoróse la vulnerabilidá</string>
+    <string name="app_list__dismiss_downloading_app">Encaboxóse la descarga</string>
 
     <string name="updates__app_with_known_vulnerability__prompt_uninstall">Alcontremos una vulnerabilidá en %1$s. Aconseyámoste desinstalar esa aplicación nel intre.</string>
     <string name="updates__app_with_known_vulnerability__prompt_upgrade">Alcontremos una vulnerabilidá en %1$s. Aconseyámoste anovar a la versión más nueva nel intre.</string>
@@ -438,7 +434,7 @@
 
     <string name="privacy">Privacidá</string>
     <string name="preventScreenshots_title">Torgar captures de pantalla</string>
-    <string name="preventScreenshots_summary">Torga la toma d\'imáxenes de pantalla y anubre\'l conteníu de la pantalla d\'aplicaciones recién</string>
+    <string name="preventScreenshots_summary">Bloquia la fechura de captures de pantalla y anubre\'l conteníu de l\'aplicación de la pantalla d\'aplicaciones recientes</string>
 
     <string name="panic_app_setting_title">Aplicación del botón de pánicu</string>
     <string name="panic_app_unknown_app">una aplicación desconocida</string>
@@ -459,7 +455,7 @@
 <string name="repo_exists_add_fingerprint">%1$s yá se configuró, esto va amestar la información de la clave nueva.</string>
     <string name="repo_exists_enable">%1$s yá se configuró, confirma que quies reactivalu.</string>
     <string name="repo_exists_and_enabled">%1$s yá se configuró y activó.</string>
-    <string name="repo_delete_to_overwrite">Primero desanicia %1$s p\'agregar esti con una clave en conflictu.</string>
+    <string name="repo_delete_to_overwrite">Primero desanicia %1$s p\'amestar esti con un clave en conflictu.</string>
     <string name="prompt_to_send_crash_reports">Suxerir l\'unviu d\'informes de casques</string>
     <string name="prompt_to_send_crash_reports_summary">Recueye los datos tocante a los casques y pide unvialos al desendolcador</string>
     <string name="hide_all_notifications">Anubrir tolos avisos</string>
@@ -505,4 +501,14 @@
     <string name="swap_toast_could_not_enable_hotspot">¡Nun pudo activase\'l puntu Wi-Fi!</string>
 
     <string name="warning_scaning_qr_code">La cámara nun paez tener l\'enfoque automáticu. Quiciabes seya difícil escaniar el códigu.</string>
+    <string name="allow_push_requests_summary">Los metadatos de los depósitos puen incluyir solicitúes pa des/instalar aplicaciones</string>
+    <string name="repo_add_mirror">Amestar espeyu</string>
+    <string name="menu_open">Abrir</string>
+    <string name="force_touch_apps">Inorar aplicaciones táutiles</string>
+    <string name="panic_hide_warning_message">Nun eventu de pánicu, esto va quitar %1$s del llanzador. Namái teclexar «%2$d» na aplicación falsa %3$d pue restaurar l\'aplicación.</string>
+
+    <string name="hiding_dialog_message">¿De xuru que quies quitar %1$s del llanzador Namái teclexar «%2$d» na aplicación falsa %3$d pue restaurar l\'aplicación.</string>
+    <string name="hiding_dialog_warning">Alvertencia: Cualesquier atayu de l\'aplicación na pantalla d\'aniciu tamién va desaniciase y va precisar amestase de nueves a mano.</string>
+    <string name="repo_user_mirrors">Espeyos del usuariu</string>
+    <string name="share_repository">Compartición del depósitu</string>
     </resources>
