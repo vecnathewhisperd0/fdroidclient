@@ -14,8 +14,8 @@
     <string name="update_interval">Intervallo degli aggiornamenti automatici</string>
     <string name="notify">Mostra aggiornamenti disponibili</string>
     <string name="notify_on">Mostra una notifica quando sono disponibili aggiornamenti</string>
-    <string name="system_installer">Estensione priviliegiata</string>
-    <string name="system_installer_on">Usa l\'estensione privilegiata per installare, aggiornare e rimuovere i pacchetti</string>
+    <string name="system_installer">Estensione Privilegiata</string>
+    <string name="system_installer_on">Usa l\'Estensione Privilegiata per installare, aggiornare e rimuovere i pacchetti</string>
     <string name="local_repo_name">Nome del tuo repo locale</string>
     <string name="local_repo_name_summary">Il titolo visualizzato del tuo repo: %s</string>
     <string name="local_repo_https_on">Usa la connessione HTTPS:// criptata per i repo locali</string>
