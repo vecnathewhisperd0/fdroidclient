@@ -107,7 +107,7 @@
     <string name="category_Security">安全</string>
     <string name="category_System">系统</string>
     <string name="swap_welcome">欢迎使用 F-Droid！</string>
-    <string name="app_name">F-Droid</string>
+    <string name="app_name">F-Droid 特权扩展</string>
 
     <string name="unstable_updates">不稳定更新</string>
     <string name="unstable_updates_summary">建议更新至不稳定的版本</string>
