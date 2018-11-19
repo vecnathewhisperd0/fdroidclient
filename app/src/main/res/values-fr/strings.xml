@@ -376,7 +376,7 @@
     <string name="antifeatures">Fonctionnalités problématiques</string>
     <plurals name="button_view_all_apps_in_category">
 	<item quantity="one">Afficher (%d)</item>
-	<item quantity="other">Afficher tout (%d)</item>
+	<item quantity="other">Tout afficher (%d)</item>
 </plurals>
 
     <string name="nearby_splash__download_apps_from_people_nearby">Aucune connexion Internet ? Installez les applications depuis les appareils de votre entourage !</string>
