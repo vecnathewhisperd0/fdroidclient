@@ -96,7 +96,7 @@
     <string name="menu_settings">تنظیمات</string>
     <string name="menu_add_repo">مخزن جدید</string>
 
-    <string name="menu_launch">اجرا</string>
+    <string name="menu_launch">بازکردن</string>
     <string name="menu_ignore_all">نادیده گرفتن تمام به‌روز رسانی‌ها</string>
     <string name="menu_ignore_this">نادیده گرفتن این به‌روز رسانی</string>
     <string name="menu_website">پایگاه وب</string>
