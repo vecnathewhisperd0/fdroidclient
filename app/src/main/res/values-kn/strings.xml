@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources xmlns:tools="http://schemas.android.com/tools"><string name="app_name">ಎಫ್-ಡ್ರಾಯ್ಡ್</string>
+<resources><string name="app_name">ಎಫ್-ಡ್ರಾಯ್ಡ್</string>
 
     <string name="version">ಆವೃತ್ತಿ</string>
     <string name="notification_action_install">ಅನುಸ್ಥಾಪಿಸು</string>
@@ -81,11 +81,11 @@
 
     <string name="delete">ಅಳಿಸು</string>
 <string name="main_menu__categories">ವಿಂಗಡಣೆಗಳು</string>
-    <string tools:ignore="UnusedResources" name="category_Internet">ಅಂತರ್ಜಾಲ</string>
-    <string tools:ignore="UnusedResources" name="category_Money">ಹಣ</string>
-    <string tools:ignore="UnusedResources" name="category_Reading">ಓದು</string>
-    <string tools:ignore="UnusedResources" name="category_Science_Education">ವಿಜ್ಞಾನ ಮತ್ತು ಶಿಕ್ಷಣ</string>
-    <string tools:ignore="UnusedResources" name="category_Writing">ಬರವಣಿಗೆ</string>
+    <string name="category_Internet">ಅಂತರ್ಜಾಲ</string>
+    <string name="category_Money">ಹಣ</string>
+    <string name="category_Reading">ಓದು</string>
+    <string name="category_Science_Education">ವಿಜ್ಞಾನ ಮತ್ತು ಶಿಕ್ಷಣ</string>
+    <string name="category_Writing">ಬರವಣಿಗೆ</string>
 
     <string name="newPerms">ನವೀನ</string>
     <string name="notification_action_cancel">ತ್ಯಜಿಸು</string>
