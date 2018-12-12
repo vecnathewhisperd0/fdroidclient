@@ -505,9 +505,9 @@
     <string name="repo_add_mirror">Amestar espeyu</string>
     <string name="menu_open">Abrir</string>
     <string name="force_touch_apps">Inorar aplicaciones táutiles</string>
-    <string name="panic_hide_warning_message">Nun eventu de pánicu, esto va quitar %1$s del llanzador. Namái teclexar «%2$d» na aplicación falsa %3$d pue restaurar l\'aplicación.</string>
+    <string name="panic_hide_warning_message">Nun eventu de pánicu, esto va quitar %1$s del llanzador. Namái teclexar «%2$d» na aplicación falsa %3$s pue restaurar l\'aplicación.</string>
 
-    <string name="hiding_dialog_message">¿De xuru que quies quitar %1$s del llanzador Namái teclexar «%2$d» na aplicación falsa %3$d pue restaurar l\'aplicación.</string>
+    <string name="hiding_dialog_message">¿De xuru que quies quitar %1$s del llanzador Namái teclexar «%2$d» na aplicación falsa %3$s pue restaurar l\'aplicación.</string>
     <string name="hiding_dialog_warning">Alvertencia: Cualesquier atayu de l\'aplicación na pantalla d\'aniciu tamién va desaniciase y va precisar amestase de nueves a mano.</string>
     <string name="repo_user_mirrors">Espeyos del usuariu</string>
     <string name="share_repository">Compartición del depósitu</string>
