@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">F-Droid</string>
 
@@ -388,7 +388,7 @@
     <string name="app_list__name__downloading_in_progress">Спампоўванне %1$s</string>
 
     <string name="updates__tts__download_app">Спампаваць</string>
-    <string name="update_all">Спампаваць усе абнаўленні</string>
+    <string name="update_all">Абнавіць усе</string>
 
     <string name="updates__hide_updateable_apps">Схаваць праграмы</string>
     <string name="updates__show_updateable_apps">Паказаць праграмы</string>
@@ -574,4 +574,5 @@
     <string name="app_size">Памер: %1$s</string>
 
     <string name="menu_downgrade">Адкат</string>
-    </resources>
+    <string name="app_repository">Рэпазіторый: %1$s</string>
+</resources>
