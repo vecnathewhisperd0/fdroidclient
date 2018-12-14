@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="SignatureMismatch">La nouvelle version est signée avec une clé différente de l\'ancienne. Pour installer la nouvelle version, l\'ancienne doit d\'abord être désinstallée. Essayez de nouveau après avoir désinstallé l\'ancienne application (attention : ceci effacera les données stockées par l\'application)</string>
     <string name="installIncompatible">Application incompatible avec votre appareil, l\'installer quand même ?</string>
@@ -342,7 +342,7 @@
 
     <string name="main_menu__latest_apps">Nouveautés</string>
     <string name="main_menu__categories">Catégories</string>
-    <string name="main_menu__swap_nearby">À proximité</string>
+    <string name="main_menu__swap_nearby">Autour</string>
 
 
     <string name="app_recommended_version_installed">Version %1$s (recommandée)</string>
