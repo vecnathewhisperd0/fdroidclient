@@ -21,26 +21,24 @@
     <string name="update_auto_install">Аўтаматычна ўсталёўваць абнаўленні</string>
     <string name="update_auto_install_summary">Спампоўваць і ўсталёўваць абнаўленні ў фоне</string>
     <string name="notify">Паказаць даступныя абнаўленні</string>
-    <string name="notify_on">Паказваць абвесткі калі ёсць абнаўленні</string>
-    <string name="system_installer">Прывілеяваны дадатак</string>
-    <string name="system_installer_on">Выкарыстоўваць прывілеяваны дадатак для ўсталёўкі, абнаўлення ці выдалення
-        пакетаў
-    </string>
+    <string name="notify_on">Паказваць апавяшчэнні пра даступныя абнаўленні</string>
+    <string name="system_installer">Прывілеяванае пашырэнне</string>
+    <string name="system_installer_on">Выкарыстоўваць прывілеяванае пашырэнне для ўсталёўкі, абнаўлення ці выдалення пакункаў</string>
     <string name="local_repo_name">Назва вашага лакальнага рэпазіторыя</string>
     <string name="local_repo_name_summary">Ваш лакальны рэпазіторый прапануецца пад назвай: %s</string>
     <string name="local_repo_https_on">Выкарыстоўваць шыфраванае HTTPS-злучэнне для лакальнага рэпазіторыя</string>
 
-    <string name="login_title">Неабходна аўтэнтыфікацыя</string>
+    <string name="login_title">Патрабуецца аўтэнтыфікацыя</string>
     <string name="login_name">Імя карыстальніка</string>
     <string name="login_password">Пароль</string>
     <string name="repo_edit_credentials">Змяніць пароль</string>
-    <string name="repo_error_empty_username">Пустое імя карыстальніка, улікоўка не змененая</string>
+    <string name="repo_error_empty_username">Пустое імя карыстальніка, паўнамоцтвы не змененыя</string>
 
     <string name="app_details">Апісанне дадатка</string>
-    <string name="no_such_app">Праграма не знойдзена.</string>
+    <string name="no_such_app">Дадатак не знойдзены.</string>
 
-    <string name="app_details_donate_prompt_unknown_author">Фундаваць каву для распрацоўнікаў %1$s!</string>
-    <string name="app_details_donate_prompt">%1$s створаны %2$s. Фундуй ім каву!</string>
+    <string name="app_details_donate_prompt_unknown_author">Ахвяраваць распрацоўшчыкам %1$s на каву!</string>
+    <string name="app_details_donate_prompt">%1$s створаны %2$s. Ахвяруйце ім на каву!</string>
 
     <string name="about_title">Пра F-Droid</string>
     <string name="about_version">Версія</string>
@@ -48,8 +46,8 @@
     <string name="about_source">Зыходны код</string>
     <string name="about_license">Ліцэнзія</string>
 
-    <string name="app_incompatible">Несумясцімая</string>
-    <string name="app_installed">Усталаваная</string>
+    <string name="app_incompatible">Несумяшчальны</string>
+    <string name="app_installed">Усталаваны</string>
     <string name="app_not_installed">Не ўсталяваная</string>
     <string name="app_inst_known_source">Усталявана (з %s)</string>
     <string name="app_inst_unknown_source">Усталяваная (з невядомай крыніцы)</string>
@@ -472,11 +470,11 @@
     <string name="app_installed_media">Файл усталяваны ў %s</string>
     <string name="app_permission_storage">F-Droid патрабуе дазвол на ўсталёўку гэтага ў сховішча. Калі ласка, дайце дазвол на наступным экране для працягу ўсталёўкі.</string>
 
-    <string name="app_details__incompatible_mismatched_signature">Іншы подпіс у параўнанні з устляванай версіяй</string>
-    <string name="app_details__no_versions__show_incompat_versions">Каб паказваць несумясцімыя версіі заўседы, уключыце наладу «%1$s».</string>
-    <string name="app_details__no_versions__no_compatible_signatures">Няма версій з сумясцімым подпісам</string>
-    <string name="app_details__no_versions__none_compatible_with_device">Няма версій сумясцімых з прыладай</string>
-    <string name="app_details__no_versions__explain_incompatible_signatures">Усталяваная версія несумясцімая не з адной даступнай версіяй. Выдаленне праграмы дазволіць убачыць і ўсталявая сумясцімыя версіі. Гэтак часта адбываецца з праграмамі, якія ўстляваныя праз Google Play ці іншыя крыніцы, і калі яны падпісныя рознымі сертыфікатамі.</string>
+    <string name="app_details__incompatible_mismatched_signature">Подпіс адрозніваецца ад подпіса ўстляванай версіі</string>
+    <string name="app_details__no_versions__show_incompat_versions">Каб заўсёды паказваць несумяшчальныя версіі, ўключыце параметр «%1$s».</string>
+    <string name="app_details__no_versions__no_compatible_signatures">Версіі з сумяшчальным подпісам адсутнічаюць</string>
+    <string name="app_details__no_versions__none_compatible_with_device">Версіі, сумяшчальныя з прыладай, адсутнічаюць</string>
+    <string name="app_details__no_versions__explain_incompatible_signatures">Усталяваная версія несумяшчаецца ні з адной даступнай версіяй. Выдаленне дадатка дазволіць убачыць і ўсталяваць сумяшчальныя версіі. Гэтак часта адбываецца з дадаткамі, што ўстлёўваюцца праз Google Play ці іншыя крыніцы і падпісваюцца рознымі сертыфікатамі.</string>
 
     <string name="empty_search_available_app_list">Няма супадзенняў сярод даступных праграм.</string>
 
@@ -543,9 +541,9 @@
 
     <string name="over_wifi">Праз Wi-Fi</string>
     <string name="over_data">Праз мабільную сетку</string>
-    <string name="over_network_always_summary">Заўсёды выкарыстоўваць гэта злучэнне пры даступнасці</string>
-    <string name="over_network_on_demand_summary">Выкарыстоўваць гэта злучэнне толька для спампоўкі</string>
-    <string name="over_network_never_summary">Ніколі нічога не спампоўваць праз гэта злучэнне</string>
+    <string name="over_network_always_summary">Заўсёды выкарыстоўваць гэтае злучэнне пры даступнасці</string>
+    <string name="over_network_on_demand_summary">Выкарыстоўваць гэтае злучэнне толькі для спампоўванняў</string>
+    <string name="over_network_never_summary">Ніколі нічога не спампоўваць праз гэтае злучэнне</string>
     <string name="antidisabledalgorithmlist">Гэтая праграма мае слабы подпіс бяспекі</string>
     <string name="antiknownvulnlist">Гэтая праграма змяшчае вядомую ўразлівасць бяспекі</string>
 
@@ -554,12 +552,12 @@
     <string name="install_history">Гісторыя ўсталёвак</string>
     <string name="install_history_summary">Паглядзець асабісты лог усіх усталёвак і выдаленняў</string>
     <string name="send_version_and_uuid">Адправіць версію і UUID на серверы</string>
-    <string name="send_version_and_uuid_summary">Уключае версію гэтай праграмы і выпадковы ўнікальны ідэнтыфікатар падчас спампоўкі. Падзейнічае пасля перазапуску праграмы.</string>
+    <string name="send_version_and_uuid_summary">Уключае версію гэтага дадатка і выпадковы ўнікальны ідэнтыфікатар падчас спампоўвання. Падзейнічае пасля перазапуску дададтка.</string>
     <string name="prompt_to_send_crash_reports">Запыт на адпраўку справаздач аб хібах</string>
     <string name="prompt_to_send_crash_reports_summary">Збор інфармацыі аб хібах і запыт на адпраўку яе распрацоўшчыку</string>
     <string name="share_repository">Падзяліцца рэпазіторыям</string>
-    <string name="allow_push_requests">Дазволіць рэпазіторыям усталёўваць/выдаляць праграмы</string>
-    <string name="allow_push_requests_summary">Метаданыя рэпазіторыяў можа ўключаць запыты на ўсталяванне ці выдаленне праграм</string>
+    <string name="allow_push_requests">Дазволіць рэпазіторыям усталёўваць/выдаляць дадаткі</string>
+    <string name="allow_push_requests_summary">Метаданыя рэпазіторыяў могуць уключаць запыты на ўсталёўку ці выдаленне дадаткаў</string>
     <string name="antinosourcesince">Зыходны код больш недаступны — абноўленні немагчымыя.</string>
 
     <string name="send_install_history">Адправіць гісторыю ўсталёвак</string>
@@ -570,7 +568,7 @@
     <string name="send_installed_apps_csv">Праграмы, усталяваныя F-Droid як CSV-файл</string>
     <string name="menu_open">Адкрыць</string>
     <string name="about_forum">Форум падтрымкі</string>
-    <string name="app_suggested">Прапанаваны</string>
+    <string name="app_suggested">Прапанавана</string>
     <string name="app_size">Памер: %1$s</string>
 
     <string name="menu_downgrade">Адкат</string>
