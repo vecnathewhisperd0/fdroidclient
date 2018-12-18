@@ -346,34 +346,36 @@ public class RepoDetailsActivity extends AppCompatActivity {
         setMultipleViewVisibility(repoView, SHOW_IF_EXISTS, View.VISIBLE);
         setMultipleViewVisibility(repoView, HIDE_IF_EXISTS, View.GONE);
 
-        TextView name = (TextView) repoView.findViewById(R.id.text_repo_name);
-        TextView numApps = (TextView) repoView.findViewById(R.id.text_num_apps);
-        TextView lastUpdated = (TextView) repoView.findViewById(R.id.text_last_update);
+        TextView name = repoView.findViewById(R.id.text_repo_name);
+        TextView numApps = repoView.findViewById(R.id.text_num_apps);
+        TextView lastUpdated = repoView.findViewById(R.id.text_last_update);
 
         if (repo.mirrors != null) {
-            TextView officialMirrorsLabel = (TextView) repoView.findViewById(R.id.label_official_mirrors);
+            TextView officialMirrorsLabel = repoView.findViewById(R.id.label_official_mirrors);
             officialMirrorsLabel.setVisibility(View.VISIBLE);
-            TextView officialMirrorsText = (TextView) repoView.findViewById(R.id.text_official_mirrors);
+            TextView officialMirrorsText = repoView.findViewById(R.id.text_official_mirrors);
             officialMirrorsText.setVisibility(View.VISIBLE);
             StringBuilder builder = new StringBuilder();
             for (String url : repo.mirrors) {
-                builder.append("◦ ");
+                builder.append("• ");
                 builder.append(url);
                 builder.append('\n');
             }
+            builder.setLength(Math.max(builder.length() - 1, 0));
             officialMirrorsText.setText(builder.toString());
         }
         if (repo.userMirrors != null) {
-            TextView userMirrorsLabel = (TextView) repoView.findViewById(R.id.label_user_mirrors);
+            TextView userMirrorsLabel = repoView.findViewById(R.id.label_user_mirrors);
             userMirrorsLabel.setVisibility(View.VISIBLE);
-            TextView userMirrorsText = (TextView) repoView.findViewById(R.id.text_user_mirrors);
+            TextView userMirrorsText = repoView.findViewById(R.id.text_user_mirrors);
             userMirrorsText.setVisibility(View.VISIBLE);
             StringBuilder builder = new StringBuilder();
             for (String url : repo.userMirrors) {
-                builder.append("◦ ");
+                builder.append("• ");
                 builder.append(url);
                 builder.append('\n');
             }
+            builder.setLength(Math.max(builder.length() - 1, 0));
             userMirrorsText.setText(builder.toString());
         }
 
