@@ -74,7 +74,6 @@ public class RepoDetailsActivity extends AppCompatActivity {
     private Repo repo;
     private long repoId;
     private View repoView;
-
     private String shareUrl;
 
     /**
@@ -83,9 +82,7 @@ public class RepoDetailsActivity extends AppCompatActivity {
      * Flex, there was a thing called "ViewStates" for exactly this. Wonder if
      * that exists in  Android?
      */
-    private static void setMultipleViewVisibility(View parent,
-                                                  int[] viewIds,
-                                                  int visibility) {
+    private static void setMultipleViewVisibility(View parent, int[] viewIds, int visibility) {
         for (int viewId : viewIds) {
             parent.findViewById(viewId).setVisibility(visibility);
         }
@@ -97,13 +94,13 @@ public class RepoDetailsActivity extends AppCompatActivity {
         ((FDroidApp) getApplication()).applyTheme(this);
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.repodetails);
+        setContentView(R.layout.activity_repo_details);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        repoView = findViewById(R.id.repoView);
+        repoView = findViewById(R.id.repo_view);
 
         repoId = getIntent().getLongExtra(ARG_REPO_ID, 0);
         final String[] projection = {
@@ -115,7 +112,7 @@ public class RepoDetailsActivity extends AppCompatActivity {
         };
         repo = RepoProvider.Helper.findById(this, repoId, projection);
 
-        TextView inputUrl = (TextView) findViewById(R.id.input_repo_url);
+        TextView inputUrl = findViewById(R.id.input_repo_url);
         inputUrl.setText(repo.address);
 
         if (repo.address.startsWith("content://")) {
@@ -170,8 +167,7 @@ public class RepoDetailsActivity extends AppCompatActivity {
 
     private void processIntent(Intent i) {
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(i.getAction())) {
-            Parcelable[] rawMsgs =
-                    i.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+            Parcelable[] rawMsgs = i.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
             NdefMessage msg = (NdefMessage) rawMsgs[0];
             String url = new String(msg.getRecords()[0].getPayload());
             Utils.debugLog(TAG, "Got this URL: " + url);
@@ -310,9 +306,9 @@ public class RepoDetailsActivity extends AppCompatActivity {
 
     private void setupCredentials(View parent, Repo repo) {
 
-        TextView usernameLabel = (TextView) parent.findViewById(R.id.label_username);
-        TextView username = (TextView) parent.findViewById(R.id.text_username);
-        Button changePassword = (Button) parent.findViewById(R.id.button_edit_credentials);
+        TextView usernameLabel = parent.findViewById(R.id.label_username);
+        TextView username = parent.findViewById(R.id.text_username);
+        Button changePassword = parent.findViewById(R.id.button_edit_credentials);
 
         if (TextUtils.isEmpty(repo.username)) {
             usernameLabel.setVisibility(View.GONE);
@@ -328,13 +324,11 @@ public class RepoDetailsActivity extends AppCompatActivity {
     }
 
     private void updateRepoView() {
-
         if (repo.hasBeenUpdated()) {
             updateViewForExistingRepo(repoView);
         } else {
             updateViewForNewRepo(repoView);
         }
-
     }
 
     private void updateViewForNewRepo(View repoView) {
@@ -421,11 +415,10 @@ public class RepoDetailsActivity extends AppCompatActivity {
     }
 
     public void showChangePasswordDialog(final View parentView) {
-
         final View view = getLayoutInflater().inflate(R.layout.login, null);
         final AlertDialog credentialsDialog = new AlertDialog.Builder(this).setView(view).create();
-        final EditText nameInput = (EditText) view.findViewById(R.id.edit_name);
-        final EditText passwordInput = (EditText) view.findViewById(R.id.edit_password);
+        final EditText nameInput = view.findViewById(R.id.edit_name);
+        final EditText passwordInput = view.findViewById(R.id.edit_password);
 
         nameInput.setText(repo.username);
         passwordInput.requestFocus();
