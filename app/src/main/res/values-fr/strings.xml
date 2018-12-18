@@ -202,9 +202,9 @@
     <string name="repo_searching_address">Recherche d\'un dépôt d\'applications sur
 \n%1$s</string>
     <string name="category_Graphics">Graphisme</string>
-    <string name="empty_installed_app_list">Aucune appli installée.
-\n
-\nDes applis sont installées sur votre appareil, mais aucune n\'est disponible sur F-Droid. Vous devriez actualiser vos dépôts ou ajouter de nouveaux dépôts.</string>
+    <string name="empty_installed_app_list">Aucune application installée. 
+\n 
+\nDes applications sont présentes sur votre appareil, mais aucune n\'est disponible sur F-Droid. Vous devriez actualiser vos dépôts ou ajouter de nouveaux dépôts dans F-Droid pour augmenter vos chances d\'obtenir des mises à jour pour vos applications.</string>
     <string name="install_error_unknown">L\'installation a échoué pour une raison inconnue</string>
     <string name="uninstall_error_unknown">La désinstallation a échoué pour une raison inconnue</string>
     <string name="swap_nfc_title">Rapprochez vos appareils pour échanger</string>
@@ -340,7 +340,7 @@
     <string name="app_version_x_installed">Version %1$s</string>
     <string name="clear_search">Effacer la recherche</string>
 
-    <string name="main_menu__latest_apps">Nouveautés</string>
+    <string name="main_menu__latest_apps">Nouveau</string>
     <string name="main_menu__categories">Catégories</string>
     <string name="main_menu__swap_nearby">Autour</string>
 
