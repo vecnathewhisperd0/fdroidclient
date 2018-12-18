@@ -528,7 +528,7 @@
     <string name="allow_push_requests">Autoriser les dépôts à installer/désinstaller des applications</string>
     <string name="send_installed_apps">Partager les applis installées</string>
     <string name="menu_open">Ouvrir</string>
-    <string name="antinosourcesince">Le code source n\'est désormais plus en accès libre, les mises à jour ne sont plus possibles.</string>
+    <string name="antinosourcesince">Le code source n\'est maintenant plus disponible, pas de mises à jour possibles.</string>
 
     <string name="send_history_csv">%s historique d\'installation sous forme de fichier CSV</string>
     <string name="updates_disabled_by_settings">Les mises à jour sont désactivées en raison des paramètres Données / Wifi</string>
