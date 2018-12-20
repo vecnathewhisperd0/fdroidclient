@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="delete">नष्ट करे</string>
     <string name="enable_nfc_send">NFC द्वारा भेजे …</string>
     <string name="version">संस्करण</string>
@@ -179,13 +179,13 @@
     <string name="preference_manage_installed_apps">स्थापित एप्स संशोधित करें</string>
     <string name="details_notinstalled">स्थापित नहीं है</string>
     <string name="next">अगला</string>
-    <string tools:ignore="UnusedResources" name="category_Connectivity">संयोजकता</string>
-    <string tools:ignore="UnusedResources" name="category_Development">विकास</string>
-    <string tools:ignore="UnusedResources" name="category_Graphics">ग्राफिक्स</string>
-    <string tools:ignore="UnusedResources" name="category_Multimedia">मल्टीमीडिया</string>
-    <string tools:ignore="UnusedResources" name="category_Phone_SMS">फ़ोन और एस-एम-एस</string>
-    <string tools:ignore="UnusedResources" name="category_Science_Education">विग्यान और शिक्षा</string>
-    <string tools:ignore="UnusedResources" name="category_Time">समय्</string>
+    <string name="category_Connectivity">संयोजकता</string>
+    <string name="category_Development">विकास</string>
+    <string name="category_Graphics">ग्राफिक्स</string>
+    <string name="category_Multimedia">मल्टीमीडिया</string>
+    <string name="category_Phone_SMS">फ़ोन और एस-एम-एस</string>
+    <string name="category_Science_Education">विग्यान और शिक्षा</string>
+    <string name="category_Time">समय्</string>
     <string name="notification_action_install">स्थापित करें</string>
     <string name="app_list__name__successfully_installed">"%1$s  स्थापना पूर्ण हुई"</string>
     <string name="updates__tts__download_app">डाउनलोड</string>
@@ -193,7 +193,7 @@
     <string name="unsigned">आप साइन आउट हैं</string>
     <string name="repo_details">भंडार</string>
     <string name="not_on_same_wifi">आपका डिवाइस आपके द्वारा जोडे गये स्थानीय भंडार के वाई-फाई पर नहीं है! इस नेटवर्क में शामिल होने का प्रयास करें: %s</string>
-    <string tools:ignore="UnusedResources" name="category_System">सिस्टम</string>
+    <string name="category_System">सिस्टम</string>
     <string name="prompt_to_send_crash_reports">दुर्घटनाओं की रिपोर्ट भेजने की अनुमति मांगें</string>
     <string name="prompt_to_send_crash_reports_summary">"दुर्घटनाओं के बारे में डेटा इकट्ठा करें और उन्हें एप्लिकेशन के निर्माता को भेजने के लिए अनुमती मांगें। "</string>
     <string name="cache_downloaded">\"कैश\" किए गए ऐप्लिकेशन रखें</string>
