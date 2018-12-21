@@ -543,4 +543,5 @@
     <string name="nearby_splash__request_permission">Essayer</string>
     <string name="swap_toast_using_path">Utilisation de %1$s</string>
     <string name="swap_toast_find_removeable_storage">Sélectionnez la carte SD ou le stockage USB</string>
+    <string name="swap_toast_not_removable_storage">Ce choix ne correspondait à aucun périphérique de stockage amovible, réessayez !</string>
 </resources>
