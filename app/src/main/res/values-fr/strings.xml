@@ -539,4 +539,8 @@
     <string name="menu_downgrade">Rétrograder</string>
     <string name="allow_push_requests_summary">Les méta-data des dépôts peuvent contenir des requêtes pour installer ou désinstaller des applications.</string>
     <string name="app_repository">Dépôt : %1$s</string>
+    <string name="scan_removable_storage_title">Parcourir le stockage mémoire amovible</string>
+    <string name="nearby_splash__request_permission">Essayer</string>
+    <string name="swap_toast_using_path">Utilisation de %1$s</string>
+    <string name="swap_toast_find_removeable_storage">Sélectionnez la carte SD ou le stockage USB</string>
 </resources>
