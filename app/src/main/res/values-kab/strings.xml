@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="updates">Amucceḍ</string>
+<resources xmlns:tools="http://schemas.android.com/tools"><string name="updates">Amucceḍ</string>
     <string name="ok">IH</string>
 
     <string name="yes">Ih</string>
@@ -264,4 +264,5 @@
     <string name="panic_app_unknown_app">Asnas arussin</string>
     <string name="repo_user_mirrors">Lemriyat n useqdac</string>
     <string name="app_repository">Akufi: %1$s</string>
+    <string tools:ignore="UnusedResources" name="category_Graphics">Tiẓrudlifin</string>
 </resources>
