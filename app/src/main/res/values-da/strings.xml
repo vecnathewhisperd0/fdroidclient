@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">F-Droid</string>
 
@@ -75,7 +75,7 @@
     <string name="menu_search">Søg</string>
     <string name="menu_add_repo">Nyt Depot</string>
 
-    <string name="menu_launch">Kør</string>
+    <string name="menu_launch">Åbne</string>
     <string name="menu_share">Del</string>
     <string name="menu_install">Installer</string>
     <string name="menu_uninstall">Afinstaller</string>
@@ -85,7 +85,7 @@
     <string name="menu_issues">Problemer</string>
     <string name="menu_changelog">Ændringslog</string>
     <string name="menu_source">Kildekode</string>
-    <string name="menu_upgrade">Opgrader</string>
+    <string name="menu_upgrade">Opdatere</string>
     <string name="menu_donate">Doner</string>
     <string name="menu_bitcoin">Bitcoin</string>
     <string name="menu_litecoin">Litecoin</string>
@@ -311,13 +311,13 @@
     <string name="warning_no_internet">Kan ikke opdatere, er du forbundet til Internettet?</string>
 <string name="main_menu__latest_apps">Seneste</string>
     <string name="main_menu__categories">Kategorier</string>
-    <string name="main_menu__swap_nearby">Tæt på</string>
+    <string name="main_menu__swap_nearby">Nærheden</string>
 
-    <string name="preference_manage_installed_apps">Administrer installerede apps</string>
+    <string name="preference_manage_installed_apps">Administrere installerede programmer</string>
 
 
     <string name="notification_action_update">Opdatér</string>
-    <string name="notification_action_cancel">Annullér</string>
+    <string name="notification_action_cancel">Annullere</string>
     <string name="notification_action_install">Installér</string>
 
     <string name="app_list__name__downloading_in_progress">Henter %1$s</string>
