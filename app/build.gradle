@@ -12,8 +12,8 @@ def getVersionName = { ->
     return stdout.toString().trim()
 }
 
-def isCi = "true".equals(System.getenv("CI"))
-def preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
+def isCi = "true" == System.getenv("CI")
+def preDexEnabled = "true" == System.getProperty("pre-dex", "true")
 
 def fullApplicationId = "org.fdroid.fdroid"
 def basicApplicationId = "org.fdroid.basic"
@@ -21,10 +21,12 @@ def basicApplicationId = "org.fdroid.basic"
 def privilegedExtensionApplicationId = '"org.fdroid.fdroid.privileged"'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 28
         versionCode 1005002
         versionName getVersionName()
 
@@ -36,6 +38,11 @@ android {
           passing the following argument to the test runner: disableAnalytics "true".
          */
         testInstrumentationRunnerArguments disableAnalytics: 'true'
+    }
+
+    sourceSets {
+        test { java.srcDirs += "$projectDir/src/testShared/java" }
+        androidTest { java.srcDirs += "$projectDir/src/testShared/java" }
     }
 
     buildTypes {
@@ -51,8 +58,8 @@ android {
         }
         debug {
             applicationIdSuffix ".debug"
-            resValue "string", "applicationId", fullApplicationId + applicationIdSuffix
             versionNameSuffix "-debug"
+            resValue "string", "applicationId", fullApplicationId + applicationIdSuffix
             println 'buildTypes.debug defaultConfig.versionCode ' + defaultConfig.versionCode
         }
     }
@@ -69,14 +76,6 @@ android {
             applicationId basicApplicationId
             resValue "string", "applicationId", basicApplicationId
         }
-    }
-
-    compileOptions {
-        compileOptions.encoding = "UTF-8"
-    }
-
-    aaptOptions {
-        cruncherEnabled = false
     }
 
     dexOptions {
@@ -101,16 +100,6 @@ android {
         }
     }
 
-    sourceSets {
-        test {
-            java.srcDirs += "$projectDir/src/testShared/java"
-        }
-
-        androidTest {
-            java.srcDirs += "$projectDir/src/testShared/java"
-        }
-    }
-
     lintOptions {
         checkReleaseBuilds false
         abortOnError true
@@ -120,6 +109,16 @@ android {
         textReport false
 
         lintConfig file("lint.xml")
+    }
+
+    compileOptions {
+        encoding = 'UTF-8'
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    aaptOptions {
+        cruncherEnabled = false
     }
 
     packagingOptions {
@@ -133,47 +132,54 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:support-v4:27.1.1'
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:gridlayout-v7:27.1.1'
-    implementation 'com.android.support:support-annotations:27.1.1'
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
-    implementation 'com.android.support:cardview-v7:27.1.1'
-    implementation 'com.android.support:design:27.1.1'
-    implementation 'com.android.support:support-vector-drawable:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
-    implementation 'com.android.support:palette-v7:27.1.1'
-    implementation 'com.android.support:preference-v14:27.1.1'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:cardview-v7:28.0.0'
+    implementation 'com.android.support:gridlayout-v7:28.0.0'
+    implementation 'com.android.support:palette-v7:28.0.0'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation 'com.android.support:preference-v14:28.0.0'
+    implementation 'com.android.support:support-annotations:28.0.0'
+    implementation 'com.android.support:support-vector-drawable:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 
-    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
-    implementation 'com.google.zxing:core:3.3.2'
+    implementation 'io.reactivex:rxjava:1.1.0' //1.3.8
+    //implementation 'io.reactivex.rxjava2:rxjava:2.2.4'
+    implementation 'io.reactivex:rxandroid:0.23.0' //1.2.1
+    //implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+
     implementation 'info.guardianproject.netcipher:netcipher:2.0.0-beta1'
     implementation 'info.guardianproject.panic:panic:0.5'
-    implementation 'commons-io:commons-io:2.5'
-    implementation 'commons-net:commons-net:3.5'
-    implementation 'ch.acra:acra:4.9.1'
-    implementation 'io.reactivex:rxjava:1.1.0'
-    implementation 'io.reactivex:rxandroid:0.23.0'
-    implementation 'com.hannesdorfmann:adapterdelegates3:3.0.1'
-    implementation 'com.ashokvarma.android:bottom-navigation-bar:2.0.5'
 
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.8.7'
-    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.8.7'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.8.7'
+    implementation 'commons-io:commons-io:2.6'
+    implementation 'commons-net:commons-net:3.6'
 
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.8.11' //2.9.8
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.8.11' //2.9.8
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.8.11' //2.9.8
+
+    implementation 'com.hannesdorfmann:adapterdelegates3:3.1.0'
+    //implementation 'com.hannesdorfmann:adapterdelegates4:4.0.0'
+
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    implementation 'com.google.zxing:core:3.3.3'
+    implementation 'ch.acra:acra:4.9.2' //4.11
+    implementation 'com.ashokvarma.android:bottom-navigation-bar:2.1.0'
     implementation 'org.bouncycastle:bcprov-jdk15on:1.60'
+
     fullImplementation 'org.bouncycastle:bcpkix-jdk15on:1.60'
     fullImplementation 'cc.mvdan.accesspoint:library:0.2.0'
-    fullImplementation 'org.jmdns:jmdns:3.5.3'
+    fullImplementation 'org.jmdns:jmdns:3.5.5'
     fullImplementation 'org.nanohttpd:nanohttpd:2.3.1'
 
-    testImplementation 'org.robolectric:robolectric:3.8'
-    testImplementation "com.android.support.test:monitor:1.0.2"
     testImplementation 'org.bouncycastle:bcprov-jdk15on:1.60'
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'org.mockito:mockito-core:2.7.22'
+    testImplementation 'junit:junit:4.13-beta-1'
+    testImplementation 'com.android.support.test:monitor:1.0.2'
+    testImplementation 'org.robolectric:robolectric:3.8' //4.1
+    testImplementation 'org.mockito:mockito-core:2.23.4'
 
-    androidTestImplementation 'com.android.support:support-annotations:27.1.1'
+    androidTestImplementation 'com.android.support:support-annotations:28.0.0'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
@@ -182,6 +188,7 @@ dependencies {
 
 checkstyle {
     toolVersion = '7.2'
+    //8.15 //TODO: Update checkstyle (http://checkstyle.sourceforge.net/releasenotes.html)
 }
 
 task checkstyle(type: Checkstyle) {
@@ -194,6 +201,7 @@ task checkstyle(type: Checkstyle) {
 
 pmd {
     toolVersion = '5.5.1'
+    //6.10.0 //TODO: Update pmd (https://github.com/pmd/pmd/releases)
     consoleOutput = true
 }
 
