@@ -20,22 +20,22 @@ function download {
 	URL="$BASE_URL/$CATEGORY/$DRAWABLE_DIR/$FILE"
 	DIR="$RES_DIR/$DRAWABLE_DIR"
 
-	if [ ! -d $DIR ]
+	if [[ ! -d ${DIR} ]]
 	then
 		echo "Creating dir $DIR"
-		mkdir $DIR
+		mkdir ${DIR}
 	fi
 
 	LOCAL_PATH="$DIR/ic_${ICON}.png"
 
 	echo "Downloading to $LOCAL_PATH"
-	wget --quiet --output-document=$LOCAL_PATH $URL
+	wget --quiet --output-document=${LOCAL_PATH} ${URL}
 
-	if [ ! -s $LOCAL_PATH ]
+	if [[ ! -s ${LOCAL_PATH} ]]
 	then
-		if [ -f $LOCAL_PATH ]
+		if [[ -f ${LOCAL_PATH} ]]
 		then
-			rm $LOCAL_PATH
+			rm ${LOCAL_PATH}
 		fi
 
 		echo "ERROR: Could not download from $URL to $LOCAL_PATH failed."
@@ -51,7 +51,7 @@ ICON="${3}_white"
 BASE_URL="https://raw.githubusercontent.com/google/material-design-icons/master"
 SCREENS="mdpi hdpi xhdpi xxhdpi xxxhdpi"
 
-if [ ! -d $RES_DIR ]
+if [[ ! -d ${RES_DIR} ]]
 then
 	echo "ERROR: $RES_DIR is not a directory"
 	echo ""
@@ -59,7 +59,7 @@ then
 	exit
 fi
 
-for SCREEN in $SCREENS
+for SCREEN in ${SCREENS}
 do
 	download "drawable-$SCREEN"
 done

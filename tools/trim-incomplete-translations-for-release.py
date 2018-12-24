@@ -3,14 +3,13 @@
 # WARNING!  THIS DELETES TRANSLATIONS!
 #
 # The incomplete translations should be kept by rebasing the weblate
-# remote on top of this commit, once its complete.
+# remote on top of this commit once it's complete.
 
 import csv
 import git
 import os
 import requests
 import sys
-
 
 projectbasedir = os.path.dirname(os.path.dirname(__file__))
 print(projectbasedir)

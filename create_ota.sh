@@ -7,7 +7,7 @@ set -e
 PROG_DIR=$(dirname $(realpath $0))
 
 TMP_DIR=$(mktemp -d -t fdroidclient.tmp.XXXXXXXX)
-trap "rm -rf $TMP_DIR" EXIT
+trap "rm -rf ${TMP_DIR}" EXIT
 
 function error() {
     echo "*** ERROR: " $@
@@ -36,51 +36,51 @@ GITVERSION=$(git describe --tags --always)
 FDROID_APK=F-Droid.apk
 
 # Collect files
-mkdir -p $TMP_DIR/META-INF/com/google/android/
-cp app/src/main/scripts/update-binary $TMP_DIR/META-INF/com/google/android/
+mkdir -p ${TMP_DIR}/META-INF/com/google/android/
+cp app/src/main/scripts/update-binary ${TMP_DIR}/META-INF/com/google/android/
 
-if [ $VARIANT == "binary" ] ; then
-    if [ -z $VERSIONCODE ]; then
-        curl -L https://f-droid.org/$FDROID_APK > $TMP_DIR/$FDROID_APK
-        curl -L https://f-droid.org/${FDROID_APK}.asc > $TMP_DIR/${FDROID_APK}.asc
+if [[ ${VARIANT} == "binary" ]] ; then
+    if [[ -z ${VERSIONCODE} ]]; then
+        curl -L https://f-droid.org/${FDROID_APK} > ${TMP_DIR}/${FDROID_APK}
+        curl -L https://f-droid.org/${FDROID_APK}.asc > ${TMP_DIR}/${FDROID_APK}.asc
     else
-        GITVERSION=$VERSIONCODE
+        GITVERSION=${VERSIONCODE}
         DL_APK=org.fdroid.fdroid_${VERSIONCODE}.apk
-        curl -L https://f-droid.org/repo/$DL_APK > $TMP_DIR/$FDROID_APK
-        curl -L https://f-droid.org/repo/${DL_APK}.asc > $TMP_DIR/${FDROID_APK}.asc
+        curl -L https://f-droid.org/repo/${DL_APK} > ${TMP_DIR}/${FDROID_APK}
+        curl -L https://f-droid.org/repo/${DL_APK}.asc > ${TMP_DIR}/${FDROID_APK}.asc
     fi
-    $GPG --verify $TMP_DIR/${FDROID_APK}.asc
-    rm $TMP_DIR/${FDROID_APK}.asc
+    ${GPG} --verify ${TMP_DIR}/${FDROID_APK}.asc
+    rm ${TMP_DIR}/${FDROID_APK}.asc
 else
-    cd $PROG_DIR
-    ./gradlew assemble$(echo $VARIANT | tr 'dr' 'DR')
-    OUT_DIR=$PROG_DIR/app/build/outputs/apk
-    if [ $VARIANT == "debug" ]; then
-        cp $OUT_DIR/app-${VARIANT}.apk \
-           $TMP_DIR/$FDROID_APK
-    elif [ -f $OUT_DIR/app-${VARIANT}-signed.apk ]; then
-        cp $OUT_DIR/app-${VARIANT}-signed.apk \
-           $TMP_DIR/$FDROID_APK
+    cd ${PROG_DIR}
+    ./gradlew assemble$(echo ${VARIANT} | tr 'dr' 'DR')
+    OUT_DIR=${PROG_DIR}/app/build/outputs/apk
+    if [[ ${VARIANT} == "debug" ]]; then
+        cp ${OUT_DIR}/app-${VARIANT}.apk \
+           ${TMP_DIR}/${FDROID_APK}
+    elif [[ -f ${OUT_DIR}/app-${VARIANT}-signed.apk ]]; then
+        cp ${OUT_DIR}/app-${VARIANT}-signed.apk \
+           ${TMP_DIR}/${FDROID_APK}
     else
-        cp $OUT_DIR/app-${VARIANT}-unsigned.apk \
-           $TMP_DIR/$FDROID_APK
+        cp ${OUT_DIR}/app-${VARIANT}-unsigned.apk \
+           ${TMP_DIR}/${FDROID_APK}
     fi
 fi
 
 # Make zip
-if [ $VARIANT == "binary" ] ; then
+if [[ ${VARIANT} == "binary" ]]; then
     ZIPBASE=F-DroidFromBinaries-${GITVERSION}
 else
     ZIPBASE=F-Droid-${GITVERSION}
 fi
-if [ $VARIANT == "debug" ]; then
+if [[ ${VARIANT} == "debug" ]]; then
     ZIP=${ZIPBASE}-debug.zip
 else
     ZIP=${ZIPBASE}.zip
 fi
-OUT_DIR=$PROG_DIR/app/build/distributions
-mkdir -p $OUT_DIR
-[ -f $OUT_DIR/$ZIP ] && rm -f $OUT_DIR/$ZIP
-pushd $TMP_DIR
-zip -r $OUT_DIR/$ZIP .
+OUT_DIR=${PROG_DIR}/app/build/distributions
+mkdir -p ${OUT_DIR}
+[[ -f ${OUT_DIR}/${ZIP} ]] && rm -f ${OUT_DIR}/${ZIP}
+pushd ${TMP_DIR}
+zip -r ${OUT_DIR}/${ZIP} .
 popd
