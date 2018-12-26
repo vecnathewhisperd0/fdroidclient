@@ -563,4 +563,14 @@
 
     <string name="menu_downgrade">Downgrade</string>
     <string name="app_repository">Repositório: %1$s</string>
+    <string name="scan_removable_storage_title">Analizar armazenamento removível</string>
+    <string name="scan_removable_storage_toast">Analisando %s…</string>
+    <string name="scan_removable_storage_summary">Procure por repositórios de pacotes em armazenamento removível como cartões SD e chaves de memória USB</string>
+    <string name="nearby_splash__read_external_storage">Cartões SD podem ser usados para trocar!</string>
+    <string name="nearby_splash__request_permission">Experimente</string>
+    <string name="not_visible_nearby">Nearby não ativado</string>
+    <string name="not_visible_nearby_description">Antes de trocar com dispositivos próximos, torne o seu dispositivo visível.</string>
+    <string name="swap_toast_using_path">Usando %1$s</string>
+    <string name="swap_toast_not_removable_storage">Essa escolha não correspondeu a nenhum dispositivo de armazenamento removível, tente novamente!</string>
+    <string name="swap_toast_find_removeable_storage">Escolha o seu cartão removível SD ou USB</string>
 </resources>
