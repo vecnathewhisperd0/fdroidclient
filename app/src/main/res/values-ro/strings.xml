@@ -550,4 +550,5 @@
     <string name="swap_toast_find_removeable_storage">Alegeți cardul SD sau unitatea USB</string>
     <string name="not_visible_nearby">Modul de schimb nu este activat</string>
     <string name="not_visible_nearby_description">Înainte de a face schimb cu dispozitivele din apropiere, faceți-vă dispozitivul vizibil.</string>
+    <string name="scan_removable_storage_toast">Scanare %s…</string>
 </resources>
