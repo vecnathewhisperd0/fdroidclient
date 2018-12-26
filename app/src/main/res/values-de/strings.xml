@@ -555,4 +555,5 @@
     <string name="swap_toast_find_removeable_storage">Wählen Sie Ihre austauschbare SD-Karte oder Ihren USB-Anschluss</string>
     <string name="not_visible_nearby">Tauschfunktion nicht aktiviert</string>
     <string name="not_visible_nearby_description">Vor dem Tausch mit benachbarten Geräten müssen Sie Ihr Gerät sichtbar machen.</string>
+    <string name="scan_removable_storage_toast">Scannen %s..…</string>
 </resources>
