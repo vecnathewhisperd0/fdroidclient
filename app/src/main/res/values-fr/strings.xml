@@ -547,4 +547,6 @@
     <string name="nearby_splash__read_external_storage">Les cartes SD peuvent être utilisées pour les échanges !</string>
     <string name="not_visible_nearby">Appareil non visible</string>
     <string name="not_visible_nearby_description">Pour échanger avec les appareils proches, vous devez d\'abord rendre visible votre appareil.</string>
+    <string name="scan_removable_storage_toast">Recherche de %s…</string>
+    <string name="scan_removable_storage_summary">Recherche de dépôts de paquets sur des périphériques amovibles tels que les cartes SD et clés USB</string>
 </resources>
