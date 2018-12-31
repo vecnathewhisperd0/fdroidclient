@@ -18,8 +18,8 @@
     <string name="notify_on">Vis en notifikation når opdateringer er tilgængelige</string>
     <string name="system_installer">Privilegeret Udvidelse</string>
     <string name="system_installer_on">Brug Privilegeret Udvidelse til at installere, opdatere og fjerne pakker</string>
-    <string name="local_repo_name">Dit Lokale Depots navn</string>
-    <string name="local_repo_name_summary">Dit lokale depots annoncerede titel: %s</string>
+    <string name="local_repo_name">Lokal depot navn</string>
+    <string name="local_repo_name_summary">Lokal depots annonceret titel: %s</string>
     <string name="local_repo_https_on">Brug krypteret HTTPS:// forbindelse til lokalt depot</string>
 
     <string name="login_title">Autentificering påkrævet</string>
