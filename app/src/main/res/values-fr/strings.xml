@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="SignatureMismatch">La nouvelle version est signée avec une clé différente de l\'ancienne. Pour installer cette nouvelle version, vous devez d\'abord désinstaller l\'ancienne version de l\'application (attention : cette opération supprimera toutes les données de l\'application).</string>
+    <string name="SignatureMismatch">La nouvelle version est signée avec une clé différente de l\'ancienne version. Pour installer cette nouvelle version, vous devez d\'abord désinstaller l\'ancienne version de l\'application (attention : cette opération supprimera toutes les données de l\'application).</string>
     <string name="installIncompatible">Application incompatible avec votre appareil, l\'installer quand même ?</string>
     <string name="version">Version</string>
     <string name="delete">Supprimer</string>
@@ -548,4 +548,5 @@
     <string name="not_visible_nearby_description">Pour échanger avec les appareils proches, vous devez d\'abord rendre visible votre appareil.</string>
     <string name="scan_removable_storage_toast">Recherche de %s…</string>
     <string name="scan_removable_storage_summary">Recherche de dépôts sur les périphériques amovibles tels que les cartes SD ou clés USB</string>
+    <string name="main_menu__updates">Mises à jour</string>
 </resources>
