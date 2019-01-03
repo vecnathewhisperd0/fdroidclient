@@ -565,4 +565,5 @@
     <string name="swap_toast_using_path">Používám %1$s</string>
     <string name="swap_toast_not_removable_storage">Vybraná složka neodpovídá žádným odpojitelným úložištím, zkuste to znovu!</string>
     <string name="swap_toast_find_removeable_storage">Vyberte vaši SD kartu nebo USB flash disk</string>
+    <string name="main_menu__updates">Aktualizace</string>
 </resources>
