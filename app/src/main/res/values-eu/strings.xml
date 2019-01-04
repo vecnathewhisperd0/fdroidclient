@@ -565,7 +565,7 @@
     <string name="menu_downgrade">Atzeratu bertsioa</string>
     <string name="app_repository">Biltegia: %1$s</string>
     <string name="scan_removable_storage_title">Eskaneatu gailu kengarria</string>
-    <string name="scan_removable_storage_toast">$s eskaneatzen…</string>
+    <string name="scan_removable_storage_toast">%s eskaneatzen…</string>
     <string name="scan_removable_storage_summary">Bilatu paketeen biltegiak biltegi kengarrietan, esaterako SD txartelak edo USB giltzak edo diskoak</string>
     <string name="nearby_splash__read_external_storage">SD txartelak trukerako erabili daitezke!</string>
     <string name="nearby_splash__request_permission">Probatu</string>
