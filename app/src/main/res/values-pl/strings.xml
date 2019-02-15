@@ -574,4 +574,5 @@
     <string name="swap_toast_using_path">Wykorzystujesz %1$s</string>
     <string name="swap_toast_not_removable_storage">Ten wybór nie pasował do żadnych usuwalnych urządzeń pamięci masowej, spróbuj ponownie!</string>
     <string name="swap_toast_find_removeable_storage">Wybierz wymienną kartę SD lub USB</string>
+    <string name="main_menu__updates">Aktualizacje</string>
 </resources>
