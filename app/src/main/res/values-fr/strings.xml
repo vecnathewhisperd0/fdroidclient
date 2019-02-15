@@ -430,7 +430,7 @@
         <item quantity="one">Mis à jour il y a %1$s an</item>
         <item quantity="other">Mis à jour il y a %1$s ans</item>
     </plurals>
-<string name="by_author_format">par %s</string>
+    <string name="by_author_format">par %s</string>
     <string name="download_404">Le fichier demandé n\'a pas été trouvé.</string>
     <string name="force_old_index">Forcer l\'ancien format d\'index</string>
     <string name="force_old_index_summary">Dans le cas où des erreurs ou des incompatibilités apparaitraient, utilisez l\'index des applications en XML</string>
@@ -488,7 +488,7 @@
     <string name="hide_on_long_search_press_title">Masquer F-droid grâce au bouton de recherche</string>
     <string name="hide_on_long_search_press_summary">Appuyer longtemps sur le bouton de Recherche pour masquer l\'application F-Droid.</string>
 
-<string name="warning_scaning_qr_code">L\'appareil photo ne semble pas avoir de mise au point automatique. Le code sera peut-être difficile à scanner.</string>
+    <string name="warning_scaning_qr_code">L\'appareil photo ne semble pas avoir de mise au point automatique. Le code sera peut-être difficile à scanner.</string>
     <string name="repo_add_mirror">Ajouter un miroir</string>
     <string name="repo_delete_to_overwrite">Veuillez d\'abord supprimer %1$s pour pouvoir l\'ajouter avec la clé en conflit.</string>
     <string name="repo_exists_add_mirror">Il s\'agit d\'une copie de %1$s, l\'ajouter comme miroir ?</string>

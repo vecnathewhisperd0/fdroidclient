@@ -415,7 +415,7 @@
 	<item quantity="one">Uppdaterades för %1$d år sedan</item>
 	<item quantity="other">Uppdaterades för %1$d år sedan</item>
 </plurals>
-<string name="by_author_format">av %s</string>
+    <string name="by_author_format">av %s</string>
     <string name="download_404">Den begärda filen hittades inte.</string>
     <string name="force_old_index">Tvinga gammalt indexformat</string>
     <string name="force_old_index_summary">Om det finns fel eller kompatibilitetsproblem, använd XML-appindexet</string>
@@ -473,7 +473,7 @@
     <string name="hide_on_long_search_press_title">Göm med sökknappen</string>
     <string name="hide_on_long_search_press_summary">Att trycka och hålla in sökknappen kommer att gömma appen</string>
 
-<string name="over_wifi">Över Wi-Fi</string>
+    <string name="over_wifi">Över Wi-Fi</string>
     <string name="over_data">Över mobildata</string>
     <string name="over_network_always_summary">Använd alltid den här anslutningen när den är tillgänglig</string>
     <string name="over_network_on_demand_summary">Använd endast den här anslutningen när jag klickar för att ladda ner</string>

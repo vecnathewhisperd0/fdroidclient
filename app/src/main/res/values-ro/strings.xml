@@ -379,7 +379,7 @@
     <string name="app_recommended_version_installed">Versiunea %1$s (Recomandată)</string>
     <string name="app_version_x_installed">Versiunea %1$s</string>
     <string name="app_version_x_available">Versiunea %1$s disponibilă</string>
-<string name="app__tts__downloading_progress">Se descarcă, %1$d%% gata</string>
+    <string name="app__tts__downloading_progress">Se descarcă, %1$d%% gata</string>
     <string name="app__tts__cancel_download">Anulează descărcarea</string>
     <string name="menu_video">Video</string>
     <string name="menu_license">Licență: %s</string>
@@ -480,7 +480,7 @@
     <string name="hiding_dialog_message">Sigur doriți să eliminați %1$s din lansator? Doar scriind \"%2$d\" în aplicația falsă %3$s veți putea să o restaurați.</string>
     <string name="hiding_dialog_warning">Atenție: Orice scurtătură din ecranul de pornire va fi de asemenea eliminată și va trebui adăugată din nou manual.</string>
     <string name="hide_on_long_search_press_summary">Aplicația va fi ascunsă dacă se apasă lung butonul de căutare</string>
-<string name="warning_scaning_qr_code">Camera foto a dispozitivului nu pare să suporte focalizare automată. Ar putea fi dificil să se scaneze codul.</string>
+    <string name="warning_scaning_qr_code">Camera foto a dispozitivului nu pare să suporte focalizare automată. Ar putea fi dificil să se scaneze codul.</string>
     <string name="menu_liberapay">Liberapay</string>
 
     <string name="show_anti_feature_apps">Include caracteristici periculoase</string>

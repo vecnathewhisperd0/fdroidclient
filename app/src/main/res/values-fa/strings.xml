@@ -290,7 +290,7 @@
     <string name="uninstall_error_notify_title">خطا در حذف نصب %s</string>
 
 
-<string name="keep_install_history">نگه داشتن تاریخچهٔ نصب</string>
+    <string name="keep_install_history">نگه داشتن تاریخچهٔ نصب</string>
     <string name="keep_install_history_summary">نگه داشتن گزارشی از تمام نصب و حذف‌ها در یک فضای خصوصی</string>
     <string name="update_auto_install">نصب خودکار به‌روز رسانی‌ها</string>
     <string name="update_auto_install_summary">بارگیری و نصب کاره‌های به‌روز در پس‌زمینه</string>
@@ -387,7 +387,7 @@
         <item quantity="one">%1$d روز پیش به‌روز شده</item>
         <item quantity="other">%1$d روز پیش به‌روز شده‌</item>
     </plurals>
-<string name="menu_license">پروانه: %s</string>
+    <string name="menu_license">پروانه: %s</string>
     <plurals name="notification_summary_more">
         <item quantity="one">+%1$d بیش‌تر…</item>
         <item quantity="other">+%1$d بیش‌تر…</item>
@@ -412,7 +412,7 @@
         <item quantity="one">%1$d سال پیش به‌روز شده</item>
         <item quantity="other">%1$d سال پیش به‌روز شده</item>
     </plurals>
-<string name="by_author_format">توسط %s</string>
+    <string name="by_author_format">توسط %s</string>
     <string name="download_404">فایل درخواستی یافت نشد.</string>
     <string name="force_old_index">استفاده اجباری از قالب فهرست قدیمی</string>
     <string name="force_old_index_summary">در صورت وجود باگ یا مشکلات عدم سازگاری، از فهرست xml کاره استفاده کنید</string>
@@ -468,7 +468,7 @@
 
     <string name="menu_liberapay">لیبراپی</string>
 
-<string name="warning_scaning_qr_code">به نظر نمی‌رسد دوربینتان از تمرکز خودکار پشتیبانی کند. ممکن است پویش رمز سخت باشد.</string>
+    <string name="warning_scaning_qr_code">به نظر نمی‌رسد دوربینتان از تمرکز خودکار پشتیبانی کند. ممکن است پویش رمز سخت باشد.</string>
     <string name="repo_add_mirror">افزودن mirror</string>
     <string name="repo_exists_add_fingerprint">%1$s از قبل تنظیم شده است، این عملیات اطلاعات کلید جدید را اضافه میکند.</string>
     <string name="repo_exists_enable">%1$s از قبل تنظیم شده است، در صورتی که میخواهید، فعال کردن مجدد آن را تایید نمایید.</string>

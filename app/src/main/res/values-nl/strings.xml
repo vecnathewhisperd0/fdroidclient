@@ -424,7 +424,7 @@
 	<item quantity="one">%1$d jaar geleden bijgewerkt</item>
 	<item quantity="other">%1$d jaar geleden bijgewerkt</item>
 </plurals>
-<string name="by_author_format">door %s</string>
+    <string name="by_author_format">door %s</string>
     <string name="download_404">Het gevraagde bestand is niet gevonden.</string>
     <string name="force_old_index">Oud indexformaat afdwingen</string>
     <string name="force_old_index_summary">Gebruik de XML-app-index in geval van programmafouten of compatibiliteitsproblemen</string>
@@ -481,7 +481,7 @@
 
     <string name="menu_liberapay">Liberapay</string>
 
-<string name="warning_scaning_qr_code">Je camera lijkt niet over autofocus te beschikken. Het scannen van de code kan moeilijk zijn.</string>
+    <string name="warning_scaning_qr_code">Je camera lijkt niet over autofocus te beschikken. Het scannen van de code kan moeilijk zijn.</string>
     <string name="show_anti_feature_apps">Apps met antifuncties tonen</string>
     <string name="show_anti_feature_apps_on">Toon apps die antifuncties bevatten</string>
     <string name="force_touch_apps">Aanraakschermapps tonen</string>

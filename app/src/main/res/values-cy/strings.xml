@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools"><string name="app_name">F-Droid</string>
+<resources>
+    <string name="app_name">F-Droid</string>
     <string name="updates">Diweddariadau</string>
     <string name="ok">Iawn</string>
     <string name="yes">Iawn</string>
@@ -21,7 +22,7 @@
     <string name="skip">Neidio</string>
     <string name="pref_language">Iaith</string>
     <string name="pref_language_default">Rhagosodiad System</string>
-    <string tools:ignore="UnusedResources" name="category_Connectivity">Cysylltedd</string>
-    <string tools:ignore="UnusedResources" name="category_Development">Datblygiad</string>
-    <string tools:ignore="UnusedResources" name="category_Games">Gemau</string>
+    <string name="category_Connectivity">Cysylltedd</string>
+    <string name="category_Development">Datblygiad</string>
+    <string name="category_Games">Gemau</string>
 </resources>

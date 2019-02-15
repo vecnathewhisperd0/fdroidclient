@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources><string name="app_name">F-Droid</string>
+<resources>
+    <string name="app_name">F-Droid</string>
 
     <string name="updates">Updates</string>
     <string name="ok">OK</string>
@@ -472,7 +473,7 @@
 	<item quantity="one">%1$d jaar geleden bijgewerkt</item>
 	<item quantity="other">%1$d jaar geleden bijgewerkt</item>
 </plurals>
-<string name="enable_proxy_summary">Stel HTTP-proxy in voor alle netwerkverbindingen</string>
+    <string name="enable_proxy_summary">Stel HTTP-proxy in voor alle netwerkverbindingen</string>
     <string name="proxy_host">Proxyhost</string>
     <string name="proxy_host_summary">Hostnaam van proxy (bijv. 127.0.0.1)</string>
     <string name="proxy_port">Proxypoort</string>

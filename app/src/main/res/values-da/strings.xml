@@ -308,7 +308,7 @@
     <string name="update_auto_install">Installer opdateringer automatisk</string>
     <string name="update_auto_install_summary">Download og installer app-opdateringer i baggrunden</string>
     <string name="warning_no_internet">Kan ikke opdatere. Er du forbundet til Internettet\?</string>
-<string name="main_menu__latest_apps">Seneste</string>
+    <string name="main_menu__latest_apps">Seneste</string>
     <string name="main_menu__categories">Kategorier</string>
     <string name="main_menu__swap_nearby">Nærheden</string>
 
@@ -445,7 +445,7 @@
     <string name="updates__app_with_known_vulnerability__ignore">Ignorer</string>
 
     <string name="status_inserting_x_apps">Gemmer app detaljer (%1$d/%2$d) fra %3$s</string>
-<string name="over_data">Over mobildata</string>
+    <string name="over_data">Over mobildata</string>
     <string name="over_network_always_summary">Brug altid denne forbindelse når tilgængelig</string>
     <string name="over_network_on_demand_summary">Brug kun denne forbindelse når jeg klikker for at hente</string>
     <string name="over_network_never_summary">Hent aldrig noget over denne forbindelse</string>

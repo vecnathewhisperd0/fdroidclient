@@ -439,7 +439,7 @@
         <item quantity="many">Обновлено %1$d лет назад</item>
         <item quantity="other">Обновлено %1$d лет назад</item>
     </plurals>
-<string name="force_old_index">Старый формат индекса (принудительно)</string>
+    <string name="force_old_index">Старый формат индекса (принудительно)</string>
     <string name="force_old_index_summary">Использовать индекс приложений XML в случае проблем с совместимостью</string>
     <string name="app_list_download_ready">Загружено, готово к установке</string>
 
@@ -494,7 +494,7 @@
     <string name="hide_on_long_search_press_title">Скрыть с помощью кнопки поиска</string>
     <string name="hide_on_long_search_press_summary">Длительное нажатие кнопки поиска скроет приложение</string>
 
-<string name="warning_scaning_qr_code">Ваша камера не поддерживает автофокус. Сканирование кода может быть затруднено.</string>
+    <string name="warning_scaning_qr_code">Ваша камера не поддерживает автофокус. Сканирование кода может быть затруднено.</string>
     <string name="repo_add_mirror">Добавить зеркало</string>
     <string name="repo_exists_add_mirror">Это копия %1$s, добавить ее как зеркало?</string>
     <string name="show_anti_feature_apps">Включить приложения с сомнительным функционалом</string>

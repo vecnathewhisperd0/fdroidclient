@@ -360,7 +360,7 @@
     <string name="notification_action_install">Installa</string>
 
     <string name="main_menu__swap_nearby">Qui vicino</string>
-<string name="preference_category__my_apps">Mie App</string>
+    <string name="preference_category__my_apps">Mie App</string>
     <string name="preference_manage_installed_apps">Gestisci app installate</string>
 
 
@@ -487,7 +487,7 @@
     <string name="panic_app_dialog_title">Conferma Applicazione Pulsante di Panico</string>
     <string name="panic_app_dialog_message">Sei sicuro di voler permettere %1$s di eseguire azioni distruttive del pulsante di panico?</string>
     <string name="panic_settings">Impostazioni Pulsante di Panico</string>
-<string name="repo_add_mirror">Aggiungi mirror</string>
+    <string name="repo_add_mirror">Aggiungi mirror</string>
     <string name="sort_search">Ordina ricerca</string>
 
     <string name="repo_exists_add_fingerprint">%1$s è già impostato, ciò aggiungerà nuove informazioni chiave.</string>

@@ -430,7 +430,7 @@
     <item quantity="few">Абноўлена %1$s гады назад</item>
     <item quantity="many">Абноўлена %1$s гадоў назад</item>
 </plurals>
-<string name="by_author_format">ад %s</string>
+    <string name="by_author_format">ад %s</string>
     <string name="download_404">Запытаны файл не знойдзены.</string>
     <string name="force_old_index">Прымусова ўжываць стары фармат індэкса</string>
     <string name="force_old_index_summary">У выпадку, калі ёсць памылкі або праблемы сумясцімасці, выкарыстоўвайце XML-індэкс</string>
@@ -490,7 +490,7 @@
 
     <string name="menu_liberapay">Liberapay</string>
 
-<string name="warning_scaning_qr_code">Ваша камера не падтрымлівае аўтафокус. Сканаваць код можа быць цяжка.</string>
+    <string name="warning_scaning_qr_code">Ваша камера не падтрымлівае аўтафокус. Сканаваць код можа быць цяжка.</string>
     <string name="force_touch_apps">Паказваць дадаткі для сэнсарнага экрана</string>
     <string name="force_touch_apps_on">Паказваць дадаткі, якім патрабуецца сэнсарны экран незалежна ад наяўнасці апаратнай падтрымкі</string>
 

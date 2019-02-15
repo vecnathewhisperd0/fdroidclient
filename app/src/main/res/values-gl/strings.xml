@@ -489,7 +489,7 @@
     <string name="hide_on_long_search_press_title">Ocultar co botón de busca</string>
     <string name="hide_on_long_search_press_summary">Premer longo no botón de busca oculta o aplicativo</string>
 
-<string name="repo_add_mirror">Engadir réplica</string>
+    <string name="repo_add_mirror">Engadir réplica</string>
     <string name="repo_exists_add_fingerprint">%1$s xa está configurado, isto engadirá nova información clave.</string>
     <string name="repo_exists_enable">%1$s xa está configurado, confirma que queres reactivalo.</string>
     <string name="repo_exists_and_enabled">%1$s xa está configurado e activado.</string>
