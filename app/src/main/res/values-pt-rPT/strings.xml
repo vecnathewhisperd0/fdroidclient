@@ -410,7 +410,7 @@
     <string name="notification_title_summary_installing">A instalar</string>
     <string name="notification_title_summary_installed">Instalação efetuada</string>
     <string name="notification_title_summary_install_error">Falha ao instalar</string>
-    <string name="notification_action_update">Atualização</string>
+    <string name="notification_action_update">Atualizar</string>
     <string name="notification_action_cancel">Cancelar</string>
     <string name="notification_action_install">Instalar</string>
 
@@ -482,7 +482,7 @@
     <string name="preventScreenshots_title">Impedir captura de ecrã</string>
     <string name="preventScreenshots_summary">Impede as capturas de ecrã e oculta o conteúdo da aplicação do ecrã de aplicações recentes</string>
 
-    <string name="panic_app_unknown_app">uma aplicação desconhecida</string>
+    <string name="panic_app_unknown_app">uma aplicação desconhecia</string>
     <string name="panic_app_setting_summary">Nenhuma aplicação definida</string>
     <string name="panic_app_setting_none">Nenhuma</string>
     <string name="allow">Permitir</string>
@@ -573,4 +573,5 @@
     <string name="swap_toast_using_path">Utilizando %1$s</string>
     <string name="swap_toast_not_removable_storage">A escolha não correspondeu a um dispositivo de armazenamento removível, tente novamente!</string>
     <string name="swap_toast_find_removeable_storage">Escolha o seu cartão removível SD ou USB</string>
+    <string name="main_menu__updates">Atualizações</string>
 </resources>
