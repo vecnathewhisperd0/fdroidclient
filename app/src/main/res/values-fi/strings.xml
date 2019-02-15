@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="SignatureMismatch">Uusi versio on allekirjoitettu eri salausavaimella kuin vanha. Asentaaksesi uuden version vanha täytyy poistaa ensin. Tee tämä ja yritä uudelleen (Huomaa, että poistaminen hävittää kaiken sovelluksen sisäisen tiedon)</string>
     <string name="installIncompatible">Sovellus ei ole yhteensopiva laitteesi kanssa. Asennetaanko silti?</string>
@@ -43,7 +43,7 @@
     <string name="menu_manage">Hallitse sovelluslähteitä</string>
     <string name="menu_search">Etsi</string>
     <string name="menu_add_repo">Uusi sovelluslähde</string>
-    <string name="menu_launch">Suorita</string>
+    <string name="menu_launch">Avaa</string>
     <string name="menu_share">Jaa</string>
     <string name="menu_install">Asenna</string>
     <string name="menu_uninstall">Poista</string>
@@ -331,9 +331,9 @@
     <string name="updates__show_updateable_apps">Näytä sovellukset</string>
 
     <plurals name="updates__download_updates_for_apps">
-        <item quantity="one">Lataa päivitys sovellukselle %1$d.</item>
-        <item quantity="other">Lataa päivitykset sovelluksille %1$d.</item>
-    </plurals>
+    <item quantity="one">Lataa päivitys %1$d:lle sovellukselle.</item>
+    <item quantity="other">Lataa päivitykset %1$d:lle sovellukselle.</item>
+</plurals>
 
     <string name="clear_search">Tyhjennä haku</string>
 
