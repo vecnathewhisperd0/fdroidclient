@@ -378,7 +378,7 @@
     <string name="app_list__name__downloading_in_progress">Scaricamento %1$s</string>
     <string name="app_list__name__successfully_installed">%1$s installato</string>
     <string name="updates__tts__download_app">Scarica</string>
-    <string name="app_recommended_version_installed">Versione %1$s (Raccomandata)</string>
+    <string name="app_recommended_version_installed">Versione %1$s (Consigliata)</string>
     <string name="app_new">Nuovo</string>
     <string name="app__tts__cancel_download">Annulla scaricamento</string>
     <string name="app__install_downloaded_update">Aggiorna</string>
@@ -561,4 +561,8 @@
     <string name="swap_toast_using_path">Usando %1$s</string>
     <string name="swap_toast_not_removable_storage">Quella scelta non corrisponde ad alcun dispositivo di archiviazione removibile, riprova!</string>
     <string name="swap_toast_find_removeable_storage">Seleziona scheda SD o USB</string>
+    <string name="scan_removable_storage_summary">Cerca repository di pacchetti su supporti removibili come schede SD e chiavette USB</string>
+    <string name="main_menu__updates">Aggiornamenti</string>
+    <string name="nearby_splash__read_external_storage">Le schede SD possono essere usate per lo scambio!</string>
+    <string name="not_visible_nearby_description">Prima di scambiare con dispositivi vicini, rendi il tuo visibile.</string>
 </resources>
