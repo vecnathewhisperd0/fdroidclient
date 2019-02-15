@@ -346,7 +346,7 @@
     <string name="swap_nfc_description">Als je vriend F-Droid heeft geïnstalleerd en NFC is ingeschakeld, houd dan de apparaten tegen elkaar.</string>
     <string name="swap_join_same_wifi">Verbind met hetzelfde wifinetwerk als je vriend</string>
     <string name="swap_join_same_wifi_desc">Om via wifi uit te wisselen moeten beide devices op hetzelfde netwerk zitten. Als je geen toegang hebt tot hetzelfde netwerk, kan een van beiden een wifihotspot aanmaken.</string>
-    <string name="swap_join_this_hotspot">"Help je vriend om te connecteren met jouw hotspot "</string>
+    <string name="swap_join_this_hotspot">Help je vriend om te connecteren met jouw hotspot</string>
     <string name="swap">Apps uitwisselen</string>
     <string name="swap_success">Uitwisseling voltooid!</string>
     <string name="swap_no_wifi_network">Nog geen netwerkverbinding</string>

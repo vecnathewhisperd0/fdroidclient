@@ -340,7 +340,7 @@
     <string name="notification_action_update">Ažuriraj</string>
     <string name="notification_action_cancel">Odustani</string>
     <string name="notification_action_install">Instaliraj</string>
-    <string name="app_list__name__downloading_in_progress">"Preuzimanje %1$s "</string>
+    <string name="app_list__name__downloading_in_progress">Preuzimanje %1$s</string>
     <string name="app_list__name__successfully_installed">%1$s instaliran</string>
     <string name="updates__tts__download_app">Preuzmi</string>
     <string name="warning_no_internet">Nije moguće ažurirati, jeste li spojeni na internet\?</string>
@@ -364,8 +364,8 @@
     <string name="app_recommended_version_installed">Verzija %1$s (preporučeno)</string>
     <string name="app__tts__cancel_download">Prekini preuzimanje</string>
     <string name="app__install_downloaded_update">Ažuriraj</string>
-    <string name="app_repository">"Repozitorij: %1$s "</string>
-    <string name="app_size">"Veličina: %1$s "</string>
+    <string name="app_repository">Repozitorij: %1$s</string>
+    <string name="app_size">Veličina: %1$s</string>
     <string name="app_list_download_ready">Preuzeto, spremno za instalaciju</string>
     <string name="app_list__dismiss_app_update">Ažuriranje ignorirano</string>
     <string name="app_list__dismiss_vulnerable_app">Ranjivost ignorirana</string>
