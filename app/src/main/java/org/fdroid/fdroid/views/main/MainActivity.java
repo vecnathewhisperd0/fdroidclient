@@ -132,6 +132,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
             bottomNavigation
                     .addItem(new BottomNavigationItem(R.drawable.ic_categories, R.string.main_menu__categories))
                     .addItem(new BottomNavigationItem(R.drawable.ic_nearby, R.string.main_menu__swap_nearby));
+        } else if (BuildConfig.FLAVOR.startsWith("boxlight")) {
+            bottomNavigation
+                    .addItem(new BottomNavigationItem(R.drawable.ic_categories, R.string.main_menu__categories));
         }
         bottomNavigation.setTabSelectedListener(this)
                 .setBarBackgroundColor(getBottomNavigationBackgroundColorResId())

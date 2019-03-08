@@ -17,6 +17,7 @@ def preDexEnabled = "true".equals(System.getProperty("pre-dex", "true"))
 
 def fullApplicationId = "org.fdroid.fdroid"
 def basicApplicationId = "org.fdroid.basic"
+def boxlightApplicationId = "com.boxlight.fdroid"
 // yes, this actually needs both quotes https://stackoverflow.com/a/41391841
 def privilegedExtensionApplicationId = '"org.fdroid.fdroid.privileged"'
 
@@ -68,6 +69,11 @@ android {
             dimension "base"
             applicationId basicApplicationId
             resValue "string", "applicationId", basicApplicationId
+        }
+        boxlight {
+            dimension "base"
+            applicationId boxlightApplicationId
+            resValue "string", "applicationId", boxlightApplicationId
         }
     }
 
