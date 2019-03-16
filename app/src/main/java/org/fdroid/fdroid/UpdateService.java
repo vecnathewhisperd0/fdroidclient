@@ -269,26 +269,33 @@ public class UpdateService extends JobIntentService {
                 .setCategory(NotificationCompat.CATEGORY_SERVICE)
                 .setContentTitle(getString(R.string.update_notification_title));
         appUpdateStatusManager = AppUpdateStatusManager.getInstance(this);
-
-        // Android docs are a little sketchy, however it seems that Gingerbread is the last
-        // sdk that made a content intent mandatory:
-        //
-        //   http://stackoverflow.com/a/20032920
-        //
-        if (Build.VERSION.SDK_INT <= 10) {
-            Intent pendingIntent = new Intent(this, MainActivity.class);
-            pendingIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            notificationBuilder.setContentIntent(
-                    PendingIntent.getActivity(this, 0, pendingIntent, PendingIntent.FLAG_UPDATE_CURRENT));
-        }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        notificationManager.cancel(NOTIFY_ID_UPDATING);
+        new CancelNotificationTask().execute(notificationManager);
         LocalBroadcastManager.getInstance(this).unregisterReceiver(updateStatusReceiver);
         updateService = null;
+    }
+
+    private static class CancelNotificationTask extends AsyncTask<NotificationManager, Void, NotificationManager> {
+        @Override
+        protected NotificationManager doInBackground(NotificationManager... notificationManagers) {
+            for (int i = 0; i < 5; i++) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    // ignored
+                }
+            }
+            return notificationManagers[0];
+        }
+
+        @Override
+        protected void onPostExecute(NotificationManager notificationManager) {
+            notificationManager.cancel(NOTIFY_ID_UPDATING);
+        }
     }
 
     public static void sendStatus(Context context, int statusCode) {
@@ -378,7 +385,8 @@ public class UpdateService extends JobIntentService {
                 case STATUS_COMPLETE_AND_SAME:
                     text = context.getString(R.string.repos_unchanged);
                     notificationBuilder.setContentText(text)
-                            .setCategory(NotificationCompat.CATEGORY_SERVICE);
+                            .setCategory(NotificationCompat.CATEGORY_SERVICE)
+                            .setProgress(100, 100, false);
                     setNotification();
                     break;
             }
