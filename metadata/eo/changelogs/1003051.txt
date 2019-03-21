@@ -10,4 +10,4 @@
 * eblo malŝalti raportojn pri paneoj
 * (malnepre) spuri historion de instaloj
 * klakebla listo de fiebloj, nova fieblo: “fontkodo nedisponebla ekde”
-* minimuma Android versio: 4.0 
+* minimuma Android versio: 4.0
