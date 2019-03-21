@@ -511,8 +511,8 @@
     <string name="not_visible_nearby_description">قبل المشاركة مع الأجهزة القريبة، أجعل الجهاز الخاص بك مرئياً.</string>
     <string name="swap_toast_not_removable_storage">هذا الخيار لم يتتطابق مع أي جهاز تخزين قابل للإزالة، حاول مرة أخرى!</string>
     <plurals name="tts_view_all_in_category">
-        <item quantity="zero">"إظهار التطبيقات  %1$d في الفئة %2$s"</item>
-        <item quantity="one">"إظهار التطبيق  %1$d الوحيد في الفئة %2$s"</item>
+        <item quantity="zero">إظهار التطبيقات  %1$d في الفئة %2$s</item>
+        <item quantity="one">إظهار التطبيق  %1$d الوحيد في الفئة %2$s</item>
         <item quantity="two">إظهار التطبيقين %1$d في الفئة %2$s</item>
         <item quantity="few">إظهار التطبيقات %1$d في هذه الفئة %2$s</item>
         <item quantity="many">إظهار التطبيقات %1$d في الفئة %2$s</item>
