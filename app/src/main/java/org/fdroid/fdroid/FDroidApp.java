@@ -478,7 +478,8 @@ public class FDroidApp extends Application {
             }
         });
 
-        configureTor(preferences.isTorEnabled());
+        // activate proxying (or Tor) if configured in preferences
+        configureProxy(preferences);
 
         if (preferences.isKeepingInstallHistory()) {
             InstallHistoryService.register(this);
@@ -633,15 +634,17 @@ public class FDroidApp extends Application {
         }
     }
 
-    private static boolean useTor;
+    private static boolean useTor = false;
 
     /**
-     * Set the proxy settings based on whether Tor should be enabled or not.
+     * configure NetCipher to use proxy (or proxy through Tor) if configured to do so
      */
-    private static void configureTor(boolean enabled) {
-        useTor = enabled;
-        if (useTor) {
+    private static void configureProxy(Preferences preferences) {
+        if (preferences.isTorEnabled()) {
+            useTor = true;
             NetCipher.useTor();
+        } else if(preferences.isProxyEnabled()) {
+            preferences.configureProxy();
         } else {
             NetCipher.clearProxy();
         }

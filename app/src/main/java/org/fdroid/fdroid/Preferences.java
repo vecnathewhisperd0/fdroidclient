@@ -481,7 +481,7 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
         return preferences.getBoolean(PREF_USE_TOR, IGNORED_B);
     }
 
-    private boolean isProxyEnabled() {
+    public boolean isProxyEnabled() {
         return preferences.getBoolean(PREF_ENABLE_PROXY, IGNORED_B);
     }
 
