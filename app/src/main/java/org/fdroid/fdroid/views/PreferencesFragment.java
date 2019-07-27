@@ -50,7 +50,6 @@ import android.view.WindowManager;
 import info.guardianproject.netcipher.proxy.OrbotHelper;
 import org.fdroid.fdroid.CleanCacheService;
 import org.fdroid.fdroid.FDroidApp;
-import org.fdroid.fdroid.Languages;
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.UpdateService;
@@ -153,6 +152,7 @@ public class PreferencesFragment extends PreferenceFragment
             }
         });
 
+        /*
         ListPreference languagePref = (ListPreference) findPreference(Preferences.PREF_LANGUAGE);
         if (Build.VERSION.SDK_INT >= 24) {
             PreferenceCategory category = (PreferenceCategory) findPreference("pref_category_display");
@@ -163,6 +163,7 @@ public class PreferencesFragment extends PreferenceFragment
             languagePref.setEntries(languages.getAllNames());
             languagePref.setEntryValues(languages.getSupportedLocales());
         }
+        */
 
         if (getActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_TOUCHSCREEN)) {
             PreferenceCategory category = (PreferenceCategory) findPreference("pref_category_appcompatibility");
@@ -284,7 +285,7 @@ public class PreferencesFragment extends PreferenceFragment
             case Preferences.PREF_LOCAL_REPO_HTTPS:
                 checkSummary(key, R.string.local_repo_https_on);
                 break;
-
+/*
             case Preferences.PREF_LANGUAGE:
                 entrySummary(key);
                 if (changing) {
@@ -297,7 +298,7 @@ public class PreferencesFragment extends PreferenceFragment
                     Languages.forceChangeLanguage(activity);
                 }
                 break;
-
+*/
             case Preferences.PREF_KEEP_CACHE_TIME:
                 entrySummary(key);
                 if (changing

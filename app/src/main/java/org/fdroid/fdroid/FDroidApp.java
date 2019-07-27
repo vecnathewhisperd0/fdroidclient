@@ -322,7 +322,8 @@ public class FDroidApp extends Application {
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        Languages.setLanguage(this);
+        //Languages.setLanguage(this);
+        Preferences.get().clearLanguage();
 
         // update the descriptions based on the new language preferences
         SharedPreferences atStartTime = getAtStartTimeSharedPreferences();
@@ -376,7 +377,7 @@ public class FDroidApp extends Application {
                     .build());
         }
         Preferences.setup(this);
-        Languages.setLanguage(this);
+        //Languages.setLanguage(this);
         Preferences preferences = Preferences.get();
 
         if (preferences.promptToSendCrashReports()) {

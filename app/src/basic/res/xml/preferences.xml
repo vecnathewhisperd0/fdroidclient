@@ -65,9 +65,6 @@
     <android.support.v7.preference.PreferenceCategory android:title="@string/display"
                                                       android:key="pref_category_display">
         <ListPreference
-                android:title="@string/pref_language"
-                android:key="language"/>
-        <ListPreference
                 android:title="@string/theme"
                 android:key="theme"
                 android:defaultValue="light"
