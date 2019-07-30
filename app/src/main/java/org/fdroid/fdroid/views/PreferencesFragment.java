@@ -152,19 +152,6 @@ public class PreferencesFragment extends PreferenceFragment
             }
         });
 
-        /*
-        ListPreference languagePref = (ListPreference) findPreference(Preferences.PREF_LANGUAGE);
-        if (Build.VERSION.SDK_INT >= 24) {
-            PreferenceCategory category = (PreferenceCategory) findPreference("pref_category_display");
-            category.removePreference(languagePref);
-        } else {
-            Languages languages = Languages.get(getActivity());
-            languagePref.setDefaultValue(Languages.USE_SYSTEM_DEFAULT);
-            languagePref.setEntries(languages.getAllNames());
-            languagePref.setEntryValues(languages.getSupportedLocales());
-        }
-        */
-
         if (getActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_TOUCHSCREEN)) {
             PreferenceCategory category = (PreferenceCategory) findPreference("pref_category_appcompatibility");
             category.removePreference(findPreference(Preferences.PREF_FORCE_TOUCH_APPS));
