@@ -1,9 +1,11 @@
 package org.fdroid.fdroid.views.apps;
 
-import android.app.Activity;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import org.fdroid.fdroid.AppUpdateStatusManager;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.data.App;
@@ -18,7 +20,7 @@ import org.fdroid.fdroid.data.App;
  * </ul>
  */
 public class StandardAppListItemController extends AppListItemController {
-    public StandardAppListItemController(Activity activity, View itemView) {
+    public StandardAppListItemController(AppCompatActivity activity, View itemView) {
         super(activity, itemView);
     }
 

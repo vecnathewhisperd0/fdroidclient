@@ -1,7 +1,6 @@
 package org.fdroid.fdroid.nearby;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -17,17 +16,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.SwitchCompat;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,9 +33,22 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import cc.mvdan.accesspoint.WifiApControl;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuItemCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+
 import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.NfcHelper;
@@ -74,6 +75,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import cc.mvdan.accesspoint.WifiApControl;
 
 import static org.fdroid.fdroid.views.main.MainActivity.ACTION_REQUEST_SWAP;
 
@@ -590,7 +593,7 @@ public class SwapWorkflowActivity extends AppCompatActivity {
     }
 
     private void sendFDroidApk() {
-        ((FDroidApp) getApplication()).sendViaBluetooth(this, Activity.RESULT_OK, BuildConfig.APPLICATION_ID);
+        ((FDroidApp) getApplication()).sendViaBluetooth(this, AppCompatActivity.RESULT_OK, BuildConfig.APPLICATION_ID);
     }
 
     /**

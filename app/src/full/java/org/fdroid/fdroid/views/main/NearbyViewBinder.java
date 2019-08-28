@@ -1,7 +1,6 @@
 package org.fdroid.fdroid.views.main;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.UriPermission;
@@ -13,9 +12,6 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +20,12 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.nearby.SDCardScannerService;
@@ -66,7 +68,7 @@ public class NearbyViewBinder {
     private static File externalStorage = null;
     private static View swapView;
 
-    NearbyViewBinder(final Activity activity, FrameLayout parent) {
+    NearbyViewBinder(final AppCompatActivity activity, FrameLayout parent) {
         swapView = activity.getLayoutInflater().inflate(R.layout.main_tab_swap, parent, true);
 
         TextView subtext = swapView.findViewById(R.id.both_parties_need_fdroid_text);
@@ -146,7 +148,7 @@ public class NearbyViewBinder {
         updateUsbOtg(activity);
     }
 
-    public static void updateUsbOtg(final Activity activity) {
+    public static void updateUsbOtg(final AppCompatActivity activity) {
         if (Build.VERSION.SDK_INT < 24) {
             return;
         }

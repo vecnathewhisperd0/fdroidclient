@@ -1,9 +1,11 @@
 package org.fdroid.fdroid.panic;
 
-import android.app.Activity;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import org.fdroid.fdroid.AppUpdateStatusManager;
 import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.views.apps.AppListItemState;
@@ -18,7 +20,7 @@ public class SelectInstalledAppListItemController extends InstalledAppListItemCo
 
     private final Set<String> selectedApps;
 
-    public SelectInstalledAppListItemController(Activity activity, View itemView, Set<String> selectedApps) {
+    public SelectInstalledAppListItemController(AppCompatActivity activity, View itemView, Set<String> selectedApps) {
         super(activity, itemView);
         this.selectedApps = selectedApps;
     }

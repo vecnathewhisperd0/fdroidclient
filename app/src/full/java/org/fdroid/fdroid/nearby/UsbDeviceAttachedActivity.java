@@ -19,7 +19,6 @@
 
 package org.fdroid.fdroid.nearby;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -33,10 +32,13 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
 import org.fdroid.fdroid.views.main.MainActivity;
 import org.fdroid.fdroid.views.main.NearbyViewBinder;
 
@@ -46,7 +48,7 @@ import java.util.HashMap;
  * This is just a shim to receive {@link UsbManager#ACTION_USB_ACCESSORY_ATTACHED}
  * events then open up the right screen in {@link MainActivity}.
  */
-public class UsbDeviceAttachedActivity extends Activity {
+public class UsbDeviceAttachedActivity extends AppCompatActivity {
     public static final String TAG = "UsbDeviceAttachedActivi";
 
     private static final HashMap<Uri, ContentObserver> contentObservers = new HashMap<>();

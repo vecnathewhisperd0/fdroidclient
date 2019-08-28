@@ -20,7 +20,6 @@
 package org.fdroid.fdroid.nearby;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.IntentService;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -28,9 +27,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Process;
-import android.support.v4.provider.DocumentFile;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.documentfile.provider.DocumentFile;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.fdroid.fdroid.AddRepoIntentService;
@@ -95,7 +97,7 @@ public class TreeUriScannerIntentService extends IntentService {
      * {@link TreeUriScannerIntentService} or whether it is External Storage
      * like an SD Card that can be directly accessed via the file system.
      */
-    public static void onActivityResult(Activity activity, Intent intent) {
+    public static void onActivityResult(AppCompatActivity activity, Intent intent) {
         Uri uri = intent.getData();
         if (uri != null) {
             if (Build.VERSION.SDK_INT >= 19) {

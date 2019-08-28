@@ -1,7 +1,6 @@
 package org.fdroid.fdroid.views.apps;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,13 +11,6 @@ import android.graphics.Outline;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.util.Pair;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewOutlineProvider;
@@ -28,7 +20,18 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.util.Pair;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
+
 import org.fdroid.fdroid.AppUpdateStatusManager;
 import org.fdroid.fdroid.AppUpdateStatusManager.AppUpdateStatus;
 import org.fdroid.fdroid.Preferences;
@@ -68,7 +71,7 @@ public abstract class AppListItemController extends RecyclerView.ViewHolder {
 
     private static Preferences prefs;
 
-    protected final Activity activity;
+    protected final AppCompatActivity activity;
 
     @NonNull
     private final ImageView icon;
@@ -111,7 +114,7 @@ public abstract class AppListItemController extends RecyclerView.ViewHolder {
     private AppUpdateStatus currentStatus;
 
     @TargetApi(21)
-    public AppListItemController(final Activity activity, View itemView) {
+    public AppListItemController(final AppCompatActivity activity, View itemView) {
         super(itemView);
         this.activity = activity;
         if (prefs == null) {

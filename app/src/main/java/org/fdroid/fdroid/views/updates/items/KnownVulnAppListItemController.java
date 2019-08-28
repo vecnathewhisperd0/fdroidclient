@@ -1,15 +1,17 @@
 package org.fdroid.fdroid.views.updates.items;
 
-import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.fdroid.fdroid.AppUpdateStatusManager;
 import org.fdroid.fdroid.R;
@@ -32,7 +34,7 @@ import org.fdroid.fdroid.views.updates.UpdatesAdapter;
  * (e.g. uninstall, update, disable).
  */
 public class KnownVulnAppListItemController extends AppListItemController {
-    public KnownVulnAppListItemController(Activity activity, View itemView) {
+    public KnownVulnAppListItemController(AppCompatActivity activity, View itemView) {
         super(activity, itemView);
     }
 
