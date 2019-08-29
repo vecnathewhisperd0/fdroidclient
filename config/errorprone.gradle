@@ -31,5 +31,5 @@ tasks.withType(JavaCompile) {
 }
 
 configurations.errorprone {
-    resolutionStrategy.force 'com.google.errorprone:error_prone_core:2.2.0'
+    resolutionStrategy.force 'com.google.errorprone:error_prone_core:2.3.3'
 }

@@ -8,4 +8,4 @@
     android:layout_marginRight="12dp"
     android:layout_marginStart="12dp"
     android:contentDescription="@string/menu_liberapay"
-    android:src="@drawable/donation_option_liberapay" />
+    app:srcCompat="@drawable/donation_option_liberapay" />

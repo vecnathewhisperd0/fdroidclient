@@ -1,17 +1,16 @@
 package org.fdroid.fdroid.panic;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import info.guardianproject.panic.Panic;
-import info.guardianproject.panic.PanicResponder;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.data.DBHelper;
@@ -31,8 +30,11 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import info.guardianproject.panic.Panic;
+import info.guardianproject.panic.PanicResponder;
+
 /**
- * This {@link Activity} is purely to run events in response to a panic trigger.
+ * This {@link AppCompatActivity} is purely to run events in response to a panic trigger.
  * It needs to be an {@code Activity} rather than a {@link android.app.Service}
  * so that it can fetch some of the required information about what sent the
  * {@link Intent}.  This is therefore an {@code Activity} without any UI, which
@@ -40,7 +42,7 @@ import java.util.concurrent.TimeUnit;
  * {@link #onCreate(Bundle)} and {@link #finish()} must be called at the end of
  * that method.
  *
- * @see PanicResponder#receivedTriggerFromConnectedApp(Activity)
+ * @see PanicResponder#receivedTriggerFromConnectedApp(AppCompatActivity)
  */
 public class PanicResponderActivity extends AppCompatActivity {
 

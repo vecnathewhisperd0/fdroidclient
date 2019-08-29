@@ -1,5 +1,5 @@
 -dontwarn android.test.**
--dontwarn android.support.test.**
+-dontwarn androidx.test.**
 -dontnote junit.framework.**
 -dontnote junit.runner.**
 

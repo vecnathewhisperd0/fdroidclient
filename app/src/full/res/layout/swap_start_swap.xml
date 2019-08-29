@@ -27,7 +27,7 @@
                 android:layout_height="24dp"
                 android:tint="@color/swap_grey_icon"
                 android:contentDescription="@string/use_bluetooth"
-                android:src="@drawable/ic_bluetooth_white"/>
+                swap:srcCompat="@drawable/ic_bluetooth_white"/>
 
         <LinearLayout
                 android:layout_width="0dp"
@@ -54,7 +54,7 @@
 
         </LinearLayout>
 
-        <android.support.v7.widget.SwitchCompat
+        <androidx.appcompat.widget.SwitchCompat
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:enabled="false"
@@ -76,7 +76,7 @@
                 android:layout_height="24dp"
                 android:tint="@color/swap_grey_icon"
                 android:contentDescription="@string/wifi"
-                android:src="@drawable/ic_network_wifi_white"/>
+                swap:srcCompat="@drawable/ic_network_wifi_white"/>
 
         <LinearLayout
                 android:layout_width="0dp"
@@ -112,7 +112,7 @@
 
         </LinearLayout>
 
-        <android.support.v7.widget.SwitchCompat
+        <androidx.appcompat.widget.SwitchCompat
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/switch_wifi"/>

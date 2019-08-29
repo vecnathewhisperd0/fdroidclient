@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="14dip"
-                android:layout_marginStart="16dip"
-                android:layout_marginEnd="16dip">
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="72dp"
+                android:layout_marginEnd="16dp">
 
     <TextView android:id="@+android:id/title"
               android:layout_width="match_parent"
@@ -19,7 +19,6 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_below="@android:id/title"
-              android:layout_alignLeft="@android:id/title"
               android:layout_alignStart="@android:id/title"
               android:textAppearance="?attr/textAppearanceListItemSecondary"
               android:textColor="?android:attr/textColorSecondary"
@@ -32,7 +31,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/seekbar"
             android:layout_alignTop="@android:id/summary"
-            android:layout_alignRight="@android:id/summary"
             android:layout_alignEnd="@android:id/summary"
             android:visibility="gone"
             android:textSize="0sp"/>
@@ -43,7 +41,6 @@
              android:layout_height="wrap_content"
              android:layout_below="@android:id/summary"
              android:layout_alignStart="@android:id/summary"
-             android:layout_alignLeft="@android:id/summary"
              android:progressDrawable="@drawable/seekbar_bg"
              android:thumb="@drawable/seekbar_thumb"
              android:padding="16dip"

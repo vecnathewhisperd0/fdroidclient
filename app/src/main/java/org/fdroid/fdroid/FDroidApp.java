@@ -24,7 +24,6 @@
 package org.fdroid.fdroid;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.Application;
@@ -40,14 +39,17 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StrictMode;
-import android.support.annotation.Nullable;
-import android.support.v4.util.LongSparseArray;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.collection.LongSparseArray;
+
 import com.nostra13.universalimageloader.cache.disc.DiskCache;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.impl.ext.LruDiskCache;
@@ -55,8 +57,7 @@ import com.nostra13.universalimageloader.core.DefaultConfigurationFactory;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.process.BitmapProcessor;
-import info.guardianproject.netcipher.NetCipher;
-import info.guardianproject.netcipher.proxy.OrbotHelper;
+
 import org.acra.ACRA;
 import org.acra.ReportField;
 import org.acra.ReportingInteractionMode;
@@ -71,19 +72,23 @@ import org.fdroid.fdroid.data.Repo;
 import org.fdroid.fdroid.installer.ApkFileProvider;
 import org.fdroid.fdroid.installer.InstallHistoryService;
 import org.fdroid.fdroid.nearby.SDCardScannerService;
+import org.fdroid.fdroid.nearby.WifiStateChangeService;
 import org.fdroid.fdroid.net.ConnectivityMonitorService;
 import org.fdroid.fdroid.net.Downloader;
 import org.fdroid.fdroid.net.HttpDownloader;
 import org.fdroid.fdroid.net.ImageLoaderForUIL;
-import org.fdroid.fdroid.nearby.WifiStateChangeService;
 import org.fdroid.fdroid.panic.HidingManager;
 
-import javax.microedition.khronos.opengles.GL10;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.security.Security;
 import java.util.List;
 import java.util.UUID;
+
+import javax.microedition.khronos.opengles.GL10;
+
+import info.guardianproject.netcipher.NetCipher;
+import info.guardianproject.netcipher.proxy.OrbotHelper;
 
 @ReportsCrashes(mailTo = "reports@f-droid.org",
         mode = ReportingInteractionMode.DIALOG,
@@ -152,7 +157,7 @@ public class FDroidApp extends Application {
         curTheme = Preferences.get().getTheme();
     }
 
-    public void applyTheme(Activity activity) {
+    public void applyTheme(AppCompatActivity activity) {
         activity.setTheme(getCurThemeResId());
         setSecureWindow(activity);
     }
@@ -174,12 +179,12 @@ public class FDroidApp extends Application {
         return curTheme == Theme.light;
     }
 
-    public void applyDialogTheme(Activity activity) {
+    public void applyDialogTheme(AppCompatActivity activity) {
         activity.setTheme(getCurDialogThemeResId());
         setSecureWindow(activity);
     }
 
-    public void setSecureWindow(Activity activity) {
+    public void setSecureWindow(AppCompatActivity activity) {
         if (Preferences.get().preventScreenshots()) {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
         }
@@ -199,12 +204,12 @@ public class FDroidApp extends Application {
     }
 
     /**
-     * Force reload the {@link Activity to make theme changes take effect.}
-     * Same as {@link Languages#forceChangeLanguage(Activity)}
+     * Force reload the {@link AppCompatActivity to make theme changes take effect.}
+     * Same as {@link Languages#forceChangeLanguage(AppCompatActivity)}
      *
      * @param activity the {@code Activity} to force reload
      */
-    public static void forceChangeTheme(Activity activity) {
+    public static void forceChangeTheme(AppCompatActivity activity) {
         Intent intent = activity.getIntent();
         if (intent == null) { // when launched as LAUNCHER
             return;
@@ -592,8 +597,8 @@ public class FDroidApp extends Application {
         return getSharedPreferences("at-start-time", Context.MODE_PRIVATE);
     }
 
-    public void sendViaBluetooth(Activity activity, int resultCode, String packageName) {
-        if (resultCode == Activity.RESULT_CANCELED) {
+    public void sendViaBluetooth(AppCompatActivity activity, int resultCode, String packageName) {
+        if (resultCode == AppCompatActivity.RESULT_CANCELED) {
             return;
         }
 

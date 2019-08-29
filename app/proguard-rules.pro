@@ -4,13 +4,13 @@
 -keep class org.fdroid.fdroid.** {*;}
 -dontskipnonpubliclibraryclassmembers
 -dontwarn android.test.**
--dontwarn com.android.support.test.**
+-dontwarn androidx.test.**
 
 -dontwarn javax.naming.**
 -dontwarn org.slf4j.**
 -dontnote org.apache.http.**
 -dontnote android.net.http.**
--dontnote android.support.**
+#-dontnote android.support.**
 -dontnote **ILicensingService
 
 # Needed for espresso https://stackoverflow.com/a/21706087
@@ -35,12 +35,12 @@
 
 # Samsung Android 4.2 bug
 # https://code.google.com/p/android/issues/detail?id=78377
--keepnames class !android.support.v7.internal.view.menu.**, ** {*;}
+#-keepnames class !android.support.v7.internal.view.menu.**, ** {*;}
 
--keep public class android.support.v7.widget.** {*;}
--keep public class android.support.v7.internal.widget.** {*;}
+-keep public class androidx.appcompat.widget.** {*;}
+-keep public class androidx.preference.internal.** {*;}
 
--keep public class * extends android.support.v4.view.ActionProvider {
+-keep public class * extends androidx.core.view.ActionProvider {
     public <init>(android.content.Context);
 }
 

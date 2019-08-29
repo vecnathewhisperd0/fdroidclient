@@ -1,10 +1,13 @@
 package org.fdroid.fdroid.views.updates.items;
 
-import android.app.Activity;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
-import com.hannesdorfmann.adapterdelegates3.AdapterDelegate;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.hannesdorfmann.adapterdelegates4.AdapterDelegate;
+
 import org.fdroid.fdroid.AppUpdateStatusManager;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.data.App;
@@ -22,16 +25,16 @@ public class AppStatus extends AppUpdateData {
 
     public final AppUpdateStatusManager.AppUpdateStatus status;
 
-    public AppStatus(Activity activity, AppUpdateStatusManager.AppUpdateStatus status) {
+    public AppStatus(AppCompatActivity activity, AppUpdateStatusManager.AppUpdateStatus status) {
         super(activity);
         this.status = status;
     }
 
     public static class Delegate extends AdapterDelegate<List<AppUpdateData>> {
 
-        private final Activity activity;
+        private final AppCompatActivity activity;
 
-        public Delegate(Activity activity) {
+        public Delegate(AppCompatActivity activity) {
             this.activity = activity;
         }
 
