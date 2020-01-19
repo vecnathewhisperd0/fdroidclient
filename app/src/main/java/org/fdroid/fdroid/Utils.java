@@ -645,7 +645,7 @@ public final class Utils {
      * {@link android.widget.TextView} which it ends up being displayed in.
      */
     public static CharSequence formatAppNameAndSummary(String appName, String summary) {
-        String toFormat = appName + ' ' + summary;
+        String toFormat = appName + '\n' + summary;
         CharacterStyle normal = new TypefaceSpan("sans-serif");
         CharacterStyle light = new TypefaceSpan("sans-serif-light");
 
