@@ -20,7 +20,8 @@
 package org.fdroid.fdroid.data;
 
 import android.support.annotation.Nullable;
-import org.fdroid.fdroid.Utils;
+
+import org.fdroid.fdroid.utils.Utils;
 
 import java.util.Arrays;
 import java.util.List;

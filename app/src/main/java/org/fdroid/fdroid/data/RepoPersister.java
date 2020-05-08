@@ -10,7 +10,7 @@ import android.support.annotation.NonNull;
 
 import org.fdroid.fdroid.CompatibilityChecker;
 import org.fdroid.fdroid.IndexUpdater;
-import org.fdroid.fdroid.Utils;
+import org.fdroid.fdroid.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;

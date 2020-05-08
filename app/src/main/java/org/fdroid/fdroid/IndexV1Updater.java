@@ -28,6 +28,7 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonFactory;
@@ -36,6 +37,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.InjectableValues;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.apache.commons.io.FileUtils;
 import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.data.App;
@@ -46,11 +48,9 @@ import org.fdroid.fdroid.data.RepoPushRequest;
 import org.fdroid.fdroid.data.Schema;
 import org.fdroid.fdroid.net.Downloader;
 import org.fdroid.fdroid.net.DownloaderFactory;
+import org.fdroid.fdroid.utils.Profiler;
+import org.fdroid.fdroid.utils.Utils;
 
-import javax.net.ssl.SSLHandshakeException;
-import javax.net.ssl.SSLKeyException;
-import javax.net.ssl.SSLPeerUnverifiedException;
-import javax.net.ssl.SSLProtocolException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -70,6 +70,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+
+import javax.net.ssl.SSLHandshakeException;
+import javax.net.ssl.SSLKeyException;
+import javax.net.ssl.SSLPeerUnverifiedException;
+import javax.net.ssl.SSLProtocolException;
 
 /**
  * Receives the index data about all available apps and packages via the V1
@@ -237,7 +242,7 @@ public class IndexV1Updater extends IndexUpdater {
      */
     public void processIndexV1(InputStream indexInputStream, JarEntry indexEntry, String etag)
             throws IOException, UpdateException {
-        Utils.Profiler profiler = new Utils.Profiler(TAG);
+        Profiler profiler = new Profiler(TAG);
         profiler.log("Starting to process index-v1.json");
         ObjectMapper mapper = getObjectMapperInstance(repo.getId());
         JsonFactory f = mapper.getFactory();

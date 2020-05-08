@@ -9,8 +9,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
+
 import org.fdroid.fdroid.data.Repo;
 import org.fdroid.fdroid.data.RepoProvider;
+import org.fdroid.fdroid.utils.Utils;
 import org.fdroid.fdroid.views.ManageReposActivity;
 import org.fdroid.fdroid.views.main.MainActivity;
 

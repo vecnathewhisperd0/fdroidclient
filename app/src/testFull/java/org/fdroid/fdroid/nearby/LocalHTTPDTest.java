@@ -35,10 +35,11 @@ package org.fdroid.fdroid.nearby;
 
 import android.content.Context;
 import android.text.TextUtils;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.net.HttpDownloader;
+import org.fdroid.fdroid.utils.Utils;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

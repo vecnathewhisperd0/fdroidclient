@@ -1,8 +1,9 @@
 package org.fdroid.fdroid.nearby.httpish;
 
 import android.util.Log;
-import org.fdroid.fdroid.Utils;
+
 import org.fdroid.fdroid.nearby.BluetoothConnection;
+import org.fdroid.fdroid.utils.Utils;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

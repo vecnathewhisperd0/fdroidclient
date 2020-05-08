@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import org.fdroid.fdroid.utils.Utils;
+
 public class AboutActivity extends AppCompatActivity {
 
     @Override

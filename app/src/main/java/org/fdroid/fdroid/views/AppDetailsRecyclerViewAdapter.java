@@ -40,11 +40,12 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
+
 import org.apache.commons.io.FilenameUtils;
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.data.ApkProvider;
 import org.fdroid.fdroid.data.App;
@@ -53,6 +54,8 @@ import org.fdroid.fdroid.data.RepoProvider;
 import org.fdroid.fdroid.installer.Installer;
 import org.fdroid.fdroid.privileged.views.AppDiff;
 import org.fdroid.fdroid.privileged.views.AppSecurityPermissions;
+import org.fdroid.fdroid.utils.HtmlTagHandler;
+import org.fdroid.fdroid.utils.Utils;
 import org.fdroid.fdroid.views.main.MainActivity;
 
 import java.io.File;
@@ -519,7 +522,7 @@ public class AppDetailsRecyclerViewAdapter
                 // the changelog if its content becomes too long to fit on screen.
                 recyclerView.requestChildFocus(itemView, itemView);
             }
-            final Spanned desc = Html.fromHtml(app.description, null, new Utils.HtmlTagHandler());
+            final Spanned desc = Html.fromHtml(app.description, null, new HtmlTagHandler());
             descriptionView.setMovementMethod(LinkMovementMethod.getInstance());
             descriptionView.setText(trimTrailingNewlines(desc));
             if (descriptionView.getText() instanceof Spannable) {

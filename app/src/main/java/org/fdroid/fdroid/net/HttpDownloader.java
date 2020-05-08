@@ -26,11 +26,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.Base64;
-import info.guardianproject.netcipher.NetCipher;
+
 import org.apache.commons.io.FileUtils;
 import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.FDroidApp;
-import org.fdroid.fdroid.Utils;
+import org.fdroid.fdroid.utils.Utils;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -41,6 +41,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+
+import info.guardianproject.netcipher.NetCipher;
 
 /**
  * Download files over HTTP, with support for proxies, {@code .onion} addresses,

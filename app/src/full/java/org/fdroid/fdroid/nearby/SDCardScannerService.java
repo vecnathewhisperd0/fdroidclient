@@ -30,10 +30,11 @@ import android.os.Environment;
 import android.os.Process;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+
 import org.fdroid.fdroid.IndexUpdater;
 import org.fdroid.fdroid.IndexV1Updater;
 import org.fdroid.fdroid.Preferences;
-import org.fdroid.fdroid.Utils;
+import org.fdroid.fdroid.utils.Utils;
 
 import java.io.File;
 import java.io.FileInputStream;

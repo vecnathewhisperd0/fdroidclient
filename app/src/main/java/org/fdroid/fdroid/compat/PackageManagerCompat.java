@@ -5,9 +5,10 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.util.Log;
+
 import org.fdroid.fdroid.BuildConfig;
-import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.installer.PrivilegedInstaller;
+import org.fdroid.fdroid.utils.Utils;
 
 /**
  * Starting with 7.0 (API 24), we're using PackageInstaller APIs

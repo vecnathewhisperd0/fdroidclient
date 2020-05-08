@@ -20,6 +20,8 @@
 
 package org.fdroid.fdroid;
 
+import org.fdroid.fdroid.utils.Utils;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;

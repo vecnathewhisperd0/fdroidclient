@@ -6,8 +6,8 @@ import android.system.ErrnoException;
 import android.util.Log;
 
 import org.fdroid.fdroid.FDroidApp;
-import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.SanitizedFile;
+import org.fdroid.fdroid.utils.Utils;
 
 import java.io.IOException;
 import java.lang.reflect.Method;

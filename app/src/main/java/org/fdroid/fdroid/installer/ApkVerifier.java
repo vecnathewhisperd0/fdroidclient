@@ -26,8 +26,9 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
-import org.fdroid.fdroid.Utils;
+
 import org.fdroid.fdroid.data.Apk;
+import org.fdroid.fdroid.utils.Utils;
 
 import java.util.Arrays;
 import java.util.HashSet;

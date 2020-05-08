@@ -29,8 +29,8 @@ import android.support.annotation.Nullable;
 
 import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.Schema.RepoTable;
+import org.fdroid.fdroid.utils.Utils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;

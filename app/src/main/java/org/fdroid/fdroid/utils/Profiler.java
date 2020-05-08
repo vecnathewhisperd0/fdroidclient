@@ -1,5 +1,7 @@
 /*
- * Copyright (C) 2010  Ciaran Gultnieks, ciaran@ciarang.com
+ * Copyright (C) 2010-12  Ciaran Gultnieks, ciaran@ciarang.com
+ * Copyright (C) 2019 Michael Pöhn, michael.poehn@fsfe.org
+ * Copyright (C) 2020 Isira Seneviratne, isirasen96@gmail.com
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,25 +18,18 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-package org.fdroid.fdroid.receiver;
+package org.fdroid.fdroid.utils;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
+public class Profiler {
+    private final long startTime = System.currentTimeMillis();
+    private final String logTag;
 
-import org.fdroid.fdroid.UpdateService;
-import org.fdroid.fdroid.utils.Utils;
-
-public class StartupReceiver extends BroadcastReceiver {
-    private static final String TAG = "StartupReceiver";
-
-    @Override
-    public void onReceive(Context ctx, Intent intent) {
-        if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
-            UpdateService.schedule(ctx);
-        } else {
-            Utils.debugLog(TAG, "received unsupported Intent " + intent);
-        }
+    public Profiler(String logTag) {
+        this.logTag = logTag;
     }
 
+    public void log(String message) {
+        long duration = System.currentTimeMillis() - startTime;
+        Utils.debugLog(logTag, "[" + duration + "ms] " + message);
+    }
 }

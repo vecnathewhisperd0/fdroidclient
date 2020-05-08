@@ -22,13 +22,15 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import cc.mvdan.accesspoint.WifiApControl;
+
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.nearby.peers.Peer;
+import org.fdroid.fdroid.utils.Utils;
 
 import java.util.ArrayList;
+
+import cc.mvdan.accesspoint.WifiApControl;
 
 @SuppressWarnings("LineLength")
 public class StartSwapView extends SwapView {

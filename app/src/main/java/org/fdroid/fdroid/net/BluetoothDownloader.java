@@ -3,13 +3,14 @@ package org.fdroid.fdroid.net;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.util.Log;
+
 import org.apache.commons.io.input.BoundedInputStream;
-import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.nearby.BluetoothClient;
 import org.fdroid.fdroid.nearby.BluetoothConnection;
 import org.fdroid.fdroid.nearby.httpish.FileDetails;
 import org.fdroid.fdroid.nearby.httpish.Request;
 import org.fdroid.fdroid.nearby.httpish.Response;
+import org.fdroid.fdroid.utils.Utils;
 
 import java.io.File;
 import java.io.IOException;

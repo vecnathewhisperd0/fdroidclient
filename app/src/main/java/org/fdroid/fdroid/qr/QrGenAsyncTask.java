@@ -8,11 +8,13 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.view.Display;
 import android.widget.ImageView;
+
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.encode.Contents;
 import com.google.zxing.encode.QRCodeEncoder;
-import org.fdroid.fdroid.Utils;
+
+import org.fdroid.fdroid.utils.Utils;
 
 public class QrGenAsyncTask extends AsyncTask<String, Void, Void> {
     private static final String TAG = "QrGenAsyncTask";

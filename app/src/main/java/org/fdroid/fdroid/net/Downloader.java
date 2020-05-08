@@ -3,8 +3,9 @@ package org.fdroid.fdroid.net;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.text.format.DateUtils;
+
 import org.fdroid.fdroid.ProgressListener;
-import org.fdroid.fdroid.Utils;
+import org.fdroid.fdroid.utils.Utils;
 
 import java.io.File;
 import java.io.FileOutputStream;
