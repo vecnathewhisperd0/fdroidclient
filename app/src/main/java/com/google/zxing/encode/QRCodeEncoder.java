@@ -74,18 +74,18 @@ public final class QRCodeEncoder {
         if (format == null || format == BarcodeFormat.QR_CODE) {
             this.format = BarcodeFormat.QR_CODE;
             encodeQRCodeContents(data, bundle, type);
-        } else if (data != null && data.length() > 0) {
+        } else if (isNotEmpty(data)) {
             contents = data;
             displayContents = data;
             title = "Text";
         }
-        return contents != null && contents.length() > 0;
+        return isNotEmpty(contents);
     }
 
     private void encodeQRCodeContents(String data, Bundle bundle, String type) {
         switch (type) {
             case Contents.Type.TEXT:
-                if (data != null && data.length() > 0) {
+                if (isNotEmpty(data)) {
                     contents = data;
                     displayContents = data;
                     title = "Text";
@@ -234,6 +234,10 @@ public final class QRCodeEncoder {
             }
         }
         return null;
+    }
+
+    private static boolean isNotEmpty(String string) {
+        return string != null && !string.isEmpty();
     }
 
     private static String trim(String s) {
