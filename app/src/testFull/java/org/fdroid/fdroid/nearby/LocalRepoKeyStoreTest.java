@@ -2,9 +2,10 @@ package org.fdroid.fdroid.nearby;
 
 import android.content.Context;
 import android.text.TextUtils;
+
 import org.apache.commons.io.IOUtils;
 import org.fdroid.fdroid.IndexUpdater;
-import org.fdroid.fdroid.Utils;
+import org.fdroid.fdroid.utils.Utils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;

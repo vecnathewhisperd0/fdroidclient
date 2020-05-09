@@ -9,9 +9,10 @@ import android.support.test.filters.LargeTest;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Netstat;
-import org.fdroid.fdroid.Utils;
+import org.fdroid.fdroid.utils.Utils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;

@@ -16,6 +16,7 @@ import org.fdroid.fdroid.data.Repo;
 import org.fdroid.fdroid.data.RepoProvider;
 import org.fdroid.fdroid.data.RepoProviderTest;
 import org.fdroid.fdroid.data.Schema;
+import org.fdroid.fdroid.utils.Utils;
 import org.mockito.AdditionalAnswers;
 import org.robolectric.Robolectric;
 import org.robolectric.RuntimeEnvironment;

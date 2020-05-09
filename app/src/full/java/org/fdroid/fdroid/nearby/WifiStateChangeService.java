@@ -14,15 +14,15 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
-import cc.mvdan.accesspoint.WifiApControl;
+
 import org.apache.commons.net.util.SubnetUtils;
 import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.UpdateService;
-import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.Repo;
+import org.fdroid.fdroid.utils.Utils;
 
 import java.net.Inet6Address;
 import java.net.InetAddress;
@@ -32,6 +32,8 @@ import java.net.SocketException;
 import java.security.cert.Certificate;
 import java.util.Enumeration;
 import java.util.Locale;
+
+import cc.mvdan.accesspoint.WifiApControl;
 
 /**
  * Handle state changes to the device's wifi, storing the required bits.

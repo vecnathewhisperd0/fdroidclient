@@ -10,19 +10,21 @@ import android.os.Process;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
+
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Preferences;
-import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.nearby.peers.BonjourPeer;
+import org.fdroid.fdroid.utils.Utils;
+
+import java.io.IOException;
+import java.lang.ref.WeakReference;
+import java.net.InetAddress;
+import java.util.HashMap;
 
 import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceEvent;
 import javax.jmdns.ServiceInfo;
 import javax.jmdns.ServiceListener;
-import java.io.IOException;
-import java.lang.ref.WeakReference;
-import java.net.InetAddress;
-import java.util.HashMap;
 
 /**
  * Manage {@link JmDNS} in a {@link HandlerThread}.  The start process is in

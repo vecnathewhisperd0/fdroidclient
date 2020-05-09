@@ -9,6 +9,8 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.text.TextUtils;
 
+import org.fdroid.fdroid.utils.Utils;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashSet;

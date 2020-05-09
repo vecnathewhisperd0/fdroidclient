@@ -2,7 +2,7 @@ package org.fdroid.fdroid.nearby;
 
 import android.content.Context;
 import android.util.Log;
-import kellinwood.security.zipsigner.ZipSigner;
+
 import org.bouncycastle.asn1.ASN1Sequence;
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x509.GeneralName;
@@ -17,11 +17,8 @@ import org.bouncycastle.operator.ContentSigner;
 import org.bouncycastle.operator.OperatorCreationException;
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
 import org.fdroid.fdroid.FDroidApp;
-import org.fdroid.fdroid.Utils;
+import org.fdroid.fdroid.utils.Utils;
 
-import javax.net.ssl.KeyManager;
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.X509KeyManager;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -48,6 +45,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+
+import javax.net.ssl.KeyManager;
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.X509KeyManager;
+
+import kellinwood.security.zipsigner.ZipSigner;
 
 // TODO Address exception handling in a uniform way throughout
 

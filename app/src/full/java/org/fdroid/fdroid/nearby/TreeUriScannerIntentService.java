@@ -20,7 +20,6 @@
 package org.fdroid.fdroid.nearby;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.IntentService;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -31,6 +30,7 @@ import android.os.Process;
 import android.support.v4.provider.DocumentFile;
 import android.util.Log;
 import android.widget.Toast;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.fdroid.fdroid.AddRepoIntentService;
@@ -38,9 +38,9 @@ import org.fdroid.fdroid.IndexUpdater;
 import org.fdroid.fdroid.IndexV1Updater;
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.Repo;
 import org.fdroid.fdroid.data.RepoProvider;
+import org.fdroid.fdroid.utils.Utils;
 
 import java.io.File;
 import java.io.IOException;

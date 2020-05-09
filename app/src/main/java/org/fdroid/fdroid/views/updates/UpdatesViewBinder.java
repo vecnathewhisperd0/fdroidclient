@@ -15,9 +15,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.UpdateService;
-import org.fdroid.fdroid.Utils;
+import org.fdroid.fdroid.utils.Utils;
 
 public class UpdatesViewBinder {
 

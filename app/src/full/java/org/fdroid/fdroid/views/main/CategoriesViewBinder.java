@@ -18,13 +18,13 @@ import android.widget.TextView;
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.UpdateService;
-import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.CategoryProvider;
 import org.fdroid.fdroid.data.Schema;
+import org.fdroid.fdroid.panic.HidingManager;
+import org.fdroid.fdroid.utils.Utils;
 import org.fdroid.fdroid.views.apps.AppListActivity;
 import org.fdroid.fdroid.views.categories.CategoryAdapter;
 import org.fdroid.fdroid.views.categories.CategoryController;
-import org.fdroid.fdroid.panic.HidingManager;
 
 import java.util.ArrayList;
 import java.util.Collections;

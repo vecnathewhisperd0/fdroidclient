@@ -1,7 +1,7 @@
 package org.fdroid.fdroid.nearby.httpish;
 
-import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.nearby.BluetoothConnection;
+import org.fdroid.fdroid.utils.Utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

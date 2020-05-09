@@ -5,10 +5,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
+
 import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.nearby.SwapWorkflowActivity;
 import org.fdroid.fdroid.nearby.peers.WifiPeer;
+import org.fdroid.fdroid.utils.Utils;
 
 import java.util.Arrays;
 import java.util.List;

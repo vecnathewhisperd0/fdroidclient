@@ -20,9 +20,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.Utils;
+import org.fdroid.fdroid.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +83,7 @@ public class ShareChooserDialog extends BottomSheetDialogFragment {
             public void onShow(DialogInterface dialogInterface) {
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.getWindow().setLayout(
-                        parentWidth - Utils.dpToPx(0, getContext()), // Set margins here!
+                        parentWidth - Utils.dpToPx(getContext(), 0), // Set margins here!
                         ViewGroup.LayoutParams.MATCH_PARENT);
             }
         });
@@ -100,8 +101,8 @@ public class ShareChooserDialog extends BottomSheetDialogFragment {
         recyclerView = (RecyclerView) v.findViewById(R.id.recycler_view_apps);
 
         // Figure out how many columns that fit in the given parent width. Give them 100dp.
-        int appWidth = Utils.dpToPx(80, getContext());
-        final int nCols = (parentWidth - /* padding */ Utils.dpToPx(8, getContext())) / appWidth;
+        int appWidth = Utils.dpToPx(getContext(), 80);
+        final int nCols = (parentWidth - /* padding */ Utils.dpToPx(getContext(), 8)) / appWidth;
         GridLayoutManager glm = new GridLayoutManager(getContext(), nCols);
 
         // Ensure that if available, the "Nearby Swap" item spans the entire width.

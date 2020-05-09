@@ -1,8 +1,9 @@
 package org.fdroid.fdroid.nearby;
 
 import android.content.Context;
+
 import org.fdroid.fdroid.FDroidApp;
-import org.fdroid.fdroid.Utils;
+import org.fdroid.fdroid.utils.Utils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;

@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.Utils;
+import org.fdroid.fdroid.utils.Utils;
 
 /**
  * Draws a faint line between items, to be used with the {@link AppListItemDivider}.
@@ -19,7 +19,7 @@ public class AppListItemDivider extends DividerItemDecoration {
     public AppListItemDivider(Context context) {
         super(context, DividerItemDecoration.VERTICAL);
         setDrawable(ContextCompat.getDrawable(context, R.drawable.app_list_item_divider));
-        itemSpacing = Utils.dpToPx(8, context);
+        itemSpacing = Utils.dpToPx(context, 8);
     }
 
     @Override

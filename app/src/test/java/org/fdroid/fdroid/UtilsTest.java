@@ -2,6 +2,8 @@
 package org.fdroid.fdroid;
 
 import android.content.Context;
+
+import org.fdroid.fdroid.utils.Utils;
 import org.fdroid.fdroid.views.AppDetailsRecyclerViewAdapter;
 import org.junit.Test;
 import org.junit.runner.RunWith;

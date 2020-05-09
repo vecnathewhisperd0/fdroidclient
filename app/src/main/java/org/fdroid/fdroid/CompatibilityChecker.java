@@ -5,8 +5,10 @@ import android.content.pm.FeatureInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.annotation.Nullable;
+
 import org.fdroid.fdroid.compat.SupportedArchitectures;
 import org.fdroid.fdroid.data.Apk;
+import org.fdroid.fdroid.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Collections;

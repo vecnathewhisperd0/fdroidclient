@@ -5,9 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Process;
 import android.support.v4.content.LocalBroadcastManager;
+
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.Utils;
+import org.fdroid.fdroid.utils.Utils;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;

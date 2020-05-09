@@ -13,9 +13,10 @@ import android.os.Process;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
+
 import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.nearby.peers.BluetoothPeer;
+import org.fdroid.fdroid.utils.Utils;
 
 import java.lang.ref.WeakReference;
 

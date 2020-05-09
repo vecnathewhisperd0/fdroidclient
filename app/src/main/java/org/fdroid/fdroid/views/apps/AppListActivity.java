@@ -39,12 +39,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
+
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.AppProvider;
 import org.fdroid.fdroid.data.Schema;
+import org.fdroid.fdroid.utils.KeyboardStateMonitor;
 
 /**
  * Provides scrollable listing of apps for search and category views.
@@ -65,7 +67,7 @@ public class AppListActivity extends AppCompatActivity implements LoaderManager.
     private TextView emptyState;
     private EditText searchInput;
     private ImageView sortImage;
-    private Utils.KeyboardStateMonitor keyboardStateMonitor;
+    private KeyboardStateMonitor keyboardStateMonitor;
 
     private interface SortClause {
         String NAME = Schema.AppMetadataTable.NAME + "." + Schema.AppMetadataTable.Cols.NAME + " asc";
@@ -80,7 +82,7 @@ public class AppListActivity extends AppCompatActivity implements LoaderManager.
 
         setContentView(R.layout.activity_app_list);
 
-        keyboardStateMonitor = new Utils.KeyboardStateMonitor(findViewById(R.id.app_list_root));
+        keyboardStateMonitor = new KeyboardStateMonitor(findViewById(R.id.app_list_root));
 
         searchInput = (EditText) findViewById(R.id.search);
         searchInput.addTextChangedListener(new CategoryTextWatcher(this, searchInput, this));

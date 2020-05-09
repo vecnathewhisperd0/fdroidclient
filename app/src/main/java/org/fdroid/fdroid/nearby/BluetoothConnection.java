@@ -1,7 +1,8 @@
 package org.fdroid.fdroid.nearby;
 
 import android.bluetooth.BluetoothSocket;
-import org.fdroid.fdroid.Utils;
+
+import org.fdroid.fdroid.utils.Utils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
