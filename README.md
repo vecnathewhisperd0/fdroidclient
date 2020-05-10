@@ -4,7 +4,8 @@
 [![Translation status](https://hosted.weblate.org/widgets/f-droid/-/svg-badge.svg)](https://hosted.weblate.org/engage/f-droid/)
 
 Client for [F-Droid](https://f-droid.org), the Free Software repository system
-for Android.
+for Android
+visit official website [here](https://f-droid.org/)
 
 ## Building with Gradle
 
