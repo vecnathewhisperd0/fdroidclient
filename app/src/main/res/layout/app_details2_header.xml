@@ -181,6 +181,20 @@
             android:background="?attr/detailPanel"
             tools:text="App summary, one line - outlining what this app does" />
 
+        <FrameLayout
+            android:id="@+id/summary_divider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:background="?attr/detailPanel">
+            <View
+                android:layout_width="50dp"
+                android:layout_height="8dp"
+                android:layout_gravity="center"
+                android:background="@drawable/app_details_summary_divider"
+                android:backgroundTint="?attr/appDetailsCardBackground"/>
+        </FrameLayout>
+
         <TextView
             android:id="@+id/whats_new"
             android:layout_width="match_parent"
