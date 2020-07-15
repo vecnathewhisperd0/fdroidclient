@@ -502,9 +502,9 @@ public class AppDetailsRecyclerViewAdapter
                 summaryView.setText(app.summary);
             }
             Apk suggestedApk = getSuggestedApk();
-            if (suggestedApk == null || TextUtils.isEmpty(app.whatsNew)) {
+            if (suggestedApk == null || TextUtils.isEmpty(app.whatsNew) || !app.isInstalled(context)) {
                 whatsNewView.setVisibility(View.GONE);
-                summaryView.setBackgroundResource(0); // make background of summary transparent
+                summaryView.setVisibility(View.VISIBLE);
             } else {
                 //noinspection deprecation Ignore deprecation because the suggested way is only available in API 24.
                 Locale locale = context.getResources().getConfiguration().locale;
@@ -516,6 +516,7 @@ public class AppDetailsRecyclerViewAdapter
                 sbWhatsNew.append(app.whatsNew);
                 whatsNewView.setText(sbWhatsNew);
                 whatsNewView.setVisibility(View.VISIBLE);
+                summaryView.setVisibility(View.GONE);
 
                 // Set focus on the header section to prevent auto scrolling to
                 // the changelog if its content becomes too long to fit on screen.
