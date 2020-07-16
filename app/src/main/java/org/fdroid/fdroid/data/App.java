@@ -15,10 +15,11 @@ import android.os.Environment;
 import android.os.LocaleList;
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.fasterxml.jackson.annotation.JacksonInject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.io.filefilter.RegexFileFilter;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Preferences;
+import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.Schema.AppMetadataTable.Cols;
 import org.xmlpull.v1.XmlPullParser;
@@ -114,10 +116,10 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
     public long repoId;
 
     // the remaining properties are set directly from the index metadata
-    public String packageName = "unknown";
-    public String name = "Unknown";
+    public String packageName;
+    public String name;
 
-    public String summary = "Unknown application";
+    public String summary;
     @JsonProperty("icon")
     public String iconFromApk;
 
@@ -235,10 +237,14 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
     }
 
     public App() {
+        final Context context = FDroidApp.getInstance();
+        name = context.getString(R.string.unknown);
+        packageName = name.toLowerCase();
+        summary = context.getString(R.string.unknown_app);
     }
 
     public App(final Cursor cursor) {
-
+        this();
         checkCursorPosition(cursor);
 
         final int cursorColumnCount = cursor.getColumnCount();
