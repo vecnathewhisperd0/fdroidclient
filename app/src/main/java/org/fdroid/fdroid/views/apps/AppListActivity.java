@@ -24,14 +24,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.CursorLoader;
-import androidx.loader.content.Loader;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -39,12 +31,28 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.nostra13.universalimageloader.core.ImageLoader;
+
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.Utils;
+import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.data.AppProvider;
 import org.fdroid.fdroid.data.Schema;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Provides scrollable listing of apps for search and category views.
@@ -52,10 +60,8 @@ import org.fdroid.fdroid.data.Schema;
 public class AppListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,
         CategoryTextWatcher.SearchTermsChangedListener {
 
-    public static final String EXTRA_CATEGORY
-            = "org.fdroid.fdroid.views.apps.AppListActivity.EXTRA_CATEGORY";
-    public static final String EXTRA_SEARCH_TERMS
-            = "org.fdroid.fdroid.views.apps.AppListActivity.EXTRA_SEARCH_TERMS";
+    public static final String EXTRA_CATEGORY = "org.fdroid.fdroid.views.apps.AppListActivity.EXTRA_CATEGORY";
+    public static final String EXTRA_SEARCH_TERMS = "org.fdroid.fdroid.views.apps.AppListActivity.EXTRA_SEARCH_TERMS";
 
     private RecyclerView appView;
     private AppListAdapter appAdapter;
@@ -82,7 +88,7 @@ public class AppListActivity extends AppCompatActivity implements LoaderManager.
 
         keyboardStateMonitor = new Utils.KeyboardStateMonitor(findViewById(R.id.app_list_root));
 
-        searchInput = (EditText) findViewById(R.id.search);
+        searchInput = findViewById(R.id.search);
         searchInput.addTextChangedListener(new CategoryTextWatcher(this, searchInput, this));
         searchInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -100,7 +106,7 @@ public class AppListActivity extends AppCompatActivity implements LoaderManager.
             }
         });
 
-        sortImage = (ImageView) findViewById(R.id.sort);
+        sortImage = findViewById(R.id.sort);
         if (FDroidApp.isAppThemeLight()) {
             sortImage.setImageResource(R.drawable.ic_last_updated_black);
         } else {
@@ -124,12 +130,12 @@ public class AppListActivity extends AppCompatActivity implements LoaderManager.
                         sortImage.setImageResource(R.drawable.ic_last_updated_white);
                     }
                 }
-                getSupportLoaderManager().restartLoader(0, null, AppListActivity.this);
+                LoaderManager.getInstance(AppListActivity.this).restartLoader(0, null, AppListActivity.this);
                 appView.scrollToPosition(0);
             }
         });
 
-        emptyState = (TextView) findViewById(R.id.empty_state);
+        emptyState = findViewById(R.id.empty_state);
 
         View backButton = findViewById(R.id.back);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -156,7 +162,7 @@ public class AppListActivity extends AppCompatActivity implements LoaderManager.
 
         appAdapter = new AppListAdapter(this);
 
-        appView = (RecyclerView) findViewById(R.id.app_list);
+        appView = findViewById(R.id.app_list);
         appView.setHasFixedSize(true);
         appView.setLayoutManager(new LinearLayoutManager(this));
         appView.setAdapter(appAdapter);
@@ -164,7 +170,7 @@ public class AppListActivity extends AppCompatActivity implements LoaderManager.
             private final ImageLoader imageLoader = ImageLoader.getInstance();
 
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 switch (newState) {
                     case RecyclerView.SCROLL_STATE_DRAGGING:
                         imageLoader.pause();
@@ -194,7 +200,7 @@ public class AppListActivity extends AppCompatActivity implements LoaderManager.
             appView.requestFocus();
         }
 
-        getSupportLoaderManager().initLoader(0, null, this);
+        LoaderManager.getInstance(this).initLoader(0, null, this);
     }
 
     private CharSequence getSearchText(@Nullable String category, @Nullable String searchTerms) {
@@ -223,9 +229,45 @@ public class AppListActivity extends AppCompatActivity implements LoaderManager.
         );
     }
 
+    private void refreshAppListView(Cursor cursor) {
+        ArrayList<App> apps = new ArrayList<>();
+
+        if (cursor != null) {
+            for (int i = 0; i < cursor.getCount(); i++) {
+                cursor.moveToPosition(i);
+                apps.add(new App(cursor));
+            }
+
+            if (!searchTerms.isEmpty()) {
+                Collections.sort(apps, new Comparator<App>() {
+                    @Override
+                    public int compare(App o1, App o2) {
+                        String searchTerms = AppListActivity.this.searchTerms.toLowerCase();
+                        String app1 = (o1.name + o1.description).toLowerCase();
+                        String app2 = (o2.name + o2.description).toLowerCase();
+                        int app1Index = app1.indexOf(searchTerms);
+                        int app2Index = app2.indexOf(searchTerms);
+
+                        if (app1Index == -1) {
+                            app1Index = Integer.MAX_VALUE;
+                        }
+
+                        if (app2Index == -1) {
+                            app2Index = Integer.MAX_VALUE;
+                        }
+
+                        return app1Index - app2Index;
+                    }
+                });
+            }
+        }
+
+        appAdapter.setApps(apps);
+    }
+
     @Override
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor cursor) {
-        appAdapter.setAppCursor(cursor);
+        refreshAppListView(cursor);
         if (cursor.getCount() > 0) {
             emptyState.setVisibility(View.GONE);
             appView.setVisibility(View.VISIBLE);
@@ -237,13 +279,13 @@ public class AppListActivity extends AppCompatActivity implements LoaderManager.
 
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
-        appAdapter.setAppCursor(null);
+        refreshAppListView(null);
     }
 
     @Override
     public void onSearchTermsChanged(@Nullable String category, @NonNull String searchTerms) {
         this.category = category;
         this.searchTerms = searchTerms;
-        getSupportLoaderManager().restartLoader(0, null, this);
+        LoaderManager.getInstance(this).restartLoader(0, null, this);
     }
 }

@@ -1,17 +1,19 @@
 package org.fdroid.fdroid.views.apps;
 
 import android.app.Activity;
-import android.database.Cursor;
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.ViewGroup;
+
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.data.App;
-import org.fdroid.fdroid.data.Schema;
+
+import java.util.ArrayList;
 
 class AppListAdapter extends RecyclerView.Adapter<StandardAppListItemController> {
 
-    private Cursor cursor;
+    private ArrayList<App> apps;
     private final Activity activity;
     private final AppListItemDivider divider;
 
@@ -21,34 +23,30 @@ class AppListAdapter extends RecyclerView.Adapter<StandardAppListItemController>
         setHasStableIds(true);
     }
 
-    public void setAppCursor(Cursor cursor) {
-        this.cursor = cursor;
+    public void setApps(ArrayList<App> apps) {
+        this.apps = apps;
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public StandardAppListItemController onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new StandardAppListItemController(activity, activity.getLayoutInflater()
-                .inflate(R.layout.app_list_item, parent, false));
+        return new StandardAppListItemController(activity, activity.getLayoutInflater().inflate(R.layout.app_list_item, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull StandardAppListItemController holder, int position) {
-        cursor.moveToPosition(position);
-        final App app = new App(cursor);
-        holder.bindModel(app);
+        holder.bindModel(apps.get(position));
     }
 
     @Override
     public long getItemId(int position) {
-        cursor.moveToPosition(position);
-        return cursor.getLong(cursor.getColumnIndex(Schema.AppMetadataTable.Cols.ROW_ID));
+        return apps.get(position).getId();
     }
 
     @Override
     public int getItemCount() {
-        return cursor == null ? 0 : cursor.getCount();
+        return apps == null ? 0 : apps.size();
     }
 
     @Override
