@@ -1,5 +1,7 @@
 package org.fdroid.fdroid.data;
 
+import android.annotation.SuppressLint;
+
 public class AppPrefs extends ValueObject {
 
     /**
@@ -29,15 +31,22 @@ public class AppPrefs extends ValueObject {
 
     @Override
     public boolean equals(Object o) {
-        return o != null && o instanceof AppPrefs &&
+        if (this == o) return true;
+        return o instanceof AppPrefs &&
                 ((AppPrefs) o).ignoreAllUpdates == ignoreAllUpdates &&
                 ((AppPrefs) o).ignoreThisUpdate == ignoreThisUpdate &&
                 ((AppPrefs) o).ignoreVulnerabilities == ignoreVulnerabilities;
     }
 
     @Override
+    @SuppressLint("NewApi")
     public int hashCode() {
-        return (ignoreThisUpdate + "-" + ignoreAllUpdates + "-" + ignoreVulnerabilities).hashCode();
+        // The method implementation is automatically added to the APK even though lint says
+        // it's not supported.
+        int result = Boolean.hashCode(ignoreAllUpdates);
+        result = 31 * result + ignoreThisUpdate;
+        result = 31 * result + Boolean.hashCode(ignoreVulnerabilities);
+        return result;
     }
 
     public AppPrefs createClone() {

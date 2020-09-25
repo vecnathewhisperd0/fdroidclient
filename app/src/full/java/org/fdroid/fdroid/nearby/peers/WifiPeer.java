@@ -1,11 +1,14 @@
 package org.fdroid.fdroid.nearby.peers;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Parcel;
 import android.text.TextUtils;
 
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.data.NewRepoConfig;
+
+import java.util.Objects;
 
 public class WifiPeer implements Peer {
 
@@ -52,8 +55,11 @@ public class WifiPeer implements Peer {
     }
 
     @Override
+    @SuppressLint("NewApi")
     public int hashCode() {
-        return (uri.getHost() + uri.getPort()).hashCode();
+        // The method implementations are automatically added to the APK even though lint says
+        // they're not supported.
+        return Objects.hashCode(uri.getHost()) + uri.getPort();
     }
 
     @Override

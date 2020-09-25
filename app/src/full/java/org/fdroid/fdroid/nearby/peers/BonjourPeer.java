@@ -1,10 +1,15 @@
 package org.fdroid.fdroid.nearby.peers;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Parcel;
-import androidx.annotation.Nullable;
 import android.text.TextUtils;
+
+import androidx.annotation.Nullable;
+
 import org.fdroid.fdroid.FDroidApp;
+
+import java.util.Objects;
 
 import javax.jmdns.ServiceInfo;
 import javax.jmdns.impl.FDroidServiceInfo;
@@ -52,12 +57,11 @@ public class BonjourPeer extends WifiPeer {
     }
 
     @Override
+    @SuppressLint("NewApi")
     public int hashCode() {
-        String fingerprint = getFingerprint();
-        if (fingerprint == null) {
-            return 0;
-        }
-        return fingerprint.hashCode();
+        // The method implementation is automatically added to the APK even though lint says
+        // it's not supported.
+        return Objects.hashCode(getFingerprint());
     }
 
     @Override
