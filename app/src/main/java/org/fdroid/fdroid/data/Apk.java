@@ -1,7 +1,6 @@
 package org.fdroid.fdroid.data;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -374,11 +373,7 @@ public class Apk extends ValueObject implements Comparable<Apk>, Parcelable {
     }
 
     @Override
-    @TargetApi(19)
     public int compareTo(@NonNull Apk apk) {
-        if (Build.VERSION.SDK_INT < 19) {
-            return Integer.valueOf(versionCode).compareTo(apk.versionCode);
-        }
         return Integer.compare(versionCode, apk.versionCode);
     }
 

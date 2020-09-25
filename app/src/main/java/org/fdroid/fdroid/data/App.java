@@ -17,11 +17,15 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+
 import com.fasterxml.jackson.annotation.JacksonInject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import org.apache.commons.io.filefilter.RegexFileFilter;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Preferences;
@@ -544,14 +548,9 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
             }
         }
         if (Build.VERSION.SDK_INT >= 24) {
-            LocaleList localeList = Resources.getSystem().getConfiguration().getLocales();
+            LocaleList localeList = getLocales();
             String[] sortedLocaleList = localeList.toLanguageTags().split(",");
-            Arrays.sort(sortedLocaleList, new java.util.Comparator<String>() {
-                @Override
-                public int compare(String s1, String s2) {
-                    return s1.length() - s2.length();
-                }
-            });
+            Arrays.sort(sortedLocaleList, (s1, s2) -> Integer.compare(s1.length(), s2.length()));
             for (String toUse : sortedLocaleList) {
                 localesToUse.add(toUse);
                 for (String l : availableLocales) {
@@ -622,6 +621,11 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         sevenInchScreenshots = getLocalizedListEntry(localized, localesToUse, "sevenInchScreenshots");
         tenInchScreenshots = getLocalizedListEntry(localized, localesToUse, "tenInchScreenshots");
         tvScreenshots = getLocalizedListEntry(localized, localesToUse, "tvScreenshots");
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    LocaleList getLocales() {
+        return Resources.getSystem().getConfiguration().getLocales();
     }
 
     /**
