@@ -9,6 +9,15 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.fdroid.fdroid.Preferences;
@@ -24,16 +33,7 @@ import org.fdroid.fdroid.panic.HidingManager;
 import org.fdroid.fdroid.views.apps.AppListActivity;
 import org.fdroid.fdroid.views.categories.AppCardController;
 
-import java.util.Date;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.loader.app.LoaderManager;
-import androidx.loader.content.CursorLoader;
-import androidx.loader.content.Loader;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import java.time.LocalDate;
 
 /**
  * Loads a list of newly added or recently updated apps and displays them to the user.
@@ -189,7 +189,7 @@ class LatestViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
         if (repoCount == 0) {
             emptyStateText.append(activity.getString(R.string.latest__empty_state__no_enabled_repos));
         } else {
-            Date lastUpdate = RepoProvider.Helper.lastUpdate(activity);
+            LocalDate lastUpdate = RepoProvider.Helper.lastUpdate(activity);
             if (lastUpdate == null) {
                 emptyStateText.append(activity.getString(R.string.latest__empty_state__never_updated));
             } else {

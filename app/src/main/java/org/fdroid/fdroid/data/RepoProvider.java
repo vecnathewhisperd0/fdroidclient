@@ -15,8 +15,9 @@ import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.Schema.RepoTable;
 import org.fdroid.fdroid.data.Schema.RepoTable.Cols;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -273,24 +274,32 @@ public class RepoProvider extends FDroidProvider {
         }
 
         @Nullable
-        public static Date lastUpdate(Context context) {
+        public static LocalDate lastUpdate(Context context) {
             ContentResolver resolver = context.getContentResolver();
             final String[] projection = {Cols.LAST_UPDATED};
             final String selection = Cols.IN_USE + " = 1";
             Cursor cursor = resolver.query(getContentUri(), projection,
                     selection, null, Cols.LAST_UPDATED + " DESC");
 
-            Date lastUpdate = null;
+            LocalDateTime lastUpdate = null;
             if (cursor != null) {
                 if (cursor.getCount() > 0) {
                     cursor.moveToFirst();
                     String dateString = cursor.getString(0);
-                    lastUpdate = Utils.parseTime(dateString, Utils.parseDate(dateString, null));
+                    final LocalDate localDate = Utils.parseLocalDate(dateString, null);
+                    if (localDate != null) {
+                        lastUpdate = Utils.parseLocalDateTime(dateString, localDate.atStartOfDay());
+                    } else {
+                        lastUpdate = Utils.parseLocalDateTime(dateString, null);
+                    }
                 }
                 cursor.close();
             }
 
-            return lastUpdate;
+            if (lastUpdate != null) {
+                return lastUpdate.toLocalDate();
+            }
+            return null;
         }
 
         public static int countEnabledRepos(Context context) {

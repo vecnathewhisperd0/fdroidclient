@@ -39,7 +39,6 @@ import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
-import android.text.format.DateUtils;
 import android.text.style.CharacterStyle;
 import android.text.style.TypefaceSpan;
 import android.util.DisplayMetrics;
@@ -82,23 +81,17 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateEncodingException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.TimeZone;
 import java.util.regex.Pattern;
 
 import androidx.annotation.NonNull;
@@ -115,17 +108,7 @@ public final class Utils {
 
     private static final int BUFFER_SIZE = 4096;
 
-    // The date format used for storing dates (e.g. lastupdated, added) in the
-    // database.
-    public static final SimpleDateFormat DATE_FORMAT =
-            new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-
     private static final DateTimeFormatter DATE_TIME = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss");
-
-    private static final SimpleDateFormat TIME_FORMAT =
-            new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.ENGLISH);
-
-    private static final TimeZone UTC = TimeZone.getTimeZone("Etc/GMT");
 
     private static final String[] FRIENDLY_SIZE_FORMAT = {
             "%.0f B", "%.0f KiB", "%.1f MiB", "%.2f GiB",
@@ -651,33 +634,9 @@ public final class Utils {
         return values == null || values.length == 0 ? null : TextUtils.join(",", values);
     }
 
-    @Nullable
-    private static Date parseDateFormat(@NonNull DateFormat format, @Nullable String str,
-                                        @Nullable Date fallback) {
-        if (TextUtils.isEmpty(str)) {
-            return fallback;
-        }
-        Date result;
-        try {
-            format.setTimeZone(UTC);
-            result = format.parse(str);
-        } catch (ArrayIndexOutOfBoundsException | NumberFormatException | ParseException e) {
-            e.printStackTrace();
-            result = fallback;
-        }
-        return result;
-    }
-
-    @Nullable
-    private static String formatDateFormat(@NonNull DateFormat format, @Nullable Date date,
-                                           @Nullable String fallback) {
-        if (date == null) {
-            return fallback;
-        }
-        format.setTimeZone(UTC);
-        return format.format(date);
-    }
-
+    /**
+     * Parses a date string into a {@link LocalDate}
+     */
     @Nullable
     public static LocalDate parseLocalDate(@Nullable String str, @Nullable LocalDate fallback) {
         if (TextUtils.isEmpty(str)) {
@@ -694,13 +653,8 @@ public final class Utils {
     }
 
     /**
-     * Parses a date string into UTC time
+     * Formats a {@link LocalDate} into a date string
      */
-    @Nullable
-    public static Date parseDate(@Nullable String str, @Nullable Date fallback) {
-        return parseDateFormat(DATE_FORMAT, str, fallback);
-    }
-
     @Nullable
     public static String formatLocalDate(@Nullable LocalDate localDate, @Nullable String fallback) {
         if (localDate == null) {
@@ -710,21 +664,8 @@ public final class Utils {
     }
 
     /**
-     * Formats UTC time into a date string
+     * Parses a date/time string into a {@link LocalDateTime}
      */
-    @Nullable
-    public static String formatDate(@Nullable Date date, @Nullable String fallback) {
-        return formatDateFormat(DATE_FORMAT, date, fallback);
-    }
-
-    /**
-     * Parses a date/time string into UTC time
-     */
-    @Nullable
-    public static Date parseTime(@Nullable String str, @Nullable Date fallback) {
-        return parseDateFormat(TIME_FORMAT, str, fallback);
-    }
-
     @Nullable
     public static LocalDateTime parseLocalDateTime(@Nullable String str, @Nullable LocalDateTime fallback) {
         if (TextUtils.isEmpty(str)) {
@@ -741,13 +682,8 @@ public final class Utils {
     }
 
     /**
-     * Formats UTC time into a date/time string
+     * Formats a {@link LocalDateTime} into a date/time string
      */
-    @Nullable
-    public static String formatTime(@Nullable Date date, @Nullable String fallback) {
-        return formatDateFormat(TIME_FORMAT, date, fallback);
-    }
-
     @Nullable
     public static String formatLocalDateTime(@Nullable LocalDateTime localDateTime, @Nullable String fallback) {
         if (localDateTime == null) {
@@ -806,26 +742,6 @@ public final class Utils {
             return res.getQuantityString(R.plurals.details_last_update_months, months, months);
         } else {
             return res.getQuantityString(R.plurals.details_last_update_years, years, years);
-        }
-    }
-
-    public static String formatLastUpdated(@NonNull Resources res, @NonNull Date date) {
-        long msDiff = Calendar.getInstance().getTimeInMillis() - date.getTime();
-        long days = msDiff / DateUtils.DAY_IN_MILLIS;
-        long weeks = msDiff / (DateUtils.DAY_IN_MILLIS * 7);
-        long months = msDiff / (DateUtils.DAY_IN_MILLIS * 30);
-        long years = msDiff / (DateUtils.DAY_IN_MILLIS * 365);
-
-        if (days < 1) {
-            return res.getString(R.string.details_last_updated_today);
-        } else if (weeks < 1) {
-            return res.getQuantityString(R.plurals.details_last_update_days, (int) days, days);
-        } else if (months < 1) {
-            return res.getQuantityString(R.plurals.details_last_update_weeks, (int) weeks, weeks);
-        } else if (years < 1) {
-            return res.getQuantityString(R.plurals.details_last_update_months, (int) months, months);
-        } else {
-            return res.getQuantityString(R.plurals.details_last_update_years, (int) years, years);
         }
     }
 
