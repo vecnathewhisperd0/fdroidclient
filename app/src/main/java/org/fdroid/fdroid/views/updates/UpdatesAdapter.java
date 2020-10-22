@@ -124,14 +124,13 @@ public class UpdatesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             }
         }
 
-        Collections.sort(appsToShowStatus, new Comparator<AppStatus>() {
-            @Override
-            public int compare(AppStatus o1, AppStatus o2) {
-                return o1.status.app.name.compareTo(o2.status.app.name);
-            }
-        });
+        Collections.sort(appsToShowStatus, Comparator.comparing(this::getName));
 
         populateItems();
+    }
+
+    private String getName(AppStatus appStatus) {
+        return appStatus.status.app.name;
     }
 
     public boolean canViewAllUpdateableApps() {

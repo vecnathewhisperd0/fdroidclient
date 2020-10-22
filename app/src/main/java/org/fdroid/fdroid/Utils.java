@@ -973,6 +973,11 @@ public final class Utils {
         }
     }
 
+    // This method helps with sorting PackageInfo objects.
+    public static String getPackageName(PackageInfo packageInfo) {
+        return packageInfo.packageName;
+    }
+
     public static boolean isServerSocketInUse(int port) {
         try {
             (new ServerSocket(port)).close();
