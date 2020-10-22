@@ -38,10 +38,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.security.cert.CertificateEncodingException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -342,9 +341,6 @@ public final class LocalRepoManager {
         @NonNull
         private final XmlSerializer serializer;
 
-        @NonNull
-        private final DateFormat dateToStr = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-
         private IndexXmlBuilder() throws XmlPullParserException {
             serializer = XmlPullParserFactory.newInstance().newSerializer();
         }
@@ -405,8 +401,8 @@ public final class LocalRepoManager {
          *
          * @see IndexXmlBuilder#tag(String, String)
          */
-        private void tag(String name, Date date) throws IOException {
-            tag(name, dateToStr.format(date));
+        private void tag(String name, LocalDate localDate) throws IOException {
+            tag(name, DateTimeFormatter.ISO_LOCAL_DATE.format(localDate));
         }
 
         private void tagApplication(App app) throws IOException {

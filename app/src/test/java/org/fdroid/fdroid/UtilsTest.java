@@ -11,9 +11,10 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 
 import java.io.File;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Random;
-import java.util.TimeZone;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -201,20 +202,19 @@ public class UtilsTest {
     public void testIndexDatesWithTimeZones() {
         for (int h = 0; h < 12; h++) {
             for (int m = 0; m < 60; m = m + 15) {
-                TimeZone.setDefault(TimeZone.getTimeZone(String.format("GMT+%d%02d", h, m)));
-
                 String timeString = "2017-11-27_20:13:24";
-                Date time = Utils.parseTime(timeString, null);
-                assertEquals("The String representation must match", timeString, Utils.formatTime(time, null));
-                assertEquals(timeString + " failed to parse", 1511813604000L, time.getTime());
-                assertEquals("time zones should match", -((h * 60) + m), time.getTimezoneOffset());
+                final LocalDateTime localDateTime = Utils.parseLocalDateTime(timeString, null);
+                assertEquals("The String representation must match", timeString,
+                        Utils.formatLocalDateTime(localDateTime, null));
+                assertEquals(timeString + " failed to parse", 1511813604000L,
+                        localDateTime.atZone(ZoneOffset.UTC).toInstant().toEpochMilli());
 
-                TimeZone.setDefault(TimeZone.getTimeZone(String.format("GMT+%d%02d", h, m)));
                 String dateString = "2017-11-27";
-                Date date = Utils.parseDate(dateString, null);
-                assertEquals("The String representation must match", dateString, Utils.formatDate(date, null));
-                assertEquals(dateString + " failed to parse", 1511740800000L, date.getTime());
-                assertEquals("time zones should match", -((h * 60) + m), date.getTimezoneOffset());
+                final LocalDate localDate = Utils.parseLocalDate(dateString, null);
+                assertEquals("The String representation must match", dateString,
+                        Utils.formatLocalDate(localDate, null));
+                assertEquals(dateString + " failed to parse", 1511740800000L,
+                        localDate.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli());
             }
         }
     }

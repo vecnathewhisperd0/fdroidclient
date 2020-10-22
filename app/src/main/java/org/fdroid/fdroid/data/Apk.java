@@ -13,25 +13,30 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.webkit.MimeTypeMap;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.fasterxml.jackson.annotation.JacksonInject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.Schema.ApkTable.Cols;
+import org.fdroid.fdroid.data.jackson.LocalDateDeserializer;
+import org.fdroid.fdroid.data.jackson.LocalDateSerializer;
 import org.fdroid.fdroid.installer.ApkCache;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.zip.ZipFile;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 /**
  * Represents a single package of an application. This represents one particular
@@ -88,7 +93,10 @@ public class Apk extends ValueObject implements Comparable<Apk>, Parcelable {
     public String obbMainFileSha256;
     public String obbPatchFile;
     public String obbPatchFileSha256;
-    public Date added;
+
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    public LocalDate added;
     /**
      * The array of the names of the permissions that this APK requests. This is the
      * same data as {@link android.content.pm.PackageInfo#requestedPermissions}. Note this
@@ -183,7 +191,7 @@ public class Apk extends ValueObject implements Comparable<Apk>, Parcelable {
                     hashType = cursor.getString(i);
                     break;
                 case Cols.ADDED_DATE:
-                    added = Utils.parseDate(cursor.getString(i), null);
+                    added = Utils.parseLocalDate(cursor.getString(i), null);
                     break;
                 case Cols.FEATURES:
                     features = Utils.parseCommaSeparatedString(cursor.getString(i));
@@ -367,7 +375,7 @@ public class Apk extends ValueObject implements Comparable<Apk>, Parcelable {
         values.put(Cols.OBB_MAIN_FILE_SHA256, obbMainFileSha256);
         values.put(Cols.OBB_PATCH_FILE, obbPatchFile);
         values.put(Cols.OBB_PATCH_FILE_SHA256, obbPatchFileSha256);
-        values.put(Cols.ADDED_DATE, Utils.formatDate(added, ""));
+        values.put(Cols.ADDED_DATE, Utils.formatLocalDate(added, ""));
         values.put(Cols.REQUESTED_PERMISSIONS, Utils.serializeCommaSeparatedString(requestedPermissions));
         values.put(Cols.FEATURES, Utils.serializeCommaSeparatedString(features));
         values.put(Cols.NATIVE_CODE, Utils.serializeCommaSeparatedString(nativecode));
@@ -407,7 +415,7 @@ public class Apk extends ValueObject implements Comparable<Apk>, Parcelable {
         dest.writeString(this.obbMainFileSha256);
         dest.writeString(this.obbPatchFile);
         dest.writeString(this.obbPatchFileSha256);
-        dest.writeLong(this.added != null ? this.added.getTime() : -1);
+        dest.writeString(added != null ? DateTimeFormatter.ISO_LOCAL_DATE.format(added) : null);
         dest.writeStringArray(this.requestedPermissions);
         dest.writeStringArray(this.features);
         dest.writeStringArray(this.nativecode);
@@ -438,8 +446,8 @@ public class Apk extends ValueObject implements Comparable<Apk>, Parcelable {
         this.obbMainFileSha256 = in.readString();
         this.obbPatchFile = in.readString();
         this.obbPatchFileSha256 = in.readString();
-        long tmpAdded = in.readLong();
-        this.added = tmpAdded == -1 ? null : new Date(tmpAdded);
+        String tmpAdded = in.readString();
+        this.added = tmpAdded == null ? null : LocalDate.parse(tmpAdded);
         this.requestedPermissions = in.createStringArray();
         this.features = in.createStringArray();
         this.nativecode = in.createStringArray();

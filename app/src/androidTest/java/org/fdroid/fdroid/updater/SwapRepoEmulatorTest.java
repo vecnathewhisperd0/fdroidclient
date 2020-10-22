@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ResolveInfo;
 import android.os.Looper;
-import androidx.test.platform.app.InstrumentationRegistry;
-import androidx.test.filters.LargeTest;
 import android.text.TextUtils;
 import android.util.Log;
+
+import androidx.test.filters.LargeTest;
+import androidx.test.platform.app.InstrumentationRegistry;
+
 import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Hasher;
@@ -34,7 +36,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 import java.security.cert.Certificate;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
@@ -137,8 +140,9 @@ public class SwapRepoEmulatorTest {
             assertTrue(updater.hasChanged());
 
             repo = RepoProvider.Helper.findByAddress(context, FDroidApp.repo.address);
-            final Date lastUpdated = repo.lastUpdated;
-            assertTrue("repo lastUpdated should be updated", new Date(2019, 5, 13).compareTo(repo.lastUpdated) > 0);
+            final LocalDateTime lastUpdated = repo.lastUpdated;
+            assertTrue("repo lastUpdated should be updated",
+                    LocalDate.of(2019, 6, 13).isAfter(repo.lastUpdated.toLocalDate()));
 
             App app = AppProvider.Helper.findSpecificApp(context.getContentResolver(),
                     context.getPackageName(), repo.getId());
@@ -169,7 +173,7 @@ public class SwapRepoEmulatorTest {
             updater = new IndexUpdater(context, repo);
             updater.update();
             assertTrue(updater.hasChanged());
-            assertTrue("repo lastUpdated should be updated", lastUpdated.compareTo(repo.lastUpdated) < 0);
+            assertTrue("repo lastUpdated should be updated", lastUpdated.isBefore(repo.lastUpdated));
 
             for (String packageName : packageNames) {
                 assertNotNull(ApkProvider.Helper.findByPackageName(context, packageName));

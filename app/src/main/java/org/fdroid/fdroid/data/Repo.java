@@ -38,10 +38,11 @@ import org.fdroid.fdroid.net.TreeUriDownloader;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -75,7 +76,7 @@ public class Repo extends ValueObject {
     @JsonIgnore
     public int priority;
     @JsonIgnore
-    public Date lastUpdated;
+    public LocalDateTime lastUpdated;
     @JsonIgnore
     public boolean isSwap;
     /**
@@ -175,7 +176,12 @@ public class Repo extends ValueObject {
                     break;
                 case Cols.LAST_UPDATED:
                     String dateString = cursor.getString(i);
-                    lastUpdated = Utils.parseTime(dateString, Utils.parseDate(dateString, null));
+                    final LocalDate localDate = Utils.parseLocalDate(dateString, null);
+                    if (localDate != null) {
+                        lastUpdated = Utils.parseLocalDateTime(dateString, localDate.atStartOfDay());
+                    } else {
+                        lastUpdated = Utils.parseLocalDateTime(dateString, null);
+                    }
                     break;
                 case Cols.MAX_AGE:
                     maxage = cursor.getInt(i);
@@ -340,7 +346,12 @@ public class Repo extends ValueObject {
 
         if (values.containsKey(Cols.LAST_UPDATED)) {
             final String dateString = values.getAsString(Cols.LAST_UPDATED);
-            lastUpdated = Utils.parseTime(dateString, Utils.parseDate(dateString, null));
+            final LocalDate localDate = Utils.parseLocalDate(dateString, null);
+            if (localDate != null) {
+                lastUpdated = Utils.parseLocalDateTime(dateString, localDate.atStartOfDay());
+            } else {
+                lastUpdated = Utils.parseLocalDateTime(dateString, null);
+            }
         }
 
         if (values.containsKey(Cols.MAX_AGE)) {

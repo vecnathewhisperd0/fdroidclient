@@ -18,7 +18,8 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -329,7 +330,7 @@ public class ApkProviderTest extends FDroidProviderTest {
         apk.features = new String[]{"one", "two", "three"};
         apk.hashType = "i'm a hash type";
 
-        Date testTime = Utils.parseDate(Utils.formatTime(new Date(System.currentTimeMillis()), null), null);
+        LocalDate testTime = Utils.parseLocalDate(Utils.formatLocalDateTime(LocalDateTime.now(), null), null);
         apk.added = testTime;
 
         ApkProvider.Helper.update(context, apk);
@@ -354,7 +355,7 @@ public class ApkProviderTest extends FDroidProviderTest {
         assertEquals(testTime.getYear(), updatedApk.added.getYear());
         assertEquals(testTime.getYear(), updatedApk.added.getYear());
         assertEquals(testTime.getMonth(), updatedApk.added.getMonth());
-        assertEquals(testTime.getDay(), updatedApk.added.getDay());
+        assertEquals(testTime.getDayOfWeek(), updatedApk.added.getDayOfWeek());
         assertEquals("i'm a hash type", updatedApk.hashType);
     }
 

@@ -29,7 +29,6 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.text.TextUtils;
 import android.util.Log;
-
 import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.data.ApkProvider;
 import org.fdroid.fdroid.data.App;
@@ -54,9 +53,9 @@ import java.io.InputStream;
 import java.security.CodeSigner;
 import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -298,7 +297,7 @@ public class IndexUpdater {
                                                       String[] mirrors, String cacheTag) {
         ContentValues values = new ContentValues();
 
-        values.put(RepoTable.Cols.LAST_UPDATED, Utils.formatTime(new Date(), ""));
+        values.put(RepoTable.Cols.LAST_UPDATED, Utils.formatLocalDateTime(LocalDateTime.now(), ""));
 
         if (repo.lastetag == null || !repo.lastetag.equals(cacheTag)) {
             values.put(RepoTable.Cols.LAST_ETAG, cacheTag);
@@ -412,7 +411,7 @@ public class IndexUpdater {
 
         Utils.debugLog(TAG, "Saving new signing certificate in the database for " + repo.address);
         ContentValues values = new ContentValues(2);
-        values.put(RepoTable.Cols.LAST_UPDATED, Utils.formatTime(new Date(), ""));
+        values.put(RepoTable.Cols.LAST_UPDATED, Utils.formatLocalDateTime(LocalDateTime.now(), ""));
         values.put(RepoTable.Cols.SIGNING_CERT, Hasher.hex(rawCertFromJar));
         RepoProvider.Helper.update(context, repo, values);
     }

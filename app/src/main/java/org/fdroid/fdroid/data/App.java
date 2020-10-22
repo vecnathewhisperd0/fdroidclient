@@ -21,12 +21,16 @@ import android.util.Log;
 import com.fasterxml.jackson.annotation.JacksonInject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import org.apache.commons.io.filefilter.RegexFileFilter;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.Schema.AppMetadataTable.Cols;
+import org.fdroid.fdroid.data.jackson.LocalDateDeserializer;
+import org.fdroid.fdroid.data.jackson.LocalDateSerializer;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -36,10 +40,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateEncodingException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -213,8 +220,13 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
      */
     public int autoInstallVersionCode;
 
-    public Date added;
-    public Date lastUpdated;
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    public LocalDate added;
+
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    public LocalDate lastUpdated;
 
     /**
      * List of categories (as defined in the metadata documentation) or null if there aren't any.
@@ -348,10 +360,10 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
                     suggestedVersionName = cursor.getString(i);
                     break;
                 case Cols.ADDED:
-                    added = Utils.parseDate(cursor.getString(i), null);
+                    added = Utils.parseLocalDate(cursor.getString(i), null);
                     break;
                 case Cols.LAST_UPDATED:
-                    lastUpdated = Utils.parseDate(cursor.getString(i), null);
+                    lastUpdated = Utils.parseLocalDate(cursor.getString(i), null);
                     break;
                 case Cols.ANTI_FEATURES:
                     antiFeatures = Utils.parseCommaSeparatedString(cursor.getString(i));
@@ -832,8 +844,9 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         } else {
             this.summary = (String) appDescription;
         }
-        this.added = new Date(packageInfo.firstInstallTime);
-        this.lastUpdated = new Date(packageInfo.lastUpdateTime);
+        final ZoneId zoneId = ZoneId.systemDefault();
+        this.added = Instant.ofEpochMilli(packageInfo.firstInstallTime).atZone(zoneId).toLocalDate();
+        this.lastUpdated = Instant.ofEpochMilli(packageInfo.lastUpdateTime).atZone(zoneId).toLocalDate();
         this.description = "<p>";
         if (!TextUtils.isEmpty(appDescription)) {
             this.description += appDescription + "\n";
@@ -1032,8 +1045,8 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         values.put(Cols.FLATTR_ID, flattrID);
         values.put(Cols.LIBERAPAY, liberapay);
         values.put(Cols.OPEN_COLLECTIVE, openCollective);
-        values.put(Cols.ADDED, Utils.formatDate(added, ""));
-        values.put(Cols.LAST_UPDATED, Utils.formatDate(lastUpdated, ""));
+        values.put(Cols.ADDED, Utils.formatLocalDate(added, ""));
+        values.put(Cols.LAST_UPDATED, Utils.formatLocalDate(lastUpdated, ""));
         values.put(Cols.PREFERRED_SIGNER, preferredSigner);
         values.put(Cols.AUTO_INSTALL_VERSION_CODE, autoInstallVersionCode);
         values.put(Cols.SUGGESTED_VERSION_NAME, suggestedVersionName);
@@ -1273,8 +1286,8 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         dest.writeInt(this.suggestedVersionCode);
         dest.writeString(this.autoInstallVersionName);
         dest.writeInt(this.autoInstallVersionCode);
-        dest.writeLong(this.added != null ? this.added.getTime() : -1);
-        dest.writeLong(this.lastUpdated != null ? this.lastUpdated.getTime() : -1);
+        dest.writeString(added != null ? DateTimeFormatter.ISO_LOCAL_DATE.format(added) : null);
+        dest.writeString(lastUpdated != null ? DateTimeFormatter.ISO_LOCAL_DATE.format(lastUpdated) : null);
         dest.writeStringArray(this.categories);
         dest.writeStringArray(this.antiFeatures);
         dest.writeStringArray(this.requirements);
@@ -1325,10 +1338,10 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         this.suggestedVersionCode = in.readInt();
         this.autoInstallVersionName = in.readString();
         this.autoInstallVersionCode = in.readInt();
-        long tmpAdded = in.readLong();
-        this.added = tmpAdded == -1 ? null : new Date(tmpAdded);
-        long tmpLastUpdated = in.readLong();
-        this.lastUpdated = tmpLastUpdated == -1 ? null : new Date(tmpLastUpdated);
+        String tmpAdded = in.readString();
+        this.added = tmpAdded == null ? null : LocalDate.parse(tmpAdded);
+        String tmpLastUpdated = in.readString();
+        this.lastUpdated = tmpLastUpdated == null ? null : LocalDate.parse(tmpLastUpdated);
         this.categories = in.createStringArray();
         this.antiFeatures = in.createStringArray();
         this.requirements = in.createStringArray();
