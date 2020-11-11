@@ -182,7 +182,7 @@ public class SwapSuccessView extends SwapView implements LoaderManager.LoaderCal
                                 Toast.makeText(context, R.string.download_error, Toast.LENGTH_SHORT).show();
                                 Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
                             } else { // user canceled
-                                Toast.makeText(context, R.string.details_notinstalled, Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, R.string.warning_no_internet, Toast.LENGTH_LONG).show();
                             }
                             resetView();
                             break;
