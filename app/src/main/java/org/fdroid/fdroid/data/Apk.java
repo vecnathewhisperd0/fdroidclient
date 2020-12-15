@@ -12,11 +12,15 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.webkit.MimeTypeMap;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
 import com.fasterxml.jackson.annotation.JacksonInject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.Schema.ApkTable.Cols;
@@ -600,7 +604,7 @@ public class Apk extends ValueObject implements Comparable<Apk>, Parcelable {
                     }
                 } else if (zipFile.getEntry("META-INF/com/google/android/update-binary") != null) {
                     // Over-The-Air update ZIP files
-                    return new File(context.getApplicationInfo().dataDir + "/ota");
+                    return new File(ContextCompat.getDataDir(context), "/ota");
                 }
             } catch (IOException e) {
                 // this should happen when running isMediaInstalled() and the file isn't installed

@@ -19,6 +19,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.URLSpan;
 import android.text.util.Linkify;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
@@ -47,6 +49,8 @@ import androidx.gridlayout.widget.GridLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.R;
@@ -63,6 +67,7 @@ import org.fdroid.fdroid.views.appdetails.AntiFeaturesListingView;
 import org.fdroid.fdroid.views.main.MainActivity;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -614,34 +619,41 @@ public class AppDetailsRecyclerViewAdapter
                         });
                     } else if (!app.isApk && mediaApk != null) {
                         final File installedFile = mediaApk.getInstalledMediaFile(context);
-                        if (!installedFile.toString().startsWith(context.getApplicationInfo().dataDir)) {
-                            final Intent viewIntent = new Intent(Intent.ACTION_VIEW);
-                            Uri uri = FileProvider.getUriForFile(context, Installer.AUTHORITY, installedFile);
-                            String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(
-                                    FilenameUtils.getExtension(installedFile.getName()));
-                            viewIntent.setDataAndType(uri, mimeType);
-                            if (Build.VERSION.SDK_INT < 19) {
-                                viewIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                            } else {
-                                viewIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION
-                                        | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
-                            }
-                            if (context.getPackageManager().queryIntentActivities(viewIntent, 0).size() > 0) {
-                                buttonPrimaryView.setText(R.string.menu_open);
-                                buttonPrimaryView.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        try {
-                                            context.startActivity(viewIntent);
-                                        } catch (ActivityNotFoundException e) {
-                                            e.printStackTrace();
+                        final File dataDir = ContextCompat.getDataDir(context);
+                        try {
+                            if (!FileUtils.directoryContains(dataDir, installedFile)) {
+                                final Intent viewIntent = new Intent(Intent.ACTION_VIEW);
+                                Uri uri = FileProvider.getUriForFile(context, Installer.AUTHORITY, installedFile);
+                                String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(
+                                        FilenameUtils.getExtension(installedFile.getName()));
+                                viewIntent.setDataAndType(uri, mimeType);
+                                if (Build.VERSION.SDK_INT < 19) {
+                                    viewIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                                } else {
+                                    viewIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION
+                                            | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+                                }
+                                if (!context.getPackageManager().queryIntentActivities(viewIntent, 0).isEmpty()) {
+                                    buttonPrimaryView.setText(R.string.menu_open);
+                                    buttonPrimaryView.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            try {
+                                                context.startActivity(viewIntent);
+                                            } catch (ActivityNotFoundException e) {
+                                                e.printStackTrace();
+                                            }
                                         }
-                                    }
-                                });
+                                    });
+                                } else {
+                                    buttonPrimaryView.setVisibility(View.GONE);
+                                }
                             } else {
                                 buttonPrimaryView.setVisibility(View.GONE);
                             }
-                        } else {
+                        } catch (IOException e) {
+                            Log.e(TAG, "An error occurred while checking if the installed file" +
+                                    " is in the data directory: ", e);
                             buttonPrimaryView.setVisibility(View.GONE);
                         }
                     } else {
