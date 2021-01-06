@@ -6,6 +6,7 @@ import android.os.Process;
 import android.system.ErrnoException;
 import android.system.Os;
 import android.system.StructStat;
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.work.Constraints;
@@ -211,5 +212,11 @@ public class CleanCacheWorker extends Worker {
                 Utils.debugLog(TAG, "An exception occurred while deleting: ", e);
             }
         }
+    }
+
+    @Override
+    public void onStopped() {
+        super.onStopped();
+        Log.i(TAG, "UpdateWorker");
     }
 }

@@ -363,6 +363,7 @@ public class AppDetailsActivity extends AppCompatActivity
             alert.show();
             return;
         }
+        Log.i(TAG, "apk.sig: " + app.installedSig + " " + apk.sig);
         if (app.installedSig != null && apk.sig != null
                 && !apk.sig.equals(app.installedSig)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);

@@ -212,7 +212,7 @@ public final class LocalRepoManager {
 
     private static void attemptToDelete(@NonNull File file) {
         if (!file.delete()) {
-            Log.e(TAG, "Could not delete \"" + file.getAbsolutePath() + "\".");
+            //Log.e(TAG, "Could not delete \"" + file.getAbsolutePath() + "\".");
         }
     }
 

@@ -1065,6 +1065,7 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         final List<Apk> apks = ApkProvider.Helper.findByPackageName(context, this.packageName);
         for (final Apk apk : apks) {
             boolean allowByCompatability = apk.compatible || Preferences.get().showIncompatibleVersions();
+            Log.i(TAG, "this.installedSig " + this.installedSig);
             boolean allowBySig = this.installedSig == null || TextUtils.equals(this.installedSig, apk.sig);
             if (allowByCompatability && allowBySig) {
                 if (!apk.isApk()) {
