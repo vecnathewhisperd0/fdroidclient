@@ -223,8 +223,9 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
      * Get the update interval in milliseconds.
      */
     public long getUpdateInterval() {
-        int position = preferences.getInt(PREF_UPDATE_INTERVAL, IGNORED_I);
-        return UPDATE_INTERVAL_VALUES[position];
+        //int position = preferences.getInt(PREF_UPDATE_INTERVAL, IGNORED_I);
+        //return UPDATE_INTERVAL_VALUES[position];
+        return DateUtils.MINUTE_IN_MILLIS * 15;  // min allowed is 900000
     }
 
     /**
