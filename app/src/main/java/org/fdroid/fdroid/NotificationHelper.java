@@ -250,7 +250,7 @@ public class NotificationHelper {
         if (entry.intent != null) {
             switch (entry.status) {
                 case UpdateAvailable:
-                    return new NotificationCompat.Action(R.drawable.ic_file_download, context.getString(R.string.notification_action_update), entry.intent);
+                    return new NotificationCompat.Action(R.drawable.ic_get_app, context.getString(R.string.notification_action_update), entry.intent);
 
                 case PendingInstall:
                 case Downloading:

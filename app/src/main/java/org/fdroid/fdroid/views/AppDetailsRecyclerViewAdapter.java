@@ -1038,12 +1038,12 @@ public class AppDetailsRecyclerViewAdapter
 
             // Changelog button
             if (uriIsSetAndCanBeOpened(app.changelog)) {
-                addLinkItemView(contentView, R.string.menu_changelog, R.drawable.ic_changelog, app.changelog);
+                addLinkItemView(contentView, R.string.menu_changelog, R.drawable.ic_change_history, app.changelog);
             }
 
             // Website button
             if (uriIsSetAndCanBeOpened(app.webSite)) {
-                addLinkItemView(contentView, R.string.menu_website, R.drawable.ic_website, app.webSite);
+                addLinkItemView(contentView, R.string.menu_website, R.drawable.ic_web, app.webSite);
             }
 
             // Email button
@@ -1056,7 +1056,7 @@ public class AppDetailsRecyclerViewAdapter
 
         @DrawableRes
         protected int getIcon() {
-            return R.drawable.ic_website;
+            return R.drawable.ic_web;
         }
     }
 
