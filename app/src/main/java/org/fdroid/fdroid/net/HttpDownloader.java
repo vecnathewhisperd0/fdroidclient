@@ -195,7 +195,7 @@ public class HttpDownloader extends Downloader {
                 && FDroidApp.subnetInfo.isInRange(host); // on the same subnet as we are
     }
 
-    private HttpURLConnection getConnection() throws SocketTimeoutException, IOException {
+    HttpURLConnection getConnection() throws SocketTimeoutException, IOException {
         HttpURLConnection connection;
         if (isSwapUrl(sourceUrl)) {
             // swap never works with a proxy, its unrouted IP on the same subnet
@@ -209,7 +209,7 @@ public class HttpDownloader extends Downloader {
             }
         }
 
-        connection.setRequestProperty("User-Agent", "F-Droid " + BuildConfig.VERSION_NAME);
+        connection.setRequestProperty("User-Agent", Utils.getUserAgent());
         connection.setConnectTimeout(getTimeout());
         connection.setReadTimeout(getTimeout());
 
