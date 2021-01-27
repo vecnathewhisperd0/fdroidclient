@@ -293,7 +293,7 @@ public class Repo extends ValueObject {
         }
 
         if (values.containsKey(Cols.IN_USE)) {
-            inuse = toInt(values.getAsInteger(Cols.IN_USE)) == 1;
+            inuse = values.getAsBoolean(Cols.IN_USE);
         }
 
         if (values.containsKey(Cols.LAST_UPDATED)) {
