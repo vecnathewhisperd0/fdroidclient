@@ -26,7 +26,7 @@
 
 package org.fdroid.fdroid.views;
 
-import android.app.Activity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -259,7 +259,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
             case Preferences.PREF_THEME:
                 entrySummary(key);
                 if (changing) {
-                    Activity activity = getActivity();
+                    AppCompatActivity activity = getActivity();
                     FDroidApp fdroidApp = (FDroidApp) activity.getApplication();
                     fdroidApp.reloadTheme();
                     fdroidApp.applyTheme(activity);
@@ -290,7 +290,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
             case Preferences.PREF_LANGUAGE:
                 entrySummary(key);
                 if (changing) {
-                    Activity activity = getActivity();
+                    AppCompatActivity activity = getActivity();
                     Languages.setLanguage(activity);
 
                     RepoProvider.Helper.clearEtags(getActivity());
@@ -462,7 +462,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         public boolean onPreferenceChange(Preference preference, Object enabled) {
             if ((Boolean) enabled) {
                 enableProxyCheckPref.setChecked(false);
-                final Activity activity = getActivity();
+                final AppCompatActivity activity = getActivity();
                 if (!OrbotHelper.isOrbotInstalled(activity)) {
                     Intent intent = OrbotHelper.getOrbotInstallIntent(activity);
                     activity.startActivityForResult(intent, REQUEST_INSTALL_ORBOT);

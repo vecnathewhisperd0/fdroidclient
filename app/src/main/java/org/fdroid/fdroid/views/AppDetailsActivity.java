@@ -22,7 +22,7 @@
 package org.fdroid.fdroid.views;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
@@ -314,14 +314,14 @@ public class AppDetailsActivity extends AppCompatActivity
                 fdroidApp.sendViaBluetooth(this, resultCode, app.packageName);
                 break;
             case REQUEST_PERMISSION_DIALOG:
-                if (resultCode == Activity.RESULT_OK) {
+                if (resultCode == AppCompatActivity.RESULT_OK) {
                     Uri uri = data.getData();
                     Apk apk = ApkProvider.Helper.findByUri(this, uri, Schema.ApkTable.Cols.ALL);
                     InstallManagerService.queue(this, app, apk);
                 }
                 break;
             case REQUEST_UNINSTALL_DIALOG:
-                if (resultCode == Activity.RESULT_OK) {
+                if (resultCode == AppCompatActivity.RESULT_OK) {
                     startUninstall();
                 }
                 break;
