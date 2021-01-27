@@ -74,7 +74,8 @@ import java.util.Map;
  *
  * <p>Note that {@link #initiateScan()} returns an {@link AlertDialog} which is non-null if the
  * user was prompted to download the application. This lets the calling app potentially manage the dialog.
- * In particular, ideally, the app dismisses the dialog if it's still active in its {@link AppCompatActivity#onPause()}
+ * In particular, ideally, the app dismisses the dialog if it's still active in its
+ * {@link AppCompatActivity#onPause()}
  * method.</p>
  *
  * <p>You can use {@link #setTitle(String)} to customize the title of this download prompt dialog (or, use
