@@ -3,7 +3,10 @@ package org.fdroid.fdroid.data;
 import android.content.ContextWrapper;
 import android.os.Environment;
 import android.webkit.MimeTypeMap;
+
+import androidx.core.content.ContextCompat;
 import androidx.test.core.app.ApplicationProvider;
+
 import org.apache.commons.io.FileUtils;
 import org.fdroid.fdroid.installer.ApkCache;
 import org.junit.Before;
@@ -54,7 +57,7 @@ public class ApkTest {
         assertFalse(apk.isApk());
         copyResourceFileToCache(apk);
         File path = apk.getMediaInstallPath(context);
-        assertEquals(new File(context.getApplicationInfo().dataDir + "/ota"), path);
+        assertEquals(new File(ContextCompat.getDataDir(context), "/ota"), path);
     }
 
     @Test
