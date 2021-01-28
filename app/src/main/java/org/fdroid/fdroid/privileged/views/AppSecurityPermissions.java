@@ -122,7 +122,7 @@ public class AppSecurityPermissions {
             if (icon != 0) {
                 iconDrawable = (Build.VERSION.SDK_INT < 22) ? loadIcon(pm) : loadUnbadgedIcon(pm);
             } else {
-                iconDrawable = ContextCompat.getDrawable(context, R.drawable.ic_perm_device_information);
+                iconDrawable = ContextCompat.getDrawable(context, R.drawable.ic_perm_device_info);
             }
 
             Preferences.Theme theme = Preferences.get().getTheme();

@@ -1038,7 +1038,7 @@ public class AppDetailsRecyclerViewAdapter
 
             // Changelog button
             if (uriIsSetAndCanBeOpened(app.changelog)) {
-                addLinkItemView(contentView, R.string.menu_changelog, R.drawable.ic_change_history, app.changelog);
+                addLinkItemView(contentView, R.string.menu_changelog, R.drawable.ic_changelog, app.changelog);
             }
 
             // Website button
