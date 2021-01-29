@@ -30,8 +30,8 @@
             android:paddingEnd="@dimen/details_activity__collapsable_lists__padding__horizontal"
             android:background="?selectableItemBackground"
             app:drawableEndCompat="@drawable/ic_expand_more"
-            app:drawableStartCompat="@drawable/ic_web"
-            app:drawableLeftCompat="@drawable/ic_web"
+            app:drawableStartCompat="@drawable/ic_website"
+            app:drawableLeftCompat="@drawable/ic_website"
             app:drawableRightCompat="@drawable/ic_expand_more" />
     </FrameLayout>
 

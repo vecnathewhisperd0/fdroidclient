@@ -1043,7 +1043,7 @@ public class AppDetailsRecyclerViewAdapter
 
             // Website button
             if (uriIsSetAndCanBeOpened(app.webSite)) {
-                addLinkItemView(contentView, R.string.menu_website, R.drawable.ic_web, app.webSite);
+                addLinkItemView(contentView, R.string.menu_website, R.drawable.ic_website, app.webSite);
             }
 
             // Email button
@@ -1056,7 +1056,7 @@ public class AppDetailsRecyclerViewAdapter
 
         @DrawableRes
         protected int getIcon() {
-            return R.drawable.ic_web;
+            return R.drawable.ic_website;
         }
     }
 

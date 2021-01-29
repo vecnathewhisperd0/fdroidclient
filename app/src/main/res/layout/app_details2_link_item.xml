@@ -8,5 +8,5 @@
     android:paddingStart="@dimen/layout_horizontal_margin"
     tools:text="@string/menu_website"
     android:background="?selectableItemBackground"
-    app:drawableLeftCompat="@drawable/ic_web"
-    app:drawableStartCompat="@drawable/ic_web" />
+    app:drawableLeftCompat="@drawable/ic_website"
+    app:drawableStartCompat="@drawable/ic_website" />
