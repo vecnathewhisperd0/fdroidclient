@@ -109,7 +109,7 @@ import java.util.UUID;
                 ReportField.STACK_TRACE,
         }
 )
-public class FDroidApp extends Application implements androidx.work.Configuration.Provider {
+public class FDroidApp extends MultiDexApplication implements androidx.work.Configuration.Provider {
 
     private static final String TAG = "FDroidApp";
     private static final String ACRA_ID = BuildConfig.APPLICATION_ID + ":acra";
