@@ -8,10 +8,11 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import info.guardianproject.panic.Panic;
 import info.guardianproject.panic.PanicResponder;
+
+import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.data.DBHelper;
@@ -48,6 +49,9 @@ public class PanicResponderActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        FDroidApp fdroidApp = (FDroidApp) getApplication();
+        fdroidApp.applyPureBlackBackgroundInDarkTheme(this);
+
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
