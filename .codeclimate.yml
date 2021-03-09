@@ -1,4 +1,4 @@
-version: "2"
+version: '2'
 plugins:
   sonar-java:
     enabled: true
@@ -12,3 +12,24 @@ plugins:
     enabled: true
     config:
       file: config/pmd/rules.xml
+  sonar-python:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+        - python:
+        - java:
+  shellcheck:
+    enabled: true
+exclude_patterns:
+  - '**/*.jar'
+  - '**/*.gpg'
+  - '**/*.png'
+  - '**/*.jpg'
+  - '**/*.apk'
+  - '**/*.zip'
+  - '**/*.pro'
+  - '**/build/'
+  - '**/assets/'
+  - '**/resources/'
