@@ -18,8 +18,9 @@ plugins:
     enabled: true
     config:
       languages:
-        - python:
-        - java:
+        python:
+            python_version: 3
+        java:
   shellcheck:
     enabled: true
 exclude_patterns:
