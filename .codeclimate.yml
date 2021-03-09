@@ -33,3 +33,6 @@ exclude_patterns:
   - '**/build/'
   - '**/assets/'
   - '**/resources/'
+  # Ignore symlinks
+  - app/src/main/res/values-iw
+  - app/src/main/res/values-in
