@@ -12,6 +12,7 @@ plugins:
     enabled: true
     config:
       file: config/pmd/rules.xml
+    channel: beta
   sonar-python:
     enabled: true
   duplication:
