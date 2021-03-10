@@ -56,7 +56,6 @@
                 android:name=".nearby.SwapWorkflowActivity"
                 android:parentActivityName=".views.main.MainActivity"
                 android:launchMode="singleTask"
-                android:theme="@style/SwapTheme.Wizard"
                 android:screenOrientation="portrait"
                 android:configChanges="orientation|keyboardHidden">
             <meta-data
