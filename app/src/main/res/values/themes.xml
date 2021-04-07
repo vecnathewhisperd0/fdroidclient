@@ -60,14 +60,6 @@
         <item name="appDetailsAntiFeatureIconColor">#000000</item>
     </style>
 
-<!--    <style name="AppBaseThemeNight" parent="Theme.App">-->
-<!--        &lt;!&ndash; backward-compatibility theme options go here &ndash;&gt;-->
-<!--        <item name="android:windowBackground">@android:color/black</item>-->
-<!--        <item name="detailPanel">@drawable/details_panel_donate_background_night</item>-->
-<!--        <item name="mainTabSwapSplashTint">#111111</item>-->
-<!--    </style>-->
-
-
     <!-- light app theme with accent colors following roughly android design guidelines -->
     <style name="Theme.App" parent="Base.Theme.App">
         <!-- customizations that are not API-level specific go here. -->
