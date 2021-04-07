@@ -68,4 +68,5 @@
     <!-- Same as Theme.App except a black background in Dark mode -->
     <style name="Theme.App.Black" parent="Theme.App" />
 
+    <style name="AppThemeTransparent" parent="@android:style/Theme.Translucent.NoTitleBar" />
 </resources>

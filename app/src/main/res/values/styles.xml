@@ -127,7 +127,6 @@
 
     <style name="AppDetailsSubheaderText" parent="AppDetailsSubheaderTextBase" />
 
-    <style name="AppThemeTransparent" parent="@android:style/Theme.NoDisplay" />
 
     <style name="DiscreteSeekBar" parent="Base.Widget.AppCompat.SeekBar.Discrete">
         <!-- Disable default tickMarks. We draw our own in SeekBarForegroundThumb -->
