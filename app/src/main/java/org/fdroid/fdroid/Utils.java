@@ -19,6 +19,7 @@
 
 package org.fdroid.fdroid;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -32,10 +33,6 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.StatFs;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.text.Editable;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
@@ -51,6 +48,10 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
@@ -101,7 +102,7 @@ public final class Utils {
 
     // The date format used for storing dates (e.g. lastupdated, added) in the
     // database.
-    private static final SimpleDateFormat DATE_FORMAT =
+    public static final SimpleDateFormat DATE_FORMAT =
             new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
 
     private static final SimpleDateFormat TIME_FORMAT =
@@ -120,7 +121,7 @@ public final class Utils {
 
     private static Handler toastHandler;
 
-    public static final String FALLBACK_ICONS_DIR = "/icons/";
+    public static final String FALLBACK_ICONS_DIR = "icons";
 
     /*
      * @param dpiMultiplier Lets you grab icons for densities larger or
@@ -132,22 +133,22 @@ public final class Utils {
         final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         final double dpi = metrics.densityDpi * dpiMultiplier;
         if (dpi >= 640) {
-            return "/icons-640/";
+            return "icons-640";
         }
         if (dpi >= 480) {
-            return "/icons-480/";
+            return "icons-480";
         }
         if (dpi >= 320) {
-            return "/icons-320/";
+            return "icons-320";
         }
         if (dpi >= 240) {
-            return "/icons-240/";
+            return "icons-240";
         }
         if (dpi >= 160) {
-            return "/icons-160/";
+            return "icons-160";
         }
 
-        return "/icons-120/";
+        return "icons-120";
     }
 
     /**
@@ -405,10 +406,26 @@ public final class Utils {
         return ret;
     }
 
+
     /**
      * Get the fingerprint used to represent an APK signing key in F-Droid.
      * This is a custom fingerprint algorithm that was kind of accidentally
      * created, but is still in use.
+     *
+     * @see #getPackageSig(PackageInfo)
+     * @see org.fdroid.fdroid.data.Apk#sig
+     */
+    public static String getsig(byte[] rawCertBytes) {
+        return Utils.hashBytes(toHexString(rawCertBytes).getBytes(), "md5");
+    }
+
+    /**
+     * Get the fingerprint used to represent an APK signing key in F-Droid.
+     * This is a custom fingerprint algorithm that was kind of accidentally
+     * created, but is still in use.
+     *
+     * @see #getsig(byte[])
+     * @see org.fdroid.fdroid.data.Apk#sig
      */
     public static String getPackageSig(PackageInfo info) {
         if (info == null || info.signatures == null || info.signatures.length < 1) {
@@ -555,7 +572,7 @@ public final class Utils {
             }
 
             byte[] mdbytes = md.digest();
-            return toHexString(mdbytes).toLowerCase(Locale.ENGLISH);
+            return toHexString(mdbytes);
         } catch (IOException e) {
             String message = e.getMessage();
             if (message.contains("read failed: EIO (I/O error)")) {
@@ -575,7 +592,7 @@ public final class Utils {
      * Computes the base 16 representation of the byte array argument.
      *
      * @param bytes an array of bytes.
-     * @return the bytes represented as a string of hexadecimal digits.
+     * @return the bytes represented as a string of lowercase hexadecimal digits.
      * @see <a href="https://stackoverflow.com/a/9855338">source</a>
      */
     public static String toHexString(byte[] bytes) {
@@ -588,7 +605,7 @@ public final class Utils {
         return new String(hexChars);
     }
 
-    private static final char[] HEX_LOOKUP_ARRAY = "0123456789ABCDEF".toCharArray();
+    private static final char[] HEX_LOOKUP_ARRAY = "0123456789abcdef".toCharArray();
 
     public static int parseInt(String str, int fallback) {
         if (str == null || str.length() == 0) {
@@ -794,6 +811,10 @@ public final class Utils {
         return versionName;
     }
 
+    public static String getUserAgent() {
+        return "F-Droid " + BuildConfig.VERSION_NAME;
+    }
+
     /**
      * Try to get the {@link PackageInfo} for the {@code packageName} provided.
      *
@@ -802,6 +823,21 @@ public final class Utils {
     public static PackageInfo getPackageInfo(Context context, String packageName) {
         try {
             return context.getPackageManager().getPackageInfo(packageName, 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            debugLog(TAG, "Could not get PackageInfo: ", e);
+        }
+        return null;
+    }
+
+    /**
+     * Try to get the {@link PackageInfo} with signature info for the {@code packageName} provided.
+     *
+     * @return null on failure
+     */
+    @SuppressLint("PackageManagerGetSignatures")
+    public static PackageInfo getPackageInfoWithSignatures(Context context, String packageName) {
+        try {
+            return context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_SIGNATURES);
         } catch (PackageManager.NameNotFoundException e) {
             debugLog(TAG, "Could not get PackageInfo: ", e);
         }
@@ -944,7 +980,7 @@ public final class Utils {
     }
 
     /**
-     * Keep an instance of this class as an field in an Activity for figuring out whether the on
+     * Keep an instance of this class as an field in an AppCompatActivity for figuring out whether the on
      * screen keyboard is currently visible or not.
      */
     public static class KeyboardStateMonitor {
@@ -952,7 +988,7 @@ public final class Utils {
         private boolean visible = false;
 
         /**
-         * @param contentView this must be the top most Container of the layout used by the Activity
+         * @param contentView this must be the top most Container of the layout used by the AppCompatActivity
          */
         public KeyboardStateMonitor(final View contentView) {
             contentView.getViewTreeObserver().addOnGlobalLayoutListener(

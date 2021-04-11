@@ -15,7 +15,7 @@
     <string name="enable_nfc_send">Habilitar envío NFC…</string>
     <string name="delete">Borrar</string>
     <string name="by_author_format">por %s</string>
-    <string name="version">Version</string>
+    <string name="version">Versión</string>
     <string name="installIncompatible">Aplicación incompatible con su dispositivo, instalar de todos modos\?</string>
     <string name="SignatureMismatch">La nueva versión está firmada con una clave diferente a la anterior. Para instalar la nueva versión, primero se debe desinstalar la antigua. Por favor, haga esto e inténtelo de nuevo. (Tenga en cuenta que la desinstalación borrará los datos internos almacenados por la aplicación)</string>
     <string name="notification_title_summary_install_error">Error al instalar</string>
@@ -198,4 +198,27 @@
     <string name="system_installer">Extensión con privilegios</string>
     <string name="local_repo_name">Nombre del repositorio local</string>
     <string name="about_site">Sitio web</string>
+    <string name="repo_error_empty_username">Nombre de usuario vacío, las credenciales no se han cambiado</string>
+    <string name="repo_edit_credentials">Cambiar contraseña</string>
+    <string name="login_password">Contraseña</string>
+    <string name="login_name">Nombre de usuario</string>
+    <string name="login_title">Se requiere autentificación</string>
+    <string name="scan_removable_storage_summary">Buscar repositorios de paquetes en unidades de almacenamiento extraíble como tarjetas SD y dispositivos USB</string>
+    <string name="update_auto_download_summary">Las actualizaciones se descargarán automáticamente y serás notificado para instalarlas</string>
+    <string name="update_auto_download">Buscar actualizaciones automáticamente</string>
+    <string name="over_network_never_summary">Nunca descargar nada usando esta conexión</string>
+    <string name="over_network_on_demand_summary">Solo usar esta conexión cuando haga click para descargar</string>
+    <string name="over_network_always_summary">Siempre utilizar esta conexión cuando esté disponible</string>
+    <string name="over_data">Sobre datos móviles</string>
+    <string name="over_wifi">Sobre Wi-fi</string>
+    <string name="update_interval">Intervalo de actualizaciones automáticas</string>
+    <string name="other">Otros</string>
+    <string name="allow_push_requests_summary">Metadatos de los repositorios pueden incluir peticiones push para instalar o desinstalar aplicaciones</string>
+    <string name="allow_push_requests">Permitir a los repositorios instalar y desinstalar aplicaciones</string>
+    <string name="force_old_index_summary">En caso de bugs o problemas de compatibilidad, use el XML</string>
+    <string name="force_old_index">Forzar inicio con formato antiguo</string>
+    <string name="send_version_and_uuid_summary">Incluir la versión de esta aplicación y un ID único y aleatorio cuando se descarga. Requiere reinicio.</string>
+    <string name="send_version_and_uuid">Envíar versión y UUID a los servidores</string>
+    <string name="keep_install_history_summary">Guardar un registro de todas las instalaciones y desinstalaciones de F-Droid</string>
+    <string name="no_such_app">No se ha encontrado dicha aplicación.</string>
 </resources>

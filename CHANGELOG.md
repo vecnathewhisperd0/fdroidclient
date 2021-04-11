@@ -1,3 +1,52 @@
+### 1.12-alpha3 (2021-03-10)
+
+* Opt-in F-Droid Metrics
+
+### 1.12-alpha2 (2021-03-03)
+
+* Overhaul clean up of cached files
+
+* Support updating "shared library packages" like Trichrome (@uldiniad)
+
+### 1.12-alpha1 (2021-02-25)
+
+* Add extra sanitation to search terms to prevent vulnerabilities.
+
+* Fix Nearby Swap's close button (@proletarius101)
+
+* Bump to compileSdkVersion 29 to support Java8
+
+* Set up WorkManager on demand to avoid slowing down starts
+
+* Prefer system keys when APKs are signed by them (@glennmen)
+
+### 1.12-alpha0 (2021-02-08)
+
+* App description localization now fully respects lists of languages in Android
+  Language Settings
+
+* Latest Tab lists results based on the Language Settings
+
+* Latest Tab now shows results ordered newest first (@TheLastProject @IzzySoft)
+
+* Theme support modernized and tied to the built-in Android themes (@proletarius101)
+
+* Search results greatly improved (@Tvax @gcbrown76)
+
+* Let Android efficiently schedule background cache cleanup operations (@Isira-Seneviratne)
+
+* Overhaul repo URL parsing for reliable repo adding (@projectgus)
+
+### 1.11 (2020-12-29)
+
+* Improved linkifying of URLs in app descriptions
+
+* Improved handling of SDCards and USG-OTG in Nearby
+
+* Modernized code and switched PNGs to vectors (thanks @isira-seneviratne!)
+
+* Recognize longer repo URLs to support GitCDN/RawGit/etc mirrors
+
 ### 1.10 (2020-10-20)
 
 * Improved language selection with multiple locales

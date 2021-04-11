@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="version">Versiune</string>
-    <string name="delete">Ștergeți</string>
+    <string name="delete">Șterge</string>
     <string name="cache_downloaded">Păstrează aplicațiile descărcate</string>
     <string name="updates">Actualizări</string>
     <string name="other">Altele</string>
@@ -352,18 +352,18 @@
     </plurals>
     <plurals name="details_last_update_years">
         <item quantity="one">Actualizat acum un an</item>
-        <item quantity="few">Actualizat acum %1$s ani</item>
-        <item quantity="other">Actualizat acum %1$s de ani</item>
+        <item quantity="few">Actualizat acum %1$d ani</item>
+        <item quantity="other">Actualizat acum %1$d de ani</item>
     </plurals>
     <plurals name="details_last_update_months">
         <item quantity="one">Actualizat acum o lună</item>
-        <item quantity="few">Actualizat acum %1$s luni</item>
-        <item quantity="other">Actualizat acum %1$s de luni</item>
+        <item quantity="few">Actualizat acum %1$d luni</item>
+        <item quantity="other">Actualizat acum %1$d de luni</item>
     </plurals>
     <plurals name="details_last_update_weeks">
         <item quantity="one">Actualizat acum o săptămână</item>
-        <item quantity="few">Actualizat acum %1$s săptămâni</item>
-        <item quantity="other">Actualizat acum %1$s săptămâni</item>
+        <item quantity="few">Actualizat acum %1$d săptămâni</item>
+        <item quantity="other">Actualizat acum %1$d săptămâni</item>
     </plurals>
     <string name="force_old_index">Forțează vechiul format de index</string>
     <string name="force_old_index_summary">În caz de probleme legate de compatibilitate, folosește indexul de aplicații XML</string>
@@ -509,4 +509,13 @@
     <string name="notification_channel_swaps_title">Schimb</string>
     <string name="notification_channel_installs_description">Afișează notificări la instalarea aplicațiilor.</string>
     <string name="notification_channel_installs_title">Instalări</string>
+    <string name="send_to_fdroid_metrics_summary">Trimite date anonime săptămânal la F-Droid Metrics (necesită păstrarea istoricului de instalare)</string>
+    <string name="send_to_fdroid_metrics">Trimitere date de utilizare</string>
+    <string name="menu_show_install_history">Afișare istoric instalări</string>
+    <string name="fdroid_metrics_report">Raport de măsurători %s</string>
+    <string name="send_fdroid_metrics_json">Raportul de măsurători %s ca fișier JSON</string>
+    <string name="send_fdroid_metrics_report">Trimitere raport măsurători %s</string>
+    <string name="menu_show_fdroid_metrics_report">Afișare raport de măsurători</string>
+    <string name="toast_metrics_in_install_history">Raportul de măsurători %s poate fi vizualizat în istoricul de instalări</string>
+    <string name="install_history_and_metrics">Istoric de instalări și măsurători</string>
 </resources>

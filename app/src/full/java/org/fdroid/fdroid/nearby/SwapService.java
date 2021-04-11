@@ -17,13 +17,13 @@ import android.os.AsyncTask;
 import android.os.IBinder;
 import android.text.TextUtils;
 import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.ServiceCompat;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-
+import cc.mvdan.accesspoint.WifiApControl;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.NotificationHelper;
 import org.fdroid.fdroid.Preferences;
@@ -46,8 +46,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import cc.mvdan.accesspoint.WifiApControl;
 
 /**
  * Central service which manages all of the different moving parts of swap which are required
@@ -428,7 +426,9 @@ public class SwapService extends Service {
         localBroadcastManager.unregisterReceiver(bonjourPeerFound);
         localBroadcastManager.unregisterReceiver(bonjourPeerRemoved);
 
-        unregisterReceiver(bluetoothScanModeChanged);
+        if (bluetoothAdapter != null) {
+            unregisterReceiver(bluetoothScanModeChanged);
+        }
 
         BluetoothManager.stop(this);
 
@@ -452,7 +452,7 @@ public class SwapService extends Service {
         if (timer != null) {
             timer.cancel();
         }
-        stopForeground(true);
+        ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE);
 
         deleteAllSwapRepos();
 

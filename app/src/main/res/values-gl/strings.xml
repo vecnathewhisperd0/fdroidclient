@@ -46,7 +46,9 @@
     <string name="search_hint">Procurar aplicacións</string>
     <string name="appcompatibility">Compatibilidade das aplicacións</string>
     <string name="show_incompat_versions">Inclúe versións incompatíbeis</string>
-    <string name="status_download">Estase a baixar %2$s / %3$s (%4$d%%) dende %1$s</string>
+    <string name="status_download">Estase a baixar
+\n%2$s / %3$s (%4$d%%) dende
+\n%1$s</string>
     <string name="status_connecting_to_repo">Estase a conectar con 
 \n%1$s</string>
     <string name="no_permissions">Sen permisos</string>
@@ -136,9 +138,9 @@
     <string name="category_Time">Tempo</string>
     <string name="category_Writing">Escrita</string>
     <string name="uninstall_error_unknown">Fallou ó desinstalar por un erro descoñecido</string>
-    <string name="swap_nfc_title">Preme para facer intercambio (swap)</string>
+    <string name="swap_nfc_title">Preme para intercambiar</string>
     <string name="swap">Intercambiar aplicacións</string>
-    <string name="swap_success">Intercambio feito con éxito!</string>
+    <string name="swap_success">Intercambio exitoso!</string>
     <string name="swap_view_available_networks">Preme para abrir as redes dispoñíbeis</string>
     <string name="open_qr_code_scanner">Abrir o lector QR</string>
     <string name="swap_welcome">Benvido ó F-Droid!</string>
@@ -362,8 +364,8 @@
     </plurals>
     <string name="details_last_updated_today">Actualizada hoxe</string>
     <plurals name="details_last_update_days">
-        <item quantity="one">Actualizado hai %1$s día</item>
-        <item quantity="other">Actualizado hai %1$s días</item>
+        <item quantity="one">Actualizado hai %1$d día</item>
+        <item quantity="other">Actualizado hai %1$d días</item>
     </plurals>
     <string name="app_details__no_versions__explain_incompatible_signatures">A versión instalada non é compatíbel con ningunha das versións dispoñíbeis. Desinstalar a aplicación permitirache ollar e instalar as versións compatíbeis. Isto acontece acotío con aplicacións instaladas através da Google Play ou outras fontes, se foron asinadas cun certificado diferente.</string>
     <string name="app_permission_storage">O F-Droid precisa permiso para acceder ó almacenamento. Por favor concede ese permiso na seguinte pantalla para proseguer ca instalación.</string>
@@ -478,7 +480,7 @@
     <string name="panic_add_apps_to_uninstall">Engadir as aplicacións que se van desinstalar e eliminar</string>
     <string name="panic_reset_repos_title">Restabelecer repositorios</string>
     <string name="panic_reset_repos_summary">Restabelecer a configuración dos repositorios</string>
-    <string name="swap_visible_hotspot">Visíbel por punto Wi-Fi</string>
+    <string name="swap_visible_hotspot">Visible a través dun punto de acceso</string>
     <string name="swap_blank_wifi_ssid">(en branco)</string>
     <string name="swap_hidden_wifi_ssid">(agochado)</string>
     <string name="swap_setting_up_hotspot">Estase a inciar o punto wifi…</string>

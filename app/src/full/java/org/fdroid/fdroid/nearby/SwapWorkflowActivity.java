@@ -1,7 +1,6 @@
 package org.fdroid.fdroid.nearby;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -217,6 +216,7 @@ public class SwapWorkflowActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitleTextAppearance(getApplicationContext(), R.style.SwapTheme_Wizard_Text_Toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         container = (ViewGroup) findViewById(R.id.container);
 
@@ -496,7 +496,6 @@ public class SwapWorkflowActivity extends AppCompatActivity {
 
         toolbar.setBackgroundColor(currentView.getToolbarColour());
         toolbar.setTitle(currentView.getToolbarTitle());
-        toolbar.setNavigationIcon(R.drawable.ic_close_white_24dp);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -594,7 +593,7 @@ public class SwapWorkflowActivity extends AppCompatActivity {
     }
 
     private void sendFDroidApk() {
-        ((FDroidApp) getApplication()).sendViaBluetooth(this, Activity.RESULT_OK, BuildConfig.APPLICATION_ID);
+        ((FDroidApp) getApplication()).sendViaBluetooth(this, AppCompatActivity.RESULT_OK, BuildConfig.APPLICATION_ID);
     }
 
     /**

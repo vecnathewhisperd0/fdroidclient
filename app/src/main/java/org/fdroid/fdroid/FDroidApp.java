@@ -24,7 +24,7 @@
 package org.fdroid.fdroid;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.Application;
@@ -40,16 +40,16 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StrictMode;
-import androidx.annotation.Nullable;
-import androidx.collection.LongSparseArray;
-import androidx.core.content.ContextCompat;
-
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.collection.LongSparseArray;
+import androidx.core.content.ContextCompat;
 import com.nostra13.universalimageloader.cache.disc.DiskCache;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.impl.ext.LruDiskCache;
@@ -67,18 +67,20 @@ import org.apache.commons.net.util.SubnetUtils;
 import org.fdroid.fdroid.Preferences.ChangeListener;
 import org.fdroid.fdroid.Preferences.Theme;
 import org.fdroid.fdroid.compat.PRNGFixes;
+import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.data.AppProvider;
 import org.fdroid.fdroid.data.InstalledAppProviderService;
 import org.fdroid.fdroid.data.Repo;
 import org.fdroid.fdroid.installer.ApkFileProvider;
 import org.fdroid.fdroid.installer.InstallHistoryService;
 import org.fdroid.fdroid.nearby.SDCardScannerService;
+import org.fdroid.fdroid.nearby.WifiStateChangeService;
 import org.fdroid.fdroid.net.ConnectivityMonitorService;
 import org.fdroid.fdroid.net.Downloader;
 import org.fdroid.fdroid.net.HttpDownloader;
 import org.fdroid.fdroid.net.ImageLoaderForUIL;
-import org.fdroid.fdroid.nearby.WifiStateChangeService;
 import org.fdroid.fdroid.panic.HidingManager;
+import org.fdroid.fdroid.work.CleanCacheWorker;
 
 import javax.microedition.khronos.opengles.GL10;
 import java.io.IOException;
@@ -107,7 +109,7 @@ import java.util.UUID;
                 ReportField.STACK_TRACE,
         }
 )
-public class FDroidApp extends Application {
+public class FDroidApp extends Application implements androidx.work.Configuration.Provider {
 
     private static final String TAG = "FDroidApp";
     private static final String ACRA_ID = BuildConfig.APPLICATION_ID + ":acra";
@@ -154,7 +156,7 @@ public class FDroidApp extends Application {
         curTheme = Preferences.get().getTheme();
     }
 
-    public void applyTheme(Activity activity) {
+    public void applyTheme(AppCompatActivity activity) {
         activity.setTheme(getCurThemeResId());
         setSecureWindow(activity);
     }
@@ -176,12 +178,12 @@ public class FDroidApp extends Application {
         return curTheme == Theme.light;
     }
 
-    public void applyDialogTheme(Activity activity) {
+    public void applyDialogTheme(AppCompatActivity activity) {
         activity.setTheme(getCurDialogThemeResId());
         setSecureWindow(activity);
     }
 
-    public void setSecureWindow(Activity activity) {
+    public void setSecureWindow(AppCompatActivity activity) {
         if (Preferences.get().preventScreenshots()) {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
         }
@@ -201,12 +203,12 @@ public class FDroidApp extends Application {
     }
 
     /**
-     * Force reload the {@link Activity to make theme changes take effect.}
-     * Same as {@link Languages#forceChangeLanguage(Activity)}
+     * Force reload the {@link AppCompatActivity to make theme changes take effect.}
+     * Same as {@link Languages#forceChangeLanguage(AppCompatActivity)}
      *
-     * @param activity the {@code Activity} to force reload
+     * @param activity the {@code AppCompatActivity} to force reload
      */
-    public static void forceChangeTheme(Activity activity) {
+    public static void forceChangeTheme(AppCompatActivity activity) {
         Intent intent = activity.getIntent();
         if (intent == null) { // when launched as LAUNCHER
             return;
@@ -325,6 +327,7 @@ public class FDroidApp extends Application {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         Languages.setLanguage(this);
+        App.systemLocaleList = null;
 
         // update the descriptions based on the new language preferences
         SharedPreferences atStartTime = getAtStartTimeSharedPreferences();
@@ -421,7 +424,7 @@ public class FDroidApp extends Application {
             }
         });
 
-        CleanCacheService.schedule(this);
+        CleanCacheWorker.schedule(this);
 
         notificationHelper = new NotificationHelper(getApplicationContext());
 
@@ -539,7 +542,9 @@ public class FDroidApp extends Application {
             atStartTime.edit().remove(queryStringKey).apply();
         }
 
-        SDCardScannerService.scan(this);
+        if (Preferences.get().isScanRemovableStorageEnabled()) {
+            SDCardScannerService.scan(this);
+        }
     }
 
     /**
@@ -549,7 +554,7 @@ public class FDroidApp extends Application {
      * problems that arise from executing the code twice. This happens due to the `android:process`
      * statement in AndroidManifest.xml causes another process to be created to run
      * {@link org.fdroid.fdroid.acra.CrashReportActivity}. This was causing lots of things to be
-     * started/run twice including {@link CleanCacheService} and {@link WifiStateChangeService}.
+     * started/run twice including {@link CleanCacheWorker} and {@link WifiStateChangeService}.
      * <p>
      * Note that it is not perfect, because some devices seem to not provide a list of running app
      * processes when asked. In such situations, F-Droid may regress to the behaviour where some
@@ -595,8 +600,8 @@ public class FDroidApp extends Application {
         return getSharedPreferences("at-start-time", Context.MODE_PRIVATE);
     }
 
-    public void sendViaBluetooth(Activity activity, int resultCode, String packageName) {
-        if (resultCode == Activity.RESULT_CANCELED) {
+    public void sendViaBluetooth(AppCompatActivity activity, int resultCode, String packageName) {
+        if (resultCode == AppCompatActivity.RESULT_CANCELED) {
             return;
         }
 
@@ -645,7 +650,7 @@ public class FDroidApp extends Application {
 
     /**
      * Put proxy settings (or Tor settings) globally into effect based on whats configured in Preferences.
-     *
+     * <p>
      * Must be called on App startup and after every proxy configuration change.
      */
     public static void configureProxy(Preferences preferences) {
@@ -666,5 +671,27 @@ public class FDroidApp extends Application {
 
     public static Context getInstance() {
         return instance;
+    }
+
+    /**
+     * Set up WorkManager on demand to avoid slowing down starts.
+     *
+     * @see CleanCacheWorker
+     * @see org.fdroid.fdroid.work.FDroidMetricsWorker
+     * @see org.fdroid.fdroid.work.UpdateWorker
+     * @see <a href="https://developer.android.com/codelabs/android-adv-workmanager#3">example</a>
+     */
+    @NonNull
+    @Override
+    public androidx.work.Configuration getWorkManagerConfiguration() {
+        if (BuildConfig.DEBUG) {
+            return new androidx.work.Configuration.Builder()
+                    .setMinimumLoggingLevel(Log.DEBUG)
+                    .build();
+        } else {
+            return new androidx.work.Configuration.Builder()
+                    .setMinimumLoggingLevel(Log.ERROR)
+                    .build();
+        }
     }
 }

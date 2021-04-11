@@ -356,8 +356,8 @@
     <string name="nearby_splash__both_parties_need_fdroid">Ambas as partes precisam do %1$s para uso próximo.</string>
     <string name="details_last_updated_today">Atualizado hoje</string>
     <plurals name="details_last_update_days">
-        <item quantity="one">Atualizado %1$s dia atrás</item>
-        <item quantity="other">Atualizado %1$s dias atrás</item>
+        <item quantity="one">Atualizado %1$d dia atrás</item>
+        <item quantity="other">Atualizados %1$d dias atrás</item>
     </plurals>
     <string name="menu_video">Vídeo</string>
     <string name="app__tts__cancel_download">Cancelar download</string>
@@ -519,4 +519,13 @@
     <string name="notification_channel_swaps_title">Trocas</string>
     <string name="notification_channel_installs_description">Exibe notificações de instalação dos aplicativos.</string>
     <string name="notification_channel_installs_title">Instalações</string>
+    <string name="menu_show_install_history">Mostrar histórico de instalação</string>
+    <string name="menu_show_fdroid_metrics_report">Mostrar relatório das métricas</string>
+    <string name="toast_metrics_in_install_history">O Relatório das Métricas %s pode ser visualizado no visor do Histórico de Instalação</string>
+    <string name="fdroid_metrics_report">%s Relatório das Métricas</string>
+    <string name="send_fdroid_metrics_json">%s relatório das métricas como arquivo JSON</string>
+    <string name="send_fdroid_metrics_report">Enviar %s Relatório das Métricas</string>
+    <string name="send_to_fdroid_metrics_summary">Enviar dados anônimos semanalmente para F-Droid Métricas (exige Manter histórico de instalação)</string>
+    <string name="send_to_fdroid_metrics">Enviar dados de uso</string>
+    <string name="install_history_and_metrics">Instalar histórico e métricas</string>
 </resources>

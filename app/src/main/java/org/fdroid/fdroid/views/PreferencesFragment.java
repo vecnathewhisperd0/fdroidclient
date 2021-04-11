@@ -26,7 +26,6 @@
 
 package org.fdroid.fdroid.views;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -35,7 +34,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.WindowManager;
-
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
@@ -47,8 +47,7 @@ import androidx.preference.SeekBarPreference;
 import androidx.preference.SwitchPreference;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
-
-import org.fdroid.fdroid.CleanCacheService;
+import info.guardianproject.netcipher.proxy.OrbotHelper;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Languages;
 import org.fdroid.fdroid.Preferences;
@@ -58,8 +57,8 @@ import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.RepoProvider;
 import org.fdroid.fdroid.installer.InstallHistoryService;
 import org.fdroid.fdroid.installer.PrivilegedInstaller;
-
-import info.guardianproject.netcipher.proxy.OrbotHelper;
+import org.fdroid.fdroid.work.CleanCacheWorker;
+import org.fdroid.fdroid.work.FDroidMetricsWorker;
 
 public class PreferencesFragment extends PreferenceFragmentCompat
         implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -104,6 +103,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
     private SwitchPreference useTorCheckPref;
     private Preference updateAutoDownloadPref;
     private CheckBoxPreference keepInstallHistoryPref;
+    private CheckBoxPreference sendToFDroidMetricsPref;
     private Preference installHistoryPref;
     private long currentKeepCacheTime;
     private int overWifiPrevious;
@@ -115,14 +115,22 @@ public class PreferencesFragment extends PreferenceFragmentCompat
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
 
-        Preferences.get().migrateOldPreferences();
+        Preferences preferences = Preferences.get();
+        preferences.migrateOldPreferences();
 
         addPreferencesFromResource(R.xml.preferences);
         otherPrefGroup = (PreferenceGroup) findPreference("pref_category_other");
 
         keepInstallHistoryPref = (CheckBoxPreference) findPreference(Preferences.PREF_KEEP_INSTALL_HISTORY);
+        sendToFDroidMetricsPref = findPreference(Preferences.PREF_SEND_TO_FDROID_METRICS);
+        sendToFDroidMetricsPref.setEnabled(keepInstallHistoryPref.isChecked());
         installHistoryPref = findPreference("installHistory");
         installHistoryPref.setVisible(keepInstallHistoryPref.isChecked());
+        if (preferences.isSendingToFDroidMetrics()) {
+            installHistoryPref.setTitle(R.string.install_history_and_metrics);
+        } else {
+            installHistoryPref.setTitle(R.string.install_history);
+        }
 
         useTorCheckPref = (SwitchPreference) findPreference(Preferences.PREF_USE_TOR);
         useTorCheckPref.setOnPreferenceChangeListener(useTorChangedListener);
@@ -160,7 +168,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
             PreferenceCategory category = (PreferenceCategory) findPreference("pref_category_display");
             category.removePreference(languagePref);
         } else {
-            Languages languages = Languages.get(getActivity());
+            Languages languages = Languages.get((AppCompatActivity) getActivity());
             languagePref.setDefaultValue(Languages.USE_SYSTEM_DEFAULT);
             languagePref.setEntries(languages.getAllNames());
             languagePref.setEntryValues(languages.getSupportedLocales());
@@ -259,7 +267,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
             case Preferences.PREF_THEME:
                 entrySummary(key);
                 if (changing) {
-                    Activity activity = getActivity();
+                    AppCompatActivity activity = (AppCompatActivity) getActivity();
                     FDroidApp fdroidApp = (FDroidApp) activity.getApplication();
                     fdroidApp.reloadTheme();
                     fdroidApp.applyTheme(activity);
@@ -290,7 +298,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
             case Preferences.PREF_LANGUAGE:
                 entrySummary(key);
                 if (changing) {
-                    Activity activity = getActivity();
+                    AppCompatActivity activity = (AppCompatActivity) getActivity();
                     Languages.setLanguage(activity);
 
                     RepoProvider.Helper.clearEtags(getActivity());
@@ -304,7 +312,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                 entrySummary(key);
                 if (changing
                         && currentKeepCacheTime != Preferences.get().getKeepCacheTime()) {
-                    CleanCacheService.schedule(getActivity());
+                    CleanCacheWorker.schedule(requireContext());
                 }
                 break;
 
@@ -369,11 +377,26 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                 if (keepInstallHistoryPref.isChecked()) {
                     InstallHistoryService.register(getActivity());
                     installHistoryPref.setVisible(true);
+                    sendToFDroidMetricsPref.setEnabled(true);
                 } else {
                     InstallHistoryService.unregister(getActivity());
                     installHistoryPref.setVisible(false);
+                    sendToFDroidMetricsPref.setEnabled(false);
                 }
+                setFDroidMetricsWorker();
                 break;
+
+            case Preferences.PREF_SEND_TO_FDROID_METRICS:
+                setFDroidMetricsWorker();
+                break;
+        }
+    }
+
+    private void setFDroidMetricsWorker() {
+        if (sendToFDroidMetricsPref.isEnabled() && sendToFDroidMetricsPref.isChecked()) {
+            FDroidMetricsWorker.schedule(getContext());
+        } else {
+            FDroidMetricsWorker.cancel(getContext());
         }
     }
 
@@ -458,32 +481,32 @@ public class PreferencesFragment extends PreferenceFragmentCompat
 
     private final Preference.OnPreferenceChangeListener useTorChangedListener =
             new Preference.OnPreferenceChangeListener() {
-        @Override
-        public boolean onPreferenceChange(Preference preference, Object enabled) {
-            if ((Boolean) enabled) {
-                enableProxyCheckPref.setChecked(false);
-                final Activity activity = getActivity();
-                if (!OrbotHelper.isOrbotInstalled(activity)) {
-                    Intent intent = OrbotHelper.getOrbotInstallIntent(activity);
-                    activity.startActivityForResult(intent, REQUEST_INSTALL_ORBOT);
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object enabled) {
+                    if ((Boolean) enabled) {
+                        enableProxyCheckPref.setChecked(false);
+                        final AppCompatActivity activity = (AppCompatActivity) getActivity();
+                        if (!OrbotHelper.isOrbotInstalled(activity)) {
+                            Intent intent = OrbotHelper.getOrbotInstallIntent(activity);
+                            activity.startActivityForResult(intent, REQUEST_INSTALL_ORBOT);
+                        }
+                        // NetCipher gets configured to use Tor in onPause()
+                        // via a call to FDroidApp.configureProxy()
+                    }
+                    return true;
                 }
-                // NetCipher gets configured to use Tor in onPause()
-                // via a call to FDroidApp.configureProxy()
-            }
-            return true;
-        }
-    };
+            };
 
     private final Preference.OnPreferenceChangeListener proxyEnabledChangedListener =
             new Preference.OnPreferenceChangeListener() {
-        @Override
-        public boolean onPreferenceChange(Preference preference, Object enabled) {
-            if ((Boolean) enabled) {
-                useTorCheckPref.setChecked(false);
-            }
-            return true;
-        }
-    };
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object enabled) {
+                    if ((Boolean) enabled) {
+                        useTorCheckPref.setChecked(false);
+                    }
+                    return true;
+                }
+            };
 
     @Override
     public void onResume() {
@@ -525,6 +548,18 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                 getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
             } else {
                 getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
+            }
+        } else if (Preferences.PREF_SEND_TO_FDROID_METRICS.equals(key)) {
+            if (Preferences.get().isSendingToFDroidMetrics()) {
+                String msg = getString(R.string.toast_metrics_in_install_history,
+                        getContext().getString(R.string.app_name));
+                Toast.makeText(getContext(), msg, Toast.LENGTH_LONG).show();
+                installHistoryPref.setTitle(R.string.install_history_and_metrics);
+                Intent intent = new Intent(getActivity(), InstallHistoryActivity.class);
+                intent.putExtra(InstallHistoryActivity.EXTRA_SHOW_FDROID_METRICS, true);
+                startActivity(intent);
+            } else {
+                installHistoryPref.setTitle(R.string.install_history);
             }
         }
     }
