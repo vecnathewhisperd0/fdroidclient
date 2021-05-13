@@ -134,7 +134,10 @@ public class ScreenShotsActivity extends AppCompatActivity {
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                                  @Nullable Bundle savedInstanceState) {
 
-            Drawable screenShotPlaceholder = ContextCompat.getDrawable(inflater.getContext(), R.drawable.screenshot_placeholder);
+            Drawable screenShotPlaceholder = ContextCompat.getDrawable(
+                    inflater.getContext(),
+                    R.drawable.screenshot_placeholder
+            );
             DisplayImageOptions displayImageOptions = Utils.getDefaultDisplayImageOptionsBuilder()
                     .showImageOnFail(screenShotPlaceholder)
                     .showImageOnLoading(screenShotPlaceholder)
