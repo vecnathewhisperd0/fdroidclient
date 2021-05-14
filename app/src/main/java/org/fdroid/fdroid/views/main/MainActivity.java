@@ -31,13 +31,17 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.TypedValue;
-import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -60,17 +64,6 @@ import org.fdroid.fdroid.views.AppDetailsActivity;
 import org.fdroid.fdroid.views.ManageReposActivity;
 import org.fdroid.fdroid.views.apps.AppListActivity;
 
-import java.lang.reflect.Field;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.content.ContextCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 /**
  * Main view shown to users upon starting F-Droid.
  * <p>
@@ -85,7 +78,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * When switching from one screen to the next, we stay within this activity. The new screen will
  * get inflated (if required)
  */
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
@@ -134,7 +127,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
 
         bottomNavigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        bottomNavigation.setOnNavigationItemSelectedListener(this);
+        bottomNavigation.setOnNavigationItemSelectedListener(item -> {
+            pager.scrollToPosition(item.getOrder());
+            selectedMenuId = (int) adapter.getItemId(item.getItemId());
+
+            if (item.getItemId() == 2) {
+                NearbyViewBinder.updateUsbOtg(MainActivity.this);
+            }
+
+            return true;
+
+        });
         updatesBadge = bottomNavigation.getOrCreateBadge(R.id.updates);
 
         IntentFilter updateableAppsFilter = new IntentFilter(AppUpdateStatusManager.BROADCAST_APPSTATUS_LIST_CHANGED);
@@ -237,18 +240,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                     Toast.LENGTH_SHORT).show();
             SDCardScannerService.scan(this);
         }
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        pager.scrollToPosition(item.getItemId());
-        selectedMenuId = (int) adapter.getItemId(item.getItemId());
-
-        if (item.getItemId() == 2) {
-            NearbyViewBinder.updateUsbOtg(MainActivity.this);
-        }
-
-        return true;
     }
 
     /**

@@ -8,18 +8,21 @@
         android:id="@+id/latest"
         android:enabled="true"
         android:icon="@drawable/ic_latest"
+        android:orderInCategory="0"
         android:title="@string/main_menu__latest_apps"
         app:showAsAction="ifRoom|withText" />
     <item
         android:id="@+id/updates"
         android:enabled="true"
         android:icon="@drawable/ic_updates"
+        android:orderInCategory="1"
         android:title="@string/main_menu__updates"
         app:showAsAction="ifRoom|withText" />
     <item
         android:id="@+id/settings"
         android:enabled="true"
         android:icon="@drawable/ic_settings"
+        android:orderInCategory="2"
         android:title="@string/menu_settings"
         app:showAsAction="ifRoom|withText" />
 </menu>
