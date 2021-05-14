@@ -398,13 +398,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private int getBottomNavigationBackgroundColorResId() {
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
-            return R.color.fdroid_night;
-        }
-        return R.color.fdroid_blue;
-    }
-
     private static class NonScrollingHorizontalLayoutManager extends LinearLayoutManager {
         NonScrollingHorizontalLayoutManager(Context context) {
             super(context, LinearLayoutManager.HORIZONTAL, false);
