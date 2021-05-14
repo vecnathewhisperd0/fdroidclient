@@ -139,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
         updatesBadge = bottomNavigation.getOrCreateBadge(R.id.updates);
+        updatesBadge.setVisible(false);
 
         IntentFilter updateableAppsFilter = new IntentFilter(AppUpdateStatusManager.BROADCAST_APPSTATUS_LIST_CHANGED);
         updateableAppsFilter.addAction(AppUpdateStatusManager.BROADCAST_APPSTATUS_CHANGED);
