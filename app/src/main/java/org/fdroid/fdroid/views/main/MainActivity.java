@@ -133,12 +133,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             pager.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
         }
 
-        updatesBadge = bottomNavigation.getOrCreateBadge(R.id.updates);
-
-
-
         bottomNavigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(this);
+        updatesBadge = bottomNavigation.getOrCreateBadge(R.id.updates);
 
         IntentFilter updateableAppsFilter = new IntentFilter(AppUpdateStatusManager.BROADCAST_APPSTATUS_LIST_CHANGED);
         updateableAppsFilter.addAction(AppUpdateStatusManager.BROADCAST_APPSTATUS_CHANGED);
