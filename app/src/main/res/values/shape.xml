@@ -61,7 +61,6 @@
 
     <style name="ShapeAppearance.App.Card" parent="ShapeAppearance.MaterialComponents.MediumComponent">
         <item name="cornerSize">4dp</item>
-        <item name="elevation">0dp</item>
         <item name="cornerFamily">rounded</item>
     </style>
 </resources>
