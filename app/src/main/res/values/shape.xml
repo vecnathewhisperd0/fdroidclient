@@ -54,8 +54,14 @@
         <item name="cornerFamily">rounded</item>
     </style>
 
-    <style name="ShapeAppearance.App.Button" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+    <style name="ShapeAppearance.App.Button" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerSize">50%</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+    <style name="ShapeAppearance.App.Card" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerSize">4dp</item>
+        <item name="elevation">0dp</item>
         <item name="cornerFamily">rounded</item>
     </style>
 </resources>

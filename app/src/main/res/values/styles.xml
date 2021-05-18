@@ -17,7 +17,7 @@
 
 
     <style name="Widget.App.CardView" parent="Widget.MaterialComponents.CardView">
-        <item name="shapeAppearance">@style/ShapeAppearance.App.MediumComponent</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.App.Card</item>
     </style>
 
     <style name="Widget.App.Button.Dialog" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
