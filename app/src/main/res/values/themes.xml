@@ -63,8 +63,7 @@
 
         <item name="bottomNavigationStyle">@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface</item>
 
-        <item name="screenshotPlaceholderForeground">#ffffff</item>
-        <item name="screenshotPlaceholderBackground">#e8e8e8</item>
+        <item name="screenshotPlaceholderIconColor">#e8e8e8</item>
     </style>
 
     <!-- light app theme with accent colors following roughly android design guidelines -->
