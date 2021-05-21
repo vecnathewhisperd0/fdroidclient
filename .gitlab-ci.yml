@@ -5,9 +5,6 @@ stages:
   - test
   - deploy
 
-variables:
-  GRADLE_CLI_OPTS:
-
 .base:
   image: registry.gitlab.com/fdroid/ci-images-client:latest
   before_script:
