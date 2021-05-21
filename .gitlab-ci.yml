@@ -148,6 +148,8 @@ deploy_nightly:
     - fdroid nightly -v
 
 gemnasium-maven-dependency_scanning:
+  variables:
+    SECURE_LOG_LEVEL: debug
   script:
     # No need to verify the signing key of gemnasium
     - /analyzer run --gradle-opts -Dorg.gradle.dependency.verification=lenient
