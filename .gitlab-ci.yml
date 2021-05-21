@@ -146,3 +146,8 @@ deploy_nightly:
     # build the APKs!
     - ./gradlew assembleDebug
     - fdroid nightly -v
+
+gemnasium-maven-dependency_scanning:
+  script:
+    # No need to verify the signing key of gemnasium
+    - /analyzer run --gradle-opts -Dorg.gradle.dependency.verification=lenient
