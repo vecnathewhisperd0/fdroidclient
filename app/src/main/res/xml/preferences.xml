@@ -33,24 +33,27 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/updates">
-        <org.fdroid.fdroid.views.LiveSeekBarPreference
-            android:defaultValue="@integer/defaultOverWifi"
-            android:key="overWifi"
-            android:layout="@layout/preference_seekbar"
+        <ListPreference
+            android:defaultValue="@string/defaultOverWifi"
+            android:entries="@array/overNetworkNames"
+            android:entryValues="@array/overNetworkValues"
+            android:key="updateOverWifi"
             android:title="@string/over_wifi" />
-        <org.fdroid.fdroid.views.LiveSeekBarPreference
-            android:defaultValue="@integer/defaultOverData"
-            android:key="overData"
-            android:layout="@layout/preference_seekbar"
+        <ListPreference
+            android:defaultValue="@string/defaultOverData"
+            android:entries="@array/overNetworkNames"
+            android:entryValues="@array/overNetworkValues"
+            android:key="updateOverData"
             android:title="@string/over_data" />
         <SwitchPreferenceCompat
             android:key="updateAutoDownload"
             android:summary="@string/update_auto_download_summary"
             android:title="@string/update_auto_download" />
-        <org.fdroid.fdroid.views.LiveSeekBarPreference
-            android:defaultValue="@integer/defaultUpdateInterval"
-            android:key="updateIntervalSeekBarPosition"
-            android:layout="@layout/preference_seekbar"
+        <ListPreference
+            android:defaultValue="@string/defaultUpdateInterval"
+            android:key="updateInterval"
+            android:entries="@array/updateIntervalNames"
+            android:entryValues="@array/updateIntervalValues"
             android:title="@string/update_interval" />
         <SwitchPreferenceCompat
             android:defaultValue="true"
@@ -183,17 +186,17 @@
             android:summary="@string/keep_install_history_summary"
             android:title="@string/keep_install_history" />
         <CheckBoxPreference
+            android:defaultValue="false"
+            android:dependency="expert"
             android:key="sendToFdroidMetrics"
-            android:title="@string/send_to_fdroid_metrics"
             android:summary="@string/send_to_fdroid_metrics_summary"
-            android:defaultValue="false"
-            android:dependency="expert" />
+            android:title="@string/send_to_fdroid_metrics" />
         <CheckBoxPreference
-            android:key="hideAllNotifications"
-            android:title="@string/hide_all_notifications"
-            android:summary="@string/hide_all_notifications_summary"
             android:defaultValue="false"
-            android:dependency="expert" />
+            android:dependency="expert"
+            android:key="hideAllNotifications"
+            android:summary="@string/hide_all_notifications_summary"
+            android:title="@string/hide_all_notifications" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:dependency="expert"

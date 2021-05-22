@@ -124,8 +124,15 @@
     <style name="AppDetailsSubheaderText" parent="AppDetailsSubheaderTextBase" />
 
 
-    <style name="DiscreteSeekBar" parent="Base.Widget.AppCompat.SeekBar.Discrete">
+    <style name="Widget.App.Seekbar" parent="@style/Widget.AppCompat.SeekBar.Discrete">
+
+        <item name="android:progressTint">?attr/colorPrimary</item>
+        <item name="android:secondaryProgressTint">#99ffffff</item>
+        <item name="android:thumbTint">?attr/colorPrimary</item>
+<!--        <item name="android:progressDrawable">@drawable/seekbar_track</item>-->
+<!--        <item name="android:paddingStart">0dp</item>-->
+<!--        <item name="android:paddingEnd">0dp</item>-->
         <!-- Disable default tickMarks. We draw our own in SeekBarForegroundThumb -->
-        <item name="tickMark">@null</item>
+<!--        <item name="tickMark">@null</item>-->
     </style>
 </resources>

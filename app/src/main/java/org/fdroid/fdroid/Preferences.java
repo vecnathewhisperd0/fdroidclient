@@ -83,9 +83,9 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
         editor.apply();
     }
 
-    public static final String PREF_OVER_WIFI = "overWifi";
-    public static final String PREF_OVER_DATA = "overData";
-    public static final String PREF_UPDATE_INTERVAL = "updateIntervalSeekBarPosition";
+    public static final String PREF_UPDATE_OVER_WIFI = "updateOverWifi";
+    public static final String PREF_UPDATE_OVER_DATA = "updateOverData";
+    public static final String PREF_UPDATE_INTERVAL = "updateInterval";
     public static final String PREF_AUTO_DOWNLOAD_INSTALL_UPDATES = "updateAutoDownload";
     public static final String PREF_UPDATE_NOTIFICATION_ENABLED = "updateNotify";
     public static final String PREF_THEME = "theme";
@@ -150,6 +150,13 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
     private static final String OLD_PREF_UPDATE_INTERVAL = "updateInterval";
     @Deprecated
     private static final String OLD_PREF_UPDATE_ON_WIFI_ONLY = "updateOnWifiOnly";
+
+    @Deprecated
+    public static final String OLD_PREF_UPDATE_OVER_WIFI = "overWifi";
+    @Deprecated
+    public static final String OLD_PREF_UPDATE_OVER_DATA = "overData";
+    @Deprecated
+    public static final String OLD_PREF_UPDATE_INTERVAL_SEEK_BAR_POSITION = "updateIntervalSeekBarPosition";
 
     public enum Theme {
         light,
@@ -227,7 +234,7 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
      * Get the update interval in milliseconds.
      */
     public long getUpdateInterval() {
-        int position = preferences.getInt(PREF_UPDATE_INTERVAL, IGNORED_I);
+        int position = Integer.parseInt(preferences.getString(PREF_UPDATE_INTERVAL, Integer.toString(IGNORED_I)));
         return UPDATE_INTERVAL_VALUES[position];
     }
 
@@ -238,7 +245,7 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
     @SuppressLint("ApplySharedPref")
     public void migrateOldPreferences() {
         SharedPreferences.Editor editor = preferences.edit();
-        if (migrateUpdateIntervalStringToInt(editor) || migrateOnlyOnWifi(editor)) {
+        if (migrateUpdateIntervalStringToInt(editor) || migrateOnlyOnWifi(editor) || migrateSeekBarPreferenceToListPreference(editor)) {
             editor.commit();
         }
     }
@@ -270,7 +277,7 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
             updateInterval = 0;
         }
         editor
-                .putInt(PREF_UPDATE_INTERVAL, updateInterval)
+                .putString(PREF_UPDATE_INTERVAL, Integer.toString(updateInterval))
                 .remove(OLD_PREF_UPDATE_INTERVAL);
         return true;
     }
@@ -292,10 +299,39 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
             data = OVER_NETWORK_ON_DEMAND;
         }
         editor
-                .putInt(PREF_OVER_WIFI, wifi)
-                .putInt(PREF_OVER_DATA, data)
+                .putString(PREF_UPDATE_OVER_WIFI, Integer.toString(wifi))
+                .putString(PREF_UPDATE_OVER_DATA, Integer.toString(data))
                 .remove(OLD_PREF_UPDATE_ON_WIFI_ONLY);
         return true;
+    }
+
+    /**
+     * The original seekbar preference allows int values while the new list preference only supports
+     * String.
+     */
+    private boolean migrateSeekBarPreferenceToListPreference(SharedPreferences.Editor editor) {
+        if (preferences.contains(OLD_PREF_UPDATE_OVER_WIFI)) {
+            int wifi = preferences.getInt(OLD_PREF_UPDATE_OVER_WIFI, 2);
+            editor
+                    .putString(PREF_UPDATE_OVER_WIFI, Integer.toString(wifi))
+                    .remove(OLD_PREF_UPDATE_OVER_WIFI);;
+            return true;
+        }
+        if (preferences.contains(OLD_PREF_UPDATE_OVER_DATA)) {
+            int data = preferences.getInt(OLD_PREF_UPDATE_OVER_DATA, 1);
+            editor
+                    .putString(PREF_UPDATE_OVER_DATA, Integer.toString(data))
+                    .remove(OLD_PREF_UPDATE_OVER_DATA);;
+            return true;
+        }
+        if (preferences.contains(OLD_PREF_UPDATE_INTERVAL_SEEK_BAR_POSITION)) {
+            int updateInterval = preferences.getInt(OLD_PREF_UPDATE_INTERVAL_SEEK_BAR_POSITION, 3);
+            editor
+                    .putString(PREF_UPDATE_INTERVAL, Integer.toString(updateInterval))
+                    .remove(OLD_PREF_UPDATE_INTERVAL_SEEK_BAR_POSITION);;
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -460,11 +496,11 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
     }
 
     public int getOverWifi() {
-        return preferences.getInt(PREF_OVER_WIFI, IGNORED_I);
+        return Integer.parseInt(preferences.getString(PREF_UPDATE_OVER_WIFI, Integer.toString(IGNORED_I)));
     }
 
     public int getOverData() {
-        return preferences.getInt(PREF_OVER_DATA, IGNORED_I);
+        return Integer.parseInt(preferences.getString(PREF_UPDATE_OVER_DATA, Integer.toString(IGNORED_I)));
     }
 
     /**
@@ -482,7 +518,7 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
         if (activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
             NetworkInfo wifiNetwork = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
             if (!wifiNetwork.isConnectedOrConnecting()) {
-                preferences.edit().putInt(PREF_OVER_DATA, OVER_NETWORK_ALWAYS).apply();
+                preferences.edit().putInt(PREF_UPDATE_OVER_DATA, OVER_NETWORK_ALWAYS).apply();
             }
         }
     }
