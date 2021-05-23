@@ -89,16 +89,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat
             Preferences.PREF_PROXY_PORT,
     };
 
-    private static final int[] UPDATE_INTERVAL_NAMES = {
-            R.string.interval_never,
-            R.string.interval_2w,
-            R.string.interval_1w,
-            R.string.interval_1d,
-            R.string.interval_12h,
-            R.string.interval_4h,
-            R.string.interval_1h,
-    };
-
     private static final int REQUEST_INSTALL_ORBOT = 0x1234;
 
     private PreferenceGroup otherPrefGroup;
