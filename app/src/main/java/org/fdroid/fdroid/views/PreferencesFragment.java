@@ -211,7 +211,10 @@ public class PreferencesFragment extends PreferenceFragmentCompat
             updateIntervalSeekPref.setSummary(getResources().getStringArray(R.array.updateIntervalNames)[0]);
         } else {
             updateIntervalSeekPref.setEnabled(true);
-            updateIntervalSeekPref.setSummary(getResources().getStringArray(R.array.updateIntervalNames)[Integer.parseInt(updateIntervalSeekPref.getValue())]);
+            updateIntervalSeekPref.setSummary(
+                    getResources().getStringArray(R.array.updateIntervalNames)[
+                            Integer.parseInt(updateIntervalSeekPref.getValue())]
+            );
         }
     }
 
@@ -536,7 +539,8 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         if (updateIntervalPrevious != Integer.parseInt(updateIntervalSeekPref.getValue())) {
             UpdateService.schedule(getActivity());
         } else if (Build.VERSION.SDK_INT >= 21 &&
-                (overWifiPrevious != Integer.parseInt(overWifiSeekPref.getValue())) || overDataPrevious != Integer.parseInt(overDataSeekPref.getValue())) {
+                (overWifiPrevious != Integer.parseInt(overWifiSeekPref.getValue()))
+                || overDataPrevious != Integer.parseInt(overDataSeekPref.getValue())) {
             UpdateService.schedule(getActivity());
         }
     }

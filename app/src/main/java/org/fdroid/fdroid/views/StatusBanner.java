@@ -168,7 +168,8 @@ public class StatusBanner extends androidx.appcompat.widget.AppCompatTextView {
             new SharedPreferences.OnSharedPreferenceChangeListener() {
                 @Override
                 public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-                    if (key.equals(Preferences.PREF_UPDATE_OVER_DATA) || key.equals(Preferences.PREF_UPDATE_OVER_WIFI)) {
+                    if (key.equals(Preferences.PREF_UPDATE_OVER_DATA)
+                            || key.equals(Preferences.PREF_UPDATE_OVER_WIFI)) {
                         overDataState = Preferences.get().getOverData();
                         overWiFiState = Preferences.get().getOverWifi();
                         setBannerTextAndVisibility();

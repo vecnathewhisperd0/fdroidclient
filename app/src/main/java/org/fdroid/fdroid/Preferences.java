@@ -245,7 +245,8 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
     @SuppressLint("ApplySharedPref")
     public void migrateOldPreferences() {
         SharedPreferences.Editor editor = preferences.edit();
-        if (migrateUpdateIntervalStringToInt(editor) || migrateOnlyOnWifi(editor) || migrateSeekBarPreferenceToListPreference(editor)) {
+        if (migrateUpdateIntervalStringToInt(editor) || migrateOnlyOnWifi(editor)
+                || migrateSeekBarPreferenceToListPreference(editor)) {
             editor.commit();
         }
     }
@@ -314,21 +315,24 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
             int wifi = preferences.getInt(OLD_PREF_UPDATE_OVER_WIFI, 2);
             editor
                     .putString(PREF_UPDATE_OVER_WIFI, Integer.toString(wifi))
-                    .remove(OLD_PREF_UPDATE_OVER_WIFI);;
+                    .remove(OLD_PREF_UPDATE_OVER_WIFI);
+            ;
             return true;
         }
         if (preferences.contains(OLD_PREF_UPDATE_OVER_DATA)) {
             int data = preferences.getInt(OLD_PREF_UPDATE_OVER_DATA, 1);
             editor
                     .putString(PREF_UPDATE_OVER_DATA, Integer.toString(data))
-                    .remove(OLD_PREF_UPDATE_OVER_DATA);;
+                    .remove(OLD_PREF_UPDATE_OVER_DATA);
+            ;
             return true;
         }
         if (preferences.contains(OLD_PREF_UPDATE_INTERVAL_SEEK_BAR_POSITION)) {
             int updateInterval = preferences.getInt(OLD_PREF_UPDATE_INTERVAL_SEEK_BAR_POSITION, 3);
             editor
                     .putString(PREF_UPDATE_INTERVAL, Integer.toString(updateInterval))
-                    .remove(OLD_PREF_UPDATE_INTERVAL_SEEK_BAR_POSITION);;
+                    .remove(OLD_PREF_UPDATE_INTERVAL_SEEK_BAR_POSITION);
+            ;
             return true;
         }
         return false;
