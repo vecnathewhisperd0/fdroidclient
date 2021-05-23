@@ -15,4 +15,21 @@
         <item>@string/theme_follow_system</item>
     </string-array>
 
+    <string-array name="overNetworkNames">
+        <item>@string/over_network_never_summary</item>
+        <item>@string/over_network_on_demand_summary</item>
+        <item>@string/over_network_always_summary</item>
+    </string-array>
+
+
+    <string-array name="updateIntervalNames">
+        <item>@string/interval_never</item>
+        <item>@string/interval_2w</item>
+        <item>@string/interval_1w</item>
+        <item>@string/interval_1d</item>
+        <item>@string/interval_12h</item>
+        <item>@string/interval_4h</item>
+        <item>@string/interval_1h</item>
+    </string-array>
+
 </resources>

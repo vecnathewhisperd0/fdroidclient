@@ -40,8 +40,25 @@
         <item>night</item>
     </string-array>
 
-    <integer name="defaultOverData">1</integer> <!-- Preferences.OVER_NETWORK_ON_DEMAND -->
-    <integer name="defaultOverWifi">2</integer> <!-- Preferences.OVER_NETWORK_ALWAYS -->
 
-    <integer name="defaultUpdateInterval">3</integer>
+    <string-array name="overNetworkValues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string name="defaultOverData">1</string> <!-- Preferences.OVER_NETWORK_ON_DEMAND -->
+    <string name="defaultOverWifi">2</string> <!-- Preferences.OVER_NETWORK_ALWAYS -->
+
+    <string-array name="updateIntervalValues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+
+    <string name="defaultUpdateInterval">3</string>
 </resources>

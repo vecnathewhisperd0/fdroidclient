@@ -32,25 +32,28 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/updates">
-        <org.fdroid.fdroid.views.LiveSeekBarPreference
-                android:key="overWifi"
+        <ListPreference
+                android:key="updateOverWifi"
                 android:title="@string/over_wifi"
-                android:defaultValue="@integer/defaultOverWifi"
-                android:layout="@layout/preference_seekbar"/>
-        <org.fdroid.fdroid.views.LiveSeekBarPreference
-                android:key="overData"
+                android:entries="@array/overNetworkNames"
+                android:entryValues="@array/overNetworkValues"
+                android:defaultValue="@string/defaultOverWifi"/>
+        <ListPreference
+                android:key="updateOverData"
                 android:title="@string/over_data"
-                android:defaultValue="@integer/defaultOverData"
-                android:layout="@layout/preference_seekbar"/>
+                android:entries="@array/overNetworkNames"
+                android:entryValues="@array/overNetworkValues"
+                android:defaultValue="@string/defaultOverData"/>
         <SwitchPreferenceCompat
                 android:title="@string/update_auto_download"
                 android:summary="@string/update_auto_download_summary"
                 android:key="updateAutoDownload"/>
-        <org.fdroid.fdroid.views.LiveSeekBarPreference
-                android:key="updateIntervalSeekBarPosition"
+        <ListPreference
+                android:key="updateInterval"
                 android:title="@string/update_interval"
-                android:defaultValue="@integer/defaultUpdateInterval"
-                android:layout="@layout/preference_seekbar"/>
+                android:entries="@array/updateIntervalNames"
+                android:entryValues="@array/updateIntervalValues"
+                android:defaultValue="@string/defaultUpdateInterval"/>
         <SwitchPreferenceCompat
                 android:title="@string/notify"
                 android:defaultValue="true"
