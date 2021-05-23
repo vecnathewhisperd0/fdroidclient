@@ -316,7 +316,6 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
             editor
                     .putString(PREF_UPDATE_OVER_WIFI, Integer.toString(wifi))
                     .remove(OLD_PREF_UPDATE_OVER_WIFI);
-            ;
             return true;
         }
         if (preferences.contains(OLD_PREF_UPDATE_OVER_DATA)) {
@@ -324,7 +323,6 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
             editor
                     .putString(PREF_UPDATE_OVER_DATA, Integer.toString(data))
                     .remove(OLD_PREF_UPDATE_OVER_DATA);
-            ;
             return true;
         }
         if (preferences.contains(OLD_PREF_UPDATE_INTERVAL_SEEK_BAR_POSITION)) {
@@ -332,7 +330,6 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
             editor
                     .putString(PREF_UPDATE_INTERVAL, Integer.toString(updateInterval))
                     .remove(OLD_PREF_UPDATE_INTERVAL_SEEK_BAR_POSITION);
-            ;
             return true;
         }
         return false;
