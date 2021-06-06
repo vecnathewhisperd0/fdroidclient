@@ -488,7 +488,6 @@ public final class Utils {
     public static RequestOptions getRepoAppDisplayImageOptions() {
         if (repoAppDisplayImageOptions == null) {
             repoAppDisplayImageOptions = new RequestOptions()
-                    .placeholder(R.drawable.ic_repo_app_default)
                     .error(R.drawable.ic_repo_app_default)
                     .fallback(R.drawable.ic_repo_app_default);
         }
@@ -502,7 +501,7 @@ public final class Utils {
      */
     public static void setIconFromRepoOrPM(@NonNull App app, ImageView iv, Context context) {
         RequestOptions options = Utils.getRepoAppDisplayImageOptions();
-        Glide.with(iv.getContext()).load(app.getIconUrl(iv.getContext())).apply(options).into(iv);
+        Glide.with(context).load(app.getIconUrl(iv.getContext())).apply(options).into(iv);
     }
 
     // this is all new stuff being added

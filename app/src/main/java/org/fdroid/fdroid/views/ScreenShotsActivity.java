@@ -143,7 +143,6 @@ public class ScreenShotsActivity extends AppCompatActivity {
             Glide.with(this)
                     .load(screenshotUrl)
                     .onlyRetrieveFromCache(!allowDownload)
-                    .placeholder(screenShotPlaceholder)
                     .error(screenShotPlaceholder)
                     .fallback(screenShotPlaceholder)
                     .into(screenshotView);
