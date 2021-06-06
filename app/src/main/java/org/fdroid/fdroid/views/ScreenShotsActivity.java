@@ -10,16 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-
-import org.fdroid.fdroid.FDroidApp;
-import org.fdroid.fdroid.Preferences;
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.Utils;
-import org.fdroid.fdroid.data.App;
-import org.fdroid.fdroid.data.AppProvider;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +18,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
+import com.bumptech.glide.Glide;
+
+import org.fdroid.fdroid.FDroidApp;
+import org.fdroid.fdroid.Preferences;
+import org.fdroid.fdroid.R;
+import org.fdroid.fdroid.data.App;
+import org.fdroid.fdroid.data.AppProvider;
 
 /**
  * Full screen view of an apps screenshots to swipe through. This will always
@@ -42,7 +40,7 @@ public class ScreenShotsActivity extends AppCompatActivity {
     private static final String EXTRA_PACKAGE_NAME = "EXTRA_PACKAGE_NAME";
     private static final String EXTRA_START_POSITION = "EXTRA_START_POSITION";
 
-    private static final ImageLoader IMAGE_LOADER = ImageLoader.getInstance();
+    private static boolean allowDownload = true;
 
     public static Intent getStartIntent(Context context, String packageName, int startPosition) {
         Intent intent = new Intent(context, ScreenShotsActivity.class);
@@ -77,13 +75,13 @@ public class ScreenShotsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        IMAGE_LOADER.denyNetworkDownloads(!Preferences.get().isOnDemandDownloadAllowed());
+        allowDownload = Preferences.get().isOnDemandDownloadAllowed();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        IMAGE_LOADER.denyNetworkDownloads(!Preferences.get().isBackgroundDownloadAllowed());
+        allowDownload = Preferences.get().isBackgroundDownloadAllowed();
     }
 
     private static class ScreenShotPagerAdapter extends FragmentStatePagerAdapter {
@@ -138,17 +136,17 @@ public class ScreenShotsActivity extends AppCompatActivity {
                     inflater.getContext(),
                     R.drawable.screenshot_placeholder
             );
-            DisplayImageOptions displayImageOptions = Utils.getDefaultDisplayImageOptionsBuilder()
-                    .showImageOnFail(screenShotPlaceholder)
-                    .showImageOnLoading(screenShotPlaceholder)
-                    .showImageForEmptyUri(screenShotPlaceholder)
-                    .build();
 
             View rootView = inflater.inflate(R.layout.activity_screenshots_page, container, false);
 
             ImageView screenshotView = (ImageView) rootView.findViewById(R.id.screenshot);
-            ImageLoader.getInstance().displayImage(screenshotUrl, screenshotView, displayImageOptions);
-
+            Glide.with(this)
+                    .load(screenshotUrl)
+                    .onlyRetrieveFromCache(!allowDownload)
+                    .placeholder(screenShotPlaceholder)
+                    .error(screenShotPlaceholder)
+                    .fallback(screenShotPlaceholder)
+                    .into(screenshotView);
             return rootView;
         }
     }

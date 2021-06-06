@@ -18,13 +18,15 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.StyleSpan;
-import android.view.View;
+import android.widget.RemoteViews;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.assist.ImageSize;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
-import com.nostra13.universalimageloader.utils.DiskCacheUtils;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.NotificationTarget;
 
 import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.views.AppDetailsActivity;
@@ -32,11 +34,6 @@ import org.fdroid.fdroid.views.main.MainActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.core.content.ContextCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 @SuppressWarnings("LineLength")
 public class NotificationHelper {
@@ -325,7 +322,6 @@ public class NotificationHelper {
         App app = entry.app;
         AppUpdateStatusManager.Status status = entry.status;
 
-        Bitmap iconLarge = getLargeIconForEntry(entry);
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(context, CHANNEL_UPDATES)
                         .setAutoCancel(true)
@@ -333,7 +329,6 @@ public class NotificationHelper {
                         .setContentText(getSingleItemContentString(app, status))
                         .setSmallIcon(R.drawable.ic_notification)
                         .setColor(ContextCompat.getColor(context, R.color.fdroid_blue))
-                        .setLargeIcon(iconLarge)
                         .setLocalOnly(true)
                         .setVisibility(NotificationCompat.VISIBILITY_SECRET)
                         .setContentIntent(entry.intent);
@@ -371,7 +366,9 @@ public class NotificationHelper {
         intentDeleted.setClass(context, NotificationBroadcastReceiver.class);
         PendingIntent piDeleted = PendingIntent.getBroadcast(context, 0, intentDeleted, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setDeleteIntent(piDeleted);
-        return builder.build();
+        Notification notification = builder.build();
+        loadLargeIconForEntry(entry, R.id.right_icon, notification.contentView, notification, NOTIFY_ID_UPDATES, null);
+        return notification;
     }
 
     private Notification createUpdateSummaryNotification(ArrayList<AppUpdateStatusManager.AppUpdateStatus> updates) {
@@ -438,11 +435,9 @@ public class NotificationHelper {
     private Notification createInstalledNotification(AppUpdateStatusManager.AppUpdateStatus entry) {
         App app = entry.app;
 
-        Bitmap iconLarge = getLargeIconForEntry(entry);
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(context, CHANNEL_INSTALLS)
                         .setAutoCancel(true)
-                        .setLargeIcon(iconLarge)
                         .setSmallIcon(R.drawable.ic_notification)
                         .setColor(ContextCompat.getColor(context, R.color.fdroid_blue))
                         .setContentTitle(app.name)
@@ -461,7 +456,9 @@ public class NotificationHelper {
         PendingIntent piDeleted = PendingIntent.getBroadcast(context, 0, intentDeleted, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setDeleteIntent(piDeleted);
 
-        return builder.build();
+        Notification notification = builder.build();
+        loadLargeIconForEntry(entry, R.id.right_icon, notification.contentView, notification, NOTIFY_ID_INSTALLED, null);
+        return notification;
     }
 
     private Notification createInstalledSummaryNotification(ArrayList<AppUpdateStatusManager.AppUpdateStatus> installed) {
@@ -518,12 +515,17 @@ public class NotificationHelper {
         return new Point(w, h);
     }
 
-    private Bitmap getLargeIconForEntry(AppUpdateStatusManager.AppUpdateStatus entry) {
+    private void loadLargeIconForEntry(AppUpdateStatusManager.AppUpdateStatus entry,
+                                       int viewId,
+                                       RemoteViews remoteViews,
+                                       Notification notification,
+                                       int notificationId,
+                                       String notificationTag) {
         final Point largeIconSize = getLargeIconSize();
-        Bitmap iconLarge = null;
-        if (TextUtils.isEmpty(entry.app.getIconUrl(context))) {
-            return null;
-        } else if (entry.status == AppUpdateStatusManager.Status.Downloading
+
+        if (TextUtils.isEmpty(entry.app.getIconUrl(context))) return;
+
+        if (entry.status == AppUpdateStatusManager.Status.Downloading
                 || entry.status == AppUpdateStatusManager.Status.Installing) {
             Bitmap bitmap = Bitmap.createBitmap(largeIconSize.x, largeIconSize.y, Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(bitmap);
@@ -532,50 +534,29 @@ public class NotificationHelper {
                 downloadIcon.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
                 downloadIcon.draw(canvas);
             }
-            return bitmap;
-        } else if (DiskCacheUtils.findInCache(entry.app.getIconUrl(context), ImageLoader.getInstance().getDiskCache()) != null) {
-            iconLarge = ImageLoader.getInstance().loadImageSync(
-                    entry.app.getIconUrl(context), new ImageSize(largeIconSize.x, largeIconSize.y));
+            Glide.with(context)
+                    .asBitmap()
+                    .load(bitmap)
+                    .into(new NotificationTarget(context,
+                            largeIconSize.x,
+                            largeIconSize.y,
+                            viewId,
+                            remoteViews,
+                            notification,
+                            notificationId,
+                            notificationTag));
         } else {
-            // Load it for later!
-            ImageLoader.getInstance().loadImage(entry.app.getIconUrl(context), new ImageSize(largeIconSize.x, largeIconSize.y), new ImageLoadingListener() {
-
-                AppUpdateStatusManager.AppUpdateStatus entry;
-
-                ImageLoadingListener init(AppUpdateStatusManager.AppUpdateStatus entry) {
-                    this.entry = entry;
-                    return this;
-                }
-
-                @Override
-                public void onLoadingStarted(String imageUri, View view) {
-
-                }
-
-                @Override
-                public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-
-                }
-
-                @Override
-                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                    // Need to check that the notification is still valid, and also that the image
-                    // is indeed cached now, so we won't get stuck in an endless loop.
-                    AppUpdateStatusManager.AppUpdateStatus oldEntry = appUpdateStatusManager.get(entry.getCanonicalUrl());
-                    if (oldEntry != null
-                            && oldEntry.app != null
-                            && oldEntry.app.getIconUrl(context) != null
-                            && DiskCacheUtils.findInCache(oldEntry.app.getIconUrl(context), ImageLoader.getInstance().getDiskCache()) != null) {
-                        createNotification(oldEntry); // Update with new image!
-                    }
-                }
-
-                @Override
-                public void onLoadingCancelled(String imageUri, View view) {
-
-                }
-            }.init(entry));
+            Glide.with(context)
+                    .asBitmap()
+                    .load(entry.app.getIconUrl(context))
+                    .into(new NotificationTarget(context,
+                            largeIconSize.x,
+                            largeIconSize.y,
+                            viewId,
+                            remoteViews,
+                            notification,
+                            notificationId,
+                            notificationTag));
         }
-        return iconLarge;
     }
 }

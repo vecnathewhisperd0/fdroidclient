@@ -7,23 +7,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.Utils;
-import org.fdroid.fdroid.data.App;
-
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
+import org.fdroid.fdroid.R;
+import org.fdroid.fdroid.data.App;
 
 /**
  * Loads and displays the small screenshots that are inline in {@link AppDetailsActivity}
  */
 class ScreenShotsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final String[] screenshots;
-    private final DisplayImageOptions displayImageOptions;
+    private final RequestOptions displayImageOptions;
     private final Listener listener;
 
     ScreenShotsRecyclerViewAdapter(Context context, App app, Listener listener) {
@@ -33,18 +32,16 @@ class ScreenShotsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         screenshots = app.getAllScreenshots(context);
 
         Drawable screenShotPlaceholder = ContextCompat.getDrawable(context, R.drawable.screenshot_placeholder);
-        displayImageOptions = Utils.getDefaultDisplayImageOptionsBuilder()
-                .showImageOnFail(screenShotPlaceholder)
-                .showImageOnLoading(screenShotPlaceholder)
-                .showImageForEmptyUri(screenShotPlaceholder)
-                .build();
+        displayImageOptions = new RequestOptions()
+                .fallback(screenShotPlaceholder)
+                .placeholder(screenShotPlaceholder)
+                .error(screenShotPlaceholder);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         final ScreenShotViewHolder vh = (ScreenShotViewHolder) holder;
-        ImageLoader.getInstance().displayImage(screenshots[position],
-                vh.image, displayImageOptions);
+        Glide.with(vh.itemView).load(screenshots[position]).apply(displayImageOptions).into(vh.image);
     }
 
     @NonNull
