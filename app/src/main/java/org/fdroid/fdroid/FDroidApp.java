@@ -519,24 +519,6 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
         return false;
     }
 
-    /**
-     * Return the number of threads Universal Image Loader should use, based on
-     * the total RAM in the device.  Devices with lots of RAM can do lots of
-     * parallel operations for fast icon loading.
-     */
-    @TargetApi(16)
-    private int getThreadPoolSize() {
-        if (Build.VERSION.SDK_INT >= 16) {
-            ActivityManager activityManager = ContextCompat.getSystemService(this, ActivityManager.class);
-            ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
-            if (activityManager != null) {
-                activityManager.getMemoryInfo(memInfo);
-                return (int) Math.max(1, Math.min(16, memInfo.totalMem / 256 / 1024 / 1024));
-            }
-        }
-        return 2;
-    }
-
     private SharedPreferences getAtStartTimeSharedPreferences() {
         return getSharedPreferences("at-start-time", Context.MODE_PRIVATE);
     }

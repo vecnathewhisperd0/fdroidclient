@@ -97,7 +97,7 @@ public class ConnectivityMonitorService extends JobIntentService {
                     if (netIf.getDisplayName().contains("wlan0")
                             || netIf.getDisplayName().contains("eth0")
                             || netIf.getDisplayName().contains("ap0")) {
-                        for (Enumeration<InetAddress> addr = netIf.getInetAddresses(); addr.hasMoreElements(); ) {
+                        for (Enumeration<InetAddress> addr = netIf.getInetAddresses(); addr.hasMoreElements();) {
                             InetAddress inetAddress = addr.nextElement();
                             if (inetAddress.isLoopbackAddress() || inetAddress instanceof Inet6Address) {
                                 continue;
@@ -136,7 +136,8 @@ public class ConnectivityMonitorService extends JobIntentService {
         if (ACTION_START.equals(intent.getAction())) {
             FDroidApp.networkState = getNetworkState(this);
             Glide.with(getApplicationContext())
-                    .setDefaultRequestOptions(new RequestOptions().onlyRetrieveFromCache(!Preferences.get().isBackgroundDownloadAllowed()));
+                    .setDefaultRequestOptions(new RequestOptions().onlyRetrieveFromCache(!Preferences.get()
+                            .isBackgroundDownloadAllowed()));
         }
     }
 }
