@@ -18,15 +18,17 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.StyleSpan;
-import android.widget.RemoteViews;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.NotificationTarget;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.views.AppDetailsActivity;
@@ -367,7 +369,7 @@ public class NotificationHelper {
         PendingIntent piDeleted = PendingIntent.getBroadcast(context, 0, intentDeleted, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setDeleteIntent(piDeleted);
         Notification notification = builder.build();
-        loadLargeIconForEntry(entry, R.id.right_icon, notification.contentView, notification, NOTIFY_ID_UPDATES, null);
+        loadLargeIconForEntry(entry, builder, NOTIFY_ID_UPDATES, entry.getCanonicalUrl());
         return notification;
     }
 
@@ -457,7 +459,7 @@ public class NotificationHelper {
         builder.setDeleteIntent(piDeleted);
 
         Notification notification = builder.build();
-        loadLargeIconForEntry(entry, R.id.right_icon, notification.contentView, notification, NOTIFY_ID_INSTALLED, null);
+        loadLargeIconForEntry(entry, builder, NOTIFY_ID_INSTALLED, entry.getCanonicalUrl());
         return notification;
     }
 
@@ -516,9 +518,7 @@ public class NotificationHelper {
     }
 
     private void loadLargeIconForEntry(AppUpdateStatusManager.AppUpdateStatus entry,
-                                       int viewId,
-                                       RemoteViews remoteViews,
-                                       Notification notification,
+                                       NotificationCompat.Builder notificationBuilder,
                                        int notificationId,
                                        String notificationTag) {
         final Point largeIconSize = getLargeIconSize();
@@ -537,26 +537,36 @@ public class NotificationHelper {
             Glide.with(context)
                     .asBitmap()
                     .load(bitmap)
-                    .into(new NotificationTarget(context,
-                            largeIconSize.x,
-                            largeIconSize.y,
-                            viewId,
-                            remoteViews,
-                            notification,
-                            notificationId,
-                            notificationTag));
+                    .into(new CustomTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                            // update the loaded large icon, but don't expand
+                            notificationBuilder.setLargeIcon(resource);
+                            Notification notification = notificationBuilder.build();
+                            notificationManager.notify(notificationTag, notificationId, notification);
+                        }
+
+                        @Override
+                        public void onLoadCleared(@Nullable Drawable drawable) {
+                        }
+                    });
         } else {
             Glide.with(context)
                     .asBitmap()
                     .load(entry.app.getIconUrl(context))
-                    .into(new NotificationTarget(context,
-                            largeIconSize.x,
-                            largeIconSize.y,
-                            viewId,
-                            remoteViews,
-                            notification,
-                            notificationId,
-                            notificationTag));
+                    .into(new CustomTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                            // update the loaded large icon, but don't expand
+                            notificationBuilder.setLargeIcon(resource);
+                            Notification notification = notificationBuilder.build();
+                            notificationManager.notify(notificationTag, notificationId, notification);
+                        }
+
+                        @Override
+                        public void onLoadCleared(@Nullable Drawable drawable) {
+                        }
+                    });
         }
     }
 }
