@@ -368,9 +368,8 @@ public class NotificationHelper {
         intentDeleted.setClass(context, NotificationBroadcastReceiver.class);
         PendingIntent piDeleted = PendingIntent.getBroadcast(context, 0, intentDeleted, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setDeleteIntent(piDeleted);
-        Notification notification = builder.build();
         loadLargeIconForEntry(entry, builder, NOTIFY_ID_UPDATES, entry.getCanonicalUrl());
-        return notification;
+        return builder.build();
     }
 
     private Notification createUpdateSummaryNotification(ArrayList<AppUpdateStatusManager.AppUpdateStatus> updates) {
@@ -458,9 +457,8 @@ public class NotificationHelper {
         PendingIntent piDeleted = PendingIntent.getBroadcast(context, 0, intentDeleted, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setDeleteIntent(piDeleted);
 
-        Notification notification = builder.build();
         loadLargeIconForEntry(entry, builder, NOTIFY_ID_INSTALLED, entry.getCanonicalUrl());
-        return notification;
+        return builder.build();
     }
 
     private Notification createInstalledSummaryNotification(ArrayList<AppUpdateStatusManager.AppUpdateStatus> installed) {
