@@ -35,7 +35,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -92,26 +92,24 @@ public class RepoProviderTest extends FDroidProviderTest {
 
         Repo gpRepo = RepoProvider.Helper.findByAddress(context, "https://guardianproject.info/fdroid/repo");
 
-        // Set date to 2017-04-05 11:56:38
-        setLastUpdate(gpRepo, new Date(1491357408643L));
+        final LocalDateTime localDateTime = LocalDateTime.of(2017, 4, 5, 11, 56, 38);
+        setLastUpdate(gpRepo, localDateTime);
 
         // GP is not yet enabled, so it is not counted.
         assertNull(RepoProvider.Helper.lastUpdate(context));
 
-        // Set date to 2017-04-04 11:56:38
         Repo fdroidRepo = RepoProvider.Helper.findByAddress(context, "https://f-droid.org/repo");
-        setLastUpdate(fdroidRepo, new Date(1491357408643L - (1000 * 60 * 60 * 24)));
-        assertEquals("2017-04-04", Utils.formatDate(RepoProvider.Helper.lastUpdate(context), null));
+        setLastUpdate(fdroidRepo, localDateTime.minusDays(1));
+        assertEquals("2017-04-04", Utils.formatLocalDate(RepoProvider.Helper.lastUpdate(context), null));
 
         setEnabled(gpRepo, true);
-        assertEquals("2017-04-05", Utils.formatDate(RepoProvider.Helper.lastUpdate(context), null));
+        assertEquals("2017-04-05", Utils.formatLocalDate(RepoProvider.Helper.lastUpdate(context), null));
     }
 
-    private Repo setLastUpdate(Repo repo, Date date) {
+    private void setLastUpdate(Repo repo, LocalDateTime localDateTime) {
         ContentValues values = new ContentValues(1);
-        values.put(RepoTable.Cols.LAST_UPDATED, Utils.formatTime(date, null));
+        values.put(RepoTable.Cols.LAST_UPDATED, Utils.formatLocalDateTime(localDateTime, null));
         RepoProvider.Helper.update(context, repo, values);
-        return RepoProvider.Helper.findByAddress(context, repo.address);
     }
 
     @Test

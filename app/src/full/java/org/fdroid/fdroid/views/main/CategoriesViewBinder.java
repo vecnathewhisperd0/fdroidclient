@@ -135,14 +135,7 @@ class CategoriesViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
             cursor.moveToNext();
         }
 
-        Collections.sort(categoryNames, new Comparator<String>() {
-            @Override
-            public int compare(String categoryOne, String categoryTwo) {
-                String localizedCategoryOne = CategoryController.translateCategory(activity, categoryOne);
-                String localizedCategoryTwo = CategoryController.translateCategory(activity, categoryTwo);
-                return localizedCategoryOne.compareTo(localizedCategoryTwo);
-            }
-        });
+        Collections.sort(categoryNames, Comparator.comparing(this::translateCategory));
 
         categoryAdapter.setCategories(categoryNames);
 
@@ -153,6 +146,10 @@ class CategoriesViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
             emptyState.setVisibility(View.GONE);
             categoriesList.setVisibility(View.VISIBLE);
         }
+    }
+
+    private String translateCategory(String category) {
+        return CategoryController.translateCategory(activity, category);
     }
 
     @Override

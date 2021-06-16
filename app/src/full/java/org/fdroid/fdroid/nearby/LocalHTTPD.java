@@ -47,18 +47,20 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
 import java.net.URLEncoder;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.TimeZone;
+
+import javax.net.ssl.SSLServerSocketFactory;
+
+import fi.iki.elonen.NanoHTTPD;
+import fi.iki.elonen.NanoHTTPD.Response.IStatus;
 
 import javax.net.ssl.SSLServerSocketFactory;
 
@@ -85,14 +87,6 @@ public class LocalHTTPD extends NanoHTTPD {
     private final WeakReference<Context> context;
 
     protected List<File> rootDirs;
-
-    // Date format specified by RFC 7231 section 7.1.1.1.
-    private static final DateFormat RFC_1123 = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss 'GMT'", Locale.US);
-
-    static {
-        RFC_1123.setLenient(false);
-        RFC_1123.setTimeZone(TimeZone.getTimeZone("GMT"));
-    }
 
     /**
      * Configure and start the webserver.  This also sets the MIME Types only
@@ -445,10 +439,10 @@ public class LocalHTTPD extends NanoHTTPD {
                     res.addHeader("Content-Length", "" + newLen);
                     res.addHeader("Content-Range", "bytes " + startFrom + "-" + endAt + "/" + fileLen);
                     res.addHeader("ETag", etag);
-                    res.addHeader("Last-Modified", RFC_1123.format(new Date(file.lastModified())));
+                    res.addHeader("Last-Modified",
+                            DateTimeFormatter.RFC_1123_DATE_TIME.format(Instant.ofEpochMilli(file.lastModified())));
                 }
             } else {
-
                 if (headerIfRangeMissingOrMatching && range != null && startFrom >= fileLen) {
                     // return the size of the file
                     // 4xx responses are not trumped by if-none-match
@@ -473,7 +467,8 @@ public class LocalHTTPD extends NanoHTTPD {
                     res = newFixedFileResponse(file, mime);
                     res.addHeader("Content-Length", "" + fileLen);
                     res.addHeader("ETag", etag);
-                    res.addHeader("Last-Modified", RFC_1123.format(new Date(file.lastModified())));
+                    res.addHeader("Last-Modified",
+                            DateTimeFormatter.RFC_1123_DATE_TIME.format(Instant.ofEpochMilli(file.lastModified())));
                 }
             }
         } catch (IOException ioe) {

@@ -40,6 +40,8 @@ import org.fdroid.fdroid.data.Repo;
 import org.fdroid.fdroid.data.RepoProvider;
 import org.fdroid.fdroid.data.Schema.RepoTable;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Locale;
@@ -410,11 +412,11 @@ public class RepoDetailsActivity extends AppCompatActivity {
         if (repo.lastUpdated == null) {
             lastUpdated.setText(R.string.unknown);
         } else {
-            int format = DateUtils.isToday(repo.lastUpdated.getTime()) ?
+            int format = LocalDate.now().isEqual(repo.lastUpdated.toLocalDate()) ?
                     DateUtils.FORMAT_SHOW_TIME :
                     DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE;
             lastUpdated.setText(DateUtils.formatDateTime(this,
-                    repo.lastUpdated.getTime(), format));
+                    repo.lastUpdated.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli(), format));
         }
     }
 

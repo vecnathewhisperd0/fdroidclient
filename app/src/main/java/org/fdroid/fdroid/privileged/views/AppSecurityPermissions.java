@@ -94,8 +94,6 @@ public class AppSecurityPermissions {
     private final PackageManager pm;
     private final Map<String, MyPermissionGroupInfo> permGroups = new HashMap<>();
     private final List<MyPermissionGroupInfo> permGroupsList = new ArrayList<>();
-    private final PermissionGroupInfoComparator permGroupComparator = new PermissionGroupInfoComparator();
-    private final PermissionInfoComparator permComparator = new PermissionInfoComparator();
     private final CharSequence newPermPrefix;
 
     // PermissionGroupInfo implements Parcelable but its Parcel constructor is private and thus cannot be extended.
@@ -131,6 +129,9 @@ public class AppSecurityPermissions {
             return wrappedIconDrawable;
         }
 
+        CharSequence getLabel() {
+            return label;
+        }
     }
 
     // PermissionInfo implements Parcelable but its Parcel constructor is private and thus cannot be extended.
@@ -151,6 +152,10 @@ public class AppSecurityPermissions {
 
         MyPermissionInfo(PermissionInfo info) {
             super(info);
+        }
+
+        CharSequence getLabel() {
+            return label;
         }
     }
 
@@ -450,33 +455,13 @@ public class AppSecurityPermissions {
         return isDevelopment && wasGranted;
     }
 
-    private static class PermissionGroupInfoComparator implements Comparator<MyPermissionGroupInfo> {
-
-        private final Collator collator = Collator.getInstance();
-
-        public final int compare(MyPermissionGroupInfo a, MyPermissionGroupInfo b) {
-            return collator.compare(a.label, b.label);
-        }
-    }
-
-    private static class PermissionInfoComparator implements Comparator<MyPermissionInfo> {
-
-        private final Collator collator = Collator.getInstance();
-
-        PermissionInfoComparator() {
-        }
-
-        public final int compare(MyPermissionInfo a, MyPermissionInfo b) {
-            return collator.compare(a.label, b.label);
-        }
-    }
-
     private void addPermToList(List<MyPermissionInfo> permList,
                                MyPermissionInfo pInfo) {
         if (pInfo.label == null) {
             pInfo.label = pInfo.loadLabel(pm);
         }
-        int idx = Collections.binarySearch(permList, pInfo, permComparator);
+        int idx = Collections.binarySearch(permList, pInfo, Comparator.comparing(MyPermissionInfo::getLabel,
+                Collator.getInstance()));
         if (idx < 0) {
             idx = -idx - 1;
             permList.add(idx, pInfo);
@@ -514,6 +499,7 @@ public class AppSecurityPermissions {
             }
             permGroupsList.add(pgrp);
         }
-        Collections.sort(permGroupsList, permGroupComparator);
+        Collections.sort(permGroupsList, Comparator.comparing(MyPermissionGroupInfo::getLabel,
+                Collator.getInstance()));
     }
 }

@@ -39,6 +39,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -143,8 +144,8 @@ public class RepoXMLHandlerTest {
         });
         for (App app : actualDetails.apps) {
             if ("org.mozilla.firefox".equals(app.packageName)) {
-                assertEquals(1411776000000L, app.added.getTime());
-                assertEquals(1411862400000L, app.lastUpdated.getTime());
+                assertEquals(1411776000000L, app.added.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli());
+                assertEquals(1411862400000L, app.lastUpdated.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli());
             }
         }
     }
@@ -916,8 +917,8 @@ public class RepoXMLHandlerTest {
         assertNotNull(apps);
         assertEquals(apps.size(), appCount);
         for (App app : apps) {
-            assertTrue("Added should have been set", app.added.getTime() > 0);
-            assertTrue("Last Updated should have been set", app.lastUpdated.getTime() > 0);
+            assertTrue("Added should have been set", app.added.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli() > 0);
+            assertTrue("Last Updated should have been set", app.lastUpdated.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli() > 0);
         }
 
         List<Apk> apks = actualDetails.apks;

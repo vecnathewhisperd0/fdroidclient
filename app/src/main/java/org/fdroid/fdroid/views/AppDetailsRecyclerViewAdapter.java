@@ -14,7 +14,6 @@ import android.os.Build;
 import android.text.Spannable;
 import android.text.Spanned;
 import android.text.TextUtils;
-import android.text.format.DateFormat;
 import android.text.method.LinkMovementMethod;
 import android.text.style.URLSpan;
 import android.text.util.Linkify;
@@ -47,6 +46,7 @@ import org.fdroid.fdroid.views.appdetails.AntiFeaturesListingView;
 import org.fdroid.fdroid.views.main.MainActivity;
 
 import java.io.File;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -1135,9 +1135,8 @@ public class AppDetailsRecyclerViewAdapter
 
             // Added date
             if (apk.added != null) {
-                java.text.DateFormat df = DateFormat.getDateFormat(context);
                 added.setVisibility(View.VISIBLE);
-                added.setText(context.getString(R.string.added_on, df.format(apk.added)));
+                added.setText(context.getString(R.string.added_on, DateTimeFormatter.ISO_LOCAL_DATE.format(apk.added)));
             } else {
                 added.setVisibility(View.INVISIBLE);
             }

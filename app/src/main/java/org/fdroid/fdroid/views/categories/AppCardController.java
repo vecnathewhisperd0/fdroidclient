@@ -20,6 +20,9 @@ import androidx.core.util.Pair;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 /**
  * The {@link AppCardController} can bind an app to several different layouts, as long as the layout
  * contains the following elements:
@@ -85,11 +88,11 @@ public class AppCardController extends RecyclerView.ViewHolder
 
     private boolean isConsideredNew(@NonNull App app) {
         //noinspection SimplifiableIfStatement
-        if (app.added == null || app.lastUpdated == null || !app.added.equals(app.lastUpdated)) {
+        if (app.added == null || !app.added.equals(app.lastUpdated)) {
             return false;
         }
 
-        return Utils.daysSince(app.added) <= DAYS_TO_CONSIDER_NEW;
+        return ChronoUnit.DAYS.between(app.added, LocalDate.now()) <= DAYS_TO_CONSIDER_NEW;
     }
 
     /**

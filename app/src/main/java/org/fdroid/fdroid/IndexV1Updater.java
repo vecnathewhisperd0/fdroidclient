@@ -28,6 +28,8 @@ import android.content.pm.PackageInfo;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonFactory;
@@ -58,9 +60,9 @@ import java.net.ProtocolException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.security.cert.X509Certificate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -72,8 +74,6 @@ import javax.net.ssl.SSLHandshakeException;
 import javax.net.ssl.SSLKeyException;
 import javax.net.ssl.SSLPeerUnverifiedException;
 import javax.net.ssl.SSLProtocolException;
-
-import androidx.annotation.NonNull;
 
 /**
  * Receives the index data about all available apps and packages via the V1
@@ -347,7 +347,7 @@ public class IndexV1Updater extends IndexUpdater {
         notifyCommittingToDb();
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(Schema.RepoTable.Cols.LAST_UPDATED, Utils.formatTime(new Date(), ""));
+        contentValues.put(Schema.RepoTable.Cols.LAST_UPDATED, Utils.formatLocalDateTime(LocalDateTime.now(), ""));
         contentValues.put(Schema.RepoTable.Cols.TIMESTAMP, repo.timestamp);
         contentValues.put(Schema.RepoTable.Cols.LAST_ETAG, repo.lastetag);
         if (repo.version != Repo.INT_UNSET_VALUE) {
@@ -476,7 +476,7 @@ public class IndexV1Updater extends IndexUpdater {
             }
             Utils.debugLog(TAG, "Saving new signing certificate to database for " + repo.address);
             ContentValues values = new ContentValues(2);
-            values.put(Schema.RepoTable.Cols.LAST_UPDATED, Utils.formatTime(new Date(), ""));
+            values.put(Schema.RepoTable.Cols.LAST_UPDATED, Utils.formatLocalDateTime(LocalDateTime.now(), ""));
             values.put(Schema.RepoTable.Cols.SIGNING_CERT, Hasher.hex(rawCertFromJar));
             RepoProvider.Helper.update(context, repo, values);
             repo.signingCertificate = certFromJar;

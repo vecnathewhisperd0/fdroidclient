@@ -198,7 +198,7 @@ public class RepoXMLHandler extends DefaultHandler {
                     curapk.obbPatchFileSha256 = str;
                     break;
                 case ApkTable.Cols.ADDED_DATE:
-                    curapk.added = Utils.parseDate(str, null);
+                    curapk.added = Utils.parseLocalDate(str, null);
                     break;
                 case "permissions": // together with <uses-permissions* makes ApkTable.Cols.REQUESTED_PERMISSIONS
                     addCommaSeparatedPermissions(str);
@@ -268,10 +268,10 @@ public class RepoXMLHandler extends DefaultHandler {
                     curapp.issueTracker = str;
                     break;
                 case "added":
-                    curapp.added = Utils.parseDate(str, null);
+                    curapp.added = Utils.parseLocalDate(str, null);
                     break;
                 case "lastupdated":
-                    curapp.lastUpdated = Utils.parseDate(str, null);
+                    curapp.lastUpdated = Utils.parseLocalDate(str, null);
                     break;
                 case "marketversion":
                     curapp.suggestedVersionName = str;

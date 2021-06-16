@@ -67,7 +67,7 @@ import org.fdroid.fdroid.net.HttpDownloader;
 import org.fdroid.fdroid.qr.CameraCharacteristicsChecker;
 import org.fdroid.fdroid.views.main.MainActivity;
 
-import java.util.Date;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -842,9 +842,9 @@ public class SwapWorkflowActivity extends AppCompatActivity {
                 }
             }
 
-            Date now = new Date();
+            LocalTime now = LocalTime.now();
             Utils.debugLog("SWAP_STATUS",
-                    now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds() + " " + message);
+                    now.getHour() + ":" + now.getMinute() + ":" + now.getSecond() + " " + message);
 
             new Timer().schedule(new TimerTask() {
                                      @Override
