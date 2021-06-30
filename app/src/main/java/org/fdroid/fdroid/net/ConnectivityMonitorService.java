@@ -135,9 +135,6 @@ public class ConnectivityMonitorService extends JobIntentService {
     protected void onHandleWork(@NonNull Intent intent) {
         if (ACTION_START.equals(intent.getAction())) {
             FDroidApp.networkState = getNetworkState(this);
-            Glide.with(getApplicationContext())
-                    .setDefaultRequestOptions(new RequestOptions().onlyRetrieveFromCache(!Preferences.get()
-                            .isBackgroundDownloadAllowed()));
         }
     }
 }
