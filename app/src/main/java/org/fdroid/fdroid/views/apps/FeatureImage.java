@@ -262,12 +262,12 @@ public class FeatureImage extends AppCompatImageView {
         Glide.with(getContext()).asBitmap().load(url).apply(imageOptions).listener(new RequestListener<Bitmap>() {
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, Object o, Target<Bitmap> target, boolean b) {
+                setColorAndAnimateChange(Color.LTGRAY);
                 return false;
             }
 
             @Override
             public boolean onResourceReady(Bitmap loadedImage, Object o, Target<Bitmap> target, DataSource dataSource, boolean b) {
-                new Palette.Builder(loadedImage).generate(palette -> setColorAndAnimateChange(palette.getDominantColor(Color.LTGRAY)));
                 return false;
             }
         }).into(this);

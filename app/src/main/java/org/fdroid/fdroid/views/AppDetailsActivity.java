@@ -149,7 +149,7 @@ public class AppDetailsActivity extends AppCompatActivity
 
         // Load the feature graphic, if present
         final FeatureImage featureImage = (FeatureImage) findViewById(R.id.feature_graphic);
-        RequestOptions displayImageOptions = Utils.getRepoAppDisplayImageOptions();
+        RequestOptions displayImageOptions = new RequestOptions();
         String featureGraphicUrl = app.getFeatureGraphicUrl(this);
         featureImage.loadImageAndDisplay(displayImageOptions,
                 featureGraphicUrl, app.getIconUrl(this));
