@@ -31,10 +31,9 @@ class ScreenShotsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
 
         screenshots = app.getAllScreenshots(context);
 
-        Drawable screenShotPlaceholder = ContextCompat.getDrawable(context, R.drawable.screenshot_placeholder);
         displayImageOptions = new RequestOptions()
-                .fallback(screenShotPlaceholder)
-                .error(screenShotPlaceholder);
+                .fallback(R.drawable.screenshot_placeholder)
+                .error(R.drawable.screenshot_placeholder);
     }
 
     @Override

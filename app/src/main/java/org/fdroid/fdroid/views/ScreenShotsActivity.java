@@ -131,20 +131,14 @@ public class ScreenShotsActivity extends AppCompatActivity {
         @Override
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                                  @Nullable Bundle savedInstanceState) {
-
-            Drawable screenShotPlaceholder = ContextCompat.getDrawable(
-                    inflater.getContext(),
-                    R.drawable.screenshot_placeholder
-            );
-
             View rootView = inflater.inflate(R.layout.activity_screenshots_page, container, false);
 
             ImageView screenshotView = (ImageView) rootView.findViewById(R.id.screenshot);
             Glide.with(this)
                     .load(screenshotUrl)
                     .onlyRetrieveFromCache(!allowDownload)
-                    .error(screenShotPlaceholder)
-                    .fallback(screenShotPlaceholder)
+                    .error(R.drawable.screenshot_placeholder)
+                    .fallback(R.drawable.screenshot_placeholder)
                     .into(screenshotView);
             return rootView;
         }
