@@ -14,11 +14,7 @@ import androidx.core.app.JobIntentService;
 import androidx.core.content.ContextCompat;
 import androidx.core.net.ConnectivityManagerCompat;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-
 import org.fdroid.fdroid.FDroidApp;
-import org.fdroid.fdroid.Preferences;
 
 import java.net.Inet6Address;
 import java.net.InetAddress;
