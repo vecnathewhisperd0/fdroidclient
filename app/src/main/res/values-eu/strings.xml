@@ -42,10 +42,9 @@
     <string name="menu_issues">Arazoak</string>
     <string name="menu_source">Iturburu-kodea</string>
     <string name="menu_upgrade">Eguneratu</string>
-    <string name="menu_donate">Egin dohaintza</string>
     <string name="details_notinstalled">Instalatu gabe</string>
     <string name="antiadslist">Aplikazio honek iragarkiak ditu</string>
-    <string name="display">Bistaratu</string>
+    <string name="display">Bistaratzea</string>
     <string name="expert">Modu aditua</string>
     <string name="search_hint">Bilatu aplikazioak</string>
     <string name="appcompatibility">Aplikazioen bateragarritasuna</string>
@@ -54,7 +53,7 @@
         \nkonektatzen
     </string>
     <string name="no_permissions">Ez dago baimenik</string>
-    <string name="theme">Itxura</string>
+    <string name="theme">Azala</string>
     <string name="unsigned">Sinatu gabea</string>
     <string name="repo_num_apps">Aplikazio kopurua</string>
     <string name="repo_description">Deskribapena</string>
@@ -83,18 +82,18 @@
     <string name="repo_add_fingerprint">Hatz-marka (aukerazkoa)</string>
     <string name="bad_fingerprint">Hatz-marka okerra</string>
     <string name="menu_changelog">Aldaketa egunkaria</string>
-    <string name="antitracklist">Aplikazio honek zure eginkizunen jarraipena egiten du eta berri ematen du</string>
+    <string name="antitracklist">Aplikazio honek zure jardueraren jarraipena egiten du eta berri ematen du</string>
     <string name="antinonfreeadlist">Aplikazio honen libreak ez diren gehigarriak bultzatzen ditu</string>
-    <string name="antinonfreenetlist">Aplikazio honek libreak ez diren sare zerbitzuak bultzatzen ditu</string>
-    <string name="antinonfreedeplist">Aplikazio honek libreak ez diren beste aplikazio batzuk behar ditu</string>
+    <string name="antinonfreenetlist">Aplikazio honek sare zerbitzu ez libreak sustatzen ditu</string>
+    <string name="antinonfreedeplist">Aplikazio hau beste aplikazio ez libreen menpekoa da</string>
     <string name="antiupstreamnonfreelist">Jatorrizko iturburu kodea ez da guztiz librea</string>
     <string name="local_repo_name">Zure biltegi lokalaren izena</string>
     <string name="local_repo_name_summary">Zure biltegi lokalak iragarritako izenburua: %s</string>
     <string name="local_repo_https_on">Erabili zifratutako HTTPS:// konexioa biltegi lokalarentzat</string>
     <string name="invalid_url">URL hau baliogabea da.</string>
     <string name="malformed_repo_uri">Ezikusi biltegi URI okerra: %s</string>
-    <string name="expert_on">Bistaratu informazio eta ezarpen gehigarriak</string>
-    <string name="show_incompat_versions_on">Bistaratu gailu honekin bateraezinak diren bertsioak</string>
+    <string name="expert_on">Erakutsi informazio eta ezarpen gehigarriak</string>
+    <string name="show_incompat_versions_on">Erakutsi gailu honekin bateraezinak diren bertsioak</string>
     <string name="local_repo">Biltegi lokala</string>
     <string name="deleting_repo">Uneko biltegia ezabatzen…</string>
     <string name="adding_apks_format">%s biltegira gehitzen…</string>
@@ -122,7 +121,7 @@
     <string name="copying_icons">Aplikazioen ikonoak biltegira kopiatzen…</string>
     <string name="proxy_host">Proxy ostalaria</string>
     <string name="enable_proxy_summary">Konfiguratu HTTP Proxya sare eskari guztientzat</string>
-    <string name="update_notification_title">Biltegiak eguneratzen</string>
+    <string name="banner_updating_repositories">Biltegiak eguneratzen</string>
     <string name="repos_unchanged">Biltegi guztiak egunean daude</string>
     <string name="all_other_repos_fine">Beste biltegiek ez dute errorerik sortu.</string>
     <string name="global_error_updating_repos">Errorea eguneratzean: %s</string>
@@ -152,10 +151,8 @@
 \n
 \nOharra: Aurretik instalatutako aplikazio guztiak gailuan jarraituko dute.</string>
     <string name="repo_disabled_notification">%1$s desgaitu da.
-
-        Bertako aplikazioak
-        instalatu ahal izateko gaitu egin beharko duzu.
-    </string>
+\n
+\nBertako aplikazioak instalatu ahal izateko gaitu egin beharko duzu.</string>
     <string name="repo_added">%1$s pakete-biltegia gorde da.</string>
     <string name="repo_searching_address">Pakete-biltegia hemen bilatzen:
 \n%1$s</string>
@@ -204,7 +201,7 @@
     <string name="open_qr_code_scanner">Ireki QR eskanerra</string>
     <string name="swap_welcome">Ongi etorri F-Droidera!</string>
     <string name="swap_confirm_connect">%1$stik aplikazioak jaso nahi dituzu orain?</string>
-    <string name="swap_dont_show_again">Ez bistaratu hau berriro</string>
+    <string name="swap_dont_show_again">Ez erakutsi hau berriro</string>
     <string name="swap_scan_or_type_url">Pertsona batek bestearen kodea eskaneatu behar du, edo URL helbidea
         nabigatzailean sartu.
     </string>
@@ -249,7 +246,6 @@
         \ndeskargatzen\n%1$s(e)tik
     </string>
     <string name="permissions">Baimenak</string>
-    <string name="theme_night">Gaua</string>
     <string name="menu_settings">Ezarpenak</string>
     <string name="update_auto_download">Deskargatu eguneraketak automatikoki</string>
     <string name="update_auto_download_summary">Eguneraketak automatikoki deskargatzen dira eta berauek instalatzeko jakinarazten zaizu</string>
@@ -261,7 +257,7 @@
     <string name="about_license">Lizentzia</string>
     <string name="repo_provider">Biltegia: %s</string>
     <string name="menu_email">Bidali e-posta egileari</string>
-    <string name="antinonfreeassetslist">Aplikazio honek libreak ez diren atalak ditu</string>
+    <string name="antinonfreeassetslist">Aplikazio honek baliabide ez libreak ditu</string>
     <string name="useTor">Erabili Tor</string>
     <string name="status_inserting_apps">Aplikazioaren xehetasunak gordetzen</string>
     <string name="empty_search_available_app_list">Ez dago bat datorren aplikaziorik eskuragarri.</string>
@@ -515,4 +511,11 @@
     <string name="swap_error_cannot_start_bluetooth">Ezin izan da Bluetooth hasi!</string>
     <string name="swap_toast_closing_nearby_after_timeout">Inguruneko funtzioa itxi da geldirik zegoelako.</string>
     <string name="nearby_splash__document_tree">Bilatu USB OTG bidez biltegiak eta ispiluak.</string>
+    <string name="menu_opencollective">OpenCollective</string>
+    <string name="notification_channel_swaps_description">P2P aplikazioaren truke-jakinarazpenak erakusten ditu.</string>
+    <string name="notification_channel_swaps_title">Trukeak</string>
+    <string name="notification_channel_updates_description">Aplikazioaren eta biltegiaren eguneratze-jakinarazpenak erakusten ditu.</string>
+    <string name="notification_channel_updates_title">Eguneraketak</string>
+    <string name="notification_channel_installs_description">Aplikazioaren instalazio-jakinarazpenak erakusten ditu.</string>
+    <string name="notification_channel_installs_title">Instalazioak</string>
 </resources>

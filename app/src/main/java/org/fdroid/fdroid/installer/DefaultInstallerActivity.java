@@ -21,7 +21,6 @@
 package org.fdroid.fdroid.installer;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -29,10 +28,13 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.data.Apk;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 /**
  * A transparent activity as a wrapper around Android's PackageInstaller Intents
@@ -66,7 +68,7 @@ public class DefaultInstallerActivity extends FragmentActivity {
         installer = new DefaultInstaller(this, apk);
         if (ACTION_INSTALL_PACKAGE.equals(action)) {
             Uri localApkUri = intent.getData();
-            canonicalUri = intent.getParcelableExtra(org.fdroid.fdroid.net.Downloader.EXTRA_CANONICAL_URL);
+            canonicalUri = Uri.parse(intent.getStringExtra(org.fdroid.fdroid.net.Downloader.EXTRA_CANONICAL_URL));
             installPackage(localApkUri);
         } else if (ACTION_UNINSTALL_PACKAGE.equals(action)) {
             uninstallPackage(apk.packageName);
@@ -96,10 +98,7 @@ public class DefaultInstallerActivity extends FragmentActivity {
         // works only when being installed as system-app
         // https://code.google.com/p/android/issues/detail?id=42253
 
-        if (Build.VERSION.SDK_INT < 14) {
-            intent.setAction(Intent.ACTION_VIEW);
-            intent.setDataAndType(uri, "application/vnd.android.package-archive");
-        } else if (Build.VERSION.SDK_INT < 16) {
+        if (Build.VERSION.SDK_INT < 16) {
             intent.setAction(Intent.ACTION_INSTALL_PACKAGE);
             intent.setData(uri);
             intent.putExtra(Intent.EXTRA_RETURN_RESULT, true);
@@ -145,12 +144,8 @@ public class DefaultInstallerActivity extends FragmentActivity {
         Intent intent = new Intent();
         intent.setData(uri);
 
-        if (Build.VERSION.SDK_INT < 14) {
-            intent.setAction(Intent.ACTION_DELETE);
-        } else {
-            intent.setAction(Intent.ACTION_UNINSTALL_PACKAGE);
-            intent.putExtra(Intent.EXTRA_RETURN_RESULT, true);
-        }
+        intent.setAction(Intent.ACTION_UNINSTALL_PACKAGE);
+        intent.putExtra(Intent.EXTRA_RETURN_RESULT, true);
 
         try {
             startActivityForResult(intent, REQUEST_CODE_UNINSTALL);
@@ -164,30 +159,21 @@ public class DefaultInstallerActivity extends FragmentActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case REQUEST_CODE_INSTALL:
-                /**
-                 * resultCode is always 0 on Android < 4.0. See
-                 * com.android.packageinstaller.PackageInstallerActivity: setResult is
-                 * never executed on Androids < 4.0
-                 */
-                if (Build.VERSION.SDK_INT < 14) {
-                    installer.sendBroadcastInstall(canonicalUri, Installer.ACTION_INSTALL_COMPLETE);
-                    break;
-                }
-
                 switch (resultCode) {
-                    case Activity.RESULT_OK:
+                    case AppCompatActivity.RESULT_OK:
                         installer.sendBroadcastInstall(canonicalUri,
                                 Installer.ACTION_INSTALL_COMPLETE);
                         break;
-                    case Activity.RESULT_CANCELED:
+                    case AppCompatActivity.RESULT_CANCELED:
                         installer.sendBroadcastInstall(canonicalUri,
                                 Installer.ACTION_INSTALL_INTERRUPTED);
                         break;
-                    case Activity.RESULT_FIRST_USER:
+                    case AppCompatActivity.RESULT_FIRST_USER:
                     default:
-                        // AOSP returns Activity.RESULT_FIRST_USER on error
+                        // AOSP returns AppCompatActivity.RESULT_FIRST_USER on error
                         installer.sendBroadcastInstall(canonicalUri,
                                 Installer.ACTION_INSTALL_INTERRUPTED,
                                 getString(R.string.install_error_unknown));
@@ -196,20 +182,14 @@ public class DefaultInstallerActivity extends FragmentActivity {
 
                 break;
             case REQUEST_CODE_UNINSTALL:
-                // resultCode is always 0 on Android < 4.0.
-                if (Build.VERSION.SDK_INT < 14) {
-                    installer.sendBroadcastUninstall(Installer.ACTION_UNINSTALL_COMPLETE);
-                    break;
-                }
-
                 switch (resultCode) {
-                    case Activity.RESULT_OK:
+                    case AppCompatActivity.RESULT_OK:
                         installer.sendBroadcastUninstall(Installer.ACTION_UNINSTALL_COMPLETE);
                         break;
-                    case Activity.RESULT_CANCELED:
+                    case AppCompatActivity.RESULT_CANCELED:
                         installer.sendBroadcastUninstall(Installer.ACTION_UNINSTALL_INTERRUPTED);
                         break;
-                    case Activity.RESULT_FIRST_USER:
+                    case AppCompatActivity.RESULT_FIRST_USER:
                     default:
                         // AOSP UninstallAppProgress returns RESULT_FIRST_USER on error
                         installer.sendBroadcastUninstall(Installer.ACTION_UNINSTALL_INTERRUPTED,

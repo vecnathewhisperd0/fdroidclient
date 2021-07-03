@@ -2,7 +2,7 @@
 
 * Possibilité d'annuler la suppression par glissé d'items de l'onglet "Mises à jour" (merci @Hocuri!)
 
-* Correction de la gestion d'ETag lors de la connexion à des miroirs NGINX  #1737
+* Correction de la gestion d'ETag lors de la connexion à des miroirs NGINX #1737
 
 * Correction de problèmes d'affichages dans l'onglet "Nouveautés" à cause des fuseaux horaires #1757
 

@@ -2,7 +2,7 @@ package org.fdroid.fdroid.data;
 
 import android.app.Application;
 import android.content.Context;
-import org.fdroid.fdroid.BuildConfig;
+
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.TestUtils;
 import org.junit.Before;
@@ -13,7 +13,7 @@ import org.robolectric.annotation.Config;
 
 import static org.junit.Assert.assertEquals;
 
-@Config(constants = BuildConfig.class, application = Application.class)
+@Config(application = Application.class)
 @RunWith(RobolectricTestRunner.class)
 public class PreferredSignatureTest extends FDroidProviderTest {
 
@@ -21,7 +21,6 @@ public class PreferredSignatureTest extends FDroidProviderTest {
 
     @Before
     public void setup() {
-        TestUtils.registerContentProvider(AppProvider.getAuthority(), AppProvider.class);
         Preferences.setupForTests(context);
 
         // This is what the FDroidApp does when this preference is changed. Need to also do this under testing.
@@ -133,6 +132,7 @@ public class PreferredSignatureTest extends FDroidProviderTest {
      * the same apps/apks. The only difference is in the order with which they get added to the database. They both
      * then delegate here and assert that everything works as expected. The reason for testing like this is to ensure
      * that the order of rows in the database has no bearing on the correct suggestions of signatures.
+     *
      * @see #fdroidThenDev1()
      * @see #fdroidThenDev2()
      */

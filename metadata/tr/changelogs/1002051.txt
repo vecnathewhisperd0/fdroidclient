@@ -1,5 +1,8 @@
-* En yeni sekmesinde, şimdi öne çıkarılan uygulamaların açıklamaları, çevirileri ve ekran görüntüleri gösteriliyor
-* f-droid.org'un yükünü azaltmak ve indirmeleri hızlandırmak için yansılardan otomatik indirme
-* Depo detaylarından yeni düğmeleri kullanarak yansıları devre dışı bırak
-* Daha verimli indirme önbelleklemesi (Her depoya karşılık farklı bir web sunucusu
-* Ayrıcalıklı Eklentili gerektiren bilinmeyen kaynak yüklemeleri düzeltildi.
+* Depolama alanı az olduğunda önbelleği otomatik olarak kırp veya sil
+* Düşük bellekli cihazlarda performans iyileştirildi
+* Tüm indirmelerin "Sadece Wi-Fi'de" tercihini dikkate almasını sağla
+* Pil azaldığında bellek kullanımını düşür
+* Bağlantıları tıklayarak, QR kodlarını tarayarak vb. herhangi bir depoya özel aynalar ekle
+* Otomatik yansı seçimi iyileştirildi
+* Birçok Takas/Yakında hata düzeltmesi ve iyileştirmesi
+* Tekrarlayan güncelleme bildirimlerinin bir nedeni düzeltildi

@@ -7,12 +7,14 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v4.app.JobIntentService;
 import android.util.Log;
-import com.nostra13.universalimageloader.core.ImageLoader;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.JobIntentService;
+import androidx.core.content.ContextCompat;
+import androidx.core.net.ConnectivityManagerCompat;
+
 import org.fdroid.fdroid.FDroidApp;
-import org.fdroid.fdroid.Preferences;
 
 import java.net.Inet6Address;
 import java.net.InetAddress;
@@ -77,7 +79,7 @@ public class ConnectivityMonitorService extends JobIntentService {
      * cases when looking through the network devices, especially on bad ROMs.
      */
     public static int getNetworkState(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = ContextCompat.getSystemService(context, ConnectivityManager.class);
         if (cm == null) {
             return FLAG_NET_UNAVAILABLE;
         }
@@ -115,7 +117,7 @@ public class ConnectivityMonitorService extends JobIntentService {
         switch (networkType) {
             case ConnectivityManager.TYPE_ETHERNET:
             case ConnectivityManager.TYPE_WIFI:
-                if (Build.VERSION.SDK_INT >= 16 && cm.isActiveNetworkMetered()) {
+                if (ConnectivityManagerCompat.isActiveNetworkMetered(cm)) {
                     return FLAG_NET_METERED;
                 } else {
                     return FLAG_NET_NO_LIMIT;
@@ -129,7 +131,6 @@ public class ConnectivityMonitorService extends JobIntentService {
     protected void onHandleWork(@NonNull Intent intent) {
         if (ACTION_START.equals(intent.getAction())) {
             FDroidApp.networkState = getNetworkState(this);
-            ImageLoader.getInstance().denyNetworkDownloads(!Preferences.get().isBackgroundDownloadAllowed());
         }
     }
 }

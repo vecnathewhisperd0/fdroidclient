@@ -21,8 +21,7 @@ package org.fdroid.fdroid.data;
 
 import android.Manifest;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.Schema.ApkTable;
 import org.xml.sax.Attributes;
@@ -33,6 +32,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * Parses the index.xml into Java data structures.
@@ -214,7 +216,7 @@ public class RepoXMLHandler extends DefaultHandler {
                     curapp.name = str;
                     break;
                 case "icon":
-                    curapp.icon = str;
+                    curapp.iconFromApk = str;
                     break;
                 case "description":
                     // This is the old-style description. We'll read it
@@ -257,7 +259,7 @@ public class RepoXMLHandler extends DefaultHandler {
                     curapp.flattrID = str;
                     break;
                 case "liberapay":
-                    curapp.liberapayID = str;
+                    curapp.liberapay = str;
                     break;
                 case "web":
                     curapp.webSite = str;

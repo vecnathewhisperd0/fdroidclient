@@ -58,8 +58,8 @@
     <string name="repo_add_fingerprint">Sõrmejälg (valikuline)</string>
     <string name="bad_fingerprint">Halb sõrmejälg</string>
     <string name="invalid_url">See ei ole kehtiv URL.</string>
-    <string name="install_confirm_update">Kas soovite olemasoleva rakenduse värskenduse installida? Teie olemasolevad andmed jäävad alles. Värskendatud rakendus pääseb järgmiste funktsioonide juurde:</string>
-    <string name="menu_email">Saada autorile meil</string>
+    <string name="install_confirm_update">Kas soovite paigaldada värskenduse olemasolevale rakendusele\? Teie andmed jäävad alles. Värskendatud rakendus saab kasutada neid funktsioone:</string>
+    <string name="menu_email">Saada autorile e-kiri</string>
     <string name="malformed_repo_uri">Vahele jäetakse hoidla ebakorrektne URI: %s</string>
     <string name="repo_provider">Hoidla: %s</string>
     <string name="menu_manage">Hoidlad</string>
@@ -70,7 +70,7 @@
     <string name="adding_apks_format">%s lisatakse hoidlasse…</string>
     <string name="linking_apks">APK faile lingitakse hoidlasse…</string>
     <string name="copying_icons">Rakenduste ikoone kopeeritakse hoidlasse…</string>
-    <string name="update_notification_title">Hoidlaid värskendatakse</string>
+    <string name="banner_updating_repositories">Värskendan hoidlaid</string>
     <string name="repos_unchanged">Kõik hoidlad on kaasajastaud</string>
     <string name="all_other_repos_fine">Kõik ülejäänud hoidlad vigu ei põhjustanud.</string>
     <string name="repo_details">Hoidla</string>
@@ -112,11 +112,10 @@
     <string name="menu_source">Lähtekood</string>
     <string name="global_error_updating_repos">Viga värskendamisel: %s</string>
     <string name="repo_last_update">Viimane värskendus</string>
-    <string name="install_confirm_update_system">Kas soovite sisseehitatud rakenduse värskenduse installida? Teie olemasolevad andmed jäävad alles. Värskendatud rakendus pääseb järgmiste funktsioonide juurde:</string>
-    <string name="install_confirm_update_no_perms">Kas soovite installida olemasoleva rakenduse värskenduse? Olemasolevad andmed ei lähe kaduma. See ei nõua erijuurdepääsu.</string>
-    <string name="install_confirm_update_system_no_perms">Kas soovite installida sisseehitatud rakenduse värskenduse? Olemasolevad andmed ei lähe kaduma. See ei nõua erijuurdepääsu.</string>
+    <string name="install_confirm_update_system">Kas soovite paigadada selle sisseehitatud rakenduse värskenduse\? Teie andmed jäävad alles. Värskendatud rakendus saab kasutada neid funktsioone:</string>
+    <string name="install_confirm_update_no_perms">Kas soovite paigaldada värskenduse sellele rakendusele\? Teie andmed ei lähe kaduma. Erijuurdepääs ei ole vajalik.</string>
+    <string name="install_confirm_update_system_no_perms">Kas soovite paigaldada värskenduse sisseehitatud rakendusele\? Olemasolevad andmed ei lähe kaduma. Erijuurdepääs ei ole vajalik.</string>
     <string name="menu_upgrade">Värskenda</string>
-    <string name="menu_donate">Toeta</string>
     <string name="menu_bitcoin">Bitcoin</string>
     <string name="menu_litecoin">Litecoin</string>
     <string name="menu_flattr">Flattr</string>
@@ -264,7 +263,6 @@
     <string name="keep_forever">Igavesti</string>
     <string name="theme_light">Hele</string>
     <string name="theme_dark">Tume</string>
-    <string name="theme_night">Öö</string>
     <string name="crash_dialog_title">F-Droidi tabas krahh</string>
     <string name="crash_dialog_comment_prompt">Sa saad lisada täiendavat informatsiooni ja kommentaare siia:</string>
     <string name="swap_join_same_wifi_desc">WiFi kaudu vahetamiseks peate olema samas võrgus. Kui sul puudub ligipääs
@@ -431,7 +429,7 @@
     <string name="repo_delete_to_overwrite">Konflikti lahendamiseks kustuta esmalt %1$s ning lisa varamu teise võtmega.</string>
     <string name="prompt_to_send_crash_reports">Küsi luba krahhiraportite saatmiseks</string>
     <string name="prompt_to_send_crash_reports_summary">Kogu krahhide andmeid  ja küsi luba nende saatmiseks arendajale</string>
-    <string name="hide_all_notifications">Paida kõik märguanded</string>
+    <string name="hide_all_notifications">Peida kõik märguanded</string>
     <string name="hide_all_notifications_summary">Väldi kõigi tegevuste kuvamist olekuribal ja märguannete sahtlis.</string>
     <string name="send_install_history">Saada paigalduste ajalugu</string>
     <string name="send_history_csv">%s paigalduste ajalugu CSV failina</string>
@@ -448,7 +446,7 @@
     <string name="over_network_never_summary">Ära kasuta seda ühendust alla laadimiseks mitte kunagi</string>
     <string name="send_installed_apps">Jaga paigaldatud rakendusi</string>
     <string name="send_installed_apps_csv">F-Droidi paigaldatud rakendused CSV failina</string>
-    <string name="updates_disabled_by_settings">Kõik uuendused, mida Data/Wi-Fi seaded keelavad</string>
+    <string name="updates_disabled_by_settings">Kõik uuendused, mille keelavad andmeside/WiFi seaded</string>
     <string name="repo_add_mirror">Lisa peegel</string>
     <string name="repo_exists_add_mirror">See on %1$s koopia. Kas lisada ta peegliks?</string>
     <string name="menu_open">Ava</string>
@@ -503,4 +501,25 @@
     <string name="swap_error_cannot_start_bluetooth">Bluetoothi ei saa käivitada!</string>
     <string name="swap_toast_closing_nearby_after_timeout">Naabrus suleti, sest teda ei kasutatud.</string>
     <string name="nearby_splash__document_tree">Otsi USB OTG meedialt hoidlaid ja peegleid.</string>
+    <string name="menu_opencollective">OpenCollective</string>
+    <string name="notification_channel_updates_description">Kuvatakse rakenduste ja repositooriumite värskenduste teavitusi.</string>
+    <string name="notification_channel_updates_title">Värskendused</string>
+    <string name="notification_channel_swaps_description">Kuvatakse kohaliku ja autonoomse andmevahetuse teavitusi.</string>
+    <string name="notification_channel_swaps_title">Kohalik andmevahetus</string>
+    <string name="notification_channel_installs_description">Kuvatakse rakenduste paigalduste teavitusi.</string>
+    <string name="notification_channel_installs_title">Paigaldused</string>
+    <string name="menu_show_install_history">Kuva paigaldamise ajalugu</string>
+    <string name="menu_show_fdroid_metrics_report">Kuva meetrika raport</string>
+    <string name="toast_metrics_in_install_history">%s meetrika raport on nähtav paigaldamise ajaloo vaates</string>
+    <string name="send_to_fdroid_metrics_summary">Saada anonüümselt ja iganädalaselt F-Droidi meetrika (vajalik on paigaldamise ajaloo säilitamine)</string>
+    <string name="send_to_fdroid_metrics">Saada kasutamise andmed</string>
+    <string name="fdroid_metrics_report">%s meetrika raport</string>
+    <string name="install_history_and_metrics">Paigalda ajalugu ja meetrika</string>
+    <string name="send_fdroid_metrics_json">%s meetrika JSON failina</string>
+    <string name="send_fdroid_metrics_report">Saada %s meetrika raport</string>
+    <string name="theme_follow_system">Kasuta üldist teemat</string>
+    <string name="use_pure_black_dark_theme_summary">Soovitame kasutamiseks vaid OLED-ekraanidel.</string>
+    <string name="use_pure_black_dark_theme">Tumedas teemas kasuta musta tausta</string>
+    <string name="banner_no_data_or_wifi">3G, 4G või WiFi pole kasutusel</string>
+    <string name="banner_no_internet">Internetiühendus puudub</string>
 </resources>

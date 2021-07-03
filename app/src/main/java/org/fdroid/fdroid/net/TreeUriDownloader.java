@@ -3,7 +3,7 @@ package org.fdroid.fdroid.net;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.net.Uri;
-import android.support.v4.provider.DocumentFile;
+
 import org.fdroid.fdroid.FDroidApp;
 
 import java.io.BufferedInputStream;
@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
+
+import androidx.documentfile.provider.DocumentFile;
 
 /**
  * An {@link Downloader} subclass for downloading files from a repo on a
@@ -25,7 +27,7 @@ import java.net.ProtocolException;
  * The base repo URL of such a repo looks like:
  * {@code content://com.android.externalstorage.documents/tree/1AFB-2402%3A/document/1AFB-2402%3Atesty.at.or.at%2Ffdroid%2Frepo}
  *
- * @see android.support.v4.provider.DocumentFile#fromTreeUri(Context, Uri)
+ * @see DocumentFile#fromTreeUri(Context, Uri)
  * @see <a href="https://developer.android.com/guide/topics/providers/document-provider.html">Open Files using Storage Access Framework</a>
  * @see <a href="https://developer.android.com/training/articles/scoped-directory-access.html">Using Scoped Directory Access</a>
  */

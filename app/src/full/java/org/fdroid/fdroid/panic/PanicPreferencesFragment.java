@@ -1,6 +1,5 @@
 package org.fdroid.fdroid.panic;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,19 +12,9 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
-import android.support.annotation.Nullable;
-import android.support.v14.preference.PreferenceFragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.preference.CheckBoxPreference;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceCategory;
 import android.text.TextUtils;
 import android.util.TypedValue;
-import info.guardianproject.panic.Panic;
-import info.guardianproject.panic.PanicResponder;
+
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.installer.PrivilegedInstaller;
@@ -33,7 +22,20 @@ import org.fdroid.fdroid.installer.PrivilegedInstaller;
 import java.util.ArrayList;
 import java.util.Set;
 
-public class PanicPreferencesFragment extends PreferenceFragment
+import androidx.annotation.ColorInt;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.preference.CheckBoxPreference;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceFragmentCompat;
+import info.guardianproject.panic.Panic;
+import info.guardianproject.panic.PanicResponder;
+
+public class PanicPreferencesFragment extends PreferenceFragmentCompat
         implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String PREF_APP = "pref_panic_app";
@@ -80,7 +82,7 @@ public class PanicPreferencesFragment extends PreferenceFragment
                     prefHide.setEnabled(false);
                     prefResetRepos.setChecked(false);
                     prefResetRepos.setEnabled(false);
-                    getActivity().setResult(Activity.RESULT_CANCELED);
+                    getActivity().setResult(AppCompatActivity.RESULT_CANCELED);
                 } else {
                     prefHide.setEnabled(true);
                     prefResetRepos.setEnabled(true);
@@ -129,9 +131,9 @@ public class PanicPreferencesFragment extends PreferenceFragment
                 }
             }
         } else {
-            Preference preference = new Preference(getActivity());
+            Preference preference = new Preference(requireActivity());
             preference.setIntent(intent);
-            Drawable icon = getResources().getDrawable(R.drawable.ic_add_circle_outline_white);
+            Drawable icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_add_circle_outline);
             icon.setColorFilter(new LightingColorFilter(0, getResources().getColor(R.color.swap_light_grey_icon)));
             preference.setSingleLineTitle(true);
             preference.setTitle(R.string.panic_add_apps_to_uninstall);
@@ -232,13 +234,13 @@ public class PanicPreferencesFragment extends PreferenceFragment
             public void onClick(DialogInterface dialogInterface, int i) {
                 PanicResponder.setTriggerPackageName(getActivity());
                 showPanicApp(PanicResponder.getTriggerPackageName(getActivity()));
-                getActivity().setResult(Activity.RESULT_OK);
+                getActivity().setResult(AppCompatActivity.RESULT_OK);
             }
         };
         DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                getActivity().setResult(Activity.RESULT_CANCELED);
+                getActivity().setResult(AppCompatActivity.RESULT_CANCELED);
                 getActivity().finish();
             }
         };

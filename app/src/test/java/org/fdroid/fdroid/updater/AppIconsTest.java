@@ -1,26 +1,25 @@
 package org.fdroid.fdroid.updater;
 
 import android.content.ContentValues;
-import org.fdroid.fdroid.BuildConfig;
+
 import org.fdroid.fdroid.IndexUpdater;
 import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.data.AppProvider;
 import org.fdroid.fdroid.data.Repo;
 import org.fdroid.fdroid.data.RepoProvider;
 import org.fdroid.fdroid.data.Schema;
+import org.hamcrest.text.MatchesPattern;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 /**
  * Check whether app icons are loaded from the correct repository. The repository with the
  * highest priority should be where we decide to load icons from.
  */
-@Config(constants = BuildConfig.class)
 @RunWith(RobolectricTestRunner.class)
 @SuppressWarnings("LineLength")
 public class AppIconsTest extends MultiIndexUpdaterTest {
@@ -42,7 +41,7 @@ public class AppIconsTest extends MultiIndexUpdaterTest {
         updateMain();
         updateArchive();
 
-        assertIconUrl("https://f-droid.org/repo/icons/org.adaway.54.png");
+        assertIconUrl("^https://f-droid\\.org/repo/icons-[0-9]{3}/org\\.adaway\\.54\\.png$");
     }
 
     @Test
@@ -53,7 +52,7 @@ public class AppIconsTest extends MultiIndexUpdaterTest {
         updateMain();
         updateArchive();
 
-        assertIconUrl("https://f-droid.org/archive/icons/org.adaway.54.png");
+        assertIconUrl("^https://f-droid\\.org/archive/icons-[0-9]{3}/org\\.adaway\\.54.png$");
     }
 
     private void setRepoPriority(String repoUri, int priority) {
@@ -66,9 +65,11 @@ public class AppIconsTest extends MultiIndexUpdaterTest {
 
     private void assertIconUrl(String expectedUrl) {
         App app = AppProvider.Helper.findHighestPriorityMetadata(context.getContentResolver(),
-                "org.adaway", new String[]{Schema.AppMetadataTable.Cols.ICON_URL});
-
-        assertEquals(app.iconUrl, expectedUrl);
+                "org.adaway", new String[]{
+                        Schema.AppMetadataTable.Cols.ICON_URL,
+                        Schema.AppMetadataTable.Cols.ICON,
+                        Schema.AppMetadataTable.Cols.REPO_ID,
+                });
+        assertThat(app.getIconUrl(context), MatchesPattern.matchesPattern(expectedUrl));
     }
-
 }

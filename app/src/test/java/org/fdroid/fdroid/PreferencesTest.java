@@ -20,16 +20,18 @@ package org.fdroid.fdroid;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowLog;
 
 import java.util.Map;
+
+import androidx.preference.PreferenceManager;
+import androidx.test.core.app.ApplicationProvider;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -39,7 +41,7 @@ import static org.junit.Assert.assertTrue;
 public class PreferencesTest {
     private static final String TAG = "PreferencesTest";
 
-    private static final Context CONTEXT = RuntimeEnvironment.application;
+    private static final Context CONTEXT = ApplicationProvider.getApplicationContext();
 
     private SharedPreferences defaults;
 

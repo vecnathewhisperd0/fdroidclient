@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">F-Droid</string>
-    <string name="SignatureMismatch">La versión nuevo está firmada con una llave diferente a la antigua. Para instalar la nueva versión, la antigua debe ser desinstalada primero. Hacé esto y probá de nuevo, por favor. (Tené en cuenta que al desinstalar, todos los datos internos guardados de la aplicación serán eliminados)</string>
+    <string name="SignatureMismatch">La nueva versión está firmada con una llave diferente a la antigua. Para instalar la nueva versión, la antigua debe ser desinstalada primero. Hacé esto y probá de nuevo, por favor. (Tené en cuenta que al desinstalar, todos los datos internos guardados de la aplicación serán eliminados)</string>
     <string name="installIncompatible">Aplicación incompatible con tu dispositivo, ¿instalar igual\?</string>
     <string name="version">Versión</string>
     <string name="by_author_format">por %s</string>
@@ -151,7 +151,7 @@
     <string name="menu_ignore_all">Ignorar todas las actualizaciones</string>
     <string name="menu_ignore_this">Ignorar esta actualización</string>
     <string name="menu_website">Sitio web</string>
-    <string name="menu_email">Enviar e-mail al autor</string>
+    <string name="menu_email">Enviar un correo electrónico al autor</string>
     <string name="menu_issues">Problemas</string>
     <string name="menu_changelog">Registro de cambios</string>
     <string name="menu_video">Video</string>
@@ -159,7 +159,6 @@
     <string name="menu_source">Código fuente</string>
     <string name="menu_translation">Traducción</string>
     <string name="menu_upgrade">Actualizar</string>
-    <string name="menu_donate">Donar</string>
     <string name="menu_bitcoin">Bitcoin</string>
     <string name="menu_litecoin">Litecoin</string>
     <string name="menu_flattr">Flattr</string>
@@ -211,7 +210,7 @@
     <string name="swap_send_fdroid">Enviar F-Droid</string>
     <string name="newPerms">Nuevo</string>
     <string name="crash_dialog_title">F-Droid se detuvo</string>
-    <string name="crash_dialog_text">Ocurrió un error inesperado que forzó a la aplicación a detenerse. ¿Querés enviar los detalles por mail para ayudar a resolver el problema\?</string>
+    <string name="crash_dialog_text">Ocurrió un error inesperado que forzó a la aplicación a detenerse. ¿Querés enviar los detalles por correo electrónico para ayudar a resolver el problema\?</string>
     <string name="notification_title_single_update_available">Actualización disponible</string>
     <string name="notification_title_summary_install_error">Falló la instalación</string>
     <string name="notification_action_update">Actualizar</string>
@@ -231,7 +230,7 @@
     <string name="search_hint">Buscar aplicaciones</string>
     <string name="appcompatibility">Compatibilidad de aplicación</string>
     <string name="show_incompat_versions">Incluir versiones incompatibles</string>
-    <string name="menu_downgrade">Downgrade</string>
+    <string name="menu_downgrade">Desactualizar</string>
     <string name="antiadslist">Esta aplicación tiene publicidad</string>
     <string name="show_incompat_versions_on">Mostrar versiones de aplicaciones que son incompatibles con el dispositivo</string>
     <string name="show_anti_feature_apps">Incluir aplicaciones controversiales</string>
@@ -288,7 +287,7 @@
 \n%2$s desde
 \n%1$s</string>
     <string name="download_404">El archivo pedido no fue encontrado.</string>
-    <string name="update_notification_title">Actualizando repositorios</string>
+    <string name="banner_updating_repositories">Actualizando repositorios</string>
     <string name="status_processing_xml_percent">Procesando %2$s / %3$s (%4$d%%) de %1$s</string>
     <string name="status_connecting_to_repo">Conectando a 
 \n%1$s</string>
@@ -297,7 +296,7 @@
     <string name="repos_unchanged">Todos los repositorios están actualizados</string>
     <string name="all_other_repos_fine">Todos los otros repositorios no crearon errores.</string>
     <string name="global_error_updating_repos">Error al actualizar: %s</string>
-    <string name="no_permissions">Ningún permiso es usado.</string>
+    <string name="no_permissions">Sin permisos</string>
     <string name="permissions">Permisos</string>
     <string name="no_handler_app">No tenés ninguna aplicación disponible que pueda manejar %s.</string>
     <string name="theme">Tema</string>
@@ -341,7 +340,7 @@
     <string name="nearby_splash__download_apps_from_people_nearby">¿Sin internet\? ¡Obtené aplicaciones de personas cercanas a vos!</string>
     <string name="nearby_splash__find_people_button">Encontrar personas cerca</string>
     <string name="nearby_splash__both_parties_need_fdroid">Ambos necesitan %1$s para usar cerca.</string>
-    <string name="nearby_splash__read_external_storage">¡Tarjetas SD pueden ser usadas para intercambiar!</string>
+    <string name="nearby_splash__read_external_storage">Busque en la tarjeta SD repositorios y espejos.</string>
     <string name="nearby_splash__request_permission">Probalo</string>
     <string name="swap_nfc_title">Tocá para intercambiar</string>
     <string name="swap_nfc_description">Si tu amigo tiene F-Droid y NFC prendidos, choquen sus dispositivos.</string>
@@ -388,13 +387,13 @@
     <string name="swap_toast_hotspot_enabled">Hotspot Wi-Fi habilitado</string>
     <string name="swap_toast_could_not_enable_hotspot">¡No se pudo habilitar el hotspot Wi-Fi!</string>
     <string name="install_confirm">necesita acceso a</string>
-    <string name="install_confirm_update">¿Querés instalar una actualización para esta aplicación existente\? Tus datos existentes no serán perdidos. La aplicación actualizada tendrá acceso a:</string>
-    <string name="install_confirm_update_system">¿Querés instalar una actualización para esta aplicación integrada\? Tus datos existentes no será perdidos. La aplicación actualizada tendrá acceso a:</string>
-    <string name="install_confirm_update_no_perms">¿Querés instalar una actualización para esta aplicación existente\? Tus datos existentes no serán perdidos. No requiere ningún acceso especial.</string>
-    <string name="install_confirm_update_system_no_perms">¿Querés instalar una actualización para esta aplicación integrada\? Tus datos existentes no serán perdidos. No requiere ningún acceso especial.</string>
+    <string name="install_confirm_update">¿Desea instalar una actualización de esta aplicación existente\? Sus datos existentes no se perderán. La aplicación actualizada tendrá acceso a:</string>
+    <string name="install_confirm_update_system">¿Desea instalar una actualización de esta aplicación integrada\? Sus datos existentes no se perderán. La aplicación actualizada tendrá acceso a:</string>
+    <string name="install_confirm_update_no_perms">¿Desea instalar una actualización de esta aplicación existente\? Sus datos existentes no se perderán. No requiere ningún acceso especial.</string>
+    <string name="install_confirm_update_system_no_perms">¿Desea instalar una actualización de esta aplicación integrada\? Sus datos existentes no se perderán. No requiere ningún acceso especial.</string>
     <string name="allPerms">Todos</string>
     <string name="perm_costs_money">Esto te puede costar dinero</string>
-    <string name="uninstall_update_confirm">¿Querés reemplazar esta aplicación con la versión de fábrica\?</string>
+    <string name="uninstall_update_confirm">¿Desea reemplazar esta aplicación con la versión de fábrica\? Todos los datos serán eliminados.</string>
     <string name="uninstall_confirm">¿Querés desinstalar esta aplicación\?</string>
     <string name="download_error">¡La descarga falló!</string>
     <string name="download_pending">Esperando para empezar la descarga…</string>
@@ -421,7 +420,6 @@
     <string name="keep_forever">Siempre</string>
     <string name="theme_light">Claro</string>
     <string name="theme_dark">Oscuro</string>
-    <string name="theme_night">Noche</string>
     <string name="crash_dialog_comment_prompt">Podés añadir información extra y comentarios acá:</string>
     <plurals name="notification_summary_more">
         <item quantity="one">+%1$d más…</item>
@@ -490,4 +488,22 @@
     <string name="disabled">Deshabilitado</string>
     <string name="swap_error_cannot_start_bluetooth">¡No se puede iniciar el Bluetooth!</string>
     <string name="swap_toast_closing_nearby_after_timeout">Cercano cerrado como estaba inactivo.</string>
+    <string name="nearby_splash__document_tree">Busque USB OTG para repositorios y espejos.</string>
+    <string name="menu_select_for_wipe">Seleccioná para eliminar</string>
+    <string name="menu_opencollective">OpenCollective</string>
+    <string name="notification_channel_updates_description">Muestra notificaciones de actualización de aplicaciones y repositorios.</string>
+    <string name="notification_channel_updates_title">Actualizaciones</string>
+    <string name="notification_channel_swaps_description">Muestra notificaciones de intercambio de aplicaciones P2P.</string>
+    <string name="notification_channel_swaps_title">Intercambios</string>
+    <string name="notification_channel_installs_description">Muestra notificaciones de instalación de aplicaciones.</string>
+    <string name="notification_channel_installs_title">Instalaciones</string>
+    <string name="menu_show_install_history">Ver historial de instalación</string>
+    <string name="menu_show_fdroid_metrics_report">Ver métricas de reporte</string>
+    <string name="fdroid_metrics_report">%s métricas de reporte</string>
+    <string name="toast_metrics_in_install_history">Las métricas de reporte %s son visibles en el Historial de instalación</string>
+    <string name="send_to_fdroid_metrics_summary">Enviar datos métricos anónimos semanales a F-Droid (requiere Mantener historial de instalaciones)</string>
+    <string name="send_to_fdroid_metrics">Enviar datos de uso</string>
+    <string name="install_history_and_metrics">Historial de instalaciones y métricas</string>
+    <string name="send_fdroid_metrics_json">%s métricas como archivos JSON</string>
+    <string name="send_fdroid_metrics_report">Enviar %s Métricas de reportes</string>
 </resources>

@@ -2,13 +2,13 @@ package org.fdroid.fdroid.nearby;
 
 import android.content.Context;
 import android.text.TextUtils;
+
 import org.apache.commons.io.IOUtils;
 import org.fdroid.fdroid.IndexUpdater;
 import org.fdroid.fdroid.Utils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -20,6 +20,8 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.JarOutputStream;
 
+import androidx.test.core.app.ApplicationProvider;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -29,7 +31,7 @@ public class LocalRepoKeyStoreTest {
 
     @Test
     public void testSignZip() throws IOException, LocalRepoKeyStore.InitException, IndexUpdater.SigningException {
-        Context context = RuntimeEnvironment.application;
+        Context context = ApplicationProvider.getApplicationContext();
 
         File xmlIndexJarUnsigned = File.createTempFile(getClass().getName(), "unsigned.jar");
         BufferedOutputStream bo = new BufferedOutputStream(new FileOutputStream(xmlIndexJarUnsigned));

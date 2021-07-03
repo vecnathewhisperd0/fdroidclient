@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -19,7 +18,7 @@
         android:layout_alignParentTop="true"
         android:scaleType="centerCrop"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_nearby_share"
+        app:srcCompat="@drawable/ic_nearby_share"
         android:layout_marginRight="10dp"
         android:layout_marginEnd="10dp"
         />
@@ -35,7 +34,6 @@
         android:layout_toRightOf="@id/icon"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:text="@string/swap_nearby"
-        android:textColor="@android:color/black"
         android:textStyle="bold"
         android:gravity="start"
         />
@@ -51,7 +49,6 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:text="@string/swap_intro"
         android:id="@+id/tvShare"
-        android:textColor="@android:color/darker_gray"
         android:gravity="start"
         />
 

@@ -1,16 +1,17 @@
 package org.fdroid.fdroid.views.main;
 
 import android.annotation.TargetApi;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
+
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.views.PreferencesFragment;
 
-@SuppressWarnings("LineLength")
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 /**
  * When attached to the window, the {@link PreferencesFragment} will be added. When detached from
  * the window, the fragment will be removed.
@@ -18,7 +19,7 @@ import org.fdroid.fdroid.views.PreferencesFragment;
  * Based on code from https://github.com/lsjwzh/RecyclerViewPager/blob/master/lib/src/main/java/com/lsjwzh/widget/recyclerviewpager/FragmentStatePagerAdapter.java
  * licensed under the Apache 2.0 license (https://github.com/lsjwzh/RecyclerViewPager/blob/master/LICENSE).
  *
- * @see android.support.v4.app.FragmentStatePagerAdapter Much of the code here was ported from this class.
+ * @see FragmentStatePagerAdapter Much of the code here was ported from this class.
  */
 public class SettingsView extends FrameLayout {
 
@@ -50,12 +51,9 @@ public class SettingsView extends FrameLayout {
         super.onAttachedToWindow();
 
         AppCompatActivity activity = (AppCompatActivity) getContext();
-        if (activity == null) {
-            throw new IllegalArgumentException("Cannot add a SettingsView to activities which are not an AppCompatActivity");
-        }
 
         if (currentTransaction == null) {
-            currentTransaction = activity.getFragmentManager().beginTransaction();
+            currentTransaction = activity.getSupportFragmentManager().beginTransaction();
         }
 
         currentTransaction.replace(getId(), new PreferencesFragment(), "preferences-fragment");
@@ -69,22 +67,19 @@ public class SettingsView extends FrameLayout {
         super.onDetachedFromWindow();
 
         AppCompatActivity activity = (AppCompatActivity) getContext();
-        if (activity == null) {
-            throw new IllegalArgumentException("Cannot add a SettingsView to activities which are not an AppCompatActivity");
-        }
 
-        Fragment existingFragment = activity.getFragmentManager().findFragmentByTag("preferences-fragment");
+        Fragment existingFragment = activity.getSupportFragmentManager().findFragmentByTag("preferences-fragment");
         if (existingFragment == null) {
             return;
         }
 
         if (currentTransaction == null) {
-            currentTransaction = activity.getFragmentManager().beginTransaction();
+            currentTransaction = activity.getSupportFragmentManager().beginTransaction();
         }
         currentTransaction.remove(existingFragment);
         currentTransaction.commitAllowingStateLoss();
         currentTransaction = null;
-        activity.getFragmentManager().executePendingTransactions();
+        activity.getSupportFragmentManager().executePendingTransactions();
     }
 
 }

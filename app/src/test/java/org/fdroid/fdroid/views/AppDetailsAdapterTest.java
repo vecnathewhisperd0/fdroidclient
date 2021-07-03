@@ -1,14 +1,18 @@
 package org.fdroid.fdroid.views;
 
+import static org.junit.Assert.assertEquals;
+
 import android.app.Application;
 import android.content.ContentValues;
-import android.support.v7.widget.RecyclerView;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.test.core.app.ApplicationProvider;
+
 import org.fdroid.fdroid.Assert;
-import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.data.Apk;
@@ -25,27 +29,29 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-import static org.junit.Assert.assertEquals;
-
-@Config(constants = BuildConfig.class, application = Application.class)
+@Config(application = Application.class)
 @RunWith(RobolectricTestRunner.class)
 public class AppDetailsAdapterTest extends FDroidProviderTest {
 
     private App app;
+    private Context themeContext;
 
     @Before
     public void setup() {
-        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(context));
         Preferences.setupForTests(context);
 
         Repo repo = RepoProviderTest.insertRepo(context, "http://www.example.com/fdroid/repo", "", "", "Test Repo");
         app = AppProviderTest.insertApp(contentResolver, context, "com.example.app", "Test App",
                 new ContentValues(), repo.getId());
+
+        // Must manually set the theme again here other than in AndroidManifest,xml
+        // https://github.com/mozilla-mobile/fenix/pull/15646#issuecomment-707345798
+        ApplicationProvider.getApplicationContext().setTheme(R.style.Theme_App);
+        themeContext = new ContextThemeWrapper(ApplicationProvider.getApplicationContext(), R.style.Theme_App);
     }
 
     @After
     public void teardown() {
-        ImageLoader.getInstance().destroy();
         DBHelper.clearDbHelperSingleton();
     }
 
@@ -93,7 +99,7 @@ public class AppDetailsAdapterTest extends FDroidProviderTest {
      * out for us .
      */
     private void populateViewHolders(RecyclerView.Adapter<RecyclerView.ViewHolder> adapter) {
-        ViewGroup parent = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.app_details2_links, null);
+        ViewGroup parent = (ViewGroup) LayoutInflater.from(themeContext).inflate(R.layout.app_details2_links, null);
         for (int i = 0; i < adapter.getItemCount(); i++) {
             RecyclerView.ViewHolder viewHolder = adapter.createViewHolder(parent, adapter.getItemViewType(i));
             adapter.bindViewHolder(viewHolder, i);

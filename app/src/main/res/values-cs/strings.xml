@@ -47,7 +47,6 @@
     <string name="menu_issues">Problémy</string>
     <string name="menu_source">Zdrojový kód</string>
     <string name="menu_upgrade">Aktualizovat</string>
-    <string name="menu_donate">Přispět</string>
     <string name="details_notinstalled">Nenainstalováno</string>
     <string name="antiadslist">Tato aplikace obsahuje reklamu</string>
     <string name="antitracklist">Tato aplikace zaznamenává a hlásí vaše aktivity</string>
@@ -93,10 +92,9 @@
     <string name="repo_confirm_delete_body">Po odebrání repozitáře nebudou nabízené aplikace nadále dostupné.
 \n
 \nPozn.: Všechny dříve nainstalované aplikace budou na tomto zařízení ponechány beze změn.</string>
-    <string name="repo_disabled_notification">%1$s zakázáno.
-
-        Pro instalaci aplikací z tohoto repozitáře ho bude nejprve třeba znovu povolit.
-    </string>
+    <string name="repo_disabled_notification">%1$s vypnut.
+\n
+\nPro instalaci aplikací z tohoto repozitáře bude nutné jej znovu zapnout.</string>
     <string name="requires_features">Vyžaduje: %1$s</string>
     <string name="category_Development">Vývoj</string>
     <string name="category_Games">Hry</string>
@@ -147,7 +145,7 @@
     <string name="menu_litecoin">Litecoin</string>
     <string name="menu_flattr">Flattr</string>
     <string name="status_download_unknown_size">Stahování\n%2$s z\n%1$s</string>
-    <string name="update_notification_title">Aktualizace repozitářů</string>
+    <string name="banner_updating_repositories">Aktualizuji repozitáře</string>
     <string name="status_processing_xml_percent">Zpracovávání %2$s / %3$s (%4$d%%) z %1$s</string>
     <string name="all_other_repos_fine">Žádné jiné repozitáře nenahlásily chyby.</string>
     <string name="permissions">Oprávnění</string>
@@ -229,12 +227,11 @@
     <string name="interval_2w">Zjišťovat aktualizace  každé 2 týdny</string>
     <string name="theme_light">Světlý</string>
     <string name="theme_dark">Tmavý</string>
-    <string name="theme_night">Noc</string>
     <string name="system_install_denied_permissions">Privilegovaná oprávnění nebyla tomuto rozšíření udělena! Nahlašte
         prosím jako chybu!
     </string>
     <string name="cache_downloaded">Uchovat balíčky</string>
-    <string name="menu_email">Odeslat email autorovi</string>
+    <string name="menu_email">Odeslat e-mail autorovi</string>
     <string name="antinonfreeassetslist">Tato aplikace obsahuje nesvobodné části</string>
     <string name="status_inserting_apps">Ukládání podrobností o aplikaci</string>
     <string name="empty_search_available_app_list">Žádné odpovídající aplikace nejsou dostupné.</string>
@@ -509,4 +506,25 @@
     <string name="swap_error_cannot_start_bluetooth">Nelze spustit  Bluetooth!</string>
     <string name="swap_toast_closing_nearby_after_timeout">Funkce Nablízku ukončena kvůli nečinnosti.</string>
     <string name="nearby_splash__document_tree">Vyhledat repozitáře a zrcadlení na USB OTG.</string>
+    <string name="menu_opencollective">OpenCollective</string>
+    <string name="notification_channel_updates_description">Zobrazí oznámení o aktulaizacích aplikací a repozitáře.</string>
+    <string name="notification_channel_updates_title">Aktualizace</string>
+    <string name="notification_channel_installs_description">Zobrazí oznámení o instalaci aplikací.</string>
+    <string name="notification_channel_installs_title">Instalace</string>
+    <string name="notification_channel_swaps_description">Zobrazí oznámení o P2P směnách aplikací.</string>
+    <string name="notification_channel_swaps_title">Směny</string>
+    <string name="theme_follow_system">Podle systému</string>
+    <string name="use_pure_black_dark_theme_summary">Doporučeno jen pro OLED-obrazovky.</string>
+    <string name="use_pure_black_dark_theme">Použít čistě černé pozadí s tmavým motivem</string>
+    <string name="banner_no_data_or_wifi">Datové spojení nebo WLAN nejsou aktivní</string>
+    <string name="banner_no_internet">Nemáme spojení</string>
+    <string name="menu_show_install_history">Zobrazit průběh instalací</string>
+    <string name="menu_show_fdroid_metrics_report">Zobrazit hlášení metrik</string>
+    <string name="toast_metrics_in_install_history">Hlášení metrik %s lze prohlédnout v náhledu průběhu instalací</string>
+    <string name="send_to_fdroid_metrics_summary">Odesílá anonymizovaná data týdně pro metriky F-Droid (vyžaduje uchování průběhu instalací)</string>
+    <string name="send_to_fdroid_metrics">Odeslat data o používání</string>
+    <string name="fdroid_metrics_report">%s Hlášení metrik</string>
+    <string name="install_history_and_metrics">Průběh instalací a metriky</string>
+    <string name="send_fdroid_metrics_json">%s hlášení metrik jako JSON soubor</string>
+    <string name="send_fdroid_metrics_report">Odeslat hlášení metrik %s</string>
 </resources>

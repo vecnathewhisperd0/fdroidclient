@@ -6,28 +6,18 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.TextViewCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.GridLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSmoothScroller;
-import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.text.Spannable;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.text.method.LinkMovementMethod;
 import android.text.style.URLSpan;
+import android.text.util.Linkify;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.nostra13.universalimageloader.core.ImageLoader;
+
 import org.apache.commons.io.FilenameUtils;
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.R;
@@ -53,6 +43,7 @@ import org.fdroid.fdroid.data.RepoProvider;
 import org.fdroid.fdroid.installer.Installer;
 import org.fdroid.fdroid.privileged.views.AppDiff;
 import org.fdroid.fdroid.privileged.views.AppSecurityPermissions;
+import org.fdroid.fdroid.views.appdetails.AntiFeaturesListingView;
 import org.fdroid.fdroid.views.main.MainActivity;
 
 import java.io.File;
@@ -61,9 +52,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.core.os.ConfigurationCompat;
+import androidx.core.os.LocaleListCompat;
+import androidx.core.text.HtmlCompat;
+import androidx.core.text.util.LinkifyCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.widget.TextViewCompat;
+import androidx.gridlayout.widget.GridLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
+import androidx.recyclerview.widget.RecyclerView;
+
 @SuppressWarnings("LineLength")
 public class AppDetailsRecyclerViewAdapter
         extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    public static final String TAG = "AppDetailsRecyclerViewA";
 
     public interface AppDetailsRecyclerViewAdapterCallbacks {
 
@@ -252,7 +262,8 @@ public class AppDetailsRecyclerViewAdapter
                 uriIsSetAndCanBeOpened(app.getBitcoinUri()) ||
                 uriIsSetAndCanBeOpened(app.getLitecoinUri()) ||
                 uriIsSetAndCanBeOpened(app.getFlattrUri()) ||
-                uriIsSetAndCanBeOpened(app.getLiberapayUri());
+                uriIsSetAndCanBeOpened(app.getLiberapayUri()) ||
+                uriIsSetAndCanBeOpened(app.getOpenCollectiveUri());
     }
 
     private void notifyVersionViewsChanged() {
@@ -379,9 +390,10 @@ public class AppDetailsRecyclerViewAdapter
         final TextView whatsNewView;
         final TextView descriptionView;
         final TextView descriptionMoreView;
+        final View antiFeaturesSectionView;
         final TextView antiFeaturesLabelView;
-        final TextView antiFeaturesView;
         final View antiFeaturesWarningView;
+        final AntiFeaturesListingView antiFeaturesListingView;
         final View buttonLayout;
         final Button buttonPrimaryView;
         final Button buttonSecondaryView;
@@ -399,12 +411,13 @@ public class AppDetailsRecyclerViewAdapter
             authorView = (TextView) view.findViewById(R.id.author);
             lastUpdateView = (TextView) view.findViewById(R.id.text_last_update);
             summaryView = (TextView) view.findViewById(R.id.summary);
-            whatsNewView = (TextView) view.findViewById(R.id.whats_new);
+            whatsNewView = (TextView) view.findViewById(R.id.latest);
             descriptionView = (TextView) view.findViewById(R.id.description);
             descriptionMoreView = (TextView) view.findViewById(R.id.description_more);
+            antiFeaturesSectionView = view.findViewById(R.id.anti_features_section);
             antiFeaturesLabelView = (TextView) view.findViewById(R.id.label_anti_features);
-            antiFeaturesView = (TextView) view.findViewById(R.id.text_anti_features);
             antiFeaturesWarningView = view.findViewById(R.id.anti_features_warning);
+            antiFeaturesListingView = view.findViewById(R.id.anti_features_full_listing);
             buttonLayout = view.findViewById(R.id.button_layout);
             buttonPrimaryView = (Button) view.findViewById(R.id.primaryButtonView);
             buttonSecondaryView = (Button) view.findViewById(R.id.secondaryButtonView);
@@ -480,7 +493,7 @@ public class AppDetailsRecyclerViewAdapter
         }
 
         public void bindModel() {
-            ImageLoader.getInstance().displayImage(app.iconUrl, iconView, Utils.getRepoAppDisplayImageOptions());
+            Utils.setIconFromRepoOrPM(app, iconView, iconView.getContext());
             titleView.setText(app.name);
             if (!TextUtils.isEmpty(app.authorName)) {
                 authorView.setText(context.getString(R.string.by_author_format, app.authorName));
@@ -504,8 +517,9 @@ public class AppDetailsRecyclerViewAdapter
                 whatsNewView.setVisibility(View.GONE);
                 summaryView.setBackgroundResource(0); // make background of summary transparent
             } else {
-                //noinspection deprecation Ignore deprecation because the suggested way is only available in API 24.
-                Locale locale = context.getResources().getConfiguration().locale;
+                final LocaleListCompat localeList =
+                        ConfigurationCompat.getLocales(context.getResources().getConfiguration());
+                Locale locale = localeList.get(0);
 
                 StringBuilder sbWhatsNew = new StringBuilder();
                 sbWhatsNew.append(whatsNewView.getContext().getString(R.string.details_new_in_version,
@@ -519,9 +533,12 @@ public class AppDetailsRecyclerViewAdapter
                 // the changelog if its content becomes too long to fit on screen.
                 recyclerView.requestChildFocus(itemView, itemView);
             }
-            final Spanned desc = Html.fromHtml(app.description, null, new Utils.HtmlTagHandler());
+            final Spanned desc = HtmlCompat.fromHtml(app.description, HtmlCompat.FROM_HTML_MODE_LEGACY,
+                    null, new Utils.HtmlTagHandler());
             descriptionView.setMovementMethod(LinkMovementMethod.getInstance());
             descriptionView.setText(trimTrailingNewlines(desc));
+            LinkifyCompat.addLinks(descriptionView, Linkify.WEB_URLS);
+
             if (descriptionView.getText() instanceof Spannable) {
                 Spannable spannable = (Spannable) descriptionView.getText();
                 URLSpan[] spans = spannable.getSpans(0, spannable.length(), URLSpan.class);
@@ -545,23 +562,10 @@ public class AppDetailsRecyclerViewAdapter
                     }
                 }
             });
-            if (app.antiFeatures != null && app.antiFeatures.length > 0) {
-                StringBuilder sb = new StringBuilder();
-                for (String af : app.antiFeatures) {
-                    String afdesc = descAntiFeature(af);
-                    sb.append("<p><a href=\"https://f-droid.org/wiki/page/Antifeature:")
-                            .append(af)
-                            .append("\">")
-                            .append(afdesc)
-                            .append("</a></p>");
-                }
-                antiFeaturesView.setText(trimTrailingNewlines(Html.fromHtml(sb.toString())));
-                antiFeaturesView.setMovementMethod(LinkMovementMethod.getInstance());
-            } else {
-                antiFeaturesView.setVisibility(View.GONE);
-            }
 
+            antiFeaturesListingView.setApp(app);
             updateAntiFeaturesWarning();
+
             buttonPrimaryView.setText(R.string.menu_install);
             buttonPrimaryView.setVisibility(versions.isEmpty() ? View.GONE : View.VISIBLE);
             buttonSecondaryView.setText(R.string.menu_uninstall);
@@ -612,7 +616,7 @@ public class AppDetailsRecyclerViewAdapter
                             }
                         });
                     } else if (!app.isApk && mediaApk != null) {
-                        final File installedFile = new File(mediaApk.getMediaInstallPath(context), mediaApk.apkName);
+                        final File installedFile = mediaApk.getInstalledMediaFile(context);
                         if (!installedFile.toString().startsWith(context.getApplicationInfo().dataDir)) {
                             final Intent viewIntent = new Intent(Intent.ACTION_VIEW);
                             Uri uri = FileProvider.getUriForFile(context, Installer.AUTHORITY, installedFile);
@@ -664,41 +668,16 @@ public class AppDetailsRecyclerViewAdapter
         }
 
         private void updateAntiFeaturesWarning() {
-            if (app.antiFeatures == null || TextUtils.isEmpty(antiFeaturesView.getText())) {
-                antiFeaturesLabelView.setVisibility(View.GONE);
-                antiFeaturesView.setVisibility(View.GONE);
+            if (app.antiFeatures == null || app.antiFeatures.length == 0) {
+                antiFeaturesSectionView.setVisibility(View.GONE);
+            } else if (descriptionIsExpanded) {
                 antiFeaturesWarningView.setVisibility(View.GONE);
+                antiFeaturesLabelView.setVisibility(View.VISIBLE);
+                antiFeaturesListingView.setVisibility(View.VISIBLE);
             } else {
-                antiFeaturesLabelView.setVisibility(descriptionIsExpanded ? View.VISIBLE : View.GONE);
-                antiFeaturesView.setVisibility(descriptionIsExpanded ? View.VISIBLE : View.GONE);
-                antiFeaturesWarningView.setVisibility(descriptionIsExpanded ? View.GONE : View.VISIBLE);
-            }
-        }
-
-        private String descAntiFeature(String af) {
-            switch (af) {
-                case "Ads":
-                    return itemView.getContext().getString(R.string.antiadslist);
-                case "Tracking":
-                    return itemView.getContext().getString(R.string.antitracklist);
-                case "NonFreeNet":
-                    return itemView.getContext().getString(R.string.antinonfreenetlist);
-                case "NonFreeAdd":
-                    return itemView.getContext().getString(R.string.antinonfreeadlist);
-                case "NonFreeDep":
-                    return itemView.getContext().getString(R.string.antinonfreedeplist);
-                case "UpstreamNonFree":
-                    return itemView.getContext().getString(R.string.antiupstreamnonfreelist);
-                case "NonFreeAssets":
-                    return itemView.getContext().getString(R.string.antinonfreeassetslist);
-                case "DisabledAlgorithm":
-                    return itemView.getContext().getString(R.string.antidisabledalgorithmlist);
-                case "KnownVuln":
-                    return itemView.getContext().getString(R.string.antiknownvulnlist);
-                case "NoSourceSince":
-                    return itemView.getContext().getString(R.string.antinosourcesince);
-                default:
-                    return af;
+                antiFeaturesWarningView.setVisibility(View.VISIBLE);
+                antiFeaturesLabelView.setVisibility(View.GONE);
+                antiFeaturesListingView.setVisibility(View.GONE);
             }
         }
     }
@@ -786,14 +765,20 @@ public class AppDetailsRecyclerViewAdapter
                 donateHeading.setText(context.getString(R.string.app_details_donate_prompt_unknown_author, app.name));
             } else {
                 String author = "<strong>" + app.authorName + "</strong>";
-                donateHeading.setText(Html.fromHtml(context.getString(R.string.app_details_donate_prompt, app.name, author)));
+                final String prompt = context.getString(R.string.app_details_donate_prompt, app.name, author);
+                donateHeading.setText(HtmlCompat.fromHtml(prompt, HtmlCompat.FROM_HTML_MODE_LEGACY));
             }
 
             donationOptionsLayout.removeAllViews();
 
-            // Donate button
-            if (uriIsSetAndCanBeOpened(app.donate)) {
-                addDonateOption(R.layout.donate_generic, app.donate);
+            // LiberaPay
+            if (uriIsSetAndCanBeOpened(app.getLiberapayUri())) {
+                addDonateOption(R.layout.donate_liberapay, app.getLiberapayUri());
+            }
+
+            // OpenCollective
+            if (uriIsSetAndCanBeOpened(app.getOpenCollectiveUri())) {
+                addDonateOption(R.layout.donate_opencollective, app.getOpenCollectiveUri());
             }
 
             // Bitcoin
@@ -808,17 +793,28 @@ public class AppDetailsRecyclerViewAdapter
 
             // Flattr
             if (uriIsSetAndCanBeOpened(app.getFlattrUri())) {
-                addDonateOption(R.layout.donate_flattr, app.getFlattrUri());
+                addDonateOption(R.layout.donate_generic, app.getFlattrUri());
             }
-            // LiberaPay
-            if (uriIsSetAndCanBeOpened(app.getLiberapayUri())) {
-                addDonateOption(R.layout.donate_liberapay, app.getLiberapayUri());
+
+            // Donate button
+            if (uriIsSetAndCanBeOpened(app.donate)) {
+                addDonateOption(R.layout.donate_generic, app.donate);
             }
         }
 
+        /**
+         * Show the donate button, but only if it is an HTTPS URL.  The
+         * {@code https://} is then stripped off when URLs are directly displayed.
+         */
         private void addDonateOption(@LayoutRes int layout, final String uri) {
             LayoutInflater inflater = LayoutInflater.from(context);
             View option = inflater.inflate(layout, donationOptionsLayout, false);
+            if (layout == R.layout.donate_generic) {
+                if (!uri.toLowerCase(Locale.ENGLISH).startsWith("https://")) {
+                    return;
+                }
+                ((TextView) option).setText(uri.substring(8));
+            }
             option.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -847,7 +843,12 @@ public class AppDetailsRecyclerViewAdapter
          * user can expand/collapse this item.
          */
         protected void updateExpandableItem(boolean isExpanded) {
-            TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(headerView, getIcon(), 0, isExpanded ? R.drawable.ic_expand_less_grey600 : R.drawable.ic_expand_more_grey600, 0);
+            final int icon = getIcon();
+            Drawable iconDrawable = ContextCompat.getDrawable(headerView.getContext(), icon);
+            final Drawable expandLess = ContextCompat.getDrawable(headerView.getContext(), R.drawable.ic_expand_less);
+            final Drawable expandMore = ContextCompat.getDrawable(headerView.getContext(), R.drawable.ic_expand_more);
+            TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(headerView,
+                    iconDrawable, null, isExpanded ? expandLess : expandMore, null);
         }
     }
 
@@ -872,7 +873,7 @@ public class AppDetailsRecyclerViewAdapter
 
         @DrawableRes
         protected int getIcon() {
-            return R.drawable.ic_access_time_24dp_grey600;
+            return R.drawable.ic_versions;
         }
     }
 
@@ -882,7 +883,11 @@ public class AppDetailsRecyclerViewAdapter
         NoVersionsViewHolder(View view) {
             super(view);
             headerView = (TextView) view.findViewById(R.id.information);
-            TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(headerView, R.drawable.ic_access_time_24dp_grey600, 0, 0, 0);
+            final Drawable accessTime = DrawableCompat.wrap(ContextCompat.getDrawable(headerView.getContext(),
+                    R.drawable.ic_versions)).mutate();
+            DrawableCompat.setTint(accessTime, Color.parseColor("#B4B4B4"));
+            TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(headerView,
+                    accessTime, null, null, null);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -973,7 +978,7 @@ public class AppDetailsRecyclerViewAdapter
 
         @DrawableRes
         protected int getIcon() {
-            return R.drawable.ic_lock_24dp_grey600;
+            return R.drawable.ic_lock;
         }
     }
 
@@ -1021,7 +1026,7 @@ public class AppDetailsRecyclerViewAdapter
 
             // Issues button
             if (uriIsSetAndCanBeOpened(app.issueTracker)) {
-                addLinkItemView(contentView, R.string.menu_issues, R.drawable.ic_issues, app.issueTracker);
+                addLinkItemView(contentView, R.string.menu_issues, R.drawable.ic_error, app.issueTracker);
             }
 
             // Translation button
@@ -1298,7 +1303,7 @@ public class AppDetailsRecyclerViewAdapter
             expandedLayout.setVisibility(expand ? View.VISIBLE : View.GONE);
             versionCode.setVisibility(expand ? View.VISIBLE : View.GONE);
             expandArrow.setImageDrawable(ContextCompat.getDrawable(context, expand ?
-                    R.drawable.ic_expand_less_grey600 : R.drawable.ic_expand_more_grey600));
+                    R.drawable.ic_expand_less : R.drawable.ic_expand_more));
 
             // This is required to make these labels
             // auto-scrollable when they are too long

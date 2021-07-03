@@ -64,7 +64,7 @@
     <string name="repo_provider">Repozitorij: %s</string>
     <string name="menu_manage">Repozitoriji</string>
     <string name="menu_settings">Postavke</string>
-    <string name="menu_search">Pretraži</string>
+    <string name="menu_search">Traži</string>
     <string name="menu_add_repo">Novi repozitorij</string>
     <string name="menu_launch">Otvori</string>
     <string name="menu_share">Dijeli</string>
@@ -77,8 +77,7 @@
     <string name="menu_issues">Problemi</string>
     <string name="menu_changelog">Zapis o promjenama</string>
     <string name="menu_source">Izvorni kod</string>
-    <string name="menu_upgrade">Ažuriraj</string>
-    <string name="menu_donate">Doniraj</string>
+    <string name="menu_upgrade">Nadogradi</string>
     <string name="menu_bitcoin">Bitcoin</string>
     <string name="menu_litecoin">Litecoin</string>
     <string name="menu_flattr">Flattr</string>
@@ -99,19 +98,17 @@
     <string name="show_incompat_versions_on">Prikaži verzije koje su nekompatibilne s ovim uređajem</string>
     <string name="local_repo">Lokalni repozitorij</string>
     <string name="local_repo_running">F-Droid je spreman za razmjenu</string>
-    <string name="touch_to_configure_local_repo">Dodirnite za detalje i dopuštanje drugima da razmjenjuju Vaše
-        aplikacije.
-    </string>
-    <string name="deleting_repo">Brišem trenutni repozitorij…</string>
-    <string name="adding_apks_format">Dodajem %s u repozitorij…</string>
-    <string name="writing_index_jar">Pišem potpisanu datoteku indeksa (index.jar)…</string>
-    <string name="linking_apks">Povezujem APK-ove u repozitorij…</string>
-    <string name="copying_icons">Kopiram ikone aplikacija u repozitorij…</string>
+    <string name="touch_to_configure_local_repo">Dodirni za prikaz detalja i za dopuštanje drugima da razmjenjuju tvoje aplikacije.</string>
+    <string name="deleting_repo">Briše se trenutačni repozitorij …</string>
+    <string name="adding_apks_format">%s se dodaje u repozitorij …</string>
+    <string name="writing_index_jar">Piše se potpisana datoteka indeksa (index.jar) …</string>
+    <string name="linking_apks">Povezuju se APK-ovi u repozitorij …</string>
+    <string name="copying_icons">Kopiraju se ikone aplikacija u repozitorij …</string>
     <string name="icon">Ikona</string>
     <string name="next">Sljedeća</string>
     <string name="skip">Preskoči</string>
     <string name="useTor">Koristi Tor</string>
-    <string name="useTorSummary">Prisili promet preuzimanja kroz Tor za povećanu privatnost. Zahtjeva Orbot</string>
+    <string name="useTorSummary">Prisili promet preuzimanja kroz Tor za povećanu privatnost. Zahtijeva Orbot</string>
     <string name="proxy">Proxy</string>
     <string name="enable_proxy_title">Omogući HTTP Proxy</string>
     <string name="enable_proxy_summary">Postavi HTTP Proxy za sve mrežne zahtjeve</string>
@@ -121,7 +118,7 @@
     <string name="proxy_port_summary">Broj priključka Vašeg proxyja (npr. 8118)</string>
     <string name="status_download">Preuzimam\n%2$s / %3$s (%4$d%%) sa\n%1$s</string>
     <string name="status_download_unknown_size">Preuzimam\n%2$s sa\n%1$s</string>
-    <string name="update_notification_title">Ažuriram repozitorije</string>
+    <string name="banner_updating_repositories">Ažuriram repozitorije</string>
     <string name="status_processing_xml_percent">Obrađujem %2$s / %3$s (%4$d%%) od %1$s</string>
     <string name="status_connecting_to_repo">Spajam se na\n%1$s</string>
     <string name="status_inserting_apps">Spremanje detalja aplikacije</string>
@@ -150,12 +147,12 @@
     </string>
     <string name="unknown">Nepoznato</string>
     <string name="repo_confirm_delete_title">Obrisati repozitorij?</string>
-    <string name="repo_confirm_delete_body">Brisanje repozitorija znači da aplikacije iz njega više neće biti dostupne. Napomena: Sve instalirane aplikacije će ostati na Vašem uređaju.</string>
+    <string name="repo_confirm_delete_body">Brisanje repozitorija znači, da aplikacije u repozitoriju više neće biti dostupne.
+\n
+\nNapomena: Sve instalirane aplikacije će ostati na Vašem uređaju.</string>
     <string name="repo_disabled_notification">Onemogućeno %1$s.
-
-        Morat će te
-        ponovno omogućiti repozitorij kako bi instalirali aplikacije iz njega.
-    </string>
+\n
+\nMorat ćete ponovo omogućiti repozitorij kako bi instalirali aplikacije iz repozitorija.</string>
     <string name="repo_added">Spremljen repozitorij paketa %1$s.</string>
     <string name="repo_searching_address">Tražim repozitorij paketa na
 \n%1$s</string>
@@ -272,7 +269,6 @@
     <string name="keep_forever">Zauvijek</string>
     <string name="theme_light">Svijetla</string>
     <string name="theme_dark">Tamna</string>
-    <string name="theme_night">Noćna</string>
     <string name="crash_dialog_title">F-Droid se srušio</string>
     <string name="crash_dialog_text">Dogodila se neočekivana greška, aplikacija je prisilno zaustavljena. Želite li poslati detalje kvara putem e-pošte da bismo ga popravili\?</string>
     <string name="crash_dialog_comment_prompt">Možete dodati dodatne informacije i komentare ovdje:</string>
@@ -390,4 +386,107 @@
     <string name="disabled">Onemogućeno</string>
     <string name="allow">Dopusti</string>
     <string name="repo_exists_add_mirror">Ovo je kopija od %1$s, dodati ga kao zrcalo\?</string>
+    <string name="menu_video">Video</string>
+    <string name="force_old_index_summary">U slučaju grešaka ili problema s kompatibilnošću, koristi XML indeks aplikacije</string>
+    <string name="panic_app_dialog_title">Potvrdi aplikaciju za hitne slučajeve</string>
+    <string name="panic_app_setting_none">Nijedna</string>
+    <string name="panic_app_setting_summary">Nijedna aplikacija nije postavljena</string>
+    <string name="panic_app_unknown_app">nepoznata aplikacija</string>
+    <string name="panic_app_setting_title">Aplikacija gumba za hitne slučajeve</string>
+    <string name="preventScreenshots_title">Spriječi snimanje ekrana</string>
+    <string name="privacy">Privatnost</string>
+    <string name="try_again">Pokušaj ponovo</string>
+    <string name="force_touch_apps_on">Prikaži aplikacije koje zahtijevaju dodirni ekran, bez obzira o hardverskoj podršci</string>
+    <string name="force_touch_apps">Uključi aplikacije za dodirni ekran</string>
+    <string name="antinosourcesince">Izvorni kod više nije dostupan, nije moguće ažurirati.</string>
+    <string name="antiknownvulnlist">Ova aplikacija sadrži poznatu sigurnosnu ranjivost</string>
+    <string name="antidisabledalgorithmlist">Ova aplikacija ima slab sigurnosni potpis</string>
+    <string name="antifeatureswarning">Ova aplikacija ima funkcije koje ti se možda ne sviđaju.</string>
+    <string name="details_new_in_version">Novo u verziji %s</string>
+    <string name="preference_category__my_apps">Moje aplikacije</string>
+    <string name="categories__empty_state__no_categories">Nema kategorija za prikaz</string>
+    <string name="latest__empty_state__no_recent_apps">Nema nedavnih aplikacija</string>
+    <string name="main_menu__updates">Ažuriranja</string>
+    <string name="menu_liberapay">Liberapay</string>
+    <string name="menu_downgrade">Unazadi verziju</string>
+    <string name="menu_translation">Prijevod</string>
+    <string name="menu_license">Licenca: %s</string>
+    <string name="menu_open">Otvori</string>
+    <string name="repositories_summary">Dodaj daljnje izvore aplikacija</string>
+    <string name="repo_delete_to_overwrite">Najprije izbriši %1$s kako bi se dodalo s neodgovarajućim ključem.</string>
+    <string name="sort_search">Razvrstaj pretragu</string>
+    <string name="clear_search">Isprazni pretragu</string>
+    <string name="versions">Verzije</string>
+    <string name="repo_add_mirror">Dodaj zrcalni repozitorij</string>
+    <plurals name="updates__download_updates_for_apps">
+        <item quantity="one">Preuzmi ažuriranje za %1$d aplikaciju.</item>
+        <item quantity="few">Preuzmi ažuriranja za %1$d aplikacije.</item>
+        <item quantity="other">Preuzmi ažuriranja za %1$d aplikacija.</item>
+    </plurals>
+    <string name="updates__show_updateable_apps">Prikaži aplikacije</string>
+    <string name="updates__hide_updateable_apps">Sakrij aplikacije</string>
+    <string name="update_all">Ažuriraj sve</string>
+    <string name="installed_app__updates_ignored_for_suggested_version">Ažuriranja su zanemarena za verziju %1$s</string>
+    <string name="send_installed_apps_csv">Aplikacije instalirane F-Droidom kao CSV datoteka</string>
+    <string name="app_installed_media">Datoteka je instalirana na %s</string>
+    <string name="app_details_donate_prompt">%1$s su stvorili %2$s programeri. Kupi im kavu!</string>
+    <string name="app_details_donate_prompt_unknown_author">Kupi %1$s programerima kavu!</string>
+    <string name="scan_removable_storage_toast">Pretražuje se %s …</string>
+    <string name="scan_removable_storage_title">Traži prijenosne memorije</string>
+    <string name="over_network_never_summary">Nikada ne preuzimaj ništa putem ove veze</string>
+    <string name="over_network_on_demand_summary">Koristi ovu vezu samo, kad kliknem na preuzimanje</string>
+    <string name="over_network_always_summary">Uvijek koristi ovu vezu kad je dostupna</string>
+    <string name="over_data">Putem mobilne mreže</string>
+    <string name="over_wifi">Putem Wi-Fi mreže</string>
+    <string name="allow_push_requests">Dopusti repozitorijima instalirati/deinstalirati aplikacije</string>
+    <string name="send_history_csv">%s povijest instalacija kao CSV datoteka</string>
+    <string name="show_anti_feature_apps_on">Prikaži programe koji zahtijevaju nepoželjne funkcije</string>
+    <string name="show_anti_feature_apps">Uključi programe s nepoželjnim funkcijama</string>
+    <string name="antifeatures">Nepoželjne funkcije</string>
+    <string name="app__tts__downloading_progress">Preuzimanje, %1$d %% gotovo</string>
+    <string name="not_visible_nearby">Dijeljenje uređaja u blizini nije omogućeno</string>
+    <string name="use_bluetooth">Koristi Bluetooth</string>
+    <string name="swap_error_cannot_start_bluetooth">Nije moguće pokrenuti Bluetooth!</string>
+    <string name="swap_stopping">Zaustavljanje…</string>
+    <string name="swap_starting">Pokretanje…</string>
+    <string name="swap_stopping_hotspot">Zaustavljanje žarišne točke…</string>
+    <string name="swap_setting_up_hotspot">Postavljanje žarišne točke…</string>
+    <string name="swap_hidden_wifi_ssid">(skriveno)</string>
+    <string name="swap_blank_wifi_ssid">(prazno)</string>
+    <string name="swap_visible_hotspot">Vidljivo preko žarišne točke</string>
+    <string name="nearby_splash__request_permission">Probaj</string>
+    <string name="nearby_splash__document_tree">Pretraži repozitorije i zrcala repozitorija na USB OTG uređaju.</string>
+    <string name="nearby_splash__read_external_storage">Pretraži repozitorije i zrcala repozitorija na SD kartici.</string>
+    <string name="nearby_splash__both_parties_need_fdroid">Oba uređaja trebaju %1$s za korištenje blizinske razmjene.</string>
+    <string name="nearby_splash__find_people_button">Pronađi ljude u blizini</string>
+    <string name="nearby_splash__download_apps_from_people_nearby">Nemate internet\? Preuzmite aplikacije od ljudi u blizini!</string>
+    <string name="share_repository">Podijeli repozitorij</string>
+    <string name="repo_user_mirrors">Korisnička zrcala repozitorija</string>
+    <string name="repo_official_mirrors">Službena zrcaljenja repozitorija</string>
+    <string name="status_inserting_x_apps">Spremanje detalja aplikacija (%1$d/%2$d) iz %3$s</string>
+    <string name="download_404">Tražena datoteka nije pronađena.</string>
+    <string name="hide_on_long_search_press_summary">Dugo pritiskanje gumba za pretraživanje sakriti će aplikaciju</string>
+    <string name="hiding_dialog_warning">Upozorenje: Svaki će se prečac aplikacije na početnom zaslonu također ukloniti i biti će ga potrebno ručno dodati.</string>
+    <string name="panic_hide_warning_message">U slučaju uzbune, ovo će ukloniti %1$s s početnog zaslona. Upisivanjem \"%2$d\" u lažnoj aplikaciji %3$s možete obnoviti %1$s.</string>
+    <string name="hiding_dialog_message">Jeste li sigurni da želite ukloniti %1$s s početnog zaslona\? %1$s možete vratiti samo upisivanjem \"%2$d\" u lažnoj aplikaciji %3$s.</string>
+    <string name="panic_reset_repos_summary">Prisilno vrati postavke repozitorija na zadane vrijednosti</string>
+    <string name="panic_reset_repos_title">Ponovo namjesti repozitorije</string>
+    <string name="panic_add_apps_to_uninstall">Dodajte aplikacije koje želite deinstalirati i izbrisati</string>
+    <string name="panic_apps_to_uninstall">Aplikacije za deinstaliranje i brisanje svih podataka</string>
+    <string name="panic_will_be_wiped">Deinstalirati će se i svi će se podaci izbrisati</string>
+    <string name="panic_app_dialog_message">Jeste li sigurni da želite dopustiti da %1$s pokrene destruktivne akcije tipke za uzbunu\?</string>
+    <string name="preventScreenshots_summary">Blokira snimanje zaslona i skriva sadržaj aplikacije sa zaslona nedavnih aplikacija</string>
+    <string name="latest__empty_state__no_enabled_repos">Nakon što omogućite repozitorij i ažurirate ga, ovdje će se prikazati najnovije aplikacije</string>
+    <string name="latest__empty_state__never_updated">Nakon što se vaš popis aplikacija ažurira, ovdje će biti prikazane najnovije aplikacije</string>
+    <string name="menu_opencollective">OpenCollective</string>
+    <string name="menu_select_for_wipe">Označi za brisanje</string>
+    <string name="updates_disabled_by_settings">Sva ažuriranja su onemogućena zbog postavki Mobilnih podataka / Wi-Fi</string>
+    <string name="updates__app_with_known_vulnerability__prompt_upgrade">Pronašli smo sigurnosnu prijetnju u %1$s. Preporučujemo da odmah ažurirate ovu aplikaciju na najnoviju verziju.</string>
+    <string name="updates__app_with_known_vulnerability__prompt_uninstall">Pronašli smo sigurnosnu prijetnju u %1$s. Preporučujemo da odmah deinstalirate ovu aplikaciju.</string>
+    <string name="app_permission_storage">F-Droid zahtjeva dopuštenje pristupa pohrani kako bi ovo instalirao u pohranu uređaja. Dopustite pristup pohrani na sljedećem zaslonu kako biste nastavili s instalacijom.</string>
+    <string name="app_details__no_versions__explain_incompatible_signatures">Instalirana verzija nije kompatibilna s nijednom dostupnom verzijom. Deinstaliranje aplikacije omogućiti će vam pregled i instaliranje kompatibilnih verzija. Ovo se često događa s aplikacijama instaliranim putem Google Play ili drugih izvora, ako su potpisane drugim certifikatom.</string>
+    <string name="app_details__no_versions__show_incompat_versions">Za prikaz nekompatibilnih verzija omogućite postavku \"%1$s\".</string>
+    <string name="scan_removable_storage_summary">Traži repozitorije paketa na prijenosnoj pohrani kao što su SD kartice i USB pohrana</string>
+    <string name="allow_push_requests_summary">Metapodaci repozitorija mogu uključivati push zahtjeve za instaliranje ili deinstaliranje aplikacija</string>
+    <string name="theme_follow_system">Slijedi sustav</string>
 </resources>

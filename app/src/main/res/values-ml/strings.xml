@@ -151,7 +151,6 @@
     <string name="menu_video">വീഡിയോ</string>
     <string name="menu_license">അനുമതി: %s</string>
     <string name="menu_source">സോഴ്സ് കോഡ്</string>
-    <string name="menu_donate">സംഭാവനചെയ്യുക</string>
     <string name="menu_bitcoin">ബിറ്റ്കോയിന്‍</string>
     <string name="menu_litecoin">ലെെറ്റ്കോയിന്‍</string>
     <string name="menu_flattr">Flattr</string>
@@ -196,7 +195,7 @@
 \n %2$s നെ 
 \n %1$s ല്‍ നിന്ന്</string>
     <string name="download_404">അഭ്യർത്ഥിച്ച ഫയൽ കണ്ടെത്തിയില്ല.</string>
-    <string name="update_notification_title">ആപ്പ് ശേഖരണം പുതുക്കുന്നു</string>
+    <string name="banner_updating_repositories">ആപ്പ് ശേഖരണം പുതുക്കുന്നു</string>
     <string name="status_connecting_to_repo">ബന്ധിപ്പിക്കുന്നു 
 \n %1$s ലേക്ക്</string>
     <string name="repos_unchanged">എല്ലാ സംഭരണികളും കാലികമാണ്</string>
@@ -215,16 +214,15 @@
     <string name="repo_not_yet_updated">ഈ ആപ്പ് ശേഖരണം ഇതുവരെ ഉപയോഗിച്ചിട്ടില്ല. ഇതിലുള്ള ആപ്പുകൾ കാണാന്‍ ഇത് സജ്ജമാക്കേണ്ടതുണ്ട്.</string>
     <string name="unknown">അജ്ഞാതം</string>
     <string name="repo_confirm_delete_title">ആപ്പ് ശേഖരണം ഒഴിവാക്കുക\?</string>
-    <string name="repo_confirm_delete_body">"ഒരു ആപ്പ് ശേഖരണം  നീക്കം ചെയ്‌താൽ അതില്‍ നിന്നുള്ള ആപ്പുകൾ ഇനി എഫ്-ഡ്രോയ്ഡില്‍ ലഭ്യമാകുകയില്ല.
+    <string name="repo_confirm_delete_body">ഒരു ആപ്പ് ശേഖരണം നീക്കം ചെയ്‌താൽ അതില്‍ നിന്നുള്ള ആപ്പുകൾ ഇനി എഫ്-ഡ്രോയ്ഡില്‍ ലഭ്യമാകുകയില്ല.
 \n
-\n      
-\n
-\n    കുറിപ്പ്:  മുമ്പ് ഇൻസ്റ്റാൾ ചെയ്ത എല്ലാ ആപ്പുകളും  നിങ്ങളുടെ ഉപകരണത്തില്‍ തന്നെ ഉണ്ടാകും."</string>
+\n കുറിപ്പ്: മുമ്പ് ഇൻസ്റ്റാൾ ചെയ്ത എല്ലാ ആപ്പുകളും നിങ്ങളുടെ ഉപകരണത്തില്‍ തന്നെ ഉണ്ടാകും.</string>
     <string name="repo_disabled_notification">%1$s പ്രവര്‍ത്തനരഹിതമാക്കി. 
 \n 
 \n ഈ സംഭരണിയില്‍ നിന്നും ആപ്പുകൾ ഉപയോഗിക്കാൻ ഇത് വീണ്ടും പ്രവർത്തനക്ഷമമാക്കേണ്ടതുണ്ട്.</string>
     <string name="repo_added">%1$s ആപ്പ് സംഭരണം സൂക്ഷിച്ചുവെച്ചു.</string>
-    <string name="repo_searching_address">%1$sൽ ആപ്പ് ശേഖരണം തിരയുന്നു</string>
+    <string name="repo_searching_address">%1$s
+\nൽ ആപ്പ് ശേഖരണം തിരയുന്നു</string>
     <string name="requires_features">വേണ്ടത്: %1$s</string>
     <string name="wifi_ap">ഹോട്ട്സ്പോട്ട്</string>
     <string name="category_Theming">ഭാവഭേദം</string>
@@ -350,7 +348,6 @@
     <string name="status_inserting_apps">പ്രയോഗ വിവരങ്ങള്‍ സൂക്ഷിക്കുന്നു</string>
     <string name="theme_light">ഇളം നിറം</string>
     <string name="theme_dark">ഇരുണ്ട നിറം</string>
-    <string name="theme_night">രാത്രി</string>
     <string name="swap_nfc_description">നിങ്ങളുടെ സുഹൃത്തിന് എഫ്-ഡ്രോയ്ഡ് ഉണ്ടെങ്കിൽ, നിങ്ങളുടെ രണ്ട് ഉപകരണങ്ങളിലും NFC ഒന്നിച്ചു സജ്ജമാക്കുകയാണെങ്കില്‍.</string>
     <string name="swap_join_same_wifi_desc">വൈ-ഫൈ ഉപയോഗിച്ച് കെെമാറ്റം ചെയ്യാൻ, നിങ്ങൾ ഒരേ നെറ്റ്വർക്കിൽ ആണെന്ന് ഉറപ്പാക്കുക. നിങ്ങൾക്ക് ഒരേ നെറ്റ്വർക്കിലേക്ക് പ്രവേശനം ഇല്ലെങ്കിൽ, നിങ്ങളിൽ ഒരാള്‍ക്ക് വൈഫൈ ഹോട്ട്സ്പോട്ട് സൃഷ്ടിക്കാം.</string>
     <string name="swap_confirm_connect">നിങ്ങൾക്ക് ഇപ്പോൾ %1$s ൽ  നിന്ന് പ്രയോഗങ്ങള്‍ സ്വീകരിക്കണോ?</string>
@@ -359,10 +356,10 @@
     <string name="force_old_index">പഴയ സൂചിക ഫോർമാറ്റ് ഉപയോഗിക്കാന്‍ നിര്‍ബന്ധിക്കുക</string>
     <string name="force_old_index_summary">ബഗ്ഗുകൾ അല്ലെങ്കിൽ അനുയോജ്യത പ്രശ്നങ്ങൾ ഉണ്ടെങ്കിൽ, XML ആപ്പ് സൂചിക ഉപയോഗിക്കുക</string>
     <string name="swap_intro">നിങ്ങളുടെ അടുത്തുള്ള ആളുകളുമായി ബന്ധപ്പെട്ട് പ്രയോഗങ്ങള്‍ കെെമാറ്റം ചെയ്യൂ.</string>
-    <string name="install_confirm_update">നിലവിലുള്ള ഈ അപ്ലിക്കേഷന് ഒരു അപ്‌ഡേറ്റ് ഇൻസ്റ്റാളുചെയ്യണോ? നിങ്ങളുടെ നിലവിലെ ഡാറ്റ നഷ്‌ടപ്പെടില്ല. അപ്‌ഡേറ്റുചെയ്‌ത അപ്ലിക്കേഷന് ഇവയിലേക്ക് ആക്‌സസ്സ് ലഭിക്കും:</string>
-    <string name="install_confirm_update_system">ഈ അന്തർ നിർമ്മിത അപ്ലിക്കേഷന് ഒരു അപ്‌ഡേറ്റ് ഇൻസ്റ്റാളുചെയ്യണോ? നിങ്ങളുടെ നിലവിലെ ഡാറ്റ നഷ്‌ടപ്പെടില്ല. അപ്‌ഡേറ്റുചെയ്‌ത അപ്ലിക്കേഷന് ഇവയിലേക്ക് ആക്‌സസ്സ് ലഭിക്കും:</string>
-    <string name="install_confirm_update_no_perms">നിലവിലുള്ള ഈ അപ്ലിക്കേഷന് ഒരു അപ്‌ഡേറ്റ് ഇൻസ്റ്റാളുചെയ്യണോ? നിങ്ങളുടെ നിലവിലെ ഡാറ്റ നഷ്‌ടപ്പെടില്ല. ഇതിന് പ്രത്യേക ആക്‌സസ്സൊന്നും ആവശ്യമില്ല.</string>
-    <string name="install_confirm_update_system_no_perms">ഈ അന്തർ നിർമ്മിത അപ്ലിക്കേഷന് ഒരു അപ്‌ഡേറ്റ് ഇൻസ്റ്റാളുചെയ്യണോ? നിങ്ങളുടെ നിലവിലെ ഡാറ്റ നഷ്‌ടപ്പെടില്ല. ഇതിന് പ്രത്യേക ആക്‌സസ്സൊന്നും ആവശ്യമില്ല.</string>
+    <string name="install_confirm_update">നിലവിലുള്ള ഈ അപ്ലിക്കേഷനിലേക്ക് ഒരു അപ്‌ഡേറ്റ് ഇൻസ്റ്റാൾ ചെയ്യാൻ നിങ്ങൾ ആഗ്രഹിക്കുന്നുണ്ടോ\? നിങ്ങളുടെ നിലവിലുള്ള ഡാറ്റ നഷ്‌ടപ്പെടില്ല. അപ്‌ഡേറ്റുചെയ്‌ത അപ്ലിക്കേഷന് ഇനിപ്പറയുന്നതിലേക്ക് ആക്‌സസ്സ് ലഭിക്കും:</string>
+    <string name="install_confirm_update_system">ഈ അന്തർനിർമ്മിത അപ്ലിക്കേഷനിലേക്ക് ഒരു അപ്‌ഡേറ്റ് ഇൻസ്റ്റാൾ ചെയ്യാൻ നിങ്ങൾ ആഗ്രഹിക്കുന്നുണ്ടോ\? നിങ്ങളുടെ നിലവിലുള്ള ഡാറ്റ നഷ്‌ടപ്പെടില്ല. അപ്‌ഡേറ്റുചെയ്‌ത അപ്ലിക്കേഷന് ഇനിപ്പറയുന്നതിലേക്ക് ആക്‌സസ്സ് ലഭിക്കും:</string>
+    <string name="install_confirm_update_no_perms">നിലവിലുള്ള ഈ അപ്ലിക്കേഷനിലേക്ക് ഒരു അപ്‌ഡേറ്റ് ഇൻസ്റ്റാൾ ചെയ്യാൻ നിങ്ങൾ ആഗ്രഹിക്കുന്നുണ്ടോ\? നിങ്ങളുടെ നിലവിലുള്ള ഡാറ്റ നഷ്‌ടപ്പെടില്ല. ഇതിന് പ്രത്യേക ആക്‌സസ്സ് ആവശ്യമില്ല.</string>
+    <string name="install_confirm_update_system_no_perms">ഈ അന്തർനിർമ്മിത അപ്ലിക്കേഷനിലേക്ക് ഒരു അപ്‌ഡേറ്റ് ഇൻസ്റ്റാൾ ചെയ്യാൻ നിങ്ങൾ ആഗ്രഹിക്കുന്നുണ്ടോ\? നിങ്ങളുടെ നിലവിലുള്ള ഡാറ്റ നഷ്‌ടപ്പെടില്ല. ഇതിന് പ്രത്യേക ആക്‌സസ്സ് ആവശ്യമില്ല.</string>
     <string name="uninstall_update_confirm">ഫാക്ടറി പതിപ്പ് ഉപയോഗിച്ച് ഈ ആപ്പ് മാറ്റിസ്ഥാപിക്കണോ? എല്ലാ ഡാറ്റയും നീക്കംചെയ്യപ്പെടും.</string>
     <string name="perms_description_app">%1$s നൽകിയത്.</string>
     <string name="enable_proxy_summary">എല്ലാ നെറ്റ്വർക്ക് അഭ്യർത്ഥനകൾക്കും പ്രോക്സി ക്രമീകരിക്കുക</string>
@@ -493,4 +490,11 @@
     <string name="swap_error_cannot_start_bluetooth">ബ്ലൂടൂത്ത് സജ്ജമാക്കാൻ സാധിച്ചില്ല!</string>
     <string name="swap_toast_closing_nearby_after_timeout">പ്രവർത്തനശൂന്യമായതിനാൽ സമീപ ഇടപാടുകൾ നിർത്തി വെച്ചു.</string>
     <string name="nearby_splash__document_tree">ആപ്പ് സംഭരണ വിവരവും പകര-സർവർ വിവരവും യു.എസ്‌.ബീ ഓ.ടി.ജിയിൽ തിരയുക.</string>
+    <string name="menu_opencollective">ഓപ്പൺ കലക്ടീവ്</string>
+    <string name="notification_channel_updates_description">അപ്ലിക്കേഷനും ശേഖരണ അപ്‌ഡേറ്റ് അറിയിപ്പുകളും പ്രദർശിപ്പിക്കുന്നു.</string>
+    <string name="notification_channel_updates_title">അപ്‌ഡേറ്റുകൾ</string>
+    <string name="notification_channel_swaps_description">P2P അപ്ലിക്കേഷൻ സ്വാപ്പിംഗ് അറിയിപ്പുകൾ പ്രദർശിപ്പിക്കുന്നു.</string>
+    <string name="notification_channel_swaps_title">സ്വാപ്പുകൾ</string>
+    <string name="notification_channel_installs_description">അപ്ലിക്കേഷൻ ഇൻസ്റ്റാളേഷൻ അറിയിപ്പുകൾ പ്രദർശിപ്പിക്കുന്നു.</string>
+    <string name="notification_channel_installs_title">ഇൻസ്റ്റാളേഷനുകൾ</string>
 </resources>

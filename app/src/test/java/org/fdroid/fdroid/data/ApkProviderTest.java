@@ -4,8 +4,8 @@ import android.app.Application;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
+
 import org.fdroid.fdroid.Assert;
-import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.TestUtils;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.Schema.ApkTable.Cols;
@@ -31,7 +31,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
-@Config(constants = BuildConfig.class, application = Application.class)
+@Config(application = Application.class)
 @RunWith(RobolectricTestRunner.class)
 public class ApkProviderTest extends FDroidProviderTest {
 

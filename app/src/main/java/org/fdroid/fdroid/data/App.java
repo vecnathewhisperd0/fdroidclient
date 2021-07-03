@@ -15,13 +15,13 @@ import android.os.Environment;
 import android.os.LocaleList;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.fasterxml.jackson.annotation.JacksonInject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import org.apache.commons.io.filefilter.RegexFileFilter;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Preferences;
@@ -41,8 +41,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -51,6 +51,11 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.os.ConfigurationCompat;
+import androidx.core.os.LocaleListCompat;
 
 /**
  * Represents an application, its availability, and its current installed state.
@@ -75,6 +80,14 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
     @JsonIgnore
     private static final String TAG = "App";
 
+    /**
+     * {@link LocaleListCompat} for finding the right app description material.
+     * It is set globally static to a) cache this value, since there are thousands
+     * of {@link App} entries, and b) make it easy to test {@link #setLocalized(Map)} )}
+     */
+    @JsonIgnore
+    public static LocaleListCompat systemLocaleList;
+
     // these properties are not from the index metadata, but represent the state on the device
     /**
      * True if compatible with the device (i.e. if at least one apk is)
@@ -98,8 +111,12 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
     public String preferredSigner;
     @JsonIgnore
     public boolean isApk;
+
+    /**
+     * Has this {@code App} been localized into one of the user's current locales.
+     */
     @JsonIgnore
-    private boolean isLocalized = false;
+    boolean isLocalized;
 
     /**
      * This is primarily for the purpose of saving app metadata when parsing an index.xml file.
@@ -116,7 +133,8 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
     public String name = "Unknown";
 
     public String summary = "Unknown application";
-    public String icon;
+    @JsonProperty("icon")
+    public String iconFromApk;
 
     public String description;
 
@@ -160,7 +178,9 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
 
     public String flattrID;
 
-    public String liberapayID;
+    public String liberapay;
+
+    public String openCollective;
 
     /**
      * This matches {@code CurrentVersion} in build metadata files.
@@ -215,9 +235,10 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
     public String[] requirements;
 
     /**
-     * URL to download the app's icon.
+     * URL to download the app's icon. (Set only from localized block, see also
+     * {@link #iconFromApk} and {@link #getIconUrl(Context)}
      */
-    public String iconUrl;
+    private String iconUrl;
 
     public static String getIconName(String packageName, int versionCode) {
         return packageName + "_" + versionCode + ".png";
@@ -258,7 +279,7 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
                     summary = cursor.getString(i);
                     break;
                 case Cols.ICON:
-                    icon = cursor.getString(i);
+                    iconFromApk = cursor.getString(i);
                     break;
                 case Cols.DESCRIPTION:
                     description = cursor.getString(i);
@@ -305,8 +326,11 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
                 case Cols.FLATTR_ID:
                     flattrID = cursor.getString(i);
                     break;
-                case Cols.LIBERAPAY_ID:
-                    liberapayID = cursor.getString(i);
+                case Cols.LIBERAPAY:
+                    liberapay = cursor.getString(i);
+                    break;
+                case Cols.OPEN_COLLECTIVE:
+                    openCollective = cursor.getString(i);
                     break;
                 case Cols.AutoInstallApk.VERSION_NAME:
                     autoInstallVersionName = cursor.getString(i);
@@ -442,6 +466,25 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
     }
 
     /**
+     * {@link #liberapay} was originally included using a numeric ID, now it is a
+     * username. This should not override {@link #liberapay} if that is already set.
+     */
+    @JsonProperty("liberapayID")
+    void setLiberapayID(String liberapayId) {  // NOPMD
+        if (TextUtils.isEmpty(liberapayId) || !TextUtils.isEmpty(liberapay)) {
+            return;
+        }
+        try {
+            int id = Integer.parseInt(liberapayId);
+            if (id > 0) {
+                liberapay = "~" + liberapayId;
+            }
+        } catch (NumberFormatException e) {
+            // ignored
+        }
+    }
+
+    /**
      * Parses the {@code localized} block in the incoming index metadata,
      * choosing the best match in terms of locale/language while filling as
      * many fields as possible.  It first sets up a locale list based on user
@@ -458,195 +501,217 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
      * {@code localized} block is included in the index.  Also, null strings in
      * the {@code localized} block should not overwrite Name/Summary/Description
      * strings with empty/null if they were set directly by Jackson.
-     * <p>
-     * Choosing the locale to use follows two sets of rules, one for Android versions
-     * older than {@code android-24} and the other for {@code android-24} or newer.
-     * The system-wide language preference list was added in {@code android-24}.
-     * <ul>
-     * <li>{@code >= android-24}<ol>
+     * <ol>
      * <li>the country variant {@code de-AT} from the user locale list
      * <li>only the language {@code de} from the above locale
+     * <li>next locale in the user's preference list ({@code >= android-24})
      * <li>{@code en-US} since its the most common English for software
      * <li>the first available {@code en} locale
-     * </ol></li>
-     * <li>{@code < android-24}<ol>
-     * <li>the country variant from the user locale: {@code de-AT}
-     * <li>only the language from the above locale:  {@code de}
-     * <li>all available locales with the same language:  {@code de-BE}
-     * <li>{@code en-US} since its the most common English for software
-     * <li>all available {@code en} locales
-     * </ol></li>
-     * </ul>
-     * On {@code >= android-24}, it is by design that this does not fallback to other
-     * country-specific locales, e.g. {@code fr-CH} does not fall back on {@code fr-FR}.
-     * If someone wants to fallback to {@code fr-FR}, they can add it to the system
-     * language list.  There are many cases where it is inappropriate to fallback to a
-     * different country-specific locale, for example {@code de-DE --> de-CH} or
-     * {@code zh-CN --> zh-TW}.
+     * </ol>
      * <p>
-     * On {@code < android-24}, the user can only set a single
-     * locale with a country as an option, so here it makes sense to try to fallback
-     * on other country-specific locales, rather than English.
+     * The system-wide language preference list was added in {@code android-24}.
+     *
+     * @see <a href="https://developer.android.com/guide/topics/resources/multilingual-support">Android language and locale resolution overview</a>
      */
     @JsonProperty("localized")
-    private void setLocalized(Map<String, Map<String, Object>> localized) { // NOPMD
-        if (localized.size() > 1) {
-            isLocalized = true;
+    void setLocalized(Map<String, Map<String, Object>> localized) { // NOPMD
+        if (systemLocaleList == null) {
+            systemLocaleList = ConfigurationCompat.getLocales(Resources.getSystem().getConfiguration());
         }
-
-        Locale defaultLocale = Locale.getDefault();
-        String languageTag = defaultLocale.getLanguage();
-        String countryTag = defaultLocale.getCountry();
-        String localeTag;
-        if (TextUtils.isEmpty(countryTag)) {
-            localeTag = languageTag;
-        } else {
-            localeTag = languageTag + "-" + countryTag;
-        }
-
-        Set<String> availableLocales = localized.keySet();
-        Set<String> localesToUse = new LinkedHashSet<>();
-        if (availableLocales.contains(localeTag)) {
-            localesToUse.add(localeTag);
-        }
-        if (availableLocales.contains(languageTag)) {
-            localesToUse.add(languageTag);
-        }
-        if (Build.VERSION.SDK_INT >= 24) {
-            LocaleList localeList = Resources.getSystem().getConfiguration().getLocales();
-            String[] sortedLocaleList = localeList.toLanguageTags().split(",");
-            Arrays.sort(sortedLocaleList, new java.util.Comparator<String>() {
-                @Override
-                public int compare(String s1, String s2) {
-                    return s1.length() - s2.length();
-                }
-            });
-            for (String toUse : sortedLocaleList) {
-                localesToUse.add(toUse);
-                for (String l : availableLocales) {
-                    if (l.equals(toUse.split("-")[0])) {
-                        localesToUse.add(l);
-                        break;
-                    }
-                }
-            }
-        } else {
-            for (String l : availableLocales) {
-                if (l.startsWith(languageTag)) {
-                    localesToUse.add(l);
-                }
-            }
-        }
-        if (availableLocales.contains("en-US")) {
-            localesToUse.add("en-US");
-        }
-        for (String l : availableLocales) {
-            if (l.startsWith("en")) {
-                localesToUse.add(l);
-                break;
-            }
-        }
-
-        String value = getLocalizedEntry(localized, localesToUse, "whatsNew");
+        Set<String> supportedLocales = localized.keySet();
+        setIsLocalized(supportedLocales);
+        String value = getLocalizedEntry(localized, supportedLocales, "whatsNew");
         if (!TextUtils.isEmpty(value)) {
             whatsNew = value;
         }
-        value = getLocalizedEntry(localized, localesToUse, "video");
+
+        value = getLocalizedEntry(localized, supportedLocales, "video");
         if (!TextUtils.isEmpty(value)) {
-            video = value.split("\n", 1)[0];
+            video = value.trim();
         }
-        value = getLocalizedEntry(localized, localesToUse, "name");
+        value = getLocalizedEntry(localized, supportedLocales, "name");
         if (!TextUtils.isEmpty(value)) {
-            name = value;
+            name = value.trim();
         }
-        value = getLocalizedEntry(localized, localesToUse, "summary");
+        value = getLocalizedEntry(localized, supportedLocales, "summary");
         if (!TextUtils.isEmpty(value)) {
-            summary = value;
+            summary = value.trim();
         }
-        value = getLocalizedEntry(localized, localesToUse, "description");
+        value = getLocalizedEntry(localized, supportedLocales, "description");
         if (!TextUtils.isEmpty(value)) {
             description = formatDescription(value);
         }
+        value = getLocalizedGraphicsEntry(localized, supportedLocales, "icon");
+        if (!TextUtils.isEmpty(value)) {
+            iconUrl = value;
+        }
 
-        featureGraphic = getLocalizedGraphicsEntry(localized, localesToUse, "featureGraphic");
-        promoGraphic = getLocalizedGraphicsEntry(localized, localesToUse, "promoGraphic");
-        tvBanner = getLocalizedGraphicsEntry(localized, localesToUse, "tvBanner");
+        featureGraphic = getLocalizedGraphicsEntry(localized, supportedLocales, "featureGraphic");
+        promoGraphic = getLocalizedGraphicsEntry(localized, supportedLocales, "promoGraphic");
+        tvBanner = getLocalizedGraphicsEntry(localized, supportedLocales, "tvBanner");
 
-        wearScreenshots = getLocalizedListEntry(localized, localesToUse, "wearScreenshots");
-        phoneScreenshots = getLocalizedListEntry(localized, localesToUse, "phoneScreenshots");
-        sevenInchScreenshots = getLocalizedListEntry(localized, localesToUse, "sevenInchScreenshots");
-        tenInchScreenshots = getLocalizedListEntry(localized, localesToUse, "tenInchScreenshots");
-        tvScreenshots = getLocalizedListEntry(localized, localesToUse, "tvScreenshots");
+        wearScreenshots = getLocalizedListEntry(localized, supportedLocales, "wearScreenshots");
+        phoneScreenshots = getLocalizedListEntry(localized, supportedLocales, "phoneScreenshots");
+        sevenInchScreenshots = getLocalizedListEntry(localized, supportedLocales, "sevenInchScreenshots");
+        tenInchScreenshots = getLocalizedListEntry(localized, supportedLocales, "tenInchScreenshots");
+        tvScreenshots = getLocalizedListEntry(localized, supportedLocales, "tvScreenshots");
     }
 
     /**
-     * Returns the right localized version of this entry, based on an immitation of
-     * the logic that Android/Java uses.  On Android >= 24, this can get the
-     * "Language Priority List", but it doesn't always seem to be properly sorted.
-     * So this method has to kind of fake it by using {@link Locale#getDefault()}
-     * as the first entry, then sorting the rest based on length (e.g. {@code de-AT}
-     * before {@code de}).
+     * Sets the boolean flag {@link #isLocalized} if this app entry has an localized
+     * entry in one of the user's current locales.
      *
-     * @see LocaleList
-     * @see Locale#getDefault()
-     * @see java.util.Locale.LanguageRange
+     * @see org.fdroid.fdroid.views.main.WhatsNewViewBinder#onCreateLoader(int, android.os.Bundle)
      */
-    private String getLocalizedEntry(Map<String, Map<String, Object>> localized,
-                                     Set<String> locales, String key) {
-        try {
-            for (String locale : locales) {
-                if (localized.containsKey(locale)) {
-                    String value = (String) localized.get(locale).get(key);
-                    if (value != null) {
-                        return value;
-                    }
+    private void setIsLocalized(Set<String> supportedLocales) {
+        isLocalized = false;
+        for (int i = 0; i < systemLocaleList.size(); i++) {
+            String language = systemLocaleList.get(i).getLanguage();
+            for (String supportedLocale : supportedLocales) {
+                if (language.equals(supportedLocale.split("-")[0])) {
+                    isLocalized = true;
+                    return;
                 }
             }
-        } catch (ClassCastException e) {
-            Utils.debugLog(TAG, e.getMessage());
+        }
+    }
+
+    /**
+     * Returns the right localized version of this entry, based on an imitation of
+     * the logic that Android uses.
+     *
+     * @see LocaleList
+     */
+    private String getLocalizedEntry(Map<String, Map<String, Object>> localized,
+                                     Set<String> supportedLocales, @NonNull String key) {
+        Map<String, Object> localizedLocaleMap = getLocalizedLocaleMap(localized, supportedLocales, key);
+        if (localizedLocaleMap != null && !localizedLocaleMap.isEmpty()) {
+            for (Object entry : localizedLocaleMap.values()) {
+                return (String) entry; // NOPMD
+            }
         }
         return null;
     }
 
     private String getLocalizedGraphicsEntry(Map<String, Map<String, Object>> localized,
-                                             Set<String> locales, String key) {
-        try {
-            for (String locale : locales) {
-                Map<String, Object> entry = localized.get(locale);
-                if (entry != null) {
-                    Object value = entry.get(key);
-                    if (value != null && value.toString().length() > 0) {
-                        return locale + "/" + value;
-                    }
-                }
+                                             Set<String> supportedLocales, @NonNull String key) {
+        Map<String, Object> localizedLocaleMap = getLocalizedLocaleMap(localized, supportedLocales, key);
+        if (localizedLocaleMap != null && !localizedLocaleMap.isEmpty()) {
+            for (String locale : localizedLocaleMap.keySet()) {
+                return locale + "/" + localizedLocaleMap.get(locale); // NOPMD
             }
-        } catch (ClassCastException e) {
-            Utils.debugLog(TAG, e.getMessage());
         }
         return null;
     }
 
     private String[] getLocalizedListEntry(Map<String, Map<String, Object>> localized,
-                                           Set<String> locales, String key) {
-        try {
-            for (String locale : locales) {
-                if (localized.containsKey(locale)) {
-                    ArrayList<String> entry = (ArrayList<String>) localized.get(locale).get(key);
-                    if (entry != null && entry.size() > 0) {
-                        String[] result = new String[entry.size()];
-                        int i = 0;
-                        for (String e : entry) {
-                            result[i] = locale + "/" + key + "/" + e;
-                            i++;
+                                           Set<String> supportedLocales, @NonNull String key) {
+        Map<String, Object> localizedLocaleMap = getLocalizedLocaleMap(localized, supportedLocales, key);
+        if (localizedLocaleMap != null && !localizedLocaleMap.isEmpty()) {
+            for (String locale : localizedLocaleMap.keySet()) {
+                ArrayList<String> entry = (ArrayList<String>) localizedLocaleMap.get(locale);
+                if (entry != null && entry.size() > 0) {
+                    String[] result = new String[entry.size()];
+                    int i = 0;
+                    for (String e : entry) {
+                        result[i] = locale + "/" + key + "/" + e;
+                        i++;
+                    }
+                    return result;
+                }
+            }
+        }
+        return new String[0];
+    }
+
+    /**
+     * Return one matching entry from the {@code localized} block in the app entry
+     * in the index JSON.
+     */
+    private Map<String, Object> getLocalizedLocaleMap(Map<String, Map<String, Object>> localized,
+                                                      Set<String> supportedLocales, @NonNull String key) {
+        String[] localesToUse = getLocalesForKey(localized, supportedLocales, key);
+        if (localesToUse.length > 0) {
+            Locale firstMatch = systemLocaleList.getFirstMatch(localesToUse);
+            if (firstMatch != null) {
+                for (String languageTag : new String[]{toLanguageTag(firstMatch), null}) {
+                    if (languageTag == null) {
+                        languageTag = getFallbackLanguageTag(firstMatch, localesToUse); // NOPMD
+                    }
+                    Map<String, Object> localeEntry = localized.get(languageTag);
+                    if (localeEntry != null && localeEntry.containsKey(key)) {
+                        Object value = localeEntry.get(key);
+                        if (value != null) {
+                            Map<String, Object> localizedLocaleMap = new HashMap<>();
+                            localizedLocaleMap.put(languageTag, value);
+                            return localizedLocaleMap;
                         }
-                        return result;
                     }
                 }
             }
-        } catch (ClassCastException e) {
-            Utils.debugLog(TAG, e.getMessage());
         }
-        return new String[0];
+        return null;
+    }
+
+    /**
+     * Replace with {@link Locale#toLanguageTag()} once
+     * {@link android.os.Build.VERSION_CODES#LOLLIPOP} is {@code minSdkVersion}
+     */
+    private String toLanguageTag(Locale firstMatch) {
+        if (Build.VERSION.SDK_INT < 21) {
+            return firstMatch.toString().replace("_", "-");
+        } else {
+            return firstMatch.toLanguageTag();
+        }
+    }
+
+    /**
+     * Get all locales that have an entry for {@code key}.
+     */
+    private String[] getLocalesForKey(Map<String, Map<String, Object>> localized,
+                                      Set<String> supportedLocales, @NonNull String key) {
+        Set<String> localesToUse = new HashSet<>();
+        for (String locale : supportedLocales) {
+            Map<String, Object> localeEntry = localized.get(locale);
+            if (localeEntry != null && localeEntry.get(key) != null) {
+                localesToUse.add(locale);
+            }
+        }
+        return localesToUse.toArray(new String[0]);
+    }
+
+    /**
+     * Look for the first language-country match for languages with multiple scripts.
+     * Then look for a language-only match, for when there is no exact
+     * {@link Locale} match.  Then try a locale with the same language, but
+     * different country. If there are still no matches, return the {@code en-US}
+     * entry. If all else fails, try to return the first existing English locale.
+     */
+    private String getFallbackLanguageTag(Locale firstMatch, String[] localesToUse) {
+        final String firstMatchLanguageCountry = firstMatch.getLanguage() + "-" + firstMatch.getCountry();
+        for (String languageTag : localesToUse) {
+            if (languageTag.equals(firstMatchLanguageCountry)) {
+                return languageTag;
+            }
+        }
+        final String firstMatchLanguage = firstMatch.getLanguage();
+        String englishLastResort = null;
+        for (String languageTag : localesToUse) {
+            if (languageTag.equals(firstMatchLanguage)) {
+                return languageTag;
+            } else if ("en-US".equals(languageTag)) {
+                englishLastResort = languageTag;
+            }
+        }
+        for (String languageTag : localesToUse) {
+            String languageToUse = languageTag.split("-")[0];
+            if (firstMatchLanguage.equals(languageToUse)) {
+                return languageTag;
+            } else if (englishLastResort == null && "en".equals(languageToUse)) {
+                englishLastResort = languageTag;
+            }
+        }
+        return englishLastResort;
     }
 
     /**
@@ -656,12 +721,34 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         return description.replace("\n", "<br>");
     }
 
+    public String getIconUrl(Context context) {
+        Repo repo = RepoProvider.Helper.findById(context, repoId);
+        if (TextUtils.isEmpty(iconUrl)) {
+            if (TextUtils.isEmpty(iconFromApk)) {
+                return null;
+            }
+            if (iconFromApk.endsWith(".xml")) {
+                // We cannot use xml ressources as icons. F-Droid server should not include them
+                // https://gitlab.com/fdroid/fdroidserver/issues/344
+                return null;
+            }
+            String iconsDir;
+            if (repo.version >= Repo.VERSION_DENSITY_SPECIFIC_ICONS) {
+                iconsDir = Utils.getIconsDir(context, 1.0);
+            } else {
+                iconsDir = Utils.FALLBACK_ICONS_DIR;
+            }
+            return repo.getFileUrl(iconsDir, iconFromApk);
+        }
+        return repo.getFileUrl(packageName, iconUrl);
+    }
+
     public String getFeatureGraphicUrl(Context context) {
         if (TextUtils.isEmpty(featureGraphic)) {
             return null;
         }
         Repo repo = RepoProvider.Helper.findById(context, repoId);
-        return repo.address + "/" + packageName + "/" + featureGraphic;
+        return repo.getFileUrl(packageName, featureGraphic);
     }
 
     public String getPromoGraphic(Context context) {
@@ -669,7 +756,7 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
             return null;
         }
         Repo repo = RepoProvider.Helper.findById(context, repoId);
-        return repo.address + "/" + packageName + "/" + promoGraphic;
+        return repo.getFileUrl(packageName, promoGraphic);
     }
 
     public String getTvBanner(Context context) {
@@ -677,7 +764,7 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
             return null;
         }
         Repo repo = RepoProvider.Helper.findById(context, repoId);
-        return repo.address + "/" + packageName + "/" + tvBanner;
+        return repo.getFileUrl(packageName, tvBanner);
     }
 
     public String[] getAllScreenshots(Context context) {
@@ -701,7 +788,7 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         String[] result = new String[list.size()];
         int i = 0;
         for (String url : list) {
-            result[i] = repo.address + "/" + packageName + "/" + url;
+            result[i] = repo.getFileUrl(packageName, url);
             i++;
         }
         return result;
@@ -756,7 +843,7 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
                 + ", last updated on " + this.lastUpdated + ")</p>";
 
         this.name = (String) appInfo.loadLabel(pm);
-        this.icon = getIconName(packageName, packageInfo.versionCode);
+        this.iconFromApk = getIconName(packageName, packageInfo.versionCode);
         this.installedVersionName = packageInfo.versionName;
         this.installedVersionCode = packageInfo.versionCode;
         this.compatible = true;
@@ -865,24 +952,7 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         }
         apkJar.close();
 
-        /*
-         * I don't fully understand the loop used here. I've copied it verbatim
-         * from getsig.java bundled with FDroidServer. I *believe* it is taking
-         * the raw byte encoding of the certificate & converting it to a byte
-         * array of the hex representation of the original certificate byte
-         * array. This is then MD5 sum'd. It's a really bad way to be doing this
-         * if I'm right... If I'm not right, I really don't know! see lines
-         * 67->75 in getsig.java bundled with Fdroidserver
-         */
-        final byte[] fdroidSig = new byte[rawCertBytes.length * 2];
-        for (int j = 0; j < rawCertBytes.length; j++) {
-            byte v = rawCertBytes[j];
-            int d = (v >> 4) & 0xF;
-            fdroidSig[j * 2] = (byte) (d >= 10 ? ('a' + d - 10) : ('0' + d));
-            d = v & 0xF;
-            fdroidSig[j * 2 + 1] = (byte) (d >= 10 ? ('a' + d - 10) : ('0' + d));
-        }
-        apk.sig = Utils.hashBytes(fdroidSig, "md5");
+        apk.sig = Utils.getsig(rawCertBytes);
     }
 
     /**
@@ -943,7 +1013,7 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         values.put(Cols.NAME, name);
         values.put(Cols.REPO_ID, repoId);
         values.put(Cols.SUMMARY, summary);
-        values.put(Cols.ICON, icon);
+        values.put(Cols.ICON, iconFromApk);
         values.put(Cols.ICON_URL, iconUrl);
         values.put(Cols.DESCRIPTION, description);
         values.put(Cols.WHATSNEW, whatsNew);
@@ -960,7 +1030,8 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         values.put(Cols.BITCOIN, bitcoin);
         values.put(Cols.LITECOIN, litecoin);
         values.put(Cols.FLATTR_ID, flattrID);
-        values.put(Cols.LIBERAPAY_ID, liberapayID);
+        values.put(Cols.LIBERAPAY, liberapay);
+        values.put(Cols.OPEN_COLLECTIVE, openCollective);
         values.put(Cols.ADDED, Utils.formatDate(added, ""));
         values.put(Cols.LAST_UPDATED, Utils.formatDate(lastUpdated, ""));
         values.put(Cols.PREFERRED_SIGNER, preferredSigner);
@@ -1051,7 +1122,7 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         boolean canUpdate = hasUpdates();
         AppPrefs prefs = getPrefs(context);
         boolean wantsUpdate = !prefs.ignoreAllUpdates && prefs.ignoreThisUpdate < autoInstallVersionCode;
-        return canUpdate && wantsUpdate && !isDisabledByAntiFeatures();
+        return canUpdate && wantsUpdate;
     }
 
     /**
@@ -1075,13 +1146,19 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
     }
 
     @Nullable
+    public String getOpenCollectiveUri() {
+        return TextUtils.isEmpty(openCollective) ? null : "https://opencollective.com/"
+                + openCollective + "/donate/";
+    }
+
+    @Nullable
     public String getFlattrUri() {
         return TextUtils.isEmpty(flattrID) ? null : "https://flattr.com/thing/" + flattrID;
     }
 
     @Nullable
     public String getLiberapayUri() {
-        return TextUtils.isEmpty(liberapayID) ? null : "https://liberapay.com/~" + liberapayID;
+        return TextUtils.isEmpty(liberapay) ? null : "https://liberapay.com/" + liberapay;
     }
 
 
@@ -1173,7 +1250,7 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         dest.writeString(this.name);
         dest.writeLong(this.repoId);
         dest.writeString(this.summary);
-        dest.writeString(this.icon);
+        dest.writeString(this.iconFromApk);
         dest.writeString(this.description);
         dest.writeString(this.whatsNew);
         dest.writeString(this.license);
@@ -1189,7 +1266,8 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         dest.writeString(this.bitcoin);
         dest.writeString(this.litecoin);
         dest.writeString(this.flattrID);
-        dest.writeString(this.liberapayID);
+        dest.writeString(this.liberapay);
+        dest.writeString(this.openCollective);
         dest.writeString(this.preferredSigner);
         dest.writeString(this.suggestedVersionName);
         dest.writeInt(this.suggestedVersionCode);
@@ -1224,7 +1302,7 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         this.name = in.readString();
         this.repoId = in.readLong();
         this.summary = in.readString();
-        this.icon = in.readString();
+        this.iconFromApk = in.readString();
         this.description = in.readString();
         this.whatsNew = in.readString();
         this.license = in.readString();
@@ -1240,7 +1318,8 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         this.bitcoin = in.readString();
         this.litecoin = in.readString();
         this.flattrID = in.readString();
-        this.liberapayID = in.readString();
+        this.liberapay = in.readString();
+        this.openCollective = in.readString();
         this.preferredSigner = in.readString();
         this.suggestedVersionName = in.readString();
         this.suggestedVersionCode = in.readInt();

@@ -7,10 +7,9 @@ import android.content.Context;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
+
 import org.fdroid.fdroid.AppUpdateStatusManager;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.Schema.RepoTable;
@@ -19,6 +18,9 @@ import org.fdroid.fdroid.data.Schema.RepoTable.Cols;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class RepoProvider extends FDroidProvider {
 
@@ -233,6 +235,7 @@ public class RepoProvider extends FDroidProvider {
         }
 
         public static void remove(Context context, long repoId) {
+            purgeApps(context, findById(context, repoId));
             ContentResolver resolver = context.getContentResolver();
             Uri uri = RepoProvider.getContentUri(repoId);
             resolver.delete(uri, null, null);

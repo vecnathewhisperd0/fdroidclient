@@ -1,28 +1,32 @@
 package org.fdroid.fdroid.data;
 
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.ContextWrapper;
+
 import org.fdroid.fdroid.TestUtils;
 import org.junit.After;
 import org.junit.Before;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
-import org.robolectric.shadows.ShadowContentResolver;
+import org.robolectric.android.controller.ContentProviderController;
+
+import androidx.test.core.app.ApplicationProvider;
 
 public abstract class FDroidProviderTest { // NOPMD This abstract class does not have any abstract methods
 
-    protected ShadowContentResolver contentResolver;
+    protected ContentResolver contentResolver;
+    protected ContentProviderController<AppProvider> contentProviderController;
     protected ContextWrapper context;
 
     @Before
     public final void setupBase() {
-        contentResolver = Shadows.shadowOf(RuntimeEnvironment.application.getContentResolver());
+        contentResolver = ApplicationProvider.getApplicationContext().getContentResolver();
         context = TestUtils.createContextWithContentResolver(contentResolver);
-        TestUtils.registerContentProvider(AppProvider.getAuthority(), AppProvider.class);
+        contentProviderController = TestUtils.registerContentProvider(AppProvider.getAuthority(), AppProvider.class);
     }
 
     @After
     public final void tearDownBase() {
+        contentProviderController.shutdown();
         CategoryProvider.Helper.clearCategoryIdCache();
         DBHelper.clearDbHelperSingleton();
     }

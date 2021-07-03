@@ -94,7 +94,6 @@
     <string name="menu_changelog">Shandura Rutarwa rwemakare</string>
     <string name="menu_source">Nyuko yemurau</string>
     <string name="menu_upgrade">Kwidziridza</string>
-    <string name="menu_donate">Ipa</string>
     <string name="menu_bitcoin">Bitcoin</string>
     <string name="menu_litecoin">Litecoin</string>
     <string name="menu_flattr">Flattr</string>
@@ -154,7 +153,7 @@
         %2$s kubva
         %1$s
     </string>
-    <string name="update_notification_title">Kunatsa pfimbi</string>
+    <string name="banner_updating_repositories">Kunatsa pfimbi</string>
     <string name="status_processing_xml_percent">Kushisha %2$s / %3$s (%4$d%%) kubva %1$s</string>
     <string name="status_connecting_to_repo">Kuhakira ku
         %1$s
@@ -357,7 +356,6 @@
 
     <string name="theme_light">Chiedza</string>
     <string name="theme_dark">Rima</string>
-    <string name="theme_night">Usiku</string>
 
     <string name="crash_dialog_title">F-Droid yabondera</string>
     <string name="crash_dialog_text">Pane kanganiso isina kutarisirwa yaitika

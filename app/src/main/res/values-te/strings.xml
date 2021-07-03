@@ -40,7 +40,6 @@
     <string name="menu_changelog">మార్పులచిట్టా</string>
     <string name="menu_video">వీడియో</string>
     <string name="menu_license">లైసెన్సు: %s</string>
-    <string name="menu_donate">విరాళమివ్వండి</string>
     <string name="menu_bitcoin">బిట్‌కాయిన్</string>
     <string name="menu_litecoin">లైట్‌కాయిన్</string>
     <string name="menu_flattr">ఫ్లాట్‌ర్</string>
@@ -193,7 +192,7 @@
     <string name="hide_on_long_search_press_title">శోధన బటన్తో దాచు</string>
     <string name="hide_on_long_search_press_summary">చాలాసేపు శోధన బటన్ను నొక్కినప్పుడు అనువర్తనం దాచబడుతుంది</string>
     <string name="download_404">అభ్యర్థించిన ఫైల్ కనుగొనబడలేదు.</string>
-    <string name="update_notification_title">రిపోజిటరీలను నవీకరిస్తోంది</string>
+    <string name="banner_updating_repositories">రిపోజిటరీలను నవీకరిస్తోంది</string>
     <string name="repos_unchanged">అన్ని రిపోజిటరీలు తాజావి</string>
     <string name="all_other_repos_fine">అన్ని ఇతర రేపోలు లోపాలు సృష్టించలేదు.</string>
     <string name="global_error_updating_repos">నవీకరణ సమయంలో లోపం: %s</string>
@@ -270,7 +269,6 @@
     <string name="status_inserting_apps">అనువర్తన వివరాలను భద్రపరుస్తోంది</string>
     <string name="theme_light">వెలుతురు</string>
     <string name="theme_dark">చీకటి</string>
-    <string name="theme_night">రాత్రి</string>
     <string name="install_history">స్థాపన చరిత్ర</string>
     <string name="repo_official_mirrors">అధికారిక మిర్రర్లు</string>
     <string name="repo_user_mirrors">వాడుకరి మిర్రర్లు</string>

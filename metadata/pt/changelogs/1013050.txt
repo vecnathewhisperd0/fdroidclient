@@ -1,0 +1,5 @@
+* Suporte temático ligado aos temas do Android embutido (@proletarius101)
+
+* Novas notificações de banners no topo: "Sem Internet" e "Sem dados móveis/WiFi"
+
+* Melhoria no manuseio de repos e espelhos de USB-OTG e cartões SD

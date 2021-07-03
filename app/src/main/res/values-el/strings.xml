@@ -14,21 +14,21 @@
     <string name="app_details">Λεπτομέρειες Εφαρμογής</string>
     <string name="no_such_app">Δεν βρέθηκε τέτοια εφαρμογή.</string>
     <string name="about_title">Σχετικά με το F-Droid</string>
-    <string name="about_site">Ιστοσελίδα</string>
+    <string name="about_site">Ιστότοπος</string>
     <string name="about_version">Έκδοση</string>
     <string name="app_installed">Εγκατεστημένο</string>
     <string name="app_not_installed">Δεν είναι εγκατεστημένο</string>
     <string name="added_on">Προστέθηκε στις %s</string>
-    <string name="ok">OK</string>
+    <string name="ok">Εντάξει</string>
     <string name="yes">Ναι</string>
     <string name="no">Όχι</string>
     <string name="repo_add_title">Προσθήκη νέου αποθετηρίου</string>
     <string name="repo_add_add">Προσθήκη</string>
-    <string name="cancel">Ακύρωση</string>
+    <string name="cancel">Άκυρο</string>
     <string name="enable">Ενεργοποίηση</string>
     <string name="add_key">Προσθήκη κλειδιού</string>
     <string name="overwrite">Αντικατάσταση</string>
-    <string name="bluetooth_activity_not_found">Καμία μέθοδος αποστολής Bluetooth δεν βρέθηκε, επιλέξτε μία!</string>
+    <string name="bluetooth_activity_not_found">Δεν βρέθηκε μέθοδος αποστολής με Bluetooth, επιλέξτε μία!</string>
     <string name="choose_bt_send">Επιλέξτε τη μέθοδο αποστολής με Bluetooth</string>
     <string name="repo_add_url">Διεύθυνση αποθετηρίου</string>
     <string name="repo_add_fingerprint">Δακτυλικό αποτύπωμα (προαιρετικά)</string>
@@ -37,16 +37,15 @@
     <string name="menu_search">Αναζήτηση</string>
     <string name="menu_add_repo">Νέο Αποθετήριο</string>
     <string name="menu_launch">Άνοιγμα</string>
-    <string name="menu_share">Διαμοιρασμός</string>
+    <string name="menu_share">Κοινοποίηση</string>
     <string name="menu_install">Εγκατάσταση</string>
     <string name="menu_uninstall">Απεγκατάσταση</string>
     <string name="menu_ignore_all">Αγνόησε όλες τις ενημερώσεις</string>
     <string name="menu_ignore_this">Αγνόησε αυτή την ενημέρωση</string>
-    <string name="menu_website">Ιστοσελίδα</string>
+    <string name="menu_website">Ιστότοπος</string>
     <string name="menu_issues">Προβλήματα</string>
     <string name="menu_source">Πηγαίος κώδικας</string>
     <string name="menu_upgrade">Ενημέρωση</string>
-    <string name="menu_donate">Δωρεά</string>
     <string name="details_notinstalled">Μη εγκατεστημένο</string>
     <string name="antiadslist">Αυτή η εφαρμογή περιέχει διαφημίσεις</string>
     <string name="antitracklist">Αυτή η εφαρμογή παρακολουθεί και αναφέρει την δραστηριότητα σας</string>
@@ -62,7 +61,8 @@
     <string name="show_incompat_versions">Να περιλαμβάνονται μη συμβατές εκδόσεις</string>
     <string name="show_incompat_versions_on">Προβολή εκδόσεων εφαρμογών ασύμβατων με τη συσκευή</string>
     <string name="status_download">Λήψη
-\n%2$s / %3$s (%4$d%%) από %1$s</string>
+\n%2$s / %3$s (%4$d%%) από
+\n %1$s</string>
     <string name="status_connecting_to_repo">Σύνδεση με\n%1$s</string>
     <string name="no_permissions">Χωρίς δικαιώματα</string>
     <string name="no_handler_app">Δεν έχετε καμία διαθέσιμη εφαρμογή που μπορεί να χειριστεί %s.</string>
@@ -84,10 +84,8 @@
     <string name="unknown">Άγνωστο</string>
     <string name="repo_confirm_delete_title">Διαγραφή αποθετηρίου;</string>
     <string name="repo_disabled_notification">Απενεργοποιημένο %1$s.
-
-        Θα χρειαστεί
-        να το ενεργοποιήσετε ξανά για να εγκαταστήσετε εφαρμογές από αυτό.
-    </string>
+\n
+\n Θα χρειαστεί να ενεργοποιήσετε ξανά αυτό το αποθετήριο για να εγκαταστήσετε εφαρμογές από αυτό.</string>
     <string name="not_on_same_wifi">Η συσκευή σας δεν είναι στο ίδιο ασύρματο δίκτυο με το τοπικό αποθετήριο που μόλις
         προσθέσατε! Δοκιμάστε να συνδεθείτε σε αυτό το δίκτυο: %s
     </string>
@@ -107,7 +105,7 @@
     <string name="links">Σύνδεσμοι</string>
     <string name="more">Περισσότερα</string>
     <string name="less">Λιγότερα</string>
-    <string name="back">Πίσω</string>
+    <string name="back">Επιστροφή</string>
     <string name="bad_fingerprint">Λανθασμένο δακτυλικό αποτύπωμα</string>
     <string name="invalid_url">Αυτή δεν είναι έγκυρη διεύθυνση.</string>
     <string name="menu_settings">Ρυθμίσεις</string>
@@ -126,17 +124,17 @@
     <string name="icon">Εικονίδιο</string>
     <string name="next">Επόμενο</string>
     <string name="skip">Παράβλεψη</string>
-    <string name="proxy">Διακομιστής μεσολάβησης (Proxy)</string>
+    <string name="proxy">Διακομιστής μεσολάβησης</string>
     <string name="enable_proxy_title">Ενεργοποίηση διακομιστή μεσολάβησης HTTP</string>
     <string name="enable_proxy_summary">Ρύθμιση διακομιστή μεσολάβησης HTTP για όλες τις αιτήσεις δικτύου</string>
-    <string name="proxy_host">Κεντρικός διακομιστής μεσολάβησης</string>
+    <string name="proxy_host">Διακομιστής μεσολάβησης</string>
     <string name="proxy_host_summary">Ρυθμίστε το όνομα του διακομιστή μεσολάβησης (π.χ. 127.0.0.1)</string>
     <string name="proxy_port">Θύρα διακομιστή μεσολάβησης</string>
     <string name="proxy_port_summary">Αριθμός θύρας του διακομιστή σας μεσολάβησης (π.χ. 8118)</string>
     <string name="status_download_unknown_size">Λήψη
 \n%2$s από
 \n%1$s</string>
-    <string name="update_notification_title">Ενημέρωση αποθετηρίων</string>
+    <string name="banner_updating_repositories">Ενημέρωση αποθετηρίων</string>
     <string name="status_processing_xml_percent">Επεξεργασία %2$s / %3$s (%4$d%%) από %1$s</string>
     <string name="repos_unchanged">Όλα τα αποθετήρια είναι ενημερωμένα</string>
     <string name="all_other_repos_fine">Τα υπόλοιπα αποθετήρια δεν δημιούργησαν σφάλματα.</string>
@@ -145,7 +143,8 @@
     <string name="unverified">Μη επαληθευμένη</string>
     <string name="repo_details">Αποθετήριο</string>
     <string name="repo_url">Διεύθυνση</string>
-    <string name="repo_confirm_delete_body">Διαγράφοντας ένα αποθετήριο σημαίνει ότι εφαρμογές από αυτό δεν θα είναι πλέον διαθέσιμες.
+    <string name="repo_confirm_delete_body">Διαγράφοντας ένα αποθετήριο σημαίνει ότι εφαρμογές από αυτό δε θα είναι πλέον διαθέσιμες.
+\n
 \nΣημείωση: Όλες οι ήδη εγκατεστημένες εφαρμογές θα παραμείνουν στη συσκευή σας.</string>
     <string name="repo_added">Αποθηκευμένο αποθετήριο πακέτου %1$s.</string>
     <string name="repo_searching_address">Αναζήτηση για αποθετήριο πακέτου στο
@@ -215,10 +214,10 @@
     <string name="loading">Γίνεται φόρτωση…</string>
     <string name="swap_connection_misc_error">Παρουσιάστηκε σφάλμα κατά τη σύνδεση με την συσκευή, φαίνεται ότι δεν μπορούμε να ανταλλάξουμε με αυτή!</string>
     <string name="install_confirm">χρειάζεται πρόσβαση σε</string>
-    <string name="install_confirm_update">Θέλετε να εγκαταστήσετε μια ενημέρωση σε αυτήν την υπάρχουσα εφαρμογή; Τα υπάρχοντα δεδομένα σας δεν θα χαθούν. Η ενημερωμένη εφαρμογή θα έχει πρόσβαση σε:</string>
-    <string name="install_confirm_update_system">Θέλετε να εγκαταστήσετε μια ενημέρωση σε αυτήν την ενσωματωμένη εφαρμογή; Τα υπάρχοντα δεδομένα σας δεν θα χαθούν. Η ενημερωμένη εφαρμογή θα έχει πρόσβαση σε:</string>
-    <string name="install_confirm_update_no_perms">Θέλετε να εγκαταστήσετε μια ενημέρωση για αυτήν την υπάρχουσα εφαρμογή; Τα υπάρχοντα δεδομένα σας δεν θα χαθούν. Δεν απαιτεί ειδική πρόσβαση.</string>
-    <string name="install_confirm_update_system_no_perms">Θέλετε να εγκαταστήσετε μια ενημέρωση για αυτήν την ενσωματωμένη εφαρμογή; Τα υπάρχοντα δεδομένα σας δεν θα χαθούν. Δεν απαιτεί ειδική πρόσβαση.</string>
+    <string name="install_confirm_update">Θέλετε να ενημερώσετε την εφαρμογή; Τα δεδομένα σας δεν θα χαθούν. Η εφαρμογή θα έχει πρόσβαση σε:</string>
+    <string name="install_confirm_update_system">Εγκατάσταση ενημέρωσης εφαρμογής; Τα δεδομένα σας δεν θα χαθούν. Η εφαρμογή θα έχει πρόσβαση σε:</string>
+    <string name="install_confirm_update_no_perms">Εγκατάσταση ενημέρωσης εφαρμογής; Τα δεδομένα σας δεν θα χαθούν. Δεν απαιτείται ειδική πρόσβαση.</string>
+    <string name="install_confirm_update_system_no_perms">Εγκατάσταση ενημέρωσης εφαρμογής; Τα δεδομένα σας δεν θα χαθούν. Δεν απαιτείται ειδική πρόσβαση.</string>
     <string name="newPerms">Νέο</string>
     <string name="allPerms">Όλα</string>
     <string name="perm_costs_money">Αυτό μπορεί να σας κοστίσει χρήματα</string>
@@ -237,7 +236,6 @@
     <string name="interval_2w">Να γίνεται έλεγχος για ενημερώσεις κάθε 2 εβδομάδες</string>
     <string name="theme_light">Φωτεινό</string>
     <string name="theme_dark">Σκοτεινό</string>
-    <string name="theme_night">Νυχτερινό</string>
     <string name="swap_nfc_title">Αγγίξτε για ανταλλαγή</string>
     <string name="swap_nfc_description">Αν ο φίλος σας έχει το F-Droid και ενεργοποιημένο το NFC αγγίξτε μεταξύ τους τις
         συσκευές σας.
@@ -252,8 +250,8 @@
     <string name="status_inserting_apps">Αποθήκευση λεπτομερειών εφαρμογής</string>
     <string name="about_license">Άδεια</string>
     <string name="login_name">Όνομα χρήστη</string>
-    <string name="login_password">Συνθηματικό</string>
-    <string name="repo_edit_credentials">Τροποποίηση Συνθηματικού</string>
+    <string name="login_password">Κωδικός πρόσβασης</string>
+    <string name="repo_edit_credentials">Αλλαγή κωδικού πρόσβασης</string>
     <string name="login_title">Απαιτείται πιστοποίηση</string>
     <string name="useTor">Χρήση Tor</string>
     <string name="keep_install_history">Αποθήκευση ιστορικού εγκαταστάσεων</string>
@@ -261,7 +259,7 @@
     <string name="update_auto_download">Αυτόματη λήψη ενημερώσεων</string>
     <string name="update_auto_download_summary">Οι ενημερώσεις θα λαμβάνονται αυτόματα και θα ειδοποιείστε για την εγκατάσταση τους</string>
     <string name="update_auto_install">Αυτόματη εγκατάσταση αναβαθμίσεων</string>
-    <string name="update_auto_install_summary">Λήψη και εγκατάσταση αναβαθμίσεων εφαρμογών στο παρασκήνιο, εμφανίζοντας μία ειδοποίηση</string>
+    <string name="update_auto_install_summary">Λήψη και εγκατάσταση αναβαθμίσεων στο παρασκήνιο, εμφανίζοντας μία ειδοποίηση</string>
     <string name="repo_error_empty_username">Κενό όνομα χρήστη, τα διαπιστευτήρια δεν άλλαξαν</string>
     <string name="versions">Εκδόσεις</string>
     <string name="repo_provider">Αποθετήριο: %s</string>
@@ -282,15 +280,15 @@
     <string name="keep_year">1 Χρόνο</string>
     <string name="keep_forever">Για πάντα</string>
     <string name="crash_dialog_title">Το F-Droid σταμάτησε να λειτουργεί</string>
-    <string name="crash_dialog_text">Μη αναμενόμενο σφάλμα ανάγκασε την εφαρμογή να σταματήσει. Θα θέλατε να στείλετε e-mail με τις λεπτομέρειες για να βοηθήσετε να διορθωθεί το πρόβλημα;</string>
+    <string name="crash_dialog_text">Μη αναμενόμενο σφάλμα ανάγκασε την εφαρμογή να σταματήσει. Θα θέλατε να στείλετε ιμέιλ με τις λεπτομέρειες για να βοηθήσετε να διορθωθεί το πρόβλημα;</string>
     <string name="main_menu__latest_apps">Τελευταία</string>
     <string name="main_menu__categories">Κατηγορίες</string>
     <string name="preference_manage_installed_apps">Διαχείριση  εγκατεστημένων εφαρμογών</string>
     <string name="notification_action_update">Ενημέρωση</string>
-    <string name="notification_action_cancel">Ακύρωση</string>
+    <string name="notification_action_cancel">Άκυρο</string>
     <string name="notification_action_install">Εγκατάσταση</string>
     <string name="app_list__name__downloading_in_progress">Γίνεται λήψη %1$s</string>
-    <string name="app_list__name__successfully_installed">%1$s εγκαταστάθηκε</string>
+    <string name="app_list__name__successfully_installed">Εγκαταστάθηκε %1$s</string>
     <string name="notification_title_single_update_available">Διαθέσιμη ενημέρωση</string>
     <string name="notification_title_summary_install_error">Η εγκατάσταση απέτυχε</string>
     <string name="app_version_x_available">Η Έκδοση %1$s είναι διαθέσιμη</string>
@@ -311,7 +309,7 @@
     <string name="latest__empty_state__no_recent_apps">Δεν βρέθηκαν πρόσφατες εφαρμογές</string>
     <string name="categories__empty_state__no_categories">Δεν υπάρχουν κατηγορίες να εμφανιστούν</string>
     <string name="preference_category__my_apps">Οι εφαρμογές μου</string>
-    <string name="antifeatures">ανεπιθύμητα χαρακτηριστικά</string>
+    <string name="antifeatures">Aνεπιθύμητα χαρακτηριστικά</string>
     <string name="notification_title_single_ready_to_install">Έτοιμο για εγκατάσταση</string>
     <string name="notification_title_single_ready_to_install_update">Ενημέρωση έτοιμη για εγκατάσταση</string>
     <string name="notification_title_single_install_error">Η εγκατάσταση Απέτυχε</string>
@@ -327,17 +325,17 @@
     <string name="notification_title_summary_installed">Εγκαταστάθηκε με επιτυχία</string>
     <string name="details_last_updated_today">Ενημερώθηκαν σήμερα</string>
     <string name="main_menu__swap_nearby">Κοντά</string>
-    <string name="updates__tts__download_app">Κατέβασμα</string>
+    <string name="updates__tts__download_app">Λήψη</string>
     <string name="by_author_format">Από %s</string>
     <string name="force_old_index">Υποχρεωτική χρήση παλαιάς μορφής ευρετηρίου</string>
     <string name="force_old_index_summary">Σε περίπτωση που υπάρχουν σφάλματα ή ασυμβατότητες, χρήση του ευρετηρίου εφαρμογών XML</string>
     <string name="app_details_donate_prompt_unknown_author">Κεράστε στους προγραμματιστές του %1$s ένα καφέ!</string>
-    <string name="app_details_donate_prompt">Το %1$s αναπτύσσεται από %2$s. Κεράστε τους ένα καφέ!</string>
+    <string name="app_details_donate_prompt">Το %1$s αναπτύσσεται από το %2$s. Κεράστε τους ένα καφέ!</string>
     <string name="app_details__incompatible_mismatched_signature">Διαφορετική υπογραφή από την εγκατεστημένη έκδοση</string>
     <string name="app_details__no_versions__show_incompat_versions">Για εμφάνιση ασύμβατων εκδόσεων εδώ, ενεργοποιήστε την \"%1$s\" επιλογή.</string>
     <string name="app_details__no_versions__no_compatible_signatures">Δεν υπάρχουν εκδόσεις με συμβατή υπογραφή</string>
     <string name="app_details__no_versions__none_compatible_with_device">Δεν υπάρχουν συμβατές εκδόσεις με τη συσκευή</string>
-    <string name="app_details__no_versions__explain_incompatible_signatures">Η εγκατεστημένη έκδοση δεν είναι συμβατή με τις διαθέσιμες εκδόσεις. Απεγκαθιστώντας την εφαρμογή θα δείτε και θα μπορείτε να εγκαταστήσετε τις συμβατές εκδόσεις. Αυτό συμβαίνει συνήθως όταν η εφαρμογή έχει εγκατασταθεί από το Play Store ή άλλη πηγή και έχει υπογραφεί με διαφορετικό πιστοποιητικό.</string>
+    <string name="app_details__no_versions__explain_incompatible_signatures">Η εγκατεστημένη έκδοση δεν είναι συμβατή με τις διαθέσιμες εκδόσεις. Απεγκαθιστώντας την εφαρμογή θα δείτε τις συμβατές εκδόσεις. Αυτό συμβαίνει όταν η εγκατάσταση έγινε από το Play Store ή άλλη πηγή με διαφορετικό πιστοποιητικό.</string>
     <string name="app_installed_media">Το εγκαταστάθηκε στο %s</string>
     <string name="app_permission_storage">Το F-Droid χρειάζεται άδεια για τον χώρο αποθήκευσης για να εγκαταστήσει αυτό. Παρακαλώ επιτρέψτε την άδεια στην επόμενη οθόνη για να προχωρήσει η εγκατάσταση.</string>
     <string name="app_list_download_ready">Έγινε η λήψη, έτοιμο για εγκατάσταση</string>
@@ -351,7 +349,7 @@
         <item quantity="one">Λήψη εγκατάστασης για %1$d εφαρμογή.</item>
         <item quantity="other">Λήψη εγκατάστασης για %1$d εφαρμογές.</item>
     </plurals>
-    <string name="repositories_summary">Προσθέστε εναλλακτικής πηγές εφαρμογών</string>
+    <string name="repositories_summary">Προσθέστε εναλλακτικές πηγές εφαρμογών</string>
     <string name="latest__empty_state__never_updated">Μόλις ανανεωθεί η λίστα εφαρμογών, οι τελευταίες εφαρμογές θα εμφανιστούν εδώ</string>
     <string name="latest__empty_state__no_enabled_repos">Όταν ενεργοποιήσετε ένα αποθετήριο και ανανεωθεί, οι νεότερες εφαρμογές θα εμφανιστούν εδώ</string>
     <string name="details_new_in_version">Νέα έκδοση %s</string>
@@ -382,7 +380,7 @@
     <string name="empty_search_available_app_list">Δεν βρέθηκαν εφαρμογές.</string>
     <string name="nearby_splash__download_apps_from_people_nearby">Δεν έχετε σύνδεση στο διαδίκτυο; Κατεβάστε εφαρμογές από άλλους που είναι κοντά σας!</string>
     <string name="nearby_splash__find_people_button">Εύρεση κοντινών ανθρώπων</string>
-    <string name="nearby_splash__both_parties_need_fdroid">Και οι δύο πρέπει να %1$s για να χρησιμοποιήσουν το \"Κοντά\".</string>
+    <string name="nearby_splash__both_parties_need_fdroid">Πρέπει να έχουν το %1$s για χρήση.</string>
     <string name="app__tts__downloading_progress">Λήψη,  %1$d%% ολοκληρώθηκε</string>
     <plurals name="notification_summary_more">
         <item quantity="one">+%1$d επιπλέον…</item>
@@ -437,20 +435,20 @@
     <string name="over_network_never_summary">Να μην γίνεται ποτέ λήψη όταν χρησιμοποιείται αυτή η σύνδεση</string>
     <string name="send_installed_apps">Μοιραστείτε εγκατεστημένες εφαρμογές</string>
     <string name="send_installed_apps_csv">Εφαρμογές εγκατεστημένες από το F-Droid ως αρχείο CSV</string>
-    <string name="updates_disabled_by_settings">Όλες οι ενημερώσεις είναι απενεργοποιημένες από τις ρυθμίσεις δεδομένων κινητής/WiFi</string>
+    <string name="updates_disabled_by_settings">Οι ενημερώσεις απενεργοποιήθηκαν από τις ρυθμίσεις δεδομένων/WiFi</string>
     <string name="repo_add_mirror">Προσθήκη mirror</string>
     <string name="sort_search">Ταξινόμηση αναζήτησης</string>
     <string name="repo_exists_add_fingerprint">Το %1$s είναι ήδη εγκατεστημένο, με αυτό θα προσθέσετε νέες πληροφορίες κλειδιού.</string>
     <string name="repo_exists_enable">Το %1$s είναι ήδη εγκατεστημένο, επιβεβαιώστε ότι επιθυμείτε να το ενεργοποιήσετε εκ νέου.</string>
     <string name="repo_exists_and_enabled">Το %1$s είναι ήδη εγκατεστημένο και ενεργοποιημένο.</string>
-    <string name="repo_delete_to_overwrite">Διαγράψτε πρώτα το %1$s προκειμένου να το προσθέσετε με ένα ασύμβατο κλειδί.</string>
+    <string name="repo_delete_to_overwrite">Πρώτα διαγράψτε το %1$s, καθώς υπάρχει διένεξη κλειδιού.</string>
     <string name="repo_exists_add_mirror">Αυτό είναι ένα αντίγραφο του %1$s, να γίνει η προσθήκη του ως mirror;</string>
     <string name="menu_open">Άνοιγμα</string>
     <string name="menu_liberapay">Liberapay</string>
     <string name="antidisabledalgorithmlist">Αυτή η εφαρμογή έχει αδύναμη υπογραφή ασφαλείας</string>
     <string name="antiknownvulnlist">Αυτή η εφαρμογή περιέχει μια γνωστή ευπάθεια ασφαλείας</string>
     <string name="antinosourcesince">Ο πηγαίος κώδικας δεν είναι πλέον διαθέσιμος, η ενημέρωση δεν είναι πλέον δυνατή.</string>
-    <string name="show_anti_feature_apps">Να περιλαμβάνονται εφαρμογές που περιέχουν αντι-χαρακτηριστικά</string>
+    <string name="show_anti_feature_apps">Να περιλαμβάνονται εφαρμογές που περιέχουν ανεπιθύμητα χαρακτηριστικά</string>
     <string name="show_anti_feature_apps_on">Εμφάνιση εφαρμογών που απαιτούν αντι-χαρακτηριστικά</string>
     <string name="force_touch_apps">Να περιληφθούν εφαρμογές που χρησιμοποιούν οθόνη αφής</string>
     <string name="force_touch_apps_on">Εμφάνιση εφαρμογών οι οποίες απαιτούν τη χρήση οθόνης αφής, ανεξάρτητα από τις απαιτήσεις υλισμικού</string>
@@ -483,10 +481,10 @@
     <string name="nearby_splash__read_external_storage">Αναζήτηση κάρτας SD για αποθετήρια και καθρέφτες.</string>
     <string name="nearby_splash__request_permission">Δοκιμάστε το</string>
     <string name="not_visible_nearby">Η λειτουργία \"Κοντά\" δεν είναι ενεργοποιημένη</string>
-    <string name="not_visible_nearby_description">Πριν από την εναλλαγή με κοντινές συσκευές, κάντε τη συσκευή σας ορατή.</string>
+    <string name="not_visible_nearby_description">Πριν από την σύνδεση, κάντε τη συσκευή σας ορατή.</string>
     <string name="swap_toast_using_path">Χρήση του %1$s</string>
-    <string name="swap_toast_not_removable_storage">Αυτή η επιλογή δεν ταιριάζει με καμία αφαιρούμενη συσκευλη αποθήκευσης, δοκιμάστε ξανά!</string>
-    <string name="swap_toast_find_removeable_storage">Επιλέξτε την αφαιρούμενη κάρτα SD ή USB φλασάκι σας</string>
+    <string name="swap_toast_not_removable_storage">Δεν βρέθηκε το αφαιρούμενο μέσο, δοκιμάστε ξανά!</string>
+    <string name="swap_toast_find_removeable_storage">Επιλέξτε την αφαιρούμενη SD κάρτα σας ή το USB</string>
     <string name="undo">Αναίρεση</string>
     <string name="app_list__dismiss_installing_app">Η εγκατάσταση ακυρώθηκε</string>
     <string name="menu_select_for_wipe">Επιλογή για σβήσιμο</string>
@@ -496,14 +494,36 @@
     <string name="panic_add_apps_to_uninstall">Προσθήκη εφαρμογών που θα απεγκατασταθούν και θα σβηστούν</string>
     <string name="panic_reset_repos_title">Επαναφορά αποθετηρίων</string>
     <string name="disabled">Απενεργοποιημένο</string>
-    <string name="nearby_splash__document_tree">Αναζήτηση στο OTG USB για αποθετήρια και καθρέφτες.</string>
+    <string name="nearby_splash__document_tree">Αναζήτηση στο OTG USB για αποθετήρια.</string>
     <string name="swap_visible_hotspot">Ορατό μέσω σημείου πρόσβασης</string>
     <string name="swap_blank_wifi_ssid">(κενό)</string>
     <string name="swap_hidden_wifi_ssid">(κρυφό)</string>
     <string name="swap_setting_up_hotspot">Ρύθμιση σημείου πρόσβασης…</string>
-    <string name="swap_stopping_hotspot">Διακοπή σημείου προσβασης…</string>
+    <string name="swap_stopping_hotspot">Διακοπή σημείου πρόσβασης…</string>
     <string name="swap_starting">Εκκίνηση…</string>
     <string name="swap_stopping">Διακοπή…</string>
-    <string name="swap_error_cannot_start_bluetooth">Δεν είναι δυνατή η εκκίνηση του Bluetooth!</string>
-    <string name="swap_toast_closing_nearby_after_timeout">Το \"Κοντά\" έκλεισε αφού ήταν αδρανές.</string>
+    <string name="swap_error_cannot_start_bluetooth">Αδυναμία εκκίνησης Bluetooth!</string>
+    <string name="swap_toast_closing_nearby_after_timeout">Η κοντινή ανταλλαγή τερματίστηκε λόγω αδράνειας.</string>
+    <string name="panic_reset_repos_summary">Επαναφορά προεπιλογών στο αποθετήριο</string>
+    <string name="notification_channel_updates_description">Εμφανίζει ειδοποιήσεις ενημέρωσης εφαρμογής και αποθετηρίου.</string>
+    <string name="notification_channel_updates_title">Ενημερώσεις</string>
+    <string name="notification_channel_installs_description">Εμφανίζει ειδοποιήσεις εγκατάστασης εφαρμογής.</string>
+    <string name="notification_channel_installs_title">Εγκαταστάσεις</string>
+    <string name="menu_opencollective">OpenCollective</string>
+    <string name="notification_channel_swaps_description">Επίδειξη ειδοποιήσεων ανταλλαγής εφαρμογών με τη χρήση P2P.</string>
+    <string name="notification_channel_swaps_title">Ανταλλαγές</string>
+    <string name="menu_show_install_history">Εμφάνιση ιστορικού εγκατάστασης</string>
+    <string name="menu_show_fdroid_metrics_report">Εμφάνιση αναφοράς διαγνωστικών</string>
+    <string name="toast_metrics_in_install_history">Η αναφορά διαγνωστικών %s είναι ορατή στην προβολή ιστορικού εγκατάστασης</string>
+    <string name="send_to_fdroid_metrics_summary">Αποστέλλει ανώνυμα δεδομένα εβδομαδιαίως στο κέντρο διαγνωστικών του F-Droid (απαιτεί διατήρηση ιστορικού εγκατάστασης)</string>
+    <string name="fdroid_metrics_report">Αναφορά διαγνωστικών %s</string>
+    <string name="install_history_and_metrics">Ιστορικό εγκαταστάσεων και διαγνωστικών</string>
+    <string name="send_fdroid_metrics_json">Αναφορά διαγνωστικών %s ως αρχείο JSON</string>
+    <string name="send_fdroid_metrics_report">Αποστολή αναφοράς διαγνωστικών %s</string>
+    <string name="send_to_fdroid_metrics">Αποστολή δεδομένων χρήσης</string>
+    <string name="theme_follow_system">Ίδιο με του συστήματος</string>
+    <string name="use_pure_black_dark_theme_summary">Συνιστάται μόνο για οθόνες OLED.</string>
+    <string name="use_pure_black_dark_theme">Χρήση τελείως μαύρου φόντου στο σκούρο θέμα</string>
+    <string name="banner_no_data_or_wifi">Δεν έχουν ενεργοποιηθεί δεδομένα ή WiFi</string>
+    <string name="banner_no_internet">Χωρίς σύνδεση στο διαδίκτυο</string>
 </resources>

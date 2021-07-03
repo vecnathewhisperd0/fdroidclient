@@ -1,6 +1,5 @@
 package org.fdroid.fdroid.nearby;
 
-import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -13,17 +12,19 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.IBinder;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
-import cc.mvdan.accesspoint.WifiApControl;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.ServiceCompat;
+import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import org.fdroid.fdroid.FDroidApp;
+import org.fdroid.fdroid.NotificationHelper;
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.UpdateService;
@@ -34,7 +35,6 @@ import org.fdroid.fdroid.data.Schema;
 import org.fdroid.fdroid.nearby.peers.Peer;
 import org.fdroid.fdroid.net.Downloader;
 
-import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -44,6 +44,12 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import cc.mvdan.accesspoint.WifiApControl;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * Central service which manages all of the different moving parts of swap which are required
@@ -71,15 +77,6 @@ public class SwapService extends Service {
     private static BluetoothAdapter bluetoothAdapter;
     private static WifiManager wifiManager;
     private static Timer pollConnectedSwapRepoTimer;
-
-    public static void start(Context context) {
-        Intent intent = new Intent(context, SwapService.class);
-        if (Build.VERSION.SDK_INT < 26) {
-            context.startService(intent);
-        } else {
-            context.startForegroundService(intent);
-        }
-    }
 
     public static void stop(Context context) {
         Intent intent = new Intent(context, SwapService.class);
@@ -112,46 +109,6 @@ public class SwapService extends Service {
         }
         peerRepo = ensureRepoExists(peer);
         UpdateService.updateRepoNow(this, peer.getRepoAddress());
-    }
-
-    @SuppressLint("StaticFieldLeak")
-    private void askServerToSwapWithUs(final Repo repo) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... args) {
-                String swapBackUri = Utils.getLocalRepoUri(FDroidApp.repo).toString();
-                HttpURLConnection conn = null;
-                try {
-                    URL url = new URL(repo.address.replace("/fdroid/repo", "/request-swap"));
-                    conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("POST");
-                    conn.setDoInput(true);
-                    conn.setDoOutput(true);
-
-                    OutputStream outputStream = conn.getOutputStream();
-                    OutputStreamWriter writer = new OutputStreamWriter(outputStream);
-                    writer.write("repo=" + swapBackUri);
-                    writer.flush();
-                    writer.close();
-                    outputStream.close();
-
-                    int responseCode = conn.getResponseCode();
-                    Utils.debugLog(TAG, "Asking server at " + repo.address + " to swap with us in return (by " +
-                            "POSTing to \"/request-swap\" with repo \"" + swapBackUri + "\"): " + responseCode);
-                } catch (IOException e) {
-                    Log.e(TAG, "Error while asking server to swap with us", e);
-                    Intent intent = new Intent(Downloader.ACTION_INTERRUPTED);
-                    intent.setData(Uri.parse(repo.address));
-                    intent.putExtra(Downloader.EXTRA_ERROR_MESSAGE, e.getLocalizedMessage());
-                    LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
-                } finally {
-                    if (conn != null) {
-                        conn.disconnect();
-                    }
-                }
-                return null;
-            }
-        }.execute();
     }
 
     private Repo ensureRepoExists(@NonNull Peer peer) {
@@ -347,12 +304,15 @@ public class SwapService extends Service {
     @Nullable
     private Timer timer;
 
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+
     public class Binder extends android.os.Binder {
         public SwapService getService() {
             return SwapService.this;
         }
     }
 
+    @Override
     public void onCreate() {
         super.onCreate();
         startForeground(NOTIFICATION, createNotification());
@@ -371,7 +331,7 @@ public class SwapService extends Service {
                     new IntentFilter(BluetoothAdapter.ACTION_SCAN_MODE_CHANGED));
         }
 
-        wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        wifiManager = ContextCompat.getSystemService(getApplicationContext(), WifiManager.class);
         if (wifiManager != null) {
             SwapService.putWifiEnabledBeforeSwap(wifiManager.isWifiEnabled());
         }
@@ -402,6 +362,45 @@ public class SwapService extends Service {
         BonjourManager.setVisible(this, getWifiVisibleUserPreference() || getHotspotActivatedUserPreference());
     }
 
+    private void askServerToSwapWithUs(final Repo repo) {
+        compositeDisposable.add(
+                Completable.fromAction(() -> {
+                    String swapBackUri = Utils.getLocalRepoUri(FDroidApp.repo).toString();
+                    HttpURLConnection conn = null;
+                    try {
+                        URL url = new URL(repo.address.replace("/fdroid/repo", "/request-swap"));
+                        conn = (HttpURLConnection) url.openConnection();
+                        conn.setRequestMethod("POST");
+                        conn.setDoInput(true);
+                        conn.setDoOutput(true);
+
+                        try (OutputStream outputStream = conn.getOutputStream();
+                             OutputStreamWriter writer = new OutputStreamWriter(outputStream)) {
+                            writer.write("repo=" + swapBackUri);
+                            writer.flush();
+                        }
+
+                        int responseCode = conn.getResponseCode();
+                        Utils.debugLog(TAG, "Asking server at " + repo.address + " to swap with us in return (by " +
+                                "POSTing to \"/request-swap\" with repo \"" + swapBackUri + "\"): " + responseCode);
+                    } finally {
+                        if (conn != null) {
+                            conn.disconnect();
+                        }
+                    }
+                })
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnError(e -> {
+                            Intent intent = new Intent(Downloader.ACTION_INTERRUPTED);
+                            intent.setData(Uri.parse(repo.address));
+                            intent.putExtra(Downloader.EXTRA_ERROR_MESSAGE, e.getLocalizedMessage());
+                            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(intent);
+                        })
+                        .subscribe()
+        );
+    }
+
     /**
      * This is for setting things up for when the {@code SwapService} was
      * started by the user clicking on the initial start button. The things
@@ -425,6 +424,8 @@ public class SwapService extends Service {
 
     @Override
     public void onDestroy() {
+        compositeDisposable.dispose();
+
         Utils.debugLog(TAG, "Destroying service, will disable swapping if required, and unregister listeners.");
         Preferences.get().unregisterLocalRepoHttpsListeners(httpsEnabledListener);
         localBroadcastManager.unregisterReceiver(onWifiChange);
@@ -433,7 +434,9 @@ public class SwapService extends Service {
         localBroadcastManager.unregisterReceiver(bonjourPeerFound);
         localBroadcastManager.unregisterReceiver(bonjourPeerRemoved);
 
-        unregisterReceiver(bluetoothScanModeChanged);
+        if (bluetoothAdapter != null) {
+            unregisterReceiver(bluetoothScanModeChanged);
+        }
 
         BluetoothManager.stop(this);
 
@@ -457,7 +460,7 @@ public class SwapService extends Service {
         if (timer != null) {
             timer.cancel();
         }
-        stopForeground(true);
+        ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE);
 
         deleteAllSwapRepos();
 
@@ -468,7 +471,7 @@ public class SwapService extends Service {
         Intent intent = new Intent(this, SwapWorkflowActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-        return new NotificationCompat.Builder(this)
+        return new NotificationCompat.Builder(this, NotificationHelper.CHANNEL_SWAPS)
                 .setContentTitle(getText(R.string.local_repo_running))
                 .setContentText(getText(R.string.touch_to_configure_local_repo))
                 .setSmallIcon(R.drawable.ic_nearby)

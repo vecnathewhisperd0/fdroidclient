@@ -5,7 +5,7 @@
     <string name="installIncompatible">Appen er ikke kompatibel med din enhed. Vil du installere den alligevel\?</string>
     <string name="version">Version</string>
     <string name="delete">Slet</string>
-    <string name="enable_nfc_send">Aktiver NFC Send…</string>
+    <string name="enable_nfc_send">Aktiver NFC send…</string>
     <string name="cache_downloaded">Behold cache-lagrede apps</string>
     <string name="updates">Opdat.</string>
     <string name="unstable_updates">Ustabile opdateringer</string>
@@ -33,7 +33,7 @@
     <string name="about_license">Licens</string>
     <string name="app_incompatible">Inkompatibel</string>
     <string name="app_installed">Installeret</string>
-    <string name="app_not_installed">Ikke Installeret</string>
+    <string name="app_not_installed">Ikke installeret</string>
     <string name="app_inst_known_source">Installeret (fra %s)</string>
     <string name="app_inst_unknown_source">Installeret (fra ukendt kilde)</string>
     <string name="added_on">Tilføjet den %s</string>
@@ -66,13 +66,12 @@
     <string name="menu_install">Installer</string>
     <string name="menu_uninstall">Afinstaller</string>
     <string name="menu_ignore_all">Ignorer alle opdateringer</string>
-    <string name="menu_ignore_this">Ignorer Denne Opdatering</string>
+    <string name="menu_ignore_this">Ignorer denne opdatering</string>
     <string name="menu_website">Hjemmeside</string>
     <string name="menu_issues">Problemer</string>
     <string name="menu_changelog">Ændringslog</string>
     <string name="menu_source">Kildekode</string>
     <string name="menu_upgrade">Opdater</string>
-    <string name="menu_donate">Doner</string>
     <string name="menu_bitcoin">Bitcoin</string>
     <string name="menu_litecoin">Litecoin</string>
     <string name="menu_flattr">Flattr</string>
@@ -109,7 +108,7 @@
     <string name="proxy_port_summary">Proxy portnummer (e.g. 8118)</string>
     <string name="status_download">Henter\n%2$s / %3$s (%4$d%%) fra\n%1$s</string>
     <string name="status_download_unknown_size">Henter\n%2$s fra\n%1$s</string>
-    <string name="update_notification_title">Opdaterer depoter</string>
+    <string name="banner_updating_repositories">Opdaterer depoter</string>
     <string name="status_processing_xml_percent">Behandler %2$s / %3$s (%4$d%%) fra %1$s</string>
     <string name="status_connecting_to_repo">Forbinder til\n%1$s</string>
     <string name="status_inserting_apps">Gemmer app-detaljer</string>
@@ -235,8 +234,7 @@
     <string name="interval_2w">Søg efter opdateringer hver anden uge</string>
     <string name="theme_light">Lys</string>
     <string name="theme_dark">Mørk</string>
-    <string name="theme_night">Nat</string>
-    <string name="menu_email">E-Mail forfatter</string>
+    <string name="menu_email">E-mail forfatter</string>
     <string name="antinonfreeassetslist">Denne app indeholder ikke-frit indhold</string>
     <string name="empty_search_available_app_list">Ingen matchende apps tilgængelige.</string>
     <string name="crash_dialog_title">F-Droid er gået ned</string>
@@ -283,7 +281,7 @@
     <string name="app_version_x_installed">Version %1$s</string>
     <string name="app_recommended_version_installed">Version %1$s (Anbefalet)</string>
     <string name="app_new">Ny</string>
-    <string name="app__tts__cancel_download">Stop download</string>
+    <string name="app__tts__cancel_download">Stop hentning</string>
     <string name="app__install_downloaded_update">Opdatér</string>
     <string name="installed_apps__activity_title">Installerede apps</string>
     <string name="installed_app__updates_ignored">Opdateringer ignoreret</string>
@@ -315,7 +313,7 @@
     </plurals>
     <string name="nearby_splash__download_apps_from_people_nearby">Ingen Internet? Hent apps fra folk i nærheden af dig!</string>
     <string name="nearby_splash__find_people_button">Find personer i nærheden</string>
-    <string name="nearby_splash__both_parties_need_fdroid">Begge parter skal have %1$s for at benytte i nærheden.</string>
+    <string name="nearby_splash__both_parties_need_fdroid">Begge parter skal have %1$s for at benytte \"i nærheden\".</string>
     <string name="app__tts__downloading_progress">Henter, %1$d%% udført</string>
     <plurals name="notification_summary_more">
         <item quantity="one">+%1$d flere…</item>
@@ -413,7 +411,7 @@
     <string name="show_anti_feature_apps_on">Vis apps der kræver antifunktionalitet</string>
     <string name="force_touch_apps">Inkluder berøringsskærmsapps</string>
     <string name="privacy">Privatliv</string>
-    <string name="preventScreenshots_title">Forhindr skærmfotos</string>
+    <string name="preventScreenshots_title">Forhindre skærmbilleder</string>
     <string name="panic_app_setting_title">Panikknap-app</string>
     <string name="panic_app_unknown_app">en ukendt app</string>
     <string name="panic_app_setting_none">Ingen</string>
@@ -453,14 +451,14 @@
     <string name="panic_app_dialog_message">Er du sikker på, at du vil tillade %1$s at trigge destruktive panikknaphandlinger\?</string>
     <string name="hiding_dialog_message">Er du sikker på, at du vil fjerne %1$s fra startskærmen\? Genvejen kan kun genoprettes ved at taste \"%2$d\" i den falske app %3$s.</string>
     <string name="repo_delete_to_overwrite">Først slettes %1$s for at tilføje den med en modstridende nøgle.</string>
-    <string name="preventScreenshots_summary">Blokerer skærmbilleder fra at blive taget og skjuler appindhold fra skærmen med seneste apps</string>
+    <string name="preventScreenshots_summary">Blokerer skærmbilleder fra at blive taget og skjuler program indhold fra seneste programmer skærme</string>
     <string name="hiding_dialog_warning">Advarsel: Enhver appgenvej på startskærmen fjernes også og vil skulle tilføjes manuelt igen.</string>
     <string name="allow_push_requests_summary">Arkiv metadata kan omfatte skubbe-forespørgsler for at installere og afinstallere apps</string>
-    <string name="scan_removable_storage_summary">Se efter pakke arkiv på fjern-bare lagerenheder som SD-kort og USB-drev</string>
+    <string name="scan_removable_storage_summary">Søg efter pakkearkiver på fjernbare lagerenheder som SD-kort og USB-drev</string>
     <string name="menu_translation">Oversættelse</string>
     <string name="main_menu__updates">Nyt</string>
     <string name="antinosourcesince">Kildekoden er ikke længere tilgængelig; ingen opdateringer mulige.</string>
-    <string name="force_touch_apps_on">Vise apps der kræver berøringsskærm uanset hardwareunderstøttelse</string>
+    <string name="force_touch_apps_on">Vis programmer der kræver berøringsskærm uanset hardwareunderstøttelse</string>
     <string name="panic_hide_warning_message">I en panikhændelse vil dette fjerne %1$s fra startskærmen. Kun indtastning af \"%2$d\" i den falske app %3$s kan genskabe det.</string>
     <string name="hide_on_long_search_press_summary">Langt tryk på søgeknappen vil skjule appen</string>
     <string name="not_visible_nearby_description">Før du kan udveksle med enheder i nærheden, skal du gøre din enhed synlig.</string>
@@ -472,7 +470,7 @@
     <string name="app_list__dismiss_installing_app">Installering annulleret</string>
     <string name="menu_select_for_wipe">Vælge for at fjerne</string>
     <string name="try_again">Prøv igen</string>
-    <string name="panic_will_be_wiped">Vil blive afinstalleret og alle data slettet</string>
+    <string name="panic_will_be_wiped">Vil blive afinstalleret og alle data vil blive slettet</string>
     <string name="panic_apps_to_uninstall">Apps som vil blive afinstalleret og hvis data vil blive slettet</string>
     <string name="panic_add_apps_to_uninstall">Tilføj apps til afinstallering og rensning</string>
     <string name="panic_reset_repos_title">Nulstil depoter</string>
@@ -488,4 +486,23 @@
     <string name="swap_error_cannot_start_bluetooth">Kan ikke starte Bluetooth!</string>
     <string name="nearby_splash__document_tree">Søg på USB OTG efter depoter og spejle.</string>
     <string name="swap_toast_closing_nearby_after_timeout">Nærved lukket da det ikke var i brug.</string>
+    <string name="menu_opencollective">OpenCollective</string>
+    <string name="notification_channel_updates_description">Viser program og arkiv opdatering underretninger.</string>
+    <string name="notification_channel_updates_title">Opdateringer</string>
+    <string name="notification_channel_swaps_description">Viser P2P program bytte underretninger.</string>
+    <string name="notification_channel_swaps_title">Bytter</string>
+    <string name="notification_channel_installs_description">Viser program installation påmindelser.</string>
+    <string name="notification_channel_installs_title">Installeringer</string>
+    <string name="theme_follow_system">Følg systemet</string>
+    <string name="use_pure_black_dark_theme_summary">Anbefales kun til OLED-skærme.</string>
+    <string name="use_pure_black_dark_theme">Anvend helt sort baggrund i mørkt tema</string>
+    <string name="menu_show_install_history">Vis installationshistorik</string>
+    <string name="menu_show_fdroid_metrics_report">Vis målingsrapport</string>
+    <string name="toast_metrics_in_install_history">Rapporten %s Metric kan ses i fremviser til Installationshistorik</string>
+    <string name="send_to_fdroid_metrics_summary">Send anonyme data ugentligt til F-Droid Metrics (kræver at Keep installerer historik)</string>
+    <string name="send_to_fdroid_metrics">Send forbrugsdata</string>
+    <string name="fdroid_metrics_report">%s Målerapport</string>
+    <string name="install_history_and_metrics">Installér historik og måling</string>
+    <string name="send_fdroid_metrics_json">%s målerapport som en JSON-fil</string>
+    <string name="send_fdroid_metrics_report">Send %s målerapport</string>
 </resources>

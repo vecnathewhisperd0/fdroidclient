@@ -27,7 +27,7 @@
     <string name="menu_manage">Deponejoj</string>
     <string name="menu_search">Serĉi</string>
     <string name="menu_add_repo">Nova deponejo</string>
-    <string name="menu_launch">Startigi</string>
+    <string name="menu_launch">Ekigi</string>
     <string name="menu_share">Kunhavigi</string>
     <string name="menu_install">Instali</string>
     <string name="menu_uninstall">Malinstali</string>
@@ -37,7 +37,6 @@
     <string name="menu_issues">Eraroj</string>
     <string name="menu_source">Fontkodo</string>
     <string name="menu_upgrade">Ĝisdatigi</string>
-    <string name="menu_donate">Donaci</string>
     <string name="details_notinstalled">Neinstalita</string>
     <string name="antiadslist">Tiu ĉi aplikaĵo enhavas reklamojn</string>
     <string name="antitracklist">Tiu ĉi aplikaĵo spuras kaj raportas vian agadon</string>
@@ -62,7 +61,7 @@
     <string name="skip">Preterpasi</string>
     <string name="no_permissions">Sen permesoj</string>
     <string name="theme">Etoso</string>
-    <string name="repo_num_apps">Nombro da aplikaĵoj</string>
+    <string name="repo_num_apps">Nombro de aplikaĵoj</string>
     <string name="repo_description">Priskribo</string>
     <string name="repo_last_update">Lasta ĝisdatigo</string>
     <string name="repo_name">Nomo</string>
@@ -89,13 +88,13 @@
     <string name="app_name">F-Droid</string>
     <string name="installIncompatible">Aplikaĵo nekongruas kun via aparato, ĉu instali ĝin malgraŭ tio?</string>
     <string name="unstable_updates">Nestabilaj ĝisdatigoj</string>
-    <string name="update_interval">Intervalo de aŭtomata ĝisdatigo</string>
-    <string name="SignatureMismatch">La nova versio estas subskribita per malsama ŝlosilo. Por instali la novan version, la malnova devas esti malinstalita unue. Bonvolu fari tion kaj reprovi. (rigardu ke malinstalo forigos ĉiujn internajn datumojn konservitajn en la aplikaĵo)</string>
+    <string name="update_interval">Ofteco de aŭtomataj ĝisdatigoj</string>
+    <string name="SignatureMismatch">La nova versio estas subskribita per malsama ŝlosilo. Por instali la novan version, la malnova devas esti malinstalita unue. Malinstalu la malnovan version kaj reprovu. (Estu konscia, ke malinstalo forigos ĉiujn internajn datumojn konservitajn de la aplikaĵo.)</string>
     <string name="enable_nfc_send">Aktivigi sendadon tra NFC…</string>
     <string name="cache_downloaded">Kaŝmemorigi apk-dosierojn</string>
     <string name="unstable_updates_summary">Proponi ĝisdatigojn al nestabilaj versioj</string>
     <string name="system_installer">Privilegia aldonaĵo</string>
-    <string name="system_installer_on">Uzi privilegian aldonaĵon por instali, ĝisdatigi kaj forigi pakaĵojn</string>
+    <string name="system_installer_on">Uzi la privilegian aldonaĵon por instali, ĝisdatigi kaj forigi pakaĵojn</string>
     <string name="local_repo_name">Nomo de via loka deponejo</string>
     <string name="local_repo_name_summary">La anoncata nomo de via loka deponejo: %s</string>
     <string name="local_repo_https_on">Uzi ĉifritan HTTPS:// konekton por loka deponejo</string>
@@ -117,10 +116,10 @@
     <string name="choose_bt_send">Elektu Bludentan metodon de sendo</string>
     <string name="repo_add_fingerprint">Fingrospuro (malnepra)</string>
     <string name="bad_fingerprint">Malbona fingrospuro</string>
-    <string name="invalid_url">Ĉi tio ne estas valida URL.</string>
-    <string name="malformed_repo_uri">Transsaltis eraran URI de deponejo: %s</string>
+    <string name="invalid_url">Tio ĉi ne estas ĝusta ligilo.</string>
+    <string name="malformed_repo_uri">Transsaltis eraran ligilon de deponejo: %s</string>
     <string name="menu_settings">Agordoj</string>
-    <string name="menu_email">Retleteri programiston</string>
+    <string name="menu_email">Retletero al programisto</string>
     <string name="menu_changelog">Ŝanĝoprotokolo</string>
     <string name="menu_bitcoin">Bitmono</string>
     <string name="menu_litecoin">Litecoin</string>
@@ -131,7 +130,7 @@
     <string name="writing_index_jar">Konservado de subskribita indeksa dosiero (index.jar)…</string>
     <string name="proxy">Retperanto</string>
     <string name="enable_proxy_title">Aktivigi HTTP-retperanton</string>
-    <string name="enable_proxy_summary">Uzi HTTP-retperanton  por ĉiuj retkonektoj</string>
+    <string name="enable_proxy_summary">Uzi HTTP-retperanton por ĉiuj ret‑petoj</string>
     <string name="proxy_host">Adreso de retperanto</string>
     <string name="proxy_port">Pordo de retperanto</string>
     <string name="proxy_host_summary">Adreso de via retperanto (ekz. 127.0.0.1)</string>
@@ -142,32 +141,32 @@
     <string name="status_download_unknown_size">Elŝutado
 \n%2$s el
 \n%1$s</string>
-    <string name="update_notification_title">Ĝisdatigado de deponejoj</string>
+    <string name="banner_updating_repositories">Ĝisdatigado de deponejoj</string>
     <string name="status_processing_xml_percent">Prilaborado de %2$s / %3$s (%4$d%%) el %1$s</string>
     <string name="status_connecting_to_repo">Konektado al
 \n%1$s</string>
     <string name="status_inserting_apps">Konservado de aplikaĵaj detaloj</string>
-    <string name="repos_unchanged">Ĉiuj deponejoj estas ĝisdatigitaj</string>
-    <string name="all_other_repos_fine">En ĉiuj aliaj deponejoj ne okazis eraroj.</string>
+    <string name="repos_unchanged">Ĉiuj deponejoj estas ĝisdataj</string>
+    <string name="all_other_repos_fine">En ĉiuj aliaj deponejoj ne okazis eraro.</string>
     <string name="global_error_updating_repos">Eraro dum ĝisdatigado: %s</string>
     <string name="permissions">Permesoj</string>
-    <string name="no_handler_app">Vi ne havas iun ajn disponeblan aplikaĵon, kiu povas trakti %s.</string>
+    <string name="no_handler_app">Vi havas neniun disponeblan aplikaĵon, kiu povas trakti %s.</string>
     <string name="unsigned">Nesubskribita</string>
     <string name="unverified">Neverigita</string>
     <string name="repo_details">Deponejo</string>
     <string name="repo_url">Adreso</string>
     <string name="repo_fingerprint">Fingrospuro de subskriba ŝlosilo (SHA-256)</string>
-    <string name="unsigned_description">Tio ĉi signifas, ke la listo de aplikaĵoj ne povas esti verigita. Vi devas esti
-        singarda kun aplikaĵoj elŝutitaj el nesubskribitaj indeksoj.
-    </string>
+    <string name="unsigned_description">Tio ĉi signifas ke la listo de aplikaĵoj ne povas esti verigita. Estu singarda pri aplikaĵoj elŝutitaj el nesubskribitaj indeksoj.</string>
     <string name="repo_not_yet_updated">La deponejo ne estas jam uzita. Vi devas aktivigi ĝin por vidi la aplikaĵojn,
         kiujn ĝi liveras.
     </string>
     <string name="repo_confirm_delete_body">Forigado de deponejo kaŭzos, ke ĝiaj aplikaĵoj ne plu montriĝos en F-Droid.
 \n
 \nRimarko: ĉiuj antaŭe instalitaj aplikaĵoj restos en via aparato.</string>
-    <string name="repo_disabled_notification">%1$s malaktiva. Vi devos reaktivigi tiun ĉi deponejon por instali aplikaĵojn el ĝi.</string>
-    <string name="not_on_same_wifi">Via aparato ne estas en la sama vifi-reto kiel la loka deponejo, kiun vi ĵus aldonis! Provu konekti al tiu ĉi reto: %s</string>
+    <string name="repo_disabled_notification">%1$s malaktiva.
+\n
+\nVi devos reaktivigi tiun ĉi deponejon por instali aplikaĵojn el ĝi.</string>
+    <string name="not_on_same_wifi">Via aparato ne estas en la sama vifi-reto kiel la loka deponejo, kiun vi ĵus aldonis! Provu konekti al la reto: %s</string>
     <string name="pref_language">Lingvo</string>
     <string name="pref_language_default">Sistema implicita</string>
     <string name="wifi">Vifio</string>
@@ -180,11 +179,9 @@
     <string name="category_Time">Tempo</string>
     <string name="category_Writing">Skribado</string>
     <string name="empty_installed_app_list">Neniu aplikaĵo instalita.
-
-        En via aparato estas aplikaĵoj, tamen ili ne estas disponeblaj el F-Droid. Eble vi devas ĝisdatigi viajn
-        deponejojn, aŭ la deponejoj vere ne enhavas viajn aplikaĵojn.
-    </string>
-    <string name="empty_search_available_app_list">Neniuj kongruaj aplikaĵoj disponeblaj.</string>
+\n
+\nEn via aparato estas aplikaĵoj, tamen ili ne estas disponeblaj el F‑Droid. Eble vi devas ĝisdatigi viajn deponejojn, aŭ la deponejoj vere ne enhavas viajn aplikaĵojn.</string>
+    <string name="empty_search_available_app_list">Neniu kongrua aplikaĵo disponebla.</string>
     <string name="empty_can_update_app_list">Bonege!\nĈiuj viaj aplikaĵoj estas ĝisdataj.</string>
     <string name="install_error_unknown">Instalo malsukcesis pro nekonata eraro</string>
     <string name="uninstall_error_unknown">Malinstalo malsukcesis pro nekonata eraro</string>
@@ -206,7 +203,7 @@
     <string name="swap_switch_to_wifi">Tuŝu por ŝanĝi al vifio</string>
     <string name="swap_confirm_connect">Ĉu vi volas elŝuti aplikaĵojn el %1$s nun?</string>
     <string name="swap_dont_show_again">Ne montri ĉi tion denove</string>
-    <string name="swap_scan_or_type_url">Unu persono devas skani la kodon, aŭ entajpi URL-n de aliulo en foliumilon.</string>
+    <string name="swap_scan_or_type_url">Unu persono devas skani la kodon aŭ enigi ligilon de la aliulo en la ret‑foliumilon.</string>
     <string name="swap_choose_apps">Elekti aplikaĵojn</string>
     <string name="swap_scan_qr">Skani QR-kodon</string>
     <string name="swap_people_nearby">Homoj proksime</string>
@@ -231,8 +228,8 @@
     <string name="install_confirm">postulas permeson al</string>
     <string name="install_confirm_update">Ĉu vi volas instali ĝisdatigon al tiu ĉi aplikaĵo\? Viaj nunaj datumoj ne perdiĝos. La ĝisdatigita aplikaĵo povos aliri al:</string>
     <string name="install_confirm_update_system">Ĉu vi volas instali ĝisdatigon al tiu ĉi integrigita aplikaĵo\? Viaj nunaj datumoj ne perdiĝos. La ĝisdatigita aplikaĵo povos aliri al:</string>
-    <string name="install_confirm_update_no_perms">Ĉu vi volas instali ĝisdatigon al ĉi tiu estanta aplikaĵo\? Viaj nunaj datumoj ne perdiĝos. Ĝi ne postulas iun ajn specialan permeson.</string>
-    <string name="install_confirm_update_system_no_perms">Ĉu vi volas instali ĝisdatigon al tiu ĉi integrigita aplikaĵo\? Viaj nunaj datumoj ne perdiĝos. Ĝi ne bezonas iun ajn specialan permeson.</string>
+    <string name="install_confirm_update_no_perms">Ĉu vi volas instali ĝisdatigon al tiu ĉi aplikaĵo\? Viaj nunaj datumoj ne perdiĝos. La aplikaĵo postulas neniun permeson.</string>
+    <string name="install_confirm_update_system_no_perms">Ĉu vi volas instali ĝisdatigon al tiu ĉi integrigita aplikaĵo\? Viaj nunaj datumoj ne perdiĝos. La aplikaĵo postulas neniun permeson.</string>
     <string name="newPerms">Nova(j)</string>
     <string name="allPerms">Ĉio</string>
     <string name="perm_costs_money">Tio ĉi povas elspezi vian monon</string>
@@ -251,7 +248,6 @@
     <string name="interval_2w">Kontroli pri ĝisdatigoj ĉiu-2-semajne</string>
     <string name="theme_light">Hela</string>
     <string name="theme_dark">Malhela</string>
-    <string name="theme_night">Nokta</string>
     <string name="crash_dialog_title">F-Droid kolapsis</string>
     <string name="crash_dialog_text">Senatenda eraro okazis kaj devigis aplikaĵon halti. Ĉu vi volas retmesaĝi detalojn
         por helpi ripari la eraron?
@@ -280,12 +276,12 @@
     <string name="update_auto_install_summary">Elŝuti kaj instali ĝisdatigojn de aplikaĵoj fone, montrante sciigon</string>
     <string name="keep_install_history">Konservi historion de instaladoj</string>
     <string name="keep_install_history_summary">Memori historion de instaladoj kaj malinstaladoj en privata konservejo</string>
-    <string name="warning_no_internet">Ne povas ĝisdatigi, ĉu vi estas konektita kun la Interreto?</string>
+    <string name="warning_no_internet">Ne povas ĝisdatigi, ĉu vi estas konektita kun la interreto\?</string>
     <string name="versions">Versioj</string>
     <string name="app_details_donate_prompt_unknown_author">Bonvolu aĉeti kafon por programistoj de %1$s!</string>
     <string name="app_details_donate_prompt">%1$s estas kreita de %2$s. Bonvolu aĉeti kafon por programistoj!</string>
     <string name="repositories_summary">Aldoni pliajn fontojn de aplikaĵoj</string>
-    <string name="notification_title_single_update_available">Ĝisdatigo disponebla</string>
+    <string name="notification_title_single_update_available">Disponebla ĝisdatigo</string>
     <string name="notification_title_single_ready_to_install">Instalpreta</string>
     <string name="notification_title_single_ready_to_install_update">Ĝisdatigo preta por instali</string>
     <string name="notification_title_single_install_error">Instalado fiaskis</string>
@@ -324,7 +320,7 @@
     <string name="tts_category_name">Kategorio %1$s</string>
     <plurals name="tts_view_all_in_category">
         <item quantity="one">Montri %1$d aplikaĵon en la kategorio %2$s</item>
-        <item quantity="other">Montri ĉiujn %1$s aplikaĵojn en la kategorio %2$s</item>
+        <item quantity="other">Montri ĉiujn %1$d aplikaĵojn en la kategorio %2$s</item>
     </plurals>
     <string name="app__install_downloaded_update">Ĝisdatigi</string>
     <string name="app_list__name__downloading_in_progress">Elŝutado de %1$s</string>
@@ -349,17 +345,17 @@
     </string>
     <string name="nearby_splash__find_people_button">Trovi proksimajn ulojn</string>
     <string name="nearby_splash__both_parties_need_fdroid">Ambaŭ flankoj bezonas %1$s por uzi proksiman interŝanĝon.</string>
-    <string name="latest__empty_state__no_recent_apps">Neniuj novaj aplikaĵoj</string>
+    <string name="latest__empty_state__no_recent_apps">Neniu nova aplikaĵo</string>
     <string name="latest__empty_state__never_updated">Kiam la listo de aplikaĵoj estos ĝisdatigita, la plej novaj aplikaĵoj aperos tie ĉi</string>
     <string name="latest__empty_state__no_enabled_repos">Kiam vi aktivigos deponejon kaj ĝi estos ĝisdatigita, la plej novaj aplikaĵoj aperos tie ĉi</string>
-    <string name="categories__empty_state__no_categories">Neniuj kategorioj por montri</string>
+    <string name="categories__empty_state__no_categories">Neniu kategorio por montri</string>
     <string name="menu_video">Filmeto</string>
     <string name="app__tts__cancel_download">Nuligi elŝutadon</string>
     <string name="app__tts__downloading_progress">Elŝutado, %1$d%% kompleta</string>
     <string name="menu_license">Permesilo: %s</string>
     <plurals name="notification_summary_more">
         <item quantity="one">+%1$d pli…</item>
-        <item quantity="other">+1$d pli…</item>
+        <item quantity="other">+%1$d pli…</item>
     </plurals>
     <plurals name="notification_summary_updates">
         <item quantity="one">%1$d ĝisdatigo</item>
@@ -382,17 +378,17 @@
         <item quantity="other">Ĝisdatigita antaŭ %1$d jaroj</item>
     </plurals>
     <string name="by_author_format">de %s</string>
-    <string name="download_404">Ne trovis petitan dosieron.</string>
+    <string name="download_404">Ne trovis la petitan dosieron.</string>
     <string name="force_old_index">Devigi malnovan formon de indekso</string>
     <string name="force_old_index_summary">Por okazo de eraroj aŭ kongruec-problemoj, uzi XML-indekson de aplikaĵoj</string>
     <string name="app_list_download_ready">Elŝutita kaj instalpreta</string>
     <string name="status_inserting_x_apps">Konservado de aplikaĵaj detaloj (%1$d/%2$d) el %3$s</string>
     <string name="app_installed_media">Dosiero instalita al %s</string>
-    <string name="app_permission_storage">F-Droid bezonas aliron al memorejo por instali ĝin tien. Permesu tion ĉi je la sekva ekrano por pluigi kun instalado.</string>
+    <string name="app_permission_storage">F‑Droid bezonas aliron al konservejo por instali ĝin tien. Permesu tion ĉi sur la sekva ekrano por pluigi instaladon.</string>
     <string name="app_details__incompatible_mismatched_signature">Alia subskribo ol instalita versio</string>
     <string name="app_details__no_versions__show_incompat_versions">Por montri nekongruajn versiojn tie ĉe malgraŭ tio, enŝaltu la agordon “%1$s”.</string>
-    <string name="app_details__no_versions__no_compatible_signatures">Neniuj versioj kun kongruaj subskriboj</string>
-    <string name="app_details__no_versions__none_compatible_with_device">Neniuj versioj kongruaj kun la aparato</string>
+    <string name="app_details__no_versions__no_compatible_signatures">Neniu versio kun kongrua subskribo</string>
+    <string name="app_details__no_versions__none_compatible_with_device">Neniu versio kongrua kun la aparato</string>
     <string name="app_details__no_versions__explain_incompatible_signatures">La instalita versio ne kongruas kun ĉiuj disponeblaj versioj. Malinstalado de aplikaĵo ebligos al vi vidigi kaj instali kongruajn versiojn. Tio ĉi ofte okazas ĉe aplikaĵoj instalitaj el Google Play aŭ aliaj fontoj, se ili estas subskribitaj per alia atestilo.</string>
     <string name="app_list__dismiss_app_update">Ĝisdatigo ignorata</string>
     <string name="app_list__dismiss_vulnerable_app">Sekurec-fliko ignorata</string>
@@ -410,18 +406,18 @@
     <string name="panic_app_dialog_title">Konfirmi panikan aplikaĵon</string>
     <string name="panic_app_dialog_message">Ĉu vi certas, ke vi volas permesi al %1$s por agordi detruajn agojn de panika butono?</string>
     <string name="allow">Permesi</string>
-    <string name="panic_settings">Agordoj de panika butono</string>
-    <string name="panic_settings_summary">Agoj por esti prenita en kazo de krizo</string>
+    <string name="panic_settings">Agordoj pri panika butono</string>
+    <string name="panic_settings_summary">Kion fari okaze de danĝero</string>
     <string name="panic_exit_title">Fermi aplikaĵon</string>
     <string name="panic_exit_summary">La aplikaĵo estos fermita</string>
     <string name="panic_destructive_actions">Detruaj agoj</string>
     <string name="panic_hide_title">Kaŝi %s</string>
     <string name="panic_hide_summary">Aplikaĵo kaŝiĝos</string>
     <string name="panic_hide_warning_title">Memori kiel restarigi</string>
-    <string name="panic_hide_warning_message">En kriza okazo, tio ĉi forigos %1$s el la lanĉilo. Nur tajpado de “%2$d” en la ŝajn-aplikaĵo %3$s povas restarigi ĝin.</string>
+    <string name="panic_hide_warning_message">En kriza okazo, tio ĉi forigos %1$s el la lanĉilo. Por restarigi la aplikaĵon %1$s, enigu “%2$d” en la ŝajn‑aplikaĵo %3$s.</string>
     <string name="hiding_calculator">Kalkulilo</string>
     <string name="hiding_dialog_title">Kaŝi %s nun</string>
-    <string name="hiding_dialog_message">Ĉu vi certe volas forigi %1$s el la lanĉilo? Nur tajpado de “%2$d” en la ŝajn-aplikaĵo %3$s povas restarigi ĝin.</string>
+    <string name="hiding_dialog_message">Ĉu vi certe volas forigi %1$s el la lanĉilo\? Por restarigi la aplikaĵon %1$s, enigu “%2$d” en la ŝajn‑aplikaĵo %3$s.</string>
     <string name="hiding_dialog_warning">Averto: ĉiu ligilo ĉe la hejmekrano ankaŭ estos forigita kaj devas esti realdonita permane.</string>
     <string name="hide_on_long_search_press_title">Kaŝi per serĉ-butono</string>
     <string name="hide_on_long_search_press_summary">Kaŝi la aplikaĵon per longe premi la serĉ-butonon</string>
@@ -439,7 +435,7 @@
     <string name="repo_delete_to_overwrite">Unue forigu %1$s por aldoni tiun ĉi servilon kun konflikta ŝlosilo.</string>
     <string name="repo_exists_add_mirror">Tio ĉi estas kopio de %1$s, ĉe aldoni ĝin kiel spegul-servilo?</string>
     <string name="repo_official_mirrors">Oficialaj spegul-serviloj</string>
-    <string name="repo_user_mirrors">Uzi spegul-servilojn</string>
+    <string name="repo_user_mirrors">Neoficialaj spegul‑serviloj</string>
     <string name="use_bluetooth">Uzi Bludenton</string>
     <string name="swap_toast_invalid_url">Erara ligilo por interŝanĝi: %1$s</string>
     <string name="swap_toast_hotspot_enabled">Vifi-retkaptejo aktiva</string>
@@ -462,7 +458,7 @@
     <string name="share_repository">Kunhavigi deponejon</string>
     <string name="allow_push_requests">Permesi al deponejoj (mal)instali aplikaĵojn</string>
     <string name="allow_push_requests_summary">Metadatumoj de deponejoj povas enhavi petojn pri instali aŭ malinstali aplikaĵojn</string>
-    <string name="antinosourcesince">La fontkodo ne estas plu disponebla, neniuj eblaj ĝisdatigoj.</string>
+    <string name="antinosourcesince">La fontkodo ne estas plu disponebla, neniu ebla ĝisdatigo.</string>
     <string name="send_install_history">Sendi historion de instaladoj</string>
     <string name="send_history_csv">Historio de instaladoj de %s kiel CSV-dosiero</string>
     <string name="updates_disabled_by_settings">Ĉiuj ĝisdatigoj malaktivigitaj per agordoj de konektoj</string>
@@ -481,7 +477,7 @@
     <string name="not_visible_nearby">Proksima interŝanĝo estas malŝaltita</string>
     <string name="not_visible_nearby_description">Antaŭ interŝanĝi kun proksimaj aparatoj, igi vian aparaton videbla.</string>
     <string name="swap_toast_using_path">Uzas %1$s</string>
-    <string name="swap_toast_not_removable_storage">Tio ĉi ne estas demetebla konservejo, bonvolu reprovi!</string>
+    <string name="swap_toast_not_removable_storage">Tio ĉi ne estas demetebla konservejo, reprovu!</string>
     <string name="swap_toast_find_removeable_storage">Elektu demeteblan SD-karton aŭ memor-bastoneton</string>
     <string name="scan_removable_storage_toast">Skanado de %s…</string>
     <string name="main_menu__updates">Ĝisdatigoj</string>
@@ -506,4 +502,25 @@
     <string name="swap_error_cannot_start_bluetooth">Ne povas enŝalti Bludenton!</string>
     <string name="swap_toast_closing_nearby_after_timeout">Malaktivigis proksiman interŝanĝon pro neaktiveco.</string>
     <string name="nearby_splash__document_tree">Serĉi deponejojn kaj spegul‑servilojn en USB OTG.</string>
+    <string name="menu_opencollective">OpenCollective</string>
+    <string name="notification_channel_updates_description">Montri sciigojn pri aktualigoj de aplikaĵoj kaj deponejoj.</string>
+    <string name="notification_channel_updates_title">Ĝisdatigoj</string>
+    <string name="notification_channel_swaps_description">Montri sciigojn pri senperaj interŝanĝoj (eblo “proksime”) de aplikaĵoj.</string>
+    <string name="notification_channel_swaps_title">Interŝanĝoj</string>
+    <string name="notification_channel_installs_description">Montri sciigojn pri instaladoj de aplikaĵoj.</string>
+    <string name="notification_channel_installs_title">Instaladoj</string>
+    <string name="send_to_fdroid_metrics_summary">Sendi anonimajn datumojn ĉiusemajne al F‑Droid‑Statistikoj (postulas aktivigi la eblon ”konservi historion de instaladoj”)</string>
+    <string name="toast_metrics_in_install_history">La raporto pri uzado %s estas videbla per la vidigilo de historio de instaladoj</string>
+    <string name="send_fdroid_metrics_json">Raporto pri uzado %s kiel JSON-dosiero</string>
+    <string name="send_fdroid_metrics_report">Sendi raporton pri uzado %s</string>
+    <string name="fdroid_metrics_report">Raporto pri uzado %s</string>
+    <string name="install_history_and_metrics">Historio de instaladoj kaj statistikoj</string>
+    <string name="menu_show_install_history">Montri historion de instaloj</string>
+    <string name="menu_show_fdroid_metrics_report">Montri raporton pri uzado</string>
+    <string name="send_to_fdroid_metrics">Sendi datumojn pri uzado</string>
+    <string name="theme_follow_system">Sistema</string>
+    <string name="use_pure_black_dark_theme_summary">Konsilinda nur por ekranoj OLED.</string>
+    <string name="use_pure_black_dark_theme">Uzi komplete nigran fonon por malhela etoso</string>
+    <string name="banner_no_data_or_wifi">Neniu interreta konekto aktiva</string>
+    <string name="banner_no_internet">Sen interreto</string>
 </resources>

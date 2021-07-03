@@ -4,7 +4,7 @@
 
 * Améliorations supplémentaires des "Détails d'Application"
 
-* Mise à jour des traductions à propos de l'échange à proximité.
+* Mise à jour des traductions à propos de l'échange à proximité
 
 * Amélioration de la logique de sélection des icônes d'application
 

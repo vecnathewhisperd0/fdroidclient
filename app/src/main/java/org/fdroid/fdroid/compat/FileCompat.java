@@ -12,6 +12,8 @@ import org.fdroid.fdroid.data.SanitizedFile;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
+import androidx.annotation.RequiresApi;
+
 /**
  * This class works only with {@link SanitizedFile} instances to enforce
  * filtering of the file names from files downloaded from the internet.
@@ -40,6 +42,7 @@ public class FileCompat {
      * not attempt to load this class at runtime. Otherwise, using the Os.symlink method will cause
      * a VerifyError to be thrown at runtime when the FileCompat class is first used.
      */
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private static class Symlink21 {
 
         @TargetApi(21)

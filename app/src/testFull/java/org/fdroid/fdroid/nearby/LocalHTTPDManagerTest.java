@@ -1,16 +1,18 @@
 package org.fdroid.fdroid.nearby;
 
 import android.content.Context;
+
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Utils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowLog;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+
+import androidx.test.core.app.ApplicationProvider;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -23,7 +25,7 @@ public class LocalHTTPDManagerTest {
     @Test
     public void testStartStop() throws InterruptedException {
         ShadowLog.stream = System.out;
-        Context context = RuntimeEnvironment.application;
+        Context context = ApplicationProvider.getApplicationContext();
 
         final String host = "localhost";
         final int port = 8888;
@@ -48,7 +50,7 @@ public class LocalHTTPDManagerTest {
                 startLatch.countDown();
             }
         }).start();
-        assertTrue(startLatch.await(30, TimeUnit.SECONDS));
+        assertTrue(startLatch.await(10, TimeUnit.MINUTES));
         assertTrue(Utils.isServerSocketInUse(port));
         assertTrue(Utils.canConnectToSocket(host, port));
 
@@ -67,6 +69,6 @@ public class LocalHTTPDManagerTest {
                 stopLatch.countDown();
             }
         }).start();
-        assertTrue(stopLatch.await(10, TimeUnit.SECONDS));
+        assertTrue(stopLatch.await(10, TimeUnit.MINUTES));
     }
 }

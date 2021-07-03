@@ -1,7 +1,6 @@
 package org.fdroid.fdroid.data;
 
 import android.content.Context;
-import android.support.test.InstrumentationRegistry;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -21,6 +20,8 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
+import androidx.test.core.app.ApplicationProvider;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -46,7 +47,7 @@ public class DBHelperTest {
 
     @Before
     public final void setupBase() {
-        context = InstrumentationRegistry.getContext();
+        context = ApplicationProvider.getApplicationContext();
     }
 
     @Test

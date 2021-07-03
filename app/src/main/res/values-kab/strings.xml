@@ -2,7 +2,6 @@
 <resources>
     <string name="updates">Amucceḍ</string>
     <string name="ok">IH</string>
-
     <string name="yes">Ih</string>
     <string name="no">Ala</string>
     <string name="back">Uγal</string>
@@ -11,7 +10,6 @@
     <string name="menu_settings">Iγewwaṛen</string>
     <string name="menu_search">Nadi</string>
     <string name="menu_add_repo">Akufi Amaynut</string>
-
     <string name="menu_launch">Ldi</string>
     <string name="menu_share">Bḍu</string>
     <string name="menu_install">Sbedd</string>
@@ -19,14 +17,11 @@
     <string name="main_menu__latest_apps">Amaynut</string>
     <string name="main_menu__categories">Taggayin</string>
     <string name="main_menu__swap_nearby">Igd izzin</string>
-
     <string name="details_notinstalled">Ur yebdid ara</string>
     <string name="next">Ar zdat</string>
     <string name="skip">Zgel</string>
-
     <string name="pref_language">Tutlayt</string>
     <string name="pref_language_default">Amezwer n unagraw</string>
-
     <string name="category_Games">Uraren</string>
     <string name="category_Internet">Internet</string>
     <string name="category_Multimedia">Umuγ n ugetmedia</string>
@@ -35,27 +30,23 @@
     <string name="category_Security">Taγellist</string>
     <string name="category_Time">Akud</string>
     <string name="category_Writing">Tira</string>
-
     <string name="newPerms">Amaynut</string>
     <string name="notification_action_update">Mucceḍ</string>
     <string name="notification_action_cancel">Sefsex</string>
     <string name="notification_action_install">Sbedd</string>
-
     <string name="app_details">Talqayt n Usnas</string>
     <string name="updates__tts__download_app">Sider</string>
     <string name="more">Ugar</string>
     <string name="less">Drus</string>
-
     <string name="repo_details">Akufi</string>
     <string name="repo_last_update">Aleqqem aneggaru</string>
     <string name="category_System">Anagraw</string>
     <string name="notification_title_single_update_available">Amucceḍ yewjed</string>
     <string name="notification_title_summary_install_error">Yecceḍ Usebded</string>
     <string name="version">Lqem</string>
-    <string name="by_author_format">ar %s</string>
+    <string name="by_author_format">sɣur %s</string>
     <string name="delete">Kkes</string>
     <string name="other">Wayeḍ</string>
-
     <string name="login_title">Tlaq tuqqna</string>
     <string name="login_name">Isem n useqdac</string>
     <string name="login_password">Awal uffir</string>
@@ -64,7 +55,6 @@
     <string name="about_site">Asmel n web</string>
     <string name="about_source">Tangalt taγbalutt</string>
     <string name="about_license">Turagt</string>
-
     <string name="app_installed">Yettusbedd</string>
     <string name="app_not_installed">Ur yebdid ara</string>
     <string name="app_new">Amaynut</string>
@@ -80,18 +70,14 @@
     <string name="bad_fingerprint">Adsil</string>
     <string name="invalid_url">Ur d-tefkiḍ ara URL ameɣtu.</string>
     <string name="repo_provider">%s Akufi</string>
-
     <string name="menu_website">Asmel n web</string>
     <string name="menu_issues">Uguren</string>
     <string name="menu_video">Ividyuten</string>
     <string name="menu_license">%s Turagt</string>
     <string name="menu_source">Tangalt taγbalut</string>
-    <string name="menu_donate">Tawsa</string>
     <string name="antifeatures">Timahilin</string>
     <string name="display">Askan</string>
-
     <string name="search_hint">Nadi</string>
-
     <string name="local_repo">Akufi adigan</string>
     <string name="icon">D tignit n wesnas</string>
     <string name="proxy">Apruksi</string>
@@ -131,18 +117,15 @@
     <string name="update_auto_download">Anadi awurman n ileqman</string>
     <string name="update_auto_install">Asebded awurman n umucceḍ</string>
     <string name="app_details_donate_prompt">%1$s yerna-t %2$s. Aγ-asen lqehwa !</string>
-
     <string name="app_incompatible">Ur imṣada ara</string>
     <string name="app_version_x_available">Lqem %1$s yella</string>
     <string name="app_version_x_installed">Lqem %1$s</string>
     <string name="updates__app_with_known_vulnerability__ignore">Ttu</string>
-
     <string name="repo_add_title">Rnu akufi amaynut</string>
     <string name="overwrite">Sfeɛj</string>
     <string name="repositories_summary">Rnu iγbula nniḍen n yisnasen</string>
     <string name="menu_changelog">Aɣmis n ibeddilen</string>
     <string name="menu_bitcoin">Bitcoin</string>
-
     <string name="adding_apks_format">Timerna n  %s ar ukufi…</string>
     <string name="repos_unchanged">Akk ikuffiyen ttwaleqmen</string>
     <string name="all_other_repos_fine">Ikufiyen nniḍen ur d-ggaren ara tuccḍiwin.</string>
@@ -152,28 +135,21 @@
     <string name="swap_confirm">Sentem ambaddal</string>
     <string name="keep_week">1 n umalas</string>
     <string name="keep_forever">Yal tikelt</string>
-
     <plurals name="notification_summary_more">
-    <item quantity="one">+%1$d nnayeḍ …</item>
-    <item quantity="other">+%1$d nniḍen …</item>
+        <item quantity="one">+%1$d nnayeḍ …</item>
+        <item quantity="other">+%1$d nniḍen …</item>
     </plurals>
     <plurals name="notification_summary_updates">
         <item quantity="one">%1$d n lqem</item>
         <item quantity="other">%1$d n ileqman</item>
     </plurals>
     <string name="tts_category_name">Taggayt %1$s</string>
-
     <string name="proxy_host">Asenneftaɣ Apṛuksi</string>
-    <string name="proxy_port">Tabburt n Apṛuksi</string>
+    <string name="proxy_port">Tabburt n upṛuksi</string>
     <string name="status_inserting_apps">Rnu tazmilt i usnas</string>
-    <string name="theme_night">Iḍ</string>
-
     <string name="app_name">F-Droid</string>
-
     <string name="menu_uninstall">Kkes</string>
     <string name="preference_manage_installed_apps">Asefrak n isnasen ibedden</string>
-
-
     <string name="category_Connectivity">Tuqqniwt</string>
     <string name="category_Money">Tadrimt</string>
     <string name="category_Science_Education">Tussna &amp; Usegmi</string>
@@ -196,9 +172,7 @@
     <string name="system_installer">Isiγzaf Yettwasirgen</string>
     <string name="local_repo_name">Isem n ukufi-ik adigan</string>
     <string name="local_repo_https_on">Seqdec tuqqna HTTPS:// tawgelhant i ukufi adigan</string>
-
     <string name="no_such_app">Ulac asnas am-a.</string>
-
     <string name="app_details_donate_prompt_unknown_author">Efk-asen lqahwa i yineflayen n %1$s!</string>
     <string name="app_details__no_versions__none_compatible_with_device">Ulac ileqman imṣadan d yibenk-ik</string>
     <string name="app_inst_known_source">Yebded (si %s)</string>
@@ -209,16 +183,13 @@
     <string name="menu_email">Azen imayl i umeskar</string>
     <string name="menu_litecoin">Litecoin</string>
     <string name="menu_flattr">Flattr</string>
-
     <string name="latest__empty_state__no_recent_apps">Ulac isnasen ineggura yettwafen</string>
     <string name="preference_category__my_apps">Isnasen-iw</string>
     <string name="details_new_in_version">D amaynut di lqem %s</string>
-
     <string name="details_last_updated_today">Yettwalqem ass-a</string>
     <string name="proxy_host_summary">Asenneftaɣ n upruksi-ik (m.d. 127.0.0.1)</string>
     <string name="proxy_port_summary">Uṭṭun n tebburt n upruksi-ik (m.d.. 8118)</string>
-
-    <string name="status_processing_xml_percent">Asesfer n  %2$s / %3$s (%4$d%%) from %1$s</string>
+    <string name="status_processing_xml_percent">Asesfer n %2$s / %3$s (%4$d%%) seg %1$s</string>
     <string name="notification_title_single_ready_to_install">Iwjed i usebded</string>
     <string name="notification_title_single_ready_to_install_update">Alqem iwjed i usebded</string>
     <string name="hide_all_notifications">Ffer akk Ilγa</string>
@@ -228,19 +199,18 @@
     <string name="enable_proxy_title">Rmed Aproksi HTTP</string>
     <string name="privacy">Tabaḍnit</string>
     <string name="preventScreenshots_title">Sewḥel tuṭṭfiwin n ugdil</string>
-    <string name="panic_exit_title">Ffeγ seg usnas-ayi</string>
+    <string name="panic_exit_title">Ffeɣ seg usnas-ayi</string>
     <string name="panic_hide_title">Ffer %s</string>
     <string name="hiding_calculator">Tamsiḍent</string>
     <string name="hiding_dialog_title">Ffer %s tura</string>
     <string name="status_download">Asider n
 \n%2$s / %3$s (%4$d%%) si
 \n%1$s</string>
-
     <string name="status_download_unknown_size">Asider n
 \n%2$s si
 \n%1$s</string>
     <string name="download_404">Afaylu i tettnadiḍ ulac-it.</string>
-    <string name="update_notification_title">Aleqqem n ikufiyen</string>
+    <string name="banner_updating_repositories">Aleqqem n ikufiyen</string>
     <string name="status_connecting_to_repo">Tuqna γer
 \n%1$s</string>
     <string name="global_error_updating_repos">Tuccḍa di uleqqem: %s</string>
@@ -270,14 +240,14 @@
     <string name="categories__empty_state__no_categories">Ur ellant kra n taggayin iweskanay</string>
     <string name="panic_app_setting_none">Ulac</string>
     <string name="allow">Sireg</string>
-    <string name="panic_exit_summary">Ad yemdel wesnas</string>
+    <string name="panic_exit_summary">Tura ad yemdel wesnas-ayi</string>
     <string name="panic_hide_summary">Asnas ad yeffer iman-is</string>
     <string name="hide_on_long_search_press_title">Ffer s teqfilt n unadi</string>
     <string name="repo_confirm_delete_title">Tebγiḍ tuksa n ukufi\?</string>
     <plurals name="button_view_all_apps_in_category">
-    <item quantity="one">Sken-d %d</item>
-    <item quantity="other">Sken-it-id akk i %d</item>
-</plurals>
+        <item quantity="one">Sken-d %d</item>
+        <item quantity="other">Sken-it-id akk i %d</item>
+    </plurals>
     <string name="empty_can_update_app_list">Ayuz!
 \nIsnasen akk ttwaleqmen.</string>
     <string name="nearby_splash__download_apps_from_people_nearby">Ulac tuqqna γer internet\? Awid isnasen sγur labɛaḍ igellan zdat-ik!</string>
@@ -314,11 +284,105 @@
     <string name="notification_title_summary_downloading_update">Yessidired lqem…</string>
     <string name="notification_title_summary_installed">Yettwasebdded aken ilaq</string>
     <plurals name="details_last_update_days">
-    <item quantity="one">Yettwalqem %1$d wass aya</item>
-    <item quantity="other">Yettwalqem %1$d wussan aya</item>
-</plurals>
+        <item quantity="one">Yettwalqem %1$d wass aya</item>
+        <item quantity="other">Yettwalqem %1$d wussan aya</item>
+    </plurals>
     <plurals name="details_last_update_years">
-    <item quantity="one">Yettwalqem %1$d assegas aya</item>
-    <item quantity="other">Yettwalqem %1$d iseggasen aya</item>
-</plurals>
+        <item quantity="one">Yettwalqem %1$d assegas aya</item>
+        <item quantity="other">Yettwalqem %1$d iseggasen aya</item>
+    </plurals>
+    <string name="disabled">Ittwarermed</string>
+    <string name="try_again">Eɛreḍ tikkelt-nniḍen</string>
+    <string name="undo">Err-d</string>
+    <string name="menu_translation">Tasuqilt</string>
+    <string name="main_menu__updates">Isedγiten</string>
+    <string name="app_suggested">Asumer</string>
+    <string name="local_repo_running">F-Droid ihegga i umbaddal</string>
+    <string name="expert">Askar n umusnas</string>
+    <string name="enable_proxy_summary">Sbadu Apruksi HTTP i yisuturen n uẓeṭṭa meṛṛa</string>
+    <string name="interval_never">Ulac aleqqem awurman</string>
+    <string name="send_history_csv">%s as isbedded amazray am ufaylu CSV</string>
+    <string name="cache_downloaded">Eǧǧ isnasen n tuffirt</string>
+    <string name="installIncompatible">Asnas aramsaḍan d ibenk-inek·inem, sebdded akken yebɣu yili\?</string>
+    <string name="SignatureMismatch">Lqem amaynut yettwazmel s tsarut yemgaraden ɣef lqem aqbur. Akken ad tesbeddeḍ lqem amaynut, yessefk ad tekkseḍ lqem aqbur. Ttxil xdem aya tɛerḍeḍ tikkelt-nniḍen. (Ẓer dakken Tukksa ad tesfeḍ akk isefka igensanen yettwaskelsen s usnas)</string>
+    <string name="notification_channel_installs_title">Isebdaden</string>
+    <string name="swap_stopping">Aseḥbes…</string>
+    <string name="swap_starting">Asenker…</string>
+    <string name="swap_blank_wifi_ssid">(ilem)</string>
+    <string name="install_confirm">Isra anekcum ɣer</string>
+    <string name="swap_toast_could_not_enable_hotspot">Ur yezmir ara as irmed taneqiḍt n wadduf Wi-Fi!</string>
+    <string name="swap_toast_hotspot_enabled">Taneqiḍt n wadduf Wi-Fi termed</string>
+    <string name="swap_toast_invalid_url">Tansa URL ur telli d tameɣtut: %1$s</string>
+    <string name="swap_toast_using_path">Aseqdec n %1$s</string>
+    <string name="swap_not_visible_wifi">Ur d-ittban ara s Wi-Fi</string>
+    <string name="swap_stopping_wifi">Aseḥbes n Wi-Fi…</string>
+    <string name="swap_visible_wifi">Ittban s Wi-Fi</string>
+    <string name="swap_not_visible_bluetooth">Ulac Bluetooth i d-ittbanen</string>
+    <string name="swap_error_cannot_start_bluetooth">Ur yezmir ara ad isenker Bluetooth!</string>
+    <string name="swap_scanning_for_peers">Anadi n yimdanen iqerben…</string>
+    <string name="swap_confirm_connect">Tebɣiḍ ad tawiḍ tura isnasen seg %1$s\?</string>
+    <string name="swap_stopping_hotspot">Aseḥbes n tneqiḍt n wadduf…</string>
+    <string name="swap_setting_up_hotspot">Aswel n tneqiḍt n wadduf…</string>
+    <string name="swap_hidden_wifi_ssid">(iffer)</string>
+    <string name="swap_visible_hotspot">Ittban s tneqiḍt n wadduf</string>
+    <string name="swap_join_this_hotspot">Efk tallelt i yumdukkal-ikim ad qqnen ɣer tneqiḍt-ik·im n wadduf</string>
+    <string name="swap_join_same_wifi">Qqen ɣer Wi-Fi i deg qqnen imdukkal-ik·im</string>
+    <string name="swap_nfc_title">Nnal akken ad tbedleḍ</string>
+    <string name="uninstall_error_unknown">Teḍra-d tuccḍa deg tukksa s sebba tarussint</string>
+    <string name="empty_search_available_app_list">Ulac isnasen ittwafen.</string>
+    <string name="repo_added">Ittwasekles akemmus n temsersiwt %1$s.</string>
+    <string name="no_permissions">Ulac tisirag</string>
+    <string name="status_inserting_x_apps">Asekles n telɣut n yisnasen (%1$d/%2$d) seg %3$s</string>
+    <string name="hide_on_long_search_press_summary">Asenned aɣezzfan ɣef tqeffalt nadi ad iffer asnas</string>
+    <string name="panic_reset_repos_title">Wennez timsersiwin</string>
+    <string name="panic_hide_warning_title">Cfu amek ara d-terreḍ</string>
+    <string name="panic_app_setting_summary">Ula d yiwen n usnas ur ittwaswel</string>
+    <string name="copying_icons">Anɣal n tignitin n yisnasen deg temsersiwt…</string>
+    <string name="linking_apks">Timerna n iseɣwan i yifuyla APK deg temserswit…</string>
+    <string name="show_incompat_versions_on">Sken-d lqem n yisnasen ur yimṣaḍan ara akked ibnek-agi</string>
+    <string name="show_incompat_versions">Qber ileqman yemṣaḍan</string>
+    <string name="appcompatibility">Amṣada</string>
+    <string name="expert_on">Sken-d talɣut leqqyen d yiɣewwaṛen leqqayen</string>
+    <string name="menu_opencollective">OpenCollective</string>
+    <string name="menu_select_for_wipe">Fren i tukksa</string>
+    <string name="repo_exists_add_mirror">Aya d anɣal n %1$s, rnut am lemri\?</string>
+    <string name="repo_exists_and_enabled">%1$s ittwaswel yakan daɣ irmed.</string>
+    <string name="repo_exists_enable">%1$s ittwaswel yakan, sentem d akken tebɣiḍ tulsa n urmad.</string>
+    <string name="repo_exists_add_fingerprint">%1$s ibdded yakan, aya ad irnu tasarut n telɣut tamaynut.</string>
+    <string name="bluetooth_activity_not_found">Ulac tarrayt n tuzna s Bluetooth ittwafen, fren yiwet!</string>
+    <plurals name="updates__download_updates_for_apps">
+        <item quantity="one">Sali-d aleqqem i usnas %1$d.</item>
+        <item quantity="other">Sali-d ileqqman i yisnasen %1$d.</item>
+    </plurals>
+    <string name="installed_app__updates_ignored_for_suggested_version">Ittwasuref uleqqem i %1$s</string>
+    <string name="installed_app__updates_ignored">Ttwasurefen ileqqman</string>
+    <string name="app_list__dismiss_app_update">Ittwasuref aleqqem</string>
+    <string name="app_inst_unknown_source">Ibbded (seg teɣbalut tarussint)</string>
+    <string name="about_forum">Afurum n tallelt</string>
+    <string name="local_repo_name_summary">Isem azayez n temsersiwt tadigant : %s</string>
+    <string name="notify_on">Sken-d tilɣa mi ara yilin ileqman</string>
+    <string name="over_network_never_summary">Werǧin ad d-tsaliḍ s tuqqna-a</string>
+    <string name="over_network_on_demand_summary">Seqdec tuqqna-a mi ara ad senndeɣ kan ɣef sali-d</string>
+    <string name="over_network_always_summary">Seqdec yal tikkelt tuqqna-a ma tella</string>
+    <string name="allow_push_requests_summary">Timsersiwt metadata tezmer ad tegber isuturen n usebdded neɣ tukksa n isnasen</string>
+    <string name="allow_push_requests">Sireg i temsersiwin ad sbeddent/ad kksent isnasen</string>
+    <string name="install_history_summary">Wali aɣmis uslig n usebdded d tukksa</string>
+    <string name="unstable_updates_summary">Sumer aleqqem i ileqman ur nṛessi ara</string>
+    <string name="notification_channel_updates_title">Isedγiten</string>
+    <string name="crash_dialog_comment_prompt">Tzemreḍ ad ternuḍ tilɣa-nniḍen d yiwenniten da:</string>
+    <string name="crash_dialog_text">Tella-d tuccḍa iɣef ur nebni tesseḥbes asnas. Tebɣiḍ ad tazneḍ ifatusen akken ad tɛawneḍ deg useggem n wugur\?</string>
+    <string name="swap_cant_find_peers">Ur d-tufiḍ ara win.tin i ɣef tettnadiḍ\?</string>
+    <string name="swap_visible_bluetooth">Yettban s Bluetooth</string>
+    <string name="category_Theming">Aggan</string>
+    <string name="antinosourcesince">Tangalt taɣbalut dayen ur telli ara, ulac ileqman.</string>
+    <string name="antidisabledalgorithmlist">Asnas-a yesɛa azmul i ixuṣṣen deg tɣellist</string>
+    <string name="antinonfreeassetslist">Asnas-a yegber iḥricen ur nelli ara d ilelliyen</string>
+    <string name="antinonfreedeplist">Asnas-a icudd ɣer yisnasen-nniḍen ur nelli ara d ilelliyen</string>
+    <string name="antinonfreenetlist">Asnas-a isnernay imeẓliyen n uẓeṭṭa ur nelli ara d ilelliyen</string>
+    <string name="antinonfreeadlist">Asnas-a yegber Izegrar ur nelli ara d ilelliyen</string>
+    <string name="antiadslist">Asnas-a yegber adellel</string>
+    <string name="scan_removable_storage_toast">Asiggez %s…</string>
+    <string name="over_data">Ugar n yisefka</string>
+    <string name="prompt_to_send_crash_reports_summary">Jmeɛ isefka ɣef yiɣelluyen tessutreḍ tuzzna-nsen ɣer uneflay</string>
+    <string name="prompt_to_send_crash_reports">Asuter i tuzzna n yineqqisen n uɣelluy</string>
 </resources>

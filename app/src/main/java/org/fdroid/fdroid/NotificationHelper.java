@@ -1,6 +1,8 @@
 package org.fdroid.fdroid;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,28 +14,34 @@ import android.graphics.Point;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.LocalBroadcastManager;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.StyleSpan;
-import android.view.View;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.assist.ImageSize;
-import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
-import com.nostra13.universalimageloader.utils.DiskCacheUtils;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
+
 import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.views.AppDetailsActivity;
 import org.fdroid.fdroid.views.main.MainActivity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 @SuppressWarnings("LineLength")
-class NotificationHelper {
+public class NotificationHelper {
+    public static final String CHANNEL_SWAPS = "swap-channel";
+    public static final String CHANNEL_INSTALLS = "install-channel";
+    public static final String CHANNEL_UPDATES = "update-channel";
 
     static final String BROADCAST_NOTIFICATIONS_ALL_UPDATES_CLEARED = "org.fdroid.fdroid.installer.notifications.allupdates.cleared";
     static final String BROADCAST_NOTIFICATIONS_ALL_INSTALLED_CLEARED = "org.fdroid.fdroid.installer.notifications.allinstalled.cleared";
@@ -59,6 +67,25 @@ class NotificationHelper {
         this.context = context;
         appUpdateStatusManager = AppUpdateStatusManager.getInstance(context);
         notificationManager = NotificationManagerCompat.from(context);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            final NotificationChannel installChannel = new NotificationChannel(CHANNEL_INSTALLS,
+                    context.getString(R.string.notification_channel_installs_title),
+                    NotificationManager.IMPORTANCE_LOW);
+            installChannel.setDescription(context.getString(R.string.notification_channel_installs_description));
+
+            final NotificationChannel swapChannel = new NotificationChannel(CHANNEL_SWAPS,
+                    context.getString(R.string.notification_channel_swaps_title),
+                    NotificationManager.IMPORTANCE_LOW);
+            swapChannel.setDescription(context.getString(R.string.notification_channel_swaps_description));
+
+            final NotificationChannel updateChannel = new NotificationChannel(CHANNEL_UPDATES,
+                    context.getString(R.string.notification_channel_updates_title),
+                    NotificationManager.IMPORTANCE_LOW);
+            updateChannel.setDescription(context.getString(R.string.notification_channel_updates_description));
+
+            notificationManager.createNotificationChannels(Arrays.asList(installChannel, swapChannel, updateChannel));
+        }
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(AppUpdateStatusManager.BROADCAST_APPSTATUS_LIST_CHANGED);
@@ -297,15 +324,13 @@ class NotificationHelper {
         App app = entry.app;
         AppUpdateStatusManager.Status status = entry.status;
 
-        Bitmap iconLarge = getLargeIconForEntry(entry);
         NotificationCompat.Builder builder =
-                new NotificationCompat.Builder(context)
+                new NotificationCompat.Builder(context, CHANNEL_UPDATES)
                         .setAutoCancel(true)
                         .setContentTitle(getSingleItemTitleString(app, status))
                         .setContentText(getSingleItemContentString(app, status))
                         .setSmallIcon(R.drawable.ic_notification)
                         .setColor(ContextCompat.getColor(context, R.color.fdroid_blue))
-                        .setLargeIcon(iconLarge)
                         .setLocalOnly(true)
                         .setVisibility(NotificationCompat.VISIBILITY_SECRET)
                         .setContentIntent(entry.intent);
@@ -343,6 +368,7 @@ class NotificationHelper {
         intentDeleted.setClass(context, NotificationBroadcastReceiver.class);
         PendingIntent piDeleted = PendingIntent.getBroadcast(context, 0, intentDeleted, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setDeleteIntent(piDeleted);
+        loadLargeIconForEntry(entry, builder, NOTIFY_ID_UPDATES, entry.getCanonicalUrl());
         return builder.build();
     }
 
@@ -384,7 +410,7 @@ class NotificationHelper {
         PendingIntent piAction = PendingIntent.getActivity(context, 0, intentObject, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder =
-                new NotificationCompat.Builder(context)
+                new NotificationCompat.Builder(context, CHANNEL_UPDATES)
                         .setAutoCancel(!useStackedNotifications())
                         .setSmallIcon(R.drawable.ic_notification)
                         .setColor(ContextCompat.getColor(context, R.color.fdroid_blue))
@@ -410,11 +436,9 @@ class NotificationHelper {
     private Notification createInstalledNotification(AppUpdateStatusManager.AppUpdateStatus entry) {
         App app = entry.app;
 
-        Bitmap iconLarge = getLargeIconForEntry(entry);
         NotificationCompat.Builder builder =
-                new NotificationCompat.Builder(context)
+                new NotificationCompat.Builder(context, CHANNEL_INSTALLS)
                         .setAutoCancel(true)
-                        .setLargeIcon(iconLarge)
                         .setSmallIcon(R.drawable.ic_notification)
                         .setColor(ContextCompat.getColor(context, R.color.fdroid_blue))
                         .setContentTitle(app.name)
@@ -433,6 +457,7 @@ class NotificationHelper {
         PendingIntent piDeleted = PendingIntent.getBroadcast(context, 0, intentDeleted, PendingIntent.FLAG_UPDATE_CURRENT);
         builder.setDeleteIntent(piDeleted);
 
+        loadLargeIconForEntry(entry, builder, NOTIFY_ID_INSTALLED, entry.getCanonicalUrl());
         return builder.build();
     }
 
@@ -464,7 +489,7 @@ class NotificationHelper {
         PendingIntent piAction = PendingIntent.getActivity(context, 0, intentObject, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder =
-                new NotificationCompat.Builder(context)
+                new NotificationCompat.Builder(context, CHANNEL_INSTALLS)
                         .setAutoCancel(!useStackedNotifications())
                         .setSmallIcon(R.drawable.ic_notification)
                         .setColor(ContextCompat.getColor(context, R.color.fdroid_blue))
@@ -490,12 +515,15 @@ class NotificationHelper {
         return new Point(w, h);
     }
 
-    private Bitmap getLargeIconForEntry(AppUpdateStatusManager.AppUpdateStatus entry) {
+    private void loadLargeIconForEntry(AppUpdateStatusManager.AppUpdateStatus entry,
+                                       NotificationCompat.Builder notificationBuilder,
+                                       int notificationId,
+                                       String notificationTag) {
         final Point largeIconSize = getLargeIconSize();
-        Bitmap iconLarge = null;
-        if (TextUtils.isEmpty(entry.app.iconUrl)) {
-            return null;
-        } else if (entry.status == AppUpdateStatusManager.Status.Downloading
+
+        if (TextUtils.isEmpty(entry.app.getIconUrl(context))) return;
+
+        if (entry.status == AppUpdateStatusManager.Status.Downloading
                 || entry.status == AppUpdateStatusManager.Status.Installing) {
             Bitmap bitmap = Bitmap.createBitmap(largeIconSize.x, largeIconSize.y, Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(bitmap);
@@ -504,50 +532,39 @@ class NotificationHelper {
                 downloadIcon.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
                 downloadIcon.draw(canvas);
             }
-            return bitmap;
-        } else if (DiskCacheUtils.findInCache(entry.app.iconUrl, ImageLoader.getInstance().getDiskCache()) != null) {
-            iconLarge = ImageLoader.getInstance().loadImageSync(
-                    entry.app.iconUrl, new ImageSize(largeIconSize.x, largeIconSize.y));
+            Glide.with(context)
+                    .asBitmap()
+                    .load(bitmap)
+                    .into(new CustomTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                            // update the loaded large icon, but don't expand
+                            notificationBuilder.setLargeIcon(resource);
+                            Notification notification = notificationBuilder.build();
+                            notificationManager.notify(notificationTag, notificationId, notification);
+                        }
+
+                        @Override
+                        public void onLoadCleared(@Nullable Drawable drawable) {
+                        }
+                    });
         } else {
-            // Load it for later!
-            ImageLoader.getInstance().loadImage(entry.app.iconUrl, new ImageSize(largeIconSize.x, largeIconSize.y), new ImageLoadingListener() {
+            Glide.with(context)
+                    .asBitmap()
+                    .load(entry.app.getIconUrl(context))
+                    .into(new CustomTarget<Bitmap>() {
+                        @Override
+                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                            // update the loaded large icon, but don't expand
+                            notificationBuilder.setLargeIcon(resource);
+                            Notification notification = notificationBuilder.build();
+                            notificationManager.notify(notificationTag, notificationId, notification);
+                        }
 
-                AppUpdateStatusManager.AppUpdateStatus entry;
-
-                ImageLoadingListener init(AppUpdateStatusManager.AppUpdateStatus entry) {
-                    this.entry = entry;
-                    return this;
-                }
-
-                @Override
-                public void onLoadingStarted(String imageUri, View view) {
-
-                }
-
-                @Override
-                public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
-
-                }
-
-                @Override
-                public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
-                    // Need to check that the notification is still valid, and also that the image
-                    // is indeed cached now, so we won't get stuck in an endless loop.
-                    AppUpdateStatusManager.AppUpdateStatus oldEntry = appUpdateStatusManager.get(entry.getCanonicalUrl());
-                    if (oldEntry != null
-                            && oldEntry.app != null
-                            && oldEntry.app.iconUrl != null
-                            && DiskCacheUtils.findInCache(oldEntry.app.iconUrl, ImageLoader.getInstance().getDiskCache()) != null) {
-                        createNotification(oldEntry); // Update with new image!
-                    }
-                }
-
-                @Override
-                public void onLoadingCancelled(String imageUri, View view) {
-
-                }
-            }.init(entry));
+                        @Override
+                        public void onLoadCleared(@Nullable Drawable drawable) {
+                        }
+                    });
         }
-        return iconLarge;
     }
 }

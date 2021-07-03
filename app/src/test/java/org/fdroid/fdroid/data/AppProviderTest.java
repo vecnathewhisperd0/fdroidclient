@@ -6,20 +6,22 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import org.fdroid.fdroid.BuildConfig;
+
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.TestUtils;
 import org.fdroid.fdroid.data.Schema.AppMetadataTable.Cols;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowContentResolver;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import static org.fdroid.fdroid.Assert.assertContainsOnly;
@@ -31,12 +33,14 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-@Config(constants = BuildConfig.class, application = Application.class)
+@Config(application = Application.class)
 @RunWith(RobolectricTestRunner.class)
 @SuppressWarnings("LineLength")
 public class AppProviderTest extends FDroidProviderTest {
 
     private static final String[] PROJ = Cols.ALL;
+
+    private static Locale defaultLocale;
 
     @BeforeClass
     public static void setRandomTimeZone() {
@@ -47,8 +51,13 @@ public class AppProviderTest extends FDroidProviderTest {
 
     @Before
     public void setup() {
-        TestUtils.registerContentProvider(AppProvider.getAuthority(), AppProvider.class);
+        defaultLocale = Locale.getDefault();
         Preferences.setupForTests(context);
+    }
+
+    @After
+    public void teardown() {
+        Locale.setDefault(defaultLocale);
     }
 
     /**
@@ -56,6 +65,7 @@ public class AppProviderTest extends FDroidProviderTest {
      * the {@link AppProvider} used to stumble across this bug when asking for installed apps,
      * and the device had over 1000 apps installed.
      */
+    @Ignore("takes a long time and covers a rare situation (over 1000 apps installed)")
     @Test
     public void testMaxSqliteParams() {
         insertApp("com.example.app1", "App 1");
@@ -315,11 +325,11 @@ public class AppProviderTest extends FDroidProviderTest {
         return insertApp(contentResolver, context, id, name, additionalValues);
     }
 
-    public static App insertApp(ShadowContentResolver contentResolver, Context context, String id, String name, ContentValues additionalValues) {
+    public static App insertApp(ContentResolver contentResolver, Context context, String id, String name, ContentValues additionalValues) {
         return insertApp(contentResolver, context, id, name, additionalValues, 1);
     }
 
-    public static App insertApp(ShadowContentResolver contentResolver, Context context, String id, String name, ContentValues additionalValues, long repoId) {
+    public static App insertApp(ContentResolver contentResolver, Context context, String id, String name, ContentValues additionalValues, long repoId) {
 
         ContentValues values = new ContentValues();
         values.put(Cols.Package.PACKAGE_NAME, id);

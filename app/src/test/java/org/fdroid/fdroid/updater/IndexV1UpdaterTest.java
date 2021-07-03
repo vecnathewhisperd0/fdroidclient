@@ -1,8 +1,8 @@
 package org.fdroid.fdroid.updater;
 
-import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -11,8 +11,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
+
 import org.apache.commons.io.IOUtils;
-import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.IndexUpdater;
 import org.fdroid.fdroid.IndexV1Updater;
 import org.fdroid.fdroid.Preferences;
@@ -27,12 +27,12 @@ import org.fdroid.fdroid.data.Repo;
 import org.fdroid.fdroid.data.RepoProvider;
 import org.fdroid.fdroid.data.RepoPushRequest;
 import org.fdroid.fdroid.data.RepoXMLHandlerTest;
+import org.fdroid.fdroid.data.Schema;
 import org.fdroid.fdroid.mock.RepoDetails;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -49,6 +49,8 @@ import java.util.TreeSet;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import androidx.annotation.NonNull;
+
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertArrayEquals;
@@ -61,7 +63,6 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-@Config(constants = BuildConfig.class)
 @RunWith(RobolectricTestRunner.class)
 public class IndexV1UpdaterTest extends FDroidProviderTest {
     public static final String TAG = "IndexV1UpdaterTest";
@@ -143,6 +144,15 @@ public class IndexV1UpdaterTest extends FDroidProviderTest {
         assertTrue(requestedPermissions.contains(android.Manifest.permission.READ_EXTERNAL_STORAGE));
         assertTrue(requestedPermissions.contains(android.Manifest.permission.WRITE_EXTERNAL_STORAGE));
         assertFalse(requestedPermissions.contains(android.Manifest.permission.READ_CALENDAR));
+        App app = AppProvider.Helper.findHighestPriorityMetadata(context.getContentResolver(),
+                "com.autonavi.minimap", new String[]{
+                        Schema.AppMetadataTable.Cols.ICON_URL,
+                        Schema.AppMetadataTable.Cols.ICON,
+                        Schema.AppMetadataTable.Cols.REPO_ID,
+                        Schema.AppMetadataTable.Cols.Package.PACKAGE_NAME,
+                });
+        assertEquals("localized icon takes precedence", TESTY_CANONICAL_URL + "/"
+                + app.packageName + "/en-US/icon.png", app.getIconUrl(context));
     }
 
     @Test(expected = IndexUpdater.SigningException.class)
@@ -257,6 +267,17 @@ public class IndexV1UpdaterTest extends FDroidProviderTest {
         }
         parser.close(); // ensure resources get cleaned up timely and properly
 
+        // test LiberapayID: -> Liberapay: migration
+        for (App app : apps) {
+            if ("org.witness.informacam.app".equals(app.packageName)) {
+                assertEquals("GuardianProject", app.liberapay);
+            } else if ("info.guardianproject.cacert".equals(app.packageName)) {
+                assertEquals("~1337", app.liberapay);
+            } else {
+                assertNull(app.liberapay);
+            }
+        }
+
         RepoDetails indexV0Details = getFromFile("guardianproject_index.xml",
                 Repo.PUSH_REQUEST_ACCEPT_ALWAYS);
         indexV0Details.apps.size();
@@ -312,14 +333,15 @@ public class IndexV1UpdaterTest extends FDroidProviderTest {
                 "donate",
                 "featureGraphic",
                 "flattrID",
-                "icon",
+                "iconFromApk",
                 "iconUrl",
                 "issueTracker",
                 "lastUpdated",
-                "liberapayID",
+                "liberapay",
                 "license",
                 "litecoin",
                 "name",
+                "openCollective",
                 "packageName",
                 "phoneScreenshots",
                 "promoGraphic",
@@ -351,6 +373,7 @@ public class IndexV1UpdaterTest extends FDroidProviderTest {
                 "isLocalized",
                 "preferredSigner",
                 "prefs",
+                "systemLocaleList",
                 "TAG",
         };
         runJsonIgnoreTest(new App(), allowedInApp, ignoredInApp);

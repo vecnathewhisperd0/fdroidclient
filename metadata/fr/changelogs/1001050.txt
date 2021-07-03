@@ -2,6 +2,6 @@
 
 * Polissage de l'interface utilisateur, amélioration de la stabilité et correction de bogues
 
-* Nouvelles préférences de confidentialité : Prévention des captures d'écrans ; sortie en cas de panique
+* Nouvelles préférences de confidentialité : Prévention des captures d'écrans ; sortie en cas de panique
 
-* Nouvelles langues: Coréen (ko) and Vietnamien (vi)
+* Nouvelles langues : Coréen (ko) and Vietnamien (vi)

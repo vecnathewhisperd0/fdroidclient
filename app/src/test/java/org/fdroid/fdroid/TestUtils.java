@@ -8,6 +8,7 @@ import android.content.ContextWrapper;
 import android.content.pm.ProviderInfo;
 import android.net.Uri;
 
+import org.apache.commons.io.IOUtils;
 import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.data.ApkProvider;
 import org.fdroid.fdroid.data.App;
@@ -18,15 +19,18 @@ import org.fdroid.fdroid.data.RepoProviderTest;
 import org.fdroid.fdroid.data.Schema;
 import org.mockito.AdditionalAnswers;
 import org.robolectric.Robolectric;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.shadows.ShadowContentResolver;
+import org.robolectric.android.controller.ContentProviderController;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.security.NoSuchAlgorithmException;
+
+import androidx.test.core.app.ApplicationProvider;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -95,13 +99,13 @@ public class TestUtils {
     }
 
     public static App insertApp(Context context, String packageName, String appName, int suggestedVersionCode,
-                          String repoUrl, String preferredSigner) {
+                                String repoUrl, String preferredSigner) {
         Repo repo = ensureRepo(context, repoUrl);
         return insertApp(context, packageName, appName, suggestedVersionCode, repo, preferredSigner);
     }
 
     public static App insertApp(Context context, String packageName, String appName, int suggestedVersionCode,
-                          Repo repo, String preferredSigner) {
+                                Repo repo, String preferredSigner) {
         ContentValues values = new ContentValues();
         values.put(Schema.AppMetadataTable.Cols.REPO_ID, repo.getId());
         values.put(Schema.AppMetadataTable.Cols.SUGGESTED_VERSION_CODE, suggestedVersionCode);
@@ -118,10 +122,11 @@ public class TestUtils {
         return RepoProviderTest.insertRepo(context, repoUrl, "", "", "");
     }
 
-    public static <T extends ContentProvider> void registerContentProvider(String authority, Class<T> providerClass) {
+    public static <T extends ContentProvider> ContentProviderController<T> registerContentProvider(
+            String authority, Class<T> providerClass) {
         ProviderInfo info = new ProviderInfo();
         info.authority = authority;
-        Robolectric.buildContentProvider(providerClass).create(info);
+        return Robolectric.buildContentProvider(providerClass).create(info);
     }
 
     public static File copyResourceToTempFile(String resourceName) {
@@ -157,9 +162,9 @@ public class TestUtils {
      * {@link ContextWrapper} which is able to return a proper content
      * resolver that delegates to the Robolectric shadow object.
      */
-    public static ContextWrapper createContextWithContentResolver(ShadowContentResolver contentResolver) {
+    public static ContextWrapper createContextWithContentResolver(ContentResolver contentResolver) {
         final ContentResolver resolver = mock(ContentResolver.class, AdditionalAnswers.delegatesTo(contentResolver));
-        return new ContextWrapper(RuntimeEnvironment.application.getApplicationContext()) {
+        return new ContextWrapper(ApplicationProvider.getApplicationContext()) {
             @Override
             public ContentResolver getContentResolver() {
                 return resolver;
@@ -176,5 +181,29 @@ public class TestUtils {
     public static void updateDbAfterInserting(Context context) {
         AppProvider.Helper.calcSuggestedApks(context);
         AppProvider.Helper.recalculatePreferredMetadata(context);
+    }
+
+    /**
+     * Set a static final field through reflection
+     */
+    public static void setFinalStatic(Field field, Object newValue) throws Exception {
+        field.setAccessible(true);
+        Field modifiersField = Field.class.getDeclaredField("modifiers");
+        modifiersField.setAccessible(true);
+        modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+        field.set(null, newValue);
+    }
+
+    public static void ls(File dir) {
+        Process p = null;
+        try {
+            p = Runtime.getRuntime().exec("ls -l " + dir.getAbsolutePath());
+            p.waitFor();
+            for (String line : IOUtils.readLines(p.getInputStream())) {
+                System.out.println(line);
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

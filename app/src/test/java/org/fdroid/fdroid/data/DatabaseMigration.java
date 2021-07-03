@@ -1,36 +1,45 @@
 package org.fdroid.fdroid.data;
 
 import android.app.Application;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import org.fdroid.fdroid.BuildConfig;
+
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.TestUtils;
 import org.fdroid.fdroid.Utils;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-import org.robolectric.Shadows;
+import org.robolectric.android.controller.ContentProviderController;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowContentResolver;
 
-@Config(constants = BuildConfig.class, application = Application.class)
+import androidx.test.core.app.ApplicationProvider;
+
+@Config(application = Application.class)
 @RunWith(RobolectricTestRunner.class)
 public class DatabaseMigration {
 
-    protected ShadowContentResolver contentResolver;
+    protected ContentResolver contentResolver;
     protected ContextWrapper context;
+
+    protected ContentProviderController contentProviderController;
 
     @Before
     public final void setupBase() {
-        contentResolver = Shadows.shadowOf(RuntimeEnvironment.application.getContentResolver());
+        contentResolver = ApplicationProvider.getApplicationContext().getContentResolver();
         context = TestUtils.createContextWithContentResolver(contentResolver);
-        TestUtils.registerContentProvider(AppProvider.getAuthority(), AppProvider.class);
+        contentProviderController = TestUtils.registerContentProvider(AppProvider.getAuthority(), AppProvider.class);
+    }
+
+    @After
+    public void teardown() {
+        contentProviderController.shutdown();
     }
 
     @Test
