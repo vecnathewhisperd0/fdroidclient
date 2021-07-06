@@ -56,12 +56,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.DisplayCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.encode.Contents;
 import com.google.zxing.encode.QRCodeEncoder;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 
 import org.fdroid.fdroid.compat.FileCompat;
 import org.fdroid.fdroid.data.App;
@@ -960,9 +959,8 @@ public final class Utils {
     public static Single<Bitmap> generateQrBitmap(@NonNull final AppCompatActivity activity,
                                                   @NonNull final String qrData) {
         return Single.fromCallable(() -> {
-            // TODO: Use DisplayCompat.getMode() once it becomes available in Core 1.6.0.
-            final DisplayCompat.ModeCompat displayMode = DisplayCompat.getSupportedModes(activity,
-                    activity.getWindowManager().getDefaultDisplay())[0];
+            final DisplayCompat.ModeCompat displayMode = DisplayCompat.getMode(activity,
+                    activity.getWindowManager().getDefaultDisplay());
             final int qrCodeDimension = Math.min(displayMode.getPhysicalWidth(),
                     displayMode.getPhysicalHeight());
             debugLog(TAG, "generating QRCode Bitmap of " + qrCodeDimension + "x" + qrCodeDimension);
