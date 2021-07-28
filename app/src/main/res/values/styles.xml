@@ -10,6 +10,10 @@
         <item name="android:textColor">@color/fdroid_green</item>
     </style>
 
+    <style name="ThemeOverlay.App.Button.TextButton.IconOnly" parent="">
+        <item name="colorPrimary">?attr/colorControlNormal</item>
+    </style>
+
     <!--Dialog-->
     <style name="MaterialAlertDialog.App.Title.Text" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
         <item name="android:textColor">@color/fdroid_green</item>
@@ -43,6 +47,8 @@
         <item name="android:paddingRight">12dp</item>
         <item name="android:minWidth">48dp</item>
         <item name="android:minHeight">48dp</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.App.Button</item>
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Button.TextButton.IconOnly</item>
     </style>
 
     <style name="Widget.App.Button" parent="Widget.MaterialComponents.Button">
