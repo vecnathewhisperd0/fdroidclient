@@ -401,7 +401,7 @@ public class AppDetailsRecyclerViewAdapter
         final ProgressBar progressBar;
         final TextView progressLabel;
         final TextView progressPercent;
-        final View progressCancel;
+        final Button progressCancel;
         boolean descriptionIsExpanded;
 
         HeaderViewHolder(View view) {

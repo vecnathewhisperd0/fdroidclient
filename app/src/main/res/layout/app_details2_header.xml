@@ -86,15 +86,16 @@
                 android:layout_below="@id/icon_and_name"
                 tools:visibility="gone">
 
-                <ImageView
+                <Button
                     android:id="@+id/progress_cancel"
+                    style="@style/Widget.App.Button.TextButton.IconOnly"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:contentDescription="@string/app__tts__cancel_download"
-                    app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
+                    app:icon="@drawable/ic_cancel" />
 
                 <TextView
                     android:id="@+id/progress_label"
