@@ -83,8 +83,7 @@
                 android:id="@+id/progress_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/icon_and_name"
-                tools:visibility="gone">
+                android:layout_below="@id/icon_and_name">
 
                 <Button
                     android:id="@+id/progress_cancel"
@@ -137,7 +136,8 @@
                 android:clipToPadding="false"
                 android:gravity="end"
                 android:paddingBottom="4dp"
-                android:visibility="visible">
+                android:visibility="visible"
+                tools:visibility="gone">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/secondaryButtonView"
