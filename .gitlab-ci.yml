@@ -140,3 +140,5 @@ deploy_nightly:
     # build the APKs!
     - ./gradlew assembleDebug
     - fdroid nightly -v
+include:
+  - template: Security/SAST.gitlab-ci.yml
