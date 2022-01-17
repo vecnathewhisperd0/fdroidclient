@@ -487,9 +487,6 @@ public class Apk extends ValueObject implements Comparable<Apk>, Parcelable {
         String[] array = Utils.parseCommaSeparatedString(permissionsFromDb);
         if (array != null) {
             HashSet<String> requestedPermissionsSet = new HashSet<>();
-            for (String permission : array) {
-                requestedPermissionsSet.add(RepoXMLHandler.fdroidToAndroidPermission(permission));
-            }
             return requestedPermissionsSet.toArray(new String[requestedPermissionsSet.size()]);
         }
         return null;

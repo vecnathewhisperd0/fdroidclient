@@ -29,6 +29,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -312,23 +313,6 @@ public class RepoXMLHandler extends DefaultHandler {
 
     private static final Pattern OLD_FDROID_PERMISSION = Pattern.compile("[A-Z_]+");
 
-    /**
-     * It appears that the default Android permissions in android.Manifest.permissions
-     * are prefixed with "android.permission." and then the constant name.
-     * FDroid just includes the constant name in the apk list, so we prefix it
-     * with "android.permission."
-     *
-     * @see <a href="https://gitlab.com/fdroid/fdroidserver/blob/1afa8cfc/update.py#L91">
-     * More info into index - size, permissions, features, sdk version</a>
-     */
-    public static String fdroidToAndroidPermission(String permission) {
-        if (OLD_FDROID_PERMISSION.matcher(permission).matches()) {
-            return "android.permission." + permission;
-        }
-
-        return permission;
-    }
-
     private void addRequestedPermission(String permission) {
         requestedPermissionsSet.add(permission);
     }
@@ -336,9 +320,7 @@ public class RepoXMLHandler extends DefaultHandler {
     private void addCommaSeparatedPermissions(String permissions) {
         String[] array = Utils.parseCommaSeparatedString(permissions);
         if (array != null) {
-            for (String permission : array) {
-                requestedPermissionsSet.add(fdroidToAndroidPermission(permission));
-            }
+            requestedPermissionsSet.addAll(Arrays.asList(array));
         }
     }
 

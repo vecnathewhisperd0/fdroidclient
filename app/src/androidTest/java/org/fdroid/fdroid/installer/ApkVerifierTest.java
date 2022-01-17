@@ -108,50 +108,6 @@ public class ApkVerifierTest {
         assertFalse(ApkVerifier.requestedPermissionsEqual(null, perms));
     }
 
-    @Test
-    public void testWithoutPrefix() {
-        Apk apk = new Apk();
-        apk.packageName = "org.fdroid.permissions.sdk14";
-        apk.targetSdkVersion = 14;
-        ArrayList<String> noPrefixPermissionsList = new ArrayList<>(Arrays.asList(
-                "AUTHENTICATE_ACCOUNTS",
-                "MANAGE_ACCOUNTS",
-                "READ_PROFILE",
-                "WRITE_PROFILE",
-                "GET_ACCOUNTS",
-                "READ_CONTACTS",
-                "WRITE_CONTACTS",
-                "WRITE_EXTERNAL_STORAGE",
-                "READ_EXTERNAL_STORAGE",
-                "INTERNET",
-                "ACCESS_NETWORK_STATE",
-                "NFC",
-                "READ_SYNC_SETTINGS",
-                "WRITE_SYNC_SETTINGS",
-                "WRITE_CALL_LOG", // implied-permission!
-                "READ_CALL_LOG" // implied-permission!
-        ));
-        if (Build.VERSION.SDK_INT >= 29) {
-            noPrefixPermissionsList.add("android.permission.ACCESS_MEDIA_LOCATION");
-        }
-        String[] noPrefixPermissions = noPrefixPermissionsList.toArray(new String[0]);
-
-        for (int i = 0; i < noPrefixPermissions.length; i++) {
-            noPrefixPermissions[i] = RepoXMLHandler.fdroidToAndroidPermission(noPrefixPermissions[i]);
-        }
-        apk.requestedPermissions = noPrefixPermissions;
-
-        Uri uri = Uri.fromFile(sdk14Apk);
-        ApkVerifier apkVerifier = new ApkVerifier(instrumentation.getContext(), uri, apk);
-
-        try {
-            apkVerifier.verifyApk();
-        } catch (ApkVerifier.ApkVerificationException | ApkVerifier.ApkPermissionUnequalException e) {
-            e.printStackTrace();
-            fail(e.getMessage());
-        }
-    }
-
     @Test(expected = ApkVerifier.ApkPermissionUnequalException.class)
     public void testWithMinMax()
             throws ApkVerifier.ApkPermissionUnequalException, ApkVerifier.ApkVerificationException {
@@ -178,7 +134,7 @@ public class ApkVerifierTest {
     }
 
     @Test
-    public void testWithPrefix() {
+    public void testFullPermissionNames() {
         Apk apk = new Apk();
         apk.packageName = "org.fdroid.permissions.sdk14";
         apk.targetSdkVersion = 14;
