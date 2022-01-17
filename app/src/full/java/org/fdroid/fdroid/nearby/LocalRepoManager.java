@@ -10,12 +10,12 @@ import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.text.TextUtils;
 import android.util.Log;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.fdroid.fdroid.FDroidApp;
-import org.fdroid.fdroid.Hasher;
-import org.fdroid.fdroid.IndexUpdater;
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.Apk;
@@ -23,9 +23,7 @@ import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.data.InstalledApp;
 import org.fdroid.fdroid.data.InstalledAppProvider;
 import org.fdroid.fdroid.data.SanitizedFile;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
-import org.xmlpull.v1.XmlSerializer;
+import org.fdroid.fdroid.data.Schema.ApkTable;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -41,7 +39,10 @@ import java.security.cert.CertificateEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -74,8 +75,9 @@ public final class LocalRepoManager {
 
     private final Map<String, App> apps = new ConcurrentHashMap<>();
 
-    private final SanitizedFile xmlIndexJar;
-    private final SanitizedFile xmlIndexJarUnsigned;
+    private final SanitizedFile entryJar;
+    private final SanitizedFile entryJarUnsigned;
+    private final SanitizedFile indexV2Json;
     private final SanitizedFile webRoot;
     private final SanitizedFile fdroidDir;
     private final SanitizedFile fdroidDirCaps;
@@ -107,8 +109,11 @@ public final class LocalRepoManager {
         repoDir = new SanitizedFile(fdroidDir, "repo");
         repoDirCaps = new SanitizedFile(fdroidDirCaps, "REPO");
         iconsDir = new SanitizedFile(repoDir, "icons");
-        xmlIndexJar = new SanitizedFile(repoDir, IndexUpdater.SIGNED_FILE_NAME);
-        xmlIndexJarUnsigned = new SanitizedFile(repoDir, "index.unsigned.jar");
+        //entryJar = new SanitizedFile(repoDir, "entry.jar"); // TODO IndexV2Updater.SIGNED_ENTRY_FILE_NAME
+        entryJar = SanitizedFile.knownSanitized(new File("/tmp/entry.jar"));
+        entryJarUnsigned = new SanitizedFile(repoDir, "unsigned.jar");
+        //indexV2Json = new SanitizedFile(repoDir, "index-v2.json");  // TODO IndexV2Updater.INDEX_FILE_NAME
+        indexV2Json = SanitizedFile.knownSanitized(new File("/tmp/index-v2.json"));
 
         if (!fdroidDir.exists() && !fdroidDir.mkdir()) {
             Log.e(TAG, "Unable to create empty base: " + fdroidDir);
@@ -246,7 +251,7 @@ public final class LocalRepoManager {
      * Get the {@code index.jar} file that represents the local swap repo.
      */
     public File getIndexJar() {
-        return xmlIndexJar;
+        return entryJar;
     }
 
     public File getWebRoot() {
@@ -338,184 +343,113 @@ public final class LocalRepoManager {
     /**
      * Helper class to aid in constructing index.xml file.
      */
-    public static final class IndexXmlBuilder {
-        @NonNull
-        private final XmlSerializer serializer;
+    public static final class IndexV2Builder {
 
         @NonNull
-        private final DateFormat dateToStr = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        private static final DateFormat dateToStr = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
-        private IndexXmlBuilder() throws XmlPullParserException {
-            serializer = XmlPullParserFactory.newInstance().newSerializer();
-        }
-
-        public void build(Context context, Map<String, App> apps, OutputStream output)
+        public static void build(Context context, Map<String, App> apps, OutputStream output)
                 throws IOException, LocalRepoKeyStore.InitException {
-            serializer.setOutput(output, "UTF-8");
-            serializer.startDocument(null, null);
-            serializer.startTag("", "fdroid");
 
-            // <repo> block
-            serializer.startTag("", "repo");
-            serializer.attribute("", "icon", "blah.png");
-            serializer.attribute("", "name", Preferences.get().getLocalRepoName()
-                    + " on " + FDroidApp.ipAddressString);
-            serializer.attribute("", "pubkey", Hasher.hex(LocalRepoKeyStore.get(context).getCertificate()));
-            long timestamp = System.currentTimeMillis() / 1000L;
-            serializer.attribute("", "timestamp", String.valueOf(timestamp));
-            serializer.attribute("", "version", "10");
-            tag("description", "A local FDroid repo generated from apps installed on "
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+
+            Map<String, Object> repoMap = new HashMap<>();
+            repoMap.put("icon", "blah.png");
+            repoMap.put("name", Preferences.get().getLocalRepoName() + " on " + FDroidApp.ipAddressString);
+            repoMap.put("timestamp", System.currentTimeMillis());
+            repoMap.put("version", "10"); // TODO
+            repoMap.put("description", "A local FDroid repo generated from apps installed on "
                     + Preferences.get().getLocalRepoName());
-            serializer.endTag("", "repo");
 
-            // <application> blocks
-            for (Map.Entry<String, App> entry : apps.entrySet()) {
-                tagApplication(entry.getValue());
+            Map<String, Object[]> packagesMap = new HashMap<>();
+            for (App app : apps.values()) {
+                app.suggestedVersionCode = app.installedApk.versionCode;
+
+                HashSet<String> categories = new HashSet<>();
+                if (app.categories != null && app.categories.length > 0) {
+                    categories.addAll(Arrays.asList(app.categories));
+                }
+                categories.add(Preferences.get().getLocalRepoName());
+                app.categories = categories.toArray(new String[0]);
+                // TODO? tag("icon", app.iconFromApk);
+                packagesMap.put(app.packageName, getPackageList(app));
             }
 
-            serializer.endTag("", "fdroid");
-            serializer.endDocument();
+            Map<String, Object> indexMap = new HashMap<>();
+            indexMap.put("repo", repoMap);
+            indexMap.put("apps", apps);
+            indexMap.put("packages", packagesMap);
+
+            mapper.writeValue(output, indexMap);
             output.close();
         }
 
         /**
-         * Helper function to start a tag called "name", fill it with text "text", and then
-         * end the tag in a more concise manner.  If "text" is blank, skip the tag entirely.
-         */
-        private void tag(String name, String text) throws IOException {
-            if (TextUtils.isEmpty(text)) {
-                return;
-            }
-            serializer.startTag("", name).text(text).endTag("", name);
-        }
-
-        /**
-         * Alias for {@link org.fdroid.fdroid.nearby.LocalRepoManager.IndexXmlBuilder#tag(String, String)}
-         * That accepts a number instead of string.
-         *
-         * @see IndexXmlBuilder#tag(String, String)
-         */
-        private void tag(String name, long number) throws IOException {
-            tag(name, String.valueOf(number));
-        }
-
-        /**
-         * Alias for {@link org.fdroid.fdroid.nearby.LocalRepoManager.IndexXmlBuilder#tag(String, String)}
+         * Alias for {@link IndexV2Builder#tag(String, String)}
          * that accepts a date instead of a string.
          *
-         * @see IndexXmlBuilder#tag(String, String)
+         * @see IndexV2Builder#tag(String, String)
          */
-        private void tag(String name, Date date) throws IOException {
-            tag(name, dateToStr.format(date));
+        private static void tag(String name, Date date) throws IOException {
+            //tag(name, dateToStr.format(date));
         }
 
-        private void tagApplication(App app) throws IOException {
-            serializer.startTag("", "application");
-            serializer.attribute("", "id", app.packageName);
-
-            tag("id", app.packageName);
-            tag("added", app.added);
-            tag("lastupdated", app.lastUpdated);
-            tag("name", app.name);
-            tag("summary", app.summary);
-            tag("icon", app.iconFromApk);
-            tag("desc", app.description);
-            tag("license", "Unknown");
-            tag("categories", "LocalRepo," + Preferences.get().getLocalRepoName());
-            tag("category", "LocalRepo," + Preferences.get().getLocalRepoName());
-            tag("web", "web");
-            tag("source", "source");
-            tag("tracker", "tracker");
-            tag("marketversion", app.installedApk.versionName);
-            tag("marketvercode", app.installedApk.versionCode);
-
-            tagPackage(app);
-
-            serializer.endTag("", "application");
-        }
-
-        private void tagPackage(App app) throws IOException {
-            serializer.startTag("", "package");
-
-            tag("version", app.installedApk.versionName);
-            tag("versioncode", app.installedApk.versionCode);
-            tag("apkname", app.installedApk.apkName);
-            tagHash(app);
-            tag("sig", app.installedApk.sig.toLowerCase(Locale.US));
-            tag("size", app.installedApk.installedFile.length());
-            tag("added", app.installedApk.added);
+        private static HashMap<String, Object>[] getPackageList(App app) throws IOException {
+            HashMap<String, Object>[] packageMap = new HashMap[1];
+            packageMap[0] = new HashMap<>();
+            packageMap[0].put("versionName", app.installedApk.versionName);
+            packageMap[0].put("versionCode", app.installedApk.versionCode);
+            packageMap[0].put(ApkTable.Cols.NAME, app.installedApk.apkName);
+            // TODO packageMap[0].putHash(app);
+            packageMap[0].put(ApkTable.Cols.SIGNER, app.installedApk.signer.toLowerCase(Locale.US));
+            // TODO packageMap[0].put("sig", app.installedApk.signer.toLowerCase(Locale.US)); // required to support old fdroidclient versions
+            packageMap[0].put(ApkTable.Cols.SIZE, app.installedApk.installedFile.length());
+            packageMap[0].put(ApkTable.Cols.ADDED_DATE, app.installedApk.added);
             if (app.installedApk.minSdkVersion > Apk.SDK_VERSION_MIN_VALUE) {
-                tag("sdkver", app.installedApk.minSdkVersion);
+                packageMap[0].put(ApkTable.Cols.MIN_SDK_VERSION, app.installedApk.minSdkVersion);
             }
             if (app.installedApk.targetSdkVersion > app.installedApk.minSdkVersion) {
-                tag("targetSdkVersion", app.installedApk.targetSdkVersion);
+                packageMap[0].put(ApkTable.Cols.TARGET_SDK_VERSION, app.installedApk.targetSdkVersion);
             }
             if (app.installedApk.maxSdkVersion < Apk.SDK_VERSION_MAX_VALUE) {
-                tag("maxsdkver", app.installedApk.maxSdkVersion);
+                packageMap[0].put(ApkTable.Cols.MAX_SDK_VERSION, app.installedApk.maxSdkVersion);
             }
-            tagFeatures(app);
-            tagPermissions(app);
-            tagNativecode(app);
-
-            serializer.endTag("", "package");
-        }
-
-        private void tagPermissions(App app) throws IOException {
-            serializer.startTag("", "permissions");
-            if (app.installedApk.requestedPermissions != null) {
-                StringBuilder buff = new StringBuilder();
-
-                for (String permission : app.installedApk.requestedPermissions) {
-                    buff.append(permission.replace("android.permission.", ""));
-                    buff.append(',');
-                }
-                String out = buff.toString();
-                if (!TextUtils.isEmpty(out)) {
-                    serializer.text(out.substring(0, out.length() - 1));
-                }
-            }
-            serializer.endTag("", "permissions");
-        }
-
-        private void tagFeatures(App app) throws IOException {
-            serializer.startTag("", "features");
-            if (app.installedApk.features != null) {
-                serializer.text(TextUtils.join(",", app.installedApk.features));
-            }
-            serializer.endTag("", "features");
-        }
-
-        private void tagNativecode(App app) throws IOException {
-            if (app.installedApk.nativecode != null) {
-                serializer.startTag("", "nativecode");
-                serializer.text(TextUtils.join(",", app.installedApk.nativecode));
-                serializer.endTag("", "nativecode");
-            }
-        }
-
-        private void tagHash(App app) throws IOException {
-            serializer.startTag("", "hash");
-            serializer.attribute("", "type", app.installedApk.hashType);
-            serializer.text(app.installedApk.hash);
-            serializer.endTag("", "hash");
+            return packageMap;
         }
     }
 
-    public void writeIndexJar() throws IOException, XmlPullParserException, LocalRepoKeyStore.InitException {
-        BufferedOutputStream bo = new BufferedOutputStream(new FileOutputStream(xmlIndexJarUnsigned));
+    public void writeEntryJar() throws IOException, LocalRepoKeyStore.InitException {
+        BufferedOutputStream bo = new BufferedOutputStream(new FileOutputStream(indexV2Json));
+        IndexV2Builder.build(context, apps, bo);
+        //Utils.hashBytes("SHA-256");
+
+        ObjectMapper mapper = new ObjectMapper();
+        bo = new BufferedOutputStream(new FileOutputStream(entryJarUnsigned));
         JarOutputStream jo = new JarOutputStream(bo);
-        JarEntry je = new JarEntry(IndexUpdater.DATA_FILE_NAME);
+        JarEntry je = new JarEntry("entry.json"); // TODO IndexV2Updater.DATA_FILE_NAME
         jo.putNextEntry(je);
-        new IndexXmlBuilder().build(context, apps, jo);
+        Map<String, Object> indexMap = new HashMap<>();
+        indexMap.put("name", "index-v2.json");
+        indexMap.put("sha256", "c4bd600d7ed554a69201d7aaa4f7f7ef7cd13dc20cdd4af254d17ffd12bd7cdc"); // TODO
+        indexMap.put("size", indexV2Json.length());
+        Map<String, Object> filesMap = new HashMap<>();
+        filesMap.put("index", indexMap);
+        Map<String, Object> entryMap = new HashMap<>();
+        entryMap.put("version", "30001"); // TODO
+        entryMap.put("timestamp", System.currentTimeMillis());
+        entryMap.put("maxAge", "14"); // TODO
+        filesMap.put("files", filesMap);
+        mapper.writeValue(jo, entryMap);
         jo.close();
         bo.close();
 
         try {
-            LocalRepoKeyStore.get(context).signZip(xmlIndexJarUnsigned, xmlIndexJar);
+            LocalRepoKeyStore.get(context).signZip(entryJarUnsigned, entryJar);
         } catch (LocalRepoKeyStore.InitException e) {
             throw new IOException("Could not sign index - keystore failed to initialize");
         } finally {
-            attemptToDelete(xmlIndexJarUnsigned);
+            attemptToDelete(entryJarUnsigned);
         }
 
     }

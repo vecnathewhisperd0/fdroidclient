@@ -8,7 +8,6 @@ import android.os.Process;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.Utils;
-import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -110,7 +109,7 @@ public class LocalRepoService extends IntentService {
             String urlString = Utils.getSharingUri(FDroidApp.repo).toString();
             lrm.writeIndexPage(urlString);
             broadcast(context, STATUS_PROGRESS, R.string.writing_index_jar);
-            lrm.writeIndexJar();
+            lrm.writeEntryJar();
             broadcast(context, STATUS_PROGRESS, R.string.linking_apks);
             lrm.copyApksToRepo();
             broadcast(context, STATUS_PROGRESS, R.string.copying_icons);
@@ -124,7 +123,7 @@ public class LocalRepoService extends IntentService {
             }.start();
 
             broadcast(context, STATUS_STARTED, null);
-        } catch (IOException | XmlPullParserException | LocalRepoKeyStore.InitException e) {
+        } catch (IOException | LocalRepoKeyStore.InitException e) {
             broadcast(context, STATUS_ERROR, e.getLocalizedMessage());
             e.printStackTrace();
         }
