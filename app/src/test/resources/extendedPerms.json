@@ -1,0 +1,698 @@
+{
+  "repo": {
+    "timestamp": 1467169032109,
+    "version": 16,
+    "name": "F-Droid",
+    "icon": "fdroid-icon.png",
+    "address": "https://f-droid.org/repo",
+    "description": "This is just a test of the extended permissions attributes."
+  },
+  "apps": [
+    {
+      "authorName": "bitfire web engineering",
+      "bitcoin": "bc1q0hvy0mknt9vce2f9hh829h72n3sht9llaltumk",
+      "categories": [
+        "Internet"
+      ],
+      "changelog": "https://forums.bitfire.at/category/4/davx?tag=announcement",
+      "suggestedVersionName": "4.1-ose",
+      "suggestedVersionCode": "401000005",
+      "donate": "https://www.davx5.com/donate",
+      "issueTracker": "https://www.davx5.com/forums",
+      "liberapay": "DAVx5",
+      "liberapayID": "14101",
+      "license": "GPL-3.0-only",
+      "sourceCode": "https://www.davx5.com/source",
+      "translation": "https://www.transifex.com/bitfireAT/davx5/",
+      "webSite": "https://www.davx5.com/",
+      "added": 1381622400000,
+      "packageName": "at.bitfire.davdroid",
+      "lastUpdated": 1640899362000,
+      "localized": {
+        "ar": {
+          "description": "DAVx\u2075 \u0647\u0648 \u062a\u0637\u0628\u064a\u0642 \u0625\u062f\u0627\u0631\u0629 \u0648\u0645\u0632\u0627\u0645\u0646\u0629 \u0644\u0622\u0646\u062f\u0631\u0648\u064a\u062f \u064a\u062a\u0643\u0627\u0645\u0644 \u0645\u0639 \u0627\u0644\u062a\u0637\u0628\u064a\u0642\u0627\u062a \u0627\u0644\u0623\u0635\u064a\u0644\u0629 \u0644\u0644\u062a\u0642\u0648\u064a\u0645 \u0648\u062c\u0647\u0627\u062a \u0627\u0644\u0627\u062a\u0635\u0627\u0644 \u0641\u064a \u0646\u0638\u0627\u0645 \u0622\u0646\u062f\u0631\u0648\u064a\u062f.\n\n\u0627\u0633\u062a\u062e\u062f\u0645\u0647 \u0645\u0639 \u062e\u0627\u062f\u0645\u0643 \u0627\u0644\u062e\u0627\u0635 \u0623\u0648 \u0645\u0639 \u062c\u0647\u0629 \u0627\u0633\u062a\u0636\u0627\u0641\u0629 \u062a\u062b\u0642 \u0628\u0647\u0627 \u0644\u0625\u0628\u0642\u0627\u0621 \u062c\u0647\u0627\u062a \u0627\u062a\u0635\u0627\u0644\u0643 \u0648 \u0623\u062d\u062f\u0627\u062b\u0643 \u0648 \u0645\u0647\u0627\u0645\u0643 \u062a\u062d\u062a \u0633\u064a\u0637\u0631\u062a\u0643.\n\n\u0644\u0644\u062d\u0635\u0648\u0644 \u0639\u0644\u0649 \u0642\u0627\u0626\u0645\u0629 \u0628\u0627\u0644\u062e\u0627\u062f\u0645\u0627\u062a/\u0627\u0644\u062e\u062f\u0645\u0627\u062a \u0627\u0644\u062a\u064a \u062a\u0645\u062a \u062a\u062c\u0631\u0628\u062a\u0647\u0627 \u060c \u0648\u0644\u0644\u0645\u0632\u064a\u062f \u0645\u0646 \u0627\u0644\u0645\u0639\u0644\u0648\u0645\u0627\u062a \u060c \u0623\u0644\u0642 \u0646\u0638\u0631\u0629 \u0639\u0644\u0649 \u0645\u0648\u0642\u0639 \u0627\u0644\u0648\u064a\u0628.",
+          "summary": "\u0645\u0632\u0627\u0645\u0646\u0629 \u0648\u0639\u0645\u064a\u0644 \u0644\u0640 CalDAV/CardDAV"
+        },
+        "bg": {
+          "description": "DAVx\u2075 \u0435 \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u0430 \u0437\u0430 \u0410\u043d\u0434\u0440\u043e\u0438\u0434, \u043a\u043e\u044f\u0442\u043e \u0441\u0438\u043d\u0445\u0440\u043e\u043d\u0438\u0437\u0438\u0440\u0430 \u0434\u0430\u043d\u043d\u0438 \u0441 CalDAV/CardDAV \u043f\u0440\u043e\u0442\u043e\u043a\u043e\u043b\u0438\u0442\u0435 \u0438 \u0441\u0435 \u0438\u043d\u0442\u0435\u0433\u0440\u0438\u0440\u0430 \u0441 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u044f\u0442\u0430 \u0437\u0430 \u043a\u0430\u043b\u0435\u043d\u0434\u0430\u0440\u0438 \u0438 \u043a\u043e\u043d\u0442\u0430\u043a\u0442\u0438 \u0432 \u0410\u043d\u0434\u0440\u043e\u0438\u0434.\n\n\u0418\u0437\u043f\u043e\u043b\u0437\u0432\u0430\u0439 \u044f \u0441\u044a\u0441 \u0441\u043e\u0431\u0441\u0442\u0432\u0435\u043d\u0438\u044f \u0441\u0438 \u0441\u044a\u0440\u0432\u044a\u0440 \u0438\u043b\u0438 \u0441 \u0434\u043e\u0432\u0435\u0440\u0435\u043d \u0434\u043e\u0441\u0442\u0430\u0432\u0447\u0438\u043a, \u0437\u0430 \u0434\u0430 \u0434\u044a\u0440\u0436\u0438\u0448 \u043a\u043e\u043d\u0442\u0430\u043a\u0442\u0438\u0442\u0435, \u0441\u044a\u0431\u0438\u0442\u0438\u044f\u0442\u0430 \u0438 \u0437\u0430\u0434\u0430\u0447\u0438\u0442\u0435 \u0441\u0438 \u043f\u043e\u0434 \u043a\u043e\u043d\u0442\u0440\u043e\u043b.\n\n\u0417\u0430 \u043f\u043e\u0432\u0435\u0447\u0435 \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044f \u0438 \u0441\u043f\u0438\u0441\u044a\u043a \u043d\u0430 \u0438\u0437\u043f\u0440\u043e\u0431\u0432\u0430\u043d\u0438\u0442\u0435 \u0441\u044a\u0440\u0432\u044a\u0440\u0438 \u0438 \u0443\u0441\u043b\u0443\u0433\u0438 \u043f\u043e\u0433\u043b\u0435\u0434\u043d\u0438 \u0438\u043d\u0442\u0435\u0440\u043d\u0435\u0442 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430\u0442\u0430.",
+          "summary": "\u0421\u0438\u043d\u0445\u0440\u043e\u043d\u0438\u0437\u0430\u0446\u0438\u044f \u0438 \u043a\u043b\u0438\u0435\u043d\u0442 \u0437\u0430 CalDAV/CardDAV"
+        },
+        "ca": {
+          "description": "DAVx\u2075 \u00e9s una aplicaci\u00f3 que permet administrar i sincronitzar CalDAV/CardDAV, i s'integra nativament amb les aplicacions de contactes/calendari.\n\nEs pot utilitzar amb un servidor propi, o b\u00e9 amb un prove\u00efdor de confian\u00e7a que permeti mantenir els contactes, esdeveniments i tasques sota el teu control.\n\nPer obtenir m\u00e9s informaci\u00f3 i una llista de servidors/serveis verificats, dirigeix-te al lloc web.",
+          "summary": "CalDAV/CardDAV Client i sincronitzaci\u00f3"
+        },
+        "cs": {
+          "description": "DAVx\u2075 je aplikace pro spr\u00e1vu a synchronizaci CalDAV/CardDAV pro Android, kter\u00e1 se nativn\u011b propojuje s aplikacemi kalend\u00e1\u0159/kontakty v syst\u00e9mu Android.\n\nPou\u017eijte ji ve spojen\u00ed s vlastn\u00edm serverem nebo hostingem, kter\u00e9mu d\u016fv\u011b\u0159ujete a uchovejte si tak kontrolu nad sv\u00fdmi kontakty, ud\u00e1lostmi a \u00fakoly.\n\nDal\u0161\u00ed informace a seznam vyzkou\u0161en\u00fdch server\u016f/slu\u017eeb naleznete na webov\u00fdch str\u00e1nk\u00e1ch projektu.",
+          "summary": "Synchronizace CalDAV/CardDAV a klient"
+        },
+        "da": {
+          "description": "DAVx\u2075 er en CalDAV/CardDAV h\u00e5ndtering og synkronisering program til Android som naturlig integrere med  Android kalender/kontakt programmer.\n\nBrug den med lokal server eller med trov\u00e6rdig v\u00e6rt for at gemme kontakter, begivenheder og opgaver under egen kontrol.\n\nFor mere information og en liste over testede server/tjenester, g\u00e5 til netstedet.",
+          "summary": "CalDAV/CardDAV synkronisering og klient"
+        },
+        "de": {
+          "description": "DAVx\u2075 ist eine CalDAV/CardDAV-Verwaltungs- und Synchronisierungs-App f\u00fcr Android, die sich nahtlos mit Kalender- und Kontakte-Apps integriert.\n\nMit DAVx\u2075 haben Sie Ihre Kontakte, Termine und Aufgaben auf Ihrem eigenen Server oder einem vertrauensw\u00fcrdigen CalDAV/CardDAV-Dienst unter eigener Kontrolle!\n\nWeitere Informationen und eine Liste der getesteten Server/Dienste finden sich auf der Website.",
+          "summary": "CalDAV/CardDAV-Synchronisierung und -Client"
+        },
+        "el": {
+          "description": "\u03a4\u03bf DAVx\u2075 \u03b5\u03af\u03bd\u03b1\u03b9 \u03bc\u03b9\u03b1 \u03b5\u03c6\u03b1\u03c1\u03bc\u03bf\u03b3\u03ae \u03b4\u03b9\u03b1\u03c7\u03b5\u03af\u03c1\u03b9\u03c3\u03b7\u03c2 \u03ba\u03b1\u03b9 \u03c3\u03c5\u03b3\u03c7\u03c1\u03bf\u03bd\u03b9\u03c3\u03bc\u03bf\u03cd CalDAV/CardDAV \u03b3\u03b9\u03b1 \u03c4\u03bf Android \u03c0\u03bf\u03c5 \u03b5\u03bd\u03c3\u03c9\u03bc\u03b1\u03c4\u03ce\u03bd\u03b5\u03b9 \u03b5\u03b3\u03b3\u03b5\u03bd\u03ce\u03c2 \u03c4\u03b9\u03c2 \u03b5\u03c6\u03b1\u03c1\u03bc\u03bf\u03b3\u03ad\u03c2 Android \u03b7\u03bc\u03b5\u03c1\u03bf\u03bb\u03bf\u03b3\u03af\u03bf\u03c5/\u03b5\u03c0\u03b1\u03c6\u03ce\u03bd.\n\n\u03a7\u03c1\u03b7\u03c3\u03b9\u03bc\u03bf\u03c0\u03bf\u03b9\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf \u03c3\u03c4\u03bf\u03bd \u03b4\u03b9\u03ba\u03cc \u03c3\u03b1\u03c2 \u03b4\u03b9\u03b1\u03ba\u03bf\u03bc\u03b9\u03c3\u03c4\u03ae \u03ae \u03bc\u03b5 \u03ad\u03bd\u03b1\u03bd \u03ad\u03bc\u03c0\u03b9\u03c3\u03c4\u03bf \u03b4\u03b9\u03b1\u03ba\u03bf\u03bc\u03b9\u03c3\u03c4\u03ae \u03b3\u03b9\u03b1 \u03c4\u03b7\u03bd \u03b4\u03b9\u03b1\u03c4\u03ae\u03c1\u03b7\u03c3\u03b7 \u03c4\u03c9\u03bd \u03b5\u03c0\u03b1\u03c6\u03ce\u03bd, \u03c4\u03c9\u03bd \u03c3\u03c5\u03bc\u03b2\u03ac\u03bd\u03c4\u03c9\u03bd \u03ba\u03b1\u03b9 \u03b5\u03c1\u03b3\u03b1\u03c3\u03b9\u03ce\u03bd \u03c5\u03c0\u03cc \u03c4\u03bf\u03bd \u03ad\u03bb\u03b5\u03b3\u03c7\u03cc \u03c3\u03b1\u03c2.\n\n\u0393\u03b9\u03b1 \u03c0\u03b5\u03c1\u03b9\u03c3\u03c3\u03cc\u03c4\u03b5\u03c1\u03b5\u03c2 \u03c0\u03bb\u03b7\u03c1\u03bf\u03c6\u03bf\u03c1\u03af\u03b5\u03c2 \u03ba\u03b1\u03b9 \u03bb\u03af\u03c3\u03c4\u03b1 \u03c4\u03c9\u03bd \u03b4\u03bf\u03ba\u03b9\u03bc\u03b1\u03c3\u03bc\u03ad\u03bd\u03c9\u03bd \u03b4\u03b9\u03b1\u03ba\u03bf\u03bc\u03b9\u03c3\u03c4\u03ce\u03bd/\u03c5\u03c0\u03b7\u03c1\u03b5\u03c3\u03b9\u03ce\u03bd, \u03b4\u03b5\u03af\u03c4\u03b5 \u03c3\u03c4\u03b7\u03bd \u03b9\u03c3\u03c4\u03bf\u03c3\u03b5\u03bb\u03af\u03b4\u03b1.",
+          "summary": "\u03a3\u03c5\u03b3\u03c7\u03c1\u03bf\u03bd\u03b9\u03c3\u03bc\u03cc\u03c2 CalDAV/CardDAV \u03ba\u03b1\u03b9 \u03c0\u03b5\u03bb\u03ac\u03c4\u03b7\u03c2"
+        },
+        "en-US": {
+          "description": "DAVx\u2075 is a CalDAV/CardDAV management and synchronization app for Android which natively integrates with Android calendar/contact apps.\n\nUse it with your own server or with a trusted hoster to keep your contacts, events and tasks under your control.\n\nFor more information and a list of tested servers/services, have a look at the Web site.\n",
+          "featureGraphic": "featureGraphic_FM_c9ctGVZc_spox1bN4-795DxGrkd6MpmXblMRj_p0=.png",
+          "icon": "icon_NexNou7vmaD45rbdc8kjLj0Rv7FW128Mde9OQpHFXPE=.png",
+          "name": "DAVx\u2075",
+          "phoneScreenshots": [
+            "1.png",
+            "2.png",
+            "3.png",
+            "4.png",
+            "5.png",
+            "6.png"
+          ],
+          "summary": "CalDAV/CardDAV Synchronization and Client",
+          "whatsNew": "- improve WebDAV access and cache\n- debug info: show available/total storage memory\n- improve SRV record resolving (especially on Android \u226510)\n- fixed a bug when the FN field was not present in a contacts vcard 4\n- minor optimizations and bug fixes\n"
+        },
+        "es": {
+          "description": "DAVx\u2075 es una aplicaci\u00f3n de administraci\u00f3n y sincronizaci\u00f3n CalDAV/CardDAV para Android la cual se integra nativamente con la aplicaci\u00f3n de calendario/contactos de Android.\n\n\u00daselo con su su servidor o con un anfitri\u00f3n de confianza para mantener sus contactos, incluso sus tareas bajo su control.\n\nPara m\u00e1s informaci\u00f3n y una lista de servicios/servidores probados, revise el sitio web.",
+          "summary": "Cliente y Sincronizaci\u00f3n de CalDAV/CardDAV"
+        },
+        "eu": {
+          "description": "DAVx\u2075 Androiderako CalDAV/CardDAV kudeatze eta sinkronizazio aplikazio bat da, Android egutegi/kontaktu aplikazio integrazioarekin.\n\nErabili ezazu zure zerbitzarian edo ostalari fidagarri batekin kontaktuak, ekitaldiak eta zereginak zure kontrolpean edukitzeko.\n\nInformazio gehiago izateko eta zerbitzarien/zerbitzuen zerrenda aztertzeko, joan zaitez webgunera.",
+          "summary": "CalDAV/CardDAV sinkronizazio eta bezeroa"
+        },
+        "fa": {
+          "description": "DAVx\u2075 \u06cc\u06a9 \u0628\u0631\u0646\u0627\u0645\u0647\u200c\u06cc CalDAV/CardDAV \u0645\u062f\u06cc\u0631\u062a\u06cc \u0648 \u0647\u0645\u06af\u0627\u0645 \u0633\u0627\u0632\u06cc \u0628\u0631\u0627\u06cc \u0627\u0646\u062f\u0631\u0648\u06cc\u062f \u0627\u0633\u062a \u06a9\u0647 \u0628\u0647 \u0635\u0648\u0631\u062a \u0628\u0648\u0645\u06cc \u0628\u0627 \u0628\u0631\u0646\u0627\u0645\u0647\u200c\u06cc \u062a\u0642\u0648\u06cc\u0645 \u0648 \u0645\u062e\u0627\u0637\u0628\u06cc\u0646 \u0627\u0646\u062f\u0631\u0648\u06cc\u062f \u0627\u062f\u0642\u0627\u0645 \u0645\u06cc\u200c\u0634\u0648\u062f.\n\n\u0628\u0627 \u0647\u0645\u0631\u0627\u0647\u06cc \u0633\u0631\u0648\u0631 \u062e\u0648\u062f\u062a\u0627\u0646 \u06cc\u0627 \u0628\u0627 \u06cc\u06a9 \u0645\u06cc\u0632\u0628\u0627\u0646 \u0642\u0627\u0628\u0644 \u0627\u0637\u0645\u06cc\u0646\u0627\u0646 \u0627\u0633\u062a\u0641\u0627\u062f\u0647 \u06a9\u0646\u06cc\u062f \u062a\u0627 \u0645\u062e\u0627\u0637\u0628\u06cc\u0646\u060c \u0648\u0642\u0627\u06cc\u0639 \u0648 \u0648\u0638\u0627\u06cc\u0641\u062a \u062a\u062d\u062a \u06a9\u0646\u062a\u0631\u0644 \u062e\u0648\u062f\u062a\u0627\u0646 \u0628\u0627\u0634\u062f.\n\n\u0628\u0631\u0627\u06cc \u062f\u0631\u06cc\u0627\u0641\u062a \u0627\u0637\u0644\u0627\u0639\u0627\u062a \u0628\u06cc\u0634\u062a\u0631 \u0648 \u06cc\u06a9 \u0644\u06cc\u0633\u062a \u0627\u0645\u062a\u062d\u0627\u0646 \u0634\u062f \u0627\u0632 \u0633\u0631\u0648\u0631\u0647\u0627 \u0648 \u0633\u0631\u0648\u06cc\u0633\u200c\u0647\u0627 \u0646\u06af\u0627\u0647\u06cc \u0628\u0647 \u0633\u0627\u06cc\u062a \u0628\u06cc\u0627\u0646\u062f\u0627\u0632\u06cc\u062f."
+        },
+        "fi": {
+          "description": "DAVx\u2075 on CalDAV/CardDAV- hallinta- ja synkronointisovellus Android-laitteille, jonka avulla kalenterit/yhteystiedot liitet\u00e4\u00e4n CalDAV/CardDAV-j\u00e4rjestelm\u00e4st\u00e4 Androidin omaan kalenterien ja yhteystietojen sovellukseen.\n\nK\u00e4yt\u00e4 sovellusta omalla palvelimellasi tai luotetun palveluntarjoajan kanssa pit\u00e4\u00e4ksesi yhteystietosi, tapahtumasi ja teht\u00e4v\u00e4si omassa hallinnassasi.\n\nSaadaksesi lis\u00e4tietoja sek\u00e4 listan testatuista palvelimista/palvelinohjelmista, k\u00e4y katsomassa Internet-sivustollamme.",
+          "summary": "CalDAV/CardDAV Synkronointi- ja asiakasohjelma"
+        },
+        "fr": {
+          "description": "DAVx\u2075 est une application de gestion et de synchronisation CalDAV / CardDAV pour Android qui s'int\u00e8gre de mani\u00e8re native aux applications de calendrier / contact Android.\n\nUtilisez-le avec votre propre serveur ou avec un h\u00e9bergeur de confiance pour garder vos contacts, \u00e9v\u00e9nements et t\u00e2ches sous votre contr\u00f4le.\n\nPour plus d'informations et une liste des serveurs / services test\u00e9s, consultez le site Web.",
+          "summary": "Synchronisation et client CalDAV / CardDAV"
+        },
+        "gl": {
+          "description": "DAVx\u2075 \u00e9 un xestor CalDAV/CardDAV e aplicaci\u00f3n de sincronizaci\u00f3n para Android que se integra de xeito nativo coas apps de contactos/calendario de Android.\n\nUtil\u00edceo co seu propio servidor ou con un de confianza para manter os seus contactos, eventos e tarefas baixo o seu control.\n\nPara m\u00e1is informaci\u00f3n e unha lista de servidores/servizos, bote unha ollada no sitio Web.",
+          "summary": "Sincronizaci\u00f3n CalDAV/CardDAV e Cliente"
+        },
+        "hu": {
+          "description": "A DAVx\u2075 egy CalDAV/CardDAV-kezel\u0151 \u00e9s szinkroniz\u00e1l\u00f3 alkalmaz\u00e1s Androidra, amely rendszerszinten integr\u00e1l\u00f3dik a napt\u00e1r- \u00e9s n\u00e9vjegy-alkalmaz\u00e1sokkal.\n\nHaszn\u00e1lhatja saj\u00e1t szerver\u00e9vel vagy megb\u00edzhat\u00f3nak tartott szolg\u00e1ltat\u00f3kkal, hogy a n\u00e9vjegyek, napt\u00e1rbejegyz\u00e9sek \u00e9s feladatok feletti kontrollja megmaradjon.\n\nTov\u00e1bbi inform\u00e1ci\u00f3kat, valamint a tesztelt szerverek/szolg\u00e1ltat\u00e1sok list\u00e1j\u00e1t a weboldalunkon tal\u00e1lja.",
+          "summary": "CalDAV/CardDAV szinkroniz\u00e1ci\u00f3 \u00e9s kliens"
+        },
+        "it": {
+          "summary": "Client e Sincronizzazione CalDAV/CardDAV"
+        },
+        "ja": {
+          "description": "DAVx\u2075 \u306f\u3001Android \u306e\u30ab\u30ec\u30f3\u30c0\u30fc/\u9023\u7d61\u5148\u30a2\u30d7\u30ea\u3068\u30cd\u30a4\u30c6\u30a3\u30d6\u306b\u7d71\u5408\u3055\u308c\u305f Android \u7528 CalDAV/CardDAV \u7ba1\u7406\u304a\u3088\u3073\u540c\u671f\u30a2\u30d7\u30ea\u3067\u3059\u3002\n\n\u3042\u306a\u305f\u72ec\u81ea\u306e\u30b5\u30fc\u30d0\u30fc\u3084\u4fe1\u983c\u3067\u304d\u308b\u30db\u30b9\u30c8\u3068\u4e00\u7dd2\u306b\u4f7f\u7528\u3057\u3066\u3001\u9023\u7d61\u5148\u3001\u30a4\u30d9\u30f3\u30c8\u3001\u30bf\u30b9\u30af\u3092\u7ba1\u7406\u3057\u3066\u304f\u3060\u3055\u3044\u3002\n\n\u8a73\u7d30\u3068\u3001\u30c6\u30b9\u30c8\u6e08\u307f\u306e\u30b5\u30fc\u30d0\u30fc/\u30b5\u30fc\u30d3\u30b9\u306e\u4e00\u89a7\u306b\u3064\u3044\u3066\u306f\u3001Web \u30b5\u30a4\u30c8\u3092\u53c2\u7167\u3057\u3066\u304f\u3060\u3055\u3044\u3002",
+          "summary": "CalDAV/CardDAV \u540c\u671f\u3068\u30af\u30e9\u30a4\u30a2\u30f3\u30c8"
+        },
+        "nl": {
+          "description": "DAVx\u2075 is een CalDAV/CardDAV management en synchronisatie app voor Android die integreert met de standaard Android kalender/contact apps.\n\nGebruik het met je eigen server of met een vertrouwde hoster om je contacten, afspraken en taken onder je eigen controle te houden.\n\nKijk voor meer informatie en een lijst met geteste servers / services op onze website.",
+          "summary": "CalDAV/CardDAV synchronisatie en client"
+        },
+        "pl": {
+          "description": "DAVx\u2075 to aplikacja do zarz\u0105dzania i synchronizacji CalDAV/CardDAV na Androida, kt\u00f3ra natywnie integruje si\u0119 z aplikacjami kalendarza/kontakt\u00f3w w systemie Android.\n\nU\u017cywaj go z w\u0142asnym serwerem lub zaufan\u0105 firm\u0105 hostingow\u0105, aby mie\u0107 kontrol\u0119 nad swoimi kontaktami, wydarzeniami i zadaniami.\n\nAby uzyska\u0107 wi\u0119cej informacji i list\u0119 przetestowanych serwer\u00f3w/us\u0142ug, zajrzyj na stron\u0119 internetow\u0105.",
+          "summary": "Synchronizacja i klient CalDAV/CardDAV"
+        },
+        "pt": {
+          "description": "DAVx\u2075 \u00e9 um aplicativo de gerenciamento e sincroniza\u00e7\u00e3o CalDAV/CardDAV para Android que se integra nativamente com aplicativos de calend\u00e1rio/contatos do Android.\n\nUse-o com seu pr\u00f3prio servidor ou com um host confi\u00e1vel para manter seus contatos, eventos e tarefas sob seu controle.\n\nPara mais informa\u00e7\u00f5es e uma lista de servidores/servi\u00e7os testados, d\u00ea uma olhada no site.",
+          "summary": "Sincroniza\u00e7\u00e3o e Cliente CalDAV/CardDAV"
+        },
+        "ru": {
+          "description": "DAVx\u2075 - \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435 \u0434\u043b\u044f \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u044f \u0438 \u0441\u0438\u043d\u0445\u0440\u043e\u043d\u0438\u0437\u0430\u0446\u0438\u0438 CalDAV/CardDAV \u0434\u043b\u044f Android, \u043a\u043e\u0442\u043e\u0440\u043e\u0435 \u0438\u0437\u043d\u0430\u0447\u0430\u043b\u044c\u043d\u043e \u0438\u043d\u0442\u0435\u0433\u0440\u0438\u0440\u0443\u0435\u0442\u0441\u044f \u0441 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u044f\u043c\u0438 Android \u0434\u043b\u044f \u0440\u0430\u0431\u043e\u0442\u044b \u0441 \u043a\u0430\u043b\u0435\u043d\u0434\u0430\u0440\u0435\u043c \u0438 \u043a\u043e\u043d\u0442\u0430\u043a\u0442\u0430\u043c\u0438.\n\n\u0418\u0441\u043f\u043e\u043b\u044c\u0437\u0443\u0439\u0442\u0435 \u0435\u0433\u043e \u0441 \u0432\u0430\u0448\u0438\u043c \u0441\u043e\u0431\u0441\u0442\u0432\u0435\u043d\u043d\u044b\u043c \u0441\u0435\u0440\u0432\u0435\u0440\u043e\u043c \u0438\u043b\u0438 \u0434\u043e\u0432\u0435\u0440\u0435\u043d\u043d\u044b\u043c \u0445\u043e\u0441\u0442\u0435\u0440\u043e\u043c, \u0447\u0442\u043e\u0431\u044b \u0434\u0435\u0440\u0436\u0430\u0442\u044c \u0432\u0430\u0448\u0438 \u043a\u043e\u043d\u0442\u0430\u043a\u0442\u044b, \u0441\u043e\u0431\u044b\u0442\u0438\u044f \u0438 \u0437\u0430\u0434\u0430\u0447\u0438 \u043f\u043e\u0434 \u043a\u043e\u043d\u0442\u0440\u043e\u043b\u0435\u043c.\n\n\u0414\u043b\u044f \u043f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u044f \u0434\u043e\u043f\u043e\u043b\u043d\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0439 \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u0438 \u0438 \u0441\u043f\u0438\u0441\u043a\u0430 \u043f\u0440\u043e\u0442\u0435\u0441\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u044b\u0445 \u0441\u0435\u0440\u0432\u0435\u0440\u043e\u0432/\u0441\u043b\u0443\u0436\u0431, \u043f\u043e\u0441\u0435\u0442\u0438\u0442\u0435 \u0432\u0435\u0431-\u0441\u0430\u0439\u0442.",
+          "summary": "\u0421\u0438\u043d\u0445\u0440\u043e\u043d\u0438\u0437\u0430\u0446\u0438\u044f CalDAV/CardDAV \u0438 \u043a\u043b\u0438\u0435\u043d\u0442"
+        },
+        "sk": {
+          "description": "DAVx\u2075 je aplik\u00e1cia na spr\u00e1vu a synchroniz\u00e1ciu CalDAV/CardDAV pre Android  ktor\u00e1 sa nat\u00edvne integruje s Android aplik\u00e1ciami kalend\u00e1r/kontakt.\n\nPou\u017e\u00edvajte s va\u0161im vlastn\u00fdm serverom alebo s poskytovate\u013eom server-hostingu ktor\u00e9mu d\u00f4verujete a majte svoje kontakty, udalosti a \u00falohy pod kontrolou.\n\n\u010eal\u0161ie inform\u00e1cie a zoznam testovan\u00fdch serverov/slu\u017eieb n\u00e1jdete na webovom s\u00eddle.",
+          "summary": "CalDAV/CardDAV synchroniz\u00e1cia a klient"
+        },
+        "sl-SI": {
+          "description": "DAVx\u2075 je CalDAV/CardDAV android aplikacija za urejanje in sinhronizacijo z koledarja/kontaktov.\n\nUporabite jo z va\u0161im lastnim stre\u017enikom ali drugimi ponudniki stre\u017enikov, ki jim zaupate, in imejte tako va\u0161e kontakte, dogodke in naloge pod svojim nadzorom.\n\nVe\u010d informacij ter seznam serverjev/storitev lahko dobite na spletni strani",
+          "summary": "CalDAV/CardDAV sinhronizacija in klient"
+        },
+        "szl": {
+          "description": "DAVx\u2075 to je aplikacyjo zarz\u014dndzanio i synchr\u014dnizacyje CalDAV/CardDAV dlo Androida, co natywnie integruje sie ze aplikacyjami kalyndorza/k\u014dntakt\u014dw Androida.\n\nU\u017cywej to ze swojim w\u0142osnym serwerym abo ze zaufanym hostym, \u017ceby trzima\u0107 swoje k\u014dntakty, zdarzynia i zadania pod k\u014dntrol\u014dm.\n\nPo wiyncyj informacyji i lista przetestowanych serwer\u014dw/serwis\u014dw, wejzdrzij na str\u014dna internetowo.",
+          "summary": "Synchr\u014dnizacyjo i klijynt CalDAV/CardDAV"
+        },
+        "uk": {
+          "description": "DAVx\u2075 \u0446\u0435 Android \u0434\u043e\u0434\u0430\u0442\u043e\u043a \u0434\u043b\u044f \u043a\u0435\u0440\u0443\u0432\u0430\u043d\u043d\u044f \u0442\u0430 \u0441\u0438\u043d\u0445\u0440\u043e\u043d\u0456\u0437\u0430\u0446\u0456\u0457 CalDAV/CardDAV, \u044f\u043a\u0438\u0439 \u043e\u0440\u0433\u0430\u043d\u0456\u0447\u043d\u043e \u0456\u043d\u0442\u0435\u0433\u0440\u0443\u0454\u0442\u044c\u0441\u044f \u0437 Android \u043a\u0430\u043b\u0435\u043d\u0434\u0430\u0440\u0435\u043c/\u043a\u043e\u043d\u0442\u0430\u043a\u0442\u0430\u043c\u0438.\n\n\u0412\u0438\u043a\u043e\u0440\u0438\u0441\u0442\u043e\u0432\u0443\u0439\u0442\u0435 \u0439\u043e\u0433\u043e \u0437 \u0432\u043b\u0430\u0441\u043d\u0438\u043c \u0441\u0435\u0440\u0432\u0435\u0440\u043e\u043c \u0430\u0431\u043e \u0437 \u0434\u043e\u0432\u0456\u0440\u0435\u043d\u0438\u043c \u043f\u043e\u0441\u0442\u0430\u0447\u0430\u043b\u044c\u043d\u0438\u043a\u043e\u043c, \u0430\u0431\u0438 \u0437\u0431\u0435\u0440\u0435\u0433\u0442\u0438 \u043a\u043e\u043d\u0442\u0440\u043e\u043b\u044c \u043d\u0430\u0434  \u0432\u0430\u0448\u0438\u043c\u0438 \u043a\u043e\u043d\u0442\u0430\u043a\u0442\u0430\u043c\u0438, \u043f\u043e\u0434\u0456\u044f\u043c\u0438 \u0442\u0430 \u0437\u0430\u0434\u0430\u0447\u0430\u043c\u0438.\n\n\u0414\u043b\u044f \u0431\u0456\u043b\u044c\u0448 \u0434\u0435\u0442\u0430\u043b\u044c\u043d\u043e\u0457 \u0456\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0456\u0457 \u0442\u0430 \u0441\u043f\u0438\u0441\u043a\u0443 \u043f\u0435\u0440\u0435\u0432\u0456\u0440\u0435\u043d\u0438\u0445 \u0441\u0435\u0440\u0432\u0435\u0440\u0456\u0432/\u0441\u0435\u0440\u0432\u0456\u0441\u0456\u0432 \u0434\u0438\u0432\u0456\u0442\u044c\u0441\u044f \u043d\u0430\u0448\u0443 Web \u0441\u0442\u043e\u0440\u0456\u043d\u043a\u0443.",
+          "summary": "\u041a\u043b\u0456\u0454\u043d\u0442 \u0441\u0438\u043d\u0445\u0440\u043e\u043d\u0456\u0437\u0430\u0446\u0456\u0457 CalDAV/CardDAV"
+        },
+        "vi": {
+          "description": "DAVx\u2075 l\u00e0 m\u1ed9t \u1ee9ng d\u1ee5ng qu\u1ea3n l\u00fd v\u00e0 \u0111\u1ed3ng b\u1ed9 ho\u00e1 CalDAV/CardDAV d\u00e0nh cho Android, n\u00f3 t\u00edch h\u1ee3p v\u1edbi \u1ee9ng d\u1ee5ng l\u1ecbch/danh b\u1ea1 c\u1ee7a Android.\n\nS\u1eed d\u1ee5ng n\u00f3 v\u1edbi m\u00e1y ch\u1ee7 c\u1ee7a b\u1ea1n ho\u1eb7c v\u1edbi m\u1ed9t ng\u01b0\u1eddi l\u01b0u tr\u1eef \u0111\u01b0\u1ee3c tin c\u1eady \u0111\u1ec3 gi\u1eef c\u00e1c danh b\u1ea1, s\u1ef1 ki\u1ec7n v\u00e0 c\u00f4ng vi\u1ec7c c\u1ee7a b\u1ea1n d\u01b0\u1edbi quy\u1ec1n ki\u1ec3m so\u00e1t c\u1ee7a b\u1ea1n.\n\n\u0110\u1ec3 bi\u1ebft th\u00eam th\u00f4ng tin v\u00e0 xem m\u1ed9t danh s\u00e1ch c\u00e1c m\u00e1y ch\u1ee7/d\u1ecbch v\u1ee5 \u0111\u00e3 \u0111\u01b0\u1ee3c th\u1eed nghi\u1ec7m, h\u00e3y xem trang web.",
+          "summary": "\u1ee8ng d\u1ee5ng kh\u00e1ch v\u00e0 \u0111\u1ed3ng b\u1ed9 ho\u00e1 CalDAV/CardDAV"
+        },
+        "zh": {
+          "description": "DAVx\u2075 \u662f\u4e00\u6b3e Android \u7684 CalDAV/CardDAV \u7ba1\u7406\u540c\u6b65\u5e94\u7528\uff0c\u4e0e Android \u7684\u65e5\u5386\u3001\u901a\u8baf\u5f55\u8f6f\u4ef6\u539f\u751f\u96c6\u6210\u3002\n\n\u901a\u8fc7\u8be5\u5e94\u7528\uff0c\u53ef\u5728\u81ea\u5df1\u7684\u670d\u52a1\u5668\u6216\u4fe1\u4efb\u7684\u6258\u7ba1\u5546\u4e0a\u4fdd\u5b58\u901a\u8baf\u5f55\u3001\u65f6\u95f4\u548c\u4efb\u52a1\u6570\u636e\uff0c\u4fdd\u8bc1\u53ef\u63a7\u3002\n\n\u8bf7\u6d4f\u89c8\u7f51\u7ad9\uff0c\u4e86\u89e3\u66f4\u591a\u4fe1\u606f\uff0c\u5305\u62ec\u6d4b\u8bd5\u901a\u8fc7\u7684\u670d\u52a1\u5668\u3001\u7f51\u7ad9\u5217\u8868\u3002",
+          "summary": "CalDAV/CardDAV \u540c\u6b65\u5ba2\u6237\u7aef"
+        },
+        "zh-TW": {
+          "description": "DAVx\u2075 \u662f\u4e00\u500b CalDAV/CardDAV \u7ba1\u7406\u8207\u540c\u6b65\u5de5\u5177\uff0c\u5728 Android \u8a2d\u5099\u4e0a\u904b\u884c\uff0c\u4e26\u96c6\u5408\u4e86 Android \u5185\u7f6e\u7684\u884c\u4e8b\u66c6\u548c\u806f\u7d61\u4ebaAPP\u3002\n\n\u5728\u60a8\u81ea\u5df1\u7684\u4f3a\u670d\u5668\u4e0a\uff0c\u6216\u8005\u5728\u53ef\u4fe1\u4efb\u7684\u7ba1\u7406\u670d\u52d9\u4e0a\u4fdd\u7ba1\u4f60\u7684\u806f\u7d61\u4eba\uff0c\u4e8b\u9805\u548c\u4efb\u52d9\u3002\n\n\u60a8\u53ef\u4ee5\u5728\u7db2\u969b\u7db2\u7d61\u4e0a\u7372\u53d6\u66f4\u591a\u8a73\u7d30\u8cc7\u6599\uff0c\u5b83\u542b\u6709\u4e00\u500b\u7d93\u904e\u6e2c\u8a66\u6210\u529f\u7684\u670d\u52d9\u548c\u4f3a\u670d\u5668\u6e05\u55ae\u3002",
+          "summary": "CalDAV/CardDAV \u540c\u6b65\u670d\u52d9\u548c\u5ba2\u6236\u7aef"
+        }
+      }
+    },
+
+    {
+      "authorEmail": "contact@digitaleconomytoolkit.org",
+      "authorName": "The Community Media Toolkit",
+      "authorWebSite": "https://www.digitaleconomytoolkit.org/",
+      "categories": [
+        "Multimedia"
+      ],
+      "changelog": "https://github.com/communitymedia/mediaphone/releases",
+      "suggestedVersionName": "1.6.6",
+      "suggestedVersionCode": "48",
+      "issueTracker": "https://github.com/communitymedia/mediaphone/issues",
+      "license": "LGPL-3.0-only",
+      "sourceCode": "https://github.com/communitymedia/mediaphone",
+      "translation": "https://www.transifex.com/communitymedia/mediaphone/",
+      "added": 1603497600000,
+      "icon": "ac.robinson.mediaphone.48.png",
+      "packageName": "ac.robinson.mediaphone",
+      "lastUpdated": 1622284632000,
+      "localized": {
+        "en-US": {
+          "description": "<p>Com-Phone Story Maker helps you create multimedia narratives, combining photos, audio and text in exciting ways to tell digital stories. The app's simple interface helps you create your own photo slideshows to document your life; send to other devices running the application or play back locally; create templates; export as a movie; upload to YouTube; or, save a web version to self-publish.</p>\n<p>Each story can include any number of media frames. Each individual frame of the story can include an image or photo, up to three layered audio or music tracks, and text content. Anything in a frame can be edited at any time \u2013 for example, you can pause audio recording and then resume later, or load pictures from your media library. All elements of each frame are optional. For example, Com-Phone can also be used as an annotated photo diary, a simple audio recorder, a text and sound tool for discussion about current events, or even a multimedia survey app.</p>\n<p>A simple printable user manual is available at: <a href=\"https://digitaleconomytoolkit.org/manuals/com-phone.pdf\">https://digitaleconomytoolkit.org/manuals/com-phone.pdf</a>.</p><br />\n<p>Com-Phone is completely free, with no adverts and no unnecessary permissions. The app is open source as part of the Com-Me toolkit \u2013 you can fork any of the Com-Me tools on GitHub: <a href=\"https://github.com/communitymedia\">https://github.com/communitymedia</a>.</p>\n<p>For more information about the Com-Me project, see: <a href=\"https://digitaleconomytoolkit.org\">https://digitaleconomytoolkit.org</a>.</p>",
+          "featureGraphic": "featureGraphic_x7lXWg0XQ-1PvrSmL7qERhXwQ-ZCXxHEHU1rtt1EkmQ=.jpg",
+          "icon": "icon_K9MU6WWBA7ETcyn5wrEloCOuXDcHytUciBSzwXwd9IA=.png",
+          "name": "Com-Phone Story Maker",
+          "phoneScreenshots": [
+            "1.png",
+            "2.png",
+            "3.png",
+            "4.png",
+            "5.png",
+            "6.png",
+            "7.png",
+            "8.png"
+          ],
+          "promoGraphic": "promoGraphic_FqqspuLPBXiRD0sq_JnsT1IKkA5A3UoZfxyslFswgeI=.png",
+          "summary": "Create, tell, share and enjoy multimedia digital stories",
+          "whatsNew": "- Improved text appearance for frame icons and exported media"
+        },
+        "es-ES": {
+          "description": "<p>Com-Phone lo ayuda a crear narrativas multimedia, combinando fotos, audio y texto de maneras emocionantes para contar historias digitales. La interfaz simple de la aplicaci\u00f3n te ayuda a crear tus propias presentaciones de diapositivas para documentar tu vida; enviar a otros dispositivos que tienen la aplicaci\u00f3n o reproducir localmente; crear plantillas; exportar como una pel\u00edcula; subir a YouTube; o guardar una versi\u00f3n web para auto-publicar.</p>\n<p>Cada historia puede incluir cualquier cantidad de cuadros multimedia. Cada cuadro individual de la historia puede incluir una imagen o foto, hasta tres capas de m\u00fasica o pistas musicales y contenido de texto. Cualquier cosa en un cuadro se puede editar en cualquier momento \u2013 por ejemplo, puede pausar la grabaci\u00f3n de audio y luego reanudarla m\u00e1s tarde, o cargar im\u00e1genes de su biblioteca multimedia. Todos los elementos de cada cuadro son opcionales. Por ejemplo, Com-Phone tambi\u00e9n se puede utilizar como un diario fotogr\u00e1fico, un grabador de audio simple, una herramienta de texto y sonido para la discusi\u00f3n sobre eventos actuales, o incluso una herramienta de encuesta multimedia.</p>\n<p>Un sencillo manual de usuario imprimible est\u00e1 disponible en: <a href=\"https://digitaleconomytoolkit.org/manuals/com-phone.pdf\">https://digitaleconomytoolkit.org/manuals/com-phone.pdf</a>.</p><br />\n<p>Com-Phone es completamente gratuito, sin anuncios ni permisos innecesarios. La aplicaci\u00f3n es una fuente abierta como parte del conjunto de herramientas Com-Me. Puede redirigirse a cualquiera de las aplicaciones Com-Me en GitHub: <a href=\"https://github.com/communitymedia\">https://github.com/communitymedia</a>.</p>\n<p>Para obtener m\u00e1s informaci\u00f3n sobre el proyecto Com-Me, visite: <a href=\"https://digitaleconomytoolkit.org\">https://digitaleconomytoolkit.org</a>.</p>",
+          "name": "Com-Phone Story Maker",
+          "summary": "Crear, contar, compartir y disfrutar historias digitales multimedia"
+        },
+        "fr-FR": {
+          "description": "<p>Com-Phone vous aide \u00e0 cr\u00e9er des r\u00e9cits multimedia, en combinant des photos, de l'audio et du texte, de fa\u00e7on \u00e0 raconter facilement des histoires num\u00e9riques. La simplicit\u00e9 de l'interface vous permet de cr\u00e9er vos propres diaporamas pour garder des souvenirs de votre vie ; envoyer \u00e0 d'autres appareils qui ont l'application ou lire votre narration en local ; cr\u00e9er des mod\u00e8les ; exporter sous format vid\u00e9o ; envoyer directement sur You Tube ou enregistrer comme page web pour la publier.</p>\n<p>Chaque histoire peut comporter un nombre illimit\u00e9 de diapositives. Chaque diapositive de votre histoire peut comporter une image, jusqu'\u00e0 trois pistes audio superpos\u00e9es, ainsi que du texte. Tout le contenu de la diapositive peut \u00eatre modifi\u00e9 \u00e0 n'importe quel moment - vous pouvez par exemple arr\u00eater votre enregistrement audio et le poursuivre plus tard, ou charger des photos depuis votre galerie. Tous les \u00e9l\u00e9ments d'une diapositive sont facultatifs. Com-Phone peut par exemple \u00e9galement \u00eatre utilis\u00e9 comme journal intime avec des photos annot\u00e9es, comme simple enregistreur audio, comme combinaison de texte et d'audio pour commenter des \u00e9v\u00e9nements en cours, ou m\u00eame comme outil de sondage multim\u00e9dia.</p>\n<p>Un guide de l'utilisateur simple et imprimable est disponible \u00e0 cette adresse : <a href=\"https://digitaleconomytoolkit.org/manuals/com-phone.pdf\">https://digitaleconomytoolkit.org/manuals/com-phone.pdf</a>.</p><br />\n<p>Com-Phone est totalement gratuite, sans aucune publicit\u00e9, ni autorisations inutiles. Cette application est open source et fait partie du toolkit Com-Me - toutes les applications disponibles sur Com-Me peuvent \u00eatre fork\u00e9es sur Github : <a href=\"https://github.com/communitymedia\">https://github.com/communitymedia</a>.</p>\n<p>Pour plus d'information sur le projet Com-Me, rendez-vous sur : <a href=\"https://digitaleconomytoolkit.org\">https://digitaleconomytoolkit.org</a>.</p>",
+          "name": "Com-Phone Story Maker",
+          "summary": "Inventez, racontez et partagez des histoires multim\u00e9dia tout en vous amusant"
+        },
+        "nl-NL": {
+          "description": "<p>Met Com-Phone kun je multimediaverhalen cre\u00ebren door foto's, audio en tekst te combineren tot digitale verhalen. De app is eenvoudig in het gebruik, waardoor je makkelijk diavoorstellingen kunt cre\u00ebren om je levensverhaal vast te leggen. Verstuur je verhaal naar andere apparaten waarop de app ge\u00efnstalleerd is of speel het lokaal af. Cre\u00eber sjablonen, exporteer je verhaal als video, upload je verhaal naar YouTube of sla een webversie op die je zelf kunt publiceren.</p>\n<p>Elk verhaal kan een oneindig aantal lijsten bevatten. Elke lijst kan een afbeelding, foto, maximaal drie audiobestanden of tekst bevatten. Je kunt elke lijst ten allen tijde bewerken; zo kun je bijv. de audio-opname pauzeren en later hervatten, of afbeeldingen laden uit je mediaverzameling. Alle elementen van elke lijst zijn optioneel. Com-Phone kan bijv. ook worden gebruikt als een fotodagboek met omschrijvingen, of als eenvoudige geluidsrecorder, tekst- en audiohulpmiddel voor huidige gebeurtenissen of zelfs als een multimedia-vragenlijst.</p>\n<p>Een eenvoudige, afdrukbare gebruikershandleiding is te vinden op <a href=\"https://digitaleconomytoolkit.org/manuals/com-phone.pdf\">https://digitaleconomytoolkit.org/manuals/com-phone.pdf</a>.</p><br />\n<p>Com-Phone is gratis, zonder reclame of onnodige machtigingen. De app is open source als onderdeel van de Com-Me-toolkit \u2013 je kunt ten allen tijde een fork maken op GitHub: <a href=\"https://github.com/communitymedia\">https://github.com/communitymedia</a>.</p>\n<p>Bekijk voor meer informatie: <a href=\"https://digitaleconomytoolkit.org\">https://digitaleconomytoolkit.org</a>.</p>",
+          "name": "Com-Phone Story Maker",
+          "summary": "Cre\u00eber, vertel, deel en geniet van je digitale multimediaverhalen"
+        },
+        "pl-PL": {
+          "description": "<p>Com-Phone pomaga tworzy\u0107 multimedialne narracje, \u0142\u0105czy\u0107 zdj\u0119cia, d\u017awi\u0119k i tekst w ekscytuj\u0105ce cyfrowe historie. Prosty interfejs aplikacji u\u0142atwia tworzenie w\u0142asnych pokaz\u00f3w zdj\u0119\u0107 aby utrwali\u0107 ciekawe momenty \u017cycia. Aplikacja umo\u017cliwia r\u00f3wnie\u017c wysy\u0142anie na inne urz\u0105dzenia lub odtwarzanie lokalnie stworzonych historii; tworzenie szablon\u00f3w; eksport jako wideo; upload na YouTube i zapisywanie w webowej wersji do p\u00f3\u017aniejszego opublikowania.</p>\n<p>Ka\u017cde opowiadania mo\u017ce zawiera\u0107 dowoln\u0105 ilo\u015b\u0107 multimedialnych kadr\u00f3w. Ka\u017cdy indywidualny kadr historii mo\u017ce zawiera\u0107 obraz, do trzech warstw d\u017awi\u0119ku oraz tekst. Wszystko w kadrze mo\u017ce by\u0107 edytowane w dowolnym momencie - przyk\u0142adowo mo\u017cna spauzowa\u0107 nagrywanie d\u017awi\u0119ku i potem kontynuowa\u0107 lub za\u0142adowa\u0107 obrazy z biblioteki. Wszystkie elementy kadru s\u0105 opcjonalne. Przyk\u0142adowo Com-Phone mo\u017ce r\u00f3wnie\u017c by\u0107 u\u017cyte jako foto pami\u0119tnik, prosty rejestrator d\u017awi\u0119ku, narz\u0119dzie do dyskutowania o wydarzeniach za pomoc\u0105 d\u017awi\u0119ku i tekstu lub nawet jako program do multimedialnych ankiet.</p>\n<p>Prosta obrazkowa instrukcja dost\u0119pna jest pod adresem: <a href=\"https://digitaleconomytoolkit.org/manuals/com-phone.pdf\">https://digitaleconomytoolkit.org/manuals/com-phone.pdf</a>.</p><br />\n<p>Com-Phone jest ca\u0142kowicie bezp\u0142atne, nie ma te\u017c reklam ani niepotrzebnych zezwole\u0144. Aplikacja ma otwarte \u017ar\u00f3d\u0142o jako cz\u0119\u015b\u0107 zestawu narz\u0119dzi Com-Me \u2013 mo\u017cesz utworzy\u0107 rozwidlenie dowolnej aplikacji z Com-Me na GitHub-ie: <a href=\"https://github.com/communitymedia\">https://github.com/communitymedia</a>.</p>\n<p>Wi\u0119cej informacji o projekcie Com-Me pod adresem: <a href=\"https://digitaleconomytoolkit.org\">https://digitaleconomytoolkit.org</a>.</p>",
+          "name": "Com-Phone Story Maker",
+          "summary": "Tw\u00f3rz, opowiadaj, dziel si\u0119 i ciesz si\u0119 multimedialnymi cyfrowymi historia"
+        },
+        "pt-PT": {
+          "description": "<p>Com-Phone ajuda a criar narrativas multim\u00eddia, combinando fotos, \u00e1udio e texto de maneiras emocionantes para contar hist\u00f3rias digitais. A interface simples do aplicativo ajuda voc\u00ea a criar suas pr\u00f3prias apresenta\u00e7\u00f5es de fotos para documentar sua vida; enviar para outros dispositivos executando o aplicativo ou reproduzi-los localmente; criar modelos; exportar como um filme; fazer o upload para o YouTube; ou salvar uma vers\u00e3o da web para auto-publicar.</p>\n<p>Cada hist\u00f3ria pode incluir qualquer n\u00famero de quadros de m\u00eddia. Cada quadro individual da hist\u00f3ria pode incluir uma imagem ou foto, at\u00e9 tr\u00eas camadas de \u00e1udio ou faixas de m\u00fasica e conte\u00fado de texto. Qualquer coisa em um quadro pode ser editado a qualquer momento \u2013 por exemplo, voc\u00ea pode pausar a grava\u00e7\u00e3o de \u00e1udio e, ent\u00e3o, retomar mais tarde, ou carregar fotos de sua galeria. Todos os elementos de cada quadro s\u00e3o opcionais. Por exemplo, Com-Phone tamb\u00e9m pode ser usado como um di\u00e1rio fotogr\u00e1fico anotado, um gravador de \u00e1udio simples, uma ferramenta de texto e som para a discuss\u00e3o sobre eventos atuais, ou mesmo uma ferramenta de pesquisa multim\u00eddia.</p>\n<p>Um manual de usu\u00e1rio simples para impress\u00e3o est\u00e1 dispon\u00edvel em: <a href=\"https://digitaleconomytoolkit.org/manuals/com-phone.pdf\">https://digitaleconomytoolkit.org/manuals/com-phone.pdf</a>.</p><br />\n<p>Com-Phone \u00e9 totalmente gratuito, sem an\u00fancios e sem permiss\u00f5es desnecess\u00e1rias. O aplicativo \u00e9 de c\u00f3digo aberto como parte do kit de ferramentas Com-Me - voc\u00ea pode colocar qualquer um dos aplicativos Com-Me no GitHub: <a href=\"https://github.com/communitymedia\">https://github.com/communitymedia</a>.</p>\n<p>Para obter mais informa\u00e7\u00f5es sobre o projeto Com-Me, consulte: <a href=\"https://digitaleconomytoolkit.org\">https://digitaleconomytoolkit.org</a>.</p>",
+          "name": "Com-Phone Story Maker",
+          "summary": "Crie, conte, compartilhe e desfrute hist\u00f3rias digitais multim\u00eddia"
+        },
+        "ru-RU": {
+          "description": "<p>Com-Phone \u043f\u043e\u043c\u043e\u0433\u0430\u0435\u0442 \u0441\u043e\u0437\u0434\u0430\u0442\u044c \u043c\u0443\u043b\u044c\u0442\u0438\u043c\u0435\u0434\u0438\u0439\u043d\u044b\u0435 \u0438\u0441\u0442\u043e\u0440\u0438\u0438, \u043a\u043e\u043c\u0431\u0438\u043d\u0438\u0440\u0443\u044f \u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0438, \u0430\u0443\u0434\u0438\u043e \u0438 \u0442\u0435\u043a\u0441\u0442 \u0432 \u043c\u0443\u043b\u044c\u0442\u0438\u043c\u0435\u0434\u0438\u0439\u043d\u043e\u043c \u043f\u043e\u0432\u0435\u0441\u0442\u0432\u043e\u0432\u0430\u043d\u0438\u0438. \u042d\u0442\u043e \u043f\u0440\u043e\u0441\u0442\u043e\u0435 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435 \u043f\u043e\u043c\u043e\u0436\u0435\u0442 \u0432\u0430\u043c \u0441\u0434\u0435\u043b\u0430\u0442\u044c \u0441\u0435\u0440\u0438\u044e \u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0439 \u0434\u043b\u044f \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u044f \u0432\u0430\u0448\u0435\u0439 \u0436\u0438\u0437\u043d\u0438; \u043e\u0442\u043e\u0441\u043b\u0430\u0442\u044c \u043d\u0430 \u0434\u0440\u0443\u0433\u0438\u0435 \u0443\u0441\u0442\u043e\u0440\u043e\u0439\u0441\u0442\u0432\u0430, \u0433\u0434\u0435 \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\u043e \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435; \u043f\u0440\u043e\u0438\u0433\u0440\u0430\u0442\u044c \u043d\u0430 \u0432\u0430\u0448\u0435\u043c \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0435; \u0441\u043e\u0437\u0434\u0430\u0442\u044c \u0448\u0430\u0431\u043b\u043e\u043d\u044b; \u044d\u043a\u0441\u043f\u043e\u0440\u0442\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u043a\u0430\u043a \u0432\u0438\u0434\u0435\u043e; \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044c \u043d\u0430 YouTube; \u0438\u043b\u0438 \u0441\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c \u0432\u0435\u0431 \u0432\u0435\u0440\u0441\u0438\u044e \u0438\u0441\u0442\u043e\u0440\u0438\u0438 \u0434\u043b\u044f \u0441\u0430\u043c\u043e-\u043f\u0443\u0431\u043b\u0438\u043a\u0430\u0446\u0438\u0438.</p>\n<p>\u041a\u0430\u0436\u0434\u0430\u044f \u0438\u0441\u0442\u043e\u0440\u0438\u044f \u043c\u043e\u0436\u0435\u0442 \u0432\u043a\u043b\u044e\u0447\u0430\u0442\u044c \u043b\u044e\u0431\u043e\u0435 \u043a\u043e\u043b\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u043c\u0435\u0434\u0438\u044f \u0440\u0430\u043c\u043e\u043a. \u041a\u0430\u0436\u0434\u0430\u044f \u0438\u043d\u0434\u0438\u0432\u0438\u0434\u0443\u0430\u043b\u044c\u043d\u0430\u044f \u0440\u0430\u043c\u043a\u0430 \u0438\u0441\u0442\u043e\u0440\u0438\u0438 \u043c\u043e\u0436\u0435\u0442 \u0432\u043a\u043b\u044e\u0447\u0430\u0442\u044c \u0444\u043e\u0442\u043e \u0438\u043b\u0438 \u0434\u0440\u0443\u0433\u043e\u0435 \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0435, \u0434\u043e \u0442\u0440\u0435\u0445 \u0437\u0432\u0443\u043a\u043e\u0432\u044b\u0445 \u0434\u043e\u0440\u043e\u0436\u0435\u043a, \u0438 \u0442\u0435\u043a\u0441\u0442. \u042d\u0442\u0438 \u043a\u043e\u043c\u043f\u043e\u043d\u0435\u043d\u0442\u044b \u0432 \u0440\u0430\u043c\u043a\u0435 \u043c\u043e\u0436\u043d\u043e \u0440\u0435\u0434\u0430\u043a\u0442\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432 \u043b\u044e\u0431\u043e\u0435 \u0432\u0440\u0435\u043c\u044f - \u043d\u0430\u043f\u0440\u0438\u043c\u0435\u0440, \u0432\u044b \u043c\u043e\u0436\u0435\u0442\u0435 \u043f\u043e\u0441\u0442\u0430\u0432\u0438\u0442\u044c \u0437\u0430\u043f\u0438\u0441\u044c \u043d\u0430 \u043f\u0430\u0443\u0437\u0443 \u0438\u043b\u0438 \u0437\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044c \u0443\u0436\u0435 \u0441\u0443\u0436\u0435\u0441\u0442\u0432\u0443\u044e\u0449\u0438\u0435 \u043d\u0430 \u0432\u0430\u0448\u0435\u043c \u0442\u0435\u043b\u0435\u0444\u043e\u043d\u0435 \u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0438. \u0412\u0441\u0435 \u044d\u043b\u0435\u043c\u0435\u043d\u0442\u044b \u0432 \u0440\u0430\u043c\u043a\u0435 \u043d\u0435 \u044f\u0432\u043b\u044f\u044e\u0442\u0441\u044f \u043e\u0431\u044f\u0437\u0430\u0442\u0435\u043b\u044c\u043d\u044b\u043c\u0438. \u041d\u0430\u043f\u0440\u0438\u043c\u0435\u0440, \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435 Com-Phone \u043c\u043e\u0436\u0435\u0442 \u0431\u044b\u0442\u044c \u0438\u0441\u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u043d\u043e \u043a\u0430\u043a \u0444\u043e\u0442\u043e \u0436\u0443\u0440\u043d\u0430\u043b \u0441 \u043f\u043e\u0434\u043f\u0438\u0441\u044f\u043c\u0438, \u0430\u0443\u0434\u0438\u043e \u0434\u0438\u043a\u0442\u043e\u0444\u043e\u043d, \u0442\u0435\u043a\u0441\u0442\u043e\u0432\u043e\u0435 \u0438 \u0437\u0432\u0443\u043a\u043e\u0432\u043e\u0435 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435 \u0434\u043b\u044f \u043e\u0431\u0441\u0443\u0436\u0434\u0435\u043d\u0438\u044f \u0442\u0435\u043a\u0443\u0449\u0438\u0445 \u0441\u043e\u0431\u044b\u0442\u0438\u0439, \u0438\u043b\u0438 \u043a\u0430\u043a \u043c\u0443\u043b\u044c\u0442\u0438\u043c\u0435\u0434\u0438\u0439\u043d\u044b\u0439 \u043e\u043f\u0440\u043e\u0441\u043d\u0438\u043a.</p>\n<p>\u041f\u0440\u043e\u0441\u0442\u0430\u044f \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u0430\u044f \u0434\u043b\u044f \u043f\u0435\u0447\u0430\u0442\u0438 \u0438\u043d\u0441\u0442\u0440\u0443\u043a\u0446\u0438\u044f \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u0430 \u043f\u043e \u0430\u0434\u0440\u0435\u0441\u0443: <a href=\"https://digitaleconomytoolkit.org/manuals/com-phone.pdf\">https://digitaleconomytoolkit.org/manuals/com-phone.pdf</a>.</p><br />\n<p>Com-Phone \u043d\u0430\u0445\u043e\u0434\u0438\u0442\u0441\u044f \u0432 \u0441\u0432\u043e\u0431\u043e\u0434\u043d\u043e\u043c \u0434\u043e\u0441\u0442\u0443\u043f\u0435, \u0431\u0435\u0437 \u0440\u0435\u043a\u043b\u0430\u043c\u044b \u0438 \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u043e\u0441\u0442\u0438 \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043d\u0438\u0439. \u041f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435 \u043e\u0442\u043a\u0440\u044b\u0442\u043e \u043a\u0430\u043a \u0447\u0430\u0441\u0442\u044c \u043a\u043e\u043c\u043f\u043b\u0435\u043a\u0442\u0430 Com-Me toolkit \u2013 \u0432\u044b \u043c\u043e\u0436\u0435\u0442\u0435 \u043d\u0430\u0439\u0442\u0438 Com-Me \u043d\u0430 GitHub: <a href=\"https://github.com/communitymedia\">https://github.com/communitymedia</a>.</p>\n<p>\u0414\u043b\u044f \u0434\u043e\u043f\u043e\u043b\u043d\u0438\u0442\u0435\u043b\u044c\u043d\u043e\u0439 \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u0438 \u043e \u043f\u0440\u043e\u0435\u043a\u0442\u0435 Com-Me, \u043f\u043e\u0441\u0438\u0442\u0438\u0442\u0435: <a href=\"https://digitaleconomytoolkit.org\">https://digitaleconomytoolkit.org</a>.</p>",
+          "name": "Com-Phone Story Maker",
+          "summary": "\u0421\u043e\u0437\u0434\u0430\u0432\u0430\u0439\u0442\u0435, \u0440\u0430\u0441\u043a\u0430\u0437\u044b\u0432\u0430\u0439\u0442\u0435, \u0434\u0435\u043b\u0438\u0442\u0435\u0441\u044c \u0438 \u043d\u0430\u0441\u043b\u0430\u0436\u0434\u0430\u0439\u0442\u0435\u0441\u044c \u043c\u0443\u043b\u044c\u0442\u0438\u043c\u0435\u0434\u0438\u0439\u043d\u044b\u043c\u0438 \u0446\u0438\u0444\u0440\u043e\u0432\u044b\u043c\u0438 \u0438\u0441\u0442"
+        }
+      }
+    }
+  ],
+
+  "packages": {
+    "at.bitfire.davdroid": [
+      {
+        "added": 1640899362000,
+        "apkName": "at.bitfire.davdroid_401000005.apk",
+        "hash": "f22f45ec7f4ca97f099e25d4db48ddb117de381485596ff1c96affd98f883e96",
+        "hashType": "sha256",
+        "minSdkVersion": 21,
+        "nativecode": [
+          "arm64-v8a",
+          "armeabi-v7a",
+          "x86",
+          "x86_64"
+        ],
+        "packageName": "at.bitfire.davdroid",
+        "sig": "03542175324d067b4c36582242f8aecc",
+        "signer": "8b48e676a6864967791783c1d8d0fc0dd6d2ce33e1fb36787793ecd086d44707",
+        "size": 10955451,
+        "srcname": "at.bitfire.davdroid_401000005_src.tar.gz",
+        "targetSdkVersion": 31,
+        "uses-permission": [
+          [
+            "android.permission.ACCESS_NETWORK_STATE",
+            null
+          ],
+          [
+            "android.permission.ACCESS_WIFI_STATE",
+            null
+          ],
+          [
+            "android.permission.FOREGROUND_SERVICE",
+            null
+          ],
+          [
+            "android.permission.INTERNET",
+            null
+          ],
+          [
+            "android.permission.READ_SYNC_SETTINGS",
+            null
+          ],
+          [
+            "android.permission.READ_SYNC_STATS",
+            null
+          ],
+          [
+            "android.permission.WRITE_SYNC_SETTINGS",
+            null
+          ],
+          [
+            "android.permission.RECEIVE_BOOT_COMPLETED",
+            null
+          ],
+          [
+            "android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS",
+            null
+          ],
+          [
+            "android.permission.AUTHENTICATE_ACCOUNTS",
+            22
+          ],
+          [
+            "android.permission.GET_ACCOUNTS",
+            22
+          ],
+          [
+            "android.permission.MANAGE_ACCOUNTS",
+            22
+          ],
+          [
+            "android.permission.READ_CONTACTS",
+            null
+          ],
+          [
+            "android.permission.WRITE_CONTACTS",
+            null
+          ],
+          [
+            "android.permission.READ_CALENDAR",
+            null
+          ],
+          [
+            "android.permission.WRITE_CALENDAR",
+            null
+          ],
+          [
+            "org.dmfs.permission.READ_TASKS",
+            null
+          ],
+          [
+            "org.dmfs.permission.WRITE_TASKS",
+            null
+          ],
+          [
+            "org.tasks.permission.READ_TASKS",
+            null
+          ],
+          [
+            "org.tasks.permission.WRITE_TASKS",
+            null
+          ]
+        ],
+        "uses-permission-sdk-23": [
+          [
+            "android.permission.ACCESS_COARSE_LOCATION",
+            null
+          ],
+          [
+            "android.permission.ACCESS_FINE_LOCATION",
+            null
+          ],
+          [
+            "android.permission.ACCESS_BACKGROUND_LOCATION",
+            null
+          ]
+        ],
+        "versionCode": 401000005,
+        "versionName": "4.1-ose"
+      },
+      {
+        "added": 1634315035000,
+        "apkName": "at.bitfire.davdroid_400000005.apk",
+        "hash": "97b23be221b06140090c975698fd4e5029e7c310d619883126679c9401a865e6",
+        "hashType": "sha256",
+        "minSdkVersion": 21,
+        "nativecode": [
+          "arm64-v8a",
+          "armeabi-v7a",
+          "x86",
+          "x86_64"
+        ],
+        "packageName": "at.bitfire.davdroid",
+        "sig": "03542175324d067b4c36582242f8aecc",
+        "signer": "8b48e676a6864967791783c1d8d0fc0dd6d2ce33e1fb36787793ecd086d44707",
+        "size": 10831893,
+        "srcname": "at.bitfire.davdroid_400000005_src.tar.gz",
+        "targetSdkVersion": 31,
+        "uses-permission": [
+          [
+            "android.permission.ACCESS_NETWORK_STATE",
+            null
+          ],
+          [
+            "android.permission.ACCESS_WIFI_STATE",
+            null
+          ],
+          [
+            "android.permission.FOREGROUND_SERVICE",
+            null
+          ],
+          [
+            "android.permission.INTERNET",
+            null
+          ],
+          [
+            "android.permission.READ_SYNC_SETTINGS",
+            null
+          ],
+          [
+            "android.permission.READ_SYNC_STATS",
+            null
+          ],
+          [
+            "android.permission.WRITE_SYNC_SETTINGS",
+            null
+          ],
+          [
+            "android.permission.RECEIVE_BOOT_COMPLETED",
+            null
+          ],
+          [
+            "android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS",
+            null
+          ],
+          [
+            "android.permission.AUTHENTICATE_ACCOUNTS",
+            22
+          ],
+          [
+            "android.permission.GET_ACCOUNTS",
+            22
+          ],
+          [
+            "android.permission.MANAGE_ACCOUNTS",
+            22
+          ],
+          [
+            "android.permission.READ_CONTACTS",
+            null
+          ],
+          [
+            "android.permission.WRITE_CONTACTS",
+            null
+          ],
+          [
+            "android.permission.READ_CALENDAR",
+            null
+          ],
+          [
+            "android.permission.WRITE_CALENDAR",
+            null
+          ],
+          [
+            "org.dmfs.permission.READ_TASKS",
+            null
+          ],
+          [
+            "org.dmfs.permission.WRITE_TASKS",
+            null
+          ],
+          [
+            "org.tasks.permission.READ_TASKS",
+            null
+          ],
+          [
+            "org.tasks.permission.WRITE_TASKS",
+            null
+          ]
+        ],
+        "uses-permission-sdk-23": [
+          [
+            "android.permission.ACCESS_COARSE_LOCATION",
+            null
+          ],
+          [
+            "android.permission.ACCESS_FINE_LOCATION",
+            null
+          ],
+          [
+            "android.permission.ACCESS_BACKGROUND_LOCATION",
+            null
+          ]
+        ],
+        "versionCode": 400000005,
+        "versionName": "4.0-ose"
+      },
+      {
+        "added": 1633077602000,
+        "apkName": "at.bitfire.davdroid_400000001.apk",
+        "hash": "fe7fbd5020ed1c4292738d296b8f9f4a2ddbb92ed766b40a0ecf7f8e872f78a5",
+        "hashType": "sha256",
+        "minSdkVersion": 21,
+        "nativecode": [
+          "arm64-v8a",
+          "armeabi-v7a",
+          "x86",
+          "x86_64"
+        ],
+        "packageName": "at.bitfire.davdroid",
+        "sig": "03542175324d067b4c36582242f8aecc",
+        "signer": "8b48e676a6864967791783c1d8d0fc0dd6d2ce33e1fb36787793ecd086d44707",
+        "size": 10806892,
+        "srcname": "at.bitfire.davdroid_400000001_src.tar.gz",
+        "targetSdkVersion": 31,
+        "uses-permission": [
+          [
+            "android.permission.ACCESS_NETWORK_STATE",
+            null
+          ],
+          [
+            "android.permission.ACCESS_WIFI_STATE",
+            null
+          ],
+          [
+            "android.permission.FOREGROUND_SERVICE",
+            null
+          ],
+          [
+            "android.permission.INTERNET",
+            null
+          ],
+          [
+            "android.permission.READ_SYNC_SETTINGS",
+            null
+          ],
+          [
+            "android.permission.READ_SYNC_STATS",
+            null
+          ],
+          [
+            "android.permission.WRITE_SYNC_SETTINGS",
+            null
+          ],
+          [
+            "android.permission.RECEIVE_BOOT_COMPLETED",
+            null
+          ],
+          [
+            "android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS",
+            null
+          ],
+          [
+            "android.permission.AUTHENTICATE_ACCOUNTS",
+            22
+          ],
+          [
+            "android.permission.GET_ACCOUNTS",
+            22
+          ],
+          [
+            "android.permission.MANAGE_ACCOUNTS",
+            22
+          ],
+          [
+            "android.permission.READ_CONTACTS",
+            null
+          ],
+          [
+            "android.permission.WRITE_CONTACTS",
+            null
+          ],
+          [
+            "android.permission.READ_CALENDAR",
+            null
+          ],
+          [
+            "android.permission.WRITE_CALENDAR",
+            null
+          ],
+          [
+            "org.dmfs.permission.READ_TASKS",
+            null
+          ],
+          [
+            "org.dmfs.permission.WRITE_TASKS",
+            null
+          ],
+          [
+            "org.tasks.permission.READ_TASKS",
+            null
+          ],
+          [
+            "org.tasks.permission.WRITE_TASKS",
+            null
+          ]
+        ],
+        "uses-permission-sdk-23": [
+          [
+            "android.permission.ACCESS_COARSE_LOCATION",
+            null
+          ],
+          [
+            "android.permission.ACCESS_FINE_LOCATION",
+            null
+          ],
+          [
+            "android.permission.ACCESS_BACKGROUND_LOCATION",
+            null
+          ]
+        ],
+        "versionCode": 400000001,
+        "versionName": "4.0-beta1-ose"
+      }
+    ],
+
+    "ac.robinson.mediaphone": [
+      {
+        "added": 1618704000000,
+        "apkName": "ac.robinson.mediaphone_48.apk",
+        "hash": "6198e1e1ff295743980112b190e762d1c642ef1344b40a21803a564fdb6661d6",
+        "hashType": "sha256",
+        "minSdkVersion": 14,
+        "packageName": "ac.robinson.mediaphone",
+        "sig": "4d4bf562fc8280f6ed8023f44074dbad",
+        "signer": "49b67feb5ab93457eb355108667e630616edaddaece67acf770cfea08093152c",
+        "size": 3086625,
+        "srcname": "ac.robinson.mediaphone_48_src.tar.gz",
+        "targetSdkVersion": 29,
+        "uses-permission": [
+          [
+            "android.permission.BLUETOOTH",
+            null
+          ],
+          [
+            "android.permission.CAMERA",
+            null
+          ],
+          [
+            "android.permission.RECORD_AUDIO",
+            null
+          ],
+          [
+            "android.permission.READ_EXTERNAL_STORAGE",
+            28
+          ],
+          [
+            "android.permission.WRITE_EXTERNAL_STORAGE",
+            28
+          ]
+        ],
+        "versionCode": 48,
+        "versionName": "1.6.6"
+      },
+      {
+        "added": 1622284632000,
+        "apkName": "ac.robinson.mediaphone_47.apk",
+        "hash": "71f0713b28ab177089c86861e090cad7daceb392cff04a9b8c46306b290e2409",
+        "hashType": "sha256",
+        "minSdkVersion": 14,
+        "packageName": "ac.robinson.mediaphone",
+        "sig": "4d4bf562fc8280f6ed8023f44074dbad",
+        "signer": "49b67feb5ab93457eb355108667e630616edaddaece67acf770cfea08093152c",
+        "size": 2908828,
+        "srcname": "ac.robinson.mediaphone_47_src.tar.gz",
+        "targetSdkVersion": 29,
+        "uses-permission": [
+          [
+            "android.permission.BLUETOOTH",
+            null
+          ],
+          [
+            "android.permission.CAMERA",
+            null
+          ],
+          [
+            "android.permission.RECORD_AUDIO",
+            null
+          ],
+          [
+            "android.permission.READ_EXTERNAL_STORAGE",
+            28
+          ],
+          [
+            "android.permission.WRITE_EXTERNAL_STORAGE",
+            28
+          ]
+        ],
+        "versionCode": 47,
+        "versionName": "1.6.5"
+      },
+      {
+        "added": 1608076800000,
+        "apkName": "ac.robinson.mediaphone_46.apk",
+        "hash": "afa058f03d6de3c99e5294836d027c7127d5cc8d840bce967bd254e75d4b8a79",
+        "hashType": "sha256",
+        "minSdkVersion": 14,
+        "packageName": "ac.robinson.mediaphone",
+        "sig": "4d4bf562fc8280f6ed8023f44074dbad",
+        "signer": "49b67feb5ab93457eb355108667e630616edaddaece67acf770cfea08093152c",
+        "size": 2908656,
+        "srcname": "ac.robinson.mediaphone_46_src.tar.gz",
+        "targetSdkVersion": 29,
+        "uses-permission": [
+          [
+            "android.permission.BLUETOOTH",
+            null
+          ],
+          [
+            "android.permission.CAMERA",
+            null
+          ],
+          [
+            "android.permission.RECORD_AUDIO",
+            null
+          ],
+          [
+            "android.permission.READ_EXTERNAL_STORAGE",
+            28
+          ],
+          [
+            "android.permission.WRITE_EXTERNAL_STORAGE",
+            28
+          ]
+        ],
+        "versionCode": 46,
+        "versionName": "1.6.4"
+      }
+    ]
+  }
+}
