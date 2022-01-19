@@ -38,6 +38,7 @@ android {
           passing the following argument to the test runner: disableAnalytics "true".
          */
         testInstrumentationRunnerArguments disableAnalytics: 'true'
+	// TODO https://medium.com/mesmerhq/accelerate-your-android-espresso-testing-by-grouping-relevant-tests-f492d4ff8809
         vectorDrawables.useSupportLibrary = true
     }
 
