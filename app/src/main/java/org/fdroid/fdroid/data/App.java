@@ -57,6 +57,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.os.ConfigurationCompat;
 import androidx.core.os.LocaleListCompat;
+import vendored.org.apache.commons.codec.digest.DigestUtils;
 
 /**
  * Represents an application, its availability, and its current installed state.
@@ -98,7 +99,7 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
     @JsonIgnore
     public Apk installedApk; // might be null if not installed
     @JsonIgnore
-    public String installedSig;
+    public String installedSigner;
     @JsonIgnore
     public int installedVersionCode;
     @JsonIgnore
@@ -399,8 +400,8 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
                 case Cols.InstalledApp.VERSION_NAME:
                     installedVersionName = cursor.getString(i);
                     break;
-                case Cols.InstalledApp.SIGNATURE:
-                    installedSig = cursor.getString(i);
+                case Cols.InstalledApp.SIGNER:
+                    installedSigner = cursor.getString(i);
                     break;
                 case "_id":
                     break;
@@ -954,6 +955,7 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         byte[] rawCertBytes = signer.getEncoded();
         apkJar.close();
 
+        apk.signer = DigestUtils.sha256Hex(rawCertBytes);
         apk.sig = Utils.getsig(rawCertBytes);
     }
 
@@ -997,7 +999,7 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
             return false;
         }
 
-        if (TextUtils.isEmpty(this.installedApk.sig)) {
+        if (TextUtils.isEmpty(this.installedApk.signer)) {
             return false;
         }
 
@@ -1086,7 +1088,7 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         final List<Apk> apks = ApkProvider.Helper.findByPackageName(context, this.packageName);
         for (final Apk apk : apks) {
             boolean allowByCompatability = apk.compatible || Preferences.get().showIncompatibleVersions();
-            boolean allowBySig = this.installedSig == null || TextUtils.equals(this.installedSig, apk.sig);
+            boolean allowBySig = this.installedSigner == null || TextUtils.equals(this.installedSigner, apk.signer);
             if (allowByCompatability && allowBySig) {
                 if (!apk.isApk()) {
                     if (apk.isMediaInstalled(context)) {
@@ -1313,7 +1315,7 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         dest.writeString(this.installedVersionName);
         dest.writeInt(this.installedVersionCode);
         dest.writeParcelable(this.installedApk, flags);
-        dest.writeString(this.installedSig);
+        dest.writeString(this.installedSigner);
         dest.writeLong(this.id);
     }
 
@@ -1367,7 +1369,7 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
         this.installedVersionName = in.readString();
         this.installedVersionCode = in.readInt();
         this.installedApk = in.readParcelable(Apk.class.getClassLoader());
-        this.installedSig = in.readString();
+        this.installedSigner = in.readString();
         this.id = in.readLong();
     }
 
@@ -1396,8 +1398,8 @@ public class App extends ValueObject implements Comparable<App>, Parcelable {
      */
     @Nullable
     public String getMostAppropriateSignature() {
-        if (!TextUtils.isEmpty(installedSig)) {
-            return installedSig;
+        if (!TextUtils.isEmpty(installedSigner)) {
+            return installedSigner;
         } else if (!TextUtils.isEmpty(preferredSigner)) {
             return preferredSigner;
         }

@@ -173,8 +173,8 @@ public class RepoXMLHandler extends DefaultHandler {
                         curapk.hashType = "sha256";
                     }
                     break;
-                case ApkTable.Cols.SIGNATURE:
-                    curapk.sig = str;
+                case ApkTable.Cols.SIGNER:
+                    curapk.signer = str;
                     // the first APK in the list provides the preferred signature
                     if (curapp.preferredSigner == null) {
                         curapp.preferredSigner = str;

@@ -289,11 +289,11 @@ public class ApkProviderTest extends FDroidProviderTest {
         Repo swapRepo = RepoProviderTest.insertRepo(context, "http://192.168.1.3/fdroid/repo", "", "22", "", true);
 
         App officialFDroid = insertApp(context, "org.fdroid.fdroid", "F-Droid (Official)", fdroidRepo);
-        TestUtils.insertApk(context, officialFDroid, 4, TestUtils.FDROID_SIG);
-        TestUtils.insertApk(context, officialFDroid, 5, TestUtils.FDROID_SIG);
+        TestUtils.insertApk(context, officialFDroid, 4, TestUtils.FDROID_SIGNER);
+        TestUtils.insertApk(context, officialFDroid, 5, TestUtils.FDROID_SIGNER);
 
         App debugSwapFDroid = insertApp(context, "org.fdroid.fdroid", "F-Droid (Debug)", swapRepo);
-        TestUtils.insertApk(context, debugSwapFDroid, 6, TestUtils.THIRD_PARTY_SIG);
+        TestUtils.insertApk(context, debugSwapFDroid, 6, TestUtils.THIRD_PARTY_SIGNER);
 
         List<Apk> foundOfficialApks = ApkProvider.Helper.findAppVersionsByRepo(context, officialFDroid, fdroidRepo);
         assertEquals(2, foundOfficialApks.size());

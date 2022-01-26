@@ -408,8 +408,8 @@ public class AppDetailsActivity extends AppCompatActivity
             alert.show();
             return;
         }
-        if (app.installedSig != null && apk.sig != null
-                && !apk.sig.equals(app.installedSig)) {
+        if (app.installedSigner != null && apk.signer != null
+                && !apk.signer.equals(app.installedSigner)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(R.string.SignatureMismatch).setPositiveButton(
                     R.string.ok,

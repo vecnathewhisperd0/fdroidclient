@@ -37,14 +37,14 @@ public class PreferredSignatureTest extends FDroidProviderTest {
     }
 
     private App populateFDroidRepo(Repo repo) {
-        App app = TestUtils.insertApp(context, PACKAGE_NAME, "App", 3100, repo, TestUtils.UPSTREAM_SIG);
+        App app = TestUtils.insertApp(context, PACKAGE_NAME, "App", 3100, repo, TestUtils.UPSTREAM_SIGNER);
 
-        TestUtils.insertApk(context, app, 1100, TestUtils.FDROID_SIG); // 1.0
-        TestUtils.insertApk(context, app, 2100, TestUtils.FDROID_SIG); // 2.0
-        TestUtils.insertApk(context, app, 3100, TestUtils.FDROID_SIG); // 3.0
+        TestUtils.insertApk(context, app, 1100, TestUtils.FDROID_SIGNER); // 1.0
+        TestUtils.insertApk(context, app, 2100, TestUtils.FDROID_SIGNER); // 2.0
+        TestUtils.insertApk(context, app, 3100, TestUtils.FDROID_SIGNER); // 3.0
 
-        TestUtils.insertApk(context, app, 2100, TestUtils.UPSTREAM_SIG); // 2.0
-        TestUtils.insertApk(context, app, 3100, TestUtils.UPSTREAM_SIG); // 3.0
+        TestUtils.insertApk(context, app, 2100, TestUtils.UPSTREAM_SIGNER); // 2.0
+        TestUtils.insertApk(context, app, 3100, TestUtils.UPSTREAM_SIGNER); // 3.0
 
         TestUtils.updateDbAfterInserting(context);
 
@@ -56,21 +56,21 @@ public class PreferredSignatureTest extends FDroidProviderTest {
     }
 
     private App populateDevRepo(Repo repo) {
-        App app = TestUtils.insertApp(context, PACKAGE_NAME, "App", 4100, repo, TestUtils.THIRD_PARTY_SIG);
+        App app = TestUtils.insertApp(context, PACKAGE_NAME, "App", 4100, repo, TestUtils.THIRD_PARTY_SIGNER);
 
-        TestUtils.insertApk(context, app, 1001, TestUtils.THIRD_PARTY_SIG); // 1.0-rc2
-        TestUtils.insertApk(context, app, 1100, TestUtils.THIRD_PARTY_SIG); // 1.0
-        TestUtils.insertApk(context, app, 2001, TestUtils.THIRD_PARTY_SIG); // 2.0-rc1
-        TestUtils.insertApk(context, app, 2002, TestUtils.THIRD_PARTY_SIG); // 2.0-rc2
-        TestUtils.insertApk(context, app, 2100, TestUtils.THIRD_PARTY_SIG); // 2.0
-        TestUtils.insertApk(context, app, 3001, TestUtils.THIRD_PARTY_SIG); // 3.0-rc1
-        TestUtils.insertApk(context, app, 3100, TestUtils.THIRD_PARTY_SIG); // 3.0
-        TestUtils.insertApk(context, app, 4001, TestUtils.THIRD_PARTY_SIG); // 4.0-rc1
-        TestUtils.insertApk(context, app, 4002, TestUtils.THIRD_PARTY_SIG); // 4.0-rc2
-        TestUtils.insertApk(context, app, 4100, TestUtils.THIRD_PARTY_SIG); // 4.0
-        TestUtils.insertApk(context, app, 5001, TestUtils.THIRD_PARTY_SIG); // 5.0-rc1
-        TestUtils.insertApk(context, app, 5002, TestUtils.THIRD_PARTY_SIG); // 5.0-rc2
-        TestUtils.insertApk(context, app, 5003, TestUtils.THIRD_PARTY_SIG); // 5.0-rc3
+        TestUtils.insertApk(context, app, 1001, TestUtils.THIRD_PARTY_SIGNER); // 1.0-rc2
+        TestUtils.insertApk(context, app, 1100, TestUtils.THIRD_PARTY_SIGNER); // 1.0
+        TestUtils.insertApk(context, app, 2001, TestUtils.THIRD_PARTY_SIGNER); // 2.0-rc1
+        TestUtils.insertApk(context, app, 2002, TestUtils.THIRD_PARTY_SIGNER); // 2.0-rc2
+        TestUtils.insertApk(context, app, 2100, TestUtils.THIRD_PARTY_SIGNER); // 2.0
+        TestUtils.insertApk(context, app, 3001, TestUtils.THIRD_PARTY_SIGNER); // 3.0-rc1
+        TestUtils.insertApk(context, app, 3100, TestUtils.THIRD_PARTY_SIGNER); // 3.0
+        TestUtils.insertApk(context, app, 4001, TestUtils.THIRD_PARTY_SIGNER); // 4.0-rc1
+        TestUtils.insertApk(context, app, 4002, TestUtils.THIRD_PARTY_SIGNER); // 4.0-rc2
+        TestUtils.insertApk(context, app, 4100, TestUtils.THIRD_PARTY_SIGNER); // 4.0
+        TestUtils.insertApk(context, app, 5001, TestUtils.THIRD_PARTY_SIGNER); // 5.0-rc1
+        TestUtils.insertApk(context, app, 5002, TestUtils.THIRD_PARTY_SIGNER); // 5.0-rc2
+        TestUtils.insertApk(context, app, 5003, TestUtils.THIRD_PARTY_SIGNER); // 5.0-rc3
 
         TestUtils.updateDbAfterInserting(context);
 
@@ -82,11 +82,11 @@ public class PreferredSignatureTest extends FDroidProviderTest {
     }
 
     private App populateUpstreamRepo(Repo repo) {
-        App app = TestUtils.insertApp(context, PACKAGE_NAME, "App", 4100, repo, TestUtils.UPSTREAM_SIG);
+        App app = TestUtils.insertApp(context, PACKAGE_NAME, "App", 4100, repo, TestUtils.UPSTREAM_SIGNER);
 
-        TestUtils.insertApk(context, app, 2100, TestUtils.UPSTREAM_SIG);
-        TestUtils.insertApk(context, app, 3100, TestUtils.UPSTREAM_SIG);
-        TestUtils.insertApk(context, app, 4100, TestUtils.UPSTREAM_SIG);
+        TestUtils.insertApk(context, app, 2100, TestUtils.UPSTREAM_SIGNER);
+        TestUtils.insertApk(context, app, 3100, TestUtils.UPSTREAM_SIGNER);
+        TestUtils.insertApk(context, app, 4100, TestUtils.UPSTREAM_SIGNER);
 
         TestUtils.updateDbAfterInserting(context);
 
@@ -96,7 +96,7 @@ public class PreferredSignatureTest extends FDroidProviderTest {
     @Test
     public void onlyFDroid() {
         populateFDroidRepo(createFDroidRepo());
-        assertSuggested(context, 3100, TestUtils.UPSTREAM_SIG);
+        assertSuggested(context, 3100, TestUtils.UPSTREAM_SIGNER);
     }
 
     /**
@@ -137,13 +137,13 @@ public class PreferredSignatureTest extends FDroidProviderTest {
      * @see #fdroidThenDev2()
      */
     private void assertFdroidThenDev() {
-        assertSuggested(context, 4100, TestUtils.THIRD_PARTY_SIG);
+        assertSuggested(context, 4100, TestUtils.THIRD_PARTY_SIGNER);
 
         Preferences.get().setUnstableUpdates(true);
-        assertSuggested(context, 5003, TestUtils.THIRD_PARTY_SIG);
+        assertSuggested(context, 5003, TestUtils.THIRD_PARTY_SIGNER);
 
         Preferences.get().setUnstableUpdates(false);
-        assertSuggested(context, 4100, TestUtils.THIRD_PARTY_SIG);
+        assertSuggested(context, 4100, TestUtils.THIRD_PARTY_SIGNER);
     }
 
     /**
@@ -180,7 +180,7 @@ public class PreferredSignatureTest extends FDroidProviderTest {
      * @see #assertFdroidThenDev()
      */
     private void assertFdroidThenUpstream() {
-        assertSuggested(context, 4100, TestUtils.UPSTREAM_SIG);
+        assertSuggested(context, 4100, TestUtils.UPSTREAM_SIGNER);
     }
 
     /**
@@ -221,13 +221,13 @@ public class PreferredSignatureTest extends FDroidProviderTest {
      * @see #assertFdroidThenDev()
      */
     private void assertFdroidThenUpstreamThenDev() {
-        assertSuggested(context, 4100, TestUtils.THIRD_PARTY_SIG);
+        assertSuggested(context, 4100, TestUtils.THIRD_PARTY_SIGNER);
 
         Preferences.get().setUnstableUpdates(true);
-        assertSuggested(context, 5003, TestUtils.THIRD_PARTY_SIG);
+        assertSuggested(context, 5003, TestUtils.THIRD_PARTY_SIGNER);
 
         Preferences.get().setUnstableUpdates(false);
-        assertSuggested(context, 4100, TestUtils.THIRD_PARTY_SIG);
+        assertSuggested(context, 4100, TestUtils.THIRD_PARTY_SIGNER);
     }
 
     /**
@@ -268,16 +268,16 @@ public class PreferredSignatureTest extends FDroidProviderTest {
      * @see #assertFdroidThenDev()
      */
     private void assertFdroidThenDevThenUpstream() {
-        assertSuggested(context, 4100, TestUtils.UPSTREAM_SIG);
+        assertSuggested(context, 4100, TestUtils.UPSTREAM_SIGNER);
     }
 
-    private void assertSuggested(Context context, int suggestedVersion, String suggestedSig) {
+    private void assertSuggested(Context context, int suggestedVersion, String suggestedSigner) {
         App suggestedApp = AppProvider.Helper.findHighestPriorityMetadata(context.getContentResolver(), PACKAGE_NAME);
         assertEquals("Suggested version on App", suggestedVersion, suggestedApp.autoInstallVersionCode);
 
         Apk suggestedApk = ApkProvider.Helper.findSuggestedApk(context, suggestedApp);
         assertEquals("Version on suggested Apk", suggestedVersion, suggestedApk.versionCode);
-        TestUtils.assertSignaturesMatch("Signature on suggested Apk", suggestedSig, suggestedApk.sig);
+        TestUtils.assertSignaturesMatch("Signature on suggested Apk", suggestedSigner, suggestedApk.signer);
     }
 
 }

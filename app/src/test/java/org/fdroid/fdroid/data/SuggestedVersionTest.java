@@ -36,10 +36,10 @@ public class SuggestedVersionTest extends FDroidProviderTest {
     @Test
     public void singleRepoSingleSig() {
         App singleApp = TestUtils.insertApp(
-                context, "single.app", "Single App (with beta)", 2, "https://beta.simple.repo", TestUtils.FDROID_SIG);
-        TestUtils.insertApk(context, singleApp, 1, TestUtils.FDROID_SIG);
-        TestUtils.insertApk(context, singleApp, 2, TestUtils.FDROID_SIG);
-        TestUtils.insertApk(context, singleApp, 3, TestUtils.FDROID_SIG);
+                context, "single.app", "Single App (with beta)", 2, "https://beta.simple.repo", TestUtils.FDROID_SIGNER);
+        TestUtils.insertApk(context, singleApp, 1, TestUtils.FDROID_SIGNER);
+        TestUtils.insertApk(context, singleApp, 2, TestUtils.FDROID_SIGNER);
+        TestUtils.insertApk(context, singleApp, 3, TestUtils.FDROID_SIGNER);
         TestUtils.updateDbAfterInserting(context);
         assertSuggested("single.app", 2);
 
@@ -52,16 +52,16 @@ public class SuggestedVersionTest extends FDroidProviderTest {
     @Test
     public void singleRepoMultiSig() {
         App unrelatedApp = TestUtils.insertApp(context, "noisy.app", "Noisy App", 3, "https://simple.repo",
-                TestUtils.FDROID_SIG);
-        TestUtils.insertApk(context, unrelatedApp, 3, TestUtils.FDROID_SIG);
+                TestUtils.FDROID_SIGNER);
+        TestUtils.insertApk(context, unrelatedApp, 3, TestUtils.FDROID_SIGNER);
 
         App singleApp = TestUtils.insertApp(context, "single.app", "Single App", 4, "https://simple.repo",
-                TestUtils.UPSTREAM_SIG);
-        TestUtils.insertApk(context, singleApp, 1, TestUtils.FDROID_SIG);
-        TestUtils.insertApk(context, singleApp, 2, TestUtils.FDROID_SIG);
-        TestUtils.insertApk(context, singleApp, 3, TestUtils.FDROID_SIG);
-        TestUtils.insertApk(context, singleApp, 4, TestUtils.UPSTREAM_SIG);
-        TestUtils.insertApk(context, singleApp, 5, TestUtils.UPSTREAM_SIG);
+                TestUtils.UPSTREAM_SIGNER);
+        TestUtils.insertApk(context, singleApp, 1, TestUtils.FDROID_SIGNER);
+        TestUtils.insertApk(context, singleApp, 2, TestUtils.FDROID_SIGNER);
+        TestUtils.insertApk(context, singleApp, 3, TestUtils.FDROID_SIGNER);
+        TestUtils.insertApk(context, singleApp, 4, TestUtils.UPSTREAM_SIGNER);
+        TestUtils.insertApk(context, singleApp, 5, TestUtils.UPSTREAM_SIGNER);
         TestUtils.updateDbAfterInserting(context);
 
         // Given we aren't installed yet, we don't care which signature.
@@ -71,42 +71,42 @@ public class SuggestedVersionTest extends FDroidProviderTest {
         // Now install v1 with the f-droid signature. In response, we should only suggest
         // apps with that sig in the future. That is, version 4 from upstream is not considered.
         InstalledAppTestUtils.install(context, "single.app", 1, "v1", TestUtils.FDROID_CERT);
-        assertSuggested("single.app", 3, TestUtils.FDROID_SIG, 1);
+        assertSuggested("single.app", 3, TestUtils.FDROID_SIGNER, 1);
 
         // This adds the "suggestedVersionCode" version of the app, but signed by f-droid.
-        TestUtils.insertApk(context, singleApp, 4, TestUtils.FDROID_SIG);
-        TestUtils.insertApk(context, singleApp, 5, TestUtils.FDROID_SIG);
+        TestUtils.insertApk(context, singleApp, 4, TestUtils.FDROID_SIGNER);
+        TestUtils.insertApk(context, singleApp, 5, TestUtils.FDROID_SIGNER);
         TestUtils.updateDbAfterInserting(context);
-        assertSuggested("single.app", 4, TestUtils.FDROID_SIG, 1);
+        assertSuggested("single.app", 4, TestUtils.FDROID_SIGNER, 1);
 
         // Version 5 from F-Droid is not the "suggestedVersionCode", but with beta updates it should
         // still become the suggested version now.
         Preferences.get().setUnstableUpdates(true);
-        assertSuggested("single.app", 5, TestUtils.FDROID_SIG, 1);
+        assertSuggested("single.app", 5, TestUtils.FDROID_SIGNER, 1);
     }
 
     @Test
     public void multiRepoMultiSig() {
         App unrelatedApp = TestUtils.insertApp(context, "noisy.app", "Noisy App", 3, "https://simple.repo",
-                TestUtils.FDROID_SIG);
-        TestUtils.insertApk(context, unrelatedApp, 3, TestUtils.FDROID_SIG);
+                TestUtils.FDROID_SIGNER);
+        TestUtils.insertApk(context, unrelatedApp, 3, TestUtils.FDROID_SIGNER);
 
         App mainApp = TestUtils.insertApp(context, "single.app", "Single App (Main repo)", 4, "https://main.repo",
-                TestUtils.FDROID_SIG);
+                TestUtils.FDROID_SIGNER);
         App thirdPartyApp = TestUtils.insertApp(
                 context, "single.app", "Single App (3rd party)", 4, "https://3rd-party.repo",
-                TestUtils.THIRD_PARTY_SIG);
+                TestUtils.THIRD_PARTY_SIGNER);
 
-        TestUtils.insertApk(context, mainApp, 1, TestUtils.FDROID_SIG);
-        TestUtils.insertApk(context, mainApp, 2, TestUtils.FDROID_SIG);
-        TestUtils.insertApk(context, mainApp, 3, TestUtils.FDROID_SIG);
-        TestUtils.insertApk(context, mainApp, 4, TestUtils.UPSTREAM_SIG);
-        TestUtils.insertApk(context, mainApp, 5, TestUtils.UPSTREAM_SIG);
+        TestUtils.insertApk(context, mainApp, 1, TestUtils.FDROID_SIGNER);
+        TestUtils.insertApk(context, mainApp, 2, TestUtils.FDROID_SIGNER);
+        TestUtils.insertApk(context, mainApp, 3, TestUtils.FDROID_SIGNER);
+        TestUtils.insertApk(context, mainApp, 4, TestUtils.UPSTREAM_SIGNER);
+        TestUtils.insertApk(context, mainApp, 5, TestUtils.UPSTREAM_SIGNER);
 
-        TestUtils.insertApk(context, thirdPartyApp, 3, TestUtils.THIRD_PARTY_SIG);
-        TestUtils.insertApk(context, thirdPartyApp, 4, TestUtils.THIRD_PARTY_SIG);
-        TestUtils.insertApk(context, thirdPartyApp, 5, TestUtils.THIRD_PARTY_SIG);
-        TestUtils.insertApk(context, thirdPartyApp, 6, TestUtils.THIRD_PARTY_SIG);
+        TestUtils.insertApk(context, thirdPartyApp, 3, TestUtils.THIRD_PARTY_SIGNER);
+        TestUtils.insertApk(context, thirdPartyApp, 4, TestUtils.THIRD_PARTY_SIGNER);
+        TestUtils.insertApk(context, thirdPartyApp, 5, TestUtils.THIRD_PARTY_SIGNER);
+        TestUtils.insertApk(context, thirdPartyApp, 6, TestUtils.THIRD_PARTY_SIGNER);
         TestUtils.updateDbAfterInserting(context);
 
         // Given we aren't installed yet, we don't care which signature or even which repo.
@@ -116,24 +116,24 @@ public class SuggestedVersionTest extends FDroidProviderTest {
         // Now install v1 with the f-droid signature. In response, we should only suggest
         // apps with that sig in the future. That is, version 4 from upstream is not considered.
         InstalledAppTestUtils.install(context, "single.app", 1, "v1", TestUtils.FDROID_CERT);
-        assertSuggested("single.app", 3, TestUtils.FDROID_SIG, 1);
+        assertSuggested("single.app", 3, TestUtils.FDROID_SIGNER, 1);
 
         // This adds the "suggestedVersionCode" version of the app, but signed by f-droid.
-        TestUtils.insertApk(context, mainApp, 4, TestUtils.FDROID_SIG);
-        TestUtils.insertApk(context, mainApp, 5, TestUtils.FDROID_SIG);
+        TestUtils.insertApk(context, mainApp, 4, TestUtils.FDROID_SIGNER);
+        TestUtils.insertApk(context, mainApp, 5, TestUtils.FDROID_SIGNER);
         TestUtils.updateDbAfterInserting(context);
-        assertSuggested("single.app", 4, TestUtils.FDROID_SIG, 1);
+        assertSuggested("single.app", 4, TestUtils.FDROID_SIGNER, 1);
 
         // Uninstalling the F-Droid build and installing v3 of the third party means we can now go
         // back to suggesting version 4.
         InstalledAppProviderService.deleteAppFromDb(context, "single.app");
         InstalledAppTestUtils.install(context, "single.app", 3, "v3", TestUtils.THIRD_PARTY_CERT);
-        assertSuggested("single.app", 4, TestUtils.THIRD_PARTY_SIG, 3);
+        assertSuggested("single.app", 4, TestUtils.THIRD_PARTY_SIGNER, 3);
 
         // Version 6 from the 3rd party repo is not the "suggestedVersionCode", but with beta updates
         // it should still become the suggested version now.
         Preferences.get().setUnstableUpdates(true);
-        assertSuggested("single.app", 6, TestUtils.THIRD_PARTY_SIG, 3);
+        assertSuggested("single.app", 6, TestUtils.THIRD_PARTY_SIGNER, 3);
     }
 
     /**
@@ -145,18 +145,18 @@ public class SuggestedVersionTest extends FDroidProviderTest {
     public void dontSuggestUpstreamVersions() {
         // By setting the "suggestedVersionCode" to 0, we are letting F-Droid choose the highest compatible version.
         App mainApp = TestUtils.insertApp(context, "single.app", "Single App (Main repo)", 0, "https://main.repo",
-                TestUtils.UPSTREAM_SIG);
+                TestUtils.UPSTREAM_SIGNER);
 
-        TestUtils.insertApk(context, mainApp, 1, TestUtils.FDROID_SIG);
-        TestUtils.insertApk(context, mainApp, 2, TestUtils.FDROID_SIG);
-        TestUtils.insertApk(context, mainApp, 3, TestUtils.FDROID_SIG);
-        TestUtils.insertApk(context, mainApp, 4, TestUtils.FDROID_SIG);
-        TestUtils.insertApk(context, mainApp, 5, TestUtils.FDROID_SIG);
+        TestUtils.insertApk(context, mainApp, 1, TestUtils.FDROID_SIGNER);
+        TestUtils.insertApk(context, mainApp, 2, TestUtils.FDROID_SIGNER);
+        TestUtils.insertApk(context, mainApp, 3, TestUtils.FDROID_SIGNER);
+        TestUtils.insertApk(context, mainApp, 4, TestUtils.FDROID_SIGNER);
+        TestUtils.insertApk(context, mainApp, 5, TestUtils.FDROID_SIGNER);
 
-        TestUtils.insertApk(context, mainApp, 4, TestUtils.UPSTREAM_SIG);
-        TestUtils.insertApk(context, mainApp, 5, TestUtils.UPSTREAM_SIG);
-        TestUtils.insertApk(context, mainApp, 6, TestUtils.UPSTREAM_SIG);
-        TestUtils.insertApk(context, mainApp, 7, TestUtils.UPSTREAM_SIG);
+        TestUtils.insertApk(context, mainApp, 4, TestUtils.UPSTREAM_SIGNER);
+        TestUtils.insertApk(context, mainApp, 5, TestUtils.UPSTREAM_SIGNER);
+        TestUtils.insertApk(context, mainApp, 6, TestUtils.UPSTREAM_SIGNER);
+        TestUtils.insertApk(context, mainApp, 7, TestUtils.UPSTREAM_SIGNER);
         TestUtils.updateDbAfterInserting(context);
 
         // If the user was to manually install the app, they should be suggested version 7 from upstream...
@@ -167,7 +167,7 @@ public class SuggestedVersionTest extends FDroidProviderTest {
 
         // After installing an early F-Droid version, we should then suggest the latest F-Droid version.
         InstalledAppTestUtils.install(context, "single.app", 2, "v2", TestUtils.FDROID_CERT);
-        assertSuggested("single.app", 5, TestUtils.FDROID_SIG, 2);
+        assertSuggested("single.app", 5, TestUtils.FDROID_SIGNER, 2);
 
         // However once we've reached the maximum F-Droid version, then we should not suggest higher versions
         // with different signatures.
@@ -189,22 +189,22 @@ public class SuggestedVersionTest extends FDroidProviderTest {
      * Checks that the app exists, that its suggested version code is correct, and that the apk which is "suggested"
      * has the correct signature.
      * <p>
-     * If {@param installedSig} is null then {@param installedVersion} is ignored and the signature of the suggested
-     * apk is not checked.
+     * If {@param installedSigner} is null then {@param installedVersion} is
+     * ignored and the signature of the suggested apk is not checked.
      */
-    public void assertSuggested(String packageName, int suggestedVersion, String installedSig, int installedVersion) {
+    public void assertSuggested(String packageName, int suggestedVersion, String installedSigner, int installedVersion) {
         App suggestedApp = AppProvider.Helper.findHighestPriorityMetadata(context.getContentResolver(), packageName);
         assertEquals("Suggested version on App", suggestedVersion, suggestedApp.autoInstallVersionCode);
-        assertEquals("Installed signature on App", installedSig, suggestedApp.installedSig);
+        assertEquals("Installed signature on App", installedSigner, suggestedApp.installedSigner);
 
         Apk suggestedApk = ApkProvider.Helper.findSuggestedApk(context, suggestedApp);
         assertEquals("Suggested version on Apk", suggestedVersion, suggestedApk.versionCode);
-        if (installedSig != null) {
-            assertEquals("Installed signature on Apk", installedSig, suggestedApk.sig);
+        if (installedSigner != null) {
+            assertEquals("Installed signature on Apk", installedSigner, suggestedApk.signer);
         }
 
         List<App> appsToUpdate = AppProvider.Helper.findCanUpdate(context, Schema.AppMetadataTable.Cols.ALL);
-        if (installedSig == null) {
+        if (installedSigner == null) {
             assertEquals("Should not be able to update anything", 0, appsToUpdate.size());
         } else {
             assertEquals("Apps to update", 1, appsToUpdate.size());
@@ -212,7 +212,7 @@ public class SuggestedVersionTest extends FDroidProviderTest {
             assertEquals("Package name of updatable app", packageName, canUpdateApp.packageName);
             assertEquals("Installed version of updatable app", installedVersion, canUpdateApp.installedVersionCode);
             assertEquals("Suggested version to update to", suggestedVersion, canUpdateApp.autoInstallVersionCode);
-            assertEquals("Installed signature of updatable app", installedSig, canUpdateApp.installedSig);
+            assertEquals("Installed signature of updatable app", installedSigner, canUpdateApp.installedSigner);
         }
     }
 

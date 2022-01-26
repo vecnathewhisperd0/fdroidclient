@@ -49,7 +49,7 @@ public class InstalledAppProviderTest extends FDroidProviderTest {
         values.put(Cols.HASH, "has of test app");
         values.put(Cols.HASH_TYPE, "fake hash type");
         values.put(Cols.LAST_UPDATE_TIME, 100000000L);
-        values.put(Cols.SIGNATURE, "000111222333444555666777888999aaabbbcccdddeeefff");
+        values.put(Cols.SIGNER, "0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff");
         contentResolver.insert(InstalledAppProvider.getContentUri(), values);
 
         Map<String, Long> foundAfter = InstalledAppProvider.Helper.lastUpdateTimes(
@@ -69,8 +69,8 @@ public class InstalledAppProviderTest extends FDroidProviderTest {
         assertEquals("has of test app", cursor.getString(cursor.getColumnIndex(Cols.HASH)));
         assertEquals("fake hash type", cursor.getString(cursor.getColumnIndex(Cols.HASH_TYPE)));
         assertEquals(100000000L, cursor.getLong(cursor.getColumnIndex(Cols.LAST_UPDATE_TIME)));
-        assertEquals("000111222333444555666777888999aaabbbcccdddeeefff",
-                cursor.getString(cursor.getColumnIndex(Cols.SIGNATURE)));
+        assertEquals("0000111122223333444455556666777788889999aaaabbbbccccddddeeeeffff",
+                cursor.getString(cursor.getColumnIndex(Cols.SIGNER)));
 
         cursor.close();
     }
@@ -217,7 +217,7 @@ public class InstalledAppProviderTest extends FDroidProviderTest {
         values.put(Cols.APPLICATION_LABEL, "Mock app: " + appId);
         values.put(Cols.VERSION_CODE, versionCode);
         values.put(Cols.VERSION_NAME, versionNumber);
-        values.put(Cols.SIGNATURE, "");
+        values.put(Cols.SIGNER, "");
         values.put(Cols.LAST_UPDATE_TIME, System.currentTimeMillis());
         values.put(Cols.HASH_TYPE, "sha256");
         values.put(Cols.HASH, "cafecafecafecafecafecafecafecafecafecafecafecafecafecafecafecafe");

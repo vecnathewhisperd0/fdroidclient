@@ -96,7 +96,13 @@ public class IndexV1Updater extends IndexUpdater {
     public static final String SIGNED_FILE_NAME = "index-v1.jar";
     public static final String DATA_FILE_NAME = "index-v1.json";
 
-    private static String platformSigCache;
+    /**
+     * Use Android {@code platform} signature as preferred signer, if available.
+     *
+     * @see App#preferredSigner
+     * @see <a href="https://source.android.com/devices/tech/ota/sign_builds#certificates-keys">Android <tt>platform</tt> signing certificate</a>
+     */
+    private static String androidPlatformSigner;
 
     public IndexV1Updater(@NonNull Context context, @NonNull Repo repo) {
         super(context, repo);
@@ -304,9 +310,9 @@ public class IndexV1Updater extends IndexUpdater {
         repo.maxage = getIntRepoValue(repoMap, "maxage");
         repo.version = getIntRepoValue(repoMap, "version");
 
-        if (TextUtils.isEmpty(platformSigCache)) {
+        if (TextUtils.isEmpty(androidPlatformSigner)) {
             PackageInfo androidPackageInfo = Utils.getPackageInfoWithSignatures(context, "android");
-            platformSigCache = Utils.getPackageSig(androidPackageInfo);
+            androidPlatformSigner = Utils.getPackageSigner(androidPackageInfo);
         }
 
         RepoPersister repoPersister = new RepoPersister(context, repo);
@@ -325,13 +331,13 @@ public class IndexV1Updater extends IndexUpdater {
                 }
 
                 if (apks.size() > 0) {
-                    app.preferredSigner = apks.get(0).sig;
+                    app.preferredSigner = apks.get(0).signer;
                     app.isApk = true;
                     for (Apk apk : apks) {
                         if (!apk.isApk()) {
                             app.isApk = false;
-                        } else if (apk.sig.equals(platformSigCache)) {
-                            app.preferredSigner = platformSigCache;
+                        } else if (apk.signer.equals(androidPlatformSigner)) {
+                            app.preferredSigner = androidPlatformSigner;
                         }
                     }
                 }

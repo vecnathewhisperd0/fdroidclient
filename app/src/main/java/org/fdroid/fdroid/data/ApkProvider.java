@@ -99,7 +99,7 @@ public class ApkProvider extends FDroidProvider {
             if (apk == null && (mostAppropriateSignature == null || !app.isInstalled(context))) {
                 List<Apk> apks = findByPackageName(context, app.packageName);
                 for (Apk availableApk : apks) {
-                    if (availableApk.sig.equals(mostAppropriateSignature)) {
+                    if (availableApk.signer.equals(mostAppropriateSignature)) {
                         apk = availableApk;
                         break;
                     }
@@ -411,7 +411,7 @@ public class ApkProvider extends FDroidProvider {
         args.add(pathSegments.get(2));
 
         if (pathSegments.size() >= 4) {
-            selection += " AND " + alias + Cols.SIGNATURE + " = ? ";
+            selection += " AND " + alias + Cols.SIGNER + " = ? ";
             args.add(pathSegments.get(3));
         }
 

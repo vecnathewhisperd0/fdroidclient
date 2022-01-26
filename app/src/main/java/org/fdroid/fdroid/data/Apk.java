@@ -101,9 +101,25 @@ public class Apk extends ValueObject implements Comparable<Apk>, Parcelable {
     public String[] nativecode; // null if empty or unknown
 
     /**
-     * ID (md5 sum of public key) of signature. Might be null, in the
-     * transition to this field existing.
+     * Standard SHA-256 fingerprint of the X.509 signing certificate.  This can
+     * be fetched in a few different ways:
+     * <ul>
+     *     <li><code>apksigner verify --print-certs example.apk</code></li>
+     *     <li><code>jarsigner -verify -verbose -certs index-v1.jar</code></li>
+     *     <li><code>keytool -list -v -keystore keystore.jks</code></li>
+     * </ul>
+     *
+     * @see <a href="https://source.android.com/security/apksigning/v3#apk-signature-scheme-v3-block"><tt>signer</tt> in APK Signature Scheme v3</a>
      */
+    public String signer;
+
+    /**
+     * ID (md5 sum of public key) of signature. Might be null, in the
+     * transition to this field existing. This will only be kept as long as it
+     * is needed for backwards compatibility. It should never be used otherwise.
+     */
+    @JsonIgnore
+    @Deprecated
     public String sig;
 
     public String apkName; // F-Droid style APK name
@@ -230,8 +246,8 @@ public class Apk extends ValueObject implements Comparable<Apk>, Parcelable {
                 case Cols.REPO_ID:
                     repoId = cursor.getInt(i);
                     break;
-                case Cols.SIGNATURE:
-                    sig = cursor.getString(i);
+                case Cols.SIGNER:
+                    signer = cursor.getString(i);
                     break;
                 case Cols.SIZE:
                     size = cursor.getInt(i);
@@ -356,7 +372,7 @@ public class Apk extends ValueObject implements Comparable<Apk>, Parcelable {
         values.put(Cols.REPO_ID, repoId);
         values.put(Cols.HASH, hash);
         values.put(Cols.HASH_TYPE, hashType);
-        values.put(Cols.SIGNATURE, sig);
+        values.put(Cols.SIGNER, signer);
         values.put(Cols.SOURCE_NAME, srcname);
         values.put(Cols.SIZE, size);
         values.put(Cols.NAME, apkName);
@@ -411,7 +427,7 @@ public class Apk extends ValueObject implements Comparable<Apk>, Parcelable {
         dest.writeStringArray(this.requestedPermissions);
         dest.writeStringArray(this.features);
         dest.writeStringArray(this.nativecode);
-        dest.writeString(this.sig);
+        dest.writeString(this.signer);
         dest.writeByte(this.compatible ? (byte) 1 : (byte) 0);
         dest.writeString(this.apkName);
         dest.writeSerializable(this.installedFile);
@@ -443,7 +459,7 @@ public class Apk extends ValueObject implements Comparable<Apk>, Parcelable {
         this.requestedPermissions = in.createStringArray();
         this.features = in.createStringArray();
         this.nativecode = in.createStringArray();
-        this.sig = in.readString();
+        this.signer = in.readString();
         this.compatible = in.readByte() != 0;
         this.apkName = in.readString();
         this.installedFile = (SanitizedFile) in.readSerializable();

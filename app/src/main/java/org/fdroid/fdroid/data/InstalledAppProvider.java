@@ -172,11 +172,11 @@ public class InstalledAppProvider extends FDroidProvider {
             Log.i(TAG, "selectNotSystemSignature: systemSignature == null, querying for it");
             HashSet<String> signatures = new HashSet<>();
             for (String packageName : SYSTEM_PACKAGES) {
-                Cursor cursor = query(InstalledAppProvider.getAppUri(packageName), new String[]{Cols.SIGNATURE},
+                Cursor cursor = query(InstalledAppProvider.getAppUri(packageName), new String[]{Cols.SIGNER},
                         null, null, null);
                 if (cursor != null) {
                     if (cursor.moveToFirst()) {
-                        signatures.add(cursor.getString(cursor.getColumnIndex(Cols.SIGNATURE)));
+                        signatures.add(cursor.getString(cursor.getColumnIndex(Cols.SIGNER)));
                     }
                     cursor.close();
                 }
@@ -186,7 +186,7 @@ public class InstalledAppProvider extends FDroidProvider {
 
         Log.i(TAG, "excluding InstalledApps signed by system signatures");
         for (String systemSignature : systemSignatures) {
-            selection = selection.add("NOT " + Cols.SIGNATURE + " IN (?)", new String[]{systemSignature});
+            selection = selection.add("NOT " + Cols.SIGNER + " IN (?)", new String[]{systemSignature});
         }
         return selection;
     }

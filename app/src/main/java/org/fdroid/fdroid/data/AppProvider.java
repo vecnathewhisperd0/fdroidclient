@@ -374,7 +374,7 @@ public class AppProvider extends FDroidProvider {
                 case Cols.InstalledApp.VERSION_CODE:
                     addInstalledAppVersionCode();
                     break;
-                case Cols.InstalledApp.SIGNATURE:
+                case Cols.InstalledApp.SIGNER:
                     addInstalledSig();
                     break;
                 case Cols._COUNT:
@@ -427,8 +427,8 @@ public class AppProvider extends FDroidProvider {
 
         private void addInstalledSig() {
             addInstalledAppField(
-                    InstalledAppTable.Cols.SIGNATURE,
-                    Cols.InstalledApp.SIGNATURE
+                    InstalledAppTable.Cols.SIGNER,
+                    Cols.InstalledApp.SIGNER
             );
         }
 
@@ -1146,7 +1146,7 @@ public class AppProvider extends FDroidProvider {
                         "   LEFT JOIN " + installed + " ON (" + installed + "." + InstalledAppTable.Cols.PACKAGE_ID + " = " + app + "." + Cols.PACKAGE_ID + ") " +
                         " WHERE " +
                         app + "." + Cols.PACKAGE_ID + " = appForThisApk." + Cols.PACKAGE_ID + " AND " +
-                        apk + "." + ApkTable.Cols.SIGNATURE + " IS COALESCE(" + installed + "." + InstalledAppTable.Cols.SIGNATURE + ", " + apk + "." + ApkTable.Cols.SIGNATURE + ") AND " +
+                        apk + "." + ApkTable.Cols.SIGNER + " IS COALESCE(" + installed + "." + InstalledAppTable.Cols.SIGNER + ", " + apk + "." + ApkTable.Cols.SIGNER + ") AND " +
                         restrictToStable +
                         " ( " + app + "." + Cols.IS_COMPATIBLE + " = 0 OR " + apk + "." + Cols.IS_COMPATIBLE + " = 1 ) ) " +
                         " WHERE " + Cols.SUGGESTED_VERSION_CODE + " > 0 " + restrictToApp;
@@ -1192,7 +1192,7 @@ public class AppProvider extends FDroidProvider {
                         "   LEFT JOIN " + installed + " ON (" + installed + "." + InstalledAppTable.Cols.PACKAGE_ID + " = " + app + "." + Cols.PACKAGE_ID + ") " +
                         " WHERE " +
                         app + "." + Cols.PACKAGE_ID + " = appForThisApk." + Cols.PACKAGE_ID + " AND " +
-                        apk + "." + ApkTable.Cols.SIGNATURE + " IS COALESCE(" + installed + "." + InstalledAppTable.Cols.SIGNATURE + ", " + apk + "." + ApkTable.Cols.SIGNATURE + ") AND " +
+                        apk + "." + ApkTable.Cols.SIGNER + " IS COALESCE(" + installed + "." + InstalledAppTable.Cols.SIGNER + ", " + apk + "." + ApkTable.Cols.SIGNER + ") AND " +
                         " ( " + app + "." + Cols.IS_COMPATIBLE + " = 0 OR " + apk + "." + ApkTable.Cols.IS_COMPATIBLE + " = 1 ) ) " +
                         " WHERE " + restrictToApps;
 

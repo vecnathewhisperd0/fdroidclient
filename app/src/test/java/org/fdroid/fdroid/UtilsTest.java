@@ -313,6 +313,7 @@ public class UtilsTest {
      *
      * @see org.fdroid.fdroid.data.Apk#sig
      */
+    @Deprecated
     @Test
     public void testGetsig() {
         /*
@@ -337,10 +338,6 @@ public class UtilsTest {
             }
             String sig = DigestUtils.md5Hex(fdroidSig);
             assertEquals(sig, Utils.getsig(rawCertBytes));
-
-            PackageInfo packageInfo = new PackageInfo();
-            packageInfo.signatures = new Signature[]{new Signature(rawCertBytes)};
-            assertEquals(sig, Utils.getPackageSig(packageInfo));
         }
     }
 
