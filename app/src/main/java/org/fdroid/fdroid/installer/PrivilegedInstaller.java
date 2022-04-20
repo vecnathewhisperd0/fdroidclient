@@ -25,6 +25,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.IBinder;
@@ -78,6 +79,7 @@ public class PrivilegedInstaller extends Installer {
 
     // From AOSP source code
     public static final int ACTION_INSTALL_REPLACE_EXISTING = 2;
+    public static final int ACTION_INSTALL_EXTERNAL = 8;
 
     /**
      * Following return codes are copied from AOSP 5.1 source code
@@ -336,7 +338,18 @@ public class PrivilegedInstaller extends Installer {
                         return;
                     }
 
-                    privService.installPackage(localApkUri, ACTION_INSTALL_REPLACE_EXISTING,
+                    // check if package exists and is on external storage
+                    PackageManager pm = context.getPackageManager();
+                    int installFlags = ACTION_INSTALL_REPLACE_EXISTING;
+                    try {
+                        ApplicationInfo applicationInfo = pm.getApplicationInfo(apk.packageName, 0);
+                        if ((applicationInfo.flags & ApplicationInfo.FLAG_EXTERNAL_STORAGE) != 0) {
+                            installFlags |= ACTION_INSTALL_EXTERNAL;
+                        }
+                    } catch (PackageManager.NameNotFoundException e) {
+                        // package was not installed prior, nothing to do here
+                    }
+                    privService.installPackage(localApkUri, installFlags,
                             null, callback);
                 } catch (RemoteException e) {
                     Log.e(TAG, "RemoteException", e);
