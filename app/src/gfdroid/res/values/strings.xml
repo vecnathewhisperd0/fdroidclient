@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string name="app_name">GF-Droid</string>
+    <string name="app_name_debug" translatable="false">GF-Droid Debug</string>
+
+    <string name="send_to_fdroid_metrics_summary">Sends anonymous data weekly to GF-Droid Metrics (requires "Keep install history")</string>
+    <!-- message shown as a "toast" when the user enables the Send to GF-Droid Metrics preference -->
+
+    <string name="about_title">About GF-Droid</string>
+
+    <string name="app_permission_storage">GF-Droid needs the storage permission to install this to storage. Please allow it on the next screen to proceed with installation.</string>
+
+    <string name="send_installed_apps_csv">Apps installed by GF-Droid as CSV file</string>
+
+    <string name="local_repo_running">GF-Droid is ready to swap</string>
+
+    <string name="empty_installed_app_list">No apps installed.\n\nThere are apps on your device, but they are not
+        available from GF-Droid. This could be because you need to update your repositories, or the repositories
+        genuinely don\'t have your apps available.
+    </string>
+
+    <string name="swap_nfc_description">If your friend has GF-Droid and NFC turned on touch your devices together.
+    </string>
+    <string name="swap_welcome">Welcome to GF-Droid!</string>
+    <string name="swap_send_fdroid">Send GF-Droid</string>
+
+    <string name="crash_dialog_title">GF-Droid has crashed</string>
+</resources>
