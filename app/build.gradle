@@ -15,10 +15,10 @@ def getVersionName = { ->
 def isCi = "true" == System.getenv("CI")
 def preDexEnabled = "true" == System.getProperty("pre-dex", "true")
 
-def fullApplicationId = "org.fdroid.fdroid"
-def basicApplicationId = "org.fdroid.basic"
+def fullApplicationId = "org.greatfire.gfdroid"
+def basicApplicationId = "org.greatfire.gfdroid.basic"
 // yes, this actually needs both quotes https://stackoverflow.com/a/41391841
-def privilegedExtensionApplicationId = '"org.fdroid.fdroid.privileged"'
+def privilegedExtensionApplicationId = '"org.greatfire.gfdroid.privileged"'
 
 android {
     compileSdkVersion 31
@@ -67,7 +67,7 @@ android {
         }
     }
 
-    flavorDimensions "base"
+    flavorDimensions "base", "gfdroid"
     productFlavors {
         full {
             dimension "base"
@@ -78,6 +78,11 @@ android {
             dimension "base"
             applicationId basicApplicationId
             resValue "string", "applicationId", basicApplicationId
+        }
+        gfdroid {
+            dimension "gfdroid"
+            applicationId basicApplicationId
+            resValue "string", "applicationId", fullApplicationId
         }
     }
 
