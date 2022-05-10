@@ -2,7 +2,6 @@ package org.fdroid.fdroid.nearby;
 
 import static java.util.Objects.requireNonNull;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -23,6 +22,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.ContextCompat;
 
 import org.fdroid.fdroid.R;
@@ -33,7 +33,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class SelectAppsView extends SwapView {
-
     public SelectAppsView(Context context) {
         super(context);
     }
@@ -149,7 +148,7 @@ public class SelectAppsView extends SwapView {
 
         private Drawable getDefaultAppIcon(Context context) {
             if (defaultAppIcon == null) {
-                defaultAppIcon = ContextCompat.getDrawable(context, android.R.drawable.sym_def_app_icon);
+                defaultAppIcon = AppCompatResources.getDrawable(context, android.R.drawable.sym_def_app_icon);
             }
             return defaultAppIcon;
         }

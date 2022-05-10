@@ -40,6 +40,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.R;
 
@@ -52,10 +57,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 
 /**
  * This class contains the SecurityPermissions view implementation.
@@ -115,19 +116,17 @@ public class AppSecurityPermissions {
         }
 
         public Drawable loadGroupIcon(Context context, PackageManager pm) {
-            Drawable iconDrawable;
+            final Drawable iconDrawable;
             if (icon != 0) {
                 iconDrawable = loadUnbadgedIcon(pm);
             } else {
-                iconDrawable = ContextCompat.getDrawable(context, R.drawable.ic_perm_device_info);
+                iconDrawable = AppCompatResources.getDrawable(context, R.drawable.ic_perm_device_info);
             }
 
             Preferences.Theme theme = Preferences.get().getTheme();
-            Drawable wrappedIconDrawable = DrawableCompat.wrap(iconDrawable).mutate();
-            DrawableCompat.setTint(wrappedIconDrawable, theme == Preferences.Theme.light ? Color.BLACK : Color.WHITE);
-            return wrappedIconDrawable;
+            iconDrawable.setTint(theme == Preferences.Theme.light ? Color.BLACK : Color.WHITE);
+            return iconDrawable;
         }
-
     }
 
     // PermissionInfo implements Parcelable but its Parcel constructor is private and thus cannot be extended.

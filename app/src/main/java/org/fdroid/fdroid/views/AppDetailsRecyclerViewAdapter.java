@@ -829,7 +829,7 @@ public class AppDetailsRecyclerViewAdapter
          * user can expand/collapse this item.
          */
         protected void updateExpandableItem(boolean isExpanded) {
-            TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(headerView, getIcon(),
+            headerView.setCompoundDrawablesRelativeWithIntrinsicBounds(getIcon(),
                     0, isExpanded ? R.drawable.ic_expand_less : R.drawable.ic_expand_more, 0);
         }
     }
@@ -865,8 +865,8 @@ public class AppDetailsRecyclerViewAdapter
         NoVersionsViewHolder(View view) {
             super(view);
             headerView = view.findViewById(R.id.information);
-            TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(headerView,
-                    R.drawable.ic_versions, 0, 0, 0);
+            headerView.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_versions,
+                    0, 0, 0);
             TextViewCompat.setCompoundDrawableTintList(headerView,
                     ColorStateList.valueOf(Color.parseColor("#B4B4B4")));
 
@@ -1341,7 +1341,7 @@ public class AppDetailsRecyclerViewAdapter
             String text = parent.getContext().getString(resIdText, formatArg);
             view.setText(text);
         }
-        TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(view, resIdDrawable, 0, 0, 0);
+        view.setCompoundDrawablesRelativeWithIntrinsicBounds(resIdDrawable, 0, 0, 0);
         parent.addView(view);
         view.setOnClickListener(new View.OnClickListener() {
             @Override

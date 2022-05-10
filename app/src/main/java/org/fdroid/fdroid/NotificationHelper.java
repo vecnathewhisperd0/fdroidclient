@@ -18,6 +18,7 @@ import android.text.style.StyleSpan;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.app.NotificationChannelCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -526,7 +527,7 @@ public class NotificationHelper {
                 || entry.status == AppUpdateStatusManager.Status.Installing) {
             Bitmap bitmap = Bitmap.createBitmap(largeIconSize.x, largeIconSize.y, Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(bitmap);
-            Drawable downloadIcon = ContextCompat.getDrawable(context, R.drawable.ic_notification_download);
+            Drawable downloadIcon = AppCompatResources.getDrawable(context, R.drawable.ic_notification_download);
             if (downloadIcon != null) {
                 downloadIcon.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
                 downloadIcon.draw(canvas);
