@@ -5,10 +5,10 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.Spannable;
 import android.text.Spanned;
@@ -35,9 +35,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.core.os.ConfigurationCompat;
 import androidx.core.os.LocaleListCompat;
 import androidx.core.text.HtmlCompat;
@@ -831,12 +829,8 @@ public class AppDetailsRecyclerViewAdapter
          * user can expand/collapse this item.
          */
         protected void updateExpandableItem(boolean isExpanded) {
-            final int icon = getIcon();
-            Drawable iconDrawable = ContextCompat.getDrawable(headerView.getContext(), icon);
-            final Drawable expandLess = ContextCompat.getDrawable(headerView.getContext(), R.drawable.ic_expand_less);
-            final Drawable expandMore = ContextCompat.getDrawable(headerView.getContext(), R.drawable.ic_expand_more);
-            TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(headerView,
-                    iconDrawable, null, isExpanded ? expandLess : expandMore, null);
+            TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(headerView, getIcon(),
+                    0, isExpanded ? R.drawable.ic_expand_less : R.drawable.ic_expand_more, 0);
         }
     }
 
@@ -870,12 +864,11 @@ public class AppDetailsRecyclerViewAdapter
 
         NoVersionsViewHolder(View view) {
             super(view);
-            headerView = (TextView) view.findViewById(R.id.information);
-            final Drawable accessTime = DrawableCompat.wrap(ContextCompat.getDrawable(headerView.getContext(),
-                    R.drawable.ic_versions)).mutate();
-            DrawableCompat.setTint(accessTime, Color.parseColor("#B4B4B4"));
+            headerView = view.findViewById(R.id.information);
             TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(headerView,
-                    accessTime, null, null, null);
+                    R.drawable.ic_versions, 0, 0, 0);
+            TextViewCompat.setCompoundDrawableTintList(headerView,
+                    ColorStateList.valueOf(Color.parseColor("#B4B4B4")));
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -1295,8 +1288,7 @@ public class AppDetailsRecyclerViewAdapter
             versionsExpandTracker.put(apk.getApkPath(), expand);
             expandedLayout.setVisibility(expand ? View.VISIBLE : View.GONE);
             versionCode.setVisibility(expand ? View.VISIBLE : View.GONE);
-            expandArrow.setImageDrawable(ContextCompat.getDrawable(context, expand ?
-                    R.drawable.ic_expand_less : R.drawable.ic_expand_more));
+            expandArrow.setImageResource(expand ? R.drawable.ic_expand_less : R.drawable.ic_expand_more);
 
             // This is required to make these labels
             // auto-scrollable when they are too long
