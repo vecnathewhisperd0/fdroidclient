@@ -18,8 +18,8 @@
         android:id="@+id/main_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_navigation_layout"
         android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         tools:listitem="@layout/main_tab_latest" />
 
     <RelativeLayout
