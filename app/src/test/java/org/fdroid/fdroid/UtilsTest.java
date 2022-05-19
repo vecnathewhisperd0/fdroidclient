@@ -253,9 +253,7 @@ public class UtilsTest {
 
     @Test
     public void testGetFileHexDigest() throws IOException {
-        File f = TestUtils.copyResourceToTempFile("largeRepo.xml");
-        assertEquals("df1754aa4b56c86c06d7842dfd02064f0781c1f740f489d3fc158bb541c8d197",
-                Utils.getFileHexDigest(f, "sha256"));
+        File f;
         f = TestUtils.copyResourceToTempFile("masterKeyIndex.jar");
         assertEquals("625d5aedcd0499fe04ebab81f3c7ae30c236cee653a914ffb587d890198f3aba",
                 Utils.getFileHexDigest(f, "sha256"));
@@ -313,6 +311,7 @@ public class UtilsTest {
      *
      * @see org.fdroid.fdroid.data.Apk#sig
      */
+    @Deprecated
     @Test
     public void testGetsig() {
         /*
@@ -337,10 +336,6 @@ public class UtilsTest {
             }
             String sig = DigestUtils.md5Hex(fdroidSig);
             assertEquals(sig, Utils.getsig(rawCertBytes));
-
-            PackageInfo packageInfo = new PackageInfo();
-            packageInfo.signatures = new Signature[]{new Signature(rawCertBytes)};
-            assertEquals(sig, Utils.getPackageSig(packageInfo));
         }
     }
 

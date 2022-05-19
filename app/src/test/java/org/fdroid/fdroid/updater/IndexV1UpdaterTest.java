@@ -25,10 +25,7 @@ import org.fdroid.fdroid.data.FDroidProviderTest;
 import org.fdroid.fdroid.data.InstalledAppTestUtils;
 import org.fdroid.fdroid.data.Repo;
 import org.fdroid.fdroid.data.RepoProvider;
-import org.fdroid.fdroid.data.RepoPushRequest;
-import org.fdroid.fdroid.data.RepoXMLHandlerTest;
 import org.fdroid.fdroid.data.Schema;
-import org.fdroid.fdroid.mock.RepoDetails;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,7 +34,6 @@ import org.robolectric.RobolectricTestRunner;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -48,8 +44,6 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-
-import androidx.annotation.NonNull;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.core.IsNot.not;
@@ -278,31 +272,27 @@ public class IndexV1UpdaterTest extends FDroidProviderTest {
             }
         }
 
-        RepoDetails indexV0Details = getFromFile("guardianproject_index.xml",
-                Repo.PUSH_REQUEST_ACCEPT_ALWAYS);
-        indexV0Details.apps.size();
-
-        assertEquals(indexV0Details.apps.size(), apps.length);
         assertEquals(apps.length, packages.size());
 
         int totalApks = 0;
         for (String packageName : packages.keySet()) {
             totalApks += packages.get(packageName).size();
         }
-        assertEquals(totalApks, indexV0Details.apks.size());
+        assertEquals(40, totalApks);
 
-        assertEquals(indexV0Details.icon, repo.icon);
-        assertEquals(indexV0Details.timestamp, repo.timestamp / 1000); // V1 is in millis
-        assertEquals(indexV0Details.name, repo.name);
-        assertArrayEquals(indexV0Details.mirrors, repo.mirrors);
+        assertEquals("guardianproject.png", repo.icon);
+        assertEquals(1488828510109L, repo.timestamp);
+        assertEquals("Guardian Project Official Releases", repo.name);
+        assertArrayEquals(new String[]{
+                "http://bdf2wcxujkg6qqff.onion/fdroid/repo",
+                "https://guardianproject.info/fdroid/repo",
+                "https://s3.amazonaws.com/guardianproject/fdroid/repo",
+        }, repo.mirrors);
 
-        ArrayList<String> installRequests = new ArrayList<>();
-        for (RepoPushRequest repoPushRequest : indexV0Details.repoPushRequestList) {
-            if ("install".equals(repoPushRequest.request)) {
-                installRequests.add(repoPushRequest.packageName);
-            }
-        }
-        assertArrayEquals(installRequests.toArray(), requests.get("install"));
+        assertArrayEquals(new String[]{
+                "org.torproject.android",
+                "info.guardianproject.orfox",
+        }, requests.get("install"));
     }
 
     /**
@@ -554,10 +544,5 @@ public class IndexV1UpdaterTest extends FDroidProviderTest {
         };
         parser.nextToken(); // START_OBJECT
         return mapper.readValue(parser, typeRef);
-    }
-
-    @NonNull
-    private RepoDetails getFromFile(String indexFilename, int pushRequests) {
-        return RepoXMLHandlerTest.getFromFile(getClass().getClassLoader(), indexFilename, pushRequests);
     }
 }

@@ -12,7 +12,6 @@ import android.os.Build;
 import android.os.IBinder;
 import android.os.Process;
 import android.os.RemoteException;
-import android.util.Log;
 
 import org.acra.ACRA;
 import org.fdroid.fdroid.AppUpdateStatusManager;
@@ -355,7 +354,6 @@ public class InstalledAppProviderService extends JobIntentService {
      *             into the database when under test.
      */
     static void insertAppIntoDb(Context context, PackageInfo packageInfo, String hashType, String hash) {
-        Log.d(TAG, "insertAppIntoDb " + packageInfo.packageName);
         Uri uri = InstalledAppProvider.getContentUri();
         ContentValues contentValues = new ContentValues();
         contentValues.put(InstalledAppTable.Cols.Package.NAME, packageInfo.packageName);
@@ -363,7 +361,7 @@ public class InstalledAppProviderService extends JobIntentService {
         contentValues.put(InstalledAppTable.Cols.VERSION_NAME, packageInfo.versionName);
         contentValues.put(InstalledAppTable.Cols.APPLICATION_LABEL,
                 InstalledAppProvider.getApplicationLabel(context, packageInfo.packageName));
-        contentValues.put(InstalledAppTable.Cols.SIGNATURE, Utils.getPackageSig(packageInfo));
+        contentValues.put(InstalledAppTable.Cols.SIGNER, Utils.getPackageSigner(packageInfo));
         contentValues.put(InstalledAppTable.Cols.LAST_UPDATE_TIME, packageInfo.lastUpdateTime);
 
         contentValues.put(InstalledAppTable.Cols.HASH_TYPE, hashType);
@@ -373,7 +371,6 @@ public class InstalledAppProviderService extends JobIntentService {
     }
 
     static void deleteAppFromDb(Context context, String packageName) {
-        Log.d(TAG, "deleteAppFromDb " + packageName);
         Uri uri = InstalledAppProvider.getAppUri(packageName);
         context.getContentResolver().delete(uri, null, null);
     }

@@ -111,7 +111,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     + ApkTable.Cols.VERSION_CODE + " int not null,"
                     + ApkTable.Cols.NAME + " text not null, "
                     + ApkTable.Cols.SIZE + " int not null, "
-                    + ApkTable.Cols.SIGNATURE + " string, "
+                    + ApkTable.Cols.SIGNER + " string, "
                     + ApkTable.Cols.SOURCE_NAME + " string, "
                     + ApkTable.Cols.MIN_SDK_VERSION + " integer, "
                     + ApkTable.Cols.TARGET_SDK_VERSION + " integer, "
@@ -210,7 +210,7 @@ public class DBHelper extends SQLiteOpenHelper {
             + InstalledAppTable.Cols.VERSION_CODE + " INT NOT NULL, "
             + InstalledAppTable.Cols.VERSION_NAME + " TEXT NOT NULL, "
             + InstalledAppTable.Cols.APPLICATION_LABEL + " TEXT NOT NULL, "
-            + InstalledAppTable.Cols.SIGNATURE + " TEXT NOT NULL, "
+            + InstalledAppTable.Cols.SIGNER + " TEXT NOT NULL, "
             + InstalledAppTable.Cols.LAST_UPDATE_TIME + " INTEGER NOT NULL DEFAULT 0, "
             + InstalledAppTable.Cols.HASH_TYPE + " TEXT NOT NULL, "
             + InstalledAppTable.Cols.HASH + " TEXT NOT NULL"
@@ -228,7 +228,7 @@ public class DBHelper extends SQLiteOpenHelper {
             + "primary key(" + ApkAntiFeatureJoinTable.Cols.APK_ID + ", " + ApkAntiFeatureJoinTable.Cols.ANTI_FEATURE_ID + ") "
             + " );";
 
-    protected static final int DB_VERSION = 85;
+    protected static final int DB_VERSION = 86;
 
     private final Context context;
 
@@ -459,6 +459,23 @@ public class DBHelper extends SQLiteOpenHelper {
         switchRepoArchivePriorities(db, oldVersion);
         deleteOldIconUrls(db, oldVersion);
         addOpenCollective(db, oldVersion);
+        addSignerToApk(db, oldVersion);
+    }
+
+    private void addSignerToApk(SQLiteDatabase db, int oldVersion) {
+        if (oldVersion >= 86) {
+            return;
+        }
+
+        if (!columnExists(db, ApkTable.NAME, ApkTable.Cols.SIGNER)) {
+            Log.i(TAG, "Adding APK signer to " + ApkTable.NAME + " table.");
+            db.execSQL("alter table " + ApkTable.NAME + " add column " + ApkTable.Cols.SIGNER + " text;");
+        }
+        if (!columnExists(db, InstalledAppTable.NAME, InstalledAppTable.Cols.SIGNER)) {
+            Log.i(TAG, "Adding APK signer to " + InstalledAppTable.NAME + " table.");
+            db.execSQL("alter table " + InstalledAppTable.NAME
+                    + " add column " + InstalledAppTable.Cols.SIGNER + " text;");
+        }
     }
 
     private void addOpenCollective(SQLiteDatabase db, int oldVersion) {
@@ -915,7 +932,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         + ApkTable.Cols.VERSION_CODE + " int not null,"
                         + ApkTable.Cols.NAME + " text not null, "
                         + ApkTable.Cols.SIZE + " int not null, "
-                        + ApkTable.Cols.SIGNATURE + " string, "
+                        + ApkTable.Cols.SIGNER + " string, "
                         + ApkTable.Cols.SOURCE_NAME + " string, "
                         + ApkTable.Cols.MIN_SDK_VERSION + " integer, "
                         + ApkTable.Cols.TARGET_SDK_VERSION + " integer, "
@@ -940,7 +957,7 @@ public class DBHelper extends SQLiteOpenHelper {
                         ApkTable.Cols.VERSION_CODE,
                         ApkTable.Cols.NAME,
                         ApkTable.Cols.SIZE,
-                        ApkTable.Cols.SIGNATURE,
+                        ApkTable.Cols.SIGNER,
                         ApkTable.Cols.SOURCE_NAME,
                         ApkTable.Cols.MIN_SDK_VERSION,
                         ApkTable.Cols.TARGET_SDK_VERSION,

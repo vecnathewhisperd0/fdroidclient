@@ -23,7 +23,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -74,7 +73,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateEncodingException;
 import java.text.DateFormat;
@@ -372,6 +370,7 @@ public final class Utils {
         return Uri.parse("package:" + packageName);
     }
 
+    @Deprecated
     public static String calcFingerprint(String keyHexString) {
         if (TextUtils.isEmpty(keyHexString)
                 || keyHexString.matches(".*[^a-fA-F0-9].*")) {
@@ -429,38 +428,30 @@ public final class Utils {
     }
 
     /**
-     * Get the fingerprint used to represent an APK signing key in F-Droid.
-     * This is a custom fingerprint algorithm that was kind of accidentally
-     * created, but is still in use.
+     * Get the standard, lowercase SHA-256 fingerprint used to represent an
+     * APK or JAR signing key. <b>NOTE</b>: this does not handle signers that
+     * have multiple X.509 signing certificates.
      *
-     * @see #getPackageSig(PackageInfo)
-     * @see org.fdroid.fdroid.data.Apk#sig
+     * @see org.fdroid.fdroid.data.Apk#signer
+     * @see PackageInfo#signatures
      */
-    public static String getsig(byte[] rawCertBytes) {
-        return DigestUtils.md5Hex(Hex.encodeHexString(rawCertBytes).getBytes());
+    public static String getPackageSigner(PackageInfo info) {
+        if (info == null || info.signatures == null || info.signatures.length < 1) {
+            return "";
+        }
+        return DigestUtils.sha256Hex(info.signatures[0].toByteArray());
     }
 
     /**
      * Get the fingerprint used to represent an APK signing key in F-Droid.
      * This is a custom fingerprint algorithm that was kind of accidentally
-     * created, but is still in use.
+     * created.  It is now here only for backwards compatibility.
      *
-     * @see #getsig(byte[])
      * @see org.fdroid.fdroid.data.Apk#sig
      */
-    public static String getPackageSig(PackageInfo info) {
-        if (info == null || info.signatures == null || info.signatures.length < 1) {
-            return "";
-        }
-        Signature sig = info.signatures[0];
-        String sigHash = "";
-        try {
-            Hasher hash = new Hasher("MD5", sig.toCharsString().getBytes());
-            sigHash = hash.getHash();
-        } catch (NoSuchAlgorithmException e) {
-            // ignore
-        }
-        return sigHash;
+    @Deprecated
+    public static String getsig(byte[] rawCertBytes) {
+        return DigestUtils.md5Hex(Hex.encodeHexString(rawCertBytes).getBytes());
     }
 
     /**

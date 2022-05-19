@@ -287,7 +287,7 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
     public void onCreate() {
         super.onCreate();
         instance = this;
-        if (BuildConfig.DEBUG) {
+        if (false) { // NOPMD
             StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
                     .detectAll()
                     .penaltyLog()
@@ -535,7 +535,7 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
     @NonNull
     @Override
     public androidx.work.Configuration getWorkManagerConfiguration() {
-        if (BuildConfig.DEBUG) {
+        if (false) {
             return new androidx.work.Configuration.Builder()
                     .setMinimumLoggingLevel(Log.DEBUG)
                     .build();

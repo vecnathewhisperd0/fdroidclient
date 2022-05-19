@@ -225,7 +225,7 @@ public interface Schema {
             interface InstalledApp {
                 String VERSION_CODE = "installedVersionCode";
                 String VERSION_NAME = "installedVersionName";
-                String SIGNATURE = "installedSig";
+                String SIGNER = "installedSigner"; // TODO
             }
 
             interface Package {
@@ -275,7 +275,7 @@ public interface Schema {
                     SEVEN_INCH_SCREENSHOTS, TEN_INCH_SCREENSHOTS, TV_SCREENSHOTS, WEAR_SCREENSHOTS,
                     PREFERRED_SIGNER, AUTO_INSTALL_VERSION_CODE, IS_APK, IS_LOCALIZED, AutoInstallApk.VERSION_NAME,
                     InstalledApp.VERSION_CODE, InstalledApp.VERSION_NAME,
-                    InstalledApp.SIGNATURE, Package.PACKAGE_NAME,
+                    InstalledApp.SIGNER, Package.PACKAGE_NAME,
             };
         }
     }
@@ -303,7 +303,7 @@ public interface Schema {
             String VERSION_CODE    = "vercode";
             String NAME            = "apkName";
             String SIZE            = "size";
-            String SIGNATURE       = "sig";
+            String SIGNER          = "signer";
             String SOURCE_NAME     = "srcname";
             String MIN_SDK_VERSION = "minSdkVersion";
             String TARGET_SDK_VERSION = "targetSdkVersion";
@@ -338,7 +338,7 @@ public interface Schema {
              */
             String[] ALL_COLS = {
                     APP_ID, VERSION_NAME, REPO_ID, HASH, VERSION_CODE, NAME,
-                    SIZE, SIGNATURE, SOURCE_NAME, MIN_SDK_VERSION, TARGET_SDK_VERSION, MAX_SDK_VERSION,
+                    SIZE, SIGNER, SOURCE_NAME, MIN_SDK_VERSION, TARGET_SDK_VERSION, MAX_SDK_VERSION,
                     OBB_MAIN_FILE, OBB_MAIN_FILE_SHA256, OBB_PATCH_FILE, OBB_PATCH_FILE_SHA256,
                     REQUESTED_PERMISSIONS, FEATURES, NATIVE_CODE, HASH_TYPE, ADDED_DATE,
                     IS_COMPATIBLE, INCOMPATIBLE_REASONS,
@@ -349,7 +349,7 @@ public interface Schema {
              */
             String[] ALL = {
                     _ID, APP_ID, Package.PACKAGE_NAME, VERSION_NAME, REPO_ID, HASH, VERSION_CODE, NAME,
-                    SIZE, SIGNATURE, SOURCE_NAME, MIN_SDK_VERSION, TARGET_SDK_VERSION, MAX_SDK_VERSION,
+                    SIZE, SIGNER, SOURCE_NAME, MIN_SDK_VERSION, TARGET_SDK_VERSION, MAX_SDK_VERSION,
                     OBB_MAIN_FILE, OBB_MAIN_FILE_SHA256, OBB_PATCH_FILE, OBB_PATCH_FILE_SHA256,
                     REQUESTED_PERMISSIONS, FEATURES, NATIVE_CODE, HASH_TYPE, ADDED_DATE,
                     IS_COMPATIBLE, Repo.VERSION, Repo.ADDRESS, INCOMPATIBLE_REASONS,
@@ -403,7 +403,7 @@ public interface Schema {
             String VERSION_CODE = "versionCode";
             String VERSION_NAME = "versionName";
             String APPLICATION_LABEL = "applicationLabel";
-            String SIGNATURE = "sig";
+            String SIGNER = "signer";
             String LAST_UPDATE_TIME = "lastUpdateTime";
             String HASH_TYPE = "hashType";
             String HASH = "hash";
@@ -414,7 +414,7 @@ public interface Schema {
 
             String[] ALL = {
                     _ID, PACKAGE_ID, Package.NAME, VERSION_CODE, VERSION_NAME, APPLICATION_LABEL,
-                    SIGNATURE, LAST_UPDATE_TIME, HASH_TYPE, HASH,
+                    SIGNER, LAST_UPDATE_TIME, HASH_TYPE, HASH,
             };
         }
     }

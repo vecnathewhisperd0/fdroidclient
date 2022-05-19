@@ -9,7 +9,7 @@ public class InstalledApp extends ValueObject {
     private int versionCode;
     private String versionName;
     private String applicationLabel;
-    private String signature;
+    private String signer;
     private long lastUpdateTime;
     private String hashType;
     private String hash;
@@ -36,8 +36,8 @@ public class InstalledApp extends ValueObject {
                 case Schema.InstalledAppTable.Cols.APPLICATION_LABEL:
                     applicationLabel = cursor.getString(i);
                     break;
-                case Schema.InstalledAppTable.Cols.SIGNATURE:
-                    signature = cursor.getString(i);
+                case Schema.InstalledAppTable.Cols.SIGNER:
+                    signer = cursor.getString(i);
                     break;
                 case Schema.InstalledAppTable.Cols.LAST_UPDATE_TIME:
                     lastUpdateTime = cursor.getLong(i);
@@ -72,8 +72,8 @@ public class InstalledApp extends ValueObject {
         return applicationLabel;
     }
 
-    public String getSignature() {
-        return signature;
+    public String getSigner() {
+        return signer;
     }
 
     public long getLastUpdateTime() {

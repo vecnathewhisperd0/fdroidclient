@@ -139,7 +139,7 @@ public class AppDetailsRecyclerViewAdapter
         boolean showIncompatibleVersions = Preferences.get().showIncompatibleVersions();
         for (final Apk apk : apks) {
             boolean allowByCompatibility = apk.compatible || showIncompatibleVersions;
-            boolean allowBySig = this.app.installedSig == null || showIncompatibleVersions || TextUtils.equals(this.app.installedSig, apk.sig);
+            boolean allowBySig = this.app.installedSigner == null || showIncompatibleVersions || TextUtils.equals(this.app.installedSigner, apk.signer);
             if (allowByCompatibility) {
                 compatibleVersionsDifferentSig.add(apk);
                 if (allowBySig) {
@@ -179,9 +179,9 @@ public class AppDetailsRecyclerViewAdapter
         Apk installedApk = app.getInstalledApk(this.context);
         // These conditions should be enough to determine if the installedApk
         // is a generated dummy or a proper APK containing data from a repository.
-        if (installedApk != null && installedApk.added == null && installedApk.sig == null) {
+        if (installedApk != null && installedApk.added == null && installedApk.signer == null) {
             installedApk.compatible = true;
-            installedApk.sig = app.installedSig;
+            installedApk.signer = app.installedSigner;
             installedApk.maxSdkVersion = -1;
             apks.add(installedApk);
         }
@@ -249,7 +249,7 @@ public class AppDetailsRecyclerViewAdapter
         String appropriateSig = app.getMostAppropriateSignature();
         for (int i = 0; i < versions.size(); i++) {
             final Apk apk = versions.get(i);
-            if (apk.versionCode == app.autoInstallVersionCode && TextUtils.equals(apk.sig, appropriateSig)) {
+            if (apk.versionCode == app.autoInstallVersionCode && TextUtils.equals(apk.signer, appropriateSig)) {
                 curApk = apk;
                 break;
             }
@@ -1108,9 +1108,9 @@ public class AppDetailsRecyclerViewAdapter
 
             boolean isAppInstalled = app.isInstalled(context);
             boolean isApkInstalled = apk.versionCode == app.installedVersionCode &&
-                    TextUtils.equals(apk.sig, app.installedSig);
+                    TextUtils.equals(apk.signer, app.installedSigner);
             boolean isApkSuggested = apk.versionCode == app.autoInstallVersionCode &&
-                    TextUtils.equals(apk.sig, app.getMostAppropriateSignature());
+                    TextUtils.equals(apk.signer, app.getMostAppropriateSignature());
             boolean isApkDownloading = callbacks.isAppDownloading() && downloadedApk != null &&
                     downloadedApk.compareTo(apk) == 0 && TextUtils.equals(apk.apkName, downloadedApk.apkName);
             boolean isApkInstalledDummy = apk.versionCode == app.installedVersionCode &&
@@ -1245,8 +1245,8 @@ public class AppDetailsRecyclerViewAdapter
                 return context.getResources().getString(R.string.requires_features,
                         TextUtils.join(", ", apk.incompatibleReasons));
             } else {
-                boolean mismatchedSig = app.installedSig != null
-                        && !TextUtils.equals(app.installedSig, apk.sig);
+                boolean mismatchedSig = app.installedSigner != null
+                        && !TextUtils.equals(app.installedSigner, apk.signer);
                 if (mismatchedSig) {
                     return context.getString(R.string.app_details__incompatible_mismatched_signature);
                 }

@@ -113,7 +113,7 @@ public class AppProviderTest extends FDroidProviderTest {
         AppPrefsProvider.Helper.update(context, app, new AppPrefs(ignoreVercode, ignoreAll, false));
 
         ContentValues certValue = new ContentValues(1);
-        certValue.put(Schema.ApkTable.Cols.SIGNATURE, TestUtils.FDROID_SIG);
+        certValue.put(Schema.ApkTable.Cols.SIGNER, TestUtils.FDROID_SIGNER);
 
         // Make sure that the relevant apks are also in the DB, or else the `install` method below will
         // not be able to correctly calculate the suggested version o the apk.
