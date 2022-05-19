@@ -6,20 +6,134 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <!--com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:menu="@menu/main_activity_screens"
-        app:labelVisibilityMode="labeled"/>
+        app:labelVisibilityMode="labeled"/-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_view_pager"
-        android:layout_alignParentTop="true"
-        android:layout_above="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_navigation_layout"
+        android:layout_alignParentTop="true"
         tools:listitem="@layout/main_tab_latest" />
+
+    <RelativeLayout
+        android:id="@+id/bottom_navigation_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/ic_gf_nav_bg">
+
+        <ImageView
+            android:id="@+id/update_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/ic_gf_update_unfocus" />
+
+        <TextView
+            android:id="@+id/update_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/update_button"
+            android:layout_alignRight="@id/update_button"
+            android:layout_alignBottom="@id/update_button"
+            android:text="@string/main_menu__updates"
+            android:textAlignment="center"
+            android:paddingBottom="@dimen/nav_unfocus_padding"
+            android:textColor="@color/fdroid_grey_light"
+            android:textSize="11dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/category_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/update_button"
+            android:background="@drawable/ic_gf_category_unfocus" />
+
+        <TextView
+            android:id="@+id/category_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/category_button"
+            android:layout_alignRight="@id/category_button"
+            android:layout_alignBottom="@id/category_button"
+            android:text="@string/main_menu__categories"
+            android:textAlignment="center"
+            android:paddingBottom="@dimen/nav_unfocus_padding"
+            android:textColor="@color/fdroid_grey_light"
+            android:textSize="10dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/newest_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/category_button"
+            android:background="@drawable/ic_gf_newest_unfocus" />
+
+        <TextView
+            android:id="@+id/newest_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/newest_button"
+            android:layout_alignRight="@id/newest_button"
+            android:layout_alignBottom="@id/newest_button"
+            android:text="@string/main_menu__latest_apps"
+            android:textAlignment="center"
+            android:paddingBottom="@dimen/nav_unfocus_padding"
+            android:textColor="@color/fdroid_grey_light"
+            android:textSize="11dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/nearby_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/update_button"
+            android:background="@drawable/ic_gf_nearby_unfocus" />
+
+        <TextView
+            android:id="@+id/nearby_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/nearby_button"
+            android:layout_alignRight="@id/nearby_button"
+            android:layout_alignBottom="@id/nearby_button"
+            android:text="@string/main_menu__swap_nearby"
+            android:textAlignment="center"
+            android:paddingBottom="@dimen/nav_unfocus_padding"
+            android:textColor="@color/fdroid_grey_light"
+            android:textSize="11dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/settings_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/nearby_button"
+            android:background="@drawable/ic_gf_settings_unfocus" />
+
+        <TextView
+            android:id="@+id/settings_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/settings_button"
+            android:layout_alignRight="@id/settings_button"
+            android:layout_alignBottom="@id/settings_button"
+            android:text="@string/menu_settings"
+            android:textAlignment="center"
+            android:paddingBottom="@dimen/nav_unfocus_padding"
+            android:textColor="@color/fdroid_grey_light"
+            android:textSize="11dp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

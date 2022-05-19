@@ -31,4 +31,8 @@
     <dimen name="category_preview__app_list__padding__vertical">18dp</dimen>
 
     <dimen name="banner__padding">4dp</dimen>
+
+    <dimen name="nav_unfocus_padding">6dp</dimen>
+    <dimen name="nav_focus_padding">21dp</dimen>
+
 </resources>
