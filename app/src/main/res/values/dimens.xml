@@ -17,7 +17,6 @@
     <dimen name="details_screenshot_margin">4dp</dimen>
 
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="fab_margin_bottom">64dp</dimen>
 
     <dimen name="latest__padding__app_card__horizontal">12dp</dimen>
     <dimen name="latest__padding__app_card__vertical">10dp</dimen>
@@ -33,6 +32,7 @@
 
     <dimen name="banner__padding">4dp</dimen>
 
+    <dimen name="nav_bar_padding">52dp</dimen>
     <dimen name="nav_unfocus_padding">6dp</dimen>
     <dimen name="nav_focus_padding">21dp</dimen>
 

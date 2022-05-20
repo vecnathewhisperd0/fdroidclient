@@ -20,6 +20,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
+        android:paddingBottom="@dimen/nav_bar_padding"
         tools:listitem="@layout/main_tab_latest" />
 
     <RelativeLayout

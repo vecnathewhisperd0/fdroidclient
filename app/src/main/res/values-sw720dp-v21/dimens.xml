@@ -4,5 +4,4 @@
          file differing from values-v21/dimens.xml):
          https://material.google.com/components/buttons-floating-action-button.html -->
     <dimen name="fab_margin">24dp</dimen>
-    <dimen name="fab_margin_bottom">120dp</dimen>
 </resources>
