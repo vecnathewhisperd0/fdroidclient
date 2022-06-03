@@ -110,6 +110,8 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
     public static final String PREF_ENABLE_PROXY = "enableProxy";
     public static final String PREF_PROXY_HOST = "proxyHost";
     public static final String PREF_PROXY_PORT = "proxyPort";
+    public static final String PREF_ENVOY_STATUS = "envoyStatus";
+    public static final String PREF_ENVOY_URL = "envoyUrl";
     public static final String PREF_SHOW_NFC_DURING_SWAP = "showNfcDuringSwap";
     public static final String PREF_POST_PRIVILEGED_INSTALL = "postPrivilegedInstall";
     public static final String PREF_PREVENT_SCREENSHOTS = "preventScreenshots";
@@ -517,6 +519,14 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
                 return DEFAULT_PROXY_PORT;
             }
         }
+    }
+
+    public void setEnvoyUrl(String envoyUrl) {
+        preferences.edit().putString(PREF_ENVOY_URL, envoyUrl).apply();
+    }
+
+    public String getEnvoyUrl() {
+        return preferences.getString(PREF_ENVOY_URL, null);
     }
 
     public boolean preventScreenshots() {

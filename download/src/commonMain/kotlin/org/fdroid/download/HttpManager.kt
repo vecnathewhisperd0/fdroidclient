@@ -35,38 +35,39 @@ import io.ktor.utils.io.close
 import io.ktor.utils.io.core.isEmpty
 import io.ktor.utils.io.core.readBytes
 import io.ktor.utils.io.writeFully
+import mu.KLogger
 import mu.KotlinLogging
 import kotlin.coroutines.cancellation.CancellationException
 
 internal expect fun getHttpClientEngineFactory(): HttpClientEngineFactory<*>
 
 public open class HttpManager @JvmOverloads constructor(
-    private val userAgent: String,
+    protected val userAgent: String,
     queryString: String? = null,
     proxyConfig: ProxyConfig? = null,
-    private val mirrorChooser: MirrorChooser = MirrorChooserRandom(),
-    private val httpClientEngineFactory: HttpClientEngineFactory<*> = getHttpClientEngineFactory(),
+    protected val mirrorChooser: MirrorChooser = MirrorChooserRandom(),
+    protected val httpClientEngineFactory: HttpClientEngineFactory<*> = getHttpClientEngineFactory(),
 ) {
 
-    private companion object {
-        val log = KotlinLogging.logger {}
+    protected companion object {
+        public val log: KLogger = KotlinLogging.logger {}
     }
 
-    private var httpClient = getNewHttpClient(proxyConfig)
+    protected open var httpClient: HttpClient = getNewHttpClient(proxyConfig)
 
     /**
      * Only exists because KTor doesn't keep a reference to the proxy its client uses.
      * Should only get set in [getNewHttpClient].
      */
-    internal var currentProxy: ProxyConfig? = null
-        private set
+    protected var currentProxy: ProxyConfig? = null
+        //private set
 
-    private val parameters = queryString?.split('&')?.map { p ->
+    protected val parameters: List<Pair<String, String>>? = queryString?.split('&')?.map { p ->
         val (key, value) = p.split('=')
         Pair(key, value)
     }
 
-    private fun getNewHttpClient(proxyConfig: ProxyConfig? = null): HttpClient {
+    protected fun getNewHttpClient(proxyConfig: ProxyConfig? = null): HttpClient {
         currentProxy = proxyConfig
         return HttpClient(httpClientEngineFactory) {
             followRedirects = false
@@ -136,7 +137,7 @@ public open class HttpManager @JvmOverloads constructor(
         }
     }
 
-    private suspend fun getHttpStatement(
+    protected suspend fun getHttpStatement(
         request: DownloadRequest,
         mirror: Mirror,
         url: Url,
@@ -196,7 +197,7 @@ public open class HttpManager @JvmOverloads constructor(
         }
     }
 
-    private fun resetProxyIfNeeded(proxyConfig: ProxyConfig?, mirror: Mirror? = null) {
+    protected fun resetProxyIfNeeded(proxyConfig: ProxyConfig?, mirror: Mirror? = null) {
         // force no-proxy when trying to hit a local mirror
         val newProxy = if (mirror.isLocal() && proxyConfig != null) {
             if (currentProxy != null) log.info {
@@ -211,12 +212,12 @@ public open class HttpManager @JvmOverloads constructor(
         }
     }
 
-    private fun HttpMessageBuilder.basicAuth(request: DownloadRequest) {
+    protected fun HttpMessageBuilder.basicAuth(request: DownloadRequest) {
         // non-null if hasCredentials is true
         if (request.hasCredentials) basicAuth(request.username!!, request.password!!)
     }
 
-    private fun HttpRequestBuilder.addQueryParameters() {
+    protected fun HttpRequestBuilder.addQueryParameters() {
         // add query string parameters if existing
         this@HttpManager.parameters?.forEach { (key, value) ->
             parameter(key, value)

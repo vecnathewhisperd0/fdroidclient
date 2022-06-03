@@ -54,6 +54,7 @@ import org.fdroid.fdroid.installer.InstallHistoryService;
 import org.fdroid.fdroid.installer.PrivilegedInstaller;
 import org.fdroid.fdroid.work.CleanCacheWorker;
 import org.fdroid.fdroid.work.FDroidMetricsWorker;
+import org.greatfire.envoy.CronetNetworking;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -110,8 +111,9 @@ public class PreferencesFragment extends PreferenceFragmentCompat
     private LiveSeekBarPreference overWifiSeekBar;
     private LiveSeekBarPreference overDataSeekBar;
     private LiveSeekBarPreference updateIntervalSeekBar;
-    private SwitchPreferenceCompat enableProxyCheckPref;
-    private SwitchPreferenceCompat useTorCheckPref;
+    // private SwitchPreferenceCompat enableProxyCheckPref;
+    // private SwitchPreferenceCompat useTorCheckPref;
+    private EditTextPreference envoyStatusPref;
     private Preference updateAutoDownloadPref;
     private CheckBoxPreference keepInstallHistoryPref;
     private CheckBoxPreference sendToFDroidMetricsPref;
@@ -151,10 +153,11 @@ public class PreferencesFragment extends PreferenceFragmentCompat
             installHistoryPref.setTitle(R.string.install_history);
         }
 
-        useTorCheckPref = (SwitchPreferenceCompat) findPreference(Preferences.PREF_USE_TOR);
-        useTorCheckPref.setOnPreferenceChangeListener(useTorChangedListener);
-        enableProxyCheckPref = (SwitchPreferenceCompat) findPreference(Preferences.PREF_ENABLE_PROXY);
-        enableProxyCheckPref.setOnPreferenceChangeListener(proxyEnabledChangedListener);
+        // useTorCheckPref = (SwitchPreferenceCompat) findPreference(Preferences.PREF_USE_TOR);
+        // useTorCheckPref.setOnPreferenceChangeListener(useTorChangedListener);
+        // enableProxyCheckPref = (SwitchPreferenceCompat) findPreference(Preferences.PREF_ENABLE_PROXY);
+        // enableProxyCheckPref.setOnPreferenceChangeListener(proxyEnabledChangedListener);
+        envoyStatusPref = findPreference(Preferences.PREF_ENVOY_STATUS);
         updateAutoDownloadPref = findPreference(Preferences.PREF_AUTO_DOWNLOAD_INSTALL_UPDATES);
 
         overWifiSeekBar = (LiveSeekBarPreference) findPreference(Preferences.PREF_OVER_WIFI);
@@ -375,6 +378,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                 }
                 break;
 
+            /*
             case Preferences.PREF_ENABLE_PROXY:
                 SwitchPreferenceCompat checkPref = (SwitchPreferenceCompat) findPreference(key);
                 checkPref.setSummary(R.string.enable_proxy_summary);
@@ -399,6 +403,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                     textPref2.setSummary(String.valueOf(port));
                 }
                 break;
+            */
 
             case Preferences.PREF_KEEP_INSTALL_HISTORY:
                 if (keepInstallHistoryPref.isChecked()) {
@@ -523,14 +528,26 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         }
     }
 
+    private void initProxyStatus(Context context) {
+        // preference is non-interactive. check proxy state and set summary to show state
+        if (CronetNetworking.cronetEngine() == null) {
+            envoyStatusPref.setSummary(getString(R.string.envoy_inactive));
+        } else {
+            envoyStatusPref.setSummary(getString(R.string.envoy_active));
+        }
+    }
+
     /**
      * The default for "Use Tor" is dynamically set based on whether Orbot is installed.
      */
+    /*
     private void initUseTorPreference(Context context) {
         useTorCheckPref.setDefaultValue(OrbotHelper.isOrbotInstalled(context));
         useTorCheckPref.setChecked(Preferences.get().isTorEnabled());
     }
+    */
 
+    /*
     private final Preference.OnPreferenceChangeListener useTorChangedListener =
             new Preference.OnPreferenceChangeListener() {
                 @Override
@@ -548,7 +565,9 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                     return true;
                 }
             };
+    */
 
+    /*
     private final Preference.OnPreferenceChangeListener proxyEnabledChangedListener =
             new Preference.OnPreferenceChangeListener() {
                 @Override
@@ -559,6 +578,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                     return true;
                 }
             };
+    */
 
     @Override
     public void onResume() {
@@ -574,14 +594,15 @@ public class PreferencesFragment extends PreferenceFragmentCompat
 
         initAutoFetchUpdatesPreference();
         initPrivilegedInstallerPreference();
-        initUseTorPreference(getActivity().getApplicationContext());
+        // initUseTorPreference(getActivity().getApplicationContext());
+        initProxyStatus(getActivity().getApplicationContext());
     }
 
     @Override
     public void onPause() {
         super.onPause();
         getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
-        FDroidApp.configureProxy(Preferences.get());
+        // FDroidApp.configureProxy(Preferences.get());
 
         if (updateIntervalPrevious != updateIntervalSeekBar.getValue()) {
             UpdateService.schedule(getActivity());

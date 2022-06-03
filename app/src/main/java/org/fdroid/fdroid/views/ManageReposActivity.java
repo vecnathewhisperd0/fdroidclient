@@ -54,6 +54,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.chromium.net.CronetEngine;
 import org.fdroid.fdroid.AddRepoIntentService;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.IndexUpdater;
@@ -178,7 +179,7 @@ public class ManageReposActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        FDroidApp.checkStartTor(this, Preferences.get());
+        // FDroidApp.checkStartTor(this, Preferences.get());
 
         /* let's see if someone is trying to send us a new repo */
         addRepoFromIntent(getIntent());
@@ -639,7 +640,21 @@ public class ManageReposActivity extends AppCompatActivity
 
                     try {
                         final URL url = new URL(uri.toString());
-                        final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                        HttpURLConnection connection = null;
+
+                        String envoyUrl = Preferences.get().getEnvoyUrl();
+
+                        if (envoyUrl != null) {
+                            Log.d(TAG, "open repo url with cronet engine");
+                            CronetEngine.Builder engineBuilder = new CronetEngine.Builder(getApplicationContext());
+                            engineBuilder.setEnvoyUrl(envoyUrl);
+                            CronetEngine engine = engineBuilder.build();
+                            connection = (HttpURLConnection) engine.openConnection(url);
+                        } else {
+                            Log.d(TAG, "open repo url with open connection");
+                            connection = (HttpURLConnection) url.openConnection();
+                        }
+
                         connection.setRequestMethod("HEAD");
 
                         statusCode = connection.getResponseCode();

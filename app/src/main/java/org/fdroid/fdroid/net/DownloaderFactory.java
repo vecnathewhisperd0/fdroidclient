@@ -25,8 +25,10 @@ public class DownloaderFactory {
 
     private static final String TAG = "DownloaderFactory";
     // TODO move to application object or inject where needed
+    // EnvoyManager extends HttpManager. If no valid envoy url was found, the cronet engine
+    // will be null and a class equivalent to the regular HttpManager should be returned.
     public static final HttpManager HTTP_MANAGER =
-            new HttpManager(Utils.getUserAgent(), FDroidApp.queryString, NetCipher.getProxy());
+            new EnvoyManager(Utils.getUserAgent(), FDroidApp.queryString, NetCipher.getProxy());
 
     /**
      * Same as {@link #create(Repo, Uri, File)}, but trying canonical address first.

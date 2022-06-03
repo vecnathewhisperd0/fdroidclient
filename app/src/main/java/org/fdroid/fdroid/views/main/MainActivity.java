@@ -64,6 +64,18 @@ import org.fdroid.fdroid.views.AppDetailsActivity;
 import org.fdroid.fdroid.views.ManageReposActivity;
 import org.fdroid.fdroid.views.apps.AppListActivity;
 
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+
+import android.util.Log;
+import org.greatfire.envoy.*;
+
+import info.guardianproject.netcipher.NetCipher;
+
 /**
  * Main view shown to users upon starting F-Droid.
  * <p>
@@ -97,6 +109,21 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView pager;
     private MainViewAdapter adapter;
+
+    private int currentPageId = 0;
+    public static final String CURRENT_PAGE_ID = "org.greatfire.envoy.CURRENT_PAGE_ID";
+
+    // initialize one or more string values containing the urls of available http/https proxies (include trailing slash)
+    private String httpUrl = "http://wiki.epochbelt.com/wikipedia/";
+    private String httpsUrl = "https://wiki.epochbelt.com/wikipedia/";
+    // urls for additional proxy services, change if there are port conflicts (do not include trailing slash)
+    private String ssUrl = "socks5://127.0.0.1:1080";
+    // add all string values to this list value
+    private List<String> possibleUrls = Arrays.asList(httpUrl, httpsUrl, ssUrl);
+
+    // copied from org.greatfire.envoy.NetworkIntentService.kt, could not be found in imported class
+    public static final String BROADCAST_VALID_URL_FOUND = "org.greatfire.envoy.VALID_URL_FOUND";
+    public static final String EXTENDED_DATA_VALID_URLS = "org.greatfire.envoy.VALID_URLS";
 
     private int currentPageId = 0;
     public static final String CURRENT_PAGE_ID = "org.greatfire.envoy.CURRENT_PAGE_ID";
@@ -191,7 +218,20 @@ public class MainActivity extends AppCompatActivity {
         updateableAppsFilter.addAction(AppUpdateStatusManager.BROADCAST_APPSTATUS_REMOVED);
         LocalBroadcastManager.getInstance(this).registerReceiver(onUpdateableAppsChanged, updateableAppsFilter);
 
-        initialRepoUpdateIfRequired();
+        // register to receive valid proxy urls
+        LocalBroadcastManager.getInstance(this).registerReceiver(onUrlsReceived, new IntentFilter(BROADCAST_VALID_URL_FOUND));
+
+        // start shadowsocks service
+        Intent shadowsocksIntent = new Intent(this, ShadowsocksService.class);
+        // put shadowsocks proxy url here, should look like ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpwYXNz@127.0.0.1:1234 (base64 encode user/password)
+        shadowsocksIntent.putExtra("org.greatfire.envoy.START_SS_LOCAL", "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTppZXNvaHZvOHh1Nm9oWW9yaWUydGhhZWhvaFBoOFRoYQ==@172.104.163.54:8388");
+        ContextCompat.startForegroundService(getApplicationContext(), shadowsocksIntent);
+
+        // submit list of urls to envoy for evaluation
+        NetworkIntentService.submit(this, possibleUrls);
+
+        // delay until after proxy urls have been validated
+        // initialRepoUpdateIfRequired();
 
         Intent intent = getIntent();
         handleSearchOrAppViewIntent(intent);
@@ -282,7 +322,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        FDroidApp.checkStartTor(this, Preferences.get());
+        // FDroidApp.checkStartTor(this, Preferences.get());
 
         if (getIntent().hasExtra(EXTRA_VIEW_UPDATES)) {
             getIntent().removeExtra(EXTRA_VIEW_UPDATES);
@@ -588,6 +628,42 @@ public class MainActivity extends AppCompatActivity {
                 // TODO - implement badge for update icon
                 // refreshUpdatesBadge(count);
             }
+        }
+    };
+
+    // this receiver listens for the results from the NetworkIntentService started below
+    // it should receive a result if no valid urls are found but not if the service throws an exception
+    private final BroadcastReceiver onUrlsReceived = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            boolean enableProxy = false;
+
+            if (intent != null && context != null) {
+                ArrayList<String> validUrls = intent.getStringArrayListExtra(EXTENDED_DATA_VALID_URLS);
+                // if there are no valid urls, the proxy setting in preferences will be disabled
+                // currently there is a delay when using gost and the app must be restarted
+                if (validUrls != null && !validUrls.isEmpty()) {
+                    // select the fastest valid option (urls are ordered by latency)
+                    String envoyUrl = validUrls.get(0);
+
+                    Log.d(TAG, "found valid proxy url: " + envoyUrl);
+                    if (CronetNetworking.cronetEngine() == null) {
+                        Log.d(TAG, "start cronet engine for " + envoyUrl);
+                        CronetNetworking.initializeCronetEngine(context, envoyUrl);
+                        Log.d(TAG, "save preference for " + envoyUrl);
+                        Preferences.get().setEnvoyUrl(envoyUrl);
+                    } else {
+                        Log.d(TAG, "cronet engine ready, skip " + envoyUrl);
+                    }
+                } else {
+                    Log.e(TAG, "no valid proxy url was found, clear saved url");
+                    Preferences.get().setEnvoyUrl(null);
+                }
+            }
+
+            Log.d(TAG, "do delayed repo update (if needed)");
+
+            initialRepoUpdateIfRequired();
         }
     };
 }

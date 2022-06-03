@@ -40,7 +40,7 @@ internal actual fun getHttpClientEngineFactory(): HttpClientEngineFactory<*> {
  * Prevent DNS requests.
  * Important when proxying all requests over Tor to not leak DNS queries.
  */
-private class NoDns : Dns {
+public class NoDns : Dns {
     override fun lookup(hostname: String): List<InetAddress> {
         return listOf(InetAddress.getByAddress(hostname, ByteArray(4)))
     }

@@ -108,7 +108,12 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/proxy">
-        <SwitchPreferenceCompat
+        <EditTextPreference
+            android:key="envoyStatus"
+            android:title="@string/envoy_status"
+            android:summary="@string/envoy_unknown"
+            android:selectable="false" />
+        <!--SwitchPreferenceCompat
             android:key="useTor"
             android:summary="@string/useTorSummary"
             android:title="@string/useTor" />
@@ -126,7 +131,7 @@
             android:dependency="enableProxy"
             android:key="proxyPort"
             android:summary="@string/proxy_port_summary"
-            android:title="@string/proxy_port" />
+            android:title="@string/proxy_port" /-->
     </PreferenceCategory>
 
     <PreferenceCategory

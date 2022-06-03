@@ -16,6 +16,7 @@ import android.os.IBinder;
 import android.text.TextUtils;
 import android.util.Log;
 
+import org.chromium.net.CronetEngine;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.NotificationHelper;
 import org.fdroid.fdroid.Preferences;
@@ -369,7 +370,20 @@ public class SwapService extends Service {
                     HttpURLConnection conn = null;
                     try {
                         URL url = new URL(repo.address.replace("/fdroid/repo", "/request-swap"));
-                        conn = (HttpURLConnection) url.openConnection();
+
+                        String envoyUrl = Preferences.get().getEnvoyUrl();
+
+                        if (envoyUrl != null) {
+                            Log.d(TAG, "open swap url with cronet engine");
+                            CronetEngine.Builder engineBuilder = new CronetEngine.Builder(getApplicationContext());
+                            engineBuilder.setEnvoyUrl(envoyUrl);
+                            CronetEngine engine = engineBuilder.build();
+                            conn = (HttpURLConnection) engine.openConnection(url);
+                        } else {
+                            Log.d(TAG, "open swap url with open connection");
+                            conn = (HttpURLConnection) url.openConnection();
+                        }
+
                         conn.setRequestMethod("POST");
                         conn.setDoInput(true);
                         conn.setDoOutput(true);
