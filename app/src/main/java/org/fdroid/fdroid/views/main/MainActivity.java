@@ -64,17 +64,12 @@ import org.fdroid.fdroid.views.AppDetailsActivity;
 import org.fdroid.fdroid.views.ManageReposActivity;
 import org.fdroid.fdroid.views.apps.AppListActivity;
 
-import java.net.InetSocketAddress;
-import java.net.Proxy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
 import android.util.Log;
 import org.greatfire.envoy.*;
-
-import info.guardianproject.netcipher.NetCipher;
 
 /**
  * Main view shown to users upon starting F-Droid.
@@ -124,9 +119,6 @@ public class MainActivity extends AppCompatActivity {
     // copied from org.greatfire.envoy.NetworkIntentService.kt, could not be found in imported class
     public static final String BROADCAST_VALID_URL_FOUND = "org.greatfire.envoy.VALID_URL_FOUND";
     public static final String EXTENDED_DATA_VALID_URLS = "org.greatfire.envoy.VALID_URLS";
-
-    private int currentPageId = 0;
-    public static final String CURRENT_PAGE_ID = "org.greatfire.envoy.CURRENT_PAGE_ID";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -636,12 +628,8 @@ public class MainActivity extends AppCompatActivity {
     private final BroadcastReceiver onUrlsReceived = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            boolean enableProxy = false;
-
             if (intent != null && context != null) {
                 ArrayList<String> validUrls = intent.getStringArrayListExtra(EXTENDED_DATA_VALID_URLS);
-                // if there are no valid urls, the proxy setting in preferences will be disabled
-                // currently there is a delay when using gost and the app must be restarted
                 if (validUrls != null && !validUrls.isEmpty()) {
                     // select the fastest valid option (urls are ordered by latency)
                     String envoyUrl = validUrls.get(0);
