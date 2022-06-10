@@ -98,10 +98,6 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView pager;
     private MainViewAdapter adapter;
 
-    // copied from org.greatfire.envoy.NetworkIntentService.kt, could not be found in imported class
-    public static final String BROADCAST_VALID_URL_FOUND = "org.greatfire.envoy.VALID_URL_FOUND";
-    public static final String EXTENDED_DATA_VALID_URLS = "org.greatfire.envoy.VALID_URLS";
-
     private int currentPageId = 0;
     public static final String CURRENT_PAGE_ID = "org.greatfire.envoy.CURRENT_PAGE_ID";
 
