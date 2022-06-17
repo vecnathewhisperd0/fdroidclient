@@ -18,18 +18,18 @@
         android:title="@string/main_menu__categories"
         app:showAsAction="ifRoom|withText" />
     <item
-        android:id="@+id/nearby"
-        android:enabled="true"
-        android:icon="@drawable/ic_nearby"
-        android:orderInCategory="2"
-        android:title="@string/main_menu__swap_nearby"
-        app:showAsAction="ifRoom|withText" />
-    <item
         android:id="@+id/updates"
         android:enabled="true"
         android:icon="@drawable/ic_updates"
-        android:orderInCategory="3"
+        android:orderInCategory="2"
         android:title="@string/main_menu__updates"
+        app:showAsAction="ifRoom|withText" />
+    <item
+        android:id="@+id/nearby"
+        android:enabled="true"
+        android:icon="@drawable/ic_nearby"
+        android:orderInCategory="3"
+        android:title="@string/main_menu__swap_nearby"
         app:showAsAction="ifRoom|withText" />
     <item
         android:id="@+id/settings"

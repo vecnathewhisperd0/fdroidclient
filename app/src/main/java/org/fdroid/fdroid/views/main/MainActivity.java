@@ -31,7 +31,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -41,9 +44,6 @@ import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.badge.BadgeDrawable;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.fdroid.fdroid.AppUpdateStatusManager;
 import org.fdroid.fdroid.AppUpdateStatusManager.AppUpdateStatus;
@@ -97,8 +97,9 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView pager;
     private MainViewAdapter adapter;
-    private BottomNavigationView bottomNavigation;
-    private BadgeDrawable updatesBadge;
+
+    private int currentPageId = 0;
+    public static final String CURRENT_PAGE_ID = "org.greatfire.envoy.CURRENT_PAGE_ID";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -123,19 +124,67 @@ public class MainActivity extends AppCompatActivity {
             pager.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
         }
 
-        bottomNavigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-        bottomNavigation.setOnNavigationItemSelectedListener(item -> {
-            pager.scrollToPosition(item.getOrder());
+        // TODO - implement badge for update icon
+        // updatesBadge = bottomNavigation.getOrCreateBadge(R.id.updates);
+        // updatesBadge.setVisible(false);
 
-            if (item.getItemId() == R.id.nearby) {
-                NearbyViewBinder.updateUsbOtg(MainActivity.this);
+        // set up custom navigation bar to allow shifted icons with frames
+        ImageView newestView = (ImageView) findViewById((R.id.newest_button));
+        ImageView categoryView = (ImageView) findViewById((R.id.category_button));
+        ImageView updateView = (ImageView) findViewById((R.id.update_button));
+        ImageView nearbyView = (ImageView) findViewById((R.id.nearby_button));
+        ImageView settingsView = (ImageView) findViewById((R.id.settings_button));
+
+        newestView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentPageId != 0) {
+                    pager.scrollToPosition(0);
+                    setNavSelection(0);
+                }
             }
-
-            return true;
-
         });
-        updatesBadge = bottomNavigation.getOrCreateBadge(R.id.updates);
-        updatesBadge.setVisible(false);
+
+        categoryView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentPageId != 1) {
+                    pager.scrollToPosition(1);
+                    setNavSelection(1);
+                }
+            }
+        });
+
+        updateView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentPageId != 2) {
+                    pager.scrollToPosition(2);
+                    setNavSelection(2);
+                }
+            }
+        });
+
+        nearbyView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentPageId != 3) {
+                    pager.scrollToPosition(3);
+                    NearbyViewBinder.updateUsbOtg(MainActivity.this);
+                    setNavSelection(3);
+                }
+            }
+        });
+
+        settingsView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (currentPageId != 4) {
+                    pager.scrollToPosition(4);
+                    setNavSelection(4);
+                }
+            }
+        });
 
         IntentFilter updateableAppsFilter = new IntentFilter(AppUpdateStatusManager.BROADCAST_APPSTATUS_LIST_CHANGED);
         updateableAppsFilter.addAction(AppUpdateStatusManager.BROADCAST_APPSTATUS_CHANGED);
@@ -148,10 +197,78 @@ public class MainActivity extends AppCompatActivity {
         handleSearchOrAppViewIntent(intent);
     }
 
+    private void refreshNavSelection() {
+        setNavSelection(currentPageId);
+    }
+
+    private void setNavSelection(int position) {
+
+        currentPageId = position;
+
+        ImageView newestView = (ImageView) findViewById(R.id.newest_button);
+        ImageView categoryView = (ImageView) findViewById(R.id.category_button);
+        ImageView updateView = (ImageView) findViewById(R.id.update_button);
+        ImageView nearbyView = (ImageView) findViewById(R.id.nearby_button);
+        ImageView settingsView = (ImageView) findViewById(R.id.settings_button);
+
+        TextView newestText = (TextView) findViewById(R.id.newest_text);
+        TextView categoryText = (TextView) findViewById(R.id.category_text);
+        TextView updateText = (TextView) findViewById(R.id.update_text);
+        TextView nearbyText = (TextView) findViewById(R.id.nearby_text);
+        TextView settingsText = (TextView) findViewById(R.id.settings_text);
+
+        // clear all current selections
+        newestView.setBackground(getDrawable(R.drawable.ic_gf_newest_unfocus));
+        newestText.setTextColor(getResources().getColor(R.color.fdroid_grey_light));
+        newestText.setPadding(0, 0, 0, getResources().getDimensionPixelOffset(R.dimen.nav_unfocus_padding));
+        categoryView.setBackground(getDrawable(R.drawable.ic_gf_category_unfocus));
+        categoryText.setTextColor(getResources().getColor(R.color.fdroid_grey_light));
+        categoryText.setPadding(0, 0, 0, getResources().getDimensionPixelOffset(R.dimen.nav_unfocus_padding));
+        updateView.setBackground(getDrawable(R.drawable.ic_gf_update_unfocus));
+        updateText.setTextColor(getResources().getColor(R.color.fdroid_grey_light));
+        updateText.setPadding(0, 0, 0, getResources().getDimensionPixelOffset(R.dimen.nav_unfocus_padding));
+        nearbyView.setBackground(getDrawable(R.drawable.ic_gf_nearby_unfocus));
+        nearbyText.setTextColor(getResources().getColor(R.color.fdroid_grey_light));
+        nearbyText.setPadding(0, 0, 0, getResources().getDimensionPixelOffset(R.dimen.nav_unfocus_padding));
+        settingsView.setBackground(getDrawable(R.drawable.ic_gf_settings_unfocus));
+        settingsText.setTextColor(getResources().getColor(R.color.fdroid_grey_light));
+        settingsText.setPadding(0, 0, 0, getResources().getDimensionPixelOffset(R.dimen.nav_unfocus_padding));
+
+        switch(currentPageId) {
+            case 0:
+                newestView.setBackground(getDrawable(R.drawable.ic_gf_newest_focus));
+                newestText.setTextColor(getResources().getColor(R.color.color_primary));
+                newestText.setPadding(0, 0, 0, getResources().getDimensionPixelOffset(R.dimen.nav_focus_padding));
+                break;
+            case 1:
+                categoryView.setBackground(getDrawable(R.drawable.ic_gf_category_focus));
+                categoryText.setTextColor(getResources().getColor(R.color.color_primary));
+                categoryText.setPadding(0, 0, 0, getResources().getDimensionPixelOffset(R.dimen.nav_focus_padding));
+                break;
+            case 2:
+                updateView.setBackground(getDrawable(R.drawable.ic_gf_update_focus));
+                updateText.setTextColor(getResources().getColor(R.color.color_primary));
+                updateText.setPadding(0, 0, 0, getResources().getDimensionPixelOffset(R.dimen.nav_focus_padding));
+                break;
+            case 3:
+                nearbyView.setBackground(getDrawable(R.drawable.ic_gf_nearby_focus));
+                nearbyText.setTextColor(getResources().getColor(R.color.color_primary));
+                nearbyText.setPadding(0, 0, 0, getResources().getDimensionPixelOffset(R.dimen.nav_focus_padding));
+                break;
+            case 4:
+                settingsView.setBackground(getDrawable(R.drawable.ic_gf_settings_focus));
+                settingsText.setTextColor(getResources().getColor(R.color.color_primary));
+                settingsText.setPadding(0, 0, 0, getResources().getDimensionPixelOffset(R.dimen.nav_focus_padding));
+                break;
+            default:
+                break;
+        }
+    }
+
     private void setSelectedMenuInNav(int menuId) {
         int position = adapter.adapterPositionFromItemId(menuId);
         pager.scrollToPosition(position);
-        bottomNavigation.setSelectedItemId(position);
+        setNavSelection(position);
     }
 
     private void initialRepoUpdateIfRequired() {
@@ -176,11 +293,29 @@ public class MainActivity extends AppCompatActivity {
         } else if (getIntent().hasExtra(EXTRA_VIEW_SETTINGS)) {
             getIntent().removeExtra(EXTRA_VIEW_SETTINGS);
             setSelectedMenuInNav(R.id.settings);
+        } else {
+            refreshNavSelection();
         }
 
         // AppDetailsActivity and RepoDetailsActivity set different NFC actions, so reset here
         NfcHelper.setAndroidBeam(this, getApplication().getPackageName());
         checkForAddRepoIntent(getIntent());
+    }
+
+    @Override
+    protected void onSaveInstanceState(final Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // save current page
+        outState.putInt(CURRENT_PAGE_ID, currentPageId);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(final Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        // restore current page
+        currentPageId = savedInstanceState.getInt(CURRENT_PAGE_ID, 0);
     }
 
     @Override
@@ -367,6 +502,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // TODO - implement badge for update icon
+    /*
     private void refreshUpdatesBadge(int canUpdateCount) {
         if (canUpdateCount == 0) {
             updatesBadge.setVisible(false);
@@ -376,6 +513,7 @@ public class MainActivity extends AppCompatActivity {
             updatesBadge.setVisible(true);
         }
     }
+    */
 
     private static class NonScrollingHorizontalLayoutManager extends LinearLayoutManager {
         NonScrollingHorizontalLayoutManager(Context context) {
@@ -447,7 +585,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                refreshUpdatesBadge(count);
+                // TODO - implement badge for update icon
+                // refreshUpdatesBadge(count);
             }
         }
     };
