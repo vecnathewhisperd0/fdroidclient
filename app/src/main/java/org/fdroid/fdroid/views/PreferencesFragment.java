@@ -33,6 +33,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -111,8 +112,8 @@ public class PreferencesFragment extends PreferenceFragmentCompat
     private LiveSeekBarPreference overWifiSeekBar;
     private LiveSeekBarPreference overDataSeekBar;
     private LiveSeekBarPreference updateIntervalSeekBar;
-    // private SwitchPreferenceCompat enableProxyCheckPref;
-    // private SwitchPreferenceCompat useTorCheckPref;
+    private SwitchPreferenceCompat enableProxyCheckPref;
+    private SwitchPreferenceCompat useTorCheckPref;
     private EditTextPreference envoyStatusPref;
     private Preference updateAutoDownloadPref;
     private CheckBoxPreference keepInstallHistoryPref;
@@ -153,11 +154,29 @@ public class PreferencesFragment extends PreferenceFragmentCompat
             installHistoryPref.setTitle(R.string.install_history);
         }
 
-        // useTorCheckPref = (SwitchPreferenceCompat) findPreference(Preferences.PREF_USE_TOR);
-        // useTorCheckPref.setOnPreferenceChangeListener(useTorChangedListener);
-        // enableProxyCheckPref = (SwitchPreferenceCompat) findPreference(Preferences.PREF_ENABLE_PROXY);
-        // enableProxyCheckPref.setOnPreferenceChangeListener(proxyEnabledChangedListener);
+        PreferenceCategory proxyCategory = (PreferenceCategory) findPreference("pref_category_proxy");
+        useTorCheckPref = (SwitchPreferenceCompat) findPreference(Preferences.PREF_USE_TOR);
+        enableProxyCheckPref = (SwitchPreferenceCompat) findPreference(Preferences.PREF_ENABLE_PROXY);
+        Preference hostPref = findPreference(Preferences.PREF_PROXY_HOST);
+        Preference portPref = findPreference(Preferences.PREF_PROXY_PORT);
         envoyStatusPref = findPreference(Preferences.PREF_ENVOY_STATUS);
+
+        if (Preferences.get().getEnvoyState().equals(Preferences.ENVOY_STATE_FAILED)) {
+            Log.d(TAG, "envoy failed: set up tor prefs, hide envoy prefs");
+            useTorCheckPref.setOnPreferenceChangeListener(useTorChangedListener);
+            enableProxyCheckPref.setOnPreferenceChangeListener(proxyEnabledChangedListener);
+            proxyCategory.removePreference(envoyStatusPref);
+        } else {
+            Log.d(TAG, "envoy pending or active: hide tor prefs, set up envoy prefs");
+
+            // remove host/port first to avoid preference dependency exception
+            proxyCategory.removePreference(hostPref);
+            proxyCategory.removePreference(portPref);
+
+            proxyCategory.removePreference(useTorCheckPref);
+            proxyCategory.removePreference(enableProxyCheckPref);
+        }
+
         updateAutoDownloadPref = findPreference(Preferences.PREF_AUTO_DOWNLOAD_INSTALL_UPDATES);
 
         overWifiSeekBar = (LiveSeekBarPreference) findPreference(Preferences.PREF_OVER_WIFI);
@@ -378,14 +397,18 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                 }
                 break;
 
-            /*
             case Preferences.PREF_ENABLE_PROXY:
                 SwitchPreferenceCompat checkPref = (SwitchPreferenceCompat) findPreference(key);
-                checkPref.setSummary(R.string.enable_proxy_summary);
+                if (checkPref != null) {
+                    checkPref.setSummary(R.string.enable_proxy_summary);
+                }
                 break;
 
             case Preferences.PREF_PROXY_HOST:
                 EditTextPreference textPref = (EditTextPreference) findPreference(key);
+                if (textPref == null) {
+                    break;
+                }
                 String text = Preferences.get().getProxyHost();
                 if (TextUtils.isEmpty(text) || text.equals(Preferences.DEFAULT_PROXY_HOST)) {
                     textPref.setSummary(R.string.proxy_host_summary);
@@ -396,6 +419,9 @@ public class PreferencesFragment extends PreferenceFragmentCompat
 
             case Preferences.PREF_PROXY_PORT:
                 EditTextPreference textPref2 = (EditTextPreference) findPreference(key);
+                if (textPref2 == null) {
+                    break;
+                }
                 int port = Preferences.get().getProxyPort();
                 if (port == Preferences.DEFAULT_PROXY_PORT) {
                     textPref2.setSummary(R.string.proxy_port_summary);
@@ -403,7 +429,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                     textPref2.setSummary(String.valueOf(port));
                 }
                 break;
-            */
 
             case Preferences.PREF_KEEP_INSTALL_HISTORY:
                 if (keepInstallHistoryPref.isChecked()) {
@@ -540,14 +565,11 @@ public class PreferencesFragment extends PreferenceFragmentCompat
     /**
      * The default for "Use Tor" is dynamically set based on whether Orbot is installed.
      */
-    /*
     private void initUseTorPreference(Context context) {
         useTorCheckPref.setDefaultValue(OrbotHelper.isOrbotInstalled(context));
         useTorCheckPref.setChecked(Preferences.get().isTorEnabled());
     }
-    */
 
-    /*
     private final Preference.OnPreferenceChangeListener useTorChangedListener =
             new Preference.OnPreferenceChangeListener() {
                 @Override
@@ -565,9 +587,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                     return true;
                 }
             };
-    */
 
-    /*
     private final Preference.OnPreferenceChangeListener proxyEnabledChangedListener =
             new Preference.OnPreferenceChangeListener() {
                 @Override
@@ -578,7 +598,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                     return true;
                 }
             };
-    */
 
     @Override
     public void onResume() {
@@ -594,15 +613,26 @@ public class PreferencesFragment extends PreferenceFragmentCompat
 
         initAutoFetchUpdatesPreference();
         initPrivilegedInstallerPreference();
-        // initUseTorPreference(getActivity().getApplicationContext());
-        initProxyStatus(getActivity().getApplicationContext());
+        if (Preferences.get().getEnvoyState().equals(Preferences.ENVOY_STATE_FAILED)) {
+            Log.d(TAG, "envoy failed, init tor prefs");
+            initUseTorPreference(getActivity().getApplicationContext());
+        } else {
+            Log.d(TAG, "envoy pending or active, ignore tor prefs");
+            initProxyStatus(getActivity().getApplicationContext());
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
         getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
-        // FDroidApp.configureProxy(Preferences.get());
+
+        if (Preferences.get().getEnvoyState().equals(Preferences.ENVOY_STATE_FAILED)) {
+            Log.d(TAG, "envoy failed: configure tor proxy");
+            FDroidApp.configureProxy(Preferences.get());
+        } else {
+            Log.d(TAG, "envoy pending or active, ignore tor proxy");
+        }
 
         if (updateIntervalPrevious != updateIntervalSeekBar.getValue()) {
             UpdateService.schedule(getActivity());

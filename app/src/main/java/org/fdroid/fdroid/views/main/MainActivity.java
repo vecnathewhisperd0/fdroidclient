@@ -220,6 +220,7 @@ public class MainActivity extends AppCompatActivity {
         ContextCompat.startForegroundService(getApplicationContext(), shadowsocksIntent);
 
         // submit list of urls to envoy for evaluation
+        Preferences.get().setEnvoyState(Preferences.ENVOY_STATE_PENDING);
         NetworkIntentService.submit(this, possibleUrls);
 
         // delay until after proxy urls have been validated
@@ -314,7 +315,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        // FDroidApp.checkStartTor(this, Preferences.get());
+        FDroidApp.checkStartTor(this, Preferences.get());
 
         if (getIntent().hasExtra(EXTRA_VIEW_UPDATES)) {
             getIntent().removeExtra(EXTRA_VIEW_UPDATES);
@@ -640,18 +641,24 @@ public class MainActivity extends AppCompatActivity {
                         CronetNetworking.initializeCronetEngine(context, envoyUrl);
                         Log.d(TAG, "save preference for " + envoyUrl);
                         Preferences.get().setEnvoyUrl(envoyUrl);
+                        Preferences.get().setEnvoyState(Preferences.ENVOY_STATE_ACTIVE);
                     } else {
                         Log.d(TAG, "cronet engine ready, skip " + envoyUrl);
                     }
                 } else {
                     Log.e(TAG, "no valid proxy url was found, clear saved url");
                     Preferences.get().setEnvoyUrl(null);
+                    Preferences.get().setEnvoyState(Preferences.ENVOY_STATE_FAILED);
                 }
             }
 
             Log.d(TAG, "do delayed repo update (if needed)");
 
             initialRepoUpdateIfRequired();
+
+            Log.d(TAG, "GIVE TOR ANOTHER CHANCE TO START");
+            FDroidApp.checkStartTor(context, Preferences.get());
+
         }
     };
 }
