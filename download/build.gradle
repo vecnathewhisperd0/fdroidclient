@@ -91,14 +91,14 @@ kotlin {
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
     sourceSets {
         main.manifest.srcFile('src/androidMain/AndroidManifest.xml')
         getByName("androidTest").java.srcDir(file("src/androidAndroidTest/kotlin"))
     }
     defaultConfig {
         minSdkVersion 22
-        targetSdkVersion 25
+        targetSdkVersion 32
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         testInstrumentationRunnerArguments disableAnalytics: 'true'
     }

@@ -3,6 +3,7 @@ package org.fdroid.fdroid.views.main;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -72,6 +73,7 @@ class LatestViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
         swipeToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                Log.d("FOO", "swipe to refresh latest");
                 swipeToRefresh.setRefreshing(false);
                 UpdateService.updateNow(activity);
             }

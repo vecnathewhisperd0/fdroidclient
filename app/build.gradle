@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-android'
 apply plugin: 'checkstyle'
 apply plugin: 'pmd'
@@ -21,8 +22,52 @@ def basicApplicationId = "org.greatfire.gfdroid.basic"
 // yes, this actually needs both quotes https://stackoverflow.com/a/41391841
 def privilegedExtensionApplicationId = '"org.greatfire.gfdroid.privileged"'
 
+def dnsttServerProp = ""
+def dnsttKeyProp = ""
+def dnsttPathProp = ""
+def dohUrlProp = ""
+def dotAddrProp = ""
+def defProxyProp = ""
+
 android {
-    compileSdkVersion 31
+
+    if (project.hasProperty("dnsttserver")) {
+        dnsttServerProp = dnsttserver
+    } else {
+        println "WARNING: no dnsttserver prop found"
+    }
+
+    if (project.hasProperty("dnsttkey")) {
+        dnsttKeyProp = dnsttkey
+    } else {
+        println "WARNING: no dnsttkey prop found"
+    }
+
+    if (project.hasProperty("dnsttpath")) {
+        dnsttPathProp = dnsttpath
+    } else {
+        println "WARNING: no dnsttpath prop found"
+    }
+
+    if (project.hasProperty("dohUrl")) {
+        dohUrlProp = dohUrl
+    } else {
+        println "WARNING: no dohUrl prop found"
+    }
+
+    if (project.hasProperty("dotAddr")) {
+        dotAddrProp = dotAddr
+    } else {
+        println "WARNING: no dotAddr prop found"
+    }
+
+    if (project.hasProperty("defProxy")) {
+        defProxyProp = defProxy
+    } else {
+        println "WARNING: no defProxy prop found"
+    }
+
+    compileSdkVersion 32
 
     defaultConfig {
         versionCode 2
@@ -31,7 +76,7 @@ android {
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         minSdkVersion 22
         //noinspection ExpiredTargetSdkVersion
-        targetSdkVersion 25
+        targetSdkVersion 32
         /*
           The Android Testing Support Library collects analytics to continuously improve the testing
           experience. More specifically, it uploads a hash of the package name of the application
@@ -40,6 +85,14 @@ android {
          */
         testInstrumentationRunnerArguments disableAnalytics: 'true'
         vectorDrawables.useSupportLibrary = true
+        signingConfig signingConfigs.'full-gfdroid-release'
+
+        buildConfigField "String", "DNSTT_SERVER", "\"$dnsttServerProp\""
+        buildConfigField "String", "DNSTT_KEY", "\"$dnsttKeyProp\""
+        buildConfigField "String", "DNSTT_PATH", "\"$dnsttPathProp\""
+        buildConfigField "String", "DOH_URL", "\"$dohUrlProp\""
+        buildConfigField "String", "DOT_ADDR", "\"$dotAddrProp\""
+        buildConfigField "String", "DEF_PROXY", "\"$defProxyProp\""
     }
 
     ext {
@@ -91,6 +144,10 @@ android {
         compileOptions.encoding = "UTF-8"
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
     }
 
     aaptOptions {
@@ -179,8 +236,31 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.11.4'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.4'
 
-    implementation "org.greatfire.envoy:cronet:0.0.100.0.4896.79"
-    implementation "org.greatfire:envoy:0.0.100.0.4896.79"
+    // TEMP: required to pull in play services?
+    implementation 'com.google.android.gms:play-services-base:18.1.0'
+    //String firebaseMessagingVersion = '23.0.6'
+    //String mlKitVersion = '17.0.4'
+    // For language detection during editing
+    //implementation "com.google.mlkit:language-id:$mlKitVersion"
+    // For receiving push notifications for logged-in users.
+    //implementation "com.google.firebase:firebase-messaging-ktx:$firebaseMessagingVersion"
+
+    // TODO: remove
+    // implementation "org.greatfire.envoy:cronet:0.0.100.0.4896.79"
+    // implementation "org.greatfire:envoy:0.0.100.0.4896.79"
+
+    // use local files for debug builds to support development
+    //debugImplementation 'org.greatfire.envoy:cronet:102.0.5005.41'
+    //debugImplementation 'org.greatfire:envoy:102.0.5005.41'
+    debugImplementation files('libs/cronet-debug.aar')
+    debugImplementation files('libs/envoy-debug.aar')
+    debugImplementation files('libs/IEnvoyProxy.aar')
+    // use maven dependencies for release builds to support automation
+    releaseImplementation 'org.greatfire.envoy:cronet:102.0.5005.41'
+    releaseImplementation 'org.greatfire:envoy:102.0.5005.41'
+    // TEMP: need to update maven envoy version
+    // releaseImplementation 'org.greatfire:IEnvoyProxy:1.0.2'
+    releaseImplementation files('libs/IEnvoyProxy.aar')
 
     implementation "com.squareup.okhttp3:okhttp:4.9.3"
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"

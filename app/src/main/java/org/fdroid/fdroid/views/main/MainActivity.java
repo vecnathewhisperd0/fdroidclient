@@ -64,12 +64,29 @@ import org.fdroid.fdroid.views.AppDetailsActivity;
 import org.fdroid.fdroid.views.ManageReposActivity;
 import org.fdroid.fdroid.views.apps.AppListActivity;
 
+import org.fdroid.fdroid.BuildConfig;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.ConnectException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import android.util.Log;
 import org.greatfire.envoy.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import IEnvoyProxy.IEnvoyProxy;
 
 /**
  * Main view shown to users upon starting F-Droid.
@@ -87,7 +104,7 @@ import org.greatfire.envoy.*;
  */
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "FOO"; // "MainActivity";
 
     public static final String EXTRA_VIEW_UPDATES = "org.fdroid.fdroid.views.main.MainActivity.VIEW_UPDATES";
     public static final String EXTRA_VIEW_NEARBY = "org.fdroid.fdroid.views.main.MainActivity.VIEW_NEARBY";
@@ -109,16 +126,39 @@ public class MainActivity extends AppCompatActivity {
     public static final String CURRENT_PAGE_ID = "org.greatfire.envoy.CURRENT_PAGE_ID";
 
     // initialize one or more string values containing the urls of available http/https proxies (include trailing slash)
-    private String httpUrl = "http://wiki.epochbelt.com/wikipedia/";
-    private String httpsUrl = "https://wiki.epochbelt.com/wikipedia/";
+    // private String httpUrl = "http://wiki.epochbelt.com/wikipedia/";
+    // private String httpsUrl = "https://wiki.epochbelt.com/wikipedia/";
     // urls for additional proxy services, change if there are port conflicts (do not include trailing slash)
-    private String ssUrl = "socks5://127.0.0.1:1080";
+    // private String ssUrl = "socks5://127.0.0.1:1080";
     // add all string values to this list value
-    private List<String> possibleUrls = Arrays.asList(httpUrl, httpsUrl, ssUrl);
+    // private List<String> possibleUrls = Arrays.asList(httpUrl, httpsUrl, ssUrl);
+
+    // local and remote urls for proxy services
+    private String ssUrlLocal = "socks5://127.0.0.1:1080";
+    private String ssUrlRemote = "";
+    private String hysteriaUrlLocal = "socks5://127.0.0.1:";
+    private String hysteriaUrlRemote = "";
+    // lists of proxy urls to validate with envoy
+    private List<String> defaultUrls = new ArrayList<String>();
+    private List<String> dnsttUrls = new ArrayList<String>();
+
+    // TODO: revisit and refactor
+    private boolean waitingForDnstt = false;
+    private boolean waitingForHysteria = false;
+    private boolean waitingForShadowsocks = false;
+    private boolean waitingForDefaultUrl = false;
+    private boolean waitingForDnsttUrl = false;
 
     // copied from org.greatfire.envoy.NetworkIntentService.kt, could not be found in imported class
-    public static final String BROADCAST_VALID_URL_FOUND = "org.greatfire.envoy.VALID_URL_FOUND";
+    //public static final String BROADCAST_VALID_URL_FOUND = "org.greatfire.envoy.VALID_URL_FOUND";
+    //public static final String EXTENDED_DATA_VALID_URLS = "org.greatfire.envoy.VALID_URLS";
+    public static final String BROADCAST_URL_VALIDATION_SUCCEEDED = "org.greatfire.envoy.VALIDATION_SUCCEEDED";
+    public static final String BROADCAST_URL_VALIDATION_FAILED = "org.greatfire.envoy.VALIDATION_FAILED";
     public static final String EXTENDED_DATA_VALID_URLS = "org.greatfire.envoy.VALID_URLS";
+    public static final String EXTENDED_DATA_INVALID_URLS = "org.greatfire.envoy.INVALID_URLS";
+
+    private Object hysteriaLock = new Object();
+    private Object dnsttLock = new Object();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -211,16 +251,21 @@ public class MainActivity extends AppCompatActivity {
         LocalBroadcastManager.getInstance(this).registerReceiver(onUpdateableAppsChanged, updateableAppsFilter);
 
         // register to receive valid proxy urls
-        LocalBroadcastManager.getInstance(this).registerReceiver(onUrlsReceived, new IntentFilter(BROADCAST_VALID_URL_FOUND));
+        //LocalBroadcastManager.getInstance(this).registerReceiver(onUrlsReceived, new IntentFilter(BROADCAST_VALID_URL_FOUND));
+        IntentFilter envoyFilter = new IntentFilter();
+        envoyFilter.addAction(BROADCAST_URL_VALIDATION_SUCCEEDED);
+        envoyFilter.addAction(BROADCAST_URL_VALIDATION_FAILED);
+        envoyFilter.addAction(ShadowsocksService.SHADOWSOCKS_SERVICE_BROADCAST);
+        LocalBroadcastManager.getInstance(this).registerReceiver(onUrlsReceived, envoyFilter);
 
         // start shadowsocks service
-        Intent shadowsocksIntent = new Intent(this, ShadowsocksService.class);
+        //Intent shadowsocksIntent = new Intent(this, ShadowsocksService.class);
         // put shadowsocks proxy url here, should look like ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpwYXNz@127.0.0.1:1234 (base64 encode user/password)
-        shadowsocksIntent.putExtra("org.greatfire.envoy.START_SS_LOCAL", "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTppZXNvaHZvOHh1Nm9oWW9yaWUydGhhZWhvaFBoOFRoYQ==@172.104.163.54:8388");
-        ContextCompat.startForegroundService(getApplicationContext(), shadowsocksIntent);
+        //shadowsocksIntent.putExtra("org.greatfire.envoy.START_SS_LOCAL", "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTppZXNvaHZvOHh1Nm9oWW9yaWUydGhhZWhvaFBoOFRoYQ==@172.104.163.54:8388");
+        //ContextCompat.startForegroundService(getApplicationContext(), shadowsocksIntent);
 
         // submit list of urls to envoy for evaluation
-        NetworkIntentService.submit(this, possibleUrls);
+        //NetworkIntentService.submit(this, possibleUrls);
 
         // delay until after proxy urls have been validated
         // initialRepoUpdateIfRequired();
@@ -304,15 +349,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initialRepoUpdateIfRequired() {
+        if (CronetNetworking.cronetEngine() == null) {
+            Log.d("FOO", "initial update, cronet null");
+        } else {
+            Log.d("FOO", "initial update, envoy active");
+        }
         if (Preferences.get().isIndexNeverUpdated() && !UpdateService.isUpdating()) {
             Utils.debugLog(TAG, "We haven't done an update yet. Forcing repo update.");
             UpdateService.updateNow(this);
+        } else {
+            Utils.debugLog(TAG, "Repo update is already in progress.");
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        // start cronet here to prevent exception from starting a service when out of focus
+        if (CronetNetworking.cronetEngine() != null) {
+            Log.d(TAG, "cronet already running, don't try to start again");
+        } else if (waitingForDefaultUrl || waitingForDnsttUrl) {
+            Log.d(TAG, "already processing urls, don't try to start again");
+        } else {
+            // run envoy setup (fetches and validate urls)
+            Log.d(TAG, "begin processing urls to start cronet");
+            waitingForDefaultUrl = true;
+            getDefaultUrls();
+        }
 
         // FDroidApp.checkStartTor(this, Preferences.get());
 
@@ -623,11 +687,470 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+
+    private void getDefaultUrls() {
+
+        if (BuildConfig.DEF_PROXY == null || BuildConfig.DEF_PROXY.isEmpty()) {
+            Log.w(TAG, "no default proxy urls were provided");
+            handleUrls(new ArrayList<String>());
+        } else {
+            Log.d(TAG, "found default proxy urls: " + BuildConfig.DEF_PROXY);
+            handleUrls(Arrays.asList(BuildConfig.DEF_PROXY.split(",")));
+        }
+    }
+
+    private void getDnsttUrls() {
+
+        // check for dnstt project properties
+        if (BuildConfig.DNSTT_SERVER == null || BuildConfig.DNSTT_SERVER.isEmpty()
+                || BuildConfig.DNSTT_KEY == null || BuildConfig.DNSTT_KEY.isEmpty()
+                || BuildConfig.DNSTT_PATH == null || BuildConfig.DNSTT_PATH.isEmpty()
+                || ((BuildConfig.DOH_URL == null || BuildConfig.DOH_URL.isEmpty())
+                && (BuildConfig.DOT_ADDR == null || BuildConfig.DOT_ADDR.isEmpty()))) {
+            Log.e(TAG, "dnstt parameters are not defined, cannot fetch metadata with dnstt");
+        } else {
+
+            // set time limit for dnstt (dnstt allows a long timeout and retries, may never return)
+            // replaces lifecycleScope.launch(Dispatchers.IO) in kotlin code
+            Thread dnsttStopThread = new Thread() {
+                @Override
+                public void run() {
+                    Log.d(TAG, "dnstt stop thread run");
+                    try {
+                        Log.d(TAG, "start timer");
+                        waitingForDnstt = true;
+                        synchronized (dnsttLock) {
+                            dnsttLock.wait(10000L);  // wait 10 seconds
+                        }
+                        if (waitingForDnstt) {
+                            Log.d(TAG, "stop timer, stop dnstt");
+                            waitingForDnstt = false;
+                            IEnvoyProxy.stopDnstt();
+                        } else {
+                            Log.d(TAG, "dnstt already complete");
+                        }
+                    } catch (InterruptedException e) {
+                        Log.d(TAG, "dnstt stop thread interrupted: " + e.getLocalizedMessage());
+                    }
+                }
+            };
+            dnsttStopThread.start();
+
+            /*
+            lifecycleScope.launch(Dispatchers.IO) {
+                Log.d(TAG, "start timer");
+                waitingForDnstt = true;
+                delay(10000L)  // wait 10 seconds
+                if (waitingForDnstt) {
+                    Log.d(TAG, "stop timer, stop dnstt");
+                    waitingForDnstt = false;
+                    IEnvoyProxy.stopDnstt();
+                } else {
+                    Log.d(TAG, "dnstt already complete");
+                }
+            }
+            */
+
+            try {
+                // provide either DOH or DOT address, and provide an empty string for the other
+                Log.d(TAG, "start dnstt proxy: " + BuildConfig.DNSTT_SERVER + " / " + BuildConfig.DOH_URL + " / " + BuildConfig.DOT_ADDR + " / " + BuildConfig.DNSTT_KEY);
+                long dnsttPort = IEnvoyProxy.startDnstt(
+                        BuildConfig.DNSTT_SERVER,
+                        BuildConfig.DOH_URL,
+                        BuildConfig.DOT_ADDR,
+                        BuildConfig.DNSTT_KEY
+                );
+
+                Log.d(TAG, "get list of possible urls");
+                URL url = new URL("http://127.0.0.1:" + dnsttPort + BuildConfig.DNSTT_PATH);
+                Log.d(TAG, "open connection: " + url);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                try {
+                    Log.d(TAG, "set timeout");
+                    connection.setConnectTimeout(5000);
+                    Log.d(TAG, "connect");
+                    connection.connect();
+                } catch (SocketTimeoutException e) {
+                    Log.e(TAG, "socket timeout when connecting: " + e.getLocalizedMessage());
+                } catch (ConnectException e) {
+                    Log.e(TAG, "connection error when connecting: " + e.getLocalizedMessage());
+                } catch (Exception e) {
+                    Log.e(TAG, "unexpected error when connecting: " + e.getLocalizedMessage());
+                }
+
+                try {
+                    Log.d(TAG, "open input stream");
+                    InputStream input = (InputStream) connection.getInputStream();
+                    if (input != null) {
+                        Log.d(TAG, "parse json and extract possible urls");
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+                        StringBuilder builder = new StringBuilder();
+                        String line = null;
+                        try {
+                            while ((line = reader.readLine()) != null) {
+                                Log.d(TAG, "read line: " + line);
+                                builder.append(line + "\n");
+                            }
+                        } catch (IOException e) {
+                            Log.e(TAG, "i/o error when reading stream: " + e.getLocalizedMessage());
+                        } finally {
+                            try {
+                                input.close();
+                            } catch (IOException e) {
+                                Log.e(TAG, "i/o error when closing stream: " + e.getLocalizedMessage());
+                            }
+                        }
+
+                        String json = builder.toString();
+                        JSONObject envoyObject = new JSONObject(json);
+                        JSONArray envoyUrlArray = envoyObject.getJSONArray("envoyUrls");
+
+                        List urlList = new ArrayList<String>();
+
+                        if (envoyUrlArray != null && envoyUrlArray.length() > 0) {
+                            for (int i = 0; i < envoyUrlArray.length(); i++){
+                                if (defaultUrls.contains(envoyUrlArray.getString(i)) ||
+                                        hysteriaUrlRemote.equals(envoyUrlArray.getString(i)) ||
+                                        ssUrlRemote.equals(envoyUrlArray.getString(i))) {
+                                    Log.d(TAG, "dnstt url " + envoyUrlArray.getString(i) + " has aready been validated");
+                                } else {
+                                    Log.d(TAG, "dnstt url " + envoyUrlArray.getString(i) + " has not been validated yet");
+                                    urlList.add(envoyUrlArray.getString(i));
+                                }
+                            }
+                        } else {
+                            Log.w(TAG, "no dnstt proxy urls were found");
+                        }
+
+                        hysteriaUrlRemote = "";
+                        ssUrlRemote = "";
+
+                        handleUrls(urlList);
+
+                    } else {
+                        Log.e(TAG, "response contained no json to parse");
+                    }
+                } catch (SocketTimeoutException e) {
+                    Log.e(TAG, "socket timeout error when reading json: " + e.getLocalizedMessage());
+                } catch (FileNotFoundException e) {
+                    Log.e(TAG, "file error when reading json: " + e.getLocalizedMessage());
+                } catch (Exception e) {
+                    Log.e(TAG, "unexpected error when reading file: " + e.getLocalizedMessage());
+                }
+            } catch (MalformedURLException e) {
+                Log.e(TAG, "malformed url error when starting dnstt: " + e.getLocalizedMessage());
+            } catch (IOException e) {
+                Log.e(TAG, "i/o error when starting dnstt: " + e.getLocalizedMessage());
+            } catch (Exception e) {
+                Log.e(TAG, "unexpected error when starting dnstt: " + e.getLocalizedMessage());
+            }
+
+            Log.d(TAG, "stop dnstt proxy");
+            waitingForDnstt = false;
+            IEnvoyProxy.stopDnstt();
+        }
+    }
+
+    private void handleUrls(List<String> envoyUrls) {
+
+        // check url types
+        for (String url : envoyUrls) {
+            if (url.startsWith("hysteria://")) {
+
+                // TEMP: current hysteria host uses an ip not a url
+                String shortUrl = url.replace("hysteria://", "");
+
+                Log.d(TAG, "found hysteria url: " + shortUrl);
+                hysteriaUrlRemote = shortUrl;
+            } else if (url.startsWith("ss://")) {
+                Log.d(TAG, "found ss url: " + url);
+                ssUrlRemote = url;
+            } else {
+                Log.d(TAG, "found url: " + url);
+                if (waitingForDefaultUrl) {
+                    defaultUrls.add(url);
+                } else {
+                    dnsttUrls.add(url);
+                }
+            }
+        }
+
+        // check for urls that require services
+
+        if (hysteriaUrlRemote != null && !hysteriaUrlRemote.isEmpty()) {
+            Log.d(TAG, "hysteria service needed");
+            // start hysteria service
+            long hysteriaPort = IEnvoyProxy.startHysteria(hysteriaUrlRemote,
+                    "uPa1gar4Guce5ooteyiuthie7soqu5Mu",
+                    "-----BEGIN CERTIFICATE-----" + "\n" +
+            "MIIEzjCCAzagAwIBAgIRAIwE+m2D+1vvzPZaSLj/a7YwDQYJKoZIhvcNAQELBQAw" + "\n" +
+            "fzEeMBwGA1UEChMVbWtjZXJ0IGRldmVsb3BtZW50IENBMSowKAYDVQQLDCFzY21A" + "\n" +
+            "bTFwcm8ubG9jYWwgKFN0ZXZlbiBNY0RvbmFsZCkxMTAvBgNVBAMMKG1rY2VydCBz" + "\n" +
+            "Y21AbTFwcm8ubG9jYWwgKFN0ZXZlbiBNY0RvbmFsZCkwHhcNMjIwMTI3MDE0NTQ5" + "\n" +
+            "WhcNMzIwMTI3MDE0NTQ5WjB/MR4wHAYDVQQKExVta2NlcnQgZGV2ZWxvcG1lbnQg" + "\n" +
+            "Q0ExKjAoBgNVBAsMIXNjbUBtMXByby5sb2NhbCAoU3RldmVuIE1jRG9uYWxkKTEx" + "\n" +
+            "MC8GA1UEAwwobWtjZXJ0IHNjbUBtMXByby5sb2NhbCAoU3RldmVuIE1jRG9uYWxk" + "\n" +
+            "KTCCAaIwDQYJKoZIhvcNAQEBBQADggGPADCCAYoCggGBANd+mMC9kQWwH+h++vmS" + "\n" +
+            "Kkqv1xebHKncKT/JAAr6lBG/O9T6V0KEZTgMeVU4XG4C2CVPRzbceADSTN36u2k2" + "\n" +
+            "+ToGeP6fEc/sz7SD1Uf/Xu6aZCrEuuK8aHchcn2+BgcV5heiKIpQGHVjFzCgez97" + "\n" +
+            "wXdcNowerpWP42WK5yj2e3+VKBojHouvSBrTj3EaYAn5nQLiIpi7ZqHmq7NorOhS" + "\n" +
+            "ldaCKO6tp8LRQX0X13FL0o8hNJb7gZuSYxt3NzoP0ZCeKfd9La7409u0ZBUuUrWl" + "\n" +
+            "k01gPh+6SqrvsqSf3AnpxvlvUfpm1e9LfUZe0S/J1OYOkF2QdQ+wlzHZsYyxZ2uc" + "\n" +
+            "kRWLYbqXkF93X3O2H0SkjYKB3PFKcWNeUdt3LJ4lNrisX+R+JTU+4XpGYznnIebF" + "\n" +
+            "/Jt/U9aFkenkE3JHyfe9SDedAqUVO9j6XGRFSK5LuoZsXoEqrqY3DXbUZTsZbkZ2" + "\n" +
+            "NVtmM+9/bcuBxDgBxUGnvPLRaHO9Y3rkjc+8Qb40iibW8QIDAQABo0UwQzAOBgNV" + "\n" +
+            "HQ8BAf8EBAMCAgQwEgYDVR0TAQH/BAgwBgEB/wIBADAdBgNVHQ4EFgQUyaGG2QSl" + "\n" +
+            "nr3VsOPd+7EwfxSIQ7UwDQYJKoZIhvcNAQELBQADggGBAA97ah3o5EUwy/LNSkSK" + "\n" +
+            "MEYREtZfZp6oz4IjDMCKN9FKtKcqlpbyJVlz/ahIU9/QDqCKcaAJVLmR57fZ/qio" + "\n" +
+            "HNQcm1yvA6TlprnwMHNtPO3cxsi1p0D7EofAy0oAcRp3NgTOWpX7zTpd2pNIuDy6" + "\n" +
+            "lmP1iBkUxfXorAN+MR1SzEWYQn2k3hcHesrvTzqGZmcVyRDihLWd7bTeixGO5x8w" + "\n" +
+            "fNNWTW+Sd6t1vPVR+qBwSLGUKMxoVeenaP8PXn6u5BDzNkwZKQMWQzFlt+DQL61z" + "\n" +
+            "6t5OU73CYgJ7XIKvKN+eFOG9lvYglo8LyDJ74QbznVh/Hcwzps7t3QB/S7Q1imue" + "\n" +
+            "7n3hINp1GwDgVmFkk0oIG8+s5z54hxCIABgWZsBr2vtGLvn3+xEDgFtRsY9N4PTO" + "\n" +
+            "PRHq//BHvTjFt9pwZs5k+EBu9K3I0WZw2PBWhzLiLA7PdkDiDvPw5sJW80vOVo8w" + "\n" +
+            "lTIm9+lxj2TaeiqcPaVRBUG7cmIx+iUFPnpttnp8SvRWlQ==" + "\n" +
+            "-----END CERTIFICATE-----");
+
+            Log.d(TAG, "hysteria service started at " + hysteriaUrlLocal + hysteriaPort);
+
+            // add url for hysteria service
+            if (waitingForDefaultUrl) {
+                defaultUrls.add(hysteriaUrlLocal + hysteriaPort);
+            } else {
+                dnsttUrls.add(hysteriaUrlLocal + hysteriaPort);
+            }
+
+            waitingForHysteria = true;
+        }
+
+        if (ssUrlRemote != null && !ssUrlRemote.isEmpty()) {
+            // Notification.Builder in ShadowsocksService.onStartCommand may require api > 7
+            Log.d(TAG, "shadowsocks service needed");
+            // start shadowsocks service
+            Intent shadowsocksIntent = new Intent(this, ShadowsocksService.class);
+            // put shadowsocks proxy url here, should look like ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpwYXNz@127.0.0.1:1234 (base64 encode user/password)
+            shadowsocksIntent.putExtra("org.greatfire.envoy.START_SS_LOCAL", ssUrlRemote);
+            ContextCompat.startForegroundService(getApplicationContext(), shadowsocksIntent);
+            // add url for shadowsocks service
+            if (waitingForDefaultUrl) {
+                defaultUrls.add(ssUrlLocal);
+            } else {
+                dnsttUrls.add(ssUrlLocal);
+            }
+
+            waitingForShadowsocks = true;
+        }
+
+        if (waitingForDefaultUrl && defaultUrls.isEmpty()) {
+            Log.w(TAG, "no default urls to submit, get additional urls with dnstt");
+            waitingForDefaultUrl = false;
+            waitingForDnsttUrl = true;
+            // start asynchronous dnstt task to fetch proxy urls
+            // replaces lifecycleScope.launch(Dispatchers.IO) in kotlin code
+            Thread dnsttThread = new Thread() {
+                @Override
+                public void run() {
+                    Log.d(TAG, "no defaults, dnstt thread run");
+                    getDnsttUrls();
+                }
+            };
+            dnsttThread.start();
+
+            /*
+            lifecycleScope.launch(Dispatchers.IO) {
+                getDnsttUrls();
+            }
+            */
+        } else if (waitingForDnsttUrl && dnsttUrls.isEmpty()) {
+            waitingForDnsttUrl = false;
+            Log.w(TAG, "no dnstt urls to submit, cannot start envoy/cronet, clear saved url");
+            Preferences.get().setEnvoyUrl(null);
+        } else if (waitingForShadowsocks) {
+            Log.d(TAG, "submit urls after starting shadowsocks service");
+        } else if (waitingForHysteria) {
+            Log.d(TAG, "submit urls after a short delay for starting hysteria");
+            // replaces lifecycleScope.launch(Dispatchers.IO) in kotlin code
+            Thread hysteriaDelayThread = new Thread() {
+                @Override
+                public void run() {
+                    Log.d(TAG, "hysteria thread (long) run");
+                    try {
+                        Log.d(TAG, "start delay");
+                        synchronized (hysteriaLock) {
+                            hysteriaLock.wait(10000L); // wait 10 seconds
+                        }
+                        Log.d(TAG, "end delay");
+                        waitingForHysteria = false;
+                        if (waitingForDefaultUrl) {
+                            NetworkIntentService.submit(MainActivity.this, defaultUrls);
+                        } else {
+                            NetworkIntentService.submit(MainActivity.this, dnsttUrls);
+                        }
+                    } catch (InterruptedException e) {
+                        Log.d(TAG, "hysteria thread (long) interrupted: " + e.getLocalizedMessage());
+                    }
+                }
+            };
+            hysteriaDelayThread.start();
+
+            /*
+            lifecycleScope.launch(Dispatchers.IO) {
+                Log.d(TAG, "start delay");
+                delay(10000L)  // wait 10 seconds
+                Log.d(TAG, "end delay");
+                waitingForHysteria = false;
+                if (waitingForDefaultUrl) {
+                    NetworkIntentService.submit(MainActivity.this, defaultUrls);
+                } else {
+                    NetworkIntentService.submit(MainActivity.this, dnsttUrls);
+                }
+            }
+            */
+        } else {
+            // submit list of urls to envoy for evaluation
+            Log.d(TAG, "no services needed, submit urls immediately");
+            if (waitingForDefaultUrl) {
+                NetworkIntentService.submit(MainActivity.this, defaultUrls);
+            } else {
+                NetworkIntentService.submit(MainActivity.this, dnsttUrls);
+            }
+        }
+    }
+
     // this receiver listens for the results from the NetworkIntentService started below
     // it should receive a result if no valid urls are found but not if the service throws an exception
     private final BroadcastReceiver onUrlsReceived = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "onUrlsReceived triggered");
+            if (intent != null && context != null) {
+                Log.d(TAG, "onUrlsReceived got action: " + intent.getAction());
+                if (intent.getAction() == BROADCAST_URL_VALIDATION_SUCCEEDED) {
+                    Log.d(TAG, "onUrlsReceived got validation successful");
+                    List<String> validUrls = intent.getStringArrayListExtra(EXTENDED_DATA_VALID_URLS);
+                    if (waitingForDefaultUrl || waitingForDnsttUrl) {
+                        if (validUrls != null && !validUrls.isEmpty()) {
+                            Log.d(TAG, "received " + validUrls.size() + " valid urls");
+                            // if we get a valid url, it doesn't matter whether it's from defaults or dnstt
+                            waitingForDefaultUrl = false;
+                            waitingForDnsttUrl = false;
+                            String envoyUrl = validUrls.get(0);
+                            Log.d(TAG, "found a valid url: " + envoyUrl + ", start engine");
+                            // select the fastest one (urls are ordered by latency), reInitializeIfNeeded set to false
+                            CronetNetworking.initializeCronetEngine(context, envoyUrl);
+                            // TODO: need to manage preference more carefully
+                            Log.d(TAG, "save preference for " + envoyUrl);
+                            Preferences.get().setEnvoyUrl(envoyUrl);
+                            // TODO: need to manage repo update more carefully
+                            Log.d(TAG, "do delayed repo update (if needed)");
+                            initialRepoUpdateIfRequired();
+                        } else {
+                            Log.e(TAG, "received empty list of valid urls");
+                        }
+                    } else {
+                        Log.d(TAG, "already found a valid url");
+                    }
+                } else if (intent.getAction() == BROADCAST_URL_VALIDATION_FAILED) {
+                    Log.d(TAG, "onUrlsReceived got validation failed");
+                    List<String> invalidUrls = intent.getStringArrayListExtra(EXTENDED_DATA_INVALID_URLS);
+                    if (invalidUrls != null && !invalidUrls.isEmpty()) {
+                        if (waitingForDefaultUrl && (invalidUrls.size() >= defaultUrls.size())) {
+                            Log.e(TAG, "no default urls left to try, fetch urls with dnstt");
+                            waitingForDefaultUrl = false;
+                            waitingForDnsttUrl = true;
+                            // start asynchronous dnstt task to fetch proxy urls
+                            // replaces lifecycleScope.launch(Dispatchers.IO) in kotlin code
+                            Thread dnsttThread = new Thread() {
+                                @Override
+                                public void run() {
+                                    Log.d(TAG, "no valid defaults, dnstt thread run");
+                                    getDnsttUrls();
+                                }
+                            };
+                            dnsttThread.start();;
+
+                            /*
+                            lifecycleScope.launch(Dispatchers.IO) {
+                                getDnsttUrls()
+                            }
+                            */
+                        } else if (waitingForDnsttUrl && (invalidUrls.size() >= dnsttUrls.size())) {
+                            Log.e(TAG, "no dnstt urls left to try, cannot start envoy/cronet, clear saved url");
+                            waitingForDnsttUrl = false;
+                            Preferences.get().setEnvoyUrl(null);
+                        } else {
+                            Log.e(TAG, "still trying urls: default - " + waitingForDefaultUrl + ", " + defaultUrls.size() + " / dnstt - " + waitingForDnsttUrl + ", " + dnsttUrls.size());
+                        }
+                    } else {
+                        Log.e(TAG, "received empty list of invalid urls");
+                    }
+                } else if (intent.getAction() == ShadowsocksService.SHADOWSOCKS_SERVICE_BROADCAST) {
+                    Log.d(TAG, "onUrlsReceived got shadowsocks broadcast");
+                    waitingForShadowsocks = false;
+                    int shadowsocksResult = intent.getIntExtra(ShadowsocksService.SHADOWSOCKS_SERVICE_RESULT, 0);
+                    if (shadowsocksResult > 0) {
+                        Log.d(TAG, "shadowsocks service started ok");
+                    } else {
+                        Log.e(TAG, "shadowsocks service failed to start");
+                    }
+                    // shadowsocks service was started if possible, submit list of urls to envoy for evaluation
+                    if (waitingForHysteria) {
+                        Log.d(TAG, "submit urls after an additional delay for starting hysteria");
+                        // replaces lifecycleScope.launch(Dispatchers.IO) in kotlin code
+                        Thread hysteriaDelayThread = new Thread() {
+                            @Override
+                            public void run() {
+                                Log.d(TAG, "hysteria thread (short) run");
+                                try {
+                                    Log.d(TAG, "start delay");
+                                    synchronized (hysteriaLock) {
+                                        hysteriaLock.wait(5000L); // wait 5 seconds
+                                    }
+                                    Log.d(TAG, "end delay");
+                                    waitingForHysteria = false;
+                                    if (waitingForDefaultUrl) {
+                                        Log.d(TAG, "submit " + defaultUrls.size() + " default urls");
+                                        NetworkIntentService.submit(MainActivity.this, defaultUrls);
+                                    } else {
+                                        Log.d(TAG, "submit " + defaultUrls.size() + " dnstt urls");
+                                        NetworkIntentService.submit(MainActivity.this, dnsttUrls);
+                                    }
+                                } catch (InterruptedException e) {
+                                    Log.d(TAG, "hysteria thread (short) interrupted: " + e.getLocalizedMessage());
+                                }
+                            }
+                        };
+                        hysteriaDelayThread.start();
+
+                        /*
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            Log.d(TAG, "start delay")
+                            delay(5000L)  // wait 5 seconds
+                            Log.d(TAG, "end delay")
+                            waitingForHysteria = false
+                            if (waitingForDefaultUrl) {
+                                NetworkIntentService.submit(this@MainActivity, defaultUrls)
+                            } else {
+                                NetworkIntentService.submit(this@MainActivity, dnsttUrls)
+                            }
+                        }
+                        */
+                    } else {
+                        Log.d(TAG, "submit urls, no additional delay is needed");
+                        if (waitingForDefaultUrl) {
+                            NetworkIntentService.submit(MainActivity.this, defaultUrls);
+                        } else {
+                            NetworkIntentService.submit(MainActivity.this, dnsttUrls);
+                        }
+                    }
+                } else {
+                    Log.e(TAG, "received unexpected intent: " + intent.getAction());
+                }
+            } else {
+                Log.e(TAG, "receiver triggered but context or intent was null");
+            }
+
+            /*
             if (intent != null && context != null) {
                 ArrayList<String> validUrls = intent.getStringArrayListExtra(EXTENDED_DATA_VALID_URLS);
                 if (validUrls != null && !validUrls.isEmpty()) {
@@ -652,6 +1175,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "do delayed repo update (if needed)");
 
             initialRepoUpdateIfRequired();
+            */
         }
     };
 }

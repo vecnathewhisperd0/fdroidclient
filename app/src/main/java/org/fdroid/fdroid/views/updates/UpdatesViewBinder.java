@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -54,6 +55,7 @@ public class UpdatesViewBinder {
         swipeToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                Log.d("FOO", "swipe to refresh");
                 swipeToRefresh.setRefreshing(false);
                 UpdateService.updateNow(activity);
             }
@@ -107,7 +109,10 @@ public class UpdatesViewBinder {
         @Override
         public void onReceive(Context context, Intent intent) {
             // Anything other than a STATUS_INFO broadcast signifies that it was complete
-            boolean isUpdating = intent.getIntExtra(UpdateService.EXTRA_STATUS_CODE, 0) == UpdateService.STATUS_INFO;
+            int status = intent.getIntExtra(UpdateService.EXTRA_STATUS_CODE, 0);
+            Log.d("FOO", "got update service status: " + status);
+            boolean isUpdating = status == UpdateService.STATUS_INFO;
+            // boolean isUpdating = intent.getIntExtra(UpdateService.EXTRA_STATUS_CODE, 0) == UpdateService.STATUS_INFO;
             setUpEmptyUpdatingProgress(isUpdating);
         }
     };

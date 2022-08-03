@@ -33,6 +33,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -187,9 +188,11 @@ public class PreferencesFragment extends PreferenceFragmentCompat
 
         ListPreference languagePref = (ListPreference) findPreference(Preferences.PREF_LANGUAGE);
         if (Build.VERSION.SDK_INT >= 24) {
+            Log.d("FOO", "hide language pref");
             PreferenceCategory category = (PreferenceCategory) findPreference("pref_category_display");
             category.removePreference(languagePref);
         } else {
+            Log.d("FOO", "show language pref");
             Languages languages = Languages.get((AppCompatActivity) getActivity());
             languagePref.setDefaultValue(Languages.USE_SYSTEM_DEFAULT);
             languagePref.setEntries(languages.getAllNames());
@@ -332,6 +335,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                     Languages.setLanguage(activity);
 
                     RepoProvider.Helper.clearEtags(getActivity());
+                    Log.d("FOO", "update repo on language change?");
                     UpdateService.updateNow(getActivity());
 
                     Languages.forceChangeLanguage(activity);
@@ -531,8 +535,10 @@ public class PreferencesFragment extends PreferenceFragmentCompat
     private void initProxyStatus(Context context) {
         // preference is non-interactive. check proxy state and set summary to show state
         if (CronetNetworking.cronetEngine() == null) {
+            Utils.debugLog("FOO", "cronet engine is null, envoy inactive");
             envoyStatusPref.setSummary(getString(R.string.envoy_inactive));
         } else {
+            Utils.debugLog("FOO", "cronet engine is not null, envoy active");
             envoyStatusPref.setSummary(getString(R.string.envoy_active));
         }
     }
