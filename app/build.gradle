@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-android'
 apply plugin: 'checkstyle'
 apply plugin: 'pmd'
@@ -85,7 +84,6 @@ android {
          */
         testInstrumentationRunnerArguments disableAnalytics: 'true'
         vectorDrawables.useSupportLibrary = true
-        signingConfig signingConfigs.'full-gfdroid-release'
 
         buildConfigField "String", "DNSTT_SERVER", "\"$dnsttServerProp\""
         buildConfigField "String", "DNSTT_KEY", "\"$dnsttKeyProp\""
@@ -144,10 +142,6 @@ android {
         compileOptions.encoding = "UTF-8"
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
     }
 
     aaptOptions {
@@ -236,22 +230,11 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.11.4'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.4'
 
-    // TEMP: required to pull in play services?
-    implementation 'com.google.android.gms:play-services-base:18.1.0'
-    //String firebaseMessagingVersion = '23.0.6'
-    //String mlKitVersion = '17.0.4'
-    // For language detection during editing
-    //implementation "com.google.mlkit:language-id:$mlKitVersion"
-    // For receiving push notifications for logged-in users.
-    //implementation "com.google.firebase:firebase-messaging-ktx:$firebaseMessagingVersion"
-
-    // TODO: remove
-    // implementation "org.greatfire.envoy:cronet:0.0.100.0.4896.79"
-    // implementation "org.greatfire:envoy:0.0.100.0.4896.79"
+    // google core classes required by cronet
+    implementation 'androidx.core:core:1.8.0'
+    implementation 'androidx.core:core-ktx:1.8.0'
 
     // use local files for debug builds to support development
-    //debugImplementation 'org.greatfire.envoy:cronet:102.0.5005.41'
-    //debugImplementation 'org.greatfire:envoy:102.0.5005.41'
     debugImplementation files('libs/cronet-debug.aar')
     debugImplementation files('libs/envoy-debug.aar')
     debugImplementation files('libs/IEnvoyProxy.aar')
@@ -259,8 +242,7 @@ dependencies {
     releaseImplementation 'org.greatfire.envoy:cronet:102.0.5005.41'
     releaseImplementation 'org.greatfire:envoy:102.0.5005.41'
     // TEMP: need to update maven envoy version
-    // releaseImplementation 'org.greatfire:IEnvoyProxy:1.0.2'
-    releaseImplementation files('libs/IEnvoyProxy.aar')
+    releaseImplementation 'org.greatfire:IEnvoyProxy:1.0.2'
 
     implementation "com.squareup.okhttp3:okhttp:4.9.3"
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"

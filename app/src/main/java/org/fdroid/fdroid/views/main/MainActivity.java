@@ -125,14 +125,6 @@ public class MainActivity extends AppCompatActivity {
     private int currentPageId = 0;
     public static final String CURRENT_PAGE_ID = "org.greatfire.envoy.CURRENT_PAGE_ID";
 
-    // initialize one or more string values containing the urls of available http/https proxies (include trailing slash)
-    // private String httpUrl = "http://wiki.epochbelt.com/wikipedia/";
-    // private String httpsUrl = "https://wiki.epochbelt.com/wikipedia/";
-    // urls for additional proxy services, change if there are port conflicts (do not include trailing slash)
-    // private String ssUrl = "socks5://127.0.0.1:1080";
-    // add all string values to this list value
-    // private List<String> possibleUrls = Arrays.asList(httpUrl, httpsUrl, ssUrl);
-
     // local and remote urls for proxy services
     private String ssUrlLocal = "socks5://127.0.0.1:1080";
     private String ssUrlRemote = "";
@@ -150,8 +142,6 @@ public class MainActivity extends AppCompatActivity {
     private boolean waitingForDnsttUrl = false;
 
     // copied from org.greatfire.envoy.NetworkIntentService.kt, could not be found in imported class
-    //public static final String BROADCAST_VALID_URL_FOUND = "org.greatfire.envoy.VALID_URL_FOUND";
-    //public static final String EXTENDED_DATA_VALID_URLS = "org.greatfire.envoy.VALID_URLS";
     public static final String BROADCAST_URL_VALIDATION_SUCCEEDED = "org.greatfire.envoy.VALIDATION_SUCCEEDED";
     public static final String BROADCAST_URL_VALIDATION_FAILED = "org.greatfire.envoy.VALIDATION_FAILED";
     public static final String EXTENDED_DATA_VALID_URLS = "org.greatfire.envoy.VALID_URLS";
@@ -251,21 +241,11 @@ public class MainActivity extends AppCompatActivity {
         LocalBroadcastManager.getInstance(this).registerReceiver(onUpdateableAppsChanged, updateableAppsFilter);
 
         // register to receive valid proxy urls
-        //LocalBroadcastManager.getInstance(this).registerReceiver(onUrlsReceived, new IntentFilter(BROADCAST_VALID_URL_FOUND));
         IntentFilter envoyFilter = new IntentFilter();
         envoyFilter.addAction(BROADCAST_URL_VALIDATION_SUCCEEDED);
         envoyFilter.addAction(BROADCAST_URL_VALIDATION_FAILED);
         envoyFilter.addAction(ShadowsocksService.SHADOWSOCKS_SERVICE_BROADCAST);
         LocalBroadcastManager.getInstance(this).registerReceiver(onUrlsReceived, envoyFilter);
-
-        // start shadowsocks service
-        //Intent shadowsocksIntent = new Intent(this, ShadowsocksService.class);
-        // put shadowsocks proxy url here, should look like ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpwYXNz@127.0.0.1:1234 (base64 encode user/password)
-        //shadowsocksIntent.putExtra("org.greatfire.envoy.START_SS_LOCAL", "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTppZXNvaHZvOHh1Nm9oWW9yaWUydGhhZWhvaFBoOFRoYQ==@172.104.163.54:8388");
-        //ContextCompat.startForegroundService(getApplicationContext(), shadowsocksIntent);
-
-        // submit list of urls to envoy for evaluation
-        //NetworkIntentService.submit(this, possibleUrls);
 
         // delay until after proxy urls have been validated
         // initialRepoUpdateIfRequired();
@@ -736,21 +716,6 @@ public class MainActivity extends AppCompatActivity {
             };
             dnsttStopThread.start();
 
-            /*
-            lifecycleScope.launch(Dispatchers.IO) {
-                Log.d(TAG, "start timer");
-                waitingForDnstt = true;
-                delay(10000L)  // wait 10 seconds
-                if (waitingForDnstt) {
-                    Log.d(TAG, "stop timer, stop dnstt");
-                    waitingForDnstt = false;
-                    IEnvoyProxy.stopDnstt();
-                } else {
-                    Log.d(TAG, "dnstt already complete");
-                }
-            }
-            */
-
             try {
                 // provide either DOH or DOT address, and provide an empty string for the other
                 Log.d(TAG, "start dnstt proxy: " + BuildConfig.DNSTT_SERVER + " / " + BuildConfig.DOH_URL + " / " + BuildConfig.DOT_ADDR + " / " + BuildConfig.DNSTT_KEY);
@@ -956,11 +921,6 @@ public class MainActivity extends AppCompatActivity {
             };
             dnsttThread.start();
 
-            /*
-            lifecycleScope.launch(Dispatchers.IO) {
-                getDnsttUrls();
-            }
-            */
         } else if (waitingForDnsttUrl && dnsttUrls.isEmpty()) {
             waitingForDnsttUrl = false;
             Log.w(TAG, "no dnstt urls to submit, cannot start envoy/cronet, clear saved url");
@@ -993,19 +953,6 @@ public class MainActivity extends AppCompatActivity {
             };
             hysteriaDelayThread.start();
 
-            /*
-            lifecycleScope.launch(Dispatchers.IO) {
-                Log.d(TAG, "start delay");
-                delay(10000L)  // wait 10 seconds
-                Log.d(TAG, "end delay");
-                waitingForHysteria = false;
-                if (waitingForDefaultUrl) {
-                    NetworkIntentService.submit(MainActivity.this, defaultUrls);
-                } else {
-                    NetworkIntentService.submit(MainActivity.this, dnsttUrls);
-                }
-            }
-            */
         } else {
             // submit list of urls to envoy for evaluation
             Log.d(TAG, "no services needed, submit urls immediately");
@@ -1067,13 +1014,8 @@ public class MainActivity extends AppCompatActivity {
                                     getDnsttUrls();
                                 }
                             };
-                            dnsttThread.start();;
+                            dnsttThread.start();
 
-                            /*
-                            lifecycleScope.launch(Dispatchers.IO) {
-                                getDnsttUrls()
-                            }
-                            */
                         } else if (waitingForDnsttUrl && (invalidUrls.size() >= dnsttUrls.size())) {
                             Log.e(TAG, "no dnstt urls left to try, cannot start envoy/cronet, clear saved url");
                             waitingForDnsttUrl = false;
@@ -1122,19 +1064,6 @@ public class MainActivity extends AppCompatActivity {
                         };
                         hysteriaDelayThread.start();
 
-                        /*
-                        lifecycleScope.launch(Dispatchers.IO) {
-                            Log.d(TAG, "start delay")
-                            delay(5000L)  // wait 5 seconds
-                            Log.d(TAG, "end delay")
-                            waitingForHysteria = false
-                            if (waitingForDefaultUrl) {
-                                NetworkIntentService.submit(this@MainActivity, defaultUrls)
-                            } else {
-                                NetworkIntentService.submit(this@MainActivity, dnsttUrls)
-                            }
-                        }
-                        */
                     } else {
                         Log.d(TAG, "submit urls, no additional delay is needed");
                         if (waitingForDefaultUrl) {
@@ -1149,33 +1078,6 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Log.e(TAG, "receiver triggered but context or intent was null");
             }
-
-            /*
-            if (intent != null && context != null) {
-                ArrayList<String> validUrls = intent.getStringArrayListExtra(EXTENDED_DATA_VALID_URLS);
-                if (validUrls != null && !validUrls.isEmpty()) {
-                    // select the fastest valid option (urls are ordered by latency)
-                    String envoyUrl = validUrls.get(0);
-
-                    Log.d(TAG, "found valid proxy url: " + envoyUrl);
-                    if (CronetNetworking.cronetEngine() == null) {
-                        Log.d(TAG, "start cronet engine for " + envoyUrl);
-                        CronetNetworking.initializeCronetEngine(context, envoyUrl);
-                        Log.d(TAG, "save preference for " + envoyUrl);
-                        Preferences.get().setEnvoyUrl(envoyUrl);
-                    } else {
-                        Log.d(TAG, "cronet engine ready, skip " + envoyUrl);
-                    }
-                } else {
-                    Log.e(TAG, "no valid proxy url was found, clear saved url");
-                    Preferences.get().setEnvoyUrl(null);
-                }
-            }
-
-            Log.d(TAG, "do delayed repo update (if needed)");
-
-            initialRepoUpdateIfRequired();
-            */
         }
     };
 }

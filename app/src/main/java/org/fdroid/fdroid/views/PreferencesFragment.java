@@ -39,6 +39,19 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.preference.CheckBoxPreference;
+import androidx.preference.EditTextPreference;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.SeekBarPreference;
+import androidx.recyclerview.widget.LinearSmoothScroller;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
@@ -56,21 +69,6 @@ import org.fdroid.fdroid.installer.PrivilegedInstaller;
 import org.fdroid.fdroid.work.CleanCacheWorker;
 import org.fdroid.fdroid.work.FDroidMetricsWorker;
 import org.greatfire.envoy.CronetNetworking;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.preference.CheckBoxPreference;
-import androidx.preference.EditTextPreference;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.SeekBarPreference;
-import androidx.preference.SwitchPreferenceCompat;
-import androidx.recyclerview.widget.LinearSmoothScroller;
-import androidx.recyclerview.widget.RecyclerView;
-import info.guardianproject.netcipher.proxy.OrbotHelper;
 
 public class PreferencesFragment extends PreferenceFragmentCompat
         implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -535,10 +533,10 @@ public class PreferencesFragment extends PreferenceFragmentCompat
     private void initProxyStatus(Context context) {
         // preference is non-interactive. check proxy state and set summary to show state
         if (CronetNetworking.cronetEngine() == null) {
-            Utils.debugLog("FOO", "cronet engine is null, envoy inactive");
+            Log.d("FOO", "cronet engine is null, envoy inactive");
             envoyStatusPref.setSummary(getString(R.string.envoy_inactive));
         } else {
-            Utils.debugLog("FOO", "cronet engine is not null, envoy active");
+            Log.d("FOO", "cronet engine is not null, envoy active");
             envoyStatusPref.setSummary(getString(R.string.envoy_active));
         }
     }
