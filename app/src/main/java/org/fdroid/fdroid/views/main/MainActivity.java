@@ -787,11 +787,10 @@ public class MainActivity extends AppCompatActivity {
                             Log.w(TAG, "no dnstt proxy urls were found");
                         }
 
-                        hysteriaUrlRemote = "";
-                        ssUrlRemote = "";
-
+                        // handleUrls() will manage the end state as needed, thread will stop dnstt
                         handleUrls(urlList);
-
+                        // return here to avoid cleanup/end state
+                        return;
                     } else {
                         Log.e(TAG, "response contained no json to parse");
                     }
@@ -814,9 +813,17 @@ public class MainActivity extends AppCompatActivity {
             waitingForDnstt = false;
             IEnvoyProxy.stopDnstt();
         }
+
+        // if we ended up here, something went wrong
+        Log.e(TAG, "dnstt failure, cannot continue");
+        handleEndState(getApplicationContext(), null);
     }
 
     private void handleUrls(List<String> envoyUrls) {
+
+        // clear values stored from past attempts
+        hysteriaUrlRemote = "";
+        ssUrlRemote = "";
 
         // check url types
         for (String url : envoyUrls) {
@@ -841,6 +848,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // check for urls that require services
+
+        // TODO: handle multiple hysteria/shadowsocks urls
+        // TODO: kill services if associated urls are not in use
 
         if (hysteriaUrlRemote != null && !hysteriaUrlRemote.isEmpty()) {
             Log.d(TAG, "hysteria service needed");
@@ -923,8 +933,8 @@ public class MainActivity extends AppCompatActivity {
 
         } else if (waitingForDnsttUrl && dnsttUrls.isEmpty()) {
             waitingForDnsttUrl = false;
-            Log.w(TAG, "no dnstt urls to submit, cannot start envoy/cronet, clear saved url");
-            Preferences.get().setEnvoyUrl(null);
+            Log.w(TAG, "no dnstt urls to submit, cannot continue");
+            handleEndState(getApplicationContext(), null);
         } else if (waitingForShadowsocks) {
             Log.d(TAG, "submit urls after starting shadowsocks service");
         } else if (waitingForHysteria) {
@@ -981,16 +991,10 @@ public class MainActivity extends AppCompatActivity {
                             // if we get a valid url, it doesn't matter whether it's from defaults or dnstt
                             waitingForDefaultUrl = false;
                             waitingForDnsttUrl = false;
-                            String envoyUrl = validUrls.get(0);
-                            Log.d(TAG, "found a valid url: " + envoyUrl + ", start engine");
                             // select the fastest one (urls are ordered by latency), reInitializeIfNeeded set to false
-                            CronetNetworking.initializeCronetEngine(context, envoyUrl);
-                            // TODO: need to manage preference more carefully
-                            Log.d(TAG, "save preference for " + envoyUrl);
-                            Preferences.get().setEnvoyUrl(envoyUrl);
-                            // TODO: need to manage repo update more carefully
-                            Log.d(TAG, "do delayed repo update (if needed)");
-                            initialRepoUpdateIfRequired();
+                            String envoyUrl = validUrls.get(0);
+                            Log.d(TAG, "found a valid url: " + envoyUrl);
+                            handleEndState(context, envoyUrl);
                         } else {
                             Log.e(TAG, "received empty list of valid urls");
                         }
@@ -1015,11 +1019,10 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             };
                             dnsttThread.start();
-
                         } else if (waitingForDnsttUrl && (invalidUrls.size() >= dnsttUrls.size())) {
-                            Log.e(TAG, "no dnstt urls left to try, cannot start envoy/cronet, clear saved url");
+                            Log.e(TAG, "no dnstt urls left to try, cannot continue");
                             waitingForDnsttUrl = false;
-                            Preferences.get().setEnvoyUrl(null);
+                            handleEndState(context, null);
                         } else {
                             Log.e(TAG, "still trying urls: default - " + waitingForDefaultUrl + ", " + defaultUrls.size() + " / dnstt - " + waitingForDnsttUrl + ", " + dnsttUrls.size());
                         }
@@ -1058,6 +1061,7 @@ public class MainActivity extends AppCompatActivity {
                                         NetworkIntentService.submit(MainActivity.this, dnsttUrls);
                                     }
                                 } catch (InterruptedException e) {
+                                    // TODO: should we submit urls if hysteria thread interrupts?
                                     Log.d(TAG, "hysteria thread (short) interrupted: " + e.getLocalizedMessage());
                                 }
                             }
@@ -1080,4 +1084,22 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
+    private void handleEndState(Context context, String envoyUrl) {
+
+        // TODO: need to manage envoy url preference more carefully
+        if (envoyUrl == null || envoyUrl.isEmpty()) {
+            Log.e(TAG, "no valid url could be found, cannot start envoy/cronet, clear saved url");
+            Preferences.get().setEnvoyUrl(null);
+        } else {
+            Log.d(TAG, "valid url found, start envoy/cronet, save url: " + envoyUrl);
+            CronetNetworking.initializeCronetEngine(context, envoyUrl);
+            Preferences.get().setEnvoyUrl(envoyUrl);
+        }
+
+        // TODO: need to manage repo update more carefully
+        // TODO: confirm whether we should initialize repo even if envoy/cronet is not active
+        Log.d(TAG, "do delayed repo update (if needed)");
+        initialRepoUpdateIfRequired();
+    }
 }

@@ -242,7 +242,8 @@ dependencies {
     releaseImplementation 'org.greatfire.envoy:cronet:102.0.5005.41'
     releaseImplementation 'org.greatfire:envoy:102.0.5005.41'
     // TEMP: need to update maven envoy version
-    releaseImplementation 'org.greatfire:IEnvoyProxy:1.0.2'
+    // releaseImplementation 'org.greatfire:IEnvoyProxy:1.0.2'
+    releaseImplementation files('libs/IEnvoyProxy.aar')
 
     implementation "com.squareup.okhttp3:okhttp:4.9.3"
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"
