@@ -354,11 +354,12 @@ public class MainActivity extends AppCompatActivity {
         } else {
             // run envoy setup (fetches and validate urls)
             Log.d(TAG, "begin processing urls to start cronet");
+            Preferences.get().setEnvoyState(Preferences.ENVOY_STATE_PENDING);
             waitingForDefaultUrl = true;
             getDefaultUrls();
         }
 
-        // FDroidApp.checkStartTor(this, Preferences.get());
+        FDroidApp.checkStartTor(this, Preferences.get());
 
         if (getIntent().hasExtra(EXTRA_VIEW_UPDATES)) {
             getIntent().removeExtra(EXTRA_VIEW_UPDATES);
@@ -1091,15 +1092,20 @@ public class MainActivity extends AppCompatActivity {
         if (envoyUrl == null || envoyUrl.isEmpty()) {
             Log.e(TAG, "no valid url could be found, cannot start envoy/cronet, clear saved url");
             Preferences.get().setEnvoyUrl(null);
+            Preferences.get().setEnvoyState(Preferences.ENVOY_STATE_FAILED);
         } else {
             Log.d(TAG, "valid url found, start envoy/cronet, save url: " + envoyUrl);
             CronetNetworking.initializeCronetEngine(context, envoyUrl);
             Preferences.get().setEnvoyUrl(envoyUrl);
+            Preferences.get().setEnvoyState(Preferences.ENVOY_STATE_ACTIVE);
         }
 
         // TODO: need to manage repo update more carefully
         // TODO: confirm whether we should initialize repo even if envoy/cronet is not active
         Log.d(TAG, "do delayed repo update (if needed)");
         initialRepoUpdateIfRequired();
+
+        Log.d(TAG, "give tor another chance to start");
+        FDroidApp.checkStartTor(context, Preferences.get());
     }
 }

@@ -69,7 +69,7 @@ android {
     compileSdkVersion 32
 
     defaultConfig {
-        versionCode 2
+        versionCode 3
         versionName getVersionName()
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'

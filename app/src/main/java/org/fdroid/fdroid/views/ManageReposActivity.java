@@ -179,7 +179,7 @@ public class ManageReposActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        // FDroidApp.checkStartTor(this, Preferences.get());
+        FDroidApp.checkStartTor(this, Preferences.get());
 
         /* let's see if someone is trying to send us a new repo */
         addRepoFromIntent(getIntent());

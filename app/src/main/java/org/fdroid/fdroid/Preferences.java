@@ -112,6 +112,7 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
     public static final String PREF_PROXY_PORT = "proxyPort";
     public static final String PREF_ENVOY_STATUS = "envoyStatus";
     public static final String PREF_ENVOY_URL = "envoyUrl";
+    public static final String PREF_ENVOY_STATE = "envoyState";
     public static final String PREF_SHOW_NFC_DURING_SWAP = "showNfcDuringSwap";
     public static final String PREF_POST_PRIVILEGED_INSTALL = "postPrivilegedInstall";
     public static final String PREF_PREVENT_SCREENSHOTS = "preventScreenshots";
@@ -142,6 +143,10 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
 
     private static final boolean IGNORED_B = false;
     private static final int IGNORED_I = -1;
+
+    public static final String ENVOY_STATE_PENDING = "pending";
+    public static final String ENVOY_STATE_ACTIVE = "active";
+    public static final String ENVOY_STATE_FAILED = "failed";
 
     /**
      * Old preference replaced by {@link #PREF_KEEP_CACHE_TIME}
@@ -527,6 +532,14 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
 
     public String getEnvoyUrl() {
         return preferences.getString(PREF_ENVOY_URL, null);
+    }
+
+    public void setEnvoyState(String envoyState) {
+        preferences.edit().putString(PREF_ENVOY_STATE, envoyState).apply();
+    }
+
+    public String getEnvoyState() {
+        return preferences.getString(PREF_ENVOY_STATE, ENVOY_STATE_PENDING);
     }
 
     public boolean preventScreenshots() {
