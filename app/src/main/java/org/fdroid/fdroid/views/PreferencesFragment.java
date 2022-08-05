@@ -49,6 +49,7 @@ import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.SeekBarPreference;
+import androidx.preference.SwitchPreferenceCompat;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -69,6 +70,8 @@ import org.fdroid.fdroid.installer.PrivilegedInstaller;
 import org.fdroid.fdroid.work.CleanCacheWorker;
 import org.fdroid.fdroid.work.FDroidMetricsWorker;
 import org.greatfire.envoy.CronetNetworking;
+
+import info.guardianproject.netcipher.proxy.OrbotHelper;
 
 public class PreferencesFragment extends PreferenceFragmentCompat
         implements SharedPreferences.OnSharedPreferenceChangeListener {
