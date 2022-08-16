@@ -65,7 +65,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class UpdateService extends JobIntentService {
 
-    private static final String TAG = "FOO"; // "UpdateService";
+    private static final String TAG = "TEMP_LOG"; // "UpdateService";
 
     public static final String LOCAL_ACTION_STATUS = "status";
 
@@ -105,7 +105,7 @@ public class UpdateService extends JobIntentService {
     }
 
     public static void updateRepoNow(Context context, String address) {
-        Log.d("FOO", "update repo: " + address);
+        Log.d(TAG, "update repo: " + address);
         Intent intent = new Intent(context, UpdateService.class);
         intent.putExtra(EXTRA_MANUAL_UPDATE, true);
         if (!TextUtils.isEmpty(address)) {
@@ -207,7 +207,7 @@ public class UpdateService extends JobIntentService {
      * @see <a href="https://stackoverflow.com/a/608600">set a global variable when it is running that your client can check</a>
      */
     public static boolean isUpdating() {
-        Log.d("FOO", "update service exists: " + (updateService != null));
+        Log.d(TAG, "update service exists: " + (updateService != null));
         return updateService != null;
     }
 
@@ -246,7 +246,7 @@ public class UpdateService extends JobIntentService {
     }
 
     public static void stopNow(Context context) {
-        Log.d("FOO", "stop update service");
+        Log.d(TAG, "stop update service");
         if (updateService != null) {
             updateService.stopSelf(JOB_ID);
             updateService = null;
@@ -287,7 +287,7 @@ public class UpdateService extends JobIntentService {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d("FOO", "cache update service instance");
+        Log.d(TAG, "cache update service instance");
         updateService = this;
 
         notificationManager = ContextCompat.getSystemService(this, NotificationManager.class);
@@ -305,7 +305,7 @@ public class UpdateService extends JobIntentService {
         super.onDestroy();
         notificationManager.cancel(NOTIFY_ID_UPDATING);
         LocalBroadcastManager.getInstance(this).unregisterReceiver(updateStatusReceiver);
-        Log.d("FOO", "destroy update service");
+        Log.d(TAG, "destroy update service");
         updateService = null;
     }
 
@@ -420,14 +420,14 @@ public class UpdateService extends JobIntentService {
     protected void onHandleWork(@NonNull Intent intent) {
         Process.setThreadPriority(Process.THREAD_PRIORITY_LOWEST);
 
-        Log.d("FOO", "update service, do work");
+        Log.d(TAG, "update service, do work");
 
         final long startTime = System.currentTimeMillis();
         boolean manualUpdate = intent.getBooleanExtra(EXTRA_MANUAL_UPDATE, false);
         boolean forcedUpdate = intent.getBooleanExtra(EXTRA_FORCED_UPDATE, false);
         String address = intent.getDataString();
 
-        Log.d("FOO", "update service, address: " + address);
+        Log.d(TAG, "update service, address: " + address);
 
         try {
             final Preferences fdroidPrefs = Preferences.get();
@@ -439,16 +439,16 @@ public class UpdateService extends JobIntentService {
             // See if it's time to actually do anything yet...
             int netState = ConnectivityMonitorService.getNetworkState(this);
             if (isLocalRepoAddress(address)) {
-                Log.d("FOO", address + " is local");
+                Log.d(TAG, address + " is local");
                 Utils.debugLog(TAG, "skipping internet check, this is local: " + address);
             } else if (netState == ConnectivityMonitorService.FLAG_NET_UNAVAILABLE) {
                 // keep track of repos that have a local copy in case internet is not available
                 List<Repo> localRepos = getLocalRepos(repos);
                 if (localRepos.size() > 0) {
-                    Log.d("FOO", "no internet, use local repos");
+                    Log.d(TAG, "no internet, use local repos");
                     repos = localRepos;
                 } else {
-                    Log.d("FOO", "no internet, no local repos");
+                    Log.d(TAG, "no internet, no local repos");
                     Utils.debugLog(TAG, "No internet, cannot update");
                     if (manualUpdate) {
                         Utils.showToastFromService(this, getString(R.string.warning_no_internet), Toast.LENGTH_SHORT);
@@ -456,15 +456,15 @@ public class UpdateService extends JobIntentService {
                     return;
                 }
             } else if ((manualUpdate || forcedUpdate) && fdroidPrefs.isOnDemandDownloadAllowed()) {
-                Log.d("FOO", "forced or manual update");
+                Log.d(TAG, "forced or manual update");
                 Utils.debugLog(TAG, "manually requested or forced update");
                 if (forcedUpdate) {
-                    Log.d("FOO", "forced update");
+                    Log.d(TAG, "forced update");
                     DBHelper.resetTransient(this);
                     InstalledAppProviderService.compareToPackageManager(this);
                 }
             } else if (!fdroidPrefs.isBackgroundDownloadAllowed() && !fdroidPrefs.isOnDemandDownloadAllowed()) {
-                Log.d("FOO", "no backround download allowed");
+                Log.d(TAG, "no backround download allowed");
                 Utils.debugLog(TAG, "don't run update");
                 return;
             }
@@ -481,42 +481,42 @@ public class UpdateService extends JobIntentService {
             boolean singleRepoUpdate = !TextUtils.isEmpty(address);
             for (final Repo repo : repos) {
                 if (!repo.inuse) {
-                    Log.d("FOO", "repo " + repo.name + " not in use");
+                    Log.d(TAG, "repo " + repo.name + " not in use");
                     continue;
                 }
                 if (singleRepoUpdate && !repo.address.equals(address)) {
-                    Log.d("FOO", "repo " + repo.name + " no address match");
+                    Log.d(TAG, "repo " + repo.name + " no address match");
                     unchangedRepos++;
                     continue;
                 }
                 if (!singleRepoUpdate && repo.isSwap) {
-                    Log.d("FOO", "repo " + repo.name + " is for swap");
+                    Log.d(TAG, "repo " + repo.name + " is for swap");
                     continue;
                 }
 
-                Log.d("FOO", "set connecting status for repo " + repo.name);
+                Log.d(TAG, "set connecting status for repo " + repo.name);
                 sendStatus(this, STATUS_INFO, getString(R.string.status_connecting_to_repo, repo.address));
 
                 try {
                     IndexUpdater updater = new IndexV1Updater(this, repo);
                     if (Preferences.get().isForceOldIndexEnabled() || !updater.update()) {
-                        Log.d("FOO", "updater -> update");
+                        Log.d(TAG, "updater -> update");
                         updater = new IndexUpdater(getBaseContext(), repo);
                         updater.update();
                     } else {
-                        Log.d("FOO", "skip updater");
+                        Log.d(TAG, "skip updater");
                     }
 
                     if (updater.hasChanged()) {
-                        Log.d("FOO", "repo changed");
+                        Log.d(TAG, "repo changed");
                         updatedRepos++;
                         changes = true;
                     } else {
-                        Log.d("FOO", "repo didn't changed");
+                        Log.d(TAG, "repo didn't changed");
                         unchangedRepos++;
                     }
                 } catch (IndexUpdater.UpdateException e) {
-                    Log.d("FOO", "repo error: " + e.getLocalizedMessage());
+                    Log.d(TAG, "repo error: " + e.getLocalizedMessage());
                     errorRepos++;
                     Throwable cause = e.getCause();
                     if (cause == null) {
@@ -530,30 +530,30 @@ public class UpdateService extends JobIntentService {
 
                 // now that downloading the index is done, start downloading updates
                 if (changes && fdroidPrefs.isAutoDownloadEnabled() && fdroidPrefs.isBackgroundDownloadAllowed()) {
-                    Log.d("FOO", "index downloaded, download updates");
+                    Log.d(TAG, "index downloaded, download updates");
                     autoDownloadUpdates(this);
                 } else {
-                    Log.d("FOO", "don't download updates");
+                    Log.d(TAG, "don't download updates");
                 }
             }
 
             if (!changes) {
                 Utils.debugLog(TAG, "Not checking app details or compatibility, because repos were up to date.");
             } else {
-                Log.d("FOO", "there were changes, notify");
+                Log.d(TAG, "there were changes, notify");
                 notifyContentProviders();
 
                 if (fdroidPrefs.isUpdateNotificationEnabled() && !fdroidPrefs.isAutoDownloadEnabled()) {
-                    Log.d("FOO", "perform notify");
+                    Log.d(TAG, "perform notify");
                     performUpdateNotification();
                 } else {
-                    Log.d("FOO", "don't perform notify");
+                    Log.d(TAG, "don't perform notify");
                 }
             }
 
             fdroidPrefs.setLastUpdateCheck(System.currentTimeMillis());
 
-            Log.d("FOO", "error repos: " + errorRepos + "updated repos: " + updatedRepos + "unchanged repos: " + unchangedRepos);
+            Log.d(TAG, "error repos: " + errorRepos + "updated repos: " + updatedRepos + "unchanged repos: " + unchangedRepos);
 
             if (errorRepos == 0) {
                 if (changes) {
@@ -640,7 +640,7 @@ public class UpdateService extends JobIntentService {
             message = context.getString(R.string.status_download,
                     updater.indexUrl, downloadedSizeFriendly, totalSizeFriendly, percent);
         }
-        Log.d("FOO", "report download progress: " + message);
+        Log.d(TAG, "report download progress: " + message);
         sendStatus(context, STATUS_INFO, message, percent);
     }
 
@@ -655,7 +655,7 @@ public class UpdateService extends JobIntentService {
         }
         String message = context.getString(R.string.status_processing_xml_percent,
                 updater.indexUrl, downloadedSize, totalSize, percent);
-        Log.d("FOO", "report index progress: " + message);
+        Log.d(TAG, "report index progress: " + message);
         sendStatus(context, STATUS_INFO, message, percent);
     }
 
@@ -673,11 +673,11 @@ public class UpdateService extends JobIntentService {
         if (totalApps > 0) {
             String message = context.getString(R.string.status_inserting_x_apps,
                     appsSaved, totalApps, updater.indexUrl);
-            Log.d("FOO", "report app progress: " + message);
+            Log.d(TAG, "report app progress: " + message);
             sendStatus(context, STATUS_INFO, message, Utils.getPercent(appsSaved, totalApps));
         } else {
             String message = context.getString(R.string.status_inserting_apps);
-            Log.d("FOO", "report app saved: " + message);
+            Log.d(TAG, "report app saved: " + message);
             sendStatus(context, STATUS_INFO, message);
         }
     }

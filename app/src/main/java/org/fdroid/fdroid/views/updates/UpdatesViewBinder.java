@@ -24,6 +24,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public class UpdatesViewBinder {
 
+    private static final String TAG = "TEMP_LOG"; // "UpdatesViewBinder";
+
     private final UpdatesAdapter adapter;
     private final RecyclerView list;
     private final TextView emptyState;
@@ -55,7 +57,7 @@ public class UpdatesViewBinder {
         swipeToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Log.d("FOO", "swipe to refresh");
+                Log.d(TAG, "swipe to refresh");
                 swipeToRefresh.setRefreshing(false);
                 UpdateService.updateNow(activity);
             }
@@ -110,7 +112,7 @@ public class UpdatesViewBinder {
         public void onReceive(Context context, Intent intent) {
             // Anything other than a STATUS_INFO broadcast signifies that it was complete
             int status = intent.getIntExtra(UpdateService.EXTRA_STATUS_CODE, 0);
-            Log.d("FOO", "got update service status: " + status);
+            Log.d(TAG, "got update service status: " + status);
             boolean isUpdating = status == UpdateService.STATUS_INFO;
             // boolean isUpdating = intent.getIntExtra(UpdateService.EXTRA_STATUS_CODE, 0) == UpdateService.STATUS_INFO;
             setUpEmptyUpdatingProgress(isUpdating);

@@ -30,6 +30,8 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class UpdateableAppsHeader extends AppUpdateData {
 
+    private static final String TAG = "TEMP_LOG"; // "UpdateableAppsHeader";
+
     public final List<UpdateableApp> apps;
     public final UpdatesAdapter adapter;
 
@@ -96,7 +98,7 @@ public class UpdateableAppsHeader extends AppUpdateData {
             downloadAll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("FOO", "download all");
+                    Log.d(TAG, "download all");
                     downloadAll.setVisibility(View.GONE);
                     UpdateService.autoDownloadUpdates(header.activity);
                 }

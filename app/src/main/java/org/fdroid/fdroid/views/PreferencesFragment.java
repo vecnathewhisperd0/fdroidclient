@@ -75,7 +75,7 @@ import info.guardianproject.netcipher.proxy.OrbotHelper;
 
 public class PreferencesFragment extends PreferenceFragmentCompat
         implements SharedPreferences.OnSharedPreferenceChangeListener {
-    public static final String TAG = "PreferencesFragment";
+    public static final String TAG = "TEMP_LOG"; // ""PreferencesFragment";
 
     private static final String[] SUMMARIES_TO_UPDATE = {
             Preferences.PREF_OVER_WIFI,
@@ -207,11 +207,11 @@ public class PreferencesFragment extends PreferenceFragmentCompat
 
         ListPreference languagePref = (ListPreference) findPreference(Preferences.PREF_LANGUAGE);
         if (Build.VERSION.SDK_INT >= 24) {
-            Log.d("FOO", "hide language pref");
+            Log.d(TAG, "hide language pref");
             PreferenceCategory category = (PreferenceCategory) findPreference("pref_category_display");
             category.removePreference(languagePref);
         } else {
-            Log.d("FOO", "show language pref");
+            Log.d(TAG, "show language pref");
             Languages languages = Languages.get((AppCompatActivity) getActivity());
             languagePref.setDefaultValue(Languages.USE_SYSTEM_DEFAULT);
             languagePref.setEntries(languages.getAllNames());
@@ -354,7 +354,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                     Languages.setLanguage(activity);
 
                     RepoProvider.Helper.clearEtags(getActivity());
-                    Log.d("FOO", "update repo on language change?");
+                    Log.d(TAG, "update repo on language change?");
                     UpdateService.updateNow(getActivity());
 
                     Languages.forceChangeLanguage(activity);
@@ -560,10 +560,10 @@ public class PreferencesFragment extends PreferenceFragmentCompat
     private void initProxyStatus(Context context) {
         // preference is non-interactive. check proxy state and set summary to show state
         if (CronetNetworking.cronetEngine() == null) {
-            Log.d("FOO", "cronet engine is null, envoy inactive");
+            Log.d(TAG, "cronet engine is null, envoy inactive");
             envoyStatusPref.setSummary(getString(R.string.envoy_inactive));
         } else {
-            Log.d("FOO", "cronet engine is not null, envoy active");
+            Log.d(TAG, "cronet engine is not null, envoy active");
             envoyStatusPref.setSummary(getString(R.string.envoy_active));
         }
     }

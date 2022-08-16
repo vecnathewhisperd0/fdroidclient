@@ -30,6 +30,15 @@ def defProxyProp = ""
 
 android {
 
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'armeabi-v7a'
+            universalApk true
+        }
+    }
+
     if (project.hasProperty("dnsttserver")) {
         dnsttServerProp = dnsttserver
     } else {
@@ -66,7 +75,13 @@ android {
         println "WARNING: no defProxy prop found"
     }
 
-    compileSdkVersion 32
+    signingConfigs {
+        debug {}
+        release {}
+        'full-gfdroid-release' {}
+    }
+
+    compileSdkVersion 30
 
     defaultConfig {
         versionCode 3
@@ -75,7 +90,7 @@ android {
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         minSdkVersion 22
         //noinspection ExpiredTargetSdkVersion
-        targetSdkVersion 32
+        targetSdkVersion 30
         /*
           The Android Testing Support Library collects analytics to continuously improve the testing
           experience. More specifically, it uploads a hash of the package name of the application
@@ -84,6 +99,8 @@ android {
          */
         testInstrumentationRunnerArguments disableAnalytics: 'true'
         vectorDrawables.useSupportLibrary = true
+
+        signingConfig signingConfigs.'full-gfdroid-release'
 
         buildConfigField "String", "DNSTT_SERVER", "\"$dnsttServerProp\""
         buildConfigField "String", "DNSTT_KEY", "\"$dnsttKeyProp\""
@@ -231,8 +248,8 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.4'
 
     // google core classes required by cronet
-    implementation 'androidx.core:core:1.8.0'
-    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.core:core:1.6.0'
+    implementation 'androidx.core:core-ktx:1.6.0'
 
     // use local files for debug builds to support development
     debugImplementation files('libs/cronet-debug.aar')
@@ -241,9 +258,7 @@ dependencies {
     // use maven dependencies for release builds to support automation
     releaseImplementation 'org.greatfire.envoy:cronet:102.0.5005.41'
     releaseImplementation 'org.greatfire:envoy:102.0.5005.41'
-    // TEMP: need to update maven envoy version
-    // releaseImplementation 'org.greatfire:IEnvoyProxy:1.0.2'
-    releaseImplementation files('libs/IEnvoyProxy.aar')
+    releaseImplementation 'org.greatfire:IEnvoyProxy:1.2.0'
 
     implementation "com.squareup.okhttp3:okhttp:4.9.3"
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"

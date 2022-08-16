@@ -66,7 +66,6 @@ import org.fdroid.fdroid.views.apps.AppListActivity;
 
 import org.fdroid.fdroid.BuildConfig;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -104,7 +103,7 @@ import IEnvoyProxy.IEnvoyProxy;
  */
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "FOO"; // "MainActivity";
+    private static final String TAG = "TEMP_LOG"; // "MainActivity";
 
     public static final String EXTRA_VIEW_UPDATES = "org.fdroid.fdroid.views.main.MainActivity.VIEW_UPDATES";
     public static final String EXTRA_VIEW_NEARBY = "org.fdroid.fdroid.views.main.MainActivity.VIEW_NEARBY";
@@ -330,9 +329,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void initialRepoUpdateIfRequired() {
         if (CronetNetworking.cronetEngine() == null) {
-            Log.d("FOO", "initial update, cronet null");
+            Log.d(TAG, "initial update, cronet null");
         } else {
-            Log.d("FOO", "initial update, envoy active");
+            Log.d(TAG, "initial update, envoy active");
         }
         if (Preferences.get().isIndexNeverUpdated() && !UpdateService.isUpdating()) {
             Utils.debugLog(TAG, "We haven't done an update yet. Forcing repo update.");
@@ -675,7 +674,7 @@ public class MainActivity extends AppCompatActivity {
             Log.w(TAG, "no default proxy urls were provided");
             handleUrls(new ArrayList<String>());
         } else {
-            Log.d(TAG, "found default proxy urls: " + BuildConfig.DEF_PROXY);
+            Log.d(TAG, "found default proxy urls");
             handleUrls(Arrays.asList(BuildConfig.DEF_PROXY.split(",")));
         }
     }
@@ -719,7 +718,7 @@ public class MainActivity extends AppCompatActivity {
 
             try {
                 // provide either DOH or DOT address, and provide an empty string for the other
-                Log.d(TAG, "start dnstt proxy: " + BuildConfig.DNSTT_SERVER + " / " + BuildConfig.DOH_URL + " / " + BuildConfig.DOT_ADDR + " / " + BuildConfig.DNSTT_KEY);
+                Log.d(TAG, "start dnstt proxy");
                 long dnsttPort = IEnvoyProxy.startDnstt(
                         BuildConfig.DNSTT_SERVER,
                         BuildConfig.DOH_URL,
@@ -727,9 +726,9 @@ public class MainActivity extends AppCompatActivity {
                         BuildConfig.DNSTT_KEY
                 );
 
-                Log.d(TAG, "get list of possible urls");
+                Log.d(TAG, "get list of possible urls from dnstt");
                 URL url = new URL("http://127.0.0.1:" + dnsttPort + BuildConfig.DNSTT_PATH);
-                Log.d(TAG, "open connection: " + url);
+                Log.d(TAG, "open connection");
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 try {
                     Log.d(TAG, "set timeout");
@@ -754,7 +753,7 @@ public class MainActivity extends AppCompatActivity {
                         String line = null;
                         try {
                             while ((line = reader.readLine()) != null) {
-                                Log.d(TAG, "read line: " + line);
+                                Log.d(TAG, "read line");
                                 builder.append(line + "\n");
                             }
                         } catch (IOException e) {
@@ -778,9 +777,9 @@ public class MainActivity extends AppCompatActivity {
                                 if (defaultUrls.contains(envoyUrlArray.getString(i)) ||
                                         hysteriaUrlRemote.equals(envoyUrlArray.getString(i)) ||
                                         ssUrlRemote.equals(envoyUrlArray.getString(i))) {
-                                    Log.d(TAG, "dnstt url " + envoyUrlArray.getString(i) + " has aready been validated");
+                                    Log.d(TAG, "got url from dnstt that has aready been validated");
                                 } else {
-                                    Log.d(TAG, "dnstt url " + envoyUrlArray.getString(i) + " has not been validated yet");
+                                    Log.d(TAG, "got url from dnstt that has not been validated yet");
                                     urlList.add(envoyUrlArray.getString(i));
                                 }
                             }
@@ -833,13 +832,13 @@ public class MainActivity extends AppCompatActivity {
                 // TEMP: current hysteria host uses an ip not a url
                 String shortUrl = url.replace("hysteria://", "");
 
-                Log.d(TAG, "found hysteria url: " + shortUrl);
+                Log.d(TAG, "found hysteria url");
                 hysteriaUrlRemote = shortUrl;
             } else if (url.startsWith("ss://")) {
-                Log.d(TAG, "found ss url: " + url);
+                Log.d(TAG, "found ss url");
                 ssUrlRemote = url;
             } else {
-                Log.d(TAG, "found url: " + url);
+                Log.d(TAG, "found url");
                 if (waitingForDefaultUrl) {
                     defaultUrls.add(url);
                 } else {
@@ -887,7 +886,7 @@ public class MainActivity extends AppCompatActivity {
             "lTIm9+lxj2TaeiqcPaVRBUG7cmIx+iUFPnpttnp8SvRWlQ==" + "\n" +
             "-----END CERTIFICATE-----");
 
-            Log.d(TAG, "hysteria service started at " + hysteriaUrlLocal + hysteriaPort);
+            Log.d(TAG, "hysteria service started");
 
             // add url for hysteria service
             if (waitingForDefaultUrl) {
@@ -994,13 +993,13 @@ public class MainActivity extends AppCompatActivity {
                             waitingForDnsttUrl = false;
                             // select the fastest one (urls are ordered by latency), reInitializeIfNeeded set to false
                             String envoyUrl = validUrls.get(0);
-                            Log.d(TAG, "found a valid url: " + envoyUrl);
+                            Log.d(TAG, "received first valid url");
                             handleEndState(context, envoyUrl);
                         } else {
                             Log.e(TAG, "received empty list of valid urls");
                         }
                     } else {
-                        Log.d(TAG, "already found a valid url");
+                        Log.d(TAG, "received additional valid url");
                     }
                 } else if (intent.getAction() == BROADCAST_URL_VALIDATION_FAILED) {
                     Log.d(TAG, "onUrlsReceived got validation failed");
@@ -1094,7 +1093,7 @@ public class MainActivity extends AppCompatActivity {
             Preferences.get().setEnvoyUrl(null);
             Preferences.get().setEnvoyState(Preferences.ENVOY_STATE_FAILED);
         } else {
-            Log.d(TAG, "valid url found, start envoy/cronet, save url: " + envoyUrl);
+            Log.d(TAG, "valid url found, start envoy/cronet, save url");
             CronetNetworking.initializeCronetEngine(context, envoyUrl);
             Preferences.get().setEnvoyUrl(envoyUrl);
             Preferences.get().setEnvoyState(Preferences.ENVOY_STATE_ACTIVE);

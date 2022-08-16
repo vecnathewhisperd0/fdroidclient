@@ -41,6 +41,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
  */
 class LatestViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
 
+    private static final String TAG = "TEMP_LOG"; // "LatestViewBinder";
+
     private static final int LOADER_ID = 978015789;
 
     private final LatestAdapter latestAdapter;
@@ -73,7 +75,7 @@ class LatestViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
         swipeToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Log.d("FOO", "swipe to refresh latest");
+                Log.d(TAG, "swipe to refresh latest");
                 swipeToRefresh.setRefreshing(false);
                 UpdateService.updateNow(activity);
             }

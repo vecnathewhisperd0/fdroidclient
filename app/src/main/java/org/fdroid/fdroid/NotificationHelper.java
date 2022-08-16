@@ -408,9 +408,14 @@ public class NotificationHelper {
         // Intent to open main app list
         Intent intentObject = new Intent(context, MainActivity.class);
         intentObject.putExtra(MainActivity.EXTRA_VIEW_UPDATES, true);
-        PendingIntent piAction = PendingIntent.getActivity(context, 0, intentObject, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent piAction = null;
+        if (android.os.Build.VERSION.SDK_INT >= 31) {
+            piAction = PendingIntent.getActivity(context, 0, intentObject, PendingIntent.FLAG_IMMUTABLE);
+        } else {
+            piAction = PendingIntent.getActivity(context, 0, intentObject, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
 
-        NotificationCompat.Builder builder =
+            NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(context, CHANNEL_UPDATES)
                         .setAutoCancel(!useStackedNotifications())
                         .setSmallIcon(R.drawable.ic_notification)
@@ -487,9 +492,14 @@ public class NotificationHelper {
 
         // Intent to open main app list
         Intent intentObject = new Intent(context, MainActivity.class);
-        PendingIntent piAction = PendingIntent.getActivity(context, 0, intentObject, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent piAction = null;
+        if (android.os.Build.VERSION.SDK_INT >= 31) {
+            piAction = PendingIntent.getActivity(context, 0, intentObject, PendingIntent.FLAG_IMMUTABLE);
+        } else {
+            piAction = PendingIntent.getActivity(context, 0, intentObject, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
 
-        NotificationCompat.Builder builder =
+            NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(context, CHANNEL_INSTALLS)
                         .setAutoCancel(!useStackedNotifications())
                         .setSmallIcon(R.drawable.ic_notification)
