@@ -1,7 +1,6 @@
 package org.fdroid.fdroid.views.updates.items;
 
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class UpdateableAppsHeader extends AppUpdateData {
 
-    private static final String TAG = "TEMP_LOG"; // "UpdateableAppsHeader";
+    private static final String TAG = "UpdateableAppsHeader";
 
     public final List<UpdateableApp> apps;
     public final UpdatesAdapter adapter;
@@ -98,7 +97,6 @@ public class UpdateableAppsHeader extends AppUpdateData {
             downloadAll.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d(TAG, "download all");
                     downloadAll.setVisibility(View.GONE);
                     UpdateService.autoDownloadUpdates(header.activity);
                 }

@@ -84,7 +84,7 @@ import info.guardianproject.netcipher.proxy.OrbotHelper;
 
 public class FDroidApp extends Application implements androidx.work.Configuration.Provider {
 
-    private static final String TAG = "TEMP_LOG"; // "FDroidApp";
+    private static final String TAG = "FDroidApp";
     private static final String ACRA_ID = BuildConfig.APPLICATION_ID + ":acra";
 
     public static final String SYSTEM_DIR_NAME = Environment.getRootDirectory().getAbsolutePath();
