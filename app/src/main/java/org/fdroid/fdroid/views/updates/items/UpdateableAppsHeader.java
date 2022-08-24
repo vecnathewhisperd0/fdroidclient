@@ -29,8 +29,6 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class UpdateableAppsHeader extends AppUpdateData {
 
-    private static final String TAG = "UpdateableAppsHeader";
-
     public final List<UpdateableApp> apps;
     public final UpdatesAdapter adapter;
 
