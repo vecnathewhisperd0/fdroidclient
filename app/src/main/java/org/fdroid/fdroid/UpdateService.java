@@ -372,6 +372,7 @@ public class UpdateService extends JobIntentService {
                             .setSmallIcon(android.R.drawable.ic_dialog_alert);
                     setNotification();
                     Toast.makeText(context, text, Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "got global repo error in service receiver");
                     break;
                 case STATUS_ERROR_LOCAL:
                 case STATUS_ERROR_LOCAL_SMALL:
@@ -390,6 +391,7 @@ public class UpdateService extends JobIntentService {
                             .setSmallIcon(android.R.drawable.ic_dialog_info);
                     setNotification();
                     Toast.makeText(context, text, Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "got repo error in service receiver");
                     break;
                 case STATUS_COMPLETE_WITH_CHANGES:
                     break;
@@ -557,14 +559,18 @@ public class UpdateService extends JobIntentService {
 
             if (errorRepos == 0) {
                 if (changes) {
+                    Log.d(TAG, "0 errors + changes");
                     sendStatus(this, STATUS_COMPLETE_WITH_CHANGES);
                 } else {
+                    Log.d(TAG, "0 errors no changes");
                     sendStatus(this, STATUS_COMPLETE_AND_SAME);
                 }
             } else {
                 if (updatedRepos + unchangedRepos == 0) {
+                    Log.d(TAG, "errors no changes");
                     sendRepoErrorStatus(STATUS_ERROR_LOCAL, repoErrors);
                 } else {
+                    Log.d(TAG, "errors + changes");
                     sendRepoErrorStatus(STATUS_ERROR_LOCAL_SMALL, repoErrors);
                 }
             }

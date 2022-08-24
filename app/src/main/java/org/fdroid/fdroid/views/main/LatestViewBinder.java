@@ -52,6 +52,8 @@ class LatestViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private ProgressBar progressBar;
 
+    private boolean repoError;
+
     LatestViewBinder(final AppCompatActivity activity, FrameLayout parent) {
         this.activity = activity;
 
@@ -157,6 +159,9 @@ class LatestViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
 
     @Override
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor cursor) {
+
+        Log.d(TAG, "onLoadFinished triggered");
+
         if (loader.getId() != LOADER_ID) {
             return;
         }
@@ -164,20 +169,26 @@ class LatestViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
         latestAdapter.setAppsCursor(cursor);
 
         if (latestAdapter.getItemCount() == 0) {
+            Log.d(TAG, "onLoadFinished no items");
             emptyState.setVisibility(View.VISIBLE);
             appList.setVisibility(View.GONE);
             explainEmptyStateToUser();
         } else {
+            Log.d(TAG, "onLoadFinished got items");
             emptyState.setVisibility(View.GONE);
             appList.setVisibility(View.VISIBLE);
         }
     }
 
     private void explainEmptyStateToUser() {
+        // is this what creates the spinner at the top of the page?
         if (Preferences.get().isIndexNeverUpdated() && UpdateService.isUpdating()) {
+            Log.d(TAG, "never updated and is updating");
             if (progressBar != null) {
+                Log.d(TAG, "loading spinner exists(?)");
                 return;
             }
+            Log.d(TAG, "create loading spinner(?)");
             LinearLayout linearLayout = (LinearLayout) appList.getParent();
             progressBar = new ProgressBar(activity, null, android.R.attr.progressBarStyleLarge);
             progressBar.setId(R.id.progress_bar);
@@ -188,17 +199,26 @@ class LatestViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
         }
 
         StringBuilder emptyStateText = new StringBuilder();
-        emptyStateText.append(activity.getString(R.string.latest__empty_state__no_recent_apps));
-        emptyStateText.append("\n\n");
+        //emptyStateText.append(activity.getString(R.string.latest__empty_state__no_recent_apps));
+        //emptyStateText.append("\n\n");
 
         int repoCount = RepoProvider.Helper.countEnabledRepos(activity);
         if (repoCount == 0) {
+            Log.d(TAG, "no repos enabled");
             emptyStateText.append(activity.getString(R.string.latest__empty_state__no_enabled_repos));
         } else {
             Date lastUpdate = RepoProvider.Helper.lastUpdate(activity);
-            if (lastUpdate == null) {
+            // TODO: improve error handling?  currently local variable is set by a received broadcast
+            // because explainEmptyStateToUser() may be called separately from onLoadFinished()
+            // is it reasonable for an error to override other possible causes of an empty state?
+            if (repoError) {
+                Log.d(TAG, "alredy got repo error during update");
+                emptyStateText.append(activity.getString(R.string.latest__empty_state__no_recent_apps));
+            } else if (lastUpdate == null) {
+                Log.d(TAG, "never been updated");
                 emptyStateText.append(activity.getString(R.string.latest__empty_state__never_updated));
             } else {
+                Log.d(TAG, "was previously updated");
                 emptyStateText.append(Utils.formatLastUpdated(activity.getResources(), lastUpdate));
             }
         }
@@ -208,10 +228,17 @@ class LatestViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
 
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+        Log.d(TAG, "binder.onLoaderReset triggered");
         if (loader.getId() != LOADER_ID) {
             return;
         }
 
         latestAdapter.setAppsCursor(null);
+    }
+
+    public void handleError() {
+        Log.d(TAG, "binder.handleError triggered");
+        repoError = true;
+        explainEmptyStateToUser();
     }
 }

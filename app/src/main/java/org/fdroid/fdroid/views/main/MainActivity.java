@@ -22,6 +22,12 @@
 
 package org.fdroid.fdroid.views.main;
 
+import static org.fdroid.fdroid.UpdateService.EXTRA_STATUS_CODE;
+import static org.fdroid.fdroid.UpdateService.LOCAL_ACTION_STATUS;
+import static org.fdroid.fdroid.UpdateService.STATUS_ERROR_GLOBAL;
+import static org.fdroid.fdroid.UpdateService.STATUS_ERROR_LOCAL;
+import static org.fdroid.fdroid.UpdateService.STATUS_ERROR_LOCAL_SMALL;
+
 import android.app.SearchManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -40,6 +46,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -54,6 +61,7 @@ import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.UpdateService;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.NewRepoConfig;
+import org.fdroid.fdroid.data.RepoProvider;
 import org.fdroid.fdroid.nearby.SDCardScannerService;
 import org.fdroid.fdroid.nearby.SwapService;
 import org.fdroid.fdroid.nearby.SwapWorkflowActivity;
@@ -238,6 +246,10 @@ public class MainActivity extends AppCompatActivity {
         updateableAppsFilter.addAction(AppUpdateStatusManager.BROADCAST_APPSTATUS_CHANGED);
         updateableAppsFilter.addAction(AppUpdateStatusManager.BROADCAST_APPSTATUS_REMOVED);
         LocalBroadcastManager.getInstance(this).registerReceiver(onUpdateableAppsChanged, updateableAppsFilter);
+
+        // register to receive repo update errors
+        IntentFilter repoErrorFilter = new IntentFilter(LOCAL_ACTION_STATUS);
+        LocalBroadcastManager.getInstance(this).registerReceiver(onRepoError, repoErrorFilter);
 
         // register to receive valid proxy urls
         IntentFilter envoyFilter = new IntentFilter();
@@ -667,6 +679,39 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    private final BroadcastReceiver onRepoError = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (TextUtils.isEmpty(action)) {
+                Log.d(TAG, "onRepoError but no action");
+                return;
+            }
+
+            if (!action.equals(LOCAL_ACTION_STATUS)) {
+                Log.d(TAG, "onRepoError but wrong action");
+                return;
+            }
+
+            int resultCode = intent.getIntExtra(EXTRA_STATUS_CODE, -1);
+
+            switch (resultCode) {
+                case STATUS_ERROR_GLOBAL:
+                case STATUS_ERROR_LOCAL:
+                case STATUS_ERROR_LOCAL_SMALL:
+                    Log.d(TAG, "got repo error in MainActivity receiver");
+                    if (adapter != null) {
+                        adapter.handleError();
+                    } else {
+                        Log.d(TAG, "adapter is null");
+                    }
+                    break;
+                default:
+                    Log.d(TAG, "got repo broadcast in MainActivity receiver");
+                    break;
+            }
+        }
+    };
 
     private void getDefaultUrls() {
 

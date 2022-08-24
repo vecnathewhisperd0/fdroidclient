@@ -21,6 +21,7 @@
 
 package org.fdroid.fdroid.views.main;
 
+import android.util.Log;
 import android.util.SparseIntArray;
 import android.view.Menu;
 import android.view.ViewGroup;
@@ -48,9 +49,13 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 class MainViewAdapter extends RecyclerView.Adapter<MainViewController> {
 
+    private static final String TAG = "TEMP_LOG"; // "MainViewAdapter";
+
     private final SparseIntArray positionToId;
 
     private final AppCompatActivity activity;
+
+    private MainViewController holder;
 
     MainViewAdapter(AppCompatActivity activity) {
         this.activity = activity;
@@ -86,7 +91,7 @@ class MainViewAdapter extends RecyclerView.Adapter<MainViewController> {
     @NonNull
     @Override
     public MainViewController onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        MainViewController holder = createEmptyView(activity);
+        holder = createEmptyView(activity);
         switch (viewType) {
             case R.id.latest:
                 holder.bindLatestView();
@@ -143,5 +148,14 @@ class MainViewAdapter extends RecyclerView.Adapter<MainViewController> {
 
     public int adapterPositionFromItemId(int itemId) {
         return positionToId.indexOfValue(itemId);
+    }
+
+    public void handleError() {
+        Log.d(TAG, "adapter.handleError triggered");
+        if (holder != null) {
+            holder.handleError();
+        } else {
+            Log.d(TAG, "holder is null");
+        }
     }
 }
