@@ -513,15 +513,16 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
      * Must be called on App startup and after every proxy configuration change.
      */
     public static void configureProxy(Preferences preferences) {
-        if (preferences.getEnvoyState().equals(Preferences.ENVOY_STATE_FAILED)) {
+        if (preferences.getEnvoyState().equals(Preferences.ENVOY_STATE_FAILED) ||
+                preferences.getEnvoyState().equals(Preferences.ENVOY_STATE_DIRECT)) {
             if (preferences.isTorEnabled()) {
-                Log.d(TAG, "envoy failed, tor enabled: use tor");
+                Log.d(TAG, "envoy failed or ignored, tor enabled: use tor");
                 NetCipher.useTor();
             } else if (preferences.isProxyEnabled()) {
-                Log.d(TAG, "envoy failed, proxy enabled: use proxy");
+                Log.d(TAG, "envoy failed or ignored, proxy enabled: use proxy");
                 NetCipher.setProxy(preferences.getProxyHost(), preferences.getProxyPort());
             } else {
-                Log.d(TAG, "envoy failed, no options enabled: clear proxy");
+                Log.d(TAG, "envoy failed or ignored, no options enabled: clear proxy");
                 NetCipher.clearProxy();
             }
         } else {
@@ -530,12 +531,13 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
     }
 
     public static void checkStartTor(Context context, Preferences preferences) {
-        if (preferences.getEnvoyState().equals(Preferences.ENVOY_STATE_FAILED)) {
+        if (preferences.getEnvoyState().equals(Preferences.ENVOY_STATE_FAILED) ||
+                preferences.getEnvoyState().equals(Preferences.ENVOY_STATE_DIRECT)) {
             if (preferences.isTorEnabled()) {
-                Log.d(TAG, "envoy failed, tor enabled: start tor");
+                Log.d(TAG, "envoy failed or ignored, tor enabled: start tor");
                 OrbotHelper.requestStartTor(context);
             } else {
-                Log.d(TAG, "envoy failed, tor not enabled: ignore tor");
+                Log.d(TAG, "envoy failed or ignored, tor not enabled: ignore tor");
             }
         } else {
             Log.d(TAG, "envoy pending or active: ignore tor");

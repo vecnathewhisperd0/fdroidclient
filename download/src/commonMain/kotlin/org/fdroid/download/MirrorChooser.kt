@@ -42,6 +42,7 @@ internal abstract class MirrorChooserImpl : MirrorChooser {
         mirrors.forEachIndexed { index, mirror ->
             val url = mirror.getUrl(downloadRequest.path)
             try {
+                Log.d(TAG, "check repo mirror: " + url)
                 return request(mirror, url)
             } catch (e: ResponseException) {
                 Log.d(TAG, "response exception for url " + url + " -> " + e.response.status)

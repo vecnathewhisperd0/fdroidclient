@@ -167,6 +167,10 @@ public class PreferencesFragment extends PreferenceFragmentCompat
             useTorCheckPref.setOnPreferenceChangeListener(useTorChangedListener);
             enableProxyCheckPref.setOnPreferenceChangeListener(proxyEnabledChangedListener);
             proxyCategory.removePreference(envoyStatusPref);
+        } else if (Preferences.get().getEnvoyState().equals(Preferences.ENVOY_STATE_DIRECT)) {
+            Log.d(TAG, "envoy ignored: set up tor prefs, but show envoy prefs");
+            useTorCheckPref.setOnPreferenceChangeListener(useTorChangedListener);
+            enableProxyCheckPref.setOnPreferenceChangeListener(proxyEnabledChangedListener);
         } else {
             Log.d(TAG, "envoy pending or active: hide tor prefs, set up envoy prefs");
 
@@ -559,7 +563,10 @@ public class PreferencesFragment extends PreferenceFragmentCompat
 
     private void initProxyStatus(Context context) {
         // preference is non-interactive. check proxy state and set summary to show state
-        if (CronetNetworking.cronetEngine() == null) {
+        if (Preferences.get().getEnvoyState().equals(Preferences.ENVOY_STATE_DIRECT)) {
+            Log.d(TAG, "connecting directly, envoy unused");
+            envoyStatusPref.setSummary(getString(R.string.envoy_unused));
+        } else if (CronetNetworking.cronetEngine() == null) {
             Log.d(TAG, "cronet engine is null, envoy inactive");
             envoyStatusPref.setSummary(getString(R.string.envoy_inactive));
         } else {
@@ -622,6 +629,10 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         if (Preferences.get().getEnvoyState().equals(Preferences.ENVOY_STATE_FAILED)) {
             Log.d(TAG, "envoy failed, init tor prefs");
             initUseTorPreference(getActivity().getApplicationContext());
+        } else if (Preferences.get().getEnvoyState().equals(Preferences.ENVOY_STATE_DIRECT)) {
+            Log.d(TAG, "envoy ignored, init both prefs");
+            initUseTorPreference(getActivity().getApplicationContext());
+            initProxyStatus(getActivity().getApplicationContext());
         } else {
             Log.d(TAG, "envoy pending or active, ignore tor prefs");
             initProxyStatus(getActivity().getApplicationContext());
@@ -633,8 +644,9 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         super.onPause();
         getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
 
-        if (Preferences.get().getEnvoyState().equals(Preferences.ENVOY_STATE_FAILED)) {
-            Log.d(TAG, "envoy failed: configure tor proxy");
+        if (Preferences.get().getEnvoyState().equals(Preferences.ENVOY_STATE_FAILED) ||
+                Preferences.get().getEnvoyState().equals(Preferences.ENVOY_STATE_DIRECT)) {
+            Log.d(TAG, "envoy failed or ignored: configure tor proxy");
             FDroidApp.configureProxy(Preferences.get());
         } else {
             Log.d(TAG, "envoy pending or active, ignore tor proxy");

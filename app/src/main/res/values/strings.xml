@@ -356,6 +356,7 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="envoy_active">Active</string>
     <string name="envoy_inactive">Inactive</string>
     <string name="envoy_unknown">Unknown</string>
+    <string name="envoy_unused">Unused</string>
 
     <string name="privacy">Privacy</string>
     <string name="preventScreenshots_title">Prevent screenshots</string>

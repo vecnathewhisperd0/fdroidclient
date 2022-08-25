@@ -145,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean waitingForDnstt = false;
     private boolean waitingForHysteria = false;
     private boolean waitingForShadowsocks = false;
+    private boolean waitingForDirectConnection = false;
     private boolean waitingForDefaultUrl = false;
     private boolean waitingForDnsttUrl = false;
 
@@ -357,17 +358,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        // start cronet here to prevent exception from starting a service when out of focus
-        if (CronetNetworking.cronetEngine() != null) {
-            Log.d(TAG, "cronet already running, don't try to start again");
-        } else if (waitingForDefaultUrl || waitingForDnsttUrl) {
-            Log.d(TAG, "already processing urls, don't try to start again");
+        // test a direct connection first
+        if (waitingForDirectConnection) {
+            Log.d(TAG, "already checking direct connection, don't check again");
         } else {
-            // run envoy setup (fetches and validate urls)
-            Log.d(TAG, "begin processing urls to start cronet");
-            Preferences.get().setEnvoyState(Preferences.ENVOY_STATE_PENDING);
-            waitingForDefaultUrl = true;
-            getDefaultUrls();
+            Log.d(TAG, "check direct connection");
+            waitingForDirectConnection = true;
+            Thread directConnectionThread = new Thread() {
+                @Override
+                public void run() {
+                    Log.d(TAG, "direct connection thread run");
+                    startDirectConnection();
+                }
+            };
+            directConnectionThread.start();
         }
 
         FDroidApp.checkStartTor(this, Preferences.get());
@@ -388,6 +392,48 @@ public class MainActivity extends AppCompatActivity {
         // AppDetailsActivity and RepoDetailsActivity set different NFC actions, so reset here
         NfcHelper.setAndroidBeam(this, getApplication().getPackageName());
         checkForAddRepoIntent(getIntent());
+    }
+
+    private void startDirectConnection() {
+        try {
+            Log.d(TAG, "test direct connection");
+            URL fdroidUrl = new URL(" https://f-droid.org");
+            HttpURLConnection directConnection = (HttpURLConnection)fdroidUrl.openConnection();
+            directConnection.setRequestMethod("GET");
+            directConnection.connect();
+            int responseCode = directConnection.getResponseCode();
+            if (200 <= responseCode && responseCode <= 299) {
+                Log.d(TAG, "direct connection ok, skip envoy: " + responseCode);
+                waitingForDirectConnection = false;
+                handleEndState(getApplicationContext(), Preferences.ENVOY_STATE_DIRECT);
+                return;
+            } else {
+                Log.d(TAG, "direct connection failed: " + responseCode);
+            }
+        } catch (MalformedURLException e) {
+            Log.e(TAG, "malformed captive url: " + e.getLocalizedMessage());
+        } catch (IOException e) {
+            Log.e(TAG, "error opening connection: " + e.getLocalizedMessage());
+        }
+
+        Log.e(TAG, "unable to connect directly, start envoy");
+        waitingForDirectConnection = false;
+        startEnvoy();
+    }
+
+    private void startEnvoy() {
+        // start envoy from onResume to prevent exception from starting a service when out of focus
+        if (CronetNetworking.cronetEngine() != null) {
+            Log.d(TAG, "cronet already running, don't try to start again");
+        } else if (waitingForDefaultUrl || waitingForDnsttUrl) {
+            Log.d(TAG, "already processing urls, don't try to start again");
+        } else {
+            // run envoy setup (fetches and validate urls)
+            Log.d(TAG, "begin processing urls to start cronet");
+            Preferences.get().setEnvoyState(Preferences.ENVOY_STATE_PENDING);
+            waitingForDefaultUrl = true;
+            getDefaultUrls();
+        }
     }
 
     @Override
@@ -1137,6 +1183,10 @@ public class MainActivity extends AppCompatActivity {
             Log.e(TAG, "no valid url could be found, cannot start envoy/cronet, clear saved url");
             Preferences.get().setEnvoyUrl(null);
             Preferences.get().setEnvoyState(Preferences.ENVOY_STATE_FAILED);
+        } else if (envoyUrl.equals(Preferences.ENVOY_STATE_DIRECT)) {
+            Log.d(TAG, "connecting directly, don't start envoy/cronet, clear saved url");
+            Preferences.get().setEnvoyUrl(null);
+            Preferences.get().setEnvoyState(Preferences.ENVOY_STATE_DIRECT);
         } else {
             Log.d(TAG, "valid url found, start envoy/cronet, save url");
             CronetNetworking.initializeCronetEngine(context, envoyUrl);
