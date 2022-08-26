@@ -24,25 +24,24 @@
     <color tools:ignore="UnusedResources" name="category_time">#FF7043</color>
     <color tools:ignore="UnusedResources" name="category_writing">#F2E9CE</color>
 
-    <color name="fdroid_blue_light">@color/color_primary_alt</color>
-    <color name="fdroid_blue">@color/color_primary</color>
-    <color name="fdroid_blue_dark">#ff004ba0</color>
-    <color name="fdroid_green_light">@color/color_secondary</color>
-    <color name="fdroid_green">@color/color_secondary</color>
+    <color name="gfdroid_purple_light">@color/color_primary_alt</color>
+    <color name="gfdroid_purple">@color/color_primary</color>
+    <color name="gfdroid_orange_light">@color/color_secondary_alt</color>
+    <color name="gfdroid_orange">@color/color_secondary</color>
 
     <color name="shadow">#cc222222</color>
 
     <color name="perms_costs_money">#fff4511e</color>
 
     <!-- gf-droid ui colors -->
-    <color name="fdroid_grey_light">#D9D9D9</color>
+    <color name="gfdroid_grey_light">#D9D9D9</color>
 
     <color name="background">?attr/colorPrimary</color>
     <color name="color_primary">#361659</color>
     <color name="color_primary_alt">#673CA7</color>
-    <color name="color_secondary">#F1B807</color>
+    <color name="color_secondary">#D98104</color>
     <color name="color_secondary_300">#F2C437</color>
-    <color name="color_secondary_alt">#D98104</color>
+    <color name="color_secondary_alt">#F1B807</color>
     <color name="color_tertiary">#715163</color>
 
 </resources>

@@ -34,10 +34,10 @@
         <!--colorPrimary colors map to components and elements, such as app bars and buttons. -->
         <!--colorSecondary colors are most often used as accents on components, such as FABs and -->
         <!--selection controls.-->
-        <item name="colorPrimary">@color/fdroid_blue</item>
-        <item name="colorPrimaryVariant">@color/fdroid_blue_dark</item>
+        <item name="colorPrimary">@color/gfdroid_purple_light</item>
+        <item name="colorPrimaryVariant">@color/gfdroid_purple</item>
         <item name="colorPrimaryDark">?colorPrimaryVariant</item>
-        <item name="colorSecondary">@color/fdroid_green</item>
+        <item name="colorSecondary">@color/gfdroid_orange_light</item>
         <!--colorBackground appears behind scrollable content and is used for the default window-->
         <!--background. colorSurface is mapped to the surface of components such as cards, sheets-->
         <!--and menus. colorError is used to indicate an error state for components such as-->
@@ -58,7 +58,7 @@
         <item name="colorOnPrimary">#ffffff</item>
         <item name="colorOnSecondary">#ffffff</item>
 
-        <item name="android:textColorLink">@color/fdroid_green</item>
+        <item name="android:textColorLink">@color/gfdroid_orange_light</item>
         <item name="mainTabSwapSplashTint">#f5f5f5</item>
         <item name="categoryName">#4a4a4a</item>
         <item name="installedApps">#424242</item>

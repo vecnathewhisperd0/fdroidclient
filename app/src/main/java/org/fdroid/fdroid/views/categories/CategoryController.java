@@ -93,7 +93,7 @@ public class CategoryController extends RecyclerView.ViewHolder implements Loade
             image.setColour(backgroundColour);
             image.setImageDrawable(null);
         } else {
-            image.setColour(ContextCompat.getColor(activity, R.color.fdroid_blue));
+            image.setColour(ContextCompat.getColor(activity, R.color.gfdroid_purple));
             Glide.with(activity).load(categoryImageId).into(image);
         }
     }

@@ -2,17 +2,17 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
     <!--Button-->
     <style name="ThemeOverlay.App.Button" parent="">
-        <item name="colorPrimary">@color/fdroid_green</item>
+        <item name="colorPrimary">@color/gfdroid_orange_light</item>
     </style>
 
     <style name="ThemeOverlay.App.Button.TextButton" parent="">
-        <item name="colorPrimary">@color/fdroid_green</item>
-        <item name="android:textColor">@color/fdroid_green</item>
+        <item name="colorPrimary">@color/gfdroid_orange_light</item>
+        <item name="android:textColor">@color/gfdroid_orange_light</item>
     </style>
 
     <!--Dialog-->
     <style name="MaterialAlertDialog.App.Title.Text" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
-        <item name="android:textColor">@color/fdroid_green</item>
+        <item name="android:textColor">@color/gfdroid_orange_light</item>
     </style>
 
 
@@ -22,8 +22,8 @@
 
     <style name="Widget.App.Button.Dialog" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.Button.TextButton</item>
-        <item name="colorPrimary">@color/fdroid_green</item>
-        <item name="android:textColor">@color/fdroid_green</item>
+        <item name="colorPrimary">@color/gfdroid_orange_light</item>
+        <item name="android:textColor">@color/gfdroid_orange_light</item>
         <item name="shapeAppearance">@style/ShapeAppearance.App.Button</item>
     </style>
 
@@ -48,20 +48,20 @@
     <style name="AlertDialogBaseThemeLight" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog" />
 
     <style name="ThemeOverlay.App.MaterialAlertDialog.Light" parent="AlertDialogBaseThemeLight">
-        <item name="colorSecondary">@color/fdroid_green</item>
+        <item name="colorSecondary">@color/gfdroid_orange_light</item>
     </style>
 
     <style name="AlertDialogBaseThemeNight" parent="AlertDialogBaseThemeDark" />
 
     <style name="MinWithDialogBaseThemeDark" parent="Theme.MaterialComponents.Dialog.MinWidth">
-        <item name="colorSecondary">@color/fdroid_green</item>
+        <item name="colorSecondary">@color/gfdroid_orange_light</item>
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
     <style name="MinWithDialogBaseThemeLight" parent="Theme.MaterialComponents.Light.Dialog.MinWidth">
-        <item name="colorSecondary">@color/fdroid_green</item>
+        <item name="colorSecondary">@color/gfdroid_orange_light</item>
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

@@ -46,7 +46,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -61,7 +60,6 @@ import org.fdroid.fdroid.R;
 import org.fdroid.fdroid.UpdateService;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.NewRepoConfig;
-import org.fdroid.fdroid.data.RepoProvider;
 import org.fdroid.fdroid.nearby.SDCardScannerService;
 import org.fdroid.fdroid.nearby.SwapService;
 import org.fdroid.fdroid.nearby.SwapWorkflowActivity;
@@ -288,19 +286,19 @@ public class MainActivity extends AppCompatActivity {
 
         // clear all current selections
         newestView.setBackground(getDrawable(R.drawable.ic_gf_newest_unfocus));
-        newestText.setTextColor(getResources().getColor(R.color.fdroid_grey_light));
+        newestText.setTextColor(getResources().getColor(R.color.gfdroid_grey_light));
         newestText.setPadding(0, 0, 0, getResources().getDimensionPixelOffset(R.dimen.nav_unfocus_padding));
         categoryView.setBackground(getDrawable(R.drawable.ic_gf_category_unfocus));
-        categoryText.setTextColor(getResources().getColor(R.color.fdroid_grey_light));
+        categoryText.setTextColor(getResources().getColor(R.color.gfdroid_grey_light));
         categoryText.setPadding(0, 0, 0, getResources().getDimensionPixelOffset(R.dimen.nav_unfocus_padding));
         updateView.setBackground(getDrawable(R.drawable.ic_gf_update_unfocus));
-        updateText.setTextColor(getResources().getColor(R.color.fdroid_grey_light));
+        updateText.setTextColor(getResources().getColor(R.color.gfdroid_grey_light));
         updateText.setPadding(0, 0, 0, getResources().getDimensionPixelOffset(R.dimen.nav_unfocus_padding));
         nearbyView.setBackground(getDrawable(R.drawable.ic_gf_nearby_unfocus));
-        nearbyText.setTextColor(getResources().getColor(R.color.fdroid_grey_light));
+        nearbyText.setTextColor(getResources().getColor(R.color.gfdroid_grey_light));
         nearbyText.setPadding(0, 0, 0, getResources().getDimensionPixelOffset(R.dimen.nav_unfocus_padding));
         settingsView.setBackground(getDrawable(R.drawable.ic_gf_settings_unfocus));
-        settingsText.setTextColor(getResources().getColor(R.color.fdroid_grey_light));
+        settingsText.setTextColor(getResources().getColor(R.color.gfdroid_grey_light));
         settingsText.setPadding(0, 0, 0, getResources().getDimensionPixelOffset(R.dimen.nav_unfocus_padding));
 
         switch(currentPageId) {
