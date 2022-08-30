@@ -98,6 +98,15 @@ class MainViewController extends RecyclerView.ViewHolder {
         activity.getLayoutInflater().inflate(R.layout.main_tab_settings, frame, true);
     }
 
+    public void handleProgress(String currentProgressMessage, int currentProgressPercent) {
+        Log.d(TAG, "controller.handleProgress triggered");
+        if (latestView != null) {
+            latestView.handleProgress(currentProgressMessage, currentProgressPercent);
+        } else {
+            Log.d(TAG, "latestView is null");
+        }
+    }
+
     public void handleError() {
         Log.d(TAG, "controller.handleError triggered");
         if (latestView != null) {

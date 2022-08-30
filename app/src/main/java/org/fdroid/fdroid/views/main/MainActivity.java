@@ -22,11 +22,14 @@
 
 package org.fdroid.fdroid.views.main;
 
+import static org.fdroid.fdroid.UpdateService.EXTRA_MESSAGE;
+import static org.fdroid.fdroid.UpdateService.EXTRA_PROGRESS;
 import static org.fdroid.fdroid.UpdateService.EXTRA_STATUS_CODE;
 import static org.fdroid.fdroid.UpdateService.LOCAL_ACTION_STATUS;
 import static org.fdroid.fdroid.UpdateService.STATUS_ERROR_GLOBAL;
 import static org.fdroid.fdroid.UpdateService.STATUS_ERROR_LOCAL;
 import static org.fdroid.fdroid.UpdateService.STATUS_ERROR_LOCAL_SMALL;
+import static org.fdroid.fdroid.UpdateService.STATUS_INFO;
 
 import android.app.SearchManager;
 import android.content.BroadcastReceiver;
@@ -246,9 +249,9 @@ public class MainActivity extends AppCompatActivity {
         updateableAppsFilter.addAction(AppUpdateStatusManager.BROADCAST_APPSTATUS_REMOVED);
         LocalBroadcastManager.getInstance(this).registerReceiver(onUpdateableAppsChanged, updateableAppsFilter);
 
-        // register to receive repo update errors
-        IntentFilter repoErrorFilter = new IntentFilter(LOCAL_ACTION_STATUS);
-        LocalBroadcastManager.getInstance(this).registerReceiver(onRepoError, repoErrorFilter);
+        // register to receive repo updates
+        IntentFilter repoUpdateFilter = new IntentFilter(LOCAL_ACTION_STATUS);
+        LocalBroadcastManager.getInstance(this).registerReceiver(onRepoUpdate, repoUpdateFilter);
 
         // register to receive valid proxy urls
         IntentFilter envoyFilter = new IntentFilter();
@@ -723,31 +726,45 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private final BroadcastReceiver onRepoError = new BroadcastReceiver() {
+    private final BroadcastReceiver onRepoUpdate = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (TextUtils.isEmpty(action)) {
-                Log.d(TAG, "onRepoError but no action");
+                Log.d(TAG, "onRepoUpdate but no action");
                 return;
             }
 
             if (!action.equals(LOCAL_ACTION_STATUS)) {
-                Log.d(TAG, "onRepoError but wrong action");
+                Log.d(TAG, "onRepoUpdate but wrong action");
                 return;
             }
 
             int resultCode = intent.getIntExtra(EXTRA_STATUS_CODE, -1);
 
             switch (resultCode) {
+                case STATUS_INFO:
+                    Log.d(TAG, "got repo update in MainActivity receiver");
+                    String message = intent.getStringExtra(EXTRA_MESSAGE);
+                    int progress = intent.getIntExtra(EXTRA_PROGRESS, -1);
+                    if (progress < 0 || message == null || message.isEmpty()) {
+                        Log.d(TAG, "no progress to report");
+                    } else if (adapter == null) {
+                        Log.d(TAG, "no adapter to report progress");
+                    } else {
+                        Log.d(TAG, "report progress: " + progress + " / " + message);
+                        adapter.handleProgress(message, progress);
+                    }
+                    break;
                 case STATUS_ERROR_GLOBAL:
                 case STATUS_ERROR_LOCAL:
                 case STATUS_ERROR_LOCAL_SMALL:
                     Log.d(TAG, "got repo error in MainActivity receiver");
-                    if (adapter != null) {
-                        adapter.handleError();
+                    if (adapter == null) {
+                        Log.d(TAG, "no adapter to report error");
                     } else {
-                        Log.d(TAG, "adapter is null");
+                        Log.d(TAG, "report error");
+                        adapter.handleError();
                     }
                     break;
                 default:

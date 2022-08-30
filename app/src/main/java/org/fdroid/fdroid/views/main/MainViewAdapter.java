@@ -150,6 +150,15 @@ class MainViewAdapter extends RecyclerView.Adapter<MainViewController> {
         return positionToId.indexOfValue(itemId);
     }
 
+    public void handleProgress(String currentProgressMessage, int currentProgressPercent) {
+        Log.d(TAG, "adapter.handleProgress triggered");
+        if (holder != null) {
+            holder.handleProgress(currentProgressMessage, currentProgressPercent);
+        } else {
+            Log.d(TAG, "holder is null");
+        }
+    }
+
     public void handleError() {
         Log.d(TAG, "adapter.handleError triggered");
         if (holder != null) {

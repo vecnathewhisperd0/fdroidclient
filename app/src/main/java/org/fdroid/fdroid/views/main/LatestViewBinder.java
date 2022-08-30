@@ -47,10 +47,11 @@ class LatestViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private final LatestAdapter latestAdapter;
     private final AppCompatActivity activity;
-    private final TextView emptyState;
+    private final TextView progressText;
     private final RecyclerView appList;
 
     private ProgressBar progressBar;
+    private String progressMessage;
 
     private boolean repoError;
 
@@ -64,7 +65,8 @@ class LatestViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
         GridLayoutManager layoutManager = new GridLayoutManager(activity, 2);
         layoutManager.setSpanSizeLookup(new LatestAdapter.SpanSizeLookup());
 
-        emptyState = (TextView) latestView.findViewById(R.id.empty_state);
+        progressText = (TextView) latestView.findViewById(R.id.progress_text);
+        progressBar = (ProgressBar) latestView.findViewById(R.id.progress_bar);
 
         appList = (RecyclerView) latestView.findViewById(R.id.app_list);
         appList.setHasFixedSize(true);
@@ -170,37 +172,23 @@ class LatestViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
 
         if (latestAdapter.getItemCount() == 0) {
             Log.d(TAG, "onLoadFinished no items");
-            emptyState.setVisibility(View.VISIBLE);
+            // explain empty state will determine visibility of text/bar
             appList.setVisibility(View.GONE);
             explainEmptyStateToUser();
         } else {
             Log.d(TAG, "onLoadFinished got items");
-            emptyState.setVisibility(View.GONE);
+            progressText.setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE);
             appList.setVisibility(View.VISIBLE);
         }
     }
 
     private void explainEmptyStateToUser() {
-        // is this what creates the spinner at the top of the page?
-        if (Preferences.get().isIndexNeverUpdated() && UpdateService.isUpdating()) {
-            Log.d(TAG, "never updated and is updating");
-            if (progressBar != null) {
-                Log.d(TAG, "loading spinner exists(?)");
-                return;
-            }
-            Log.d(TAG, "create loading spinner(?)");
-            LinearLayout linearLayout = (LinearLayout) appList.getParent();
-            progressBar = new ProgressBar(activity, null, android.R.attr.progressBarStyleLarge);
-            progressBar.setId(R.id.progress_bar);
-            linearLayout.addView(progressBar);
-            emptyState.setVisibility(View.GONE);
-            appList.setVisibility(View.GONE);
-            return;
-        }
+
+        Log.d(TAG, "empty state, show text");
+        progressText.setVisibility(View.VISIBLE);
 
         StringBuilder emptyStateText = new StringBuilder();
-        //emptyStateText.append(activity.getString(R.string.latest__empty_state__no_recent_apps));
-        //emptyStateText.append("\n\n");
 
         int repoCount = RepoProvider.Helper.countEnabledRepos(activity);
         if (repoCount == 0) {
@@ -214,6 +202,10 @@ class LatestViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
             if (repoError) {
                 Log.d(TAG, "alredy got repo error during update");
                 emptyStateText.append(activity.getString(R.string.latest__empty_state__no_recent_apps));
+            } else if (progressMessage != null && !progressMessage.isEmpty()) {
+                Log.d(TAG, "show update progress: " + progressMessage);
+                progressBar.setVisibility(View.VISIBLE);
+                emptyStateText.append(progressMessage);
             } else if (lastUpdate == null) {
                 Log.d(TAG, "never been updated");
                 emptyStateText.append(activity.getString(R.string.latest__empty_state__never_updated));
@@ -223,7 +215,7 @@ class LatestViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
             }
         }
 
-        emptyState.setText(emptyStateText.toString());
+        progressText.setText(emptyStateText.toString());
     }
 
     @Override
@@ -234,6 +226,14 @@ class LatestViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
         }
 
         latestAdapter.setAppsCursor(null);
+    }
+
+    public void handleProgress(String currentProgressMessage, int currentProgressPercent) {
+        Log.d(TAG, "binder.handleProgress triggered");
+        progressMessage = currentProgressMessage;
+        progressBar.setMax(100);
+        progressBar.setProgress(currentProgressPercent);
+        explainEmptyStateToUser();
     }
 
     public void handleError() {
