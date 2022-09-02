@@ -5,6 +5,7 @@ import io.ktor.http.HttpStatusCode.Companion.Forbidden
 import io.ktor.http.Url
 import io.ktor.utils.io.errors.IOException
 import mu.KotlinLogging
+import android.util.Log
 
 public interface MirrorChooser {
     public fun orderMirrors(downloadRequest: DownloadRequest): List<Mirror>
@@ -15,6 +16,8 @@ public interface MirrorChooser {
 }
 
 internal abstract class MirrorChooserImpl : MirrorChooser {
+
+    private val TAG = "TEMP_LOG" // "MirrorChooser"
 
     companion object {
         protected val log = KotlinLogging.logger {}
@@ -39,13 +42,16 @@ internal abstract class MirrorChooserImpl : MirrorChooser {
         mirrors.forEachIndexed { index, mirror ->
             val url = mirror.getUrl(downloadRequest.path)
             try {
+                Log.d(TAG, "check repo mirror: " + url)
                 return request(mirror, url)
             } catch (e: ResponseException) {
+                Log.d(TAG, "response exception for url " + url + " -> " + e.response.status)
                 // don't try other mirrors if we got Forbidden response, but supplied credentials
                 if (downloadRequest.hasCredentials && e.response.status == Forbidden) throw e
                 // also throw if this is the last mirror to try, otherwise try next
                 throwOnLastMirror(e, index == downloadRequest.mirrors.size - 1)
             } catch (e: IOException) {
+                Log.d(TAG, "io exception for url " + url + " -> " + e.message)
                 throwOnLastMirror(e, index == downloadRequest.mirrors.size - 1)
             }
         }

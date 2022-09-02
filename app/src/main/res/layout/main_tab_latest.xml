@@ -14,26 +14,32 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <org.fdroid.fdroid.views.StatusBanner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            android:orientation="vertical"
+            android:gravity="center_vertical">
 
             <TextView
-                android:id="@+id/empty_state"
+                android:id="@+id/progress_text"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 style="@style/AppListEmptyText"
                 android:visibility="gone"
                 tools:text="@string/latest__empty_state__no_recent_apps"/>
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="50dp"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:visibility="gone"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/app_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:listitem="@layout/app_card_normal"
-                android:scrollbars="vertical" />
+                android:scrollbars="vertical"
+                android:visibility="gone"/>
 
         </LinearLayout>
 

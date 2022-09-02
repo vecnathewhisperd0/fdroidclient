@@ -3,6 +3,7 @@ package org.fdroid.fdroid.views.main;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -40,14 +41,19 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
  */
 class LatestViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
 
+    private static final String TAG = "TEMP_LOG"; // "LatestViewBinder";
+
     private static final int LOADER_ID = 978015789;
 
     private final LatestAdapter latestAdapter;
     private final AppCompatActivity activity;
-    private final TextView emptyState;
+    private final TextView progressText;
     private final RecyclerView appList;
 
     private ProgressBar progressBar;
+    private String progressMessage;
+
+    private boolean repoError;
 
     LatestViewBinder(final AppCompatActivity activity, FrameLayout parent) {
         this.activity = activity;
@@ -59,7 +65,8 @@ class LatestViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
         GridLayoutManager layoutManager = new GridLayoutManager(activity, 2);
         layoutManager.setSpanSizeLookup(new LatestAdapter.SpanSizeLookup());
 
-        emptyState = (TextView) latestView.findViewById(R.id.empty_state);
+        progressText = (TextView) latestView.findViewById(R.id.progress_text);
+        progressBar = (ProgressBar) latestView.findViewById(R.id.progress_bar);
 
         appList = (RecyclerView) latestView.findViewById(R.id.app_list);
         appList.setHasFixedSize(true);
@@ -72,6 +79,7 @@ class LatestViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
         swipeToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                Log.d(TAG, "swipe to refresh latest");
                 swipeToRefresh.setRefreshing(false);
                 UpdateService.updateNow(activity);
             }
@@ -153,6 +161,9 @@ class LatestViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
 
     @Override
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor cursor) {
+
+        Log.d(TAG, "onLoadFinished triggered");
+
         if (loader.getId() != LOADER_ID) {
             return;
         }
@@ -160,54 +171,74 @@ class LatestViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
         latestAdapter.setAppsCursor(cursor);
 
         if (latestAdapter.getItemCount() == 0) {
-            emptyState.setVisibility(View.VISIBLE);
+            Log.d(TAG, "onLoadFinished no items");
+            // explain empty state will determine visibility of text/bar
             appList.setVisibility(View.GONE);
             explainEmptyStateToUser();
         } else {
-            emptyState.setVisibility(View.GONE);
+            Log.d(TAG, "onLoadFinished got items");
+            progressText.setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE);
             appList.setVisibility(View.VISIBLE);
         }
     }
 
     private void explainEmptyStateToUser() {
-        if (Preferences.get().isIndexNeverUpdated() && UpdateService.isUpdating()) {
-            if (progressBar != null) {
-                return;
-            }
-            LinearLayout linearLayout = (LinearLayout) appList.getParent();
-            progressBar = new ProgressBar(activity, null, android.R.attr.progressBarStyleLarge);
-            progressBar.setId(R.id.progress_bar);
-            linearLayout.addView(progressBar);
-            emptyState.setVisibility(View.GONE);
-            appList.setVisibility(View.GONE);
-            return;
-        }
+
+        Log.d(TAG, "empty state, show text");
+        progressText.setVisibility(View.VISIBLE);
 
         StringBuilder emptyStateText = new StringBuilder();
-        emptyStateText.append(activity.getString(R.string.latest__empty_state__no_recent_apps));
-        emptyStateText.append("\n\n");
 
         int repoCount = RepoProvider.Helper.countEnabledRepos(activity);
         if (repoCount == 0) {
+            Log.d(TAG, "no repos enabled");
             emptyStateText.append(activity.getString(R.string.latest__empty_state__no_enabled_repos));
         } else {
             Date lastUpdate = RepoProvider.Helper.lastUpdate(activity);
-            if (lastUpdate == null) {
+            // TODO: improve error handling?  currently local variable is set by a received broadcast
+            // because explainEmptyStateToUser() may be called separately from onLoadFinished()
+            // is it reasonable for an error to override other possible causes of an empty state?
+            if (repoError) {
+                Log.d(TAG, "alredy got repo error during update");
+                emptyStateText.append(activity.getString(R.string.latest__empty_state__no_recent_apps));
+            } else if (progressMessage != null && !progressMessage.isEmpty()) {
+                Log.d(TAG, "show update progress: " + progressMessage);
+                progressBar.setVisibility(View.VISIBLE);
+                emptyStateText.append(progressMessage);
+            } else if (lastUpdate == null) {
+                Log.d(TAG, "never been updated");
                 emptyStateText.append(activity.getString(R.string.latest__empty_state__never_updated));
             } else {
+                Log.d(TAG, "was previously updated");
                 emptyStateText.append(Utils.formatLastUpdated(activity.getResources(), lastUpdate));
             }
         }
 
-        emptyState.setText(emptyStateText.toString());
+        progressText.setText(emptyStateText.toString());
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader<Cursor> loader) {
+        Log.d(TAG, "binder.onLoaderReset triggered");
         if (loader.getId() != LOADER_ID) {
             return;
         }
 
         latestAdapter.setAppsCursor(null);
+    }
+
+    public void handleProgress(String currentProgressMessage, int currentProgressPercent) {
+        Log.d(TAG, "binder.handleProgress triggered");
+        progressMessage = currentProgressMessage;
+        progressBar.setMax(100);
+        progressBar.setProgress(currentProgressPercent);
+        explainEmptyStateToUser();
+    }
+
+    public void handleError() {
+        Log.d(TAG, "binder.handleError triggered");
+        repoError = true;
+        explainEmptyStateToUser();
     }
 }

@@ -147,6 +147,7 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
     public static final String ENVOY_STATE_PENDING = "pending";
     public static final String ENVOY_STATE_ACTIVE = "active";
     public static final String ENVOY_STATE_FAILED = "failed";
+    public static final String ENVOY_STATE_DIRECT = "direct";
 
     /**
      * Old preference replaced by {@link #PREF_KEEP_CACHE_TIME}

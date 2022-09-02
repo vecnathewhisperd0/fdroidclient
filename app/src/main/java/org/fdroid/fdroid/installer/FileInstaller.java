@@ -58,11 +58,20 @@ public class FileInstaller extends Installer {
         installIntent.putExtra(Installer.EXTRA_APK, apk);
         installIntent.setData(localApkUri);
 
-        PendingIntent installPendingIntent = PendingIntent.getActivity(
-                context.getApplicationContext(),
-                localApkUri.hashCode(),
-                installIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent installPendingIntent = null;
+        if (android.os.Build.VERSION.SDK_INT >= 31) {
+            installPendingIntent = PendingIntent.getActivity(
+                    context.getApplicationContext(),
+                    localApkUri.hashCode(),
+                    installIntent,
+                    PendingIntent.FLAG_IMMUTABLE);
+        } else {
+            installPendingIntent = PendingIntent.getActivity(
+                    context.getApplicationContext(),
+                    localApkUri.hashCode(),
+                    installIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT);
+        }
 
         sendBroadcastInstall(canonicalUri, Installer.ACTION_INSTALL_USER_INTERACTION,
                 installPendingIntent);
@@ -73,11 +82,20 @@ public class FileInstaller extends Installer {
         Intent uninstallIntent = new Intent(context, FileInstallerActivity.class);
         uninstallIntent.setAction(FileInstallerActivity.ACTION_UNINSTALL_FILE);
         uninstallIntent.putExtra(Installer.EXTRA_APK, apk);
-        PendingIntent uninstallPendingIntent = PendingIntent.getActivity(
-                context.getApplicationContext(),
-                apk.packageName.hashCode(),
-                uninstallIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent uninstallPendingIntent = null;
+        if (android.os.Build.VERSION.SDK_INT >= 31) {
+            uninstallPendingIntent = PendingIntent.getActivity(
+                    context.getApplicationContext(),
+                    apk.packageName.hashCode(),
+                    uninstallIntent,
+                    PendingIntent.FLAG_IMMUTABLE);
+        } else {
+            uninstallPendingIntent = PendingIntent.getActivity(
+                    context.getApplicationContext(),
+                    apk.packageName.hashCode(),
+                    uninstallIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT);
+        }
 
         sendBroadcastUninstall(Installer.ACTION_UNINSTALL_USER_INTERACTION, uninstallPendingIntent);
     }

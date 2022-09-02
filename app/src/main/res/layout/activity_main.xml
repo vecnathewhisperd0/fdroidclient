@@ -47,7 +47,7 @@
             android:text="@string/main_menu__updates"
             android:textAlignment="center"
             android:paddingBottom="@dimen/nav_unfocus_padding"
-            android:textColor="@color/fdroid_grey_light"
+            android:textColor="@color/gfdroid_grey_light"
             android:textSize="11dp"
             android:textStyle="bold" />
 
@@ -68,7 +68,7 @@
             android:text="@string/main_menu__categories"
             android:textAlignment="center"
             android:paddingBottom="@dimen/nav_unfocus_padding"
-            android:textColor="@color/fdroid_grey_light"
+            android:textColor="@color/gfdroid_grey_light"
             android:textSize="10dp"
             android:textStyle="bold" />
 
@@ -89,7 +89,7 @@
             android:text="@string/main_menu__latest_apps"
             android:textAlignment="center"
             android:paddingBottom="@dimen/nav_unfocus_padding"
-            android:textColor="@color/fdroid_grey_light"
+            android:textColor="@color/gfdroid_grey_light"
             android:textSize="11dp"
             android:textStyle="bold" />
 
@@ -110,7 +110,7 @@
             android:text="@string/main_menu__swap_nearby"
             android:textAlignment="center"
             android:paddingBottom="@dimen/nav_unfocus_padding"
-            android:textColor="@color/fdroid_grey_light"
+            android:textColor="@color/gfdroid_grey_light"
             android:textSize="11dp"
             android:textStyle="bold" />
 
@@ -131,7 +131,7 @@
             android:text="@string/menu_settings"
             android:textAlignment="center"
             android:paddingBottom="@dimen/nav_unfocus_padding"
-            android:textColor="@color/fdroid_grey_light"
+            android:textColor="@color/gfdroid_grey_light"
             android:textSize="11dp"
             android:textStyle="bold" />
 

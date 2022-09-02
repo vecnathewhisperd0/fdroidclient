@@ -1,5 +1,6 @@
 package org.fdroid.fdroid.views.main;
 
+import android.util.Log;
 import android.widget.FrameLayout;
 
 import org.fdroid.fdroid.R;
@@ -19,11 +20,16 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 class MainViewController extends RecyclerView.ViewHolder {
 
+    private static final String TAG = "TEMP_LOG"; // "MainViewController";
+
     private final AppCompatActivity activity;
     private final FrameLayout frame;
 
     @Nullable
     private UpdatesViewBinder updatesView = null;
+
+    @Nullable
+    private LatestViewBinder latestView = null;
 
     MainViewController(AppCompatActivity activity, FrameLayout frame) {
         super(frame);
@@ -35,7 +41,7 @@ class MainViewController extends RecyclerView.ViewHolder {
      * @see LatestViewBinder
      */
     public void bindLatestView() {
-        new LatestViewBinder(activity, frame);
+        latestView = new LatestViewBinder(activity, frame);
     }
 
     /**
@@ -90,5 +96,23 @@ class MainViewController extends RecyclerView.ViewHolder {
      */
     public void bindSettingsView() {
         activity.getLayoutInflater().inflate(R.layout.main_tab_settings, frame, true);
+    }
+
+    public void handleProgress(String currentProgressMessage, int currentProgressPercent) {
+        Log.d(TAG, "controller.handleProgress triggered");
+        if (latestView != null) {
+            latestView.handleProgress(currentProgressMessage, currentProgressPercent);
+        } else {
+            Log.d(TAG, "latestView is null");
+        }
+    }
+
+    public void handleError() {
+        Log.d(TAG, "controller.handleError triggered");
+        if (latestView != null) {
+            latestView.handleError();
+        } else {
+            Log.d(TAG, "latestView is null");
+        }
     }
 }

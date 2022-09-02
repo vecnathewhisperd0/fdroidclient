@@ -1,11 +1,13 @@
 buildscript {
     repositories {
+        google()
         mavenCentral()
         maven { url 'https://maven.google.com/' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.1.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.20"
+        classpath 'com.android.tools.build:gradle:7.2.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21"
+        classpath 'org.greatfire:IEnvoyProxy:1.0.2'
         classpath 'com.vanniktech:gradle-maven-publish-plugin:0.18.0'
     }
 }

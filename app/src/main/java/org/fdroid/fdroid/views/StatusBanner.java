@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 
@@ -42,6 +43,8 @@ import androidx.preference.PreferenceManager;
  * @see <a href="https://gitlab.com/fdroid/fdroidclient/-/merge_requests/724">"No internet" banner on main, categories, and updates screen</a>
  */
 public class StatusBanner extends androidx.appcompat.widget.AppCompatTextView {
+
+    private static final String TAG = "TEMP_LOG"; // "StatusBanner";
 
     private int updateServiceStatus = UpdateService.STATUS_COMPLETE_WITH_CHANGES;
     private int networkState = ConnectivityMonitorService.FLAG_NET_NO_LIMIT;
@@ -79,7 +82,10 @@ public class StatusBanner extends androidx.appcompat.widget.AppCompatTextView {
                 new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
         if (UpdateService.isUpdating()) {
+            Log.d(TAG, "service is updating");
             updateServiceStatus = UpdateService.STATUS_INFO;
+        } else {
+            Log.w(TAG, "service is not updating");
         }
         LocalBroadcastManager.getInstance(context).registerReceiver(onRepoFeedback,
                 new IntentFilter(UpdateService.LOCAL_ACTION_STATUS));
@@ -113,6 +119,7 @@ public class StatusBanner extends androidx.appcompat.widget.AppCompatTextView {
      */
     private void setBannerTextAndVisibility() {
         if (updateServiceStatus == UpdateService.STATUS_INFO) {
+            Log.d(TAG, "banner update: updating repos");
             setText(R.string.banner_updating_repositories);
             setVisibility(View.VISIBLE);
         } else if (networkState == ConnectivityMonitorService.FLAG_NET_UNAVAILABLE
@@ -150,6 +157,7 @@ public class StatusBanner extends androidx.appcompat.widget.AppCompatTextView {
     private final BroadcastReceiver onRepoFeedback = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "onRepoFeedback");
             updateServiceStatus = intent.getIntExtra(UpdateService.EXTRA_STATUS_CODE,
                     UpdateService.STATUS_COMPLETE_WITH_CHANGES);
             setBannerTextAndVisibility();

@@ -39,6 +39,20 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.preference.CheckBoxPreference;
+import androidx.preference.EditTextPreference;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.SeekBarPreference;
+import androidx.preference.SwitchPreferenceCompat;
+import androidx.recyclerview.widget.LinearSmoothScroller;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
@@ -57,24 +71,11 @@ import org.fdroid.fdroid.work.CleanCacheWorker;
 import org.fdroid.fdroid.work.FDroidMetricsWorker;
 import org.greatfire.envoy.CronetNetworking;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.preference.CheckBoxPreference;
-import androidx.preference.EditTextPreference;
-import androidx.preference.ListPreference;
-import androidx.preference.Preference;
-import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceGroup;
-import androidx.preference.SeekBarPreference;
-import androidx.preference.SwitchPreferenceCompat;
-import androidx.recyclerview.widget.LinearSmoothScroller;
-import androidx.recyclerview.widget.RecyclerView;
 import info.guardianproject.netcipher.proxy.OrbotHelper;
 
 public class PreferencesFragment extends PreferenceFragmentCompat
         implements SharedPreferences.OnSharedPreferenceChangeListener {
-    public static final String TAG = "PreferencesFragment";
+    public static final String TAG = "TEMP_LOG"; // ""PreferencesFragment";
 
     private static final String[] SUMMARIES_TO_UPDATE = {
             Preferences.PREF_OVER_WIFI,
@@ -166,6 +167,10 @@ public class PreferencesFragment extends PreferenceFragmentCompat
             useTorCheckPref.setOnPreferenceChangeListener(useTorChangedListener);
             enableProxyCheckPref.setOnPreferenceChangeListener(proxyEnabledChangedListener);
             proxyCategory.removePreference(envoyStatusPref);
+        } else if (Preferences.get().getEnvoyState().equals(Preferences.ENVOY_STATE_DIRECT)) {
+            Log.d(TAG, "envoy ignored: set up tor prefs, but show envoy prefs");
+            useTorCheckPref.setOnPreferenceChangeListener(useTorChangedListener);
+            enableProxyCheckPref.setOnPreferenceChangeListener(proxyEnabledChangedListener);
         } else {
             Log.d(TAG, "envoy pending or active: hide tor prefs, set up envoy prefs");
 
@@ -206,9 +211,11 @@ public class PreferencesFragment extends PreferenceFragmentCompat
 
         ListPreference languagePref = (ListPreference) findPreference(Preferences.PREF_LANGUAGE);
         if (Build.VERSION.SDK_INT >= 24) {
+            Log.d(TAG, "hide language pref");
             PreferenceCategory category = (PreferenceCategory) findPreference("pref_category_display");
             category.removePreference(languagePref);
         } else {
+            Log.d(TAG, "show language pref");
             Languages languages = Languages.get((AppCompatActivity) getActivity());
             languagePref.setDefaultValue(Languages.USE_SYSTEM_DEFAULT);
             languagePref.setEntries(languages.getAllNames());
@@ -351,6 +358,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                     Languages.setLanguage(activity);
 
                     RepoProvider.Helper.clearEtags(getActivity());
+                    Log.d(TAG, "update repo on language change?");
                     UpdateService.updateNow(getActivity());
 
                     Languages.forceChangeLanguage(activity);
@@ -555,9 +563,14 @@ public class PreferencesFragment extends PreferenceFragmentCompat
 
     private void initProxyStatus(Context context) {
         // preference is non-interactive. check proxy state and set summary to show state
-        if (CronetNetworking.cronetEngine() == null) {
+        if (Preferences.get().getEnvoyState().equals(Preferences.ENVOY_STATE_DIRECT)) {
+            Log.d(TAG, "connecting directly, envoy unused");
+            envoyStatusPref.setSummary(getString(R.string.envoy_unused));
+        } else if (CronetNetworking.cronetEngine() == null) {
+            Log.d(TAG, "cronet engine is null, envoy inactive");
             envoyStatusPref.setSummary(getString(R.string.envoy_inactive));
         } else {
+            Log.d(TAG, "cronet engine is not null, envoy active");
             envoyStatusPref.setSummary(getString(R.string.envoy_active));
         }
     }
@@ -616,6 +629,10 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         if (Preferences.get().getEnvoyState().equals(Preferences.ENVOY_STATE_FAILED)) {
             Log.d(TAG, "envoy failed, init tor prefs");
             initUseTorPreference(getActivity().getApplicationContext());
+        } else if (Preferences.get().getEnvoyState().equals(Preferences.ENVOY_STATE_DIRECT)) {
+            Log.d(TAG, "envoy ignored, init both prefs");
+            initUseTorPreference(getActivity().getApplicationContext());
+            initProxyStatus(getActivity().getApplicationContext());
         } else {
             Log.d(TAG, "envoy pending or active, ignore tor prefs");
             initProxyStatus(getActivity().getApplicationContext());
@@ -627,8 +644,9 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         super.onPause();
         getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
 
-        if (Preferences.get().getEnvoyState().equals(Preferences.ENVOY_STATE_FAILED)) {
-            Log.d(TAG, "envoy failed: configure tor proxy");
+        if (Preferences.get().getEnvoyState().equals(Preferences.ENVOY_STATE_FAILED) ||
+                Preferences.get().getEnvoyState().equals(Preferences.ENVOY_STATE_DIRECT)) {
+            Log.d(TAG, "envoy failed or ignored: configure tor proxy");
             FDroidApp.configureProxy(Preferences.get());
         } else {
             Log.d(TAG, "envoy pending or active, ignore tor proxy");

@@ -21,8 +21,67 @@ def basicApplicationId = "org.greatfire.gfdroid.basic"
 // yes, this actually needs both quotes https://stackoverflow.com/a/41391841
 def privilegedExtensionApplicationId = '"org.greatfire.gfdroid.privileged"'
 
+def dnsttServerProp = ""
+def dnsttKeyProp = ""
+def dnsttPathProp = ""
+def dohUrlProp = ""
+def dotAddrProp = ""
+def defProxyProp = ""
+
 android {
-    compileSdkVersion 31
+
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'armeabi-v7a'
+            universalApk true
+        }
+    }
+
+    if (project.hasProperty("dnsttserver")) {
+        dnsttServerProp = dnsttserver
+    } else {
+        println "WARNING: no dnsttserver prop found"
+    }
+
+    if (project.hasProperty("dnsttkey")) {
+        dnsttKeyProp = dnsttkey
+    } else {
+        println "WARNING: no dnsttkey prop found"
+    }
+
+    if (project.hasProperty("dnsttpath")) {
+        dnsttPathProp = dnsttpath
+    } else {
+        println "WARNING: no dnsttpath prop found"
+    }
+
+    if (project.hasProperty("dohUrl")) {
+        dohUrlProp = dohUrl
+    } else {
+        println "WARNING: no dohUrl prop found"
+    }
+
+    if (project.hasProperty("dotAddr")) {
+        dotAddrProp = dotAddr
+    } else {
+        println "WARNING: no dotAddr prop found"
+    }
+
+    if (project.hasProperty("defProxy")) {
+        defProxyProp = defProxy
+    } else {
+        println "WARNING: no defProxy prop found"
+    }
+
+    signingConfigs {
+        debug {}
+        release {}
+        'full-gfdroid-release' {}
+    }
+
+    compileSdkVersion 30
 
     defaultConfig {
         versionCode 3
@@ -40,6 +99,15 @@ android {
          */
         testInstrumentationRunnerArguments disableAnalytics: 'true'
         vectorDrawables.useSupportLibrary = true
+
+        signingConfig signingConfigs.'full-gfdroid-release'
+
+        buildConfigField "String", "DNSTT_SERVER", "\"$dnsttServerProp\""
+        buildConfigField "String", "DNSTT_KEY", "\"$dnsttKeyProp\""
+        buildConfigField "String", "DNSTT_PATH", "\"$dnsttPathProp\""
+        buildConfigField "String", "DOH_URL", "\"$dohUrlProp\""
+        buildConfigField "String", "DOT_ADDR", "\"$dotAddrProp\""
+        buildConfigField "String", "DEF_PROXY", "\"$defProxyProp\""
     }
 
     ext {
@@ -179,8 +247,18 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.11.4'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.4'
 
-    implementation "org.greatfire.envoy:cronet:0.0.100.0.4896.79"
-    implementation "org.greatfire:envoy:0.0.100.0.4896.79"
+    // google core classes required by cronet
+    implementation 'androidx.core:core:1.6.0'
+    implementation 'androidx.core:core-ktx:1.6.0'
+
+    // use local files for debug builds to support development
+    debugImplementation files('libs/cronet-debug.aar')
+    debugImplementation files('libs/envoy-debug.aar')
+    debugImplementation files('libs/IEnvoyProxy.aar')
+    // use maven dependencies for release builds to support automation
+    releaseImplementation 'org.greatfire.envoy:cronet:102.0.5005.41'
+    releaseImplementation 'org.greatfire:envoy:102.0.5005.41'
+    releaseImplementation 'org.greatfire:IEnvoyProxy:1.2.0'
 
     implementation "com.squareup.okhttp3:okhttp:4.9.3"
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"

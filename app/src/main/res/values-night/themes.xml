@@ -23,17 +23,17 @@
         <!--Platform attributes-->
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
-        <item name="android:statusBarColor">@android:color/black</item>
-        <item name="android:navigationBarColor">@android:color/black</item>
+        <item name="android:statusBarColor">@color/gfdroid_purple</item>
+        <item name="android:navigationBarColor">@color/gfdroid_purple</item>
 
         <!-- backward-compatibility theme options go here -->
-        <item name="colorPrimary">@color/fdroid_blue_light</item>
-        <item name="colorPrimaryVariant">@color/fdroid_blue</item>
+        <item name="colorPrimary">@color/gfdroid_purple_light</item>
+        <item name="colorPrimaryVariant">@color/gfdroid_purple</item>
         <item name="colorPrimaryDark">?colorPrimaryVariant</item>
         <item name="colorOnPrimary">#000000</item>
-        <item name="colorSecondary">@color/fdroid_green_light</item>
+        <item name="colorSecondary">@color/gfdroid_orange_light</item>
         <item name="colorOnSecondary">#ffffff</item>
-        <item name="android:textColorLink">@color/fdroid_green</item>
+        <item name="android:textColorLink">@color/gfdroid_orange_light</item>
         <item name="appDetailsBackground">?android:windowBackground</item>
         <item name="appDetailsCardBackground">#424242</item>
         <item name="categoryPreviewAppCardBackground">

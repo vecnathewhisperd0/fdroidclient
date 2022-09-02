@@ -331,7 +331,7 @@ public class NotificationHelper {
                         .setContentTitle(getSingleItemTitleString(app, status))
                         .setContentText(getSingleItemContentString(app, status))
                         .setSmallIcon(R.drawable.ic_notification)
-                        .setColor(ContextCompat.getColor(context, R.color.fdroid_blue))
+                        .setColor(ContextCompat.getColor(context, R.color.gfdroid_purple))
                         .setLocalOnly(true)
                         .setVisibility(NotificationCompat.VISIBILITY_SECRET)
                         .setContentIntent(entry.intent);
@@ -408,13 +408,18 @@ public class NotificationHelper {
         // Intent to open main app list
         Intent intentObject = new Intent(context, MainActivity.class);
         intentObject.putExtra(MainActivity.EXTRA_VIEW_UPDATES, true);
-        PendingIntent piAction = PendingIntent.getActivity(context, 0, intentObject, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent piAction = null;
+        if (android.os.Build.VERSION.SDK_INT >= 31) {
+            piAction = PendingIntent.getActivity(context, 0, intentObject, PendingIntent.FLAG_IMMUTABLE);
+        } else {
+            piAction = PendingIntent.getActivity(context, 0, intentObject, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
 
-        NotificationCompat.Builder builder =
+            NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(context, CHANNEL_UPDATES)
                         .setAutoCancel(!useStackedNotifications())
                         .setSmallIcon(R.drawable.ic_notification)
-                        .setColor(ContextCompat.getColor(context, R.color.fdroid_blue))
+                        .setColor(ContextCompat.getColor(context, R.color.gfdroid_purple))
                         .setContentTitle(title)
                         .setContentText(text)
                         .setContentIntent(piAction)
@@ -441,7 +446,7 @@ public class NotificationHelper {
                 new NotificationCompat.Builder(context, CHANNEL_INSTALLS)
                         .setAutoCancel(true)
                         .setSmallIcon(R.drawable.ic_notification)
-                        .setColor(ContextCompat.getColor(context, R.color.fdroid_blue))
+                        .setColor(ContextCompat.getColor(context, R.color.gfdroid_purple))
                         .setContentTitle(app.name)
                         .setContentText(context.getString(R.string.notification_content_single_installed))
                         .setLocalOnly(true)
@@ -487,13 +492,18 @@ public class NotificationHelper {
 
         // Intent to open main app list
         Intent intentObject = new Intent(context, MainActivity.class);
-        PendingIntent piAction = PendingIntent.getActivity(context, 0, intentObject, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent piAction = null;
+        if (android.os.Build.VERSION.SDK_INT >= 31) {
+            piAction = PendingIntent.getActivity(context, 0, intentObject, PendingIntent.FLAG_IMMUTABLE);
+        } else {
+            piAction = PendingIntent.getActivity(context, 0, intentObject, PendingIntent.FLAG_UPDATE_CURRENT);
+        }
 
-        NotificationCompat.Builder builder =
+            NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(context, CHANNEL_INSTALLS)
                         .setAutoCancel(!useStackedNotifications())
                         .setSmallIcon(R.drawable.ic_notification)
-                        .setColor(ContextCompat.getColor(context, R.color.fdroid_blue))
+                        .setColor(ContextCompat.getColor(context, R.color.gfdroid_purple))
                         .setContentTitle(title)
                         .setContentText(text)
                         .setContentIntent(piAction)

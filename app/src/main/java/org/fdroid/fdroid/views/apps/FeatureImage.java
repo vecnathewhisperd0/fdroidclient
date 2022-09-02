@@ -86,7 +86,7 @@ public class FeatureImage extends AppCompatImageView {
 
     private void init(Context context) {
         float[] hsv = new float[3];
-        Color.colorToHSV(ContextCompat.getColor(context, R.color.fdroid_blue), hsv);
+        Color.colorToHSV(ContextCompat.getColor(context, R.color.gfdroid_purple), hsv);
         hsv[1] *= 0.5f;
         hsv[2] *= 0.7f;
         baseColour = Color.HSVToColor(hsv);
@@ -250,7 +250,7 @@ public class FeatureImage extends AppCompatImageView {
     }
 
     public void loadImageAndDisplay(@NonNull RequestOptions imageOptions, @Nullable String featureImageToShow, @Nullable String fallbackImageToExtractColours) {
-        setColour(ContextCompat.getColor(getContext(), R.color.fdroid_blue));
+        setColour(ContextCompat.getColor(getContext(), R.color.gfdroid_purple));
         if (!TextUtils.isEmpty(featureImageToShow)) {
             loadImageAndDisplay(imageOptions, featureImageToShow);
         } else if (!TextUtils.isEmpty(fallbackImageToExtractColours)) {

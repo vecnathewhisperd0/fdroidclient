@@ -3,6 +3,7 @@ package org.fdroid.fdroid.views.main;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -40,7 +41,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
  * view with relevant info about each.
  */
 class CategoriesViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
-    public static final String TAG = "CategoriesViewBinder";
+
+    public static final String TAG = "TEMP_LOG"; // "CategoriesViewBinder";
 
     private static final int LOADER_ID = 429820532;
 
@@ -69,6 +71,7 @@ class CategoriesViewBinder implements LoaderManager.LoaderCallbacks<Cursor> {
         swipeToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                Log.d(TAG, "swipe to refresh categories");
                 swipeToRefresh.setRefreshing(false);
                 UpdateService.updateNow(activity);
             }

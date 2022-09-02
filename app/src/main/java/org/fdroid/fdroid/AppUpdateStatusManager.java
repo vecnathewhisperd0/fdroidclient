@@ -524,7 +524,11 @@ public final class AppUpdateStatusManager {
                 PackageManager pm = context.getPackageManager();
                 Intent intentObject = pm.getLaunchIntentForPackage(entry.app.packageName);
                 if (intentObject != null) {
-                    entry.intent = PendingIntent.getActivity(context, 0, intentObject, 0);
+                    if (android.os.Build.VERSION.SDK_INT >= 31) {
+                        entry.intent = PendingIntent.getActivity(context, 0, intentObject, PendingIntent.FLAG_IMMUTABLE);
+                    } else {
+                        entry.intent = PendingIntent.getActivity(context, 0, intentObject, 0);
+                    }
                 } else {
                     entry.intent = getAppDetailsIntent(entry.apk);
                 }
@@ -555,10 +559,18 @@ public final class AppUpdateStatusManager {
                 .putExtra(ErrorDialogActivity.EXTRA_TITLE, title)
                 .putExtra(ErrorDialogActivity.EXTRA_MESSAGE, entry.errorText);
 
-        return PendingIntent.getActivity(
-                context,
-                0,
-                errorDialogIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+        if (android.os.Build.VERSION.SDK_INT >= 31) {
+            return PendingIntent.getActivity(
+                    context,
+                    0,
+                    errorDialogIntent,
+                    PendingIntent.FLAG_IMMUTABLE);
+        } else {
+            return PendingIntent.getActivity(
+                    context,
+                    0,
+                    errorDialogIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT);
+        }
     }
 }
