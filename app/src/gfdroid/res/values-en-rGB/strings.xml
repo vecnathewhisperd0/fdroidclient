@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string name="app_name">GreatFire App Store</string>
+    <string name="app_name_debug" translatable="false">GreatFire App Store Debug</string>
+
+    <string name="send_to_fdroid_metrics_summary">Sends anonymous data weekly to GreatFire App Store Metrics (requires "Keep install history")</string>
+    <!-- message shown as a "toast" when the user enables the Send to GreatFire App Store Metrics preference -->
+
+    <string name="about_title">About GreatFire App Store</string>
+
+    <string name="app_permission_storage">GreatFire App Store needs the storage permission to install this to storage. Please allow it on the next screen to proceed with installation.</string>
+
+    <string name="send_installed_apps_csv">Apps installed by GreatFire App Store as CSV file</string>
+
+    <string name="local_repo_running">GreatFire App Store is ready to swap</string>
+
+    <string name="empty_installed_app_list">No apps installed.\n\nThere are apps on your device, but they are not
+        available from GreatFire App Store. This could be because you need to update your repositories, or the repositories
+        genuinely don\'t have your apps available.
+    </string>
+
+    <string name="swap_nfc_description">If your friend has GreatFire App Store and NFC turned on touch your devices together.
+    </string>
+    <string name="swap_welcome">Welcome to GreatFire App Store!</string>
+    <string name="swap_send_fdroid">Send GreatFire App Store</string>
+
+    <string name="crash_dialog_title">GreatFire App Store has crashed</string>
+</resources>
