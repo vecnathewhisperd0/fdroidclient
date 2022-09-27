@@ -19,6 +19,10 @@ jobs:
             ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: ${{ runner.os }}-gradle-
+      - name: Check directory
+        run: pwd
+      - name: Check files
+        run: ls -alR
       - name: Verification cleanup
         run: rm ~/verification-metadata.xml
       - name: Set up JDK 11
