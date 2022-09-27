@@ -75,26 +75,26 @@ import org.fdroid.fdroid.views.apps.AppListActivity;
 
 import org.fdroid.fdroid.BuildConfig;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.ConnectException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
-import java.net.URL;
+//import java.io.BufferedReader;
+//import java.io.FileNotFoundException;
+//import java.io.IOException;
+//import java.io.InputStream;
+//import java.io.InputStreamReader;
+//import java.net.ConnectException;
+//import java.net.HttpURLConnection;
+//import java.net.MalformedURLException;
+//import java.net.SocketTimeoutException;
+//import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import android.util.Log;
 import org.greatfire.envoy.*;
-import org.json.JSONArray;
-import org.json.JSONObject;
+//import org.json.JSONArray;
+//import org.json.JSONObject;
 
-import IEnvoyProxy.IEnvoyProxy;
+//import IEnvoyProxy.IEnvoyProxy;
 
 /**
  * Main view shown to users upon starting F-Droid.
@@ -113,6 +113,8 @@ import IEnvoyProxy.IEnvoyProxy;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "TEMP_LOG"; // "MainActivity";
+
+    private static final String DIRECT_URL = "https://f-droid.org";
 
     public static final String EXTRA_VIEW_UPDATES = "org.fdroid.fdroid.views.main.MainActivity.VIEW_UPDATES";
     public static final String EXTRA_VIEW_NEARBY = "org.fdroid.fdroid.views.main.MainActivity.VIEW_NEARBY";
@@ -134,21 +136,24 @@ public class MainActivity extends AppCompatActivity {
     public static final String CURRENT_PAGE_ID = "org.greatfire.envoy.CURRENT_PAGE_ID";
 
     // local and remote urls for proxy services
-    private String ssUrlLocal = "socks5://127.0.0.1:1080";
-    private String ssUrlRemote = "";
-    private String hysteriaUrlLocal = "socks5://127.0.0.1:";
-    private String hysteriaUrlRemote = "";
+    //private String ssUrlLocal = "socks5://127.0.0.1:1080";
+    //private String ssUrlRemote = "";
+    //private String hysteriaUrlLocal = "socks5://127.0.0.1:";
+    //private String hysteriaUrlRemote = "";
     // lists of proxy urls to validate with envoy
-    private List<String> defaultUrls = new ArrayList<String>();
-    private List<String> dnsttUrls = new ArrayList<String>();
+    //private List<String> defaultUrls = new ArrayList<String>();
+    //private List<String> dnsttUrls = new ArrayList<String>();
+
+    private List<String> listOfUrls = new ArrayList<String>();
+    private boolean waitingForEnvoy = false;
 
     // TODO: revisit and refactor
-    private boolean waitingForDnstt = false;
-    private boolean waitingForHysteria = false;
-    private boolean waitingForShadowsocks = false;
-    private boolean waitingForDirectConnection = false;
-    private boolean waitingForDefaultUrl = false;
-    private boolean waitingForDnsttUrl = false;
+    //private boolean waitingForDnstt = false;
+    //private boolean waitingForHysteria = false;
+    //private boolean waitingForShadowsocks = false;
+    //private boolean waitingForDirectConnection = false;
+    //private boolean waitingForDefaultUrl = false;
+    //private boolean waitingForDnsttUrl = false;
 
     // copied from org.greatfire.envoy.NetworkIntentService.kt, could not be found in imported class
     public static final String BROADCAST_URL_VALIDATION_SUCCEEDED = "org.greatfire.envoy.VALIDATION_SUCCEEDED";
@@ -156,8 +161,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String EXTENDED_DATA_VALID_URLS = "org.greatfire.envoy.VALID_URLS";
     public static final String EXTENDED_DATA_INVALID_URLS = "org.greatfire.envoy.INVALID_URLS";
 
-    private Object hysteriaLock = new Object();
-    private Object dnsttLock = new Object();
+    //private Object hysteriaLock = new Object();
+    //private Object dnsttLock = new Object();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -257,7 +262,7 @@ public class MainActivity extends AppCompatActivity {
         IntentFilter envoyFilter = new IntentFilter();
         envoyFilter.addAction(BROADCAST_URL_VALIDATION_SUCCEEDED);
         envoyFilter.addAction(BROADCAST_URL_VALIDATION_FAILED);
-        envoyFilter.addAction(ShadowsocksService.SHADOWSOCKS_SERVICE_BROADCAST);
+        //envoyFilter.addAction(ShadowsocksService.SHADOWSOCKS_SERVICE_BROADCAST);
         LocalBroadcastManager.getInstance(this).registerReceiver(onUrlsReceived, envoyFilter);
 
         // delay until after proxy urls have been validated
@@ -359,7 +364,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
+        // start cronet here to prevent exception from starting a service when out of focus
+        startEnvoy();
+
         // test a direct connection first
+        /*
         if (waitingForDirectConnection) {
             Log.d(TAG, "already checking direct connection, don't check again");
         } else {
@@ -374,6 +383,7 @@ public class MainActivity extends AppCompatActivity {
             };
             directConnectionThread.start();
         }
+        */
 
         FDroidApp.checkStartTor(this, Preferences.get());
 
@@ -395,6 +405,7 @@ public class MainActivity extends AppCompatActivity {
         checkForAddRepoIntent(getIntent());
     }
 
+    /*
     private void startDirectConnection() {
         try {
             Log.d(TAG, "test direct connection");
@@ -421,19 +432,27 @@ public class MainActivity extends AppCompatActivity {
         waitingForDirectConnection = false;
         startEnvoy();
     }
+    */
 
     private void startEnvoy() {
         // start envoy from onResume to prevent exception from starting a service when out of focus
         if (CronetNetworking.cronetEngine() != null) {
-            Log.d(TAG, "cronet already running, don't try to start again");
-        } else if (waitingForDefaultUrl || waitingForDnsttUrl) {
-            Log.d(TAG, "already processing urls, don't try to start again");
+            Log.d(TAG, "cronet already running, don't try to start envoy again");
+        //} else if (waitingForDefaultUrl || waitingForDnsttUrl) {
+        } else if (waitingForEnvoy) {
+            Log.d(TAG, "already processing urls, don't try to start envoy again");
+        } else if (BuildConfig.DEF_PROXY == null || BuildConfig.DEF_PROXY.isEmpty()) {
+            // TODO: attempt to start with nothing to get urls from dnstt?
+            Log.w(TAG, "no urls were provided, can't try to start envoy");
         } else {
             // run envoy setup (fetches and validate urls)
-            Log.d(TAG, "begin processing urls to start cronet");
+            Log.d(TAG, "start envoy to process urls");
             Preferences.get().setEnvoyState(Preferences.ENVOY_STATE_PENDING);
-            waitingForDefaultUrl = true;
-            getDefaultUrls();
+            //waitingForDefaultUrl = true;
+            //getDefaultUrls();
+            waitingForEnvoy = true;
+            listOfUrls.addAll(Arrays.asList(BuildConfig.DEF_PROXY.split(",")));
+            NetworkIntentService.submit(MainActivity.this, listOfUrls, DIRECT_URL);
         }
     }
 
@@ -774,6 +793,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    /*
     private void getDefaultUrls() {
 
         if (BuildConfig.DEF_PROXY == null || BuildConfig.DEF_PROXY.isEmpty()) {
@@ -784,7 +804,9 @@ public class MainActivity extends AppCompatActivity {
             handleUrls(Arrays.asList(BuildConfig.DEF_PROXY.split(",")));
         }
     }
+    */
 
+    /*
     private void getDnsttUrls() {
 
         // check for dnstt project properties
@@ -924,7 +946,9 @@ public class MainActivity extends AppCompatActivity {
         Log.e(TAG, "dnstt failure, cannot continue");
         handleEndState(getApplicationContext(), null);
     }
+    */
 
+    /*
     private void handleUrls(List<String> envoyUrls) {
 
         // clear values stored from past attempts
@@ -1079,6 +1103,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+    */
 
     // this receiver listens for the results from the NetworkIntentService started below
     // it should receive a result if no valid urls are found but not if the service throws an exception
@@ -1091,16 +1116,23 @@ public class MainActivity extends AppCompatActivity {
                 if (intent.getAction() == BROADCAST_URL_VALIDATION_SUCCEEDED) {
                     Log.d(TAG, "onUrlsReceived got validation successful");
                     List<String> validUrls = intent.getStringArrayListExtra(EXTENDED_DATA_VALID_URLS);
-                    if (waitingForDefaultUrl || waitingForDnsttUrl) {
+                    // if (waitingForDefaultUrl || waitingForDnsttUrl) {
+                    if (waitingForEnvoy) {
                         if (validUrls != null && !validUrls.isEmpty()) {
                             Log.d(TAG, "received " + validUrls.size() + " valid urls");
                             // if we get a valid url, it doesn't matter whether it's from defaults or dnstt
-                            waitingForDefaultUrl = false;
-                            waitingForDnsttUrl = false;
+                            //waitingForDefaultUrl = false;
+                            //waitingForDnsttUrl = false;
+                            waitingForEnvoy = false;
                             // select the fastest one (urls are ordered by latency), reInitializeIfNeeded set to false
                             String envoyUrl = validUrls.get(0);
-                            Log.d(TAG, "received first valid url");
-                            handleEndState(context, envoyUrl);
+                            if (DIRECT_URL.equals(envoyUrl)) {
+                                Log.d(TAG, "got direct url: " + envoyUrl + ", don't need to start engine");
+                                handleEndState(context, Preferences.ENVOY_STATE_DIRECT);
+                            } else {
+                                Log.d(TAG, "found a valid url: " + envoyUrl + ", start engine");
+                                handleEndState(context, envoyUrl);
+                            }
                         } else {
                             Log.e(TAG, "received empty list of valid urls");
                         }
@@ -1111,31 +1143,19 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "onUrlsReceived got validation failed");
                     List<String> invalidUrls = intent.getStringArrayListExtra(EXTENDED_DATA_INVALID_URLS);
                     if (invalidUrls != null && !invalidUrls.isEmpty()) {
-                        if (waitingForDefaultUrl && (invalidUrls.size() >= defaultUrls.size())) {
-                            Log.e(TAG, "no default urls left to try, fetch urls with dnstt");
-                            waitingForDefaultUrl = false;
-                            waitingForDnsttUrl = true;
-                            // start asynchronous dnstt task to fetch proxy urls
-                            // replaces lifecycleScope.launch(Dispatchers.IO) in kotlin code
-                            Thread dnsttThread = new Thread() {
-                                @Override
-                                public void run() {
-                                    Log.d(TAG, "no valid defaults, dnstt thread run");
-                                    getDnsttUrls();
-                                }
-                            };
-                            dnsttThread.start();
-                        } else if (waitingForDnsttUrl && (invalidUrls.size() >= dnsttUrls.size())) {
-                            Log.e(TAG, "no dnstt urls left to try, cannot continue");
-                            waitingForDnsttUrl = false;
+                        // TEMP: should envoy reset invalid list before getting new urls from dnstt?
+                        if (waitingForEnvoy && (invalidUrls.size() >= listOfUrls.size())) {
+                            Log.e(TAG, "no urls left to try, cannot continue");
+                            // TEMP: clearing this flag will cause any dnstt urls that follow to be ignored
+                            waitingForEnvoy = false;
                             handleEndState(context, null);
                         } else {
-                            Log.e(TAG, "still trying urls: default - " + waitingForDefaultUrl + ", " + defaultUrls.size() + " / dnstt - " + waitingForDnsttUrl + ", " + dnsttUrls.size());
+                            Log.e(TAG, "still trying urls, " + invalidUrls.size() + " out of " + listOfUrls.size() + " failed");
                         }
                     } else {
                         Log.e(TAG, "received empty list of invalid urls");
                     }
-                } else if (intent.getAction() == ShadowsocksService.SHADOWSOCKS_SERVICE_BROADCAST) {
+                } /* else if (intent.getAction() == ShadowsocksService.SHADOWSOCKS_SERVICE_BROADCAST) {
                     Log.d(TAG, "onUrlsReceived got shadowsocks broadcast");
                     waitingForShadowsocks = false;
                     int shadowsocksResult = intent.getIntExtra(ShadowsocksService.SHADOWSOCKS_SERVICE_RESULT, 0);
@@ -1182,7 +1202,7 @@ public class MainActivity extends AppCompatActivity {
                             NetworkIntentService.submit(MainActivity.this, dnsttUrls);
                         }
                     }
-                } else {
+                } */ else {
                     Log.e(TAG, "received unexpected intent: " + intent.getAction());
                 }
             } else {
