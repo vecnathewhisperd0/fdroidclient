@@ -75,11 +75,13 @@ android {
         println "WARNING: no defProxy prop found"
     }
 
+    /*
     signingConfigs {
         debug {}
         release {}
         'full-gfdroid-release' {}
     }
+    */
 
     compileSdkVersion 30
 
@@ -100,7 +102,7 @@ android {
         testInstrumentationRunnerArguments disableAnalytics: 'true'
         vectorDrawables.useSupportLibrary = true
 
-        signingConfig signingConfigs.'full-gfdroid-release'
+        // signingConfig signingConfigs.'full-gfdroid-release'
 
         buildConfigField "String", "DNSTT_SERVER", "\"$dnsttServerProp\""
         buildConfigField "String", "DNSTT_KEY", "\"$dnsttKeyProp\""
