@@ -29,11 +29,17 @@ jobs:
           distribution: 'adopt'
           java-version: 11
       - name: Build
+        env:
+          DNSTT_SERVER: ${{ secrets.DNSTT_SERVER }}
+          DNSTT_KEY: ${{ secrets.DNSTT_KEY }}
+          DNSTT_PATH: ${{ secrets.DNSTT_PATH }}
+          DOH_URL: ${{ secrets.DOH_URL }}
+          DEF_PROXY: ${{ secrets.DEF_PROXY }}
         run: |
           # use timestamp as Version Code
           export versionCode=$(date '+%s')
           sed -i "s,^\(\s*versionCode\)  *[0-9].*,\1 $versionCode," app/build.gradle
-          ./gradlew assembleFullGfdroidDebug
+          ./gradlew assembleFullGfdroidDebug -Pdnsttserver=$DNSTT_SERVER -Pdnsttkey=$DNSTT_KEY -Pdnsttpath=$DNSTT_PATH -PdohUrl=$DOH_URL -PdefProxy=$DEF_PROXY
       - name: fdroid nightly
         run: |
           sudo add-apt-repository ppa:fdroid/fdroidserver
