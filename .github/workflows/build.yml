@@ -26,11 +26,44 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 11
-      - name: Build
+      - name: Clean and build
         env:
           DNSTT_SERVER: ${{ secrets.DNSTT_SERVER }}
           DNSTT_KEY: ${{ secrets.DNSTT_KEY }}
           DNSTT_PATH: ${{ secrets.DNSTT_PATH }}
           DOH_URL: ${{ secrets.DOH_URL }}
           DEF_PROXY: ${{ secrets.DEF_PROXY }}
-        run: ./gradlew assembleFull -Pdnsttserver=$DNSTT_SERVER -Pdnsttkey=$DNSTT_KEY -Pdnsttpath=$DNSTT_PATH -PdohUrl=$DOH_URL -PdefProxy=$DEF_PROXY
+        run: ./gradlew clean assembleFullGfdroidRelease --stacktrace -Pdnsttserver=$DNSTT_SERVER -Pdnsttkey=$DNSTT_KEY -Pdnsttpath=$DNSTT_PATH -PdohUrl=$DOH_URL -PdefProxy=$DEF_PROXY
+      - name: List
+        run: ls -alR ./app/build/outputs/apk/
+      - name: Sign APK
+        uses: r0adkll/sign-android-release@v1
+        id: build_signed
+        with:
+          releaseDirectory: app/build/outputs/apk/fullGfdroid/release
+          signingKeyBase64: ${{ secrets.KEYSTORE }}
+          alias: ${{ secrets.SIGNING_KEY_ALIAS }}
+          keyStorePassword: ${{ secrets.SIGNING_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
+      - name: Create hash
+        run: git rev-parse HEAD > app/build/outputs/apk/fullGfdroid/release/rev-hash.txt
+      - name: Rename APK
+        run: mv app/build/outputs/apk/fullGfdroid/release/app-full-gfdroid-release-unsigned-signed.apk app/build/outputs/apk/fullGfdroid/release/app-full-gfdroid-universal-release.apk
+      - name: Delete previous release tag
+        uses: dev-drprasad/delete-tag-and-release@v0.1.2
+        with:
+          delete_release: false
+          tag_name: gfdroid-nightly
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create release and upload artifacts
+        uses: ncipollo/release-action@v1
+        with:
+          name: gfdroid-release
+          commit: ${{ github.sha }}
+          tag: gfdroid-nightly
+          artifacts: "app/build/outputs/apk/fullGfdroid/release/app-full-gfdroid-universal-release.apk,app/build/outputs/apk/fullGfdroid/release/rev-hash.txt"
+          body: This is an android release automatically built from the latest commit to the gf-droid branch.
+          token: ${{ secrets.GITHUB_TOKEN }}
+          allowUpdates: true
+          replacesArtifacts: true
