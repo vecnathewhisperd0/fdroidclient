@@ -21,11 +21,11 @@ def basicApplicationId = "org.greatfire.gfdroid.basic"
 // yes, this actually needs both quotes https://stackoverflow.com/a/41391841
 def privilegedExtensionApplicationId = '"org.greatfire.gfdroid.privileged"'
 
-//def dnsttServerProp = ""
-//def dnsttKeyProp = ""
-//def dnsttPathProp = ""
-//def dohUrlProp = ""
-//def dotAddrProp = ""
+def dnsttDomainProp = ""
+def dnsttKeyProp = ""
+def dnsttPathProp = ""
+def dohUrlProp = ""
+def dotAddrProp = ""
 def defProxyProp = ""
 
 android {
@@ -39,11 +39,10 @@ android {
         }
     }
 
-    /*
-    if (project.hasProperty("dnsttserver")) {
-        dnsttServerProp = dnsttserver
+    if (project.hasProperty("dnsttdomain")) {
+        dnsttDomainProp = dnsttdomain
     } else {
-        println "WARNING: no dnsttserver prop found"
+        println "WARNING: no dnsttdomain prop found"
     }
 
     if (project.hasProperty("dnsttkey")) {
@@ -69,7 +68,6 @@ android {
     } else {
         println "WARNING: no dotAddr prop found"
     }
-    */
 
     if (project.hasProperty("defProxy")) {
         defProxyProp = defProxy
@@ -104,11 +102,11 @@ android {
 
         signingConfig signingConfigs.'full-gfdroid-release'
 
-        //buildConfigField "String", "DNSTT_SERVER", "\"$dnsttServerProp\""
-        //buildConfigField "String", "DNSTT_KEY", "\"$dnsttKeyProp\""
-        //buildConfigField "String", "DNSTT_PATH", "\"$dnsttPathProp\""
-        //buildConfigField "String", "DOH_URL", "\"$dohUrlProp\""
-        //buildConfigField "String", "DOT_ADDR", "\"$dotAddrProp\""
+        buildConfigField "String", "DNSTT_DOMAIN", "\"$dnsttDomainProp\""
+        buildConfigField "String", "DNSTT_KEY", "\"$dnsttKeyProp\""
+        buildConfigField "String", "DNSTT_PATH", "\"$dnsttPathProp\""
+        buildConfigField "String", "DOH_URL", "\"$dohUrlProp\""
+        buildConfigField "String", "DOT_ADDR", "\"$dotAddrProp\""
         buildConfigField "String", "DEF_PROXY", "\"$defProxyProp\""
     }
 
@@ -256,12 +254,11 @@ dependencies {
     // use local files for debug builds to support development
     debugImplementation files('libs/cronet-debug.aar')
     debugImplementation files('libs/envoy-debug.aar')
-    //debugImplementation files('libs/IEnvoyProxy.aar')
+    debugImplementation files('libs/IEnvoyProxy.aar')
     // use maven dependencies for release builds to support automation
     releaseImplementation 'org.greatfire.envoy:cronet:102.0.5005.41'
-    releaseImplementation files('libs/envoy-debug.aar')
-    //releaseImplementation 'org.greatfire:envoy:102.0.5005.41'
-    //releaseImplementation 'org.greatfire:IEnvoyProxy:1.2.0'
+    releaseImplementation 'org.greatfire:envoy:102.0.5005.41'
+    releaseImplementation 'org.greatfire:IEnvoyProxy:1.2.0'
 
     implementation "com.squareup.okhttp3:okhttp:4.9.3"
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"

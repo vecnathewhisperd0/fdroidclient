@@ -368,7 +368,22 @@ public class MainActivity extends AppCompatActivity {
             Preferences.get().setEnvoyState(Preferences.ENVOY_STATE_PENDING);
             waitingForEnvoy = true;
             listOfUrls.addAll(Arrays.asList(BuildConfig.DEF_PROXY.split(",")));
-            NetworkIntentService.submit(MainActivity.this, listOfUrls, DIRECT_URL);
+
+            /* expected format:
+               0. dnstt domain
+               1. dnstt key
+               2. dnstt path
+               3. doh url
+               4. dot address
+               (either 4 or 5 should be an empty string) */
+            List<String> dnsttConfig = new ArrayList<String>();
+            dnsttConfig.add(BuildConfig.DNSTT_DOMAIN);
+            dnsttConfig.add(BuildConfig.DNSTT_KEY);
+            dnsttConfig.add(BuildConfig.DNSTT_PATH);
+            dnsttConfig.add(BuildConfig.DOH_URL);
+            dnsttConfig.add(BuildConfig.DOT_ADDR);
+
+            NetworkIntentService.submit(MainActivity.this, listOfUrls, DIRECT_URL, dnsttConfig);
         }
     }
 
