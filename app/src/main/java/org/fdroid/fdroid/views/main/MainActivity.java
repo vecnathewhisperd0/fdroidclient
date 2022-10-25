@@ -383,7 +383,7 @@ public class MainActivity extends AppCompatActivity {
             dnsttConfig.add(BuildConfig.DOH_URL);
             dnsttConfig.add(BuildConfig.DOT_ADDR);
 
-            NetworkIntentService.submit(MainActivity.this, listOfUrls, DIRECT_URL, dnsttConfig);
+            NetworkIntentService.submit(MainActivity.this, listOfUrls, DIRECT_URL, BuildConfig.HYST_CERT, dnsttConfig);
         }
     }
 

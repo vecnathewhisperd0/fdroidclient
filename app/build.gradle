@@ -26,6 +26,7 @@ def dnsttKeyProp = ""
 def dnsttPathProp = ""
 def dohUrlProp = ""
 def dotAddrProp = ""
+def hystCertProp = ""
 def defProxyProp = ""
 
 android {
@@ -69,6 +70,12 @@ android {
         println "WARNING: no dotAddr prop found"
     }
 
+    if (project.hasProperty("hystCert")) {
+        hystCertProp = hystCert
+    } else {
+        println "WARNING: no hystCert prop found"
+    }
+
     if (project.hasProperty("defProxy")) {
         defProxyProp = defProxy
     } else {
@@ -107,6 +114,7 @@ android {
         buildConfigField "String", "DNSTT_PATH", "\"$dnsttPathProp\""
         buildConfigField "String", "DOH_URL", "\"$dohUrlProp\""
         buildConfigField "String", "DOT_ADDR", "\"$dotAddrProp\""
+        buildConfigField "String", "HYST_CERT", "\"$hystCertProp\""
         buildConfigField "String", "DEF_PROXY", "\"$defProxyProp\""
     }
 
