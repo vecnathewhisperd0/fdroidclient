@@ -125,12 +125,6 @@ public class MainActivity extends AppCompatActivity {
     private List<String> listOfUrls = new ArrayList<String>();
     private boolean waitingForEnvoy = false;
 
-    // copied from org.greatfire.envoy.NetworkIntentService.kt, could not be found in imported class
-    public static final String BROADCAST_URL_VALIDATION_SUCCEEDED = "org.greatfire.envoy.VALIDATION_SUCCEEDED";
-    public static final String BROADCAST_URL_VALIDATION_FAILED = "org.greatfire.envoy.VALIDATION_FAILED";
-    public static final String EXTENDED_DATA_VALID_URLS = "org.greatfire.envoy.VALID_URLS";
-    public static final String EXTENDED_DATA_INVALID_URLS = "org.greatfire.envoy.INVALID_URLS";
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         FDroidApp fdroidApp = (FDroidApp) getApplication();
@@ -227,8 +221,8 @@ public class MainActivity extends AppCompatActivity {
 
         // register to receive valid proxy urls
         IntentFilter envoyFilter = new IntentFilter();
-        envoyFilter.addAction(BROADCAST_URL_VALIDATION_SUCCEEDED);
-        envoyFilter.addAction(BROADCAST_URL_VALIDATION_FAILED);
+        envoyFilter.addAction(org.greatfire.envoy.NetworkIntentServiceKt.ENVOY_BROADCAST_VALIDATION_SUCCEEDED);
+        envoyFilter.addAction(org.greatfire.envoy.NetworkIntentServiceKt.ENVOY_BROADCAST_VALIDATION_FAILED);
         LocalBroadcastManager.getInstance(this).registerReceiver(onUrlsReceived, envoyFilter);
 
         // delay until after proxy urls have been validated
@@ -732,9 +726,9 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "onUrlsReceived triggered");
             if (intent != null && context != null) {
                 Log.d(TAG, "onUrlsReceived got action: " + intent.getAction());
-                if (intent.getAction() == BROADCAST_URL_VALIDATION_SUCCEEDED) {
+                if (intent.getAction() == org.greatfire.envoy.NetworkIntentServiceKt.ENVOY_BROADCAST_VALIDATION_SUCCEEDED) {
                     Log.d(TAG, "onUrlsReceived got validation successful");
-                    List<String> validUrls = intent.getStringArrayListExtra(EXTENDED_DATA_VALID_URLS);
+                    List<String> validUrls = intent.getStringArrayListExtra(org.greatfire.envoy.NetworkIntentServiceKt.ENVOY_DATA_URLS_SUCCEEDED);
                     if (waitingForEnvoy) {
                         if (validUrls != null && !validUrls.isEmpty()) {
                             Log.d(TAG, "received " + validUrls.size() + " valid urls");
@@ -754,9 +748,9 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         Log.d(TAG, "received additional valid url");
                     }
-                } else if (intent.getAction() == BROADCAST_URL_VALIDATION_FAILED) {
+                } else if (intent.getAction() == org.greatfire.envoy.NetworkIntentServiceKt.ENVOY_BROADCAST_VALIDATION_FAILED) {
                     Log.d(TAG, "onUrlsReceived got validation failed");
-                    List<String> invalidUrls = intent.getStringArrayListExtra(EXTENDED_DATA_INVALID_URLS);
+                    List<String> invalidUrls = intent.getStringArrayListExtra(org.greatfire.envoy.NetworkIntentServiceKt.ENVOY_DATA_URL_FAILED);
                     if (invalidUrls != null && !invalidUrls.isEmpty()) {
                         // TEMP: should envoy reset invalid list before getting new urls from dnstt?
                         if (waitingForEnvoy && (invalidUrls.size() >= listOfUrls.size())) {

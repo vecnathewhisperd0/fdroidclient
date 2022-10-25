@@ -265,7 +265,7 @@ dependencies {
     debugImplementation files('libs/IEnvoyProxy.aar')
     // use maven dependencies for release builds to support automation
     releaseImplementation 'org.greatfire.envoy:cronet:102.0.5005.41'
-    releaseImplementation 'org.greatfire:envoy:102.0.5005.41'
+    releaseImplementation 'org.greatfire:envoy:102.00.5005.41.4'
     releaseImplementation 'org.greatfire:IEnvoyProxy:1.2.0'
 
     implementation "com.squareup.okhttp3:okhttp:4.9.3"
