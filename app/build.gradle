@@ -21,11 +21,12 @@ def basicApplicationId = "org.greatfire.gfdroid.basic"
 // yes, this actually needs both quotes https://stackoverflow.com/a/41391841
 def privilegedExtensionApplicationId = '"org.greatfire.gfdroid.privileged"'
 
-def dnsttServerProp = ""
+def dnsttDomainProp = ""
 def dnsttKeyProp = ""
 def dnsttPathProp = ""
 def dohUrlProp = ""
 def dotAddrProp = ""
+def hystCertProp = ""
 def defProxyProp = ""
 
 android {
@@ -39,10 +40,10 @@ android {
         }
     }
 
-    if (project.hasProperty("dnsttserver")) {
-        dnsttServerProp = dnsttserver
+    if (project.hasProperty("dnsttdomain")) {
+        dnsttDomainProp = dnsttdomain
     } else {
-        println "WARNING: no dnsttserver prop found"
+        println "WARNING: no dnsttdomain prop found"
     }
 
     if (project.hasProperty("dnsttkey")) {
@@ -67,6 +68,12 @@ android {
         dotAddrProp = dotAddr
     } else {
         println "WARNING: no dotAddr prop found"
+    }
+
+    if (project.hasProperty("hystCert")) {
+        hystCertProp = hystCert
+    } else {
+        println "WARNING: no hystCert prop found"
     }
 
     if (project.hasProperty("defProxy")) {
@@ -102,11 +109,12 @@ android {
 
         signingConfig signingConfigs.'full-gfdroid-release'
 
-        buildConfigField "String", "DNSTT_SERVER", "\"$dnsttServerProp\""
+        buildConfigField "String", "DNSTT_DOMAIN", "\"$dnsttDomainProp\""
         buildConfigField "String", "DNSTT_KEY", "\"$dnsttKeyProp\""
         buildConfigField "String", "DNSTT_PATH", "\"$dnsttPathProp\""
         buildConfigField "String", "DOH_URL", "\"$dohUrlProp\""
         buildConfigField "String", "DOT_ADDR", "\"$dotAddrProp\""
+        buildConfigField "String", "HYST_CERT", "\"$hystCertProp\""
         buildConfigField "String", "DEF_PROXY", "\"$defProxyProp\""
     }
 
@@ -251,14 +259,14 @@ dependencies {
     implementation 'androidx.core:core:1.6.0'
     implementation 'androidx.core:core-ktx:1.6.0'
 
-    // use local files for debug builds to support development
-    debugImplementation files('libs/cronet-debug.aar')
-    debugImplementation files('libs/envoy-debug.aar')
-    debugImplementation files('libs/IEnvoyProxy.aar')
-    // use maven dependencies for release builds to support automation
-    releaseImplementation 'org.greatfire.envoy:cronet:102.0.5005.41'
-    releaseImplementation 'org.greatfire:envoy:102.0.5005.41'
-    releaseImplementation 'org.greatfire:IEnvoyProxy:1.2.0'
+    // switch to local files if needed to support development
+    // implementation files('libs/cronet-debug.aar')
+    // implementation files('libs/envoy-debug.aar')
+    // implementation files('libs/IEnvoyProxy.aar')
+    // use maven dependencies to support automation
+    implementation 'org.greatfire.envoy:cronet:102.0.5005.41'
+    implementation 'org.greatfire:envoy:102.00.5005.41.4'
+    implementation 'org.greatfire:IEnvoyProxy:1.2.0'
 
     implementation "com.squareup.okhttp3:okhttp:4.9.3"
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"
