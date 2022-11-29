@@ -2,6 +2,7 @@
 package org.fdroid.fdroid;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.Signature;
 import android.database.Cursor;
@@ -25,6 +26,7 @@ import androidx.loader.content.CursorLoader;
 import androidx.test.core.app.ApplicationProvider;
 import vendored.org.apache.commons.codec.digest.DigestUtils;
 
+import static org.fdroid.fdroid.Preferences.PREF_SHOW_ANTI_FEATURES;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -347,6 +349,11 @@ public class UtilsTest {
     @Test
     public void testGetAntifeatureSQLFilterWithNone() {
         Context context = ApplicationProvider.getApplicationContext();
+
+        // Show all antifeatures
+        SharedPreferences antiFeaturePreference = context.getSharedPreferences(PREF_SHOW_ANTI_FEATURES, Context.MODE_PRIVATE);
+        antiFeaturePreference.edit().putStringSet(PREF_SHOW_ANTI_FEATURES, null).commit();
+
         Preferences.setupForTests(context);
         assertEquals(
                 "fdroid_app.antiFeatures IS NULL OR (fdroid_app.antiFeatures NOT LIKE '%_anti_others_%')",
