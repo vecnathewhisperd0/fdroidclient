@@ -27,7 +27,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
@@ -38,8 +37,15 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewTreeObserver;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -69,14 +75,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class AppDetailsActivity extends AppCompatActivity
         implements AppDetailsRecyclerViewAdapter.AppDetailsRecyclerViewAdapterCallbacks {
@@ -145,15 +143,10 @@ public class AppDetailsActivity extends AppCompatActivity
         recyclerView.setLayoutManager(lm);
         recyclerView.setAdapter(adapter);
 
-        recyclerView.getViewTreeObserver().addOnPreDrawListener(
-                new ViewTreeObserver.OnPreDrawListener() {
-                    @Override
-                    public boolean onPreDraw() {
-                        supportStartPostponedEnterTransition();
-                        return true;
-                    }
-                }
-        );
+        recyclerView.getViewTreeObserver().addOnPreDrawListener(() -> {
+            supportStartPostponedEnterTransition();
+            return true;
+        });
         checker = new CompatibilityChecker(this);
         db = DBHelper.getDb(getApplicationContext());
         db.getAppDao().getApp(packageName).observe(this, this::onAppChanged);
@@ -383,21 +376,8 @@ public class AppDetailsActivity extends AppCompatActivity
         if (!apk.compatible) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(R.string.installIncompatible);
-            builder.setPositiveButton(R.string.yes,
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog,
-                                            int whichButton) {
-                            initiateInstall(apk);
-                        }
-                    });
-            builder.setNegativeButton(R.string.no,
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog,
-                                            int whichButton) {
-                        }
-                    });
+            builder.setPositiveButton(R.string.yes, (dialog, whichButton) -> initiateInstall(apk));
+            builder.setNegativeButton(R.string.no, null);
             AlertDialog alert = builder.create();
             alert.show();
             return;
@@ -405,14 +385,8 @@ public class AppDetailsActivity extends AppCompatActivity
         if (app.installedSig != null && apk.sig != null
                 && !apk.sig.equals(app.installedSig)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(R.string.SignatureMismatch).setPositiveButton(
-                    R.string.ok,
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
+            builder.setMessage(R.string.SignatureMismatch)
+                    .setPositiveButton(R.string.ok, (dialog, id) -> dialog.cancel());
             AlertDialog alert = builder.create();
             alert.show();
             return;

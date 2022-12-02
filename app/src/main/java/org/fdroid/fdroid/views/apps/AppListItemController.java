@@ -125,14 +125,9 @@ public abstract class AppListItemController extends RecyclerView.ViewHolder {
             prefs = Preferences.get();
         }
 
-        installButton = (ImageView) itemView.findViewById(R.id.install);
+        installButton = itemView.findViewById(R.id.install);
         if (installButton != null) {
-            installButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onActionButtonPressed(currentApp, currentApk);
-                }
-            });
+            installButton.setOnClickListener(v -> onActionButtonPressed(currentApp, currentApk));
 
             installButton.setOutlineProvider(new ViewOutlineProvider() {
                 @Override
@@ -158,30 +153,47 @@ public abstract class AppListItemController extends RecyclerView.ViewHolder {
         secondaryStatus = (TextView) itemView.findViewById(R.id.secondary_status);
         progressBar = (ProgressBar) itemView.findViewById(R.id.progress_bar);
         cancelButton = (ImageButton) itemView.findViewById(R.id.cancel_button);
-        actionButton = (Button) itemView.findViewById(R.id.action_button);
+        actionButton = itemView.findViewById(R.id.action_button);
         secondaryButton = (Button) itemView.findViewById(R.id.secondary_button);
         checkBox = itemView.findViewById(R.id.checkbox);
 
         if (actionButton != null) {
             actionButton.setEnabled(true);
-            actionButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    actionButton.setEnabled(false);
-                    onActionButtonPressed(currentApp, currentApk);
-                }
+            actionButton.setOnClickListener(v -> {
+                actionButton.setEnabled(false);
+                onActionButtonPressed(currentApp, currentApk);
             });
         }
 
         if (secondaryButton != null) {
-            secondaryButton.setOnClickListener(onSecondaryButtonClicked);
+            secondaryButton.setOnClickListener(v -> {
+                if (currentApp == null) {
+                    return;
+                }
+                secondaryButton.setEnabled(false);
+                onSecondaryButtonPressed(currentApp);
+            });
         }
 
         if (cancelButton != null) {
-            cancelButton.setOnClickListener(onCancelDownload);
+            cancelButton.setOnClickListener(v -> cancelDownload());
         }
 
-        itemView.setOnClickListener(onAppClicked);
+        itemView.setOnClickListener(v -> {
+            if (currentApp == null) {
+                return;
+            }
+
+            Intent intent = new Intent(activity, AppDetailsActivity.class);
+            intent.putExtra(AppDetailsActivity.EXTRA_APPID, currentApp.packageName);
+            String transitionAppIcon = activity.getString(R.string.transition_app_item_icon);
+            Pair<View, String> iconTransitionPair = Pair.create(icon, transitionAppIcon);
+            // unchecked since the right type is passed as 2nd varargs arg: Pair<View, String>
+            @SuppressWarnings("unchecked")
+            Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, iconTransitionPair)
+                    .toBundle();
+            ContextCompat.startActivity(AppListItemController.this.activity, intent, bundle);
+        });
     }
 
     @Nullable
@@ -353,7 +365,16 @@ public abstract class AppListItemController extends RecyclerView.ViewHolder {
 
         if (checkBox != null) {
             if (viewState.shouldShowCheckBox()) {
-                itemView.setOnClickListener(selectInstalledAppListener);
+                itemView.setOnClickListener(v -> {
+                    Set<String> wipeSet = prefs.getPanicTmpSelectedSet();
+                    checkBox.toggle();
+                    if (checkBox.isChecked()) {
+                        wipeSet.add(currentApp.packageName);
+                    } else {
+                        wipeSet.remove(currentApp.packageName);
+                    }
+                    prefs.setPanicTmpSelectedSet(wipeSet);
+                });
                 checkBox.setChecked(viewState.isCheckBoxChecked());
                 checkBox.setVisibility(View.VISIBLE);
                 status.setVisibility(View.GONE);
@@ -446,26 +467,6 @@ public abstract class AppListItemController extends RecyclerView.ViewHolder {
      * =================================================================
      */
 
-    @SuppressWarnings("FieldCanBeLocal")
-    private final View.OnClickListener onAppClicked = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (currentApp == null) {
-                return;
-            }
-
-            Intent intent = new Intent(activity, AppDetailsActivity.class);
-            intent.putExtra(AppDetailsActivity.EXTRA_APPID, currentApp.packageName);
-            String transitionAppIcon = activity.getString(R.string.transition_app_item_icon);
-            Pair<View, String> iconTransitionPair = Pair.create((View) icon, transitionAppIcon);
-            // unchecked since the right type is passed as 2nd varargs arg: Pair<View, String>
-            @SuppressWarnings("unchecked")
-            Bundle bundle = ActivityOptionsCompat
-                    .makeSceneTransitionAnimation(activity, iconTransitionPair).toBundle();
-            ContextCompat.startActivity(activity, intent, bundle);
-        }
-    };
-
     private final BroadcastReceiver onStatusChanged = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -478,18 +479,6 @@ public abstract class AppListItemController extends RecyclerView.ViewHolder {
             }
 
             updateAppStatus(currentApp, newStatus);
-        }
-    };
-
-    @SuppressWarnings("FieldCanBeLocal")
-    private final View.OnClickListener onSecondaryButtonClicked = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (currentApp == null) {
-                return;
-            }
-            if (secondaryButton != null) secondaryButton.setEnabled(false);
-            onSecondaryButtonPressed(currentApp);
         }
     };
 
@@ -560,14 +549,6 @@ public abstract class AppListItemController extends RecyclerView.ViewHolder {
     protected void onSecondaryButtonPressed(@NonNull App app) {
     }
 
-    @SuppressWarnings("FieldCanBeLocal")
-    private final View.OnClickListener onCancelDownload = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            cancelDownload();
-        }
-    };
-
     protected final void cancelDownload() {
         if (currentStatus == null || currentStatus.status != AppUpdateStatusManager.Status.Downloading) {
             return;
@@ -575,18 +556,4 @@ public abstract class AppListItemController extends RecyclerView.ViewHolder {
 
         InstallManagerService.cancel(activity, currentStatus.getCanonicalUrl());
     }
-
-    private final View.OnClickListener selectInstalledAppListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Set<String> wipeSet = prefs.getPanicTmpSelectedSet();
-            checkBox.toggle();
-            if (checkBox.isChecked()) {
-                wipeSet.add(currentApp.packageName);
-            } else {
-                wipeSet.remove(currentApp.packageName);
-            }
-            prefs.setPanicTmpSelectedSet(wipeSet);
-        }
-    };
 }

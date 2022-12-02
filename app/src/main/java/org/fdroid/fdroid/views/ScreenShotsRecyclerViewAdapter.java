@@ -65,18 +65,13 @@ class ScreenShotsRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
         void onScreenshotClick(int position);
     }
 
-    private class ScreenShotViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    private class ScreenShotViewHolder extends RecyclerView.ViewHolder {
         final ImageView image;
 
         ScreenShotViewHolder(View view) {
             super(view);
-            image = (ImageView) view.findViewById(R.id.image);
-            image.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            listener.onScreenshotClick(getAdapterPosition());
+            image = view.findViewById(R.id.image);
+            image.setOnClickListener(v -> listener.onScreenshotClick(getAdapterPosition()));
         }
 
         @Override

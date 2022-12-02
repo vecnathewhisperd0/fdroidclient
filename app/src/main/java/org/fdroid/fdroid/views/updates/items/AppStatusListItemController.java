@@ -77,13 +77,10 @@ public class AppStatusListItemController extends AppListItemController {
                                 itemView,
                                 R.string.app_list__dismiss_installing_app,
                                 Snackbar.LENGTH_LONG
-                        ).setAction(R.string.undo, new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                manager.addApk(appUpdateStatus.app, appUpdateStatus.apk, appUpdateStatus.status,
-                                        appUpdateStatus.intent);
-                                adapter.refreshItems();
-                            }
+                        ).setAction(R.string.undo, view -> {
+                            manager.addApk(appUpdateStatus.app, appUpdateStatus.apk, appUpdateStatus.status,
+                                    appUpdateStatus.intent);
+                            adapter.refreshItems();
                         }).show();
                         break;
                     }

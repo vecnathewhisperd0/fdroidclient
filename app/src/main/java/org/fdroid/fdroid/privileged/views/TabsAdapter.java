@@ -43,8 +43,7 @@ import androidx.viewpager.widget.ViewPager;
  * care of switch to the correct paged in the ViewPager whenever the selected
  * tab changes.
  */
-class TabsAdapter extends PagerAdapter
-        implements TabHost.OnTabChangeListener, ViewPager.OnPageChangeListener {
+class TabsAdapter extends PagerAdapter implements ViewPager.OnPageChangeListener {
     private final Context context;
     private final TabHost tabHost;
     private final ViewPager viewPager;
@@ -72,7 +71,13 @@ class TabsAdapter extends PagerAdapter
         context = activity;
         this.tabHost = tabHost;
         viewPager = pager;
-        this.tabHost.setOnTabChangedListener(this);
+        this.tabHost.setOnTabChangedListener(tabId -> {
+            int position = tabHost.getCurrentTab();
+            viewPager.setCurrentItem(position);
+            if (onTabChangeListener != null) {
+                onTabChangeListener.onTabChanged(tabId);
+            }
+        });
         viewPager.setAdapter(this);
         viewPager.setOnPageChangeListener(this);
     }
@@ -109,15 +114,6 @@ class TabsAdapter extends PagerAdapter
 
     public void setOnTabChangedListener(TabHost.OnTabChangeListener listener) {
         onTabChangeListener = listener;
-    }
-
-    @Override
-    public void onTabChanged(String tabId) {
-        int position = tabHost.getCurrentTab();
-        viewPager.setCurrentItem(position);
-        if (onTabChangeListener != null) {
-            onTabChangeListener.onTabChanged(tabId);
-        }
     }
 
     @Override

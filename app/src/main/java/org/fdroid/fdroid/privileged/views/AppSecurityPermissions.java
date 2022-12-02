@@ -151,7 +151,7 @@ public class AppSecurityPermissions {
         }
     }
 
-    public static class PermissionItemView extends LinearLayout implements View.OnClickListener {
+    public static class PermissionItemView extends LinearLayout {
         MyPermissionGroupInfo group;
         MyPermissionInfo perm;
         AlertDialog dialog;
@@ -191,36 +191,32 @@ public class AppSecurityPermissions {
             permGrpIcon.setImageDrawable(icon);
             permGrpIcon.setColorFilter(0xff757575);
             permNameView.setText(label);
-            setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (group != null && perm != null) {
-                if (dialog != null) {
-                    dialog.dismiss();
-                }
-                PackageManager pm = getContext().getPackageManager();
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setTitle(group.label);
-                if (perm.descriptionRes != 0) {
-                    builder.setMessage(perm.loadDescription(pm));
-                } else {
-                    CharSequence appName;
-                    try {
-                        ApplicationInfo app = pm.getApplicationInfo(perm.packageName, 0);
-                        appName = app.loadLabel(pm);
-                    } catch (NameNotFoundException e) {
-                        appName = perm.packageName;
+            setOnClickListener(v -> {
+                if (group != null) {
+                    if (dialog != null) {
+                        dialog.dismiss();
                     }
-                    builder.setMessage(getContext().getString(
-                            R.string.perms_description_app, appName) + "\n\n" + perm.name);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setTitle(group.label);
+                    if (perm.descriptionRes != 0) {
+                        builder.setMessage(perm.loadDescription(pm));
+                    } else {
+                        CharSequence appName;
+                        try {
+                            ApplicationInfo app = pm.getApplicationInfo(perm.packageName, 0);
+                            appName = app.loadLabel(pm);
+                        } catch (NameNotFoundException e) {
+                            appName = perm.packageName;
+                        }
+                        builder.setMessage(getContext().getString(
+                                R.string.perms_description_app, appName) + "\n\n" + perm.name);
+                    }
+                    builder.setCancelable(true);
+                    builder.setIcon(group.loadGroupIcon(getContext(), pm));
+                    dialog = builder.show();
+                    dialog.setCanceledOnTouchOutside(true);
                 }
-                builder.setCancelable(true);
-                builder.setIcon(group.loadGroupIcon(getContext(), pm));
-                dialog = builder.show();
-                dialog.setCanceledOnTouchOutside(true);
-            }
+            });
         }
 
         @Override

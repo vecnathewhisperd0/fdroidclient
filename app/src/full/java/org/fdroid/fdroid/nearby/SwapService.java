@@ -15,8 +15,14 @@ import android.os.IBinder;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.ServiceCompat;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import org.fdroid.database.Repository;
 import org.fdroid.download.Downloader;
@@ -49,18 +55,11 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.ServiceCompat;
-import androidx.core.content.ContextCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import cc.mvdan.accesspoint.WifiApControl;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import kotlin.Pair;
 
 /**
  * Central service which manages all of the different moving parts of swap
@@ -371,7 +370,7 @@ public class SwapService extends Service {
 
         appsToSwap.addAll(deserializePackages(swapPreferences.getString(KEY_APPS_TO_SWAP, "")));
 
-        Preferences.get().registerLocalRepoHttpsListeners(httpsEnabledListener);
+        Preferences.get().registerLocalRepoHttpsListeners(this::restartWiFiServices);
 
         localBroadcastManager.registerReceiver(onWifiChange, new IntentFilter(WifiStateChangeService.BROADCAST));
         localBroadcastManager.registerReceiver(bluetoothPeerFound, new IntentFilter(BluetoothManager.ACTION_FOUND));
@@ -458,7 +457,7 @@ public class SwapService extends Service {
         compositeDisposable.dispose();
 
         Utils.debugLog(TAG, "Destroying service, will disable swapping if required, and unregister listeners.");
-        Preferences.get().unregisterLocalRepoHttpsListeners(httpsEnabledListener);
+        Preferences.get().unregisterLocalRepoHttpsListeners(this::restartWiFiServices);
         localBroadcastManager.unregisterReceiver(onWifiChange);
         localBroadcastManager.unregisterReceiver(bluetoothPeerFound);
         localBroadcastManager.unregisterReceiver(bonjourPeerFound);
@@ -566,13 +565,6 @@ public class SwapService extends Service {
             LocalHTTPDManager.stop(this);
         }
     }
-
-    private final Preferences.ChangeListener httpsEnabledListener = new Preferences.ChangeListener() {
-        @Override
-        public void onPreferenceChange() {
-            restartWiFiServices();
-        }
-    };
 
     private final BroadcastReceiver onWifiChange = new BroadcastReceiver() {
         @Override

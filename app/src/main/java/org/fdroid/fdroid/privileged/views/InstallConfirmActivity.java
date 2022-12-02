@@ -25,7 +25,6 @@ import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -50,8 +49,7 @@ import org.fdroid.fdroid.installer.Installer;
  * Parts are based on AOSP src/com/android/packageinstaller/PackageInstallerActivity.java
  * latest included commit: c23d802958158d522e7350321ad9ac6d43013883
  */
-public class InstallConfirmActivity extends AppCompatActivity implements OnCancelListener, OnClickListener {
-
+public class InstallConfirmActivity extends AppCompatActivity implements OnCancelListener {
     private Intent intent;
 
     private AppDiff appDiff;
@@ -60,7 +58,6 @@ public class InstallConfirmActivity extends AppCompatActivity implements OnCance
     private View installConfirm;
     // Buttons to indicate user acceptance
     private Button okButton;
-    private Button cancelButton;
     private CaffeinatedScrollView scrollView;
     private boolean okCanInstall;
 
@@ -68,14 +65,11 @@ public class InstallConfirmActivity extends AppCompatActivity implements OnCance
     private static final String TAB_ID_NEW = "new";
 
     private void startInstallConfirm() {
-        TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
+        TabHost tabHost = findViewById(android.R.id.tabhost);
         tabHost.setup();
-        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        ViewPager viewPager = findViewById(R.id.pager);
         TabsAdapter adapter = new TabsAdapter(this, tabHost, viewPager);
-        adapter.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-            @Override
-            public void onTabChanged(String tabId) {
-            }
+        adapter.setOnTabChangedListener(tabId -> {
         });
 
         boolean permVisible = false;
@@ -111,9 +105,9 @@ public class InstallConfirmActivity extends AppCompatActivity implements OnCance
             LayoutInflater inflater = ContextCompat.getSystemService(this, LayoutInflater.class);
             View root = inflater.inflate(R.layout.permissions_list, null);
             if (scrollView == null) {
-                scrollView = (CaffeinatedScrollView) root.findViewById(R.id.scrollview);
+                scrollView = root.findViewById(R.id.scrollview);
             }
-            final ViewGroup permList = (ViewGroup) root.findViewById(R.id.permission_list);
+            final ViewGroup permList = root.findViewById(R.id.permission_list);
             permList.addView(perms.getPermissionsView(AppSecurityPermissions.WHICH_ALL));
             adapter.addTab(tabHost.newTabSpec(TAB_ID_ALL).setIndicator(
                     getText(R.string.allPerms)), root);
@@ -139,22 +133,29 @@ public class InstallConfirmActivity extends AppCompatActivity implements OnCance
             ((TextView) findViewById(R.id.install_confirm)).setText(msg);
         }
         installConfirm.setVisibility(View.VISIBLE);
-        okButton = (Button) findViewById(R.id.ok_button);
-        cancelButton = (Button) findViewById(R.id.cancel_button);
-        okButton.setOnClickListener(this);
-        cancelButton.setOnClickListener(this);
+        okButton = findViewById(R.id.ok_button);
+        Button cancelButton = findViewById(R.id.cancel_button);
+        okButton.setOnClickListener(v -> {
+            if (okCanInstall || scrollView == null) {
+                setResult(RESULT_OK, intent);
+                finish();
+            } else {
+                scrollView.pageScroll(View.FOCUS_DOWN);
+            }
+        });
+        cancelButton.setOnClickListener(v -> {
+            setResult(RESULT_CANCELED, intent);
+            finish();
+        });
         if (scrollView == null) {
             // There is nothing to scroll view, so the ok button is immediately
             // set to install.
             okButton.setText(R.string.menu_install);
             okCanInstall = true;
         } else {
-            scrollView.setFullScrollAction(new Runnable() {
-                @Override
-                public void run() {
-                    okButton.setText(R.string.menu_install);
-                    okCanInstall = true;
-                }
+            scrollView.setFullScrollAction(() -> {
+                okButton.setText(R.string.menu_install);
+                okCanInstall = true;
             });
         }
     }
@@ -197,21 +198,8 @@ public class InstallConfirmActivity extends AppCompatActivity implements OnCance
     }
 
     // Generic handling when pressing back key
+    @Override
     public void onCancel(DialogInterface dialog) {
         finish();
-    }
-
-    public void onClick(View v) {
-        if (v == okButton) {
-            if (okCanInstall || scrollView == null) {
-                setResult(RESULT_OK, intent);
-                finish();
-            } else {
-                scrollView.pageScroll(View.FOCUS_DOWN);
-            }
-        } else if (v == cancelButton) {
-            setResult(RESULT_CANCELED, intent);
-            finish();
-        }
     }
 }

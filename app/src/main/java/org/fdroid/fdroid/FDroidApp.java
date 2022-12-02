@@ -44,6 +44,14 @@ import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.ContextCompat;
+import androidx.core.os.ConfigurationCompat;
+import androidx.core.os.LocaleListCompat;
+
 import com.bumptech.glide.Glide;
 
 import org.acra.ACRA;
@@ -54,7 +62,6 @@ import org.acra.config.MailSenderConfigurationBuilder;
 import org.apache.commons.net.util.SubnetUtils;
 import org.fdroid.database.FDroidDatabase;
 import org.fdroid.database.Repository;
-import org.fdroid.fdroid.Preferences.ChangeListener;
 import org.fdroid.fdroid.Preferences.Theme;
 import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.data.DBHelper;
@@ -74,14 +81,6 @@ import java.security.Security;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.content.ContextCompat;
-import androidx.core.os.ConfigurationCompat;
-import androidx.core.os.LocaleListCompat;
 
 import info.guardianproject.netcipher.NetCipher;
 import info.guardianproject.netcipher.proxy.OrbotHelper;
@@ -333,19 +332,12 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
         // If the user changes the preference to do with filtering anti-feature apps,
         // it is easier to just notify a change in the app provider,
         // so that the newly updated list will correctly filter relevant apps.
-        preferences.registerAppsRequiringAntiFeaturesChangeListener(new Preferences.ChangeListener() {
-            @Override
-            public void onPreferenceChange() {
-                // TODO check if anything else needs updating/reloading
-            }
+        preferences.registerAppsRequiringAntiFeaturesChangeListener(() -> {
+            // TODO check if anything else needs updating/reloading
         });
 
-        preferences.registerUnstableUpdatesChangeListener(new Preferences.ChangeListener() {
-            @Override
-            public void onPreferenceChange() {
-                AppUpdateStatusManager.getInstance(FDroidApp.this).checkForUpdates();
-            }
-        });
+        preferences.registerUnstableUpdatesChangeListener(() ->
+                AppUpdateStatusManager.getInstance(FDroidApp.this).checkForUpdates());
 
         CleanCacheWorker.schedule(this);
 
@@ -362,12 +354,8 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
         FDroidApp.initWifiSettings();
         WifiStateChangeService.start(this, null);
         // if the HTTPS pref changes, then update all affected things
-        preferences.registerLocalRepoHttpsListeners(new ChangeListener() {
-            @Override
-            public void onPreferenceChange() {
-                WifiStateChangeService.start(getApplicationContext(), null);
-            }
-        });
+        preferences.registerLocalRepoHttpsListeners(() ->
+                WifiStateChangeService.start(getApplicationContext(), null));
 
         if (preferences.isKeepingInstallHistory()) {
             InstallHistoryService.register(this);

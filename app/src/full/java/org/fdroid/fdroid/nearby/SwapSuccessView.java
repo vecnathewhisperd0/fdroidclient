@@ -1,6 +1,5 @@
 package org.fdroid.fdroid.nearby;
 
-import android.annotation.TargetApi;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -221,12 +220,12 @@ public class SwapSuccessView extends SwapView {
             ViewHolder(View view) {
                 super(view);
                 localBroadcastManager = LocalBroadcastManager.getInstance(getContext());
-                progressView = (ProgressBar) view.findViewById(R.id.progress);
-                nameView = (TextView) view.findViewById(R.id.name);
-                iconView = (ImageView) view.findViewById(android.R.id.icon);
-                btnInstall = (Button) view.findViewById(R.id.btn_install);
-                statusInstalled = (TextView) view.findViewById(R.id.status_installed);
-                statusIncompatible = (TextView) view.findViewById(R.id.status_incompatible);
+                progressView = view.findViewById(R.id.progress);
+                nameView = view.findViewById(R.id.name);
+                iconView = view.findViewById(android.R.id.icon);
+                btnInstall = view.findViewById(R.id.btn_install);
+                statusInstalled = view.findViewById(R.id.status_installed);
+                statusIncompatible = view.findViewById(R.id.status_incompatible);
             }
 
             public void setApp(@NonNull App app) {
@@ -282,25 +281,6 @@ public class SwapSuccessView extends SwapView {
                 resetView();
             }
 
-            private final OnClickListener cancelListener = new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (apk != null) {
-                        InstallManagerService.cancel(getContext(), apk.getCanonicalUrl());
-                    }
-                }
-            };
-
-            private final OnClickListener installListener = new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (apk != null && (app.hasUpdates() || app.compatible)) {
-                        showProgress();
-                        InstallManagerService.queue(getContext(), app, apk);
-                    }
-                }
-            };
-
             private void resetView() {
                 if (app == null) {
                     return;
@@ -320,7 +300,12 @@ public class SwapSuccessView extends SwapView {
                 if (app.hasUpdates()) {
                     btnInstall.setText(R.string.menu_upgrade);
                     btnInstall.setVisibility(View.VISIBLE);
-                    btnInstall.setOnClickListener(installListener);
+                    btnInstall.setOnClickListener(v -> {
+                        if (apk != null && (app.hasUpdates() || app.compatible)) {
+                            showProgress();
+                            InstallManagerService.queue(getContext(), app, apk);
+                        }
+                    });
                     statusIncompatible.setVisibility(View.GONE);
                     statusInstalled.setVisibility(View.GONE);
                 } else if (app.isInstalled(getContext())) {
@@ -335,13 +320,22 @@ public class SwapSuccessView extends SwapView {
                 } else if (progressView.getVisibility() == View.VISIBLE) {
                     btnInstall.setText(R.string.cancel);
                     btnInstall.setVisibility(View.VISIBLE);
-                    btnInstall.setOnClickListener(cancelListener);
+                    btnInstall.setOnClickListener(v -> {
+                        if (apk != null) {
+                            InstallManagerService.cancel(getContext(), apk.getCanonicalUrl());
+                        }
+                    });
                     statusIncompatible.setVisibility(View.GONE);
                     statusInstalled.setVisibility(View.GONE);
                 } else {
                     btnInstall.setText(R.string.menu_install);
                     btnInstall.setVisibility(View.VISIBLE);
-                    btnInstall.setOnClickListener(installListener);
+                    btnInstall.setOnClickListener(v -> {
+                        if (apk != null && (app.hasUpdates() || app.compatible)) {
+                            showProgress();
+                            InstallManagerService.queue(getContext(), app, apk);
+                        }
+                    });
                     statusIncompatible.setVisibility(View.GONE);
                     statusInstalled.setVisibility(View.GONE);
                 }
@@ -350,7 +344,11 @@ public class SwapSuccessView extends SwapView {
             private void showProgress() {
                 btnInstall.setText(R.string.cancel);
                 btnInstall.setVisibility(View.VISIBLE);
-                btnInstall.setOnClickListener(cancelListener);
+                btnInstall.setOnClickListener(v -> {
+                    if (apk != null) {
+                        InstallManagerService.cancel(getContext(), apk.getCanonicalUrl());
+                    }
+                });
                 progressView.setVisibility(View.VISIBLE);
                 statusInstalled.setVisibility(View.GONE);
                 statusIncompatible.setVisibility(View.GONE);
@@ -388,16 +386,9 @@ public class SwapSuccessView extends SwapView {
         @Override
         public void onReceive(Context context, Intent intent) {
             int statusCode = intent.getIntExtra(UpdateService.EXTRA_STATUS_CODE, -1);
-            switch (statusCode) {
-                case UpdateService.STATUS_COMPLETE_WITH_CHANGES:
-                    Utils.debugLog(TAG, "Swap repo has updates, notifying the list adapter.");
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            adapter.notifyDataSetChanged();
-                        }
-                    });
-                    break;
+            if (statusCode == UpdateService.STATUS_COMPLETE_WITH_CHANGES) {
+                Utils.debugLog(TAG, "Swap repo has updates, notifying the list adapter.");
+                getActivity().runOnUiThread(() -> adapter.notifyDataSetChanged());
             }
         }
     };

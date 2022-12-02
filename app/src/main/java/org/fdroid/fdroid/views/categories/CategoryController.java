@@ -61,14 +61,22 @@ public class CategoryController extends RecyclerView.ViewHolder {
 
         appCardsAdapter = new AppPreviewAdapter(activity);
 
-        viewAll = (Button) itemView.findViewById(R.id.view_all_button);
-        viewAll.setOnClickListener(onViewAll);
+        viewAll = itemView.findViewById(R.id.view_all_button);
+        viewAll.setOnClickListener(v -> {
+            if (currentCategory == null) {
+                return;
+            }
 
-        heading = (TextView) itemView.findViewById(R.id.name);
-        image = (FeatureImage) itemView.findViewById(R.id.category_image);
-        background = (FrameLayout) itemView.findViewById(R.id.category_background);
+            Intent intent = new Intent(CategoryController.this.activity, AppListActivity.class);
+            intent.putExtra(AppListActivity.EXTRA_CATEGORY, currentCategory);
+            CategoryController.this.activity.startActivity(intent);
+        });
 
-        RecyclerView appCards = (RecyclerView) itemView.findViewById(R.id.app_cards);
+        heading = itemView.findViewById(R.id.name);
+        image = itemView.findViewById(R.id.category_image);
+        background = itemView.findViewById(R.id.category_background);
+
+        RecyclerView appCards = itemView.findViewById(R.id.app_cards);
         appCards.setAdapter(appCardsAdapter);
         appCards.addItemDecoration(new ItemDecorator(activity));
     }
@@ -162,20 +170,6 @@ public class CategoryController extends RecyclerView.ViewHolder {
         viewAll.setContentDescription(r.getQuantityString(R.plurals.tts_view_all_in_category, numAppsInCategory,
                 numAppsInCategory, currentCategory));
     }
-
-    @SuppressWarnings("FieldCanBeLocal")
-    private final View.OnClickListener onViewAll = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (currentCategory == null) {
-                return;
-            }
-
-            Intent intent = new Intent(activity, AppListActivity.class);
-            intent.putExtra(AppListActivity.EXTRA_CATEGORY, currentCategory);
-            activity.startActivity(intent);
-        }
-    };
 
     /**
      * Applies excessive padding to the start of the first item. This is so that the category artwork

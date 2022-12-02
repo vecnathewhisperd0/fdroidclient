@@ -17,7 +17,6 @@
 package com.google.zxing.integration.android;
 
 import android.content.ActivityNotFoundException;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -321,17 +320,13 @@ public class IntentIntegrator {
         AlertDialog.Builder downloadDialog = new AlertDialog.Builder(activity);
         downloadDialog.setTitle(title);
         downloadDialog.setMessage(message);
-        downloadDialog.setPositiveButton(buttonYes, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                String packageName = BS_PACKAGE;
-                Uri uri = Uri.parse("market://details?id=" + packageName);
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                if (fragment == null) {
-                    activity.startActivity(intent);
-                } else {
-                    fragment.startActivity(intent);
-                }
+        downloadDialog.setPositiveButton(buttonYes, (dialogInterface, i) -> {
+            Uri uri = Uri.parse("market://details?id=" + BS_PACKAGE);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            if (fragment == null) {
+                activity.startActivity(intent);
+            } else {
+                fragment.startActivity(intent);
             }
         });
         downloadDialog.setNegativeButton(buttonNo, null);

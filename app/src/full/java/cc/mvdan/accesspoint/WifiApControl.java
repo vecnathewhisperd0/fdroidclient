@@ -16,12 +16,9 @@
 
 package cc.mvdan.accesspoint;
 
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
-import android.os.Build;
 import android.provider.Settings;
 import android.util.Log;
 
@@ -35,7 +32,6 @@ import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -390,18 +386,16 @@ final public class WifiApControl {
 		final CountDownLatch latch = new CountDownLatch(clients.size());
 		ExecutorService es = Executors.newCachedThreadPool();
 		for (final Client c : clients) {
-			es.submit(new Runnable() {
-				public void run() {
-					try {
-						InetAddress ip = InetAddress.getByName(c.ipAddr);
-						if (ip.isReachable(timeout)) {
-							listener.onReachableClient(c);
-						}
-					} catch (IOException e) {
-						Log.e(TAG, "", e);
+			es.submit(() -> {
+				try {
+					InetAddress ip = InetAddress.getByName(c.ipAddr);
+					if (ip.isReachable(timeout)) {
+						listener.onReachableClient(c);
 					}
-					latch.countDown();
+				} catch (IOException e) {
+					Log.e(TAG, "", e);
 				}
+				latch.countDown();
 			});
 		}
 		new Thread() {
