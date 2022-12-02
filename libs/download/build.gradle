@@ -94,6 +94,8 @@ kotlin {
 
 android {
     compileSdkVersion 31
+    namespace 'org.fdroid.download'
+
     sourceSets {
         main.manifest.srcFile('src/androidMain/AndroidManifest.xml')
         getByName("androidTest").java.srcDir(file("src/androidAndroidTest/kotlin"))
@@ -107,15 +109,13 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    lintOptions {
-        checkReleaseBuilds false
+    lint {
         abortOnError true
-
+        checkReleaseBuilds false
         htmlReport true
-        xmlReport false
+        lintConfig file('lint.xml')
         textReport true
-
-        lintConfig file("lint.xml")
+        xmlReport false
     }
 }
 
