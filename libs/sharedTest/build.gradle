@@ -15,6 +15,7 @@ android {
     defaultConfig {
         minSdkVersion 21
     }
+    namespace 'org.fdroid.test'
 }
 
 dependencies {

@@ -8,6 +8,7 @@ plugins {
 
 android {
     compileSdkVersion 31
+    namespace 'org.fdroid.database'
 
     defaultConfig {
         minSdkVersion 21
@@ -50,13 +51,13 @@ android {
         freeCompilerArgs += "-Xexplicit-api=strict"
         freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
     }
-    aaptOptions {
-        // needed only for instrumentation tests: assets.openFd()
-        noCompress "json"
-    }
     packagingOptions {
-        exclude 'META-INF/AL2.0'
-        exclude 'META-INF/LGPL2.1'
+        resources {
+            excludes += ['META-INF/AL2.0', 'META-INF/LGPL2.1']
+        }
+    }
+    androidResources {
+        noCompress 'json'
     }
 }
 

@@ -9,8 +9,12 @@ import android.content.pm.PackageManager;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.TaskStackBuilder;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import org.fdroid.database.UpdatableApp;
 import org.fdroid.database.DbUpdateChecker;
@@ -22,17 +26,12 @@ import org.fdroid.fdroid.installer.InstallManagerService;
 import org.fdroid.fdroid.net.DownloaderService;
 import org.fdroid.fdroid.views.AppDetailsActivity;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.TaskStackBuilder;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 
 import io.reactivex.rxjava3.disposables.Disposable;
 
@@ -207,10 +206,10 @@ public final class AppUpdateStatusManager {
     private final Context context;
     private final LocalBroadcastManager localBroadcastManager;
     private final DbUpdateChecker updateChecker;
-    private final HashMap<String, AppUpdateStatus> appMapping = new HashMap<>();
+    private final Map<String, AppUpdateStatus> appMapping = new ConcurrentHashMap<>();
+    private final AtomicBoolean isBatchUpdating = new AtomicBoolean();
     @Nullable
     private Disposable disposable;
-    private boolean isBatchUpdating;
 
     private AppUpdateStatusManager(Context context) {
         this.context = context;
@@ -222,32 +221,19 @@ public final class AppUpdateStatusManager {
     }
 
     public void removeAllByRepo(long repoId) {
-        boolean hasRemovedSome = false;
-        Iterator<AppUpdateStatus> it = getAll().iterator();
-        while (it.hasNext()) {
-            AppUpdateStatus status = it.next();
-            if (status.apk.repoId == repoId) {
-                it.remove();
-                hasRemovedSome = true;
-            }
-        }
-
-        if (hasRemovedSome) {
+        if (appMapping.values().removeIf(status -> status.apk.repoId == repoId)) {
             notifyChange(REASON_REPO_DISABLED);
         }
     }
 
     @Nullable
     public AppUpdateStatus get(String canonicalUrl) {
-        synchronized (appMapping) {
-            return appMapping.get(canonicalUrl);
-        }
+        return appMapping.get(canonicalUrl);
     }
 
+    @NonNull
     public Collection<AppUpdateStatus> getAll() {
-        synchronized (appMapping) {
-            return appMapping.values();
-        }
+        return appMapping.values();
     }
 
     /**
@@ -256,16 +242,11 @@ public final class AppUpdateStatusManager {
      * @param packageName Package name of the app
      * @return A list of entries, or an empty list
      */
+    @NonNull
     public Collection<AppUpdateStatus> getByPackageName(String packageName) {
-        ArrayList<AppUpdateStatus> returnValues = new ArrayList<>();
-        synchronized (appMapping) {
-            for (AppUpdateStatus entry : appMapping.values()) {
-                if (entry.apk.packageName.equals(packageName)) {
-                    returnValues.add(entry);
-                }
-            }
-        }
-        return returnValues;
+        return appMapping.values().stream()
+                .filter(entry -> entry.apk.packageName.equals(packageName))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -318,7 +299,7 @@ public final class AppUpdateStatusManager {
     private void addApkInternal(@NonNull App app, @NonNull Apk apk, @NonNull Status status, PendingIntent intent) {
         String apkName = apk.getApkPath();
         Utils.debugLog(LOGTAG, "Add APK " + apkName + " with state " + status.name());
-        AppUpdateStatus entry = createAppEntry(app, apk, status, intent);
+        AppUpdateStatus entry = new AppUpdateStatus(app, apk, status, intent);
         setEntryContentIntentIfEmpty(entry);
         appMapping.put(entry.getCanonicalUrl(), entry);
         notifyAdd(entry);
@@ -329,7 +310,7 @@ public final class AppUpdateStatusManager {
     }
 
     private void notifyChange(String reason) {
-        if (!isBatchUpdating) {
+        if (!isBatchUpdating.get()) {
             Intent intent = new Intent(BROADCAST_APPSTATUS_LIST_CHANGED);
             intent.putExtra(EXTRA_REASON_FOR_CHANGE, reason);
             localBroadcastManager.sendBroadcast(intent);
@@ -337,7 +318,7 @@ public final class AppUpdateStatusManager {
     }
 
     private void notifyAdd(AppUpdateStatus entry) {
-        if (!isBatchUpdating) {
+        if (!isBatchUpdating.get()) {
             Intent broadcastIntent = new Intent(BROADCAST_APPSTATUS_ADDED);
             broadcastIntent.putExtra(DownloaderService.EXTRA_CANONICAL_URL, entry.getCanonicalUrl());
             broadcastIntent.putExtra(EXTRA_STATUS, entry.copy());
@@ -346,7 +327,7 @@ public final class AppUpdateStatusManager {
     }
 
     private void notifyChange(AppUpdateStatus entry, boolean isStatusUpdate) {
-        if (!isBatchUpdating) {
+        if (!isBatchUpdating.get()) {
             Intent broadcastIntent = new Intent(BROADCAST_APPSTATUS_CHANGED);
             broadcastIntent.putExtra(DownloaderService.EXTRA_CANONICAL_URL, entry.getCanonicalUrl());
             broadcastIntent.putExtra(EXTRA_STATUS, entry.copy());
@@ -356,19 +337,11 @@ public final class AppUpdateStatusManager {
     }
 
     private void notifyRemove(AppUpdateStatus entry) {
-        if (!isBatchUpdating) {
+        if (!isBatchUpdating.get()) {
             Intent broadcastIntent = new Intent(BROADCAST_APPSTATUS_REMOVED);
             broadcastIntent.putExtra(DownloaderService.EXTRA_CANONICAL_URL, entry.getCanonicalUrl());
             broadcastIntent.putExtra(EXTRA_STATUS, entry.copy());
             localBroadcastManager.sendBroadcast(broadcastIntent);
-        }
-    }
-
-    private AppUpdateStatus createAppEntry(App app, Apk apk, Status status, PendingIntent intent) {
-        synchronized (appMapping) {
-            AppUpdateStatus ret = new AppUpdateStatus(app, apk, status, intent);
-            appMapping.put(apk.getCanonicalUrl(), ret);
-            return ret;
         }
     }
 
@@ -395,16 +368,14 @@ public final class AppUpdateStatusManager {
     }
 
     private void addUpdatableAppsNoNotify(List<UpdatableApp> canUpdate) {
-        synchronized (appMapping) {
-            isBatchUpdating = true;
-            try {
-                for (UpdatableApp app : canUpdate) {
-                    addApk(new App(app), new Apk(app.getUpdate()), Status.UpdateAvailable, null);
-                }
-                setNumUpdatableApps(canUpdate.size());
-            } finally {
-                isBatchUpdating = false;
+        isBatchUpdating.set(true);
+        try {
+            for (UpdatableApp app : canUpdate) {
+                addApk(new App(app), new Apk(app.getUpdate()), Status.UpdateAvailable, null);
             }
+            setNumUpdatableApps(canUpdate.size());
+        } finally {
+            isBatchUpdating.set(false);
         }
     }
 
@@ -420,15 +391,13 @@ public final class AppUpdateStatusManager {
             return;
         }
 
-        synchronized (appMapping) {
-            AppUpdateStatus entry = appMapping.get(apk.getCanonicalUrl());
-            if (entry != null) {
-                updateApkInternal(entry, status, pendingIntent);
-            } else if (app != null) {
-                addApkInternal(app, apk, status, pendingIntent);
-            } else {
-                Utils.debugLog(LOGTAG, "Found no entry for " + apk.packageName + " and app was null.");
-            }
+        AppUpdateStatus entry = appMapping.get(apk.getCanonicalUrl());
+        if (entry != null) {
+            updateApkInternal(entry, status, pendingIntent);
+        } else if (app != null) {
+            addApkInternal(app, apk, status, pendingIntent);
+        } else {
+            Utils.debugLog(LOGTAG, "Found no entry for " + apk.packageName + " and app was null.");
         }
     }
 
@@ -436,11 +405,9 @@ public final class AppUpdateStatusManager {
      * @param pendingIntent Action when notification is clicked. Can be null for default action(s)
      */
     public void updateApk(String canonicalUrl, @NonNull Status status, @Nullable PendingIntent pendingIntent) {
-        synchronized (appMapping) {
-            AppUpdateStatus entry = appMapping.get(canonicalUrl);
-            if (entry != null) {
-                updateApkInternal(entry, status, pendingIntent);
-            }
+        AppUpdateStatus entry = appMapping.get(canonicalUrl);
+        if (entry != null) {
+            updateApkInternal(entry, status, pendingIntent);
         }
     }
 
@@ -457,13 +424,11 @@ public final class AppUpdateStatusManager {
 
     @Nullable
     public Apk getApk(String canonicalUrl) {
-        synchronized (appMapping) {
-            AppUpdateStatus entry = appMapping.get(canonicalUrl);
-            if (entry != null) {
-                return entry.apk;
-            }
-            return null;
+        AppUpdateStatus entry = appMapping.get(canonicalUrl);
+        if (entry != null) {
+            return entry.apk;
         }
+        return null;
     }
 
     /**
@@ -473,34 +438,28 @@ public final class AppUpdateStatusManager {
      * @see org.fdroid.fdroid.installer.InstallManagerService
      */
     public void removeApk(String canonicalUrl) {
-        synchronized (appMapping) {
-            InstallManagerService.removePendingInstall(context, canonicalUrl);
-            AppUpdateStatus entry = appMapping.remove(canonicalUrl);
-            if (entry != null) {
-                Utils.debugLog(LOGTAG, "Remove APK " + entry.apk.getApkPath());
-                notifyRemove(entry);
-            }
+        InstallManagerService.removePendingInstall(context, canonicalUrl);
+        AppUpdateStatus entry = appMapping.remove(canonicalUrl);
+        if (entry != null) {
+            Utils.debugLog(LOGTAG, "Remove APK " + entry.apk.getApkPath());
+            notifyRemove(entry);
         }
     }
 
     public void refreshApk(String canonicalUrl) {
-        synchronized (appMapping) {
-            AppUpdateStatus entry = appMapping.get(canonicalUrl);
-            if (entry != null) {
-                Utils.debugLog(LOGTAG, "Refresh APK " + entry.apk.getApkPath());
-                notifyChange(entry, true);
-            }
+        AppUpdateStatus entry = appMapping.get(canonicalUrl);
+        if (entry != null) {
+            Utils.debugLog(LOGTAG, "Refresh APK " + entry.apk.getApkPath());
+            notifyChange(entry, true);
         }
     }
 
     public void updateApkProgress(String canonicalUrl, long max, long current) {
-        synchronized (appMapping) {
-            AppUpdateStatus entry = appMapping.get(canonicalUrl);
-            if (entry != null) {
-                entry.progressMax = max;
-                entry.progressCurrent = current;
-                notifyChange(entry, false);
-            }
+        AppUpdateStatus entry = appMapping.get(canonicalUrl);
+        if (entry != null) {
+            entry.progressMax = max;
+            entry.progressCurrent = current;
+            notifyChange(entry, false);
         }
     }
 
@@ -508,77 +467,53 @@ public final class AppUpdateStatusManager {
      * @param errorText If null, then it is likely because the user cancelled the download.
      */
     public void setDownloadError(String canonicalUrl, @Nullable String errorText) {
-        synchronized (appMapping) {
-            AppUpdateStatus entry = appMapping.get(canonicalUrl);
-            if (entry != null) {
-                entry.status = Status.DownloadInterrupted;
-                entry.errorText = errorText;
-                entry.intent = null;
-                notifyChange(entry, true);
-                removeApk(canonicalUrl);
-            }
+        AppUpdateStatus entry = appMapping.get(canonicalUrl);
+        if (entry != null) {
+            entry.status = Status.DownloadInterrupted;
+            entry.errorText = errorText;
+            entry.intent = null;
+            notifyChange(entry, true);
+            removeApk(canonicalUrl);
         }
     }
 
     public void setApkError(App app, Apk apk, String errorText) {
-        synchronized (appMapping) {
-            AppUpdateStatus entry = appMapping.get(apk.getCanonicalUrl());
-            if (entry == null) {
-                entry = createAppEntry(app, apk, Status.InstallError, null);
-            }
-            entry.status = Status.InstallError;
-            entry.errorText = errorText;
-            entry.intent = getAppErrorIntent(entry);
-            notifyChange(entry, false);
+        AppUpdateStatus entry = appMapping.getOrDefault(apk.getCanonicalUrl(),
+                new AppUpdateStatus(app, apk, Status.InstallError, null));
+        entry.status = Status.InstallError;
+        entry.errorText = errorText;
+        entry.intent = getAppErrorIntent(entry);
+        notifyChange(entry, false);
 
-            InstallManagerService.removePendingInstall(context, entry.getCanonicalUrl());
-        }
+        InstallManagerService.removePendingInstall(context, entry.getCanonicalUrl());
     }
 
     private void startBatchUpdates() {
-        synchronized (appMapping) {
-            isBatchUpdating = true;
-        }
+        isBatchUpdating.set(true);
     }
 
     private void endBatchUpdates(Status status) {
-        synchronized (appMapping) {
-            isBatchUpdating = false;
+        isBatchUpdating.set(false);
 
-            String reason = null;
-            if (status == Status.ReadyToInstall) {
-                reason = REASON_READY_TO_INSTALL;
-            } else if (status == Status.UpdateAvailable) {
-                reason = REASON_UPDATES_AVAILABLE;
-            }
-            notifyChange(reason);
+        final String reason;
+        if (status == Status.ReadyToInstall) {
+            reason = REASON_READY_TO_INSTALL;
+        } else if (status == Status.UpdateAvailable) {
+            reason = REASON_UPDATES_AVAILABLE;
+        } else {
+            reason = null;
         }
+        notifyChange(reason);
     }
 
-    @SuppressWarnings("LineLength")
     void clearAllUpdates() {
-        synchronized (appMapping) {
-            for (Iterator<Map.Entry<String, AppUpdateStatus>> it = appMapping.entrySet().iterator(); it.hasNext(); ) { // NOCHECKSTYLE EmptyForIteratorPad
-                Map.Entry<String, AppUpdateStatus> entry = it.next();
-                if (entry.getValue().status != Status.Installed) {
-                    it.remove();
-                }
-            }
-            notifyChange(REASON_CLEAR_ALL_UPDATES);
-        }
+        appMapping.entrySet().removeIf(entry -> entry.getValue().status != Status.Installed);
+        notifyChange(REASON_CLEAR_ALL_INSTALLED);
     }
 
-    @SuppressWarnings("LineLength")
     void clearAllInstalled() {
-        synchronized (appMapping) {
-            for (Iterator<Map.Entry<String, AppUpdateStatus>> it = appMapping.entrySet().iterator(); it.hasNext(); ) { // NOCHECKSTYLE EmptyForIteratorPad
-                Map.Entry<String, AppUpdateStatus> entry = it.next();
-                if (entry.getValue().status == Status.Installed) {
-                    it.remove();
-                }
-            }
-            notifyChange(REASON_CLEAR_ALL_INSTALLED);
-        }
+        appMapping.entrySet().removeIf(entry -> entry.getValue().status == Status.Installed);
+        notifyChange(REASON_CLEAR_ALL_INSTALLED);
     }
 
     /**
