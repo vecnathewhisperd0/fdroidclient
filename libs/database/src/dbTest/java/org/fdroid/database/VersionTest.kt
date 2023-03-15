@@ -209,6 +209,11 @@ internal class VersionTest : DbTest() {
         appPrefs = appPrefs.toggleIgnoreAllUpdates()
         appPrefsDao.update(appPrefs)
         assertEquals(1, versionDao.getVersions(listOf(packageName)).size)
+
+        // clear all apps and their versions
+        appDao.clearAll()
+        assertEquals(0, versionDao.countAppVersions())
+        assertEquals(0, versionDao.countVersionedStrings())
     }
 
     @Test
@@ -229,6 +234,25 @@ internal class VersionTest : DbTest() {
 
         // all versions are returned only if all packages are asked for
         assertEquals(4, versionDao.getVersions(listOf(packageName, packageName2)).size)
+    }
+
+    @Test
+    fun getVersionsHandlesMaxVariableNumber() {
+        // sqlite has a maximum number of 999 variables that can be used in a query
+        val packagesOk = MutableList(998) { "" } + listOf(packageName)
+        val packagesNotOk1 = MutableList(1000) { "" } + listOf(packageName)
+        val packagesNotOk2 = MutableList(5000) { "" } + listOf(packageName)
+
+        // insert two versions
+        val repoId = repoDao.insertOrReplace(getRandomRepo())
+        appDao.insert(repoId, packageName, getRandomMetadataV2())
+        versionDao.insert(repoId, packageName, packageVersions, compatChecker)
+        assertEquals(2, versionDao.getVersions(listOf(packageName)).size)
+
+        // versions are returned as expected for all lists, no matter their size
+        assertEquals(2, versionDao.getVersions(packagesOk).size)
+        assertEquals(2, versionDao.getVersions(packagesNotOk1).size)
+        assertEquals(2, versionDao.getVersions(packagesNotOk2).size)
     }
 
 }

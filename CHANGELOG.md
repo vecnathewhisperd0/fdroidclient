@@ -1,4 +1,60 @@
-### 1.16-alpha0 (2022-04-19)
+### 1.16.1 (2023-02-27)
+
+* Add IPFS as opt-in Expert Setting, with selected IPFS Gateways built-in #2504
+
+* Migrate ignored updates from old DB, #2538
+
+* Big translation update
+
+### 1.16 (2023-02-08)
+
+* Fix crashes reported via ACRA
+
+* Fix extra install prompt for zero permission apps #2525
+
+### 1.16-alpha4 (2023-01-21)
+
+* Improved swap support when connecting with older F-Droid releases. 
+
+* Stop downloading updates for app with known-vulnerabilities but no update.  #2488
+
+* Migrate repo names #2513
+
+* Wait for database to be available when adding a new repo on slow devices.
+
+### 1.16-alpha3 (2023-01-13)
+
+* Fix assorted crashes, including one related to WiFi Hotspot mode #2477
+
+* Fix including additional repos from the ROM #2503
+
+* Handle users with a thousand apps or more installed #2505
+
+* Fix release channel logic so stable updates are always allowed #2508
+
+### 1.16-alpha2 (2022-12-30)
+
+* Show upgrade notice after resetting the DB due to F-Droid or OS update.
+
+* Stop logging app URLs and filenames (#2500)
+
+* Use new strict release process which does not load dev tools during build
+
+* Fix numerous crashes
+
+### 1.16-alpha1 (2022-12-19)
+
+* Migrate custom repo configuration to new database (#2485)
+
+* Fix random crashes related to WiFi (#2495 #2477)
+
+* Fix disabling of repo mirrors when there are many (#2490)
+
+* Fix OpenCollective links
+
+* Small bits of code modernization
+
+### 1.16-alpha0 (2022-12-02)
 
 * Huge overhaul of download, index, and database code.
 
@@ -6,6 +62,18 @@
   #2412 #2436 #2442 #2443 #2444 #1971
 
 * Known bugs: #2446 #2447 #2475
+
+### 1.15.6 (2023-01-13)
+
+* Fix crash when app is downloading an app or updating repos in background #2482
+
+* Only load WifiApControl if it is going to be used, avoiding potential crashes.
+
+### 1.15.5 (2022-12-19)
+
+* Fix swap to use index-v1.jar when available #2476
+
+* Fix random crashes related to WifiApControl
 
 ### 1.15.4 (2022-11-30)
 

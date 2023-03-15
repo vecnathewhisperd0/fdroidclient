@@ -9,11 +9,14 @@ import android.view.ViewGroup;
 
 import com.hannesdorfmann.adapterdelegates4.AdapterDelegatesManager;
 
+import org.fdroid.database.Repository;
+import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.database.FDroidDatabase;
 import org.fdroid.database.UpdatableApp;
 import org.fdroid.database.DbUpdateChecker;
 import org.fdroid.fdroid.AppUpdateStatusManager;
+import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.data.DBHelper;
@@ -35,10 +38,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * Manages the following types of information:
@@ -101,10 +101,8 @@ public class UpdatesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private void loadUpdatableApps() {
         List<String> releaseChannels = Preferences.get().getBackendReleaseChannels();
         if (disposable != null) disposable.dispose();
-        disposable = Single.fromCallable(() -> updateChecker.getUpdatableApps(releaseChannels))
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::onCanUpdateLoadFinished);
+        disposable = Utils.runOffUiThread(() -> updateChecker.getUpdatableApps(releaseChannels, true),
+                this::onCanUpdateLoadFinished);
     }
 
     public boolean canViewAllUpdateableApps() {
@@ -137,7 +135,8 @@ public class UpdatesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         for (UpdatableApp updatableApp: apps) {
             App app = new App(updatableApp);
-            Apk apk = new Apk(updatableApp.getUpdate());
+            Repository repo = FDroidApp.getRepo(updatableApp.getUpdate().getRepoId());
+            Apk apk = new Apk(updatableApp.getUpdate(), repo);
             if (updatableApp.getHasKnownVulnerability()) {
                 app.installedApk = apk;
                 knownVulnApps.add(new KnownVulnApp(activity, app, apk));

@@ -152,7 +152,7 @@
     <string name="menu_bitcoin">Bitcoin</string>
     <string name="menu_litecoin">Litecoin</string>
     <string name="menu_flattr">Flattr</string>
-    <string name="banner_updating_repositories">Oppdaterer pakkebrønner …</string>
+    <string name="banner_updating_repositories">Oppdaterer pakkebrønner</string>
     <string name="status_processing_xml_percent">Behandler %2$s / %3$s (%4$d%%) fra %1$s</string>
     <string name="repo_details">Pakkebrønn</string>
     <string name="repo_url">Adresse</string>
@@ -387,11 +387,11 @@
     <string name="app_list_download_ready">Nedlastet, klar til installasjon</string>
     <string name="download_404">Den etterspurte fila ble ikke funnet.</string>
     <string name="status_inserting_x_apps">Lagrer programdetaljer (%1$d/%2$d) fra %3$s</string>
-    <string name="app_details__incompatible_mismatched_signature">Forskjellig signatur enn installert versjon</string>
+    <string name="app_details__incompatible_mismatched_signers">Forskjellig signatur enn installert versjon</string>
     <string name="app_details__no_versions__show_incompat_versions">For å vise ukompatible versjoner her uansett, skru på \"%1$s\"-innstillingen.</string>
-    <string name="app_details__no_versions__no_compatible_signatures">Ingen versjoner med kompatibel signatur</string>
+    <string name="app_details__no_versions__no_compatible_signers">Ingen versjoner med kompatibel signatur</string>
     <string name="app_details__no_versions__none_compatible_with_device">Ingen versjoner kompatible med enhet</string>
-    <string name="app_details__no_versions__explain_incompatible_signatures">Den installerte versjonen er ikke kompatibel med noen tilgjengelig versjoner. Å avinstallere programmet vil la deg vise og installere kompatible versjoner. Dette skjer ofte når programmer er installert via Google Play eller fra andre kilder, hvis de er signert med et annet sertifikat.</string>
+    <string name="app_details__no_versions__explain_incompatible_signers">Den installerte versjonen er ikke kompatibel med noen tilgjengelig versjoner. Å avinstallere programmet vil la deg vise og installere kompatible versjoner. Dette skjer ofte når programmer er installert via Google Play eller fra andre kilder, hvis de er signert med et annet sertifikat.</string>
     <string name="app_list__dismiss_app_update">Oppdatering oversett</string>
     <string name="app_list__dismiss_vulnerable_app">Sårbarhet ignorert</string>
     <string name="app_list__dismiss_downloading_app">Nedlasting avbrutt</string>
@@ -540,4 +540,6 @@
     <string name="antiknownvuln">Kjent sårbarhet</string>
     <string name="antinosource">Kilden er ikke lenger tilgjengelig</string>
     <string name="antinsfw">Programmet inneholder innhold ledelsen i F-Droid synes bør sensureres</string>
+    <string name="latest__empty_state__upgrading">Oppgraderer database…</string>
+    <string name="menu_release_channel_beta">Tillat betaoppdateringer</string>
 </resources>

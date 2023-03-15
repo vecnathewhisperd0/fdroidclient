@@ -34,6 +34,14 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
+import androidx.core.app.JobIntentService;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import org.fdroid.CompatibilityChecker;
 import org.fdroid.CompatibilityCheckerImpl;
 import org.fdroid.database.DbUpdateChecker;
@@ -58,12 +66,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.JobIntentService;
-import androidx.core.app.NotificationCompat;
-import androidx.core.content.ContextCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -102,6 +104,7 @@ public class UpdateService extends JobIntentService {
     private static final int NOTIFY_ID_UPDATING = 0;
 
     private static UpdateService updateService;
+    private static boolean isForcedUpdate;
 
     private FDroidDatabase db;
     private NotificationManager notificationManager;
@@ -126,6 +129,7 @@ public class UpdateService extends JobIntentService {
         return intent;
     }
 
+    @UiThread
     public static void updateNewRepoNow(Context context, String address, @Nullable String fingerprint) {
         enqueueWork(context, getIntent(context, address, fingerprint));
     }
@@ -135,6 +139,7 @@ public class UpdateService extends JobIntentService {
      * when the system language changes, or the underlying OS was upgraded.
      * This wipes the existing database before running the update!
      */
+    @UiThread
     public static void forceUpdateRepo(Context context) {
         Intent intent = new Intent(context, UpdateService.class);
         intent.putExtra(EXTRA_FORCED_UPDATE, true);
@@ -150,6 +155,7 @@ public class UpdateService extends JobIntentService {
      *
      * @see JobIntentService#enqueueWork(Context, Class, int, Intent)
      */
+    @UiThread
     private static void enqueueWork(Context context, @NonNull Intent intent) {
         if (FDroidApp.networkState > 0 && !Preferences.get().isOnDemandDownloadAllowed()) {
             Toast.makeText(context, R.string.updates_disabled_by_settings, Toast.LENGTH_LONG).show();
@@ -211,6 +217,15 @@ public class UpdateService extends JobIntentService {
         return updateService != null;
     }
 
+    /**
+     * Whether or not a forced repo update is currently in progress.
+     * This is typically the case when the phone was updated to a new major OS version
+     * or the client DB was updated, so that all data needed to be purged.
+     */
+    public static boolean isUpdatingForced() {
+        return updateService != null && isForcedUpdate;
+    }
+
     public static void stopNow() {
         if (updateService != null) {
             updateService.stopSelf(JOB_ID);
@@ -261,6 +276,7 @@ public class UpdateService extends JobIntentService {
         super.onDestroy();
         notificationManager.cancel(NOTIFY_ID_UPDATING);
         LocalBroadcastManager.getInstance(this).unregisterReceiver(updateStatusReceiver);
+        isForcedUpdate = false;
         updateService = null;
     }
 
@@ -285,7 +301,7 @@ public class UpdateService extends JobIntentService {
     private void sendRepoErrorStatus(int statusCode, ArrayList<CharSequence> repoErrors) {
         Intent intent = new Intent(LOCAL_ACTION_STATUS);
         intent.putExtra(EXTRA_STATUS_CODE, statusCode);
-        intent.putExtra(EXTRA_REPO_ERRORS, repoErrors.toArray(new CharSequence[repoErrors.size()]));
+        intent.putExtra(EXTRA_REPO_ERRORS, repoErrors.toArray(new CharSequence[0]));
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
@@ -378,6 +394,7 @@ public class UpdateService extends JobIntentService {
         final long startTime = System.currentTimeMillis();
         boolean manualUpdate = intent.getBooleanExtra(EXTRA_MANUAL_UPDATE, false);
         boolean forcedUpdate = intent.getBooleanExtra(EXTRA_FORCED_UPDATE, false);
+        isForcedUpdate = forcedUpdate;
         String fingerprint = intent.getStringExtra(EXTRA_REPO_FINGERPRINT);
         String address = intent.getDataString();
 
@@ -402,17 +419,15 @@ public class UpdateService extends JobIntentService {
                     if (manualUpdate) {
                         Utils.showToastFromService(this, getString(R.string.warning_no_internet), Toast.LENGTH_SHORT);
                     }
+                    isForcedUpdate = false;
                     return;
                 }
             } else if ((manualUpdate || forcedUpdate) && fdroidPrefs.isOnDemandDownloadAllowed()) {
                 Utils.debugLog(TAG, "manually requested or forced update");
-                if (forcedUpdate) {
-                    DBHelper.resetRepos(this);
-                    // TODO check if we still need something like this:
-                    // InstalledAppProviderService.compareToPackageManager(this);
-                }
+                if (forcedUpdate) DBHelper.resetTransient(this);
             } else if (!fdroidPrefs.isBackgroundDownloadAllowed() && !fdroidPrefs.isOnDemandDownloadAllowed()) {
                 Utils.debugLog(TAG, "don't run update");
+                isForcedUpdate = false;
                 return;
             }
 
@@ -507,6 +522,7 @@ public class UpdateService extends JobIntentService {
             sendStatus(this, STATUS_ERROR_GLOBAL, e.getMessage());
         }
 
+        isForcedUpdate = false;
         long time = System.currentTimeMillis() - startTime;
         Log.i(TAG, "Updating repo(s) complete, took " + time / 1000 + " seconds to complete.");
     }
@@ -529,13 +545,15 @@ public class UpdateService extends JobIntentService {
         App updateLastApp = null;
         Apk updateLastApk = null;
         for (UpdatableApp app : apps) {
+            Repository repo = FDroidApp.getRepo(app.getUpdate().getRepoId());
+            if (repo == null) continue; // repo could have been removed in the meantime
             // update our own APK at the end
             if (TextUtils.equals(ourPackageName, app.getUpdate().getPackageName())) {
                 updateLastApp = new App(app);
-                updateLastApk = new Apk(app.getUpdate());
+                updateLastApk = new Apk(app.getUpdate(), repo);
                 continue;
             }
-            InstallManagerService.queue(context, new App(app), new Apk(app.getUpdate()));
+            InstallManagerService.queue(context, new App(app), new Apk(app.getUpdate(), repo));
         }
         if (updateLastApp != null) {
             InstallManagerService.queue(context, updateLastApp, updateLastApk);

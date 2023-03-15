@@ -442,9 +442,14 @@ public final class Utils {
      * Get the standard, lowercase SHA-256 fingerprint used to represent an
      * APK or JAR signing key. <b>NOTE</b>: this does not handle signers that
      * have multiple X.509 signing certificates.
+     * <p>
+     * Calling the X.509 signing certificate the "signature" is incorrect, e.g.
+     * {@link PackageInfo#signatures} or {@link android.content.pm.Signature}.
+     * The Android docs about APK signatures call this the "signer".
      *
-     * @see org.fdroid.fdroid.data.Apk#sig
+     * @see org.fdroid.fdroid.data.Apk#signer
      * @see PackageInfo#signatures
+     * @see <a href="https://source.android.com/docs/security/features/apksigning/v2">APK Signature Scheme v2</a>
      */
     @Nullable
     public static String getPackageSigner(PackageInfo info) {
@@ -521,15 +526,6 @@ public final class Utils {
         List<Mirror> mirrors = repo.getMirrors();
         Proxy proxy = NetCipher.getProxy();
         return new DownloadRequest(file, mirrors, proxy, repo.getUsername(), repo.getPassword());
-    }
-
-    @Nullable
-    @Deprecated
-    public static DownloadRequest getDownloadRequest(@NonNull Repository repo, @Nullable String path) {
-        if (path == null) return null;
-        List<Mirror> mirrors = repo.getMirrors();
-        Proxy proxy = NetCipher.getProxy();
-        return new DownloadRequest(path, mirrors, proxy, repo.getUsername(), repo.getPassword());
     }
 
     /**
@@ -617,11 +613,11 @@ public final class Utils {
 
         if (days < 1) {
             return res.getString(R.string.details_last_updated_today);
-        } else if (weeks < 1) {
+        } else if (weeks < 3) {
             return res.getQuantityString(R.plurals.details_last_update_days, (int) days, days);
-        } else if (months < 1) {
+        } else if (months < 2) {
             return res.getQuantityString(R.plurals.details_last_update_weeks, (int) weeks, weeks);
-        } else if (years < 1) {
+        } else if (years < 2) {
             return res.getQuantityString(R.plurals.details_last_update_months, (int) months, months);
         } else {
             return res.getQuantityString(R.plurals.details_last_update_years, (int) years, years);

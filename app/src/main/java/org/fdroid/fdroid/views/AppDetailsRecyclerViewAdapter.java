@@ -47,6 +47,7 @@ import androidx.gridlayout.widget.GridLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.transition.TransitionManager;
 
 import org.apache.commons.io.FilenameUtils;
 import org.fdroid.database.AppPrefs;
@@ -112,7 +113,7 @@ public class AppDetailsRecyclerViewAdapter
     private RecyclerView recyclerView;
     private final List<Object> items = new ArrayList<>();
     private final List<Apk> versions = new ArrayList<>();
-    private final List<Apk> compatibleVersionsDifferentSig = new ArrayList<>();
+    private final List<Apk> compatibleVersionsDifferentSigner = new ArrayList<>();
     private boolean showVersions;
 
     private HeaderViewHolder headerView;
@@ -137,16 +138,17 @@ public class AppDetailsRecyclerViewAdapter
         versions.clear();
 
         // Get versions
-        compatibleVersionsDifferentSig.clear();
+        compatibleVersionsDifferentSigner.clear();
         addInstalledApkIfExists(apks);
         boolean showIncompatibleVersions = Preferences.get().showIncompatibleVersions();
         for (final Apk apk : apks) {
             boolean allowByCompatibility = apk.compatible || showIncompatibleVersions;
-            String installedSig = app.installedSig;
-            boolean allowBySig = installedSig == null || showIncompatibleVersions || TextUtils.equals(installedSig, apk.sig);
+            String installedSigner = app.installedSigner;
+            boolean allowBySigner = installedSigner == null
+                    || showIncompatibleVersions || TextUtils.equals(installedSigner, apk.signer);
             if (allowByCompatibility) {
-                compatibleVersionsDifferentSig.add(apk);
-                if (allowBySig) {
+                compatibleVersionsDifferentSigner.add(apk);
+                if (allowBySigner) {
                     versions.add(apk);
                     if (!versionsExpandTracker.containsKey(apk.getApkPath())) {
                         versionsExpandTracker.put(apk.getApkPath(), false);
@@ -177,9 +179,9 @@ public class AppDetailsRecyclerViewAdapter
         Apk installedApk = app.getInstalledApk(context, apks);
         // These conditions should be enough to determine if the installedApk
         // is a generated dummy or a proper APK containing data from a repository.
-        if (installedApk != null && installedApk.added == null && installedApk.sig == null) {
+        if (installedApk != null && installedApk.added == null && installedApk.signer == null) {
             installedApk.compatible = true;
-            installedApk.sig = app.installedSig;
+            installedApk.signer = app.installedSigner;
             installedApk.maxSdkVersion = -1;
             apks.add(installedApk);
         }
@@ -416,11 +418,7 @@ public class AppDetailsRecyclerViewAdapter
             descriptionView.setMaxLines(MAX_LINES);
             descriptionView.setEllipsize(TextUtils.TruncateAt.MARQUEE);
             descriptionMoreView.setOnClickListener(v -> {
-                // Make this "header section" the focused child, so that RecyclerView will use
-                // it as the anchor in the layout process. Otherwise the RV might select another
-                // view as the anchor, resulting in that the top of this view is instead scrolled
-                // off the screen. Refer to LinearLayoutManager.updateAnchorFromChildren(...).
-                recyclerView.requestChildFocus(itemView, itemView);
+                TransitionManager.beginDelayedTransition(recyclerView, null);
                 if (TextViewCompat.getMaxLines(descriptionView) != MAX_LINES) {
                     descriptionView.setMaxLines(MAX_LINES);
                     descriptionMoreView.setText(R.string.more);
@@ -552,7 +550,7 @@ public class AppDetailsRecyclerViewAdapter
             updateAntiFeaturesWarning();
 
             buttonPrimaryView.setText(R.string.menu_install);
-            buttonPrimaryView.setVisibility(versions.isEmpty() ? View.GONE : View.VISIBLE);
+            buttonPrimaryView.setVisibility((versions.isEmpty() || app.packageName.equals(R.string.applicationId)) ? View.GONE : View.VISIBLE);
             buttonSecondaryView.setText(R.string.menu_uninstall);
             buttonSecondaryView.setVisibility(app.isUninstallable(context) ? View.VISIBLE : View.INVISIBLE);
             buttonSecondaryView.setOnClickListener(v -> callbacks.uninstallApk());
@@ -845,8 +843,8 @@ public class AppDetailsRecyclerViewAdapter
         @Override
         public void bindModel() {
             Context context = headerView.getContext();
-            if (hasCompatibleApksDifferentSigs()) {
-                headerView.setText(context.getString(R.string.app_details__no_versions__no_compatible_signatures));
+            if (hasCompatibleApksDifferentSigners()) {
+                headerView.setText(context.getString(R.string.app_details__no_versions__no_compatible_signers));
             } else {
                 headerView.setText(context.getString(R.string.app_details__no_versions__none_compatible_with_device));
             }
@@ -865,9 +863,9 @@ public class AppDetailsRecyclerViewAdapter
 
             String message;
             String title;
-            if (hasCompatibleApksDifferentSigs()) {
-                title = context.getString(R.string.app_details__no_versions__no_compatible_signatures);
-                message = context.getString(R.string.app_details__no_versions__explain_incompatible_signatures) +
+            if (hasCompatibleApksDifferentSigners()) {
+                title = context.getString(R.string.app_details__no_versions__no_compatible_signers);
+                message = context.getString(R.string.app_details__no_versions__explain_incompatible_signers) +
                         "\n\n" + showIncompatible;
             } else {
                 title = context.getString(R.string.app_details__no_versions__none_compatible_with_device);
@@ -886,8 +884,8 @@ public class AppDetailsRecyclerViewAdapter
                     .show();
         }
 
-        private boolean hasCompatibleApksDifferentSigs() {
-            return compatibleVersionsDifferentSig.size() > 0;
+        private boolean hasCompatibleApksDifferentSigners() {
+            return compatibleVersionsDifferentSigner.size() > 0;
         }
     }
 
@@ -1049,7 +1047,7 @@ public class AppDetailsRecyclerViewAdapter
 
             boolean isAppInstalled = app.isInstalled(context);
             boolean isApkInstalled = apk.versionCode == app.installedVersionCode &&
-                    TextUtils.equals(apk.sig, app.installedSig);
+                    TextUtils.equals(apk.signer, app.installedSigner);
             boolean isApkSuggested = apk.equals(suggestedApk);
             boolean isApkDownloading = callbacks.isAppDownloading() && downloadedApk != null &&
                     downloadedApk.compareTo(apk) == 0 &&
@@ -1183,10 +1181,9 @@ public class AppDetailsRecyclerViewAdapter
                         TextUtils.join(", ", apk.incompatibleReasons));
             } else {
                 Objects.requireNonNull(app);
-                boolean mismatchedSig = app.installedSig != null
-                        && !TextUtils.equals(app.installedSig, apk.sig);
-                if (mismatchedSig) {
-                    return context.getString(R.string.app_details__incompatible_mismatched_signature);
+                if (app.installedSigner != null
+                        && !TextUtils.equals(app.installedSigner, apk.signer)) {
+                    return context.getString(R.string.app_details__incompatible_mismatched_signers);
                 }
             }
             return null;

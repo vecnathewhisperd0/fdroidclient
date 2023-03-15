@@ -2,6 +2,7 @@ package org.fdroid.database
 
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import androidx.core.content.pm.PackageInfoCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import io.mockk.every
 import io.mockk.mockk
@@ -19,6 +20,7 @@ import kotlin.random.Random
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
+import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 import kotlin.test.fail
@@ -60,11 +62,18 @@ internal class AppListItemsTest : AppTest() {
             assertEquals(app1, apps[0])
         }
 
+        // get first app by partial search, sort by name
+        appDao.getAppListItems(pm, "On", NAME).getOrFail().let { apps ->
+            assertEquals(1, apps.size)
+            assertEquals(app1, apps[0])
+        }
+
         // get second app by search, sort order doesn't matter
         appDao.getAppListItems(pm, "Two", NAME).getOrFail().let { apps ->
             assertEquals(1, apps.size)
             assertEquals(app2, apps[0])
-            assertEquals(packageInfo2.getVersionCode(), apps[0].installedVersionCode)
+            assertEquals(PackageInfoCompat.getLongVersionCode(packageInfo2),
+                apps[0].installedVersionCode)
             assertEquals(packageInfo2.versionName, apps[0].installedVersionName)
         }
 
@@ -117,7 +126,8 @@ internal class AppListItemsTest : AppTest() {
         appDao.getAppListItems(pm, "A", "Two", NAME).getOrFail().let { apps ->
             assertEquals(1, apps.size)
             assertEquals(app2, apps[0])
-            assertEquals(packageInfo2.getVersionCode(), apps[0].installedVersionCode)
+            assertEquals(PackageInfoCompat.getLongVersionCode(packageInfo2),
+                apps[0].installedVersionCode)
             assertEquals(packageInfo2.versionName, apps[0].installedVersionName)
         }
 
@@ -148,6 +158,27 @@ internal class AppListItemsTest : AppTest() {
         // empty search for unknown search term
         appDao.getAppListItems(pm, "A", "foo bar", LAST_UPDATED).getOrFail().let { apps ->
             assertEquals(0, apps.size)
+        }
+    }
+
+    @Test
+    fun testMalformedSearchQuery() {
+        every { pm.getInstalledPackages(0) } returns emptyList()
+
+        // without category
+        appDao.getAppListItems(pm, "\"", LAST_UPDATED).getOrFail().let { apps ->
+            assertTrue(apps.isEmpty())
+        }
+        appDao.getAppListItems(pm, "*simple\"*", NAME).getOrFail().let { apps ->
+            assertTrue(apps.isEmpty())
+        }
+
+        // with category
+        appDao.getAppListItems(pm, "Category", "\"", LAST_UPDATED).getOrFail().let { apps ->
+            assertTrue(apps.isEmpty())
+        }
+        appDao.getAppListItems(pm, "Category", "*simple\"*", NAME).getOrFail().let { apps ->
+            assertTrue(apps.isEmpty())
         }
     }
 
@@ -225,7 +256,10 @@ internal class AppListItemsTest : AppTest() {
             val installed = if (apps[0].packageName == packageName1) apps[1] else apps[0]
             val other = if (apps[0].packageName == packageName1) apps[0] else apps[1]
             assertEquals(packageInfo2.versionName, installed.installedVersionName)
-            assertEquals(packageInfo2.getVersionCode(), installed.installedVersionCode)
+            assertEquals(
+                PackageInfoCompat.getLongVersionCode(packageInfo2),
+                installed.installedVersionCode
+            )
             assertNull(other.installedVersionName)
             assertNull(other.installedVersionCode)
         }
@@ -406,7 +440,10 @@ internal class AppListItemsTest : AppTest() {
             assertEquals(1, apps.size)
             assertEquals(app1, apps[0])
             // version code and version name gets taken from supplied packageInfo
-            assertEquals(packageInfo1.getVersionCode(), apps[0].installedVersionCode)
+            assertEquals(
+                PackageInfoCompat.getLongVersionCode(packageInfo1),
+                apps[0].installedVersionCode
+            )
             assertEquals(packageInfo1.versionName, apps[0].installedVersionName)
         }
 
@@ -415,6 +452,45 @@ internal class AppListItemsTest : AppTest() {
         appDao.getInstalledAppListItems(pm).getOrFail().let { apps ->
             assertEquals(0, apps.size)
         }
+    }
+
+    @Test
+    fun testGetInstalledAppListItemsMaxVars() {
+        // insert an app
+        val repoId = repoDao.insertOrReplace(getRandomRepo())
+        appDao.insert(repoId, packageName, app1, locales)
+
+        val packageInfoCreator = { name: String ->
+            @Suppress("DEPRECATION")
+            PackageInfo().apply {
+                packageName = name
+                versionName = name
+                versionCode = Random.nextInt(1, Int.MAX_VALUE)
+            }
+        }
+        val packageInfo = packageInfoCreator(packageName)
+
+        // sqlite has a maximum number of 999 variables that can be used in a query
+        val listPackageInfo = listOf(packageInfo)
+        val packageInfoOk = MutableList(999) { packageInfoCreator(getRandomString()) }
+        val packageInfoNotOk1 = MutableList(1000) { packageInfoCreator(getRandomString()) }
+        val packageInfoNotOk2 = MutableList(5000) { packageInfoCreator(getRandomString()) }
+
+        // app gets returned no matter how many packages are installed
+        every { pm.getInstalledPackages(0) } returns packageInfoOk + listPackageInfo
+        assertEquals(1, appDao.getInstalledAppListItems(pm).getOrFail().size)
+        every { pm.getInstalledPackages(0) } returns packageInfoNotOk1 + listPackageInfo
+        assertEquals(1, appDao.getInstalledAppListItems(pm).getOrFail().size)
+        every { pm.getInstalledPackages(0) } returns packageInfoNotOk2 + listPackageInfo
+        assertEquals(1, appDao.getInstalledAppListItems(pm).getOrFail().size)
+
+        // ensure they have version info set
+        every { pm.getInstalledPackages(0) } returns packageInfoOk + listPackageInfo
+        assertNotNull(appDao.getInstalledAppListItems(pm).getOrFail()[0].installedVersionName)
+        every { pm.getInstalledPackages(0) } returns packageInfoNotOk1 + listPackageInfo
+        assertNotNull(appDao.getInstalledAppListItems(pm).getOrFail()[0].installedVersionName)
+        every { pm.getInstalledPackages(0) } returns packageInfoNotOk2 + listPackageInfo
+        assertNotNull(appDao.getInstalledAppListItems(pm).getOrFail()[0].installedVersionName)
     }
 
     /**

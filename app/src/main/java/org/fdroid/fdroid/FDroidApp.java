@@ -322,6 +322,7 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
 
         // keep a static copy of the repositories around and in-sync
         // not how one would normally do this, but it is a common pattern in this codebase
+        // note: we need this as soon as possible as lots of other code is relying on it
         FDroidDatabase db = DBHelper.getDb(this);
         db.getRepositoryDao().getLiveRepositories().observeForever(repositories -> repos = repositories);
 
@@ -345,9 +346,9 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
 
         if (preferences.isIndexNeverUpdated()) {
             preferences.setDefaultForDataOnlyConnection(this);
-            // force this check to ensure it starts fetching the index on initial runs
-            networkState = ConnectivityMonitorService.getNetworkState(this);
         }
+        // force setting network state to ensure it is set before UpdateService checks it
+        networkState = ConnectivityMonitorService.getNetworkState(this);
         ConnectivityMonitorService.registerAndStart(this);
         UpdateService.schedule(getApplicationContext());
 

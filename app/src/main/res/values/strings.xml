@@ -40,6 +40,8 @@
     <string name="keep_install_history_summary">Store a log of all installs and uninstalls in a private store</string>
     <string name="send_to_fdroid_metrics">Send usage data</string>
     <string name="send_to_fdroid_metrics_summary">Sends anonymous data weekly to F-Droid Metrics (requires "Keep install history")</string>
+    <string name="use_ipfs_gateways">Use IPFS gateways</string>
+    <string name="use_ipfs_gateways_summary">Download files from IPFS mirrors, if supported by the repo.</string>
     <!-- message shown as a "toast" when the user enables the Send to F-Droid Metrics preference -->
     <string name="toast_metrics_in_install_history">The %s Metric report is viewable in the Install History viewer</string>
     <string name="send_version_and_uuid">Send version and UUID to servers</string>
@@ -93,11 +95,11 @@
     <string name="app_details_donate_prompt_unknown_author">Buy the developers of %1$s a coffee!</string>
     <string name="app_details_donate_prompt">%1$s is created by %2$s. Buy them a coffee!</string>
 
-    <string name="app_details__incompatible_mismatched_signature">Different signature to installed version</string>
+    <string name="app_details__incompatible_mismatched_signers">Different signer to installed version</string>
     <string name="app_details__no_versions__show_incompat_versions">To show incompatible versions here anyway, enable the \"%1$s\" setting.</string>
-    <string name="app_details__no_versions__no_compatible_signatures">No versions with compatible signature</string>
+    <string name="app_details__no_versions__no_compatible_signers">No versions with compatible signer</string>
     <string name="app_details__no_versions__none_compatible_with_device">No versions compatible with device</string>
-    <string name="app_details__no_versions__explain_incompatible_signatures">The installed version is not compatible with any available versions. Uninstalling the app will enable you to view and install compatible versions.
+    <string name="app_details__no_versions__explain_incompatible_signers">The installed version is not compatible with any available versions. Uninstalling the app will enable you to view and install compatible versions.
 
 This often occurs with apps installed via Google Play or other sources, if they are signed by a different certificate.</string>
 
@@ -263,6 +265,7 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="menu_show_install_history">Show install history</string>
 
     <string name="latest__empty_state__no_recent_apps">No recent apps found</string>
+    <string name="latest__empty_state__upgrading">Upgrading database…</string>
     <string name="latest__empty_state__never_updated">Once your list of apps has been updated, the latest apps should
         show here
     </string>
@@ -280,18 +283,6 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="details_new_in_version">New in version %s</string>
 
     <string name="antifeatureswarning">This app has features you may not like.</string>
-    <string name="antiads_key" translatable="false">Ads</string>
-    <string name="antitrack_key" translatable="false">Tracking</string>
-    <string name="antinonfreenet_key" translatable="false">NonFreeNet</string>
-    <string name="antinonfreead_key" translatable="false">NonFreeAdd</string>
-    <string name="antinonfreedep_key" translatable="false">NonFreeDep</string>
-    <string name="antiupstreamnonfree_key" translatable="false">UpstreamNonFree</string>
-    <string name="antinonfreeassets_key" translatable="false">NonFreeAssets</string>
-    <string name="antidisabledalgorithm_key" translatable="false">DisabledAlgorithm</string>
-    <string name="antiknownvuln_key" translatable="false">KnownVuln</string>
-    <string name="antinosource_key" translatable="false">NoSourceSince</string>
-    <string name="antinsfw_key" translatable="false">NSFW</string>
-    <string name="antiothers_key" translatable="false">_anti_others_</string>
     <string name="antifeatures">Anti-features</string>
     <string name="antiads">Ads</string>
     <string name="antitrack">Tracking</string>

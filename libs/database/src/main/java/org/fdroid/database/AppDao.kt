@@ -4,9 +4,11 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import androidx.annotation.VisibleForTesting
+import androidx.core.content.pm.PackageInfoCompat
 import androidx.core.os.ConfigurationCompat.getLocales
 import androidx.core.os.LocaleListCompat
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.map
 import androidx.room.Dao
 import androidx.room.Insert
@@ -109,6 +111,11 @@ public interface AppDao {
     public fun getNumberOfAppsInCategory(category: String): Int
 
     public fun getNumberOfAppsInRepository(repoId: Long): Int
+
+    /**
+     * Removes all apps and associated data from all repositories.
+     */
+    public fun clearAll()
 }
 
 public enum class AppListSortOrder {
@@ -372,7 +379,7 @@ internal interface AppDaoInt : AppDao {
         return if (searchQuery.isNullOrEmpty()) when (sortOrder) {
             LAST_UPDATED -> getAppListItemsByLastUpdated().map(packageManager)
             NAME -> getAppListItemsByName().map(packageManager)
-        } else getAppListItems(searchQuery).map(packageManager)
+        } else getAppListItems(escapeQuery(searchQuery)).map(packageManager)
     }
 
     override fun getAppListItems(
@@ -384,7 +391,12 @@ internal interface AppDaoInt : AppDao {
         return if (searchQuery.isNullOrEmpty()) when (sortOrder) {
             LAST_UPDATED -> getAppListItemsByLastUpdated(category).map(packageManager)
             NAME -> getAppListItemsByName(category).map(packageManager)
-        } else getAppListItems(category, searchQuery).map(packageManager)
+        } else getAppListItems(category, escapeQuery(searchQuery)).map(packageManager)
+    }
+
+    private fun escapeQuery(searchQuery: String): String {
+        val sanitized = searchQuery.replace(Regex.fromLiteral("\""), "\"\"")
+        return "\"*$sanitized*\""
     }
 
     private fun LiveData<List<AppListItem>>.map(
@@ -396,11 +408,14 @@ internal interface AppDaoInt : AppDao {
             val packageInfo = installedPackages[item.packageName]
             if (packageInfo == null) item else item.copy(
                 installedVersionName = packageInfo.versionName,
-                installedVersionCode = packageInfo.getVersionCode(),
+                installedVersionCode = PackageInfoCompat.getLongVersionCode(packageInfo),
             )
         }
     }
 
+    /**
+     * Warning: Run [escapeQuery] on the given [searchQuery] before.
+     */
     @Transaction
     @Query("""
         SELECT repoId, packageName, app.localizedName, app.localizedSummary, app.lastUpdated, 
@@ -409,10 +424,13 @@ internal interface AppDaoInt : AppDao {
         JOIN ${AppMetadataFts.TABLE} USING (repoId, packageName)
         LEFT JOIN ${HighestVersion.TABLE} AS version USING (repoId, packageName)
         JOIN ${RepositoryPreferences.TABLE} AS pref USING (repoId)
-        WHERE pref.enabled = 1 AND ${AppMetadataFts.TABLE} MATCH '"*' || :searchQuery || '*"'
+        WHERE pref.enabled = 1 AND ${AppMetadataFts.TABLE} MATCH :searchQuery
         GROUP BY packageName HAVING MAX(pref.weight)""")
     fun getAppListItems(searchQuery: String): LiveData<List<AppListItem>>
 
+    /**
+     * Warning: Run [escapeQuery] on the given [searchQuery] before.
+     */
     @Transaction
     @Query("""
         SELECT repoId, packageName, app.localizedName, app.localizedSummary, app.lastUpdated, 
@@ -422,7 +440,7 @@ internal interface AppDaoInt : AppDao {
         LEFT JOIN ${HighestVersion.TABLE} AS version USING (repoId, packageName)
         JOIN ${RepositoryPreferences.TABLE} AS pref USING (repoId)
         WHERE pref.enabled = 1 AND categories LIKE '%,' || :category || ',%' AND
-              ${AppMetadataFts.TABLE} MATCH '"*' || :searchQuery || '*"'
+              ${AppMetadataFts.TABLE} MATCH :searchQuery
         GROUP BY packageName HAVING MAX(pref.weight)""")
     fun getAppListItems(category: String, searchQuery: String): LiveData<List<AppListItem>>
 
@@ -474,6 +492,9 @@ internal interface AppDaoInt : AppDao {
         ORDER BY localizedName COLLATE NOCASE ASC""")
     fun getAppListItemsByName(category: String): LiveData<List<AppListItem>>
 
+    /**
+     * Warning: Can not be called with more than 999 [packageNames].
+     */
     @Transaction
     @SuppressWarnings(CURSOR_MISMATCH) // no anti-features needed here
     @Query("""SELECT repoId, packageName, localizedName, localizedSummary, app.lastUpdated, 
@@ -491,7 +512,40 @@ internal interface AppDaoInt : AppDao {
         val installedPackages = packageManager.getInstalledPackages(0)
             .associateBy { packageInfo -> packageInfo.packageName }
         val packageNames = installedPackages.keys.toList()
-        return getAppListItems(packageNames).map(packageManager, installedPackages)
+        return if (packageNames.size <= 999) {
+            getAppListItems(packageNames).map(packageManager, installedPackages)
+        } else {
+            AppListLiveData().apply {
+                packageNames.chunked(999) { addSource(getAppListItems(it)) }
+            }.map(packageManager, installedPackages)
+        }
+    }
+
+    private class AppListLiveData : MediatorLiveData<List<AppListItem>>() {
+        private val list = ArrayList<LiveData<List<AppListItem>>>()
+
+        /**
+         * Adds the given [liveData] and updates [getValue] with a union of all lists
+         * once all added [liveData]s changed to a non-null list value.
+         */
+        fun addSource(liveData: LiveData<List<AppListItem>>) {
+            list.add(liveData)
+            addSource(liveData) {
+                var shouldUpdate = true
+                val result = list.flatMap {
+                    it.value ?: run {
+                        shouldUpdate = false
+                        emptyList()
+                    }
+                }
+                if (shouldUpdate) value = result.sortedWith { i1, i2 ->
+                    // we need to re-sort the result, because each liveData is only sorted in itself
+                    val n1 = i1.name ?: ""
+                    val n2 = i2.name ?: ""
+                    n1.compareTo(n2, ignoreCase = true)
+                }
+            }
+        }
     }
 
     //
@@ -543,4 +597,6 @@ internal interface AppDaoInt : AppDao {
     @Query("SELECT COUNT(*) FROM ${LocalizedFileList.TABLE}")
     fun countLocalizedFileLists(): Int
 
+    @Query("DELETE FROM ${AppMetadata.TABLE}")
+    override fun clearAll()
 }

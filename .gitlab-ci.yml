@@ -1,6 +1,7 @@
 image: registry.gitlab.com/fdroid/fdroidserver:buildserver-bullseye
 
 stages:
+  - lint
   - test
   - deploy
 
@@ -57,9 +58,20 @@ workflow:
 test_lint_pmd_checkstyle:
   <<: *test-template
   script:
+    # index-v1.jar tests need SHA1 support still, TODO use apksig to validate JAR sigs
+    - sed -i 's,SHA1 denyAfter 20[0-9][0-9],SHA1 denyAfter 2024,'
+          /usr/lib/jvm/default-java/conf/security/java.security
     # always report on lint errors to the build log
     - sed -i -e 's,textReport .*,textReport true,' app/build.gradle
+    # the tasks "lint", "test", etc don't always include everything
     - ./gradlew lint pmd checkstyle ktlintCheck testDebugUnitTest testFullDebugUnitTest
+
+tools scripts:
+  stage: lint
+  image: debian:bullseye-slim
+  script:
+    - apt-get update
+    - apt-get -qy install --no-install-recommends git python3
     - ./tools/check-format-strings.py
     - ./tools/check-fastlane-whitespace.py
     - ./tools/remove-unused-and-blank-translations.py
@@ -72,6 +84,18 @@ errorprone:
   script:
     - cat config/errorprone.gradle >> app/build.gradle
     - ./gradlew -Dorg.gradle.dependency.verification=lenient assembleDebug
+
+database schema:
+  stage: test
+  image: debian:bullseye-backports
+  script:
+    - apt-get update
+    - apt-get -qy --no-install-recommends install default-jdk-headless git sdkmanager
+    - export ANDROID_HOME=/opt/android-sdk
+    - export ANDROID_COMPILE_SDK=`sed -n 's,.*compileSdkVersion\s*\([0-9][0-9]*\).*,\1,p' app/build.gradle`
+    - sdkmanager "platforms;android-$ANDROID_COMPILE_SDK" "build-tools;30.0.3"
+    - ./gradlew :libs:database:kaptDebugKotlin
+    - git --no-pager diff --exit-code
 
 # Run the tests in the emulator.  Each step is broken out to run on
 # its own since the CI runner can have limited RAM, and the emulator

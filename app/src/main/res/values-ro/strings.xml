@@ -17,7 +17,7 @@
     <string name="no">Nu</string>
     <string name="repo_add_title">Adaugă depozit nou de aplicații</string>
     <string name="repo_add_add">Adaugă</string>
-    <string name="cancel">Renunță</string>
+    <string name="cancel">Anulaţi</string>
     <string name="enable">Activează</string>
     <string name="menu_search">Căutați</string>
     <string name="menu_launch">Deschideți</string>
@@ -297,7 +297,7 @@
     <string name="antifeatures">Caracteristici negative</string>
     <string name="antifeatureswarning">Această aplicație are caracteristici ce ar putea să nu vă placă.</string>
     <string name="details_new_in_version">Nou în versiunea %s</string>
-    <string name="preference_manage_installed_apps">gestionează aplicațiile instalate</string>
+    <string name="preference_manage_installed_apps">Gestionează aplicațiile instalate</string>
     <string name="preference_category__my_apps">Aplicațiile mele</string>
     <string name="categories__empty_state__no_categories">Nici o categorie de arătat</string>
     <string name="latest__empty_state__no_enabled_repos">Odată ce ai activat și actualizat un depozit, cele mai noi aplicații ar trebui să apară aici</string>
@@ -378,11 +378,11 @@
     <string name="swap_scan_or_type_url">O persoană trebuie să scaneze codul sau să introducă URL-ul celuilalt într-un browser.</string>
     <string name="swap_qr_isnt_for_swap">Codul QR scanat nu arată ca un cod de schimb.</string>
     <string name="swap_connection_misc_error">Eroare produsă în timpul conectării la dispozitiv, nu se poate face schimbul!</string>
-    <string name="app_details__incompatible_mismatched_signature">Semnătură diferită de versiunea instalată</string>
+    <string name="app_details__incompatible_mismatched_signers">Semnatar diferit față de versiunea instalată</string>
     <string name="app_details__no_versions__show_incompat_versions">Pentru a afișa aici și versiunile incompatibile, activați setarea \"%1$s\".</string>
-    <string name="app_details__no_versions__no_compatible_signatures">Nici o versiune nu are o semnătură compatibilă</string>
+    <string name="app_details__no_versions__no_compatible_signers">Nu există versiuni cu semnatar compatibil</string>
     <string name="app_details__no_versions__none_compatible_with_device">Nici o versiune compatibilă cu dispozitivul</string>
-    <string name="app_details__no_versions__explain_incompatible_signatures">Versiunea instalată nu este compatibilă cu nici o versiune disponibilă. Dezinstalând aplicația veți putea vedea și instala versiuni compatibile. Aceasta se întâmplă de obicei aplicațiilor instalate din Google Play sau alte surse, dacă sunt semnate cu un alt certificat.</string>
+    <string name="app_details__no_versions__explain_incompatible_signers">Versiunea instalată nu este compatibilă cu nici o versiune disponibilă. Dezinstalând aplicația veți putea vedea și instala versiuni compatibile. Aceasta se întâmplă de obicei aplicațiilor instalate din Google Play sau alte surse, dacă sunt semnate cu un alt certificat.</string>
     <string name="app_list__dismiss_app_update">Actualizare ignorată</string>
     <string name="app_list__dismiss_vulnerable_app">Vulnerabilitate ignorată</string>
     <string name="app_list__dismiss_downloading_app">Descărcare anulată</string>
@@ -536,4 +536,8 @@
     <string name="antinonfreenet">Servicii de rețea ne-libere</string>
     <string name="antiothers">Alte Anti-features</string>
     <string name="antinsfw">Această aplicație conține conținut care nu ar trebui să fie făcut public sau vizibil peste tot</string>
+    <string name="menu_release_channel_beta">Permiteți actualizări Beta</string>
+    <string name="latest__empty_state__upgrading">Se actualizează baza de date…</string>
+    <string name="use_ipfs_gateways">Utilizare portaluri IPFS</string>
+    <string name="use_ipfs_gateways_summary">Se descarcă fișiere de pe serverele de rezervă IPFS, dacă sunt suportate de depozite.</string>
 </resources>

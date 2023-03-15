@@ -329,10 +329,10 @@
     <string name="keep_year">שנה</string>
     <string name="keep_forever">תמיד</string>
     <plurals name="notification_summary_more">
-        <item quantity="one">עוד +%1$d…</item>
-        <item quantity="two">עוד +%1$d…</item>
-        <item quantity="many">עוד +%1$d…</item>
-        <item quantity="other">עוד +%1$d…</item>
+        <item quantity="one">עוד %1$d…</item>
+        <item quantity="two">עוד %1$d…</item>
+        <item quantity="many">עוד %1$d…</item>
+        <item quantity="other">עוד %1$d…</item>
     </plurals>
     <string name="notification_title_single_ready_to_install">מוכן להתקנה</string>
     <string name="notification_title_single_ready_to_install_update">עדכון מוכן להתקנה</string>
@@ -398,11 +398,11 @@
     <string name="status_inserting_x_apps">פרטי היישומון נשמרים (%1$d/%2$d) מתוך %3$s</string>
     <string name="app_installed_media">הקובץ הותקן אל %s</string>
     <string name="app_permission_storage">ל־F-Droid נדרשת הרשאה לגשת לאחסון כדי להתקין זאת לאחסון. נא להרשות זאת במסך הבא כדי להמשיך בהתקנה.</string>
-    <string name="app_details__incompatible_mismatched_signature">חתימה שונה מהגרסה המותקנת</string>
+    <string name="app_details__incompatible_mismatched_signers">חותם שונה מהגרסה המותקנת</string>
     <string name="app_details__no_versions__show_incompat_versions">כדי להציג את הגרסה נטולת התמיכה להלן בכל מקרה, יש להפעיל את ההגדרה „%1$s“.</string>
-    <string name="app_details__no_versions__no_compatible_signatures">אין גרסאות עם חתימה תואמת</string>
+    <string name="app_details__no_versions__no_compatible_signers">אין גרסאות עם חותם תואם</string>
     <string name="app_details__no_versions__none_compatible_with_device">אין גרסאות תואמות להתקן זה</string>
-    <string name="app_details__no_versions__explain_incompatible_signatures">הגרסה המותקנת אינה תואמת לכל הגרסאות הנתמכות. הסרת היישומון תאפשר לך לצפות ולהתקין גרסאות תואמות. מצב זה קורה לרוב עם יישומונים שמותקנים דרך Google Play או מקורות אחרים, אם היישומונים נחתמו עם אישור אחר.</string>
+    <string name="app_details__no_versions__explain_incompatible_signers">הגרסה המותקנת אינה תואמת לכל הגרסאות הנתמכות. הסרת היישומון תאפשר לך לצפות ולהתקין גרסאות תואמות. מצב זה קורה לרוב עם יישומונים שמותקנים דרך Google Play או מקורות אחרים, אם היישומונים נחתמו עם אישור אחר.</string>
     <string name="updates__app_with_known_vulnerability__prompt_uninstall">מצאנו חולשה אצל %1$s. אנו ממליצים להסיר את היישומון הזה מיידית.</string>
     <string name="updates__app_with_known_vulnerability__prompt_upgrade">מצאנו חולשה אצל %1$s. אנו ממליצים לעדכן את היישומון הזה לגרסה החדשה ביותר מיידית.</string>
     <string name="updates__app_with_known_vulnerability__ignore">התעלמות</string>
@@ -534,7 +534,6 @@
     <string name="swap_wifi_vpn_conflict">סותר VPN פעיל!</string>
     <string name="has_disallow_install_unknown_sources">למשתמש הזה אין אפשרות להוסיף מקורות לא ידועים, לרבות מאגרים חדשים</string>
     <string name="has_disallow_install_unknown_sources_globally">הנהלת המכשיר שלך לא מאפשרת התקנת יישומים ממקורות לא ידועים, לרבות מאגרים חדשים</string>
-    <string name="antinosource_key">אין קוד מקור מאז</string>
     <string name="app_list_results_hidden_antifeature_settings">חלק מהתוצאות הוסתרו עקב הגדרות התכונות השליליות שהגדרת.</string>
     <string name="antitrack">מעקב</string>
     <string name="antiads">פרסומות</string>
@@ -549,4 +548,7 @@
     <string name="antiothers">תכונות שליליות אחרות</string>
     <string name="antinsfw">היישומון הזה מכיל תוכן שלא מיועד לכל קהל בכל מקום</string>
     <string name="menu_release_channel_beta">לאפשר עדכוני בטא</string>
+    <string name="latest__empty_state__upgrading">מסד הנתונים משתדרג…</string>
+    <string name="use_ipfs_gateways">להשתמש בשערי גישה מסוג IPFS</string>
+    <string name="use_ipfs_gateways_summary">להוריד קבצים מאתרי מראה ב־IPFS, אם המאגר תומך בזה.</string>
 </resources>

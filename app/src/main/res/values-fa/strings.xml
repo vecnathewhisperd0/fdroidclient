@@ -36,7 +36,7 @@
     <string name="antiadslist">این کاره دارای تبلیغات است</string>
     <string name="antitracklist">این کاره، فعّالیتتان را ردیابی و گزارش می‌کند</string>
     <string name="antinonfreeadlist">این کاره، افزونه‌های ناآزاد را تبلیغ می‌کند</string>
-    <string name="antinonfreenetlist">این کاره، خدمات شبکه‌های ناآزاد را ترویج می‌کند</string>
+    <string name="antinonfreenetlist">این کاره، خدمت شبکه‌ای ناآزاد را ترویج کرده یا کاملاً به آن وابسته است</string>
     <string name="antinonfreedeplist">این کاره به دیگر کاره‌های ناآزاد وابسته است</string>
     <string name="antiupstreamnonfreelist">کد مبدأ بالادستی کاملاً آزاد نیست</string>
     <string name="display">نمایش</string>
@@ -148,7 +148,7 @@
     <string name="category_Internet">اینترنت</string>
     <string name="category_Money">مالی</string>
     <string name="category_Multimedia">چندرسانه‌ای</string>
-    <string name="category_Navigation">ناوش</string>
+    <string name="category_Navigation">ناوبری</string>
     <string name="category_Phone_SMS">تلفن و پیامک</string>
     <string name="category_Reading">خواندن</string>
     <string name="category_Science_Education">علم و آموزش</string>
@@ -373,11 +373,11 @@
     <string name="app_installed_media">پرونده در %s نصب شد</string>
     <string name="app_permission_storage">اف‌دروید برای نصب روی ذخیره‌ساز، نیاز به اجازهٔ ذخیره‌سازی دارد. لطفاً برای ادامهٔ نصب، این اجازه را در صفحهٔ بعدی بدهید.</string>
     <string name="status_inserting_x_apps">ذخیره کردن جزییات کاره (%1$d/%2$d) از %3$s</string>
-    <string name="app_details__incompatible_mismatched_signature">امضای متفاوت با نگارشِ نصب‌شده</string>
+    <string name="app_details__incompatible_mismatched_signers">امضاکنندهٔ متفاوت با نگارشِ نصب‌شده</string>
     <string name="app_details__no_versions__show_incompat_versions">برای نمایش نگارش‌های ناسازگار، تنظیمات «%1$s» را به کار بیندازید.</string>
-    <string name="app_details__no_versions__no_compatible_signatures">هیچ نگارشی با امضای سازگار وجود ندارد</string>
+    <string name="app_details__no_versions__no_compatible_signers">هیچ نگارشی با امضاکنندهٔ سازگار وجود ندارد</string>
     <string name="app_details__no_versions__none_compatible_with_device">هیچ نگارش سازگار با افزاره‌ای وجود ندارد</string>
-    <string name="app_details__no_versions__explain_incompatible_signatures">نگارش نصب‌شده با هیچ نگارش موجودی سازگار نیست. حذف نصب کاره، شما را قادر به مشاهده و نصب نگارش‌های سازگار می‌کند. این مشکل اغلب با کاره‌های نصب‌شده از گوگل‌پلی یا دیگر منابعی رخ می‌دهد که با گواهی‌نامهٔ متفاوتی امضا شده‌اند.</string>
+    <string name="app_details__no_versions__explain_incompatible_signers">نگارش نصب‌شده با هیچ نگارش موجودی سازگار نیست. حذف نصب کاره، شما را قادر به مشاهده و نصب نگارش‌های سازگار می‌کند. این مشکل اغلب با کاره‌های نصب‌شده از گوگل‌پلی یا دیگر منابعی رخ می‌دهد که با گواهی‌نامهٔ متفاوتی امضا شده‌اند.</string>
     <string name="app_list__dismiss_app_update">از به‌روز رسانی چشم‌پوشی شد</string>
     <string name="app_list__dismiss_vulnerable_app">از آسیب‌پذیری چشم‌پوشی</string>
     <string name="app_list__dismiss_downloading_app">بارگیری لغو شد</string>
@@ -521,11 +521,12 @@
     <string name="antidisabledalgorithm">امضا شده با الگوریتمی ناامن</string>
     <string name="antiknownvuln">آسیب‌پذیری شناخته</string>
     <string name="app_list_results_hidden_antifeature_settings">برخی نتیجه‌ها بر پایهٔ تنظیمات پادویژگیتان پنهان شده‌اند.</string>
-    <string name="antinosource_key">بدون منبع از</string>
     <string name="antitrack">ردیابی</string>
     <string name="antinonfreead">افزونه‌های ناآزاد</string>
     <string name="antinonfreedep">وابستگی‌های ناآزاد</string>
     <string name="antinosource">کد مبدأ دیگر موجود نیست</string>
     <string name="antiothers">دیگر پادویژگی‌ها</string>
     <string name="antinsfw">این کاره محتوایی دارد که نباید عمومی شده یا همه‌حا نمایان باشد</string>
+    <string name="menu_release_channel_beta">اجازهٔ به‌روز رسانی‌های بتا</string>
+    <string name="latest__empty_state__upgrading">ارتقا دادن پایگاه داده…</string>
 </resources>

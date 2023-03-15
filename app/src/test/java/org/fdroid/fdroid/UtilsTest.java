@@ -1,9 +1,18 @@
 
 package org.fdroid.fdroid;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static vendored.org.apache.commons.codec.digest.MessageDigestAlgorithms.SHA_256;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.text.format.DateUtils;
+
+import androidx.test.core.app.ApplicationProvider;
 
 import org.fdroid.fdroid.views.AppDetailsRecyclerViewAdapter;
 import org.junit.Before;
@@ -13,15 +22,6 @@ import org.robolectric.RobolectricTestRunner;
 
 import java.io.File;
 import java.io.IOException;
-
-import androidx.test.core.app.ApplicationProvider;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static vendored.org.apache.commons.codec.digest.MessageDigestAlgorithms.SHA_256;
 
 /**
  * @see <a href="https://gitlab.com/fdroid/fdroidclient/-/merge_requests/1089#note_822501322">forced to vendor Apache Commons Codec</a>
@@ -190,6 +190,14 @@ public class UtilsTest {
         assertEquals(
                 "Updated 3 days ago",
                 Utils.formatLastUpdated(res, now - 234834870L)
+        );
+        assertEquals(
+                "Updated 13 days ago",
+                Utils.formatLastUpdated(res, now - DateUtils.DAY_IN_MILLIS * 13 - offset)
+        );
+        assertEquals(
+                "Updated 7 months ago",
+                Utils.formatLastUpdated(res, now - DateUtils.DAY_IN_MILLIS * 30 * 7 + offset)
         );
     }
 }

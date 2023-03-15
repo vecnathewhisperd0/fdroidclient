@@ -54,6 +54,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import org.fdroid.database.AppPrefs;
 import org.fdroid.database.AppVersion;
 import org.fdroid.database.FDroidDatabase;
+import org.fdroid.database.Repository;
 import org.fdroid.fdroid.AppUpdateStatusManager;
 import org.fdroid.fdroid.CompatibilityChecker;
 import org.fdroid.fdroid.FDroidApp;
@@ -115,6 +116,8 @@ public class AppDetailsActivity extends AppCompatActivity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         fdroidApp = (FDroidApp) getApplication();
+        fdroidApp.setSecureWindow(this);
+
         fdroidApp.applyPureBlackBackgroundInDarkTheme(this);
 
         super.onCreate(savedInstanceState);
@@ -234,7 +237,8 @@ public class AppDetailsActivity extends AppCompatActivity
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
         final AppPrefs prefs = appPrefs;
-        if (prefs == null) return true;
+        // don't show menu before appPrefs haven't been loaded
+        if (prefs == null || app == null) return false;
 
         MenuItem itemIgnoreAll = menu.findItem(R.id.action_ignore_all);
         itemIgnoreAll.setChecked(prefs.getIgnoreAllUpdates());
@@ -382,8 +386,8 @@ public class AppDetailsActivity extends AppCompatActivity
             alert.show();
             return;
         }
-        if (app.installedSig != null && apk.sig != null
-                && !apk.sig.equals(app.installedSig)) {
+        if (app.installedSigner != null && apk.signer != null
+                && !apk.signer.equals(app.installedSigner)) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage(R.string.SignatureMismatch)
                     .setPositiveButton(R.string.ok, (dialog, id) -> dialog.cancel());
@@ -559,9 +563,8 @@ public class AppDetailsActivity extends AppCompatActivity
                     if (!TextUtils.isEmpty(errorMessage) && !isFinishing()) {
                         Log.e(TAG, "install aborted with errorMessage: " + errorMessage);
 
-                        String title = String.format(
-                                getString(R.string.install_error_notify_title),
-                                app.name);
+                        String title = getString(R.string.install_error_notify_title,
+                                app == null ? "" : app.name);
 
                         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(AppDetailsActivity.this);
                         alertBuilder.setTitle(title);
@@ -606,7 +609,7 @@ public class AppDetailsActivity extends AppCompatActivity
                 case Installer.ACTION_UNINSTALL_COMPLETE:
                     adapter.clearProgress();
                     if (app != null) {
-                        app.installedSig = null;
+                        app.installedSigner = null;
                         app.installedVersionCode = 0;
                         app.installedVersionName = null;
                         onAppChanged(app);
@@ -696,7 +699,8 @@ public class AppDetailsActivity extends AppCompatActivity
     private void onVersionsChanged(List<AppVersion> appVersions) {
         List<Apk> apks = new ArrayList<>(appVersions.size());
         for (AppVersion appVersion : appVersions) {
-            Apk apk = new Apk(appVersion);
+            Repository repo = FDroidApp.getRepo(appVersion.getRepoId());
+            Apk apk = new Apk(appVersion, repo);
             apk.setCompatibility(checker);
             apks.add(apk);
         }
@@ -799,9 +803,12 @@ public class AppDetailsActivity extends AppCompatActivity
         Apk apk = app.installedApk;
         if (apk == null) {
             apk = app.getMediaApkifInstalled(getApplicationContext());
-            if (apk == null && versions != null) {
-                // When the app isn't a media file - the above workaround refers to this.
-                apk = app.getInstalledApk(this, versions);
+            if (apk == null) {
+                List<Apk> versions = this.versions;
+                if (versions != null) {
+                    // When the app isn't a media file - the above workaround refers to this.
+                    apk = app.getInstalledApk(this, versions);
+                }
                 if (apk == null) {
                     Log.d(TAG, "Couldn't find installed apk for " + app.packageName);
                     Toast.makeText(this, R.string.uninstall_error_unknown, Toast.LENGTH_SHORT).show();

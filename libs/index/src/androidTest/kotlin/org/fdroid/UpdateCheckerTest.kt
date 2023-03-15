@@ -12,7 +12,7 @@ internal class UpdateCheckerTest {
 
     private val updateChecker = UpdateChecker { true }
     private val signer = "9f9261f0b911c60f8db722f5d430a9e9d557a3f8078ce43e1c07522ef41efedb"
-    private val signatureV2 = SignerV2(listOf(signer))
+    private val signerV2 = SignerV2(listOf(signer))
     private val betaChannels = listOf(RELEASE_CHANNEL_BETA)
     private val version1 = Version(1)
     private val version2 = Version(2)
@@ -71,7 +71,8 @@ internal class UpdateCheckerTest {
         // version with empty release channels gets returned
         assertEquals(version3, updateChecker.getUpdate(versions))
         // version with empty release channels gets returned when allowing also beta
-        assertEquals(version3,
+        assertEquals(
+            version3,
             updateChecker.getUpdate(versions, allowedReleaseChannels = betaChannels)
         )
         // version with empty release channels gets returned when allow list is empty
@@ -101,7 +102,7 @@ internal class UpdateCheckerTest {
 
     @Test
     fun multipleSignersNotSupported() {
-        val version = version3.copy(signer = signatureV2.copy(hasMultipleSigners = true))
+        val version = version3.copy(signer = signerV2.copy(hasMultipleSigners = true))
         val versions = listOf(version)
         assertNull(updateChecker.getUpdate(versions))
     }
@@ -109,9 +110,9 @@ internal class UpdateCheckerTest {
     @Test
     fun onlyAllowedSignersGetIncluded() {
         val version3 = version3.copy(signer = SignerV2(listOf("foo", "bar")))
-        val version2 = version2.copy(signer = signatureV2)
+        val version2 = version2.copy(signer = signerV2)
         val versions = listOf(version3, version2, version1)
-        val v2Set = signatureV2.sha256.toMutableSet()
+        val v2Set = signerV2.sha256.toMutableSet()
         // 3 gets returned if at least one of its signers are allowed, or all are allowed
         assertEquals(version3, updateChecker.getUpdate(versions, { setOf("foo") }))
         assertEquals(version3, updateChecker.getUpdate(versions, { setOf("bar") }))
@@ -122,9 +123,9 @@ internal class UpdateCheckerTest {
         // 2 gets returned if at least one of its signers are allowed
         assertEquals(version2, updateChecker.getUpdate(versions, { v2Set }))
         assertEquals(version2, updateChecker.getUpdate(versions, { v2Set + "foo bar" }))
-        // empty set means no signatures are allowed, only works for apps without signature
+        // empty set means no signers are allowed, only works for packages without "signer"
         assertEquals(version1, updateChecker.getUpdate(versions, { emptySet() }))
-        // apps without signature get through everything
+        // packages without "signer" entries get through everything
         assertEquals(version1, updateChecker.getUpdate(versions, { setOf("no version") }))
         // if no matching sig can be found, no version gets returned
         assertNull(updateChecker.getUpdate(listOf(version3, version2), { setOf("no version") }))
@@ -134,9 +135,30 @@ internal class UpdateCheckerTest {
     fun installedVulnerableVersionAlwaysReturned() {
         val version3 = version3.copy(hasKnownVulnerability = true)
         val versions = listOf(version3, version2, version1)
-        assertEquals(version3, updateChecker.getUpdate(versions))
-        assertEquals(version3, updateChecker.getUpdate(versions, installedVersionCode = 3))
-        assertEquals(version3, updateChecker.getUpdate(versions, installedVersionCode = 2))
+        assertEquals(
+            version3,
+            updateChecker.getUpdate(versions, includeKnownVulnerabilities = true)
+        )
+        assertEquals(
+            version3,
+            updateChecker.getUpdate(
+                versions,
+                installedVersionCode = 3,
+                includeKnownVulnerabilities = true,
+            )
+        )
+        assertEquals(
+            version3,
+            updateChecker.getUpdate(
+                versions,
+                installedVersionCode = 2,
+                includeKnownVulnerabilities = true,
+            )
+        )
+        // when not asking for known vulnerabilities, version3 isn't returned (no update here)
+        assertNull(
+            updateChecker.getUpdate(versions, installedVersionCode = 3)
+        )
     }
 
     private fun getWithAllowReleaseChannels(

@@ -31,6 +31,10 @@ import android.os.Build;
 import android.text.format.DateUtils;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.preference.PreferenceManager;
+
 import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.installer.PrivilegedInstaller;
 import org.fdroid.fdroid.net.ConnectivityMonitorService;
@@ -43,10 +47,6 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.preference.PreferenceManager;
 
 /**
  * Handles shared preferences for FDroid, looking after the names of
@@ -101,6 +101,7 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
     public static final String PREF_UNSTABLE_UPDATES = "unstableUpdates";
     public static final String PREF_KEEP_INSTALL_HISTORY = "keepInstallHistory";
     public static final String PREF_SEND_TO_FDROID_METRICS = "sendToFdroidMetrics";
+    public static final String PREF_USE_IPFS_GATEWAYS = "useIpfsGateways";
     public static final String PREF_EXPERT = "expert";
     public static final String PREF_FORCE_OLD_INDEX = "forceOldIndex";
     public static final String PREF_PRIVILEGED_INSTALLER = "privilegedInstaller";
@@ -506,15 +507,19 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
     public int getProxyPort() {
         final String port = preferences.getString(PREF_PROXY_PORT, String.valueOf(DEFAULT_PROXY_PORT));
         try {
-            return Integer.parseInt(port);
+            return Math.min(Integer.parseInt(port), 65535);
         } catch (NumberFormatException e) {
             // hack until this can be a number-only preference
             try {
-                return Integer.parseInt(port.replaceAll("[^0-9]", ""));
+                return Math.min(Integer.parseInt(port.replaceAll("[^0-9]", "")), 65535);
             } catch (Exception e1) {
                 return DEFAULT_PROXY_PORT;
             }
         }
+    }
+
+    public boolean isIpfsEnabled() {
+        return preferences.getBoolean(PREF_USE_IPFS_GATEWAYS, IGNORED_B);
     }
 
     public boolean preventScreenshots() {

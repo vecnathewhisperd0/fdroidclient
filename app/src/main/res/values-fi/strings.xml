@@ -220,7 +220,7 @@
 \nLaitteessasi on sovelluksia, mutta ne eivät ole saatavilla F-Droidissa. Tämä voi johtua joko siitä, että sovelluslähteesi tarvitsee päivittää tai sovelluslähteissä ei yksinkertaisesti ole sovelluksiasi saatavilla.</string>
     <string name="empty_can_update_app_list">Onnittelut!
 \nKaikki sovelluksesi ovat ajan tasalla.</string>
-    <string name="unsigned_description">Tämä tarkoittaa sitä, ettei sovelluslistausta voitu vahvistaa. Ole varovainen ladatessasi sovelluksia varmentamattomista hakemistoista.</string>
+    <string name="unsigned_description">Tämä tarkoittaa, ettei sovelluslistausta voitu vahvistaa. Ole varovainen ladatessasi sovelluksia varmentamattomista hakemistoista.</string>
     <string name="empty_search_available_app_list">Haulla ei löytynyt sovelluksia.</string>
     <string name="install_error_unknown">Asennus epäonnistui tuntemattoman virheen vuoksi</string>
     <string name="uninstall_error_unknown">Poistaminen epäonnistui tuntemattoman virheen vuoksi</string>
@@ -351,9 +351,9 @@
     <string name="over_network_always_summary">Käytä aina tätä yhteyttä, kun se on saatavilla</string>
     <string name="over_network_on_demand_summary">Käytä tätä yhteyttä vain, kun klikkaan \'Lataa\'</string>
     <string name="over_network_never_summary">Älä koskaan lataa mitään käyttäen tätä yhteyttä</string>
-    <string name="app_details__no_versions__no_compatible_signatures">Ei versioita joilla yhteensopiva allekirjoitus</string>
+    <string name="app_details__no_versions__no_compatible_signers">Versioita yhteensopivalla allekirjoittajalla ei ole</string>
     <string name="app_details__no_versions__none_compatible_with_device">Ei versioita jotka ovat yhteensopivia laitteen kanssa</string>
-    <string name="app_details__no_versions__explain_incompatible_signatures">Asennettu versio ei ole yhteensopiva yhdenkään saatavilla olevan version kanssa. Poistamalla seovelluksen voit selata ja asentaa yhteensopivan version. Näin käy usein Google Playstä tai muista lähteistä asennettujen sovellusten kohdalla, mikäli ne on allekirjoitettu eri sertifikaatilla.</string>
+    <string name="app_details__no_versions__explain_incompatible_signers">Asennettu versio ei ole yhteensopiva yhdenkään saatavilla olevan version kanssa. Sovelluksen asennuksen poiston jälkeen voit tarkastella ja asentaa yhteensopivia versioita. Tämä on yleistä Google Playstä tai muista lähteistä asennettuille sovelluksille, jos ne on allekirjoitettu eri varmenteella.</string>
     <string name="app__tts__cancel_download">Peruuta lataus</string>
     <string name="app_installed_media">Tiedosto asennettu polkuun %s</string>
     <string name="app_permission_storage">F-Droid tarvitsee tämän asentamiseen oikeuden tallennustilaan. Ole hyvä ja myönnä oikeus seuraavassa ruudussa jatkaaksesi asennusta.</string>
@@ -435,7 +435,7 @@
         <item quantity="one">Päivitetty %1$d vuosi sitten</item>
         <item quantity="other">Päivitetty %1$d vuotta sitten</item>
     </plurals>
-    <string name="app_details__incompatible_mismatched_signature">Poikkeava allekirjoitus asennettuun versioon nähden</string>
+    <string name="app_details__incompatible_mismatched_signers">Asennetusta versiosta poikkeava allekirjoittaja</string>
     <string name="app_details__no_versions__show_incompat_versions">Nähdäksesi yhteensopimattomatkin versiot, käytä \"%1$s\" asetusta.</string>
     <string name="prompt_to_send_crash_reports">Pyydä lähettämään kaatumisraportteja</string>
     <string name="prompt_to_send_crash_reports_summary">Kerää tietoja kaatumisista ja pyydä lähettämään ne kehittäjälle</string>
@@ -529,4 +529,6 @@
     <string name="antinosource">Lähdekoodi Ei enää saatavilla</string>
     <string name="antiothers">Muut antiominaisuudet</string>
     <string name="antinsfw">Sovelluksessa on sisältöä, jota ei tulisi julkaista tai näyttää kaikkialla</string>
+    <string name="latest__empty_state__upgrading">Päivitetään tietokantaa…</string>
+    <string name="menu_release_channel_beta">Salli beta-päivitykset</string>
 </resources>

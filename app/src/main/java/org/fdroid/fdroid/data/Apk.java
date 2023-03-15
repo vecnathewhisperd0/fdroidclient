@@ -10,12 +10,15 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.webkit.MimeTypeMap;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+
 import org.fdroid.database.AppManifest;
 import org.fdroid.database.AppVersion;
 import org.fdroid.database.Repository;
 import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.CompatibilityChecker;
-import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.installer.ApkCache;
 import org.fdroid.index.v2.FileV1;
@@ -29,12 +32,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 import java.util.zip.ZipFile;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
 
 /**
  * Represents a single package of an application. This represents one particular
@@ -87,7 +85,9 @@ public class Apk implements Comparable<Apk>, Parcelable {
      * same data as {@link android.content.pm.PackageInfo#requestedPermissions}. Note this
      * does not mean that all these permissions have been granted, only requested.  For
      * example, a regular app can request a system permission, but it won't be granted it.
+     * Set this to null for no permissions.
      */
+    @Nullable
     public String[] requestedPermissions;
     public String[] features; // null if empty or unknown
 
@@ -104,7 +104,7 @@ public class Apk implements Comparable<Apk>, Parcelable {
      *
      * @see <a href="https://source.android.com/security/apksigning/v3#apk-signature-scheme-v3-block"><tt>signer</tt> in APK Signature Scheme v3</a>
      */
-    public String sig;
+    public String signer;
 
     /**
      * Can be null when created with {@link #Apk(PackageInfo)}
@@ -151,8 +151,8 @@ public class Apk implements Comparable<Apk>, Parcelable {
         repoId = 0;
     }
 
-    public Apk(AppVersion v) {
-        Repository repo = Objects.requireNonNull(FDroidApp.getRepo(v.getRepoId()));
+    public Apk(AppVersion v, Repository repo) {
+        if (v.getRepoId() != repo.getRepoId()) throw new IllegalArgumentException();
         repoAddress = Utils.getRepoAddress(repo);
         canonicalRepoAddress = repo.getAddress();
         added = new Date(v.getAdded());
@@ -178,7 +178,7 @@ public class Apk implements Comparable<Apk>, Parcelable {
         nativecode = v.getNativeCode().toArray(new String[0]);
         repoId = v.getRepoId();
         SignerV2 signer = v.getManifest().getSigner();
-        sig = signer == null ? null : signer.getSha256().get(0);
+        this.signer = signer == null ? null : signer.getSha256().get(0);
         size = v.getFile().getSize() == null ? 0 : v.getFile().getSize();
         srcname = v.getSrc() == null ? null : v.getSrc().getName();
         versionName = manifest.getVersionName();
@@ -320,9 +320,9 @@ public class Apk implements Comparable<Apk>, Parcelable {
         dest.writeStringArray(this.requestedPermissions);
         dest.writeStringArray(this.features);
         dest.writeStringArray(this.nativecode);
-        dest.writeString(this.sig);
+        dest.writeString(this.signer);
         dest.writeByte(this.compatible ? (byte) 1 : (byte) 0);
-        dest.writeString(this.apkFile.serialize());
+        dest.writeString(this.apkFile != null ? this.apkFile.serialize() : null);
         dest.writeSerializable(this.installedFile);
         dest.writeString(this.srcname);
         dest.writeString(this.repoAddress);
@@ -349,7 +349,7 @@ public class Apk implements Comparable<Apk>, Parcelable {
         this.requestedPermissions = in.createStringArray();
         this.features = in.createStringArray();
         this.nativecode = in.createStringArray();
-        this.sig = in.readString();
+        this.signer = in.readString();
         this.compatible = in.readByte() != 0;
         this.apkFile = FileV1.deserialize(in.readString());
         this.installedFile = (SanitizedFile) in.readSerializable();
@@ -431,7 +431,7 @@ public class Apk implements Comparable<Apk>, Parcelable {
                 }
             }
             // Else do nothing. The targetSdk for the below split-permissions is set to 29,
-            // so we don't make any changes for apps targetting 29 or above
+            // so we don't make any changes for apps targeting 29 or above
         }
         if (Build.VERSION.SDK_INT >= 31) {
             if (targetSdkVersion < 31) {
@@ -443,7 +443,7 @@ public class Apk implements Comparable<Apk>, Parcelable {
                 }
             }
             // Else do nothing. The targetSdk for the above split-permissions is set to 31,
-            // so we don't make any changes for apps targetting 31 or above
+            // so we don't make any changes for apps targeting 31 or above
         }
         if (Build.VERSION.SDK_INT >= 33) {
             if (targetSdkVersion < 33) {
@@ -459,10 +459,11 @@ public class Apk implements Comparable<Apk>, Parcelable {
                 }
             }
             // Else do nothing. The targetSdk for the above split-permissions is set to 33,
-            // so we don't make any changes for apps targetting 33 or above
+            // so we don't make any changes for apps targeting 33 or above
         }
 
-        requestedPermissions = set.toArray(new String[set.size()]);
+        String[] perms = set.toArray(new String[0]);
+        requestedPermissions = perms.length == 0 ? null : perms;
     }
 
     /**

@@ -62,15 +62,20 @@ internal abstract class MirrorChooserImpl : MirrorChooser {
                 throwOnLastMirror(e, index == mirrors.size - 1)
             } catch (e: SocketTimeoutException) {
                 throwOnLastMirror(e, index == mirrors.size - 1)
+            } catch (e: NoResumeException) {
+                // continue to next mirror, if we need to resume, but this one doesn't support it
+                throwOnLastMirror(e, index == mirrors.size - 1)
             }
         }
         error("Reached code that was thought to be unreachable.")
     }
 
     private fun throwOnLastMirror(e: Exception, wasLastMirror: Boolean) {
-        log.warn(e) {
-            if (wasLastMirror) "Last mirror, rethrowing..."
-            else "Trying other mirror now..."
+        log.info {
+            val info = if (e is ResponseException) e.response.status.toString()
+            else e::class.simpleName ?: ""
+            if (wasLastMirror) "Last mirror, rethrowing... ($info)"
+            else "Trying other mirror now... ($info)"
         }
         if (wasLastMirror) throw e
     }

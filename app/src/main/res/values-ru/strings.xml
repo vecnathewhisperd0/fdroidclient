@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="SignatureMismatch">Новая версия приложения подписана другим ключом. Для ее установки необходимо удалить старую. Пожалуйста, сделайте это и попробуйте снова. (Учтите, что при удалении приложения все его данные будут потеряны)</string>
-    <string name="installIncompatible">Приложение несовместимо с вашим устройством. Все равно установить?</string>
+    <string name="installIncompatible">Приложение несовместимо с вашим устройством. Все равно установить\?</string>
     <string name="version">Версия</string>
     <string name="delete">Удалить</string>
     <string name="enable_nfc_send">Включить отправку по NFC…</string>
@@ -128,7 +128,7 @@
     <string name="swap">Обмен приложениями</string>
     <string name="swap_no_wifi_network">Сеть отсутствует</string>
     <string name="swap_view_available_networks">Нажмите, чтобы открыть доступные сети</string>
-    <string name="open_qr_code_scanner">Открыть сканер QR-кода</string>
+    <string name="open_qr_code_scanner">Открыть сканер QR-кодов</string>
     <string name="swap_welcome">Добро пожаловать в F-Droid!</string>
     <string name="swap_confirm_connect">Вы хотите получить приложения от %1$s сейчас?</string>
     <string name="about_source">Исходный код</string>
@@ -231,21 +231,21 @@
     <string name="swap_active_hotspot">%1$s (ваша точка доступа)</string>
     <string name="swap_switch_to_wifi">Нажмите, чтобы переключиться на сеть Wi-Fi</string>
     <string name="swap_scan_or_type_url">Одному из вас следует отсканировать код или ввести в браузере URL другого участника.</string>
-    <string name="swap_people_nearby">Люди поблизости</string>
-    <string name="swap_scanning_for_peers">Поиск людей поблизости…</string>
-    <string name="swap_nearby">Обмен поблизости</string>
-    <string name="swap_intro">Подключитесь и обменивайтесь приложениями с людьми поблизости.</string>
+    <string name="swap_people_nearby">Люди вокруг</string>
+    <string name="swap_scanning_for_peers">Поиск людей…</string>
+    <string name="swap_nearby">Обмен вокруг</string>
+    <string name="swap_intro">Подключитесь и обменивайтесь приложениями с людьми рядом с вами.</string>
     <string name="swap_visible_bluetooth">Видимый через Bluetooth</string>
     <string name="swap_setting_up_bluetooth">Настройка Bluetooth…</string>
-    <string name="swap_not_visible_bluetooth">Не видимый через Bluetooth</string>
+    <string name="swap_not_visible_bluetooth">Недоступен через Bluetooth</string>
     <string name="swap_visible_wifi">Видимый через Wi-Fi</string>
     <string name="swap_setting_up_wifi">Настройка Wi-Fi…</string>
     <string name="swap_stopping_wifi">Остановка Wi-Fi…</string>
-    <string name="swap_not_visible_wifi">Не видимый через Wi-Fi</string>
+    <string name="swap_not_visible_wifi">Недоступен через Wi-Fi</string>
     <string name="swap_cant_find_peers">Не можете найти того, кого ищете?</string>
     <string name="swap_send_fdroid">Отправить F-Droid</string>
     <string name="apps">Приложения</string>
-    <string name="swap_no_peers_nearby">Не удается найти людей поблизости.</string>
+    <string name="swap_no_peers_nearby">Не удалось найти людей для обмена.</string>
     <string name="swap_confirm">Подтвердить обмен</string>
     <string name="swap_qr_isnt_for_swap">QR-код, который вы отсканировали, не похож на код обмена.</string>
     <string name="swap_connection_misc_error">При подключении к устройству произошла ошибка, невозможно провести с ним обмен!</string>
@@ -269,7 +269,7 @@
     <string name="keep_install_history_summary">Сохранять журнал всех установок и удалений в приватном хранилище</string>
     <string name="warning_no_internet">Не удается обновить. Вы подключены к интернету\?</string>
     <string name="versions">Версии</string>
-    <string name="app_details_donate_prompt_unknown_author">Угостите разработчика %1$s чашечкой кофе:)</string>
+    <string name="app_details_donate_prompt_unknown_author">Угостите разработчика %1$s чашечкой кофе:)!</string>
     <string name="update_all">Обновить все</string>
     <string name="updates__hide_updateable_apps">Скрыть приложения</string>
     <string name="updates__show_updateable_apps">Показать приложения</string>
@@ -281,8 +281,8 @@
     <string name="details_new_in_version">Новое в версии %s</string>
     <string name="preference_category__my_apps">Мои приложения</string>
     <string name="installed_apps__activity_title">Установленные приложения</string>
-    <string name="main_menu__swap_nearby">Поблизости</string>
-    <string name="nearby_splash__find_people_button">Найти людей поблизости</string>
+    <string name="main_menu__swap_nearby">Вокруг</string>
+    <string name="nearby_splash__find_people_button">Найти людей</string>
     <string name="notification_title_single_update_available">Доступно обновление</string>
     <string name="notification_title_single_ready_to_install_update">Обновление готово к установке</string>
     <string name="notification_title_summary_ready_to_install">Готово к установке</string>
@@ -294,14 +294,14 @@
     <string name="app_version_x_installed">Версия %1$s</string>
     <string name="app_new">Новое</string>
     <string name="app_list__name__successfully_installed">%1$s установлено</string>
-    <string name="categories__empty_state__no_categories">Нет категорий для показа</string>
+    <string name="categories__empty_state__no_categories">Нет категорий для отображения</string>
     <plurals name="button_view_all_apps_in_category">
         <item quantity="one">Показать %d</item>
         <item quantity="few">Показать все %d</item>
         <item quantity="many">Показать все %d</item>
         <item quantity="other">Показать все %d</item>
     </plurals>
-    <string name="nearby_splash__download_apps_from_people_nearby">Нет интернета\? Получите приложения от людей поблизости!</string>
+    <string name="nearby_splash__download_apps_from_people_nearby">Нет интернета\? Получите приложения от людей рядом с вами!</string>
     <string name="notification_title_single_ready_to_install">Готово к установке</string>
     <string name="notification_title_single_install_error">Установка не удалась</string>
     <string name="notification_content_single_downloading">Загрузка \"%1$s\"…</string>
@@ -319,7 +319,7 @@
         <item quantity="many">Обновлено %1$d дней назад</item>
         <item quantity="other">Обновлено %1$d дней назад</item>
     </plurals>
-    <string name="app_details_donate_prompt">Угостите %2$s чашечкой кофе за создание %1$s:)</string>
+    <string name="app_details_donate_prompt">Угостите %2$s чашечкой кофе за создание %1$s:)!</string>
     <string name="app_recommended_version_installed">Версия %1$s (Рекомендована)</string>
     <string name="app__install_downloaded_update">Обновить</string>
     <plurals name="updates__download_updates_for_apps">
@@ -346,7 +346,7 @@
         <item quantity="other">Посмотреть %1$d приложений в категории %2$s</item>
     </plurals>
     <string name="latest__empty_state__no_recent_apps">Не найдено недавних приложений</string>
-    <string name="nearby_splash__both_parties_need_fdroid">Для использования \'Поблизости\' обеим сторонам необходим %1$s.</string>
+    <string name="nearby_splash__both_parties_need_fdroid">Обеим сторонам необходим %1$s. Отправить его можно на следующем этапе.</string>
     <string name="menu_video">Видео</string>
     <string name="app__tts__cancel_download">Отменить загрузку</string>
     <string name="app__tts__downloading_progress">Скачано %1$d%%</string>
@@ -395,11 +395,11 @@
     <string name="status_inserting_x_apps">Сохранение данных приложений (%1$d/%2$d) из %3$s</string>
     <string name="app_installed_media">Файл установлен в %s</string>
     <string name="app_permission_storage">Для установки в хранилище F-Droid необходимо соответствующее разрешение. Его можно предоставить на следующем экране.</string>
-    <string name="app_details__incompatible_mismatched_signature">У установленной версии другая подпись</string>
+    <string name="app_details__incompatible_mismatched_signers">У установленной версии другая подпись</string>
     <string name="app_details__no_versions__show_incompat_versions">Чтобы показать несовместимые версии включите параметр \"%1$s\".</string>
-    <string name="app_details__no_versions__no_compatible_signatures">Нет версий с совместимой подписью</string>
+    <string name="app_details__no_versions__no_compatible_signers">Нет версий с совместимой подписью</string>
     <string name="app_details__no_versions__none_compatible_with_device">Нет версий, совместимых с устройством</string>
-    <string name="app_details__no_versions__explain_incompatible_signatures">Установленная версия не совместима ни с одной из доступных версий. Удаление приложения позволит вам просмотреть и установить совместимые версии. Это часто происходит с приложениями, установленными из Google Play или других источников, если они подписаны другим сертификатом.</string>
+    <string name="app_details__no_versions__explain_incompatible_signers">Установленная версия не совместима ни с одной из доступных версий. Удаление приложения позволит вам просмотреть и установить совместимые версии. Это часто происходит с приложениями, установленными из Google Play или других источников, если они подписаны другим сертификатом.</string>
     <string name="app_list__dismiss_app_update">Обновление игнорируется</string>
     <string name="app_list__dismiss_vulnerable_app">Уязвимость игнорируется</string>
     <string name="app_list__dismiss_downloading_app">Загрузка отменена</string>
@@ -483,7 +483,7 @@
     <string name="scan_removable_storage_title">Сканировать съемное хранилище</string>
     <string name="nearby_splash__read_external_storage">Поиск репозиториев и зеркал на SD-карте.</string>
     <string name="nearby_splash__request_permission">Попробовать</string>
-    <string name="not_visible_nearby">Режим \'Поблизости\' не включен</string>
+    <string name="not_visible_nearby">Режим Вокруг не включен</string>
     <string name="not_visible_nearby_description">Перед обменом с соседними устройствами сделайте ваше устройство видимым.</string>
     <string name="swap_toast_using_path">С помощью %1$s</string>
     <string name="swap_toast_not_removable_storage">Этот выбор не подходит ни к одному из съемных носителей, попробуйте еще раз!</string>
@@ -508,7 +508,7 @@
     <string name="swap_stopping">Останавливаем…</string>
     <string name="disabled">Отключено</string>
     <string name="swap_error_cannot_start_bluetooth">Не удается запустить Bluetooth!</string>
-    <string name="swap_toast_closing_nearby_after_timeout">Из-за неиспользования режим \'Поблизости\' был отключен.</string>
+    <string name="swap_toast_closing_nearby_after_timeout">Режим Вокруг был отключен поскольку не использовался.</string>
     <string name="nearby_splash__document_tree">Поиск репозиториев и зеркал через USB OTG.</string>
     <string name="menu_opencollective">OpenCollective</string>
     <string name="notification_channel_updates_description">Отображает уведомления об обновлении приложений и репозиториев.</string>
@@ -526,13 +526,13 @@
     <string name="install_history_and_metrics">История установок и статистика</string>
     <string name="send_fdroid_metrics_json">%s статистический отчет в виде JSON-файла</string>
     <string name="send_fdroid_metrics_report">Отправить статистический отчет %s</string>
-    <string name="theme_follow_system">Как в системе</string>
+    <string name="theme_follow_system">Определена системой</string>
     <string name="use_pure_black_dark_theme_summary">Рекомендуется только для экранов OLED.</string>
     <string name="use_pure_black_dark_theme">Использовать абсолютно черный фон в темной теме</string>
     <string name="banner_no_data_or_wifi">Передача данных или WiFi отключены</string>
     <string name="banner_no_internet">Нет интернета</string>
     <string name="share_apk_error">Не удалось поделиться файлом приложения</string>
-    <string name="swap_wifi_vpn_conflict">Конфликтует с активной VPN!</string>
+    <string name="swap_wifi_vpn_conflict">VPN необходимо отключить!</string>
     <string name="has_disallow_install_unknown_sources">Неизвестные источники не могут быть добавлены этим пользователем, и это правило распространяется на новые репозитории</string>
     <string name="has_disallow_install_unknown_sources_globally">Администратор вашего устройства не разрешает установку приложений из неизвестных источников, и это правило распространяется на новые репозитории</string>
     <string name="antinonfreead">Несвободные дополнения</string>
@@ -548,4 +548,8 @@
     <string name="antiknownvuln">Известная уязвимость</string>
     <string name="antiothers">Прочие анти-функции</string>
     <string name="antinsfw">Это приложение содержит контент, который не следует разглашать или повсеместно демонстрировать</string>
+    <string name="menu_release_channel_beta">Разрешить обновления до бета-версий</string>
+    <string name="latest__empty_state__upgrading">Обновление базы данных…</string>
+    <string name="use_ipfs_gateways">Используйте шлюзы IPFS</string>
+    <string name="use_ipfs_gateways_summary">Загрузите файлы с зеркал IPFS, если это поддерживается репозиторием.</string>
 </resources>
