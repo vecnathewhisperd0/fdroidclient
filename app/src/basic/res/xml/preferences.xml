@@ -145,6 +145,12 @@
                 android:defaultValue="false"
                 android:dependency="expert"/>
         <CheckBoxPreference
+            android:key="showPermissions"
+            android:title="@string/show_permissions"
+            android:summary="@string/show_permissions_summary"
+            android:defaultValue="false"
+            android:dependency="expert"/>
+        <CheckBoxPreference
                 android:key="keepInstallHistory"
                 android:title="@string/keep_install_history"
                 android:summary="@string/keep_install_history_summary"
