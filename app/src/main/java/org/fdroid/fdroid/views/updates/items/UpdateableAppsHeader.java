@@ -78,26 +78,20 @@ public class UpdateableAppsHeader extends AppUpdateData {
         public ViewHolder(View itemView) {
             super(itemView);
 
-            updatesAvailable = (TextView) itemView.findViewById(R.id.text_updates_available);
-            appsToUpdate = (TextView) itemView.findViewById(R.id.text_apps_to_update);
-            downloadAll = (Button) itemView.findViewById(R.id.button_download_all);
-            toggleAppsToUpdate = (Button) itemView.findViewById(R.id.button_toggle_apps_to_update);
+            updatesAvailable = itemView.findViewById(R.id.text_updates_available);
+            appsToUpdate = itemView.findViewById(R.id.text_apps_to_update);
+            downloadAll = itemView.findViewById(R.id.button_download_all);
+            toggleAppsToUpdate = itemView.findViewById(R.id.button_toggle_apps_to_update);
 
-            toggleAppsToUpdate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    header.adapter.toggleAllUpdateableApps();
-                    updateToggleButtonText();
-                }
+            toggleAppsToUpdate.setOnClickListener(v -> {
+                header.adapter.toggleAllUpdateableApps();
+                updateToggleButtonText();
             });
 
             downloadAll.setVisibility(View.VISIBLE);
-            downloadAll.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    downloadAll.setVisibility(View.GONE);
-                    UpdateService.autoDownloadUpdates(header.activity);
-                }
+            downloadAll.setOnClickListener(v -> {
+                downloadAll.setVisibility(View.GONE);
+                UpdateService.autoDownloadUpdates(header.activity);
             });
         }
 

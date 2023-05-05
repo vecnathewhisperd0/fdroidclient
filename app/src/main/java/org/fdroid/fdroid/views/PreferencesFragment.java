@@ -126,20 +126,31 @@ public class PreferencesFragment extends PreferenceFragmentCompat
 
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
-
         Preferences preferences = Preferences.get();
         preferences.migrateOldPreferences();
 
         addPreferencesFromResource(R.xml.preferences);
-        otherPrefGroup = (PreferenceGroup) findPreference("pref_category_other");
-
+        otherPrefGroup = findPreference("pref_category_other");
 
         Preference aboutPreference = findPreference("pref_about");
         if (aboutPreference != null) {
-            aboutPreference.setOnPreferenceClickListener(aboutPrefClickedListener);
+            aboutPreference.setOnPreferenceClickListener(preference -> {
+                final View view = getLayoutInflater().inflate(R.layout.about, null);
+                final Context context = requireContext();
+
+                String versionName = Utils.getVersionName(context);
+                if (versionName != null) {
+                    ((TextView) view.findViewById(R.id.version)).setText(versionName);
+                }
+                new MaterialAlertDialogBuilder(context)
+                        .setView(view)
+                        .setPositiveButton(R.string.ok, null)
+                        .show();
+                return true;
+            });
         }
 
-        keepInstallHistoryPref = (CheckBoxPreference) findPreference(Preferences.PREF_KEEP_INSTALL_HISTORY);
+        keepInstallHistoryPref = findPreference(Preferences.PREF_KEEP_INSTALL_HISTORY);
         sendToFDroidMetricsPref = findPreference(Preferences.PREF_SEND_TO_FDROID_METRICS);
         sendToFDroidMetricsPref.setEnabled(keepInstallHistoryPref.isChecked());
         installHistoryPref = findPreference("installHistory");
@@ -150,40 +161,42 @@ public class PreferencesFragment extends PreferenceFragmentCompat
             installHistoryPref.setTitle(R.string.install_history);
         }
 
-        useTorCheckPref = (SwitchPreferenceCompat) findPreference(Preferences.PREF_USE_TOR);
-        useTorCheckPref.setOnPreferenceChangeListener(useTorChangedListener);
-        enableProxyCheckPref = (SwitchPreferenceCompat) findPreference(Preferences.PREF_ENABLE_PROXY);
-        enableProxyCheckPref.setOnPreferenceChangeListener(proxyEnabledChangedListener);
+        useTorCheckPref = findPreference(Preferences.PREF_USE_TOR);
+        useTorCheckPref.setOnPreferenceChangeListener((preference, enabled) -> {
+            if ((Boolean) enabled) {
+                enableProxyCheckPref.setChecked(false);
+                final AppCompatActivity activity = (AppCompatActivity) getActivity();
+                if (!OrbotHelper.isOrbotInstalled(activity)) {
+                    Intent intent = OrbotHelper.getOrbotInstallIntent(activity);
+                    activity.startActivityForResult(intent, REQUEST_INSTALL_ORBOT);
+                }
+                // NetCipher gets configured to use Tor in onPause()
+                // via a call to FDroidApp.configureProxy()
+            }
+            return true;
+        });
+        enableProxyCheckPref = findPreference(Preferences.PREF_ENABLE_PROXY);
+        enableProxyCheckPref.setOnPreferenceChangeListener((preference, enabled) -> {
+            if ((Boolean) enabled) {
+                useTorCheckPref.setChecked(false);
+            }
+            return true;
+        });
         updateAutoDownloadPref = findPreference(Preferences.PREF_AUTO_DOWNLOAD_INSTALL_UPDATES);
 
-        overWifiSeekBar = (LiveSeekBarPreference) findPreference(Preferences.PREF_OVER_WIFI);
+        overWifiSeekBar = findPreference(Preferences.PREF_OVER_WIFI);
         overWifiPrevious = overWifiSeekBar.getValue();
-        overWifiSeekBar.setSeekBarLiveUpdater(new LiveSeekBarPreference.SeekBarLiveUpdater() {
-            @Override
-            public String seekBarUpdated(int position) {
-                return getNetworkSeekBarSummary(position);
-            }
-        });
-        overDataSeekBar = (LiveSeekBarPreference) findPreference(Preferences.PREF_OVER_DATA);
+        overWifiSeekBar.setSeekBarLiveUpdater(this::getNetworkSeekBarSummary);
+        overDataSeekBar = findPreference(Preferences.PREF_OVER_DATA);
         overDataPrevious = overDataSeekBar.getValue();
-        overDataSeekBar.setSeekBarLiveUpdater(new LiveSeekBarPreference.SeekBarLiveUpdater() {
-            @Override
-            public String seekBarUpdated(int position) {
-                return getNetworkSeekBarSummary(position);
-            }
-        });
-        updateIntervalSeekBar = (LiveSeekBarPreference) findPreference(Preferences.PREF_UPDATE_INTERVAL);
+        overDataSeekBar.setSeekBarLiveUpdater(this::getNetworkSeekBarSummary);
+        updateIntervalSeekBar = findPreference(Preferences.PREF_UPDATE_INTERVAL);
         updateIntervalPrevious = updateIntervalSeekBar.getValue();
-        updateIntervalSeekBar.setSeekBarLiveUpdater(new LiveSeekBarPreference.SeekBarLiveUpdater() {
-            @Override
-            public String seekBarUpdated(int position) {
-                return getString(UPDATE_INTERVAL_NAMES[position]);
-            }
-        });
+        updateIntervalSeekBar.setSeekBarLiveUpdater(position -> getString(UPDATE_INTERVAL_NAMES[position]));
 
-        ListPreference languagePref = (ListPreference) findPreference(Preferences.PREF_LANGUAGE);
+        ListPreference languagePref = findPreference(Preferences.PREF_LANGUAGE);
         if (Build.VERSION.SDK_INT >= 24) {
-            PreferenceCategory category = (PreferenceCategory) findPreference("pref_category_display");
+            PreferenceCategory category = findPreference("pref_category_display");
             category.removePreference(languagePref);
         } else {
             Languages languages = Languages.get((AppCompatActivity) getActivity());
@@ -193,7 +206,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         }
 
         if (getActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_TOUCHSCREEN)) {
-            PreferenceCategory category = (PreferenceCategory) findPreference("pref_category_appcompatibility");
+            PreferenceCategory category = findPreference("pref_category_appcompatibility");
             category.removePreference(findPreference(Preferences.PREF_FORCE_TOUCH_APPS));
         }
 
@@ -424,31 +437,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat
     }
 
     /**
-     * About dialog click listener
-     * <p>
-     * TODO: this might need to be changed when updated to the new preference pattern
-     */
-
-    private final Preference.OnPreferenceClickListener aboutPrefClickedListener =
-            new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    final View view = getLayoutInflater().inflate(R.layout.about, null);
-                    final Context context = requireContext();
-
-                    String versionName = Utils.getVersionName(context);
-                    if (versionName != null) {
-                        ((TextView) view.findViewById(R.id.version)).setText(versionName);
-                    }
-                    new MaterialAlertDialogBuilder(context)
-                            .setView(view)
-                            .setPositiveButton(R.string.ok, null)
-                            .show();
-                    return true;
-                }
-            };
-
-    /**
      * Initializes SystemInstaller preference, which can only be enabled when F-Droid is installed as a system-app
      */
     private void initPrivilegedInstallerPreference() {
@@ -477,18 +465,15 @@ public class PreferencesFragment extends PreferenceFragmentCompat
             pref.setDefaultValue(true);
             pref.setChecked(enabled);
 
-            pref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    SharedPreferences.Editor editor = pref.getSharedPreferences().edit();
-                    if (pref.isChecked()) {
-                        editor.remove(Preferences.PREF_PRIVILEGED_INSTALLER);
-                    } else {
-                        editor.putBoolean(Preferences.PREF_PRIVILEGED_INSTALLER, false);
-                    }
-                    editor.apply();
-                    return true;
+            pref.setOnPreferenceClickListener(preference -> {
+                SharedPreferences.Editor editor = pref.getSharedPreferences().edit();
+                if (pref.isChecked()) {
+                    editor.remove(Preferences.PREF_PRIVILEGED_INSTALLER);
+                } else {
+                    editor.putBoolean(Preferences.PREF_PRIVILEGED_INSTALLER, false);
                 }
+                editor.apply();
+                return true;
             });
         }
     }
@@ -500,15 +485,11 @@ public class PreferencesFragment extends PreferenceFragmentCompat
      * will actually _install_ apps, not just fetch their .apk file automatically.
      */
     private void initAutoFetchUpdatesPreference() {
-        updateAutoDownloadPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                if (newValue instanceof Boolean && (boolean) newValue) {
-                    UpdateService.autoDownloadUpdates(getActivity());
-                }
-                return true;
+        updateAutoDownloadPref.setOnPreferenceChangeListener((preference, newValue) -> {
+            if (newValue instanceof Boolean && (boolean) newValue) {
+                UpdateService.autoDownloadUpdates(getActivity());
             }
+            return true;
         });
 
         if (PrivilegedInstaller.isDefault(getActivity())) {
@@ -524,35 +505,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         useTorCheckPref.setDefaultValue(OrbotHelper.isOrbotInstalled(context));
         useTorCheckPref.setChecked(Preferences.get().isTorEnabled());
     }
-
-    private final Preference.OnPreferenceChangeListener useTorChangedListener =
-            new Preference.OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object enabled) {
-                    if ((Boolean) enabled) {
-                        enableProxyCheckPref.setChecked(false);
-                        final AppCompatActivity activity = (AppCompatActivity) getActivity();
-                        if (!OrbotHelper.isOrbotInstalled(activity)) {
-                            Intent intent = OrbotHelper.getOrbotInstallIntent(activity);
-                            activity.startActivityForResult(intent, REQUEST_INSTALL_ORBOT);
-                        }
-                        // NetCipher gets configured to use Tor in onPause()
-                        // via a call to FDroidApp.configureProxy()
-                    }
-                    return true;
-                }
-            };
-
-    private final Preference.OnPreferenceChangeListener proxyEnabledChangedListener =
-            new Preference.OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object enabled) {
-                    if ((Boolean) enabled) {
-                        useTorCheckPref.setChecked(false);
-                    }
-                    return true;
-                }
-            };
 
     @Override
     public void onResume() {

@@ -33,13 +33,14 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.LogPrinter;
 
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import org.fdroid.database.FDroidDatabase;
 import org.fdroid.database.Repository;
 import org.fdroid.download.Downloader;
 import org.fdroid.download.NotFoundException;
 import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.FDroidApp;
-import org.fdroid.fdroid.ProgressListener;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.data.DBHelper;
 import org.fdroid.fdroid.data.SanitizedFile;
@@ -59,8 +60,6 @@ import javax.net.ssl.SSLHandshakeException;
 import javax.net.ssl.SSLKeyException;
 import javax.net.ssl.SSLPeerUnverifiedException;
 import javax.net.ssl.SSLProtocolException;
-
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 /**
  * DownloaderService is a service that handles asynchronous download requests
@@ -269,15 +268,12 @@ public class DownloaderService extends Service {
                 }
             }
             downloader = DownloaderFactory.INSTANCE.create(repo, downloadUrl, fileV1, localFile);
-            downloader.setListener(new ProgressListener() {
-                @Override
-                public void onProgress(long bytesRead, long totalBytes) {
-                    Intent intent = new Intent(DownloaderService.ACTION_PROGRESS);
-                    intent.setData(canonicalUrl);
-                    intent.putExtra(DownloaderService.EXTRA_BYTES_READ, bytesRead);
-                    intent.putExtra(DownloaderService.EXTRA_TOTAL_BYTES, totalBytes);
-                    localBroadcastManager.sendBroadcast(intent);
-                }
+            downloader.setListener((bytesRead, totalBytes) -> {
+                Intent intent1 = new Intent(DownloaderService.ACTION_PROGRESS);
+                intent1.setData(canonicalUrl);
+                intent1.putExtra(DownloaderService.EXTRA_BYTES_READ, bytesRead);
+                intent1.putExtra(DownloaderService.EXTRA_TOTAL_BYTES, totalBytes);
+                localBroadcastManager.sendBroadcast(intent1);
             });
             downloader.download();
             sendBroadcast(uri, DownloaderService.ACTION_COMPLETE, localFile, repoId, canonicalUrl);

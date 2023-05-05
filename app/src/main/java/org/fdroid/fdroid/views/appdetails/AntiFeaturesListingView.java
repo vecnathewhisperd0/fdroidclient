@@ -74,14 +74,11 @@ public class AntiFeaturesListingView extends RecyclerView {
                 );
                 holder.antiFeatureText.setText(
                         getAntiFeatureDescriptionText(holder.antiFeatureText.getContext(), antiFeatureName));
-                holder.entireView.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent i = new Intent(Intent.ACTION_VIEW);
-                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-                        i.setData(Uri.parse("https://f-droid.org/docs/Anti-Features#" + antiFeatureName));
-                        getContext().startActivity(i);
-                    }
+                holder.entireView.setOnClickListener(v -> {
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+                    i.setData(Uri.parse("https://f-droid.org/docs/Anti-Features#" + antiFeatureName));
+                    getContext().startActivity(i);
                 });
             }
 

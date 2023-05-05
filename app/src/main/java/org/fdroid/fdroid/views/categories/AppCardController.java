@@ -28,9 +28,7 @@ import org.fdroid.database.AppOverviewItem;
  * + {@link R.id#summary} ({@link TextView}, required)
  * + {@link R.id#new_tag} ({@link TextView}, optional)
  */
-public class AppCardController extends RecyclerView.ViewHolder
-        implements View.OnClickListener {
-
+public class AppCardController extends RecyclerView.ViewHolder {
     /**
      * After this many days, don't consider showing the "New" tag next to an app.
      */
@@ -54,19 +52,31 @@ public class AppCardController extends RecyclerView.ViewHolder
     @Nullable
     private AppOverviewItem currentApp;
 
-    private final AppCompatActivity activity;
-
     public AppCardController(AppCompatActivity activity, View itemView) {
         super(itemView);
-
-        this.activity = activity;
 
         icon = ViewCompat.requireViewById(itemView, R.id.icon);
         summary = ViewCompat.requireViewById(itemView, R.id.summary);
 
         newTag = itemView.findViewById(R.id.new_tag);
 
-        itemView.setOnClickListener(this);
+        itemView.setOnClickListener(v -> {
+            if (currentApp == null) {
+                return;
+            }
+
+            Intent intent = new Intent(activity, AppDetailsActivity.class);
+            intent.putExtra(AppDetailsActivity.EXTRA_APPID, currentApp.getPackageName());
+            Pair<View, String> iconTransitionPair = Pair.create(icon,
+                    activity.getString(R.string.transition_app_item_icon));
+
+            // unchecked since the right type is passed as 2nd varargs arg: Pair<View, String>
+            @SuppressWarnings("unchecked")
+            Bundle b = ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
+                            iconTransitionPair)
+                    .toBundle();
+            ContextCompat.startActivity(activity, intent, b);
+        });
     }
 
     public void bindApp(@NonNull AppOverviewItem app) {
@@ -90,25 +100,5 @@ public class AppCardController extends RecyclerView.ViewHolder
             return false;
         }
         return Utils.daysSince(app.getAdded()) <= DAYS_TO_CONSIDER_NEW;
-    }
-
-    /**
-     * When the user clicks/touches an app card, we launch the {@link AppDetailsActivity} activity in response.
-     */
-    @Override
-    public void onClick(View v) {
-        if (currentApp == null) {
-            return;
-        }
-
-        Intent intent = new Intent(activity, AppDetailsActivity.class);
-        intent.putExtra(AppDetailsActivity.EXTRA_APPID, currentApp.getPackageName());
-        Pair<View, String> iconTransitionPair = Pair.create((View) icon,
-                activity.getString(R.string.transition_app_item_icon));
-
-        // unchecked since the right type is passed as 2nd varargs arg: Pair<View, String>
-        @SuppressWarnings("unchecked")
-        Bundle b = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, iconTransitionPair).toBundle();
-        ContextCompat.startActivity(activity, intent, b);
     }
 }

@@ -102,23 +102,14 @@ public class LocalHTTPDTest {
         IOUtils.copy(classLoader.getResourceAsStream("test.html"),
                 new FileOutputStream(new File(testdir, "test.html")));
 
-        serverStartThread = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                localHttpd = new LocalHTTPD(
-                        context,
-                        "localhost",
-                        port,
-                        webRoot,
-                        false);
-                try {
-                    localHttpd.start();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                assertTrue(localHttpd.isAlive());
+        serverStartThread = new Thread(() -> {
+            localHttpd = new LocalHTTPD(context, "localhost", port, webRoot, false);
+            try {
+                localHttpd.start();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+            assertTrue(localHttpd.isAlive());
         });
         serverStartThread.start();
         // give the server some tine to start.
@@ -254,23 +245,15 @@ public class LocalHTTPDTest {
     @Test
     public void doArgumentTest() throws InterruptedException, UnsupportedEncodingException, IOException {
         final int testPort = 9458;
-        Thread testServer = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                LocalHTTPD localHttpd = new LocalHTTPD(
-                        ApplicationProvider.getApplicationContext(),
-                        "localhost",
-                        testPort,
-                        webRoot,
-                        false);
-                try {
-                    localHttpd.start();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                assertTrue(localHttpd.isAlive());
+        Thread testServer = new Thread(() -> {
+            LocalHTTPD localHttpd = new LocalHTTPD(ApplicationProvider.getApplicationContext(),
+                    "localhost", testPort, webRoot, false);
+            try {
+                localHttpd.start();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+            assertTrue(localHttpd.isAlive());
         });
 
         testServer.start();

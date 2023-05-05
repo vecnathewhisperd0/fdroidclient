@@ -42,9 +42,19 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.util.Consumer;
+import androidx.core.util.Supplier;
+import androidx.core.view.DisplayCompat;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -86,17 +96,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.util.Consumer;
-import androidx.core.util.Supplier;
-import androidx.core.view.DisplayCompat;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import info.guardianproject.netcipher.NetCipher;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -769,13 +768,7 @@ public final class Utils {
         if (toastHandler == null) {
             toastHandler = new Handler(Looper.getMainLooper());
         }
-        toastHandler.post(new Runnable() {
-
-            @Override
-            public void run() {
-                Toast.makeText(context.getApplicationContext(), msg, length).show();
-            }
-        });
+        toastHandler.post(() -> Toast.makeText(context.getApplicationContext(), msg, length).show());
     }
 
     public static void applySwipeLayoutColors(SwipeRefreshLayout swipeLayout) {
@@ -888,18 +881,13 @@ public final class Utils {
          * @param contentView this must be the top most Container of the layout used by the AppCompatActivity
          */
         public KeyboardStateMonitor(final View contentView) {
-            contentView.getViewTreeObserver().addOnGlobalLayoutListener(
-                    new ViewTreeObserver.OnGlobalLayoutListener() {
-                        @Override
-                        public void onGlobalLayout() {
-                            int screenHeight = contentView.getRootView().getHeight();
-                            Rect rect = new Rect();
-                            contentView.getWindowVisibleDisplayFrame(rect);
-                            int keypadHeight = screenHeight - rect.bottom;
-                            visible = keypadHeight >= screenHeight * 0.15;
-                        }
-                    }
-            );
+            contentView.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
+                int screenHeight = contentView.getRootView().getHeight();
+                Rect rect = new Rect();
+                contentView.getWindowVisibleDisplayFrame(rect);
+                int keypadHeight = screenHeight - rect.bottom;
+                visible = keypadHeight >= screenHeight * 0.15;
+            });
         }
 
         public boolean isKeyboardVisible() {
