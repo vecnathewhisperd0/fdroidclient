@@ -8,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.LightingColorFilter;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,7 +18,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
@@ -136,7 +135,7 @@ public class PanicPreferencesFragment extends PreferenceFragmentCompat
         } else {
             Preference preference = new Preference(requireActivity());
             preference.setIntent(intent);
-            Drawable icon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_add_circle_outline);
+            Drawable icon = AppCompatResources.getDrawable(requireContext(), R.drawable.ic_add_circle_outline);
             icon.setColorFilter(new LightingColorFilter(0, getResources().getColor(R.color.swap_light_grey_icon)));
             preference.setSingleLineTitle(true);
             preference.setTitle(R.string.panic_add_apps_to_uninstall);
@@ -201,12 +200,11 @@ public class PanicPreferencesFragment extends PreferenceFragmentCompat
             prefApp.setSummary(getString(R.string.panic_app_setting_summary));
 
             prefApp.setIcon(null); // otherwise re-setting view resource doesn't work
-            Drawable icon = ContextCompat.getDrawable(getActivity(), R.drawable.ic_cancel);
+            final Drawable icon = AppCompatResources.getDrawable(requireContext(), R.drawable.ic_cancel);
             TypedValue typedValue = new TypedValue();
-            Resources.Theme theme = getActivity().getTheme();
+            Resources.Theme theme = requireContext().getTheme();
             theme.resolveAttribute(R.attr.appListItem, typedValue, true);
-            @ColorInt int color = typedValue.data;
-            icon.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+            icon.setTint(typedValue.data);
             prefApp.setIcon(icon);
 
             // disable destructive panic actions

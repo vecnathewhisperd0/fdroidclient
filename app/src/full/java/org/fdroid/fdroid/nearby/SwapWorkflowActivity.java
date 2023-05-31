@@ -1,5 +1,7 @@
 package org.fdroid.fdroid.nearby;
 
+import static org.fdroid.fdroid.views.main.MainActivity.ACTION_REQUEST_SWAP;
+
 import android.annotation.TargetApi;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
@@ -34,6 +36,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -62,19 +74,8 @@ import java.util.Stack;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.core.content.ContextCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import cc.mvdan.accesspoint.WifiApControl;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
-
-import static org.fdroid.fdroid.views.main.MainActivity.ACTION_REQUEST_SWAP;
 
 /**
  * This is the core of the UI for the whole nearby swap experience.  Each
@@ -1067,19 +1068,19 @@ public class SwapWorkflowActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(FDroidApp.bssid) && !TextUtils.isEmpty(FDroidApp.ipAddressString)) {
             // empty bssid with an ipAddress means hotspot mode
             descriptionView.setText(R.string.swap_join_this_hotspot);
-            wifiIcon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_wifi_tethering));
+            wifiIcon.setImageResource(R.drawable.ic_wifi_tethering);
             ssidView.setText(R.string.swap_active_hotspot);
             tapView.setText(R.string.swap_switch_to_wifi);
         } else if (TextUtils.isEmpty(FDroidApp.ssid)) {
             // not connected to or setup with any wifi network
             descriptionView.setText(R.string.swap_join_same_wifi);
-            wifiIcon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_wifi));
+            wifiIcon.setImageResource(R.drawable.ic_wifi);
             ssidView.setText(R.string.swap_no_wifi_network);
             tapView.setText(R.string.swap_view_available_networks);
         } else {
             // connected to a regular wifi network
             descriptionView.setText(R.string.swap_join_same_wifi);
-            wifiIcon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_wifi));
+            wifiIcon.setImageResource(R.drawable.ic_wifi);
             ssidView.setText(FDroidApp.ssid);
             tapView.setText(R.string.swap_view_available_networks);
         }

@@ -22,6 +22,9 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 
@@ -32,9 +35,6 @@ import org.fdroid.fdroid.nearby.peers.Peer;
 
 import java.util.ArrayList;
 
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import cc.mvdan.accesspoint.WifiApControl;
 
 @SuppressWarnings("LineLength")
@@ -72,8 +72,7 @@ public class StartSwapView extends SwapView {
 
             Peer peer = getItem(position);
             ((TextView) convertView.findViewById(R.id.peer_name)).setText(peer.getName());
-            ((ImageView) convertView.findViewById(R.id.icon))
-                    .setImageDrawable(ContextCompat.getDrawable(getContext(), peer.getIcon()));
+            ((ImageView) convertView.findViewById(R.id.icon)).setImageResource(peer.getIcon());
 
             return convertView;
         }

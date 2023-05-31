@@ -8,12 +8,12 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.text.style.ReplacementSpan;
 
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.views.categories.CategoryController;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
+import androidx.appcompat.content.res.AppCompatResources;
+
+import org.fdroid.fdroid.R;
+import org.fdroid.fdroid.views.categories.CategoryController;
 
 /**
  * This draws a category "chip" in the search text view according to the material design specs
@@ -124,7 +124,7 @@ public class CategorySpan extends ReplacementSpan {
         canvas.drawRoundRect(iconBackgroundRect, cornerRadius, cornerRadius, iconBackgroundPaint);
 
         // Category icon on top of the circular background which was just drawn.
-        Drawable icon = ContextCompat.getDrawable(context, R.drawable.ic_categories);
+        Drawable icon = AppCompatResources.getDrawable(context, R.drawable.ic_categories);
         icon.setBounds(iconPadding, iconPadding, iconPadding + iconSize, iconPadding + iconSize);
         icon.draw(canvas);
 

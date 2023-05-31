@@ -27,15 +27,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.data.App;
-
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.fdroid.fdroid.R;
+import org.fdroid.fdroid.data.App;
 
 public class AntiFeaturesListingView extends RecyclerView {
 
@@ -63,15 +62,8 @@ public class AntiFeaturesListingView extends RecyclerView {
             @Override
             public void onBindViewHolder(@NonNull AntiFeatureItemViewHolder holder, int position) {
                 final String antiFeatureName = app.antiFeatures[position];
-                holder.antiFeatureIcon.setBackgroundDrawable(
-                        ContextCompat.getDrawable(
-                                getContext(),
-                                antiFeatureIcon(
-                                        holder.antiFeatureText.getContext(),
-                                        antiFeatureName
-                                )
-                        )
-                );
+                holder.antiFeatureIcon.setBackgroundResource(antiFeatureIcon(
+                        holder.antiFeatureText.getContext(), antiFeatureName));
                 holder.antiFeatureText.setText(
                         getAntiFeatureDescriptionText(holder.antiFeatureText.getContext(), antiFeatureName));
                 holder.entireView.setOnClickListener(new OnClickListener() {

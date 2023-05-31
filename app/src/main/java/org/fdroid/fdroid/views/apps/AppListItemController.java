@@ -320,14 +320,14 @@ public abstract class AppListItemController extends RecyclerView.ViewHolder {
             } else if (viewState.showProgress()) {
                 installButton.setEnabled(false);
                 installButton.setVisibility(View.VISIBLE);
-                installButton.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_download_progress));
+                installButton.setImageResource(R.drawable.ic_download_progress);
                 int progressAsDegrees = viewState.getProgressMax() <= 0 ? 0 :
                         (int) (((float) viewState.getProgressCurrent() / viewState.getProgressMax()) * 360);
                 installButton.setImageLevel(progressAsDegrees);
             } else if (viewState.shouldShowInstall()) {
                 installButton.setEnabled(true);
                 installButton.setVisibility(View.VISIBLE);
-                installButton.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_download));
+                installButton.setImageResource(R.drawable.ic_download);
             } else {
                 installButton.setVisibility(View.GONE);
             }
