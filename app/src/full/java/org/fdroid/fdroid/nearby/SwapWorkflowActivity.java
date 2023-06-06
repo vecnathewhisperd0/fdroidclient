@@ -1,5 +1,7 @@
 package org.fdroid.fdroid.nearby;
 
+import static org.fdroid.fdroid.views.main.MainActivity.ACTION_REQUEST_SWAP;
+
 import android.annotation.TargetApi;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
@@ -18,6 +20,7 @@ import android.os.IBinder;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,6 +36,16 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
@@ -54,27 +67,14 @@ import org.fdroid.fdroid.qr.CameraCharacteristicsChecker;
 import org.fdroid.fdroid.views.main.MainActivity;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.core.content.ContextCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import cc.mvdan.accesspoint.WifiApControl;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
-
-import static org.fdroid.fdroid.views.main.MainActivity.ACTION_REQUEST_SWAP;
 
 /**
  * This is the core of the UI for the whole nearby swap experience.  Each
@@ -928,7 +928,7 @@ public class SwapWorkflowActivity extends AppCompatActivity {
 
                 bluetooth = "N/A";
                 if (bluetoothAdapter != null) {
-                    Map<Integer, String> scanModes = new HashMap<>(3);
+                    SparseArray<String> scanModes = new SparseArray<>(3);
                     scanModes.put(BluetoothAdapter.SCAN_MODE_CONNECTABLE, "CON");
                     scanModes.put(BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE, "CON_DISC");
                     scanModes.put(BluetoothAdapter.SCAN_MODE_NONE, "NONE");

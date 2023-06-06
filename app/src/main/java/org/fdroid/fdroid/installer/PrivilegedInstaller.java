@@ -30,6 +30,9 @@ import android.net.Uri;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
+import android.util.SparseArray;
+
+import androidx.annotation.NonNull;
 
 import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.Preferences;
@@ -38,10 +41,6 @@ import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.privileged.IPrivilegedCallback;
 import org.fdroid.fdroid.privileged.IPrivilegedService;
-
-import java.util.HashMap;
-
-import androidx.annotation.NonNull;
 
 /**
  * Installer that only works if the "F-Droid Privileged
@@ -124,11 +123,11 @@ public class PrivilegedInstaller extends Installer {
     private static final int INSTALL_FAILED_DUPLICATE_PERMISSION = -112;
     private static final int INSTALL_FAILED_NO_MATCHING_ABIS = -113;
 
-    private static final HashMap<Integer, String> INSTALL_RETURN_CODES;
+    private static final SparseArray<String> INSTALL_RETURN_CODES;
 
     static {
         // Descriptions extracted from the source code comments in AOSP
-        INSTALL_RETURN_CODES = new HashMap<>();
+        INSTALL_RETURN_CODES = new SparseArray<>();
         INSTALL_RETURN_CODES.put(INSTALL_SUCCEEDED,
                 "Success");
         INSTALL_RETURN_CODES.put(INSTALL_FAILED_ALREADY_EXISTS,
@@ -233,11 +232,11 @@ public class PrivilegedInstaller extends Installer {
     private static final int DELETE_FAILED_USER_RESTRICTED = -3;
     private static final int DELETE_FAILED_OWNER_BLOCKED = -4;
 
-    private static final HashMap<Integer, String> UNINSTALL_RETURN_CODES;
+    private static final SparseArray<String> UNINSTALL_RETURN_CODES;
 
     static {
         // Descriptions extracted from the source code comments in AOSP
-        UNINSTALL_RETURN_CODES = new HashMap<>();
+        UNINSTALL_RETURN_CODES = new SparseArray<>();
         UNINSTALL_RETURN_CODES.put(DELETE_SUCCEEDED,
                 "Success");
         UNINSTALL_RETURN_CODES.put(DELETE_FAILED_INTERNAL_ERROR,
