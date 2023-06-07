@@ -31,6 +31,8 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.R;
@@ -38,10 +40,6 @@ import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.privileged.IPrivilegedCallback;
 import org.fdroid.fdroid.privileged.IPrivilegedService;
-
-import java.util.HashMap;
-
-import androidx.annotation.NonNull;
 
 /**
  * Installer that only works if the "F-Droid Privileged
@@ -124,107 +122,107 @@ public class PrivilegedInstaller extends Installer {
     private static final int INSTALL_FAILED_DUPLICATE_PERMISSION = -112;
     private static final int INSTALL_FAILED_NO_MATCHING_ABIS = -113;
 
-    private static final HashMap<Integer, String> INSTALL_RETURN_CODES;
-
-    static {
-        // Descriptions extracted from the source code comments in AOSP
-        INSTALL_RETURN_CODES = new HashMap<>();
-        INSTALL_RETURN_CODES.put(INSTALL_SUCCEEDED,
-                "Success");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_ALREADY_EXISTS,
-                "Package is already installed.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_INVALID_APK,
-                "The package archive file is invalid.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_INVALID_URI,
-                "The URI passed in is invalid.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_INSUFFICIENT_STORAGE,
-                "The package manager service found that the device didn't have enough " +
-                        "storage space to install the app.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_DUPLICATE_PACKAGE,
-                "A package is already installed with the same name.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_NO_SHARED_USER,
-                "The requested shared user does not exist.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_UPDATE_INCOMPATIBLE,
-                "A previously installed package of the same name has a different signature than " +
-                        "the new package (and the old package's data was not removed).");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_SHARED_USER_INCOMPATIBLE,
-                "The new package has requested a shared user which is already installed on " +
-                        "the device and does not have matching signature.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_MISSING_SHARED_LIBRARY,
-                "The new package uses a shared library that is not available.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_REPLACE_COULDNT_DELETE,
-                "Unknown"); // wrong comment in source
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_DEXOPT,
-                "The package failed while optimizing and validating its dex files, either " +
-                        "because there was not enough storage or the validation failed.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_OLDER_SDK,
-                "The new package failed because the current SDK version is older than that " +
-                        "required by the package.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_CONFLICTING_PROVIDER,
-                "The new package failed because it contains a content provider with the same " +
-                        "authority as a provider already installed in the system.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_NEWER_SDK,
-                "The new package failed because the current SDK version is newer than that " +
-                        "required by the package.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_TEST_ONLY,
-                "The new package failed because it has specified that it is a test-only package " +
-                        "and the caller has not supplied the {@link #INSTALL_ALLOW_TEST} flag.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_CPU_ABI_INCOMPATIBLE,
-                "The package being installed contains native code, but none that is compatible " +
-                        "with the device's CPU_ABI.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_MISSING_FEATURE,
-                "The new package uses a feature that is not available.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_CONTAINER_ERROR,
-                "A secure container mount point couldn't be accessed on external media.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_INVALID_INSTALL_LOCATION,
-                "The new package couldn't be installed in the specified install location.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_MEDIA_UNAVAILABLE,
-                "The new package couldn't be installed in the specified install location " +
-                        "because the media is not available.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_VERIFICATION_TIMEOUT,
-                "The new package couldn't be installed because the verification timed out.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_VERIFICATION_FAILURE,
-                "The new package couldn't be installed because the verification did not succeed.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_PACKAGE_CHANGED,
-                "The package changed from what the calling program expected.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_UID_CHANGED,
-                "The new package is assigned a different UID than it previously held.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_VERSION_DOWNGRADE,
-                "The new package has an older version code than the currently installed package.");
-        INSTALL_RETURN_CODES.put(INSTALL_PARSE_FAILED_NOT_APK,
-                "The parser was given a path that is not a file, or does not end with the " +
-                        "expected '.apk' extension.");
-        INSTALL_RETURN_CODES.put(INSTALL_PARSE_FAILED_BAD_MANIFEST,
-                "the parser was unable to retrieve the AndroidManifest.xml file.");
-        INSTALL_RETURN_CODES.put(INSTALL_PARSE_FAILED_UNEXPECTED_EXCEPTION,
-                "The parser encountered an unexpected exception.");
-        INSTALL_RETURN_CODES.put(INSTALL_PARSE_FAILED_NO_CERTIFICATES,
-                "The parser did not find any certificates in the .apk.");
-        INSTALL_RETURN_CODES.put(INSTALL_PARSE_FAILED_INCONSISTENT_CERTIFICATES,
-                "The parser found inconsistent certificates on the files in the .apk.");
-        INSTALL_RETURN_CODES.put(INSTALL_PARSE_FAILED_CERTIFICATE_ENCODING,
-                "The parser encountered a CertificateEncodingException in one of the files in " +
-                        "the .apk.");
-        INSTALL_RETURN_CODES.put(INSTALL_PARSE_FAILED_BAD_PACKAGE_NAME,
-                "The parser encountered a bad or missing package name in the manifest.");
-        INSTALL_RETURN_CODES.put(INSTALL_PARSE_FAILED_BAD_SHARED_USER_ID,
-                "The parser encountered a bad shared user id name in the manifest.");
-        INSTALL_RETURN_CODES.put(INSTALL_PARSE_FAILED_MANIFEST_MALFORMED,
-                "The parser encountered some structural problem in the manifest.");
-        INSTALL_RETURN_CODES.put(INSTALL_PARSE_FAILED_MANIFEST_EMPTY,
-                "The parser did not find any actionable tags (instrumentation or application) " +
-                        "in the manifest.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_INTERNAL_ERROR,
-                "The system failed to install the package because of system issues.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_USER_RESTRICTED,
-                "The system failed to install the package because the user is restricted from " +
-                        "installing apps.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_DUPLICATE_PERMISSION,
-                "The system failed to install the package because it is attempting to define a " +
-                        "permission that is already defined by some existing package.");
-        INSTALL_RETURN_CODES.put(INSTALL_FAILED_NO_MATCHING_ABIS,
-                "The system failed to install the package because its packaged native code did " +
-                        "not match any of the ABIs supported by the system.");
+    private String getInstallMessage(int installCode) {
+        switch (installCode) {
+            // Descriptions extracted from the source code comments in AOSP
+            case INSTALL_SUCCEEDED:
+                return "Success";
+            case INSTALL_FAILED_ALREADY_EXISTS:
+                return "Package is already installed.";
+            case INSTALL_FAILED_INVALID_APK:
+                return "The package archive file is invalid.";
+            case INSTALL_FAILED_INVALID_URI:
+                return "The URI passed in is invalid.";
+            case INSTALL_FAILED_INSUFFICIENT_STORAGE:
+                return "The package manager service found that the device didn't have enough " +
+                        "storage space to install the app.";
+            case INSTALL_FAILED_DUPLICATE_PACKAGE:
+                return "A package is already installed with the same name.";
+            case INSTALL_FAILED_NO_SHARED_USER:
+                return "The requested shared user does not exist.";
+            case INSTALL_FAILED_UPDATE_INCOMPATIBLE:
+                return "A previously installed package of the same name has a different signature than " +
+                        "the new package (and the old package's data was not removed).";
+            case INSTALL_FAILED_SHARED_USER_INCOMPATIBLE:
+                return "The new package has requested a shared user which is already installed on " +
+                        "the device and does not have matching signature.";
+            case INSTALL_FAILED_MISSING_SHARED_LIBRARY:
+                return "The new package uses a shared library that is not available.";
+            case INSTALL_FAILED_REPLACE_COULDNT_DELETE:
+                return "Unknown"; // wrong comment in source
+            case INSTALL_FAILED_DEXOPT:
+                return "The package failed while optimizing and validating its dex files, either " +
+                        "because there was not enough storage or the validation failed.";
+            case INSTALL_FAILED_OLDER_SDK:
+                return "The new package failed because the current SDK version is older than that " +
+                        "required by the package.";
+            case INSTALL_FAILED_CONFLICTING_PROVIDER:
+                return "The new package failed because it contains a content provider with the same " +
+                        "authority as a provider already installed in the system.";
+            case INSTALL_FAILED_NEWER_SDK:
+                return "The new package failed because the current SDK version is newer than that " +
+                        "required by the package.";
+            case INSTALL_FAILED_TEST_ONLY:
+                return "The new package failed because it has specified that it is a test-only package " +
+                        "and the caller has not supplied the {@link #INSTALL_ALLOW_TEST} flag.";
+            case INSTALL_FAILED_CPU_ABI_INCOMPATIBLE:
+                return "The package being installed contains native code, but none that is compatible " +
+                        "with the device's CPU_ABI.";
+            case INSTALL_FAILED_MISSING_FEATURE:
+                return "The new package uses a feature that is not available.";
+            case INSTALL_FAILED_CONTAINER_ERROR:
+                return "A secure container mount point couldn't be accessed on external media.";
+            case INSTALL_FAILED_INVALID_INSTALL_LOCATION:
+                return "The new package couldn't be installed in the specified install location.";
+            case INSTALL_FAILED_MEDIA_UNAVAILABLE:
+                return "The new package couldn't be installed in the specified install location " +
+                        "because the media is not available.";
+            case INSTALL_FAILED_VERIFICATION_TIMEOUT:
+                return "The new package couldn't be installed because the verification timed out.";
+            case INSTALL_FAILED_VERIFICATION_FAILURE:
+                return "The new package couldn't be installed because the verification did not succeed.";
+            case INSTALL_FAILED_PACKAGE_CHANGED:
+                return "The package changed from what the calling program expected.";
+            case INSTALL_FAILED_UID_CHANGED:
+                return "The new package is assigned a different UID than it previously held.";
+            case INSTALL_FAILED_VERSION_DOWNGRADE:
+                return "The new package has an older version code than the currently installed package.";
+            case INSTALL_PARSE_FAILED_NOT_APK:
+                return "The parser was given a path that is not a file, or does not end with the " +
+                        "expected '.apk' extension.";
+            case INSTALL_PARSE_FAILED_BAD_MANIFEST:
+                return "the parser was unable to retrieve the AndroidManifest.xml file.";
+            case INSTALL_PARSE_FAILED_UNEXPECTED_EXCEPTION:
+                return "The parser encountered an unexpected exception.";
+            case INSTALL_PARSE_FAILED_NO_CERTIFICATES:
+                return "The parser did not find any certificates in the .apk.";
+            case INSTALL_PARSE_FAILED_INCONSISTENT_CERTIFICATES:
+                return "The parser found inconsistent certificates on the files in the .apk.";
+            case INSTALL_PARSE_FAILED_CERTIFICATE_ENCODING:
+                return "The parser encountered a CertificateEncodingException in one of the files in " +
+                        "the .apk.";
+            case INSTALL_PARSE_FAILED_BAD_PACKAGE_NAME:
+                return "The parser encountered a bad or missing package name in the manifest.";
+            case INSTALL_PARSE_FAILED_BAD_SHARED_USER_ID:
+                return "The parser encountered a bad shared user id name in the manifest.";
+            case INSTALL_PARSE_FAILED_MANIFEST_MALFORMED:
+                return "The parser encountered some structural problem in the manifest.";
+            case INSTALL_PARSE_FAILED_MANIFEST_EMPTY:
+                return "The parser did not find any actionable tags (instrumentation or application) " +
+                        "in the manifest.";
+            case INSTALL_FAILED_INTERNAL_ERROR:
+                return "The system failed to install the package because of system issues.";
+            case INSTALL_FAILED_USER_RESTRICTED:
+                return "The system failed to install the package because the user is restricted from " +
+                        "installing apps.";
+            case INSTALL_FAILED_DUPLICATE_PERMISSION:
+                return "The system failed to install the package because it is attempting to define a " +
+                        "permission that is already defined by some existing package.";
+            case INSTALL_FAILED_NO_MATCHING_ABIS:
+                return "The system failed to install the package because its packaged native code did " +
+                        "not match any of the ABIs supported by the system.";
+        }
+        return null;
     }
 
     private static final int DELETE_SUCCEEDED = 1;
@@ -233,23 +231,21 @@ public class PrivilegedInstaller extends Installer {
     private static final int DELETE_FAILED_USER_RESTRICTED = -3;
     private static final int DELETE_FAILED_OWNER_BLOCKED = -4;
 
-    private static final HashMap<Integer, String> UNINSTALL_RETURN_CODES;
-
-    static {
-        // Descriptions extracted from the source code comments in AOSP
-        UNINSTALL_RETURN_CODES = new HashMap<>();
-        UNINSTALL_RETURN_CODES.put(DELETE_SUCCEEDED,
-                "Success");
-        UNINSTALL_RETURN_CODES.put(DELETE_FAILED_INTERNAL_ERROR,
-                " the system failed to delete the package for an unspecified reason.");
-        UNINSTALL_RETURN_CODES.put(DELETE_FAILED_DEVICE_POLICY_MANAGER,
-                "the system failed to delete the package because it is the active " +
-                        "DevicePolicy manager.");
-        UNINSTALL_RETURN_CODES.put(DELETE_FAILED_USER_RESTRICTED,
-                "the system failed to delete the package since the user is restricted.");
-        UNINSTALL_RETURN_CODES.put(DELETE_FAILED_OWNER_BLOCKED,
-                "the system failed to delete the package because a profile or " +
-                        "device owner has marked the package as uninstallable.");
+    private String getUninstallMessage(int uninstallCode) {
+        switch (uninstallCode) {
+            case DELETE_SUCCEEDED:
+                return "Success";
+            case DELETE_FAILED_INTERNAL_ERROR:
+                return " the system failed to delete the package for an unspecified reason.";
+            case DELETE_FAILED_DEVICE_POLICY_MANAGER:
+                return "the system failed to delete the package because it is the active DevicePolicy manager.";
+            case DELETE_FAILED_USER_RESTRICTED:
+                return "the system failed to delete the package since the user is restricted.";
+            case DELETE_FAILED_OWNER_BLOCKED:
+                return "the system failed to delete the package because a profile or " +
+                        "device owner has marked the package as uninstallable.";
+        }
+        return null;
     }
 
     PrivilegedInstaller(Context context, App app, @NonNull Apk apk) {
@@ -316,7 +312,7 @@ public class PrivilegedInstaller extends Installer {
                         } else {
                             sendBroadcastInstall(canonicalUri, ACTION_INSTALL_INTERRUPTED,
                                     "Error " + returnCode + ": "
-                                            + INSTALL_RETURN_CODES.get(returnCode));
+                                            + getInstallMessage(returnCode));
                         }
                     }
                 };
@@ -362,7 +358,7 @@ public class PrivilegedInstaller extends Installer {
                         } else {
                             sendBroadcastUninstall(ACTION_UNINSTALL_INTERRUPTED,
                                     "Error " + returnCode + ": "
-                                            + UNINSTALL_RETURN_CODES.get(returnCode));
+                                            + getUninstallMessage(returnCode));
                         }
                     }
                 };
