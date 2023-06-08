@@ -103,6 +103,7 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
     public static final String PREF_SEND_TO_FDROID_METRICS = "sendToFdroidMetrics";
     public static final String PREF_USE_IPFS_GATEWAYS = "useIpfsGateways";
     public static final String PREF_EXPERT = "expert";
+    public static final String PREF_SHOW_PERMISSIONS = "showPermissions";
     public static final String PREF_FORCE_OLD_INDEX = "forceOldIndex";
     public static final String PREF_PRIVILEGED_INSTALLER = "privilegedInstaller";
     public static final String PREF_LOCAL_REPO_NAME = "localRepoName";
@@ -390,6 +391,10 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
 
     public void setExpertMode(boolean flag) {
         preferences.edit().putBoolean(PREF_EXPERT, flag).apply();
+    }
+
+    public boolean showPermissions() {
+        return preferences.getBoolean(PREF_SHOW_PERMISSIONS, IGNORED_B);
     }
 
     public boolean forceTouchApps() {

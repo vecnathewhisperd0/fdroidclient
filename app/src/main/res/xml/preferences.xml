@@ -183,6 +183,12 @@
             android:summary="@string/unstable_updates_summary"
             android:title="@string/unstable_updates" />
         <CheckBoxPreference
+            android:key="showPermissions"
+            android:title="@string/show_permissions"
+            android:summary="@string/show_permissions_summary"
+            android:defaultValue="false"
+            android:dependency="expert"/>
+        <CheckBoxPreference
             android:defaultValue="false"
             android:dependency="expert"
             android:key="keepInstallHistory"

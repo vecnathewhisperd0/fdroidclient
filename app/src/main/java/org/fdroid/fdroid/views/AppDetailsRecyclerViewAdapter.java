@@ -165,7 +165,7 @@ public class AppDetailsRecyclerViewAdapter
         if (app.getAllScreenshots().size() > 0) addItem(VIEWTYPE_SCREENSHOTS);
         addItem(VIEWTYPE_DONATE);
         addItem(VIEWTYPE_LINKS);
-        addItem(VIEWTYPE_PERMISSIONS);
+        if (Preferences.get().showPermissions()) addItem(VIEWTYPE_PERMISSIONS);
         if (versions.isEmpty()) {
             addItem(VIEWTYPE_NO_VERSIONS);
         } else {
