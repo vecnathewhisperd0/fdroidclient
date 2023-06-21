@@ -88,8 +88,7 @@ public class UpdatesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private boolean showAllUpdateableApps;
 
-    @Nullable
-    private Disposable disposable;
+    @Nullable private Disposable disposable;
 
     UpdatesAdapter(AppCompatActivity activity) {
         this.activity = activity;

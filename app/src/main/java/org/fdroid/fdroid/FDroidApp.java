@@ -100,8 +100,7 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
     public static final String SYSTEM_DIR_NAME = Environment.getRootDirectory().getAbsolutePath();
 
     private static FDroidApp instance;
-    @Nullable
-    private static RepoManager repoManager;
+    @Nullable private static RepoManager repoManager;
 
     // for the local repo on this device, all static since there is only one
     public static volatile int port;
@@ -118,8 +117,7 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
 
     public static final SubnetUtils.SubnetInfo UNSET_SUBNET_INFO = new SubnetUtils("0.0.0.0/32").getInfo();
 
-    @Nullable
-    public static volatile String queryString;
+    @Nullable public static volatile String queryString;
 
     private static final org.bouncycastle.jce.provider.BouncyCastleProvider BOUNCYCASTLE_PROVIDER;
 

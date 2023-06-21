@@ -95,14 +95,11 @@ public class SelectAppsView extends SwapView {
     private class AppListAdapter extends BaseAdapter {
 
         private final Context context = SelectAppsView.this.getContext();
-        @Nullable
-        private LayoutInflater inflater;
+        @Nullable private LayoutInflater inflater;
 
-        @Nullable
-        private Drawable defaultAppIcon;
+        @Nullable private Drawable defaultAppIcon;
 
-        @NonNull
-        private final ListView listView;
+        @NonNull private final ListView listView;
 
         private final List<InstalledApp> allPackages;
         private final List<InstalledApp> filteredPackages = new ArrayList<>();

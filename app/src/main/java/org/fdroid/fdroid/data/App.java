@@ -161,8 +161,7 @@ public class App implements Comparable<App>, Parcelable {
      *
      * @see <a href="https://f-droid.org/docs/Build_Metadata_Reference/#CurrentVersion">CurrentVersion</a>
      */
-    @Deprecated
-    public String suggestedVersionName;
+    @Deprecated public String suggestedVersionName;
 
     /**
      * This matches {@code CurrentVersionCode} in build metadata files. Java
@@ -171,8 +170,7 @@ public class App implements Comparable<App>, Parcelable {
      *
      * @see <a href="https://f-droid.org/docs/Build_Metadata_Reference/#CurrentVersionCode">CurrentVersionCode</a>
      */
-    @Deprecated
-    public int suggestedVersionCode = Integer.MIN_VALUE;
+    @Deprecated public int suggestedVersionCode = Integer.MIN_VALUE;
 
     /**
      * Unlike other public fields, this is only accessible via a getter, to
@@ -200,8 +198,8 @@ public class App implements Comparable<App>, Parcelable {
     /**
      * List of anti-features (as defined in the metadata documentation) or null if there aren't any.
      */
-    @Nullable
-    public String[] antiFeatures;
+    @Nullable public String[] antiFeatures;
+
     public Map<String, String> antiFeatureReasons = new HashMap<>();
 
     public FileV2 iconFile;

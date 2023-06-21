@@ -67,8 +67,7 @@ public class Apk implements Comparable<Apk>, Parcelable {
 
     // these come directly from the index metadata
     public String packageName;
-    @Nullable
-    public String versionName;
+    @Nullable public String versionName;
     public long versionCode;
     public long size; // Size in bytes - 0 means we don't know!
     public int minSdkVersion = SDK_VERSION_MIN_VALUE; // 0 if unknown
@@ -87,8 +86,8 @@ public class Apk implements Comparable<Apk>, Parcelable {
      * example, a regular app can request a system permission, but it won't be granted it.
      * Set this to null for no permissions.
      */
-    @Nullable
-    public String[] requestedPermissions;
+    @Nullable public String[] requestedPermissions;
+
     public String[] features; // null if empty or unknown
 
     public String[] nativecode; // null if empty or unknown
@@ -112,16 +111,14 @@ public class Apk implements Comparable<Apk>, Parcelable {
      * which happens only for showing an installed version
      * in {@link org.fdroid.fdroid.views.AppDetailsActivity}.
      */
-    @Nullable
-    public FileV1 apkFile;
+    @Nullable public FileV1 apkFile;
 
     /**
      * If not null, this is the name of the source tarball for the
      * application. Null indicates that it's a developer's binary
      * build - otherwise it's built from source.
      */
-    @Nullable
-    private String srcname;
+    @Nullable private String srcname;
 
     public String[] incompatibleReasons;
 

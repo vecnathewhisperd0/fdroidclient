@@ -159,11 +159,9 @@ public class SwapSuccessView extends SwapView {
 
             private final LocalBroadcastManager localBroadcastManager;
 
-            @Nullable
-            private App app;
+            @Nullable private App app;
 
-            @Nullable
-            private Apk apk;
+            @Nullable private Apk apk;
 
             ProgressBar progressView;
             TextView nameView;

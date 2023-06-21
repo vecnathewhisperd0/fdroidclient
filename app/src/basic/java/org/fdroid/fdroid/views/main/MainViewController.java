@@ -41,8 +41,7 @@ class MainViewController extends RecyclerView.ViewHolder {
     private final AppCompatActivity activity;
     private final FrameLayout frame;
 
-    @Nullable
-    private UpdatesViewBinder updatesView = null;
+    @Nullable private UpdatesViewBinder updatesView = null;
 
     MainViewController(AppCompatActivity activity, FrameLayout frame) {
         super(frame);

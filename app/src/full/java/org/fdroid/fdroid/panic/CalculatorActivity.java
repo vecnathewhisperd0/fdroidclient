@@ -31,8 +31,7 @@ public class CalculatorActivity extends AppCompatActivity {
     // unary operators
     private static final String PERCENT = "%";
 
-    @Nullable
-    private String lastOp;
+    @Nullable private String lastOp;
 
     // views
     private TextView textView;

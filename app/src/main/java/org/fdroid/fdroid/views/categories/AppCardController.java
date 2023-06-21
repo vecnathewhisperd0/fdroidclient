@@ -35,23 +35,19 @@ public class AppCardController extends RecyclerView.ViewHolder
      */
     private static final int DAYS_TO_CONSIDER_NEW = 14;
 
-    @NonNull
-    private final ImageView icon;
+    @NonNull private final ImageView icon;
 
     /**
      * Text starting with the app name (in bold) followed by a short summary of the app.
      */
-    @NonNull
-    private final TextView summary;
+    @NonNull private final TextView summary;
 
     /**
      * A little blue tag which says "New" to indicate an app was added to the repository recently.
      */
-    @Nullable
-    private final TextView newTag;
+    @Nullable private final TextView newTag;
 
-    @Nullable
-    private AppOverviewItem currentApp;
+    @Nullable private AppOverviewItem currentApp;
 
     private final AppCompatActivity activity;
 
