@@ -1,0 +1,25 @@
+apply plugin: "com.diffplug.spotless"
+spotless {
+    java {
+        target 'src/*/java/**/*.java'
+        targetExclude 'src/full/java/cc/**/*.java', 'src/*/java/vendored/**/*.java'
+        // TODO enable a code format, e.g. googleJavaFormat('1.17.0').aosp()
+        // this is quite pedantic but its what Android Studio does by default
+        // https://stackoverflow.com/questions/69985913/how-do-i-get-checkstyle-customimportorder-to-work-with-android-studio-properly/69985914#69985914
+        importOrder('\\#', 'android.', 'androidx.', 'com.', 'junit.', 'net.', 'org.', 'java', 'javax', '')
+        removeUnusedImports()
+        indentWithSpaces()
+        trimTrailingWhitespace()
+    }
+    format 'misc', {
+        target '**/*.gradle', '**/*.md', '**/.gitignore'
+        endWithNewline()
+        indentWithSpaces()
+        trimTrailingWhitespace()
+    }
+    format 'xml', {
+        target '**/*.xml'
+        indentWithSpaces()
+        trimTrailingWhitespace() // TODO can be enabled after syncing with Weblate
+    }
+}

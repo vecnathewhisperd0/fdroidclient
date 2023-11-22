@@ -73,8 +73,7 @@ public final class LocalRepoManager {
     private final SanitizedFile repoDir;
     private final SanitizedFile repoDirCaps;
 
-    @Nullable
-    private static LocalRepoManager localRepoManager;
+    @Nullable private static LocalRepoManager localRepoManager;
 
     @NonNull
     public static LocalRepoManager get(Context context) {

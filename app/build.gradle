@@ -7,6 +7,7 @@ if (project.hasProperty('strict.release')) {
 } else {
     apply from: '../config/checkstyle/checkstyle.gradle'
     apply from: '../config/pmd/pmd.gradle'
+    apply from: '../config/spotless.gradle'
 }
 
 /* gets the version name from the latest Git tag */

@@ -78,49 +78,35 @@ public abstract class AppListItemController extends RecyclerView.ViewHolder {
 
     protected final AppCompatActivity activity;
 
-    @NonNull
-    private final ImageView icon;
+    @NonNull private final ImageView icon;
 
-    @NonNull
-    private final TextView name;
+    @NonNull private final TextView name;
 
-    @Nullable
-    private final ImageView installButton;
+    @Nullable private final ImageView installButton;
 
-    @Nullable
-    private final TextView status;
+    @Nullable private final TextView status;
 
-    @Nullable
-    private final TextView secondaryStatus;
+    @Nullable private final TextView secondaryStatus;
 
-    @Nullable
-    private final ProgressBar progressBar;
+    @Nullable private final ProgressBar progressBar;
 
-    @Nullable
-    private final ImageButton cancelButton;
+    @Nullable private final ImageButton cancelButton;
 
     /**
      * Will operate as the "Download is complete, click to (install|update)" button, as well as the
      * "Installed successfully, click to run" button.
      */
-    @Nullable
-    private final Button actionButton;
+    @Nullable private final Button actionButton;
 
-    @Nullable
-    private final Button secondaryButton;
+    @Nullable private final Button secondaryButton;
 
-    @Nullable
-    private final CheckBox checkBox;
+    @Nullable private final CheckBox checkBox;
 
-    @Nullable
-    private App currentApp;
-    @Nullable
-    private Apk currentApk;
+    @Nullable private App currentApp;
+    @Nullable private Apk currentApk;
 
-    @Nullable
-    private AppUpdateStatus currentStatus;
-    @Nullable
-    private Disposable disposable;
+    @Nullable private AppUpdateStatus currentStatus;
+    @Nullable private Disposable disposable;
 
     public AppListItemController(final AppCompatActivity activity, View itemView) {
         super(itemView);

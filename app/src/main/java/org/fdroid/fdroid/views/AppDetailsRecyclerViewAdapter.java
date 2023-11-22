@@ -110,8 +110,7 @@ public class AppDetailsRecyclerViewAdapter
     private static final int VIEWTYPE_VERSION = 7;
 
     private final Context context;
-    @Nullable
-    private App app;
+    @Nullable private App app;
     private final AppDetailsRecyclerViewAdapterCallbacks callbacks;
     private RecyclerView recyclerView;
     private final List<Object> items = new ArrayList<>();
@@ -122,8 +121,7 @@ public class AppDetailsRecyclerViewAdapter
     private HeaderViewHolder headerView;
 
     private Apk downloadedApk;
-    @Nullable
-    private Apk suggestedApk;
+    @Nullable private Apk suggestedApk;
     private final HashMap<String, Boolean> versionsExpandTracker = new HashMap<>();
 
     public AppDetailsRecyclerViewAdapter(Context context, @Nullable App app, AppDetailsRecyclerViewAdapterCallbacks callbacks) {

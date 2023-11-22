@@ -119,6 +119,20 @@ app lint pmd checkstyle:
     # the tasks "lint", "test", etc don't always include everything
     - ./gradlew :app:lint :app:pmd :app:checkstyle
 
+spotless:
+  extends: .base
+  stage: lint
+  script:
+    - sed -i '/^org.gradle.caching=true/d' gradle.properties
+    - if ! ./gradlew spotlessCheck; then
+          ./gradlew spotlessApply;
+          git --no-pager diff;
+          echo 'ERROR The code needs to be properly formated!';
+          echo 'Ctrl-Alt-O and Ctrl-Alt-L formats need to use Android Studio defaults';
+          echo 'Run ./gradlew spotlessApply locally to reformat';
+          exit 1;
+      fi
+
 libs lint ktlintCheck:
   <<: *test-template
   stage: lint
@@ -198,6 +212,7 @@ libs database schema:
     - sdkmanager "platforms;android-$ANDROID_COMPILE_SDK" "build-tools;30.0.3"
     - ./gradlew :libs:database:kaptDebugKotlin
     - git --no-pager diff --exit-code
+
 
 # Run the tests in the emulator.  Each step is broken out to run on
 # its own since the CI runner can have limited RAM, and the emulator

@@ -18,8 +18,7 @@ import org.fdroid.fdroid.R;
 public class SwapView extends RelativeLayout {
     public static final String TAG = "SwapView";
 
-    @ColorInt
-    public final int toolbarColor;
+    @ColorInt public final int toolbarColor;
     public final String toolbarTitle;
 
     private int layoutResId = -1;

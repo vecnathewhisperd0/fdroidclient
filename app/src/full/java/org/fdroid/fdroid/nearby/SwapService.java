@@ -83,8 +83,7 @@ public class SwapService extends Service {
     private static final String KEY_WIFI_ENABLED_BEFORE_SWAP = "wifiEnabledBeforeSwap";
     private static final String KEY_HOTSPOT_ACTIVATED_BEFORE_SWAP = "hotspotEnabledBeforeSwap";
 
-    @NonNull
-    private final Set<String> appsToSwap = new HashSet<>();
+    @NonNull private final Set<String> appsToSwap = new HashSet<>();
     private final Set<Peer> activePeers = new HashSet<>();
     private final MutableLiveData<IndexV1> index = new MutableLiveData<>();
     private final MutableLiveData<Exception> indexError = new MutableLiveData<>();
@@ -200,11 +199,9 @@ public class SwapService extends Service {
     //  (Rather than showing a generic QR code to scan)
     // =================================================
 
-    @Nullable
-    private Peer peer;
+    @Nullable private Peer peer;
 
-    @Nullable
-    private Repository peerRepo;
+    @Nullable private Repository peerRepo;
 
     public void swapWith(Peer peer) {
         this.peer = peer;
@@ -353,8 +350,7 @@ public class SwapService extends Service {
     /**
      * Used to automatically turn of swapping after a defined amount of time (15 mins).
      */
-    @Nullable
-    private Timer timer;
+    @Nullable private Timer timer;
 
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
