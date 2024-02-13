@@ -8,4 +8,15 @@ ktlint {
             "import-ordering",
             "no-blank-line-before-rbrace",
     ]
+    reporters {
+        reporter "plain"
+
+        customReporters {
+        // GitLab reporter
+            "json" {
+                fileExtension = "json"
+                dependency = "io.github.tobi2k:ktlint-gitlab-reporter:2.0.1"
+            }
+        }
+    }
 }

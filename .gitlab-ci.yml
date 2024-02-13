@@ -121,7 +121,7 @@ app lint pmd checkstyle:
     # the tasks "lint", "test", etc don't always include everything
     - ./gradlew :app:lint :app:pmd :app:checkstyle
 
-libs lint ktlintCheck:
+libs lint:
   <<: *test-template
   stage: lint
   rules:
@@ -131,7 +131,22 @@ libs lint ktlintCheck:
   script:
     # always report on lint errors to the build log
     - sed -i -e 's,textReport .*,textReport true,' app/build.gradle
-    - ./gradlew :libs:database:lint :libs:download:lint :libs:index:lint ktlintCheck
+    - ./gradlew :libs:database:lint :libs:download:lint :libs:index:lint
+
+libs ktlintCheck:
+  <<: *test-template
+  stage: lint
+  rules:
+    - <<: *always-on-these-changes
+    - changes:
+        - libs/**/*
+  script:
+    # always report on lint errors to the build log
+    - sed -i -e 's,textReport .*,textReport true,' app/build.gradle
+    - ./gradlew ktlintCheck
+  artifacts:
+    reports:
+      codequality: libs/*/build/reports/ktlint/*/*.json
 
 app tools scripts:
   stage: lint
