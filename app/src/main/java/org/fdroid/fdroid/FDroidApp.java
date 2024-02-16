@@ -48,12 +48,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
 import androidx.core.os.ConfigurationCompat;
 import androidx.core.os.LocaleListCompat;
 
 import com.bumptech.glide.Glide;
-import com.google.android.material.color.DynamicColors;
 
 import org.acra.ACRA;
 import org.acra.ReportField;
@@ -169,8 +169,25 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
         }
     }
 
-    public void applyTheme() {
-        DynamicColors.applyToActivitiesIfAvailable(this);
+    public static void applyTheme() {
+        Preferences.Theme curTheme = Preferences.get().getTheme();
+        switch (curTheme) {
+            case dark:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                break;
+            case light:
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                break;
+            default:
+                // `Set by Battery Saver` for Q above (inclusive), `Use system default` for Q below
+                // https://medium.com/androiddevelopers/appcompat-v23-2-daynight-d10f90c83e94
+                if (Build.VERSION.SDK_INT <= 28) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY);
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                }
+                break;
+        }
     }
 
     public void setSecureWindow(AppCompatActivity activity) {
@@ -183,8 +200,7 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
      * The built-in BouncyCastle was stripped down in {@link Build.VERSION_CODES#S}
      * so that {@code SHA1withRSA} and {@code SHA256withRSA} are no longer included.
      *
-     * @see
-     * <a href="https://gitlab.com/fdroid/fdroidclient/-/issues/2338">Nearby Swap Crash on Android 12: no such algorithm: SHA1WITHRSA for provider BC</a>
+     * @see <a href="https://gitlab.com/fdroid/fdroidclient/-/issues/2338">Nearby Swap Crash on Android 12: no such algorithm: SHA1WITHRSA for provider BC</a>
      */
     private static void enableBouncyCastle() {
         if (Build.VERSION.SDK_INT >= 31) {

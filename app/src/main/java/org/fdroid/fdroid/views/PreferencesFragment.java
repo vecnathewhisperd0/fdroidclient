@@ -280,8 +280,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
             case Preferences.PREF_THEME:
                 entrySummary(key);
                 if (changing) {
-                    FDroidApp fdroidApp = (FDroidApp) getActivity().getApplication();
-                    fdroidApp.applyTheme();
+                    FDroidApp.applyTheme();
                 }
                 break;
 
