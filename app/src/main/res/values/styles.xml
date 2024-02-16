@@ -16,26 +16,30 @@
     </style>
 
 
-    <style name="Widget.App.CardView" parent="Widget.MaterialComponents.CardView">
+    <style name="Widget.App.CardView" parent="Widget.Material3.CardView.Filled">
         <item name="shapeAppearance">@style/ShapeAppearance.App.Card</item>
     </style>
 
-    <style name="Widget.App.Button.Dialog" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+    <style name="Widget.App.Button.Dialog" parent="Widget.Material3.Button.TextButton.Dialog">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.Button.TextButton</item>
         <item name="colorPrimary">@color/fdroid_green</item>
         <item name="android:textColor">@color/fdroid_green</item>
         <item name="shapeAppearance">@style/ShapeAppearance.App.Button</item>
     </style>
 
-    <style name="Widget.App.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
+    <style name="Widget.App.Button.TextButton" parent="Widget.Material3.Button.TextButton">
         <item name="shapeAppearance">@style/ShapeAppearance.App.Button</item>
     </style>
 
-    <style name="Widget.App.Button.OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    <style name="Widget.App.Button.OutlinedButton" parent="Widget.Material3.Button.OutlinedButton">
         <item name="shapeAppearance">@style/ShapeAppearance.App.Button</item>
     </style>
 
-    <style name="Widget.App.Button" parent="Widget.MaterialComponents.Button">
+    <style name="Widget.App.Button" parent="Widget.Material3.Button">
+        <item name="shapeAppearance">@style/ShapeAppearance.App.Button</item>
+    </style>
+
+    <style name="Widget.App.Button.ElevatedButton" parent="Widget.Material3.Button.ElevatedButton">
         <item name="shapeAppearance">@style/ShapeAppearance.App.Button</item>
     </style>
 
@@ -53,14 +57,14 @@
 
     <style name="AlertDialogBaseThemeNight" parent="AlertDialogBaseThemeDark" />
 
-    <style name="MinWithDialogBaseThemeDark" parent="Theme.MaterialComponents.Dialog.MinWidth">
+    <style name="MinWithDialogBaseThemeDark" parent="Theme.Material3.DayNight.Dialog.MinWidth">
         <item name="colorSecondary">@color/fdroid_green</item>
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="MinWithDialogBaseThemeLight" parent="Theme.MaterialComponents.Light.Dialog.MinWidth">
+    <style name="MinWithDialogBaseThemeLight" parent="Theme.Material3.Light.Dialog.MinWidth">
         <item name="colorSecondary">@color/fdroid_green</item>
 
         <item name="windowActionBar">false</item>
@@ -88,7 +92,6 @@
     </style>
 
     <style name="AppListEmptyText">
-        <item name="android:id">@android:id/empty</item>
         <item name="android:gravity">center</item>
         <item name="android:padding">48dp</item>
         <item name="android:textSize">20sp</item>
@@ -100,7 +103,6 @@
     <style name="AppListItemStatusText">
         <item name="android:textStyle">italic</item>
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">?attr/lightGrayTextColor</item>
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
         <item name="fontFamily">sans-serif-light</item>
