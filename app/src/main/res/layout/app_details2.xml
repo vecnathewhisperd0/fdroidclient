@@ -11,14 +11,16 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
-        android:fitsSystemWindows="true">
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:layout_behavior="org.fdroid.fdroid.views.FixAppBarLayoutBehavior">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="?attr/collapsingToolbarLayoutLargeSize"
             style="?attr/collapsingToolbarLayoutLargeStyle"
             android:fitsSystemWindows="true"
+            app:expandedTitleMarginTop="24dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <org.fdroid.fdroid.views.apps.FeatureImage
@@ -26,7 +28,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
-                android:scaleType="centerCrop" />
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax" />
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
