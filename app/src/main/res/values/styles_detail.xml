@@ -15,7 +15,7 @@
         <item name="android:letterSpacing">0.05</item>
     </style>
 
-    <style name="DetailsPrimaryButtonStyle" parent="Widget.App.Button.ElevatedButton"></style>
+    <style name="DetailsPrimaryButtonStyle" parent="Widget.App.Button"></style>
 
     <style name="DetailsPrimaryButtonStyleSmall" parent="DetailsPrimaryButtonStyle">
         <item name="android:textSize">12sp</item>
