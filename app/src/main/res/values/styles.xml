@@ -92,6 +92,7 @@
     </style>
 
     <style name="AppListEmptyText">
+        <item name="android:id">@android:id/empty</item>
         <item name="android:gravity">center</item>
         <item name="android:padding">48dp</item>
         <item name="android:textSize">20sp</item>
