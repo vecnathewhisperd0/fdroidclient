@@ -146,4 +146,8 @@
         <!-- Disable default tickMarks. We draw our own in SeekBarForegroundThumb -->
         <item name="tickMark">@null</item>
     </style>
+
+    <style name="PreferenceMaterialSwitch" parent="@style/Preference.SwitchPreferenceCompat.Material">
+        <item name="widgetLayout">@layout/preference_switch</item>
+    </style>
 </resources>
