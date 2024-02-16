@@ -24,11 +24,8 @@
     <color tools:ignore="UnusedResources" name="category_time">#FF7043</color>
     <color tools:ignore="UnusedResources" name="category_writing">#F2E9CE</color>
 
-    <color name="fdroid_blue_light">#ff63a4ff</color>
-    <color name="fdroid_blue">#ff1976d2</color>
-    <color name="fdroid_blue_dark">#ff004ba0</color>
-    <color name="fdroid_green_light">#ffbee247</color>
-    <color name="fdroid_green">#ff8ab000</color>
+    <color tools:ignore="UnusedResources" name="fdroid_blue">#ff1976d2</color>
+    <color tools:ignore="UnusedResources" name="fdroid_green">#ff8ab000</color>
     <color name="fdroid_error">#ffb00020</color>
     <color name="fdroid_caption">#ff757575</color>
 
@@ -62,7 +59,6 @@
     <color name="md_theme_onSurfaceVariant">#414752</color>
     <color name="md_theme_outline">#717783</color>
     <color name="md_theme_outlineVariant">#C1C6D4</color>
-    <color name="md_theme_scrim">#000000</color>
     <color name="md_theme_inverseSurface">#2D3037</color>
     <color name="md_theme_inverseOnSurface">#EFF0F9</color>
     <color name="md_theme_inversePrimary">#A5C8FF</color>
