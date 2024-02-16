@@ -41,14 +41,14 @@
         <item name="android:textStyle">normal</item>
     </style>
 
-    <style name="DetailsAppTitleStyle" parent="TextAppearance.MaterialComponents.Headline6">
+    <style name="DetailsAppTitleStyle" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:textSize">18sp</item>
     </style>
 
 
-    <style name="DetailsLastUpdatedStyle" parent="TextAppearance.MaterialComponents.Caption" />
+    <style name="DetailsLastUpdatedStyle" parent="TextAppearance.Material3.BodySmall" />
 
-    <style name="DetailsAntiFeaturesWarningStyle" parent="TextAppearance.MaterialComponents.Body1">
+    <style name="DetailsAntiFeaturesWarningStyle" parent="TextAppearance.Material3.BodyLarge">
         <item name="android:textStyle">bold</item>
     </style>
 

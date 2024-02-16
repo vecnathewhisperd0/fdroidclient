@@ -11,7 +11,7 @@
     </style>
 
     <!--Dialog-->
-    <style name="MaterialAlertDialog.App.Title.Text" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+    <style name="MaterialAlertDialog.App.Title.Text" parent="MaterialAlertDialog.Material3.Title.Text">
         <item name="android:textColor">@color/fdroid_green</item>
     </style>
 
@@ -43,13 +43,13 @@
         <item name="shapeAppearance">@style/ShapeAppearance.App.Button</item>
     </style>
 
-    <style name="AlertDialogBaseThemeDark" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog" />
+    <style name="AlertDialogBaseThemeDark" parent="ThemeOverlay.Material3.MaterialAlertDialog" />
 
     <style name="ThemeOverlay.App.MaterialAlertDialog.Dark" parent="AlertDialogBaseThemeDark">
         <item name="android:windowBackground">@color/cardview_dark_background</item>
     </style>
 
-    <style name="AlertDialogBaseThemeLight" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog" />
+    <style name="AlertDialogBaseThemeLight" parent="ThemeOverlay.Material3.MaterialAlertDialog" />
 
     <style name="ThemeOverlay.App.MaterialAlertDialog.Light" parent="AlertDialogBaseThemeLight">
         <item name="colorSecondary">@color/fdroid_green</item>
