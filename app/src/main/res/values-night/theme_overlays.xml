@@ -1,6 +1,0 @@
-<resources>
-
-    <style name="ThemeOverlay.App.Preference" parent="PreferenceThemeOverlay">
-        <item name="switchPreferenceCompatStyle">@style/PreferenceMaterialSwitch</item>
-    </style>
-</resources>
