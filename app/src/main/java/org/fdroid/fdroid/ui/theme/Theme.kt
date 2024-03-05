@@ -79,6 +79,8 @@ private val darkScheme = darkColorScheme(
     inversePrimary = inversePrimaryDark,
 )
 
+private val pureBlackScheme = darkScheme.copy(background = Color.Black, surface = Color(0xff1e1e1e))
+
 @Immutable
 data class ColorFamily(
     val color: Color,
@@ -94,6 +96,7 @@ val unspecified_scheme = ColorFamily(
 @Composable
 fun AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
+    pureBlack: Boolean = false,
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = false,
     content: @Composable() () -> Unit
@@ -104,6 +107,7 @@ fun AppTheme(
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
 
+        darkTheme && pureBlack -> pureBlackScheme
         darkTheme -> darkScheme
         else -> lightScheme
     }

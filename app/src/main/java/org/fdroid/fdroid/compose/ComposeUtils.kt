@@ -1,5 +1,6 @@
 package org.fdroid.fdroid.compose
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
@@ -22,21 +23,22 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
+import org.fdroid.fdroid.Preferences
 import org.fdroid.fdroid.ui.theme.AppTheme
 import java.util.Locale
 
 object ComposeUtils {
     @Composable
     fun FDroidContent(content: @Composable () -> Unit) {
-//        val appDarkColorScheme = if (Preferences.get().isPureBlack) {
-//            darkColorScheme(
-//                background = Color.Black, surface = Color(0xff1e1e1e)
-//
-//            )
-//        } else {
-//            darkColorScheme()
-//        }
-        AppTheme() {
+        val darkTheme = when (Preferences.get().theme) {
+            Preferences.Theme.light -> false
+            Preferences.Theme.dark -> true
+            Preferences.Theme.followSystem -> isSystemInDarkTheme()
+            Preferences.Theme.night -> true
+            Preferences.Theme.lightWithDarkActionBar -> false
+        }
+        val pureBlack = Preferences.get().isPureBlack
+        AppTheme(darkTheme = darkTheme, pureBlack = pureBlack) {
             Surface(content = content)
         }
     }
