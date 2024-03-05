@@ -13,17 +13,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Card
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Alignment.Companion.End
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.stringResource
@@ -72,11 +70,11 @@ fun RepoPreviewScreen(paddingValues: PaddingValues, state: Fetching, onAddRepo: 
                 ) {
                     Text(
                         text = "Included apps:",
-                        style = MaterialTheme.typography.body1,
+                        style = MaterialTheme.typography.bodyLarge,
                     )
                     Text(
                         text = state.apps.size.toString(),
-                        style = MaterialTheme.typography.body1,
+                        style = MaterialTheme.typography.bodyLarge,
                     )
                     if (!state.done) LinearProgressIndicator(modifier = Modifier.weight(1f))
                 }
@@ -110,16 +108,16 @@ fun RepoPreviewHeader(
                     text = repo.getName(localeList) ?: "Unknown Repository",
                     maxLines = 1,
                     fontWeight = FontWeight.Bold,
-                    style = MaterialTheme.typography.body1,
+                    style = MaterialTheme.typography.bodyLarge,
                 )
                 Text(
                     text = repo.address.replaceFirst("https://", ""),
-                    style = MaterialTheme.typography.body2,
-                    modifier = Modifier.alpha(ContentAlpha.medium),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
                 Text(
                     text = Utils.formatLastUpdated(LocalContext.current.resources, repo.timestamp),
-                    style = MaterialTheme.typography.body2,
+                    style = MaterialTheme.typography.bodyMedium,
                 )
             }
         }
@@ -134,8 +132,8 @@ fun RepoPreviewHeader(
         ) else if (state.fetchResult is IsExistingRepository) {
             Text(
                 text = stringResource(R.string.repo_exists),
-                style = MaterialTheme.typography.body1,
-                color = MaterialTheme.colors.error,
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.error,
             )
         }
         val description = if (isPreview) {
@@ -145,7 +143,7 @@ fun RepoPreviewHeader(
         }
         if (description != null) Text(
             text = description,
-            style = MaterialTheme.typography.body2,
+            style = MaterialTheme.typography.bodyMedium,
         )
     }
 }
@@ -183,11 +181,11 @@ fun LazyItemScope.RepoPreviewApp(
             Column {
                 Text(
                     app.name ?: "Unknown app",
-                    style = MaterialTheme.typography.body1,
+                    style = MaterialTheme.typography.bodyLarge,
                 )
                 Text(
                     app.summary ?: "",
-                    style = MaterialTheme.typography.body2,
+                    style = MaterialTheme.typography.bodyMedium,
                 )
             }
         }

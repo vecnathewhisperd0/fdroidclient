@@ -18,22 +18,21 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.ArrowDropUp
 import androidx.compose.material.icons.filled.ContentPaste
 import androidx.compose.material.icons.filled.QrCode
-import androidx.compose.material.primarySurface
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -44,7 +43,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.layout.onGloballyPositioned
@@ -71,6 +69,7 @@ import org.fdroid.repo.Adding
 import org.fdroid.repo.Fetching
 import org.fdroid.repo.None
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddRepoIntroScreen(
     state: AddRepoState,
@@ -80,8 +79,6 @@ fun AddRepoIntroScreen(
 ) {
     Scaffold(topBar = {
         TopAppBar(
-            elevation = 4.dp,
-            backgroundColor = MaterialTheme.colors.primarySurface,
             navigationIcon = {
                 IconButton(onClick = onBackClicked) {
                     Icon(Icons.Filled.ArrowBack, stringResource(R.string.back))
@@ -90,7 +87,6 @@ fun AddRepoIntroScreen(
             title = {
                 Text(
                     text = stringResource(R.string.repo_add_title),
-                    modifier = Modifier.alpha(ContentAlpha.high),
                 )
             },
         )
@@ -125,7 +121,7 @@ fun AddRepoIntroContent(paddingValues: PaddingValues, onFetchRepo: (String) -> U
     ) {
         Text(
             text = stringResource(R.string.repo_intro),
-            style = MaterialTheme.typography.body1,
+            style = MaterialTheme.typography.bodyLarge,
         )
         val startForResult = rememberLauncherForActivityResult(ScanContract()) { result ->
             if (result.contents != null) {

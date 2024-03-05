@@ -10,18 +10,17 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.ContentAlpha
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ContentPaste
-import androidx.compose.material.primarySurface
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -29,7 +28,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.layout.onGloballyPositioned
@@ -69,6 +67,7 @@ class IpfsGatewayAddActivity : AppCompatActivity() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IpfsGatewayAddScreen(
     onBackClicked: () -> Unit,
@@ -80,8 +79,6 @@ fun IpfsGatewayAddScreen(
 
     Scaffold(topBar = {
         TopAppBar(
-            elevation = 4.dp,
-            backgroundColor = MaterialTheme.colors.primarySurface,
             navigationIcon = {
                 IconButton(onClick = onBackClicked) {
                     Icon(Icons.Filled.ArrowBack, stringResource(R.string.back))
@@ -90,7 +87,6 @@ fun IpfsGatewayAddScreen(
             title = {
                 Text(
                     text = stringResource(R.string.ipfsgw_add_title),
-                    modifier = Modifier.alpha(ContentAlpha.high),
                 )
             },
         )
@@ -105,7 +101,7 @@ fun IpfsGatewayAddScreen(
         ) {
             Text(
                 text = "Enter IPFS gateway URL",
-                style = MaterialTheme.typography.body1,
+                style = MaterialTheme.typography.bodyLarge,
             )
             Column {
                 TextField(
@@ -123,7 +119,7 @@ fun IpfsGatewayAddScreen(
                 if (errorMsg.isNotEmpty()) {
                     Text(
                         text = errorMsg,
-                        style = MaterialTheme.typography.body1,
+                        style = MaterialTheme.typography.bodyLarge,
                         color = colorResource(
                             id = R.color.fdroid_error
                         )
