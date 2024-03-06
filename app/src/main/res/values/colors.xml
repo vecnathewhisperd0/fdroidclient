@@ -27,7 +27,7 @@
     <color tools:ignore="UnusedResources" name="fdroid_blue">#ff1976d2</color>
     <color tools:ignore="UnusedResources" name="fdroid_green">#ff8ab000</color>
     <color name="fdroid_error">#ffb00020</color>
-    <color name="fdroid_caption">#ff757575</color>
+    <color tools:ignore="UnusedResources" name="fdroid_caption">#ff757575</color>
 
     <color name="shadow">#cc222222</color>
     <color name="warning">#827717</color>
