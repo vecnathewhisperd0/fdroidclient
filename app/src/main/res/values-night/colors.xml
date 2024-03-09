@@ -31,7 +31,6 @@
     <color name="md_theme_onSurfaceVariant">#C1C6D4</color>
     <color name="md_theme_outline">#8B919E</color>
     <color name="md_theme_outlineVariant">#414752</color>
-    <color name="md_theme_scrim">#000000</color>
     <color name="md_theme_inverseSurface">#E0E2EA</color>
     <color name="md_theme_inverseOnSurface">#2D3037</color>
     <color name="md_theme_inversePrimary">#005FAF</color>
