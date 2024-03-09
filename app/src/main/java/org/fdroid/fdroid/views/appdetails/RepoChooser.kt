@@ -118,15 +118,15 @@ fun RepoChooser(
                         tint = if (isPreferred) {
                             colorResource(id = R.color.fdroid_blue)
                         } else {
-                            MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+                            MaterialTheme.colorScheme.onSurface
                         },
                     )
                 },
                 singleLine = false,
                 enabled = false,
                 colors = OutlinedTextFieldDefaults.colors(
-                    // hack to enable clickable
-                    disabledTextColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
+                    // hack to enable clickable and look like enabled
+                    disabledTextColor = MaterialTheme.colorScheme.onSurface,
                     disabledBorderColor = borderColor,
                     disabledLeadingIconColor = MaterialTheme.colorScheme.onSurface,
                     disabledLabelColor = borderColor,
