@@ -148,7 +148,8 @@
         <item name="tickMark">@null</item>
     </style>
 
-    <style name="PreferenceMaterialSwitch" parent="@style/Preference.SwitchPreferenceCompat.Material">
-        <item name="widgetLayout">@layout/preference_switch</item>
+
+    <style name="Widget.App.Preference.SwitchPreferenceCompat" parent="Preference.SwitchPreferenceCompat.Material">
+        <item name="android:widgetLayout">@layout/preference_switch</item>
     </style>
 </resources>
