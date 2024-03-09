@@ -1,7 +1,6 @@
 package org.fdroid.fdroid.views.appdetails
 
 import android.content.res.Configuration
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -62,7 +61,6 @@ fun setContentRepoChooser(
                 preferredRepoId = preferredRepoId,
                 onRepoChanged = onRepoChanged::accept,
                 onPreferredRepoChanged = onPreferredRepoChanged::accept,
-                modifier = Modifier.background(MaterialTheme.colorScheme.surface),
             )
         }
     }
