@@ -1,21 +1,24 @@
 package org.fdroid.download
 
-import io.ktor.client.engine.HttpClientEngine
-import io.ktor.client.engine.HttpClientEngineFactory
-import io.ktor.client.engine.okhttp.OkHttp
-import io.ktor.client.engine.okhttp.OkHttpConfig
-import io.ktor.utils.io.jvm.javaio.toInputStream
+import io.ktor.client.engine.*
+import io.ktor.client.engine.okhttp.*
+import io.ktor.utils.io.jvm.javaio.*
 import okhttp3.ConnectionSpec.Companion.CLEARTEXT
 import okhttp3.ConnectionSpec.Companion.MODERN_TLS
 import okhttp3.ConnectionSpec.Companion.RESTRICTED_TLS
 import okhttp3.Dns
 import okhttp3.internal.tls.OkHostnameVerifier
 import org.fdroid.fdroid.DigestInputStream
+import org.fdroid.fdroid.SocketFactoryManager
 import java.io.InputStream
 import java.net.InetAddress
+import java.security.KeyStore
 import java.security.MessageDigest
+import javax.net.ssl.TrustManager
+import javax.net.ssl.TrustManagerFactory
+import javax.net.ssl.X509TrustManager
 
-internal actual fun getHttpClientEngineFactory(customDns: Dns?): HttpClientEngineFactory<*> {
+internal actual fun getHttpClientEngineFactory(customDns: Dns?, socketFactoryManager: SocketFactoryManager?): HttpClientEngineFactory<*> {
     return object : HttpClientEngineFactory<OkHttpConfig> {
         private val connectionSpecs = listOf(
             RESTRICTED_TLS, // order matters here, so we put restricted before modern
@@ -37,6 +40,15 @@ internal actual fun getHttpClientEngineFactory(customDns: Dns?): HttpClientEngin
                     OkHostnameVerifier.verify(hostname, session)
                 }
                 connectionSpecs(connectionSpecs)
+                if (socketFactoryManager != null) {
+                    // JVM Default Trust Managers
+                    val trustManagerFactory: TrustManagerFactory =
+                        TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
+                    trustManagerFactory.init(null as KeyStore?)
+                    val trustManagers: Array<TrustManager> = trustManagerFactory.getTrustManagers()
+                    val manager: X509TrustManager = trustManagers[0] as X509TrustManager
+                    sslSocketFactory(socketFactoryManager.getSocketFactory(), manager)
+                }
             }
         }
     }

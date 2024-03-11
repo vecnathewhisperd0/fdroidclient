@@ -1,9 +1,6 @@
 package org.fdroid.download
 
-import io.ktor.http.URLBuilder
-import io.ktor.http.URLParserException
-import io.ktor.http.Url
-import io.ktor.http.appendPathSegments
+import io.ktor.http.*
 import mu.KotlinLogging
 
 public data class Mirror @JvmOverloads constructor(
@@ -14,6 +11,7 @@ public data class Mirror @JvmOverloads constructor(
      * So use this mirror only, if you have a CIDv1 available for supplying it to [getUrl].
      */
     val isIpfsGateway: Boolean = false,
+    val requiresSni: Boolean = false
 ) {
     public val url: Url by lazy {
         try {
@@ -41,6 +39,8 @@ public data class Mirror @JvmOverloads constructor(
     public fun isLocal(): Boolean = url.isLocal()
 
     public fun isHttp(): Boolean = url.protocol.name.startsWith("http")
+
+    public fun requiresSni(): Boolean = requiresSni
 
     public companion object {
         @JvmStatic

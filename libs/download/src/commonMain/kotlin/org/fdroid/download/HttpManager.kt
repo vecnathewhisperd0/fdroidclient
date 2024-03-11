@@ -36,20 +36,24 @@ import io.ktor.utils.io.core.readBytes
 import mu.KotlinLogging
 import okhttp3.Dns
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
+import org.fdroid.fdroid.SocketFactoryManager
 import java.io.ByteArrayOutputStream
+import javax.net.ssl.SSLPeerUnverifiedException
 import kotlin.coroutines.cancellation.CancellationException
 
-internal expect fun getHttpClientEngineFactory(customDns: Dns?): HttpClientEngineFactory<*>
+internal expect fun getHttpClientEngineFactory(customDns: Dns?, socketFactoryManager: SocketFactoryManager?): HttpClientEngineFactory<*>
 
 public open class HttpManager @JvmOverloads constructor(
     private val userAgent: String,
     queryString: String? = null,
     proxyConfig: ProxyConfig? = null,
     customDns: Dns? = null,
+    private val socketFactoryManager: SocketFactoryManager? = null,
     private val highTimeouts: Boolean = false,
     private val mirrorChooser: MirrorChooser = MirrorChooserRandom(),
     private val httpClientEngineFactory: HttpClientEngineFactory<*> = getHttpClientEngineFactory(
-        customDns
+        customDns,
+        socketFactoryManager
     ),
 ) {
 
@@ -60,7 +64,7 @@ public open class HttpManager @JvmOverloads constructor(
         public fun isInvalidHttpUrl(url: String): Boolean = url.toHttpUrlOrNull() == null
     }
 
-    private var httpClient = getNewHttpClient(proxyConfig)
+    private var httpClient = getNewHttpClient(proxyConfig, false)
 
     /**
      * Only exists because KTor doesn't keep a reference to the proxy its client uses.
@@ -74,7 +78,16 @@ public open class HttpManager @JvmOverloads constructor(
         Pair(key, value)
     }
 
-    private fun getNewHttpClient(proxyConfig: ProxyConfig? = null): HttpClient {
+    private fun getNewHttpClient(proxyConfig: ProxyConfig? = null, enableSni: Boolean = false): HttpClient {
+
+        if (socketFactoryManager != null) {
+            if (enableSni) {
+                socketFactoryManager.enableSni()
+            } else {
+                socketFactoryManager.disableSni()
+            }
+        }
+
         currentProxy = proxyConfig
         return HttpClient(httpClientEngineFactory) {
             followRedirects = false
@@ -106,17 +119,11 @@ public open class HttpManager @JvmOverloads constructor(
     @Throws(NotFoundException::class)
     public suspend fun head(request: DownloadRequest, eTag: String? = null): HeadInfo? {
         val response: HttpResponse = try {
-            mirrorChooser.mirrorRequest(request) { mirror, url ->
-                resetProxyIfNeeded(request.proxy, mirror)
-                log.debug { "HEAD $url" }
-                httpClient.head(url) {
-                    addQueryParameters()
-                    // add authorization header from username / password if set
-                    basicAuth(request)
-                    // increase connect timeout if using Tor mirror
-                    if (mirror.isOnion()) timeout { connectTimeoutMillis = 10_000 }
-                }
-            }
+            doHead(request, eTag)
+        } catch (e: SSLPeerUnverifiedException) {
+            httpClient.close()
+            httpClient = getNewHttpClient(request.proxy, true)
+            doHead(request, eTag)
         } catch (e: ResponseException) {
             log.warn { "Error getting HEAD: ${e.response.status}" }
             if (e.response.status == NotFound) throw NotFoundException()
@@ -130,9 +137,39 @@ public open class HttpManager @JvmOverloads constructor(
         return HeadInfo(true, response.headers[ETag], contentLength, lastModified)
     }
 
+    @Throws(NotFoundException::class)
+    private suspend fun doHead(request: DownloadRequest, eTag: String? = null): HttpResponse {
+        return mirrorChooser.mirrorRequest(request) { mirror, url ->
+            resetProxyIfNeeded(request.proxy, mirror)
+            log.debug { "HEAD $url" }
+            httpClient.head(url) {
+                addQueryParameters()
+                // add authorization header from username / password if set
+                basicAuth(request)
+                // increase connect timeout if using Tor mirror
+                if (mirror.isOnion()) timeout { connectTimeoutMillis = 10_000 }
+            }
+        }
+    }
+
     @JvmOverloads
     @Throws(ResponseException::class, NoResumeException::class, CancellationException::class)
     public suspend fun get(
+        request: DownloadRequest,
+        skipFirstBytes: Long? = null,
+        receiver: BytesReceiver,
+    ) {
+        try {
+            doGet(request, skipFirstBytes, receiver)
+        } catch (e: SSLPeerUnverifiedException)  {
+            httpClient.close()
+            httpClient = getNewHttpClient(request.proxy, true)
+            doGet(request, skipFirstBytes, receiver)
+        }
+    }
+
+    @Throws(ResponseException::class, NoResumeException::class, CancellationException::class)
+    private suspend fun doGet(
         request: DownloadRequest,
         skipFirstBytes: Long? = null,
         receiver: BytesReceiver,
@@ -185,6 +222,19 @@ public open class HttpManager @JvmOverloads constructor(
         skipFirstBytes: Long? = null,
     ): ByteReadChannel {
         // TODO check if closed
+        try {
+            return doGetChannel(request, skipFirstBytes)
+        } catch (e: SSLPeerUnverifiedException) {
+            httpClient.close()
+            httpClient = getNewHttpClient(request.proxy, true)
+            return doGetChannel(request, skipFirstBytes)
+        }
+    }
+
+    internal suspend fun doGetChannel(
+        request: DownloadRequest,
+        skipFirstBytes: Long? = null,
+    ): ByteReadChannel {
         return mirrorChooser.mirrorRequest(request) { mirror, url ->
             getHttpStatement(request, mirror, url, skipFirstBytes ?: 0L).body()
         }
@@ -230,7 +280,7 @@ public open class HttpManager @JvmOverloads constructor(
         if (currentProxy != newProxy) {
             log.debug { "Switching proxy from [$currentProxy] to [$newProxy]" }
             httpClient.close()
-            httpClient = getNewHttpClient(newProxy)
+            httpClient = getNewHttpClient(newProxy, false)
         }
     }
 

@@ -7,6 +7,7 @@ import io.ktor.http.HttpStatusCode.Companion.NotFound
 import io.ktor.http.Url
 import io.ktor.utils.io.errors.IOException
 import mu.KotlinLogging
+import javax.net.ssl.SSLPeerUnverifiedException
 
 public interface MirrorChooser {
     public fun orderMirrors(downloadRequest: DownloadRequest): List<Mirror>
@@ -18,25 +19,36 @@ public interface MirrorChooser {
 
 internal abstract class MirrorChooserImpl : MirrorChooser {
 
+    var sniRequired = false
+
     companion object {
         protected val log = KotlinLogging.logger {}
+    }
+
+    override suspend fun <T> mirrorRequest(
+        downloadRequest: DownloadRequest,
+        request: suspend (mirror: Mirror, url: Url) -> T,
+    ): T {
+        return mirrorRequest(downloadRequest, request, false)
     }
 
     /**
      * Executes the given request on the best mirror and tries the next best ones if that fails.
      */
-    override suspend fun <T> mirrorRequest(
+    suspend fun <T> mirrorRequest(
         downloadRequest: DownloadRequest,
         request: suspend (mirror: Mirror, url: Url) -> T,
+        enableSni: Boolean
     ): T {
+        sniRequired = false
         val mirrors = if (downloadRequest.proxy == null) {
             // if we don't use a proxy, filter out onion mirrors (won't work without Orbot)
             val orderedMirrors =
-                orderMirrors(downloadRequest).filter { mirror -> !mirror.isOnion() }
+                orderMirrors(downloadRequest).filter { mirror -> !mirror.isOnion() }.filter { mirror ->  mirror.requiresSni == enableSni }
             // if we only have onion mirrors, take what we have and expect errors
             orderedMirrors.ifEmpty { downloadRequest.mirrors }
         } else {
-            orderMirrors(downloadRequest)
+            orderMirrors(downloadRequest).filter { mirror ->  mirror.requiresSni == enableSni }
         }
         mirrors.forEachIndexed { index, mirror ->
             val ipfsCidV1 = downloadRequest.indexFile.ipfsCidV1
@@ -58,6 +70,9 @@ internal abstract class MirrorChooserImpl : MirrorChooser {
                 if (downloadRequest.tryFirstMirror != null && e.response.status == NotFound) throw e
                 // also throw if this is the last mirror to try, otherwise try next
                 throwOnLastMirror(e, index == mirrors.size - 1)
+            } catch (e: SSLPeerUnverifiedException) {
+                sniRequired = true
+                throwOnLastMirror(e, index == mirrors.size - 1)
             } catch (e: IOException) {
                 throwOnLastMirror(e, index == mirrors.size - 1)
             } catch (e: SocketTimeoutException) {
@@ -77,7 +92,13 @@ internal abstract class MirrorChooserImpl : MirrorChooser {
             if (wasLastMirror) "Last mirror, rethrowing... ($info)"
             else "Trying other mirror now... ($info)"
         }
-        if (wasLastMirror) throw e
+        if (wasLastMirror) {
+            if (sniRequired) {
+                throw SSLPeerUnverifiedException(e.message)
+            } else {
+                throw e
+            }
+        }
     }
 }
 
