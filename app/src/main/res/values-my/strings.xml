@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="SignatureMismatch">ဗားရွင္းအသစ္သည္ တျခားကီးႏွင့္ ဗားရွင္းအေဟာင္းကိုသတ္မွတ္ထားပါသည္။
-        ဗားရွင္းအသစ္သြင္းရန္ အေဟာင္းသည္ အရင္ဆံုးျဖဳတ္မွရပါမည္။ ျဖဳတ္ျပီးမွ ျပန္လည္ၾကိဳးစားၾကည့္ပါ။ (ျဖဳတ္ျခင္းသည္
-        application မွသိမ္းထားေသာ ေဒတာအားလံုးဖ်က္သြားပါလိမ့္မည္)
-    </string>
+    <string name="SignatureMismatch">ဗားရှင်းအသစ်သည် တခြားကီးနှင့် ဗားရှင်းအဟောင်းကိုသတ်မှတ်ထားပါသည်။ ဗားရှင်းအသစ်သွင်းရန် အဟောင်းသည် အရင်ဆုံးဖြုတ်မှရပါမည်။ ဖြုတ်ပြီးမှ ပြန်လည်ကြိုးစားကြည့်ပါ။ (ဖြုတ်ခြင်းသည် application မှသိမ်းထားသော ဒေတာအားလုံးဖျက်သွားပါလိမ့်မည်)</string>
     <string name="installIncompatible">ဒါသည်သင့်ကရိယာနှင့်မလိုက်ဖက်ပါ။ဘာဖြစ်ဖြစ်အခြေချမလား\?</string>
     <string name="version">ဗားရွင္း</string>
     <string name="delete">ဖျက်ရန်</string>
@@ -282,4 +279,5 @@
     <string name="notification_action_cancel">မလုပ်တော့</string>
     <string name="notification_action_update">နောက်ဆုံးတင်ရန်</string>
     <string name="apps">အက်ပ</string>
+    <string name="send_to_fdroid_metrics_summary">သရုပ်မခွဲခြားထားတဲ့ဒေတာတွေကို F-Droid မက်ထရစ်တွေစီပို့ပါ (ထည့်သွင်းမှုမှတ်တမ်းအားဆက်လက်ထားရှိရန်လိုသည်)</string>
 </resources>
