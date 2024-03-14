@@ -7,14 +7,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentSender;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageInstaller;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
+import androidx.core.content.ContextCompat;
 import androidx.core.util.ObjectsCompat;
 import androidx.documentfile.provider.DocumentFile;
 
@@ -47,8 +50,10 @@ public class SessionInstallManager extends BroadcastReceiver {
 
     public SessionInstallManager(Context context) {
         this.context = context;
-        context.registerReceiver(this, new IntentFilter(INSTALLER_ACTION_INSTALL));
-        context.registerReceiver(this, new IntentFilter(INSTALLER_ACTION_UNINSTALL));
+        ContextCompat.registerReceiver(context, this, new IntentFilter(INSTALLER_ACTION_INSTALL),
+                ContextCompat.RECEIVER_NOT_EXPORTED);
+        ContextCompat.registerReceiver(context, this, new IntentFilter(INSTALLER_ACTION_UNINSTALL),
+                ContextCompat.RECEIVER_NOT_EXPORTED);
         PackageInstaller installer = context.getPackageManager().getPackageInstaller();
         // abandon old sessions, because there's a limit
         // that will throw IllegalStateException when we try to open new sessions
@@ -68,16 +73,7 @@ public class SessionInstallManager extends BroadcastReceiver {
     public void install(App app, Apk apk, Uri localApkUri, Uri canonicalUri) {
         DocumentFile documentFile = ObjectsCompat.requireNonNull(DocumentFile.fromSingleUri(context, localApkUri));
         long size = documentFile.length();
-        PackageInstaller.SessionParams params =
-                new PackageInstaller.SessionParams(PackageInstaller.SessionParams.MODE_FULL_INSTALL);
-        params.setAppPackageName(app.packageName);
-        params.setSize(size);
-        if (Build.VERSION.SDK_INT >= 31) {
-            params.setRequireUserAction(PackageInstaller.SessionParams.USER_ACTION_NOT_REQUIRED);
-        }
-        if (Build.VERSION.SDK_INT >= 33) {
-            params.setPackageSource(PackageInstaller.PACKAGE_SOURCE_STORE);
-        }
+        PackageInstaller.SessionParams params = getSessionParams(app, size);
         PackageInstaller installer = context.getPackageManager().getPackageInstaller();
         try {
             int sessionId = installer.createSession(params);
@@ -96,6 +92,22 @@ public class SessionInstallManager extends BroadcastReceiver {
             Installer.sendBroadcastInstall(context, canonicalUri, Installer.ACTION_INSTALL_INTERRUPTED, app, apk,
                     null, e.getLocalizedMessage());
         }
+    }
+
+    @NonNull
+    private static PackageInstaller.SessionParams getSessionParams(App app, long size) {
+        PackageInstaller.SessionParams params =
+                new PackageInstaller.SessionParams(PackageInstaller.SessionParams.MODE_FULL_INSTALL);
+        params.setAppPackageName(app.packageName);
+        params.setSize(size);
+        params.setInstallLocation(PackageInfo.INSTALL_LOCATION_AUTO);
+        if (Build.VERSION.SDK_INT >= 31) {
+            params.setRequireUserAction(PackageInstaller.SessionParams.USER_ACTION_NOT_REQUIRED);
+        }
+        if (Build.VERSION.SDK_INT >= 33) {
+            params.setPackageSource(PackageInstaller.PACKAGE_SOURCE_STORE);
+        }
+        return params;
     }
 
     @WorkerThread

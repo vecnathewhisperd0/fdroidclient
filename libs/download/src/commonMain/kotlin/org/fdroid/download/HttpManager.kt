@@ -93,7 +93,6 @@ public open class HttpManager @JvmOverloads constructor(
             followRedirects = false
             expectSuccess = true
             engine {
-                threadsCount = 4
                 pipelining = true
                 proxy = proxyConfig
             }

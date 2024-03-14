@@ -24,7 +24,6 @@
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="org.fdroid.fdroid"
     android:installLocation="auto">
 
     <supports-screens
@@ -65,6 +64,7 @@
     <application
         android:name=".FDroidApp"
         android:allowBackup="true"
+        android:dataExtractionRules="@xml/backup_extraction_rules"
         android:description="@string/app_description"
         android:fullBackupContent="@xml/backup_rules"
         android:hardwareAccelerated="true"
@@ -259,11 +259,6 @@
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation" />
-
-        <activity
-            android:name=".NfcNotEnabledActivity"
-            android:configChanges="layoutDirection|locale"
-            android:noHistory="true" />
 
         <activity
             android:name=".views.repos.RepoDetailsActivity"
