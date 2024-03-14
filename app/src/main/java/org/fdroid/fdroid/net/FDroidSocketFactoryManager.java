@@ -11,9 +11,9 @@ import javax.net.ssl.SSLSocketFactory;
 
 public class FDroidSocketFactoryManager implements SocketFactoryManager {
 
-    private boolean sniEnabled = true;
-    private boolean needNewFactory = false;
-    private TlsOnlySocketFactory factory = null;
+    private volatile boolean sniEnabled = true;
+    private volatile boolean needNewFactory = false;
+    private volatile TlsOnlySocketFactory factory = null;
 
     public FDroidSocketFactoryManager() {
         factory = NetCipher.getTlsOnlySocketFactory();
