@@ -7,7 +7,7 @@
     </style>
 
     <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
-        <item name="shapeAppearance">?attr/shapeAppearanceCornerExtraLarge</item>
+        <item name="dialogCornerRadius">28dp</item>
         <item name="android:colorBackground">?attr/colorSurfaceContainerHigh</item>
         <item name="android:layout">@layout/m3_alert_dialog</item>
     </style>
