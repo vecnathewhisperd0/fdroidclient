@@ -38,6 +38,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.fdroid.database.AppDao;
@@ -453,7 +454,7 @@ public class RepoDetailsActivity extends AppCompatActivity {
     }
 
     private void promptForDelete() {
-        new AlertDialog.Builder(this)
+        new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.repo_confirm_delete_title)
                 .setMessage(R.string.repo_confirm_delete_body)
                 .setPositiveButton(R.string.delete, (dialog, which) -> {
@@ -470,7 +471,7 @@ public class RepoDetailsActivity extends AppCompatActivity {
 
     private void showChangePasswordDialog(final View parentView) {
         final View view = getLayoutInflater().inflate(R.layout.login, (ViewGroup) parentView, false);
-        final AlertDialog credentialsDialog = new AlertDialog.Builder(this).setView(view).create();
+        final AlertDialog credentialsDialog = new MaterialAlertDialogBuilder(this).setView(view).create();
         final TextInputLayout nameInputLayout = view.findViewById(R.id.edit_name);
         final TextInputLayout passwordInputLayout = view.findViewById(R.id.edit_password);
         final EditText nameInput = nameInputLayout.getEditText();
