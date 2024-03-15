@@ -4,6 +4,9 @@
         <item name="switchPreferenceCompatStyle">
             @style/Widget.App.Preference.SwitchPreferenceCompat
         </item>
+        <item name="editTextPreferenceStyle">
+            @style/Widget.App.Preference.DialogPreference.EditTextPreference
+        </item>
     </style>
 
     <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
