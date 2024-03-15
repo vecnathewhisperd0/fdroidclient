@@ -43,20 +43,6 @@
         <item name="shapeAppearance">@style/ShapeAppearance.App.Button</item>
     </style>
 
-    <style name="AlertDialogBaseThemeDark" parent="ThemeOverlay.Material3.MaterialAlertDialog" />
-
-    <style name="ThemeOverlay.App.MaterialAlertDialog.Dark" parent="AlertDialogBaseThemeDark">
-        <item name="android:windowBackground">@color/cardview_dark_background</item>
-    </style>
-
-    <style name="AlertDialogBaseThemeLight" parent="ThemeOverlay.Material3.MaterialAlertDialog" />
-
-    <style name="ThemeOverlay.App.MaterialAlertDialog.Light" parent="AlertDialogBaseThemeLight">
-        <item name="colorSecondary">@color/fdroid_green</item>
-    </style>
-
-    <style name="AlertDialogBaseThemeNight" parent="AlertDialogBaseThemeDark" />
-
     <style name="MinWithDialogBaseThemeDark" parent="Theme.Material3.DayNight.Dialog.MinWidth">
         <item name="colorSecondary">@color/fdroid_green</item>
 
