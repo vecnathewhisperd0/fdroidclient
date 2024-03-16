@@ -14,6 +14,8 @@
   ~ limitations under the License
   -->
 
+<!-- Derived from https://github.com/androidx/androidx/blob/824114c787e8be1b5a81e589f81827c9121c36e6/preference/preference/res/layout/preference_dialog_edittext.xml -->
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
