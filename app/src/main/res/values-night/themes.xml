@@ -15,7 +15,7 @@
 ~ See the License for the specific language governing permissions and
 ~ limitations under the License.
 -->
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!--Top level DayNight theme to be used in AndroidManifest.xml-->
     <style name="Theme.App" parent="Base.Theme.App">
         <item name="appDetailsBackground">?android:windowBackground</item>
@@ -28,7 +28,6 @@
         <item name="mainTabSwapSplashTint">#2c2c2c</item>
         <item name="categoryName">#ffffff</item>
         <item name="installedApps">#ffffff</item>
-        <item name="detailPanel">?colorSurfaceContainerLow</item>
         <item name="appListItem">#ffffff</item>
         <item name="lightGrayTextColor">#a6a6a6</item>
         <item name="antiFeaturesWarning">@drawable/ic_warning</item>

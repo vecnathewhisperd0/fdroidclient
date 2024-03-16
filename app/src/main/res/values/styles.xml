@@ -16,6 +16,7 @@
     </style>
 
 
+    <!-- To preserve the UX before MD3 migration -->
     <style name="Widget.App.CardView" parent="Widget.Material3.CardView.Elevated">
         <item name="shapeAppearance">@style/ShapeAppearance.App.Card</item>
     </style>
