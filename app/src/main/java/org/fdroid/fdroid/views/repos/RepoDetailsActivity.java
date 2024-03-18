@@ -29,7 +29,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.app.NavUtils;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
@@ -39,6 +38,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.fdroid.database.AppDao;
@@ -186,17 +186,17 @@ public class RepoDetailsActivity extends AppCompatActivity {
                     }
                 });
 
-        SwitchCompat switchCompat = findViewById(R.id.archiveRepo);
+        MaterialSwitch archiveRepoSwitch = findViewById(R.id.archiveRepo);
         model.getLiveData().observe(this, s -> {
             Boolean enabled = s.getArchiveEnabled();
             if (enabled == null) {
-                switchCompat.setEnabled(false);
+                archiveRepoSwitch.setEnabled(false);
             } else {
-                switchCompat.setEnabled(true);
-                switchCompat.setChecked(enabled);
+                archiveRepoSwitch.setEnabled(true);
+                archiveRepoSwitch.setChecked(enabled);
             }
         });
-        switchCompat.setOnClickListener(v -> model.setArchiveRepoEnabled(repo, switchCompat.isChecked()));
+        archiveRepoSwitch.setOnClickListener(v -> model.setArchiveRepoEnabled(repo, archiveRepoSwitch.isChecked()));
     }
 
     @Override
