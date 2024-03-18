@@ -36,9 +36,11 @@ import androidx.compose.ui.unit.dp
 import androidx.core.os.LocaleListCompat
 import androidx.core.util.Consumer
 import org.fdroid.database.Repository
+import org.fdroid.fdroid.Preferences
 import org.fdroid.fdroid.R
 import org.fdroid.fdroid.compose.ComposeUtils.FDroidContent
 import org.fdroid.fdroid.compose.ComposeUtils.FDroidOutlineButton
+import org.fdroid.fdroid.ui.theme.AppTheme
 import org.fdroid.fdroid.views.repos.RepoIcon
 import org.fdroid.index.IndexFormatVersion.TWO
 
@@ -53,15 +55,19 @@ fun setContentRepoChooser(
     onRepoChanged: Consumer<Repository>,
     onPreferredRepoChanged: Consumer<Long>,
 ) {
+    val pureBlack = Preferences.get().isPureBlack
+
     composeView.setContent {
-        FDroidContent {
-            RepoChooser(
-                repos = repos,
-                currentRepoId = currentRepoId,
-                preferredRepoId = preferredRepoId,
-                onRepoChanged = onRepoChanged::accept,
-                onPreferredRepoChanged = onPreferredRepoChanged::accept,
-            )
+        AppTheme(pureBlack = pureBlack) {
+            FDroidContent {
+                RepoChooser(
+                    repos = repos,
+                    currentRepoId = currentRepoId,
+                    preferredRepoId = preferredRepoId,
+                    onRepoChanged = onRepoChanged::accept,
+                    onPreferredRepoChanged = onPreferredRepoChanged::accept,
+                )
+            }
         }
     }
 }

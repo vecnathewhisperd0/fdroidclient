@@ -41,14 +41,17 @@ import org.fdroid.fdroid.Preferences
 import org.fdroid.fdroid.R
 import org.fdroid.fdroid.compose.ComposeUtils
 import org.fdroid.fdroid.compose.ComposeUtils.FDroidContent
+import org.fdroid.fdroid.ui.theme.AppTheme
 
 class IpfsGatewayAddActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val pureBlack = Preferences.get().isPureBlack
+
         setContent {
-            FDroidContent {
+            AppTheme(pureBlack = pureBlack) {
                 IpfsGatewayAddScreen(onBackClicked = { onBackPressedDispatcher.onBackPressed() },
                     onAddUserGateway = { url ->
                         // don't allow adding default gateways to the user gateways list

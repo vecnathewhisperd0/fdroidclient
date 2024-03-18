@@ -46,6 +46,7 @@ import org.fdroid.fdroid.R
 import org.fdroid.fdroid.compose.ComposeUtils
 import org.fdroid.fdroid.compose.ComposeUtils.FDroidContent
 import org.fdroid.fdroid.compose.ComposeUtils.LifecycleEventListener
+import org.fdroid.fdroid.ui.theme.AppTheme
 
 class IpfsGatewaySettingsActivity : AppCompatActivity() {
 
@@ -55,11 +56,14 @@ class IpfsGatewaySettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         prefs = Preferences.get()
+        val pureBlack = prefs.isPureBlack
 
         setContent {
-            FDroidContent {
-                IpfsGatewaySettingsScreen(prefs = prefs,
-                    onBackClicked = { onBackPressedDispatcher.onBackPressed() })
+            AppTheme(pureBlack = pureBlack) {
+                FDroidContent {
+                    IpfsGatewaySettingsScreen(prefs = prefs,
+                        onBackClicked = { onBackPressedDispatcher.onBackPressed() })
+                }
             }
         }
     }
