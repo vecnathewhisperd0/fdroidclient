@@ -4,6 +4,7 @@ import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement.SpaceBetween
 import androidx.compose.foundation.layout.Arrangement.spacedBy
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -144,7 +145,7 @@ fun AddRepoIntroContent(paddingValues: PaddingValues, onFetchRepo: (String) -> U
         val isPreview = LocalInspectionMode.current
         var manualExpanded by rememberSaveable { mutableStateOf(isPreview) }
         Row(
-            horizontalArrangement = spacedBy(16.dp),
+            horizontalArrangement = SpaceBetween,
             verticalAlignment = CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
@@ -152,9 +153,11 @@ fun AddRepoIntroContent(paddingValues: PaddingValues, onFetchRepo: (String) -> U
                 .clickable { manualExpanded = !manualExpanded },
         ) {
             Text(
-                text = stringResource(R.string.repo_enter_url)
+                text = stringResource(R.string.repo_enter_url),
+                style = MaterialTheme.typography.bodyMedium,
+                // avoid occupying the whole row
+                modifier = Modifier.weight(1f),
             )
-            Spacer(modifier = Modifier.weight(1f))
             Icon(
                 imageVector = if (manualExpanded) {
                     Icons.Default.ArrowDropUp
