@@ -47,7 +47,7 @@ public class ErrorDialogActivity extends FragmentActivity {
         final String message = intent.getStringExtra(EXTRA_MESSAGE);
 
         // pass the theme, it is not automatically applied due to activity's Theme.NoDisplay
-        final MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, R.style.AppThemeDialog);
+        final MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
         builder.setTitle(title);
         builder.setNeutralButton(R.string.ok, (dialog, which) -> {
             setResult(AppCompatActivity.RESULT_OK);
