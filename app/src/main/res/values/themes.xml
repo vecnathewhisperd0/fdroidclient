@@ -123,7 +123,7 @@
     <!-- Same as Theme.App except a black background in Dark mode -->
     <style name="Theme.App.Black" parent="Theme.App" />
 
-    <style name="AppThemeTransparent" parent="@android:style/Theme.Translucent.NoTitleBar">
+    <style name="Theme.App.Transparent" parent="Base.Theme.App">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowIsTranslucent">true</item>
