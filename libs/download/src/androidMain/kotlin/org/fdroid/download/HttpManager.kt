@@ -1,8 +1,10 @@
 package org.fdroid.download
 
-import io.ktor.client.engine.*
-import io.ktor.client.engine.okhttp.*
-import io.ktor.utils.io.jvm.javaio.*
+import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.engine.HttpClientEngineFactory
+import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.engine.okhttp.OkHttpConfig
+import io.ktor.utils.io.jvm.javaio.toInputStream
 import okhttp3.ConnectionSpec.Companion.CLEARTEXT
 import okhttp3.ConnectionSpec.Companion.MODERN_TLS
 import okhttp3.ConnectionSpec.Companion.RESTRICTED_TLS

@@ -7,7 +7,7 @@ import io.ktor.http.HttpStatusCode.Companion.NotFound
 import io.ktor.http.Url
 import io.ktor.utils.io.errors.IOException
 import mu.KotlinLogging
-import javax.net.ssl.SSLPeerUnverifiedException
+import org.fdroid.fdroid.SocketFactoryManager
 
 public interface MirrorChooser {
     public fun orderMirrors(downloadRequest: DownloadRequest): List<Mirror>
@@ -25,30 +25,22 @@ internal abstract class MirrorChooserImpl : MirrorChooser {
         protected val log = KotlinLogging.logger {}
     }
 
-    override suspend fun <T> mirrorRequest(
-        downloadRequest: DownloadRequest,
-        request: suspend (mirror: Mirror, url: Url) -> T,
-    ): T {
-        return mirrorRequest(downloadRequest, request, false)
-    }
-
     /**
      * Executes the given request on the best mirror and tries the next best ones if that fails.
      */
-    suspend fun <T> mirrorRequest(
+    override suspend fun <T> mirrorRequest(
         downloadRequest: DownloadRequest,
-        request: suspend (mirror: Mirror, url: Url) -> T,
-        enableSni: Boolean
+        request: suspend (mirror: Mirror, url: Url) -> T
     ): T {
         sniRequired = false
         val mirrors = if (downloadRequest.proxy == null) {
             // if we don't use a proxy, filter out onion mirrors (won't work without Orbot)
             val orderedMirrors =
-                orderMirrors(downloadRequest).filter { mirror -> !mirror.isOnion() }.filter { mirror ->  mirror.requiresSni == enableSni }
+                orderMirrors(downloadRequest).filter { mirror -> !mirror.isOnion() }
             // if we only have onion mirrors, take what we have and expect errors
             orderedMirrors.ifEmpty { downloadRequest.mirrors }
         } else {
-            orderMirrors(downloadRequest).filter { mirror ->  mirror.requiresSni == enableSni }
+            orderMirrors(downloadRequest)
         }
         mirrors.forEachIndexed { index, mirror ->
             val ipfsCidV1 = downloadRequest.indexFile.ipfsCidV1
@@ -70,9 +62,6 @@ internal abstract class MirrorChooserImpl : MirrorChooser {
                 if (downloadRequest.tryFirstMirror != null && e.response.status == NotFound) throw e
                 // also throw if this is the last mirror to try, otherwise try next
                 throwOnLastMirror(e, index == mirrors.size - 1)
-            } catch (e: SSLPeerUnverifiedException) {
-                sniRequired = true
-                throwOnLastMirror(e, index == mirrors.size - 1)
             } catch (e: IOException) {
                 throwOnLastMirror(e, index == mirrors.size - 1)
             } catch (e: SocketTimeoutException) {
@@ -93,11 +82,7 @@ internal abstract class MirrorChooserImpl : MirrorChooser {
             else "Trying other mirror now... ($info)"
         }
         if (wasLastMirror) {
-            if (sniRequired) {
-                throw SSLPeerUnverifiedException(e.message)
-            } else {
-                throw e
-            }
+            throw e
         }
     }
 }
@@ -116,5 +101,25 @@ internal class MirrorChooserRandom : MirrorChooserImpl() {
             }
         }
     }
+}
 
+internal class MirrorChooserSni constructor(
+    private val socketFactoryManager: SocketFactoryManager? = null
+) : MirrorChooserImpl() {
+
+    /**
+     * Returns a list of mirrors that puts mirrors that require SNI first.
+     */
+    override fun orderMirrors(downloadRequest: DownloadRequest): List<Mirror> {
+        // shuffle list and split into mirrors that work with/without sni
+        val withSniList: List<Mirror> = downloadRequest.mirrors.toMutableList().apply { shuffle() }.filter { mirror ->  mirror.worksWithoutSni == false }
+        val withoutSniList: List<Mirror> = downloadRequest.mirrors.toMutableList().apply { shuffle() }.filter { mirror ->  mirror.worksWithoutSni == true }
+        if (socketFactoryManager != null && !socketFactoryManager.sniEnabled()) {
+            return withoutSniList + withSniList
+        } else {
+            // if the socket factory manager is null, there is no mechanism to disable sni,
+            // so continue as if sni is enabled
+            return withSniList + withoutSniList
+        }
+    }
 }

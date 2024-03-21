@@ -13,14 +13,10 @@ import javax.net.ssl.SSLSocketFactory
 public interface SocketFactoryManager {
 
     /**
-     * Enables SNI.  This does not affect the current socket factory instance.
+     * Returns true or false depending on whether the SNI system parameter has been enabled. This
+     * parameter will affect the behavior of the sockets provided by the socket factory.
      */
-    public fun enableSni()
-
-    /**
-     * Disables SNI.  This does not affect the current socket factory instance.
-     */
-    public fun disableSni()
+    public fun sniEnabled(): Boolean
 
     /**
      * Returns true or false depending on whether features have been changed that require a new

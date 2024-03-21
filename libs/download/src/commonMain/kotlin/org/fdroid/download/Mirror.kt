@@ -11,7 +11,7 @@ public data class Mirror @JvmOverloads constructor(
      * So use this mirror only, if you have a CIDv1 available for supplying it to [getUrl].
      */
     val isIpfsGateway: Boolean = false,
-    val requiresSni: Boolean = false
+    val worksWithoutSni: Boolean = false
 ) {
     public val url: Url by lazy {
         try {
@@ -40,7 +40,7 @@ public data class Mirror @JvmOverloads constructor(
 
     public fun isHttp(): Boolean = url.protocol.name.startsWith("http")
 
-    public fun requiresSni(): Boolean = requiresSni
+    public fun worksWithoutSni(): Boolean = worksWithoutSni
 
     public companion object {
         @JvmStatic

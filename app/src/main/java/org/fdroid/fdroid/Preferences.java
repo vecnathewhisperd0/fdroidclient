@@ -126,6 +126,7 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
     public static final String PREF_LANGUAGE = "language";
     public static final String PREF_USE_DNS_CACHE = "useDnsCache";
     public static final String PREF_DNS_CACHE = "dnsCache";
+    public static final String PREF_ENABLE_SNI = "enableSni";
     public static final String PREF_USE_TOR = "useTor";
     public static final String PREF_ENABLE_PROXY = "enableProxy";
     public static final String PREF_PROXY_HOST = "proxyHost";
@@ -611,6 +612,14 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
             output.put(key, list);
         }
         return output;
+    }
+
+    public void setSniEnabledValue(boolean newValue) {
+        preferences.edit().putBoolean(PREF_ENABLE_SNI, newValue).apply();
+    }
+
+    public boolean isSniEnabled() {
+        return preferences.getBoolean(PREF_ENABLE_SNI, false);
     }
 
     /**

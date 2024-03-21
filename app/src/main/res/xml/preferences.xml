@@ -126,6 +126,10 @@
             android:summary="@string/useDnsCacheSummary"
             android:title="@string/useDnsCache" />
         <SwitchPreferenceCompat
+            android:key="enableSni"
+            android:summary="@string/enableSniSummary"
+            android:title="@string/enableSni" />
+        <SwitchPreferenceCompat
             android:key="useTor"
             android:summary="@string/useTorSummary"
             android:title="@string/useTor" />
