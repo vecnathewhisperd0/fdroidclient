@@ -1,6 +1,9 @@
 package org.fdroid.download
 
-import io.ktor.http.*
+import io.ktor.http.URLBuilder
+import io.ktor.http.URLParserException
+import io.ktor.http.Url
+import io.ktor.http.appendPathSegments
 import mu.KotlinLogging
 
 public data class Mirror @JvmOverloads constructor(
