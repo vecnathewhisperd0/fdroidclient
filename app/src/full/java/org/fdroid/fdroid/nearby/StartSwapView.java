@@ -24,7 +24,7 @@ import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.android.material.materialswitch.MaterialSwitch;
 
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.R;
@@ -34,7 +34,6 @@ import org.fdroid.fdroid.nearby.peers.Peer;
 import java.util.ArrayList;
 
 import androidx.annotation.Nullable;
-import com.google.android.material.switchmaterial.SwitchMaterial;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -87,7 +86,7 @@ public class StartSwapView extends SwapView {
     @Nullable /* Emulators typically don't have bluetooth adapters */
     private final BluetoothAdapter bluetooth = BluetoothAdapter.getDefaultAdapter();
 
-    private SwitchMaterial bluetoothSwitch;
+    private MaterialSwitch bluetoothSwitch;
     private TextView viewBluetoothId;
     private TextView textBluetoothVisible;
     private TextView viewWifiId;
@@ -176,7 +175,7 @@ public class StartSwapView extends SwapView {
 
             textBluetoothVisible = findViewById(R.id.bluetooth_visible);
 
-            bluetoothSwitch = (SwitchMaterial) findViewById(R.id.switch_bluetooth);
+            bluetoothSwitch = (MaterialSwitch) findViewById(R.id.switch_bluetooth);
             bluetoothSwitch.setOnCheckedChangeListener(onBluetoothSwitchToggled);
             bluetoothSwitch.setChecked(SwapService.getBluetoothVisibleUserPreference());
             bluetoothSwitch.setEnabled(true);

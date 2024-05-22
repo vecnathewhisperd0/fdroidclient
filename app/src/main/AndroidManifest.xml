@@ -283,10 +283,10 @@
 
         <activity
             android:name=".installer.DefaultInstallerActivity"
-            android:theme="@style/AppThemeTransparent" />
+            android:theme="@style/Theme.App.Transparent" />
         <activity
             android:name=".installer.ErrorDialogActivity"
-            android:theme="@style/AppThemeTransparent" />
+            android:theme="@style/Theme.App.Transparent" />
 
         <activity
             android:name=".views.main.MainActivity"
@@ -453,7 +453,7 @@
 
         <activity
             android:name=".installer.FileInstallerActivity"
-            android:theme="@style/AppThemeTransparent" />
+            android:theme="@style/Theme.App.Transparent" />
 
         <provider
             android:name="org.fdroid.fdroid.installer.ApkFileProvider"
