@@ -164,6 +164,7 @@ dependencies {
     implementation project(":libs:download")
     implementation project(":libs:index")
     implementation project(":libs:database")
+    // hold off appcompat:1.7.0 until the 'nasty' bugfix (I6a94b) is reverted: see remark in Languages.java
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.preference:preference-ktx:1.2.1'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'

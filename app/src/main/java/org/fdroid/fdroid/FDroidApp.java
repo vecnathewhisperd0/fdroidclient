@@ -296,6 +296,7 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
         }
         Preferences.setup(this);
         Languages.setLanguage(this);
+        Languages.onApplicationCreate(this);
         Preferences preferences = Preferences.get();
 
         if (preferences.promptToSendCrashReports()) {
