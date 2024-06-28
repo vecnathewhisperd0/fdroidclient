@@ -917,14 +917,14 @@ public final class Languages {
      * @return an array of the names of all the supported languages, sorted to
      * match what is returned by {@link Languages#getSupportedLocales()}.
      */
-    public String[] getAllNames() {
+    public static String[] getAllNames(final Context context) {
         return mapToArray(context, false, PER_APP_LANG);
     }
 
     /**
      * @return sorted list of supported locales.
      */
-    public String[] getSupportedLocales() {
+    public static String[] getSupportedLocales(final Context context) {
         return mapToArray(context, true, PER_APP_LANG);
     }
 
@@ -935,8 +935,8 @@ public final class Languages {
         return line.substring(0, 1).toUpperCase(displayLocale) + line.substring(1);
     }
 
-    private String[] mapToArray(final Context context, final boolean key,
-                                final boolean matchSystemLocales) {
+    private static String[] mapToArray(final Context context, final boolean key,
+                                       final boolean matchSystemLocales) {
         String[] names = new String[appLocales.length + 1];
         /* SYSTEM_DEFAULT is a fake one for displaying in a chooser menu. */
         names[0] = key ? USE_SYSTEM_DEFAULT : context.getString(R.string.pref_language_default);
