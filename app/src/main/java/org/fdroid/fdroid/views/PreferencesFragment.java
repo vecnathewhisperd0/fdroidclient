@@ -31,7 +31,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -224,6 +223,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         };
     }
 
+    @SuppressWarnings("EmptyLineSeparator")
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -241,8 +241,9 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                     new RecyclerView.OnChildAttachStateChangeListener() {
                         private void setOnLongClickListener(@NonNull View view,
                                                             final boolean onAttach) {
-                            if (recycler.getChildAdapterPosition(view) == prefPos)
+                            if (recycler.getChildAdapterPosition(view) == prefPos) {
                                 view.setOnLongClickListener(onAttach ? listener : null);
+                            }
                         }
                         @Override
                         public void onChildViewAttachedToWindow(@NonNull View view) {
@@ -252,7 +253,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                         public void onChildViewDetachedFromWindow(@NonNull View view) {
                             setOnLongClickListener(view, false);
                         }
-            });
+                    });
         }
     }
 

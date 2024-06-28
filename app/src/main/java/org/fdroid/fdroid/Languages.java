@@ -65,6 +65,7 @@ public final class Languages {
         }
     }
 
+    @SuppressWarnings("EmptyLineSeparator")
     public static void onApplicationCreate(final Application app) {
         if (PER_APP_LANG) return;
         // The default locale list seems to be set on creation of an activity (thread):
@@ -199,8 +200,7 @@ public final class Languages {
                 biases[bias] = value;
                 flags |= 1 << bias;
                 if ((flags & MATCH_EXACT) != 0 || isMarked(flags, MATCH_HIGHER | MATCH_LOWER)
-                        || (flags & ((flags & DESCENDING) != 0 ? MATCH_LOWER : MATCH_HIGHER)) != 0)
-                {
+                        || (flags & ((flags & DESCENDING) != 0 ? MATCH_LOWER : MATCH_HIGHER)) != 0) {
                     flags |= DONE;
                 }
             }
