@@ -1,5 +1,6 @@
 package org.fdroid.fdroid;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Application;
 import android.app.LocaleConfig;
@@ -24,6 +25,7 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
+@TargetApi(24)
 public final class Languages {
     public static final String TAG = "Languages";
 
