@@ -166,8 +166,8 @@ public final class Languages {
     //
     private static class CacheHint {
         private static final int EXACT = 0, HIGHER = 1, LOWER = 2;
-        private String[][] biases = new String[3][];
-        private int[] keys = new int[3];
+        private final String[][] biases = new String[3][];
+        private final int[] keys = new int[3];
         private String[][] commons;
         private int flags;
 
@@ -343,11 +343,8 @@ public final class Languages {
         for (int i = 0; i < SCRIPT_HINTS.length; i++) {
             if (c == SCRIPT_HINTS[i]) return true;
         }
-        if (!forMatching && (c == CacheHint.SLOT.charAt(CacheHint.SLOT.length() - 1)
-                || c == CacheHint.SLUGS.charAt(CacheHint.SLUGS.length() - 1))) {
-            return true;
-        }
-        return false;
+        return !forMatching && (c == CacheHint.SLOT.charAt(CacheHint.SLOT.length() - 1)
+                || c == CacheHint.SLUGS.charAt(CacheHint.SLUGS.length() - 1));
     }
 
     private static void requireAppLocales(final Context activity) {
@@ -382,9 +379,7 @@ public final class Languages {
         int i = 0;
         int j = 0;
         int k = 0;
-        String lang = "";
         String script = "";
-        int langLocales = 0;
         int langScripts = 0;
         for (; i < appLocales.length; i++) {
             String appLang = remapLegacyCode(appLocales[j].getLanguage());
@@ -460,14 +455,11 @@ public final class Languages {
                     Locale sysLocale = sysLocales[k];
                     if (!appLang.equalsIgnoreCase(remapLegacyCode(sysLocale.getLanguage()))) break;
                     if (!sysLocale.getVariant().isEmpty()) continue;
-                    langLocales++;
-                    int sysParts = getParts(sysLocale);
                     String sysScript = sysLocale.getScript();
                     if (!sysScript.isEmpty() && !script.equalsIgnoreCase(sysScript)) {
                         langScripts++;
                         script = sysScript;
                     }
-                    String sysCountry = sysLocale.getCountry();
                     for (int l = i; l < j; l++) {
                         AppLocale appLocale = appLocales[l];
                         int cmp = compare(sysLocale, appLocale);
@@ -494,9 +486,7 @@ public final class Languages {
                     sb.append(SCRIPT_HINTS[langScripts > 0
                             ? SCRIPT_SIGNIFICANT : SCRIPT_INSIGNIFICANT]);
                 }
-                lang = "";
                 script = "";
-                langLocales = 0;
                 langScripts = 0;
             } else {
                 if (!appLang.isEmpty()) {
@@ -557,14 +547,12 @@ public final class Languages {
     private static final int IMPUTED_COUNTRY = COUNTRY << IMPUTED_OFFSET;
 
     private static final int DISCOUNT_OFFSET = 12;
-    private static final int DISCOUNT_LANG = LANG << DISCOUNT_OFFSET;
     private static final int DISCOUNT_SCRIPT = SCRIPT << DISCOUNT_OFFSET;
     private static final int DISCOUNT_COUNTRY = COUNTRY << DISCOUNT_OFFSET;
 
     private static final int MATCHSYS_OFFSET = 16;
     private static final int MATCHSYS_CACHED = 1 << MATCHSYS_OFFSET;
     private static final int MATCHSYS_SCRIPT = SCRIPT << MATCHSYS_OFFSET;
-    private static final int MATCHSYS_COUNTRY = COUNTRY << MATCHSYS_OFFSET;
 
     private static final int SYSPRESENT_OFFSET = 20;
     private static final int SYSPRESENT_EXACT = 1 << SYSPRESENT_OFFSET;
@@ -707,14 +695,6 @@ public final class Languages {
             localeBuilder.clear();
         }
         return localeBuilder;
-    }
-
-    private static int getParts(final Locale locale) {
-        int flags = 0;
-        if (!locale.getLanguage().isEmpty()) flags |= LANG;
-        if (!locale.getScript().isEmpty()) flags |= SCRIPT;
-        if (!locale.getCountry().isEmpty()) flags |= COUNTRY;
-        return flags;
     }
 
     private static int compare(final Locale sysLocale, final AppLocale appLocale) {
