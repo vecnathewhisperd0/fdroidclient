@@ -288,7 +288,7 @@ public final class Languages {
     //    Android 14 (API 34), Samsung                        Delta=hi-->hi+
     // 34=af-ar-ast-be-bg-bn-ca-cs-cy-da-de-el-en-eo-es-et-eu-fa-fi-fil-fr-gd-gl-he-hi+hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc-sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue+zh+
     //
-    private ocaleScripts() {
+    private static void cacheLocaleScriptsHints() {
         LOCALE_SCRIPTS[CACHE] = new CacheHint(Build.VERSION.SDK_INT, true)
                 .setCommonGround("af-ar-",
                         /* ast */ CacheHint.SLOT,
