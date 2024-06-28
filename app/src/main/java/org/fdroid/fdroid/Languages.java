@@ -1037,6 +1037,7 @@ public final class Languages {
         return locales.toArray(new String[0]);
     }
 
+    @SuppressWarnings("SetTextI18n")
     public static void debugLangScripts(final Context context) {
         LOCALE_SCRIPTS[RESOLVED] = null;
         computeAppLocales(context, false, true);
