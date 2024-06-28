@@ -830,11 +830,7 @@ public final class Languages {
                                             final LocaleListCompat newLocales) {
         final Resources resources = context.getResources();
         Configuration config = resources.getConfiguration();
-        if (Build.VERSION.SDK_INT >= 16) {
-            ConfigurationCompat.setLocales(config, newLocales);
-        } else {
-            config.setLocale(locale);
-        }
+        ConfigurationCompat.setLocales(config, newLocales);
         resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 
