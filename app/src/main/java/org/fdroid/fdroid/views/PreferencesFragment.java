@@ -26,6 +26,7 @@
 
 package org.fdroid.fdroid.views;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -257,6 +258,12 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         }
     }
 
+    @TargetApi(33)
+    private static Intent getAppLocaleSettingsIntent(final Context context) {
+        return new Intent(android.provider.Settings.ACTION_APP_LOCALE_SETTINGS, 
+                Uri.fromParts("package", context.getPackageName(), null));
+    }
+
     @Override
     public void onDisplayPreferenceDialog(@NonNull Preference preference) {
         boolean handled = false;
@@ -265,9 +272,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         if (preference == languagePref && !Preferences.get().expertMode()) {
             handled = true;
             try {
-                Intent intent = new Intent(android.provider.Settings.ACTION_APP_LOCALE_SETTINGS,
-                        Uri.fromParts("package", preference.getContext().getPackageName(), null));
-                startActivity(intent);
+                startActivity(getAppLocaleSettingsIntent(preference.getContext()));
             } catch (Exception e) {
                 handled = false;
             }
