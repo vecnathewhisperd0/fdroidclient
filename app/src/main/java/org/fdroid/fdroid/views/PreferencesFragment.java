@@ -260,7 +260,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
 
     @TargetApi(33)
     private static Intent getAppLocaleSettingsIntent(final Context context) {
-        return new Intent(android.provider.Settings.ACTION_APP_LOCALE_SETTINGS, 
+        return new Intent(android.provider.Settings.ACTION_APP_LOCALE_SETTINGS,
                 Uri.fromParts("package", context.getPackageName(), null));
     }
 
