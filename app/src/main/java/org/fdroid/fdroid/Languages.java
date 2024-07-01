@@ -75,7 +75,7 @@ public final class Languages {
         // by calling `LocaleList.setDefault()` with a `LocaleList` passed in from the system
         // which corresponds with the language preference list in system settings (as we desire)
         // and adjusted with the selected per app language at the top on Android 13 onwards
-        // with native support.  Unfortunately we'll have to `mess with` it pre-Android 13
+        // with native support.  Unfortunately we'll have to 'mess with' it pre-Android 13
         // so we re-set the default locale list to our modified one at the earliest opportunity.
         // This is particularly important so as to 'propagate' our locale list to the libraries
         // (which then pick up the same by calling `LocaleListCompat.getDefault()`).
@@ -117,8 +117,8 @@ public final class Languages {
 
     // The in-app language picker is designed to interop with the system's locale picker
     // (namely AOSP's `LocalePickerWithRegion`) which prompts the user to select a locale
-    // with a country.  Say, the user will normally choose "English (United States)" (en-US)
-    // rather than just "English" (en) from the settings UI (even though both locales exist
+    // with a country.  Say, the user will normally choose "English (United States)" (`en-US`)
+    // rather than just "English" (`en`) from the settings UI (even though both locales exist
     // in `Locale.getAvailableLocales()`).  This actually has its advantages, e.g. the user
     // may still benefit from `en-AU` translations if available from the repos (the resolution
     // being handled by the library) with "English (Australia)" as the preferred (in-app) language
@@ -128,15 +128,16 @@ public final class Languages {
     // (normally with just a language code (occasionally with a country) e.g. `de`, `sr`, `zh-TW`)
     // to a 'best matching' system locale with a country (occasionally with a script)
     // e.g. `de-DE`, `sr-Cyrl-RS`, `zh-Hant-TW` (with a default script and/or country 'imputed' from
-    // 'ULocale.addLikelySubtags()' helpfully backed by the system's embedded ICU/CLDR dataset).
+    // `ULocale.addLikelySubtags()` helpfully backed by the system's embedded ICU/CLDR dataset).
     //
     // The most 'correct' way (as `LocalePickerWithRegion` appears to do) would be to start off
-    // with `Locale.getAvailableLocales()' and do the matching against the full list (unfortunately
+    // with `Locale.getAvailableLocales()` and do the matching against the full list (unfortunately
     // to the tune of some eight hundreds).  `CacheHint` leverages the fact that the system locales
     // are (probably loosely) tied with a specific ICU/CLDR version per Android release (API level)
     // https://developer.android.com/guide/topics/resources/internationalization
-    // (and vendor customizations to such lengths unlikely) and 'caches' the scripts hint
-    // of languages in a bid to 'get by' from resolving from `Locale.getAvailableLocales()'.
+    // (and vendor customizations to such lengths unlikely) and 'caches' a shorthand of the scripts
+    // info of languages as a fast path to resolving from `Locale.getAvailableLocales()` (which is
+    // not noticeably slow either but saves creation of a handsome amount of `Locale` objects).
     //
     // The whole exercise of 'mapping' application locales to their respective 'best match'
     // system locales might be best illustrated with some examples:
@@ -154,13 +155,14 @@ public final class Languages {
     //  "zh+"               "zh-CN"   "zh-Hans-CN"   -> "zh-Hans-CN"  "zh", "zh-Hans", "zh-Hans-CN",
     //                      "zh-HK"   "zh-Hant-HK"   -> "zh-Hant-HK"  "zh-Hant", "zh-Hant-HK",
     //                      "zh-TW"   "zh-Hant-TW"   -> "zh-Hant-TW"  "zh-Hant-TW", ...
+    //  "eo~"    STANDALONE "eo"      "eo_Latn_001"  ->     "eo"      "eo"
     //  "sc!"   NOT_PRESENT "sc"      "sc-Latn-IT"   ->   "sc-IT" [3]  nil
     //
-    // [1] via 'ULocale.addLikelySubtags()'
+    // [1] via `ULocale.addLikelySubtags()`
     // [2] which would otherwise resolve to best match "pt-BR" but for the country "BR" 'discounted'
     //     (since the user would have otherwise chosen "pt-BR" out of the three options available);
     //     falls back to 'vanilla' `pt` since there is no other clue what country to impute
-    // [3] assumes SCRIPT_INSIGNIFICANT; e.g. Sardinian (sc) only seems
+    // [3] assumes SCRIPT_INSIGNIFICANT; e.g. Sardinian (`sc`) only seems
     //     to be added to the language picker in Android Settings in Dec 2022
     //     https://android.googlesource.com/platform/frameworks/base/+/fa276959d68a7fc3464816a8cdd36f2f498be530
     //
@@ -262,28 +264,28 @@ public final class Languages {
     }
 
     @SuppressWarnings("LineLength")
-    // Changed: ast                                                                 hi                                                             sc                                     yue
+    // Changed: ast                               eo                                hi                                                             sc                                     yue
     //   Hand-crafted based on https://github.com/localazy/android-locales
     //    Android 6 (API 23, Marshmallow):  he=>iw, id=>in
-    // 23=af-ar-ast!be-bg-bn-ca-cs-cy-da-de-el-en-eo-es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue!zh+
+    // 23=af-ar-ast!be-bg-bn-ca-cs-cy-da-de-el-en-eo~es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue!zh+
     //    Android 7.0 (API 24, Nougat):     he=>iw, id=>in;   Delta=0
-    // 24=af-ar-ast!be-bg-bn-ca-cs-cy-da-de-el-en-eo-es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue!zh+
+    // 24=af-ar-ast!be-bg-bn-ca-cs-cy-da-de-el-en-eo~es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue!zh+
     //    Android 7.1 (API 25, Nougat):     he=>iw, id=>in;   Delta=0
-    // 25=af-ar-ast!be-bg-bn-ca-cs-cy-da-de-el-en-eo-es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue!zh+
+    // 25=af-ar-ast!be-bg-bn-ca-cs-cy-da-de-el-en-eo~es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue!zh+
     //    Android 8.0 (API 26, Oreo):       he=>iw, id=>in;   Delta=ast!->ast-, yue!->yue-
-    // 26=af-ar-ast-be-bg-bn-ca-cs-cy-da-de-el-en-eo-es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue-zh+
+    // 26=af-ar-ast-be-bg-bn-ca-cs-cy-da-de-el-en-eo~es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue-zh+
     //    Android 8.1 (API 27, Oreo):       he=>iw, id=>in;   Delta=0
-    // 27=af-ar-ast-be-bg-bn-ca-cs-cy-da-de-el-en-eo-es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue-zh+
+    // 27=af-ar-ast-be-bg-bn-ca-cs-cy-da-de-el-en-eo~es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue-zh+
     //    Android 9 (API 28, Pie):          he=>iw, id=>in;   Delta=yue-->yue+
-    // 28=af-ar-ast-be-bg-bn-ca-cs-cy-da-de-el-en-eo-es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue+zh+
+    // 28=af-ar-ast-be-bg-bn-ca-cs-cy-da-de-el-en-eo~es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue+zh+
     //    Android 10 (API 29):              he=>iw, id=>in;   Delta=0
-    // 29=af-ar-ast-be-bg-bn-ca-cs-cy-da-de-el-en-eo-es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue+zh+
+    // 29=af-ar-ast-be-bg-bn-ca-cs-cy-da-de-el-en-eo~es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue+zh+
     //
     //   Obtained on a real device
     //    Android 8.0, Samsung (tallies with above)
-    // 26=af-ar-ast-be-bg-bn-ca-cs-cy-da-de-el-en-eo-es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue-zh+
+    // 26=af-ar-ast-be-bg-bn-ca-cs-cy-da-de-el-en-eo~es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue-zh+
     //    Android 11 (API 30): tbd
-    //    Android 12 (API 31), Samsung                        Delta=0 (against API 29)
+    //    Android 12 (API 31), Samsung                        Delta=eo~->eo- (against API 29)
     // 31=af-ar-ast-be-bg-bn-ca-cs-cy-da-de-el-en-eo-es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue+zh+
     //    Android 13 (API 33), Asus                           Delta=sc!->sc-
     // 33=af-ar-ast-be-bg-bn-ca-cs-cy-da-de-el-en-eo-es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc-sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue+zh+
@@ -294,28 +296,33 @@ public final class Languages {
         LOCALE_SCRIPTS[CACHE] = new CacheHint(Build.VERSION.SDK_INT, true)
                 .setCommonGround("af-ar-",
                         /* ast */ CacheHint.SLOT,
-                        "be-bg-bn-ca-cs-cy-da-de-el-en-eo-es-et-eu-fa-fi-fil-fr-gd-gl-he-",
+                        "be-bg-bn-ca-cs-cy-da-de-el-en-",
+                        /* eo */ CacheHint.SLOT,
+                        "es-et-eu-fa-fi-fil-fr-gd-gl-he-",
                         /* hi */ CacheHint.SLOT,
                         "hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-",
                         /* sc */ CacheHint.SLOT,
                         "sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-",
                         /* yue */ CacheHint.SLOT,
                         "zh+")
-                .putCacheHint(34,     CacheHint.SLUGS, "ast-", "hi+", "sc-", "yue+")
-                .putCacheHint(33,     CacheHint.SLUGS, "ast-", "hi-", "sc-", "yue+")
-                .putCacheHint(31,     CacheHint.SLUGS, "ast-", "hi-", "sc!", "yue+")
-                .putCacheHint(28, 29, CacheHint.SLUGS, "ast-", "hi-", "sc!", "yue+")
-                .putCacheHint(26, 27, CacheHint.SLUGS, "ast-", "hi-", "sc!", "yue-")
-                .putCacheHint(23, 25, CacheHint.SLUGS, "ast!", "hi-", "sc!", "yue!")
+                .putCacheHint(34,     CacheHint.SLUGS, "ast-", "eo-", "hi+", "sc-", "yue+")
+                .putCacheHint(33,     CacheHint.SLUGS, "ast-", "eo-", "hi-", "sc-", "yue+")
+                .putCacheHint(31,     CacheHint.SLUGS, "ast-", "eo-", "hi-", "sc!", "yue+")
+                .putCacheHint(28, 29, CacheHint.SLUGS, "ast-", "eo~", "hi-", "sc!", "yue+")
+                .putCacheHint(26, 27, CacheHint.SLUGS, "ast-", "eo~", "hi-", "sc!", "yue-")
+                .putCacheHint(23, 25, CacheHint.SLUGS, "ast!", "eo~", "hi-", "sc!", "yue!")
                 .commit();
     }
 
-    private static int getStartOfLanguageRange(final AppLocale[] appLocales, final String appLang) {
+    private static int getStartOfLanguageRange(final AppLocale[] appLocales, final String appLang,
+                                               final boolean remapLegacyCode) {
         int i = 0;
         String lang = appLocales[i].getLanguage();
+        if (remapLegacyCode) lang = remapLegacyCode(lang);
         int compare = appLang.compareToIgnoreCase(lang);
         while (compare > 0 && i < appLocales.length - 1) {
             lang = appLocales[++i].getLanguage();
+            if (remapLegacyCode) lang = remapLegacyCode(lang);
             compare = appLang.compareToIgnoreCase(lang);
         }
         if (compare != 0) return -1;
@@ -323,17 +330,20 @@ public final class Languages {
     }
 
     private static int getEndOfLanguageRange(final AppLocale[] appLocales, final String appLang,
-                                             final int i) {
+                                             final int i, final boolean remapLegacyCode) {
         int j = i + 1;
         for (; j < appLocales.length; j++) {
-            if (!appLang.equalsIgnoreCase(appLocales[j].getLanguage())) break;
+            String lang = appLocales[j].getLanguage();
+            if (remapLegacyCode) lang = remapLegacyCode(lang);
+            if (!appLang.equalsIgnoreCase(lang)) break;
         }
         return j;
     }
 
     @SuppressWarnings("NoWhitespaceAfter")
-    private static final char[] SCRIPT_HINTS = new char[] { '+', '-', '!' };
-    private static final int SCRIPT_SIGNIFICANT = 0, SCRIPT_INSIGNIFICANT = 1, NOT_PRESENT = 2;
+    private static final char[] SCRIPT_HINTS = new char[] { '+', '-', '~', '!' };
+    private static final int SCRIPT_SIGNIFICANT = 0, SCRIPT_INSIGNIFICANT = 1,
+            STANDALONE = 2, NOT_PRESENT = 3;
 
     private static boolean isStopChar(final char c) {
         return isStopChar(c, false);
@@ -380,10 +390,11 @@ public final class Languages {
         int j = 0;
         int k = 0;
         String script = "";
+        int langLocales = 0;
         int langScripts = 0;
         for (; i < appLocales.length; i++) {
             String appLang = remapLegacyCode(appLocales[j].getLanguage());
-            j = getEndOfLanguageRange(appLocales, appLang, i);
+            j = getEndOfLanguageRange(appLocales, appLang, i, true);
             if (j > i + 1) {
                 for (int m = i; m < j; m++) {
                     AppLocale checkLocale = appLocales[m];
@@ -426,6 +437,9 @@ public final class Languages {
                                 appLocale.flags |= MATCHSYS_CACHED;
                                 if (op == SCRIPT_HINTS[SCRIPT_SIGNIFICANT]) {
                                     appLocale.flags |= MATCHSYS_SCRIPT;
+                                } else if (op == SCRIPT_HINTS[STANDALONE]
+                                        && (appLocale.flags & COUNTRY) == 0) {
+                                    appLocale.flags |= DISCOUNT_COUNTRY;
                                 }
                             }
                             cachePos[c] = pos + len + 1;
@@ -455,6 +469,7 @@ public final class Languages {
                     Locale sysLocale = sysLocales[k];
                     if (!appLang.equalsIgnoreCase(remapLegacyCode(sysLocale.getLanguage()))) break;
                     if (!sysLocale.getVariant().isEmpty()) continue;
+                    langLocales++;
                     String sysScript = sysLocale.getScript();
                     if (!sysScript.isEmpty() && !script.equalsIgnoreCase(sysScript)) {
                         langScripts++;
@@ -483,10 +498,11 @@ public final class Languages {
                 }
                 if (!appLang.isEmpty()) {
                     sb.append(appLang);
-                    sb.append(SCRIPT_HINTS[langScripts > 0
-                            ? SCRIPT_SIGNIFICANT : SCRIPT_INSIGNIFICANT]);
+                    sb.append(SCRIPT_HINTS[langLocales == 1 ? STANDALONE
+                            : (langScripts > 0 ? SCRIPT_SIGNIFICANT : SCRIPT_INSIGNIFICANT)]);
                 }
                 script = "";
+                langLocales = 0;
                 langScripts = 0;
             } else {
                 if (!appLang.isEmpty()) {
@@ -524,9 +540,7 @@ public final class Languages {
             systemLocales = newLocales;
         } else {
             defaultLocale = Locale.getDefault();
-            systemLocales = Build.VERSION.SDK_INT >= 24
-                    ? LocaleListCompat.wrap(LocaleList.getDefault())
-                    : LocaleListCompat.create(Locale.getDefault());
+            systemLocales = LocaleListCompat.getDefault();
         }
         locale = null;
     }
@@ -631,8 +645,8 @@ public final class Languages {
             }
             if (icuLocale != null && (flags & MATCHSYS_CACHED) != 0) {
                 Locale.Builder builder = getBuilder().setLanguage(icuLocale.getLanguage());
-                if ((flags & DISCOUNT_SCRIPT) == 0 && ((flags & MATCHSYS_SCRIPT) !=
-                        0 || isMarked(flags, SCRIPT | IMPUTED_SCRIPT))) {
+                if ((flags & DISCOUNT_SCRIPT) == 0 && ((flags & MATCHSYS_SCRIPT) != 0
+                        || isMarked(flags, SCRIPT | IMPUTED_SCRIPT))) {
                     if ((flags & SCRIPT) != 0) {
                         builder.setScript(locale.getScript());
                     } else if ((flags & U_SCRIPT) != 0) {
@@ -750,12 +764,13 @@ public final class Languages {
         lastLocaleList = newLocales;
     }
 
-    private static AppLocale matchAppLocale(final Context context, final String language) {
-        if (language == null || language.isEmpty()) return null;
-        Locale l = Locale.forLanguageTag(language);
+    private static AppLocale matchAppLocale(final Context context, final String languageTag) {
+        if (languageTag == null || languageTag.isEmpty()) return null;
+        Locale l = Locale.forLanguageTag(languageTag);
+        String lang = remapLegacyCode(l.getLanguage());
         requireAppLocales(context);
-        int i = getStartOfLanguageRange(appLocales, l.getLanguage());
-        int j = getEndOfLanguageRange(appLocales, l.getLanguage(), i);
+        int i = getStartOfLanguageRange(appLocales, lang, true);
+        int j = getEndOfLanguageRange(appLocales, lang, i, true);
         if (i < 0 || j > appLocales.length) return null;
         for (; i < j; i++) {
             AppLocale appLocale = appLocales[i];
@@ -838,8 +853,8 @@ public final class Languages {
     // https://android.googlesource.com/platform/frameworks/base/+/fc8c211b436aa180818780a6ade107ad30835ef8
     // landed into `LocaleList` in Sep 2020.  Unfortunately the Compat version (`LocaleListCompat`)
     // doesn't cover the edge case for us and simply hands off to platform implementation where available.
-    // In other words, we cannot rely on the constructor but to do the deduplication on our own
-    // (lest IAE will be thrown on older Android versions (presumably pre-Android 11)).
+    // In other words, we cannot rely on the constructor (to silently drop duplicates) but to do the
+    // deduplication on our own (lest IAE will be thrown on older Android versions (presumably <11)).
     private static LocaleListCompat adjustLocaleList(final Locale preferred,
                                                      final LocaleListCompat baseList) {
         if (preferred == null) return baseList;
@@ -864,14 +879,14 @@ public final class Languages {
         if (!PER_APP_LANG) {
             // Cherry-picked from AOSP commit 9752b73 included in AppCompat 1.7.0-alpha02:
             // https://android.googlesource.com/platform/frameworks/support/+/9752b7383244c2ab548970d89a257ef368183b88
-            // `To workaround the android framework issue(b/242026447) which doesn't update the
-            // layout direction after recreating in Android S.` (adapted with modification).
+            // "To workaround the android framework issue(b/242026447) which doesn't update the
+            // layout direction after recreating in Android S." (adapted with modification).
             //
             // Unfortunately AppCompat 1.7.0-alpha01 introduces a 'nasty' 'bugfix' (I6a94b)
             // https://android-review.googlesource.com/c/platform/frameworks/support/+/2200485
             // which claims to fix `Locale.getDefault()` but breaks `LocaleList.getDefault()`
-            // entirely when per-app language is used with AppCompatDelegate pre-Android 13
-            // so we need to hold off AppCompat 1.7.0 (stay on 1.6.1) until the same is reverted.
+            // entirely when per-app language is used with `AppCompatDelegate` pre-Android 13
+            // so we need to hold off AppCompat 1.7.0 (stay on 1.6.1) until the commit is reverted.
             if (Build.VERSION.SDK_INT >= 31
                     && activity.getResources().getConfiguration().getLayoutDirection() !=
                     TextUtils.getLayoutDirectionFromLocale(locale)) {
@@ -879,7 +894,7 @@ public final class Languages {
                 view.setLayoutDirection(TextUtils.getLayoutDirectionFromLocale(locale));
             }
         }
-        // `AppCompatDelegate` would take care to recreate `Activity` as necessary
+        // `AppCompatDelegate` would take care to recreate `AppCompatActivity`s as necessary
         /* Intent intent = activity.getIntent();
         if (intent == null) { // when launched as LAUNCHER
             return;
@@ -928,7 +943,7 @@ public final class Languages {
 
     private static boolean showDialect(final String lang) {
         if (!USE_ICU || lang == null || lang.isEmpty()) return false;
-        // aligns with AOSP's internal `LocaleHelper.shouldUseDialectName()`
+        // aligns with AOSP's `LocaleHelper.shouldUseDialectName()`
         // https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/java/com/android/internal/app/LocaleHelper.java?q=symbol%3A%5Cbcom.android.internal.app.LocaleHelper.shouldUseDialectName%5Cb%20case%3Ayes
         if ("fa".equals(lang)) {
             return true;
@@ -943,12 +958,14 @@ public final class Languages {
     private static String getDisplayName(final Locale locale) {
         if (locale == null) return null;
         final String lang = locale.getLanguage();
+        final int langLen = lang.length();
         final boolean showDialect = showDialect(lang);
         String name = null;
         LocaleListCompat locales = null;
         int i = -1, n = 0;
         Locale displayLocale = locale;
-        while (i <= n && (name == null || name.isEmpty() || name.equals(lang))) {
+        while (i <= n && (name == null || name.isEmpty() || (name.startsWith(lang)
+                && (name.length() > langLen ? name.charAt(langLen) == ' ' : true)))) {
             if (i == 0 && locales == null) {
                 locales = LocaleListCompat.getDefault();
                 n = locales.size();
@@ -1016,11 +1033,24 @@ public final class Languages {
     @SuppressWarnings("SetTextI18n")
     public static void debugLangScripts(final Context context) {
         LOCALE_SCRIPTS[RESOLVED] = null;
-        computeAppLocales(context, false, true);
+        AppLocale[] appLocalesResolved = computeAppLocales(context, false, true);
         final android.widget.TextView textView = new android.widget.TextView(context);
+
+        StringBuilder sb = new StringBuilder(appLocalesResolved.length * (20 + 6 + 11 + 11 + 11 + 4));
+        for (int i = 0; i < appLocalesResolved.length; i++) {
+            AppLocale appLocale = appLocalesResolved[i];
+            Locale sysLocaleCached = appLocales[i].getMatchingSystemLocale();
+            sb.append('"').append(appLocale.locale).append('"').append("\t -> ")
+                    .append(appLocale.icuLocale).append("\t => ")
+                    .append(appLocale.sysLocale).append("\t | ")
+                    .append(sysLocaleCached).append("\t (")
+                    .append(sysLocaleCached.equals(appLocale.sysLocale)).append(")");
+            if (i < (appLocalesResolved.length - 1)) sb.append(",\n");
+        }
         textView.setText(TextUtils.join(", \n\n", LOCALE_SCRIPTS)
                 + "; \n\nLOCALE_SCRIPTS[CACHE] == LOCALE_SCRIPTS[RESOLVED]: "
-                + (LOCALE_SCRIPTS[CACHE].equals(LOCALE_SCRIPTS[RESOLVED])));
+                + (LOCALE_SCRIPTS[CACHE].equals(LOCALE_SCRIPTS[RESOLVED]))
+                + "\n\n\n" + sb.toString());
         textView.setTextIsSelectable(true);
 
         new com.google.android.material.dialog.MaterialAlertDialogBuilder(context)
