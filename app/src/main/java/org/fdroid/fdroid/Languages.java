@@ -720,10 +720,12 @@ public final class Languages {
 
     }
 
+    @SuppressLint("NewApi")
     private static AppLocale createAppLocale(@NonNull final Locale locale) {
         return USE_ICU ? new AppLocaleIcu(locale) : new AppLocale(locale);
     }
 
+    @SuppressLint("NewApi")
     private static int compare(final Locale sysLocale, final AppLocale appLocale) {
         int flags = 0;
         String l = remapLegacyCode(sysLocale.getLanguage());
@@ -732,7 +734,7 @@ public final class Languages {
         if (l.equalsIgnoreCase(remapLegacyCode(appLocale.getLanguage()))) flags |= LANG;
         if (s.equalsIgnoreCase(appLocale.getScript())) flags |= SCRIPT;
         if (c.equalsIgnoreCase(appLocale.getCountry())) flags |= COUNTRY;
-        if (appLocale instanceof AppLocaleIcu) {
+        if (USE_ICU && appLocale instanceof AppLocaleIcu) {
             AppLocaleIcu appLocaleIcu = (AppLocaleIcu) appLocale;
             if ((appLocaleIcu.flags & IMPUTED_LANG) != 0
                     && l.equalsIgnoreCase(remapLegacyCode(appLocaleIcu.icuLocale.getLanguage()))) {
@@ -975,6 +977,7 @@ public final class Languages {
         return ULocale.forLocale(locale).getDisplayNameWithDialect(ULocale.forLocale(displayLocale));
     }
 
+    @SuppressLint("NewApi")
     private static String getDisplayName(final Locale locale) {
         if (locale == null) return null;
         final String lang = locale.getLanguage();
@@ -1042,6 +1045,7 @@ public final class Languages {
         return locales.toArray(new String[0]);
     }
 
+    @SuppressLint("NewApi")
     @SuppressWarnings("SetTextI18n")
     public static void debugLangScripts(@NonNull final Context context) {
         LOCALE_SCRIPTS[RESOLVED] = null;
@@ -1053,7 +1057,7 @@ public final class Languages {
             AppLocale appLocale = appLocalesResolved[i];
             Locale sysLocaleCached = appLocales[i].getMatchingSystemLocale();
             sb.append('"').append(appLocale.locale).append('"');
-            if (appLocale instanceof AppLocaleIcu) {
+            if (USE_ICU && appLocale instanceof AppLocaleIcu) {
                 sb.append("\t -> ").append(((AppLocaleIcu) appLocale).icuLocale);
             }
             sb.append("\t => ").append(appLocale.sysLocale).append("\t | ")

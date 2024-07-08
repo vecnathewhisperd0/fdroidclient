@@ -264,6 +264,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                 Uri.fromParts("package", context.getPackageName(), null));
     }
 
+    @SuppressLint("NewApi")
     @Override
     public void onDisplayPreferenceDialog(@NonNull Preference preference) {
         boolean handled = false;
