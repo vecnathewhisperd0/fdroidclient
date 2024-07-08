@@ -1,5 +1,6 @@
 package org.fdroid.fdroid;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.app.LocaleConfig;
