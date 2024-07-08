@@ -26,7 +26,6 @@
 
 package org.fdroid.fdroid.views;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -40,6 +39,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.util.ObjectsCompat;
@@ -194,7 +194,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
             }
             return entry;
         });
-        if (Languages.PER_APP_LANG) {
+        if (Languages.NATIVE_PAL) {
             Preferences.get().clearLanguage();
             languagePref.setPersistent(false);
             languagePref.setValue(Languages.getAppLocale());
@@ -258,8 +258,8 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         }
     }
 
-    @TargetApi(33)
-    private static Intent getAppLocaleSettingsIntent(final Context context) {
+    @RequiresApi(api = 33)
+    private static Intent getAppLocaleSettingsIntent(@NonNull final Context context) {
         return new Intent(android.provider.Settings.ACTION_APP_LOCALE_SETTINGS,
                 Uri.fromParts("package", context.getPackageName(), null));
     }
@@ -267,7 +267,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
     @Override
     public void onDisplayPreferenceDialog(@NonNull Preference preference) {
         boolean handled = false;
-        ListPreference languagePref = Languages.PER_APP_LANG
+        ListPreference languagePref = Languages.NATIVE_PAL
                 ? findPreference(Preferences.PREF_LANGUAGE) : null;
         if (preference == languagePref && !Preferences.get().expertMode()) {
             handled = true;
@@ -402,7 +402,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                     Languages.setLanguage(activity);
                     // With native per app language support on Android 13+, the change is handed off
                     // to the system and would trigger the 'change in system languages' route
-                    if (!Languages.PER_APP_LANG) {
+                    if (!Languages.NATIVE_PAL) {
                         App.systemLocaleList = null;
                         FDroidApp.onLanguageChanged(activity.getApplicationContext());
                         Languages.forceChangeLanguage(activity);

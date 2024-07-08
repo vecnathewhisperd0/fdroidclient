@@ -1,6 +1,5 @@
 package org.fdroid.fdroid;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Application;
 import android.app.LocaleConfig;
@@ -15,6 +14,8 @@ import android.os.LocaleList;
 import android.text.TextUtils;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.os.ConfigurationCompat;
@@ -25,13 +26,12 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
-@TargetApi(24)
 public final class Languages {
     public static final String TAG = "Languages";
 
     public static final String USE_SYSTEM_DEFAULT = "";
 
-    public static final boolean PER_APP_LANG;
+    public static final boolean NATIVE_PAL; // PAL = Per app language support
 
     private static final boolean USE_ICU;
     private static LocaleListCompat systemLocales;
@@ -47,12 +47,12 @@ public final class Languages {
 
     static {
         USE_ICU = Build.VERSION.SDK_INT >= 24;
-        PER_APP_LANG = Build.VERSION.SDK_INT >= 33;
+        NATIVE_PAL = Build.VERSION.SDK_INT >= 33;
         cacheLocaleScriptsHints();
         updateSystemLocales(null);
     }
 
-    private Languages(AppCompatActivity activity) {
+    private Languages(@NonNull AppCompatActivity activity) {
         requireAppLocales(activity);
     }
 
@@ -68,8 +68,8 @@ public final class Languages {
     }
 
     @SuppressWarnings("EmptyLineSeparator")
-    public static void onApplicationCreate(final Application app) {
-        if (PER_APP_LANG) return;
+    public static void onApplicationCreate(@NonNull final Application app) {
+        if (NATIVE_PAL) return;
         // The default locale list seems to be set on creation of an activity (thread):
         // https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/java/android/app/ActivityThread.java?q=symbol%3A%5Cbandroid.app.ActivityThread.handleBindApplication%5Cb%20case%3Ayes
         // by calling `LocaleList.setDefault()` with a `LocaleList` passed in from the system
@@ -142,7 +142,7 @@ public final class Languages {
     // The whole exercise of 'mapping' application locales to their respective 'best match'
     // system locales might be best illustrated with some examples:
     //
-    // CacheHint    implies   App     maximizes to [1]   resolves to  where `getAvailableLocales()'
+    // CacheHint    implies   App     maximizes to [1]   resolves to  where `getAvailableLocales()`
     //                       locale                      best match   contains
     //  "de-"       SCRIPT_ "de"      "de-Latn-DE"   ->   "de-DE"     "de", "de-BE", "de-DE", ...
     //  "en-" INSIGNIFICANT "en-GB"   "en-Latn-GB"   ->   "en-GB"     "en", "en-GB", "en-US", ...
@@ -199,8 +199,7 @@ public final class Languages {
         public CacheHint putCacheHint(final int from, final int to, final String... value) {
             if ((flags & DONE) == 0) {
                 int target = keys[EXACT];
-                int bias = from <= target && target <= to ? EXACT
-                        : (from > target ? HIGHER : LOWER);
+                int bias = from <= target && target <= to ? EXACT : (from > target ? HIGHER : LOWER);
                 biases[bias] = value;
                 flags |= 1 << bias;
                 if ((flags & MATCH_EXACT) != 0 || isMarked(flags, MATCH_HIGHER | MATCH_LOWER)
@@ -226,8 +225,7 @@ public final class Languages {
                     bias = takeLower ? HIGHER : LOWER;
                 }
             }
-            if ((flags & (1 << bias)) == 0) return null;
-            return compose(bias);
+            return (flags & (1 << bias)) == 0 ? null : compose(bias);
         }
 
         private int sizeHint(final int common, final int bias) {
@@ -314,28 +312,27 @@ public final class Languages {
                 .commit();
     }
 
-    private static int getStartOfLanguageRange(final AppLocale[] appLocales, final String appLang,
-                                               final boolean remapLegacyCode) {
-        int i = 0;
-        String lang = appLocales[i].getLanguage();
-        if (remapLegacyCode) lang = remapLegacyCode(lang);
-        int compare = appLang.compareToIgnoreCase(lang);
-        while (compare > 0 && i < appLocales.length - 1) {
-            lang = appLocales[++i].getLanguage();
-            if (remapLegacyCode) lang = remapLegacyCode(lang);
-            compare = appLang.compareToIgnoreCase(lang);
-        }
-        if (compare != 0) return -1;
-        return i;
+    private static int getStartOfLanguageRange(@NonNull final AppLocale[] appLocales,
+                                               @NonNull final String appLang,
+                                               final boolean useNewCode) {
+        int i = -1, cmp = -1;
+        do {
+            cmp = appLang.compareToIgnoreCase(remapLegacyCode(appLocales[++i].getLanguage(),
+                    useNewCode));
+        } while (cmp > 0 && i < appLocales.length - 1);
+        return cmp == 0 ? i : -1;
     }
 
-    private static int getEndOfLanguageRange(final AppLocale[] appLocales, final String appLang,
-                                             final int i, final boolean remapLegacyCode) {
+    private static int getEndOfLanguageRange(@NonNull final AppLocale[] appLocales,
+                                             @NonNull final String appLang,
+                                             final int i, final boolean useNewCode) {
         int j = i + 1;
-        for (; j < appLocales.length; j++) {
-            String lang = appLocales[j].getLanguage();
-            if (remapLegacyCode) lang = remapLegacyCode(lang);
-            if (!appLang.equalsIgnoreCase(lang)) break;
+        while (j < appLocales.length) {
+            if (!appLang.equalsIgnoreCase(remapLegacyCode(appLocales[j].getLanguage(),
+                    useNewCode))) {
+                break;
+            }
+            j++;
         }
         return j;
     }
@@ -357,13 +354,13 @@ public final class Languages {
                 || c == CacheHint.SLUGS.charAt(CacheHint.SLUGS.length() - 1));
     }
 
-    private static void requireAppLocales(final Context activity) {
+    private static void requireAppLocales(@NonNull final Context activity) {
         if (appLocales != null) return;
 
         appLocales = computeAppLocales(activity, true, true);
     }
 
-    private static AppLocale[] computeAppLocales(final Context activity,
+    private static AppLocale[] computeAppLocales(@NonNull final Context activity,
                                                  final boolean useCache, final boolean resolve) {
         AppLocale[] appLocales = null;
         Locale[] sysLocales = null;
@@ -374,7 +371,7 @@ public final class Languages {
             if (locales != null) {
                 appLocales = new AppLocale[locales.size()];
                 for (int i = 0; i < locales.size(); i++) {
-                    appLocales[i] = new AppLocale(locales.get(i));
+                    appLocales[i] = createAppLocale(locales.get(i));
                 }
             }
         }
@@ -386,14 +383,10 @@ public final class Languages {
         Arrays.sort(appLocales);
 
         StringBuilder sb = null;
-        int i = 0;
-        int j = 0;
-        int k = 0;
+        int i = 0, j = -1, k = -1, langLocales = 0, langScripts = 0;
         String script = "";
-        int langLocales = 0;
-        int langScripts = 0;
-        for (; i < appLocales.length; i++) {
-            String appLang = remapLegacyCode(appLocales[j].getLanguage());
+        while (i < appLocales.length) {
+            String appLang = remapLegacyCode(appLocales[i].getLanguage());
             j = getEndOfLanguageRange(appLocales, appLang, i, true);
             if (j > i + 1) {
                 for (int m = i; m < j; m++) {
@@ -448,69 +441,70 @@ public final class Languages {
                         }
                     }
                 }
-                if (handled) {
-                    i = j - 1;
-                    continue;
+            }
+
+            if (!handled && resolve) {
+                if (sb == null) sb = new StringBuilder(4 * appLocales.length);
+                if (sysLocales == null) sysLocales = Locale.getAvailableLocales();
+
+                String sysLang;
+                int compare = -1;
+                do {
+                    sysLang = remapLegacyCode(sysLocales[++k].getLanguage());
+                    compare = appLang.compareToIgnoreCase(sysLang);
+                } while (compare > 0 && k < sysLocales.length - 1);
+                if (compare == 0) {
+                    for (int n = sysLocales.length - 1; k <= n; k++) {
+                        Locale sysLocale = sysLocales[k];
+                        if (!sysLocale.getVariant().isEmpty()) continue;
+                        langLocales++;
+                        String sysScript = sysLocale.getScript();
+                        if (!sysScript.isEmpty() && !script.equalsIgnoreCase(sysScript)) {
+                            langScripts++;
+                            script = sysScript;
+                        }
+                        for (int l = i; l < j; l++) {
+                            AppLocale appLocale = appLocales[l];
+                            int cmp = compare(sysLocale, appLocale);
+                            if (isMarked(cmp, COUNTRY | SCRIPT)) {
+                                appLocale.flags |= SYSPRESENT_EXACT;
+                                appLocale.sysLocale = sysLocale;
+                            } else if (isMarked(cmp, COUNTRY | IMPUTED_SCRIPT)) {
+                                if ((appLocale.flags & DISCOUNT_COUNTRY) == 0) {
+                                    appLocale.flags |= SYSPRESENT_SCRIPT;
+                                    appLocale.sysLocale = sysLocale;
+                                }
+                            }
+                            if (isMarked(cmp, U_COUNTRY | U_SCRIPT)
+                                    || isMarked(cmp, U_COUNTRY | IMPUTED_SCRIPT)) {
+                                if ((appLocale.flags & DISCOUNT_COUNTRY) == 0) {
+                                    appLocale.flags |= SYSPRESENT_SCRIPT;
+                                    appLocale.sysLocale = sysLocale;
+                                }
+                            }
+                        }
+                        if (k < n && !appLang.equalsIgnoreCase(
+                                remapLegacyCode(sysLocales[k + 1].getLanguage()))) {
+                            break;
+                        }
+                    }
+                    if (!appLang.isEmpty()) {
+                        sb.append(appLang);
+                        sb.append(SCRIPT_HINTS[langLocales == 1 ? STANDALONE
+                                : (langScripts > 0 ? SCRIPT_SIGNIFICANT : SCRIPT_INSIGNIFICANT)]);
+                    }
+                    script = "";
+                    langLocales = 0;
+                    langScripts = 0;
+                } else {
+                    if (!appLang.isEmpty()) {
+                        sb.append(appLang);
+                        sb.append(SCRIPT_HINTS[NOT_PRESENT]);
+                    }
                 }
             }
 
-            if (!resolve) continue;
-            if (sb == null) sb = new StringBuilder(4 * appLocales.length);
-            if (sysLocales == null) sysLocales = Locale.getAvailableLocales();
-
-            String sysLang = remapLegacyCode(sysLocales[k].getLanguage());
-            int compare = appLang.compareToIgnoreCase(sysLang);
-            while (compare > 0 && k < sysLocales.length - 1) {
-                sysLang = remapLegacyCode(sysLocales[++k].getLanguage());
-                compare = appLang.compareToIgnoreCase(sysLang);
-            }
-            if (compare == 0) {
-                for (; k < sysLocales.length; k++) {
-                    Locale sysLocale = sysLocales[k];
-                    if (!appLang.equalsIgnoreCase(remapLegacyCode(sysLocale.getLanguage()))) break;
-                    if (!sysLocale.getVariant().isEmpty()) continue;
-                    langLocales++;
-                    String sysScript = sysLocale.getScript();
-                    if (!sysScript.isEmpty() && !script.equalsIgnoreCase(sysScript)) {
-                        langScripts++;
-                        script = sysScript;
-                    }
-                    for (int l = i; l < j; l++) {
-                        AppLocale appLocale = appLocales[l];
-                        int cmp = compare(sysLocale, appLocale);
-                        if (isMarked(cmp, COUNTRY | SCRIPT)) {
-                            appLocale.flags |= SYSPRESENT_EXACT;
-                            appLocale.sysLocale = sysLocale;
-                        } else if (isMarked(cmp, COUNTRY | IMPUTED_SCRIPT)) {
-                            if ((appLocale.flags & DISCOUNT_COUNTRY) == 0) {
-                                appLocale.flags |= SYSPRESENT_SCRIPT;
-                                appLocale.sysLocale = sysLocale;
-                            }
-                        }
-                        if (isMarked(cmp, U_COUNTRY | U_SCRIPT)
-                                || isMarked(cmp, U_COUNTRY | IMPUTED_SCRIPT)) {
-                            if ((appLocale.flags & DISCOUNT_COUNTRY) == 0) {
-                                appLocale.flags |= SYSPRESENT_SCRIPT;
-                                appLocale.sysLocale = sysLocale;
-                            }
-                        }
-                    }
-                }
-                if (!appLang.isEmpty()) {
-                    sb.append(appLang);
-                    sb.append(SCRIPT_HINTS[langLocales == 1 ? STANDALONE
-                            : (langScripts > 0 ? SCRIPT_SIGNIFICANT : SCRIPT_INSIGNIFICANT)]);
-                }
-                script = "";
-                langLocales = 0;
-                langScripts = 0;
-            } else {
-                if (!appLang.isEmpty()) {
-                    sb.append(appLang);
-                    sb.append(SCRIPT_HINTS[NOT_PRESENT]);
-                }
-            }
-            i = j - 1;
+            i = j;
         }
         if (sb != null && sb.length() > 0) {
             LOCALE_SCRIPTS[RESOLVED] = sb.toString();
@@ -523,7 +517,7 @@ public final class Languages {
      * @param activity the {@link AppCompatActivity} this is working as part of
      * @return the singleton to work with
      */
-    public static Languages get(AppCompatActivity activity) {
+    public static Languages get(@NonNull AppCompatActivity activity) {
         if (singleton == null) {
             singleton = new Languages(activity);
         }
@@ -543,6 +537,17 @@ public final class Languages {
             systemLocales = LocaleListCompat.getDefault();
         }
         locale = null;
+    }
+
+    private static Locale.Builder localeBuilder;
+
+    private static Locale.Builder getBuilder() {
+        if (localeBuilder == null) {
+            localeBuilder = new Locale.Builder();
+        } else {
+            localeBuilder.clear();
+        }
+        return localeBuilder;
     }
 
     private static final int LOCALE = 0b111;
@@ -573,48 +578,19 @@ public final class Languages {
     private static final int SYSPRESENT_SCRIPT = SCRIPT << SYSPRESENT_OFFSET;
 
     private static class AppLocale implements Comparable<AppLocale> {
-        Locale locale;
-        ULocale icuLocale;
+        @NonNull Locale locale;
         Locale sysLocale = null;
         int flags = 0;
 
-        AppLocale(final Locale locale) {
+        AppLocale(@NonNull final Locale locale) {
             this.locale = locale;
-            if (USE_ICU) {
-                this.icuLocale = ULocale.addLikelySubtags(ULocale.forLocale(locale));
-            } else {
-                this.icuLocale = null;
-            }
             setParts();
         }
 
         private void setParts() {
-            String l = null, s = null, c = null;
-            if (locale != null) {
-                l = locale.getLanguage();
-                s = locale.getScript();
-                c = locale.getCountry();
-                if (!l.isEmpty()) flags |= LANG;
-                if (!s.isEmpty()) flags |= SCRIPT;
-                if (!c.isEmpty()) flags |= COUNTRY;
-            }
-            if (icuLocale != null) {
-                String uL = icuLocale.getLanguage();
-                String uS = icuLocale.getScript();
-                String uC = icuLocale.getCountry();
-                if (!uL.isEmpty()) {
-                    flags |= U_LANG;
-                    if (!uL.equalsIgnoreCase(l)) flags |= IMPUTED_LANG;
-                }
-                if (!uS.isEmpty()) {
-                    flags |= U_SCRIPT;
-                    if (!uS.equalsIgnoreCase(s)) flags |= IMPUTED_SCRIPT;
-                }
-                if (!uC.isEmpty()) {
-                    flags |= U_COUNTRY;
-                    if (!uC.equalsIgnoreCase(c)) flags |= IMPUTED_COUNTRY;
-                }
-            }
+            if (!locale.getLanguage().isEmpty()) flags |= LANG;
+            if (!locale.getScript().isEmpty()) flags |= SCRIPT;
+            if (!locale.getCountry().isEmpty()) flags |= COUNTRY;
         }
 
         public String getLanguage() {
@@ -626,8 +602,7 @@ public final class Languages {
         }
 
         public String getScript(final boolean impute) {
-            String script = locale.getScript();
-            return (script.isEmpty() && impute && icuLocale != null) ? icuLocale.getScript() : script;
+            return locale.getScript();
         }
 
         public String getCountry() {
@@ -635,35 +610,11 @@ public final class Languages {
         }
 
         public String getCountry(final boolean impute) {
-            String country = locale.getCountry();
-            return (country.isEmpty() && impute && icuLocale != null) ? icuLocale.getCountry() : country;
+            return locale.getCountry();
         }
 
         public Locale getMatchingSystemLocale() {
-            if (sysLocale != null) {
-                return sysLocale;
-            }
-            if (icuLocale != null && (flags & MATCHSYS_CACHED) != 0) {
-                Locale.Builder builder = getBuilder().setLanguage(icuLocale.getLanguage());
-                if ((flags & DISCOUNT_SCRIPT) == 0 && ((flags & MATCHSYS_SCRIPT) != 0
-                        || isMarked(flags, SCRIPT | IMPUTED_SCRIPT))) {
-                    if ((flags & SCRIPT) != 0) {
-                        builder.setScript(locale.getScript());
-                    } else if ((flags & U_SCRIPT) != 0) {
-                        builder.setScript(icuLocale.getScript());
-                    }
-                }
-                if ((flags & DISCOUNT_COUNTRY) == 0) {
-                    if ((flags & COUNTRY) != 0) {
-                        builder.setRegion(locale.getCountry());
-                    } else if ((flags & U_COUNTRY) != 0) {
-                        builder.setRegion(icuLocale.getCountry());
-                    }
-                }
-                sysLocale = builder.build();
-                return sysLocale;
-            }
-            return locale;
+            return sysLocale == null ? locale : sysLocale;
         }
 
         @Override
@@ -674,8 +625,7 @@ public final class Languages {
         @Override
         public int compareTo(AppLocale another) {
             int compare = 0;
-            String a = "";
-            String b = "";
+            String a = "", b = "";
             for (int i = 0; i < 3; i++) {
                 for (int v = 0; v < 2; v++) {
                     String s = "";
@@ -700,15 +650,78 @@ public final class Languages {
         }
     }
 
-    private static Locale.Builder localeBuilder;
+    @RequiresApi(api = 24)
+    private static class AppLocaleIcu extends AppLocale {
+        @NonNull ULocale icuLocale;
 
-    private static Locale.Builder getBuilder() {
-        if (localeBuilder == null) {
-            localeBuilder = new Locale.Builder();
-        } else {
-            localeBuilder.clear();
+        AppLocaleIcu(@NonNull final Locale locale) {
+            super(locale);
+            icuLocale = ULocale.addLikelySubtags(ULocale.forLocale(locale));
+            setParts();
         }
-        return localeBuilder;
+
+        private void setParts() {
+            String uL = icuLocale.getLanguage();
+            String uS = icuLocale.getScript();
+            String uC = icuLocale.getCountry();
+            if (!uL.isEmpty()) {
+                flags |= U_LANG;
+                if (!uL.equalsIgnoreCase(locale.getLanguage())) flags |= IMPUTED_LANG;
+            }
+            if (!uS.isEmpty()) {
+                flags |= U_SCRIPT;
+                if (!uS.equalsIgnoreCase(locale.getScript())) flags |= IMPUTED_SCRIPT;
+            }
+            if (!uC.isEmpty()) {
+                flags |= U_COUNTRY;
+                if (!uC.equalsIgnoreCase(locale.getCountry())) flags |= IMPUTED_COUNTRY;
+            }
+        }
+
+        @Override
+        public String getScript(final boolean impute) {
+            String script = locale.getScript();
+            return (script.isEmpty() && impute) ? icuLocale.getScript() : script;
+        }
+
+        @Override
+        public String getCountry(final boolean impute) {
+            String country = locale.getCountry();
+            return (country.isEmpty() && impute) ? icuLocale.getCountry() : country;
+        }
+
+        @Override
+        public Locale getMatchingSystemLocale() {
+            if (sysLocale != null) {
+                return sysLocale;
+            }
+            if ((flags & MATCHSYS_CACHED) != 0) {
+                Locale.Builder builder = getBuilder().setLanguage(icuLocale.getLanguage());
+                if ((flags & DISCOUNT_SCRIPT) == 0 && ((flags & MATCHSYS_SCRIPT) != 0
+                        || isMarked(flags, SCRIPT | IMPUTED_SCRIPT))) {
+                    if ((flags & SCRIPT) != 0) {
+                        builder.setScript(locale.getScript());
+                    } else if ((flags & U_SCRIPT) != 0) {
+                        builder.setScript(icuLocale.getScript());
+                    }
+                }
+                if ((flags & DISCOUNT_COUNTRY) == 0) {
+                    if ((flags & COUNTRY) != 0) {
+                        builder.setRegion(locale.getCountry());
+                    } else if ((flags & U_COUNTRY) != 0) {
+                        builder.setRegion(icuLocale.getCountry());
+                    }
+                }
+                sysLocale = builder.build();
+                return sysLocale;
+            }
+            return locale;
+        }
+
+    }
+
+    private static AppLocale createAppLocale(@NonNull final Locale locale) {
+        return USE_ICU ? new AppLocaleIcu(locale) : new AppLocale(locale);
     }
 
     private static int compare(final Locale sysLocale, final AppLocale appLocale) {
@@ -719,15 +732,20 @@ public final class Languages {
         if (l.equalsIgnoreCase(remapLegacyCode(appLocale.getLanguage()))) flags |= LANG;
         if (s.equalsIgnoreCase(appLocale.getScript())) flags |= SCRIPT;
         if (c.equalsIgnoreCase(appLocale.getCountry())) flags |= COUNTRY;
-        if (appLocale.icuLocale != null) {
-            if ((appLocale.flags & IMPUTED_LANG) != 0
-                    && l.equalsIgnoreCase(remapLegacyCode(appLocale.icuLocale.getLanguage()))) {
+        if (appLocale instanceof AppLocaleIcu) {
+            AppLocaleIcu appLocaleIcu = (AppLocaleIcu) appLocale;
+            if ((appLocaleIcu.flags & IMPUTED_LANG) != 0
+                    && l.equalsIgnoreCase(remapLegacyCode(appLocaleIcu.icuLocale.getLanguage()))) {
                 flags |= U_LANG;
             }
-            if ((appLocale.flags & IMPUTED_SCRIPT) != 0
-                    && s.equalsIgnoreCase(appLocale.icuLocale.getScript())) flags |= U_SCRIPT;
-            if ((appLocale.flags & IMPUTED_COUNTRY) != 0
-                    && c.equalsIgnoreCase(appLocale.icuLocale.getCountry())) flags |= U_COUNTRY;
+            if ((appLocaleIcu.flags & IMPUTED_SCRIPT) != 0
+                    && s.equalsIgnoreCase(appLocaleIcu.icuLocale.getScript())) {
+                flags |= U_SCRIPT;
+            }
+            if ((appLocaleIcu.flags & IMPUTED_COUNTRY) != 0
+                    && c.equalsIgnoreCase(appLocaleIcu.icuLocale.getCountry())) {
+                flags |= U_COUNTRY;
+            }
         }
         if ((flags & LANG) != 0) {
             if ((flags & (COUNTRY | U_COUNTRY)) != 0
@@ -742,20 +760,32 @@ public final class Languages {
         return (i & flags) == flags;
     }
 
-    private static String remapLegacyCode(final String lang) {
-        // Map obsolete language codes to new language codes
-        // see https://developer.android.com/reference/java/util/Locale#legacy-language-codes
-        if ("iw".equals(lang)) {
-            return "he";
-        } else if ("in".equals(lang)) {
-            return "id";
-        } else if ("ji".equals(lang)) {
-            return "yi";
-        }
-        return lang;
+    // Map obsolete language codes to new language codes
+    // see https://developer.android.com/reference/java/util/Locale#legacy-language-codes
+    @SuppressWarnings("NoWhitespaceAfter")
+    private static final String[] OLD_LANG_CODES = { "in", "iw", "ji" };
+    @SuppressWarnings("NoWhitespaceAfter")
+    private static final String[] NEW_LANG_CODES = { "id", "he", "yi" };
+
+    private static int searchSortedStrings(@NonNull final String[] haystack,
+                                           @NonNull final String needle) {
+        int i = -1, cmp = -1;
+        do {
+            cmp = needle.compareTo(haystack[++i]);
+        } while (cmp > 0 && i < haystack.length - 1);
+        return cmp == 0 ? i : -1;
     }
 
-    private static void setLocaleListDefault(final LocaleListCompat newLocales) {
+    private static String remapLegacyCode(@NonNull final String lang) {
+        int index = searchSortedStrings(OLD_LANG_CODES, lang);
+        return index >= 0 ? NEW_LANG_CODES[index] : lang;
+    }
+
+    private static String remapLegacyCode(final String lang, final boolean enable) {
+        return enable ? remapLegacyCode(lang) : lang;
+    }
+
+    private static void setLocaleListDefault(@NonNull final LocaleListCompat newLocales) {
         if (Build.VERSION.SDK_INT >= 24) {
             LocaleList.setDefault((LocaleList) newLocales.unwrap());
         } else {
@@ -764,7 +794,8 @@ public final class Languages {
         lastLocaleList = newLocales;
     }
 
-    private static AppLocale matchAppLocale(final Context context, final String languageTag) {
+    private static AppLocale matchAppLocale(@NonNull final Context context,
+                                            final String languageTag) {
         if (languageTag == null || languageTag.isEmpty()) return null;
         Locale l = Locale.forLanguageTag(languageTag);
         String lang = remapLegacyCode(l.getLanguage());
@@ -774,75 +805,15 @@ public final class Languages {
         if (i < 0 || j > appLocales.length) return null;
         for (; i < j; i++) {
             AppLocale appLocale = appLocales[i];
-            if (l.equals(appLocale.locale)
-                    || l.equals(appLocale.getMatchingSystemLocale())) {
+            if (l.equals(appLocale.locale) || l.equals(appLocale.getMatchingSystemLocale())) {
                 return appLocale;
             }
         }
         return null;
     }
 
-    /**
-     * Handles setting the language if it is different than the current language,
-     * or different than the current system-wide locale.
-     */
-    public static void setLanguage(final Context context) {
-        if (!Preferences.get().isLanguageSet()) {
-            locale = defaultLocale;
-            return;
-        }
-        String language = Preferences.get().getLanguage();
-        setLanguage(context, language);
-    }
-
-    public static void setLanguage(final Context context, final String language) {
-        boolean changed = locale == null;
-        if (language == null || language.equals(USE_SYSTEM_DEFAULT)) {
-            if (Build.VERSION.SDK_INT >= 33 && locale == null) {
-                return;
-            }
-            changed = locale != null;
-            locale = defaultLocale;
-        } else {
-            Locale sysLocale;
-            AppLocale appLocale = matchAppLocale(context, language);
-            if (appLocale != null) {
-                sysLocale = appLocale.getMatchingSystemLocale();
-            } else {
-                sysLocale = Locale.forLanguageTag(language);
-            }
-            if (locale != null && sysLocale.equals(locale)) {
-                return; // already configured
-            } else if (sysLocale.equals(defaultLocale)) {
-                changed = locale != null;
-                locale = defaultLocale;
-            } else {
-                changed = true;
-                locale = sysLocale;
-            }
-        }
-
-        if (changed) {
-            LocaleListCompat newLocales = adjustLocaleList(locale, systemLocales);
-
-            updateConfiguration(context.getApplicationContext(), newLocales);
-
-            if (language.equals(USE_SYSTEM_DEFAULT)) {
-                AppCompatDelegate.setApplicationLocales(LocaleListCompat.getEmptyLocaleList());
-            } else {
-                AppCompatDelegate.setApplicationLocales(LocaleListCompat.create(locale));
-            }
-
-            if (PER_APP_LANG) {
-                Preferences.get().clearLanguage();
-            } else {
-                setLocaleListDefault(newLocales);
-            }
-        }
-    }
-
-    private static void updateConfiguration(final Context context,
-                                            final LocaleListCompat newLocales) {
+    private static void updateConfiguration(@NonNull final Context context,
+                                            @NonNull final LocaleListCompat newLocales) {
         final Resources resources = context.getResources();
         Configuration config = resources.getConfiguration();
         ConfigurationCompat.setLocales(config, newLocales);
@@ -871,12 +842,61 @@ public final class Languages {
     }
 
     /**
+     * Handles setting the language if it is different than the current language,
+     * or different than the current system-wide locale.
+     */
+    public static void setLanguage(@NonNull final Context context) {
+        if (!Preferences.get().isLanguageSet()) {
+            locale = defaultLocale;
+            return;
+        }
+        setLanguage(context, Preferences.get().getLanguage());
+    }
+
+    public static void setLanguage(@NonNull final Context context, final String language) {
+        boolean changed = locale == null;
+        if (language == null || language.equals(USE_SYSTEM_DEFAULT)) {
+            if (NATIVE_PAL && locale == null) return;
+            changed = locale != null;
+            locale = defaultLocale;
+        } else {
+            AppLocale appLocale = matchAppLocale(context, language);
+            Locale sysLocale = appLocale == null ? Locale.forLanguageTag(language)
+                    : appLocale.getMatchingSystemLocale();
+            if (locale != null && sysLocale.equals(locale)) {
+                return; // already configured
+            } else if (sysLocale.equals(defaultLocale)) {
+                changed = locale != null;
+                locale = defaultLocale;
+            } else {
+                changed = true;
+                locale = sysLocale;
+            }
+        }
+
+        if (changed) {
+            LocaleListCompat newLocales = adjustLocaleList(locale, systemLocales);
+
+            updateConfiguration(context.getApplicationContext(), newLocales);
+
+            AppCompatDelegate.setApplicationLocales(language.equals(USE_SYSTEM_DEFAULT)
+                    ? LocaleListCompat.getEmptyLocaleList() : LocaleListCompat.create(locale));
+
+            if (NATIVE_PAL) {
+                Preferences.get().clearLanguage();
+            } else {
+                setLocaleListDefault(newLocales);
+            }
+        }
+    }
+
+    /**
      * Force reload the {@link AppCompatActivity} to make language changes take effect.
      *
      * @param activity the {@code AppCompatActivity} to force reload
      */
-    public static void forceChangeLanguage(AppCompatActivity activity) {
-        if (!PER_APP_LANG) {
+    public static void forceChangeLanguage(@NonNull AppCompatActivity activity) {
+        if (!NATIVE_PAL) {
             // Cherry-picked from AOSP commit 9752b73 included in AppCompat 1.7.0-alpha02:
             // https://android.googlesource.com/platform/frameworks/support/+/9752b7383244c2ab548970d89a257ef368183b88
             // "To workaround the android framework issue(b/242026447) which doesn't update the
@@ -910,25 +930,25 @@ public final class Languages {
      * @return an array of the names of all the supported languages, sorted to
      * match what is returned by {@link Languages#getSupportedLocales()}.
      */
-    public static String[] getAllNames(final Context context) {
-        return mapToArray(context, false, PER_APP_LANG);
+    public static String[] getAllNames(@NonNull final Context context) {
+        return mapToArray(context, false, NATIVE_PAL);
     }
 
     /**
      * @return sorted list of supported locales.
      */
-    public static String[] getSupportedLocales(final Context context) {
-        return mapToArray(context, true, PER_APP_LANG);
+    public static String[] getSupportedLocales(@NonNull final Context context) {
+        return mapToArray(context, true, NATIVE_PAL);
     }
 
-    private static String capitalize(final String line, final Locale displayLocale) {
+    private static String capitalize(@NonNull final String line, final Locale displayLocale) {
         if (displayLocale == null || displayLocale.getLanguage().isEmpty()) {
             return Character.toUpperCase(line.charAt(0)) + line.substring(1);
         }
         return line.substring(0, 1).toUpperCase(displayLocale) + line.substring(1);
     }
 
-    private static String[] mapToArray(final Context context, final boolean key,
+    private static String[] mapToArray(@NonNull final Context context, final boolean key,
                                        final boolean matchSystemLocales) {
         String[] names = new String[appLocales.length + 1];
         /* SYSTEM_DEFAULT is a fake one for displaying in a chooser menu. */
@@ -941,18 +961,18 @@ public final class Languages {
         return names;
     }
 
-    private static boolean showDialect(final String lang) {
-        if (!USE_ICU || lang == null || lang.isEmpty()) return false;
-        // aligns with AOSP's `LocaleHelper.shouldUseDialectName()`
-        // https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/java/com/android/internal/app/LocaleHelper.java?q=symbol%3A%5Cbcom.android.internal.app.LocaleHelper.shouldUseDialectName%5Cb%20case%3Ayes
-        if ("fa".equals(lang)) {
-            return true;
-        } else if ("ro".equals(lang)) {
-            return true;
-        } else if ("zh".equals(lang)) {
-            return true;
-        }
-        return false;
+    // aligns with AOSP's `LocaleHelper.shouldUseDialectName()`
+    // https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/java/com/android/internal/app/LocaleHelper.java?q=symbol%3A%5Cbcom.android.internal.app.LocaleHelper.shouldUseDialectName%5Cb%20case%3Ayes
+    @SuppressWarnings("NoWhitespaceAfter")
+    private static final String[] DIALECT_LANGS = { "fa", "ro", "zh" };
+
+    private static boolean showDialect(@NonNull final String lang) {
+        return USE_ICU && !lang.isEmpty() && searchSortedStrings(DIALECT_LANGS, lang) >= 0;
+    }
+
+    @RequiresApi(api = 24)
+    private static String getDisplayNameWithDialect(final Locale locale, final Locale displayLocale) {
+        return ULocale.forLocale(locale).getDisplayNameWithDialect(ULocale.forLocale(displayLocale));
     }
 
     private static String getDisplayName(final Locale locale) {
@@ -972,16 +992,11 @@ public final class Languages {
             }
             if (i >= 0) displayLocale = i < n ? locales.get(i) : Locale.ENGLISH;
 
-            if (showDialect) {
-                ULocale icuLocale = ULocale.forLocale(displayLocale);
-                name = icuLocale.getDisplayNameWithDialect(icuLocale);
-            } else {
-                name = locale.getDisplayName(displayLocale);
-            }
+            name = showDialect ? getDisplayNameWithDialect(locale, displayLocale)
+                    : locale.getDisplayName(displayLocale);
             i++;
         }
-        if (name == null) return null;
-        return capitalize(name, displayLocale);
+        return name == null ? null : capitalize(name, displayLocale);
     }
 
     public static String getCurrentLocale() {
@@ -990,13 +1005,10 @@ public final class Languages {
 
     public static String getAppLocale() {
         LocaleListCompat locales = AppCompatDelegate.getApplicationLocales();
-        if (!locales.isEmpty()) {
-            return locales.get(0).toLanguageTag();
-        }
-        return "";
+        return locales.isEmpty() ? USE_SYSTEM_DEFAULT : locales.get(0).toLanguageTag();
     }
 
-    public static Locale[] toLocales(final String[] locales) {
+    public static Locale[] toLocales(@NonNull final String[] locales) {
         Arrays.sort(locales);
         Locale[] array = new Locale[locales.length];
         for (int i = 0; i < locales.length; i++) {
@@ -1005,15 +1017,15 @@ public final class Languages {
         return array;
     }
 
-    public static AppLocale[] toAppLocales(final String[] locales) {
+    public static AppLocale[] toAppLocales(@NonNull final String[] locales) {
         AppLocale[] array = new AppLocale[locales.length];
         for (int i = 0; i < locales.length; i++) {
-            array[i] = new AppLocale(Locale.forLanguageTag(locales[i]));
+            array[i] = createAppLocale(Locale.forLanguageTag(locales[i]));
         }
         return array;
     }
 
-    public static String[] parseAppLocales(final Resources resources) {
+    public static String[] parseAppLocales(@NonNull final Resources resources) {
         Set<String> locales = new HashSet<>();
         try (XmlResourceParser parser = resources.getXml(R.xml.locales_config)) {
             int eventType = parser.getEventType();
@@ -1031,21 +1043,23 @@ public final class Languages {
     }
 
     @SuppressWarnings("SetTextI18n")
-    public static void debugLangScripts(final Context context) {
+    public static void debugLangScripts(@NonNull final Context context) {
         LOCALE_SCRIPTS[RESOLVED] = null;
         AppLocale[] appLocalesResolved = computeAppLocales(context, false, true);
         final android.widget.TextView textView = new android.widget.TextView(context);
 
-        StringBuilder sb = new StringBuilder(appLocalesResolved.length * (20 + 6 + 11 + 11 + 11 + 4));
-        for (int i = 0; i < appLocalesResolved.length; i++) {
+        StringBuilder sb = new StringBuilder(appLocalesResolved.length * (20 + 6 + 11 + 11 + 11 + 5));
+        for (int i = 0, n = appLocalesResolved.length - 1; i <= n; i++) {
             AppLocale appLocale = appLocalesResolved[i];
             Locale sysLocaleCached = appLocales[i].getMatchingSystemLocale();
-            sb.append('"').append(appLocale.locale).append('"').append("\t -> ")
-                    .append(appLocale.icuLocale).append("\t => ")
-                    .append(appLocale.sysLocale).append("\t | ")
+            sb.append('"').append(appLocale.locale).append('"');
+            if (appLocale instanceof AppLocaleIcu) {
+                sb.append("\t -> ").append(((AppLocaleIcu) appLocale).icuLocale);
+            }
+            sb.append("\t => ").append(appLocale.sysLocale).append("\t | ")
                     .append(sysLocaleCached).append("\t (")
                     .append(sysLocaleCached.equals(appLocale.sysLocale)).append(")");
-            if (i < (appLocalesResolved.length - 1)) sb.append(",\n");
+            if (i < n) sb.append(",\n");
         }
         textView.setText(TextUtils.join(", \n\n", LOCALE_SCRIPTS)
                 + "; \n\nLOCALE_SCRIPTS[CACHE] == LOCALE_SCRIPTS[RESOLVED]: "
