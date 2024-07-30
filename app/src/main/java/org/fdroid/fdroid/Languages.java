@@ -13,6 +13,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.LocaleList;
 import android.text.TextUtils;
+import android.util.Log;
+import android.util.SparseArray;
+import android.util.SparseIntArray;
 import android.view.View;
 
 import androidx.annotation.ChecksSdkIntAtLeast;
@@ -22,11 +25,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.os.ConfigurationCompat;
 import androidx.core.os.LocaleListCompat;
+import androidx.preference.ListPreference;
 
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Locale;
-import java.util.Set;
+import java.util.Map;
+import java.util.TreeMap;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public final class Languages {
     public static final String TAG = "Languages";
@@ -41,6 +52,7 @@ public final class Languages {
     private static LocaleListCompat systemLocales;
     private static LocaleListCompat lastLocaleList;
     private static AppLocale[] appLocales;
+    private static AppLocale[] appResLocales;
 
     private static Locale defaultLocale;
     private static Locale locale;
@@ -184,38 +196,28 @@ public final class Languages {
         }
     }
 
+    private static boolean showResLocales() {
+        return BuildConfig.DEBUG && Preferences.get().expertMode();
+    }
+
+    @SuppressWarnings("NoWhitespaceAfter")
     private static void requireAppLocales(@NonNull final Context activity) {
         if (LOCALE_SCRIPTS[CACHE] == null || LOCALE_SCRIPTS[CACHE].isEmpty()) {
             processAppLocales(null, false, true);
         }
-
-        if (appLocales == null) {
-            AppLocale[] list = fetchAppLocales(activity);
-            processAppLocales(list, true, true);
-            appLocales = list;
-        }
-    }
-
-    private static AppLocale[] fetchAppLocales(@NonNull final Context activity) {
-        AppLocale[] appLocales = null;
-
-        if (Build.VERSION.SDK_INT >= 33) {
-            LocaleConfig localeConfig = new LocaleConfig(activity);
-            LocaleList locales = localeConfig.getSupportedLocales();
-            if (locales != null) {
-                appLocales = new AppLocale[locales.size()];
-                for (int i = 0; i < locales.size(); i++) {
-                    appLocales[i] = createAppLocale(locales.get(i));
-                }
+        int[] echo = new int[] { appLocales == null ? 1 : 0,
+                showResLocales() && appResLocales == null ? 1 : 0 };
+        AppLocale[][] results = prepareAppLocales(activity, echo);
+        if (results != null && results.length == echo.length) {
+            if (echo[0] == 1 && results[0] != null) {
+                processAppLocales(results[0], true, true);
+                appLocales = results[0];
+            }
+            if (echo[1] == 1 && results[1] != null) {
+                processAppLocales(results[1], true, true);
+                appResLocales = results[1];
             }
         }
-
-        if (appLocales == null) {
-            appLocales = toAppLocales(parseAppLocales(activity.getResources()));
-        }
-
-        Arrays.sort(appLocales);
-        return appLocales;
     }
 
     private static void processAppLocales(@NonNull AppLocale[] appLocales,
@@ -840,21 +842,25 @@ public final class Languages {
     }
 
     private static String capitalize(@NonNull final String line, final Locale displayLocale) {
-        if (displayLocale == null || displayLocale.getLanguage().isEmpty()) {
-            return Character.toUpperCase(line.charAt(0)) + line.substring(1);
-        }
-        return line.substring(0, 1).toUpperCase(displayLocale) + line.substring(1);
+        if (line.isEmpty()) return line;
+        String firstChar = displayLocale == null || displayLocale.getLanguage().isEmpty()
+                ? Character.toString(Character.toUpperCase(line.charAt(0)))
+                : line.substring(0, 1).toUpperCase(displayLocale);
+        return firstChar.charAt(0) == line.charAt(0) ? line
+                : (line.length() == 1 ? firstChar : firstChar + line.substring(1));
     }
 
     private static String[] mapToArray(@NonNull final Context context, final boolean key,
                                        final boolean matchSystemLocales) {
-        String[] names = new String[appLocales.length + 1];
+        int resLocales = showResLocales() && appResLocales != null ? appResLocales.length : 0;
+        String[] names = new String[appLocales.length + 1 + resLocales];
         /* SYSTEM_DEFAULT is a fake one for displaying in a chooser menu. */
         names[0] = key ? USE_SYSTEM_DEFAULT : context.getString(R.string.pref_language_default);
-        for (int i = 0; i < appLocales.length; i++) {
-            Locale appLocale = matchSystemLocales ? appLocales[i].getMatchingSystemLocale()
-                    : appLocales[i].locale;
-            names[i + 1] = key ? appLocale.toLanguageTag() : getDisplayName(appLocales[i].locale);
+        for (int i = 0, n = appLocales.length, m = names.length - 1; i < m; i++) {
+            AppLocale appLocale = i < n ? appLocales[i] : appResLocales[i - n];
+            Locale locale = matchSystemLocales ? appLocale.getMatchingSystemLocale() : appLocale.locale;
+            names[i + 1] = key ? locale.toLanguageTag()
+                    : getDisplayName(appLocale.locale, i < n ? null : "\uD83D\uDEA7  ", null); // 🚧
         }
         return names;
     }
@@ -873,7 +879,7 @@ public final class Languages {
         return ULocale.forLocale(locale).getDisplayNameWithDialect(ULocale.forLocale(displayLocale));
     }
 
-    private static String getDisplayName(final Locale locale) {
+    private static String getDisplayName(final Locale locale, final String prefix, final String suffix) {
         if (locale == null) return null;
         final String lang = locale.getLanguage();
         final int langLen = lang.length();
@@ -882,11 +888,15 @@ public final class Languages {
         LocaleListCompat locales = null;
         int i = -1, n = 0;
         Locale displayLocale = locale;
-        while (i <= n && (name == null || name.isEmpty() || (name.startsWith(lang)
+        while (i <= n + 1 && (name == null || name.isEmpty() || (name.startsWith(lang)
                 && (name.length() > langLen ? name.charAt(langLen) == ' ' : true)))) {
             if (i == 0 && locales == null) {
                 locales = LocaleListCompat.getDefault();
                 n = locales.size();
+            }
+            if (i == n + 1 && name != null && !name.isEmpty()) {
+                name = "\uD83C\uDF10 " + name; // 🌐
+                break;
             }
             if (i >= 0) displayLocale = i < n ? locales.get(i) : Locale.ENGLISH;
 
@@ -894,16 +904,41 @@ public final class Languages {
                     : locale.getDisplayName(displayLocale);
             i++;
         }
-        return name == null ? null : capitalize(name, displayLocale);
+        if (name == null || name.isEmpty()) return name;
+        int prefixLen = prefix == null ? 0 : prefix.length(),
+                suffixLen = suffix == null ? 0 : suffix.length();
+        StringBuilder sb = new StringBuilder(name.length() + prefixLen + suffixLen);
+        if (prefixLen > 0) sb.append(prefix);
+        sb.append(capitalize(name, displayLocale));
+        if (suffixLen > 0) sb.append(suffix);
+        return sb.toString();
     }
 
     public static String getCurrentLocale() {
-        return getDisplayName(Locale.getDefault());
+        return getDisplayName(Locale.getDefault(), null, null);
     }
 
     public static String getAppLocale() {
         LocaleListCompat locales = AppCompatDelegate.getApplicationLocales();
         return locales.isEmpty() ? USE_SYSTEM_DEFAULT : locales.get(0).toLanguageTag();
+    }
+
+    private static WeakReference<ListPreference> langPreference;
+
+    private static void updateListPreference(final ListPreference languagePref) {
+        if (languagePref == null) return;
+        languagePref.setEntries(getAllNames(languagePref.getContext()));
+        languagePref.setEntryValues(getSupportedLocales(languagePref.getContext()));
+    }
+
+    public static void updateListPreference(final ListPreference languagePref,
+                                            @NonNull final Context activity) {
+        requireAppLocales(activity);
+        updateListPreference(languagePref);
+    }
+
+    public static void bindListPreference(@NonNull final ListPreference languagePref, boolean onCreate) {
+        langPreference = new WeakReference(languagePref);
     }
 
     public static Locale[] toLocales(@NonNull final String[] locales) {
@@ -923,31 +958,391 @@ public final class Languages {
         return array;
     }
 
-    public static String[] parseAppLocales(@NonNull final Resources resources) {
-        Set<String> locales = new HashSet<>();
-        try (XmlResourceParser parser = resources.getXml(R.xml.locales_config)) {
+    private static String[] fetchAppLocales(@NonNull final Context activity) {
+        String[] appLocales = null;
+        if (Build.VERSION.SDK_INT >= 33) {
+            LocaleConfig localeConfig = new LocaleConfig(activity);
+            LocaleList locales = localeConfig.getSupportedLocales();
+            if (locales != null) {
+                appLocales = new String[locales.size()];
+                for (int i = 0; i < locales.size(); i++) {
+                    appLocales[i] = locales.get(i).toLanguageTag();
+                }
+            }
+        }
+        if (appLocales == null) appLocales = parseXMLLocales(activity.getResources());
+        if (appLocales != null) Arrays.sort(appLocales);
+        return appLocales;
+    }
+
+    public static String[] parseXMLLocales(@NonNull final Resources resources) {
+        Map<String, String> locales = new TreeMap<>();
+        parseXMLResource(resources, R.xml.locales_config, locales, "locale", 0);
+        return locales.isEmpty() ? null : locales.keySet().toArray(new String[0]);
+    }
+
+    public static AppLocale[][] prepareAppLocales(@NonNull final Context context, int[] echo) {
+        if (echo.length != 2) return null;
+        AppLocale[][] results = new AppLocale[echo.length][];
+        Context appContext = context.getApplicationContext();
+        String[] appLocales = echo[0] > 0 || echo[1] > 0 ? fetchAppLocales(appContext) : null;
+        if (echo[1] == 1 && appResLocales == null) {
+            echo[1] = -1;
+            android.widget.Toast.makeText(context, "Updating languages from resources...", 0).show();
+            Single.fromCallable(() -> {
+                long now = System.currentTimeMillis();
+                String[] locales = appContext.getAssets().getLocales();
+                String[] resLocales = parseResourcesLocales(appContext, locales, appLocales, true, null);
+                Log.d(TAG, "Fetching resources locales (got " + (resLocales == null ? 0 : resLocales.length)
+                        + ") took: " + (System.currentTimeMillis() - now) + "ms");
+                return toAppLocales(resLocales);
+            }).subscribeOn(Schedulers.computation())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnError(throwable -> Log.e(TAG, "Could not fetch resources locales", throwable))
+                    .subscribe(resLocales -> {
+                        appResLocales = resLocales;
+                        android.widget.Toast.makeText(context,
+                                "Updated " + resLocales.length + " locales from app resources.", 0).show();
+                        updateListPreference(langPreference.get());
+                    });
+        }
+        if (echo[0] > 0) {
+            echo[0] = 1;
+            results[0] = toAppLocales(appLocales);
+        }
+        return results;
+    }
+
+    public static String[] parseResourcesLocales(@NonNull final Context context) {
+        Context appContext = context.getApplicationContext();
+        String[] locales = appContext.getAssets().getLocales();
+        String[] appLocales = fetchAppLocales(appContext);
+        return parseResourcesLocales(context, locales, appLocales, false, null);
+    }
+
+    private static String[] parseResourcesLocales(@NonNull final Context appContext,
+            @NonNull String[] locales, String[] xmlLocales, boolean excludeXMLLocales,
+                                                  ArrayList<String> appLocalesDebug) {
+        Configuration appConfig = appContext.getResources().getConfiguration();
+        String packageName = appContext.getPackageName();
+
+        java.lang.reflect.Field[] fields = R.string.class.getFields();
+        int limit = 100;
+        int[] stringIds = new int[limit > 0 && limit > fields.length ? limit : fields.length];
+        for (int i = 0, n = stringIds.length; i < n; i++) {
+            try {
+                stringIds[i] = fields[i].getInt(fields[i]);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        Locale fallbackLocale = Locale.ENGLISH, altFallbackLocale = Locale.GERMAN;
+        Resources[] fallbackResources = new Resources[2];
+        Configuration modConfig = new Configuration(appConfig);
+        ConfigurationCompat.setLocales(modConfig, LocaleListCompat.create(fallbackLocale));
+        fallbackResources[0] = appContext.createConfigurationContext(modConfig).getResources();
+        ConfigurationCompat.setLocales(modConfig, LocaleListCompat.create(altFallbackLocale));
+        fallbackResources[1] = appContext.createConfigurationContext(modConfig).getResources();
+
+        Locale[] testLocales = new Locale[2];
+        testLocales[1] = fallbackLocale;
+        ArrayList<String> appLocales = new ArrayList<>(locales.length);
+        int i = 0;
+        ArrayList<Resources> testResources = new ArrayList<>();
+        ArrayList<String> testStrings = new ArrayList<>();
+        SparseIntArray testHits = new SparseIntArray();
+        SparseIntArray testPrio = new SparseIntArray();
+        SparseIntArray rankPrio = new SparseIntArray();
+        SparseArray<StringBuilder> testCandidates = appLocalesDebug == null ? null : new SparseArray();
+        String[][] ref = new String[2][];
+        int[] refPos = new int[2];
+        if (xmlLocales != null) ref[0] = xmlLocales;
+        ref[1] = Resources.getSystem().getAssets().getLocales();
+        // Resources.updateConfiguration() seems to be a bit flakey: missing `af` and `en-US` at times
+        // don't know why? disabled reuseRes to always recreate one from `Context.createConfigurationContext()`
+        boolean reuseRes = false, reinitModConfig = reuseRes;
+        while (i < locales.length) {
+            if (locales[i].isEmpty()) {
+                i++;
+                continue;
+            }
+            int langSep = locales[i].indexOf('-');
+            int nextLang = i + 1, langLen = langSep < 0 ? locales[i].length() : langSep;
+            for (int j = nextLang; j < locales.length; j++) {
+                if (!locales[i].regionMatches(0, locales[j], 0, langLen)
+                        || (locales[j].length() > langLen && locales[j].charAt(langLen) != '-')) {
+                    break;
+                }
+                nextLang++;
+            }
+            int fallbackRes = locales[i].regionMatches(0, fallbackLocale.getLanguage(), 0, langLen) ? 1 : 0;
+            int batchSize = 0;
+            if (!reuseRes) testResources.clear();
+            for (int k = i; k < nextLang; k++) {
+                Locale locale = Locale.forLanguageTag(locales[k]);
+                testLocales[0] = locale;
+                if (fallbackRes > 0) testLocales[1] = altFallbackLocale;
+                if (reinitModConfig) modConfig = new Configuration(appConfig);
+                ConfigurationCompat.setLocales(modConfig, LocaleListCompat.create(testLocales));
+                if (fallbackRes > 0) testLocales[1] = fallbackLocale;
+                Resources testRes = null;
+                boolean existingRes = reuseRes && testResources.size() >= batchSize + 1;
+                if (existingRes) {
+                    testRes = testResources.get(batchSize);
+                    testRes.updateConfiguration(modConfig, testRes.getDisplayMetrics());
+                }
+                if (testRes == null) {
+                    testRes = appContext.createConfigurationContext(modConfig).getResources();
+                }
+                LocaleListCompat localeList = ConfigurationCompat.getLocales(
+                        testRes.getConfiguration());
+                if (localeList != null && localeList.size() > 0 && localeList.get(0).equals(locale)) {
+                    if (!existingRes) testResources.add(testRes);
+                    batchSize++;
+                }
+            }
+            if (batchSize > 0) {
+                testHits.clear();
+                testPrio.clear();
+                rankPrio.clear();
+                int done = 0, mask = (1 << batchSize) - 1, l = 0;
+                while (l < stringIds.length && done < mask) {
+                    int resId = stringIds[l++];
+                    if (resId <= 0) continue;
+                    String fallbackString = fallbackResources[fallbackRes].getString(resId);
+                    for (int m = 0, n = testStrings.size(); m < batchSize; m++) {
+                        Resources testRes = testResources.get(m);
+                        String testString = testRes.getString(resId);
+                        if (m < n) testStrings.set(m, testString);
+                        else testStrings.add(testString);
+                    }
+                    int marked = done;
+                    for (int m = 0; m < batchSize; m++) {
+                        if ((marked & (1 << m)) != 0) continue;
+                        String testString = testStrings.get(m);
+                        int dedup = 0;
+                        for (int n = 0; n < batchSize; n++) {
+                            if ((marked & (1 << n)) != 0) continue;
+                            if (m == n || testString.equals(testStrings.get(n))) dedup |= 1 << n;
+                        }
+                        if (!testString.equals(fallbackString)) {
+                            if (dedup == (1 << m)) done |= dedup;
+                            else testHits.put(dedup, testHits.get(dedup, 0) + 1);
+                        }
+                        marked |= dedup;
+                    }
+                }
+                int selected = done;
+                for (int k = 0, s = testHits.size(), e = (selected != 0 && s == 0) ? 1 : s; k < e; k++) {
+                    boolean firstLoop = k == 0 && selected != 0;
+                    int keys = s > 0 ? (testHits.keyAt(k) & ~done) : 0;
+                    if (!firstLoop && s > 0 && keys == 0) continue;
+                    int bestCandidate = -1;
+                    for (int loopKeys = firstLoop ? (keys | selected) : keys,
+                            b = Integer.numberOfTrailingZeros(loopKeys),
+                            n = Integer.SIZE - Integer.numberOfLeadingZeros(loopKeys); b < n; b++) {
+                        if (!firstLoop && bestCandidate >= 0) break;
+                        if ((loopKeys & (1 << b)) != 0) {
+                            boolean areKeys = (keys & (1 << b)) != 0;
+                            if (firstLoop && bestCandidate >= 0 && areKeys) continue;
+                            String locale = locales[i + b];
+                            int candidatePrio = testPrio.get(b, -1);
+                            if (candidatePrio < 0) {
+                                int prio = 0;
+                                for (int p = 4, q = areKeys ? 1 : 3; p > q; p--) {
+                                    if (p == 4 || p == 2) {
+                                        int r = p == 4 ? 0 : 1;
+                                        if (ref[r] != null) {
+                                            int cmp = 1;
+                                            while (cmp > 0 && refPos[r] < ref[r].length) {
+                                                cmp = locale.compareToIgnoreCase(ref[r][refPos[r]]);
+                                                if (cmp >= 0) refPos[r]++;
+                                            }
+                                            if (r == 0 && cmp == 0) {
+                                                prio |= 1 << p;
+                                                if (areKeys) bestCandidate = b;
+                                            } else if (r == 1 && cmp < 0) {
+                                                prio |= 1 << p;
+                                            }
+                                        }
+                                    } else if (p == 3) {
+                                        if (locale.indexOf('-') < 0) prio |= 1 << 3;
+                                        else if (locale.charAt(locale.lastIndexOf('-') + 1) >= 'A') {
+                                            prio |= 1 << 1;
+                                        }
+                                    }
+                                }
+                                testPrio.put(b, prio);
+                                candidatePrio = prio;
+                            }
+                            if (areKeys && rankPrio.get(candidatePrio, -1) == -1) {
+                                rankPrio.put(candidatePrio, b);
+                            }
+                        }
+                    }
+                    if (s == 0 || keys == 0) continue;
+                    if (bestCandidate < 0) bestCandidate = rankPrio.valueAt(rankPrio.size() - 1);
+                    selected |= 1 << bestCandidate;
+                    if (appLocalesDebug != null) {
+                        StringBuilder sb = testCandidates.get(bestCandidate, null);
+                        if (sb == null) {
+                            sb = new StringBuilder();
+                            testCandidates.put(bestCandidate, sb);
+                        } else if (sb.length() > 0) {
+                            sb.append(';');
+                        }
+                        for (int b = Integer.numberOfTrailingZeros(keys), sbInit = sb.length(),
+                                n = Integer.SIZE - Integer.numberOfLeadingZeros(keys); b < n; b++) {
+                            if ((keys & (1 << b)) != 0) {
+                                if (sb.length() > sbInit) sb.append(',');
+                                sb.append(locales[i + b]);
+                                if (b == bestCandidate) {
+                                    sb.append((testPrio.get(b, 0) & (1 << 4)) != 0 ? "*" : "**");
+                                }
+                            }
+                        }
+                    }
+                    done |= keys;
+                }
+                if (selected != 0) {
+                    for (int b = Integer.numberOfTrailingZeros(selected),
+                            n = Integer.SIZE - Integer.numberOfLeadingZeros(selected); b < n; b++) {
+                        if ((selected & (1 << b)) != 0) {
+                            boolean isAppLocale = (testPrio.get(b, 0) & (1 << 4)) != 0;
+                            String locale = locales[i + b];
+                            boolean isLegacyCode = searchSortedStrings(OLD_LANG_CODES,
+                                    langSep < 0 ? locale : locale.substring(0, langSep)) >= 0;
+                            boolean skip = excludeXMLLocales && (isAppLocale || isLegacyCode);
+                            if (!skip) appLocales.add(locale);
+                            if (appLocalesDebug != null) {
+                                StringBuilder sb = testCandidates.get(b, null);
+                                boolean hasContent = sb != null && sb.length() > 0;
+                                if (!skip) {
+                                    String prefix = isAppLocale ? "#" : (isLegacyCode ? "@" : null);
+                                    appLocalesDebug.add(hasContent ? (prefix == null
+                                            ? sb.toString() : prefix + " " + sb.toString())
+                                            : prefix);
+                                }
+                                if (hasContent) sb.setLength(0);
+                            }
+                        }
+                    }
+                }
+            }
+            i = nextLang;
+        }
+        return appLocales.toArray(new String[0]);
+    }
+
+    private static void parseXMLResource(@NonNull final Resources resources, int resId,
+                                         @NonNull final Map<String, String> results,
+                                         final String matchTag, final int getAttribute) {
+        try (XmlResourceParser parser = resources.getXml(resId)) {
+            String key = null, value = null;
             int eventType = parser.getEventType();
             while (eventType != XmlResourceParser.END_DOCUMENT) {
-                if (eventType == XmlResourceParser.START_TAG
-                        && parser.getName().equalsIgnoreCase("locale")) {
-                    locales.add(parser.getAttributeValue(0));
+                if (eventType == XmlResourceParser.START_TAG) {
+                    if (matchTag == null || matchTag.isEmpty()
+                            || parser.getName().equalsIgnoreCase(matchTag)) {
+                        key = parser.getAttributeValue(getAttribute >= 0 ? getAttribute : 0);
+                    }
+                } else if (key != null && eventType == XmlResourceParser.TEXT) {
+                    value = parser.getText();
+                }
+                if (key != null && ((eventType == XmlResourceParser.START_TAG
+                        && parser.isEmptyElementTag()) || eventType == XmlResourceParser.END_TAG)) {
+                    results.put(key, value);
+                    key = null;
+                    value = null;
                 }
                 eventType = parser.next();
             }
         } catch (Exception e) {
-            Utils.debugLog(TAG, "Exception thrown while parsing locales_config.xml");
+            Utils.debugLog(TAG, "Exception thrown while parsing resource xml " + resId);
         }
-        return locales.toArray(new String[0]);
     }
 
     @SuppressWarnings("SetTextI18n")
-    public static void debugLangScripts(@NonNull final Context context) {
-        LOCALE_SCRIPTS[RESOLVED] = null;
-        AppLocale[] appLocalesResolved = fetchAppLocales(context);
-        processAppLocales(appLocalesResolved, false, true);
-        final android.widget.TextView textView = new android.widget.TextView(context);
+    private static String debugResLocales(@NonNull final Context context) {
+        Context appContext = context.getApplicationContext();
+        String[] locales = appContext.getAssets().getLocales();
+        ArrayList<String> appLocalesDebug = new ArrayList<>(locales.length);
+        String[] xmlLocales = fetchAppLocales(appContext);
+        String[] appLocales = parseResourcesLocales(context, locales, xmlLocales, false, appLocalesDebug);
 
-        StringBuilder sb = new StringBuilder(appLocalesResolved.length * (20 + 6 + 11 + 11 + 11 + 5));
+        int j = 0, released = 0, unreleased = 0, legacy = 0;
+        StringBuilder sb = new StringBuilder(), missing = null, extra = null, untagged = null;
+        for (int i = 0, n = appLocales.length, m = appLocalesDebug.size(); i < n; i++) {
+            sb.append(appLocales[i]).append("\t");
+            int cmp = 1;
+            while (cmp > 0 && j < xmlLocales.length) {
+                cmp = appLocales[i].compareToIgnoreCase(xmlLocales[j]);
+                if (cmp >= 0) {
+                    if (cmp != 0) {
+                        if (missing == null) missing = new StringBuilder();
+                        if (missing.length() > 0) missing.append(',');
+                        missing.append(xmlLocales[j]);
+                    }
+                    j++;
+                }
+            }
+            if (cmp == 0) {
+                released++;
+                sb.append(j - 1).append("\t");
+            } else {
+                int langSep = appLocales[i].indexOf('-');
+                boolean isLegacyCode = searchSortedStrings(OLD_LANG_CODES,
+                        langSep < 0 ? appLocales[i] : appLocales[i].substring(0, langSep)) >= 0;
+                sb.append("\t");
+                if (!isLegacyCode) sb.append("(").append(unreleased++).append(")");
+                else legacy++;
+            }
+            sb.append("\t");
+            String debug = i < m ? appLocalesDebug.get(i) : null;
+            if (debug != null) {
+                boolean marked = debug.startsWith("#");
+                if (marked && cmp != 0) {
+                    if (extra == null) extra = new StringBuilder();
+                    if (extra.length() > 0) extra.append(',');
+                    extra.append(appLocales[i]);
+                } else if (!marked && cmp == 0) {
+                    if (untagged == null) untagged = new StringBuilder();
+                    if (untagged.length() > 0) untagged.append(',');
+                    untagged.append(appLocales[i]);
+                }
+                if (!marked) sb.append("  ");
+                sb.append(debug);
+            }
+            sb.append("\n");
+        }
+        sb.append("\n").append(appLocales.length).append(" Resources locales: ")
+                .append(unreleased).append(" unreleased, ")
+                .append(legacy).append(" legacy, ")
+                .append(released).append(" released (")
+                .append(extra).append(" extra; ")
+                .append(missing).append(" missing; ")
+                .append(untagged).append(" untagged cf ")
+                .append(xmlLocales.length).append(" from LocaleConfig)");
+        return sb.toString();
+    }
+
+    @SuppressWarnings({ "SetTextI18n", "NoWhitespaceAfter" })
+    private static String debugAppLocales(@NonNull final Context context) {
+        LOCALE_SCRIPTS[RESOLVED] = null;
+        AppLocale[] appLocalesResolved = prepareAppLocales(context, new int[] { 1, 0 })[0];
+        processAppLocales(appLocalesResolved, false, true);
+
+        int sizeHint = 20 + 5;
+        for (int i = 0; i < LOCALE_SCRIPTS.length; i++) {
+            sizeHint += (LOCALE_SCRIPTS[i] == null ? 4 : LOCALE_SCRIPTS[i].length()) + 4;
+        }
+        sizeHint += appLocalesResolved.length * (20 + 6 + 11 + 11 + 11 + 5);
+        StringBuilder sb = new StringBuilder(sizeHint);
+
+        sb.append("LOCALE_SCRIPTS: " + Build.VERSION.SDK_INT + "=\n")
+                .append(TextUtils.join(", \n\n", LOCALE_SCRIPTS))
+                .append("\n\n\n");
+
         for (int i = 0, n = appLocalesResolved.length - 1; i <= n; i++) {
             AppLocale appLocale = appLocalesResolved[i];
             Locale sysLocaleCached = appLocales[i].getMatchingSystemLocale();
@@ -960,15 +1355,176 @@ public final class Languages {
                     .append(sysLocaleCached.equals(appLocale.sysLocale)).append(")");
             if (i < n) sb.append(",\n");
         }
-        textView.setText(TextUtils.join(", \n\n", LOCALE_SCRIPTS)
-                + "; \n\nLOCALE_SCRIPTS[CACHE] == LOCALE_SCRIPTS[RESOLVED]: "
-                + (LOCALE_SCRIPTS[CACHE].equals(LOCALE_SCRIPTS[RESOLVED]))
-                + "\n\n\n" + sb.toString());
+        return sb.toString();
+    }
+
+    private static String debugSystemLocales(@NonNull final Context context) {
+        boolean extended = false;
+        java.util.Date date = new java.util.Date(System.currentTimeMillis());
+        java.text.SimpleDateFormat format = new java.text.SimpleDateFormat(
+                extended ? "dd-MM-yyyy hh:mm:ss a" : "dd-MM-yyyy");
+        format.setTimeZone(java.util.TimeZone.getTimeZone("UTC"));
+
+        Locale[] sysLocales = Locale.getAvailableLocales();
+        int sizeHint = 131 + 9 + (8 + 13 + 29) * sysLocales.length;
+        if (extended) {
+            if (USE_ICU) sizeHint += 38 + (3 + 27) * sysLocales.length;
+            sizeHint += 26 + (3 + 27) * sysLocales.length;
+        }
+        Locale displayLocale = Locale.ENGLISH;
+        StringBuilder sb = new StringBuilder();
+        sb.append("# Android SDK ").append(Build.VERSION.SDK_INT)
+                .append(" - Android ").append(Build.VERSION.RELEASE)
+                .append("\n\n[comment]: # (Generated on a ").append(Build.MANUFACTURER)
+                .append(" device on ").append(format.format(date))
+                .append(")\n\n| Locale | Name |");
+        if (extended) {
+            if (USE_ICU) sb.append(" ULocale.getDisplayNameWithDialect() |");
+            sb.append(" Locale.getDisplayName() |");
+        }
+        sb.append("\n| ------ | ---- |");
+        if (extended) {
+            if (USE_ICU) sb.append(" ----------------------------------- |");
+            sb.append(" ----------------------- |");
+        }
+        sb.append("\n");
+        Arrays.sort(sysLocales, new java.util.Comparator<Locale>() {
+            @Override
+            public int compare(Locale o1, Locale o2) {
+                return o1.toString().compareTo(o2.toString());
+            }
+        });
+        for (int i = 0; i < sysLocales.length; i++) {
+            Locale locale = sysLocales[i];
+            sb.append("| ");
+            String l = locale.getLanguage();
+            String c = locale.getCountry();
+            String s = locale.getScript();
+            String v = locale.getVariant();
+            if (!l.isEmpty()) {
+                sb.append(l);
+            }
+            if (!c.isEmpty()) {
+                if (!l.isEmpty()) sb.append('_');
+                sb.append(c);
+            }
+            if (!s.isEmpty()) {
+                sb.append('#');
+                sb.append(s);
+            }
+            if (!v.isEmpty()) {
+                sb.append(s.isEmpty() ? '#' : '_');
+                sb.append(v);
+            }
+            sb.append(" | ");
+            String n;
+            if (USE_ICU) {
+                ULocale icuLocale = ULocale.forLocale(locale);
+                n = icuLocale.getDisplayNameWithDialect(ULocale.forLocale(displayLocale));
+            } else {
+                n = locale.getDisplayName(displayLocale);
+            }
+            int open = n.indexOf('('), comma = n.indexOf(',', open), close = n.indexOf(')', comma);
+            if (open >= 0  && comma > open && close > comma) {
+                sb.append(n, 0, open + 1)
+                        .append(n, comma + 1 + (n.charAt(comma + 1) == ' ' ? 1 : 0), close)
+                        .append(", ").append(n, open + 1, comma).append(n, close, n.length());
+            } else sb.append(n);
+            if (extended) {
+                sb.append(" | ").append(n);
+                if (USE_ICU) sb.append(" | ").append(locale.getDisplayName(displayLocale));
+            }
+            sb.append(" |\n");
+        }
+        return sb.toString();
+    }
+
+    private static final String[] DEBUG_ITEMS = new String[] {
+            "LOCALE_SCRIPTS", "Resources Locales", "System Locales" };
+
+    @SuppressWarnings({ "SetTextI18n", "NoWhitespaceAfter", "EmptyLineSeparator" })
+    public static void debugLangScripts(@NonNull final Context context) {
+        final android.widget.TextView textView = new android.widget.TextView(context);
+
         textView.setTextIsSelectable(true);
+
+        String[] debugInfo = new String[DEBUG_ITEMS.length];
+        int[] selected = new int[] { -1 };
+        Disposable[] disposable = new Disposable[1];
+
+        androidx.appcompat.widget.AppCompatSpinner spinner = new androidx.appcompat.widget.AppCompatSpinner(context);
+        android.widget.ArrayAdapter<String> adapter = new android.widget.ArrayAdapter<String>(
+                context, android.R.layout.simple_spinner_dropdown_item, DEBUG_ITEMS);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(android.widget.AdapterView<?> adapterView, View view, int i, long l) {
+                if (debugInfo[i] == null) {
+                    textView.setText(selected[0] < 0 ? "Heading to the Room of Maintenance..."
+                            : "Still brewing...");
+                    if (disposable[0] != null) disposable[0].dispose();
+                    disposable[0] = Single.fromCallable(() -> {
+                        if (i == 0) {
+                            return debugAppLocales(context);
+                        } else if (i == 1) {
+                            return debugResLocales(context);
+                        } else if (i == 2) {
+                            return debugSystemLocales(context);
+                        }
+                        return null;
+                    }).subscribeOn(Schedulers.computation())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .doOnError(throwable -> {
+                                textView.setText("Cannot brew magic portion :(");
+                                Log.e(TAG, "Error generating debug info", throwable);
+                            })
+                            .subscribe(debug -> {
+                                debugInfo[i] = debug;
+                                textView.setText(debugInfo[i]);
+                            });
+                } else textView.setText(debugInfo[i]);
+                selected[0] = i;
+            }
+            @Override
+            public void onNothingSelected(android.widget.AdapterView<?> adapterView) {
+                // nothing
+            }
+        });
 
         new com.google.android.material.dialog.MaterialAlertDialogBuilder(context)
                 .setView(textView)
-                .setTitle("LOCALE_SCRIPTS: " + Build.VERSION.SDK_INT + "=")
+                .setCustomTitle(spinner)
+                .setNeutralButton("Save", (dialog, i) -> {
+                    Context c = context.getApplicationContext();
+                    java.io.File dir = new java.io.File(context.getExternalFilesDir(null), "Debug logs");
+                    if (!dir.exists()) dir.mkdir();
+                    int index = selected[0];
+                    if (index < 0) {
+                        android.widget.Toast.makeText(context, "Content unavailable!", 1).show();
+                        return;
+                    }
+                    String filename = index == 2 ? ("android_" + Build.VERSION.SDK_INT + ".md")
+                            : ("debug" + (index >= 0 && index < debugInfo.length
+                            ? ("_" + DEBUG_ITEMS[index]) : "") + ".log");
+                    try {
+                        java.io.FileWriter out = new java.io.FileWriter(new java.io.File(dir, filename));
+                        out.write(textView.getText().toString());
+                        out.close();
+                        android.widget.Toast.makeText(context,
+                                "Saved " + filename + " to " + dir, 1).show();
+                    } catch (Exception e) {
+                        android.widget.Toast.makeText(context,
+                                "Failed to create " + filename + " in " + dir + ": " + e, 1).show();
+                        e.printStackTrace();
+                    }
+                })
+                .setNegativeButton("Share", (dialog, i) -> {
+                    android.content.Intent intent = new android.content.Intent();
+                    intent.setAction(android.content.Intent.ACTION_SEND);
+                    intent.putExtra(android.content.Intent.EXTRA_TEXT, debugInfo[selected[0]]);
+                    intent.setType("text/plain");
+                    context.startActivity(android.content.Intent.createChooser(intent, null));
+                })
                 .setCancelable(true)
                 .show();
     }

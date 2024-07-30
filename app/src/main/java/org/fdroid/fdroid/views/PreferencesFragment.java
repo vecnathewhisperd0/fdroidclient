@@ -177,6 +177,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
 
         ListPreference languagePref = ObjectsCompat.requireNonNull(findPreference(Preferences.PREF_LANGUAGE));
         Languages languages = Languages.get((AppCompatActivity) getActivity());
+        languages.bindListPreference(languagePref, true);
         languagePref.setDefaultValue(Languages.USE_SYSTEM_DEFAULT);
         languagePref.setEntries(languages.getAllNames(getActivity()));
         languagePref.setEntryValues(languages.getSupportedLocales(getActivity()));
