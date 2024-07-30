@@ -30,7 +30,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -39,7 +38,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.util.ObjectsCompat;
@@ -256,28 +254,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                         }
                     });
         }
-    }
-
-    @RequiresApi(api = 33)
-    private static Intent getAppLocaleSettingsIntent(@NonNull final Context context) {
-        return new Intent(android.provider.Settings.ACTION_APP_LOCALE_SETTINGS,
-                Uri.fromParts("package", context.getPackageName(), null));
-    }
-
-    @Override
-    public void onDisplayPreferenceDialog(@NonNull Preference preference) {
-        boolean handled = false;
-        ListPreference languagePref = Languages.NATIVE_PAL
-                ? findPreference(Preferences.PREF_LANGUAGE) : null;
-        if (preference == languagePref && !Preferences.get().expertMode()) {
-            handled = true;
-            try {
-                startActivity(getAppLocaleSettingsIntent(preference.getContext()));
-            } catch (Exception e) {
-                handled = false;
-            }
-        }
-        if (!handled) super.onDisplayPreferenceDialog(preference);
     }
 
     private void checkSummary(String key, int resId) {
