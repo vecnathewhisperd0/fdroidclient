@@ -17,6 +17,7 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.ChecksSdkIntAtLeast;
 import androidx.annotation.NonNull;
@@ -988,7 +989,7 @@ public final class Languages {
         String[] appLocales = echo[0] > 0 || echo[1] > 0 ? fetchAppLocales(appContext) : null;
         if (echo[1] == 1 && appResLocales == null) {
             echo[1] = -1;
-            android.widget.Toast.makeText(context, "Updating languages from resources...", 0).show();
+            Toast.makeText(context, "Updating languages from resources...", Toast.LENGTH_SHORT).show();
             Single.fromCallable(() -> {
                 long now = System.currentTimeMillis();
                 String[] locales = appContext.getAssets().getLocales();
@@ -1001,8 +1002,8 @@ public final class Languages {
                     .doOnError(throwable -> Log.e(TAG, "Could not fetch resources locales", throwable))
                     .subscribe(resLocales -> {
                         appResLocales = resLocales;
-                        android.widget.Toast.makeText(context,
-                                "Updated " + resLocales.length + " locales from app resources.", 0).show();
+                        Toast.makeText(context, "Updated " + resLocales.length
+                                + " locales from app resources.", Toast.LENGTH_SHORT).show();
                         updateListPreference(langPreference.get());
                     });
         }
@@ -1362,7 +1363,7 @@ public final class Languages {
         boolean extended = false;
         java.util.Date date = new java.util.Date(System.currentTimeMillis());
         java.text.SimpleDateFormat format = new java.text.SimpleDateFormat(
-                extended ? "dd-MM-yyyy hh:mm:ss a" : "dd-MM-yyyy");
+                extended ? "dd-MM-yyyy hh:mm:ss a" : "dd-MM-yyyy", Locale.ENGLISH);
         format.setTimeZone(java.util.TimeZone.getTimeZone("UTC"));
 
         Locale[] sysLocales = Locale.getAvailableLocales();
@@ -1500,7 +1501,7 @@ public final class Languages {
                     if (!dir.exists()) dir.mkdir();
                     int index = selected[0];
                     if (index < 0) {
-                        android.widget.Toast.makeText(context, "Content unavailable!", 1).show();
+                        Toast.makeText(context, "Content unavailable!", Toast.LENGTH_LONG).show();
                         return;
                     }
                     String filename = index == 2 ? ("android_" + Build.VERSION.SDK_INT + ".md")
@@ -1510,11 +1511,11 @@ public final class Languages {
                         java.io.FileWriter out = new java.io.FileWriter(new java.io.File(dir, filename));
                         out.write(textView.getText().toString());
                         out.close();
-                        android.widget.Toast.makeText(context,
-                                "Saved " + filename + " to " + dir, 1).show();
+                        Toast.makeText(context,
+                                "Saved " + filename + " to " + dir, Toast.LENGTH_LONG).show();
                     } catch (Exception e) {
-                        android.widget.Toast.makeText(context,
-                                "Failed to create " + filename + " in " + dir + ": " + e, 1).show();
+                        Toast.makeText(context, "Failed to create " + filename + " in "
+                                + dir + ": " + e, Toast.LENGTH_LONG).show();
                         e.printStackTrace();
                     }
                 })
