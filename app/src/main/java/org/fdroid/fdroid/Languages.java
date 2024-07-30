@@ -943,7 +943,8 @@ public final class Languages {
     @SuppressWarnings("SetTextI18n")
     public static void debugLangScripts(@NonNull final Context context) {
         LOCALE_SCRIPTS[RESOLVED] = null;
-        AppLocale[] appLocalesResolved = computeAppLocales(context, false, true);
+        AppLocale[] appLocalesResolved = fetchAppLocales(context);
+        processAppLocales(context, appLocalesResolved, false, true);
         final android.widget.TextView textView = new android.widget.TextView(context);
 
         StringBuilder sb = new StringBuilder(appLocalesResolved.length * (20 + 6 + 11 + 11 + 11 + 5));
