@@ -389,6 +389,7 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
         }
         atStartTime.edit().putInt("build-version", Build.VERSION.SDK_INT).apply();
 
+        Languages.updateCacheHint(getApplicationContext(), atStartTime);
         if (!preferences.isIndexNeverUpdated()) {
             // if system locales have changed since the app's last run, refresh cache as necessary
             updateLanguagesIfNecessary();

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.app.LocaleConfig;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
@@ -48,10 +49,14 @@ public final class Languages {
     private static final int CACHE = 0, RESOLVED = 1;
     private static final String[] LOCALE_SCRIPTS = new String[2];
 
+    @SuppressWarnings("NoWhitespaceAfter")
+    private static final char[] SCRIPT_HINTS = new char[] { '!', '#', '+', '-', '/' };
+    private static final int NOT_PRESENT = 0, SCRIPT_SINGLE = 1,
+            SCRIPT_SIGNIFICANT = 2, SCRIPT_INSIGNIFICANT = 3, STANDALONE = 4;
+
     static {
         USE_ICU = Build.VERSION.SDK_INT >= 24;
         NATIVE_PAL = Build.VERSION.SDK_INT >= 33;
-        cacheLocaleScriptsHints();
         updateSystemLocales(null);
     }
 
@@ -118,201 +123,18 @@ public final class Languages {
         });
     }
 
-    // The in-app language picker is designed to interop with the system's locale picker
-    // (namely AOSP's `LocalePickerWithRegion`) which prompts the user to select a locale
-    // with a country.  Say, the user will normally choose "English (United States)" (`en-US`)
-    // rather than just "English" (`en`) from the settings UI (even though both locales exist
-    // in `Locale.getAvailableLocales()`).  This actually has its advantages, e.g. the user
-    // may still benefit from `en-AU` translations if available from the repos (the resolution
-    // being handled by the library) with "English (Australia)" as the preferred (in-app) language
-    // while the client UI falls back to one of the available English locales (`en-US` or `en-GB`)
-    // among the application locales (via `Resources` resolution by the system in native C++ code).
-    // But for various reasons this also means we need to 'map' the available application locales
-    // (normally with just a language code (occasionally with a country) e.g. `de`, `sr`, `zh-TW`)
-    // to a 'best matching' system locale with a country (occasionally with a script)
-    // e.g. `de-DE`, `sr-Cyrl-RS`, `zh-Hant-TW` (with a default script and/or country 'imputed' from
-    // `ULocale.addLikelySubtags()` helpfully backed by the system's embedded ICU/CLDR dataset).
-    //
-    // The most 'correct' way (as `LocalePickerWithRegion` appears to do) would be to start off
-    // with `Locale.getAvailableLocales()` and do the matching against the full list (unfortunately
-    // to the tune of some eight hundreds).  `CacheHint` leverages the fact that the system locales
-    // are (probably loosely) tied with a specific ICU/CLDR version per Android release (API level)
-    // https://developer.android.com/guide/topics/resources/internationalization
-    // (and vendor customizations to such lengths unlikely) and 'caches' a shorthand of the scripts
-    // info of languages as a fast path to resolving from `Locale.getAvailableLocales()` (which is
-    // not noticeably slow either but saves creation of a handsome amount of `Locale` objects).
-    //
-    // The whole exercise of 'mapping' application locales to their respective 'best match'
-    // system locales might be best illustrated with some examples:
-    //
-    // CacheHint    implies   App     maximizes to [1]   resolves to  where `getAvailableLocales()`
-    //                       locale                      best match   contains
-    //  "de-"       SCRIPT_ "de"      "de-Latn-DE"   ->   "de-DE"     "de", "de-BE", "de-DE", ...
-    //  "en-" INSIGNIFICANT "en-GB"   "en-Latn-GB"   ->   "en-GB"     "en", "en-GB", "en-US", ...
-    //                      "en-US"   "en-Latn-US"   ->   "en-US"
-    //  "pt-"               "pt"      "pt-Latn-BR"   ->     "pt" [2]  "pt", "pt-BR", "pt-CH",
-    //                      "pt-BR"   "pt-Latn-BR"   ->   "pt-BR"     "pt-MO", "pt-PT", "pt-ST", ...
-    //                      "pt-PT"   "pt-Latn-PT"   ->   "pt-PT"
-    //  "sr+"       SCRIPT_ "sr"      "sr-Cyrl-RS"   -> "sr-Cyrl-RS"  "sr", "sr-Cyrl", "sr-Cyrl-RS",
-    //          SIGNIFICANT                                           "sr-Latn", "sr-Latn-RS", ...
-    //  "zh+"               "zh-CN"   "zh-Hans-CN"   -> "zh-Hans-CN"  "zh", "zh-Hans", "zh-Hans-CN",
-    //                      "zh-HK"   "zh-Hant-HK"   -> "zh-Hant-HK"  "zh-Hant", "zh-Hant-HK",
-    //                      "zh-TW"   "zh-Hant-TW"   -> "zh-Hant-TW"  "zh-Hant-TW", ...
-    //  "eo~"    STANDALONE "eo"      "eo_Latn_001"  ->     "eo"      "eo"
-    //  "sc!"   NOT_PRESENT "sc"      "sc-Latn-IT"   ->   "sc-IT" [3]  nil
-    //
-    // [1] via `ULocale.addLikelySubtags()`
-    // [2] which would otherwise resolve to best match "pt-BR" but for the country "BR" 'discounted'
-    //     (since the user would have otherwise chosen "pt-BR" out of the three options available);
-    //     falls back to 'vanilla' `pt` since there is no other clue what country to impute
-    // [3] assumes SCRIPT_INSIGNIFICANT; e.g. Sardinian (`sc`) only seems
-    //     to be added to the language picker in Android Settings in Dec 2022
-    //     https://android.googlesource.com/platform/frameworks/base/+/fa276959d68a7fc3464816a8cdd36f2f498be530
-    //
-    private static class CacheHint {
-        private static final int EXACT = 0, HIGHER = 1, LOWER = 2;
-        private final String[][] biases = new String[3][];
-        private final int[] keys = new int[3];
-        private String[][] commons;
-        private int flags;
-
-        private static final int MATCH_EXACT = 1 << EXACT;
-        private static final int MATCH_HIGHER = 1 << HIGHER;
-        private static final int MATCH_LOWER = 1 << LOWER;
-        private static final int DESCENDING = 1 << 3;
-        private static final int DONE = 1 << 4;
-
-        public static final String SLOT = "*", SLUGS = "&";
-
-        CacheHint(final int target, final boolean descending) {
-            keys[EXACT] = target;
-            if (descending) flags |= DESCENDING;
+    private static int compareStringSegments(final String aString, int aPos, int aLen,
+                                             String bString, int bPos, int bLen) {
+        int cmp = -1;
+        if (bString == null) bString = aString;
+        for (int i = 0, n = Math.min(aLen, bLen), al = aString.length(), bl = bString.length();
+                i < n && aPos < al && bPos < bl; i++) {
+            char charA = aString.charAt(aPos++);
+            char charB = bString.charAt(bPos++);
+            cmp = Character.compare(charA, charB);
+            if (cmp != 0) break;
         }
-
-        public CacheHint setCommonGround(final String... value) {
-            if (commons == null) commons = new String[1][];
-            commons[0] = value;
-            return this;
-        }
-
-        public CacheHint putCacheHint(final int key, final String... value) {
-            return putCacheHint(key, key, value);
-        }
-
-        public CacheHint putCacheHint(final int from, final int to, final String... value) {
-            if ((flags & DONE) == 0) {
-                int target = keys[EXACT];
-                int bias = from <= target && target <= to ? EXACT : (from > target ? HIGHER : LOWER);
-                biases[bias] = value;
-                flags |= 1 << bias;
-                if ((flags & MATCH_EXACT) != 0 || isMarked(flags, MATCH_HIGHER | MATCH_LOWER)
-                        || (flags & ((flags & DESCENDING) != 0 ? MATCH_LOWER : MATCH_HIGHER)) != 0) {
-                    flags |= DONE;
-                }
-            }
-            return this;
-        }
-
-        public String commit() {
-            return commit(true, true);
-        }
-
-        public String commit(final boolean takeLower, final boolean orEither) {
-            int bias = 0;
-            if ((flags & MATCH_EXACT) == 0) {
-                if (takeLower && (flags & MATCH_LOWER) != 0) {
-                    bias = LOWER;
-                } else if (!takeLower && (flags & MATCH_HIGHER) != 0) {
-                    bias = HIGHER;
-                } else if (orEither) {
-                    bias = takeLower ? HIGHER : LOWER;
-                }
-            }
-            return (flags & (1 << bias)) == 0 ? null : compose(bias);
-        }
-
-        private int sizeHint(final int common, final int bias) {
-            int size = 0;
-            for (int c = 0; c < 2; c++) {
-                int entry = c == 0 ? common : bias;
-                String[][] array = c == 0 ? commons : biases;
-                if (entry >= 0 && entry < array.length) {
-                    String[] parts = array[entry];
-                    for (int i = 0; i < parts.length; i++) {
-                        String part = parts[i];
-                        if (part != SLOT && part != SLUGS) size += part.length();
-                    }
-                }
-            }
-            return size;
-        }
-
-        private String compose(final int bias) {
-            String[] value = biases[bias];
-            if (value == null || value.length < 1) return null;
-            boolean delta = value[0] == SLUGS;
-            if (!delta) return value.length == 1 ? value[0] : TextUtils.join("", value);
-            String[] base = commons[0];
-            if (base == null) return null;
-            StringBuilder sb = new StringBuilder(sizeHint(0, bias));
-            int p = 1;
-            for (int i = 0; i < base.length; i++) {
-                String s = base[i];
-                sb.append(s == SLOT && p < value.length ? value[p++] : s);
-            }
-            return sb.toString();
-        }
-    }
-
-    @SuppressWarnings("LineLength")
-    // Changed: ast                               eo                                hi                                                             sc                                     yue
-    //   Hand-crafted based on https://github.com/localazy/android-locales
-    //    Android 6 (API 23, Marshmallow):  he=>iw, id=>in
-    // 23=af-ar-ast!be-bg-bn-ca-cs-cy-da-de-el-en-eo~es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue!zh+
-    //    Android 7.0 (API 24, Nougat):     he=>iw, id=>in;   Delta=0
-    // 24=af-ar-ast!be-bg-bn-ca-cs-cy-da-de-el-en-eo~es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue!zh+
-    //    Android 7.1 (API 25, Nougat):     he=>iw, id=>in;   Delta=0
-    // 25=af-ar-ast!be-bg-bn-ca-cs-cy-da-de-el-en-eo~es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue!zh+
-    //    Android 8.0 (API 26, Oreo):       he=>iw, id=>in;   Delta=ast!->ast-, yue!->yue-
-    // 26=af-ar-ast-be-bg-bn-ca-cs-cy-da-de-el-en-eo~es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue-zh+
-    //    Android 8.1 (API 27, Oreo):       he=>iw, id=>in;   Delta=0
-    // 27=af-ar-ast-be-bg-bn-ca-cs-cy-da-de-el-en-eo~es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue-zh+
-    //    Android 9 (API 28, Pie):          he=>iw, id=>in;   Delta=yue-->yue+
-    // 28=af-ar-ast-be-bg-bn-ca-cs-cy-da-de-el-en-eo~es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue+zh+
-    //    Android 10 (API 29):              he=>iw, id=>in;   Delta=0
-    // 29=af-ar-ast-be-bg-bn-ca-cs-cy-da-de-el-en-eo~es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue+zh+
-    //
-    //   Obtained on a real device
-    //    Android 8.0, Samsung (tallies with above)
-    // 26=af-ar-ast-be-bg-bn-ca-cs-cy-da-de-el-en-eo~es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue-zh+
-    //    Android 11 (API 30): tbd
-    //    Android 12 (API 31), Samsung                        Delta=eo~->eo- (against API 29)
-    // 31=af-ar-ast-be-bg-bn-ca-cs-cy-da-de-el-en-eo-es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc!sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue+zh+
-    //    Android 13 (API 33), Asus                           Delta=sc!->sc-
-    // 33=af-ar-ast-be-bg-bn-ca-cs-cy-da-de-el-en-eo-es-et-eu-fa-fi-fil-fr-gd-gl-he-hi-hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc-sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue+zh+
-    //    Android 14 (API 34), Samsung                        Delta=hi-->hi+
-    // 34=af-ar-ast-be-bg-bn-ca-cs-cy-da-de-el-en-eo-es-et-eu-fa-fi-fil-fr-gd-gl-he-hi+hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-sc-sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-yue+zh+
-    //
-    private static void cacheLocaleScriptsHints() {
-        LOCALE_SCRIPTS[CACHE] = new CacheHint(Build.VERSION.SDK_INT, true)
-                .setCommonGround("af-ar-",
-                        /* ast */ CacheHint.SLOT,
-                        "be-bg-bn-ca-cs-cy-da-de-el-en-",
-                        /* eo */ CacheHint.SLOT,
-                        "es-et-eu-fa-fi-fil-fr-gd-gl-he-",
-                        /* hi */ CacheHint.SLOT,
-                        "hr-hu-id-is-it-ja-kn-ko-lt-lv-ml-mn-nb-nl-nn-pa+pl-pt-ro-ru-",
-                        /* sc */ CacheHint.SLOT,
-                        "sk-sl-sq-sr+sv-sw-ta-te-th-tr-uk-vi-",
-                        /* yue */ CacheHint.SLOT,
-                        "zh+")
-                .putCacheHint(34,     CacheHint.SLUGS, "ast-", "eo-", "hi+", "sc-", "yue+")
-                .putCacheHint(33,     CacheHint.SLUGS, "ast-", "eo-", "hi-", "sc-", "yue+")
-                .putCacheHint(31,     CacheHint.SLUGS, "ast-", "eo-", "hi-", "sc!", "yue+")
-                .putCacheHint(28, 29, CacheHint.SLUGS, "ast-", "eo~", "hi-", "sc!", "yue+")
-                .putCacheHint(26, 27, CacheHint.SLUGS, "ast-", "eo~", "hi-", "sc!", "yue-")
-                .putCacheHint(23, 25, CacheHint.SLUGS, "ast!", "eo~", "hi-", "sc!", "yue!")
-                .commit();
+        return cmp == 0 ? (aLen == bLen ? 0 : (aLen < bLen ? -1 : 1)) : (cmp < 0 ? -1 : 1);
     }
 
     private static int getStartOfLanguageRange(@NonNull final AppLocale[] appLocales,
@@ -340,33 +162,42 @@ public final class Languages {
         return j;
     }
 
-    @SuppressWarnings("NoWhitespaceAfter")
-    private static final char[] SCRIPT_HINTS = new char[] { '+', '-', '~', '!' };
-    private static final int SCRIPT_SIGNIFICANT = 0, SCRIPT_INSIGNIFICANT = 1,
-            STANDALONE = 2, NOT_PRESENT = 3;
-
     private static boolean isStopChar(final char c) {
-        return isStopChar(c, false);
-    }
-
-    private static boolean isStopChar(final char c, final boolean forMatching) {
         for (int i = 0; i < SCRIPT_HINTS.length; i++) {
             if (c == SCRIPT_HINTS[i]) return true;
         }
-        return !forMatching && (c == CacheHint.SLOT.charAt(CacheHint.SLOT.length() - 1)
-                || c == CacheHint.SLUGS.charAt(CacheHint.SLUGS.length() - 1));
+        return false;
+    }
+
+    public static void updateCacheHint(@NonNull final Context context, final SharedPreferences atStartTime) {
+        final String cacheHintKey = "scripts-hint";
+        String cached = atStartTime == null ? null : atStartTime.getString(cacheHintKey, null);
+        String prefix = Build.VERSION.SDK_INT + "=";
+        if (cached != null && cached.startsWith(prefix)) {
+            LOCALE_SCRIPTS[CACHE] = cached.substring(prefix.length());
+        } else {
+            processAppLocales(context, null, false, true);
+            cached = LOCALE_SCRIPTS[CACHE];
+            if (atStartTime != null && cached != null && !cached.isEmpty()) {
+                atStartTime.edit().putString(cacheHintKey, prefix + cached).apply();
+            }
+        }
     }
 
     private static void requireAppLocales(@NonNull final Context activity) {
-        if (appLocales != null) return;
+        if (LOCALE_SCRIPTS[CACHE] == null || LOCALE_SCRIPTS[CACHE].isEmpty()) {
+            processAppLocales(activity, null, false, true);
+        }
 
-        appLocales = computeAppLocales(activity, true, true);
+        if (appLocales == null) {
+            AppLocale[] list = fetchAppLocales(activity);
+            processAppLocales(activity, list, true, true);
+            appLocales = list;
+        }
     }
 
-    private static AppLocale[] computeAppLocales(@NonNull final Context activity,
-                                                 final boolean useCache, final boolean resolve) {
+    private static AppLocale[] fetchAppLocales(@NonNull final Context activity) {
         AppLocale[] appLocales = null;
-        Locale[] sysLocales = null;
 
         if (Build.VERSION.SDK_INT >= 33) {
             LocaleConfig localeConfig = new LocaleConfig(activity);
@@ -384,13 +215,24 @@ public final class Languages {
         }
 
         Arrays.sort(appLocales);
+        return appLocales;
+    }
 
-        StringBuilder sb = null;
+    private static void processAppLocales(@NonNull final Context activity, @NonNull AppLocale[] appLocales,
+                                          final boolean useCache, final boolean resolve) {
+        boolean dryRun = appLocales == null;
+        boolean genericHints = dryRun;
+        int fallbackOp = SCRIPT_INSIGNIFICANT;
+        Locale[] sysLocales = dryRun ? Locale.getAvailableLocales() : null;
+        int[] cachePos = null, defaultOp = null;
+        StringBuilder sb = dryRun ? new StringBuilder().append(SCRIPT_HINTS[fallbackOp]) : null;
         int i = 0, j = -1, k = -1, langLocales = 0, langScripts = 0;
         String script = "";
-        while (i < appLocales.length) {
-            String appLang = remapLegacyCode(appLocales[i].getLanguage());
-            j = getEndOfLanguageRange(appLocales, appLang, i, true);
+        int end = dryRun ? sysLocales.length : appLocales.length;
+        while (i < end) {
+            String appLang = remapLegacyCode(dryRun ? sysLocales[i].getLanguage()
+                    : appLocales[i].getLanguage());
+            j = dryRun ? i : getEndOfLanguageRange(appLocales, appLang, i, true);
             if (j > i + 1) {
                 for (int m = i; m < j; m++) {
                     AppLocale checkLocale = appLocales[m];
@@ -418,30 +260,72 @@ public final class Languages {
 
             boolean handled = false;
             if (useCache && LOCALE_SCRIPTS != null && LOCALE_SCRIPTS.length > 0) {
-                int[] cachePos = new int[LOCALE_SCRIPTS.length];
+                if (cachePos == null) {
+                    cachePos = new int[LOCALE_SCRIPTS.length];
+                    Arrays.fill(cachePos, -1);
+                }
+                if (defaultOp == null) {
+                    defaultOp = new int[LOCALE_SCRIPTS.length];
+                    Arrays.fill(defaultOp, -1);
+                }
                 for (int c = 0; c < LOCALE_SCRIPTS.length; c++) {
                     String cache = LOCALE_SCRIPTS[c];
                     if (cache == null || cache.isEmpty()) continue;
-                    int pos = cache.indexOf(appLang, cachePos[c]);
-                    int len = appLang.length();
-                    if (pos != -1 && cache.length() > pos + len
-                            && (pos == cachePos[c] || isStopChar(cache.charAt(pos - 1)))) {
-                        char op = cache.charAt(pos + len);
-                        if (isStopChar(op, true)) {
-                            for (int l = i; l < j; l++) {
-                                AppLocale appLocale = appLocales[l];
-                                appLocale.flags |= MATCHSYS_CACHED;
-                                if (op == SCRIPT_HINTS[SCRIPT_SIGNIFICANT]) {
-                                    appLocale.flags |= MATCHSYS_SCRIPT;
-                                } else if (op == SCRIPT_HINTS[STANDALONE]
-                                        && (appLocale.flags & COUNTRY) == 0) {
-                                    appLocale.flags |= DISCOUNT_COUNTRY;
-                                }
-                            }
-                            cachePos[c] = pos + len + 1;
-                            handled = true;
-                            break;
+                    if (cachePos[c] < 0) {
+                        int headerLen = 0;
+                        for (int a = 0; a < cache.length(); a++) {
+                            char op = cache.charAt(a);
+                            if (isStopChar(op)) headerLen++;
+                            else break;
                         }
+                        if (headerLen > 0) {
+                            int cmp = searchSortedChars(SCRIPT_HINTS, cache.charAt(headerLen - 1));
+                            defaultOp[c] = cmp >= 0 ? cmp : SCRIPT_INSIGNIFICANT;
+                        }
+                        cachePos[c] = headerLen;
+                    }
+                    int pos = cachePos[c];
+
+                    int len = appLang.length();
+                    int cmp = -1, opPos = -1;
+                    do {
+                        int start = -1, segLen = 0;
+                        for (int p = pos; p < cache.length(); p++) {
+                            boolean stopChar = isStopChar(cache.charAt(p));
+                            if (start < 0) {
+                                if (!stopChar) {
+                                    start = pos;
+                                    segLen++;
+                                }
+                            } else {
+                                if (!stopChar) segLen++;
+                                else break;
+                            }
+                        }
+                        cmp = compareStringSegments(appLang, 0, len, cache, start, segLen);
+                        if (cmp > 0) pos = start + segLen + 1;
+                    } while (cmp > 0 && pos < cache.length());
+
+                    if (cmp == 0 && cache.length() > pos + len) {
+                        opPos = pos + len;
+                    }
+                    cachePos[c] = pos;
+                    boolean validOp = opPos >= 0 && isStopChar(cache.charAt(opPos));
+                    if (validOp || defaultOp[c] != -1) {
+                        char op = validOp ? cache.charAt(opPos) : SCRIPT_HINTS[defaultOp[c]];
+                        for (int l = i; l < j; l++) {
+                            AppLocale appLocale = appLocales[l];
+                            appLocale.flags |= MATCHSYS_CACHED;
+                            if (op == SCRIPT_HINTS[SCRIPT_SIGNIFICANT]) {
+                                appLocale.flags |= MATCHSYS_SCRIPT;
+                            } else if (op == SCRIPT_HINTS[STANDALONE]
+                                    && (appLocale.flags & COUNTRY) == 0) {
+                                appLocale.flags |= DISCOUNT_COUNTRY;
+                            }
+                        }
+                        if (validOp) cachePos[c] = opPos + 1;
+                        handled = true;
+                        break;
                     }
                 }
             }
@@ -492,9 +376,13 @@ public final class Languages {
                         }
                     }
                     if (!appLang.isEmpty()) {
-                        sb.append(appLang);
-                        sb.append(SCRIPT_HINTS[langLocales == 1 ? STANDALONE
-                                : (langScripts > 0 ? SCRIPT_SIGNIFICANT : SCRIPT_INSIGNIFICANT)]);
+                        int op = langLocales == 1 ? STANDALONE
+                                : (langScripts > 1 ? SCRIPT_SIGNIFICANT
+                                : (langScripts == 1 ? SCRIPT_SINGLE : SCRIPT_INSIGNIFICANT));
+                        if (!genericHints || op != fallbackOp) {
+                            sb.append(appLang);
+                            sb.append(SCRIPT_HINTS[op]);
+                        }
                     }
                     script = "";
                     langLocales = 0;
@@ -507,13 +395,12 @@ public final class Languages {
                 }
             }
 
-            i = j;
+            i = dryRun ? k + 1 : j;
         }
         if (sb != null && sb.length() > 0) {
-            LOCALE_SCRIPTS[RESOLVED] = sb.toString();
+            if (dryRun) LOCALE_SCRIPTS[CACHE] = sb.toString();
+            else LOCALE_SCRIPTS[RESOLVED] = sb.toString();
         }
-
-        return appLocales;
     }
 
     /**
@@ -775,6 +662,14 @@ public final class Languages {
         int i = -1, cmp = -1;
         do {
             cmp = needle.compareTo(haystack[++i]);
+        } while (cmp > 0 && i < haystack.length - 1);
+        return cmp == 0 ? i : -1;
+    }
+
+    private static int searchSortedChars(final char[] haystack, final char needle) {
+        int i = -1, cmp = -1;
+        do {
+            cmp = Character.compare(needle, haystack[++i]);
         } while (cmp > 0 && i < haystack.length - 1);
         return cmp == 0 ? i : -1;
     }
