@@ -176,7 +176,7 @@ public final class Languages {
         if (cached != null && cached.startsWith(prefix)) {
             LOCALE_SCRIPTS[CACHE] = cached.substring(prefix.length());
         } else {
-            processAppLocales(context, null, false, true);
+            processAppLocales(null, false, true);
             cached = LOCALE_SCRIPTS[CACHE];
             if (atStartTime != null && cached != null && !cached.isEmpty()) {
                 atStartTime.edit().putString(cacheHintKey, prefix + cached).apply();
@@ -186,12 +186,12 @@ public final class Languages {
 
     private static void requireAppLocales(@NonNull final Context activity) {
         if (LOCALE_SCRIPTS[CACHE] == null || LOCALE_SCRIPTS[CACHE].isEmpty()) {
-            processAppLocales(activity, null, false, true);
+            processAppLocales(null, false, true);
         }
 
         if (appLocales == null) {
             AppLocale[] list = fetchAppLocales(activity);
-            processAppLocales(activity, list, true, true);
+            processAppLocales(list, true, true);
             appLocales = list;
         }
     }
@@ -218,7 +218,7 @@ public final class Languages {
         return appLocales;
     }
 
-    private static void processAppLocales(@NonNull final Context activity, @NonNull AppLocale[] appLocales,
+    private static void processAppLocales(@NonNull AppLocale[] appLocales,
                                           final boolean useCache, final boolean resolve) {
         boolean dryRun = appLocales == null;
         boolean genericHints = dryRun;
@@ -944,7 +944,7 @@ public final class Languages {
     public static void debugLangScripts(@NonNull final Context context) {
         LOCALE_SCRIPTS[RESOLVED] = null;
         AppLocale[] appLocalesResolved = fetchAppLocales(context);
-        processAppLocales(context, appLocalesResolved, false, true);
+        processAppLocales(appLocalesResolved, false, true);
         final android.widget.TextView textView = new android.widget.TextView(context);
 
         StringBuilder sb = new StringBuilder(appLocalesResolved.length * (20 + 6 + 11 + 11 + 11 + 5));
