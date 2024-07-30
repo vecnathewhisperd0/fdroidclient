@@ -1,7 +1,5 @@
 package org.fdroid.database
 
-import android.content.res.Resources
-import androidx.core.os.ConfigurationCompat.getLocales
 import androidx.core.os.LocaleListCompat
 import kotlinx.serialization.SerializationException
 import org.fdroid.CompatibilityChecker
@@ -23,7 +21,7 @@ internal class DbV2StreamReceiver(
     private val compatibilityChecker: CompatibilityChecker,
 ) : IndexV2StreamReceiver {
 
-    private val locales: LocaleListCompat = getLocales(Resources.getSystem().configuration)
+    private val locales: LocaleListCompat = LocaleListCompat.getDefault()
     private var clearedRepoData = false
     private val nonNullFileV2: (FileV2?) -> Unit = { fileV2 ->
         if (fileV2 != null) {
@@ -36,10 +34,10 @@ internal class DbV2StreamReceiver(
     }
 
     @Synchronized
-    override fun receive(repo: RepoV2, version: Long, certificate: String) {
+    override fun receive(repo: RepoV2, version: Long) {
         repo.walkFiles(nonNullFileV2)
         clearRepoDataIfNeeded()
-        db.getRepositoryDao().update(repoId, repo, version, TWO, certificate)
+        db.getRepositoryDao().update(repoId, repo, version, TWO)
     }
 
     @Synchronized

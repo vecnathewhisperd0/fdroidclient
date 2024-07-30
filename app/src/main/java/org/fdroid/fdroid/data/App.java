@@ -5,7 +5,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
-import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -19,7 +18,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.pm.PackageInfoCompat;
-import androidx.core.os.ConfigurationCompat;
 import androidx.core.os.LocaleListCompat;
 
 import com.bumptech.glide.Glide;
@@ -75,7 +73,13 @@ public class App implements Comparable<App>, Parcelable {
     public static LocaleListCompat getLocales() {
         LocaleListCompat cached = systemLocaleList;
         if (cached == null) {
-            cached = ConfigurationCompat.getLocales(Resources.getSystem().getConfiguration());
+            // Tries to get the device locales list set by the user in system settings.
+            // The official docs are less than apparent in this regard, but empirically,
+            // `ConfigurationCompat.getLocales(Resources.getSystem().getConfiguration())`
+            // seems to push back languages marked "May not be available in some apps"
+            // in Settings UI while `LocaleListCompat.getDefault()` appears to preserve
+            // the user-preferred order so we prefer the latter here
+            cached = LocaleListCompat.getDefault();
             systemLocaleList = cached;
         }
         return cached;
@@ -363,15 +367,7 @@ public class App implements Comparable<App>, Parcelable {
         if (repo == null || file == null) { // This is also used for apps that do not have a repo
             return Glide.with(context).load(R.drawable.ic_repo_app_default);
         }
-        String address = Utils.getRepoAddress(repo);
-        if (address.startsWith("content://")) {
-            String sb = Utils.getUri(address, file.getName().split("/")).toString();
-            return Glide.with(context).load(sb);
-        } else if (address.startsWith("file://")) {
-            return Glide.with(context).load(file);
-        } else {
-            return Glide.with(context).load(Utils.getDownloadRequest(repo, file));
-        }
+        return Glide.with(context).load(Utils.getGlideModel(repo, file));
     }
 
     public static RequestBuilder<Bitmap> loadBitmapWithGlide(Context context, long repoId,
@@ -381,16 +377,7 @@ public class App implements Comparable<App>, Parcelable {
             Log.e(TAG, "Repo not found: " + repoId);
             return Glide.with(context).asBitmap().load(R.drawable.ic_repo_app_default);
         }
-        String address = Utils.getRepoAddress(repo);
-        if (address.startsWith("content://")) {
-            String sb = file == null ?
-                    null : Utils.getUri(address, file.getName().split("/")).toString();
-            return Glide.with(context).asBitmap().load(sb);
-        } else if (address.startsWith("file://")) {
-            return Glide.with(context).asBitmap().load(file.getName());
-        } else {
-            return Glide.with(context).asBitmap().load(Utils.getDownloadRequest(repo, file));
-        }
+        return Glide.with(context).asBitmap().load(Utils.getGlideModel(repo, file));
     }
 
     /**
@@ -552,6 +539,7 @@ public class App implements Comparable<App>, Parcelable {
             }
         }
         // use the first of the list, before we don't choose anything
+        // TODO does this still make sense? Maybe better to not suggest anything in this case?
         if (apk == null && apks.size() > 0) {
             apk = apks.get(0);
         }

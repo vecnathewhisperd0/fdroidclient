@@ -4,7 +4,6 @@
     <string name="installIncompatible">Приложението не е съвместимо с вашето устройство. Да бъде ли направен опит за инсталиране въпреки това\?</string>
     <string name="version">Издание</string>
     <string name="delete">Изтриване</string>
-    <string name="enable_nfc_send">По КБП…</string>
     <string name="cache_downloaded">Кеширане на приложенията</string>
     <string name="updates">Обновяване</string>
     <string name="other">Друго</string>
@@ -54,7 +53,7 @@
     <string name="antiadslist">Приложението съдържа реклами</string>
     <string name="antitracklist">Приложението следи и докладва действията ви</string>
     <string name="antinonfreeadlist">Приложението насърчава използване на добавки със затворен код</string>
-    <string name="antinonfreenetlist">Приложението насърчава или изцяло зависи от несвободна мрежова услуга</string>
+    <string name="antinonfreenetlist">Приложението насърчава или изцяло зависи от непроменяема или несвободна мрежова услуга</string>
     <string name="antinonfreedeplist">Приложението зависи от приложения със затворен код</string>
     <string name="antiupstreamnonfreelist">Изходният код не е напълно свободен</string>
     <string name="display">Изглед</string>
@@ -82,7 +81,7 @@
 \n%1$s</string>
     <string name="status_connecting_to_repo">Свързване към
 \n%1$s</string>
-    <string name="repos_unchanged">Всички хранилищата са актуални</string>
+    <string name="repos_unchanged">Всички хранилищата са обновени</string>
     <string name="global_error_updating_repos">Грешка при обновяване: %s</string>
     <string name="no_permissions">Няма разрешения</string>
     <string name="no_handler_app">Никое инсталирано приложение не може да обработи %s.</string>
@@ -112,7 +111,6 @@
     <string name="category_Science_Education">Наука и образование</string>
     <string name="category_Security">Сигурност</string>
     <string name="category_System">Системни</string>
-    <string name="swap_nfc_description">Ако човекът с вас разполага с F-Droid и е включил NFC, докоснете телефоните си.</string>
     <string name="swap_join_same_wifi">Свържете се към една и съща безжична мрежа с приятеля си</string>
     <string name="swap">Разменяне</string>
     <string name="swap_view_available_networks">(Натиснете за преглед на наличните мрежи)</string>
@@ -185,7 +183,6 @@
     <string name="swap_nearby">Размяна с у-ва наблизо</string>
     <string name="local_repo_running">F-Droid e в готовност за размяна</string>
     <string name="touch_to_configure_local_repo">Натиснете за детайли или да позволите размяна на приложение.</string>
-    <string name="swap_nfc_title">Докоснете за размяна</string>
     <string name="swap_success">Размяната е успешна!</string>
     <string name="swap_switch_to_wifi">Натиснете за смяна на безжичната мрежа</string>
     <string name="swap_dont_show_again">Без повторно показване</string>
@@ -227,7 +224,6 @@
     <string name="about_license">Лиценз</string>
     <string name="enable">Включване</string>
     <string name="overwrite">Презаписване</string>
-    <string name="repo_provider">Хранилище: %s</string>
     <string name="menu_email">Изпращане на писмо до автора</string>
     <string name="antinonfreeassetslist">Приложението съдържа ресурси със затворен код</string>
     <string name="writing_index_jar">Записва се засекретеният индекс файл (index.jar)…</string>
@@ -270,8 +266,8 @@
     <string name="updates__hide_updateable_apps">Скриване на приложения</string>
     <string name="updates__show_updateable_apps">Показване на приложения</string>
     <plurals name="updates__download_updates_for_apps">
-        <item quantity="one">Изтегляне на издание на %1$d приложение.</item>
-        <item quantity="other">Изтегляне на издания на %1$d приложения.</item>
+        <item quantity="one">Изтегляне на издание на %1$d приложение:</item>
+        <item quantity="other">Изтегляне на издания на %1$d приложения:</item>
     </plurals>
     <string name="versions">Издания</string>
     <string name="clear_search">Изчистване на търсенето</string>
@@ -348,14 +344,14 @@
     <string name="notification_action_update">Обновяване</string>
     <string name="notification_action_cancel">Отказ</string>
     <string name="notification_action_install">Инсталиране</string>
-    <string name="warning_no_internet">Невъзможна актуализация. Проверете връзката към интернет\?</string>
+    <string name="warning_no_internet">Грешка при обновяване, има връзка с интернет?</string>
     <string name="notification_title_single_update_available">Налично издание</string>
     <string name="notification_title_summary_install_error">Неуспешна инсталация</string>
     <plurals name="button_view_all_apps_in_category">
         <item quantity="one">Преглед на %d</item>
         <item quantity="other">Всички %d</item>
     </plurals>
-    <string name="nearby_splash__download_apps_from_people_nearby">Нямате връзка с интернет\? Вземете приложения от хората около вас!</string>
+    <string name="nearby_splash__download_apps_from_people_nearby">Има ли връзка с интернет? Вземете приложения от хората около вас!</string>
     <string name="nearby_splash__find_people_button">Откриване на хора наблизо</string>
     <string name="download_pending">Изчаква се изтеглянето да започне…</string>
     <string name="install_error_notify_title">Грешка при инсталиране на %s</string>
@@ -472,7 +468,6 @@
     <string name="antinosourcesince">Изходният код не е наличен вече, не е възможно обновяване.</string>
     <string name="antidisabledalgorithmlist">Приложението има слаба защита на подписа</string>
     <string name="menu_select_for_wipe">Избери за изчистване</string>
-    <string name="app_repository">Хранилище: %1$s</string>
     <string name="about_forum">Форум за поддръжка</string>
     <string name="scan_removable_storage_summary">Търсят се хранилища върху външните носители като SD Card или USB</string>
     <string name="scan_removable_storage_toast">Сканиране на %s…</string>
@@ -481,7 +476,7 @@
     <string name="repo_delete_to_overwrite">Изтрийте първо %1$s за да добавите това хранилище с различен ключ.</string>
     <string name="repo_exists_and_enabled">Хранилището %1$s е вече добавено и включено.</string>
     <string name="repo_exists_enable">Хранилището %1$s е вече добавено, потвърдете че искате да го включите отново.</string>
-    <string name="repo_exists_add_fingerprint">%1$s е вече настроено, това ще добави нова иформация за ключа.</string>
+    <string name="repo_exists_add_fingerprint">%1$s е вече настроено, това ще добави нова информация за ключа.</string>
     <string name="swap_toast_closing_nearby_after_timeout">Наоколо се изключва поради бездействие.</string>
     <string name="not_visible_nearby">Наблизо не е включено</string>
     <string name="hiding_dialog_message">Сигурни ли сте, че искате да премахнете %1$s от стартовия панел\? Само въвеждането на „%2$d“ във фалшивото приложение %3$s може да го възстанови.</string>
@@ -507,7 +502,7 @@
     <string name="use_pure_black_dark_theme_summary">Препоръчително само за екрани с OLED.</string>
     <string name="use_pure_black_dark_theme">Тъмната тема ползва чисто черен фон</string>
     <string name="banner_no_data_or_wifi">Мобилните данни и W-iFi са изключени</string>
-    <string name="banner_no_internet">Няма достъп до интернет</string>
+    <string name="banner_no_internet">Няма връзка с интернет</string>
     <string name="share_apk_error">Грешка при споделяне на файл на приложение</string>
     <string name="apps">Приложения</string>
     <string name="swap_wifi_vpn_conflict">Конфликт с текущия VPN!</string>
@@ -545,7 +540,7 @@
     <string name="repo_state_fetching">Зареждане на хранилище…</string>
     <string name="repo_state_adding">Добавяне на хранилище…</string>
     <string name="repo_enter_url">Ръчно въведете адреса на хранилището</string>
-    <string name="repo_exists">Това хранилище вече е добавено.</string>
+    <string name="repo_exists">Това хранилище е вече добавено.</string>
     <string name="repo_invalid">Неприемливо хранилище.
 \n
 \nСвържете се с поддръжката му и съобщете за грешката.</string>
@@ -555,7 +550,7 @@
     <string name="swap_connection_indexv0_error">Опитвате се да се свържете с устройство с по-ранно издание на F-Droid. Преди да можете да осъществите връзка приложението трябва да бъде обновено. Можете да изпратите последното издание от вашето устройство.</string>
     <string name="copied_to_clipboard">Копирано</string>
     <string name="force_old_installer_title">Използване на стария инсталатор принудително</string>
-    <string name="force_old_installer_summary">Изключва инсталатора на сесии (бета), включително автоматичното обновяване във фонов режим.</string>
+    <string name="force_old_installer_summary">Изключва инсталатора на сесии, включително автоматичното обновяване във фонов режим.</string>
     <string name="copied_permission_to_clipboard">Името на разрешението е копирано</string>
     <string name="copied_url_to_clipboard">Адресът е копиран</string>
     <string name="targetsdk_or_later">цел %s</string>
@@ -573,4 +568,33 @@
         <item quantity="one">Изтегляне на приложения от крайни точки на IPFS: %1$d включено</item>
         <item quantity="other">Изтегляне на приложения от крайни точки на IPFS: %1$d включени</item>
     </plurals>
+    <string name="repo_share_not_found">В споделения текст не е намерен адрес на хранилище.</string>
+    <string name="useDnsCache">Използване на временна памет за DNS</string>
+    <string name="useDnsCacheSummary">Преизползват се резултати с цел намаляване заявките към DNS.</string>
+    <string name="app_details_repository">Хранилище</string>
+    <string name="app_details_repositories">Хранилища</string>
+    <string name="app_details_repository_expand">Разгъване на списъка с хранилища</string>
+    <string name="app_list_no_suggested_version">Няма препоръчано издание.</string>
+    <string name="repo_archive_failed">Архивно хранилище в момента липсва</string>
+    <string name="repositories_last_update">Последно обновяване: %s</string>
+    <string name="repositories_last_update_never">никога</string>
+    <string name="repo_list_info_title">Списък с хранилища</string>
+    <string name="repo_archive_toggle">Архив на хранилище</string>
+    <string name="repo_archive_toggle_description">Показва архивни приложения и остарели издания на приложенията</string>
+    <string name="repo_disable_warning_button">Изключване</string>
+    <string name="app_details_repository_preferred">(предпочитано)</string>
+    <string name="app_details_repository_button_prefer">Предпочитане на хранилището</string>
+    <string name="repo_list_info_text">Хранилището е източник на приложения. Този списък показва всички добавени за момента хранилища. Изключените хранилища не се използват.
+\n
+\nАко едно приложение е налично в повече от едно хранилище, се използва хранилището, което е по-горе в списъка. Можете да подреждате хранилищата, с дълго задържане и влачене.</string>
+    <string name="repo_error_adding_archive">Архив на хранилище не може да бъде добавен директно. Докоснете хранилище в списъка и го направете архивно.</string>
+    <string name="repo_disable_warning">Изключване на това хранилище ще премахне състоянието „предпочитано“ от всички приложения.</string>
+    <string name="repo_add_repo_and_mirror">Добавяне на хранилище или огледало</string>
+    <string name="repo_view_repo">Преглед</string>
+    <string name="repo_scan_qr_code">Сканиране на код за QR</string>
+    <string name="repo_preview_included_apps">Налични приложения:</string>
+    <string name="repo_mirror_exists">Това огледало е вече добавено (%s).</string>
+    <string name="repo_and_mirror_add_both_info">Адресът, който добавяте (%s) е огледало на ново хранилище. И хранилището, и огледалото ще бъдат добавени.</string>
+    <string name="repo_mirror_add_info">Адресът, който добавяте (%s) е огледало на съществуващо хранилище.</string>
+    <string name="warning_no_compat_versions">В избраното хранилище няма съвместими издания на приложението. За да получавате обновявания изберете хранилище със съвместими издания.</string>
 </resources>

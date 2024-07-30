@@ -1,15 +1,13 @@
-* Handhabung von Repos und Spiegeln überarbeitet, UX und Code
+* Repository-Darstellung für Benutzer überarbeitet, um zu verdeutlichen, wenn eine Installation nicht von f-droid.org kommt
 
-* Vorschau auf neue Repos
+* Benutzer können die Repository-Priorität global und pro App ändern
 
-* Installation mit F-Droid (Basic) unterstützt nun automat. Hintergrundupdates
+* Eigene Anti-Features sind nun standardmäßig aktiviert, anstatt deaktiviert
 
-* Unter Android 14 werden Apps mit nicht unterstützter Ziel-SDK als inkompatibel markiert #2692
+* Empfang von Repository-URLs über Teilen
 
-* Langer Klick zum Kopieren von Links, Berechtigungen usw. in der App-Info (@Tobias_Groza)
+* Alle Aktivitäten berücksichtigen das Tag/Nacht-Design
 
-* Inkompatible Apps werden nur angezeigt, wenn in den Einstellungen erlaubt #41 (@pigpig)
+* Nutzung von ext. Speicher aktualisiert, wegen targetSdkVersion 29
 
-* Neue IPFS-Gateways-Einstellungen
-
-* Sprachauswahl pro App (@Licaon-Kter)
+* F-Droid Basic aktualisiert, wegen targetSdkVersion 34

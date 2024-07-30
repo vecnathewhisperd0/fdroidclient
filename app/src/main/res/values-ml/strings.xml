@@ -73,7 +73,6 @@
     <string name="version">പതിപ്പ്</string>
     <string name="by_author_format">%s എഴുതിയത്</string>
     <string name="delete">ഇല്ലാതാക്കുക</string>
-    <string name="enable_nfc_send">എന്‍എഫ്സി അയക്കല്‍ സജ്ജമാക്കുക…</string>
     <string name="cache_downloaded">കാഷെ ചെയ്ത പ്രയോഗങ്ങൾ സൂക്ഷിക്കുക</string>
     <string name="unstable_updates">അസ്ഥിരമായ പുതുക്കലുകള്‍</string>
     <string name="unstable_updates_summary">അസ്ഥിരമായ പതിപ്പിലേക്കുള്ള പുതുക്കലുകള്‍ നിര്‍ദ്ദേശിക്കുക</string>
@@ -141,7 +140,6 @@
     <string name="bad_fingerprint">തെറ്റായ വിരലടയാളം</string>
     <string name="invalid_url">ഇത് ഒരു സാധുവായ URL അല്ല.</string>
     <string name="malformed_repo_uri">തെറ്റായ രൂപത്തിലുള്ള URI അവഗണിക്കുന്നു: %s</string>
-    <string name="repo_provider">സംഭരണി: %s</string>
     <string name="repositories_summary">പ്രയോഗങ്ങള്‍ക്ക് കൂടുതൽ ഉറവിടങ്ങൾ ചേർക്കുക</string>
     <string name="menu_ignore_all">എല്ലാ പുതുക്കലുകളും അവഗണിക്കുക</string>
     <string name="menu_ignore_this">ഈ പുതുക്കല്‍ അവഗണിക്കുക</string>
@@ -242,7 +240,6 @@
     <string name="nearby_splash__download_apps_from_people_nearby">ഇന്റർനെറ്റ് ഇല്ലേ? നിങ്ങളുടെ അടുത്തുള്ള ആളുകളിൽ നിന്ന് പ്രയോഗങ്ങള്‍ സ്വീകരിക്കൂ!</string>
     <string name="nearby_splash__find_people_button">സമീപത്തുള്ളവരെ കണ്ടെത്തുക</string>
     <string name="nearby_splash__both_parties_need_fdroid">നിയര്‍ബെെ ഉപയോഗിക്കാന്‍ രണ്ട് കൂട്ടരും %1$s ഉപയോഗിക്കേണ്ടതുണ്ട്.</string>
-    <string name="swap_nfc_title">കെെമാറ്റം ചെയ്യാന്‍ തൊടുക</string>
     <string name="swap_join_same_wifi">നിങ്ങളുടെ സുഹൃത്തിന്റെ അതേ വൈ-ഫൈ യില്‍ ചേരുക</string>
     <string name="swap_join_this_hotspot">നിങ്ങളുടെ ഹോട്ട്സ്പോട്ടില്‍ ചേരാൻ സുഹൃത്തിനെ സഹായിക്കുക</string>
     <string name="swap">ആപ്പ്  കെെമാറ്റം ചെയ്യുക</string>
@@ -349,7 +346,6 @@
     <string name="status_inserting_apps">പ്രയോഗ വിവരങ്ങള്‍ സൂക്ഷിക്കുന്നു</string>
     <string name="theme_light">ഇളം നിറം</string>
     <string name="theme_dark">ഇരുണ്ട നിറം</string>
-    <string name="swap_nfc_description">നിങ്ങളുടെ സുഹൃത്തിന് എഫ്-ഡ്രോയ്ഡ് ഉണ്ടെങ്കിൽ, നിങ്ങളുടെ രണ്ട് ഉപകരണങ്ങളിലും NFC ഒന്നിച്ചു സജ്ജമാക്കുകയാണെങ്കില്‍.</string>
     <string name="swap_join_same_wifi_desc">വൈ-ഫൈ ഉപയോഗിച്ച് കെെമാറ്റം ചെയ്യാൻ, നിങ്ങൾ ഒരേ നെറ്റ്വർക്കിൽ ആണെന്ന് ഉറപ്പാക്കുക. നിങ്ങൾക്ക് ഒരേ നെറ്റ്വർക്കിലേക്ക് പ്രവേശനം ഇല്ലെങ്കിൽ, നിങ്ങളിൽ ഒരാള്‍ക്ക് വൈഫൈ ഹോട്ട്സ്പോട്ട് സൃഷ്ടിക്കാം.</string>
     <string name="swap_confirm_connect">നിങ്ങൾക്ക് ഇപ്പോൾ %1$s ൽ  നിന്ന് പ്രയോഗങ്ങള്‍ സ്വീകരിക്കണോ?</string>
     <string name="swap_scan_or_type_url">ഒരാൾ കോഡ് സ്കാൻ ചെയ്യുകയോ മറ്റേയാളുടെ യുആര്‍എല്‍ ബ്രൗസറിൽ ടൈപ്പുചെയ്യുകയോ വേണം.</string>
@@ -455,7 +451,6 @@
     <string name="about_forum">സഹായ ഫോറം</string>
     <string name="app_suggested">നിർദേശിക്കപ്പെട്ടതു</string>
     <string name="app_size">വലിപ്പം: %1$s</string>
-    <string name="app_repository">ശേഖരണം : %1$s</string>
     <string name="scan_removable_storage_title">ബാഹ്യമായ സ്റ്റോറേജിൽ സൂക്ഷ്മപരിശോധന നടത്തുക</string>
     <string name="scan_removable_storage_summary">ആപ്പ് ശേഖരണ വിവരം ബാഹ്യമായ എസ.ഡി കാർഡിലോ യു.എസ്‌.ബി ഡ്രൈവുകളിലോ തിരയുക</string>
     <string name="nearby_splash__read_external_storage">ആപ്പ് സംഭരണ വിവരവും പകര-സർവർ വിവരവും  എസ്‌.ഡി കാർഡിൽ തിരയുക.</string>
@@ -541,4 +536,21 @@
     <string name="latest__empty_state__upgrading">ഡാറ്റാബേസ് നവീകരിക്കുന്നു…</string>
     <string name="repo_num_apps_button">ആപ്പുകൾ കാണിക്കുക</string>
     <string name="swap_banner_message">ആപ്പുകൾ സ്വാപ്പ് ചെയ്യാൻ, നിങ്ങളുടെ വൈഫൈ ആരംഭിച്ച് നിങ്ങളുടെ സുഹൃത്തിന്റെ അതേ നെറ്റ്‌വർക്കിലേക്ക് കണക്റ്റുചെയ്യുക.</string>
+    <string name="app_details_repositories">സംഭരണികള്‍</string>
+    <string name="repo_intro">ആപ്പുകളുടെ ഒരു അധിക ഉറവിടമാണ് ഒരു ശേഖരം. നിങ്ങൾ ഇവിടെ ചേർക്കുന്ന മൂന്നാം കക്ഷികൾക്ക് F-Droid തന്നെ നിർമ്മിച്ച ആപ്പുകൾ നൽകുന്നതിനേക്കാൾ വ്യത്യസ്തമായ മാനദണ്ഡങ്ങളുണ്ട്.
+\n
+\nനിങ്ങൾ ചേർക്കുന്ന ശേഖരം വിശ്വസനീയമാണെന്ന് ഉറപ്പാക്കുക.</string>
+    <string name="app_details_repository">സംഭരണിയാണ്</string>
+    <string name="app_details_repository_preferred">(ഇഷ്ടമുള്ളത്)</string>
+    <string name="app_details_repository_button_prefer">ശേഖരണത്തിന് മുൻഗണന നൽകുക</string>
+    <string name="app_details_repository_expand">റിപ്പോസിറ്ററി ലിസ്റ്റ് വികസിപ്പിക്കുക</string>
+    <string name="app_list_no_suggested_version">ഇൻസ്റ്റാളേഷനായി ഒരു പതിപ്പും ശുപാർശ ചെയ്തിട്ടില്ല.</string>
+    <string name="repo_state_fetching">ശേഖരം ലഭ്യമാക്കുന്നു…</string>
+    <string name="repo_state_adding">ശേഖരം ചേർക്കുന്നു…</string>
+    <string name="repo_enter_url">റിപ്പോസിറ്ററി URL സ്വമേധയാ നൽകുക</string>
+    <string name="repo_io_error">റിപ്പോസിറ്ററിയിലേക്ക് ബന്ധിപ്പിക്കുന്നതിൽ പിശക്.</string>
+    <string name="repo_add_new_mirror">പുതിയ പ്രതിഫലനം ചേർക്കുക</string>
+    <string name="repo_invalid">അസാധുവായ ശേഖരം.
+\n
+\nപരിപാലകനെ ബന്ധപ്പെടുകയും പ്രശ്നത്തെക്കുറിച്ച് അവരെ അറിയിക്കുകയും ചെയ്യുക.</string>
 </resources>

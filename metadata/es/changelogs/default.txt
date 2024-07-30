@@ -1,15 +1,13 @@
-* Revisar el repositorio y el manejo de réplicas, tanto UX como código
+* Revisar cómo se representan los repositorios para dejar claro cuando una instalación es otro lugar que no sea f-droid.org.
 
-* Mostrar vista previa de nuevos repos
+* Permitir a los usuarios cambiar la prioridad del repositorio globalmente y por aplicación
 
-* La instalación con F-Droid y F-Droid Basic ahora admite actualizaciones automáticas en segundo plano
+* Anti-Características personalizadas están ahora habilitadas por defecto, en lugar de deshabilitadas
 
-* En Android 14, marcar las aplicaciones con la versión SDK de destino no compatible como incompatible #2692
+* Soporte para recibir URLs de repositorio a través de
 
-* Pulsación larga para copiar enlaces, permisos y versiones en la pantalla detalles de la app (@Tobias_Groza)
+* Todas las actividades respetan el tema día/noche
 
-* Las aplicaciones incompatibles sólo se muestran cuando están permitidas en Ajustes #41 (@pigpig)
+* Actualizar los usos de almacenamiento externo para trabajar con targetSdkVersion 29
 
-* Nueva configuración de pasarelas IPFS
-
-* Selección de idioma por aplicación (@Licaon-Kter)
+* F-Droid Basic actualizado para trabajar con targetSdkVersion 34

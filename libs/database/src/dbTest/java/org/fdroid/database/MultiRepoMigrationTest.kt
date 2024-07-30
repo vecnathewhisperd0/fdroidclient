@@ -106,13 +106,13 @@ internal class MultiRepoMigrationTest {
             db.getRepositoryDao().getRepositories().sortedByDescending { it.weight }.also { repos ->
                 assertEquals(reposToMigrate.size, repos.size)
                 assertEquals(reposToMigrate.size, repos.map { it.weight }.toSet().size)
-                assertEquals(fdroidRepo.address, repos[0].address)
+                assertEquals(guardianRepo.address, repos[0].address)
                 assertEquals(1_000_000_000, repos[0].weight)
-                assertEquals(fdroidArchiveRepo.address, repos[1].address)
+                assertEquals(guardianArchiveRepo.address, repos[1].address)
                 assertEquals(999_999_999, repos[1].weight)
-                assertEquals(guardianRepo.address, repos[2].address)
+                assertEquals(fdroidRepo.address, repos[2].address)
                 assertEquals(999_999_998, repos[2].weight)
-                assertEquals(guardianArchiveRepo.address, repos[3].address)
+                assertEquals(fdroidArchiveRepo.address, repos[3].address)
                 assertEquals(999_999_997, repos[3].weight)
             }
         }
@@ -148,18 +148,18 @@ internal class MultiRepoMigrationTest {
             db.getRepositoryDao().getRepositories().sortedByDescending { it.weight }.also { repos ->
                 assertEquals(reposToMigrate.size, repos.size)
                 assertEquals(reposToMigrate.size, repos.map { it.weight }.toSet().size)
-                assertEquals(fdroidRepo.address, repos[0].address)
+                assertEquals("https://example.com/fdroid/repo", repos[0].address)
                 assertEquals(1_000_000_000, repos[0].weight)
-                assertEquals(fdroidArchiveRepo.address, repos[1].address)
-                assertEquals(999_999_999, repos[1].weight)
+                assertEquals("https://example.org/fdroid/repo", repos[1].address)
+                assertEquals(999_999_998, repos[1].weight) // space for archive above
                 assertEquals(guardianRepo.address, repos[2].address)
-                assertEquals(999_999_998, repos[2].weight)
+                assertEquals(999_999_996, repos[2].weight)
                 assertEquals(guardianArchiveRepo.address, repos[3].address)
-                assertEquals(999_999_997, repos[3].weight)
-                assertEquals("https://example.org/fdroid/repo", repos[4].address)
-                assertEquals(999_999_996, repos[4].weight)
-                assertEquals("https://example.com/fdroid/repo", repos[5].address)
-                assertEquals(999_999_994, repos[5].weight) // space for archive above
+                assertEquals(999_999_995, repos[3].weight)
+                assertEquals(fdroidRepo.address, repos[4].address)
+                assertEquals(999_999_994, repos[4].weight)
+                assertEquals(fdroidArchiveRepo.address, repos[5].address)
+                assertEquals(999_999_993, repos[5].weight)
             }
         }
     }
@@ -183,12 +183,12 @@ internal class MultiRepoMigrationTest {
             db.getRepositoryDao().getRepositories().sortedByDescending { it.weight }.also { repos ->
                 assertEquals(reposToMigrate.size, repos.size)
                 assertEquals(reposToMigrate.size, repos.map { it.weight }.toSet().size)
-                assertEquals("https://example.org/fdroid/repo", repos[0].address)
-                assertEquals(1_000_000_000, repos[0].weight)
-                assertEquals(guardianRepo.address, repos[1].address)
-                assertEquals(999_999_998, repos[1].weight) // space for archive above
-                assertEquals(fdroidArchiveRepo.address, repos[2].address)
-                assertEquals(999_999_996, repos[2].weight) // space for archive above
+                assertEquals(guardianRepo.address, repos[0].address)
+                assertEquals(1_000_000_000, repos[0].weight) // space for archive below
+                assertEquals("https://example.org/fdroid/repo", repos[1].address)
+                assertEquals(999_999_998, repos[1].weight)
+                assertEquals(fdroidArchiveRepo.address, repos[2].address) // archive at the end
+                assertEquals(999_999_996, repos[2].weight)
             }
         }
     }
@@ -232,6 +232,7 @@ internal class MultiRepoMigrationTest {
 
         // now get the Room DB, so we can use our DAOs for verifying the migration
         databaseBuilder(getApplicationContext(), FDroidDatabaseInt::class.java, TEST_DB)
+            .addMigrations(MIGRATION_2_3)
             .allowMainThreadQueries()
             .build()
             .use { db ->
@@ -245,6 +246,40 @@ internal class MultiRepoMigrationTest {
                 val preferredRepos = db.getAppPrefsDao().getPreferredRepos(listOf(packageName))
                 assertEquals(1, preferredRepos.size)
                 assertEquals(repoId, preferredRepos[packageName])
+            }
+    }
+
+    @Test
+    fun repoWithoutCertificate() {
+        helper.createDatabase(TEST_DB, 1).use { db ->
+            // Database has schema version 1. Insert some data using SQL queries.
+            // We can't use DAO classes because they expect the latest schema.
+            val repoId = db.insert(CoreRepository.TABLE, CONFLICT_FAIL, ContentValues().apply {
+                put("name", localizedTextV2toString(mapOf("en-US" to fdroidRepo.name)))
+                put(
+                    "description",
+                    localizedTextV2toString(mapOf("en-US" to fdroidRepo.description))
+                )
+                put("address", fdroidRepo.address)
+                put("timestamp", -1)
+            })
+            db.insert(RepositoryPreferences.TABLE, CONFLICT_FAIL, ContentValues().apply {
+                put("repoId", repoId)
+                put("enabled", fdroidRepo.enabled)
+                put("weight", fdroidRepo.weight)
+            })
+        }
+
+        // Re-open the database with version 2, auto-migrations are applied automatically
+        helper.runMigrationsAndValidate(TEST_DB, 2, true).close()
+
+        // now get the Room DB, so we can use our DAOs for verifying the migration
+        databaseBuilder(getApplicationContext(), FDroidDatabaseInt::class.java, TEST_DB)
+            .addMigrations(MIGRATION_2_3)
+            .allowMainThreadQueries()
+            .build().use { db ->
+                // repo without cert did not get migrated, because we auto-migrate to latest version
+                assertEquals(0, db.getRepositoryDao().getRepositories().size)
             }
     }
 
@@ -276,6 +311,7 @@ internal class MultiRepoMigrationTest {
 
         // now get the Room DB, so we can use our DAOs for verifying the migration
         databaseBuilder(getApplicationContext(), FDroidDatabaseInt::class.java, TEST_DB)
+            .addMigrations(MIGRATION_2_3)
             .allowMainThreadQueries()
             .build().use { db ->
                 check(db)

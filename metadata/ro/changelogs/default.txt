@@ -1,0 +1,13 @@
+* Revizuirea modului în care sunt reprezentate depozitele pentru utilizatori pentru a fi clar când o instalare vine din altă parte decât de pe f-droid.org.
+
+* Permiteți utilizatorilor să schimbe prioritatea depozitului la nivel global și pentru fiecare aplicație.
+
+* Anti-funcții personalizate sunt acum activate în mod implicit, în loc să fie dezactivate
+
+* Suport pentru primirea URL-urilor depozitelor prin Partajare
+
+* Toate activitățile respectă tema zi/noapte
+
+* Actualizați utilizările de stocare externă pentru a funcționa cu targetSdkVersion 29
+
+* F-Droid Basic a fost actualizat pentru a funcționa cu targetSdkVersion 34

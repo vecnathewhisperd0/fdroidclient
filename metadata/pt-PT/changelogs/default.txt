@@ -1,13 +1,13 @@
-* Revisão de repo e manipulação de espelho, tanto UX e código
+* Reformulação da representação dos repositórios aos utilizadores, clarificando instalações externas ao f-droid.org.
 
-* Mostrar visualização de novos repos
+* Permitir alteração da prioridade dos repositórios globalmente e por app
 
-* Instalar com F-Droid e F-Droid Basic agora suporta atualizações automáticas de fundo
+* Anti-Features personalizadas ativadas por padrão
 
-* No Android 14, marcar apps não suportadas da versão do SDK alvo e incompatíveis #2692
+* Suporte para receção de URLs de repositórios por partilha
 
-* Clique longo para copiar ligações, permissões e versões no ecrã Detalhes da App (@Tobias_Groza)
+* Todas as atividades seguem o tema dia/noite
 
-* Apps incompatíveis só são mostrados quando permitido em Configurações #41 (@pigpig)
+* Atualização dos usos de armazenamento externo para trabalhar com targetSdkVersion 29
 
-...
+* F-Droid Basic atualizado para targetSdkVersion 34

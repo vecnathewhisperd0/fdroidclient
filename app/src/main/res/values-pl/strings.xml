@@ -3,7 +3,6 @@
     <string name="installIncompatible">Aplikacja niezgodna z Twoim urządzeniem, czy zainstalować ją mimo to\?</string>
     <string name="version">Wersja</string>
     <string name="delete">Usuń</string>
-    <string name="enable_nfc_send">Włącz przesyłanie NFC…</string>
     <string name="cache_downloaded">Przechowuj instalatory aplikacji w pamięci podręcznej</string>
     <string name="updates">Aktualizacje</string>
     <string name="other">Inne</string>
@@ -99,7 +98,6 @@
     <string name="category_Science_Education">Nauka i edukacja</string>
     <string name="category_Security">Bezpieczeństwo</string>
     <string name="category_System">System</string>
-    <string name="swap_nfc_description">Jeśli oba urządzenia mają F-Droid i włączone NFC, możecie je zbliżyć do siebie.</string>
     <string name="swap_join_same_wifi">Połącz się z tą samą siecią Wi-Fi</string>
     <string name="swap">Wymień aplikacje</string>
     <string name="swap_no_wifi_network">Brak sieci</string>
@@ -151,7 +149,6 @@
     <string name="empty_can_update_app_list">Wspaniale!\nWszystkie Twoje aplikacje są w najnowszych wersjach.</string>
     <string name="install_error_unknown">Nie udało się zainstalować z powodu nieznanego błędu</string>
     <string name="uninstall_error_unknown">Nie udało się odinstalować z powodu nieznanego błędu</string>
-    <string name="swap_nfc_title">Dotknij, aby się wymienić</string>
     <string name="swap_join_same_wifi_desc">Aby wymienić się za pomocą Wi-Fi, upewnij się, że oba urządzenia są w tej samej sieci. Jeśli nie macie dostępu do tej samej sieci, jedno z Was może utworzyć hotspot Wi-Fi.</string>
     <string name="swap_join_this_hotspot">Pomóż drugiej osobie dołączyć do Twojego hotspota</string>
     <string name="swap_success">Wymiana powiodła się!</string>
@@ -243,7 +240,6 @@
     <string name="useTor">Użyj Tora</string>
     <string name="useTorSummary">Wymuszaj pobieranie przez Tora, aby zwiększyć prywatność. Wymagany Orbot</string>
     <string name="swap_stopping_wifi">Zatrzymywanie Wi-Fi…</string>
-    <string name="repo_provider">Repozytorium: %s</string>
     <string name="update_auto_download">Pobieraj aktualizacje automatycznie</string>
     <string name="update_auto_download_summary">Aktualizacje są pobierane automatycznie i zostaniesz powiadomiony, aby je zainstalować</string>
     <string name="download_pending">Oczekiwanie na pobieranie…</string>
@@ -318,10 +314,10 @@
     <string name="updates__hide_updateable_apps">Ukryj aplikacje</string>
     <string name="updates__show_updateable_apps">Pokaż aplikacje</string>
     <plurals name="updates__download_updates_for_apps">
-        <item quantity="one">Pobierz aktualizację dla %1$d aplikacji.</item>
-        <item quantity="few">Pobierz aktualizacje dla %1$d aplikacji.</item>
-        <item quantity="many">Pobierz aktualizacje dla %1$d aplikacji.</item>
-        <item quantity="other">Pobierz aktualizacje dla %1$d aplikacji.</item>
+        <item quantity="one">Pobierz aktualizację dla %1$d aplikacji:</item>
+        <item quantity="few">Pobierz aktualizacje dla %1$d aplikacji:</item>
+        <item quantity="many">Pobierz aktualizacje dla %1$d aplikacji:</item>
+        <item quantity="other">Pobierz aktualizacje dla %1$d aplikacji:</item>
     </plurals>
     <string name="details_new_in_version">Co nowego w wersji %s</string>
     <string name="antifeatureswarning">Ta aplikacja zawiera funkcje, których możesz nie lubić.</string>
@@ -470,7 +466,6 @@
     <string name="about_forum">Forum pomocy technicznej</string>
     <string name="app_suggested">Sugerowana</string>
     <string name="app_size">Rozmiar: %1$s</string>
-    <string name="app_repository">Repozytorium: %1$s</string>
     <string name="scan_removable_storage_title">Skanuj pamięć wymienną</string>
     <string name="scan_removable_storage_toast">Skanowanie %s…</string>
     <string name="scan_removable_storage_summary">Szukaj repozytoriów pakietów na nośnikach wymiennych, takich jak karty pamięci i urządzenia USB</string>
@@ -570,7 +565,7 @@
     <string name="nearby_splach__external_storage_permission_explainer">F-Droid może wyszukiwać repozytoria i serwery lustrzane na Twojej karcie pamięci, ale potrzebuje do tego Twojej zgody.</string>
     <string name="swap_connection_indexv0_error">Próbujesz połączyć się z kimś, kto ma nieaktualną wersję F-Droid. Aby się połączyć, musi zaktualizować swoją aplikację F-Droid. Może użyć funkcji wymiany, aby zaktualizować ją od Ciebie.</string>
     <string name="force_old_installer_title">Wymuszaj stary instalator</string>
-    <string name="force_old_installer_summary">Wyłącz instalatora sesji beta, w tym obsługę automatycznych aktualizacji w tle</string>
+    <string name="force_old_installer_summary">Wyłącz instalatora sesji, w tym obsługę automatycznych aktualizacji w tle</string>
     <string name="copied_to_clipboard">Skopiowano do schowka</string>
     <string name="copied_permission_to_clipboard">Nazwę uprawnienia skopiowano do schowka</string>
     <string name="copied_url_to_clipboard">URL skopiowano do schowka</string>
@@ -612,4 +607,12 @@
     <string name="repo_error_adding_archive">Archiwalne repozytoria nie mogą być dodawane bezpośrednio. Naciśnij repozytorium na liście i włącz tam archiwum.</string>
     <string name="repositories_last_update">Ostatnia aktualizacja: %s</string>
     <string name="repo_disable_warning">Wyłączenie tego repozytorium spowoduje usunięcie jego statusu „preferowane” ze wszystkich aplikacji.</string>
+    <string name="repo_add_repo_and_mirror">Dodaj repozytorium i serwer lustrzany</string>
+    <string name="repo_view_repo">Wyświetl repozytorium</string>
+    <string name="repo_scan_qr_code">Zeskanuj kod QR</string>
+    <string name="repo_mirror_exists">Ten serwer lustrzany został już dodany (%s).</string>
+    <string name="repo_preview_included_apps">Uwzględnione aplikacje:</string>
+    <string name="repo_and_mirror_add_both_info">URL, który próbujesz dodać (%s), jest serwerem lustrzanym nowego repozytorium. Dodane zostanie zarówno oryginalne repozytorium, jak i serwer lustrzany.</string>
+    <string name="repo_mirror_add_info">URL, który próbujesz dodać (%s), jest serwerem lustrzanym istniejącego repozytorium.</string>
+    <string name="warning_no_compat_versions">Wybrane repozytorium nie ma zgodnych wersji aplikacji. Aby otrzymywać aktualizacje, preferuj repozytorium z kompatybilnymi wersjami.</string>
 </resources>

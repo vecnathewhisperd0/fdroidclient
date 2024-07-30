@@ -1,3 +1,66 @@
+### 1.21.0-alpha0 (2024-07-09)
+
+* Split up name and summary in app lists for better readability
+* Apps targeting SDK 24 are incompatible with Android 15 devices
+* Handle mirrors in "Add repo" preview better (Thanks Thore!)
+* Enable unattended app updates on Xiaomi devices not running MIUI (Thanks Irate!)
+* Trust user-added root certs (Thanks B.!)
+* Improve localization for less common languages (Thanks Ray!)
+* Don't react to NFC tags as NFC feature was removed (Thanks Thibault!)
+* Show warning when apps can not be updated from preferred repo
+
+### 1.20.0 (2024-05-08)
+
+* Maintain existing repo priority ordering when migrating #2788
+
+* Fix "Auto-Update" working when using Session Installer #2704
+
+* Fix loading images from local repos including /system, USB drives, SDCards.
+
+* Improved ACRA emails
+
+* Sort versions with same version code by native code #2792
+
+### 1.20.0-alpha1 (2024-04-05)
+
+* Updated targetSdkVersion to 29
+
+* Fix crashes BLUETOOTH_SCAN crashes when using Nearby on Android 13 and 14
+
+* Request update ownership for newly installed apps on Android 14
+
+* Fix icons forced to black #1458 (@VishnuSanal)
+
+* Stop cropping screenshots (@JunkFood02)
+
+### 1.20.0-alpha0 (2024-03-25)
+
+* Overhaul how repositories are represented to users to make it clear when an install is coming from somewhere else but f-droid.org.
+
+* Allow users to change repository priority globally and per app
+
+* Custom Anti-Features are now enabled by default, rather than disabled
+
+* Support receiving repo URLs via Share
+
+* All activities respect day/night theme
+
+* Update external storage usages to work with targetSdkVersion 29
+
+* F-Droid Basic updated to work with targetSdkVersion 34
+
+### 1.19.2 (2024-03-12)
+
+* export PanicResponderActivity to make panic mode work again (@ConnyDuck)
+
+### 1.19.1 (2024-02-15)
+
+* Make all activities respect day/night theme
+
+* Support final fdroid.link URL syntax
+
+* Updated translations
+
 ### 1.19.0 (2024-01-25)
 
 * Add button background to App Details toolbar to improve visibility (@ConnyDuck)

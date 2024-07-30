@@ -60,6 +60,12 @@
         android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.ENFORCE_UPDATE_OWNERSHIP" />
+
+    <!-- Permission used to externally trigger repository updates -->
+    <permission
+        android:name="org.fdroid.permission.UPDATE_REPOS"
+        android:protectionLevel="signature|privileged" />
 
     <application
         android:name=".FDroidApp"
@@ -149,23 +155,6 @@
                 <data
                     android:scheme="FDROIDREPOS"
                     tools:ignore="AppLinkUrlError" />
-            </intent-filter>
-
-            <!--
-            Same as the intent filter listening for repositories via https://*/fdroid/repo, except this
-            looks for fdroidrepos://* and doesn't care what the path is.
-            -->
-            <intent-filter>
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <!--
-                URIs that come in via NFC have scheme/host normalized to all lower case
-                https://developer.android.com/reference/android/nfc/NfcAdapter.html#ACTION_NDEF_DISCOVERED
-                -->
-                <data android:scheme="fdroidrepo" />
-                <data android:scheme="fdroidrepos" />
             </intent-filter>
 
             <!--
@@ -499,15 +488,14 @@
             android:exported="false">
             <!-- Doesn't require an intent-filter because it is explicitly invoked via Intent.setClass() -->
         </receiver>
+        <receiver android:name=".receiver.RepoUpdateReceiver"
+            android:exported="true"
+            android:permission="org.fdroid.permission.UPDATE_REPOS">
+            <intent-filter>
+                <action android:name="org.fdroid.action.UPDATE_REPOS" />
+            </intent-filter>
+        </receiver>
 
-        <service
-            android:name=".UpdateService"
-            android:exported="false"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-        <service
-            android:name=".UpdateJobService"
-            android:exported="false"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
             android:name=".net.DownloaderService"
             android:exported="false"
@@ -516,7 +504,11 @@
             android:name=".installer.InstallerService"
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE" />
-
+        <!-- needed for declaring foregroundServiceType for WorkManager -->
+        <service
+            android:name="androidx.work.impl.foreground.SystemForegroundService"
+            android:foregroundServiceType="dataSync"
+            tools:node="merge" />
         <service
             android:name=".DeleteCacheService"
             android:exported="false"

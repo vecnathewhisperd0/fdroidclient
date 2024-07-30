@@ -1,15 +1,8 @@
-* Overhaul repo and mirror handling, both UX and code
-
-* Show preview of new repos
-
-* Installing with F-Droid and F-Droid Basic now supports automatic background updates
-
-* On Android 14, mark apps with unsupported Target SDK Version as incompatible #2692
-
-* Long click to copy Links, Permissions and Versions on App Details screen (@Tobias_Groza)
-
-* Incompatible apps are only shown when allowed in Settings #41 (@pigpig)
-
-* New IPFS Gateways Settings
-
-* Per-app language selection (@Licaon-Kter)
+* Split up name and summary in app lists for better readability
+* Apps targeting SDK 24 are incompatible with Android 15 devices
+* Handle mirrors in "Add repo" preview better (Thanks Thore!)
+* Enable unattended app updates on Xiaomi devices not running MIUI (Thanks Irate!)
+* Trust user-added root certs (Thanks B.!)
+* Improve localization for less common languages (Thanks Ray!)
+* Don't react to NFC tags as NFC feature was removed (Thanks Thibault!)
+* Show warning when apps can not be updated from preferred repo

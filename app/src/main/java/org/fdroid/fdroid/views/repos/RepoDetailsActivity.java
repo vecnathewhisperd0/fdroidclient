@@ -1,10 +1,8 @@
 package org.fdroid.fdroid.views.repos;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.Uri;
 import android.nfc.NdefMessage;
 import android.nfc.NfcAdapter;
@@ -33,7 +31,6 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.app.NavUtils;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,7 +43,6 @@ import org.fdroid.database.RepositoryDao;
 import org.fdroid.download.Mirror;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.UpdateService;
 import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.compat.LocaleCompat;
 import org.fdroid.fdroid.data.App;
@@ -67,6 +63,12 @@ public class RepoDetailsActivity extends AppCompatActivity {
     private static final String TAG = "RepoDetailsActivity";
 
     static final String ARG_REPO_ID = "repo_id";
+
+    static void launch(Context context, long repoId) {
+        Intent intent = new Intent(context, RepoDetailsActivity.class);
+        intent.putExtra(ARG_REPO_ID, repoId);
+        context.startActivity(intent);
+    }
 
     /**
      * If the repo has been updated at least once, then we will show
@@ -185,6 +187,12 @@ public class RepoDetailsActivity extends AppCompatActivity {
                     }
                 });
 
+        // update UI when repo in DB changes
+        model.getRepoLiveData().observe(this, repo -> {
+            this.repo = repo;
+            updateRepoView();
+        });
+
         SwitchCompat switchCompat = findViewById(R.id.archiveRepo);
         model.getLiveData().observe(this, s -> {
             Boolean enabled = s.getArchiveEnabled();
@@ -217,9 +225,6 @@ public class RepoDetailsActivity extends AppCompatActivity {
         repo = FDroidApp.getRepoManager(this).getRepository(repoId);
         updateRepoView();
 
-        LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver,
-                new IntentFilter(UpdateService.LOCAL_ACTION_STATUS));
-
         processIntent(getIntent());
     }
 
@@ -242,22 +247,6 @@ public class RepoDetailsActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-    }
-
-    private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            int statusCode = intent.getIntExtra(UpdateService.EXTRA_STATUS_CODE, -1);
-            if (statusCode == UpdateService.STATUS_COMPLETE_WITH_CHANGES) {
-                updateRepoView();
-            }
-        }
-    };
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver);
     }
 
     @Override

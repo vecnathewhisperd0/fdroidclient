@@ -4,7 +4,6 @@
     <string name="installIncompatible">Aplikace není kompatibilní s vaším zařízením – chcete se přesto pokusit o instalaci\?</string>
     <string name="version">Verze</string>
     <string name="delete">Smazat</string>
-    <string name="enable_nfc_send">Povolit posílání po NFC…</string>
     <string name="updates">Aktualizace</string>
     <string name="other">Jiné</string>
     <string name="update_interval">Interval automatických aktualizací</string>
@@ -208,7 +207,6 @@
     <string name="swap_qr_isnt_for_swap">Naskenovaný QR kód nevypadá jako výměnný kód.</string>
     <string name="loading">Načítání…</string>
     <string name="install_confirm">vyžaduje přístup k</string>
-    <string name="swap_nfc_title">Klepněte pro výměnu</string>
     <string name="swap_switch_to_wifi">Klepněte pro přepnutí sítě Wi-Fi</string>
     <string name="newPerms">Nově</string>
     <string name="allPerms">Vše</string>
@@ -234,10 +232,8 @@
     <string name="antinonfreeassetslist">Tato aplikace obsahuje nesvobodné části</string>
     <string name="status_inserting_apps">Ukládání podrobností o aplikacích</string>
     <string name="empty_search_available_app_list">Žádné odpovídající aplikace nejsou dostupné.</string>
-    <string name="swap_nfc_description">Pokud má váš přítel F-Droid a zapnuté NFC, přibližte svá zařízení k sobě.</string>
     <string name="update_auto_download">Automaticky stahovat aktualizace</string>
     <string name="update_auto_download_summary">Aktualizace jsou stahovány automaticky a jste upozorněni na možnost je nainstalovat</string>
-    <string name="repo_provider">Repozitář: %s</string>
     <string name="useTor">Použít Tor</string>
     <string name="useTorSummary">Vynutit stahování přes Tor pro zlepšení ochrany soukromí. Vyžaduje aplikaci Orbot</string>
     <string name="swap_join_same_wifi_desc">Pro kopírování po Wi-Fi musí být oba na stejné síti. Pokud nemáte přístup ke stejné síti, může jeden z vás vytvořit vlastní Wi-Fi hotspot.</string>
@@ -332,9 +328,9 @@
     <string name="updates__hide_updateable_apps">Skrýt aplikace</string>
     <string name="updates__show_updateable_apps">Zobrazit aplikace</string>
     <plurals name="updates__download_updates_for_apps">
-        <item quantity="one">Stáhnout aktualizaci pro %1$d aplikaci.</item>
-        <item quantity="few">Stáhnout aktualizace pro %1$d aplikace.</item>
-        <item quantity="other">Stáhnout aktualizace pro %1$d aplikací.</item>
+        <item quantity="one">Stáhnout aktualizaci pro %1$d aplikaci:</item>
+        <item quantity="few">Stáhnout aktualizace pro %1$d aplikace:</item>
+        <item quantity="other">Stáhnout aktualizace pro %1$d aplikací:</item>
     </plurals>
     <string name="menu_video">Video</string>
     <string name="menu_license">Licence: %s</string>
@@ -468,7 +464,6 @@
     <string name="scan_removable_storage_title">Prohledat odpojitelné úložiště</string>
     <string name="scan_removable_storage_toast">Prohledávám %s…</string>
     <string name="scan_removable_storage_summary">Vyhledat repozitáře v odpojitelných úložištích (např. SD karty a USB disky)</string>
-    <string name="app_repository">Repozitář: %1$s</string>
     <string name="nearby_splash__read_external_storage">Vyhledat repozitáře a zrcadla na SD kartě.</string>
     <string name="nearby_splash__request_permission">Hledat</string>
     <string name="not_visible_nearby">Funkce Nablízku je vypnuta</string>
@@ -564,7 +559,7 @@
     <string name="nearby_splach__external_storage_permission_explainer">F-Droid může vyhledávat repozitáře a zrcadla na vaší SD kartě, potřebuje k tomu ale oprávnění.</string>
     <string name="swap_connection_indexv0_error">Snažíte se připojit k někomu se zastaralou verzí aplikace F-Droid. Pro připojení musí druhá strana svou aplikaci aktualizovat. Může použít výměnu pro aktualizaci své aplikace od vás.</string>
     <string name="force_old_installer_title">Vynutit starý instalátor</string>
-    <string name="force_old_installer_summary">Zakázat nový beta instalátor používající relace, včetně podpory pro automatické aktualizace na pozadí.</string>
+    <string name="force_old_installer_summary">Zakázat nový instalátor používající relace, včetně podpory pro automatické aktualizace na pozadí.</string>
     <string name="copied_to_clipboard">Zkopírováno do schránky</string>
     <string name="copied_permission_to_clipboard">Název oprávnění zkopírován do schránky</string>
     <string name="copied_url_to_clipboard">Adresa URL zkopírována do schránky</string>
@@ -605,4 +600,12 @@
 \nPokud se aplikace nachází více než v jednom repozitáři, bude automaticky vybrán repozitář výše v seznamu. Repozitáře můžete přesunout dlouhým podržením a posunutím.</string>
     <string name="repositories_last_update_never">nikdy</string>
     <string name="repositories_last_update">Poslední aktualizace: %s</string>
+    <string name="repo_view_repo">Zobrazit repozitář</string>
+    <string name="repo_scan_qr_code">Naskenovat QR kód</string>
+    <string name="repo_preview_included_apps">Zahrnuté aplikace:</string>
+    <string name="repo_mirror_exists">Toto zrcadlo již bylo přidáno (%s).</string>
+    <string name="repo_mirror_add_info">Adresa, kterou se snažíte přidat (%s), je zrcadlem již existujícího repozitáře.</string>
+    <string name="repo_and_mirror_add_both_info">Adresa, kterou se snažíte přidat (%s), je zrcadlem nového repozitáře. Bude přidán původní repozitář i zrcadlo.</string>
+    <string name="repo_add_repo_and_mirror">Přidat repozitář jako zrcadlo</string>
+    <string name="warning_no_compat_versions">Zvolený repozitář nemá žádné kompatibilní verze aplikací. Pro získávání aktualizací upřednostněte repozitář s kompatibilními verzemi.</string>
 </resources>

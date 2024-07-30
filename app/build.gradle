@@ -1,5 +1,8 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id "org.jlleitschuh.gradle.ktlint" version "10.2.1"
+}
 
 // add -Pstrict.release to the gradle command line to enable
 if (project.hasProperty('strict.release')) {
@@ -29,14 +32,14 @@ android {
     compileSdk 34
 
     defaultConfig {
-        versionCode 1019050
+        versionCode 1021000
         versionName getVersionName()
         applicationId "org.fdroid"
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         minSdkVersion 23
         //noinspection ExpiredTargetSdkVersion
-        targetSdkVersion 28
+        targetSdkVersion 29
         /*
           The Android Testing Support Library collects analytics to continuously improve the testing
           experience. More specifically, it uploads a hash of the package name of the application
@@ -61,6 +64,7 @@ android {
             shrinkResources true
             buildConfigField "String", "PRIVILEGED_EXTENSION_PACKAGE_NAME", privilegedExtensionApplicationId
             buildConfigField "String", "ACRA_REPORT_EMAIL", '"reports@f-droid.org"' // String needs both quotes
+            buildConfigField "String", "ACRA_REPORT_FILE_NAME", '"ACRA-report.stacktrace.json"'
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'src/androidTest/proguard-rules.pro'
         }
@@ -245,3 +249,5 @@ android.productFlavors.all { flavor ->
         }
     }
 }
+
+apply from: "${rootProject.rootDir}/gradle/ktlint.gradle"

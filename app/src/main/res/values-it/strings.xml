@@ -7,7 +7,6 @@
     <string name="installIncompatible">L\'app non è compatibile con il tuo dispositivo, vuoi installarla lo stesso\?</string>
     <string name="version">Versione</string>
     <string name="delete">Elimina</string>
-    <string name="enable_nfc_send">Attiva invio NFC…</string>
     <string name="cache_downloaded">Mantieni le app in cache</string>
     <string name="updates">Aggiornamenti</string>
     <string name="other">Altro</string>
@@ -234,8 +233,6 @@
     <string name="system_install_denied_permissions">I privilegi non sono stati concessi all\'estensione! Per favore
         segnala questo problema!
     </string>
-    <string name="swap_nfc_title">Tocca per scambiare</string>
-    <string name="swap_nfc_description">Se il tuo amico ha F-Droid e NFC attivato, sovrapponete i vostri dispositivi.</string>
     <string name="swap_join_same_wifi_desc">Per scambiare usando il Wi-Fi, assicuratevi di trovarvi sulla stessa rete.
         Se non avete accesso alla stessa rete, uno dei due può creare un Hotspot Wi-Fi.
     </string>
@@ -263,7 +260,6 @@
     <string name="swap_stopping_wifi">Spegnimento del Wi-Fi…</string>
     <string name="update_auto_download_summary">Gli aggiornamenti vengono scaricati automaticamente e ti sarai notificato per installarli</string>
     <string name="update_auto_download">Ottieni automaticamente gli aggiornamenti</string>
-    <string name="repo_provider">Repository: %s</string>
     <string name="download_pending">In attesa di avviare lo scaricamento…</string>
     <string name="keep_hour">1 ora</string>
     <string name="keep_day">1 giorno</string>
@@ -334,9 +330,9 @@
     <string name="updates__hide_updateable_apps">Nascondi applicazioni</string>
     <string name="updates__show_updateable_apps">Mostra applicazioni</string>
     <plurals name="updates__download_updates_for_apps">
-        <item quantity="one">Scarica aggiornamento per %1$d app.</item>
-        <item quantity="many">Scarica aggiornamenti per %1$d app.</item>
-        <item quantity="other">Scarica aggiornamenti per %1$d app.</item>
+        <item quantity="one">Scarica aggiornamento per %1$d app:</item>
+        <item quantity="many">Scarica aggiornamenti per %1$d app:</item>
+        <item quantity="other">Scarica aggiornamenti per %1$d app:</item>
     </plurals>
     <string name="menu_license">Licenza: %s</string>
     <plurals name="details_last_update_years">
@@ -478,7 +474,6 @@
     <string name="send_installed_apps">Condividi applicazioni installate</string>
     <string name="menu_open">Apri</string>
     <string name="send_installed_apps_csv">Applicazioni installate da F-Droid in formato CSV</string>
-    <string name="app_repository">Repository: %1$s</string>
     <string name="scan_removable_storage_title">Scansiona archivio rimovibile</string>
     <string name="scan_removable_storage_toast">Scansione %s…</string>
     <string name="nearby_splash__request_permission">Cerca ora</string>
@@ -568,7 +563,7 @@
     <string name="repo_state_fetching">Recupero repository…</string>
     <string name="repo_state_adding">Aggiunta repository…</string>
     <string name="repo_enter_url">Inserisci l\'URL del repository a mano</string>
-    <string name="repo_exists">Questo repo è già stato aggiunto.</string>
+    <string name="repo_exists">Questo repository è già stato aggiunto.</string>
     <string name="repo_invalid">Repository non valido.
 \n
 \nContatta il manutentore e informalo del problema.</string>
@@ -577,7 +572,7 @@
     <string name="nearby_splach__external_storage_permission_explainer">F-Droid può cercare repo e mirror sulla tua scheda SD, ma ha bisogno della tua autorizzazione per farlo.</string>
     <string name="swap_connection_indexv0_error">Stai cercando di connetterti a qualcuno con una versione obsoleta di F-Droid. Per collegarsi deve aggiornare la sua app F-Droid. Può aggiornarla tramite te.</string>
     <string name="force_old_installer_title">Imponi vecchio installatore</string>
-    <string name="force_old_installer_summary">Disattiva l\'installatore di sessione beta, compreso il supporto per gli aggiornamenti automatici in secondo piano.</string>
+    <string name="force_old_installer_summary">Disattiva l\'installatore di sessione, compreso il supporto per gli aggiornamenti automatici in secondo piano.</string>
     <string name="copied_to_clipboard">Copiato negli appunti</string>
     <string name="copied_permission_to_clipboard">Nome dell\'autorizzazione copiato negli appunti</string>
     <string name="copied_url_to_clipboard">URL copiato negli appunti</string>
@@ -618,4 +613,12 @@
     <string name="repo_list_info_title">Elenco repository</string>
     <string name="repo_archive_failed">Repo di archivio attualmente non disponibile</string>
     <string name="repo_disable_warning">Disattivando questo repository verrà rimosso il suo stato \"preferito\" da tutte le app.</string>
+    <string name="repo_add_repo_and_mirror">Aggiungi repository e mirror</string>
+    <string name="repo_view_repo">Vedi il repository</string>
+    <string name="repo_scan_qr_code">Scansiona codice QR</string>
+    <string name="repo_and_mirror_add_both_info">L\'URL che stai cercando di aggiungere (%s) è un mirror di un nuovo repository. Verrà aggiunto sia il repository originale che il mirror.</string>
+    <string name="repo_preview_included_apps">App incluse:</string>
+    <string name="repo_mirror_exists">Questo mirror è già stato aggiunto (%s).</string>
+    <string name="repo_mirror_add_info">L\'URL che stai cercando di aggiungere (%s) è un mirror di un repository esistente.</string>
+    <string name="warning_no_compat_versions">Il repository selezionato non ha versioni dell\'app compatibili. Per ricevere aggiornamenti, prediligi un repository con versioni compatibili.</string>
 </resources>

@@ -43,7 +43,7 @@
     <string name="repo_last_update">آخر تحديث</string>
     <string name="repo_name">الإسم</string>
     <string name="unknown">غير معروف</string>
-    <string name="repo_confirm_delete_title">حذف المستودع؟</string>
+    <string name="repo_confirm_delete_title">أتريد حذف المستودع؟</string>
     <string name="category_Development">التطوير</string>
     <string name="category_Games">الألعاب</string>
     <string name="category_Internet">الإنترنت</string>
@@ -57,7 +57,6 @@
     <string name="SignatureMismatch">الإصدار الجديد يحتوي على مفتاح مختلف عن القديم. لتثبيت الإصدار الجديد، يجب أن يتم إلغاء تثبيت القديم أولًا. يرجى القيام بذلك وإعادة المحاولة مرة أخرى. (علمًا أنه عند إلغاء التثبيت سيتم محو البيانات الداخلية المخزنة من قِبل التطبيق)</string>
     <string name="installIncompatible">التطبيق غير متوافق مع جهازك. هل تريد تثبيته على أي حال؟</string>
     <string name="menu_email">إرسال رسالة للمالك</string>
-    <string name="enable_nfc_send">تمكين إرسال نظام ملفات الشبكة (NFC)…</string>
     <string name="cache_downloaded">إبقاء التطبيقات المخزنة مؤقتا</string>
     <string name="unstable_updates">تحديثات غير مستقرة</string>
     <string name="unstable_updates_summary">اقتراح تحديثات للإصدارات غير المستقرة</string>
@@ -91,7 +90,6 @@
     <string name="bad_fingerprint">البصمة خاطئة</string>
     <string name="invalid_url">هذا ليس عنوان URL صالح للاستخدام.</string>
     <string name="malformed_repo_uri">تجاهل عناوين URI للمستودعات  التالفة : %s</string>
-    <string name="repo_provider">مستودع: %s</string>
     <string name="menu_settings">الإعدادات</string>
     <string name="menu_add_repo">مستودع جديد</string>
     <string name="menu_website">الموقع الإلكتروني</string>
@@ -156,8 +154,8 @@
     <string name="repo_disabled_notification">تم تعطيل %1$s.
 \n
 \nستحتاج إلى إعادة تمكين هذا المستودع لتثبيت التطبيقات منه.</string>
-    <string name="repo_added">مستودع الحزمة المحفوظة %1$s.</string>
-    <string name="repo_searching_address">ابحث عن مستودع الحزمة في
+    <string name="repo_added">تم حفظ مستودع حزم %1$s.</string>
+    <string name="repo_searching_address">البحث عن مستودع الحزم على
 \n%1$s</string>
     <string name="not_on_same_wifi">جهازك ليس على الشبكة اللاسلكية نفسها مع المستودع المحلي الذي قمت بإضافتها فقط! حاول الانضمام إلى هذه الشبكة: %s</string>
     <string name="requires_features">احتياجات: %1$s</string>
@@ -182,9 +180,6 @@
     <string name="install_error_unknown">فشل في التثبيت بسبب خطأ مجهول</string>
     <string name="uninstall_error_unknown">فشل إلغاء التثبيت نتيجة لخطأ مجهول</string>
     <string name="system_install_denied_permissions">لم يتم منح ضوابط مميزة للإضافة! يرجى إنشاء تقرير عن خطأ!</string>
-    <string name="swap_nfc_title">إختر باللمس للتبديل</string>
-    <string name="swap_nfc_description">إذا كان صديقك لديه اف-درويد او NFC على قيد التشغيل يمكنك توصيل الأجهزة معا.
-    </string>
     <string name="swap_join_same_wifi">إنضم إلى الإنترنت اللاسلكي مثل صديقك</string>
     <string name="swap_join_same_wifi_desc">للتبديل باستخدام الإنترنت اللاسلكي، لضمان إن كنت على نفس الشبكة. إذا لم يكن
         لديك الوصول إلى نفس الشبكة، يمكن إنشاء شبكة إنترنت لاسلكي.
@@ -318,14 +313,14 @@
     <string name="installed_app__updates_ignored">تم تجاهل التحديثات</string>
     <string name="installed_app__updates_ignored_for_suggested_version">تم تجاهل التحديثات للنسخة %1$s</string>
     <plurals name="updates__download_updates_for_apps">
-        <item quantity="zero">لا تحمل التحديثات لأي شيء.</item>
-        <item quantity="one">حمل التحديثات لتطبيق واحد.</item>
-        <item quantity="two">حمل التحديثات لتطبيقين.</item>
-        <item quantity="few">حمل التحديثات %1$d تطبيقات.</item>
-        <item quantity="many">حمل التحديثات ل %1$d تطبيقا.</item>
-        <item quantity="other">حمل التحديثات ل %1$d تطبيق.</item>
+        <item quantity="zero">لا تحمل التحديثات لأي شيء:</item>
+        <item quantity="one">حمل التحديثات لتطبيق واحد:</item>
+        <item quantity="two">حمل التحديثات لتطبيقين:</item>
+        <item quantity="few">حمل التحديثات %1$d تطبيقات:</item>
+        <item quantity="many">حمل التحديثات ل %1$d تطبيقا:</item>
+        <item quantity="other">حمل التحديثات ل %1$d تطبيق:</item>
     </plurals>
-    <string name="repositories_summary">أضف مصادر إضافية للتطبيقات</string>
+    <string name="repositories_summary">إضافة مصادر إضافية للتطبيقات</string>
     <string name="menu_license">الرخصة: %s</string>
     <string name="download_404">الملف المطلوب غير موجود.</string>
     <string name="app__tts__downloading_progress">جاري التحميل، اكتمل %1$d%%</string>
@@ -487,7 +482,6 @@
     <string name="app_suggested">مقترح</string>
     <string name="send_installed_apps_csv">التطبيقات المثبتة بواسطة F-Droid  كملف CSV</string>
     <string name="scan_removable_storage_title">مسح ذاكرة التخزين القابلة للإزالة</string>
-    <string name="app_repository">المستودع: %1$s</string>
     <string name="nearby_splash__request_permission">ابحث الآن</string>
     <string name="swap_toast_using_path">يستخدِم %1$s</string>
     <string name="scan_removable_storage_toast">جارٍ مسح %s…</string>
@@ -593,7 +587,7 @@
     <string name="nearby_splach__external_storage_permission_explainer">يمكن لـ F-Droid البحث عن المستودعات والمرايا على بطاقة الذاكرة الخارجية الخاصة بك، ولكنه يحتاج إلى إذن منك للقيام بذلك.</string>
     <string name="swap_connection_indexv0_error">أنت تحاول الاتصال بشخص لديه إصدار قديم من F-Droid. للاتصال عليهم ترقية تطبيق F-Droid الخاص بهم. يمكنهم استخدام المبادلة لتحديث تطبيق F-Droid الخاص بهم منك.</string>
     <string name="force_old_installer_title">إجبار المثبت القديم</string>
-    <string name="force_old_installer_summary">قم بتعطيل مثبت الجلسة التجريبية، بما في ذلك دعم التحديثات التلقائية في الخلفية.</string>
+    <string name="force_old_installer_summary">عطّل مثبت الجلسة، بما في ذلك دعم التحديثات التلقائية في الخلفية.</string>
     <string name="copied_to_clipboard">تم النسخ إلى الحافظة</string>
     <string name="copied_permission_to_clipboard">تم نسخ اسم الإذن إلى الحافظة</string>
     <string name="copied_url_to_clipboard">نسخ الرابط إلى الحافظة</string>
@@ -631,10 +625,18 @@
     <string name="repo_archive_failed">أرشيف المستودع غير متوفر حاليًا</string>
     <string name="repositories_last_update">آخر تحديث: %s</string>
     <string name="repositories_last_update_never">أبدًا</string>
-    <string name="repo_list_info_title">قائمة المستودع</string>
-    <string name="repo_archive_toggle">أرشيف المستودع</string>
+    <string name="repo_list_info_title">قائمة المستودعات</string>
+    <string name="repo_archive_toggle">أرشيف المستودعات</string>
     <string name="repo_archive_toggle_description">اعرض التطبيقات المؤرشفة والإصدارات القديمة من التطبيقات</string>
     <string name="repo_disable_warning_button">عطّل</string>
     <string name="app_details_repository_preferred">(مفضّل)</string>
     <string name="repo_disable_warning">سيؤدي تعطيل هذا المستودع إلى إزالة حالته \"المفضلة\" من جميع التطبيقات.</string>
+    <string name="repo_mirror_add_info">عنوان URL الذي تحاول إضافته (%s) هو مرآة لمستودع موجود.</string>
+    <string name="repo_add_repo_and_mirror">أضِف المستودع والمرآة</string>
+    <string name="repo_view_repo">اعرض المستودع</string>
+    <string name="repo_scan_qr_code">امسح رمز QR</string>
+    <string name="repo_preview_included_apps">التطبيقات المضمّنة:</string>
+    <string name="repo_mirror_exists">تمت إضافة هذه المرآة بالفعل (%s).</string>
+    <string name="repo_and_mirror_add_both_info">عنوان URL الذي تحاول إضافته (%s) هو مرآة لمستودع جديد. سيتم إضافة كل من المستودع الأصلي والمرآة.</string>
+    <string name="warning_no_compat_versions">لا يحتوي المستودع المحدد على إصدارات تطبيقات متوافقة. لتلقي التحديثات، تفضل مستودعًا يحتوي على إصدارات متوافقة.</string>
 </resources>

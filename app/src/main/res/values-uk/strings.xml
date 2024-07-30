@@ -134,7 +134,6 @@
     <string name="loading">Завантаження…</string>
     <string name="newPerms">Нові</string>
     <string name="allPerms">Усі</string>
-    <string name="enable_nfc_send">Ввімкнути надсилання через NFC…</string>
     <string name="repo_add_fingerprint">Відбиток (необов\'язковий)</string>
     <string name="antiadslist">Цей застосунок містить рекламу</string>
     <string name="copying_icons">Копіювання піктограм застосунку до репозиторію…</string>
@@ -144,7 +143,6 @@
     <string name="empty_can_update_app_list">Вітаємо!
 \nВаші застосунки оновлено.</string>
     <string name="install_error_unknown">Не вдалося встановити через невідому помилку</string>
-    <string name="swap_nfc_description">Якщо у вашого друга є F-Droid і у вас обох включений NFC, прикладіть пристрої один до одного.</string>
     <string name="swap_no_wifi_network">Мережа відсутня</string>
     <string name="swap_confirm_connect">Хочете отримати застосунки з %1$s зараз\?</string>
     <string name="swap_dont_show_again">Не показувати це знову</string>
@@ -181,7 +179,6 @@
 \nВам необхідно ввімкнути репозиторій, щоб встановлювати застосунки з нього.</string>
     <string name="not_on_same_wifi">Ваш пристрій не в спільній мережі Wi-Fi з локальним репозиторієм, який ви щойно додали! Спробуйте з\'єднатися з цією мережею: %s</string>
     <string name="category_Development">Розробка</string>
-    <string name="swap_nfc_title">Натисніть для обміну</string>
     <string name="swap">Обмін застосунками</string>
     <string name="swap_success">Обмін пройшов удало!</string>
     <string name="swap_switch_to_wifi">Натисніть, щоб перейти до мережі Wi-Fi</string>
@@ -244,7 +241,6 @@
     <string name="useTor">Використовувати Tor</string>
     <string name="useTorSummary">Примусове завантаження трафіку через мережу Tor для покращення приватності. Потрібен Orbot</string>
     <string name="swap_stopping_wifi">Зупиняю Wi-Fi…</string>
-    <string name="repo_provider">Репозиторій: %s</string>
     <string name="update_auto_download">Автозавантаження оновлень</string>
     <string name="update_auto_download_summary">Оновлення завантажуватимуться автоматично, а після завершення пропонуватиметься їх встановити</string>
     <string name="download_pending">Очікування початку завантаження…</string>
@@ -307,10 +303,10 @@
     <string name="updates__hide_updateable_apps">Сховати застосунки</string>
     <string name="updates__show_updateable_apps">Показати застосунки</string>
     <plurals name="updates__download_updates_for_apps">
-        <item quantity="one">Завантажити оновлення для %1$d застосунку.</item>
-        <item quantity="few">Завантажити оновлення для %1$d застосунків.</item>
-        <item quantity="many">Завантажити оновлення для %1$d застосунків.</item>
-        <item quantity="other">Завантажити оновлення для %1$d застосунків.</item>
+        <item quantity="one">Завантажити оновлення для %1$d застосунку:</item>
+        <item quantity="few">Завантажити оновлення для %1$d застосунків:</item>
+        <item quantity="many">Завантажити оновлення для %1$d застосунків:</item>
+        <item quantity="other">Завантажити оновлення для %1$d застосунків:</item>
     </plurals>
     <string name="details_new_in_version">Нове у версії %s</string>
     <string name="antifeatureswarning">Цей застосунок містить функції, які можуть бути вам не до вподоби.</string>
@@ -474,7 +470,6 @@
     <string name="scan_removable_storage_title">Сканувати знімне сховище</string>
     <string name="scan_removable_storage_toast">Сканування %s…</string>
     <string name="scan_removable_storage_summary">Шукати репозиторії пакунків на знімних носіях, таких як SD-карти та USB-накопичувачі</string>
-    <string name="app_repository">Репозиторій: %1$s</string>
     <string name="nearby_splash__read_external_storage">Перевірити наявність репозиторіїв та дзеркал на носії SD.</string>
     <string name="nearby_splash__request_permission">Пошук</string>
     <string name="not_visible_nearby">Поруч не ввімкнено</string>
@@ -570,7 +565,7 @@
     <string name="nearby_splach__external_storage_permission_explainer">F-Droid може шукати репозиторії та дзеркала на SD-карті, але потребує дозволу на це.</string>
     <string name="swap_connection_indexv0_error">Ви намагаєтеся під\'єднатися до когось з застарілою версією F-Droid. Для під\'єднання необхідно оновити застосунок F-Droid. Для оновлення F-Droid можна надіслати версію з вашого пристрою.</string>
     <string name="force_old_installer_title">Примусово використовувати старий встановлювач</string>
-    <string name="force_old_installer_summary">Вимкнути бета-версію встановлювача сеансів, зокрема підтримку автоматичних фонових оновлень.</string>
+    <string name="force_old_installer_summary">Вимкнути встановлювач сеансів, зокрема підтримку автоматичних фонових оновлень.</string>
     <string name="copied_to_clipboard">Скопійовано в буфер обміну</string>
     <string name="copied_url_to_clipboard">URL-адресу скопійовано в буфер обміну</string>
     <string name="copied_permission_to_clipboard">Ім’я дозволу скопійовано в буфер обміну</string>
@@ -611,4 +606,12 @@
     <string name="repo_list_info_text">Репозиторій — це джерело застосунків. У цьому списку показано всі додані на цей час репозиторії. Вимкнені репозиторії не використовуються.
 \n
 \nЯкщо застосунок розміщено у кількох репозиторіях, автоматично надається перевага репозиторію, розташованому вище у списку. Ви можете змінити порядок розміщення репозиторіїв затисканням і перетягуванням.</string>
+    <string name="repo_view_repo">Переглянути репозиторій</string>
+    <string name="repo_add_repo_and_mirror">Додати репозиторій і дзеркало</string>
+    <string name="repo_scan_qr_code">Відсканувати QR-код</string>
+    <string name="repo_preview_included_apps">Включені застосунки:</string>
+    <string name="repo_mirror_exists">Це дзеркало вже додано (%s).</string>
+    <string name="repo_mirror_add_info">URL-адреса, яку ви намагаєтеся додати (%s), є дзеркалом наявного репозиторію.</string>
+    <string name="repo_and_mirror_add_both_info">URL-адреса, яку ви намагаєтеся додати (%s), є дзеркалом нового репозиторія . Буде додано як оригінальний репозиторій, так і дзеркало.</string>
+    <string name="warning_no_compat_versions">Вибраний репозиторій не має сумісних версій застосунків. Щоб отримувати оновлення, віддайте перевагу репозиторію з сумісними версіями.</string>
 </resources>

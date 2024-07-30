@@ -34,7 +34,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -50,7 +49,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.content.ContextCompat;
-import androidx.core.os.ConfigurationCompat;
 import androidx.core.os.LocaleListCompat;
 
 import com.bumptech.glide.Glide;
@@ -76,6 +74,7 @@ import org.fdroid.fdroid.net.DownloaderFactory;
 import org.fdroid.fdroid.panic.HidingManager;
 import org.fdroid.fdroid.receiver.DeviceStorageReceiver;
 import org.fdroid.fdroid.work.CleanCacheWorker;
+import org.fdroid.fdroid.work.RepoUpdateWorker;
 import org.fdroid.index.IndexFormatVersion;
 import org.fdroid.index.RepoManager;
 import org.fdroid.index.RepoUriBuilder;
@@ -86,6 +85,7 @@ import java.net.Proxy;
 import java.nio.ByteBuffer;
 import java.security.Security;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 import java.util.UUID;
 
@@ -106,6 +106,8 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
     private static FDroidApp instance;
     @Nullable
     private static RepoManager repoManager;
+    @Nullable
+    private static RepoUpdateManager repoUpdateManager;
 
     // for the local repo on this device, all static since there is only one
     public static volatile int port;
@@ -236,29 +238,27 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
         super.onConfigurationChanged(newConfig);
         Languages.setLanguage(this);
         App.systemLocaleList = null;
+        updateLanguagesIfNecessary();
+    }
 
+    private void updateLanguagesIfNecessary() {
         // update the descriptions based on the new language preferences
         SharedPreferences atStartTime = getAtStartTimeSharedPreferences();
         final String lastLocaleKey = "lastLocale";
-        String lastLocale = atStartTime.getString(lastLocaleKey, null);
-        String currentLocale;
-        if (Build.VERSION.SDK_INT < 24) {
-            currentLocale = newConfig.locale.toString();
-        } else {
-            currentLocale = newConfig.getLocales().toString();
-        }
-        if (!TextUtils.equals(lastLocale, currentLocale)) {
+        String lastLocales = atStartTime.getString(lastLocaleKey, null);
+        String currentLocales = App.getLocales().toString();
+        if (!TextUtils.equals(lastLocales, currentLocales)) {
+            Log.i(TAG, "Locales changed. Old: " + lastLocales + " New: " + currentLocales);
             onLanguageChanged(getApplicationContext());
         }
-        atStartTime.edit().putString(lastLocaleKey, currentLocale).apply();
+        atStartTime.edit().putString(lastLocaleKey, currentLocales).apply();
     }
 
     public static void onLanguageChanged(Context context) {
         FDroidDatabase db = DBHelper.getDb(context);
         Single.fromCallable(() -> {
             long now = System.currentTimeMillis();
-            LocaleListCompat locales =
-                    ConfigurationCompat.getLocales(Resources.getSystem().getConfiguration());
+            LocaleListCompat locales = App.getLocales();
             db.afterLocalesChanged(locales);
             Log.d(TAG, "Updating DB locales took: " + (System.currentTimeMillis() - now) + "ms");
             return true;
@@ -302,6 +302,10 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
         Preferences preferences = Preferences.get();
 
         if (preferences.promptToSendCrashReports()) {
+            final String subject = String.format(Locale.ENGLISH,
+                                                 "%s %s: Crash Report",
+                                                 BuildConfig.APPLICATION_ID,
+                                                 BuildConfig.VERSION_NAME);
             ACRA.init(this, new CoreConfigurationBuilder()
                     .withReportContent(
                             ReportField.USER_COMMENT,
@@ -321,6 +325,8 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
                     .withPluginConfigurations(
                             new MailSenderConfigurationBuilder()
                                     .withMailTo(BuildConfig.ACRA_REPORT_EMAIL)
+                                    .withReportFileName(BuildConfig.ACRA_REPORT_FILE_NAME)
+                                    .withSubject(subject)
                                     .build(),
                             new DialogConfigurationBuilder()
                                     .withResTheme(R.style.Theme_App)
@@ -357,7 +363,7 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
         // force setting network state to ensure it is set before UpdateService checks it
         networkState = ConnectivityMonitorService.getNetworkState(this);
         ConnectivityMonitorService.registerAndStart(this);
-        UpdateService.schedule(getApplicationContext());
+        RepoUpdateWorker.scheduleOrCancel(getApplicationContext());
 
         FDroidApp.initWifiSettings();
         WifiStateChangeService.start(this, null);
@@ -381,9 +387,17 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
         // if the underlying OS version has changed, then fully rebuild the database
         SharedPreferences atStartTime = getAtStartTimeSharedPreferences();
         if (Build.VERSION.SDK_INT != atStartTime.getInt("build-version", Build.VERSION.SDK_INT)) {
-            UpdateService.forceUpdateRepo(this);
+            Utils.runOffUiThread(() -> {
+                DBHelper.resetTransient(getApplicationContext());
+                return true;
+            }, result -> RepoUpdateWorker.updateNow(getApplicationContext()));
         }
         atStartTime.edit().putInt("build-version", Build.VERSION.SDK_INT).apply();
+
+        if (!preferences.isIndexNeverUpdated()) {
+            // if system locales have changed since the app's last run, refresh cache as necessary
+            updateLanguagesIfNecessary();
+        }
 
         final String queryStringKey = "http-downloader-query-string";
         if (preferences.sendVersionAndUUIDToServers()) {
@@ -521,6 +535,7 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
 
     public static Repository createSwapRepo(String address, String certificate) {
         long now = System.currentTimeMillis();
+        if (certificate == null) certificate = "d0ef";
         return new Repository(42L, address, now, IndexFormatVersion.ONE, certificate, 20001L, 42,
                 now);
     }
@@ -539,6 +554,13 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
                     DownloaderFactory.HTTP_MANAGER, repoUriBuilder);
         }
         return repoManager;
+    }
+
+    public static RepoUpdateManager getRepoUpdateManager(Context context) {
+        if (repoUpdateManager == null) {
+            repoUpdateManager = new RepoUpdateManager(context, DBHelper.getDb(context), getRepoManager(context));
+        }
+        return repoUpdateManager;
     }
 
     /**

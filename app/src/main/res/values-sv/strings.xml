@@ -4,7 +4,6 @@
     <string name="installIncompatible">Appen är inkompatibel med din enhet, installera ändå?</string>
     <string name="version">Version</string>
     <string name="delete">Ta bort</string>
-    <string name="enable_nfc_send">Aktivera NFC-sändning…</string>
     <string name="cache_downloaded">Behåll cachade appar</string>
     <string name="updates">Uppdateringar</string>
     <string name="other">Annat</string>
@@ -189,11 +188,8 @@
     </string>
     <string name="empty_can_update_app_list">Grattis!\nDina appar är uppdaterade.</string>
     <string name="install_error_unknown">Misslyckades att installera på grund av ett okänt problem</string>
-    <string name="repo_provider">Förråd: %s</string>
     <string name="uninstall_error_unknown">Det gick inte att avinstallera på grund av ett okänt fel</string>
     <string name="system_install_denied_permissions">De privilegierade tillstånden har inte beviljats utökningen! Skapa en felrapport!</string>
-    <string name="swap_nfc_title">Tryck för att byta</string>
-    <string name="swap_nfc_description">Om din vän har F-Droid och NFC påslaget, lägg samman era enheter.</string>
     <string name="swap_join_same_wifi_desc">För att utbyta via wifi, se till att ni är på samma nätverk. Om ni inte har åtkomst till samma nätverk, kan en av er skapa en wifi-surfzon.</string>
     <string name="swap_join_this_hotspot">Hjälp din vän ansluta sig till din surfzon</string>
     <string name="swap_success">Utbyte lyckades!</string>
@@ -460,7 +456,6 @@
     <string name="scan_removable_storage_toast">Skannar %s…</string>
     <string name="swap_toast_using_path">Använder %1$s</string>
     <string name="scan_removable_storage_summary">Leta efter paketförråd på flyttbar lagring som SD-kort och USB-minnen</string>
-    <string name="app_repository">Förråd: %1$s</string>
     <string name="main_menu__updates">Uppdateringar</string>
     <string name="nearby_splash__read_external_storage">Sök på SD-kort efter förråd och speglar.</string>
     <string name="nearby_splash__request_permission">Sök nu</string>
@@ -541,9 +536,9 @@
     <string name="nearby_splace__external_storage_permission_button">Testa den</string>
     <string name="force_old_installer_title">Tvinga gammal installerare</string>
     <string name="repo_state_adding">Lägger till förråd…</string>
-    <string name="repo_invalid">Ogiligt förråd.
+    <string name="repo_invalid">Ogiltigt förråd.
 \n
-\nKontakta förrårdsansvarig och upplys de om problemet.</string>
+\nKontakta förrådsansvarig och upplys de om problemet.</string>
     <string name="repo_exists">Detta förråd är redan tillagt.</string>
     <string name="repo_add_new_title">Lägg till förråd</string>
     <string name="nearby_splach__external_storage_permission_explainer">F-Droid kan söka efter förråd och speglar på ditt SD-kort men kräver behörighet för att göra det.</string>
@@ -563,4 +558,7 @@
 \n
 \nVänligen försäkra dig om att filförrådet som du lägger till är pålitligt.</string>
     <string name="swap_connection_indexv0_error">Du försöker ansluta till någon med en utdaterad version av F-Droid. För att ansluta så måste de uppgradera sin F-Droid-app. De kan använda byt för att uppdatera sin F-Droid-app från dig.</string>
+    <string name="useDnsCache">Använd DNS-cache</string>
+    <string name="useDnsCacheSummary">Använd cachade resultat för att minimera DNS-förfrågningar.</string>
+    <string name="app_details_repository_preferred">(föredras)</string>
 </resources>

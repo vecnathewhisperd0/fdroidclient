@@ -1,0 +1,15 @@
+* Przebud. repo i obsługi kopii lustrz., zarówno UX, jak i kodu
+
+* Wyśw. podgl. nowych repo
+
+* Instal. przez F-Droid i F-Droid Basic obsług. teraz autom. aktualiz. w tle
+
+* W Androidzie 14 oznacz. apek z nieobsług. wersją docel. pakietu SDK jako niezgodne #2692
+
+* Długie naciśn., aby skop. linki, upraw. i wersje na ekranie szczeg. apki (@Tobias_Groza)
+
+* Wyśw. niekompatyb. apek tylko, gdy zezw. w Ustaw. #41 (@pigpig)
+
+* Nowe ustaw. bramek IPFS
+
+* Wybór języka dla poszczeg. apek (@Licaon-Kter)

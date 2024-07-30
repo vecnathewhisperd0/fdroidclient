@@ -70,7 +70,7 @@
     <!-- as in software updates -->
     <string name="notify_on">Show a notification when updates are available</string>
     <string name="force_old_installer_title">Force old installer</string>
-    <string name="force_old_installer_summary">Disable the beta Session Installer, including support for automatic background updates.</string>
+    <string name="force_old_installer_summary">Disable the Session Installer, including support for automatic background updates.</string>
     <string name="system_installer">Privileged Extension</string>
     <string name="system_installer_on">Use Privileged Extension to install, update, and remove packages</string>
     <string name="local_repo_name">Name of your Local Repo</string>
@@ -173,8 +173,8 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <!-- This is a button label, it must be the right size, or the layout gets messed up. It should ideally be 10-20 characters. -->
     <string name="updates__show_updateable_apps">Show apps</string>
     <plurals name="updates__download_updates_for_apps">
-        <item quantity="one">Download update for %1$d app.</item>
-        <item quantity="other">Download updates for %1$d apps.</item>
+        <item quantity="one">Download update for %1$d app:</item>
+        <item quantity="other">Download updates for %1$d apps:</item>
     </plurals>
     <!-- "updates" as in software updates, "Data" as in cellular internet service -->
     <string name="updates_disabled_by_settings">All updates disabled by Data/WiFi Settings</string>
@@ -184,11 +184,11 @@ This often occurs with apps installed via Google Play or other sources, if they 
 
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="repo_add_title">Add new repository</string>
     <string name="repo_add_new_title">Add repository</string>
     <string name="repo_add_add">Add</string>
     <string name="repo_add_mirror">Add mirror</string>
-    <string name="repo_add_new_mirror">Add as new mirror</string>
+    <string name="repo_add_repo_and_mirror">Add repository and mirror</string>
+    <string name="repo_view_repo">View repository</string>
     <string name="links">Links</string>
     <string name="versions">Versions</string>
     <string name="more">More</string>
@@ -207,12 +207,14 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="choose_bt_send">Choose Bluetooth send method</string>
 
     <string name="repo_intro">A repository is an additional source of apps. Third-party ones you add here have different standards than those providing apps built by F-Droid itself.\n\nPlease ensure that the repository you are adding is trustworthy.</string>
+    <string name="repo_scan_qr_code">Scan QR Code</string>
     <string name="repo_state_fetching">Fetching repository…</string>
     <string name="repo_state_adding">Adding repository…</string>
     <string name="repo_enter_url">Enter repository URL manually</string>
     <string name="repo_add_url">Repository address</string>
     <string name="repo_add_fingerprint">Fingerprint (optional)</string>
-    <string name="repo_exists">This repo was already added.</string>
+    <string name="repo_preview_included_apps">Included apps:</string>
+    <string name="repo_exists">This repository was already added.</string>
     <string name="repo_exists_add_fingerprint">%1$s is already setup, this will add new key information.</string>
     <string name="repo_exists_enable">%1$s is already setup, confirm that you want to re-enable it.</string>
     <string name="repo_exists_and_enabled">%1$s is already setup and enabled.</string>
@@ -222,6 +224,9 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="repo_io_error">Error connecting to the repository.</string>
     <string name="repo_error_adding_archive">Archive repositories can not be added directly. Tap the repository in the list and enable the archive there.</string>
     <string name="repo_share_not_found">Could not find repo address in shared text.</string>
+    <string name="repo_mirror_exists">This mirror was already added (%s).</string>
+    <string name="repo_mirror_add_info">The URL you are trying to add (%s) is a mirror of an existing repository.</string>
+    <string name="repo_and_mirror_add_both_info">The URL you are trying to add (%s) is a mirror of a new repository. Both the original repository and the mirror will be added.</string>
     <string name="bad_fingerprint">Bad fingerprint</string>
     <string name="invalid_url">This is not a valid URL.</string>
     <string name="malformed_repo_uri">Ignoring malformed repo URI: %s</string>
@@ -674,6 +679,8 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="interval_1w">Check for updates weekly</string>
     <!-- "updates" as in software updates -->
     <string name="interval_2w">Check for updates every 2 weeks</string>
+    <!-- "updates" as in software updates -->
+    <string name="auto_update_time">Earliest next update: %s</string>
 
     <string name="keep_hour">1 Hour</string>
     <string name="keep_day">1 Day</string>
@@ -745,6 +752,7 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="details_last_updated_today">Updated today</string>
     <string name="warning_scaning_qr_code">Your camera doesn\'t seem to have an autofocus. It might be difficult to scan the code.</string>
     <string name="warning_target_sdk">This app was built for an older version of Android and cannot be updated automatically.</string>
+    <string name="warning_no_compat_versions">The selected repository has no compatible app versions. To receive updates, prefer a repository with compatible versions.</string>
     <string name="undo">Undo</string>
     <string name="app_list__dismiss_installing_app">Installation cancelled</string>
     <string name="turn_on_wifi">Turn on wifi</string>

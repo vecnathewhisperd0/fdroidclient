@@ -4,7 +4,6 @@
     <string name="installIncompatible">Uygulama aygıtınızla uyumlu değil, yine de yüklensin mi\?</string>
     <string name="version">Sürüm</string>
     <string name="delete">Sil</string>
-    <string name="enable_nfc_send">NFC ile göndermeyi etkinleştir…</string>
     <string name="cache_downloaded">Önbelleklenen uygulamaları sakla</string>
     <string name="updates">Güncellemeler</string>
     <string name="other">Diğer</string>
@@ -128,7 +127,6 @@
     <string name="category_Science_Education">Bilim ve eğitim</string>
     <string name="category_Security">Güvenlik</string>
     <string name="category_System">Sistem</string>
-    <string name="swap_nfc_description">Arkadaşınızda F-Droid varsa ve NFC açıksa aygıtlarınızı birbirine dokundurun.</string>
     <string name="swap_join_same_wifi">Arkadaşınızla aynı kablosuz ağa katılın</string>
     <string name="swap">Uygulama takası</string>
     <string name="swap_no_wifi_network">Henüz ağ yok</string>
@@ -185,7 +183,6 @@
 \nUygulamalarınız güncel.</string>
     <string name="install_error_unknown">Bilinmeyen bir hata nedeniyle yüklenemedi</string>
     <string name="uninstall_error_unknown">Bilinmeyen bir hata nedeniyle kaldırılamadı</string>
-    <string name="swap_nfc_title">Takaslamak için dokunun</string>
     <string name="swap_success">Takas başarılı!</string>
     <string name="swap_switch_to_wifi">Bir kablosuz ağa geçmek için dokunun</string>
     <string name="swap_dont_show_again">Bunu bir daha gösterme</string>
@@ -246,7 +243,6 @@
     <string name="menu_email">Geliştiriciye E-posta Gönder</string>
     <string name="update_auto_download">Güncellemeleri otomatik al</string>
     <string name="update_auto_download_summary">Güncellemeler otomatik olarak indirilir ve yüklenmeleri istenir</string>
-    <string name="repo_provider">Depo: %s</string>
     <string name="useTor">Tor kullan</string>
     <string name="swap_stopping_wifi">Kablosuz Ağ Durduruluyor…</string>
     <string name="useTorSummary">Arttırılmış gizlilik için indirme trafiğinin Tor\'dan geçmesini zorunlu kıl. Orbot gerektirir</string>
@@ -318,8 +314,8 @@
     <string name="updates__hide_updateable_apps">Uygulamaları gizle</string>
     <string name="updates__show_updateable_apps">Uygulamaları göster</string>
     <plurals name="updates__download_updates_for_apps">
-        <item quantity="one">%1$d uygulama için güncellemeyi indir.</item>
-        <item quantity="other">%1$d uygulama için güncellemeleri indir.</item>
+        <item quantity="one">%1$d uygulama için güncellemeyi indir:</item>
+        <item quantity="other">%1$d uygulama için güncellemeleri indir:</item>
     </plurals>
     <string name="details_new_in_version">%s sürümündeki yenilikler</string>
     <string name="antifeatureswarning">Bu uygulama sevmeyebileceğiniz özellikler içerir.</string>
@@ -454,7 +450,6 @@
     <string name="about_forum">Destek forumu</string>
     <string name="app_suggested">Önerilen</string>
     <string name="app_size">Boyut: %1$s</string>
-    <string name="app_repository">Depo: %1$s</string>
     <string name="scan_removable_storage_title">Çıkarılabilir depolama alanını tara</string>
     <string name="scan_removable_storage_summary">SD Kart ve USB sürücü gibi çıkarılabilir depolama birimlerinde paket depolarına bak</string>
     <string name="nearby_splash__read_external_storage">Depolar ve yansımalar için SD Kart ara.</string>
@@ -551,7 +546,7 @@
     <string name="swap_banner_message">Uygulamaları paylaşmak için Wi-Fi\'nizi açın ve arkadaşınızla aynı ağa bağlanın.</string>
     <string name="nearby_splace__external_storage_permission_button">Dene</string>
     <string name="force_old_installer_title">Eski yükleyiciyi zorla</string>
-    <string name="force_old_installer_summary">Beta Oturum Yükleyicisini devre dışı bırak, buna Otomatik arka plan güncellemeleri desteği de dahildir.</string>
+    <string name="force_old_installer_summary">Oturum Kurucusunu devre dışı bırakın, buna otomatik arka plan güncellemeleri desteği de dahildir.</string>
     <string name="nearby_splach__external_storage_permission_explainer">F-Droid, SD Kartınızdaki depoları ve aynaları arayabilir ancak bunu yapmak için izninize ihtiyacı var.</string>
     <string name="swap_connection_indexv0_error">F-Droid\'in eski sürümüne sahip birisiyle bağlantı kurmaya çalışıyorsunuz. Bağlantı kurmak için F-Droid uygulamalarını güncellemeleri gerekiyor. F-Droid uygulamalarını güncellemek için sizden takas edebilirler.</string>
     <string name="copied_to_clipboard">Panoya kopyalandı</string>

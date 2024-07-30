@@ -73,7 +73,6 @@
     <string name="version">Versão</string>
     <string name="by_author_format">de %s</string>
     <string name="delete">Excluir</string>
-    <string name="enable_nfc_send">Ativar envio NFC…</string>
     <string name="prompt_to_send_crash_reports">Pedir para enviar relatórios de erros</string>
     <string name="prompt_to_send_crash_reports_summary">Recolher dados sobre os erros e pedir para os enviar ao programador</string>
     <string name="cache_downloaded">Manter aplicações em cache</string>
@@ -145,7 +144,6 @@
     <string name="app__install_downloaded_update">Atualizar</string>
     <string name="app_installed_media">Ficheiro instalado em %s</string>
     <string name="app_permission_storage">F-Droid necessita de aceder ao armazenamento. Por favor conceda essa permissão no próximo ecrã para continuar com a instalação.</string>
-    <string name="app_repository">Repositório: %1$s</string>
     <string name="app_size">Tamanho: %1$s</string>
     <string name="app_list_download_ready">Descarregada e pronta para instalar</string>
     <string name="app_list__dismiss_app_update">Atualização ignorada</string>
@@ -163,9 +161,9 @@
     <string name="updates__hide_updateable_apps">Ocultar aplicações</string>
     <string name="updates__show_updateable_apps">Mostrar aplicações</string>
     <plurals name="updates__download_updates_for_apps">
-        <item quantity="one">Descarregar atualização para %1$d aplicação.</item>
-        <item quantity="many">Descarregar atualizações para %1$d aplicações.</item>
-        <item quantity="other">Descarregar atualizações para %1$d aplicações.</item>
+        <item quantity="one">Descarregar atualização para %1$d app:</item>
+        <item quantity="many">Descarregar atualizações para %1$d apps:</item>
+        <item quantity="other">Descarregar atualizações para %1$d apps:</item>
     </plurals>
     <string name="updates_disabled_by_settings">Todas as atualizações desativadas conforme as definições de Wi-Fi/dados móveis</string>
     <string name="repo_add_title">Adicionar novo repositório</string>
@@ -190,7 +188,6 @@
     <string name="bad_fingerprint">Identificação inválida</string>
     <string name="invalid_url">URL inválido.</string>
     <string name="malformed_repo_uri">A ignorar o URI inválido do repositório: %s</string>
-    <string name="repo_provider">Repositório: %s</string>
     <string name="repositories_summary">Adicionar mais fontes de aplicações</string>
     <string name="menu_open">Abrir</string>
     <string name="menu_ignore_all">Ignorar todas as atualizações</string>
@@ -218,7 +215,7 @@
     <string name="antifeatures">Características indesejadas</string>
     <string name="antiadslist">Esta aplicação contém publicidade</string>
     <string name="antinonfreeadlist">Esta aplicação promove add-ons não livres</string>
-    <string name="antinonfreenetlist">Esta aplicação promove ou depende inteiramente de um serviço de rede não livre</string>
+    <string name="antinonfreenetlist">Esta aplicação promove ou depende inteiramente de um serviço de rede não alterável ou não gratuito</string>
     <string name="antinonfreedeplist">Esta aplicação depende de outras aplicações não livres</string>
     <string name="antiupstreamnonfreelist">O código-fonte não é totalmente livre</string>
     <string name="antinonfreeassetslist">Esta aplicação contém conteúdo não livre</string>
@@ -335,8 +332,6 @@
     <string name="nearby_splash__both_parties_need_fdroid">Ambas as partes necessitam de %1$s.</string>
     <string name="nearby_splash__read_external_storage">Pesquisar repositórios e espelhos no cartão SD.</string>
     <string name="nearby_splash__request_permission">Pesquise</string>
-    <string name="swap_nfc_title">Toque para trocar</string>
-    <string name="swap_nfc_description">Se a outra pessoa tiver o F-Droid instalado e o NFC ativo, aproximem os vossos dispositivos.</string>
     <string name="swap_join_same_wifi">Junte-se à mesma rede Wi-Fi da outra pessoa</string>
     <string name="swap_join_same_wifi_desc">Para trocar através de Wi-Fi, certifique-se que estão ambos na mesma rede. Se não estiverem na mesma rede, um de vós pode criar um ponto de acesso (hotspot) Wi-Fi.</string>
     <string name="swap_join_this_hotspot">Ajude a outra pessoa a entrar no seu ponto de acesso</string>
@@ -547,9 +542,9 @@
     <string name="repo_last_update_downloaded">Última atualização descarregada</string>
     <string name="copied_to_clipboard">Copiado para área de transferência</string>
     <string name="turn_on_wifi">Ligar o Wi-Fi</string>
-    <string name="nearby_splace__external_storage_permission_button">Tente isso</string>
+    <string name="nearby_splace__external_storage_permission_button">Experimentar</string>
     <string name="force_old_installer_title">Forçar antigo instalador</string>
-    <string name="force_old_installer_summary">Desativar o beta Session Installer, incluindo suporte para atualizações automáticas de fundo.</string>
+    <string name="force_old_installer_summary">Desativar o instalador da sessão, incluindo o suporte para atualizações automáticas em segundo plano.</string>
     <string name="repo_state_adding">A adicionar repositório…</string>
     <string name="repo_invalid">Repositório inválido.
 \n
@@ -560,14 +555,57 @@
     <string name="nearby_splach__external_storage_permission_explainer">F-Droid pode procurar por repositórios e espelhos no seu Cartão de Memória, mas precisa da sua permissão para fazer isso.</string>
     <string name="repo_state_fetching">A obter o repositório…</string>
     <string name="copied_permission_to_clipboard">Nome da permissão copiada para área de transferência</string>
-    <string name="copied_url_to_clipboard">URL copiada para clipboard</string>
+    <string name="copied_url_to_clipboard">URL copiado para a área de transferência</string>
     <string name="repo_io_error">Erro ao conectar com o repositório.</string>
     <string name="repo_enter_url">Digite a URL do repositório manualmente</string>
     <string name="repo_add_new_mirror">Adicionar um novo espelho</string>
     <string name="repo_intro">Um repositório é uma fonte adicional de apps. Os de terceiros que adiciona aqui têm padrões diferentes àqueles que fornecem aps construídos pelo próprio F-Droid.
 \n
 \nCertifique-se que o repositório que está a adicionar é confiável.</string>
-    <string name="swap_connection_indexv0_error">Você tentando se conecta com alguém mesmo sua versão do F-Droid estando ultrapassada . Para voltar a se conectar a eles tente atualizar seu aplicativo F-Droid. Eles podem usar um compartilhamento para ajuda-lo atualizar seu aplicativo F-Droid.</string>
-    <string name="repo_num_apps_button">Mostrar aplicativos</string>
-    <string name="swap_banner_message">Para compartilhar seus aplicativos, inicie seu Wi-Fi e conecte-se à mesma rede que seu amigo.</string>
+    <string name="swap_connection_indexv0_error">Está a tentar ligar-se a alguém com uma versão desatualizada do F-Droid. Para se conectar, o outro dispositivo precisa de atualizar a aplicação F-Droid. Podem utilizar a troca para atualizar a sua aplicação F-Droid a partir de si.</string>
+    <string name="repo_num_apps_button">Mostrar aplicações</string>
+    <string name="swap_banner_message">Para trocar aplicações, inicie o seu Wi-Fi e ligue-se à mesma rede que o seu amigo.</string>
+    <string name="ipfsgw_summary_disabled">Descarregar aplicações usando endpoints da web IPFS: desativado</string>
+    <plurals name="ipfsgw_summary">
+        <item quantity="one">Descarregar aplicação usando endpoints da web IPFS: %1$d ativado</item>
+        <item quantity="many">Descarregar aplicações usando endpoints da web IPFS: %1$d ativados</item>
+        <item quantity="other">Descarregar aplicações usando endpoints da web IPFS: %1$d ativados</item>
+    </plurals>
+    <string name="ipfsgw_add_title">Adicionar gateway de IPFS</string>
+    <string name="ipfsgw_add_add">Adicionar</string>
+    <string name="ipfsgw_caption_official_gateways">Gateways IPFS oficiais</string>
+    <string name="ipfsgw_caption_custom_gateways">Gateways de IPFS personalizados</string>
+    <string name="paste">Colar</string>PluralsCandidate
+
+    <string name="ipfsgw_explainer">Descarregar aplicações a partir de pontos finais web IPFS. (Funciona apenas para repositórios F-Droid com suporte IPFS.)</string>
+    <string name="app_list_no_suggested_version">Nenhuma versão recomendada para instalação.</string>
+    <string name="repo_list_info_title">Lista de repositórios</string>
+    <string name="repo_list_info_text">Um repositório é uma fonte de aplicações. Esta lista mostra todos os repositórios atualmente adicionados. Os repositórios desativados não são utilizados.
+\n
+\nSe uma aplicação estiver em mais do que um repositório, o repositório no topo da lista é automaticamente preferido. Pode reordenar os repositórios premindo longamente e arrastando-os.</string>
+    <string name="app_details_repository_preferred">(preferido)</string>
+    <string name="app_details_repository_expand">Expandir a lista de repositórios</string>
+    <string name="repo_error_adding_archive">Os repositórios de arquivos não podem ser adicionados diretamente. Toque no repositório da lista e ative o arquivo nesse local.</string>
+    <string name="useDnsCache">Utilizar a cache DNS</string>
+    <string name="useDnsCacheSummary">Utilizar resultados em cache para minimizar as consultas de DNS.</string>
+    <string name="repo_archive_toggle">Arquivo do Repositório</string>
+    <string name="repo_archive_toggle_description">Mostrar aplicações arquivadas e versões desatualizadas de aplicações</string>
+    <string name="repo_archive_failed">O repositório de arquivos não está atualmente disponível</string>
+    <string name="repo_disable_warning_button">Desativar</string>
+    <string name="repo_disable_warning">A desativação deste repositório removerá o seu estatuto de \"preferido\" de todas as aplicações.</string>
+    <string name="ipfsgw_title">Gateways IPFS</string>
+    <string name="app_details_repository">Repositório</string>
+    <string name="app_details_repositories">Repositórios</string>
+    <string name="app_details_repository_button_prefer">Preferir Repositório</string>
+    <string name="repositories_last_update">Última atualização: %s</string>
+    <string name="repositories_last_update_never">nunca</string>
+    <string name="repo_share_not_found">Não foi possível encontrar o endereço do repositório no texto partilhado.</string>
+    <string name="repo_and_mirror_add_both_info">A URL que tenta adicionar (%s) é um espelho de um novo repositório. Tanto o repositório original como o espelho serão adicionados.</string>
+    <string name="warning_no_compat_versions">O repositório selecionado não tem versões compatíveis com a app. Para receber atualizações, prefira um repositório com versões compatíveis.</string>
+    <string name="repo_add_repo_and_mirror">Adicionar repositório e espelho</string>
+    <string name="repo_view_repo">Visualizar repositório</string>
+    <string name="repo_scan_qr_code">Ler código QR</string>
+    <string name="repo_preview_included_apps">Apps incluídos:</string>
+    <string name="repo_mirror_exists">Este espelho já foi adicionado (%s).</string>
+    <string name="repo_mirror_add_info">A URL que tenta adicionar (%s) é um espelho de um repositório existente.</string>
 </resources>

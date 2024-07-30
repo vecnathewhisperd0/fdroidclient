@@ -7,7 +7,6 @@
     <string name="version">版本</string>
     <string name="by_author_format">出自 %s</string>
     <string name="delete">刪除</string>
-    <string name="enable_nfc_send">啟用 NFC 傳送…</string>
     <string name="prompt_to_send_crash_reports">提示傳送彈 app 報告</string>
     <string name="prompt_to_send_crash_reports_summary">收集有關彈 app 嘅資料，然後問下係咪傳送返畀開發人員</string>
     <string name="cache_downloaded">保留快取嘅 app</string>
@@ -196,7 +195,7 @@
     <string name="privacy">私隱</string>
     <string name="preventScreenshots_summary">唔俾截圖，同時喺 apps 清單度遮住畫面</string>
     <string name="proxy_port">代理伺服器嘅連接埠</string>
-    <string name="proxy_port_summary">您嘅代理伺服器個連接埠冧碼 (例如 8118)</string>
+    <string name="proxy_port_summary">您嘅代理伺服器個連接埠冧把 (例如 8118)</string>
     <string name="enable_proxy_summary">設定所有網絡請求都用 HTTP 代理伺服器</string>
     <string name="proxy_host">代理伺服器主機</string>
     <string name="proxy_host_summary">您嘅代理伺服器個主機名 (例如 127.0.0.1)</string>
@@ -226,8 +225,6 @@
     <string name="share_apk_error">分享唔到個 app 檔</string>
     <string name="nearby_splash__download_apps_from_people_nearby">個網離太遠？一於由身在咫尺嘅人過啲 app 畀您！</string>
     <string name="nearby_splash__request_permission">立即搜查</string>
-    <string name="swap_nfc_title">對碰去兌換</string>
-    <string name="swap_nfc_description">若果您嘅好友有 F-Droid 又開著 NFC 就將您哋兩部機拍埋一齊啦。</string>
     <string name="swap_join_same_wifi">同您嘅好友連去同一個 Wi-Fi</string>
     <string name="swap_join_same_wifi_desc">若要用 Wi-Fi 兌換，請確定您哋連咗去相同嘅網絡。若果您冇得連去相同嘅網絡，您哋是但一位可以建立一個 Wi-Fi 流動熱點。</string>
     <string name="swap_join_this_hotspot">幫好友連去您嘅流動熱點</string>
@@ -388,7 +385,6 @@
     <string name="local_repo_https_on">本機存庫用加密嘅 HTTPS:// 連線</string>
     <string name="scan_removable_storage_title">掃描即插即用儲存裝置</string>
     <string name="scan_removable_storage_summary">喺即插即用儲存裝置 (諸如 SD 卡同 USB 手指) 入面尋覓封裝軟件存庫</string>
-    <string name="app_repository">存庫：%1$s</string>
     <string name="app_list_results_hidden_antifeature_settings">按您嘅無心裝載設定，收起咗部份結果。</string>
     <string name="repo_add_title">加入新嘅存庫</string>
     <string name="repo_add_add">加入</string>
@@ -451,7 +447,6 @@
     <string name="malformed_repo_uri">飛過不良嘅存庫 URI：%s</string>
     <string name="has_disallow_install_unknown_sources_globally">您嘅裝置管理員未允許安裝未知來源嘅 apps，即包括新嘅存庫</string>
     <string name="has_disallow_install_unknown_sources">呢位使用者冇得加入未知嘅來源，即包括新嘅存庫</string>
-    <string name="repo_provider">存庫：%s</string>
     <string name="repositories_summary">加入額外嘅 apps 來源</string>
     <string name="menu_select_for_wipe">揀選邊啲要抹走</string>
     <string name="panic_app_setting_title">緊急掣 App</string>
@@ -545,7 +540,7 @@
     <string name="swap_connection_indexv0_error">對家用緊舊版嘅 F-Droid。要升級佢個 F-Droid app 至能夠連線。佢可以同您兌換，等您過個 F-Droid app 畀佢更新。</string>
     <string name="copied_to_clipboard">複製咗去剪貼簿</string>
     <string name="force_old_installer_title">強制用舊版安裝器</string>
-    <string name="force_old_installer_summary">停用測試緊嘅工作階段安裝器，包括自動化背景更新嘅支援。</string>
+    <string name="force_old_installer_summary">停用工作階段安裝器，包括自動化背景更新嘅支援。</string>
     <string name="copied_permission_to_clipboard">複製咗權限個名去剪貼簿</string>
     <string name="copied_url_to_clipboard">複製咗個 URL 去剪貼簿</string>
     <string name="targetsdk_or_later">目標版本為 %s</string>

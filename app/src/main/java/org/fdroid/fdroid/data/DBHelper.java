@@ -36,8 +36,8 @@ import org.fdroid.database.FDroidDatabase;
 import org.fdroid.database.FDroidDatabaseHolder;
 import org.fdroid.database.InitialRepository;
 import org.fdroid.fdroid.R;
-import org.fdroid.fdroid.UpdateService;
 import org.fdroid.fdroid.Utils;
+import org.fdroid.fdroid.work.RepoUpdateWorker;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -107,10 +107,11 @@ public class DBHelper {
             migrator.runMigrations(context, db);
             migrator.removeOldDb(context);
             // force update on UiThread in case we need to show Toasts
-            new Handler(Looper.getMainLooper()).post(() -> UpdateService.forceUpdateRepo(context));
+            DBHelper.resetTransient(context);
+            new Handler(Looper.getMainLooper()).post(() -> RepoUpdateWorker.updateNow(context));
         } else if (hasEnabledRepo) {
             // update repos on the UiThread after pre-populating them
-            new Handler(Looper.getMainLooper()).post(() -> UpdateService.updateNow(context));
+            new Handler(Looper.getMainLooper()).post(() -> RepoUpdateWorker.updateNow(context));
         }
     }
 
@@ -134,8 +135,8 @@ public class DBHelper {
     }
 
     /**
-     * Load Additional Repos first, then Default Repos. This way, Default
-     * Repos will be shown after the OEM-added ones on the Manage Repos
+     * Load Default Repos first, then Additional Repos. This way, the OEM-added repos
+     * will be shown after the default ones (i.e. lower priority) on the Manage Repos
      * screen.  This throws a hard {@code Exception} on parse errors since
      * Default Repos are built into the APK.  So it should fail as hard and fast
      * as possible so the developer catches the problem.
@@ -164,9 +165,10 @@ public class DBHelper {
                     ") != 0, FYI the priority item was removed in v1.16");
         }
 
+        // add default repos first, so they are at the top of the list with higher priority
         List<String> repos = new ArrayList<>(additionalRepos.size() + defaultRepos.size());
-        repos.addAll(additionalRepos);
         repos.addAll(defaultRepos);
+        repos.addAll(additionalRepos);
 
         final int descriptionIndex = 2;
         for (int i = descriptionIndex; i < repos.size(); i += REPO_XML_ITEM_COUNT) {

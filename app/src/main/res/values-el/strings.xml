@@ -4,7 +4,6 @@
     <string name="installIncompatible">Η εφαρμογή δεν είναι συμβατή με τη συσκευή σας. Θέλετε να την εγκαταστήσετε παρόλα αυτά;</string>
     <string name="version">Έκδοση</string>
     <string name="delete">Διαγραφή</string>
-    <string name="enable_nfc_send">Ενεργοποίηση Αποστολής NFC…</string>
     <string name="cache_downloaded">Διατήρηση προσωρινά αποθηκευμένων εφαρμογών</string>
     <string name="updates">Ενημερώσεις</string>
     <string name="other">Άλλο</string>
@@ -237,10 +236,6 @@
     <string name="interval_2w">Να γίνεται έλεγχος για ενημερώσεις κάθε 2 εβδομάδες</string>
     <string name="theme_light">Φωτεινό</string>
     <string name="theme_dark">Σκοτεινό</string>
-    <string name="swap_nfc_title">Αγγίξτε για ανταλλαγή</string>
-    <string name="swap_nfc_description">Αν ο φίλος σας έχει το F-Droid και ενεργοποιημένο το NFC αγγίξτε μεταξύ τους τις
-        συσκευές σας.
-    </string>
     <string name="swap_join_same_wifi_desc">Για να ανταλλάξετε χρησιμοποιώντας Wi-Fi, βεβαιωθείτε ότι είσαστε στο ίδιο
         δίκτυο. Αν δεν έχετε πρόσβαση στο ίδιο δίκτυο, ένας από εσάς μπορεί να δημιουργήσει ένα σημείο πρόσβασης Wi-Fi.
     </string>
@@ -250,7 +245,7 @@
     <string name="crash_dialog_comment_prompt">Μπορείτε να προσθέσετε περισσότερες πληροφορίες και σχόλια εδώ:</string>
     <string name="status_inserting_apps">Αποθήκευση λεπτομερειών εφαρμογής</string>
     <string name="about_license">Άδεια</string>
-    <string name="login_name">Όνομα χρήστη</string>
+    <string name="login_name">Όνομα του χρήστη</string>
     <string name="login_password">Κωδικός πρόσβασης</string>
     <string name="repo_edit_credentials">Αλλαγή κωδικού πρόσβασης</string>
     <string name="login_title">Απαιτείται πιστοποίηση</string>
@@ -263,7 +258,6 @@
     <string name="update_auto_install_summary">Λήψη και εγκατάσταση αναβαθμίσεων στο παρασκήνιο, εμφανίζοντας μία ειδοποίηση</string>
     <string name="repo_error_empty_username">Κενό όνομα χρήστη, τα διαπιστευτήρια δεν άλλαξαν</string>
     <string name="versions">Εκδόσεις</string>
-    <string name="repo_provider">Αποθετήριο: %s</string>
     <string name="menu_email">Ηλ. ταχυδρομείο δημιουργού</string>
     <string name="antinonfreeassetslist">Αυτή η εφαρμογή περιέχει μη-ελεύθερα στοιχεία</string>
     <string name="useTorSummary">Αναγκαστική λήψη μέσω του δικτύου Tor για αυξημένη ιδιωτικότητα. Απαιτείται εγκατάσταση του Orbot</string>
@@ -286,7 +280,7 @@
     <string name="main_menu__categories">Κατηγορίες</string>
     <string name="preference_manage_installed_apps">Διαχείριση  εγκατεστημένων εφαρμογών</string>
     <string name="notification_action_update">Ενημέρωση</string>
-    <string name="notification_action_cancel">Ακύρωση</string>
+    <string name="notification_action_cancel">Άκυρο</string>
     <string name="notification_action_install">Εγκατάσταση</string>
     <string name="app_list__name__downloading_in_progress">Γίνεται λήψη %1$s</string>
     <string name="app_list__name__successfully_installed">Εγκαταστάθηκε %1$s</string>
@@ -347,8 +341,8 @@
     <string name="updates__app_with_known_vulnerability__prompt_upgrade">Βρέθηκε ευπάθεια με %1$s. Συνίσταται να ενημερώσετε αυτή την εφαρμογή αμέσως στη νεότερη έκδοση.</string>
     <string name="updates__app_with_known_vulnerability__ignore">Αγνοήστε</string>
     <plurals name="updates__download_updates_for_apps">
-        <item quantity="one">Λήψη εγκατάστασης για %1$d εφαρμογή.</item>
-        <item quantity="other">Λήψη εγκατάστασης για %1$d εφαρμογές.</item>
+        <item quantity="one">Λήψη εγκατάστασης %1$d εφαρμογήs:</item>
+        <item quantity="other">Λήψη εγκατάστασης %1$d εφαρμογών:</item>
     </plurals>
     <string name="repositories_summary">Προσθέστε εναλλακτικές πηγές εφαρμογών</string>
     <string name="latest__empty_state__never_updated">Μόλις ανανεωθεί η λίστα εφαρμογών, οι τελευταίες εφαρμογές θα εμφανιστούν εδώ</string>
@@ -384,7 +378,7 @@
     <string name="nearby_splash__both_parties_need_fdroid">Πρέπει να έχουν το %1$s για χρήση.</string>
     <string name="app__tts__downloading_progress">Λήψη,  %1$d%% ολοκληρώθηκε</string>
     <plurals name="notification_summary_more">
-        <item quantity="one">+%1$d επιπλέον…</item>
+        <item quantity="one">+%1$d περισσότερα…</item>
         <item quantity="other">+%1$d επιπλέον…</item>
     </plurals>
     <string name="notification_content_single_downloading_update">Λήψη αναβάθμισης για \"%1$s\"…</string>
@@ -435,13 +429,13 @@
     <string name="send_installed_apps">Μοιραστείτε εγκατεστημένες εφαρμογές</string>
     <string name="send_installed_apps_csv">Εφαρμογές εγκατεστημένες από το F-Droid ως αρχείο CSV</string>
     <string name="updates_disabled_by_settings">Οι ενημερώσεις απενεργοποιήθηκαν από τις ρυθμίσεις δεδομένων/WiFi</string>
-    <string name="repo_add_mirror">Προσθήκη mirror</string>
+    <string name="repo_add_mirror">Προσθήκη ειδώλου</string>
     <string name="sort_search">Ταξινόμηση αναζήτησης</string>
     <string name="repo_exists_add_fingerprint">Το %1$s είναι ήδη εγκατεστημένο, με αυτό θα προσθέσετε νέες πληροφορίες κλειδιού.</string>
     <string name="repo_exists_enable">Το %1$s είναι ήδη εγκατεστημένο, επιβεβαιώστε ότι επιθυμείτε να το ενεργοποιήσετε εκ νέου.</string>
     <string name="repo_exists_and_enabled">Το %1$s είναι ήδη εγκατεστημένο και ενεργοποιημένο.</string>
     <string name="repo_delete_to_overwrite">Πρώτα διαγράψτε το %1$s, καθώς υπάρχει διένεξη κλειδιού.</string>
-    <string name="repo_exists_add_mirror">Αυτό είναι ένα αντίγραφο του %1$s, να γίνει η προσθήκη του ως mirror;</string>
+    <string name="repo_exists_add_mirror">Αυτό είναι ένα αντίγραφο του %1$s, να γίνει η προσθήκη του ως ειδώλου;</string>
     <string name="menu_open">Άνοιγμα</string>
     <string name="menu_liberapay">Liberapay</string>
     <string name="antidisabledalgorithmlist">Αυτή η εφαρμογή έχει αδύναμη υπογραφή ασφαλείας</string>
@@ -459,8 +453,8 @@
     <string name="hiding_dialog_warning">Προσοχή: Οποιαδήποτε συντόμευση εφαρμογής υπάρχει στην κεντρική οθόνη θα αφαιρεθεί και θα πρέπει να προστεθεί χειροκίνητα.</string>
     <string name="hide_on_long_search_press_title">Απόκρυψη με το κουμπί αναζήτησης</string>
     <string name="hide_on_long_search_press_summary">Παρατεταμένη πίεση του κουμπιού αναζήτησης θα αποκρύψει την εφαρμογή</string>
-    <string name="repo_official_mirrors">Επίσημα mirrors</string>
-    <string name="repo_user_mirrors">Mirrors χρήστη</string>
+    <string name="repo_official_mirrors">Επίσημα είδωλα</string>
+    <string name="repo_user_mirrors">Είδωλα χρήστη</string>
     <string name="share_repository">Μοιραστείτε το αποθετήριο</string>
     <string name="use_bluetooth">Χρήση Bluetooth</string>
     <string name="swap_toast_invalid_url">Μη έγκυρο URL για ανταλλαγή: %1$s</string>
@@ -470,14 +464,13 @@
     <string name="about_forum">Φόρουμ υποστήριξης</string>
     <string name="app_suggested">Προτεινόμενα</string>
     <string name="app_size">Μέγεθος: %1$s</string>
-    <string name="app_repository">Αποθετήριο: %1$s</string>
     <string name="scan_removable_storage_title">Σάρωση αφαιρούμενου χώρου αποθήκευσης</string>
     <string name="scan_removable_storage_toast">Σάρωση %s…</string>
     <string name="scan_removable_storage_summary">Αναζήτηση αποθετηρίου σε αφαιρούμενα μέσα αποθήκευσης όπως κάρτες SD και ράβδους αποθήκευσης USB</string>
     <string name="menu_translation">Μετάφραση</string>
     <string name="main_menu__updates">Ενημερώσεις</string>
-    <string name="nearby_splash__read_external_storage">Αναζήτηση κάρτας SD για αποθετήρια και καθρέφτες.</string>
-    <string name="nearby_splash__request_permission">Δοκιμάστε το</string>
+    <string name="nearby_splash__read_external_storage">Αναζήτηση κάρτας SD για αποθετήρια και είδωλα.</string>
+    <string name="nearby_splash__request_permission">Ψάξε τώρα</string>
     <string name="not_visible_nearby">Η λειτουργία \"Κοντά\" δεν είναι ενεργοποιημένη</string>
     <string name="not_visible_nearby_description">Πριν από την σύνδεση, κάντε τη συσκευή σας ορατή.</string>
     <string name="swap_toast_using_path">Χρήση του %1$s</string>
@@ -492,7 +485,7 @@
     <string name="panic_add_apps_to_uninstall">Προσθήκη εφαρμογών που θα απεγκατασταθούν και θα σβηστούν</string>
     <string name="panic_reset_repos_title">Επαναφορά αποθετηρίων</string>
     <string name="disabled">Απενεργοποιημένο</string>
-    <string name="nearby_splash__document_tree">Αναζήτηση στο OTG USB για αποθετήρια.</string>
+    <string name="nearby_splash__document_tree">Αναζήτηση στο OTG USB για αποθετήρια και είδωλα.</string>
     <string name="swap_visible_hotspot">Ορατό μέσω σημείου πρόσβασης</string>
     <string name="swap_blank_wifi_ssid">(κενό)</string>
     <string name="swap_hidden_wifi_ssid">(κρυφό)</string>
@@ -540,14 +533,80 @@
     <string name="antiupstreamnonfree">Upstream Μη Δωρεάν</string>
     <string name="share_apk_error">Δεν ήταν δυνατή η κοινή χρήση του αρχείου εφαρμογής</string>
     <string name="antidisabledalgorithm">Υπογραφή με χρήση μη ασφαλούς αλγόριθμου</string>
-    <string name="antinsfw">Μη ασφαλή για δουλειά.</string>
+    <string name="antinsfw">Δεν είναι ασφαλές για τη δουλειά</string>
     <string name="menu_release_channel_beta">Να επιτρέπονται οι ενημερώσεις Beta</string>
     <string name="latest__empty_state__upgrading">Αναβάθμιση βάσης δεδομένων…</string>
-    <string name="app_name_basic">F-Droid Basic</string>
+    <string name="app_name_basic">F-Drοid Basic</string>
     <string name="about_title_basic">Σχετικά με το F-Droid Basic</string>
-    <string name="category_Nightly">Αυτόματες Εκδώσεις</string>
+    <string name="category_Nightly">νυχτερινές</string>
     <string name="repo_last_update_downloaded">Έγινε λήψη της τελευταίας ενημέρωσης</string>
     <string name="app_error_open">Δεν ήταν δυνατή η εκκίνηση της εφαρμογής.</string>
     <string name="antinsfwlist">Αυτή η εφαρμογή περιέχει περιεχόμενο που δεν πρέπει να δημοσιοποιείται ή να είναι ορατό παντού</string>
     <string name="warning_target_sdk">Αυτή η εφαρμογή δημιουργήθηκε για μια παλαιότερη έκδοση του Android και δεν μπορεί να ενημερωθεί αυτόματα.</string>
+    <string name="app_details_repositories">Αποθετήρια</string>
+    <string name="app_details_repository_preferred">(κατά προτίμηση)</string>
+    <string name="app_details_repository_button_prefer">Προτιμήστε το αποθετήριο</string>
+    <string name="repo_enter_url">Εισάγετε χειροκίνητα τη διεύθυνση URL του αποθετηρίου</string>
+    <string name="app_details_repository_expand">Επέκταση της λίστας αποθετηρίων</string>
+    <string name="app_list_no_suggested_version">Δεν συνιστάται έκδοση για εγκατάσταση.</string>
+    <string name="repo_intro">Ένα αποθετήριο είναι μια πρόσθετη πηγή εφαρμογών. Οι εφαρμογές τρίτων που προσθέτετε εδώ έχουν διαφορετικά πρότυπα από αυτά που παρέχουν εφαρμογές που έχουν κατασκευαστεί από το ίδιο το F-Droid.
+\n
+\nΒεβαιωθείτε ότι το αποθετήριο που προσθέτετε είναι αξιόπιστο.</string>
+    <string name="repo_state_fetching">Λήψη αποθετηρίου…</string>
+    <string name="repo_state_adding">Προσθήκη αποθετηρίου…</string>
+    <string name="repo_io_error">Σφάλμα σύνδεσης στο αποθετήριο.</string>
+    <string name="repo_share_not_found">Δεν μπόρεσε να βρει τη διεύθυνση του αποθετηρίου στο κοινόχρηστο κείμενο.</string>
+    <string name="repo_error_adding_archive">Τα αποθετήρια αρχείων δεν μπορούν να προστεθούν απευθείας. Πατήστε το αποθετήριο στη λίστα και ενεργοποιήστε το αρχείο εκεί.</string>
+    <string name="repo_list_info_title">Κατάλογος αποθετηρίου</string>
+    <string name="repo_list_info_text">Ένα αποθετήριο είναι μια πηγή εφαρμογών. Αυτή η λίστα δείχνει όλα τα αποθετήρια που έχουν προστεθεί αυτή τη στιγμή. Τα απενεργοποιημένα αποθετήρια δεν χρησιμοποιούνται.
+\n
+\nΕάν μια εφαρμογή βρίσκεται σε περισσότερα από ένα αποθετήρια, προτιμάται αυτόματα το αποθετήριο που βρίσκεται ψηλότερα στη λίστα. Μπορείτε να αναδιατάξετε τα αποθετήρια πατώντας παρατεταμένα και σύροντάς τα.</string>
+    <string name="repo_archive_toggle">Αρχείο αποθετηρίου</string>
+    <string name="repo_archive_toggle_description">Εμφάνιση αρχειοθετημένων εφαρμογών και ξεπερασμένων εκδόσεων εφαρμογών</string>
+    <string name="repo_disable_warning">Η απενεργοποίηση αυτού του αποθετηρίου θα αφαιρέσει την κατάσταση \"προτιμώμενη\" από όλες τις εφαρμογές.</string>
+    <string name="repo_disable_warning_button">Απενεργοποίηση</string>
+    <string name="copied_url_to_clipboard">Αντιγραφή URL στο πρόχειρο</string>
+    <string name="swap_banner_message">Για να ανταλλάξετε εφαρμογές, ξεκινήστε το Wi-Fi και συνδεθείτε στο ίδιο δίκτυο με τον φίλο σας.</string>
+    <string name="swap_connection_indexv0_error">Προσπαθείτε να συνδεθείτε σε κάποιον με μια ξεπερασμένη έκδοση του F-Droid. Για να συνδεθεί πρέπει να αναβαθμίσει την εφαρμογή του F-Droid. Μπορούν να χρησιμοποιήσουν την ανταλλαγή για να ενημερώσουν την εφαρμογή F-Droid από εσάς.</string>
+    <string name="copied_permission_to_clipboard">Αντιγραφή ονόματος δικαιώματος στο πρόχειρο</string>
+    <string name="ipfsgw_explainer">Λήψη εφαρμογών από τα διαδικτυακά σημεία IPFS. (Λειτουργεί μόνο για αποθετήρια F-Droid με υποστήριξη IPFS.)</string>
+    <string name="ipfsgw_add_add">Προσθέστε</string>
+    <plurals name="ipfsgw_summary">
+        <item quantity="one">Λήψη εφαρμογών με χρήση τελικών σημείων ιστού IPFS: %1$d ενεργοποιημένο</item>
+        <item quantity="other">Λήψη εφαρμογών με χρήση τελικών σημείων ιστού IPFS: %1$d ενεργοποιημένα</item>
+    </plurals>
+    <string name="ipfsgw_summary_disabled">Λήψη εφαρμογών με χρήση τελικών σημείων ιστού IPFS: απενεργοποιημένο</string>
+    <string name="ipfsgw_add_title">Προσθήκη πύλης IPFS</string>
+    <string name="ipfsgw_caption_official_gateways">Επίσημες πύλες IPFS</string>
+    <string name="ipfsgw_caption_custom_gateways">Προσαρμοσμένες πύλες IPFS</string>
+    <string name="repo_exists">Αυτό το αποθετήριο έχει ήδη προστεθεί.</string>
+    <string name="repo_archive_failed">Το αρχείο αποθετηρίων δεν είναι προς το παρόν διαθέσιμο</string>
+    <string name="repositories_last_update">Τελευταία ενημέρωση: %s</string>
+    <string name="repositories_last_update_never">ποτέ</string>
+    <string name="paste">Επικόλληση</string>
+    <string name="app_details_repository">Αποθετήριο</string>
+    <string name="repo_invalid">Μη έγκυρο αποθετήριο.
+\n
+\nΕπικοινωνήστε με τον συντηρητή και ενημερώστε τον για το πρόβλημα.</string>
+    <string name="useDnsCache">Χρήση DNS Cache</string>
+    <string name="useDnsCacheSummary">Χρησιμοποιήστε αποθηκευμένα αποτελέσματα για να ελαχιστοποιήσετε τα ερωτήματα DNS.</string>
+    <string name="turn_on_wifi">Ενεργοποιήστε το wifi</string>
+    <string name="targetsdk_or_later">στόχοι %s</string>
+    <string name="repo_add_new_title">Προσθήκη αποθετηρίου</string>
+    <string name="repo_add_new_mirror">Προσθήκη ως νέο mirror</string>
+    <string name="force_old_installer_title">Αναγκάστε τον παλιό εγκαταστάτη</string>
+    <string name="force_old_installer_summary">Απενεργοποιήστε το πρόγραμμα εγκατάστασης περιόδου λειτουργίας, συμπεριλαμβανομένης της υποστήριξης για αυτόματες ενημερώσεις στο παρασκήνιο.</string>
+    <string name="ipfsgw_title">Πύλες IPFS</string>
+    <string name="nearby_splach__external_storage_permission_explainer">Το F-Droid μπορεί να αναζητήσει αποθετήρια και είδωλα στην κάρτα SD, αλλά χρειάζεται την άδειά σας για να το κάνει.</string>
+    <string name="nearby_splace__external_storage_permission_button">Δοκίμασέ το</string>
+    <string name="repo_num_apps_button">Εμφάνιση εφαρμογών</string>
+    <string name="copied_to_clipboard">Αντιγραφή στο πρόχειρο</string>
+    <string name="repo_view_repo">Προβολή αποθετηρίου</string>
+    <string name="repo_scan_qr_code">Σκανάρισμα κώδικα QR</string>
+    <string name="repo_and_mirror_add_both_info">Η διεύθυνση URL που προσπαθείτε να προσθέσετε (%s) είναι ένα είδωλο ενός νέου αποθετηρίου. Θα προστεθούν τόσο το αρχικό αποθετήριο όσο και το είδωλο.</string>
+    <string name="repo_mirror_exists">Αυτό το είδωλο είχε ήδη προστεθεί (%s).</string>
+    <string name="repo_preview_included_apps">Περιλαμβανόμενες εφαρμογές:</string>
+    <string name="repo_add_repo_and_mirror">Προσθήκη αποθετηρίου και ειδώλου</string>
+    <string name="repo_mirror_add_info">Η διεύθυνση URL που προσπαθείτε να προσθέσετε (%s) είναι ένα είδωλο ενός υπάρχοντος αποθετηρίου.</string>
+    <string name="warning_no_compat_versions">Το επιλεγμένο αποθετήριο δεν έχει συμβατές εκδόσεις εφαρμογών. Για να λάβετε ενημερώσεις, προτιμήστε ένα αποθετήριο με συμβατές εκδόσεις.</string>
 </resources>

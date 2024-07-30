@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase.CONFLICT_FAIL
 import androidx.room.migration.AutoMigrationSpec
+import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import mu.KotlinLogging
 
@@ -33,12 +34,12 @@ internal class MultiRepoMigration : AutoMigrationSpec {
             """
             SELECT repoId, address, certificate, weight FROM ${CoreRepository.TABLE}
             JOIN ${RepositoryPreferences.TABLE} USING (repoId)
-            ORDER BY weight ASC"""
+            ORDER BY weight DESC"""
         ).use { cursor ->
             while (cursor.moveToNext()) {
                 val repo = getRepo(cursor)
                 log.error { repo.toString() }
-                if (repo.isArchive()) {
+                if (repo.isArchive() && repo.certificate != null) {
                     if (archiveMap.containsKey(repo.certificate)) {
                         log.error { "More than two repos with certificate of ${repo.address}" }
                         // still migrating this as a normal repo then
@@ -54,7 +55,7 @@ internal class MultiRepoMigration : AutoMigrationSpec {
         }
 
         // now go through all repos and adapt their weight,
-        // so that repos with a low weight get a high weight with space for archive repos
+        // so that repos get a higher weight with space for archive repos
         var nextWeight = REPO_WEIGHT
         repos.forEach { repo ->
             val archiveRepo = archiveMap[repo.certificate]
@@ -98,9 +99,19 @@ internal class MultiRepoMigration : AutoMigrationSpec {
     private data class Repo(
         val repoId: Long,
         val address: String,
-        val certificate: String,
+        val certificate: String?,
         val weight: Int,
     ) {
         fun isArchive(): Boolean = address.trimEnd('/').endsWith("/archive")
+    }
+}
+
+/**
+ * Removes all repos without a certificate as those are broken anyway
+ * and force us to handle repos without certs.
+ */
+internal val MIGRATION_2_3 = object : Migration(2, 3) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.delete(CoreRepository.TABLE, "certificate IS NULL", null)
     }
 }

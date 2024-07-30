@@ -1,15 +1,13 @@
-* Przebud. repo i obsługi kopii lustrz., zarówno UX, jak i kodu
+* Zmiana sposobu ukazania repo. użytk., ukazująca, kiedy instalacja nie pochodzi z f-droid.org.
 
-* Wyśw. podgl. nowych repo
+* Umożliwiono użytk. zmianę priorytetu repo. globalnie i dla danych aplikacji.
 
-* Instal. przez F-Droid i F-Droid Basic obsług. teraz autom. aktualiz. w tle
+* Niestandardowe anty-funkcje są teraz domyślnie włączone, a nie wyłączone.
 
-* W Androidzie 14 oznacz. apek z nieobsług. wersją docel. pakietu SDK jako niezgodne #2692
+* Obsługa otrzymywania adr. URL repozytoriów poprzez Share
 
-* Długie naciśn., aby skop. linki, upraw. i wersje na ekranie szczeg. apki (@Tobias_Groza)
+* Każde działanie respektuje motyw dnia/nocy
 
-* Wyśw. niekompatyb. apek tylko, gdy zezw. w Ustaw. #41 (@pigpig)
+* Aktualizacja wykorzystania zewn. pam. masowej do pracy z targetSdkVersion 29
 
-* Nowe ustaw. bramek IPFS
-
-* Wybór języka dla poszczeg. apek (@Licaon-Kter)
+* Aktualizacja F-Droid Basic do pracy z targetSdkVersion 34

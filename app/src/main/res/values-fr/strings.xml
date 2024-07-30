@@ -4,7 +4,6 @@
     <string name="installIncompatible">Application non compatible avec votre appareil, l’installer quand même \?</string>
     <string name="version">Version</string>
     <string name="delete">Supprimer</string>
-    <string name="enable_nfc_send">Activer l’envoi par CCP/NFC…</string>
     <string name="cache_downloaded">Conserver les applis en cache</string>
     <string name="updates">Mises à jour</string>
     <string name="other">Autre</string>
@@ -61,7 +60,7 @@
     <string name="antiadslist">Cette appli comprend des publicités</string>
     <string name="antitracklist">Cette application suit et transmet votre activité</string>
     <string name="antinonfreeadlist">Cette applications propose des extensions qui ne sont pas libres</string>
-    <string name="antinonfreenetlist">Cette application promeut ou utilise des services réseaux qui ne sont pas libres</string>
+    <string name="antinonfreenetlist">Cette application promeut ou dépend entièrement d\'un service réseau non modifiable ou non libre</string>
     <string name="antinonfreedeplist">Cette application s\'appuie d\'autres applications qui ne sont pas libres</string>
     <string name="antiupstreamnonfreelist">Le code source en amont n’est pas entièrement libre</string>
     <string name="display">Affichage</string>
@@ -154,7 +153,6 @@
     <string name="category_Connectivity">Connectivité</string>
     <string name="category_Sports_Health">Sport et santé</string>
     <string name="empty_can_update_app_list">Félicitations !\nVos applications sont à jour.</string>
-    <string name="swap_nfc_description">Si votre ami utilise F-Droid et a activé la CCP/NFC, faites toucher vos appareils.</string>
     <string name="swap_switch_to_wifi">Appuyez pour basculer vers un réseau Wi-Fi</string>
     <string name="swap_dont_show_again">Ne plus afficher</string>
     <string name="loading">Chargement…</string>
@@ -192,7 +190,6 @@
 \nDes applications sont présentes sur votre appareil mais aucune n\'est disponible sur F-Droid. Vous devriez actualiser vos dépôts ou ajouter de nouveaux dépôts dans F-Droid pour découvrir de nouvelles applications ou mettre à jour vos applications existantes.</string>
     <string name="install_error_unknown">L\'installation a échoué pour une raison inconnue</string>
     <string name="uninstall_error_unknown">La désinstallation a échoué pour une raison inconnue</string>
-    <string name="swap_nfc_title">Touchez pour échanger</string>
     <string name="swap_join_same_wifi_desc">Pour échanger via Wi-Fi, assurez-vous d\'être sur le même réseau Wi-Fi. Si
         vous n\'avez pas accès au même réseau, l\'un d\'entre vous peut créer un point d\'accès Wi-Fi.
     </string>
@@ -251,10 +248,9 @@
     <string name="crash_dialog_text">Une erreur inattendue s’est produite provoquant l’arrêt de l’application. Souhaitez signaler cette erreur par courriel afin d’aider à corriger ce problème \?</string>
     <string name="antinonfreeassetslist">Cette appli comprend des éléments qui ne sont pas libres</string>
     <string name="menu_email">Envoyer un courriel à l’auteur</string>
-    <string name="useTor">Utilisez Tor</string>
+    <string name="useTor">Utiliser Tor</string>
     <string name="useTorSummary">Pour une confidentialité accrue, utilisation forcée de Tor pour le trafic en téléchargement. Orbot est requis</string>
     <string name="swap_stopping_wifi">Arrêt du Wi-Fi…</string>
-    <string name="repo_provider">Dépôt : %s</string>
     <string name="update_auto_download">Récupérer automatiquement les mises à jour</string>
     <string name="update_auto_download_summary">Les mises à jour sont téléchargées automatiquement et vous êtes invité à
         les installer
@@ -474,7 +470,6 @@
     <string name="about_forum">Forum d\'assistance</string>
     <string name="app_suggested">Conseillée</string>
     <string name="app_size">Taille : %1$s</string>
-    <string name="app_repository">Dépôt : %1$s</string>
     <string name="scan_removable_storage_title">Parcourir le stockage mémoire amovible</string>
     <string name="nearby_splash__request_permission">Chercher</string>
     <string name="swap_toast_using_path">Utilisation de %1$s</string>
@@ -576,7 +571,7 @@
     <string name="copied_permission_to_clipboard">Le nom de l\'autorisation a été copié vers le presse-papier</string>
     <string name="copied_url_to_clipboard">L’URL a été copiée dans le presse-papier</string>
     <string name="repo_num_apps_button">Afficher les apps</string>
-    <string name="force_old_installer_summary">Désactive l\'installateur de Session bêta, y compris la prise en charge des mises à jour automatiques en arrière-plan.</string>
+    <string name="force_old_installer_summary">Désactive l\'installateur de Session, y compris la prise en charge des mises à jour automatiques en arrière-plan.</string>
     <string name="targetsdk_or_later">cible SDK %s</string>
     <string name="swap_connection_indexv0_error">Vous essayez de vous connecter à quelqu\'un disposant d\'une version obsolète de F-Droid. Pour vous connecter, cette personne doit mettre à niveau son application F-Droid. Elle peut utiliser l\'échange d\'applications pour mettre à jour son application à partir de vous.</string>
     <string name="ipfsgw_caption_official_gateways">Passerelles IPFS officielles</string>
@@ -589,8 +584,29 @@
     <string name="ipfsgw_explainer">Télécharger les applications à partir de la passerelle IPFS. (Fonctionne seulement avec les dépôts qui supportent IPFS.)</string>
     <string name="ipfsgw_add_title">Ajouter une passerelle IPFS</string>
     <plurals name="ipfsgw_summary">
-        <item quantity="one">Télécharger les applications à partir des passerelles web IPFS: %1$d activé</item>
-        <item quantity="many">Télécharger les applications à partir des passerelles web IPFS: %1$d activés</item>
-        <item quantity="other">Télécharger les applications à partir des passerelles web IPFS: %1$d activés</item>
+        <item quantity="one">Téléchargement d\'applications via les points d\'accès web \"IPFS\" : %1$d activé</item>
+        <item quantity="many">Téléchargement d\'applications via les points d\'accès web \"IPFS\" : %1$d activés</item>
+        <item quantity="other">Téléchargement d\'applications via les points d\'accès web \"IPFS\" : %1$d activés</item>
     </plurals>
+    <string name="repo_share_not_found">L\'adresse du dépôt n\'a pas pu être trouvée dans le texte partagé.</string>
+    <string name="useDnsCacheSummary">Utiliser les résultats en cache pour minimiser les requêtes DNS.</string>
+    <string name="useDnsCache">Utiliser le cache DNS</string>
+    <string name="app_details_repository">Dépôt</string>
+    <string name="app_details_repositories">Dépôt</string>
+    <string name="app_details_repository_preferred">(préféré)</string>
+    <string name="app_details_repository_expand">Développer la liste des dépôts</string>
+    <string name="app_list_no_suggested_version">Aucune version recommandée pour l\'installation.</string>
+    <string name="repo_disable_warning_button">Désactiver</string>
+    <string name="app_details_repository_button_prefer">Préférer ce Dépôt</string>
+    <string name="repo_list_info_title">Liste des Dépôts</string>
+    <string name="repo_archive_toggle">Archive des Dépôts</string>
+    <string name="repo_archive_toggle_description">Afficher les apps archivées et les anciennes versions des apps</string>
+    <string name="repositories_last_update">Dernière mise à jour : %s</string>
+    <string name="repo_disable_warning">Désactiver ce dépôt enlèvera son statut « préféré » de toutes les apps.</string>
+    <string name="repositories_last_update_never">jamais</string>
+    <string name="repo_list_info_text">Un dépôt est un pourvoyeur d\'apps. Cette liste affiche tous les dépôts actuellement ajoutés.Les dépôts désactivés ne sont pas utilisés.
+\n
+\nSi une app est disponible dans plus d\'un dépôt, le dépôt le plus haut dans la liste est préféré. Vous pouvez changer l\'ordre des dépôts avec un appui long puis en les faisant glisser.</string>
+    <string name="repo_error_adding_archive">Les dépôts archivés ne peuvent pas être directement ajoutés. Appuyez sur le dépôt dans la liste et activez l\'archive à cet emplacement.</string>
+    <string name="repo_archive_failed">Dépôt archivé actuellement indisponible</string>
 </resources>

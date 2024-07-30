@@ -1,15 +1,13 @@
-* Přepracování repozitářů a zrcadel, rozhraní i kód
+* Přepracován způsob představení repozitářů uživateli, aby bylo jasné, kdy aplikace pochází z jiného zdroje než z f-droid.org
 
-* Zobrazení náhledu nových repozitářů
+* Přidána možnost změny priority repozitářů (globálně i individuálně)
 
-* Instalace v F-Droidu a F-Droidu Basic nyní podporuje automatické aktualizace na pozadí
+* Vlastní anti-vlastnosti jsou nyní ve výchozím nastavení povoleny
 
-* V Androidu 14 označeny aplikace s nepodporovanou cílovou verzí SDK jako nekompatibilní
+* Podpora získání URL repozitářů z nabídky Sdílení
 
-* Podržení pro zkopírování odkazů, oprávnění a verzí na stránce s podrobnostmi o aplikaci (@Tobias_Groza)
+* Všechny aktivity respektují denní/noční motiv
 
-* Nekompatibilní aplikace zobrazeny pouze po povolení v nastavení (@pigpig)
+* Upraveno použití externích úložišť pro podporu targetSdkVersion 29
 
-* Nová nastavení bran IPFS
-
-* a další
+* F-Droid Basic aktualizován s podporou targetSdkVersion 34

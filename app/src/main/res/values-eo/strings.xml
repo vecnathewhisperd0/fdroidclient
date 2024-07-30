@@ -88,7 +88,6 @@
     <string name="unstable_updates">Nestabilaj ĝisdatigoj</string>
     <string name="update_interval">Ofteco de aŭtomataj ĝisdatigoj</string>
     <string name="SignatureMismatch">La nova versio estas subskribita per malsama ŝlosilo. Por instali la novan version, oni devas antaŭe malinstali la malnovan ion. Malinstalu la malnovan version kaj reprovu. (Konsciu, ke malinstalo forigos ĉiujn internajn datumojn konservitajn de la aplikaĵo.)</string>
-    <string name="enable_nfc_send">Aktivigi sendadon per NFC…</string>
     <string name="cache_downloaded">Kaŝmemorigi apk-dosierojn</string>
     <string name="unstable_updates_summary">Proponi ĝisdatigojn al nestabilaj versioj</string>
     <string name="system_installer">Privilegia aldonaĵo</string>
@@ -183,8 +182,6 @@
     <string name="install_error_unknown">Instalo malsukcesis pro nekonata eraro</string>
     <string name="uninstall_error_unknown">Malinstalo malsukcesis pro nekonata eraro</string>
     <string name="system_install_denied_permissions">La privilegia aldonaĵo ne akiris ĉefuzantan permeson! Bonvolu krei erar-raporton!</string>
-    <string name="swap_nfc_title">Tuŝu por interŝanĝi</string>
-    <string name="swap_nfc_description">Se via amiko havas F-Droid kaj aktivan NFC, vi povas tuŝi viajn aparatojn kune.</string>
     <string name="swap_join_same_wifi">Konektu al la sama vifio kiel via amiko</string>
     <string name="swap_join_same_wifi_desc">Por interŝanĝi per vifio, certiĝu ke vi estas en la sama reto. Se vi ne havas aliron al la sama reto, unu el vi povas krei vifian retkaptejon.</string>
     <string name="swap_join_this_hotspot">Helpu al via amiko aligi vian retkaptejon</string>
@@ -246,7 +243,6 @@
     <string name="useTor">Uzi Tor</string>
     <string name="useTorSummary">Devigi elŝuti per la Tor-reto por plibonigi privatecon, postulas Orbot</string>
     <string name="swap_stopping_wifi">Haltigado de vifio…</string>
-    <string name="repo_provider">Deponejo: %s</string>
     <string name="update_auto_download">Aŭtomate elŝuti ĝisdatigojn</string>
     <string name="update_auto_download_summary">Elŝuti ĝisdatigojn de aplikaĵoj fone, montrante sciigon kun peto pri instali ilin</string>
     <string name="download_pending">Atendado je instalado…</string>
@@ -317,8 +313,8 @@
     <string name="updates__hide_updateable_apps">Kaŝi aplikaĵojn</string>
     <string name="updates__show_updateable_apps">Montri aplikaĵojn</string>
     <plurals name="updates__download_updates_for_apps">
-        <item quantity="one">Elŝuti ĝisdatigon por %1$d aplikaĵo.</item>
-        <item quantity="other">Elŝuti ĝisdatigojn por %1$d aplikaĵoj.</item>
+        <item quantity="one">Elŝuti ĝisdatigon por %1$d aplikaĵo:</item>
+        <item quantity="other">Elŝuti ĝisdatigojn por %1$d aplikaĵoj:</item>
     </plurals>
     <string name="details_new_in_version">Nova en versio %s</string>
     <string name="antifeatureswarning">Tiu ĉi aplikaĵo enhavas eblojn, kiujn vi eble ne ŝatas.</string>
@@ -453,7 +449,6 @@
     <string name="about_forum">Subtena forumo</string>
     <string name="app_suggested">Konsilinda</string>
     <string name="app_size">Grando: %1$s</string>
-    <string name="app_repository">Deponejo: %1$s</string>
     <string name="scan_removable_storage_title">Skani demeteblan konservejon</string>
     <string name="scan_removable_storage_summary">Serĉi deponejojn de pakaĵoj en la demetebla konservejo (SD-kartoj aŭ memor-bastonetoj)</string>
     <string name="nearby_splash__read_external_storage">Serĉi deponejojn kaj spegul‑servilojn en SD‑kartoj.</string>
@@ -555,8 +550,8 @@
     <string name="swap_connection_indexv0_error">Vi provas konekti kun persono, kiu havas malnovan version de F-Droid. Por konekti, li devas ĝisdatigi la aplikaĵon F-Droid. Li povas uzi la eblon “Interŝanĝi” por elŝuti F-Droid el via aparato.</string>
     <string name="copied_to_clipboard">Kopiita al tondujo</string>
     <string name="force_old_installer_title">Devigi malnovan instalilon</string>
-    <string name="force_old_installer_summary">Malaktivigi la betan seancan instalilon kaj subtenon por aŭtomataj fonaj ĝisdatigoj.</string>
-    <string name="targetsdk_or_later">celas %s</string>
+    <string name="force_old_installer_summary">Malaktivigi la seancan instalilon kaj subtenon por aŭtomataj fonaj ĝisdatigoj.</string>
+    <string name="targetsdk_or_later">kompilita por %s</string>
     <string name="copied_permission_to_clipboard">Nomo de permeso kopiita al tondujo</string>
     <string name="copied_url_to_clipboard">Ligilo kopiita al tondujo</string>
     <string name="repo_num_apps_button">Montri aplikaĵojn</string>
@@ -594,4 +589,12 @@
 \n
 \nSe aplikaĵo troviĝas en pli ol unu deponejo, la pli supra deponejo sur la listo estas aŭtomate preferata. Vi povas reordigi deponejojn per frapetadi kaj ŝovi ilin.</string>
     <string name="repo_list_info_title">Listo de deponejoj</string>
+    <string name="repo_mirror_exists">Tiu ĉi spegul-servilo jam estas aldonita (%s).</string>
+    <string name="repo_mirror_add_info">La ligilo (%s), kiun vi provas aldoni estas spegul-servilo de ekzistanta deponejo.</string>
+    <string name="repo_add_repo_and_mirror">Aldoni deponejon kaj spegul-servilon</string>
+    <string name="repo_view_repo">Vidigi deponejon</string>
+    <string name="repo_scan_qr_code">Skani QR-kodon</string>
+    <string name="repo_preview_included_apps">Entenataj aplikaĵoj:</string>
+    <string name="repo_and_mirror_add_both_info">La ligilo (%s), kiun vi provas aldoni estas spegul-servilo de nova deponejo. Ambaŭ la originala deponejo kaj spegul-servilo estos aldonitaj.</string>
+    <string name="warning_no_compat_versions">La elektita deponejo enhavas neniun kongruan version de aplikaĵo. Por ricevi ĝisdatigojn, preferu deponejon kun kongruaj versioj.</string>
 </resources>
