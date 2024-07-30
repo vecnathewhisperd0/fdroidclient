@@ -1025,7 +1025,6 @@ public final class Languages {
             @NonNull String[] locales, String[] xmlLocales, boolean excludeXMLLocales,
                                                   ArrayList<String> appLocalesDebug) {
         Configuration appConfig = appContext.getResources().getConfiguration();
-        String packageName = appContext.getPackageName();
 
         java.lang.reflect.Field[] fields = R.string.class.getFields();
         int limit = 100;
@@ -1359,7 +1358,7 @@ public final class Languages {
         return sb.toString();
     }
 
-    private static String debugSystemLocales(@NonNull final Context context) {
+    private static String debugSystemLocales() {
         boolean extended = false;
         java.util.Date date = new java.util.Date(System.currentTimeMillis());
         java.text.SimpleDateFormat format = new java.text.SimpleDateFormat(
@@ -1470,7 +1469,7 @@ public final class Languages {
                         } else if (i == 1) {
                             return debugResLocales(context);
                         } else if (i == 2) {
-                            return debugSystemLocales(context);
+                            return debugSystemLocales();
                         }
                         return null;
                     }).subscribeOn(Schedulers.computation())
@@ -1496,7 +1495,6 @@ public final class Languages {
                 .setView(textView)
                 .setCustomTitle(spinner)
                 .setNeutralButton("Save", (dialog, i) -> {
-                    Context c = context.getApplicationContext();
                     java.io.File dir = new java.io.File(context.getExternalFilesDir(null), "Debug logs");
                     if (!dir.exists()) dir.mkdir();
                     int index = selected[0];
