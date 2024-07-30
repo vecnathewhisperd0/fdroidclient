@@ -1,6 +1,5 @@
 package org.fdroid.fdroid;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.app.LocaleConfig;
@@ -15,6 +14,7 @@ import android.os.LocaleList;
 import android.text.TextUtils;
 import android.view.View;
 
+import androidx.annotation.ChecksSdkIntAtLeast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,8 +32,10 @@ public final class Languages {
 
     public static final String USE_SYSTEM_DEFAULT = "";
 
+    @ChecksSdkIntAtLeast(api = 33)
     public static final boolean NATIVE_PAL; // PAL = Per app language support
 
+    @ChecksSdkIntAtLeast(api = 24)
     private static final boolean USE_ICU;
     private static LocaleListCompat systemLocales;
     private static LocaleListCompat lastLocaleList;
@@ -721,12 +723,10 @@ public final class Languages {
 
     }
 
-    @SuppressLint("NewApi")
     private static AppLocale createAppLocale(@NonNull final Locale locale) {
         return USE_ICU ? new AppLocaleIcu(locale) : new AppLocale(locale);
     }
 
-    @SuppressLint("NewApi")
     private static int compare(final Locale sysLocale, final AppLocale appLocale) {
         int flags = 0;
         String l = remapLegacyCode(sysLocale.getLanguage());
@@ -978,7 +978,6 @@ public final class Languages {
         return ULocale.forLocale(locale).getDisplayNameWithDialect(ULocale.forLocale(displayLocale));
     }
 
-    @SuppressLint("NewApi")
     private static String getDisplayName(final Locale locale) {
         if (locale == null) return null;
         final String lang = locale.getLanguage();
@@ -1046,7 +1045,6 @@ public final class Languages {
         return locales.toArray(new String[0]);
     }
 
-    @SuppressLint("NewApi")
     @SuppressWarnings("SetTextI18n")
     public static void debugLangScripts(@NonNull final Context context) {
         LOCALE_SCRIPTS[RESOLVED] = null;
