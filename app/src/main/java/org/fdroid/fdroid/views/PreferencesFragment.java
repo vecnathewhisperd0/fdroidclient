@@ -407,6 +407,9 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                     }
                 }
                 if (changing) {
+                    ListPreference languagePref = ObjectsCompat.requireNonNull(
+                            findPreference(Preferences.PREF_LANGUAGE));
+                    Languages.updateListPreference(languagePref, getActivity());
                     RecyclerView recyclerView = getListView();
                     int preferencesCount = recyclerView.getAdapter().getItemCount();
                     if (!isExpertMode) {
