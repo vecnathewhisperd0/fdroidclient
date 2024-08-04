@@ -94,10 +94,34 @@ public class InstallHistoryService extends JobIntentService {
         JobIntentService.enqueueWork(context, InstallHistoryService.class, JOB_ID, intent);
     }
 
-    public static File getInstallHistoryFile(Context context) {
+    public static File getInstallHistoryFileOld(Context context) {
         File installHistoryDir = new File(context.getCacheDir(), "install_history");
         installHistoryDir.mkdir();
         return new File(installHistoryDir, "all");
+    }
+
+
+    public static File getInstallHistoryFile(Context context) {
+        String INSTALL_HISTORY_DIR_NAME = "install_history";
+        String INSTALL_HISTORY_FILE_NAME = "all";
+
+        File oldInstallHistoryDir = new File(context.getCacheDir(), INSTALL_HISTORY_DIR_NAME);
+        File oldInstallHistoryFile = new File(oldInstallHistoryDir, INSTALL_HISTORY_FILE_NAME);
+        File newInstallHistoryDir = new File(context.getFilesDir(), INSTALL_HISTORY_DIR_NAME);
+        File newInstallHistoryFile = new File(newInstallHistoryDir, INSTALL_HISTORY_FILE_NAME);
+
+        if (!newInstallHistoryDir.exists()) {
+            newInstallHistoryDir.mkdir();
+        }
+
+        if (!oldInstallHistoryFile.exists()) {
+            return newInstallHistoryFile;
+        }
+        boolean isCopySuccess = Utils.copyQuietly(oldInstallHistoryFile, newInstallHistoryFile);
+        if (isCopySuccess) {
+            Utils.deleteDirectory(oldInstallHistoryDir);
+        }
+        return newInstallHistoryFile;
     }
 
     @Override
