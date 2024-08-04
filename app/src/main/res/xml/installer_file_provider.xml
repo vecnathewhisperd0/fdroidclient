@@ -3,6 +3,9 @@
     <cache-path
         name="install_history"
         path="install_history" />
+    <files-path
+        name="install_history_files"
+        path="install_history" />
     <external-path
         name="external"
         path="/" />

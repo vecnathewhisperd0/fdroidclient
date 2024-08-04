@@ -51,7 +51,7 @@ public class InstallHistoryService extends JobIntentService {
     private static final int JOB_ID = TAG.hashCode();
 
     public static final Uri LOG_URI =
-            Uri.parse("content://" + Installer.AUTHORITY + "/install_history/all");
+            Uri.parse("content://" + Installer.AUTHORITY + "/install_history_files/all");
 
     private static BroadcastReceiver broadcastReceiver;
 
