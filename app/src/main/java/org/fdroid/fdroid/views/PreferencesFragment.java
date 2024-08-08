@@ -57,6 +57,7 @@ import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Languages;
@@ -224,37 +225,51 @@ public class PreferencesFragment extends PreferenceFragmentCompat
     }
 
     @SuppressWarnings("EmptyLineSeparator")
+    private void debugLanguagePrefSidekick(boolean resume) {
+        RecyclerView recycler = getListView();
+        if (recycler != null) {
+            ListPreference languagePref = ObjectsCompat.requireNonNull(findPreference(Preferences.PREF_LANGUAGE));
+            final int prefPos = ((PreferenceGroup.PreferencePositionCallback) recycler.getAdapter())
+                    .getPreferenceAdapterPosition(languagePref);
+            if (resume) {
+                recycler.post(() -> {
+                    recycler.post(() -> {
+                        RecyclerView.ViewHolder viewHolder = recycler.findViewHolderForAdapterPosition(prefPos);
+                        if (viewHolder != null) {
+                            viewHolder.itemView.setLongClickable(true);
+                        }
+                    });
+                });
+            } else {
+                View.OnLongClickListener listener = v -> {
+                    Languages.debugLangScripts(v.getContext());
+                    return true;
+                };
+                recycler.addOnChildAttachStateChangeListener(
+                        new RecyclerView.OnChildAttachStateChangeListener() {
+                            private void setOnLongClickListener(@NonNull View view,
+                                                                final boolean onAttach) {
+                                view.setOnLongClickListener(onAttach ? listener : null);
+                                view.setLongClickable(onAttach);
+                            }
+                            @Override
+                            public void onChildViewAttachedToWindow(@NonNull View view) {
+                                setOnLongClickListener(view, true);
+                            }
+                            @Override
+                            public void onChildViewDetachedFromWindow(@NonNull View view) {
+                                setOnLongClickListener(view, false);
+                            }
+                        });
+            }
+        }
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (org.fdroid.fdroid.BuildConfig.DEBUG) {
-            RecyclerView recycler = getListView();
-            ListPreference languagePref = ObjectsCompat.requireNonNull(findPreference(Preferences.PREF_LANGUAGE));
-            int prefPos = ((PreferenceGroup.PreferencePositionCallback) recycler.getAdapter())
-                    .getPreferenceAdapterPosition(languagePref);
-            View.OnLongClickListener listener = v -> {
-                Languages.debugLangScripts(v.getContext());
-                return true;
-            };
-            recycler.addOnChildAttachStateChangeListener(
-                    new RecyclerView.OnChildAttachStateChangeListener() {
-                        private void setOnLongClickListener(@NonNull View view,
-                                                            final boolean onAttach) {
-                            if (recycler.getChildAdapterPosition(view) == prefPos) {
-                                view.setOnLongClickListener(onAttach ? listener : null);
-                            }
-                        }
-                        @Override
-                        public void onChildViewAttachedToWindow(@NonNull View view) {
-                            setOnLongClickListener(view, true);
-                        }
-                        @Override
-                        public void onChildViewDetachedFromWindow(@NonNull View view) {
-                            setOnLongClickListener(view, false);
-                        }
-                    });
-        }
+        if (BuildConfig.DEBUG) debugLanguagePrefSidekick(false);
     }
 
     private void checkSummary(String key, int resId) {
@@ -407,9 +422,11 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                     }
                 }
                 if (changing) {
-                    ListPreference languagePref = ObjectsCompat.requireNonNull(
-                            findPreference(Preferences.PREF_LANGUAGE));
-                    Languages.updateListPreference(languagePref, getActivity());
+                    if (BuildConfig.DEBUG) {
+                        ListPreference languagePref = ObjectsCompat.requireNonNull(
+                                findPreference(Preferences.PREF_LANGUAGE));
+                        Languages.updateListPreference(languagePref, getActivity());
+                    }
                     RecyclerView recyclerView = getListView();
                     int preferencesCount = recyclerView.getAdapter().getItemCount();
                     if (!isExpertMode) {
@@ -638,6 +655,8 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         initUseTorPreference(requireContext().getApplicationContext());
 
         updateIpfsGatewaySummary();
+
+        if (BuildConfig.DEBUG) debugLanguagePrefSidekick(true);
     }
 
     @Override
