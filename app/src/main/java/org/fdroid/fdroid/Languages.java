@@ -210,11 +210,11 @@ public final class Languages {
         AppLocale[][] results = prepareAppLocales(activity, echo);
         if (results != null && results.length == echo.length) {
             if (echo[0] == 1 && results[0] != null) {
-                processAppLocales(results[0], true, false); // true);
+                processAppLocales(results[0], true, true);
                 appLocales = results[0];
             }
             if (echo[1] == 1 && results[1] != null) {
-                processAppLocales(results[1], true, false); // true);
+                processAppLocales(results[1], true, true);
                 appResLocales = results[1];
             }
         }
@@ -882,7 +882,8 @@ public final class Languages {
         String label = "\uD83D\uDEA7"; // 🚧
         /* SYSTEM_DEFAULT is a fake one for displaying in a chooser menu. */
         names[0] = key ? USE_SYSTEM_DEFAULT : context.getString(R.string.pref_language_default);
-        for (int i = 0, j = 0, k = 1, n = appLocales.length, m = resLocales, o = names.length, cmp = -1; k < o;) {
+        int i = 0, j = 0, k = 1, cmp = -1;
+        for (int n = appLocales.length, m = resLocales, o = names.length; k < o;) {
             cmp = (sortTogether && i < n && j < m) ? appLocales[i].compareTo(appResLocales[j])
                     : (i < n ? -1 : 1);
             AppLocale appLocale = cmp <= 0 ? appLocales[i++] : appResLocales[j++];
@@ -1141,6 +1142,13 @@ public final class Languages {
             int batchSize = 0;
             if (!reuseRes) testResources.clear();
             for (int k = i; k < nextLang; k++) {
+                if (batchSize > Integer.SIZE) { // 501
+                    Utils.debugLog(TAG, "Only the first valid " + Integer.SIZE + " out of "
+                            + (nextLang - i) + " (seriously?) locales would be considered for the `"
+                            + locales[i].substring(0, langLen) + "` language group.  `"
+                            + locales[k] + "` (#" + k + ") et seq disregarded.");
+                    break;
+                }
                 Locale locale = Locale.forLanguageTag(locales[k]);
                 testLocales[0] = locale;
                 if (fallbackRes > 0) testLocales[1] = altFallbackLocale;
@@ -1162,7 +1170,6 @@ public final class Languages {
                     if (!existingRes) testResources.add(testRes);
                     batchSize++;
                 }
-                if (batchSize >= Integer.SIZE) break; // 502
             }
             if (batchSize > 0) {
                 testHits.clear();
