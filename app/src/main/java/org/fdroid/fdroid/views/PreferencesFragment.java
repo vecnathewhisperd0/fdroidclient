@@ -49,6 +49,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.SeekBarPreference;
 import androidx.preference.SwitchPreferenceCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -225,21 +226,15 @@ public class PreferencesFragment extends PreferenceFragmentCompat
     }
 
     @SuppressWarnings("EmptyLineSeparator")
-    private void debugLanguagePrefSidekick(boolean resume) {
+    private void debugLanguagePrefSidekick(boolean postLayout) {
         RecyclerView recycler = getListView();
         if (recycler != null) {
             ListPreference languagePref = ObjectsCompat.requireNonNull(findPreference(Preferences.PREF_LANGUAGE));
             final int prefPos = ((PreferenceGroup.PreferencePositionCallback) recycler.getAdapter())
                     .getPreferenceAdapterPosition(languagePref);
-            if (resume) {
-                recycler.post(() -> {
-                    recycler.post(() -> {
-                        RecyclerView.ViewHolder viewHolder = recycler.findViewHolderForAdapterPosition(prefPos);
-                        if (viewHolder != null) {
-                            viewHolder.itemView.setLongClickable(true);
-                        }
-                    });
-                });
+            if (postLayout) {
+                RecyclerView.ViewHolder viewHolder = recycler.findViewHolderForAdapterPosition(prefPos);
+                if (viewHolder != null) viewHolder.itemView.setLongClickable(true);
             } else {
                 View.OnLongClickListener listener = v -> {
                     Languages.debugLangScripts(v.getContext());
@@ -263,6 +258,18 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                         });
             }
         }
+    }
+
+    @Override
+    public RecyclerView.LayoutManager onCreateLayoutManager() {
+        if (BuildConfig.DEBUG) return new LinearLayoutManager(requireContext()) {
+            @Override
+            public void onLayoutCompleted(RecyclerView.State state) {
+                super.onLayoutCompleted(state);
+                debugLanguagePrefSidekick(true);
+            }
+        };
+        return super.onCreateLayoutManager();
     }
 
     @Override
@@ -655,8 +662,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         initUseTorPreference(requireContext().getApplicationContext());
 
         updateIpfsGatewaySummary();
-
-        if (BuildConfig.DEBUG) debugLanguagePrefSidekick(true);
     }
 
     @Override

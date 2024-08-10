@@ -187,7 +187,7 @@ public final class Languages {
         if (cached != null && cached.startsWith(prefix)) {
             LOCALE_SCRIPTS[CACHE] = cached.substring(prefix.length());
         } else {
-            processAppLocales(null, false, true);
+            processAppLocales(null, false, true, LOCALE_SCRIPTS);
             cached = LOCALE_SCRIPTS[CACHE];
             if (atStartTime != null && cached != null && !cached.isEmpty()) {
                 atStartTime.edit().putString(cacheHintKey, prefix + cached).apply();
@@ -202,7 +202,7 @@ public final class Languages {
     @SuppressWarnings("NoWhitespaceAfter")
     private static void requireAppLocales(@NonNull final Context activity, final int mask) {
         if (LOCALE_SCRIPTS[CACHE] == null || LOCALE_SCRIPTS[CACHE].isEmpty()) {
-            processAppLocales(null, false, true);
+            processAppLocales(null, false, true, LOCALE_SCRIPTS);
         }
         if (mask == 0) return;
         int[] echo = new int[] { appLocales == null && (mask & 1) != 0 ? 1 : 0,
@@ -210,11 +210,11 @@ public final class Languages {
         AppLocale[][] results = prepareAppLocales(activity, echo);
         if (results != null && results.length == echo.length) {
             if (echo[0] == 1 && results[0] != null) {
-                processAppLocales(results[0], true, true);
+                processAppLocales(results[0], true, true, LOCALE_SCRIPTS);
                 appLocales = results[0];
             }
             if (echo[1] == 1 && results[1] != null) {
-                processAppLocales(results[1], true, true);
+                processAppLocales(results[1], true, true, LOCALE_SCRIPTS);
                 appResLocales = results[1];
             }
         }
@@ -225,7 +225,8 @@ public final class Languages {
     }
 
     private static void processAppLocales(@NonNull AppLocale[] appLocales,
-                                          final boolean useCache, final boolean resolve) {
+                                          final boolean useCache, final boolean resolve,
+                                          final String[] localeScripts) {
         boolean dryRun = appLocales == null;
         boolean genericHints = dryRun;
         int fallbackOp = SCRIPT_INSIGNIFICANT;
@@ -403,9 +404,9 @@ public final class Languages {
 
             i = dryRun ? k + 1 : j;
         }
-        if (sb != null && sb.length() > 0) {
-            if (dryRun) LOCALE_SCRIPTS[CACHE] = sb.toString();
-            else LOCALE_SCRIPTS[RESOLVED] = sb.toString();
+        if (sb != null && sb.length() > 0 && localeScripts != null) {
+            int pos = dryRun ? CACHE : RESOLVED;
+            if (localeScripts.length > pos) localeScripts[pos] = sb.toString();
         }
     }
 
@@ -703,13 +704,16 @@ public final class Languages {
         if (languageTag == null || languageTag.isEmpty()) return null;
         Locale l = Locale.forLanguageTag(languageTag);
         String lang = remapLegacyCode(l.getLanguage());
-        if (BuildConfig.DEBUG && appResLocales == null) {
+        if (BuildConfig.DEBUG ? appResLocales == null : appLocales == null) {
             requireAppLocales(context, 0);
-            String[] langLocales = l.getCountry().isEmpty() ? parseResourcesLocales(context,
-                    context.getAssets().getLocales(), null, false, null, lang) : null;
+            boolean skipDiscount = !l.getCountry().isEmpty();
+            String[] xmlLocales = skipDiscount ? null : fetchAppLocales(context, lang);
+            String[] langLocales = skipDiscount ? null
+                    : (BuildConfig.DEBUG ? parseResourcesLocales(context,
+                    context.getAssets().getLocales(), xmlLocales, false, null, lang) : xmlLocales);
             AppLocale[] locales = toAppLocales(langLocales == null ? new String[] { languageTag }
                     : langLocales);
-            processAppLocales(locales, true, false);
+            processAppLocales(locales, true, false, null);
             for (int i = 0; i < locales.length; i++) {
                 AppLocale appLocale = locales[i];
                 if (l.equals(appLocale.locale) || l.equals(appLocale.getMatchingSystemLocale())) {
@@ -952,11 +956,15 @@ public final class Languages {
             i++;
         }
         if (name == null || name.isEmpty()) return name;
-        int prefixLen = prefix == null ? 0 : prefix.length(),
-                suffixLen = suffix == null ? 0 : suffix.length();
-        StringBuilder sb = new StringBuilder(name.length() + prefixLen + suffixLen);
+        int prefixLen = prefix == null ? 0 : prefix.length(), suffixLen = suffix == null ? 0 : suffix.length(),
+                sepLen = sep == null ? 0 : sep.length();
+        StringBuilder sb = new StringBuilder(name.length() + prefixLen + suffixLen
+                + sepLen * ((prefixLen > 0 ? 1 : 0) + (suffixLen > 0 ? 1 : 0)));
         if (prefixLen > 0) sb.append(bidiWrap(prefix, bidi)).append(sep);
         sb.append(bidiWrap(capitalize(name, displayLocale), bidi));
+        // nitpick: give it the benefit of a space if there isn't one after the comma (separating script and country)
+        int comma = sb.indexOf(",", prefixLen > 0 ? prefixLen + sepLen : 0);
+        if (comma > 0) sb.insert(comma + 1, ' ');
         if (suffixLen > 0) sb.append(sep).append(bidiWrap(suffix, bidi));
         return sb.toString();
     }
@@ -1009,26 +1017,42 @@ public final class Languages {
         return array;
     }
 
-    private static String[] fetchAppLocales(@NonNull final Context activity) {
+    private static String[] fetchAppLocales(@NonNull final Context activity, final String lang) {
         String[] appLocales = null;
         if (Build.VERSION.SDK_INT >= 33) {
             LocaleConfig localeConfig = new LocaleConfig(activity);
             LocaleList locales = localeConfig.getSupportedLocales();
             if (locales != null) {
-                appLocales = new String[locales.size()];
-                for (int i = 0; i < locales.size(); i++) {
-                    appLocales[i] = locales.get(i).toLanguageTag();
+                if (lang == null || lang.isEmpty()) {
+                    appLocales = new String[locales.size()];
+                    for (int i = 0; i < locales.size(); i++) {
+                        appLocales[i] = locales.get(i).toLanguageTag();
+                    }
+                } else {
+                    ArrayList<String> langLocales = new ArrayList<>(locales.size());
+                    for (int i = 0; i < locales.size(); i++) {
+                        Locale l = locales.get(i);
+                        if (remapLegacyCode(l.getLanguage()).equals(lang)) {
+                            langLocales.add(l.toLanguageTag());
+                        }
+                    }
+                    if (langLocales.isEmpty()) return null;
+                    else appLocales = langLocales.toArray(new String[0]);
                 }
             }
         }
-        if (appLocales == null) appLocales = parseXMLLocales(activity.getResources());
+        if (appLocales == null) appLocales = parseXMLLocales(activity.getResources(), lang);
         if (appLocales != null) Arrays.sort(appLocales);
         return appLocales;
     }
 
-    public static String[] parseXMLLocales(@NonNull final Resources resources) {
+    private static String[] fetchAppLocales(@NonNull final Context activity) {
+        return fetchAppLocales(activity, null);
+    }
+
+    public static String[] parseXMLLocales(@NonNull final Resources resources, final String lang) {
         Map<String, String> locales = new TreeMap<>();
-        parseXMLResource(resources, R.xml.locales_config, locales, "locale", 0);
+        parseXMLResource(resources, R.xml.locales_config, locales, "locale", 0, lang);
         return locales.isEmpty() ? null : locales.keySet().toArray(new String[0]);
     }
 
@@ -1036,31 +1060,40 @@ public final class Languages {
         if (echo.length != 2) return null;
         AppLocale[][] results = new AppLocale[echo.length][];
         Context appContext = context.getApplicationContext();
-        String[] appLocales = echo[0] > 0 || echo[1] > 0 ? fetchAppLocales(appContext) : null;
-        if (echo[1] == 1 && appResLocales == null) {
-            echo[1] = -1;
-            Toast.makeText(context, "Updating languages from resources...", Toast.LENGTH_SHORT).show();
-            Single.fromCallable(() -> {
+        String[] appLocales = (echo[0] > 0 || echo[1] > 0) ? fetchAppLocales(appContext) : null;
+        if (appLocales == null) return null;
+        if (echo[0] > 0) {
+            echo[0] = 1;
+            results[0] = toAppLocales(appLocales);
+        }
+        if (echo[1] > 0) {
+            Single<AppLocale[]> single = Single.fromCallable(() -> {
                 long now = System.currentTimeMillis();
                 String[] locales = appContext.getAssets().getLocales();
                 String[] resLocales = parseResourcesLocales(appContext, locales, appLocales, true, null, null);
                 Log.d(TAG, "Fetching resources locales (got " + (resLocales == null ? "null" : resLocales.length)
                         + ") took: " + (System.currentTimeMillis() - now) + "ms");
                 return toAppLocales(resLocales);
-            }).subscribeOn(Schedulers.computation())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .doOnError(throwable -> Log.e(TAG, "Could not fetch resources locales", throwable))
-                    .subscribe(resLocales -> {
-                        appResLocales = resLocales;
-                        processAppLocales(appResLocales, true, true);
-                        Toast.makeText(context, "Updated " + resLocales.length
-                                + " locales from app resources.", Toast.LENGTH_SHORT).show();
-                        updateListPreference();
-                    });
-        }
-        if (echo[0] > 0) {
-            echo[0] = 1;
-            results[0] = toAppLocales(appLocales);
+            });
+            if (echo[1] == 1) {
+                echo[1] = -1;
+                if (appResLocales == null) {
+                    Toast.makeText(context, "Updating languages from resources...", Toast.LENGTH_SHORT).show();
+                    single.subscribeOn(Schedulers.computation())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .doOnError(throwable -> Log.e(TAG, "Could not fetch resources locales", throwable))
+                            .subscribe(resLocales -> {
+                                appResLocales = resLocales;
+                                processAppLocales(appResLocales, true, true, LOCALE_SCRIPTS);
+                                Toast.makeText(context, "Updated " + resLocales.length
+                                        + " locales from app resources.", Toast.LENGTH_SHORT).show();
+                                updateListPreference();
+                            });
+                }
+            } else {
+                echo[1] = 1;
+                results[1] = single.blockingGet();
+            }
         }
         return results;
     }
@@ -1125,11 +1158,12 @@ public final class Languages {
                 nextLang++;
             }
             if (filterLang >= 0) {
-                if (lang.length() == langLen && locales[i].regionMatches(0, lang, 0, langLen)) {
-                    filterLang++;
-                } else {
+                int cmp = compareStringSegments(locales[i], 0, langLen, lang, 0, lang.length());
+                if (cmp == 0) filterLang++;
+                else {
                     i = nextLang;
-                    continue;
+                    if (cmp > 0) break;
+                    else continue;
                 }
             }
             int fallbackRes = fallbackLocale.getLanguage().length() == langLen
@@ -1145,8 +1179,9 @@ public final class Languages {
                 if (batchSize > Integer.SIZE) { // 501
                     Utils.debugLog(TAG, "Only the first valid " + Integer.SIZE + " out of "
                             + (nextLang - i) + " (seriously?) locales would be considered for the `"
-                            + locales[i].substring(0, langLen) + "` language group.  `"
-                            + locales[k] + "` (#" + k + ") et seq disregarded.");
+                            + locales[i].substring(0, langLen) + "` language group.  `" + locales[k]
+                            + "` et seq [" + k + (nextLang - 1 > k ? (".." + (nextLang - 1)) : "")
+                            + "] disregarded.");
                     break;
                 }
                 Locale locale = Locale.forLanguageTag(locales[k]);
@@ -1175,7 +1210,7 @@ public final class Languages {
                 testHits.clear();
                 testPrio.clear();
                 rankPrio.clear();
-                int done = 0, mask = (1 << batchSize) - 1, l = 0;
+                int done = 0, flatten = 0, mask = batchSize == Integer.SIZE ? ~0 : (1 << batchSize) - 1, l = 0;
                 while (l < stringIds.length && done < mask) {
                     int resId = stringIds[l++];
                     if (resId <= 0) continue;
@@ -1197,29 +1232,29 @@ public final class Languages {
                         }
                         if (!testString.equals(fallbackString)) {
                             if (dedup == (1 << m)) done |= dedup;
-                            else testHits.put(dedup, testHits.get(dedup, 0) + 1);
+                            else if (testHits.indexOfKey(dedup) < 0) {
+                                testHits.put(dedup, m);
+                                flatten |= dedup;
+                            }
                         }
                         marked |= dedup;
                     }
                 }
                 int selected = done;
-                for (int k = 0, s = testHits.size(), e = (selected != 0 && s == 0) ? 1 : s; k < e; k++) {
-                    boolean firstLoop = k == 0 && selected != 0;
-                    int keys = s > 0 ? (testHits.keyAt(k) & ~done) : 0;
-                    if (!firstLoop && s > 0 && keys == 0) continue;
+                for (int k = (selected | flatten) == 0 ? 0 : -1, s = testHits.size(); k < s; k++) {
+                    boolean firstLoop = k == -1;
+                    int keys = firstLoop ? 0 : (testHits.keyAt(k) & ~done);
+                    if (!firstLoop && keys == 0) continue;
                     int bestCandidate = -1;
-                    for (int loopKeys = firstLoop ? (keys | selected) : keys,
+                    for (int loopKeys = firstLoop ? (selected | flatten) : keys,
                             b = Integer.numberOfTrailingZeros(loopKeys),
                             n = Integer.SIZE - Integer.numberOfLeadingZeros(loopKeys); b < n; b++) {
                         if (!firstLoop && bestCandidate >= 0) break;
                         if ((loopKeys & (1 << b)) != 0) {
-                            boolean areKeys = (keys & (1 << b)) != 0;
-                            if (firstLoop && bestCandidate >= 0 && (selected & (1 << b)) == 0) continue;
-                            String locale = locales[i + b];
-                            int candidatePrio = testPrio.get(b, -1);
-                            if (candidatePrio < 0) {
+                            if (firstLoop) {
                                 int prio = 0;
-                                for (int p = 4, q = areKeys ? 1 : 3; p > q; p--) {
+                                String locale = locales[i + b];
+                                for (int p = 4, q = (flatten & (1 << b)) != 0 ? 1 : 3; p > q; p--) {
                                     if (p == 4 || p == 2) {
                                         int r = p == 4 ? 0 : 1;
                                         if (ref[r] != null) {
@@ -1230,6 +1265,7 @@ public final class Languages {
                                             }
                                             if (r == 0 && cmp == 0) {
                                                 prio |= 1 << p;
+                                                break;
                                             } else if (r == 1 && cmp < 0) {
                                                 prio |= 1 << p;
                                             }
@@ -1242,17 +1278,18 @@ public final class Languages {
                                     }
                                 }
                                 testPrio.put(b, prio);
-                                candidatePrio = prio;
-                            }
-                            if (areKeys) {
-                                if ((candidatePrio & (1 << 4)) != 0) bestCandidate = b;
-                                else if (rankPrio.get(candidatePrio, -1) == -1) {
-                                    rankPrio.put(candidatePrio, b);
+                            } else {
+                                int candidatePrio = testPrio.get(b, -1);
+                                if (candidatePrio >= 0) {
+                                    if ((candidatePrio & (1 << 4)) != 0) bestCandidate = b;
+                                    else if (rankPrio.get(candidatePrio, -1) == -1) {
+                                        rankPrio.put(candidatePrio, b);
+                                    }
                                 }
                             }
                         }
                     }
-                    if (s == 0 || keys == 0) continue;
+                    if (firstLoop) continue;
                     if (bestCandidate < 0) bestCandidate = rankPrio.valueAt(rankPrio.size() - 1);
                     selected |= 1 << bestCandidate;
                     if (appLocalesDebug != null) {
@@ -1311,7 +1348,8 @@ public final class Languages {
 
     private static void parseXMLResource(@NonNull final Resources resources, int resId,
                                          @NonNull final Map<String, String> results,
-                                         final String matchTag, final int getAttribute) {
+                                         final String matchTag, final int getAttribute,
+                                         final String lang) {
         try (XmlResourceParser parser = resources.getXml(resId)) {
             String key = null, value = null;
             int eventType = parser.getEventType();
@@ -1319,7 +1357,11 @@ public final class Languages {
                 if (eventType == XmlResourceParser.START_TAG) {
                     if (matchTag == null || matchTag.isEmpty()
                             || parser.getName().equalsIgnoreCase(matchTag)) {
-                        key = parser.getAttributeValue(getAttribute >= 0 ? getAttribute : 0);
+                        String s = parser.getAttributeValue(getAttribute >= 0 ? getAttribute : 0);
+                        if (lang == null || lang.isEmpty() || (s.startsWith(lang)
+                                && (s.length() == lang.length() || s.charAt(lang.length()) == '-'))) {
+                            key = s;
+                        }
                     }
                 } else if (key != null && eventType == XmlResourceParser.TEXT) {
                     value = parser.getText();
@@ -1403,32 +1445,48 @@ public final class Languages {
 
     @SuppressWarnings({ "SetTextI18n", "NoWhitespaceAfter" })
     private static String debugAppLocales(@NonNull final Context context) {
-        LOCALE_SCRIPTS[RESOLVED] = null;
-        AppLocale[] appLocalesResolved = prepareAppLocales(context, new int[] { 1, 0 })[0];
-        processAppLocales(appLocalesResolved, false, true);
+        AppLocale[][] collection = prepareAppLocales(context, new int[] { 2, /* 2 */ 0 });
+        if (collection[1] == null && appResLocales != null) {
+            String[] l = new String[appResLocales.length];
+            for (int i = 0; i < appResLocales.length; i++) {
+                l[i] = appResLocales[i].locale.toLanguageTag();
+            }
+            collection[1] = toAppLocales(l);
+        }
 
         int sizeHint = 20 + 5;
         for (int i = 0; i < LOCALE_SCRIPTS.length; i++) {
-            sizeHint += (LOCALE_SCRIPTS[i] == null ? 4 : LOCALE_SCRIPTS[i].length()) + 4;
+            sizeHint += ((LOCALE_SCRIPTS[i] == null ? 4 : LOCALE_SCRIPTS[i].length()) + 4) * (i == 0 ? 1 : 2);
         }
-        sizeHint += appLocalesResolved.length * (20 + 6 + 11 + 11 + 11 + 5);
+        for (int i = 0; i < collection.length; i++) {
+            sizeHint += 17 + (collection[i] == null ? 0 : collection[i].length) * (20 + 6 + 11 + 11 + 11 + 5);
+        }
         StringBuilder sb = new StringBuilder(sizeHint);
+        sb.append("Locale Scripts: " + Build.VERSION.SDK_INT + "=\n").append(LOCALE_SCRIPTS[CACHE]);
 
-        sb.append("LOCALE_SCRIPTS: " + Build.VERSION.SDK_INT + "=\n")
-                .append(TextUtils.join(", \n\n", LOCALE_SCRIPTS))
-                .append("\n\n\n");
+        for (int c = 0; c < collection.length; c++) {
+            AppLocale[] appLocalesResolved = collection[c];
+            if (appLocalesResolved == null) continue;
+            String[] localeScripts = new String[2];
+            processAppLocales(appLocalesResolved, false, true, localeScripts);
 
-        for (int i = 0, n = appLocalesResolved.length - 1; i <= n; i++) {
-            AppLocale appLocale = appLocalesResolved[i];
-            Locale sysLocaleCached = appLocales[i].getMatchingSystemLocale();
-            sb.append('"').append(appLocale.locale).append('"');
-            if (USE_ICU && appLocale instanceof AppLocaleIcu) {
-                sb.append("\t -> ").append(((AppLocaleIcu) appLocale).icuLocale);
+            sb.append("\n\n\n").append(c == 0 ? "Released:" : "Unreleased:")
+                    .append("\n").append(localeScripts[RESOLVED]).append("\n\n");
+
+            AppLocale[] appLocalesSubject = c == 0 ? appLocales : appResLocales;
+            for (int i = 0, n = appLocalesResolved.length - 1; i <= n; i++) {
+                AppLocale appLocale = appLocalesResolved[i];
+                Locale sysLocaleCached = i < appLocalesSubject.length
+                        ? appLocalesSubject[i].getMatchingSystemLocale() : null;
+                sb.append('"').append(appLocale.locale).append('"');
+                if (USE_ICU && appLocale instanceof AppLocaleIcu) {
+                    sb.append("\t -> ").append(((AppLocaleIcu) appLocale).icuLocale);
+                }
+                sb.append("\t => ").append(appLocale.sysLocale).append("\t | ")
+                        .append(sysLocaleCached).append("\t (")
+                        .append(sysLocaleCached.equals(appLocale.sysLocale)).append(")");
+                if (i < n) sb.append(",\n");
             }
-            sb.append("\t => ").append(appLocale.sysLocale).append("\t | ")
-                    .append(sysLocaleCached).append("\t (")
-                    .append(sysLocaleCached.equals(appLocale.sysLocale)).append(")");
-            if (i < n) sb.append(",\n");
         }
         return sb.toString();
     }
