@@ -941,10 +941,11 @@ public final class Languages {
                                        final BidiFormatter bidi) {
         int resLocales = showResLocales() && appResLocales != null ? appResLocales.length : 0;
         String[] names = new String[appLocales.length + 1 + resLocales];
-        String label = "\uD83D\uDEA7"; // 🚧
+        final String label = "\uD83D\uDEA7"; // 🚧
         /* SYSTEM_DEFAULT is a fake one for displaying in a chooser menu. */
         names[0] = key ? USE_SYSTEM_DEFAULT : context.getString(R.string.pref_language_default);
         int i = 0, j = 0, k = 1, cmp = -1;
+        StringBuilder sb = new StringBuilder();
         for (int n = appLocales.length, m = resLocales, o = names.length; k < o;) {
             cmp = (sortTogether && i < n && j < m) ? appLocales[i].compareTo(appResLocales[j])
                     : (i < n ? -1 : 1);
@@ -953,12 +954,12 @@ public final class Languages {
             int addLabel = sortTogether ? 1 : -1;
             names[k++] = key ? locale.toLanguageTag()
                     : getDisplayName(appLocale.locale, cmp > 0 && addLabel < 0 ? label : null,
-                    cmp > 0 && addLabel > 0 ? label : null, "\u2007", bidi);
+                    cmp > 0 && addLabel > 0 ? label : null, "\u2007", bidi, sb);
             if (cmp == 0 && k < o) {
                 j++;
                 names[k++] = key ? locale.toLanguageTag()
                         : getDisplayName(appLocale.locale, addLabel < 0 ? label : null,
-                        addLabel > 0 ? label : null, "\u2007", bidi);
+                        addLabel > 0 ? label : null, "\u2007", bidi, sb);
             }
         }
         return names;
@@ -988,7 +989,7 @@ public final class Languages {
     }
 
     private static String getDisplayName(final Locale locale, final String prefix, final String suffix,
-                                         final String sep, final BidiFormatter bidi) {
+                                         final String sep, final BidiFormatter bidi, StringBuilder sb) {
         if (locale == null) return null;
         final String lang = locale.getLanguage();
         final int langLen = lang.length();
@@ -997,6 +998,7 @@ public final class Languages {
         LocaleListCompat locales = null;
         int i = -1, n = 0;
         Locale displayLocale = locale;
+        boolean resolved = true;
         while (i <= n + 1 && (name == null || name.isEmpty() || (name.startsWith(lang)
                 && (name.length() > langLen ? name.charAt(langLen) == ' ' : true)))) {
             if (i == 0 && locales == null) {
@@ -1004,7 +1006,7 @@ public final class Languages {
                 n = locales.size();
             }
             if (i == n + 1 && name != null && !name.isEmpty()) {
-                name = "\uD83C\uDF10" + "\u2009" + name; // 🌐
+                resolved = false;
                 break;
             }
             if (i >= 0) displayLocale = i < n ? locales.get(i) : Locale.ENGLISH;
@@ -1016,19 +1018,24 @@ public final class Languages {
         if (name == null || name.isEmpty()) return name;
         int prefixLen = prefix == null ? 0 : prefix.length(), suffixLen = suffix == null ? 0 : suffix.length(),
                 sepLen = sep == null ? 0 : sep.length();
-        StringBuilder sb = new StringBuilder(name.length() + prefixLen + suffixLen
-                + sepLen * ((prefixLen > 0 ? 1 : 0) + (suffixLen > 0 ? 1 : 0)));
+        if (sb != null) {
+            if (sb.length() > 0) sb.setLength(0);
+        } else sb = new StringBuilder((resolved ? 0 : 3) + name.length() + prefixLen + suffixLen
+                + sepLen * ((prefixLen > 0 ? 1 : 0) + (suffixLen > 0 ? 1 : 0))
+                + (bidi == null ? 0 : 10)); // reserve some headroom for directionality characters
         if (prefixLen > 0) sb.append(bidiWrap(prefix, bidi)).append(sep);
-        sb.append(bidiWrap(capitalize(name, displayLocale), bidi));
+        int comma = resolved ? sb.length() : -1;
+        if (!resolved) sb.append("\uD83C\uDF10").append('\u2009'); // 🌐
+        sb.append(bidiWrap(resolved ? capitalize(name, displayLocale) : name, bidi));
+        if (resolved) comma = sb.indexOf(",", comma);
         // nitpick: give it the benefit of a space if there isn't one after the comma (separating script and country)
-        int comma = sb.indexOf(",", prefixLen > 0 ? prefixLen + sepLen : 0);
-        if (comma > 0) sb.insert(comma + 1, ' ');
+        if (comma > 0 && comma < sb.length() - 2 && sb.charAt(comma + 1) != ' ') sb.insert(comma + 1, ' ');
         if (suffixLen > 0) sb.append(sep).append(bidiWrap(suffix, bidi));
         return sb.toString();
     }
 
     public static String getCurrentLocale() {
-        return getDisplayName(Locale.getDefault(), null, null, null, null);
+        return getDisplayName(Locale.getDefault(), null, null, null, null, null);
     }
 
     public static String getAppLocale() {
