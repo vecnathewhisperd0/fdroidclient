@@ -32,6 +32,7 @@ import androidx.preference.ListPreference;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
@@ -180,10 +181,66 @@ public final class Languages {
         return searchSortedChars(SCRIPT_HINTS, c) >= 0;
     }
 
+    private static class Commons {
+        private static SparseArray<WeakReference> cache;
+        public static final int AVAILABLE_LOCALES = 1;
+        public static final int SYS_ASSETS_LOCALES = 2;
+        public static final int APP_ASSETS_LOCALES = 3;
+
+        private static <T> T get(final int res, @NonNull final Class<T> c, final Context context) {
+            if (cache == null) cache = new SparseArray(2);
+            WeakReference<T> ref = cache.get(res, null);
+            Object result = ref == null ? null : ref.get();
+            if (result == null) {
+                switch (res) {
+                    case AVAILABLE_LOCALES:
+                        result = Locale.getAvailableLocales();
+                        // Prior to AOSP's commit 92924f2 (Oct 2016; probably Android <8)
+                        // https://cs.android.com/android/_/android/platform/libcore/+/92924f23a03635bb194b6481c4a950e6414ca4e4
+                        // `Locale.getAvailableLocales()` queried `LocaleServiceProviderPool` which
+                        // deduplicated `Locale`s with a `HashSet`.  Since then it directly fetches
+                        // from `ICU.getAvailableLocales()` which deduplicates with a `LinkedHashSet`
+                        // and the ordering appears to be quite stable (in ascending BCP-47 tags)
+                        if (Build.VERSION.SDK_INT < 26) {
+                            Arrays.sort((Locale[]) result, new Comparator<Locale>() {
+                                @Override
+                                public int compare(Locale o1, Locale o2) {
+                                    return o1.toLanguageTag().compareTo(o2.toLanguageTag());
+                                }
+                            });
+                        }
+                        break;
+                    case SYS_ASSETS_LOCALES:
+                        result = Resources.getSystem().getAssets().getLocales();
+                        break;
+                    case APP_ASSETS_LOCALES:
+                        if (context != null) result = context.getAssets().getLocales();
+                        break;
+                }
+                if (result != null) cache.put(res, new WeakReference(result));
+            }
+            return c.isInstance(result) ? c.cast(result) : null;
+        }
+
+        public static Locale[] getLocaleArray(final int res) {
+            return get(res, Locale[].class, null);
+        }
+
+        public static String[] getStringArray(final int res) {
+            return get(res, String[].class, null);
+        }
+
+        public static String[] getStringArray(final int res, final Context context) {
+            return get(res, String[].class, context);
+        }
+    }
+
     public static void updateCacheHint(@NonNull final Context context, final SharedPreferences atStartTime) {
         final String cacheHintKey = "scripts-hint";
+        // prefix a version number so that we can easily vitiate cache in case of future implementation changes
+        final int schema = 0;
         String cached = atStartTime == null ? null : atStartTime.getString(cacheHintKey, null);
-        String prefix = Build.VERSION.SDK_INT + "=";
+        String prefix = schema + ":" + Build.VERSION.SDK_INT + "=";
         if (cached != null && cached.startsWith(prefix)) {
             LOCALE_SCRIPTS[CACHE] = cached.substring(prefix.length());
         } else {
@@ -230,7 +287,7 @@ public final class Languages {
         boolean dryRun = appLocales == null;
         boolean genericHints = dryRun;
         int fallbackOp = SCRIPT_INSIGNIFICANT;
-        Locale[] sysLocales = dryRun ? Locale.getAvailableLocales() : null;
+        Locale[] sysLocales = dryRun ? Commons.getLocaleArray(Commons.AVAILABLE_LOCALES) : null;
         int[] cachePos = null, defaultOp = null;
         StringBuilder sb = dryRun ? new StringBuilder().append(SCRIPT_HINTS[fallbackOp]) : null;
         int i = 0, j = -1, k = -1, langLocales = 0, langScripts = 0;
@@ -339,7 +396,7 @@ public final class Languages {
 
             if (!handled && resolve) {
                 if (sb == null) sb = new StringBuilder(4 * appLocales.length);
-                if (sysLocales == null) sysLocales = Locale.getAvailableLocales();
+                if (sysLocales == null) sysLocales = Commons.getLocaleArray(Commons.AVAILABLE_LOCALES);
 
                 String sysLang;
                 int compare = -1;
@@ -710,7 +767,8 @@ public final class Languages {
             String[] xmlLocales = skipDiscount ? null : fetchAppLocales(context, lang);
             String[] langLocales = skipDiscount ? null
                     : (BuildConfig.DEBUG ? parseResourcesLocales(context,
-                    context.getAssets().getLocales(), xmlLocales, false, null, lang) : xmlLocales);
+                    Commons.getStringArray(Commons.APP_ASSETS_LOCALES, context),
+                    xmlLocales, false, null, lang) : xmlLocales);
             AppLocale[] locales = toAppLocales(langLocales == null ? new String[] { languageTag }
                     : langLocales);
             processAppLocales(locales, true, false, null);
@@ -1020,6 +1078,7 @@ public final class Languages {
     private static String[] fetchAppLocales(@NonNull final Context activity, final String lang) {
         String[] appLocales = null;
         if (Build.VERSION.SDK_INT >= 33) {
+            // `LocaleConfig` deduplicates with a `HashSet` which leaves us with the (eventual) sorting on our own
             LocaleConfig localeConfig = new LocaleConfig(activity);
             LocaleList locales = localeConfig.getSupportedLocales();
             if (locales != null) {
@@ -1069,7 +1128,7 @@ public final class Languages {
         if (echo[1] > 0) {
             Single<AppLocale[]> single = Single.fromCallable(() -> {
                 long now = System.currentTimeMillis();
-                String[] locales = appContext.getAssets().getLocales();
+                String[] locales = Commons.getStringArray(Commons.APP_ASSETS_LOCALES, appContext);
                 String[] resLocales = parseResourcesLocales(appContext, locales, appLocales, true, null, null);
                 Log.d(TAG, "Fetching resources locales (got " + (resLocales == null ? "null" : resLocales.length)
                         + ") took: " + (System.currentTimeMillis() - now) + "ms");
@@ -1100,7 +1159,7 @@ public final class Languages {
 
     public static String[] parseResourcesLocales(@NonNull final Context context) {
         Context appContext = context.getApplicationContext();
-        String[] locales = appContext.getAssets().getLocales();
+        String[] locales = Commons.getStringArray(Commons.APP_ASSETS_LOCALES, appContext);
         String[] appLocales = fetchAppLocales(appContext);
         return parseResourcesLocales(context, locales, appLocales, false, null, null);
     }
@@ -1138,11 +1197,12 @@ public final class Languages {
         String[][] ref = new String[2][];
         int[] refPos = new int[2];
         if (xmlLocales != null) ref[0] = xmlLocales;
-        ref[1] = Resources.getSystem().getAssets().getLocales();
+        ref[1] = Commons.getStringArray(Commons.SYS_ASSETS_LOCALES);
         // Resources.updateConfiguration() seems to be a bit flakey: missing `af` and `en-US` at times
         // don't know why? disabled reuseRes to always recreate one from `Context.createConfigurationContext()`
         boolean reuseRes = false, reinitModConfig = reuseRes;
         int filterLang = lang == null || lang.isEmpty() ? -1 : 0;
+        boolean filSeen = false;
         while (i < locales.length) {
             if (locales[i].isEmpty()) {
                 i++;
@@ -1156,6 +1216,16 @@ public final class Languages {
                     break;
                 }
                 nextLang++;
+            }
+            // On some (older) devices (saw it on an Android 7) `fil` (Filipino) might appear twice:
+            // the second one seems to be remapped from (and apparently sorted as) `tl` (Tagalog).
+            // Just disregard subsequent occurrences of `fil` as a quick workaround.
+            if (langLen == 3 && locales[i].startsWith("fil")) {
+                if (!filSeen) filSeen = true;
+                else {
+                    i = nextLang;
+                    continue;
+                }
             }
             if (filterLang >= 0) {
                 int cmp = compareStringSegments(locales[i], 0, langLen, lang, 0, lang.length());
@@ -1382,7 +1452,7 @@ public final class Languages {
     @SuppressWarnings("SetTextI18n")
     private static String debugResLocales(@NonNull final Context context) {
         Context appContext = context.getApplicationContext();
-        String[] locales = appContext.getAssets().getLocales();
+        String[] locales = Commons.getStringArray(Commons.APP_ASSETS_LOCALES, appContext);
         ArrayList<String> appLocalesDebug = new ArrayList<>(locales.length);
         String[] xmlLocales = fetchAppLocales(appContext);
         String[] appLocales = parseResourcesLocales(context, locales, xmlLocales, false, appLocalesDebug, null);
@@ -1499,6 +1569,13 @@ public final class Languages {
         format.setTimeZone(java.util.TimeZone.getTimeZone("UTC"));
 
         Locale[] sysLocales = Locale.getAvailableLocales();
+        Arrays.sort(sysLocales, new Comparator<Locale>() {
+            @Override
+            public int compare(Locale o1, Locale o2) {
+                return o1.toString().compareTo(o2.toString());
+            }
+        });
+
         int sizeHint = 131 + 9 + (8 + 13 + 29) * sysLocales.length;
         if (extended) {
             if (USE_ICU) sizeHint += 38 + (3 + 27) * sysLocales.length;
@@ -1521,12 +1598,6 @@ public final class Languages {
             sb.append(" ----------------------- |");
         }
         sb.append("\n");
-        Arrays.sort(sysLocales, new java.util.Comparator<Locale>() {
-            @Override
-            public int compare(Locale o1, Locale o2) {
-                return o1.toString().compareTo(o2.toString());
-            }
-        });
         for (int i = 0; i < sysLocales.length; i++) {
             Locale locale = sysLocales[i];
             sb.append("| ");
