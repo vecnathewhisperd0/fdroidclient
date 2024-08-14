@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import androidx.annotation.ChecksSdkIntAtLeast;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -47,9 +48,15 @@ public final class Languages {
 
     public static final String USE_SYSTEM_DEFAULT = "";
 
+    /**
+     * Denotes whether there is native per app language support.  Since {@link Build.VERSION_CODES#TIRAMISU}.
+     */
     @ChecksSdkIntAtLeast(api = 33)
-    public static final boolean NATIVE_PAL; // PAL = Per app language support
+    public static final boolean NATIVE_PAL;
 
+    /**
+     * Denotes whether there is support for the {@link android.icu} package.  Since {@link Build.VERSION_CODES#N}.
+     */
     @ChecksSdkIntAtLeast(api = 24)
     private static final boolean USE_ICU;
     private static LocaleListCompat systemLocales;
@@ -90,18 +97,22 @@ public final class Languages {
         }
     }
 
+    /**
+     * The default locale list seems to be set on creation of an {@code Activity} (thread)
+     * by calling {@link LocaleList#setDefault} with a {@link LocaleList} passed in from the system
+     * which corresponds with the language preference list in system settings (as desired)
+     * and adjusted with the selected per app language at the top on Android 13 onwards
+     * with native support.  Unfortunately we'll have to 'mess with' it pre-Android 13
+     * so we re-set the default {@link LocaleList} to our modified one at the earliest opportunity.
+     * This is particularly important so as to 'propagate' our locale list to the libraries
+     * (which then pick up the same by calling {@link LocaleListCompat#getDefault}).
+     *
+     * @see {@link android.app.ActivityThread#handleBindApplication}
+     * @param app The {@link Application} to {@link Application#registerActivityLifecycleCallbacks} for that purpose.
+     */
     @SuppressWarnings("EmptyLineSeparator")
     public static void onApplicationCreate(@NonNull final Application app) {
         if (NATIVE_PAL) return;
-        // The default locale list seems to be set on creation of an activity (thread):
-        // https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/java/android/app/ActivityThread.java?q=symbol%3A%5Cbandroid.app.ActivityThread.handleBindApplication%5Cb%20case%3Ayes
-        // by calling `LocaleList.setDefault()` with a `LocaleList` passed in from the system
-        // which corresponds with the language preference list in system settings (as we desire)
-        // and adjusted with the selected per app language at the top on Android 13 onwards
-        // with native support.  Unfortunately we'll have to 'mess with' it pre-Android 13
-        // so we re-set the default locale list to our modified one at the earliest opportunity.
-        // This is particularly important so as to 'propagate' our locale list to the libraries
-        // (which then pick up the same by calling `LocaleListCompat.getDefault()`).
         app.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
             @Override
             public void onActivityPreCreated(Activity activity, Bundle savedInstanceState) {
@@ -138,8 +149,8 @@ public final class Languages {
         });
     }
 
-    private static int compareStringSegments(final String aString, int aPos, int aLen,
-                                             String bString, int bPos, int bLen) {
+    private static int compareStringSegments(@NonNull final String aString, int aPos, int aLen,
+                                             @Nullable String bString, int bPos, int bLen) {
         int cmp = -1;
         if (bString == null) bString = aString;
         for (int i = 0, n = Math.min(aLen, bLen), al = aString.length(), bl = bString.length();
@@ -187,7 +198,8 @@ public final class Languages {
         public static final int SYS_ASSETS_LOCALES = 2;
         public static final int APP_ASSETS_LOCALES = 3;
 
-        private static <T> T get(final int res, @NonNull final Class<T> c, final Context context) {
+        @Nullable
+        private static <T> T get(final int res, @NonNull final Class<T> c, @Nullable final Context context) {
             if (cache == null) cache = new SparseArray(2);
             WeakReference<T> ref = cache.get(res, null);
             Object result = ref == null ? null : ref.get();
@@ -222,20 +234,24 @@ public final class Languages {
             return c.isInstance(result) ? c.cast(result) : null;
         }
 
+        @Nullable
         public static Locale[] getLocaleArray(final int res) {
             return get(res, Locale[].class, null);
         }
 
+        @Nullable
         public static String[] getStringArray(final int res) {
             return get(res, String[].class, null);
         }
 
-        public static String[] getStringArray(final int res, final Context context) {
+        @Nullable
+        public static String[] getStringArray(final int res, @Nullable final Context context) {
             return get(res, String[].class, context);
         }
     }
 
-    public static void updateCacheHint(@NonNull final Context context, final SharedPreferences atStartTime) {
+    public static void updateCacheHint(@NonNull final Context context,
+                                       @Nullable final SharedPreferences atStartTime) {
         final String cacheHintKey = "scripts-hint";
         // prefix a version number so that we can easily vitiate cache in case of future implementation changes
         final int schema = 0;
@@ -283,7 +299,7 @@ public final class Languages {
 
     private static void processAppLocales(@NonNull AppLocale[] appLocales,
                                           final boolean useCache, final boolean resolve,
-                                          final String[] localeScripts) {
+                                          @Nullable final String[] localeScripts) {
         boolean dryRun = appLocales == null;
         boolean genericHints = dryRun;
         int fallbackOp = SCRIPT_INSIGNIFICANT;
@@ -471,14 +487,15 @@ public final class Languages {
      * @param activity the {@link AppCompatActivity} this is working as part of
      * @return the singleton to work with
      */
-    public static Languages get(@NonNull AppCompatActivity activity) {
+    @NonNull
+    public static Languages get(@NonNull final AppCompatActivity activity) {
         if (singleton == null) {
             singleton = new Languages(activity);
         }
         return singleton;
     }
 
-    public static void updateSystemLocales(Configuration config) {
+    public static void updateSystemLocales(@Nullable final Configuration config) {
         LocaleListCompat newLocales = null;
         if (config != null) {
             newLocales = ConfigurationCompat.getLocales(config);
@@ -495,6 +512,7 @@ public final class Languages {
 
     private static Locale.Builder localeBuilder;
 
+    @NonNull
     private static Locale.Builder getBuilder() {
         if (localeBuilder == null) {
             localeBuilder = new Locale.Builder();
@@ -567,6 +585,7 @@ public final class Languages {
             return locale.getCountry();
         }
 
+        @NonNull
         public Locale getMatchingSystemLocale() {
             return sysLocale == null ? locale : sysLocale;
         }
@@ -644,6 +663,7 @@ public final class Languages {
             return (country.isEmpty() && impute) ? icuLocale.getCountry() : country;
         }
 
+        @NonNull
         @Override
         public Locale getMatchingSystemLocale() {
             if (sysLocale != null) {
@@ -674,11 +694,12 @@ public final class Languages {
 
     }
 
+    @NonNull
     private static AppLocale createAppLocale(@NonNull final Locale locale) {
         return USE_ICU ? new AppLocaleIcu(locale) : new AppLocale(locale);
     }
 
-    private static int compare(final Locale sysLocale, final AppLocale appLocale) {
+    private static int compare(@NonNull final Locale sysLocale, @NonNull final AppLocale appLocale) {
         int flags = 0;
         String l = remapLegacyCode(sysLocale.getLanguage());
         String s = sysLocale.getScript();
@@ -714,15 +735,16 @@ public final class Languages {
         return (i & flags) == flags;
     }
 
-    // Map obsolete language codes to new language codes
-    // see https://developer.android.com/reference/java/util/Locale#legacy-language-codes
+    /**
+     * Map obsolete language codes to new language codes
+     * @see <a href="https://developer.android.com/reference/java/util/Locale#legacy-language-codes">Legacy language codes</a> mapped by Locale
+     */
     @SuppressWarnings("NoWhitespaceAfter")
     private static final String[] OLD_LANG_CODES = { "in", "iw", "ji" };
     @SuppressWarnings("NoWhitespaceAfter")
     private static final String[] NEW_LANG_CODES = { "id", "he", "yi" };
 
-    private static int searchSortedStrings(@NonNull final String[] haystack,
-                                           @NonNull final String needle) {
+    private static int searchSortedStrings(@NonNull final String[] haystack, @NonNull final String needle) {
         int i = -1, cmp = -1;
         do {
             cmp = needle.compareTo(haystack[++i]);
@@ -730,7 +752,7 @@ public final class Languages {
         return cmp == 0 ? i : -1;
     }
 
-    private static int searchSortedChars(final char[] haystack, final char needle) {
+    private static int searchSortedChars(@NonNull final char[] haystack, final char needle) {
         int i = -1, cmp = -1;
         do {
             cmp = Character.compare(needle, haystack[++i]);
@@ -738,12 +760,14 @@ public final class Languages {
         return cmp == 0 ? i : -1;
     }
 
+    @NonNull
     private static String remapLegacyCode(@NonNull final String lang) {
         int index = searchSortedStrings(OLD_LANG_CODES, lang);
         return index >= 0 ? NEW_LANG_CODES[index] : lang;
     }
 
-    private static String remapLegacyCode(final String lang, final boolean enable) {
+    @NonNull
+    private static String remapLegacyCode(@NonNull final String lang, final boolean enable) {
         return enable ? remapLegacyCode(lang) : lang;
     }
 
@@ -757,7 +781,7 @@ public final class Languages {
     }
 
     @SuppressWarnings("NoWhitespaceAfter")
-    private static AppLocale matchAppLocale(@NonNull final Context context, final String languageTag) {
+    private static AppLocale matchAppLocale(@NonNull final Context context, @Nullable final String languageTag) {
         if (languageTag == null || languageTag.isEmpty()) return null;
         Locale l = Locale.forLanguageTag(languageTag);
         String lang = remapLegacyCode(l.getLanguage());
@@ -806,14 +830,21 @@ public final class Languages {
         resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 
-    // AOSP commit fc8c211 "Accept repeated locale as an input of LocaleList construction."
-    // https://android.googlesource.com/platform/frameworks/base/+/fc8c211b436aa180818780a6ade107ad30835ef8
-    // landed into `LocaleList` in Sep 2020.  Unfortunately the Compat version (`LocaleListCompat`)
-    // doesn't cover the edge case for us and simply hands off to platform implementation where available.
-    // In other words, we cannot rely on the constructor (to silently drop duplicates) but to do the
-    // deduplication on our own (lest IAE will be thrown on older Android versions (presumably <11)).
-    private static LocaleListCompat adjustLocaleList(final Locale preferred,
-                                                     final LocaleListCompat baseList) {
+    /**
+     * AOSP commit <a href="https://android.googlesource.com/platform/frameworks/base/+/fc8c211b436aa180818780a6ade107ad30835ef8">fc8c211</a>
+     * "Accept repeated locale as an input of LocaleList construction."
+     * landed into {@link LocaleList} in Sep 2020.  Unfortunately {@link LocaleListCompat}
+     * doesn't cover the edge case for us and simply hands it off to platform implementation where available.
+     * In other words, we cannot rely on the constructor (to silently drop duplicates) but to do the
+     * deduplication on our own (lest IAE will be thrown on older Android versions (presumably <11)).
+     *
+     * @param preferred The {@link Locale} to be placed at the top of the {@link LocaleList}.
+     * @param baseList The {@link LocaleList} to base on for adjustment.
+     * @return the adjusted {@link LocaleList}
+     */
+    @Nullable
+    private static LocaleListCompat adjustLocaleList(@Nullable final Locale preferred,
+                                                     @Nullable final LocaleListCompat baseList) {
         if (preferred == null) return baseList;
         if (baseList == null) return LocaleListCompat.create(preferred);
         int pos = baseList.indexOf(preferred);
@@ -839,7 +870,7 @@ public final class Languages {
         setLanguage(context, Preferences.get().getLanguage());
     }
 
-    public static void setLanguage(@NonNull final Context context, final String language) {
+    public static void setLanguage(@NonNull final Context context, @Nullable final String language) {
         boolean changed = locale == null;
         if (language == null || language.equals(USE_SYSTEM_DEFAULT)) {
             if (NATIVE_PAL && locale == null) return;
@@ -916,6 +947,7 @@ public final class Languages {
      * @return an array of the names of all the supported languages, sorted to
      * match what is returned by {@link Languages#getSupportedLocales()}.
      */
+    @NonNull
     public static String[] getAllNames(@NonNull final Context context) {
         return mapToArray(context, false, NATIVE_PAL);
     }
@@ -923,11 +955,13 @@ public final class Languages {
     /**
      * @return sorted list of supported locales.
      */
+    @NonNull
     public static String[] getSupportedLocales(@NonNull final Context context) {
         return mapToArray(context, true, NATIVE_PAL);
     }
 
-    private static String capitalize(@NonNull final String line, final Locale displayLocale) {
+    @NonNull
+    private static String capitalize(@NonNull final String line, @Nullable final Locale displayLocale) {
         if (line.isEmpty()) return line;
         String firstChar = displayLocale == null || displayLocale.getLanguage().isEmpty()
                 ? Character.toString(Character.toUpperCase(line.charAt(0)))
@@ -936,9 +970,10 @@ public final class Languages {
                 : (line.length() == 1 ? firstChar : firstChar + line.substring(1));
     }
 
+    @NonNull
     private static String[] mapToArray(@NonNull final Context context, final boolean key,
                                        final boolean matchSystemLocales, final boolean sortTogether,
-                                       final BidiFormatter bidi) {
+                                       @Nullable final BidiFormatter bidi) {
         int resLocales = showResLocales() && appResLocales != null ? appResLocales.length : 0;
         String[] names = new String[appLocales.length + 1 + resLocales];
         final String label = "\uD83D\uDEA7"; // 🚧
@@ -965,13 +1000,15 @@ public final class Languages {
         return names;
     }
 
+    @NonNull
     private static String[] mapToArray(@NonNull final Context context, final boolean key,
                                        final boolean matchSystemLocales) {
         return mapToArray(context, key, matchSystemLocales, true, BidiFormatter.getInstance());
     }
 
-    // aligns with AOSP's `LocaleHelper.shouldUseDialectName()`
-    // https://cs.android.com/android/platform/superproject/main/+/main:frameworks/base/core/java/com/android/internal/app/LocaleHelper.java?q=symbol%3A%5Cbcom.android.internal.app.LocaleHelper.shouldUseDialectName%5Cb%20case%3Ayes
+    /**
+     * aligns with AOSP's {@link com.android.internal.app.LocaleHelper#shouldUseDialectName}
+     */
     @SuppressWarnings("NoWhitespaceAfter")
     private static final String[] DIALECT_LANGS = { "fa", "ro", "zh" };
 
@@ -980,16 +1017,20 @@ public final class Languages {
     }
 
     @RequiresApi(api = 24)
-    private static String getDisplayNameWithDialect(final Locale locale, final Locale displayLocale) {
+    private static String getDisplayNameWithDialect(@NonNull final Locale locale,
+                                                    @NonNull final Locale displayLocale) {
         return ULocale.forLocale(locale).getDisplayNameWithDialect(ULocale.forLocale(displayLocale));
     }
 
-    private static String bidiWrap(final String string, final BidiFormatter bidi) {
+    @Nullable
+    private static String bidiWrap(@Nullable final String string, @Nullable final BidiFormatter bidi) {
         return string == null ? null : (bidi == null ? string : bidi.unicodeWrap(string));
     }
 
-    private static String getDisplayName(final Locale locale, final String prefix, final String suffix,
-                                         final String sep, final BidiFormatter bidi, StringBuilder sb) {
+    @Nullable
+    private static String getDisplayName(@Nullable final Locale locale, @Nullable final String prefix,
+                                         @Nullable final String suffix, @Nullable final String sep,
+                                         @Nullable final BidiFormatter bidi, @Nullable StringBuilder sb) {
         if (locale == null) return null;
         final String lang = locale.getLanguage();
         final int langLen = lang.length();
@@ -1045,7 +1086,7 @@ public final class Languages {
 
     private static WeakReference<ListPreference> langPreference;
 
-    private static void updateListPreference(final ListPreference languagePref) {
+    private static void updateListPreference(@Nullable final ListPreference languagePref) {
         if (languagePref == null) return;
         languagePref.setEntries(getAllNames(languagePref.getContext()));
         languagePref.setEntryValues(getSupportedLocales(languagePref.getContext()));
@@ -1055,7 +1096,7 @@ public final class Languages {
         if (langPreference != null) updateListPreference(langPreference.get());
     }
 
-    public static void updateListPreference(final ListPreference languagePref,
+    public static void updateListPreference(@Nullable final ListPreference languagePref,
                                             @NonNull final Context activity) {
         requireAppLocales(activity);
         updateListPreference(languagePref);
@@ -1065,6 +1106,7 @@ public final class Languages {
         langPreference = new WeakReference(languagePref);
     }
 
+    @NonNull
     public static Locale[] toLocales(@NonNull final String[] locales) {
         Arrays.sort(locales);
         Locale[] array = new Locale[locales.length];
@@ -1074,6 +1116,7 @@ public final class Languages {
         return array;
     }
 
+    @NonNull
     public static AppLocale[] toAppLocales(@NonNull final String[] locales) {
         AppLocale[] array = new AppLocale[locales.length];
         for (int i = 0; i < locales.length; i++) {
@@ -1082,7 +1125,8 @@ public final class Languages {
         return array;
     }
 
-    private static String[] fetchAppLocales(@NonNull final Context activity, final String lang) {
+    @Nullable
+    private static String[] fetchAppLocales(@NonNull final Context activity, @Nullable final String lang) {
         String[] appLocales = null;
         if (Build.VERSION.SDK_INT >= 33) {
             // `LocaleConfig` deduplicates with a `HashSet` which leaves us with the (eventual) sorting on our own
@@ -1112,17 +1156,20 @@ public final class Languages {
         return appLocales;
     }
 
+    @Nullable
     private static String[] fetchAppLocales(@NonNull final Context activity) {
         return fetchAppLocales(activity, null);
     }
 
-    public static String[] parseXMLLocales(@NonNull final Resources resources, final String lang) {
+    @Nullable
+    public static String[] parseXMLLocales(@NonNull final Resources resources, @Nullable final String lang) {
         Map<String, String> locales = new TreeMap<>();
         parseXMLResource(resources, R.xml.locales_config, locales, "locale", 0, lang);
         return locales.isEmpty() ? null : locales.keySet().toArray(new String[0]);
     }
 
-    public static AppLocale[][] prepareAppLocales(@NonNull final Context context, int[] echo) {
+    @Nullable
+    public static AppLocale[][] prepareAppLocales(@NonNull final Context context, @NonNull int[] echo) {
         if (echo.length != 2) return null;
         AppLocale[][] results = new AppLocale[echo.length][];
         Context appContext = context.getApplicationContext();
@@ -1164,6 +1211,7 @@ public final class Languages {
         return results;
     }
 
+    @Nullable
     public static String[] parseResourcesLocales(@NonNull final Context context) {
         Context appContext = context.getApplicationContext();
         String[] locales = Commons.getStringArray(Commons.APP_ASSETS_LOCALES, appContext);
@@ -1171,10 +1219,11 @@ public final class Languages {
         return parseResourcesLocales(context, locales, appLocales, false, null, null);
     }
 
-    private static String[] parseResourcesLocales(@NonNull final Context appContext,
-            @NonNull String[] locales, String[] xmlLocales, boolean excludeXMLLocales,
-                                                  ArrayList<String> appLocalesDebug,
-                                                  final String lang) {
+    @Nullable
+    private static String[] parseResourcesLocales(@NonNull final Context appContext, @NonNull String[] locales,
+                                                  @Nullable String[] xmlLocales, boolean excludeXMLLocales,
+                                                  @Nullable ArrayList<String> appLocalesDebug,
+                                                  @Nullable final String lang) {
         Configuration appConfig = appContext.getResources().getConfiguration();
 
         java.lang.reflect.Field[] fields = R.string.class.getFields();
@@ -1425,8 +1474,8 @@ public final class Languages {
 
     private static void parseXMLResource(@NonNull final Resources resources, int resId,
                                          @NonNull final Map<String, String> results,
-                                         final String matchTag, final int getAttribute,
-                                         final String lang) {
+                                         @Nullable final String matchTag, final int getAttribute,
+                                         @Nullable final String lang) {
         try (XmlResourceParser parser = resources.getXml(resId)) {
             String key = null, value = null;
             int eventType = parser.getEventType();
@@ -1457,6 +1506,7 @@ public final class Languages {
     }
 
     @SuppressWarnings("SetTextI18n")
+    @NonNull
     private static String debugResLocales(@NonNull final Context context) {
         Context appContext = context.getApplicationContext();
         String[] locales = Commons.getStringArray(Commons.APP_ASSETS_LOCALES, appContext);
@@ -1521,6 +1571,7 @@ public final class Languages {
     }
 
     @SuppressWarnings({ "SetTextI18n", "NoWhitespaceAfter" })
+    @NonNull
     private static String debugAppLocales(@NonNull final Context context) {
         AppLocale[][] collection = prepareAppLocales(context, new int[] { 2, /* 2 */ 0 });
         if (collection[1] == null && appResLocales != null) {
@@ -1568,6 +1619,7 @@ public final class Languages {
         return sb.toString();
     }
 
+    @NonNull
     private static String debugSystemLocales() {
         boolean extended = false;
         java.util.Date date = new java.util.Date(System.currentTimeMillis());
