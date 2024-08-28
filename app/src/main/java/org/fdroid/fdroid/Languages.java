@@ -868,12 +868,6 @@ public final class Languages {
             // https://android.googlesource.com/platform/frameworks/support/+/9752b7383244c2ab548970d89a257ef368183b88
             // "To workaround the android framework issue(b/242026447) which doesn't update the
             // layout direction after recreating in Android S." (adapted with modification).
-            //
-            // Unfortunately AppCompat 1.7.0-alpha01 introduces a 'nasty' 'bugfix' (I6a94b)
-            // https://android-review.googlesource.com/c/platform/frameworks/support/+/2200485
-            // which claims to fix `Locale.getDefault()` but breaks `LocaleList.getDefault()`
-            // entirely when per-app language is used with `AppCompatDelegate` pre-Android 13
-            // so we need to hold off AppCompat 1.7.0 (stay on 1.6.1) until the commit is reverted.
             if (Build.VERSION.SDK_INT >= 31
                     && activity.getResources().getConfiguration().getLayoutDirection() !=
                     TextUtils.getLayoutDirectionFromLocale(locale)) {
