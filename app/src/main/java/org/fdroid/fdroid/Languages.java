@@ -86,6 +86,7 @@ public final class Languages {
     }
 
     public static void onApplicationCreate(@NonNull final Application app) {
+        if (NATIVE_PAL) return;
         if (lastLocaleList != null) {
             android.os.Handler handler = new android.os.Handler(app.getMainLooper());
             handler.post(() -> {
@@ -1508,6 +1509,7 @@ public final class Languages {
         return sb.toString();
     }
 
+    @SuppressWarnings("PMD.AssignementInOperand")
     @NonNull
     private static String debugLogcat() {
         StringBuilder sb = new StringBuilder();
