@@ -1509,7 +1509,7 @@ public final class Languages {
         return sb.toString();
     }
 
-    @SuppressWarnings("PMD.AssignementInOperand")
+    @SuppressWarnings("PMD.AssignmentInOperand")
     @NonNull
     private static String debugLogcat() {
         StringBuilder sb = new StringBuilder();
