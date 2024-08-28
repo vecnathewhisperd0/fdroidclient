@@ -1,6 +1,5 @@
 package org.fdroid.fdroid;
 
-import android.app.Activity;
 import android.app.Application;
 import android.app.LocaleConfig;
 import android.content.Context;
@@ -10,7 +9,6 @@ import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.icu.util.ULocale;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.LocaleList;
 import android.text.TextUtils;
 import android.util.Log;
@@ -25,9 +23,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.text.BidiFormatter;
 import androidx.core.os.ConfigurationCompat;
 import androidx.core.os.LocaleListCompat;
+import androidx.core.text.BidiFormatter;
 import androidx.preference.ListPreference;
 
 import java.lang.ref.WeakReference;
@@ -59,6 +57,7 @@ public final class Languages {
      */
     @ChecksSdkIntAtLeast(api = 24)
     private static final boolean USE_ICU;
+
     private static LocaleListCompat systemLocales;
     private static LocaleListCompat lastLocaleList;
     private static AppLocale[] appLocales;
@@ -86,67 +85,13 @@ public final class Languages {
         requireAppLocales(activity);
     }
 
-    public static void ensureLocaleList() {
-        LocaleListCompat current = LocaleListCompat.getDefault();
-        if (lastLocaleList != null && !current.equals(lastLocaleList)) {
-            if (Build.VERSION.SDK_INT >= 24) {
-                LocaleList.setDefault((LocaleList) lastLocaleList.unwrap());
-            } else {
-                Locale.setDefault(lastLocaleList.get(0));
-            }
-        }
-    }
-
-    /**
-     * The default locale list seems to be set on creation of an {@code Activity} (thread)
-     * by calling {@link LocaleList#setDefault} with a {@link LocaleList} passed in from the system
-     * which corresponds with the language preference list in system settings (as desired)
-     * and adjusted with the selected per app language at the top on Android 13 onwards
-     * with native support.  Unfortunately we'll have to 'mess with' it pre-Android 13
-     * so we re-set the default {@link LocaleList} to our modified one at the earliest opportunity.
-     * This is particularly important so as to 'propagate' our locale list to the libraries
-     * (which then pick up the same by calling {@link LocaleListCompat#getDefault}).
-     *
-     * @see {@link android.app.ActivityThread#handleBindApplication}
-     * @param app The {@link Application} to {@link Application#registerActivityLifecycleCallbacks} for that purpose.
-     */
-    @SuppressWarnings("EmptyLineSeparator")
     public static void onApplicationCreate(@NonNull final Application app) {
-        if (NATIVE_PAL) return;
-        app.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
-            @Override
-            public void onActivityPreCreated(Activity activity, Bundle savedInstanceState) {
-                ensureLocaleList();
-            }
-            @Override
-            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-                // empty
-            }
-            @Override
-            public void onActivityStarted(Activity activity) {
-                // empty
-            }
-            @Override
-            public void onActivityResumed(Activity activity) {
-                // empty
-            }
-            @Override
-            public void onActivityPaused(Activity activity) {
-                // empty
-            }
-            @Override
-            public void onActivityStopped(Activity activity) {
-                // empty
-            }
-            @Override
-            public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-                // empty
-            }
-            @Override
-            public void onActivityDestroyed(Activity activity) {
-                // empty
-            }
-        });
+        if (lastLocaleList != null) {
+            android.os.Handler handler = new android.os.Handler(app.getMainLooper());
+            handler.post(() -> {
+                updateConfiguration(app, lastLocaleList);
+            });
+        }
     }
 
     private static int compareStringSegments(@NonNull final String aString, int aPos, int aLen,
@@ -508,6 +453,7 @@ public final class Languages {
             systemLocales = LocaleListCompat.getDefault();
         }
         locale = null;
+        lastLocaleList = null;
     }
 
     private static Locale.Builder localeBuilder;
@@ -777,7 +723,6 @@ public final class Languages {
         } else {
             Locale.setDefault(locale);
         }
-        lastLocaleList = newLocales;
     }
 
     @SuppressWarnings("NoWhitespaceAfter")
@@ -824,10 +769,13 @@ public final class Languages {
 
     private static void updateConfiguration(@NonNull final Context context,
                                             @NonNull final LocaleListCompat newLocales) {
+        Log.d(TAG, "Updating resources configuration for " + context.toString());
         final Resources resources = context.getResources();
-        Configuration config = resources.getConfiguration();
+        Configuration config = new Configuration(resources.getConfiguration());
+        Log.d(TAG, "Old locales: " + ConfigurationCompat.getLocales(config).toString());
         ConfigurationCompat.setLocales(config, newLocales);
         resources.updateConfiguration(config, resources.getDisplayMetrics());
+        Log.d(TAG, "New locales: " + ConfigurationCompat.getLocales(config).toString());
     }
 
     /**
@@ -893,6 +841,7 @@ public final class Languages {
 
         if (changed) {
             LocaleListCompat newLocales = adjustLocaleList(locale, systemLocales);
+            lastLocaleList = newLocales;
 
             updateConfiguration(context.getApplicationContext(), newLocales);
 
@@ -932,15 +881,6 @@ public final class Languages {
             }
         }
         // `AppCompatDelegate` would take care to recreate `AppCompatActivity`s as necessary
-        /* Intent intent = activity.getIntent();
-        if (intent == null) { // when launched as LAUNCHER
-            return;
-        }
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        activity.finish();
-        activity.overridePendingTransition(0, 0);
-        activity.startActivity(intent);
-        activity.overridePendingTransition(0, 0); */
     }
 
     /**
@@ -979,9 +919,9 @@ public final class Languages {
         final String label = "\uD83D\uDEA7"; // 🚧
         /* SYSTEM_DEFAULT is a fake one for displaying in a chooser menu. */
         names[0] = key ? USE_SYSTEM_DEFAULT : context.getString(R.string.pref_language_default);
-        int i = 0, j = 0, k = 1, cmp = -1;
+        int i = 0, j = 0, k = 1, cmp = -1, o = names.length;
         StringBuilder sb = new StringBuilder();
-        for (int n = appLocales.length, m = resLocales, o = names.length; k < o;) {
+        for (int n = appLocales.length, m = resLocales; k < o;) {
             cmp = (sortTogether && i < n && j < m) ? appLocales[i].compareTo(appResLocales[j])
                     : (i < n ? -1 : 1);
             AppLocale appLocale = cmp <= 0 ? appLocales[i++] : appResLocales[j++];
@@ -992,12 +932,10 @@ public final class Languages {
                     cmp > 0 && addLabel > 0 ? label : null, "\u2007", bidi, sb);
             if (cmp == 0 && k < o) {
                 j++;
-                names[k++] = key ? locale.toLanguageTag()
-                        : getDisplayName(appLocale.locale, addLabel < 0 ? label : null,
-                        addLabel > 0 ? label : null, "\u2007", bidi, sb);
+                o--;
             }
         }
-        return names;
+        return o == names.length ? names : Arrays.copyOf(names, o);
     }
 
     @NonNull
@@ -1570,6 +1508,52 @@ public final class Languages {
         return sb.toString();
     }
 
+    @NonNull
+    private static String debugLogcat() {
+        StringBuilder sb = new StringBuilder();
+        try {
+            Process proc = Runtime.getRuntime().exec("logcat -d");
+            java.io.BufferedReader r = new java.io.BufferedReader(
+                    new java.io.InputStreamReader(proc.getInputStream()));
+
+            String line = "";
+            while ((line = r.readLine()) != null) {
+                sb.append(line).append('\n');
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sb.toString();
+    }
+
+    @SuppressWarnings("SetTextI18n")
+    @NonNull
+    private static String debugEnvLocales(@NonNull final Context context) {
+        StringBuilder sb = new StringBuilder()
+                .append("NATIVE_PAL: \t").append(NATIVE_PAL).append('\n')
+                .append("USE_ICU: \t").append(USE_ICU).append("\n\n");
+
+        sb.append("Locale.getDefault(): \t").append(Locale.getDefault()).append('\n')
+                .append("LocaleListCompat.getDefault(): \t")
+                .append(LocaleListCompat.getDefault()).append('\n');
+
+        sb.append("\nLanguages static: \n")
+                .append("systemLocales: \t").append(systemLocales).append('\n')
+                .append("lastLocaleList: \t").append(lastLocaleList).append('\n')
+                .append("defaultLocale: \t").append(defaultLocale).append('\n')
+                .append("locale: \t").append(locale).append('\n');
+
+        for (int i = 0; i < 2; i++) {
+            Context c = i == 0 ? context.getApplicationContext() : context;
+            sb.append('\n').append(i == 0 ? "Application context" : "This context")
+                    .append(": \t").append(c).append('\n')
+                    .append("Configuration locales: \t")
+                    .append(ConfigurationCompat.getLocales(c.getResources().getConfiguration()))
+                    .append('\n');
+        }
+        return sb.toString();
+    }
+
     @SuppressWarnings({ "SetTextI18n", "NoWhitespaceAfter" })
     @NonNull
     private static String debugAppLocales(@NonNull final Context context) {
@@ -1703,13 +1687,15 @@ public final class Languages {
     }
 
     private static final String[] DEBUG_ITEMS = new String[] {
-            "LOCALE_SCRIPTS", "Resources Locales", "System Locales" };
+            "Locales", "LOCALE_SCRIPTS", "Resources Locales", "System Locales", "Logcat" };
 
     @SuppressWarnings({ "SetTextI18n", "NoWhitespaceAfter", "EmptyLineSeparator" })
     public static void debugLangScripts(@NonNull final Context context) {
         final android.widget.TextView textView = new android.widget.TextView(context);
 
         textView.setTextIsSelectable(true);
+        textView.setHorizontallyScrolling(true);
+        textView.setSelectAllOnFocus(true);
 
         String[] debugInfo = new String[DEBUG_ITEMS.length];
         int[] selected = new int[] { -1 };
@@ -1727,11 +1713,15 @@ public final class Languages {
                     if (disposable[0] != null) disposable[0].dispose();
                     disposable[0] = Single.fromCallable(() -> {
                         if (i == 0) {
-                            return debugAppLocales(context);
+                            return debugEnvLocales(context);
                         } else if (i == 1) {
-                            return debugResLocales(context);
+                            return debugAppLocales(context);
                         } else if (i == 2) {
+                            return debugResLocales(context);
+                        } else if (i == 3) {
                             return debugSystemLocales();
+                        } else if (i == 4) {
+                            return debugLogcat();
                         }
                         return null;
                     }).subscribeOn(Schedulers.computation())
@@ -1764,9 +1754,9 @@ public final class Languages {
                         Toast.makeText(context, "Content unavailable!", Toast.LENGTH_LONG).show();
                         return;
                     }
-                    String filename = index == 2 ? ("android_" + Build.VERSION.SDK_INT + ".md")
-                            : ("debug" + (index >= 0 && index < debugInfo.length
-                            ? ("_" + DEBUG_ITEMS[index]) : "") + ".log");
+                    String filename = index == 3 ? ("android_" + Build.VERSION.SDK_INT + ".md")
+                            : ("debug_" + (index >= 0 && index < debugInfo.length - 1
+                            ? (DEBUG_ITEMS[index]) : System.currentTimeMillis()) + ".log");
                     try {
                         java.io.FileWriter out = new java.io.FileWriter(new java.io.File(dir, filename));
                         out.write(textView.getText().toString());
