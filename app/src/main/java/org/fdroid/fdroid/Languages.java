@@ -10,7 +10,6 @@ import android.content.res.XmlResourceParser;
 import android.icu.util.ULocale;
 import android.os.Build;
 import android.os.LocaleList;
-import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
@@ -855,27 +854,6 @@ public final class Languages {
                 setLocaleListDefault(newLocales);
             }
         }
-    }
-
-    /**
-     * Force reload the {@link AppCompatActivity} to make language changes take effect.
-     *
-     * @param activity the {@code AppCompatActivity} to force reload
-     */
-    public static void forceChangeLanguage(@NonNull AppCompatActivity activity) {
-        if (!NATIVE_PAL) {
-            // Cherry-picked from AOSP commit 9752b73 included in AppCompat 1.7.0-alpha02:
-            // https://android.googlesource.com/platform/frameworks/support/+/9752b7383244c2ab548970d89a257ef368183b88
-            // "To workaround the android framework issue(b/242026447) which doesn't update the
-            // layout direction after recreating in Android S." (adapted with modification).
-            if (Build.VERSION.SDK_INT >= 31
-                    && activity.getResources().getConfiguration().getLayoutDirection() !=
-                    TextUtils.getLayoutDirectionFromLocale(locale)) {
-                View view = activity.getWindow().getDecorView();
-                view.setLayoutDirection(TextUtils.getLayoutDirectionFromLocale(locale));
-            }
-        }
-        // `AppCompatDelegate` would take care to recreate `AppCompatActivity`s as necessary
     }
 
     /**
