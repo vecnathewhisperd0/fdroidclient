@@ -426,6 +426,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                     if (!Languages.NATIVE_PAL) {
                         App.systemLocaleList = null;
                         FDroidApp.onLanguageChanged(activity.getApplicationContext());
+                        Languages.forceChangeLanguage(activity);
                     }
                 }
                 break;
