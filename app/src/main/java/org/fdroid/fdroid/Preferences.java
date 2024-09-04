@@ -94,6 +94,7 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
                     PrivilegedInstaller.isExtensionInstalledCorrectly(context)
                             != PrivilegedInstaller.IS_EXTENSION_INSTALLED_YES);
         }
+        migrateAntiFeaturesIfNecessary(context, editor);
 
         editor.apply();
     }
@@ -149,6 +150,7 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
     // not shown in Settings
     private static final String PREF_LAST_UPDATE_CHECK = "lastUpdateCheck";
     private static final String PREF_BOTTOM_NAVIGATION_VIEW_NAME = "bottomNavigationViewName";
+    private static final String PREF_ANTI_FEATURES_SCHEMA = "antiFeaturesSchema";
 
     // these preferences are not listed in preferences.xml so the defaults are set here
     @SuppressWarnings("PMD.AvoidUsingHardCodedIP")
@@ -310,6 +312,28 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
                 .putInt(PREF_OVER_WIFI, wifi)
                 .putInt(PREF_OVER_DATA, data)
                 .remove(OLD_PREF_UPDATE_ON_WIFI_ONLY);
+        return true;
+    }
+
+    /**
+     * Enable new default-on Anti-Features for upgrading installations
+     */
+    private boolean migrateAntiFeaturesIfNecessary(Context context, SharedPreferences.Editor editor) {
+        int schema = preferences.getInt(PREF_ANTI_FEATURES_SCHEMA, 0);
+        String[] migrations = context.getResources().getStringArray(R.array.antifeaturesNewDefaults);
+        if (schema >= migrations.length) {
+            return false; // already completed
+        }
+        Set<String> enabledAntiFeatures = preferences.getStringSet(PREF_SHOW_ANTI_FEATURES,
+                Collections.emptySet());
+        for (int i = schema; i < migrations.length; i++) {
+            for (String newDefault : migrations[i].split(",")) {
+                enabledAntiFeatures.add(newDefault);
+            }
+        }
+        editor
+                .putStringSet(PREF_SHOW_ANTI_FEATURES, enabledAntiFeatures)
+                .putInt(PREF_ANTI_FEATURES_SCHEMA, migrations.length);
         return true;
     }
 

@@ -62,6 +62,12 @@
         <item>@string/antiothers</item>
     </string-array>
 
+    <!-- A comma separated list of newly added Anti-Features to be retrospectively enabled for upgrading clients.
+         A counter is stored for the last row it had executed, so append a new item for such new occasion when it arises. -->
+    <string-array name="antifeaturesNewDefaults">
+        <item>TetheredNet</item>
+    </string-array>
+
     <string-array name="defaultCategories">
         <item>@string/category_Connectivity</item>
         <item>@string/category_Development</item>
