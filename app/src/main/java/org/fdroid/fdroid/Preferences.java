@@ -150,7 +150,7 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
     // not shown in Settings
     private static final String PREF_LAST_UPDATE_CHECK = "lastUpdateCheck";
     private static final String PREF_BOTTOM_NAVIGATION_VIEW_NAME = "bottomNavigationViewName";
-    private static final String PREF_ANTI_FEATURES_SCHEMA = "antiFeaturesSchema";
+    public static final String PREF_ANTI_FEATURES_SCHEMA = "antiFeaturesSchema";
 
     // these preferences are not listed in preferences.xml so the defaults are set here
     @SuppressWarnings("PMD.AvoidUsingHardCodedIP")
