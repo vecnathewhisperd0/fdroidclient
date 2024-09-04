@@ -81,17 +81,19 @@ public class PreferencesTest {
      * {@link PreferenceManager#getDefaultSharedPreferences(Context)}, and that
      * the values match.  {@link Preferences#Preferences(Context)} sets the
      * values of {@link Preferences#PREF_LOCAL_REPO_NAME} and
-     * {@link Preferences#PREF_AUTO_DOWNLOAD_INSTALL_UPDATES} dynamically, so
-     * there are two more preferences.
+     * {@link Preferences#PREF_AUTO_DOWNLOAD_INSTALL_UPDATES} dynamically, while
+     * {@link Preferences#PREF_ANTI_FEATURES_SCHEMA} holds a counter to occasions of
+     * retrospectively enabling new default Anti-Features, so there are three more preferences.
      */
     @Test
     public void testSetDefaultValues() {
         Preferences.setupForTests(CONTEXT);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(CONTEXT);
-        assertEquals(defaults.getAll().size() + 2, sharedPreferences.getAll().size());
+        assertEquals(defaults.getAll().size() + 3, sharedPreferences.getAll().size());
         assertTrue(sharedPreferences.contains(Preferences.PREF_LOCAL_REPO_NAME));
         assertTrue(sharedPreferences.contains(Preferences.PREF_AUTO_DOWNLOAD_INSTALL_UPDATES));
+        assertTrue(sharedPreferences.contains(Preferences.PREF_ANTI_FEATURES_SCHEMA));
 
         Map<String, ?> entries = sharedPreferences.getAll();
         for (Map.Entry<String, ?> entry : defaults.getAll().entrySet()) {
