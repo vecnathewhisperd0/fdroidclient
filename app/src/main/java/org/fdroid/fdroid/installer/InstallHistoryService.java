@@ -51,7 +51,7 @@ public class InstallHistoryService extends JobIntentService {
     private static final int JOB_ID = TAG.hashCode();
 
     public static final Uri LOG_URI =
-            Uri.parse("content://" + Installer.AUTHORITY + "/install_history/all");
+            Uri.parse("content://" + Installer.AUTHORITY + "/install_history_files/all");
 
     private static BroadcastReceiver broadcastReceiver;
 
@@ -94,10 +94,36 @@ public class InstallHistoryService extends JobIntentService {
         JobIntentService.enqueueWork(context, InstallHistoryService.class, JOB_ID, intent);
     }
 
+    /**
+     * This method ensures that the install history file is moved from the cache directory
+     * to the files directory. If the file already exists in the files directory, it returns
+     * the reference to that file. If the file exists in the cache directory, it is copied
+     * to the files directory and the old file is deleted.
+     *
+     * @param context The application context used to get cache and files directories.
+     * @return A File object referencing the install history file in the files directory.
+     */
     public static File getInstallHistoryFile(Context context) {
-        File installHistoryDir = new File(context.getCacheDir(), "install_history");
-        installHistoryDir.mkdir();
-        return new File(installHistoryDir, "all");
+        String INSTALL_HISTORY_DIR_NAME = "install_history";
+        String INSTALL_HISTORY_FILE_NAME = "all";
+
+        File oldInstallHistoryDir = new File(context.getCacheDir(), INSTALL_HISTORY_DIR_NAME);
+        File oldInstallHistoryFile = new File(oldInstallHistoryDir, INSTALL_HISTORY_FILE_NAME);
+        File newInstallHistoryDir = new File(context.getFilesDir(), INSTALL_HISTORY_DIR_NAME);
+        File newInstallHistoryFile = new File(newInstallHistoryDir, INSTALL_HISTORY_FILE_NAME);
+
+        if (!newInstallHistoryDir.exists()) {
+            newInstallHistoryDir.mkdir();
+        }
+
+        if (!oldInstallHistoryFile.exists()) {
+            return newInstallHistoryFile;
+        }
+        boolean isCopySuccess = Utils.copyQuietly(oldInstallHistoryFile, newInstallHistoryFile);
+        if (isCopySuccess) {
+            Utils.deleteDirectory(oldInstallHistoryDir);
+        }
+        return newInstallHistoryFile;
     }
 
     @Override

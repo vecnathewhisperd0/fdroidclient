@@ -119,7 +119,7 @@ public final class Utils {
     private static final int BUFFER_SIZE = 4096;
 
     private static final String[] FRIENDLY_SIZE_FORMAT = {
-        "%.0f B", "%.0f KiB", "%.1f MiB", "%.2f GiB",
+            "%.0f B", "%.0f KiB", "%.1f MiB", "%.2f GiB",
     };
 
     private static RequestOptions iconRequestOptions;
@@ -254,7 +254,7 @@ public final class Utils {
         }
     }
 
-    private static boolean copyQuietly(File inFile, File outFile) {
+    public static boolean copyQuietly(File inFile, File outFile) {
         InputStream input = null;
         OutputStream output = null;
         try {
@@ -293,41 +293,41 @@ public final class Utils {
     }
 
     private static final String[] ANDROID_VERSION_NAMES = {
-        "?", // 0, undefined
-        "1.0", // 1
-        "1.1", // 2
-        "1.5", // 3
-        "1.6", // 4
-        "2.0", // 5
-        "2.0.1", // 6
-        "2.1", // 7
-        "2.2", // 8
-        "2.3", // 9
-        "2.3.3", // 10
-        "3.0", // 11
-        "3.1", // 12
-        "3.2", // 13
-        "4.0", // 14
-        "4.0.3", // 15
-        "4.1", // 16
-        "4.2", // 17
-        "4.3", // 18
-        "4.4", // 19
-        "4.4W", // 20
-        "5.0", // 21
-        "5.1", // 22
-        "6.0", // 23
-        "7.0", // 24
-        "7.1", // 25
-        "8.0", // 26
-        "8.1", // 27
-        "9", // 28
-        "10", // 29
-        "11", // 30
-        "12", // 31
-        "12.1", // 32
-        "13", // 33
-        "14", // 34
+            "?", // 0, undefined
+            "1.0", // 1
+            "1.1", // 2
+            "1.5", // 3
+            "1.6", // 4
+            "2.0", // 5
+            "2.0.1", // 6
+            "2.1", // 7
+            "2.2", // 8
+            "2.3", // 9
+            "2.3.3", // 10
+            "3.0", // 11
+            "3.1", // 12
+            "3.2", // 13
+            "4.0", // 14
+            "4.0.3", // 15
+            "4.1", // 16
+            "4.2", // 17
+            "4.3", // 18
+            "4.4", // 19
+            "4.4W", // 20
+            "5.0", // 21
+            "5.1", // 22
+            "6.0", // 23
+            "7.0", // 24
+            "7.1", // 25
+            "8.0", // 26
+            "8.1", // 27
+            "9", // 28
+            "10", // 29
+            "11", // 30
+            "12", // 31
+            "12.1", // 32
+            "13", // 33
+            "14", // 34
     };
 
     public static String getAndroidVersionName(int sdkLevel) {
@@ -547,8 +547,7 @@ public final class Utils {
      * probably warranted. See https://www.gitlab.com/fdroid/fdroidclient/issues/855
      * for more detail.
      *
-     * @see
-     * <a href="https://gitlab.com/fdroid/fdroidclient/-/merge_requests/1089#note_822501322">forced to vendor Apache Commons Codec</a>
+     * @see <a href="https://gitlab.com/fdroid/fdroidclient/-/merge_requests/1089#note_822501322">forced to vendor Apache Commons Codec</a>
      */
     @Nullable
     static String getFileHexDigest(File file, String hashAlgo) {
@@ -811,16 +810,16 @@ public final class Utils {
     public static Single<Bitmap> generateQrBitmap(@NonNull final AppCompatActivity activity,
                                                   @NonNull final String qrData) {
         return Single.fromCallable(() -> {
-            // TODO: Use DisplayCompat.getMode() once it becomes available in Core 1.6.0.
-            final DisplayCompat.ModeCompat displayMode = DisplayCompat.getSupportedModes(activity,
-                    activity.getWindowManager().getDefaultDisplay())[0];
-            final int qrCodeDimension = Math.min(displayMode.getPhysicalWidth(),
-                    displayMode.getPhysicalHeight());
-            debugLog(TAG, "generating QRCode Bitmap of " + qrCodeDimension + "x" + qrCodeDimension);
+                    // TODO: Use DisplayCompat.getMode() once it becomes available in Core 1.6.0.
+                    final DisplayCompat.ModeCompat displayMode = DisplayCompat.getSupportedModes(activity,
+                            activity.getWindowManager().getDefaultDisplay())[0];
+                    final int qrCodeDimension = Math.min(displayMode.getPhysicalWidth(),
+                            displayMode.getPhysicalHeight());
+                    debugLog(TAG, "generating QRCode Bitmap of " + qrCodeDimension + "x" + qrCodeDimension);
 
-            return new QRCodeEncoder(qrData, null, Contents.Type.TEXT,
-                    BarcodeFormat.QR_CODE.toString(), qrCodeDimension).encodeAsBitmap();
-        })
+                    return new QRCodeEncoder(qrData, null, Contents.Type.TEXT,
+                            BarcodeFormat.QR_CODE.toString(), qrCodeDimension).encodeAsBitmap();
+                })
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .onErrorReturnItem(Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888))
@@ -840,9 +839,9 @@ public final class Utils {
 
     public static Disposable runOffUiThread(Runnable runnable) {
         return Single.fromCallable(() -> {
-            runnable.run();
-            return true;
-        })
+                    runnable.run();
+                    return true;
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError(throwable -> Log.e(TAG, "Error running off UiThread", throwable))
@@ -918,9 +917,10 @@ public final class Utils {
 
     /**
      * Copy text to the clipboard and show a toast informing the user that something has been copied.
+     *
      * @param context the context to use
-     * @param label the label used in the clipboard
-     * @param text the text to copy
+     * @param label   the label used in the clipboard
+     * @param text    the text to copy
      */
     public static void copyToClipboard(@NonNull Context context, @Nullable String label,
                                        @NonNull String text) {
@@ -929,9 +929,10 @@ public final class Utils {
 
     /**
      * Copy text to the clipboard and show a toast informing the user that the text has been copied.
+     *
      * @param context the context to use
-     * @param label the label used in the clipboard
-     * @param text the text to copy
+     * @param label   the label used in the clipboard
+     * @param text    the text to copy
      * @param message the message to show in the toast
      */
     public static void copyToClipboard(@NonNull Context context, @Nullable String label,
@@ -974,5 +975,29 @@ public final class Utils {
         } catch (JSONException e) {
             return Collections.emptyList();
         }
+    }
+
+    /**
+     * Deletes a directory and all its subdirectories and files.
+     * If the given file object is a directory, It recursively deletes all files and subdirectories
+     * within the specified directory.
+     * If the given file object is a file, it deletes the file directly.
+     *
+     * @param directory The directory or file to delete.
+     * @return true if the directory/file and all its contents were successfully deleted, false otherwise.
+     */
+    public static boolean deleteDirectory(File directory) {
+        if (directory.isDirectory()) {
+            String[] children = directory.list();
+            if (children != null) {
+                for (String child : children) {
+                    boolean success = deleteDirectory(new File(directory, child));
+                    if (!success) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return directory.delete();
     }
 }
