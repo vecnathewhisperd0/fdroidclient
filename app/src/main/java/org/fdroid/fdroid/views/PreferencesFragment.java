@@ -30,12 +30,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.SparseArray;
+import android.util.SparseIntArray;
+import android.view.LayoutInflater;
 import android.text.format.DateUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,8 +58,10 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceViewHolder;
 import androidx.preference.SeekBarPreference;
 import androidx.preference.SwitchPreferenceCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -59,7 +69,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.divider.MaterialDivider;
 
+import org.fdroid.fdroid.BuildConfig;
 import org.fdroid.fdroid.AppUpdateStatusManager;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Languages;
@@ -70,9 +82,17 @@ import org.fdroid.fdroid.Utils;
 import org.fdroid.fdroid.installer.InstallHistoryService;
 import org.fdroid.fdroid.installer.PrivilegedInstaller;
 import org.fdroid.fdroid.installer.SessionInstallManager;
+import org.fdroid.fdroid.views.appdetails.AntiFeaturesListingView;
 import org.fdroid.fdroid.work.CleanCacheWorker;
 import org.fdroid.fdroid.work.FDroidMetricsWorker;
 import org.fdroid.fdroid.work.RepoUpdateWorker;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import info.guardianproject.netcipher.proxy.OrbotHelper;
 
@@ -143,6 +163,8 @@ public class PreferencesFragment extends PreferenceFragmentCompat
 
         repoUpdateManager = FDroidApp.getRepoUpdateManager(requireContext());
 
+        showAntiFeaturesUpgradeCard(preferences);
+
         Preference aboutPreference = findPreference("pref_about");
         if (aboutPreference != null) {
             aboutPreference.setOnPreferenceClickListener(aboutPrefClickedListener);
@@ -202,6 +224,268 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         };
     }
 
+    private void showAntiFeaturesUpgradeCard(@NonNull Preferences preferences) {
+        if (preferences.pendingAntiFeaturesUpgrade()) {
+            Preference card = new Preference(getContext()) {
+                private Preferences.ChangeListener listener = () -> {
+                    if (!Preferences.get().pendingAntiFeaturesUpgrade()) {
+                        getPreferenceScreen().removePreference(this);
+                    } else refreshPending();
+                };
+                private List<String> pending = null;
+                private SparseIntArray meta = null;
+                private Set<String> toEnable = new HashSet();
+                private View.OnClickListener buttonListener = v -> {
+                    if (v instanceof Button) {
+                        int id = ((Button) v).getId();
+                        preferences.finalizeAntiFeaturesUpgrade(getContext(),
+                                id == R.id.antifeatures_enable ? toEnable : null,
+                                findPreference("showAntiFeatures"));
+                    }
+                };
+                private View contentView;
+
+                private void refreshPending() {
+                    List<String> newPending = new ArrayList();
+                    SparseIntArray newMeta = new SparseIntArray();
+                    Preferences.get().getPendingAntiFeaturesUpgrade(getContext(), newPending, newMeta);
+                    if (!newPending.equals(pending)) {
+                        pending = newPending;
+                        meta = newMeta;
+                        if (contentView != null) updateList(contentView);
+                    }
+                }
+
+                private void updateList(@NonNull View holder) {
+                    LinearLayout ll = (LinearLayout) holder.findViewById(R.id.antifeatures_list);
+                    if (ll != null) {
+                        for (int i = ll.getChildCount() - 1; i >= 0; i--) {
+                            ll.removeView(ll.getChildAt(i));
+                        }
+                        LayoutInflater inflater = LayoutInflater.from(getContext());
+
+                        String[] antiFeaturesValues = getContext().getResources()
+                                .getStringArray(R.array.antifeaturesValues);
+                        String[] antiFeaturesNames = getContext().getResources()
+                                .getStringArray(R.array.antifeaturesNames);
+                        String[] learnMoreLinks = getContext().getResources()
+                                .getStringArray(R.array.antifeaturesNewDefaultsLearnMore);
+
+                        int migration = -1, subcount = -1, subitem = -1;
+                        for (int p = 0, q = pending == null ? 0 : pending.size(), m = meta.size(),
+                                l = learnMoreLinks.length; p < q; p++) {
+                            if (subitem >= subcount - 1) {
+                                if (++migration < m) {
+                                    subcount = Integer.bitCount(meta.get(migration, 0));
+                                    subitem = 0;
+                                }
+                            } else subitem++;
+                            String item = pending.get(p);
+                            toEnable.add(item);
+                            View view = inflater.inflate(R.layout.antifeatures_upgrade_item, ll, false);
+                            TextView antiFeatureText = view.findViewById(R.id.anti_feature_text);
+                            if (antiFeatureText != null) {
+                                String label = item;
+                                for (int i = 0, n = Math.min(antiFeaturesValues.length,
+                                        antiFeaturesNames.length); i < n; i++) {
+                                    if (item.equals(antiFeaturesValues[i])) {
+                                        label = antiFeaturesNames[i];
+                                        break;
+                                    }
+                                }
+                                antiFeatureText.setText(label);
+                            }
+                            TextView antiFeatureReason = view.findViewById(R.id.anti_feature_reason);
+                            if (antiFeatureReason != null) {
+                                antiFeatureReason.setText(AntiFeaturesListingView
+                                        .getAntiFeatureDescriptionText(getContext(), item));
+                                antiFeatureReason.setVisibility(View.VISIBLE);
+                            }
+                            ImageView antiFeatureIcon = view.findViewById(R.id.anti_feature_icon);
+                            if (antiFeatureText != null) {
+                                antiFeatureIcon.setImageResource(AntiFeaturesListingView
+                                        .antiFeatureIcon(getContext(), item));
+                            }
+                            Button learnMore = view.findViewById(R.id.learn_more);
+                            if (learnMore != null) {
+                                if (migration < l && subitem >= subcount - 1) {
+                                    final String link = learnMoreLinks[migration];
+                                    if (!link.isEmpty()) {
+                                        learnMore.setOnClickListener(v -> {
+                                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+                                            intent.setData(Uri.parse(link));
+                                            getContext().startActivity(intent);
+                                        });
+                                    }
+                                } else learnMore.setVisibility(View.GONE);
+                            }
+                            ll.addView(view);
+                            if (migration < m - 1 && subitem >= subcount - 1) {
+                                ll.addView(new MaterialDivider(getContext()));
+                            }
+                        }
+                    }
+                }
+
+                private View getContentView() {
+                    if (contentView == null) {
+                        LayoutInflater inflater = LayoutInflater.from(getContext());
+                        contentView = inflater.inflate(R.layout.antifeatures_upgrade_card, null, false);
+                        refreshPending();
+                        Button disableButton = contentView.findViewById(R.id.antifeatures_disable);
+                        if (disableButton != null) {
+                            disableButton.setOnClickListener(buttonListener);
+                        }
+                        Button enableButton = contentView.findViewById(R.id.antifeatures_enable);
+                        if (enableButton != null) {
+                            enableButton.setOnClickListener(buttonListener);
+                        }
+                    }
+                    return contentView;
+                }
+
+                @Override
+                public void onBindViewHolder(@NonNull PreferenceViewHolder holder) {
+                    View view = getContentView();
+                    View stub = holder.findViewById(R.id.card_content);
+                    if (stub instanceof ViewGroup && stub != view.getParent()) {
+                        if (view.getParent() instanceof ViewGroup) {
+                            ((ViewGroup) view.getParent()).removeView(view);
+                        }
+                        ((ViewGroup) stub).addView(view);
+                    }
+                }
+
+                @Override
+                public void onAttached() {
+                    super.onAttached();
+                    preferences.registerAppsRequiringAntiFeaturesChangeListener(listener);
+                }
+
+                @Override
+                public void onDetached() {
+                    super.onDetached();
+                    if (contentView != null && contentView.getParent() instanceof ViewGroup) {
+                        ((ViewGroup) contentView.getParent()).post(() -> {
+                            ((ViewGroup) contentView.getParent()).removeView(contentView);
+                        });
+                    }
+                    preferences.unregisterAppsRequiringAntiFeaturesChangeListener(listener);
+                }
+            };
+            card.setPersistent(false);
+            card.setSelectable(false);
+            card.setLayoutResource(R.layout.preference_card);
+            card.setOrder(-1);
+            getPreferenceScreen().addPreference(card);
+        }
+    }
+
+    private Map<String, View.OnLongClickListener> debugSidekicks = null;
+    private SparseArray<View.OnLongClickListener> debugSidekicksPos = null;
+
+    private void registerDebugSidekick(String key, View.OnLongClickListener listener) {
+        if (debugSidekicks == null) debugSidekicks = new HashMap();
+        debugSidekicks.put(key, listener);
+    }
+
+    private void refreshDebugSidekicksPos(RecyclerView recycler, boolean refresh) {
+        if (recycler == null) return;
+        if (debugSidekicksPos == null) debugSidekicksPos = new SparseArray(debugSidekicks.size());
+        else {
+            setupDebugSidekicks(true, true);
+            debugSidekicksPos.clear();
+        }
+        recycler.post(() -> {
+            for (Map.Entry<String, View.OnLongClickListener> e : debugSidekicks.entrySet()) {
+                int prefPos = ((PreferenceGroup.PreferencePositionCallback) recycler.getAdapter())
+                        .getPreferenceAdapterPosition(e.getKey());
+                if (prefPos != RecyclerView.NO_POSITION) debugSidekicksPos.put(prefPos, e.getValue());
+            }
+            if (refresh) setupDebugSidekicks(true, false);
+        });
+    }
+
+    @SuppressWarnings("SetTextI18n")
+    private void setupDebugSidekicks(boolean postLayout, boolean clear) {
+        RecyclerView recycler = getListView();
+        if (recycler != null) {
+            if (debugSidekicks == null) {
+                registerDebugSidekick(Preferences.PREF_SHOW_ANTI_FEATURES, v -> {
+                    Preferences.get().clearAntiFeaturesSchema();
+                    new MaterialAlertDialogBuilder(v.getContext())
+                            .setTitle("Anti-Features schema cleared")
+                            .setMessage("Restart for the upgrade magic to kick in!")
+                            .setPositiveButton("Close app", (d, i) -> {
+                                Runtime.getRuntime().exit(0);
+                            })
+                            .show();
+                    return true;
+                });
+                registerDebugSidekick(Preferences.PREF_LANGUAGE, v -> {
+                    Languages.debugLangScripts(v.getContext());
+                    return true;
+                });
+                RecyclerView.Adapter adapter = recycler.getAdapter();
+                if (adapter != null) {
+                    adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+                        @Override
+                        public void onChanged() {
+                            refreshDebugSidekicksPos(recycler, true);
+                        }
+                    });
+                }
+                refreshDebugSidekicksPos(recycler, false);
+            }
+            if (postLayout) {
+                for (int i = 0, n = debugSidekicksPos == null ? 0 : debugSidekicksPos.size(); i < n; i++) {
+                    RecyclerView.ViewHolder viewHolder = recycler
+                            .findViewHolderForAdapterPosition(debugSidekicksPos.keyAt(i));
+                    if (viewHolder != null) {
+                        viewHolder.itemView.setOnLongClickListener(clear ? null : debugSidekicksPos.valueAt(i));
+                        viewHolder.itemView.setLongClickable(!clear);
+                    }
+                }
+            } else {
+                recycler.addOnChildAttachStateChangeListener(
+                        new RecyclerView.OnChildAttachStateChangeListener() {
+                            private void setOnLongClickListener(@NonNull View view, final boolean onAttach) {
+                                if (debugSidekicksPos == null) return;
+                                View.OnLongClickListener listener = debugSidekicksPos
+                                        .get(recycler.getChildAdapterPosition(view), null);
+                                if (listener != null) {
+                                    view.setOnLongClickListener(onAttach ? listener : null);
+                                    view.setLongClickable(onAttach);
+                                }
+                            }
+
+                            @Override
+                            public void onChildViewAttachedToWindow(@NonNull View view) {
+                                setOnLongClickListener(view, true);
+                            }
+
+                            @Override
+                            public void onChildViewDetachedFromWindow(@NonNull View view) {
+                                setOnLongClickListener(view, false);
+                            }
+                        });
+            }
+        }
+    }
+
+    @Override
+    public RecyclerView.LayoutManager onCreateLayoutManager() {
+        if (BuildConfig.DEBUG) return new LinearLayoutManager(requireContext()) {
+            @Override
+            public void onLayoutCompleted(RecyclerView.State state) {
+                super.onLayoutCompleted(state);
+                setupDebugSidekicks(true, false);
+            }
+        };
+        return super.onCreateLayoutManager();
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -210,6 +494,8 @@ public class PreferencesFragment extends PreferenceFragmentCompat
             nextUpdateCheck = time;
             updateSummary(Preferences.PREF_UPDATE_INTERVAL, false);
         });
+
+        if (BuildConfig.DEBUG) setupDebugSidekicks(false, false);
     }
 
     private void checkSummary(String key, int resId) {

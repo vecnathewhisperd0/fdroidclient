@@ -32,6 +32,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -45,6 +48,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 
 import org.fdroid.fdroid.AppUpdateStatusManager;
 import org.fdroid.fdroid.FDroidApp;
@@ -93,6 +98,9 @@ public class MainActivity extends AppCompatActivity {
     private MainViewAdapter adapter;
     private BottomNavigationView bottomNavigation;
     private BadgeDrawable updatesBadge;
+    private Snackbar snackbar = null;
+    private int snackbarShowing = 0;
+    private int currentTab = -1;
 
     private final ActivityResultLauncher<String> permissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
@@ -120,20 +128,26 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigation = findViewById(R.id.bottom_navigation);
         setSelectedMenuInNav(Preferences.get().getBottomNavigationViewName());
         bottomNavigation.setOnNavigationItemSelectedListener(item -> {
-            pager.scrollToPosition(item.getOrder());
+            int oldItemId = bottomNavigation.getSelectedItemId();
+            int newItemId = item.getItemId();
+            if (oldItemId != newItemId) {
+                pager.scrollToPosition(item.getOrder());
+                updateFabIfNecessary(item.getOrder());
 
-            if (item.getItemId() == R.id.latest) {
-                Preferences.get().setBottomNavigationViewName(EXTRA_VIEW_LATEST);
-            } else if (item.getItemId() == R.id.categories) {
-                Preferences.get().setBottomNavigationViewName(EXTRA_VIEW_CATEGORIES);
-            } else if (item.getItemId() == R.id.nearby) {
-                Preferences.get().setBottomNavigationViewName(EXTRA_VIEW_NEARBY);
+                if (newItemId == R.id.latest) {
+                    Preferences.get().setBottomNavigationViewName(EXTRA_VIEW_LATEST);
+                } else if (newItemId == R.id.categories) {
+                    Preferences.get().setBottomNavigationViewName(EXTRA_VIEW_CATEGORIES);
+                } else if (newItemId == R.id.nearby) {
+                    Preferences.get().setBottomNavigationViewName(EXTRA_VIEW_NEARBY);
 
-                NearbyViewBinder.updateUsbOtg(MainActivity.this);
-            } else if (item.getItemId() == R.id.updates) {
-                Preferences.get().setBottomNavigationViewName(EXTRA_VIEW_UPDATES);
-            } else if (item.getItemId() == R.id.settings) {
-                Preferences.get().setBottomNavigationViewName(EXTRA_VIEW_SETTINGS);
+                    NearbyViewBinder.updateUsbOtg(MainActivity.this);
+                } else if (newItemId == R.id.updates) {
+                    Preferences.get().setBottomNavigationViewName(EXTRA_VIEW_UPDATES);
+                } else if (newItemId == R.id.settings) {
+                    Preferences.get().setBottomNavigationViewName(EXTRA_VIEW_SETTINGS);
+                    if (snackbar != null && snackbarShowing == 1) snackbar.dismiss();
+                }
             }
             return true;
 
@@ -144,6 +158,8 @@ public class MainActivity extends AppCompatActivity {
         initialRepoUpdateIfRequired();
 
         AppUpdateStatusManager.getInstance(this).getNumUpdatableApps().observe(this, this::refreshUpdatesBadge);
+
+        showUpgradeAntiFeaturesSnackbar();
 
         Intent intent = getIntent();
         if (handleMainViewSelectIntent(intent)) {
@@ -158,11 +174,13 @@ public class MainActivity extends AppCompatActivity {
      * currently active. It can be done using {@code MenuItem.setChecked(true)}".
      */
     private void setSelectedMenuInNav(int menuId) {
+        if (menuId == bottomNavigation.getSelectedItemId()) return;
         int position = adapter.adapterPositionFromItemId(menuId);
         if (position < 0) {
             Log.e(TAG, "Invalid menu position: " + position);
         } else {
             pager.scrollToPosition(position);
+            updateFabIfNecessary(position);
             bottomNavigation.getMenu().getItem(position).setChecked(true);
         }
     }
@@ -186,6 +204,85 @@ public class MainActivity extends AppCompatActivity {
                 !FDroidApp.getRepoUpdateManager(this).isUpdating().getValue()) {
             Utils.debugLog(TAG, "We haven't done an update yet. Forcing repo update.");
             RepoUpdateWorker.updateNow(this);
+        }
+    }
+
+    private static void adjustFab(@NonNull View view, int h, boolean showing) {
+        View fab = view.findViewById(R.id.fab_search);
+        if (fab != null) {
+            int toAdj = showing ? h : -h;
+            if (toAdj != 0) {
+                fab.setTranslationY(fab.getTranslationY() - toAdj);
+            }
+        }
+    }
+
+    private void updateFabIfNecessary(int tab, boolean showing, boolean forced) {
+        RecyclerView.ViewHolder holder = pager.findViewHolderForAdapterPosition(tab);
+        if (holder != null) {
+            adjustFab(holder.itemView, snackbar.getView().getHeight(), showing);
+        }
+    }
+
+    private void updateFabIfNecessary(boolean showing) {
+        updateFabIfNecessary(currentTab, showing, true);
+    }
+
+    private void updateFabIfNecessary(int newTab) {
+        if (snackbar != null && newTab != currentTab && snackbar.isShown()) {
+            updateFabIfNecessary(currentTab, false, false);
+            pager.post(() -> updateFabIfNecessary(newTab, true, false));
+        }
+        currentTab = newTab;
+    }
+
+    private void showUpgradeAntiFeaturesSnackbar() {
+        if (Preferences.get().pendingAntiFeaturesUpgrade()) {
+            if (currentTab != adapter.adapterPositionFromItemId(R.id.settings)) {
+                if (snackbar == null) {
+                    snackbar = Snackbar.make(pager, R.string.antifeatures_updated,
+                            BaseTransientBottomBar.LENGTH_INDEFINITE);
+                    snackbar.addCallback(new BaseTransientBottomBar.BaseCallback<Snackbar>() {
+                        @Override
+                        public void onDismissed(Snackbar b, int event) {
+                            updateFabIfNecessary(false);
+                            snackbarShowing = 0;
+                        }
+
+                        @Override
+                        public void onShown(Snackbar b) {
+                            snackbarShowing = 1;
+                            pager.post(() -> updateFabIfNecessary(true));
+                        }
+                    });
+                    snackbar.setAction(R.string.antifeatures_review, v -> {
+                        setSelectedMenuInNav(R.id.settings);
+                    });
+                }
+                bottomNavigation.post(() -> {
+                    View layout = snackbar.getView();
+                    LayoutParams lp = layout.getLayoutParams();
+                    if (lp instanceof MarginLayoutParams) {
+                        ((MarginLayoutParams) lp).bottomMargin += bottomNavigation.getHeight();
+                        layout.setLayoutParams(lp);
+                    }
+                    snackbar.show();
+                });
+            }
+            BadgeDrawable settingsBadge = bottomNavigation.getOrCreateBadge(R.id.settings);
+            settingsBadge.setNumber(1);
+            settingsBadge.setVisible(true);
+            Preferences.get().registerAppsRequiringAntiFeaturesChangeListener(new Preferences.ChangeListener() {
+                @Override
+                public void onPreferenceChange() {
+                    if (!Preferences.get().pendingAntiFeaturesUpgrade()) {
+                        if (snackbar != null && snackbarShowing == 1) snackbar.dismiss();
+                        settingsBadge.setVisible(false);
+                        settingsBadge.clearNumber();
+                        Preferences.get().unregisterAppsRequiringAntiFeaturesChangeListener(this);
+                    }
+                }
+            });
         }
     }
 

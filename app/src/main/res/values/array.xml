@@ -62,10 +62,27 @@
         <item>@string/antiothers</item>
     </string-array>
 
-    <!-- A comma separated list of newly added Anti-Features to be retrospectively enabled for upgrading clients.
-         A counter is stored for the last row it had executed, so append a new item for such new occasion when it arises. -->
+    <!-- Occasions of newly added Anti-Features to be retrospectively enabled for upgrading clients,
+         separated by semi-colon if more than one Anti-Features on the same occasion.  This is
+         essentially a one-way train: a counter is stored for the last row it had executed (and will
+         not look back once it's done once) so append a new item whenever such a new occasion arises. -->
     <string-array name="antifeaturesNewDefaults">
-        <item>TetheredNet</item>
+        <item>TetheredNet</item> <!-- added in 1.21 -->
+    </string-array>
+
+    <!-- Mode for retrospectively enabling the new default-on Anti-Features for upgrading clients:
+         0: auto (silent), 1: prompt (defer to UI interaction).  Defaults to 1 (prompt).
+         Keep these lines in sync with @string/antifeaturesNewDefaults above. -->
+    <string-array name="antifeaturesNewDefaultsUpgrade">
+        <item>1</item>
+    </string-array>
+
+    <!-- An optional link for the "Learn more" button in the prompt UI
+         which may provide educational/informative material specific to this occasion.
+         Keep these lines in sync with @string/antifeaturesNewDefaults above. -->
+    <string-array name="antifeaturesNewDefaultsLearnMore">
+        <!-- 'The anti-feature you've asked for', a great write-up by (the great) Licaon -->
+        <item>https://f-droid.org/2024/07/25/twif.html</item>
     </string-array>
 
     <string-array name="defaultCategories">

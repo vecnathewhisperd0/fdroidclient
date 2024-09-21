@@ -30,9 +30,12 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.util.SparseIntArray;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.preference.MultiSelectListPreference;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 
 import com.google.common.collect.Lists;
@@ -45,6 +48,8 @@ import org.fdroid.fdroid.net.ConnectivityMonitorService;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -318,23 +323,121 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
     /**
      * Enable new default-on Anti-Features for upgrading installations
      */
-    private boolean migrateAntiFeaturesIfNecessary(Context context, SharedPreferences.Editor editor) {
-        int schema = preferences.getInt(PREF_ANTI_FEATURES_SCHEMA, 0);
-        String[] migrations = context.getResources().getStringArray(R.array.antifeaturesNewDefaults);
+    private boolean processAntiFeaturesUpgrade(Context context, SharedPreferences.Editor editor,
+                                               Collection<String> toEnable, SparseIntArray meta) {
+        final int schema = preferences.getInt(PREF_ANTI_FEATURES_SCHEMA, 0);
+        final String[] migrations = context.getResources().getStringArray(R.array.antifeaturesNewDefaults);
         if (schema >= migrations.length) {
             return false; // already completed
         }
+        List<String> chooseableAntiFeatures = Arrays.asList(
+                context.getResources().getStringArray(R.array.antifeaturesValues));
         Set<String> enabledAntiFeatures = preferences.getStringSet(PREF_SHOW_ANTI_FEATURES,
-                Collections.emptySet());
-        for (int i = schema; i < migrations.length; i++) {
-            for (String newDefault : migrations[i].split(",")) {
-                enabledAntiFeatures.add(newDefault);
+                new HashSet());
+        final boolean editMode = editor != null;
+        if (editMode && toEnable != null && !toEnable.isEmpty()) enabledAntiFeatures.addAll(toEnable);
+        int migration = schema < 0 ? -schema - 1 : schema;
+        String[] upgradeModes = context.getResources().getStringArray(R.array.antifeaturesNewDefaultsUpgrade);
+        while (migration < migrations.length) {
+            String[] newDefaults = migrations[migration].split(";");
+            String[] upgrades = migration < upgradeModes.length ? upgradeModes[migration].split(";") : null;
+            boolean pending = false;
+            for (int i = 0, n = newDefaults.length; i < n; i++) {
+                if ((upgrades == null || upgrades.length == 0 || i >= upgrades.length || !upgrades[i].equals("0"))
+                        && chooseableAntiFeatures.contains(newDefaults[i])
+                        && !enabledAntiFeatures.contains(newDefaults[i])) {
+                    pending = true;
+                    break;
+                }
+            }
+            if (!pending || !editMode) {
+                int pendingEnable = 0;
+                for (int i = 0, n = newDefaults.length; i < n; i++) {
+                    String upgrade = (upgrades == null || upgrades.length == 0 || i >= upgrades.length) ? null
+                            : (upgrades.length == 1 ? upgrades[0] : upgrades[i]);
+                    String newDefault = newDefaults[i];
+                    if (chooseableAntiFeatures.contains(newDefault) && !enabledAntiFeatures.contains(newDefault)) {
+                        if ("0".equals(upgrade)) {
+                            if (editMode) {
+                                enabledAntiFeatures.add(newDefault);
+                            }
+                        } else if (!editMode && toEnable != null) {
+                            toEnable.add(newDefault);
+                            pendingEnable |= 1 << i;
+                        }
+                    }
+                }
+                if (!editMode && meta != null && pendingEnable != 0) meta.put(migration, pendingEnable);
+            }
+            migration++;
+            if (pending && editMode && toEnable == null) {
+                migration = -migration;
+                break;
             }
         }
-        editor
-                .putStringSet(PREF_SHOW_ANTI_FEATURES, enabledAntiFeatures)
-                .putInt(PREF_ANTI_FEATURES_SCHEMA, migrations.length);
+        if (editMode) {
+            editor
+                    .putStringSet(PREF_SHOW_ANTI_FEATURES, enabledAntiFeatures)
+                    .putInt(PREF_ANTI_FEATURES_SCHEMA, migration);
+        }
         return true;
+    }
+
+    private boolean migrateAntiFeaturesIfNecessary(Context context, SharedPreferences.Editor editor) {
+        return processAntiFeaturesUpgrade(context, editor, null, null);
+    }
+
+    @SuppressLint("ApplySharedPref")
+    private boolean refreshAntiFeaturesUpgrade(Context context) {
+        SharedPreferences.Editor editor = preferences.edit();
+        if (processAntiFeaturesUpgrade(context, editor, null, null)) {
+            editor.commit();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean pendingAntiFeaturesUpgrade() {
+        return preferences.getInt(PREF_ANTI_FEATURES_SCHEMA, 0) < 0;
+    }
+
+    public void getPendingAntiFeaturesUpgrade(Context context, List<String> toEnable, SparseIntArray meta) {
+        processAntiFeaturesUpgrade(context, null, toEnable, meta);
+    }
+
+    @SuppressLint("ApplySharedPref")
+    public void finalizeAntiFeaturesUpgrade(Context context, Collection<String> toEnable, Preference pref) {
+        SharedPreferences.Editor editor = preferences.edit();
+        if (processAntiFeaturesUpgrade(context, editor, toEnable == null ? Collections.emptySet() : toEnable, null)) {
+            editor.commit();
+            // try to keep the preference dialog UI checkboxes in sync
+            if (pref instanceof MultiSelectListPreference) {
+                ((MultiSelectListPreference) pref).setValues(preferences.getStringSet(PREF_SHOW_ANTI_FEATURES,
+                            ((MultiSelectListPreference) pref).getValues()));
+            }
+            onSharedPreferenceChanged(preferences, PREF_SHOW_ANTI_FEATURES);
+        }
+    }
+
+    @SuppressLint("ApplySharedPref")
+    public void clearAntiFeaturesSchema() {
+        SharedPreferences.Editor editor = preferences.edit().remove(PREF_ANTI_FEATURES_SCHEMA);
+        if (BuildConfig.DEBUG) {
+            // for testing only:
+            // disable all subsequently added new default-on Anti-Features to simulate pre-upgrade client position
+            Set<String> enabledAntiFeatures = preferences.getStringSet(PREF_SHOW_ANTI_FEATURES, new HashSet());
+            for (String migration : FDroidApp.getInstance().getResources()
+                    .getStringArray(R.array.antifeaturesNewDefaults)) {
+                for (String newDefault : migration.split(";")) {
+                    if (enabledAntiFeatures.contains(newDefault)) enabledAntiFeatures.remove(newDefault);
+                }
+            }
+            editor
+                    .putStringSet(PREF_SHOW_ANTI_FEATURES, enabledAntiFeatures)
+                    // reset to the Latest view on next start to show the Anti-Features upgrade prompt snackbar
+                    .remove(PREF_BOTTOM_NAVIGATION_VIEW_NAME);
+        }
+        editor.commit();
     }
 
     /**
@@ -820,8 +923,12 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
 
         switch (key) {
             case PREF_SHOW_ANTI_FEATURES:
-                for (ChangeListener listener : showAppsRequiringAntiFeaturesListeners) {
-                    listener.onPreferenceChange();
+                if (pendingAntiFeaturesUpgrade()) refreshAntiFeaturesUpgrade(FDroidApp.getInstance());
+                // loop backwards the old-school way to allow for the possibility
+                // of a listener removing itself without ConcurrentModificationException
+                // being thrown by the iterator in an enhanced for loop
+                for (int i = showAppsRequiringAntiFeaturesListeners.size() - 1; i >= 0; i--) {
+                    showAppsRequiringAntiFeaturesListeners.get(i).onPreferenceChange();
                 }
                 break;
             case PREF_LOCAL_REPO_NAME:
