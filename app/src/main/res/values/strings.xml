@@ -790,4 +790,14 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="ipfsgw_caption_official_gateways">Official IPFS Gateways</string>
     <string name="ipfsgw_caption_custom_gateways">Custom IPFS Gateways</string>
 
+    <string name="antifeatures_updated">Anti-Features have updated.</string>
+    <string name="antifeatures_review">Review</string>
+    <string name="antifeatures_upgrade_card_title">Anti-Features updated</string>
+    <string name="antifeatures_upgrade_card_intro">As a daily process reviewing apps on F-Droid, we strike to place the best tags on apps to indicate features that you might not like. We have updated the list of Anti-Features to better describe their nature and fairly reflect what they mean.</string>
+    <string name="antifeatures_upgrade_card_direction">Please take a moment to see if you would like to include apps with the new Anti-Feature, which is enabled by default for new users:</string>
+    <string name="antifeatures_upgrade_card_postscript">Apps with a disabled Anti-Feature will be hidden. You can change this anytime in the setting below.</string>
+    <string name="antifeatures_upgrade_card_enable">Enable</string>
+    <string name="antifeatures_upgrade_card_disable">Stay disabled</string>
+    <string name="antifeatures_upgrade_item_learn_more">Learn more</string>
+
 </resources>

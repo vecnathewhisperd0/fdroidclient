@@ -385,11 +385,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat
     private Map<String, View.OnLongClickListener> debugSidekicks = null;
     private SparseArray<View.OnLongClickListener> debugSidekicksPos = null;
 
-    private void registerDebugSidekick(String key, View.OnLongClickListener listener) {
-        if (debugSidekicks == null) debugSidekicks = new HashMap();
-        debugSidekicks.put(key, listener);
-    }
-
     private void refreshDebugSidekicksPos(RecyclerView recycler, boolean refresh) {
         if (recycler == null) return;
         if (debugSidekicksPos == null) debugSidekicksPos = new SparseArray(debugSidekicks.size());
@@ -412,7 +407,8 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         RecyclerView recycler = getListView();
         if (recycler != null) {
             if (debugSidekicks == null) {
-                registerDebugSidekick(Preferences.PREF_SHOW_ANTI_FEATURES, v -> {
+                if (debugSidekicks == null) debugSidekicks = new HashMap();
+                debugSidekicks.put(Preferences.PREF_SHOW_ANTI_FEATURES, v -> {
                     Preferences.get().clearAntiFeaturesSchema();
                     new MaterialAlertDialogBuilder(v.getContext())
                             .setTitle("Anti-Features schema cleared")
@@ -421,10 +417,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                                 Runtime.getRuntime().exit(0);
                             })
                             .show();
-                    return true;
-                });
-                registerDebugSidekick(Preferences.PREF_LANGUAGE, v -> {
-                    Languages.debugLangScripts(v.getContext());
                     return true;
                 });
                 RecyclerView.Adapter adapter = recycler.getAdapter();
