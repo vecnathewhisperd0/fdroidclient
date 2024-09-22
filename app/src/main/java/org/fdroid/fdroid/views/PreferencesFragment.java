@@ -407,7 +407,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         RecyclerView recycler = getListView();
         if (recycler != null) {
             if (debugSidekicks == null) {
-                if (debugSidekicks == null) debugSidekicks = new HashMap();
+                debugSidekicks = new HashMap();
                 debugSidekicks.put(Preferences.PREF_SHOW_ANTI_FEATURES, v -> {
                     Preferences.get().clearAntiFeaturesSchema();
                     new MaterialAlertDialogBuilder(v.getContext())

@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
      * currently active. It can be done using {@code MenuItem.setChecked(true)}".
      */
     private void setSelectedMenuInNav(int menuId) {
-        if (menuId == bottomNavigation.getSelectedItemId()) return;
+        if (currentTab >= 0 && menuId == bottomNavigation.getSelectedItemId()) return;
         int position = adapter.adapterPositionFromItemId(menuId);
         if (position < 0) {
             Log.e(TAG, "Invalid menu position: " + position);
