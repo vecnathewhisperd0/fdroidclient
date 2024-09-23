@@ -39,7 +39,6 @@ object TestAppUtils {
         openCollective = getRandomString().orNull(),
         bitcoin = getRandomString().orNull(),
         litecoin = getRandomString().orNull(),
-        flattrID = getRandomString().orNull(),
         icon = getRandomLocalizedFileV2().orNull(),
         featureGraphic = getRandomLocalizedFileV2().orNull(),
         promoGraphic = getRandomLocalizedFileV2().orNull(),

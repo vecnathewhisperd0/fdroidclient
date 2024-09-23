@@ -69,7 +69,6 @@ internal object TestUtils {
         openCollective = metadata.openCollective,
         bitcoin = metadata.bitcoin,
         litecoin = metadata.litecoin,
-        flattrID = metadata.flattrID,
         categories = metadata.categories ?: emptyList(),
         icon = icon,
         featureGraphic = featureGraphic,

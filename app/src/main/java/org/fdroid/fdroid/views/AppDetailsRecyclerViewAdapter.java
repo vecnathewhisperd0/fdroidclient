@@ -275,7 +275,6 @@ public class AppDetailsRecyclerViewAdapter
         return uriIsSetAndCanBeOpened(app.donate) ||
                 uriIsSetAndCanBeOpened(app.getBitcoinUri()) ||
                 uriIsSetAndCanBeOpened(app.getLitecoinUri()) ||
-                uriIsSetAndCanBeOpened(app.getFlattrUri()) ||
                 uriIsSetAndCanBeOpened(app.getLiberapayUri()) ||
                 uriIsSetAndCanBeOpened(app.getOpenCollectiveUri());
     }
@@ -867,11 +866,6 @@ public class AppDetailsRecyclerViewAdapter
             // Litecoin
             if (uriIsSetAndCanBeOpened(app.getLitecoinUri())) {
                 addDonateOption(R.layout.donate_litecoin, app.getLitecoinUri());
-            }
-
-            // Flattr
-            if (uriIsSetAndCanBeOpened(app.getFlattrUri())) {
-                addDonateOption(R.layout.donate_generic, app.getFlattrUri());
             }
 
             // Donate button

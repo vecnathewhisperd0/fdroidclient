@@ -591,7 +591,6 @@ object TestDataMidV2 {
             donate = listOf("https://f-droid.org/donate"),
             liberapayID = "27859",
             openCollective = "F-Droid-Euro",
-            flattrID = "343053",
             preferredSigner = "43238d512c1e5eb2d6569f4a3afbf5523418b82e0a3ed1552770abb9a9c9ccab",
             license = "GPL-3.0-or-later",
             webSite = "https://f-droid.org",
@@ -1081,7 +1080,6 @@ object TestDataMaxV2 {
             openCollective = "openCollective",
             bitcoin = "bitcoin",
             litecoin = "litecoin",
-            flattrID = "flattrID",
             icon = mapOf(
                 "en" to FileV2(
                     name = "/Haoheiseeshai2que2Che0ooSa6aikeemoo2ap9Aequoh4ju5chooYuPhiev8moodahl" +

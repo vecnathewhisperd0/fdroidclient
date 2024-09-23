@@ -370,7 +370,7 @@
       },
       {
         "tableName": "AppMetadata",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`repoId` INTEGER NOT NULL, `packageName` TEXT NOT NULL, `added` INTEGER NOT NULL, `lastUpdated` INTEGER NOT NULL, `name` TEXT, `summary` TEXT, `description` TEXT, `localizedName` TEXT, `localizedSummary` TEXT, `webSite` TEXT, `changelog` TEXT, `license` TEXT, `sourceCode` TEXT, `issueTracker` TEXT, `translation` TEXT, `preferredSigner` TEXT, `video` TEXT, `authorName` TEXT, `authorEmail` TEXT, `authorWebSite` TEXT, `authorPhone` TEXT, `donate` TEXT, `liberapayID` TEXT, `liberapay` TEXT, `openCollective` TEXT, `bitcoin` TEXT, `litecoin` TEXT, `flattrID` TEXT, `categories` TEXT, `isCompatible` INTEGER NOT NULL, PRIMARY KEY(`repoId`, `packageName`), FOREIGN KEY(`repoId`) REFERENCES `CoreRepository`(`repoId`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`repoId` INTEGER NOT NULL, `packageName` TEXT NOT NULL, `added` INTEGER NOT NULL, `lastUpdated` INTEGER NOT NULL, `name` TEXT, `summary` TEXT, `description` TEXT, `localizedName` TEXT, `localizedSummary` TEXT, `webSite` TEXT, `changelog` TEXT, `license` TEXT, `sourceCode` TEXT, `issueTracker` TEXT, `translation` TEXT, `preferredSigner` TEXT, `video` TEXT, `authorName` TEXT, `authorEmail` TEXT, `authorWebSite` TEXT, `authorPhone` TEXT, `donate` TEXT, `liberapayID` TEXT, `liberapay` TEXT, `openCollective` TEXT, `bitcoin` TEXT, `litecoin` TEXT, `categories` TEXT, `isCompatible` INTEGER NOT NULL, PRIMARY KEY(`repoId`, `packageName`), FOREIGN KEY(`repoId`) REFERENCES `CoreRepository`(`repoId`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "repoId",
@@ -531,12 +531,6 @@
           {
             "fieldPath": "litecoin",
             "columnName": "litecoin",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "flattrID",
-            "columnName": "flattrID",
             "affinity": "TEXT",
             "notNull": false
           },
