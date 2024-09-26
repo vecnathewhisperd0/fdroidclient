@@ -217,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void updateFabIfNecessary(int tab, boolean showing, boolean forced) {
+    private void updateFabIfNecessary(int tab, boolean showing) {
         RecyclerView.ViewHolder holder = pager.findViewHolderForAdapterPosition(tab);
         if (holder != null) {
             adjustFab(holder.itemView, snackbar.getView().getHeight(), showing);
@@ -225,13 +225,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateFabIfNecessary(boolean showing) {
-        updateFabIfNecessary(currentTab, showing, true);
+        updateFabIfNecessary(currentTab, showing);
     }
 
     private void updateFabIfNecessary(int newTab) {
         if (snackbar != null && newTab != currentTab && snackbar.isShown()) {
-            updateFabIfNecessary(currentTab, false, false);
-            pager.post(() -> updateFabIfNecessary(newTab, true, false));
+            updateFabIfNecessary(currentTab, false);
+            pager.post(() -> updateFabIfNecessary(newTab, true));
         }
         currentTab = newTab;
     }

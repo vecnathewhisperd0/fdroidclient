@@ -275,7 +275,8 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                         for (int p = 0, q = pending == null ? 0 : pending.size(), m = meta.size(),
                                 l = learnMoreLinks.length; p < q; p++) {
                             if (subitem >= subcount - 1) {
-                                if (++migration < m) {
+                                migration++;
+                                if (migration < m) {
                                     subcount = Integer.bitCount(meta.get(migration, 0));
                                     subitem = 0;
                                 }
