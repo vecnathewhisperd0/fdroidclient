@@ -615,6 +615,7 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
     }
 
     public void setSniEnabledValue(boolean newValue) {
+        Log.d("FOO", "SET SNI PREFS: " + newValue);
         preferences.edit().putBoolean(PREF_ENABLE_SNI, newValue).apply();
     }
 

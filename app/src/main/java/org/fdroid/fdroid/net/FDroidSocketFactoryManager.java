@@ -1,9 +1,11 @@
 package org.fdroid.fdroid.net;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
-import com.example.justnetcipher.NetCipher;
-import com.example.justnetcipher.client.TlsOnlySocketFactory;
+import info.guardianproject.netcipher.NetCipher;
+import info.guardianproject.netcipher.client.TlsOnlySocketFactory;
 
 import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.SocketFactoryManager;
@@ -19,8 +21,10 @@ public class FDroidSocketFactoryManager implements SocketFactoryManager {
         Preferences prefs = Preferences.get();
         this.isSniEnabled = prefs.isSniEnabled();
         if (isSniEnabled) {
+            Log.d("FOO", "INIT WITH SOCKET FACTORY");
             factory = NetCipher.getTlsOnlySocketFactory();
         } else {
+            Log.d("FOO", "INIT WITH NO-SNI SOCKET FACTORY");
             factory = NetCipher.getTlsOnlySocketFactoryNoSni();
         }
     }
@@ -34,6 +38,7 @@ public class FDroidSocketFactoryManager implements SocketFactoryManager {
     @Override
     public boolean needNewSocketFactory() {
         Preferences prefs = Preferences.get();
+        Log.d("FOO", "THIS: " + this.isSniEnabled + " vs. PREFS: " + prefs.isSniEnabled());
         return this.isSniEnabled != prefs.isSniEnabled();
     }
 
@@ -42,12 +47,17 @@ public class FDroidSocketFactoryManager implements SocketFactoryManager {
     public SSLSocketFactory getSocketFactory() {
         Preferences prefs = Preferences.get();
         if (needNewSocketFactory()) {
+            Log.d("FOO", "NEED NEW FACTORY");
             this.isSniEnabled = prefs.isSniEnabled();
             if (isSniEnabled) {
+                Log.d("FOO", "RETURN SOCKET FACTORY");
                 factory = NetCipher.getTlsOnlySocketFactory();
             } else {
+                Log.d("FOO", "RETURN NO-SNI SOCKET FACTORY");
                 factory = NetCipher.getTlsOnlySocketFactoryNoSni();
             }
+        } else {
+            Log.d("FOO", "RETURN EXISTING FACTORY");
         }
         return factory;
     }
