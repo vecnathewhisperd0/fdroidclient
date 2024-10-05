@@ -57,7 +57,6 @@ import org.fdroid.fdroid.nearby.TreeUriScannerIntentService;
 import org.fdroid.fdroid.nearby.WifiStateChangeService;
 import org.fdroid.fdroid.views.AppDetailsActivity;
 import org.fdroid.fdroid.views.apps.AppListActivity;
-import org.fdroid.fdroid.work.RepoUpdateWorker;
 
 /**
  * Main view shown to users upon starting F-Droid.
