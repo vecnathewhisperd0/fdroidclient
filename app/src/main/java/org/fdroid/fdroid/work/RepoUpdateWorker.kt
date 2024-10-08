@@ -37,7 +37,7 @@ import java.util.concurrent.TimeUnit.MINUTES
 private val TAG = RepoUpdateWorker::class.java.simpleName
 
 class RepoUpdateWorker(
-    appContext: Context,
+    private val appContext: Context,
     workerParams: WorkerParameters,
 ) : CoroutineWorker(appContext, workerParams) {
 
@@ -54,6 +54,9 @@ class RepoUpdateWorker(
         @JvmStatic
         @JvmOverloads
         fun updateNow(context: Context, repoId: Long = -1) {
+            // Always trigger a clean cache job even if updates are prohibited
+            CleanCacheWorker.force(context)
+
             if (FDroidApp.networkState > 0 && !Preferences.get().isOnDemandDownloadAllowed()) {
                 Toast.makeText(context, R.string.updates_disabled_by_settings, LENGTH_LONG).show()
                 return
@@ -132,6 +135,8 @@ class RepoUpdateWorker(
         } catch (e: Exception) {
             Log.e(TAG, "Error updating repos", e)
             Result.failure()
+        } finally {
+            CleanCacheWorker.force(appContext)
         }
     }
 
