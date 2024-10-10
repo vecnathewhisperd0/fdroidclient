@@ -371,6 +371,8 @@ This often occurs with apps installed via Google Play or other sources, if they 
 
     <string name="useDnsCache">Use DNS Cache</string>
     <string name="useDnsCacheSummary">Use cached results to minimize DNS queries.</string>
+    <string name="enableSni">Enable SNI</string>
+    <string name="enableSniSummary">Enable SNI and prefer mirrors that require SNI.</string>
     <string name="useTor">Use Tor</string>
     <string name="useTorSummary">Force download traffic through Tor for increased privacy. Requires Orbot</string>
     <string name="proxy">Proxy</string>

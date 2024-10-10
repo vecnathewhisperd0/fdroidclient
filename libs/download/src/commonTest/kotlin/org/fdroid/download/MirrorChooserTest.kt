@@ -13,7 +13,9 @@ import kotlin.test.assertTrue
 class MirrorChooserTest {
 
     private val mirrors = listOf(Mirror("foo"), Mirror("bar"), Mirror("42"), Mirror("1337"))
+    private val mirrorsSni = listOf(Mirror(baseUrl = "with_sni", worksWithoutSni = false), Mirror(baseUrl = "without_sni", worksWithoutSni = true))
     private val downloadRequest = DownloadRequest("foo", mirrors)
+    private val downloadRequestSni = DownloadRequest("sni", mirrorsSni)
 
     private val ipfsIndexFile = getIndexFile(name = "foo", ipfsCidV1 = "CIDv1")
 
@@ -139,6 +141,27 @@ class MirrorChooserTest {
             }
         }
         assertEquals("Got IPFS gateway without CID", e.message)
+    }
+
+    @Test
+    fun testMirrorChooserSni() {
+        val mirrorChooser = MirrorChooserSni()
+
+        // test with sni disabled
+        mirrorChooser.setSniDisabled(true)
+        val mirrorsSniLast = mirrorChooser.orderMirrors(downloadRequestSni)
+        // confirm the list contains both mirrors
+        assertEquals(mirrorsSniLast.size, 2)
+        // mirror that does work without SNI should be first
+        assertEquals(mirrorsSniLast.get(0).worksWithoutSni, true)
+
+        // test with sni enabled
+        mirrorChooser.setSniDisabled(false)
+        val mirrorsSniFirst = mirrorChooser.orderMirrors(downloadRequestSni)
+        // confirm the list contains both mirrors
+        assertEquals(mirrorsSniFirst.size, 2)
+        // mirror that doesn't work without SNI should be first
+        assertEquals(mirrorsSniFirst.get(0).worksWithoutSni, false)
     }
 
 }

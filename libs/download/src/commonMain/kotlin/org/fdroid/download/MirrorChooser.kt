@@ -6,7 +6,9 @@ import io.ktor.http.HttpStatusCode.Companion.Forbidden
 import io.ktor.http.HttpStatusCode.Companion.NotFound
 import io.ktor.http.Url
 import io.ktor.utils.io.errors.IOException
+import javax.net.ssl.SSLPeerUnverifiedException
 import mu.KotlinLogging
+import org.fdroid.fdroid.SocketFactoryManager
 
 public interface MirrorChooser {
     public fun orderMirrors(downloadRequest: DownloadRequest): List<Mirror>
@@ -58,6 +60,8 @@ internal abstract class MirrorChooserImpl : MirrorChooser {
                 if (downloadRequest.tryFirstMirror != null && e.response.status == NotFound) throw e
                 // also throw if this is the last mirror to try, otherwise try next
                 throwOnLastMirror(e, index == mirrors.size - 1)
+            } catch (e: SSLPeerUnverifiedException) {
+                throwOnLastMirror(e, index == mirrors.size - 1)
             } catch (e: IOException) {
                 throwOnLastMirror(e, index == mirrors.size - 1)
             } catch (e: SocketTimeoutException) {
@@ -95,5 +99,32 @@ internal class MirrorChooserRandom : MirrorChooserImpl() {
             }
         }
     }
+}
 
+internal class MirrorChooserSni constructor(
+    private val socketFactoryManager: SocketFactoryManager? = null
+) : MirrorChooserImpl() {
+
+    // added to support testing but may be useful for other situations
+    private var forceSniDisabled: Boolean = false
+
+    fun setSniDisabled(sniDisabled: Boolean) {
+        forceSniDisabled = sniDisabled
+    }
+
+    /**
+     * Returns a list of mirrors that mirrors that require SNI first or last depending on settings.
+     */
+    override fun orderMirrors(downloadRequest: DownloadRequest): List<Mirror> {
+        // shuffle list and split into mirrors that work with/without sni
+        val withSniList: List<Mirror> = downloadRequest.mirrors.toMutableList().apply { shuffle() }.filter { mirror ->  mirror.worksWithoutSni == false }
+        val withoutSniList: List<Mirror> = downloadRequest.mirrors.toMutableList().apply { shuffle() }.filter { mirror ->  mirror.worksWithoutSni == true }
+        if ((socketFactoryManager != null && !socketFactoryManager.sniEnabled()) || forceSniDisabled) {
+            return withoutSniList + withSniList
+        } else {
+            // if the socket factory manager is null, there is no mechanism to disable sni,
+            // so continue as if sni is enabled
+            return withSniList + withoutSniList
+        }
+    }
 }

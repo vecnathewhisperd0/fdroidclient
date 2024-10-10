@@ -36,20 +36,23 @@ import io.ktor.utils.io.core.readBytes
 import mu.KotlinLogging
 import okhttp3.Dns
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
+import org.fdroid.fdroid.SocketFactoryManager
 import java.io.ByteArrayOutputStream
 import kotlin.coroutines.cancellation.CancellationException
 
-internal expect fun getHttpClientEngineFactory(customDns: Dns?): HttpClientEngineFactory<*>
+internal expect fun getHttpClientEngineFactory(customDns: Dns?, socketFactoryManager: SocketFactoryManager?): HttpClientEngineFactory<*>
 
 public open class HttpManager @JvmOverloads constructor(
     private val userAgent: String,
     queryString: String? = null,
     proxyConfig: ProxyConfig? = null,
     customDns: Dns? = null,
+    private val socketFactoryManager: SocketFactoryManager? = null,
     private val highTimeouts: Boolean = false,
-    private val mirrorChooser: MirrorChooser = MirrorChooserRandom(),
+    private val mirrorChooser: MirrorChooser = MirrorChooserSni(socketFactoryManager),
     private val httpClientEngineFactory: HttpClientEngineFactory<*> = getHttpClientEngineFactory(
-        customDns
+        customDns,
+        socketFactoryManager
     ),
 ) {
 
@@ -106,7 +109,7 @@ public open class HttpManager @JvmOverloads constructor(
     public suspend fun head(request: DownloadRequest, eTag: String? = null): HeadInfo? {
         val response: HttpResponse = try {
             mirrorChooser.mirrorRequest(request) { mirror, url ->
-                resetProxyIfNeeded(request.proxy, mirror)
+                resetClientIfNeeded(request.proxy, mirror)
                 log.debug { "HEAD $url" }
                 httpClient.head(url) {
                     addQueryParameters()
@@ -163,7 +166,7 @@ public open class HttpManager @JvmOverloads constructor(
         url: Url,
         skipFirstBytes: Long,
     ): HttpStatement {
-        resetProxyIfNeeded(request.proxy, mirror)
+        resetClientIfNeeded(request.proxy, mirror)
         log.debug { "GET $url" }
         return httpClient.prepareGet(url) {
             addQueryParameters()
@@ -209,7 +212,7 @@ public open class HttpManager @JvmOverloads constructor(
     }
 
     public suspend fun post(url: String, json: String, proxy: ProxyConfig? = null) {
-        resetProxyIfNeeded(proxy)
+        resetClientIfNeeded(proxy)
         httpClient.post {
             addQueryParameters()
             url(url)
@@ -218,7 +221,7 @@ public open class HttpManager @JvmOverloads constructor(
         }
     }
 
-    private fun resetProxyIfNeeded(proxyConfig: ProxyConfig?, mirror: Mirror? = null) {
+    private fun resetClientIfNeeded(proxyConfig: ProxyConfig?, mirror: Mirror? = null) {
         // force no-proxy when trying to hit a local mirror
         val newProxy = if (mirror.isLocal() && proxyConfig != null) {
             if (currentProxy != null) log.debug {
@@ -228,6 +231,10 @@ public open class HttpManager @JvmOverloads constructor(
         } else proxyConfig
         if (currentProxy != newProxy) {
             log.debug { "Switching proxy from [$currentProxy] to [$newProxy]" }
+            httpClient.close()
+            httpClient = getNewHttpClient(newProxy)
+        } else if (socketFactoryManager != null && socketFactoryManager.needNewSocketFactory()) {
+            // also check sni status. enabling/disabling sni will require a new client
             httpClient.close()
             httpClient = getNewHttpClient(newProxy)
         }

@@ -189,7 +189,8 @@ dependencies {
 
     implementation('com.journeyapps:zxing-android-embedded:4.3.0') { transitive = false }
     implementation 'com.google.zxing:core:3.3.3' // newer version need minSdk 24 or library desugering
-    implementation 'info.guardianproject.netcipher:netcipher:2.2.0-alpha'
+    //implementation 'info.guardianproject.netcipher:netcipher:2.2.0-alpha'
+    implementation files('libs/netcipher-2.2.0-alpha-9-g76db9ee.jar')
     //noinspection GradleDependency -> Commons IO > 2.5 uses java.nio.file, which requires desugaring
     implementation 'commons-io:commons-io:2.6'
     implementation 'commons-net:commons-net:3.6'
