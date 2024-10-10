@@ -118,6 +118,8 @@ public class PreferencesFragment extends PreferenceFragmentCompat
     private LiveSeekBarPreference updateIntervalSeekBar;
     private SwitchPreferenceCompat enableProxyCheckPref;
     private SwitchPreferenceCompat useDnsCacheCheckPref;
+    private SwitchPreferenceCompat useLocalCheckPref;
+    private SwitchPreferenceCompat useRemoteCheckPref;
     private SwitchPreferenceCompat useTorCheckPref;
     private Preference updateAutoDownloadPref;
     private SwitchPreferenceCompat keepInstallHistoryPref;
@@ -161,6 +163,9 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         }
 
         useDnsCacheCheckPref = ObjectsCompat.requireNonNull(findPreference(Preferences.PREF_USE_DNS_CACHE));
+        useLocalCheckPref = ObjectsCompat.requireNonNull(findPreference(Preferences.PREF_USE_LOCAL));
+        useRemoteCheckPref = ObjectsCompat.requireNonNull(findPreference(Preferences.PREF_USE_REMOTE));
+
         useTorCheckPref = ObjectsCompat.requireNonNull(findPreference(Preferences.PREF_USE_TOR));
         useTorCheckPref.setOnPreferenceChangeListener(useTorChangedListener);
         enableProxyCheckPref = ObjectsCompat.requireNonNull(findPreference(Preferences.PREF_ENABLE_PROXY));
@@ -548,6 +553,45 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         useDnsCacheCheckPref.setChecked(Preferences.get().isDnsCacheEnabled());
     }
 
+    private void initUseLocalPreference() {
+        useLocalCheckPref.setDefaultValue(true);
+        useLocalCheckPref.setChecked(Preferences.get().isUseLocalSet());
+        // disable remote setting if needed so both can't be turned off
+        resolveLocalClick();
+        useLocalCheckPref.setOnPreferenceClickListener(preference -> {
+            resolveLocalClick();
+            return false;
+        });
+    }
+
+    private void resolveLocalClick() {
+        if (Preferences.get().isUseLocalSet()) {
+            useRemoteCheckPref.setEnabled(true);
+        } else {
+            useRemoteCheckPref.setEnabled(false);
+        }
+    }
+
+    private void initUseRemotePreference() {
+        useRemoteCheckPref.setDefaultValue(true);
+        useRemoteCheckPref.setChecked(Preferences.get().isUseRemoteSet());
+        // disable local setting if needed so both can't be turned off
+        resolveRemoteClick();
+        useRemoteCheckPref.setOnPreferenceClickListener(preference -> {
+            resolveRemoteClick();
+            return false;
+        });
+    }
+
+    private void resolveRemoteClick() {
+        if (Preferences.get().isUseRemoteSet()) {
+            useLocalCheckPref.setEnabled(true);
+        } else {
+            useLocalCheckPref.setEnabled(false);
+        }
+    }
+
+
     /**
      * The default for "Use Tor" is dynamically set based on whether Orbot is installed.
      */
@@ -600,6 +644,8 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         initAutoFetchUpdatesPreference();
         initPrivilegedInstallerPreference();
         initUseDnsCachePreference();
+        initUseLocalPreference();
+        initUseRemotePreference();
         initUseTorPreference(requireContext().getApplicationContext());
 
         updateIpfsGatewaySummary();

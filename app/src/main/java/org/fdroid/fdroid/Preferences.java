@@ -36,7 +36,9 @@ import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
 import com.google.common.collect.Lists;
+import com.google.gson.Gson;
 
+import org.fdroid.download.MirrorData;
 import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.data.DBHelper;
 import org.fdroid.fdroid.installer.PrivilegedInstaller;
@@ -126,6 +128,8 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
     public static final String PREF_LANGUAGE = "language";
     public static final String PREF_USE_DNS_CACHE = "useDnsCache";
     public static final String PREF_DNS_CACHE = "dnsCache";
+    public static final String PREF_USE_LOCAL = "useLocal";
+    public static final String PREF_USE_REMOTE = "useRemote";
     public static final String PREF_USE_TOR = "useTor";
     public static final String PREF_ENABLE_PROXY = "enableProxy";
     public static final String PREF_PROXY_HOST = "proxyHost";
@@ -611,6 +615,57 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
             output.put(key, list);
         }
         return output;
+    }
+
+    public void setUseLocalValue(boolean newValue) {
+        preferences.edit().putBoolean(PREF_USE_LOCAL, newValue).apply();
+    }
+
+    public boolean isUseLocalSet() {
+        return preferences.getBoolean(PREF_USE_LOCAL, true);
+    }
+
+    public void setUseRemoteValue(boolean newValue) {
+        preferences.edit().putBoolean(PREF_USE_REMOTE, newValue).apply();
+    }
+
+    public boolean isUseRemoteSet() {
+        return preferences.getBoolean(PREF_USE_REMOTE, true);
+    }
+
+    private Gson gson;
+
+    public void setMirrorData(String mirrorUrl, MirrorData mirrorData) {
+        if (gson == null) {
+            gson = new Gson();
+        }
+        String[] urlParts = mirrorUrl.split("/");
+        if (urlParts.length > 2) {
+            String shortUrl = urlParts[0] + "//" + urlParts[2];
+            String json = gson.toJson(mirrorData);
+            preferences.edit().putString(shortUrl, json).apply();
+        } else {
+            Log.w("Preferences", "can't save mirror data, got unexpected url format: " + mirrorUrl);
+        }
+    }
+
+    public MirrorData getMirrorData(String mirrorUrl) {
+        if (gson == null) {
+            gson = new Gson();
+        }
+        String[] urlParts = mirrorUrl.split("/");
+        if (urlParts.length > 2) {
+            String shortUrl = urlParts[0] + "//" + urlParts[2];
+            String json = preferences.getString(shortUrl, null);
+            if (json != null && !json.isEmpty()) {
+                return gson.fromJson(json, MirrorData.class);
+            } else {
+                return new MirrorData();
+            }
+        } else {
+            Log.w("Preferences", "can't load mirror data, got unexpected url format: " + mirrorUrl);
+            return new MirrorData();
+        }
     }
 
     /**

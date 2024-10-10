@@ -12,8 +12,16 @@ import kotlin.test.assertTrue
 
 class MirrorChooserTest {
 
-    private val mirrors = listOf(Mirror("foo"), Mirror("bar"), Mirror("42"), Mirror("1337"))
+    private val mirrors = listOf(
+        Mirror("foo"),
+        Mirror("bar"),
+        Mirror("42"),
+        Mirror("1337"))
+    private val mirrorsLocation = listOf(
+        Mirror(baseUrl = "local", location = "HERE"),
+        Mirror(baseUrl = "remote", location = "THERE"))
     private val downloadRequest = DownloadRequest("foo", mirrors)
+    private val downloadRequestLocation = DownloadRequest("location", mirrorsLocation)
 
     private val ipfsIndexFile = getIndexFile(name = "foo", ipfsCidV1 = "CIDv1")
 
@@ -139,6 +147,40 @@ class MirrorChooserTest {
             }
         }
         assertEquals("Got IPFS gateway without CID", e.message)
+    }
+
+    @Test
+    fun testMirrorChooserLocation() {
+        val mirrorChooser = MirrorChooserWithParameters()
+        mirrorChooser.setLocationPropertyOverride(listOf("HERE"))
+
+        // test with local mirrors
+        mirrorChooser.setLocalPropertyOverride(true)
+        mirrorChooser.setRemotePropertyOverride(false)
+        val mirrorsLocalList = mirrorChooser.orderMirrors(downloadRequestLocation)
+        // confirm the list contains one mirror
+        assertEquals(1, mirrorsLocalList.size)
+        // mirror that is local should be included
+        assertEquals("HERE", mirrorsLocalList.get(0).location)
+
+        // test with remote mirrors
+        mirrorChooser.setLocalPropertyOverride(false)
+        mirrorChooser.setRemotePropertyOverride(true)
+        val mirrorsRemoteList = mirrorChooser.orderMirrors(downloadRequestLocation)
+        // confirm the list contains one mirror
+        assertEquals(1, mirrorsRemoteList.size)
+        // mirror that is remote should be included
+        assertEquals("THERE", mirrorsRemoteList.get(0).location)
+
+        // test with all mirrors
+        mirrorChooser.setLocalPropertyOverride(true)
+        mirrorChooser.setRemotePropertyOverride(true)
+        val mirrorsAllList = mirrorChooser.orderMirrors(downloadRequestLocation)
+        // confirm the list contains both mirrors
+        assertEquals(2, mirrorsAllList.size)
+        // local mirror should appear first for the sake of latency
+        assertEquals("HERE", mirrorsAllList.get(0).location)
+        assertEquals("THERE", mirrorsAllList.get(1).location)
     }
 
 }

@@ -247,7 +247,7 @@ internal data class Mirror(
 internal fun MirrorV2.toMirror(repoId: Long) = Mirror(
     repoId = repoId,
     url = url,
-    location = location,
+    location = countryCode,
 )
 
 /**
