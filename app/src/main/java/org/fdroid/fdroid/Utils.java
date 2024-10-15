@@ -130,14 +130,10 @@ public final class Utils {
     private static Handler toastHandler;
 
     // need non-null arguments for rxjava Single.subscribe()
-    private static final io.reactivex.rxjava3.functions.Consumer<Boolean> onSu = new io.reactivex.rxjava3.functions.Consumer<Boolean>() {
-        @Override
-        public void accept(Boolean b) {
-            Log.d(TAG, "rxjava onSuccess (no-op)");
-        }
-    };
+    private static io.reactivex.rxjava3.functions.Consumer<Boolean> onSu =
+            b -> Log.d(TAG, "rxjava onSuccess (no-op)");
 
-    private static void onEr(Throwable t) {
+    private static void onEr (Throwable t) {
         Log.e(TAG, "rxjava onError: ", t);
     }
 

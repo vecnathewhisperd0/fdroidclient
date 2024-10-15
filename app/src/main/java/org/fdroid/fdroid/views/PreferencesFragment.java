@@ -591,7 +591,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         }
     }
 
-
     /**
      * The default for "Use Tor" is dynamically set based on whether Orbot is installed.
      */

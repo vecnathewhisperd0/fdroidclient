@@ -9,7 +9,6 @@ import org.fdroid.fdroid.Preferences;
 import org.fdroid.fdroid.data.App;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class FDroidMirrorParameterManager implements MirrorParameterManager {
