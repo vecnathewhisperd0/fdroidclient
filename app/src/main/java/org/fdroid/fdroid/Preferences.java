@@ -36,7 +36,6 @@ import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
 import com.google.common.collect.Lists;
-import com.google.gson.Gson;
 
 import org.fdroid.download.MirrorData;
 import org.fdroid.fdroid.data.Apk;
@@ -633,32 +632,26 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
         return preferences.getBoolean(PREF_USE_REMOTE, true);
     }
 
-    private Gson gson;
-
     public void setMirrorData(String mirrorUrl, MirrorData mirrorData) {
-        if (gson == null) {
-            gson = new Gson();
-        }
         String[] urlParts = mirrorUrl.split("/");
         if (urlParts.length > 2) {
             String shortUrl = urlParts[0] + "//" + urlParts[2];
-            String json = gson.toJson(mirrorData);
-            preferences.edit().putString(shortUrl, json).apply();
+            String prefString = mirrorData.toPreferencesString();
+            preferences.edit().putString(shortUrl, prefString).apply();
         } else {
             Log.w("Preferences", "can't save mirror data, got unexpected url format: " + mirrorUrl);
         }
     }
 
     public MirrorData getMirrorData(String mirrorUrl) {
-        if (gson == null) {
-            gson = new Gson();
-        }
         String[] urlParts = mirrorUrl.split("/");
         if (urlParts.length > 2) {
             String shortUrl = urlParts[0] + "//" + urlParts[2];
-            String json = preferences.getString(shortUrl, null);
-            if (json != null && !json.isEmpty()) {
-                return gson.fromJson(json, MirrorData.class);
+            String prefString = preferences.getString(shortUrl, null);
+            if (prefString != null && !prefString.isEmpty()) {
+                MirrorData data = new MirrorData();
+                data.fromPreferencesString(prefString);
+                return data;
             } else {
                 return new MirrorData();
             }
