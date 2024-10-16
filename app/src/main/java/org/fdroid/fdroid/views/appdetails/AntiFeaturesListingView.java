@@ -133,7 +133,7 @@ public class AntiFeaturesListingView extends RecyclerView {
         }
     }
 
-    private static String getAntiFeatureDescriptionText(Context context, String antiFeatureName) {
+    public static String getAntiFeatureDescriptionText(Context context, String antiFeatureName) {
         if (antiFeatureName.equals(context.getString(R.string.antiads_key))) {
             return context.getString(R.string.antiadslist);
         } else if (antiFeatureName.equals(context.getString(R.string.antitrack_key))) {
@@ -163,7 +163,7 @@ public class AntiFeaturesListingView extends RecyclerView {
         }
     }
 
-    private static @DrawableRes int antiFeatureIcon(Context context, String antiFeatureName) {
+    public static @DrawableRes int antiFeatureIcon(Context context, String antiFeatureName) {
         if (antiFeatureName.equals(context.getString(R.string.antiads_key))) {
             return R.drawable.ic_antifeature_ads;
         } else if (antiFeatureName.equals(context.getString(R.string.antitrack_key))) {

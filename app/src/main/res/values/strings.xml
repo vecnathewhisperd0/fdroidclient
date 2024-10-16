@@ -788,4 +788,13 @@ This often occurs with apps installed via Google Play or other sources, if they 
     <string name="ipfsgw_caption_official_gateways">Official IPFS Gateways</string>
     <string name="ipfsgw_caption_custom_gateways">Custom IPFS Gateways</string>
 
+    <string name="antifeatures_updated">Anti-Features got an update.</string>
+    <string name="antifeatures_review">Review</string>
+    <string name="antifeatures_upgrade_card_title">Anti-Features updated</string>
+    <string name="antifeatures_upgrade_card_direction">We have updated the list of Anti-Features at F-Droid. Would you like to include apps with the new Anti-Feature?</string>
+    <string name="antifeatures_upgrade_card_postscript">You can change this anytime in the setting below.</string>
+    <string name="antifeatures_upgrade_card_enable">Yes</string>
+    <string name="antifeatures_upgrade_card_disable">No, thanks</string>
+    <string name="antifeatures_upgrade_item_learn_more">Learn more</string>
+
 </resources>
