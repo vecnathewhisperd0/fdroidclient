@@ -16,7 +16,7 @@ object TestRepoUtils {
 
     fun getRandomMirror(): MirrorV2 = MirrorV2(
         url = getRandomString(),
-        countryCode = getRandomString().orNull()
+        location = getRandomString().orNull()
     )
 
     fun getRandomLocalizedTextV2(size: Int = Random.nextInt(0, 23)): LocalizedTextV2 =
