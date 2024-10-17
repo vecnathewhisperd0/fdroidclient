@@ -103,16 +103,16 @@ internal class MirrorChooserWithParameters constructor(
 ) : MirrorChooserImpl() {
 
     // added to support testing but may be useful for other situations
-    private var localPropertyOverride: Boolean = false
-    private var remotePropertyOverride: Boolean = false
+    private var regionalPropertyOverride: Boolean = false
+    private var worldwidePropertyOverride: Boolean = false
     private var locationPropertyOverride: List<String> = listOf()
 
-    fun setLocalPropertyOverride(localProperty: Boolean) {
-        localPropertyOverride = localProperty
+    fun setRegionalPropertyOverride(regionalProperty: Boolean) {
+        regionalPropertyOverride = regionalProperty
     }
 
-    fun setRemotePropertyOverride(remoteProperty: Boolean) {
-        remotePropertyOverride = remoteProperty
+    fun setWorldwidePropertyOverride(worldwideProperty: Boolean) {
+        worldwidePropertyOverride = worldwideProperty
     }
 
     fun setLocationPropertyOverride(locationProperty: List<String>) {
@@ -129,8 +129,8 @@ internal class MirrorChooserWithParameters constructor(
             val filteredMirrors = orderedMirrors.filter { mirror -> !mirror.isOnion() }
             if (filteredMirrors.isEmpty()) {
                 if (mirrorParameterManager != null
-                    && (!mirrorParameterManager.useLocalMirrors()
-                            || !mirrorParameterManager.useRemoteMirrors())
+                    && (!mirrorParameterManager.useRegionalMirrors()
+                            || !mirrorParameterManager.useWorldwideMirrors())
                 ) {
                     // if we have no non-onion mirrors because mirrors were excluded, keep empty list
                     filteredMirrors
@@ -213,8 +213,8 @@ internal class MirrorChooserWithParameters constructor(
             // if we have access to mirror parameters and the current location,
             // then use that information to sort the mirror list
             val mirrorFilteredList: List<Mirror> = getMirrorsByLocation(
-                mirrorParameterManager.useLocalMirrors(),
-                mirrorParameterManager.useRemoteMirrors(),
+                mirrorParameterManager.useRegionalMirrors(),
+                mirrorParameterManager.useWorldwideMirrors(),
                 downloadRequest.mirrors,
                 mirrorParameterManager.getCurrentLocations(),
                 errorComparator
@@ -224,8 +224,8 @@ internal class MirrorChooserWithParameters constructor(
             // if testing overrides have been set, then use those settings to
             // sort the mirror list
             val mirrorFilteredList: List<Mirror> = getMirrorsByLocation(
-                localPropertyOverride,
-                remotePropertyOverride,
+                regionalPropertyOverride,
+                worldwidePropertyOverride,
                 downloadRequest.mirrors,
                 locationPropertyOverride,
                 errorComparator
@@ -242,18 +242,18 @@ internal class MirrorChooserWithParameters constructor(
     }
 
     fun getMirrorsByLocation(
-        localMirrorsEnabled: Boolean,
-        remoteMirrorsEnabled: Boolean,
+        regionalMirrorsEnabled: Boolean,
+        worldwideMirrorsEnabled: Boolean,
         availableMirrorList: List<Mirror>,
         currentLocationList: List<String>,
         mirrorComparator: Comparator<Mirror>
     ): List<Mirror> {
         var mirrorList: MutableList<Mirror> = mutableListOf<Mirror>()
 
-        // if both local and remote are enabled, add local mirrors first (assuming
-        // latency will be lower). preferences ui should prevent disabling both
-        // local and remote
-        if (localMirrorsEnabled) {
+        // if both regional and worldwide are enabled, add regional mirrors first
+        // (assuming latency will be lower). preferences ui should prevent disabling
+        // both regional and worldwide
+        if (regionalMirrorsEnabled) {
             val mirrorInsideList: List<Mirror> =
                 availableMirrorList.toMutableList().sortedWith(mirrorComparator)
                     .filter { mirror ->
@@ -261,7 +261,7 @@ internal class MirrorChooserWithParameters constructor(
                     }
             mirrorList.addAll(mirrorInsideList)
         }
-        if (remoteMirrorsEnabled) {
+        if (worldwideMirrorsEnabled) {
             val mirrorOutsideList: List<Mirror> =
                 availableMirrorList.toMutableList().sortedWith(mirrorComparator)
                     .filter { mirror ->

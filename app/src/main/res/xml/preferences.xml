@@ -122,18 +122,6 @@
                 android:targetPackage="@string/applicationId" />
         </PreferenceScreen>
         <SwitchPreferenceCompat
-            android:key="useDnsCache"
-            android:summary="@string/useDnsCacheSummary"
-            android:title="@string/useDnsCache" />
-        <SwitchPreferenceCompat
-            android:key="useLocal"
-            android:summary="@string/useLocalSummary"
-            android:title="@string/useLocal" />
-        <SwitchPreferenceCompat
-            android:key="useRemote"
-            android:summary="@string/useRemoteSummary"
-            android:title="@string/useRemote" />
-        <SwitchPreferenceCompat
             android:key="useTor"
             android:summary="@string/useTorSummary"
             android:title="@string/useTor" />
@@ -167,6 +155,19 @@
             android:key="preventScreenshots"
             android:summary="@string/preventScreenshots_summary"
             android:title="@string/preventScreenshots_title" />
+
+        <SwitchPreferenceCompat
+            android:key="useRegional"
+            android:summary="@string/useRegionalSummary"
+            android:title="@string/useRegional" />
+        <SwitchPreferenceCompat
+            android:key="useWorldwide"
+            android:summary="@string/useWorldwideSummary"
+            android:title="@string/useWorldwide" />
+        <SwitchPreferenceCompat
+            android:key="useDnsCache"
+            android:summary="@string/useDnsCacheSummary"
+            android:title="@string/useDnsCache" />
 
         <!-- only visible in full flavor -->
         <SwitchPreferenceCompat
