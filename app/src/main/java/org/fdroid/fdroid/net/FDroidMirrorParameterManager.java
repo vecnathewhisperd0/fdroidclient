@@ -58,15 +58,15 @@ public class FDroidMirrorParameterManager implements MirrorParameterManager {
     }
 
     @Override
-    public boolean useRegionalMirrors() {
+    public boolean preferRegionalMirrors() {
         Preferences prefs = Preferences.get();
-        return prefs.isUseRegionalSet();
+        return prefs.ispreferRegionalSet();
     }
 
     @Override
-    public boolean useWorldwideMirrors() {
+    public boolean preferWorldwideMirrors() {
         Preferences prefs = Preferences.get();
-        return prefs.isUseWorldwideSet();
+        return prefs.ispreferWorldwideSet();
     }
 
     @NonNull

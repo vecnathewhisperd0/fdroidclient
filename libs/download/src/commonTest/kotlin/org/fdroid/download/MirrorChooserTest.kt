@@ -18,6 +18,7 @@ class MirrorChooserTest {
         Mirror("42"),
         Mirror("1337"))
     private val mirrorsLocation = listOf(
+        Mirror(baseUrl = "unknown", location = null),
         Mirror(baseUrl = "local", location = "HERE"),
         Mirror(baseUrl = "remote", location = "THERE"))
     private val downloadRequest = DownloadRequest("foo", mirrors)
@@ -154,33 +155,32 @@ class MirrorChooserTest {
         val mirrorChooser = MirrorChooserWithParameters()
         mirrorChooser.setLocationPropertyOverride(listOf("HERE"))
 
-        // test with local mirrors
-        mirrorChooser.setLocalPropertyOverride(true)
-        mirrorChooser.setRemotePropertyOverride(false)
-        val mirrorsLocalList = mirrorChooser.orderMirrors(downloadRequestLocation)
-        // confirm the list contains one mirror
-        assertEquals(1, mirrorsLocalList.size)
-        // mirror that is local should be included
-        assertEquals("HERE", mirrorsLocalList.get(0).location)
+        // test local mirror preference
+        mirrorChooser.setRegionalPropertyOverride(true)
+        mirrorChooser.setWorldwidePropertyOverride(false)
+        val regionalList = mirrorChooser.orderMirrors(downloadRequestLocation)
+        // confirm the list contains all mirrors
+        assertEquals(3, regionalList.size)
+        // mirror that is local should be included first
+        assertEquals("HERE", regionalList.get(0).location)
 
-        // test with remote mirrors
-        mirrorChooser.setLocalPropertyOverride(false)
-        mirrorChooser.setRemotePropertyOverride(true)
-        val mirrorsRemoteList = mirrorChooser.orderMirrors(downloadRequestLocation)
-        // confirm the list contains one mirror
-        assertEquals(1, mirrorsRemoteList.size)
-        // mirror that is remote should be included
-        assertEquals("THERE", mirrorsRemoteList.get(0).location)
+        // test remote mirror preference
+        mirrorChooser.setRegionalPropertyOverride(false)
+        mirrorChooser.setWorldwidePropertyOverride(true)
+        val worldwideList = mirrorChooser.orderMirrors(downloadRequestLocation)
+        // confirm the list contains all mirrors
+        assertEquals(3, worldwideList.size)
+        // mirror that is remote should be included first
+        assertEquals("THERE", worldwideList.get(0).location)
 
-        // test with all mirrors
-        mirrorChooser.setLocalPropertyOverride(true)
-        mirrorChooser.setRemotePropertyOverride(true)
-        val mirrorsAllList = mirrorChooser.orderMirrors(downloadRequestLocation)
+        // test with no preference
+        mirrorChooser.setRegionalPropertyOverride(false)
+        mirrorChooser.setWorldwidePropertyOverride(false)
+        val unknownList = mirrorChooser.orderMirrors(downloadRequestLocation)
         // confirm the list contains both mirrors
-        assertEquals(2, mirrorsAllList.size)
-        // local mirror should appear first for the sake of latency
-        assertEquals("HERE", mirrorsAllList.get(0).location)
-        assertEquals("THERE", mirrorsAllList.get(1).location)
+        assertEquals(3, unknownList.size)
+        // unknown mirror should appear first based on original ordering
+        assertEquals(null, unknownList.get(0).location)
     }
 
 }

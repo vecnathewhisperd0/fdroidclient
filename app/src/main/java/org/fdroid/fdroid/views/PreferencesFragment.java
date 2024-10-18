@@ -118,8 +118,8 @@ public class PreferencesFragment extends PreferenceFragmentCompat
     private LiveSeekBarPreference updateIntervalSeekBar;
     private SwitchPreferenceCompat enableProxyCheckPref;
     private SwitchPreferenceCompat useDnsCacheCheckPref;
-    private SwitchPreferenceCompat useRegionalCheckPref;
-    private SwitchPreferenceCompat useWorldwideCheckPref;
+    private SwitchPreferenceCompat preferRegionalCheckPref;
+    private SwitchPreferenceCompat preferWorldwideCheckPref;
     private SwitchPreferenceCompat useTorCheckPref;
     private Preference updateAutoDownloadPref;
     private SwitchPreferenceCompat keepInstallHistoryPref;
@@ -163,8 +163,8 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         }
 
         useDnsCacheCheckPref = ObjectsCompat.requireNonNull(findPreference(Preferences.PREF_USE_DNS_CACHE));
-        useRegionalCheckPref = ObjectsCompat.requireNonNull(findPreference(Preferences.PREF_USE_REGIONAL));
-        useWorldwideCheckPref = ObjectsCompat.requireNonNull(findPreference(Preferences.PREF_USE_WORLDWIDE));
+        preferRegionalCheckPref = ObjectsCompat.requireNonNull(findPreference(Preferences.PREF_PREFER_REGIONAL));
+        preferWorldwideCheckPref = ObjectsCompat.requireNonNull(findPreference(Preferences.PREF_PREFER_WORLDWIDE));
 
         useTorCheckPref = ObjectsCompat.requireNonNull(findPreference(Preferences.PREF_USE_TOR));
         useTorCheckPref.setOnPreferenceChangeListener(useTorChangedListener);
@@ -553,41 +553,39 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         useDnsCacheCheckPref.setChecked(Preferences.get().isDnsCacheEnabled());
     }
 
-    private void initUseRegionalPreference() {
-        useRegionalCheckPref.setDefaultValue(true);
-        useRegionalCheckPref.setChecked(Preferences.get().isUseRegionalSet());
-        // disable worldwide setting if needed so both can't be turned off
+    private void initpreferRegionalPreference() {
+        preferRegionalCheckPref.setDefaultValue(false);
+        preferRegionalCheckPref.setChecked(Preferences.get().ispreferRegionalSet());
+        // unset worldwide setting if needed so both can't be turned on
         resolveRegionalClick();
-        useRegionalCheckPref.setOnPreferenceClickListener(preference -> {
+        preferRegionalCheckPref.setOnPreferenceClickListener(preference -> {
             resolveRegionalClick();
             return false;
         });
     }
 
     private void resolveRegionalClick() {
-        if (Preferences.get().isUseRegionalSet()) {
-            useWorldwideCheckPref.setEnabled(true);
-        } else {
-            useWorldwideCheckPref.setEnabled(false);
+        if (Preferences.get().ispreferRegionalSet() && Preferences.get().ispreferWorldwideSet()) {
+            Preferences.get().setpreferWorldwideValue(false);
+            preferWorldwideCheckPref.setChecked(Preferences.get().ispreferWorldwideSet());
         }
     }
 
-    private void initUseWorldwidePreference() {
-        useWorldwideCheckPref.setDefaultValue(true);
-        useWorldwideCheckPref.setChecked(Preferences.get().isUseWorldwideSet());
-        // disable regional setting if needed so both can't be turned off
+    private void initpreferWorldwidePreference() {
+        preferWorldwideCheckPref.setDefaultValue(false);
+        preferWorldwideCheckPref.setChecked(Preferences.get().ispreferWorldwideSet());
+        // unset regional setting if needed so both can't be turned on
         resolveWorldwideClick();
-        useWorldwideCheckPref.setOnPreferenceClickListener(preference -> {
+        preferWorldwideCheckPref.setOnPreferenceClickListener(preference -> {
             resolveWorldwideClick();
             return false;
         });
     }
 
     private void resolveWorldwideClick() {
-        if (Preferences.get().isUseWorldwideSet()) {
-            useRegionalCheckPref.setEnabled(true);
-        } else {
-            useRegionalCheckPref.setEnabled(false);
+        if (Preferences.get().ispreferWorldwideSet() && Preferences.get().ispreferRegionalSet()) {
+            Preferences.get().setpreferRegionalValue(false);
+            preferRegionalCheckPref.setChecked(Preferences.get().ispreferRegionalSet());
         }
     }
 
@@ -643,8 +641,8 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         initAutoFetchUpdatesPreference();
         initPrivilegedInstallerPreference();
         initUseDnsCachePreference();
-        initUseRegionalPreference();
-        initUseWorldwidePreference();
+        initpreferRegionalPreference();
+        initpreferWorldwidePreference();
         initUseTorPreference(requireContext().getApplicationContext());
 
         updateIpfsGatewaySummary();

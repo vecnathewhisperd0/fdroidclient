@@ -157,13 +157,13 @@
             android:title="@string/preventScreenshots_title" />
 
         <SwitchPreferenceCompat
-            android:key="useRegional"
-            android:summary="@string/useRegionalSummary"
-            android:title="@string/useRegional" />
+            android:key="preferRegional"
+            android:summary="@string/preferRegionalSummary"
+            android:title="@string/preferRegional" />
         <SwitchPreferenceCompat
-            android:key="useWorldwide"
-            android:summary="@string/useWorldwideSummary"
-            android:title="@string/useWorldwide" />
+            android:key="preferWorldwide"
+            android:summary="@string/preferWorldwideSummary"
+            android:title="@string/preferWorldwide" />
         <SwitchPreferenceCompat
             android:key="useDnsCache"
             android:summary="@string/useDnsCacheSummary"

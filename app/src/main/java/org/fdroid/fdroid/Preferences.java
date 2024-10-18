@@ -127,8 +127,8 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
     public static final String PREF_LANGUAGE = "language";
     public static final String PREF_USE_DNS_CACHE = "useDnsCache";
     public static final String PREF_DNS_CACHE = "dnsCache";
-    public static final String PREF_USE_REGIONAL = "useRegional";
-    public static final String PREF_USE_WORLDWIDE = "useWorldwide";
+    public static final String PREF_PREFER_REGIONAL = "preferRegional";
+    public static final String PREF_PREFER_WORLDWIDE = "preferWorldwide";
     public static final String PREF_USE_TOR = "useTor";
     public static final String PREF_ENABLE_PROXY = "enableProxy";
     public static final String PREF_PROXY_HOST = "proxyHost";
@@ -616,20 +616,20 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
         return output;
     }
 
-    public void setUseRegionalValue(boolean newValue) {
-        preferences.edit().putBoolean(PREF_USE_REGIONAL, newValue).apply();
+    public void setpreferRegionalValue(boolean newValue) {
+        preferences.edit().putBoolean(PREF_PREFER_REGIONAL, newValue).apply();
     }
 
-    public boolean isUseRegionalSet() {
-        return preferences.getBoolean(PREF_USE_REGIONAL, true);
+    public boolean ispreferRegionalSet() {
+        return preferences.getBoolean(PREF_PREFER_REGIONAL, false);
     }
 
-    public void setUseWorldwideValue(boolean newValue) {
-        preferences.edit().putBoolean(PREF_USE_WORLDWIDE, newValue).apply();
+    public void setpreferWorldwideValue(boolean newValue) {
+        preferences.edit().putBoolean(PREF_PREFER_WORLDWIDE, newValue).apply();
     }
 
-    public boolean isUseWorldwideSet() {
-        return preferences.getBoolean(PREF_USE_WORLDWIDE, true);
+    public boolean ispreferWorldwideSet() {
+        return preferences.getBoolean(PREF_PREFER_WORLDWIDE, false);
     }
 
     public void setMirrorData(String mirrorUrl, MirrorData mirrorData) {

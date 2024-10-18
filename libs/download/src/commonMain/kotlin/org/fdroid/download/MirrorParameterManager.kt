@@ -32,9 +32,9 @@ public interface MirrorParameterManager {
      * Returns true or false depending on whether the location preference has been enabled. This
      * preference reflects whether mirrors matching your location should get priority.
      */
-    public fun useRegionalMirrors(): Boolean
+    public fun preferRegionalMirrors(): Boolean
 
-    public fun useWorldwideMirrors(): Boolean
+    public fun preferWorldwideMirrors(): Boolean
 
     /**
      * Returns the country code of the user's current location
