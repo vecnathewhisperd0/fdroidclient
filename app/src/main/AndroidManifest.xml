@@ -285,7 +285,9 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.APP_MARKET" />
                 <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
 
 
@@ -494,6 +496,13 @@
             android:permission="${applicationId}.permission.UPDATE_REPOS">
             <intent-filter>
                 <action android:name="org.fdroid.action.UPDATE_REPOS" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".receiver.UnarchivePackageReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.UNARCHIVE_PACKAGE" />
             </intent-filter>
         </receiver>
 

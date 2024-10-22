@@ -35,8 +35,6 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
-import com.google.common.collect.Lists;
-
 import org.fdroid.download.MirrorData;
 import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.data.DBHelper;
@@ -46,6 +44,7 @@ import org.fdroid.fdroid.net.ConnectivityMonitorService;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -608,7 +607,7 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
         HashMap<String, List<String>> output = new HashMap<String, List<String>>();
         for (String line : string.split("\n")) {
             String[] items = line.split(" ");
-            List<String> list = Lists.newArrayList(items);
+            ArrayList<String> list = new ArrayList<>(Arrays.asList(items));
             String key = list.remove(0);
             output.put(key, list);
         }

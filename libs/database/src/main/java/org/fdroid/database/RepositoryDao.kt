@@ -6,15 +6,19 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.Companion.REPLACE
 import androidx.room.Query
+import androidx.room.RawQuery
 import androidx.room.RewriteQueriesToDropUnusedColumns
 import androidx.room.Transaction
 import androidx.room.Update
+import androidx.sqlite.db.SimpleSQLiteQuery
+import androidx.sqlite.db.SupportSQLiteQuery
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.decodeFromJsonElement
 import org.fdroid.database.DbDiffUtils.diffAndUpdateListTable
 import org.fdroid.database.DbDiffUtils.diffAndUpdateTable
 import org.fdroid.index.IndexFormatVersion
 import org.fdroid.index.IndexParser.json
+import org.fdroid.index.v1.IndexV1Updater
 import org.fdroid.index.v2.IndexV2Updater
 import org.fdroid.index.v2.MirrorV2
 import org.fdroid.index.v2.ReflectionDiffer.applyDiff
@@ -87,6 +91,14 @@ public interface RepositoryDao {
      * Removes all repos and their preferences.
      */
     public fun clearAll()
+
+    /**
+     * Force a checkpoint on the SQLite WAL such that the file size gets reduced.
+     * Blocks until concurrent reads have finished.
+     * Useful to call after large inserts (repo update)
+     * @see <a href="https://www.sqlite.org/wal.html#avoiding_excessively_large_wal_files">https://www.sqlite.org/wal.html#avoiding_excessively_large_wal_files</a>
+     */
+    public fun walCheckpoint()
 }
 
 @Dao
@@ -171,7 +183,8 @@ internal interface RepositoryDaoInt : RepositoryDao {
         address: String,
         username: String? = null,
         password: String? = null,
-        certificate: String = "6789" // just used for testing
+        // just used for testing
+        certificate: String = "6789",
     ): Long {
         val repo = CoreRepository(
             name = mapOf("en-US" to address),
@@ -223,9 +236,11 @@ internal interface RepositoryDaoInt : RepositoryDao {
      * Returns a non-archive repository with the given [certificate], if it exists in the DB.
      */
     @Transaction
-    @Query("""SELECT * FROM ${CoreRepository.TABLE}
+    @Query(
+        """SELECT * FROM ${CoreRepository.TABLE}
         WHERE certificate = :certificate AND address NOT LIKE "%/archive" COLLATE NOCASE
-        LIMIT 1""")
+        LIMIT 1"""
+    )
     fun getRepository(certificate: String): Repository?
 
     @Transaction
@@ -250,9 +265,11 @@ internal interface RepositoryDaoInt : RepositoryDao {
     fun getRepositoryPreferences(repoId: Long): RepositoryPreferences?
 
     @RewriteQueriesToDropUnusedColumns
-    @Query("""SELECT * FROM ${Category.TABLE}
+    @Query(
+        """SELECT * FROM ${Category.TABLE}
         JOIN ${RepositoryPreferences.TABLE} AS pref USING (repoId)
-        WHERE pref.enabled = 1 GROUP BY id HAVING MAX(pref.weight)""")
+        WHERE pref.enabled = 1 GROUP BY id HAVING MAX(pref.weight)"""
+    )
     override fun getLiveCategories(): LiveData<List<Category>>
 
     /**
@@ -354,16 +371,22 @@ internal interface RepositoryDaoInt : RepositoryDao {
     @Query("UPDATE ${AppPrefs.TABLE} SET preferredRepoId = NULL WHERE preferredRepoId = :repoId")
     fun resetPreferredRepoInAppPrefs(repoId: Long)
 
-    @Query("""UPDATE ${RepositoryPreferences.TABLE} SET userMirrors = :mirrors
-        WHERE repoId = :repoId""")
+    @Query(
+        """UPDATE ${RepositoryPreferences.TABLE} SET userMirrors = :mirrors
+        WHERE repoId = :repoId"""
+    )
     override fun updateUserMirrors(repoId: Long, mirrors: List<String>)
 
-    @Query("""UPDATE ${RepositoryPreferences.TABLE} SET username = :username, password = :password
-        WHERE repoId = :repoId""")
+    @Query(
+        """UPDATE ${RepositoryPreferences.TABLE} SET username = :username, password = :password
+        WHERE repoId = :repoId"""
+    )
     override fun updateUsernameAndPassword(repoId: Long, username: String?, password: String?)
 
-    @Query("""UPDATE ${RepositoryPreferences.TABLE} SET disabledMirrors = :disabledMirrors
-        WHERE repoId = :repoId""")
+    @Query(
+        """UPDATE ${RepositoryPreferences.TABLE} SET disabledMirrors = :disabledMirrors
+        WHERE repoId = :repoId"""
+    )
     override fun updateDisabledMirrors(repoId: Long, disabledMirrors: List<String>)
 
     /**
@@ -398,7 +421,7 @@ internal interface RepositoryDaoInt : RepositoryDao {
         // move repoToReorder in place of repoTarget
         setWeight(repoToReorder.repoId, repoTarget.weight)
         // also adjust weight of archive repo, if it exists
-        val archiveRepoId = repoToReorder.certificate?.let { getArchiveRepoId(it) }
+        val archiveRepoId = getArchiveRepoId(repoToReorder.certificate)
         if (archiveRepoId != null) {
             setWeight(archiveRepoId, repoTarget.weight - 1)
         }
@@ -493,6 +516,13 @@ internal interface RepositoryDaoInt : RepositoryDao {
     fun resetTimestamps()
 
     /**
+     * Resets ETags for *all* repos in the database.
+     * This will use cause a full index update when updating the repository via [IndexV1Updater].
+     */
+    @Query("UPDATE ${RepositoryPreferences.TABLE} SET lastETag = NULL")
+    fun resetETags()
+
+    /**
      * Use when replacing an existing repo with a full index.
      * This removes all existing index data associated with this repo from the database,
      * but does not touch repository preferences.
@@ -527,4 +557,10 @@ internal interface RepositoryDaoInt : RepositoryDao {
     @Query("SELECT COUNT(*) FROM ${ReleaseChannel.TABLE}")
     fun countReleaseChannels(): Int
 
+    override fun walCheckpoint() {
+        rawCheckpoint(SimpleSQLiteQuery("pragma wal_checkpoint(truncate)"))
+    }
+
+    @RawQuery
+    fun rawCheckpoint(supportSQLiteQuery: SupportSQLiteQuery): Int
 }
