@@ -155,32 +155,23 @@ class MirrorChooserTest {
         val mirrorChooser = MirrorChooserWithParameters()
         mirrorChooser.setLocationPropertyOverride(listOf("HERE"))
 
-        // test local mirror preference
-        mirrorChooser.setRegionalPropertyOverride(true)
-        mirrorChooser.setWorldwidePropertyOverride(false)
-        val regionalList = mirrorChooser.orderMirrors(downloadRequestLocation)
+        // test domestic mirror preference
+        mirrorChooser.setForeignPropertyOverride(false)
+        val domesticList = mirrorChooser.orderMirrors(downloadRequestLocation)
         // confirm the list contains all mirrors
-        assertEquals(3, regionalList.size)
+        assertEquals(3, domesticList.size)
         // mirror that is local should be included first
-        assertEquals("HERE", regionalList.get(0).location)
+        assertEquals("HERE", domesticList.get(0).location)
+        assertEquals(null, domesticList.get(1).location)
 
-        // test remote mirror preference
-        mirrorChooser.setRegionalPropertyOverride(false)
-        mirrorChooser.setWorldwidePropertyOverride(true)
-        val worldwideList = mirrorChooser.orderMirrors(downloadRequestLocation)
+        // test foreign mirror preference
+        mirrorChooser.setForeignPropertyOverride(true)
+        val foreignList = mirrorChooser.orderMirrors(downloadRequestLocation)
         // confirm the list contains all mirrors
-        assertEquals(3, worldwideList.size)
+        assertEquals(3, foreignList.size)
         // mirror that is remote should be included first
-        assertEquals("THERE", worldwideList.get(0).location)
-
-        // test with no preference
-        mirrorChooser.setRegionalPropertyOverride(false)
-        mirrorChooser.setWorldwidePropertyOverride(false)
-        val unknownList = mirrorChooser.orderMirrors(downloadRequestLocation)
-        // confirm the list contains both mirrors
-        assertEquals(3, unknownList.size)
-        // unknown mirror should appear first based on original ordering
-        assertEquals(null, unknownList.get(0).location)
+        assertEquals("THERE", foreignList.get(0).location)
+        assertEquals(null, foreignList.get(1).location)
     }
 
 }
