@@ -18,7 +18,6 @@ import org.junit.runner.RunWith;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.IllegalFormatException;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -37,8 +36,7 @@ public class LocalizationTest {
     public static final String TAG = "LocalizationTest";
 
     private final Pattern androidFormat = Pattern.compile("(%[a-z0-9]\\$?[a-z]?)");
-    private final Locale[] locales = Locale.getAvailableLocales();
-    private final HashSet<String> localeNames = new HashSet<>(locales.length);
+    private Locale[] locales;
 
     private AssetManager assets;
     private Configuration config;
@@ -46,13 +44,6 @@ public class LocalizationTest {
 
     @Before
     public void setUp() {
-        for (Locale locale : Languages.LOCALES_TO_TEST) {
-            localeNames.add(locale.toString());
-        }
-        for (Locale locale : locales) {
-            localeNames.add(locale.toString());
-        }
-
         Instrumentation instrumentation = InstrumentationRegistry.getInstrumentation();
         Context context = instrumentation.getTargetContext();
         assets = context.getAssets();
@@ -60,6 +51,11 @@ public class LocalizationTest {
         config.locale = Locale.ENGLISH;
         // Resources() requires DisplayMetrics, but they are only needed for drawables
         resources = new Resources(assets, new DisplayMetrics(), config);
+
+        // Try to get all app locales from Resources (true), or just released locales from locales_config.xml (false)
+        boolean includeAllLocales = true;
+        locales = Languages.toLocales(includeAllLocales ? Languages.parseResourcesLocales(context)
+                : Languages.parseXMLLocales(context.getResources()));
     }
 
     @Test

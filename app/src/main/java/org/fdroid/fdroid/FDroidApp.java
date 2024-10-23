@@ -298,7 +298,12 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
                     .build());
         }
         Preferences.setup(this);
+
+        SharedPreferences atStartTime = getAtStartTimeSharedPreferences();
+        Languages.updateCacheHint(getApplicationContext(), atStartTime);
         Languages.setLanguage(this);
+        Languages.onApplicationCreate(this);
+
         Preferences preferences = Preferences.get();
 
         if (preferences.promptToSendCrashReports()) {
@@ -385,7 +390,6 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
         }
 
         // if the underlying OS version has changed, then fully rebuild the database
-        SharedPreferences atStartTime = getAtStartTimeSharedPreferences();
         if (Build.VERSION.SDK_INT != atStartTime.getInt("build-version", Build.VERSION.SDK_INT)) {
             Utils.runOffUiThread(() -> {
                 DBHelper.resetTransient(getApplicationContext());
@@ -421,7 +425,7 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
             atStartTime.edit().remove(queryStringKey).apply();
         }
 
-        if (Preferences.get().isScanRemovableStorageEnabled()) {
+        if (preferences.isScanRemovableStorageEnabled()) {
             SDCardScannerService.scan(this);
         }
     }

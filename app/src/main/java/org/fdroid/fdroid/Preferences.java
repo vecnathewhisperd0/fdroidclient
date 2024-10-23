@@ -449,8 +449,12 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
         return preferences.getString(Preferences.PREF_LANGUAGE, Languages.USE_SYSTEM_DEFAULT);
     }
 
-    void clearLanguage() {
+    public void clearLanguage() {
         preferences.edit().remove(Preferences.PREF_LANGUAGE).apply();
+    }
+
+    public Boolean isLanguageSet() {
+        return preferences.contains(Preferences.PREF_LANGUAGE);
     }
 
     public String getLocalRepoName() {

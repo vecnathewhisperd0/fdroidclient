@@ -238,6 +238,24 @@ dependencies {
     androidTestImplementation libs.turbine
 }
 
+def getResLocales = { ->
+    def locales = ['en-US']
+
+    def tree = fileTree('src/main/res')
+    tree.include('**/values-**/strings.xml')
+    tree.getFiles().each { file ->
+        def locale = file.getParentFile().getName().substring(7).replaceAll('-r', '-')
+        if (locale != 'iw' && locale != 'in') locales.add(locale)
+    }
+    return '"' + locales.sort().join('", "') + '"'
+}
+
+android.buildTypes.all { build ->
+    if (build.name == "debug") {
+        build.buildConfigField "String[]", "RES_LOCALES", 'new String[] { ' + getResLocales() + ' }'
+    }
+}
+
 // org.fdroid.fdroid.updater.UpdateServiceTest needs app-full-debug.apk
 android.productFlavors.all { flavor ->
     if (flavor.name == "full") {

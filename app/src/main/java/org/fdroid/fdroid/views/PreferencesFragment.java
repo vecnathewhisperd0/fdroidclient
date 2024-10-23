@@ -30,7 +30,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
@@ -52,6 +51,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.SeekBarPreference;
 import androidx.preference.SwitchPreferenceCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -61,6 +61,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.fdroid.fdroid.AppUpdateStatusManager;
+import org.fdroid.fdroid.BuildConfig;
+import org.fdroid.fdroid.data.App;
 import org.fdroid.fdroid.FDroidApp;
 import org.fdroid.fdroid.Languages;
 import org.fdroid.fdroid.Preferences;
@@ -177,14 +179,36 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         updateIpfsGatewaySummary();
 
         ListPreference languagePref = ObjectsCompat.requireNonNull(findPreference(Preferences.PREF_LANGUAGE));
-        if (Build.VERSION.SDK_INT >= 24) {
-            PreferenceCategory category = ObjectsCompat.requireNonNull(findPreference("pref_category_display"));
-            category.removePreference(languagePref);
-        } else {
-            Languages languages = Languages.get((AppCompatActivity) getActivity());
-            languagePref.setDefaultValue(Languages.USE_SYSTEM_DEFAULT);
-            languagePref.setEntries(languages.getAllNames());
-            languagePref.setEntryValues(languages.getSupportedLocales());
+        Languages languages = Languages.get((AppCompatActivity) getActivity());
+        languages.bindListPreference(languagePref, true);
+        languagePref.setDefaultValue(Languages.USE_SYSTEM_DEFAULT);
+        languagePref.setEntries(languages.getAllNames(getActivity()));
+        languagePref.setEntryValues(languages.getSupportedLocales(getActivity()));
+        languagePref.setSummaryProvider(pref -> {
+            ListPreference p = (ListPreference) pref;
+            String currentLocale = Languages.getCurrentLocale();
+            CharSequence entry = p.getEntry();
+            if (entry != null && p.getValue() == Languages.USE_SYSTEM_DEFAULT
+                    && entry.length() > 0) {
+                entry = entry + " (" + currentLocale + ")";
+            } else {
+                entry = currentLocale;
+            }
+            return entry;
+        });
+        if (Languages.NATIVE_PAL) {
+            Preferences.get().clearLanguage();
+            languagePref.setPersistent(false);
+            languagePref.setValue(Languages.getAppLocale());
+            languagePref.setOnPreferenceChangeListener((pref, value) -> {
+                boolean changing = !value.equals(((ListPreference) pref).getValue());
+                if (changing) {
+                    updateSummary(Preferences.PREF_LANGUAGE, changing);
+                    AppCompatActivity activity = (AppCompatActivity) requireActivity();
+                    Languages.setLanguage(activity, (String) value);
+                }
+                return true;
+            });
         }
 
         if (requireActivity().getPackageManager().hasSystemFeature(PackageManager.FEATURE_TOUCHSCREEN)) {
@@ -202,6 +226,53 @@ public class PreferencesFragment extends PreferenceFragmentCompat
         };
     }
 
+    @SuppressWarnings("EmptyLineSeparator")
+    private void debugLanguagePrefSidekick(boolean postLayout) {
+        RecyclerView recycler = getListView();
+        if (recycler != null) {
+            ListPreference languagePref = ObjectsCompat.requireNonNull(findPreference(Preferences.PREF_LANGUAGE));
+            final int prefPos = ((PreferenceGroup.PreferencePositionCallback) recycler.getAdapter())
+                    .getPreferenceAdapterPosition(languagePref);
+            if (postLayout) {
+                RecyclerView.ViewHolder viewHolder = recycler.findViewHolderForAdapterPosition(prefPos);
+                if (viewHolder != null) viewHolder.itemView.setLongClickable(true);
+            } else {
+                View.OnLongClickListener listener = v -> {
+                    Languages.debugLangScripts(v.getContext());
+                    return true;
+                };
+                recycler.addOnChildAttachStateChangeListener(
+                        new RecyclerView.OnChildAttachStateChangeListener() {
+                            private void setOnLongClickListener(@NonNull View view,
+                                                                final boolean onAttach) {
+                                view.setOnLongClickListener(onAttach ? listener : null);
+                                view.setLongClickable(onAttach);
+                            }
+                            @Override
+                            public void onChildViewAttachedToWindow(@NonNull View view) {
+                                setOnLongClickListener(view, true);
+                            }
+                            @Override
+                            public void onChildViewDetachedFromWindow(@NonNull View view) {
+                                setOnLongClickListener(view, false);
+                            }
+                        });
+            }
+        }
+    }
+
+    @Override
+    public RecyclerView.LayoutManager onCreateLayoutManager() {
+        if (BuildConfig.DEBUG) return new LinearLayoutManager(requireContext()) {
+            @Override
+            public void onLayoutCompleted(RecyclerView.State state) {
+                super.onLayoutCompleted(state);
+                debugLanguagePrefSidekick(true);
+            }
+        };
+        return super.onCreateLayoutManager();
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -210,6 +281,8 @@ public class PreferencesFragment extends PreferenceFragmentCompat
             nextUpdateCheck = time;
             updateSummary(Preferences.PREF_UPDATE_INTERVAL, false);
         });
+
+        if (BuildConfig.DEBUG) debugLanguagePrefSidekick(false);
     }
 
     private void checkSummary(String key, int resId) {
@@ -221,7 +294,7 @@ public class PreferencesFragment extends PreferenceFragmentCompat
 
     private void entrySummary(String key) {
         ListPreference pref = findPreference(key);
-        if (pref != null) {
+        if (pref != null && pref.getSummaryProvider() == null) {
             pref.setSummary(pref.getEntry());
         }
     }
@@ -347,11 +420,17 @@ public class PreferencesFragment extends PreferenceFragmentCompat
 
             case Preferences.PREF_LANGUAGE:
                 entrySummary(key);
-                if (changing) {
+                // Don't trigger a refresh when the language preference is cleared
+                if (changing && Preferences.get().isLanguageSet()) {
                     AppCompatActivity activity = (AppCompatActivity) requireActivity();
                     Languages.setLanguage(activity);
-                    FDroidApp.onLanguageChanged(activity.getApplicationContext());
-                    Languages.forceChangeLanguage(activity);
+                    // With native per app language support on Android 13+, the change is handed off
+                    // to the system and would trigger the 'change in system languages' route
+                    if (!Languages.NATIVE_PAL) {
+                        App.systemLocaleList = null;
+                        FDroidApp.onLanguageChanged(activity.getApplicationContext());
+                        Languages.forceChangeLanguage(activity);
+                    }
                 }
                 break;
 
@@ -375,6 +454,11 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                     }
                 }
                 if (changing) {
+                    if (BuildConfig.DEBUG) {
+                        ListPreference languagePref = ObjectsCompat.requireNonNull(
+                                findPreference(Preferences.PREF_LANGUAGE));
+                        Languages.updateListPreference(languagePref, getActivity());
+                    }
                     RecyclerView recyclerView = getListView();
                     int preferencesCount = recyclerView.getAdapter().getItemCount();
                     if (!isExpertMode) {
