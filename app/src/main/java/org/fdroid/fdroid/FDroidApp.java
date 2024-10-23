@@ -37,6 +37,7 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.text.TextUtils;
 import android.util.Base64;
@@ -259,6 +260,7 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
         Single.fromCallable(() -> {
             long now = System.currentTimeMillis();
             LocaleListCompat locales = App.getLocales();
+            Log.d(TAG, "Refreshing database cache for locales: " + locales.toString());
             db.afterLocalesChanged(locales);
             Log.d(TAG, "Updating DB locales took: " + (System.currentTimeMillis() - now) + "ms");
             return true;
@@ -395,8 +397,11 @@ public class FDroidApp extends Application implements androidx.work.Configuratio
         atStartTime.edit().putInt("build-version", Build.VERSION.SDK_INT).apply();
 
         if (!preferences.isIndexNeverUpdated()) {
-            // if system locales have changed since the app's last run, refresh cache as necessary
-            updateLanguagesIfNecessary();
+            // stagger refresh check to avoid db contention at startup
+            new Handler(getMainLooper()).post(() -> {
+                // refresh database cache if system locales have changed since the app's last run
+                updateLanguagesIfNecessary();
+            });
         }
 
         final String queryStringKey = "http-downloader-query-string";
