@@ -218,7 +218,6 @@
             "suggestedVersionCode": "999999999",
             "description": "<p>Tor is both software and an open network that helps you defend against network surveillance that threatens personal freedom and privacy, confidential business activities and relationships.</p><p>Orbot allows access to Tor by accessing a local SOCKS or HTTP proxy. On a rooted device, the proxying can be completely transparent i.e. the app that accesses the network need not be aware of the proxy's existence; you can choose which apps go via the proxy in the settings.</p><p>If you don't have root access, there are some apps that are designed to work closely with tor or allow proxied connections: <a href=\"fdroid.app:info.guardianproject.otr.app.im\">ChatSecure</a>, <a href=\"fdroid.app:info.guardianproject.browser\">Orweb</a> and <a href=\"fdroid.app:org.mariotaku.twidere\">Twidere</a>. There is also a proxy configurator addon for <a href=\"fdroid.app:org.mozilla.firefox\">org.mozilla.firefox</a> called <a href=\"https://github.com/guardianproject/ProxyMob/downloads\">ProxyMob</a> (not yet available from the Mozilla addon site).</p><p>Requires root: No, but you will need to use apps that allow proxies if root is not granted.</p>",
             "donate": "https://www.torproject.org/donate/donate.html.en",
-            "flattrID": "5649",
             "issueTracker": "https://dev.guardianproject.info/projects/orbot/issues",
             "license": "NewBSD",
             "name": "Orbot",

@@ -154,8 +154,6 @@ public class App implements Comparable<App>, Parcelable {
 
     public String litecoin;
 
-    private String flattrID;
-
     public String liberapay;
 
     private String openCollective;
@@ -251,7 +249,6 @@ public class App implements Comparable<App>, Parcelable {
         }
         bitcoin = app.getMetadata().getBitcoin();
         litecoin = app.getMetadata().getLitecoin();
-        flattrID = app.getMetadata().getFlattrID();
         liberapay = app.getMetadata().getLiberapay();
         openCollective = app.getMetadata().getOpenCollective();
         preferredSigner = app.getMetadata().getPreferredSigner();
@@ -603,11 +600,6 @@ public class App implements Comparable<App>, Parcelable {
     }
 
     @Nullable
-    public String getFlattrUri() {
-        return TextUtils.isEmpty(flattrID) ? null : "https://flattr.com/thing/" + flattrID;
-    }
-
-    @Nullable
     public String getLiberapayUri() {
         return TextUtils.isEmpty(liberapay) ? null : "https://liberapay.com/" + liberapay;
     }
@@ -704,7 +696,6 @@ public class App implements Comparable<App>, Parcelable {
         dest.writeString(this.donate);
         dest.writeString(this.bitcoin);
         dest.writeString(this.litecoin);
-        dest.writeString(this.flattrID);
         dest.writeString(this.liberapay);
         dest.writeString(this.openCollective);
         dest.writeString(this.preferredSigner);
@@ -752,7 +743,6 @@ public class App implements Comparable<App>, Parcelable {
         this.donate = in.readString();
         this.bitcoin = in.readString();
         this.litecoin = in.readString();
-        this.flattrID = in.readString();
         this.liberapay = in.readString();
         this.openCollective = in.readString();
         this.preferredSigner = in.readString();

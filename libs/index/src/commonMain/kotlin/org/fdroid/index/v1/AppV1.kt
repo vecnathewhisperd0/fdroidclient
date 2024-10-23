@@ -32,7 +32,6 @@ public data class AppV1(
     val openCollective: String? = null,
     val bitcoin: String? = null,
     val litecoin: String? = null,
-    val flattrID: String? = null,
     val suggestedVersionName: String? = null, // missing in guardian project repo
     val suggestedVersionCode: String? = null, // missing in wind repo
     val license: String,
@@ -71,7 +70,6 @@ public data class AppV1(
         openCollective = openCollective,
         bitcoin = bitcoin,
         litecoin = litecoin,
-        flattrID = flattrID,
         icon = localized.toLocalizedFileV2 { it.icon }
             ?: icon?.let { mapOf(locale to FileV2("/icons/$it")) },
         featureGraphic = localized.toLocalizedFileV2 { it.featureGraphic },

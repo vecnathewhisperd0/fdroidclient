@@ -43,7 +43,6 @@ public data class MetadataV2(
     val openCollective: String? = null,
     val bitcoin: String? = null,
     val litecoin: String? = null,
-    val flattrID: String? = null,
     val icon: LocalizedFileV2? = null,
     val featureGraphic: LocalizedFileV2? = null,
     val promoGraphic: LocalizedFileV2? = null,

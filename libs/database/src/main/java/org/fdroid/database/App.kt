@@ -71,7 +71,6 @@ public data class AppMetadata(
     public val openCollective: String? = null,
     public val bitcoin: String? = null,
     public val litecoin: String? = null,
-    public val flattrID: String? = null,
     public val categories: List<String>? = null,
     /**
      * Whether the app is compatible with the current device.
@@ -119,7 +118,6 @@ internal fun MetadataV2.toAppMetadata(
     openCollective = openCollective,
     bitcoin = bitcoin,
     litecoin = litecoin,
-    flattrID = flattrID,
     categories = categories,
     isCompatible = isCompatible,
 )
