@@ -6,6 +6,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
@@ -42,6 +43,24 @@ private val HorizontalPadding = 16.dp
 private val IconTextPadding = 12.dp
 
 @Composable
+private fun RowScope.ListItemContent(
+    leadingIcon: (@Composable () -> Unit)? = null,
+    text: @Composable () -> Unit,
+    trailingIcon: (@Composable () -> Unit)? = null,
+) {
+    leadingIcon?.invoke()
+    if (leadingIcon != null) {
+        Spacer(modifier = Modifier.width(IconTextPadding))
+    }
+    text.invoke()
+    Spacer(modifier = Modifier.weight(1f))
+    trailingIcon?.invoke()
+}
+
+/**
+ * See the other overloads for [clickable] and [combinedClickable] list items.
+ */
+@Composable
 fun ListItem(
     modifier: Modifier = Modifier,
     leadingIcon: (@Composable () -> Unit)? = null,
@@ -55,15 +74,10 @@ fun ListItem(
             .fillMaxWidth()
             .padding(horizontal = HorizontalPadding)
     ) {
-        leadingIcon?.invoke()
-        if (leadingIcon != null) {
-            Spacer(modifier = Modifier.width(IconTextPadding))
-        }
-        text.invoke()
-        Spacer(modifier = Modifier.weight(1f))
-        trailingIcon?.invoke()
+        ListItemContent(leadingIcon, text, trailingIcon)
     }
 }
+
 
 @Composable
 fun ListItem(
@@ -80,13 +94,7 @@ fun ListItem(
             .fillMaxWidth()
             .clickable(onClick = onClick)
     ) {
-        leadingIcon?.invoke()
-        if (leadingIcon != null) {
-            Spacer(modifier = Modifier.width(IconTextPadding))
-        }
-        text.invoke()
-        Spacer(modifier = Modifier.weight(1f))
-        trailingIcon?.invoke()
+        ListItemContent(leadingIcon, text, trailingIcon)
     }
 }
 
@@ -116,13 +124,7 @@ fun ListItem(
             .padding(horizontal = HorizontalPadding)
 
     ) {
-        leadingIcon?.invoke()
-        if (leadingIcon != null) {
-            Spacer(modifier = Modifier.width(IconTextPadding))
-        }
-        text.invoke()
-        Spacer(modifier = Modifier.weight(1f))
-        trailingIcon?.invoke()
+        ListItemContent(leadingIcon, text, trailingIcon)
     }
 }
 
