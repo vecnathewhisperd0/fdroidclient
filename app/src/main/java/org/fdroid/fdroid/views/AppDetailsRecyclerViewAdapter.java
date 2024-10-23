@@ -1,5 +1,7 @@
 package org.fdroid.fdroid.views;
 
+import static org.fdroid.fdroid.views.compose.wrappers.LinkItemWrapperKt.createComposeLinkListItem;
+
 import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -1405,22 +1407,8 @@ public class AppDetailsRecyclerViewAdapter
     }
 
     private void addLinkItemView(ViewGroup parent, int resIdText, int resIdDrawable, final String url, String formatArg) {
-        TextView view = (TextView) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.app_details2_link_item, parent, false);
-        final String text;
-        if (formatArg == null) {
-            text = parent.getContext().getString(resIdText);
-        } else {
-            text = parent.getContext().getString(resIdText, formatArg);
-        }
-        view.setText(text);
-        TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(view, resIdDrawable, 0, 0, 0);
+        ComposeView view = createComposeLinkListItem(parent, resIdText, resIdDrawable, url, formatArg);
         parent.addView(view);
-        view.setOnClickListener(v -> onLinkClicked(url));
-        view.setOnLongClickListener(v -> {
-            Utils.copyToClipboard(context, text, url, R.string.copied_url_to_clipboard);
-            return true;
-        });
     }
 
     private void onLinkClicked(String url) {

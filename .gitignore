@@ -48,3 +48,5 @@ junit-report.xml
 captures/
 
 /fdroid/
+
+.DS_Store
