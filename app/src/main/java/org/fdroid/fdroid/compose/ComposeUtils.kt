@@ -35,8 +35,9 @@ import org.fdroid.fdroid.R
 import java.util.Locale
 
 object ComposeUtils {
+
     @Composable
-    fun FDroidContent(content: @Composable () -> Unit) {
+    fun FDroidTheme(content: @Composable () -> Unit) {
         val context = LocalContext.current
         val layoutDirection = LocalLayoutDirection.current
         val (colors, typography, shapes) = createMdcTheme(
@@ -66,8 +67,14 @@ object ComposeUtils {
                     )
                 )
             } ?: MaterialTheme.typography,
-            shapes = shapes ?: MaterialTheme.shapes
-        ) {
+            shapes = shapes ?: MaterialTheme.shapes,
+            content = content
+        )
+    }
+
+    @Composable
+    fun FDroidContent(content: @Composable () -> Unit) {
+        FDroidTheme {
             Surface(content = content)
         }
     }
