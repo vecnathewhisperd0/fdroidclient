@@ -129,6 +129,14 @@ public final class Utils {
 
     private static Handler toastHandler;
 
+    // need non-null arguments for rxjava Single.subscribe()
+    private static io.reactivex.rxjava3.functions.Consumer<Boolean> onSu =
+            b -> Log.d(TAG, "rxjava onSuccess (no-op)");
+
+    private static void onEr (Throwable t) {
+        Log.e(TAG, "rxjava onError: ", t);
+    }
+
     @NonNull
     public static Uri getUri(String repoAddress, String... pathElements) {
         /*
@@ -840,7 +848,10 @@ public final class Utils {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError(throwable -> Log.e(TAG, "Error running off UiThread", throwable))
-                .subscribe();
+                .subscribe(onSu, throwable -> onEr(throwable));
+                // doOnError() does not replace an onError argument. an exception will
+                // be thrown if there is an error because onError was not implemented
+
     }
 
     public static <T> void observeOnce(LiveData<T> liveData, LifecycleOwner lifecycleOwner, Consumer<T> consumer) {

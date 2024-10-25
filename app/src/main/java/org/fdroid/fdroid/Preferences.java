@@ -35,6 +35,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
+import org.fdroid.download.MirrorData;
 import org.fdroid.fdroid.data.Apk;
 import org.fdroid.fdroid.data.DBHelper;
 import org.fdroid.fdroid.installer.PrivilegedInstaller;
@@ -125,6 +126,7 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
     public static final String PREF_LANGUAGE = "language";
     public static final String PREF_USE_DNS_CACHE = "useDnsCache";
     public static final String PREF_DNS_CACHE = "dnsCache";
+    public static final String PREF_PREFER_FOREIGN = "preferForeign";
     public static final String PREF_USE_TOR = "useTor";
     public static final String PREF_ENABLE_PROXY = "enableProxy";
     public static final String PREF_PROXY_HOST = "proxyHost";
@@ -610,6 +612,43 @@ public final class Preferences implements SharedPreferences.OnSharedPreferenceCh
             output.put(key, list);
         }
         return output;
+    }
+
+    public void setPreferForeignValue(boolean newValue) {
+        preferences.edit().putBoolean(PREF_PREFER_FOREIGN, newValue).apply();
+    }
+
+    public boolean isPreferForeignSet() {
+        return preferences.getBoolean(PREF_PREFER_FOREIGN, false);
+    }
+
+    public void setMirrorData(String mirrorUrl, MirrorData mirrorData) {
+        String[] urlParts = mirrorUrl.split("/");
+        if (urlParts.length > 2) {
+            String shortUrl = urlParts[0] + "//" + urlParts[2];
+            String prefString = mirrorData.toPreferencesString();
+            preferences.edit().putString(shortUrl, prefString).apply();
+        } else {
+            Log.w("Preferences", "can't save mirror data, got unexpected url format: " + mirrorUrl);
+        }
+    }
+
+    public MirrorData getMirrorData(String mirrorUrl) {
+        String[] urlParts = mirrorUrl.split("/");
+        if (urlParts.length > 2) {
+            String shortUrl = urlParts[0] + "//" + urlParts[2];
+            String prefString = preferences.getString(shortUrl, null);
+            if (prefString != null && !prefString.isEmpty()) {
+                MirrorData data = new MirrorData();
+                data.fromPreferencesString(prefString);
+                return data;
+            } else {
+                return new MirrorData();
+            }
+        } else {
+            Log.w("Preferences", "can't load mirror data, got unexpected url format: " + mirrorUrl);
+            return new MirrorData();
+        }
     }
 
     /**

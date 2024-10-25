@@ -12,8 +12,17 @@ import kotlin.test.assertTrue
 
 class MirrorChooserTest {
 
-    private val mirrors = listOf(Mirror("foo"), Mirror("bar"), Mirror("42"), Mirror("1337"))
+    private val mirrors = listOf(
+        Mirror("foo"),
+        Mirror("bar"),
+        Mirror("42"),
+        Mirror("1337"))
+    private val mirrorsLocation = listOf(
+        Mirror(baseUrl = "unknown", location = null),
+        Mirror(baseUrl = "local", location = "HERE"),
+        Mirror(baseUrl = "remote", location = "THERE"))
     private val downloadRequest = DownloadRequest("foo", mirrors)
+    private val downloadRequestLocation = DownloadRequest("location", mirrorsLocation)
 
     private val ipfsIndexFile = getIndexFile(name = "foo", ipfsCidV1 = "CIDv1")
 
@@ -139,6 +148,30 @@ class MirrorChooserTest {
             }
         }
         assertEquals("Got IPFS gateway without CID", e.message)
+    }
+
+    @Test
+    fun testMirrorChooserLocation() {
+        val mirrorChooser = MirrorChooserWithParameters()
+        mirrorChooser.setLocationPropertyOverride(listOf("HERE"))
+
+        // test domestic mirror preference
+        mirrorChooser.setForeignPropertyOverride(false)
+        val domesticList = mirrorChooser.orderMirrors(downloadRequestLocation)
+        // confirm the list contains all mirrors
+        assertEquals(3, domesticList.size)
+        // mirror that is local should be included first
+        assertEquals("HERE", domesticList.get(0).location)
+        assertEquals(null, domesticList.get(1).location)
+
+        // test foreign mirror preference
+        mirrorChooser.setForeignPropertyOverride(true)
+        val foreignList = mirrorChooser.orderMirrors(downloadRequestLocation)
+        // confirm the list contains all mirrors
+        assertEquals(3, foreignList.size)
+        // mirror that is remote should be included first
+        assertEquals("THERE", foreignList.get(0).location)
+        assertEquals(null, foreignList.get(1).location)
     }
 
 }
